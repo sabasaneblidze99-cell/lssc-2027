@@ -6,3 +6,4 @@ image.bin
 logs/
 mysql.ini
 scriptfiles/
+tests/cef/shots/

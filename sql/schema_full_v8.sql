@@ -84,6 +84,7 @@ CREATE TABLE IF NOT EXISTS `characters` (
   `last_played_at` TIMESTAMP      NULL DEFAULT NULL,   -- (012)
   `created_at` TIMESTAMP        NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `last_save`  TIMESTAMP        NULL DEFAULT NULL,
+  `combat_logout` TINYINT UNSIGNED NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   UNIQUE KEY `uq_characters_account_slot` (`account_id`, `slot`),
   UNIQUE KEY `uq_characters_name` (`char_name`),

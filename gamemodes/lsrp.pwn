@@ -73,6 +73,7 @@
 #include "modules/ui/hud_cef.inc"
 #include "modules/voice/voice.inc"
 #include "modules/world/mapicons.inc"
+#include "modules/character/spawn_select.inc"
 #include "modules/commands/admin_commands.inc"
 #include "modules/commands/rp_commands.inc"
 
@@ -138,12 +139,14 @@ public OnPlayerConnect(playerid)
 	Living_OnPlayerConnect(playerid);
 	HudCef_OnPlayerConnect(playerid);
 	StreetRental_OnPlayerConnect(playerid);
+	SpawnSel_OnPlayerConnect(playerid);
 	Account_OnConnect(playerid);
 	return 1;
 }
 
 public OnPlayerDisconnect(playerid, reason)
 {
+	SpawnSel_OnPlayerDisconnect(playerid);   // prima di Faction (manette)
 	Bank_OnPlayerDisconnect(playerid);
 	Inv_OnPlayerDisconnect(playerid);
 	Job_OnPlayerDisconnect(playerid);
@@ -212,6 +215,12 @@ public OnPlayerSpawn(playerid)
 	return 1;
 }
 
+public OnPlayerTakeDamage(playerid, issuerid, Float:amount, WEAPON:weaponid, bodypart)
+{
+	SpawnSel_OnDamage(playerid, issuerid);
+	return 1;
+}
+
 public OnPlayerDeath(playerid, killerid, WEAPON:reason)
 {
 	Job_OnPlayerDeath(playerid);
@@ -249,6 +258,10 @@ public OnPlayerCommandText(playerid, cmdtext[])
 
 public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 {
+	if (SpawnSel_OnDialogResponse(playerid, dialogid, listitem))
+	{
+		return 1;
+	}
 	if (StreetRental_OnDialogResponse(playerid, dialogid, response))
 	{
 		return 1;

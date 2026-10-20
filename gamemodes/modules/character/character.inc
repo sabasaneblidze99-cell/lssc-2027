@@ -136,7 +136,7 @@ public Char_OnDBLoaded(playerid, bool:found)
 	{
 		Char_SanitizeLoaded(playerid);
 		Intro_OnCharLoaded(playerid);
-		Char_Spawn(playerid);
+		SpawnSel_Begin(playerid);      // scelta dello spawn (character/spawn_select.inc)
 		return 1;
 	}
 	if (!DB_IsReady())
@@ -243,6 +243,11 @@ Char_OnExit()
 Char_OnRequestClass(playerid)
 {
 	gPlayer[playerid][pClassRequested] = 1;
+	if (SpawnSel_Active(playerid))
+	{
+		Char_SetLoginCamera(playerid);
+		return 1;
+	}
 	if (gPlayer[playerid][pAuthState] == 14)
 	{
 		return 1;

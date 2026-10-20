@@ -380,4 +380,7 @@ forward Cef_OnChatSend(playerid, arguments[]);
 forward Cmd_chatsamp(playerid, params[]);
 forward Cmd_chatcef(playerid, params[]);
 forward StreetRental_OnTick();
+forward SpawnSel_OnInfo(playerid, charId, token);
+forward SpawnSel_OnTimeout(playerid, token);
+forward Cef_OnSpawnPick(playerid, arguments[]);
 forward Voice_OnTick();

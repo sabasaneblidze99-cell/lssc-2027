@@ -43,4 +43,5 @@ async def main():
         res['delta'] = await pg.evaluate("document.querySelector('.money-delta') && document.querySelector('.money-delta').textContent")
         print(json.dumps(res, ensure_ascii=False, indent=1)); print("errors", errs)
         await b.close()
-asyncio.run(main())
+if __name__ == "__main__":
+    asyncio.run(main())
