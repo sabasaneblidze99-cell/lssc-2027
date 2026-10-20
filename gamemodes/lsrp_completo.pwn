@@ -38002,6 +38002,9 @@ CharSel_Begin(playerid)
 	{
 		g_CsId[playerid][s] = 0;
 		g_CsName[playerid][s][0] = 0;
+		g_CsAway[playerid][s] = -1;
+		g_CsLevel[playerid][s] = 0;
+		g_CsCash[playerid][s] = 0;
 	}
 	new query[400];
 	mysql_format(g_DB, query, sizeof query,
