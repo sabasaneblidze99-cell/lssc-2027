@@ -18864,13 +18864,41 @@ Veh_DoLock(playerid)
 	Veh_SaveSlot(playerid, slot);
 }
 
+// motore dei veicoli che non sono personali: noleggio, auto di strada, lavoro, merci
+Veh_DoEngineOther(playerid)
+{
+	if (GetPlayerState(playerid) != PLAYER_STATE_DRIVER)
+	{
+		Util_Send(playerid, -10270721, "ძრავის ჩასართავად საჭესთან უნდა იჯდე.");
+		return 0;
+	}
+	new veh = GetPlayerVehicleID(playerid);
+	if (StreetRental_SpotOf(veh) >= 0)
+	{
+		StreetRental_OnStateChange(playerid, PLAYER_STATE_DRIVER);   // auto di strada non ancora noleggiata: offerta
+		return 0;
+	}
+	new bool:mine = (gPlayer[playerid][pRentalVehicle] != 0 && gPlayer[playerid][pRentalVehicle] == veh)
+		|| LD_VehOwner(veh) == playerid
+		|| Job_VehicleOwner(veh) == playerid;
+	if (!mine)
+	{
+		Util_Send(playerid, -10270721, "ამ მანქანის გასაღები არ გაქვს.");
+		return 0;
+	}
+	new e, l, a, d, b, bt, o;
+	GetVehicleParamsEx(veh, e, l, a, d, b, bt, o);
+	SetVehicleParamsEx(veh, e == 1 ? 0 : 1, l, a, d, b, bt, o);
+	Veh_Emote(playerid, e == 1 ? "spegne il motore." : "avvia il motore.");
+	return 1;
+}
+
 Veh_DoEngine(playerid)
 {
 	new slot = Veh_DrivenSlot(playerid);
 	if (slot == -1)
 	{
-		Util_Send(playerid, -10270721, "Devi essere al posto guida di un tuo veicolo.");
-		return 0;
+		return Veh_DoEngineOther(playerid);
 	}
 	if (g_VSlot[playerid][slot][vsSelling])
 	{
@@ -19412,7 +19440,7 @@ Veh_OnPlayerStateChange(playerid, t_PLAYER_STATE:newstate, t_PLAYER_STATE:oldsta
 		Veh_HudStart(playerid, vid);
 		if (!g_VSlot[o][s][vsEngineOn])
 		{
-			Util_Send(playerid, 0x99CCFFFF, "Motore spento: usa /v engine per avviarlo.");
+			Util_Send(playerid, 0x99CCFFFF, "ძრავი გამორთულია: დააჭირე N ან დაწერე /v engine.");
 		}
 	}
 }
@@ -40383,6 +40411,10 @@ public OnPlayerKeyStateChange(playerid, KEY:newkeys, KEY:oldkeys)
 {
 	Intro_OnKeyStateChange(playerid, newkeys);
 	HudCef_OnKeyStateChange(playerid, newkeys, oldkeys);
+	if ((newkeys & KEY_NO) && !(oldkeys & KEY_NO) && GetPlayerState(playerid) == PLAYER_STATE_DRIVER && Util_IsPlaying(playerid))
+	{
+		Veh_DoEngine(playerid);   // N al volante: motore acceso/spento
+	}
 	return 1;
 }
 

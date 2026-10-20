@@ -350,6 +350,10 @@ public OnPlayerKeyStateChange(playerid, KEY:newkeys, KEY:oldkeys)
 {
 	Intro_OnKeyStateChange(playerid, newkeys);
 	HudCef_OnKeyStateChange(playerid, newkeys, oldkeys);
+	if ((newkeys & KEY_NO) && !(oldkeys & KEY_NO) && GetPlayerState(playerid) == PLAYER_STATE_DRIVER && Util_IsPlaying(playerid))
+	{
+		Veh_DoEngine(playerid);   // N al volante: motore acceso/spento
+	}
 	return 1;
 }
 
