@@ -289,12 +289,12 @@ PlayerText:UI_JhText(playerid, Float:x, Float:y, text[], Float:lw, Float:lh, col
 	new PlayerText:td = Lang_CreatePlayerTextDraw(playerid, x, y, text);
 	PlayerTextDrawLetterSize(playerid, td, lw, lh);
 	PlayerTextDrawAlignment(playerid, td, align);
-	PlayerTextDrawColor(playerid, td, color);
+	PlayerTextDrawColour(playerid, td, color);
 	PlayerTextDrawFont(playerid, td, 1);
 	PlayerTextDrawSetProportional(playerid, td, 1);
 	PlayerTextDrawSetOutline(playerid, td, 1);
 	PlayerTextDrawSetShadow(playerid, td, 0);
-	PlayerTextDrawBackgroundColor(playerid, td, 255);
+	PlayerTextDrawBackgroundColour(playerid, td, 255);
 	return td;
 }
 
@@ -304,7 +304,7 @@ PlayerText:UI_JhBox(playerid, Float:x, Float:y, Float:w, Float:h, color)
 	PlayerTextDrawLetterSize(playerid, td, 0.0, (h / 9.0));
 	PlayerTextDrawTextSize(playerid, td, (x + w), 0.0);
 	PlayerTextDrawUseBox(playerid, td, 1);
-	PlayerTextDrawBoxColor(playerid, td, color);
+	PlayerTextDrawBoxColour(playerid, td, color);
 	PlayerTextDrawFont(playerid, td, 1);
 	PlayerTextDrawSetShadow(playerid, td, 0);
 	PlayerTextDrawSetOutline(playerid, td, 0);
@@ -431,7 +431,7 @@ UI_JobHudUpdate(playerid, step, stepTotal, earned, elapsedSec, dwellSec, offVehi
 		format(str, 64, "TORNA AL VEICOLO: %ds", offVehicleSec);
 		Lang_PlayerTextDrawSetString(playerid, g_UiJHud[playerid][5], str);
 		new bool:blinkOff = GetTickCount() / 500 % 2 == 1;
-		PlayerTextDrawColor(playerid, g_UiJHud[playerid][5], blinkOff ? -12303292 : -12303105);
+		PlayerTextDrawColour(playerid, g_UiJHud[playerid][5], blinkOff ? -12303292 : -12303105);
 		PlayerTextDrawShow(playerid, g_UiJHud[playerid][5]);
 		g_UiJHudWarn[playerid] = 1;
 	}

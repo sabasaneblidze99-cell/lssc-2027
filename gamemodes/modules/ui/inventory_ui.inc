@@ -355,12 +355,12 @@ PlayerText:UI_InvText(playerid, Float:x, Float:y, text[], Float:lw, Float:lh, co
 	new PlayerText:td = Lang_CreatePlayerTextDraw(playerid, x, y, text);
 	PlayerTextDrawLetterSize(playerid, td, lw, lh);
 	PlayerTextDrawAlignment(playerid, td, align);
-	PlayerTextDrawColor(playerid, td, color);
+	PlayerTextDrawColour(playerid, td, color);
 	PlayerTextDrawFont(playerid, td, 1);
 	PlayerTextDrawSetProportional(playerid, td, 1);
 	PlayerTextDrawSetOutline(playerid, td, 1);
 	PlayerTextDrawSetShadow(playerid, td, 0);
-	PlayerTextDrawBackgroundColor(playerid, td, 255);
+	PlayerTextDrawBackgroundColour(playerid, td, 255);
 	return td;
 }
 
@@ -370,7 +370,7 @@ PlayerText:UI_InvBox(playerid, Float:x, Float:y, Float:w, Float:h, color)
 	PlayerTextDrawLetterSize(playerid, td, 0.0, (h / 9.0));
 	PlayerTextDrawTextSize(playerid, td, (x + w), 0.0);
 	PlayerTextDrawUseBox(playerid, td, 1);
-	PlayerTextDrawBoxColor(playerid, td, color);
+	PlayerTextDrawBoxColour(playerid, td, color);
 	PlayerTextDrawFont(playerid, td, 1);
 	PlayerTextDrawSetShadow(playerid, td, 0);
 	PlayerTextDrawSetOutline(playerid, td, 0);
@@ -520,7 +520,7 @@ UI_InvToastRedraw(playerid)
 		new delta = g_UiInvToastDelta[playerid][i];
 		format(str, 48, "%s%d %s", delta > 0 ? "+" : "", delta, g_UiInvName[g_UiInvToastItem[playerid][i]]);
 		Lang_PlayerTextDrawSetString(playerid, g_UiInvToastTd[playerid][i], str);
-		PlayerTextDrawColor(playerid, g_UiInvToastTd[playerid][i], delta > 0 ? 0x66DD66FF : -10066177);
+		PlayerTextDrawColour(playerid, g_UiInvToastTd[playerid][i], delta > 0 ? 0x66DD66FF : -10066177);
 		PlayerTextDrawShow(playerid, g_UiInvToastTd[playerid][i]);
 	}
 }

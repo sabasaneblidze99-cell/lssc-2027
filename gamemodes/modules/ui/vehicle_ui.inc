@@ -335,12 +335,12 @@ PlayerText:UI_VHudText(playerid, Float:x, Float:y, text[], Float:lw, Float:lh, c
 	new PlayerText:td = Lang_CreatePlayerTextDraw(playerid, x, y, text);
 	PlayerTextDrawLetterSize(playerid, td, lw, lh);
 	PlayerTextDrawAlignment(playerid, td, align);
-	PlayerTextDrawColor(playerid, td, color);
+	PlayerTextDrawColour(playerid, td, color);
 	PlayerTextDrawFont(playerid, td, 1);
 	PlayerTextDrawSetProportional(playerid, td, 1);
 	PlayerTextDrawSetOutline(playerid, td, 1);
 	PlayerTextDrawSetShadow(playerid, td, 0);
-	PlayerTextDrawBackgroundColor(playerid, td, 255);
+	PlayerTextDrawBackgroundColour(playerid, td, 255);
 	return td;
 }
 
@@ -350,7 +350,7 @@ PlayerText:UI_VHudBox(playerid, Float:x, Float:y, Float:w, Float:h, color)
 	PlayerTextDrawLetterSize(playerid, td, 0.0, (h / 9.0));
 	PlayerTextDrawTextSize(playerid, td, (x + w), 0.0);
 	PlayerTextDrawUseBox(playerid, td, 1);
-	PlayerTextDrawBoxColor(playerid, td, color);
+	PlayerTextDrawBoxColour(playerid, td, color);
 	PlayerTextDrawFont(playerid, td, 1);
 	PlayerTextDrawSetShadow(playerid, td, 0);
 	PlayerTextDrawSetOutline(playerid, td, 0);
@@ -443,13 +443,13 @@ UI_VehicleHudUpdate(playerid, Float:fuel, Float:fuelMax, speedKmh, bool:engineOn
 	format(str, 48, "Benzina %.1f/%.0f L", fuel, fuelMax);
 	Lang_PlayerTextDrawSetString(playerid, g_UiVHud[playerid][2], str);
 	new bool:blinkOff = low && GetTickCount() / 500 % 2 == 1;
-	PlayerTextDrawColor(playerid, g_UiVHud[playerid][2], low ? (blinkOff ? -10066364 : -10066177) : -1);
+	PlayerTextDrawColour(playerid, g_UiVHud[playerid][2], low ? (blinkOff ? -10066364 : -10066177) : -1);
 	PlayerTextDrawShow(playerid, g_UiVHud[playerid][2]);
-	PlayerTextDrawBoxColor(playerid, g_UiVHud[playerid][4], low ? -12303105 : 0x66DD66FF);
+	PlayerTextDrawBoxColour(playerid, g_UiVHud[playerid][4], low ? -12303105 : 0x66DD66FF);
 	PlayerTextDrawTextSize(playerid, g_UiVHud[playerid][4], (0.1 + ((5.0 + (632.0 - 150.0)) + (140.0 * fraction))), 0.0);
 	PlayerTextDrawShow(playerid, g_UiVHud[playerid][4]);
 	Lang_PlayerTextDrawSetString(playerid, g_UiVHud[playerid][5], engineOn ? "MOTORE ACCESO" : "MOTORE SPENTO");
-	PlayerTextDrawColor(playerid, g_UiVHud[playerid][5], engineOn ? 0x66DD66FF : -10066177);
+	PlayerTextDrawColour(playerid, g_UiVHud[playerid][5], engineOn ? 0x66DD66FF : -10066177);
 	PlayerTextDrawShow(playerid, g_UiVHud[playerid][5]);
 }
 

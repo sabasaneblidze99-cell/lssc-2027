@@ -302,7 +302,7 @@ public UI_OnLoginSubmit(playerid, password[])
 		return 1;
 	}
 	new hash[65];
-	SHA256_PassHash(password, gPlayer[playerid][pPassSalt], hash, 65);
+	SHA256_Hash(password, gPlayer[playerid][pPassSalt], hash, 65);
 	if (strcmp(hash, gPlayer[playerid][pPassHash], 1, 0x7FFFFFFF) != 0)
 	{
 		Account_LoginFailed(playerid);

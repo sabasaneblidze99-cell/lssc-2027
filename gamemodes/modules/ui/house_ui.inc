@@ -655,12 +655,12 @@ PlayerText:UI_HhText(playerid, Float:x, Float:y, text[], Float:lw, Float:lh, col
 	new PlayerText:td = Lang_CreatePlayerTextDraw(playerid, x, y, text);
 	PlayerTextDrawLetterSize(playerid, td, lw, lh);
 	PlayerTextDrawAlignment(playerid, td, align);
-	PlayerTextDrawColor(playerid, td, color);
+	PlayerTextDrawColour(playerid, td, color);
 	PlayerTextDrawFont(playerid, td, 1);
 	PlayerTextDrawSetProportional(playerid, td, 1);
 	PlayerTextDrawSetOutline(playerid, td, 1);
 	PlayerTextDrawSetShadow(playerid, td, 0);
-	PlayerTextDrawBackgroundColor(playerid, td, 255);
+	PlayerTextDrawBackgroundColour(playerid, td, 255);
 	return td;
 }
 
@@ -670,7 +670,7 @@ PlayerText:UI_HhBox(playerid, Float:x, Float:y, Float:w, Float:h, color)
 	PlayerTextDrawLetterSize(playerid, td, 0.0, (h / 9.0));
 	PlayerTextDrawTextSize(playerid, td, (x + w), 0.0);
 	PlayerTextDrawUseBox(playerid, td, 1);
-	PlayerTextDrawBoxColor(playerid, td, color);
+	PlayerTextDrawBoxColour(playerid, td, color);
 	PlayerTextDrawFont(playerid, td, 1);
 	PlayerTextDrawSetShadow(playerid, td, 0);
 	PlayerTextDrawSetOutline(playerid, td, 0);
@@ -749,8 +749,8 @@ UI_HungerHudUpdate(playerid, hunger)
 	new str[32];
 	format(str, 32, "Sazieta' %d%%", hunger);
 	Lang_PlayerTextDrawSetString(playerid, g_UiHh[playerid][2], str);
-	PlayerTextDrawColor(playerid, g_UiHh[playerid][2], color);
-	PlayerTextDrawBoxColor(playerid, g_UiHh[playerid][4], barColor);
+	PlayerTextDrawColour(playerid, g_UiHh[playerid][2], color);
+	PlayerTextDrawBoxColour(playerid, g_UiHh[playerid][4], barColor);
 	new Float:fraction = (float(hunger) / float(100));
 	PlayerTextDrawTextSize(playerid, g_UiHh[playerid][4], (0.1 + ((4.0 + (632.0 - 150.0)) + (142.0 * fraction))), 0.0);
 	if (!g_UiHhHunger[playerid])

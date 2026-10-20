@@ -213,12 +213,12 @@ UI_BankToastCreate(playerid)
 	new PlayerText:td = Lang_CreatePlayerTextDraw(playerid, 130.0, 380.0, "_");
 	PlayerTextDrawLetterSize(playerid, td, 0.22, 1.0);
 	PlayerTextDrawAlignment(playerid, td, 1);
-	PlayerTextDrawColor(playerid, td, 0x66DD66FF);
+	PlayerTextDrawColour(playerid, td, 0x66DD66FF);
 	PlayerTextDrawFont(playerid, td, 1);
 	PlayerTextDrawSetProportional(playerid, td, 1);
 	PlayerTextDrawSetOutline(playerid, td, 1);
 	PlayerTextDrawSetShadow(playerid, td, 0);
-	PlayerTextDrawBackgroundColor(playerid, td, 255);
+	PlayerTextDrawBackgroundColour(playerid, td, 255);
 	g_UiBkToastTd[playerid] = td;
 	g_UiBkToastCreated[playerid] = 1;
 }
@@ -232,7 +232,7 @@ UI_BankToast(playerid, text[], bool:ok)
 	UI_BankToastCreate(playerid);
 	new PlayerText:td = g_UiBkToastTd[playerid];
 	Lang_PlayerTextDrawSetString(playerid, td, text);
-	PlayerTextDrawColor(playerid, td, ok ? 0x66DD66FF : -10066177);
+	PlayerTextDrawColour(playerid, td, ok ? 0x66DD66FF : -10066177);
 	PlayerTextDrawShow(playerid, td);
 	g_UiBkToastTtl[playerid] = 4;
 	UI_BankTimerEnsure(playerid);

@@ -613,12 +613,12 @@ PlayerText:UI_FhText(playerid, Float:x, Float:y, text[], Float:lw, Float:lh, col
 	new PlayerText:td = Lang_CreatePlayerTextDraw(playerid, x, y, text);
 	PlayerTextDrawLetterSize(playerid, td, lw, lh);
 	PlayerTextDrawAlignment(playerid, td, align);
-	PlayerTextDrawColor(playerid, td, color);
+	PlayerTextDrawColour(playerid, td, color);
 	PlayerTextDrawFont(playerid, td, 1);
 	PlayerTextDrawSetProportional(playerid, td, 1);
 	PlayerTextDrawSetOutline(playerid, td, 1);
 	PlayerTextDrawSetShadow(playerid, td, 0);
-	PlayerTextDrawBackgroundColor(playerid, td, 255);
+	PlayerTextDrawBackgroundColour(playerid, td, 255);
 	return td;
 }
 
@@ -628,7 +628,7 @@ PlayerText:UI_FhBox(playerid, Float:x, Float:y, Float:w, Float:h, color)
 	PlayerTextDrawLetterSize(playerid, td, 0.0, (h / 9.0));
 	PlayerTextDrawTextSize(playerid, td, (x + w), 0.0);
 	PlayerTextDrawUseBox(playerid, td, 1);
-	PlayerTextDrawBoxColor(playerid, td, color);
+	PlayerTextDrawBoxColour(playerid, td, color);
 	PlayerTextDrawFont(playerid, td, 1);
 	PlayerTextDrawSetShadow(playerid, td, 0);
 	PlayerTextDrawSetOutline(playerid, td, 0);
@@ -658,13 +658,13 @@ UI_FhApply(playerid, faction, rank, kitCharges)
 	UI_FcRankText(faction, rank, rankName, 24);
 	format(str, 64, "IN SERVIZIO - %s", rankName);
 	Lang_PlayerTextDrawSetString(playerid, g_UiFHud[playerid][1], str);
-	PlayerTextDrawColor(playerid, g_UiFHud[playerid][1], g_UiFcColor[faction]);
+	PlayerTextDrawColour(playerid, g_UiFHud[playerid][1], g_UiFcColor[faction]);
 	PlayerTextDrawShow(playerid, g_UiFHud[playerid][1]);
 	if (kitCharges >= 0)
 	{
 		format(str, 64, "Kit medico: %d/%d", kitCharges, 8);
 		Lang_PlayerTextDrawSetString(playerid, g_UiFHud[playerid][2], str);
-		PlayerTextDrawColor(playerid, g_UiFHud[playerid][2], kitCharges == 0 ? -10066177 : -1);
+		PlayerTextDrawColour(playerid, g_UiFHud[playerid][2], kitCharges == 0 ? -10066177 : -1);
 		PlayerTextDrawShow(playerid, g_UiFHud[playerid][2]);
 		g_UiFHudKit[playerid] = 1;
 	}
@@ -757,7 +757,7 @@ UI_InjuryHudUpdate(playerid, secondsLeft)
 	Lang_PlayerTextDrawSetString(playerid, g_UiIHud[playerid][2], str);
 	new bool:warn = secondsLeft <= 30;
 	new bool:blinkOff = warn && GetTickCount() / 500 % 2 == 1;
-	PlayerTextDrawColor(playerid, g_UiIHud[playerid][2], warn ? (blinkOff ? -12303292 : -12303105) : -1);
+	PlayerTextDrawColour(playerid, g_UiIHud[playerid][2], warn ? (blinkOff ? -12303292 : -12303105) : -1);
 	PlayerTextDrawShow(playerid, g_UiIHud[playerid][2]);
 	new Float:fraction = (float(secondsLeft) / float(180));
 	PlayerTextDrawTextSize(playerid, g_UiIHud[playerid][4], (0.1 + ((210.0 + 6.0) + (208.0 * fraction))), 0.0);

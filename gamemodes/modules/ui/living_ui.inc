@@ -430,12 +430,12 @@ PlayerText:UI_LvText(playerid, Float:x, Float:y, text[], Float:lw, Float:lh, col
 	new PlayerText:td = Lang_CreatePlayerTextDraw(playerid, x, y, text);
 	PlayerTextDrawLetterSize(playerid, td, lw, lh);
 	PlayerTextDrawAlignment(playerid, td, align);
-	PlayerTextDrawColor(playerid, td, color);
+	PlayerTextDrawColour(playerid, td, color);
 	PlayerTextDrawFont(playerid, td, 1);
 	PlayerTextDrawSetProportional(playerid, td, 1);
 	PlayerTextDrawSetOutline(playerid, td, 1);
 	PlayerTextDrawSetShadow(playerid, td, 0);
-	PlayerTextDrawBackgroundColor(playerid, td, 255);
+	PlayerTextDrawBackgroundColour(playerid, td, 255);
 	return td;
 }
 
@@ -445,7 +445,7 @@ PlayerText:UI_LvBox(playerid, Float:x, Float:y, Float:w, Float:h, color)
 	PlayerTextDrawLetterSize(playerid, td, 0.0, (h / 9.0));
 	PlayerTextDrawTextSize(playerid, td, (x + w), 0.0);
 	PlayerTextDrawUseBox(playerid, td, 1);
-	PlayerTextDrawBoxColor(playerid, td, color);
+	PlayerTextDrawBoxColour(playerid, td, color);
 	PlayerTextDrawFont(playerid, td, 1);
 	PlayerTextDrawSetShadow(playerid, td, 0);
 	PlayerTextDrawSetOutline(playerid, td, 0);
@@ -618,7 +618,7 @@ UI_LivingToast(playerid, text[], kind)
 	}
 	UI_LvTdEnsure(playerid);
 	Lang_PlayerTextDrawSetString(playerid, g_UiLvTd[playerid][10], text);
-	PlayerTextDrawColor(playerid, g_UiLvTd[playerid][10], UI_LvToastColor(kind));
+	PlayerTextDrawColour(playerid, g_UiLvTd[playerid][10], UI_LvToastColor(kind));
 	PlayerTextDrawShow(playerid, g_UiLvTd[playerid][10]);
 	g_UiLvToastTtl[playerid] = 4;
 	UI_LvTimerSync(playerid);
@@ -1388,7 +1388,7 @@ UI_LivingTaxiMeter(playerid, fare, distanceM, bool:running)
 	format(line, 128, "$%s  -  %s", sFare, sDist);
 	Lang_PlayerTextDrawSetString(playerid, g_UiLvTd[playerid][7], line);
 	Lang_PlayerTextDrawSetString(playerid, g_UiLvTd[playerid][6], running ? "TASSAMETRO - in corsa" : "TASSAMETRO - fermo");
-	PlayerTextDrawColor(playerid, g_UiLvTd[playerid][7], running ? 0x66DD66FF : 0xC8C8C8FF);
+	PlayerTextDrawColour(playerid, g_UiLvTd[playerid][7], running ? 0x66DD66FF : 0xC8C8C8FF);
 	UI_LvTdShow(playerid, 5, 7, 1);
 	g_UiLvMeterOn[playerid] = 1;
 }
