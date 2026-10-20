@@ -234,7 +234,7 @@ public Char_OnDBCreated(playerid, charId)
 
 Char_OnInit()
 {
-	AddPlayerClass(7, 1481.0, -1749.5, 15.45, 0.0, 0, 0, 0, 0, 0, 0);
+	AddPlayerClass(7, 1481.0, -1749.5, 15.45, 0.0, WEAPON_FIST, 0, WEAPON_FIST, 0, WEAPON_FIST, 0);
 	g_CharAutosaveTimer = SetTimer("Char_OnAutosave", 300000, true);
 }
 

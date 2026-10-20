@@ -1466,10 +1466,10 @@ Veh_OnInit()
 	g_VPool = 0;
 	g_VSaveTimer = SetTimer("Veh_OnSaveTick", 120000, true);
 	CreatePickup(1239, 1, 1655.0, -1665.0, 22.5, 0);
-	Lang_Create3DTextLabel("Concessionario di Los Santos\nUsa /concessionario", -2994689, 1655.0, -1665.0, (22.5 + 1.0), 15.0, 0, 0);
+	Lang_Create3DTextLabel("Concessionario di Los Santos\nUsa /concessionario", -2994689, 1655.0, -1665.0, (22.5 + 1.0), 15.0, 0, false);
 	for (new i = 0; i < 3; i++)
 	{
-		Lang_Create3DTextLabel("Distributore\nUsa /refuel [litri]", -2994689, g_VehStations[i][0], g_VehStations[i][1], (1.0 + g_VehStations[i][2]), 15.0, 0, 0);
+		Lang_Create3DTextLabel("Distributore\nUsa /refuel [litri]", -2994689, g_VehStations[i][0], g_VehStations[i][1], (1.0 + g_VehStations[i][2]), 15.0, 0, false);
 	}
 }
 
@@ -1555,7 +1555,7 @@ Veh_OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
 	}
 	if (ispassenger == 0)
 	{
-		ClearAnimations(playerid, 0);
+		ClearAnimations(playerid, SYNC_NONE);
 		Util_Send(playerid, -10270721, "Non hai le chiavi di questo veicolo.");
 	}
 	return 0;

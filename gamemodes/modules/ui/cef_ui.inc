@@ -26,16 +26,16 @@ CefUI_Reset(playerid)
 		return 0;
 	}
 	g_CefState[playerid] = 0;
-	g_CefFocus[playerid] = 0;
-	g_CefHudOn[playerid] = 0;
-	g_CefHudHas[playerid] = 0;
+	g_CefFocus[playerid] = false;
+	g_CefHudOn[playerid] = false;
+	g_CefHudHas[playerid] = false;
 	g_CefView[playerid] = 0;
 #if defined LSRP_CEF
-	g_CefDecided[playerid] = 0;
+	g_CefDecided[playerid] = false;
 #else
 	g_CefDecided[playerid] = 1;
 #endif
-	g_CefPromptWait[playerid] = 0;
+	g_CefPromptWait[playerid] = false;
 	for (new i = 0; i < 5; i++)
 	{
 		g_CefHud[playerid][i] = 0;
@@ -84,7 +84,7 @@ CefUI_Open(playerid, const view[], const arg[])
 	}
 	cef_emit_event(playerid, "lssc:open", 0, view, 0, arg);
 	cef_focus_browser(playerid, 1, true);
-	g_CefFocus[playerid] = 1;
+	g_CefFocus[playerid] = true;
 	g_CefView[playerid] = v;
 	return 0;
 }
@@ -119,7 +119,7 @@ CefUI_ReleaseFocus(playerid)
 		return 0;
 	}
 	cef_focus_browser(playerid, 1, false);
-	g_CefFocus[playerid] = 0;
+	g_CefFocus[playerid] = false;
 	return 0;
 }
 
@@ -154,7 +154,7 @@ CefUI_HudData(playerid, money, bank, level, expIn, expStep)
 	g_CefHud[playerid][2] = level;
 	g_CefHud[playerid][3] = expIn;
 	g_CefHud[playerid][4] = expStep;
-	g_CefHudHas[playerid] = 1;
+	g_CefHudHas[playerid] = true;
 	HudCef_OnHudData(playerid, money, bank, level);
 	if (CefUI_Active(playerid) && g_CefHudOn[playerid])
 	{
@@ -219,7 +219,7 @@ CefUI_AuthGate(playerid)
 	{
 		SendClientMessage(playerid, 0xAAAAAAFF, "Caricamento dell'interfaccia...");
 	}
-	g_CefPromptWait[playerid] = 1;
+	g_CefPromptWait[playerid] = true;
 	return 0;
 }
 
@@ -229,9 +229,9 @@ bool:CefUI_Decide(playerid)
 	{
 		return false;
 	}
-	g_CefDecided[playerid] = 1;
+	g_CefDecided[playerid] = true;
 	new bool:wait = g_CefPromptWait[playerid];
-	g_CefPromptWait[playerid] = 0;
+	g_CefPromptWait[playerid] = false;
 	return wait;
 }
 

@@ -32,8 +32,8 @@ bool:Freight_ValidId(playerid)
 
 Freight_ResetPlayer(playerid)
 {
-	g_FrtActive[playerid] = 0;
-	g_FrtWelcome[playerid] = 0;
+	g_FrtActive[playerid] = false;
+	g_FrtWelcome[playerid] = false;
 	g_FrtCt[playerid] = 0;
 	g_FrtFrom[playerid] = 0;
 	g_FrtTo[playerid] = 0;
@@ -42,9 +42,9 @@ Freight_ResetPlayer(playerid)
 	g_FrtPhase[playerid] = 0;
 	g_FrtVeh[playerid] = 65535;
 	g_FrtSerial[playerid] = 0;
-	g_FrtBoarded[playerid] = 0;
-	g_FrtDwell[playerid] = 0;
-	g_FrtOff[playerid] = 0;
+	g_FrtBoarded[playerid] = false;
+	g_FrtDwell[playerid] = false;
+	g_FrtOff[playerid] = false;
 	g_FrtStartTick[playerid] = 0;
 	g_FrtWaitTick[playerid] = 0;
 	g_FrtDefer[playerid] = 0;
@@ -343,7 +343,7 @@ Freight_End(playerid, reason)
 	Freight_ResetPlayer(playerid);
 	if (welcome && online && reason != 0 && reason != 2 && reason != 6)
 	{
-		Hub_OnWelcomeDelivered(playerid, 0);
+		Hub_OnWelcomeDelivered(playerid, false);
 	}
 	return 1;
 }
@@ -399,7 +399,7 @@ Freight_Picked(playerid)
 {
 	new now = GetTickCount();
 	g_FrtPhase[playerid] = 3;
-	g_FrtDwell[playerid] = 0;
+	g_FrtDwell[playerid] = false;
 	g_FrtStateRetry[playerid] = 0;
 	gPlayer[playerid][pFreightLegTick] = now;
 	gPlayer[playerid][pFreightDwellTick] = 0;
@@ -486,7 +486,7 @@ Freight_DoDeliver(playerid)
 	{
 		Freight_End(playerid, 0);
 		Util_Send(playerid, 0x66DD66FF, "Consegna di benvenuto completata: il negozio di Idlewood ti ringrazia!");
-		Hub_OnWelcomeDelivered(playerid, 1);
+		Hub_OnWelcomeDelivered(playerid, true);
 		return 0;
 	}
 	g_FrtPhase[playerid] = 4;
@@ -600,7 +600,7 @@ bool:Freight_Begin(playerid, contractId, fromD, toD, cargo, distanceM, bool:welc
 	SetVehicleParamsEx(veh, 1, 0, 0, 0, 0, 0, 0);
 	new now = GetTickCount();
 	Freight_ResetPlayer(playerid);
-	g_FrtActive[playerid] = 1;
+	g_FrtActive[playerid] = true;
 	g_FrtWelcome[playerid] = welcome;
 	g_FrtCt[playerid] = contractId;
 	g_FrtFrom[playerid] = fromD;
@@ -675,7 +675,7 @@ Freight_OnPickupResult(playerid, result)
 		case -1, 10:
 		{
 			g_FrtPhase[playerid] = 1;
-			g_FrtDwell[playerid] = 0;
+			g_FrtDwell[playerid] = false;
 			g_FrtRetryTick[playerid] = GetTickCount() + 5000;
 			Util_Send(playerid, -10270721, "Registrazione del carico non riuscita: resta nel checkpoint per ritentare.");
 		}
@@ -725,7 +725,7 @@ Freight_OnCompleteResult(playerid, result, paid, balance)
 				return 1;
 			}
 			g_FrtPhase[playerid] = 3;
-			g_FrtDwell[playerid] = 0;
+			g_FrtDwell[playerid] = false;
 			g_FrtRetryTick[playerid] = GetTickCount() + 5000;
 			Util_Send(playerid, -10270721, "Registrazione della consegna non riuscita: resta nel checkpoint per ritentare.");
 		}
@@ -738,7 +738,7 @@ Freight_OnCompleteResult(playerid, result, paid, balance)
 				return 1;
 			}
 			g_FrtPhase[playerid] = 3;
-			g_FrtDwell[playerid] = 0;
+			g_FrtDwell[playerid] = false;
 			g_FrtRetryTick[playerid] = GetTickCount() + 5000;
 			Util_Send(playerid, -10270721, "Consegna rifiutata dal registro (troppo rapida o stato non valido): attendi qualche secondo nel checkpoint.");
 		}
@@ -761,7 +761,7 @@ Freight_WaitTimeout(playerid)
 		return 0;
 	}
 	g_FrtPhase[playerid] = g_FrtPhase[playerid] == 2 ? 1 : 3;
-	g_FrtDwell[playerid] = 0;
+	g_FrtDwell[playerid] = false;
 	g_FrtRetryTick[playerid] = GetTickCount() + 5000;
 	return 0;
 }
@@ -833,15 +833,15 @@ Freight_TickPlayer(playerid, now)
 	new bool:driving = Freight_IsDriving(playerid);
 	if (driving)
 	{
-		g_FrtBoarded[playerid] = 1;
-		g_FrtOff[playerid] = 0;
+		g_FrtBoarded[playerid] = true;
+		g_FrtOff[playerid] = false;
 		gPlayer[playerid][pFreightLeftVehTick] = 0;
 	}
 	else if (g_FrtBoarded[playerid])
 	{
 		if (!g_FrtOff[playerid])
 		{
-			g_FrtOff[playerid] = 1;
+			g_FrtOff[playerid] = true;
 			gPlayer[playerid][pFreightLeftVehTick] = now;
 		}
 		new Float:px, Float:py, Float:pz;
@@ -880,7 +880,7 @@ Freight_TickPlayer(playerid, now)
 	{
 		if (!g_FrtDwell[playerid])
 		{
-			g_FrtDwell[playerid] = 1;
+			g_FrtDwell[playerid] = true;
 			gPlayer[playerid][pFreightDwellTick] = now;
 			if (g_FrtWelcome[playerid])
 			{
@@ -891,7 +891,7 @@ Freight_TickPlayer(playerid, now)
 		new waited = now - gPlayer[playerid][pFreightDwellTick];
 		if (waited >= need)
 		{
-			g_FrtDwell[playerid] = 0;
+			g_FrtDwell[playerid] = false;
 			gPlayer[playerid][pFreightDwellTick] = 0;
 			if (shop)
 			{
@@ -913,7 +913,7 @@ Freight_TickPlayer(playerid, now)
 	}
 	else
 	{
-		g_FrtDwell[playerid] = 0;
+		g_FrtDwell[playerid] = false;
 		gPlayer[playerid][pFreightDwellTick] = 0;
 	}
 	Freight_Hud(playerid, floatround(dist, floatround_method:1), dwellSec);
@@ -1019,7 +1019,7 @@ Freight_OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
 	{
 		return 0;
 	}
-	ClearAnimations(playerid, 0);
+	ClearAnimations(playerid, SYNC_NONE);
 	Util_Send(playerid, -10270721, "Questo veicolo da carico e' assegnato a un altro trasportatore.");
 	return 0;
 }
@@ -1032,7 +1032,7 @@ Freight_OnPlayerExitVehicle(playerid, vehicleid)
 	}
 	if (!g_FrtOff[playerid])
 	{
-		g_FrtOff[playerid] = 1;
+		g_FrtOff[playerid] = true;
 		gPlayer[playerid][pFreightLeftVehTick] = GetTickCount();
 		SendClientMessage(playerid, -10270721, "Torna alla guida del Mule entro %d secondi (e resta entro %.0f m) o il contratto sara' rilasciato.", 45, 0x43160000);
 	}
@@ -1059,8 +1059,8 @@ Freight_OnPlayerStateChange(playerid, t_PLAYER_STATE:newstate, t_PLAYER_STATE:ol
 	}
 	if (g_FrtActive[playerid] && g_FrtVeh[playerid] == veh)
 	{
-		g_FrtBoarded[playerid] = 1;
-		g_FrtOff[playerid] = 0;
+		g_FrtBoarded[playerid] = true;
+		g_FrtOff[playerid] = false;
 		gPlayer[playerid][pFreightLeftVehTick] = 0;
 	}
 	return 0;

@@ -170,7 +170,7 @@ new bool:g_UiLvHpOff[MAX_PLAYERS];
 new g_UiLvHpView[MAX_PLAYERS];
 new g_UiLvHpOffRow[MAX_PLAYERS];
 new g_UiLvHintTtl[MAX_PLAYERS];
-new g_UiLvTd[MAX_PLAYERS][11];
+new PlayerText:g_UiLvTd[MAX_PLAYERS][11];
 new bool:g_UiLvTdMade[MAX_PLAYERS];
 new g_UiLvToastTtl[MAX_PLAYERS];
 new g_UiLvTimer[MAX_PLAYERS];
@@ -423,7 +423,7 @@ UI_LvToastColor(kind)
 
 UI_LvInfo(playerid, const title[], const body[])
 {
-	Lang_ShowPlayerDialog(playerid, 9725, 0, title, body, "Chiudi", "");
+	Lang_ShowPlayerDialog(playerid, 9725, DIALOG_STYLE_MSGBOX, title, body, "Chiudi", "");
 }
 
 PlayerText:UI_LvText(playerid, Float:x, Float:y, const text[], Float:lw, Float:lh, color, t_TEXT_DRAW_ALIGN:align)
@@ -432,7 +432,7 @@ PlayerText:UI_LvText(playerid, Float:x, Float:y, const text[], Float:lw, Float:l
 	PlayerTextDrawLetterSize(playerid, td, lw, lh);
 	PlayerTextDrawAlignment(playerid, td, align);
 	PlayerTextDrawColour(playerid, td, color);
-	PlayerTextDrawFont(playerid, td, 1);
+	PlayerTextDrawFont(playerid, td, TEXT_DRAW_FONT_1);
 	PlayerTextDrawSetProportional(playerid, td, true);
 	PlayerTextDrawSetOutline(playerid, td, 1);
 	PlayerTextDrawSetShadow(playerid, td, 0);
@@ -447,7 +447,7 @@ PlayerText:UI_LvBox(playerid, Float:x, Float:y, Float:w, Float:h, color)
 	PlayerTextDrawTextSize(playerid, td, (x + w), 0.0);
 	PlayerTextDrawUseBox(playerid, td, true);
 	PlayerTextDrawBoxColour(playerid, td, color);
-	PlayerTextDrawFont(playerid, td, 1);
+	PlayerTextDrawFont(playerid, td, TEXT_DRAW_FONT_1);
 	PlayerTextDrawSetShadow(playerid, td, 0);
 	PlayerTextDrawSetOutline(playerid, td, 0);
 	return td;
@@ -471,7 +471,7 @@ UI_LvTdEnsure(playerid)
 	g_UiLvTd[playerid][9] = UI_LvText(playerid, (14.0 + 5.0), (252.0 + 2.0), "_", 0.2, 0.9, -1, t_TEXT_DRAW_ALIGN:1);
 	PlayerTextDrawTextSize(playerid, PlayerText:g_UiLvTd[playerid][9], ((14.0 + 220.0) - 4.0), 0.0);
 	g_UiLvTd[playerid][10] = _:UI_LvText(playerid, 320.0, 318.0, "_", 0.24, 1.1, -2994689, t_TEXT_DRAW_ALIGN:2);
-	g_UiLvTdMade[playerid] = 1;
+	g_UiLvTdMade[playerid] = true;
 	return 0;
 }
 
@@ -746,7 +746,7 @@ UI_LvBoardRender(playerid)
 	}
 	strcat(body, "{AAAAAA}Aggiorna la bacheca\t\t\t", 1536);
 	format(title, 64, "Bacheca contratti%s", g_UiLvBdAt[playerid] ? "" : " (consultazione)");
-	Lang_ShowPlayerDialog(playerid, 9700, 5, title, body, "Apri", "Chiudi");
+	Lang_ShowPlayerDialog(playerid, 9700, DIALOG_STYLE_TABLIST_HEADERS, title, body, "Apri", "Chiudi");
 }
 
 UI_CityBoardShow(playerid, bool:atBoard)
@@ -769,7 +769,7 @@ UI_LvFilterShow(playerid)
 {
 	new body[384];
 	format(body, 384, "Quartiere: {FFD24D}%s\nProfessione: {FFD24D}%s\nMostra: {FFD24D}%s\n{66DD66}Torna alla bacheca", g_UiLvDistrictName[g_UiLvFltDistrict[playerid]], g_UiLvKindName[g_UiLvFltKind[playerid]], g_UiLvFltEligible[playerid] ? "solo quelli che posso accettare" : "tutti i contratti");
-	Lang_ShowPlayerDialog(playerid, 9701, 2, "Filtra la bacheca", body, "Cambia", "Indietro");
+	Lang_ShowPlayerDialog(playerid, 9701, DIALOG_STYLE_LIST, "Filtra la bacheca", body, "Cambia", "Indietro");
 }
 
 UI_LvDetailRender(playerid, i)
@@ -798,11 +798,11 @@ UI_LvDetailRender(playerid, i)
 	format(title, 64, "Contratto #%d", g_UiLvBdId[playerid][i]);
 	if (g_UiLvDetCan[playerid])
 	{
-		Lang_ShowPlayerDialog(playerid, 9702, 0, title, body, "Accetta", "Indietro");
+		Lang_ShowPlayerDialog(playerid, 9702, DIALOG_STYLE_MSGBOX, title, body, "Accetta", "Indietro");
 	}
 	else
 	{
-		Lang_ShowPlayerDialog(playerid, 9702, 0, title, body, "Indietro", "Chiudi");
+		Lang_ShowPlayerDialog(playerid, 9702, DIALOG_STYLE_MSGBOX, title, body, "Indietro", "Chiudi");
 	}
 }
 
@@ -823,7 +823,7 @@ UI_LvAcceptShow(playerid, i)
 	new body[512], sTime[12];
 	UI_LvFmtTime(g_UiLvBdExpAt[playerid][i] - gettime(), sTime, 12);
 	format(body, 512, "{FFFFFF}Accetti il contratto {FFD24D}#%d{FFFFFF}?\n\nUn furgone ti aspetta al magazzino di {FFD24D}%s{FFFFFF}.\nPorta il carico al negozio di {FFD24D}%s{FFFFFF} con calma e attenzione.\n\n{AAAAAA}Puoi seguire un solo contratto alla volta. Il contratto resta valido per %s.", g_UiLvBdId[playerid][i], g_UiLvDistrictName[g_UiLvBdFrom[playerid][i]], g_UiLvDistrictName[g_UiLvBdTo[playerid][i]], sTime);
-	Lang_ShowPlayerDialog(playerid, 9703, 0, "Conferma contratto", body, "Conferma", "Annulla");
+	Lang_ShowPlayerDialog(playerid, 9703, DIALOG_STYLE_MSGBOX, "Conferma contratto", body, "Conferma", "Annulla");
 }
 
 UI_CityContractStatus(playerid, contractId, ctState, fromDistrict, toDistrict, cargo, reward, secondsLeft, integrityPct, distanceM, repPenalty)
@@ -878,7 +878,7 @@ UI_CityContractStatus(playerid, contractId, ctState, fromDistrict, toDistrict, c
 	}
 	format(body, 1024, "{FFFFFF}Stato: {FFD24D}%s\n{FFFFFF}Prossimo passo: {FFD24D}%s\n{FFFFFF}Distanza: {FFD24D}%s\n{FFFFFF}Tempo rimasto: {FFD24D}%s\n{FFFFFF}Merce: {FFD24D}%s{FFFFFF}, integrita' {FFD24D}%s\n{FFFFFF}Compenso indicativo: {66DD66}$%s\n\n{AAAAAA}Se lasci il contratto non perdi denaro, ma perdi %d punti di reputazione nei trasporti.", ctState == 2 ? "in consegna" : "accettato", step, sDist, sTime, g_UiLvCargoName[cargo >= 1 && cargo <= 3 ? cargo : 0], sInteg, sReward, repPenalty < 0 ? -repPenalty : repPenalty);
 	format(title, 64, "Il tuo contratto #%d", contractId);
-	Lang_ShowPlayerDialog(playerid, 9704, 0, title, body, "Lascia", "Chiudi");
+	Lang_ShowPlayerDialog(playerid, 9704, DIALOG_STYLE_MSGBOX, title, body, "Lascia", "Chiudi");
 	return 0;
 }
 
@@ -895,7 +895,7 @@ UI_CityContractNone(playerid)
 		CefUI_Open(playerid, "phone", "contracts");
 		return 0;
 	}
-	Lang_ShowPlayerDialog(playerid, 9704, 0, "Nessun contratto", "{FFFFFF}Al momento non stai seguendo nessun contratto.\n\n{AAAAAA}La bacheca della Casa del Quartiere di Idlewood ha sempre qualcosa da fare.", "Bacheca", "Chiudi");
+	Lang_ShowPlayerDialog(playerid, 9704, DIALOG_STYLE_MSGBOX, "Nessun contratto", "{FFFFFF}Al momento non stai seguendo nessun contratto.\n\n{AAAAAA}La bacheca della Casa del Quartiere di Idlewood ha sempre qualcosa da fare.", "Bacheca", "Chiudi");
 	return 0;
 }
 
@@ -961,7 +961,7 @@ UI_CityContractHud(playerid, contractId, ctState, const objective[], const desti
 	{
 		UI_LvTdShow(playerid, 0, 4, true);
 	}
-	g_UiLvHudOn[playerid] = 1;
+	g_UiLvHudOn[playerid] = true;
 	UI_LvTimerSync(playerid);
 	return 0;
 }
@@ -980,7 +980,7 @@ UI_CityContractHudHide(playerid)
 	{
 		UI_LvTdShow(playerid, 0, 4, false);
 	}
-	g_UiLvHudOn[playerid] = 0;
+	g_UiLvHudOn[playerid] = false;
 	g_UiLvHudId[playerid] = 0;
 	g_UiLvHudExpAt[playerid] = 0;
 	if (IsPlayerConnected(playerid))
@@ -998,7 +998,7 @@ UI_CityDistrictPick(playerid)
 	}
 	new body[128];
 	format(body, 128, "%s\n%s\n%s", g_UiLvDistrictName[1], g_UiLvDistrictName[2], g_UiLvDistrictName[3]);
-	Lang_ShowPlayerDialog(playerid, 9706, 2, "Quale quartiere?", body, "Apri", "Chiudi");
+	Lang_ShowPlayerDialog(playerid, 9706, DIALOG_STYLE_LIST, "Quale quartiere?", body, "Apri", "Chiudi");
 	return 0;
 }
 
@@ -1117,7 +1117,7 @@ UI_CityDistrictShow(playerid)
 		strcat(body, line, 1280);
 	}
 	format(title, 64, "Quartiere: %s", g_UiLvDistrictName[d]);
-	Lang_ShowPlayerDialog(playerid, 9707, 0, title, body, "Progetto", "Chiudi");
+	Lang_ShowPlayerDialog(playerid, 9707, DIALOG_STYLE_MSGBOX, title, body, "Progetto", "Chiudi");
 	return 0;
 }
 
@@ -1133,7 +1133,7 @@ UI_CityRepBegin(playerid)
 	}
 	for (new d = 0; d <= 3; d++)
 	{
-		g_UiLvRpLHas[playerid][d] = 0;
+		g_UiLvRpLHas[playerid][d] = false;
 	}
 	return 0;
 }
@@ -1161,7 +1161,7 @@ UI_CityRepLocal(playerid, districtId, rep)
 	{
 		return 0;
 	}
-	g_UiLvRpLHas[playerid][d] = 1;
+	g_UiLvRpLHas[playerid][d] = true;
 	g_UiLvRpLocal[playerid][d] = rep;
 	return 0;
 }
@@ -1220,7 +1220,7 @@ UI_CityRepShow(playerid)
 		strcat(body, line, 1280);
 	}
 	strcat(body, "\n{AAAAAA}La reputazione non si compra: cresce con il lavoro, ogni giorno un passo alla volta.", 1280);
-	Lang_ShowPlayerDialog(playerid, 9708, 0, "Reputazione", body, "Chiudi", "");
+	Lang_ShowPlayerDialog(playerid, 9708, DIALOG_STYLE_MSGBOX, "Reputazione", body, "Chiudi", "");
 	return 0;
 }
 
@@ -1280,7 +1280,7 @@ UI_LvRentModelShow(playerid)
 	{
 		strcopy(title, "Noleggio veicoli", 64);
 	}
-	Lang_ShowPlayerDialog(playerid, 9709, 5, title, body, "Scegli", "Chiudi");
+	Lang_ShowPlayerDialog(playerid, 9709, DIALOG_STYLE_TABLIST_HEADERS, title, body, "Scegli", "Chiudi");
 }
 
 UI_LivingRentalShow(playerid)
@@ -1309,7 +1309,7 @@ UI_LvRentBlocksShow(playerid)
 		strcat(body, line, 512);
 	}
 	format(title, 64, "%s - per quanto tempo?", g_UiLvRnName[playerid][s]);
-	Lang_ShowPlayerDialog(playerid, 9710, 4, title, body, "Avanti", "Indietro");
+	Lang_ShowPlayerDialog(playerid, 9710, DIALOG_STYLE_TABLIST, title, body, "Avanti", "Indietro");
 }
 
 UI_LvRentSummaryShow(playerid)
@@ -1328,7 +1328,7 @@ UI_LvRentSummaryShow(playerid)
 		disc[0] = 0;
 	}
 	format(body, 1024, "{FFFFFF}Veicolo: {FFD24D}%s\n{FFFFFF}Durata: {FFD24D}%d minuti\n{FFFFFF}Canone: {66DD66}$%s%s\n{FFFFFF}Cauzione: {FFD24D}$%s {AAAAAA}(ti torna alla riconsegna, in base alle condizioni del mezzo)\n{FFFFFF}Addebito ora: {66DD66}$%s\n\n{AAAAAA}Si paga dal conto in banca, poi dai contanti. Riporta il mezzo qui con /riconsegna:\ndopo la scadenza c'e' qualche minuto di tolleranza, poi la cauzione resta all'agenzia.", g_UiLvRnName[playerid][s], g_UiLvRnBlockMin[playerid] * b, sFee, disc, sDep, sTot);
-	Lang_ShowPlayerDialog(playerid, 9711, 0, "Riepilogo noleggio", body, "Noleggia", "Indietro");
+	Lang_ShowPlayerDialog(playerid, 9711, DIALOG_STYLE_MSGBOX, "Riepilogo noleggio", body, "Noleggia", "Indietro");
 }
 
 UI_LivingRentalReturnConfirm(playerid, rentalId, const modelName[], healthPct, deposit, refund)
@@ -1342,7 +1342,7 @@ UI_LivingRentalReturnConfirm(playerid, rentalId, const modelName[], healthPct, d
 	UI_LvFmt(deposit < 0 ? 0 : deposit, sDep, 16);
 	UI_LvFmt(refund < 0 ? 0 : refund, sRef, 16);
 	format(body, 512, "{FFFFFF}Riconsegni la {FFD24D}%s{FFFFFF}?\n\nCondizioni del mezzo: {FFD24D}%d%%\n{FFFFFF}Cauzione versata: {FFD24D}$%s\n{FFFFFF}Ti restituiamo: {66DD66}$%s\n\n{AAAAAA}Il canone non si rimborsa. Grazie per averci scelto.", modelName, UI_LvClamp(healthPct, 0, 100), sDep, sRef);
-	Lang_ShowPlayerDialog(playerid, 9712, 0, "Riconsegna", body, "Riconsegna", "Annulla");
+	Lang_ShowPlayerDialog(playerid, 9712, DIALOG_STYLE_MSGBOX, "Riconsegna", body, "Riconsegna", "Annulla");
 	return 0;
 }
 
@@ -1358,7 +1358,7 @@ UI_LivingRentalReceipt(playerid, const modelName[], fee, deposit, refund, minute
 	UI_LvFmt(refund < 0 ? 0 : refund, sRef, 16);
 	UI_LvFmt(deposit - refund < 0 ? 0 : deposit - refund, sKept, 16);
 	format(body, 512, "{FFFFFF}Veicolo: {FFD24D}%s\n{FFFFFF}Utilizzo: {FFD24D}%d minuti\n{FFFFFF}Canone pagato: {FFD24D}$%s\n{FFFFFF}Cauzione: {FFD24D}$%s\n{FFFFFF}Rimborsata: {66DD66}$%s\n{FFFFFF}Trattenuta per danni o ritardo: {FF8866}$%s\n\n{AAAAAA}Buona strada, e a presto.", modelName, minutesUsed < 0 ? 0 : minutesUsed, sFee, sDep, sRef, sKept);
-	Lang_ShowPlayerDialog(playerid, 9713, 0, "Ricevuta noleggio", body, "Chiudi", "");
+	Lang_ShowPlayerDialog(playerid, 9713, DIALOG_STYLE_MSGBOX, "Ricevuta noleggio", body, "Chiudi", "");
 	return 0;
 }
 
@@ -1378,7 +1378,7 @@ UI_LivingTaxiOffer(playerid, callId, bool:npc, const passenger[], fromDistrict, 
 	UI_LvFmtDist(distanceM, sDist, 16);
 	UI_LvFmt(fareEstimate < 0 ? 0 : fareEstimate, sFare, 16);
 	format(body, 512, "{FFFFFF}%s {FFD24D}%s{FFFFFF} cerca un taxi.\n\nDa: {FFD24D}%s\n{FFFFFF}A: {FFD24D}%s\n{FFFFFF}Percorso stimato: {FFD24D}%s\n{FFFFFF}Tariffa stimata: {66DD66}$%s\n\n{AAAAAA}Hai %d secondi per rispondere (anche con /accettacorsa).", npc ? "Un cliente," : "Il giocatore", passenger[0] != 0 ? passenger : "-", g_UiLvDistrictName[UI_LvClampDistrict(fromDistrict)], g_UiLvDistrictName[UI_LvClampDistrict(toDistrict)], sDist, sFare, ttlSec);
-	Lang_ShowPlayerDialog(playerid, 9714, 0, "Chiamata taxi", body, "Accetta corsa", "Ignora");
+	Lang_ShowPlayerDialog(playerid, 9714, DIALOG_STYLE_MSGBOX, "Chiamata taxi", body, "Accetta corsa", "Ignora");
 	UI_LvTimerSync(playerid);
 	return 0;
 }
@@ -1418,7 +1418,7 @@ UI_LivingTaxiMeter(playerid, fare, distanceM, bool:running)
 	Lang_PlayerTextDrawSetString(playerid, g_UiLvTd[playerid][6], running ? "TASSAMETRO - in corsa" : "TASSAMETRO - fermo");
 	PlayerTextDrawColour(playerid, PlayerText:g_UiLvTd[playerid][7], running ? 0x66DD66FF : 0xC8C8C8FF);
 	UI_LvTdShow(playerid, 5, 7, true);
-	g_UiLvMeterOn[playerid] = 1;
+	g_UiLvMeterOn[playerid] = true;
 	return 0;
 }
 
@@ -1432,7 +1432,7 @@ UI_LivingTaxiMeterHide(playerid)
 	{
 		UI_LvTdShow(playerid, 5, 7, false);
 	}
-	g_UiLvMeterOn[playerid] = 0;
+	g_UiLvMeterOn[playerid] = false;
 	return 0;
 }
 
@@ -1450,7 +1450,7 @@ UI_LvTaxiPayShow(playerid)
 		disc[0] = 0;
 	}
 	format(body, 640, "{FFFFFF}Corsa con {FFD24D}%s{FFFFFF} conclusa.\n\nPercorso: {FFD24D}%s\n{FFFFFF}Importo: {66DD66}$%s%s\n\n{AAAAAA}Il pagamento parte dal tuo conto in banca. Se qualcosa non va puoi contestare:\nla corsa restera' in sospeso e lo staff la verifichera'. Rispondi entro %d secondi.", g_UiLvTxPayDriver[playerid], sDist, sFare, disc, g_UiLvTxPayLeft[playerid]);
-	Lang_ShowPlayerDialog(playerid, 9715, 0, "Pagamento corsa", body, "Paga", "Contesta");
+	Lang_ShowPlayerDialog(playerid, 9715, DIALOG_STYLE_MSGBOX, "Pagamento corsa", body, "Paga", "Contesta");
 }
 
 UI_LivingTaxiPayConfirm(playerid, rideId, const driver[], distanceM, fare, discountPct, ttlSec)
@@ -1509,7 +1509,7 @@ UI_LivingTaxiRate(playerid, rideId, const driver[])
 	new title[64];
 	g_UiLvTxRateId[playerid] = rideId;
 	format(title, 64, "Com'e' andata con %s?", driver[0] != 0 ? driver : "il tassista");
-	Lang_ShowPlayerDialog(playerid, 9717, 2, title, "{66DD66}***** Ottima\n{66DD66}**** Buona\n{FFD24D}*** Nella norma\n{FFAA33}** Da migliorare\n{FF8866}* Deludente", "Vota", "Salta");
+	Lang_ShowPlayerDialog(playerid, 9717, DIALOG_STYLE_LIST, title, "{66DD66}***** Ottima\n{66DD66}**** Buona\n{FFD24D}*** Nella norma\n{FFAA33}** Da migliorare\n{FF8866}* Deludente", "Vota", "Salta");
 	return 0;
 }
 
@@ -1533,7 +1533,7 @@ UI_LivingTaxiReceipt(playerid, bool:asDriver, rideId, const other[], distanceM, 
 		format(body, 512, "{FFFFFF}Tassista: {FFD24D}%s\n{FFFFFF}Percorso: {FFD24D}%s\n{FFFFFF}Pagato: {66DD66}$%s\n\n{AAAAAA}Grazie per aver viaggiato con i taxi di Los Santos.", other[0] != 0 ? other : "-", sDist, sFare);
 	}
 	format(title, 64, "Ricevuta corsa #%d", rideId);
-	Lang_ShowPlayerDialog(playerid, 9718, 0, title, body, "Chiudi", "");
+	Lang_ShowPlayerDialog(playerid, 9718, DIALOG_STYLE_MSGBOX, title, body, "Chiudi", "");
 	return 0;
 }
 
@@ -1611,11 +1611,11 @@ UI_LivingProjectShow(playerid)
 	strcopy(title, "Progetto della comunita'", 64);
 	if (can)
 	{
-		Lang_ShowPlayerDialog(playerid, 9719, 0, title, body, "Contribuisci", "Chiudi");
+		Lang_ShowPlayerDialog(playerid, 9719, DIALOG_STYLE_MSGBOX, title, body, "Contribuisci", "Chiudi");
 	}
 	else
 	{
-		Lang_ShowPlayerDialog(playerid, 9719, 0, title, body, "Chiudi", "");
+		Lang_ShowPlayerDialog(playerid, 9719, DIALOG_STYLE_MSGBOX, title, body, "Chiudi", "");
 	}
 	return 0;
 }
@@ -1631,7 +1631,7 @@ UI_LvPrjAmountShow(playerid, const err[])
 	UI_LvFmt(lo, sLo, 16);
 	UI_LvFmt(hi, sHi, 16);
 	format(body, 512, "%s{FFFFFF}Quanto vuoi donare a {FFD24D}%s{FFFFFF}?\nImporto ammesso: da {FFD24D}$%s{FFFFFF} a {FFD24D}$%s{FFFFFF}. Inserisci un numero intero:", err, g_UiLvPjName[playerid], sLo, sHi);
-	Lang_ShowPlayerDialog(playerid, 9720, 1, "Contribuisci", body, "Avanti", "Indietro");
+	Lang_ShowPlayerDialog(playerid, 9720, DIALOG_STYLE_INPUT, "Contribuisci", body, "Avanti", "Indietro");
 	return 0;
 }
 
@@ -1640,7 +1640,7 @@ UI_LvPrjConfirmShow(playerid)
 	new body[384], sAmt[16];
 	UI_LvFmt(g_UiLvPjAmount[playerid], sAmt, 16);
 	format(body, 384, "{FFFFFF}Doni {66DD66}$%s{FFFFFF} a {FFD24D}%s{FFFFFF}?\n\n{AAAAAA}L'importo si paga dal conto in banca, poi dai contanti, e non si restituisce.\nIl quartiere se ne ricordera'.", sAmt, g_UiLvPjName[playerid]);
-	Lang_ShowPlayerDialog(playerid, 9721, 0, "Conferma donazione", body, "Dona", "Indietro");
+	Lang_ShowPlayerDialog(playerid, 9721, DIALOG_STYLE_MSGBOX, "Conferma donazione", body, "Dona", "Indietro");
 }
 
 bool:UI_LvPrjCheck(playerid, amount, err[], size)
@@ -1741,7 +1741,7 @@ UI_LivingHelpShow(playerid)
 	{
 		format(title, 64, "Primo giorno - passo %d di %d", cur, 5);
 	}
-	Lang_ShowPlayerDialog(playerid, 9722, 2, title, body, "Apri", "Chiudi");
+	Lang_ShowPlayerDialog(playerid, 9722, DIALOG_STYLE_LIST, title, body, "Apri", "Chiudi");
 	return 0;
 }
 
@@ -1753,11 +1753,11 @@ UI_LvHelpStepShow(playerid, step)
 	format(title, 64, "%d. %s", step, g_UiLvStepTitle[step]);
 	if (step == cur && !g_UiLvHpOff[playerid])
 	{
-		Lang_ShowPlayerDialog(playerid, 9723, 0, title, body, "Segna sulla mappa", "Indietro");
+		Lang_ShowPlayerDialog(playerid, 9723, DIALOG_STYLE_MSGBOX, title, body, "Segna sulla mappa", "Indietro");
 	}
 	else
 	{
-		Lang_ShowPlayerDialog(playerid, 9723, 0, title, body, "Indietro", "Chiudi");
+		Lang_ShowPlayerDialog(playerid, 9723, DIALOG_STYLE_MSGBOX, title, body, "Indietro", "Chiudi");
 	}
 }
 
@@ -1877,25 +1877,25 @@ UI_LivingUiDestroy(playerid)
 		for (new i = 0; i < 11; i++)
 		{
 			PlayerTextDrawDestroy(playerid, PlayerText:g_UiLvTd[playerid][i]);
-			g_UiLvTd[playerid][i] = 65535;
+			g_UiLvTd[playerid][i] = INVALID_PLAYER_TEXT_DRAW;
 		}
 	}
-	g_UiLvTdMade[playerid] = 0;
+	g_UiLvTdMade[playerid] = false;
 	g_UiLvToastTtl[playerid] = 0;
 	g_UiLvHintTtl[playerid] = 0;
-	g_UiLvHudOn[playerid] = 0;
+	g_UiLvHudOn[playerid] = false;
 	g_UiLvHudId[playerid] = 0;
 	g_UiLvHudExpAt[playerid] = 0;
-	g_UiLvMeterOn[playerid] = 0;
+	g_UiLvMeterOn[playerid] = false;
 	UI_LvConfirmsReset(playerid);
 	g_UiLvBdCount[playerid] = 0;
 	g_UiLvBdRows[playerid] = 0;
-	g_UiLvBdAt[playerid] = 0;
+	g_UiLvBdAt[playerid] = false;
 	g_UiLvFltDistrict[playerid] = 0;
 	g_UiLvFltKind[playerid] = 0;
-	g_UiLvFltEligible[playerid] = 0;
+	g_UiLvFltEligible[playerid] = false;
 	g_UiLvDetIdx[playerid] = -1;
-	g_UiLvDetCan[playerid] = 0;
+	g_UiLvDetCan[playerid] = false;
 	g_UiLvStId[playerid] = 0;
 	g_UiLvDsId[playerid] = 0;
 	g_UiLvDsEvCount[playerid] = 0;
@@ -1907,7 +1907,7 @@ UI_LivingUiDestroy(playerid)
 	g_UiLvPjId[playerid] = 0;
 	g_UiLvPjAmount[playerid] = 0;
 	g_UiLvHpStep[playerid] = 1;
-	g_UiLvHpOff[playerid] = 0;
+	g_UiLvHpOff[playerid] = false;
 	g_UiLvHpView[playerid] = 0;
 	g_UiLvHpOffRow[playerid] = -1;
 	return 0;
@@ -2075,7 +2075,7 @@ bool:UI_LivingOnDialogResponse(playerid, dialogid, response, listitem, const inp
 				UI_LvDetailShow(playerid, i);
 				return true;
 			}
-			g_UiLvDetCan[playerid] = 0;
+			g_UiLvDetCan[playerid] = false;
 			UI_LivingToast(playerid, "Contratto richiesto, un attimo...", 0);
 			UI_OnContractAccept(playerid, g_UiLvBdId[playerid][i]);
 			return true;
@@ -2093,7 +2093,7 @@ bool:UI_LivingOnDialogResponse(playerid, dialogid, response, listitem, const inp
 			}
 			new body[256];
 			format(body, 256, "{FFFFFF}Vuoi davvero lasciare il contratto {FFD24D}#%d{FFFFFF}?\n\n{AAAAAA}Il mezzo tornera' al magazzino e il contratto tornera' in bacheca per qualcun altro.", g_UiLvStId[playerid]);
-			Lang_ShowPlayerDialog(playerid, 9705, 0, "Lasciare il contratto?", body, "Lascia", "Indietro");
+			Lang_ShowPlayerDialog(playerid, 9705, DIALOG_STYLE_MSGBOX, "Lasciare il contratto?", body, "Lascia", "Indietro");
 			return true;
 		}
 		case 9705:
@@ -2231,7 +2231,7 @@ bool:UI_LivingOnDialogResponse(playerid, dialogid, response, listitem, const inp
 				UI_OnTaxiPayConfirm(playerid, id, 1);
 				return true;
 			}
-			Lang_ShowPlayerDialog(playerid, 9716, 0, "Contestare la corsa?", "{FFFFFF}Se contesti, la corsa non viene pagata e resta in sospeso per lo staff.\n\n{AAAAAA}Usalo solo se qualcosa e' andato davvero storto.", "Contesta", "Indietro");
+			Lang_ShowPlayerDialog(playerid, 9716, DIALOG_STYLE_MSGBOX, "Contestare la corsa?", "{FFFFFF}Se contesti, la corsa non viene pagata e resta in sospeso per lo staff.\n\n{AAAAAA}Usalo solo se qualcosa e' andato davvero storto.", "Contesta", "Indietro");
 			return true;
 		}
 		case 9716:
@@ -2332,7 +2332,7 @@ bool:UI_LivingOnDialogResponse(playerid, dialogid, response, listitem, const inp
 			}
 			if (listitem >= 0 && listitem == g_UiLvHpOffRow[playerid])
 			{
-				Lang_ShowPlayerDialog(playerid, 9724, 0, "Spegnere i suggerimenti?", "{FFFFFF}Il percorso del primo giorno si chiude qui, senza il pacco accoglienza.\n\n{AAAAAA}Potrai sempre chiedere a chi incontri: Los Santos e' piu' gentile di quanto sembri.", "Spegni", "Indietro");
+				Lang_ShowPlayerDialog(playerid, 9724, DIALOG_STYLE_MSGBOX, "Spegnere i suggerimenti?", "{FFFFFF}Il percorso del primo giorno si chiude qui, senza il pacco accoglienza.\n\n{AAAAAA}Potrai sempre chiedere a chi incontri: Los Santos e' piu' gentile di quanto sembri.", "Spegni", "Indietro");
 				return true;
 			}
 			UI_LivingHelpShow(playerid);
@@ -2367,7 +2367,7 @@ bool:UI_LivingOnDialogResponse(playerid, dialogid, response, listitem, const inp
 				UI_LivingHelpShow(playerid);
 				return true;
 			}
-			g_UiLvHpOff[playerid] = 1;
+			g_UiLvHpOff[playerid] = true;
 			UI_LivingHintHide(playerid);
 			UI_OnHelpHintsOff(playerid);
 			return true;

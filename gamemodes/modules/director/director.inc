@@ -180,7 +180,7 @@ Director_ClearContract(playerid)
 	g_DirRetry[playerid] = 0;
 	g_DirRelAfter[playerid] = 0;
 	g_DirRelReason[playerid] = 0;
-	g_DirRelSilent[playerid] = 0;
+	g_DirRelSilent[playerid] = false;
 	g_DirCompOp[playerid][0] = 0;
 	g_DirCompCt[playerid] = 0;
 	g_DirSeq[playerid]++;
@@ -681,7 +681,7 @@ Director_OnAccept(playerid, result, contractId, v2)
 		{
 			return 0;
 		}
-		g_DirRelSilent[playerid] = 1;
+		g_DirRelSilent[playerid] = true;
 		g_DirRelReason[playerid] = 6;
 		Director_SetOp(playerid, 4, "cr", contractId);
 		Director_Send(playerid);

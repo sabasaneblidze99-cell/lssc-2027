@@ -114,17 +114,17 @@ Faction_ResetPlayer(playerid)
 	{
 		return 0;
 	}
-	g_FcCmdSet[playerid] = 0;
+	g_FcCmdSet[playerid] = false;
 	g_FcCmdLast[playerid] = 0;
-	g_FcDutySet[playerid] = 0;
+	g_FcDutySet[playerid] = false;
 	g_FcDutyLast[playerid] = 0;
-	g_FcRadioSet[playerid] = 0;
+	g_FcRadioSet[playerid] = false;
 	g_FcRadioLast[playerid] = 0;
-	g_FcCuffSet[playerid] = 0;
+	g_FcCuffSet[playerid] = false;
 	g_FcCuffLast[playerid] = 0;
-	g_FcHealSet[playerid] = 0;
+	g_FcHealSet[playerid] = false;
 	g_FcHealLast[playerid] = 0;
-	g_FcHealTgtSet[playerid] = 0;
+	g_FcHealTgtSet[playerid] = false;
 	g_FcHealTgtLast[playerid] = 0;
 	g_FcPrevArmor[playerid] = 0.0;
 	g_FcPayMs[playerid] = 0;
@@ -133,38 +133,38 @@ Faction_ResetPlayer(playerid)
 	g_FcLastPos[playerid][1] = 0.0;
 	g_FcLastPos[playerid][2] = 0.0;
 	g_FcKit[playerid] = 0;
-	g_FcKitSet[playerid] = 0;
+	g_FcKitSet[playerid] = false;
 	g_FcKitRefillLast[playerid] = 0;
 	g_FcCuffBy[playerid] = 65535;
 	g_FcCuffTick[playerid] = 0;
 	g_FcInjLeftMs[playerid] = 0;
 	g_FcInjSec[playerid] = -1;
-	g_FcHospPending[playerid] = 0;
+	g_FcHospPending[playerid] = false;
 	g_FcRevTarget[playerid] = 65535;
 	g_FcRevTargetChar[playerid] = 0;
 	g_FcRevStart[playerid] = 0;
 	g_FcReviveBucket[playerid] = 0;
 	g_FcReviveCount[playerid] = 0;
-	g_FcInvActive[playerid] = 0;
+	g_FcInvActive[playerid] = false;
 	g_FcInvFrom[playerid] = 65535;
 	g_FcInvFromChar[playerid] = 0;
 	g_FcInvFac[playerid] = 0;
 	g_FcInvStart[playerid] = 0;
-	g_FcJoinPending[playerid] = 0;
-	g_FcFineBusy[playerid] = 0;
+	g_FcJoinPending[playerid] = false;
+	g_FcFineBusy[playerid] = false;
 	g_FcFineTarget[playerid] = 0;
 	g_FcFineReason[playerid][0] = 0;
-	g_FcFinePend[playerid] = 0;
-	g_FcFineTgtSet[playerid] = 0;
+	g_FcFinePend[playerid] = false;
+	g_FcFineTgtSet[playerid] = false;
 	g_FcFineTgtLast[playerid] = 0;
 	g_FcFineBucket[playerid] = 0;
 	g_FcFineSum[playerid] = 0;
-	g_FcMemBusy[playerid] = 0;
+	g_FcMemBusy[playerid] = false;
 	g_FcMemBusyTick[playerid] = 0;
 	g_FcMemMode[playerid] = 0;
 	g_FcMemCount[playerid] = 0;
 	g_FcOpName[playerid][0] = 0;
-	g_FcSetActive[playerid] = 0;
+	g_FcSetActive[playerid] = false;
 	g_FcSetTargetChar[playerid] = 0;
 	g_FcSetTargetAcc[playerid] = 0;
 	g_FcSetStaffAcc[playerid] = 0;
@@ -236,7 +236,7 @@ bool:Fac_CmdBlocked(playerid)
 		SendClientMessage(playerid, -10270721, "Attendi %d secondi prima di un altro comando di fazione.", Fac_SecCeil(left));
 		return true;
 	}
-	g_FcCmdSet[playerid] = 1;
+	g_FcCmdSet[playerid] = true;
 	g_FcCmdLast[playerid] = GetTickCount();
 	return false;
 }
@@ -365,15 +365,15 @@ Fac_GiveKit(playerid)
 	if (gPlayer[playerid][pFaction] == 1)
 	{
 		ResetPlayerWeapons(playerid);
-		GivePlayerWeapon(playerid, 3, 1);
-		GivePlayerWeapon(playerid, 22, 51);
-		GivePlayerWeapon(playerid, 41, 100);
+		GivePlayerWeapon(playerid, WEAPON_NITESTICK, 1);
+		GivePlayerWeapon(playerid, WEAPON_COLT45, 51);
+		GivePlayerWeapon(playerid, WEAPON_SPRAYCAN, 100);
 		SetPlayerArmour(playerid, 50.0);
 		return 0;
 	}
 	if (!g_FcKitSet[playerid] || Fac_CdLeftMs(true, g_FcKitRefillLast[playerid], 900000) == 0)
 	{
-		g_FcKitSet[playerid] = 1;
+		g_FcKitSet[playerid] = true;
 		g_FcKit[playerid] = 8;
 		g_FcKitRefillLast[playerid] = GetTickCount();
 	}
@@ -463,7 +463,7 @@ Faction_CmdDuty(playerid)
 	{
 		return 0;
 	}
-	g_FcDutySet[playerid] = 1;
+	g_FcDutySet[playerid] = true;
 	g_FcDutyLast[playerid] = GetTickCount();
 	if (gPlayer[playerid][pOnDuty])
 	{
@@ -533,8 +533,8 @@ Fac_Uncuff(targetid)
 	g_FcCuffTick[targetid] = 0;
 	if (IsPlayerConnected(targetid))
 	{
-		SetPlayerSpecialAction(targetid, 0);
-		ClearAnimations(targetid, 0);
+		SetPlayerSpecialAction(targetid, SPECIAL_ACTION_NONE);
+		ClearAnimations(targetid, SYNC_NONE);
 		Faction_UpdateControl(targetid);
 		Util_Send(targetid, 0x66DD66FF, "Sei stato liberato dalle manette.");
 	}
@@ -579,14 +579,14 @@ Faction_CmdAmmanetta(playerid, const params[], bool:cuff)
 			Util_Send(playerid, -10270721, "Il bersaglio non puo' essere ammanettato (gia' ammanettato, ferito o non a piedi).");
 			return 0;
 		}
-		g_FcCuffSet[playerid] = 1;
+		g_FcCuffSet[playerid] = true;
 		g_FcCuffLast[playerid] = GetTickCount();
 		gPlayer[target][pCuffed] = 1;
 		g_FcCuffBy[target] = playerid;
 		g_FcCuffTick[target] = GetTickCount();
 		Job_Cancel(target, "sei stato ammanettato.");
 		Faction_UpdateControl(target);
-		SetPlayerSpecialAction(target, 24);
+		SetPlayerSpecialAction(target, SPECIAL_ACTION_CUFFED);
 		format(msg, 128, "ammanetta %s", tn);
 		Fac_Emote(playerid, msg);
 		DB_FactionLogAdd(1, gPlayer[playerid][pCharId], gPlayer[target][pCharId], "cuff", "");
@@ -626,7 +626,7 @@ Faction_CmdRadio(playerid, const params[], bool:interdept)
 		Util_Send(playerid, -10270721, "Rallenta con la radio.");
 		return 0;
 	}
-	g_FcRadioSet[playerid] = 1;
+	g_FcRadioSet[playerid] = true;
 	g_FcRadioLast[playerid] = GetTickCount();
 	new f = gPlayer[playerid][pFaction], rn[24], name[25], msg[256];
 	Fac_RankName(f, gPlayer[playerid][pFactionRank], rn, 24);
@@ -717,7 +717,7 @@ Faction_CmdMulta(playerid, const params[])
 		Util_Send(playerid, -10270721, "Il cittadino non ha fondi sufficienti: multa rifiutata.");
 		return 0;
 	}
-	g_FcFineBusy[playerid] = 1;
+	g_FcFineBusy[playerid] = true;
 	g_FcFineTarget[playerid] = gPlayer[target][pCharId];
 	g_FcFinePend[target] = true;
 	strmid(g_FcFineReason[playerid], reason, 0, strlen(reason), 65);
@@ -922,7 +922,7 @@ Faction_CmdCura(playerid, const params[])
 		hp = 100.0;
 	}
 	SetPlayerHealth(target, hp);
-	g_FcHealSet[playerid] = 1;
+	g_FcHealSet[playerid] = true;
 	g_FcHealLast[playerid] = GetTickCount();
 	g_FcHealTgtSet[target] = true;
 	g_FcHealTgtLast[target] = GetTickCount();
@@ -942,7 +942,7 @@ Fac_ReviveCancel(medic, const reason[])
 	g_FcRevTargetChar[medic] = 0;
 	if (IsPlayerConnected(medic))
 	{
-		ClearAnimations(medic, 0);
+		ClearAnimations(medic, SYNC_NONE);
 		if (reason[0] != 0)
 		{
 			Util_Send(medic, -10270721, reason);
@@ -990,7 +990,7 @@ Faction_CmdRianima(playerid, const params[])
 	g_FcRevTarget[playerid] = target;
 	g_FcRevTargetChar[playerid] = gPlayer[target][pCharId];
 	g_FcRevStart[playerid] = GetTickCount();
-	ApplyAnimation(playerid, "MEDIC", "CPR", 4.1, true, false, false, false, 0, 0);
+	ApplyAnimation(playerid, "MEDIC", "CPR", 4.1, true, false, false, false, 0, SYNC_NONE);
 	new tn[25], msg[128];
 	GetPlayerName(target, tn, 25);
 	format(msg, 128, "inizia a rianimare %s", tn);
@@ -1003,11 +1003,11 @@ Fac_ReviveDone(medic, target)
 {
 	g_FcRevTarget[medic] = 65535;
 	g_FcRevTargetChar[medic] = 0;
-	ClearAnimations(medic, 0);
+	ClearAnimations(medic, SYNC_NONE);
 	gPlayer[target][pWounded] = 0;
 	g_FcInjLeftMs[target] = 0;
 	SetPlayerHealth(target, 60.0);
-	ClearAnimations(target, 0);
+	ClearAnimations(target, SYNC_NONE);
 	Faction_UpdateControl(target);
 	UI_InjuryEndShow(target, 2, 0);
 	Fac_UseCharge(medic);
@@ -1034,7 +1034,7 @@ Fac_ReviveDone(medic, target)
 
 Fac_ApplyInjuredPose(playerid)
 {
-	ApplyAnimation(playerid, "CRACK", "crckidle2", 4.1, true, false, false, true, 0, 0);
+	ApplyAnimation(playerid, "CRACK", "crckidle2", 4.1, true, false, false, true, 0, SYNC_NONE);
 }
 
 Faction_Hospitalize(playerid)
@@ -1042,13 +1042,13 @@ Faction_Hospitalize(playerid)
 	new fee = Fac_Debit(playerid, 200);
 	gPlayer[playerid][pWounded] = 0;
 	g_FcInjLeftMs[playerid] = 0;
-	g_FcHospPending[playerid] = 0;
+	g_FcHospPending[playerid] = false;
 	SetPlayerInterior(playerid, 0);
 	SetPlayerVirtualWorld(playerid, 0);
 	SetPlayerPos(playerid, 1182.0, -1330.0, 13.9);
 	SetPlayerFacingAngle(playerid, 270.0);
 	SetCameraBehindPlayer(playerid);
-	ClearAnimations(playerid, 0);
+	ClearAnimations(playerid, SYNC_NONE);
 	SetPlayerHealth(playerid, 100.0);
 	Faction_UpdateControl(playerid);
 	UI_InjuryEndShow(playerid, 1, fee);
@@ -1191,7 +1191,7 @@ Fac_InviteReply(playerid, bool:accept)
 		Util_Send(playerid, -10270721, "Non puoi entrare in una fazione adesso.");
 		return 0;
 	}
-	g_FcJoinPending[playerid] = 1;
+	g_FcJoinPending[playerid] = true;
 	GetPlayerName(playerid, g_FcOpName[from], 25);
 	DB_FactionJoin(from, fromChar, gPlayer[playerid][pCharId], f);
 	return 0;
@@ -1513,7 +1513,7 @@ Fac_RequestMembers(playerid, mode)
 		Util_Send(playerid, -10270721, "Richiesta gia' in corso: attendi.");
 		return 0;
 	}
-	g_FcMemBusy[playerid] = 1;
+	g_FcMemBusy[playerid] = true;
 	g_FcMemBusyTick[playerid] = GetTickCount();
 	g_FcMemMode[playerid] = mode;
 	DB_FactionMembers(playerid, f);
@@ -1573,7 +1573,7 @@ public Faction_OnDBMembers(playerid, faction, count)
 	{
 		return 1;
 	}
-	g_FcMemBusy[playerid] = 0;
+	g_FcMemBusy[playerid] = false;
 	if (count < 0)
 	{
 		Util_Send(playerid, -10270721, "Servizio temporaneamente non disponibile: riprova piu' tardi.");
@@ -1685,7 +1685,7 @@ bool:Faction_CmdSetfazione(playerid, const params[])
 		Util_Send(playerid, -10270721, "Giocatore non valido (usa id oppure Nome_Cognome).");
 		return true;
 	}
-	g_FcSetActive[playerid] = 1;
+	g_FcSetActive[playerid] = true;
 	g_FcSetTargetChar[playerid] = 0;
 	g_FcSetTargetAcc[playerid] = 0;
 	g_FcSetStaffAcc[playerid] = gPlayer[playerid][pAccountId];
@@ -1705,7 +1705,7 @@ public Faction_OnDBFound(playerid, tag, charId, const name[], faction, rank, lev
 	}
 	if (charId <= 0)
 	{
-		g_FcSetActive[playerid] = 0;
+		g_FcSetActive[playerid] = false;
 		Util_Send(playerid, -10270721, charId < 0 ? "Servizio temporaneamente non disponibile: riprova piu' tardi." : "Personaggio non trovato.");
 		return 1;
 	}
@@ -1897,7 +1897,7 @@ Faction_OnPlayerDeath(playerid)
 	}
 	if (gPlayer[playerid][pWounded])
 	{
-		g_FcHospPending[playerid] = 1;
+		g_FcHospPending[playerid] = true;
 		return 0;
 	}
 	gPlayer[playerid][pWounded] = 1;

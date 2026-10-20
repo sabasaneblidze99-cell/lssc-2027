@@ -48,7 +48,7 @@ Char_PickSpawn(playerid)
 
 Char_ApplySpawnInfo(playerid)
 {
-	SetSpawnInfo(playerid, 255, gPlayer[playerid][pSkin], gPlayer[playerid][pPosX], gPlayer[playerid][pPosY], gPlayer[playerid][pPosZ], gPlayer[playerid][pAngle], 0, 0, 0, 0, 0, 0);
+	SetSpawnInfo(playerid, 255, gPlayer[playerid][pSkin], gPlayer[playerid][pPosX], gPlayer[playerid][pPosY], gPlayer[playerid][pPosZ], gPlayer[playerid][pAngle], WEAPON_FIST, 0, WEAPON_FIST, 0, WEAPON_FIST, 0);
 	SetPlayerInterior(playerid, gPlayer[playerid][pInterior]);
 	SetPlayerVirtualWorld(playerid, gPlayer[playerid][pWorld]);
 }
@@ -65,5 +65,5 @@ Char_SetLoginCamera(playerid)
 	SetPlayerInterior(playerid, 0);
 	SetPlayerVirtualWorld(playerid, 0);
 	SetPlayerCameraPos(playerid, (1481.0 + 60.0), (-1749.5 + 50.0), (15.45 + 25.0));
-	SetPlayerCameraLookAt(playerid, 1481.0, -1749.5, 15.45, 2);
+	SetPlayerCameraLookAt(playerid, 1481.0, -1749.5, 15.45, CAMERA_CUT);
 }

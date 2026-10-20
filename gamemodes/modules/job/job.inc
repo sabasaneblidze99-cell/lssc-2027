@@ -126,7 +126,7 @@ Job_ResetPlayer(playerid)
 	{
 		return 0;
 	}
-	g_JsActive[playerid] = 0;
+	g_JsActive[playerid] = false;
 	g_JsJob[playerid] = 0;
 	g_JsVeh[playerid] = 65535;
 	g_JsSerial[playerid] = 0;
@@ -142,21 +142,21 @@ Job_ResetPlayer(playerid)
 	g_JsLastPos[playerid][0] = 0.0;
 	g_JsLastPos[playerid][1] = 0.0;
 	g_JsLastPos[playerid][2] = 0.0;
-	g_JsDwelling[playerid] = 0;
+	g_JsDwelling[playerid] = false;
 	g_JsDwellTick[playerid] = 0;
-	g_JsOff[playerid] = 0;
+	g_JsOff[playerid] = false;
 	g_JsOffTick[playerid] = 0;
-	g_JsCapWarned[playerid] = 0;
-	g_JpPending[playerid] = 0;
+	g_JsCapWarned[playerid] = false;
+	g_JpPending[playerid] = false;
 	g_JpJob[playerid] = 0;
 	g_JpAmount[playerid] = 0;
 	g_JpCap[playerid] = 0;
-	g_JpCompleted[playerid] = 0;
-	g_JcRunSet[playerid] = 0;
+	g_JpCompleted[playerid] = false;
+	g_JcRunSet[playerid] = false;
 	g_JcRunLast[playerid] = 0;
-	g_JcChgSet[playerid] = 0;
+	g_JcChgSet[playerid] = false;
 	g_JcChgLast[playerid] = 0;
-	g_JcSetPending[playerid] = 0;
+	g_JcSetPending[playerid] = false;
 	g_JcSetJob[playerid] = 0;
 	g_JcHourBucket[playerid] = 0;
 	for (new j = 0; j <= 3; j++)
@@ -347,15 +347,15 @@ Job_Teardown(playerid, bool:startCooldown)
 		UI_JobHudHide(playerid);
 	}
 	Job_VehRemove(playerid);
-	g_JsActive[playerid] = 0;
+	g_JsActive[playerid] = false;
 	g_JsEarned[playerid] = 0;
 	g_JsCapUsed[playerid] = 0;
-	g_JsDwelling[playerid] = 0;
-	g_JsOff[playerid] = 0;
+	g_JsDwelling[playerid] = false;
+	g_JsOff[playerid] = false;
 	g_JsSerial[playerid] = 0;
 	if (startCooldown)
 	{
-		g_JcRunSet[playerid] = 1;
+		g_JcRunSet[playerid] = true;
 		g_JcRunLast[playerid] = GetTickCount();
 	}
 }
@@ -397,7 +397,7 @@ Job_Accrue(playerid, amount)
 	new granted = amount > room ? room : amount;
 	if (granted < amount && !g_JsCapWarned[playerid])
 	{
-		g_JsCapWarned[playerid] = 1;
+		g_JsCapWarned[playerid] = true;
 		SendClientMessage(playerid, -10270721, "Tetto orario di $%d raggiunto: il turno prosegue ma non matura altro compenso.", 2200);
 	}
 	g_JcHourEarned[playerid][job] += granted;
@@ -426,7 +426,7 @@ Job_Finish(playerid, bool:completed)
 		SendClientMessage(playerid, -10270721, "Un accredito precedente e' ancora in corso: compenso non registrato.");
 		return 0;
 	}
-	g_JpPending[playerid] = 1;
+	g_JpPending[playerid] = true;
 	g_JpJob[playerid] = job;
 	g_JpAmount[playerid] = amount;
 	g_JpCap[playerid] = cap;
@@ -446,7 +446,7 @@ public Job_OnDBPayout(playerid, jobId, amount, result)
 	{
 		return 1;
 	}
-	g_JpPending[playerid] = 0;
+	g_JpPending[playerid] = false;
 	new cap = g_JpCap[playerid];
 	new bool:completed = g_JpCompleted[playerid];
 	g_JpCap[playerid] = 0;
@@ -518,7 +518,7 @@ Job_StepDone(playerid, now)
 	g_JsLastPos[playerid][1] = ty;
 	g_JsLastPos[playerid][2] = tz;
 	g_JsLastCpTick[playerid] = now;
-	g_JsDwelling[playerid] = 0;
+	g_JsDwelling[playerid] = false;
 	if (g_JsStep[playerid] >= total)
 	{
 		Job_Accrue(playerid, g_JobPayBonus[job]);
@@ -690,16 +690,16 @@ Job_Start(playerid)
 	g_JVehOwner[veh] = playerid;
 	g_JVehSerial[veh] = g_JSerialSeq;
 	g_JPool++;
-	g_JsActive[playerid] = 1;
+	g_JsActive[playerid] = true;
 	g_JsJob[playerid] = job;
 	g_JsVeh[playerid] = veh;
 	g_JsSerial[playerid] = g_JSerialSeq;
 	g_JsStep[playerid] = 0;
 	g_JsEarned[playerid] = 0;
 	g_JsCapUsed[playerid] = 0;
-	g_JsCapWarned[playerid] = 0;
-	g_JsDwelling[playerid] = 0;
-	g_JsOff[playerid] = 0;
+	g_JsCapWarned[playerid] = false;
+	g_JsDwelling[playerid] = false;
+	g_JsOff[playerid] = false;
 	g_JsStartTick[playerid] = GetTickCount();
 	g_JsLastCpTick[playerid] = g_JsStartTick[playerid];
 	g_JsLastPos[playerid][0] = x;
@@ -805,7 +805,7 @@ public UI_OnJobSelect(playerid, jobIndex)
 		SendClientMessage(playerid, -10270721, "Potrai cambiare lavoro tra %d secondi.", Job_SecCeil(left));
 		return 1;
 	}
-	g_JcSetPending[playerid] = 1;
+	g_JcSetPending[playerid] = true;
 	g_JcSetJob[playerid] = jobIndex;
 	DB_SetJob(playerid, gPlayer[playerid][pCharId], jobIndex);
 	return 1;
@@ -827,7 +827,7 @@ public UI_OnJobQuit(playerid)
 		Util_Send(playerid, -10270721, "Non puoi lasciare il lavoro adesso.");
 		return 1;
 	}
-	g_JcSetPending[playerid] = 1;
+	g_JcSetPending[playerid] = true;
 	g_JcSetJob[playerid] = 0;
 	DB_SetJob(playerid, gPlayer[playerid][pCharId], 0);
 	return 1;
@@ -843,11 +843,11 @@ public Job_OnDBSet(playerid, jobId, result)
 	{
 		return 1;
 	}
-	g_JcSetPending[playerid] = 0;
+	g_JcSetPending[playerid] = false;
 	if (result == 1)
 	{
 		gPlayer[playerid][pJob] = jobId;
-		g_JcChgSet[playerid] = 1;
+		g_JcChgSet[playerid] = true;
 		g_JcChgLast[playerid] = GetTickCount();
 		if (jobId == 0)
 		{
@@ -887,7 +887,7 @@ Job_OnInit()
 	g_JPool = 0;
 	g_JTimer = SetTimer("Job_OnTick", 500, true);
 	CreatePickup(1239, 1, 1480.5, -1736.0, 13.5, 0);
-	Lang_Create3DTextLabel("Job Center\nUsa /lavoro", -2994689, 1480.5, -1736.0, (13.5 + 1.0), 15.0, 0, 0);
+	Lang_Create3DTextLabel("Job Center\nUsa /lavoro", -2994689, 1480.5, -1736.0, (13.5 + 1.0), 15.0, 0, false);
 }
 
 Job_OnExit()
@@ -944,7 +944,7 @@ Job_OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
 	}
 	if (ispassenger == 0)
 	{
-		ClearAnimations(playerid, 0);
+		ClearAnimations(playerid, SYNC_NONE);
 		Util_Send(playerid, -10270721, "Questo veicolo di lavoro e' in uso da un altro lavoratore.");
 	}
 	return 0;
@@ -958,7 +958,7 @@ Job_OnPlayerExitVehicle(playerid, vehicleid)
 	}
 	if (!g_JsOff[playerid])
 	{
-		g_JsOff[playerid] = 1;
+		g_JsOff[playerid] = true;
 		g_JsOffTick[playerid] = GetTickCount();
 		SendClientMessage(playerid, -10270721, "Torna sul veicolo di lavoro entro %d secondi o il turno sara' annullato.", 45);
 	}
@@ -982,7 +982,7 @@ Job_OnPlayerStateChange(playerid, t_PLAYER_STATE:newstate)
 		Util_Send(playerid, -10270721, "Questo veicolo di lavoro e' in uso da un altro lavoratore.");
 		return 0;
 	}
-	g_JsOff[playerid] = 0;
+	g_JsOff[playerid] = false;
 	return 0;
 }
 

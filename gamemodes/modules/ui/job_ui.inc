@@ -118,7 +118,7 @@ UI_JobCenterShow(playerid, level, currentJob, cooldownSec)
 	{
 		strcat(body, "{FF6666}Lascia il lavoro attuale\t\t\t\n", 1024);
 	}
-	Lang_ShowPlayerDialog(playerid, 9300, 5, "Job Center", body, "Dettagli", "Chiudi");
+	Lang_ShowPlayerDialog(playerid, 9300, DIALOG_STYLE_TABLIST_HEADERS, "Job Center", body, "Dettagli", "Chiudi");
 	return 0;
 }
 
@@ -171,7 +171,7 @@ UI_JbDetailShow(playerid, job)
 		strcat(body, line, 1024);
 	}
 	format(title, 64, "Job Center - %s", g_UiJbName[job]);
-	Lang_ShowPlayerDialog(playerid, 9301, 0, title, body, ok ? "Prendi lavoro" : "Indietro", ok ? "Indietro" : "");
+	Lang_ShowPlayerDialog(playerid, 9301, DIALOG_STYLE_MSGBOX, title, body, ok ? "Prendi lavoro" : "Indietro", ok ? "Indietro" : "");
 	return 0;
 }
 
@@ -183,7 +183,7 @@ UI_JbQuitShow(playerid)
 		return 0;
 	}
 	format(body, 256, "{FFFFFF}Vuoi davvero lasciare il lavoro di {FFD24D}%s{FFFFFF}?\n\nSe poi scegli un altro lavoro dovrai rispettare il cooldown di %d minuti.", g_UiJbName[cur], 10);
-	Lang_ShowPlayerDialog(playerid, 9302, 0, "Lascia il lavoro", body, "Lascia", "Annulla");
+	Lang_ShowPlayerDialog(playerid, 9302, DIALOG_STYLE_MSGBOX, "Lascia il lavoro", body, "Lascia", "Annulla");
 	return 0;
 }
 
@@ -221,7 +221,7 @@ UI_JobInfoShow(playerid, jobId, level, runs, earned)
 		strcat(body, line, 1024);
 		strcat(body, "Comandi: /inizia (avvia il turno), /fine (chiude e paga il maturato), /lavoro lascia (al Job Center).", 1024);
 	}
-	Lang_ShowPlayerDialog(playerid, 9303, 0, "Il tuo lavoro", body, "Chiudi", "");
+	Lang_ShowPlayerDialog(playerid, 9303, DIALOG_STYLE_MSGBOX, "Il tuo lavoro", body, "Chiudi", "");
 	return 0;
 }
 
@@ -283,7 +283,7 @@ bool:UI_JobOnDialogResponse(playerid, dialogid, response, listitem, const inputt
 	}
 	return false;
 }
-new g_UiJHud[MAX_PLAYERS][6];
+new PlayerText:g_UiJHud[MAX_PLAYERS][6];
 new bool:g_UiJHudCreated[MAX_PLAYERS];
 new bool:g_UiJHudShown[MAX_PLAYERS];
 new bool:g_UiJHudWarn[MAX_PLAYERS];
@@ -295,7 +295,7 @@ PlayerText:UI_JhText(playerid, Float:x, Float:y, const text[], Float:lw, Float:l
 	PlayerTextDrawLetterSize(playerid, td, lw, lh);
 	PlayerTextDrawAlignment(playerid, td, align);
 	PlayerTextDrawColour(playerid, td, color);
-	PlayerTextDrawFont(playerid, td, 1);
+	PlayerTextDrawFont(playerid, td, TEXT_DRAW_FONT_1);
 	PlayerTextDrawSetProportional(playerid, td, true);
 	PlayerTextDrawSetOutline(playerid, td, 1);
 	PlayerTextDrawSetShadow(playerid, td, 0);
@@ -310,7 +310,7 @@ PlayerText:UI_JhBox(playerid, Float:x, Float:y, Float:w, Float:h, color)
 	PlayerTextDrawTextSize(playerid, td, (x + w), 0.0);
 	PlayerTextDrawUseBox(playerid, td, true);
 	PlayerTextDrawBoxColour(playerid, td, color);
-	PlayerTextDrawFont(playerid, td, 1);
+	PlayerTextDrawFont(playerid, td, TEXT_DRAW_FONT_1);
 	PlayerTextDrawSetShadow(playerid, td, 0);
 	PlayerTextDrawSetOutline(playerid, td, 0);
 	return td;
@@ -329,7 +329,7 @@ UI_JhCreate(playerid)
 	g_UiJHud[playerid][3] = UI_JhText(playerid, (5.0 + left), (384.0 + 26.0), "Maturato: $0", 0.22, 1.0, 0x66DD66FF, t_TEXT_DRAW_ALIGN:1);
 	g_UiJHud[playerid][4] = UI_JhText(playerid, (5.0 + left), (384.0 + 38.0), "Tempo 00:00", 0.22, 1.0, -1, t_TEXT_DRAW_ALIGN:1);
 	g_UiJHud[playerid][5] = UI_JhText(playerid, (5.0 + left), (384.0 + 51.0), "TORNA AL VEICOLO: 45s", 0.2, 0.9, -12303105, t_TEXT_DRAW_ALIGN:1);
-	g_UiJHudCreated[playerid] = 1;
+	g_UiJHudCreated[playerid] = true;
 	return 0;
 }
 
@@ -353,7 +353,7 @@ UI_JhSetVisible(playerid, bool:visible)
 	if (!visible || !g_UiJHudWarn[playerid])
 	{
 		PlayerTextDrawHide(playerid, PlayerText:g_UiJHud[playerid][5]);
-		g_UiJHudWarn[playerid] = 0;
+		g_UiJHudWarn[playerid] = false;
 	}
 }
 
@@ -369,8 +369,8 @@ UI_JobHudShow(playerid, jobId)
 	}
 	UI_JhCreate(playerid);
 	g_UiJHudJob[playerid] = jobId;
-	g_UiJHudShown[playerid] = 1;
-	g_UiJHudWarn[playerid] = 0;
+	g_UiJHudShown[playerid] = true;
+	g_UiJHudWarn[playerid] = false;
 	new str[48];
 	format(str, 48, "LAVORO: %s", g_UiJbName[jobId]);
 	Lang_PlayerTextDrawSetString(playerid, g_UiJHud[playerid][1], str);
@@ -388,7 +388,7 @@ UI_JobHudHide(playerid)
 	{
 		return 0;
 	}
-	g_UiJHudShown[playerid] = 0;
+	g_UiJHudShown[playerid] = false;
 	UI_JhSetVisible(playerid, false);
 	return 0;
 }
@@ -441,12 +441,12 @@ UI_JobHudUpdate(playerid, step, stepTotal, earned, elapsedSec, dwellSec, offVehi
 		new bool:blinkOff = GetTickCount() / 500 % 2 == 1;
 		PlayerTextDrawColour(playerid, PlayerText:g_UiJHud[playerid][5], blinkOff ? -12303292 : -12303105);
 		PlayerTextDrawShow(playerid, PlayerText:g_UiJHud[playerid][5]);
-		g_UiJHudWarn[playerid] = 1;
+		g_UiJHudWarn[playerid] = true;
 	}
 	else if (g_UiJHudWarn[playerid])
 	{
 		PlayerTextDrawHide(playerid, PlayerText:g_UiJHud[playerid][5]);
-		g_UiJHudWarn[playerid] = 0;
+		g_UiJHudWarn[playerid] = false;
 	}
 	PlayerTextDrawShow(playerid, PlayerText:g_UiJHud[playerid][2]);
 	PlayerTextDrawShow(playerid, PlayerText:g_UiJHud[playerid][3]);
@@ -465,12 +465,12 @@ UI_JobUiDestroy(playerid)
 		for (new i = 0; i < 6; i++)
 		{
 			PlayerTextDrawDestroy(playerid, PlayerText:g_UiJHud[playerid][i]);
-			g_UiJHud[playerid][i] = 65535;
+			g_UiJHud[playerid][i] = INVALID_PLAYER_TEXT_DRAW;
 		}
 	}
-	g_UiJHudCreated[playerid] = 0;
-	g_UiJHudShown[playerid] = 0;
-	g_UiJHudWarn[playerid] = 0;
+	g_UiJHudCreated[playerid] = false;
+	g_UiJHudShown[playerid] = false;
+	g_UiJHudWarn[playerid] = false;
 	g_UiJHudJob[playerid] = 0;
 	g_UiJbLevel[playerid] = 0;
 	g_UiJbCurrent[playerid] = 0;

@@ -231,7 +231,7 @@ UI_HouseMenuShow(playerid)
 			UI_HsMenuRow(playerid, n, 6, "{FF6666}Vendi la casa\n", body, 1024);
 		}
 	}
-	Lang_ShowPlayerDialog(playerid, 9200, 2, title, body, "Scegli", "Chiudi");
+	Lang_ShowPlayerDialog(playerid, 9200, DIALOG_STYLE_LIST, title, body, "Scegli", "Chiudi");
 	return 0;
 }
 
@@ -247,7 +247,7 @@ UI_HsBuyPayShow(playerid)
 	format(tl, 48, "{FFFFFF}Banca\t%s$%s\n", g_UiHsBank[playerid] >= p ? "{66DD66}" : "{FF6666}", bank);
 	strcat(body, tl, 320);
 	format(title, 64, "%s $%s - pagamento", g_UiHsTierName[t], price);
-	Lang_ShowPlayerDialog(playerid, 9201, 4, title, body, "Acquista", "Indietro");
+	Lang_ShowPlayerDialog(playerid, 9201, DIALOG_STYLE_TABLIST, title, body, "Acquista", "Indietro");
 }
 
 UI_HsSellConfirmShow(playerid)
@@ -256,7 +256,7 @@ UI_HsSellConfirmShow(playerid)
 	UI_HsMoney(g_UiHsTierPrice[g_UiHsTier[playerid]] * 70 / 100, amount, 16);
 	format(body, 320, "{FFFFFF}Vendere la casa {FFD24D}%d{FFFFFF} (%s)?\n\nRiceverai circa {66DD66}$%s{FFFFFF} (%d%% del prezzo) in banca.\nUtenze, chiavi e bollette verranno azzerate; l'operazione non e' reversibile.", g_UiHsHouse[playerid], g_UiHsIntName[g_UiHsInt[playerid]], amount, 70);
 	UI_HsTitle(playerid, "Conferma vendita", title, 64);
-	Lang_ShowPlayerDialog(playerid, 9202, 0, title, body, "Vendi", "Annulla");
+	Lang_ShowPlayerDialog(playerid, 9202, DIALOG_STYLE_MSGBOX, title, body, "Vendi", "Annulla");
 }
 
 UI_HouseUtilityShow(playerid)
@@ -309,7 +309,7 @@ UI_HouseUtilityShow(playerid)
 	}
 	strcat(body, line, 512);
 	UI_HsTitle(playerid, "Utenze", title, 64);
-	Lang_ShowPlayerDialog(playerid, 9203, 5, title, body, "Cambia", "Indietro");
+	Lang_ShowPlayerDialog(playerid, 9203, DIALOG_STYLE_TABLIST_HEADERS, title, body, "Cambia", "Indietro");
 	return 0;
 }
 
@@ -344,7 +344,7 @@ UI_HouseFridgeShow(playerid)
 		UI_HsMenuRow(playerid, n, 4, line, body, 512);
 	}
 	UI_HsTitle(playerid, "Frigo", title, 64);
-	Lang_ShowPlayerDialog(playerid, 9204, 2, title, body, "Scegli", "Indietro");
+	Lang_ShowPlayerDialog(playerid, 9204, DIALOG_STYLE_LIST, title, body, "Scegli", "Indietro");
 	return 0;
 }
 
@@ -355,7 +355,7 @@ UI_HsAmountShow(playerid, action, maxAmount)
 	g_UiHsAmtMax[playerid] = maxAmount;
 	format(body, 192, "{FFFFFF}%s\nQuantita' (1-%d):", action == 3 ? "Porzioni da riporre nel frigo." : "Porzioni da prendere dal frigo.", maxAmount);
 	UI_HsTitle(playerid, action == 3 ? "Riponi" : "Prendi", title, 64);
-	Lang_ShowPlayerDialog(playerid, 9205, 1, title, body, "Conferma", "Indietro");
+	Lang_ShowPlayerDialog(playerid, 9205, DIALOG_STYLE_INPUT, title, body, "Conferma", "Indietro");
 }
 
 UI_HouseBillsShow(playerid)
@@ -386,7 +386,7 @@ UI_HouseBillsShow(playerid)
 	}
 	strcat(body, line, 512);
 	UI_HsTitle(playerid, "Bollette", title, 64);
-	Lang_ShowPlayerDialog(playerid, 9206, 5, title, body, "Paga tutte", "Indietro");
+	Lang_ShowPlayerDialog(playerid, 9206, DIALOG_STYLE_TABLIST_HEADERS, title, body, "Paga tutte", "Indietro");
 	return 0;
 }
 
@@ -401,7 +401,7 @@ UI_HsBillsPayShow(playerid)
 	format(tl, 48, "{FFFFFF}Contanti\t%s$%s\n", g_UiHsMoney[playerid] >= p ? "{66DD66}" : "{FF6666}", cash);
 	strcat(body, tl, 320);
 	format(title, 64, "Paga bollette $%s", total);
-	Lang_ShowPlayerDialog(playerid, 9207, 4, title, body, "Paga", "Indietro");
+	Lang_ShowPlayerDialog(playerid, 9207, DIALOG_STYLE_TABLIST, title, body, "Paga", "Indietro");
 }
 
 bool:UI_HsParseAmount(const text[], &value)
@@ -651,7 +651,7 @@ bool:UI_HouseOnDialogResponse(playerid, dialogid, response, listitem, const inpu
 	}
 	return false;
 }
-new g_UiHh[MAX_PLAYERS][7];
+new PlayerText:g_UiHh[MAX_PLAYERS][7];
 new bool:g_UiHhCreated[MAX_PLAYERS];
 new bool:g_UiHhDark[MAX_PLAYERS];
 new bool:g_UiHhHunger[MAX_PLAYERS];
@@ -663,7 +663,7 @@ PlayerText:UI_HhText(playerid, Float:x, Float:y, const text[], Float:lw, Float:l
 	PlayerTextDrawLetterSize(playerid, td, lw, lh);
 	PlayerTextDrawAlignment(playerid, td, align);
 	PlayerTextDrawColour(playerid, td, color);
-	PlayerTextDrawFont(playerid, td, 1);
+	PlayerTextDrawFont(playerid, td, TEXT_DRAW_FONT_1);
 	PlayerTextDrawSetProportional(playerid, td, true);
 	PlayerTextDrawSetOutline(playerid, td, 1);
 	PlayerTextDrawSetShadow(playerid, td, 0);
@@ -678,7 +678,7 @@ PlayerText:UI_HhBox(playerid, Float:x, Float:y, Float:w, Float:h, color)
 	PlayerTextDrawTextSize(playerid, td, (x + w), 0.0);
 	PlayerTextDrawUseBox(playerid, td, true);
 	PlayerTextDrawBoxColour(playerid, td, color);
-	PlayerTextDrawFont(playerid, td, 1);
+	PlayerTextDrawFont(playerid, td, TEXT_DRAW_FONT_1);
 	PlayerTextDrawSetShadow(playerid, td, 0);
 	PlayerTextDrawSetOutline(playerid, td, 0);
 	return td;
@@ -699,7 +699,7 @@ UI_HhCreate(playerid)
 	g_UiHh[playerid][4] = UI_HhBox(playerid, (4.0 + left), (458.0 + 12.0), 142.0, 4.0, 0x66DD66FF);
 	g_UiHh[playerid][5] = _:UI_HhBox(playerid, homeLeft, 458.0, 150.0, 18.0, 153);
 	g_UiHh[playerid][6] = UI_HhText(playerid, (4.0 + homeLeft), (458.0 + 3.0), "Luce ON | Gas ON | Frigo 0/0", 0.2, 0.9, -1, t_TEXT_DRAW_ALIGN:1);
-	g_UiHhCreated[playerid] = 1;
+	g_UiHhCreated[playerid] = true;
 	return 0;
 }
 
@@ -710,7 +710,7 @@ UI_HouseDarkShow(playerid)
 		return 0;
 	}
 	UI_HhCreate(playerid);
-	g_UiHhDark[playerid] = 1;
+	g_UiHhDark[playerid] = true;
 	PlayerTextDrawShow(playerid, PlayerText:g_UiHh[playerid][0]);
 	return 0;
 }
@@ -721,7 +721,7 @@ UI_HouseDarkHide(playerid)
 	{
 		return 0;
 	}
-	g_UiHhDark[playerid] = 0;
+	g_UiHhDark[playerid] = false;
 	PlayerTextDrawHide(playerid, PlayerText:g_UiHh[playerid][0]);
 	return 0;
 }
@@ -765,7 +765,7 @@ UI_HungerHudUpdate(playerid, hunger)
 	PlayerTextDrawTextSize(playerid, PlayerText:g_UiHh[playerid][4], (0.1 + ((4.0 + (632.0 - 150.0)) + (142.0 * fraction))), 0.0);
 	if (!g_UiHhHunger[playerid])
 	{
-		g_UiHhHunger[playerid] = 1;
+		g_UiHhHunger[playerid] = true;
 		PlayerTextDrawShow(playerid, PlayerText:g_UiHh[playerid][1]);
 		PlayerTextDrawShow(playerid, PlayerText:g_UiHh[playerid][3]);
 	}
@@ -786,7 +786,7 @@ UI_HouseHudUpdate(playerid, bool:lightOn, bool:gasOn, fridgeUnits, fridgeCap)
 	Lang_PlayerTextDrawSetString(playerid, g_UiHh[playerid][6], str);
 	if (!g_UiHhHome[playerid])
 	{
-		g_UiHhHome[playerid] = 1;
+		g_UiHhHome[playerid] = true;
 		PlayerTextDrawShow(playerid, PlayerText:g_UiHh[playerid][5]);
 	}
 	PlayerTextDrawShow(playerid, PlayerText:g_UiHh[playerid][6]);
@@ -799,7 +799,7 @@ UI_HouseHudHide(playerid)
 	{
 		return 0;
 	}
-	g_UiHhHome[playerid] = 0;
+	g_UiHhHome[playerid] = false;
 	PlayerTextDrawHide(playerid, PlayerText:g_UiHh[playerid][5]);
 	PlayerTextDrawHide(playerid, PlayerText:g_UiHh[playerid][6]);
 	return 0;
@@ -816,13 +816,13 @@ UI_HouseUiDestroy(playerid)
 		for (new i = 0; i < 7; i++)
 		{
 			PlayerTextDrawDestroy(playerid, PlayerText:g_UiHh[playerid][i]);
-			g_UiHh[playerid][i] = 65535;
+			g_UiHh[playerid][i] = INVALID_PLAYER_TEXT_DRAW;
 		}
 	}
-	g_UiHhCreated[playerid] = 0;
-	g_UiHhDark[playerid] = 0;
-	g_UiHhHunger[playerid] = 0;
-	g_UiHhHome[playerid] = 0;
+	g_UiHhCreated[playerid] = false;
+	g_UiHhDark[playerid] = false;
+	g_UiHhHunger[playerid] = false;
+	g_UiHhHome[playerid] = false;
 	g_UiHsHouse[playerid] = 0;
 	g_UiHsRole[playerid] = 3;
 	g_UiHsLightDue[playerid] = 0;

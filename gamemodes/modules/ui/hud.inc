@@ -1,4 +1,4 @@
-new g_UiHud[MAX_PLAYERS][6];
+new PlayerText:g_UiHud[MAX_PLAYERS][6];
 new bool:g_UiHudActive[MAX_PLAYERS];
 
 UI_ExpForLevel(level)
@@ -12,7 +12,7 @@ PlayerText:UI_HudText(playerid, Float:x, Float:y, const text[], Float:lw, Float:
 	PlayerTextDrawLetterSize(playerid, td, lw, lh);
 	PlayerTextDrawAlignment(playerid, td, align);
 	PlayerTextDrawColour(playerid, td, color);
-	PlayerTextDrawFont(playerid, td, 1);
+	PlayerTextDrawFont(playerid, td, TEXT_DRAW_FONT_1);
 	PlayerTextDrawSetProportional(playerid, td, true);
 	PlayerTextDrawSetOutline(playerid, td, 1);
 	PlayerTextDrawSetShadow(playerid, td, 0);
@@ -27,7 +27,7 @@ PlayerText:UI_HudBox(playerid, Float:x, Float:y, Float:w, Float:h, color)
 	PlayerTextDrawTextSize(playerid, td, (x + w), 0.0);
 	PlayerTextDrawUseBox(playerid, td, true);
 	PlayerTextDrawBoxColour(playerid, td, color);
-	PlayerTextDrawFont(playerid, td, 1);
+	PlayerTextDrawFont(playerid, td, TEXT_DRAW_FONT_1);
 	PlayerTextDrawSetShadow(playerid, td, 0);
 	PlayerTextDrawSetOutline(playerid, td, 0);
 	return td;
@@ -50,7 +50,7 @@ UI_HudSetBar(playerid, Float:fraction)
 
 UI_HudDestroy(playerid)
 {
-	CefUI_HudShow(playerid, 0);
+	CefUI_HudShow(playerid, false);
 	if (playerid < 0 || playerid >= MAX_PLAYERS || !g_UiHudActive[playerid])
 	{
 		return 0;
@@ -61,9 +61,9 @@ UI_HudDestroy(playerid)
 		{
 			PlayerTextDrawDestroy(playerid, PlayerText:g_UiHud[playerid][i]);
 		}
-		g_UiHud[playerid][i] = 65535;
+		g_UiHud[playerid][i] = INVALID_PLAYER_TEXT_DRAW;
 	}
-	g_UiHudActive[playerid] = 0;
+	g_UiHudActive[playerid] = false;
 	return 0;
 }
 
@@ -79,12 +79,12 @@ UI_HudCreate(playerid)
 	}
 	if (CefUI_Active(playerid))
 	{
-		CefUI_HudShow(playerid, 1);
+		CefUI_HudShow(playerid, true);
 		return 0;
 	}
 	for (new i = 0; i < 6; i++)
 	{
-		g_UiHud[playerid][i] = 65535;
+		g_UiHud[playerid][i] = INVALID_PLAYER_TEXT_DRAW;
 	}
 	new Float:left = (632.0 - 150.0);
 	g_UiHud[playerid][0] = _:UI_HudBox(playerid, left, 330.0, 150.0, 62.0, 153);
@@ -100,7 +100,7 @@ UI_HudCreate(playerid)
 			PlayerTextDrawShow(playerid, PlayerText:g_UiHud[playerid][i]);
 		}
 	}
-	g_UiHudActive[playerid] = 1;
+	g_UiHudActive[playerid] = true;
 	UI_HudSetBar(playerid, 0.0);
 	return 0;
 }

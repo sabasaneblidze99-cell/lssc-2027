@@ -228,7 +228,7 @@ DB_HouseCompensate(what, ownerId, houseId, kind, token, bool:recut)
 			mysql_format(g_DB, query, 768, "UPDATE house_bills b JOIN houses h ON h.id = b.house_id SET b.paid = 0, b.paid_at = NULL, b.pay_id = NULL WHERE b.house_id = %d AND b.kind = %d AND b.paid = 1 AND b.paid_at = FROM_UNIXTIME(%d) AND h.owner_id = %d AND b.pay_id = (SELECT m FROM (SELECT MAX(pay_id) AS m FROM house_bills WHERE house_id = %d AND kind = %d AND paid = 1) t)", houseId, kind, token, ownerId, houseId, kind);
 			if (recut)
 			{
-				DB_HouseSetCut(houseId, kind, 1);
+				DB_HouseSetCut(houseId, kind, true);
 			}
 		}
 	}
@@ -628,7 +628,7 @@ DB_HouseSetCut(houseId, utility, bool:cut)
 
 DB_CutUtility(houseId, utility)
 {
-	DB_HouseSetCut(houseId, utility, 1);
+	DB_HouseSetCut(houseId, utility, true);
 }
 
 DB_LoadFood(playerid, charId)
@@ -992,7 +992,7 @@ DB_RevertBillPayment(houseId, ownerCharId, kind, bool:recut)
 	mysql_tquery(g_DB, query, "", "");
 	if (recut)
 	{
-		DB_HouseSetCut(houseId, kind, 1);
+		DB_HouseSetCut(houseId, kind, true);
 	}
 	return 0;
 }

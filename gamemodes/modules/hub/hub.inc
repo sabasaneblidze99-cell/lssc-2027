@@ -97,7 +97,7 @@ Hub_ResetPlayer(playerid)
 	g_HubAhead[playerid] = 0;
 	g_HubHintShown[playerid] = 0;
 	g_HubHintDue[playerid] = 0;
-	g_HubOpBusy[playerid] = 0;
+	g_HubOpBusy[playerid] = false;
 	g_HubOpStep[playerid] = 0;
 	g_HubOpId[playerid][0] = 0;
 	g_HubOpRetryAt[playerid] = 0;
@@ -105,9 +105,9 @@ Hub_ResetPlayer(playerid)
 	g_HubKitLeft[playerid] = 0;
 	g_HubKitAt[playerid] = 0;
 	g_HubKitTries[playerid] = 0;
-	g_HubKitReload[playerid] = 0;
+	g_HubKitReload[playerid] = false;
 	g_HubTarget[playerid] = 0;
-	g_HubCpOn[playerid] = 0;
+	g_HubCpOn[playerid] = false;
 	g_HubAtBoard[playerid] = 0;
 	g_HubGreeted[playerid] = 0;
 	g_HubDonDay[playerid] = 0;
@@ -187,7 +187,7 @@ Hub_ClearTarget(playerid)
 	{
 		DisablePlayerCheckpoint(playerid);
 	}
-	g_HubCpOn[playerid] = 0;
+	g_HubCpOn[playerid] = false;
 	g_HubTarget[playerid] = 0;
 	return 0;
 }
@@ -201,12 +201,12 @@ Hub_SetTarget(playerid, target, bool:withCheckpoint)
 		return 0;
 	}
 	Hub_ClearTarget(playerid);
-	SetPlayerMapIcon(playerid, 97, x, y, z, 0, -2994689, 1);
+	SetPlayerMapIcon(playerid, 97, x, y, z, 0, -2994689, MAPICON_GLOBAL);
 	g_HubTarget[playerid] = target;
 	if (withCheckpoint && LD_ActiveFlow(playerid) == 0)
 	{
 		SetPlayerCheckpoint(playerid, x, y, z, 3.0);
-		g_HubCpOn[playerid] = 1;
+		g_HubCpOn[playerid] = true;
 	}
 	return 0;
 }
@@ -235,13 +235,13 @@ Hub_OnInit()
 		g_HubPickup[b] = CreatePickup(1239, 1, s_HubBoard[b][0], s_HubBoard[b][1], s_HubBoard[b][2], 0);
 		if (b == 0)
 		{
-			g_HubLabel[b] = Lang_Create3DTextLabel("Casa del Quartiere di Idlewood\nBacheca contratti - Progetto del quartiere\n/contratti  /contribuisci  /aiuto servizi", -2994689, s_HubBoard[b][0], s_HubBoard[b][1], (0.8 + s_HubBoard[b][2]), 15.0, 0, 0);
+			g_HubLabel[b] = Lang_Create3DTextLabel("Casa del Quartiere di Idlewood\nBacheca contratti - Progetto del quartiere\n/contratti  /contribuisci  /aiuto servizi", -2994689, s_HubBoard[b][0], s_HubBoard[b][1], (0.8 + s_HubBoard[b][2]), 15.0, 0, false);
 		}
 		else
 		{
 			LD_DistrictName(s_HubBoardDistrict[b], name, 16);
 			format(text, 256, "Bacheca di quartiere - %s\nUn pezzo di Casa del Quartiere anche qui\n/contratti  /contribuisci", name);
-			g_HubLabel[b] = Lang_Create3DTextLabel(text, 0x99CCFFFF, s_HubBoard[b][0], s_HubBoard[b][1], (0.8 + s_HubBoard[b][2]), 15.0, 0, 0);
+			g_HubLabel[b] = Lang_Create3DTextLabel(text, 0x99CCFFFF, s_HubBoard[b][0], s_HubBoard[b][1], (0.8 + s_HubBoard[b][2]), 15.0, 0, false);
 		}
 	}
 	g_HubZone = GangZoneCreate((1850.0 - 22.0), (-1800.0 - 22.0), (1850.0 + 22.0), (-1800.0 + 22.0));
@@ -250,7 +250,7 @@ Hub_OnInit()
 	g_HubRefreshed = false;
 	for (new d = 0; d <= 3; d++)
 	{
-		g_HubFestInit[d] = 0;
+		g_HubFestInit[d] = false;
 		g_HubFestSeen[d] = 0;
 		g_HubPrjSeen[d] = 0;
 		g_HubGoalSeen[d] = 0;
@@ -287,7 +287,7 @@ Hub_OnExit()
 			Delete3DTextLabel(g_HubLabel[b]);
 		}
 		g_HubPickup[b] = -1;
-		g_HubLabel[b] = 65535;
+		g_HubLabel[b] = Text3D:65535;
 	}
 	if (g_HubZone != -1)
 	{
@@ -382,7 +382,7 @@ Hub_SendStep(playerid, step, bool:fresh)
 		DB_LivingMakeOpId(g_HubOpId[playerid], 37, "ob", step, gPlayer[playerid][pCharId]);
 		g_HubOpTries[playerid] = 0;
 	}
-	g_HubOpBusy[playerid] = 1;
+	g_HubOpBusy[playerid] = true;
 	g_HubOpStep[playerid] = step;
 	g_HubOpRetryAt[playerid] = 0;
 	if (DB_LivingBusy(playerid, 4))
@@ -489,7 +489,7 @@ Hub_KitTick(playerid, now)
 	{
 		if (g_HubKitReload[playerid] && now - g_HubKitAt[playerid] >= 0 && gPlayer[playerid][pInvOpBusy] == 0)
 		{
-			g_HubKitReload[playerid] = 0;
+			g_HubKitReload[playerid] = false;
 			Inv_Reload(playerid);
 		}
 		return 0;
@@ -528,7 +528,7 @@ Hub_KitTick(playerid, now)
 	}
 	if (g_HubKitLeft[playerid] == 0)
 	{
-		g_HubKitReload[playerid] = 1;
+		g_HubKitReload[playerid] = true;
 	}
 	return 0;
 }
@@ -544,7 +544,7 @@ public Living_OnDBOnboard(playerid, result, step, paid, balance, giveKit, exp)
 	{
 		case 1:
 		{
-			g_HubOpBusy[playerid] = 0;
+			g_HubOpBusy[playerid] = false;
 			g_HubOpId[playerid][0] = 0;
 			if (sent == 0)
 			{
@@ -574,7 +574,7 @@ public Living_OnDBOnboard(playerid, result, step, paid, balance, giveKit, exp)
 		}
 		case 2, 4:
 		{
-			g_HubOpBusy[playerid] = 0;
+			g_HubOpBusy[playerid] = false;
 			g_HubOpId[playerid][0] = 0;
 			new dbStep = LD_Clamp(step, 0, 5);
 			if (result == 2 && (sent == 0 || sent > dbStep || dbStep >= 5))
@@ -596,7 +596,7 @@ public Living_OnDBOnboard(playerid, result, step, paid, balance, giveKit, exp)
 		}
 		default:
 		{
-			g_HubOpBusy[playerid] = 0;
+			g_HubOpBusy[playerid] = false;
 			g_HubOpId[playerid][0] = 0;
 			new msg[256];
 			format(msg, 256, "onboarding: esito %d per il passo %d del personaggio %d", result, sent, gPlayer[playerid][pCharId]);
@@ -1073,7 +1073,7 @@ public Living_OnDBProject(playerid, result, projectId, donated, balance, points,
 			if (projectState == 2)
 			{
 				Util_Send(playerid, 0x66DD66FF, "E' stata la tua donazione a completare il progetto. Il quartiere fa festa!");
-				Hub_RequestRefresh(1);
+				Hub_RequestRefresh(true);
 			}
 			format(msg, 256, "personaggio %d dona %d al progetto %d (fondo %d, stato %d)", gPlayer[playerid][pCharId], donated, projectId, fund, projectState);
 			Log_Write("HUB", msg);
@@ -1089,7 +1089,7 @@ public Living_OnDBProject(playerid, result, projectId, donated, balance, points,
 		case 4, 5:
 		{
 			UI_LivingReject(playerid, "Questo progetto non raccoglie piu' fondi: ne partira' presto un altro.");
-			Hub_RequestRefresh(1);
+			Hub_RequestRefresh(true);
 		}
 		case 7:
 		{
@@ -1153,7 +1153,7 @@ Hub_CheckFestivals()
 		new fest = DB_LivingDistrictGet(d, E_LD_DISTRICT:4), prj = DB_LivingDistrictGet(d, E_LD_DISTRICT:6);
 		if (!g_HubFestInit[d])
 		{
-			g_HubFestInit[d] = 1;
+			g_HubFestInit[d] = true;
 			g_HubFestSeen[d] = fest;
 			g_HubPrjSeen[d] = prj;
 			g_HubGoalSeen[d] = DB_LivingDistrictGet(d, E_LD_DISTRICT:7);
@@ -1261,7 +1261,7 @@ Hub_PlayerTick(playerid, now)
 	{
 		if (g_HubCpOn[playerid] && LD_ActiveFlow(playerid) != 0)
 		{
-			g_HubCpOn[playerid] = 0;
+			g_HubCpOn[playerid] = false;
 		}
 		new Float:x, Float:y, Float:z;
 		if (Hub_TargetPos(g_HubTarget[playerid], x, y, z) && IsPlayerInRangeOfPoint(playerid, 6.0, x, y, z))

@@ -168,7 +168,7 @@ UI_BankTimerEnsure(playerid)
 
 UI_BankConfReset(playerid)
 {
-	g_UiBkConfActive[playerid] = 0;
+	g_UiBkConfActive[playerid] = false;
 	g_UiBkConfTarget[playerid] = -1;
 	g_UiBkConfAmount[playerid] = 0;
 	g_UiBkConfLeft[playerid] = 0;
@@ -214,15 +214,15 @@ UI_BankToastCreate(playerid)
 	}
 	new PlayerText:td = Lang_CreatePlayerTextDraw(playerid, 130.0, 380.0, "_");
 	PlayerTextDrawLetterSize(playerid, td, 0.22, 1.0);
-	PlayerTextDrawAlignment(playerid, td, 1);
+	PlayerTextDrawAlignment(playerid, td, TEXT_DRAW_ALIGN_LEFT);
 	PlayerTextDrawColour(playerid, td, 0x66DD66FF);
-	PlayerTextDrawFont(playerid, td, 1);
+	PlayerTextDrawFont(playerid, td, TEXT_DRAW_FONT_1);
 	PlayerTextDrawSetProportional(playerid, td, true);
 	PlayerTextDrawSetOutline(playerid, td, 1);
 	PlayerTextDrawSetShadow(playerid, td, 0);
 	PlayerTextDrawBackgroundColour(playerid, td, 255);
-	g_UiBkToastTd[playerid] = td;
-	g_UiBkToastCreated[playerid] = 1;
+	g_UiBkToastTd[playerid] = _:td;
+	g_UiBkToastCreated[playerid] = true;
 	return 0;
 }
 
@@ -233,7 +233,7 @@ UI_BankToast(playerid, const text[], bool:ok)
 		return 0;
 	}
 	UI_BankToastCreate(playerid);
-	new PlayerText:td = g_UiBkToastTd[playerid];
+	new PlayerText:td = PlayerText:g_UiBkToastTd[playerid];
 	Lang_PlayerTextDrawSetString(playerid, td, text);
 	PlayerTextDrawColour(playerid, td, ok ? 0x66DD66FF : -10066177);
 	PlayerTextDrawShow(playerid, td);
@@ -252,7 +252,7 @@ UI_BankMenuShow(playerid)
 	format(body, 320, "Operazione\tDettaglio\nSaldo\t{66DD66}$%s\nDeposita\tContanti: $%s\nPrelievo\tBanca: $%s\nBonifico\t{FFD24D}commissione inclusa\nEstratto conto\tultime %d righe", a, b, c, 15);
 	g_UiBkOp[playerid] = 0;
 	g_UiBkTarget[playerid] = -1;
-	Lang_ShowPlayerDialog(playerid, 9500, 5, title, body, "Scegli", "Chiudi");
+	Lang_ShowPlayerDialog(playerid, 9500, DIALOG_STYLE_TABLIST_HEADERS, title, body, "Scegli", "Chiudi");
 }
 
 UI_BankMenu(playerid, bool:counter)
@@ -291,7 +291,7 @@ UI_BankBalanceShow(playerid)
 		strcopy(snd, "{AAAAAA}n/d", 48);
 	}
 	format(body, 512, "{FFFFFF}Contanti: {66DD66}$%s\n{FFFFFF}Conto bancario: {66DD66}$%s\n{FFFFFF}Totale: {66DD66}$%s\n\n{FFFFFF}Prelevabile oggi: %s\n{FFFFFF}Inviabile oggi: %s", cash, bank, total, wd, snd);
-	Lang_ShowPlayerDialog(playerid, 9505, 0, "Saldo", body, "Menu", "Chiudi");
+	Lang_ShowPlayerDialog(playerid, 9505, DIALOG_STYLE_MSGBOX, "Saldo", body, "Menu", "Chiudi");
 }
 
 bool:UI_BankRange(playerid, op, &lo, &hi)
@@ -396,7 +396,7 @@ UI_BankAmountShow(playerid, op, const err[])
 		}
 	}
 	format(body, 512, "%s{FFFFFF}%s\nImporto ammesso: da {FFD24D}$%s{FFFFFF} a {FFD24D}$%s{FFFFFF}.\nInserisci un numero intero:", err, sub, sLo, sHi);
-	Lang_ShowPlayerDialog(playerid, 9501, 1, title, body, "Avanti", "Indietro");
+	Lang_ShowPlayerDialog(playerid, 9501, DIALOG_STYLE_INPUT, title, body, "Avanti", "Indietro");
 	return 0;
 }
 
@@ -404,7 +404,7 @@ UI_BankTargetShow(playerid, const err[])
 {
 	new body[320];
 	format(body, 320, "%s{FFFFFF}Inserisci l'{FFD24D}ID{FFFFFF} o parte del {FFD24D}nome{FFFFFF} del giocatore online che riceve il bonifico.\nIl destinatario non deve confermare: il credito e' immediato.", err);
-	Lang_ShowPlayerDialog(playerid, 9502, 1, "Bonifico: destinatario", body, "Avanti", "Indietro");
+	Lang_ShowPlayerDialog(playerid, 9502, DIALOG_STYLE_INPUT, "Bonifico: destinatario", body, "Avanti", "Indietro");
 }
 
 UI_BankTransferConfirm(playerid, targetId, amount, fee, balanceAfter, ttlSec)
@@ -421,7 +421,7 @@ UI_BankTransferConfirm(playerid, targetId, amount, fee, balanceAfter, ttlSec)
 	{
 		ttlSec = 30;
 	}
-	g_UiBkConfActive[playerid] = 1;
+	g_UiBkConfActive[playerid] = true;
 	g_UiBkConfTarget[playerid] = targetId;
 	g_UiBkConfAmount[playerid] = amount;
 	g_UiBkConfLeft[playerid] = ttlSec;
@@ -433,7 +433,7 @@ UI_BankTransferConfirm(playerid, targetId, amount, fee, balanceAfter, ttlSec)
 	UI_BankFmt(amount + fee, sTotal, 16);
 	UI_BankFmt(balanceAfter, sAfter, 16);
 	format(body, 512, "{FFFFFF}Destinatario: {FFD24D}%s (ID %d)\n{FFFFFF}Importo: {66DD66}$%s\n{FFFFFF}Commissione: {FF6666}$%s\n{FFFFFF}Totale addebitato: {FF6666}$%s\n{FFFFFF}Saldo dopo l'operazione: {66DD66}$%s\n\n{AAAAAA}La conferma scade tra %d secondi.", g_UiBkConfName[playerid], targetId, sAmount, sFee, sTotal, sAfter, ttlSec);
-	Lang_ShowPlayerDialog(playerid, 9503, 0, "Conferma bonifico", body, "Conferma", "Annulla");
+	Lang_ShowPlayerDialog(playerid, 9503, DIALOG_STYLE_MSGBOX, "Conferma bonifico", body, "Conferma", "Annulla");
 	return 0;
 }
 
@@ -508,7 +508,7 @@ UI_BankStatementShow(playerid)
 	if (n == 0)
 	{
 		format(title, 64, "Estratto conto - pag. %d", page + 1);
-		Lang_ShowPlayerDialog(playerid, 9504, 0, title, "{FFFFFF}Nessun movimento da mostrare.", page > 0 ? "Precedente" : "Menu", "Chiudi");
+		Lang_ShowPlayerDialog(playerid, 9504, DIALOG_STYLE_MSGBOX, title, "{FFFFFF}Nessun movimento da mostrare.", page > 0 ? "Precedente" : "Menu", "Chiudi");
 		if (page == 0)
 		{
 			g_UiBkStNavPrev[playerid] = -1;
@@ -544,7 +544,7 @@ UI_BankStatementShow(playerid)
 		g_UiBkStNavPrev[playerid] = idx;
 	}
 	format(title, 64, "Estratto conto - pag. %d/%d", page + 1, 5);
-	Lang_ShowPlayerDialog(playerid, 9504, 5, title, body, "Vai", "Menu");
+	Lang_ShowPlayerDialog(playerid, 9504, DIALOG_STYLE_TABLIST_HEADERS, title, body, "Vai", "Menu");
 	return 0;
 }
 
@@ -591,10 +591,10 @@ UI_BankUiDestroy(playerid)
 	UI_BankTimerStop(playerid);
 	if (g_UiBkToastCreated[playerid])
 	{
-		PlayerTextDrawDestroy(playerid, g_UiBkToastTd[playerid]);
+		PlayerTextDrawDestroy(playerid, PlayerText:g_UiBkToastTd[playerid]);
 	}
 	g_UiBkToastTd[playerid] = 65535;
-	g_UiBkToastCreated[playerid] = 0;
+	g_UiBkToastCreated[playerid] = false;
 	g_UiBkToastTtl[playerid] = 0;
 	UI_BankConfReset(playerid);
 	g_UiBkCash[playerid] = 0;
@@ -605,11 +605,11 @@ UI_BankUiDestroy(playerid)
 	g_UiBkXferMin[playerid] = 1;
 	g_UiBkXferMax[playerid] = 0;
 	g_UiBkSendLeft[playerid] = -1;
-	g_UiBkCounter[playerid] = 0;
+	g_UiBkCounter[playerid] = false;
 	g_UiBkOp[playerid] = 0;
 	g_UiBkTarget[playerid] = -1;
 	g_UiBkStPage[playerid] = 0;
-	g_UiBkStNext[playerid] = 0;
+	g_UiBkStNext[playerid] = false;
 	g_UiBkStCount[playerid] = 0;
 	g_UiBkStNavNext[playerid] = -1;
 	g_UiBkStNavPrev[playerid] = -1;
@@ -627,7 +627,7 @@ public UI_BankOnTimer(playerid)
 		g_UiBkToastTtl[playerid]--;
 		if (g_UiBkToastTtl[playerid] <= 0 && g_UiBkToastCreated[playerid])
 		{
-			PlayerTextDrawHide(playerid, g_UiBkToastTd[playerid]);
+			PlayerTextDrawHide(playerid, PlayerText:g_UiBkToastTd[playerid]);
 		}
 	}
 	if (g_UiBkConfActive[playerid])

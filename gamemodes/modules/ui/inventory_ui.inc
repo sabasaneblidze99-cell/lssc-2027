@@ -40,12 +40,12 @@ new g_UiInvSel[MAX_PLAYERS];
 new g_UiInvSelItem[MAX_PLAYERS];
 new g_UiInvSelQty[MAX_PLAYERS];
 new g_UiInvPendAct[MAX_PLAYERS];
-new g_UiInvToastTd[MAX_PLAYERS][3];
+new PlayerText:g_UiInvToastTd[MAX_PLAYERS][3];
 new g_UiInvToastItem[MAX_PLAYERS][3];
 new g_UiInvToastDelta[MAX_PLAYERS][3];
 new g_UiInvToastTtl[MAX_PLAYERS][3];
 new bool:g_UiInvToastCreated[MAX_PLAYERS];
-new g_UiInvRecvTd[MAX_PLAYERS][4];
+new PlayerText:g_UiInvRecvTd[MAX_PLAYERS][4];
 new bool:g_UiInvRecvActive[MAX_PLAYERS];
 new g_UiInvRecvLeft[MAX_PLAYERS];
 new g_UiInvRecvTotal[MAX_PLAYERS];
@@ -192,7 +192,7 @@ UI_InvListPage(playerid, page)
 		g_UiInvRowCount[playerid] = 0;
 		g_UiInvNavNext[playerid] = -1;
 		g_UiInvNavPrev[playerid] = -1;
-		Lang_ShowPlayerDialog(playerid, 9400, 0, title, empty, "Chiudi", "");
+		Lang_ShowPlayerDialog(playerid, 9400, DIALOG_STYLE_MSGBOX, title, empty, "Chiudi", "");
 		return 0;
 	}
 	new pages = (n + 10 - 1) / 10;
@@ -234,7 +234,7 @@ UI_InvListPage(playerid, page)
 	{
 		format(title, 64, "Inventario %d/%d - zaino %s - pag. %d/%d", used, limit, g_UiInvBag[playerid] ? "si" : "no", page + 1, pages);
 	}
-	Lang_ShowPlayerDialog(playerid, 9400, 5, title, body, "Apri", "Chiudi");
+	Lang_ShowPlayerDialog(playerid, 9400, DIALOG_STYLE_TABLIST_HEADERS, title, body, "Apri", "Chiudi");
 	return 0;
 }
 
@@ -279,7 +279,7 @@ UI_InvActionShow(playerid)
 		strcat(body, "{888888}Dai (non trasferibile){FFFFFF}\n{888888}Getta (non droppabile){FFFFFF}\n", 256);
 	}
 	strcat(body, "Descrizione", 256);
-	Lang_ShowPlayerDialog(playerid, 9401, 2, title, body, "Scegli", "Indietro");
+	Lang_ShowPlayerDialog(playerid, 9401, DIALOG_STYLE_LIST, title, body, "Scegli", "Indietro");
 	return 0;
 }
 
@@ -310,7 +310,7 @@ UI_InvInfoShow(playerid)
 	new flags = g_UiInvFlags[itemId];
 	format(title, 64, "%s", name);
 	format(body, 384, "{FFFFFF}%s\n\nPosseduti: {FFD24D}%d{FFFFFF} (max %d per slot)\nUso: {FFD24D}%s{FFFFFF}\nDare/Gettare: {FFD24D}%s", desc, g_UiInvQty[playerid][slot], g_UiInvStack[itemId], flags & 1 ? "si" : "no", flags & 2 ? "si" : "no");
-	Lang_ShowPlayerDialog(playerid, 9402, 0, title, body, "Indietro", "Chiudi");
+	Lang_ShowPlayerDialog(playerid, 9402, DIALOG_STYLE_MSGBOX, title, body, "Indietro", "Chiudi");
 }
 
 UI_InvQtyShow(playerid, const err[])
@@ -320,7 +320,7 @@ UI_InvQtyShow(playerid, const err[])
 	strcopy(name, g_UiInvName[itemId], 24);
 	format(title, 64, "%s: quantita'", name);
 	format(body, 320, "%s{FFFFFF}Quante unita' di {FFD24D}%s{FFFFFF} vuoi %s?\nInserisci un numero da {FFD24D}1{FFFFFF} a {FFD24D}%d{FFFFFF}.", err, name, g_UiInvPendAct[playerid] == 1 ? "dare" : "gettare", maxQ);
-	Lang_ShowPlayerDialog(playerid, 9403, 1, title, body, "Avanti", "Indietro");
+	Lang_ShowPlayerDialog(playerid, 9403, DIALOG_STYLE_INPUT, title, body, "Avanti", "Indietro");
 }
 
 UI_InvTargetShow(playerid, const err[])
@@ -329,7 +329,7 @@ UI_InvTargetShow(playerid, const err[])
 	strcopy(name, g_UiInvName[itemId], 24);
 	format(title, 64, "Dai %s x%d", name, g_UiInvSelQty[playerid]);
 	format(body, 320, "%s{FFFFFF}Inserisci l'{FFD24D}ID{FFFFFF} del giocatore vicino a cui dare l'oggetto.\nDeve trovarsi entro %.0f metri e accettare lo scambio.", err, 3.0);
-	Lang_ShowPlayerDialog(playerid, 9404, 1, title, body, "Invia", "Indietro");
+	Lang_ShowPlayerDialog(playerid, 9404, DIALOG_STYLE_INPUT, title, body, "Invia", "Indietro");
 }
 
 UI_InvDropConfirmShow(playerid)
@@ -337,7 +337,7 @@ UI_InvDropConfirmShow(playerid)
 	new body[320], name[24], itemId = g_UiInvSelItem[playerid];
 	strcopy(name, g_UiInvName[itemId], 24);
 	format(body, 320, "{FFFFFF}Gettare {FFD24D}%s x%d{FFFFFF}?\n\n{FF6666}L'oggetto finira' a terra e scomparira' dopo %d minuti. Chiunque vicino potra' raccoglierlo.", name, g_UiInvSelQty[playerid], 10);
-	Lang_ShowPlayerDialog(playerid, 9405, 0, "Conferma: getta", body, "Getta", "Annulla");
+	Lang_ShowPlayerDialog(playerid, 9405, DIALOG_STYLE_MSGBOX, "Conferma: getta", body, "Getta", "Annulla");
 }
 
 UI_InvTimerStop(playerid)
@@ -363,7 +363,7 @@ PlayerText:UI_InvText(playerid, Float:x, Float:y, const text[], Float:lw, Float:
 	PlayerTextDrawLetterSize(playerid, td, lw, lh);
 	PlayerTextDrawAlignment(playerid, td, align);
 	PlayerTextDrawColour(playerid, td, color);
-	PlayerTextDrawFont(playerid, td, 1);
+	PlayerTextDrawFont(playerid, td, TEXT_DRAW_FONT_1);
 	PlayerTextDrawSetProportional(playerid, td, true);
 	PlayerTextDrawSetOutline(playerid, td, 1);
 	PlayerTextDrawSetShadow(playerid, td, 0);
@@ -378,7 +378,7 @@ PlayerText:UI_InvBox(playerid, Float:x, Float:y, Float:w, Float:h, color)
 	PlayerTextDrawTextSize(playerid, td, (x + w), 0.0);
 	PlayerTextDrawUseBox(playerid, td, true);
 	PlayerTextDrawBoxColour(playerid, td, color);
-	PlayerTextDrawFont(playerid, td, 1);
+	PlayerTextDrawFont(playerid, td, TEXT_DRAW_FONT_1);
 	PlayerTextDrawSetShadow(playerid, td, 0);
 	PlayerTextDrawSetOutline(playerid, td, 0);
 	return td;
@@ -392,7 +392,7 @@ UI_InvRecvDestroyTds(playerid)
 		{
 			PlayerTextDrawDestroy(playerid, PlayerText:g_UiInvRecvTd[playerid][i]);
 		}
-		g_UiInvRecvTd[playerid][i] = 65535;
+		g_UiInvRecvTd[playerid][i] = INVALID_PLAYER_TEXT_DRAW;
 	}
 }
 
@@ -417,7 +417,7 @@ UI_InvRecvRefresh(playerid)
 
 UI_InvRecvEnd(playerid)
 {
-	g_UiInvRecvActive[playerid] = 0;
+	g_UiInvRecvActive[playerid] = false;
 	g_UiInvRecvLeft[playerid] = 0;
 	UI_InvRecvDestroyTds(playerid);
 }
@@ -454,13 +454,13 @@ UI_InvGiveConfirmShow(playerid, const giverName[], itemId, qty, ttlSec)
 	}
 	for (new i = 0; i < 4; i++)
 	{
-		g_UiInvRecvTd[playerid][i] = 65535;
+		g_UiInvRecvTd[playerid][i] = INVALID_PLAYER_TEXT_DRAW;
 	}
 	g_UiInvRecvTd[playerid][0] = _:UI_InvBox(playerid, 210.0, 124.0, 220.0, 26.0, 170);
 	g_UiInvRecvTd[playerid][1] = UI_InvText(playerid, (210.0 + 6.0), (124.0 + 2.0), "Scambio in attesa", 0.24, 1.1, -2994689, t_TEXT_DRAW_ALIGN:1);
 	g_UiInvRecvTd[playerid][2] = UI_InvBox(playerid, (210.0 + 6.0), (124.0 + 17.0), 208.0, 5.0, 0x444444FF);
 	g_UiInvRecvTd[playerid][3] = UI_InvBox(playerid, (210.0 + 6.0), (124.0 + 17.0), 208.0, 5.0, -2994689);
-	g_UiInvRecvActive[playerid] = 1;
+	g_UiInvRecvActive[playerid] = true;
 	g_UiInvRecvTotal[playerid] = ttlSec;
 	g_UiInvRecvLeft[playerid] = ttlSec;
 	PlayerTextDrawShow(playerid, PlayerText:g_UiInvRecvTd[playerid][0]);
@@ -471,7 +471,7 @@ UI_InvGiveConfirmShow(playerid, const giverName[], itemId, qty, ttlSec)
 	strcopy(name, g_UiInvName[itemId], 24);
 	strcopy(giver, giverName, 25);
 	format(body, 320, "{FFD24D}%s{FFFFFF} vuole darti {FFD24D}%s x%d{FFFFFF}.\n\nLa richiesta scade tra {FF6666}%d{FFFFFF} secondi.\nSe non c'e' posto nel tuo inventario lo scambio fallira'.", giver, name, qty, ttlSec);
-	Lang_ShowPlayerDialog(playerid, 9406, 0, "Oggetto in arrivo", body, "Accetta", "Rifiuta");
+	Lang_ShowPlayerDialog(playerid, 9406, DIALOG_STYLE_MSGBOX, "Oggetto in arrivo", body, "Accetta", "Rifiuta");
 	return 0;
 }
 
@@ -509,7 +509,7 @@ UI_InvToastCreate(playerid)
 		g_UiInvToastItem[playerid][i] = 0;
 		g_UiInvToastDelta[playerid][i] = 0;
 	}
-	g_UiInvToastCreated[playerid] = 1;
+	g_UiInvToastCreated[playerid] = true;
 	return 0;
 }
 
@@ -838,21 +838,21 @@ UI_InvUiDestroy(playerid)
 		for (new i = 0; i < 3; i++)
 		{
 			PlayerTextDrawDestroy(playerid, PlayerText:g_UiInvToastTd[playerid][i]);
-			g_UiInvToastTd[playerid][i] = 65535;
+			g_UiInvToastTd[playerid][i] = INVALID_PLAYER_TEXT_DRAW;
 			g_UiInvToastTtl[playerid][i] = 0;
 			g_UiInvToastItem[playerid][i] = 0;
 			g_UiInvToastDelta[playerid][i] = 0;
 		}
 	}
-	g_UiInvToastCreated[playerid] = 0;
+	g_UiInvToastCreated[playerid] = false;
 	if (g_UiInvRecvActive[playerid])
 	{
 		UI_InvRecvEnd(playerid);
 	}
-	g_UiInvRecvActive[playerid] = 0;
+	g_UiInvRecvActive[playerid] = false;
 	UI_InvClear(playerid);
 	g_UiInvMax[playerid] = 0;
-	g_UiInvBag[playerid] = 0;
+	g_UiInvBag[playerid] = false;
 	g_UiInvPage[playerid] = 0;
 	g_UiInvRowCount[playerid] = 0;
 	g_UiInvNavNext[playerid] = -1;

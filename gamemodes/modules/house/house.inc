@@ -370,7 +370,7 @@ House_RefreshWorld(idx)
 	}
 	else
 	{
-		g_HsLabel[idx] = Lang_Create3DTextLabel(text, color, g_HouseRows[idx][hrExtX], g_HouseRows[idx][hrExtY], (0.9 + g_HouseRows[idx][hrExtZ]), 12.0, 0, 0);
+		g_HsLabel[idx] = Lang_Create3DTextLabel(text, color, g_HouseRows[idx][hrExtX], g_HouseRows[idx][hrExtY], (0.9 + g_HouseRows[idx][hrExtZ]), 12.0, 0, false);
 	}
 	if (g_HsPickup[idx] >= 0)
 	{
@@ -2470,7 +2470,7 @@ House_OnInit()
 	g_HsReady = false;
 	for (new s = 0; s < 2; s++)
 	{
-		Lang_Create3DTextLabel("Supermercato\n/compra - cibo, pasto, acqua, snack, kit, benda, zaino...", 0x66DD66FF, s_HsShops[s][0], s_HsShops[s][1], (0.9 + s_HsShops[s][2]), 12.0, 0, 0);
+		Lang_Create3DTextLabel("Supermercato\n/compra - cibo, pasto, acqua, snack, kit, benda, zaino...", 0x66DD66FF, s_HsShops[s][0], s_HsShops[s][1], (0.9 + s_HsShops[s][2]), 12.0, 0, false);
 	}
 	g_HsTickTimer = SetTimer("House_OnTick", 60000, true);
 	g_HsSaveTimer = SetTimer("House_OnSaveTick", 300000, true);

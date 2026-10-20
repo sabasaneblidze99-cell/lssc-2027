@@ -35,7 +35,7 @@ new g_UiIntroNarration[5][256] = {
 	"ლოს-სანტოსი. ჯერ არ ვიცოდი, რას ვიპოვიდი.",
 	"ერთი ჩემოდანი, ცოტა ფული და არანაირი გეგმა."
 };
-new g_UiIntroTd[MAX_PLAYERS][7];
+new PlayerText:g_UiIntroTd[MAX_PLAYERS][7];
 new bool:g_UiIntroActive[MAX_PLAYERS];
 new g_UiIntroTimer[MAX_PLAYERS];
 new g_UiIntroAlpha[MAX_PLAYERS];
@@ -110,7 +110,7 @@ UI_ShowOriginSelect(playerid)
 	{
 		return 0;
 	}
-	g_UiStoryActive[playerid] = 1;
+	g_UiStoryActive[playerid] = true;
 	new body[1600], line[128];
 	body[0] = 0;
 	for (new i = 1; i <= 5; i++)
@@ -119,7 +119,7 @@ UI_ShowOriginSelect(playerid)
 		strcat(body, line, 1600);
 	}
 	strcat(body, "{AAAAAA}არ მინდა თქმა", 1600);
-	Lang_ShowPlayerDialog(playerid, 9600, 2, "შენი ისტორია: წარმოშობა", body, "არჩევა", "");
+	Lang_ShowPlayerDialog(playerid, 9600, DIALOG_STYLE_LIST, "შენი ისტორია: წარმოშობა", body, "არჩევა", "");
 	return 0;
 }
 
@@ -129,7 +129,7 @@ UI_ShowMotiveSelect(playerid)
 	{
 		return 0;
 	}
-	g_UiStoryActive[playerid] = 1;
+	g_UiStoryActive[playerid] = true;
 	new body[1600], line[128];
 	body[0] = 0;
 	for (new i = 1; i <= 4; i++)
@@ -138,7 +138,7 @@ UI_ShowMotiveSelect(playerid)
 		strcat(body, line, 1600);
 	}
 	strcat(body, "{AAAAAA}არ მინდა თქმა", 1600);
-	Lang_ShowPlayerDialog(playerid, 9601, 2, "შენი ისტორია: რატომ ლოს-სანტოსი", body, "არჩევა", "უკან");
+	Lang_ShowPlayerDialog(playerid, 9601, DIALOG_STYLE_LIST, "შენი ისტორია: რატომ ლოს-სანტოსი", body, "არჩევა", "უკან");
 	return 0;
 }
 
@@ -148,7 +148,7 @@ UI_StoryConfirmShow(playerid)
 	GetPlayerName(playerid, name, 32);
 	UI_StoryCompose(name, g_UiStoryOrigin[playerid], g_UiStoryMotive[playerid], text, 768);
 	format(body, 1600, "{FFFFFF}შენი პერსონაჟის წარსული:\n\n{FFD24D}%s\n\n{FFFFFF}ეს მხოლოდ ისტორიაა: თამაშში შესაძლებლობებს არ ცვლის.\nირჩევა მხოლოდ ერთხელ.", text);
-	Lang_ShowPlayerDialog(playerid, 9602, 0, "დაადასტურე შენი ისტორია", body, "დადასტურება", "უკან");
+	Lang_ShowPlayerDialog(playerid, 9602, DIALOG_STYLE_MSGBOX, "დაადასტურე შენი ისტორია", body, "დადასტურება", "უკან");
 }
 
 UI_StoryBegin(playerid)
@@ -181,7 +181,7 @@ UI_StoryViewShow(playerid, const name[], origin, motive, const title[])
 	new text[768], body[1600];
 	UI_StoryCompose(name, origin, motive, text, 768);
 	format(body, 1600, "{FFD24D}%s", text);
-	Lang_ShowPlayerDialog(playerid, 9603, 0, title, body, "დახურვა", "");
+	Lang_ShowPlayerDialog(playerid, 9603, DIALOG_STYLE_MSGBOX, title, body, "დახურვა", "");
 }
 
 UI_StoryShowOwn(playerid, const name[], origin, motive)
@@ -281,7 +281,7 @@ bool:UI_IntroOnDialogResponse(playerid, dialogid, response, listitem, const inpu
 			{
 				reason = 0;
 			}
-			g_UiStoryActive[playerid] = 0;
+			g_UiStoryActive[playerid] = false;
 			g_UiStoryOrigin[playerid] = 0;
 			g_UiStoryMotive[playerid] = 0;
 			UI_OnStoryChosen(playerid, origin, reason);
@@ -302,7 +302,7 @@ PlayerText:UI_IntroBox(playerid, Float:x, Float:y, Float:w, Float:h, color)
 	PlayerTextDrawTextSize(playerid, td, (x + w), 0.0);
 	PlayerTextDrawUseBox(playerid, td, true);
 	PlayerTextDrawBoxColour(playerid, td, color);
-	PlayerTextDrawFont(playerid, td, 1);
+	PlayerTextDrawFont(playerid, td, TEXT_DRAW_FONT_1);
 	PlayerTextDrawSetShadow(playerid, td, 0);
 	PlayerTextDrawSetOutline(playerid, td, 0);
 	return td;
@@ -312,7 +312,7 @@ PlayerText:UI_IntroText(playerid, Float:x, Float:y, const text[], Float:lw, Floa
 {
 	new PlayerText:td = Lang_CreatePlayerTextDraw(playerid, x, y, text);
 	PlayerTextDrawLetterSize(playerid, td, lw, lh);
-	PlayerTextDrawAlignment(playerid, td, 2);
+	PlayerTextDrawAlignment(playerid, td, TEXT_DRAW_ALIGN_CENTRE);
 	PlayerTextDrawColour(playerid, td, color);
 	PlayerTextDrawFont(playerid, td, font);
 	PlayerTextDrawSetProportional(playerid, td, true);
@@ -358,7 +358,7 @@ UI_IntroApplyAlpha(playerid)
 
 UI_IntroResetState(playerid)
 {
-	g_UiIntroActive[playerid] = 0;
+	g_UiIntroActive[playerid] = false;
 	g_UiIntroAlpha[playerid] = 0;
 	g_UiIntroFadeTarget[playerid] = 0;
 	g_UiIntroFadeStep[playerid] = 0;
@@ -367,10 +367,10 @@ UI_IntroResetState(playerid)
 	g_UiIntroFadeNext[playerid] = 0;
 	g_UiIntroLockEnd[playerid] = 0;
 	g_UiIntroLockShown[playerid] = -1;
-	g_UiIntroHintOn[playerid] = 0;
+	g_UiIntroHintOn[playerid] = false;
 	for (new i = 0; i < 7; i++)
 	{
-		g_UiIntroTd[playerid][i] = 65535;
+		g_UiIntroTd[playerid][i] = INVALID_PLAYER_TEXT_DRAW;
 	}
 }
 
@@ -392,7 +392,7 @@ UI_IntroUiDestroy(playerid)
 		}
 	}
 	UI_IntroResetState(playerid);
-	g_UiStoryActive[playerid] = 0;
+	g_UiStoryActive[playerid] = false;
 	g_UiStoryOrigin[playerid] = 0;
 	g_UiStoryMotive[playerid] = 0;
 	return 0;
@@ -406,7 +406,7 @@ UI_IntroCreate(playerid)
 	}
 	UI_IntroUiDestroy(playerid);
 	CefUI_AuthClose(playerid);
-	g_UiIntroActive[playerid] = 1;
+	g_UiIntroActive[playerid] = true;
 	g_UiIntroTd[playerid][0] = _:UI_IntroBox(playerid, 0.0, 0.0, 640.0, 482.0, 0);
 	g_UiIntroTd[playerid][1] = _:UI_IntroBox(playerid, 0.0, 0.0, 640.0, 56.0, 255);
 	g_UiIntroTd[playerid][2] = UI_IntroBox(playerid, 0.0, (480.0 - 56.0), 640.0, (56.0 + 2.0), 255);
@@ -581,7 +581,7 @@ UI_IntroSkipHint(playerid, lockSeconds)
 	{
 		return 0;
 	}
-	g_UiIntroHintOn[playerid] = 1;
+	g_UiIntroHintOn[playerid] = true;
 	if (lockSeconds > 0)
 	{
 		g_UiIntroLockEnd[playerid] = GetTickCount() + lockSeconds * 1000;
@@ -610,7 +610,7 @@ UI_IntroSkipHintHide(playerid)
 	{
 		return 0;
 	}
-	g_UiIntroHintOn[playerid] = 0;
+	g_UiIntroHintOn[playerid] = false;
 	g_UiIntroLockEnd[playerid] = 0;
 	g_UiIntroLockShown[playerid] = -1;
 	PlayerTextDrawHide(playerid, PlayerText:g_UiIntroTd[playerid][6]);

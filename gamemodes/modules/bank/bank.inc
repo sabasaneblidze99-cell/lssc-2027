@@ -1241,7 +1241,7 @@ Bank_OnInit()
 	{
 		new bool:counter = Bank_IsCounter(i);
 		g_BankPickup[i] = CreatePickup(1274, 1, s_BankPoints[i][0], s_BankPoints[i][1], s_BankPoints[i][2], 0);
-		g_BankLabel[i] = Lang_Create3DTextLabel(counter ? "Banca - Sportello\nUsa /atm" : "ATM\nUsa /atm", 0x66DD66FF, s_BankPoints[i][0], s_BankPoints[i][1], (1.0 + s_BankPoints[i][2]), 12.0, 0, 0);
+		g_BankLabel[i] = Lang_Create3DTextLabel(counter ? "Banca - Sportello\nUsa /atm" : "ATM\nUsa /atm", 0x66DD66FF, s_BankPoints[i][0], s_BankPoints[i][1], (1.0 + s_BankPoints[i][2]), 12.0, 0, false);
 	}
 }
 

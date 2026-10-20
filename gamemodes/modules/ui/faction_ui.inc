@@ -149,7 +149,7 @@ UI_FactionMenuShow(playerid, faction, rank, bool:onDuty, membersOnline, membersT
 	}
 	UI_FcRankText(faction, rank, rankName, 24);
 	format(title, 64, "%s - %s%s", g_UiFcShort[faction], rankName, onDuty ? " (in servizio)" : "");
-	Lang_ShowPlayerDialog(playerid, 9320, 2, title, body, "Seleziona", "Chiudi");
+	Lang_ShowPlayerDialog(playerid, 9320, DIALOG_STYLE_LIST, title, body, "Seleziona", "Chiudi");
 	return 0;
 }
 
@@ -175,7 +175,7 @@ UI_FcInfoShow(playerid)
 		format(line, 192, "\nComando: /invita, /promuovi, /degrada, /licenzia (solo su gradi inferiori al tuo; il grado %d si assegna solo da staff).", 6);
 		strcat(body, line, 1536);
 	}
-	Lang_ShowPlayerDialog(playerid, 9321, 0, "Informazioni fazione", body, "Menu", "Chiudi");
+	Lang_ShowPlayerDialog(playerid, 9321, DIALOG_STYLE_MSGBOX, "Informazioni fazione", body, "Menu", "Chiudi");
 	return 0;
 }
 
@@ -183,7 +183,7 @@ UI_FcInviteTargetShow(playerid, const error[])
 {
 	new body[384];
 	format(body, 384, "{FFFFFF}Inserisci l'ID del giocatore da invitare in {FFD24D}%s{FFFFFF}.\nDeve essere senza fazione, di livello %d o superiore e a meno di %.0f metri.\nL'invito resta valido %d secondi.\n\n%s", g_UiFcShort[g_UiFcFaction[playerid]], 3, 5.0, 60, error);
-	Lang_ShowPlayerDialog(playerid, 9325, 1, "Invita giocatore", body, "Invita", "Annulla");
+	Lang_ShowPlayerDialog(playerid, 9325, DIALOG_STYLE_INPUT, "Invita giocatore", body, "Invita", "Annulla");
 }
 
 UI_FactionMemberListClear(playerid)
@@ -281,7 +281,7 @@ UI_FcMembersPage(playerid, page)
 	if (g_UiFcCount[playerid] == 0)
 	{
 		format(title, 64, "%s - %s", verb, g_UiFcShort[faction]);
-		Lang_ShowPlayerDialog(playerid, 9323, 0, title, "{FFFFFF}Nessun membro da mostrare.", "Chiudi", "");
+		Lang_ShowPlayerDialog(playerid, 9323, DIALOG_STYLE_MSGBOX, title, "{FFFFFF}Nessun membro da mostrare.", "Chiudi", "");
 		return 0;
 	}
 	new body[1536], line[192], name[25], rankName[24], status[24], reason[8];
@@ -326,7 +326,7 @@ UI_FcMembersPage(playerid, page)
 	{
 		format(title, 64, "%s membro - %s (pag. %d/%d)", verb, g_UiFcShort[faction], page + 1, pages);
 	}
-	Lang_ShowPlayerDialog(playerid, 9322, 5, title, body, mode == 2 ? "Dettagli" : "Seleziona", "Chiudi");
+	Lang_ShowPlayerDialog(playerid, 9322, DIALOG_STYLE_TABLIST_HEADERS, title, body, mode == 2 ? "Dettagli" : "Seleziona", "Chiudi");
 	return 0;
 }
 
@@ -367,7 +367,7 @@ UI_FcMemberInfoShow(playerid, idx)
 	UI_FcStatusText(st, status, 24);
 	UI_FcMoney(g_UiFcRankPay[faction][rank], pay, 16);
 	format(body, 384, "{FFD24D}%s{FFFFFF}\n\nFazione: %s\nGrado: %s (%d/%d)\nStato: %s{FFFFFF}\nStipendio di grado: {66DD66}$%s{FFFFFF} ogni %d min di servizio", name, g_UiFcFull[faction], rankName, rank, 6, status, pay, 15);
-	Lang_ShowPlayerDialog(playerid, 9323, 0, "Dettaglio membro", body, "Indietro", "");
+	Lang_ShowPlayerDialog(playerid, 9323, DIALOG_STYLE_MSGBOX, "Dettaglio membro", body, "Indietro", "");
 }
 
 UI_FcConfirmShow(playerid, idx)
@@ -396,7 +396,7 @@ UI_FcConfirmShow(playerid, idx)
 			format(body, 512, "{FFFFFF}Licenziare {FFD24D}%s{FFFFFF} ({FFD24D}%s{FFFFFF}) da {FFD24D}%s{FFFFFF}?\n\n{FF6666}Perdera' fazione, grado e servizio. L'operazione non e' reversibile.", name, oldName, g_UiFcShort[faction]);
 		}
 	}
-	Lang_ShowPlayerDialog(playerid, 9324, 0, verb, body, "Conferma", "Annulla");
+	Lang_ShowPlayerDialog(playerid, 9324, DIALOG_STYLE_MSGBOX, verb, body, "Conferma", "Annulla");
 }
 
 UI_FactionInviteShow(playerid, faction, const inviterName[], ttlSec)
@@ -412,7 +412,7 @@ UI_FactionInviteShow(playerid, faction, const inviterName[], ttlSec)
 	new body[512], rank1[24];
 	UI_FcRankText(faction, 1, rank1, 24);
 	format(body, 512, "{FFD24D}%s{FFFFFF} ti invita a entrare in {FFD24D}%s{FFFFFF}.\n\nEntrerai con il grado {FFD24D}%s{FFFFFF}.\nL'invito scade tra {FF6666}%d{FFFFFF} secondi.", inviterName, g_UiFcFull[faction], rank1, ttlSec > 0 ? ttlSec : 60);
-	Lang_ShowPlayerDialog(playerid, 9326, 0, "Invito in fazione", body, "Accetta", "Rifiuta");
+	Lang_ShowPlayerDialog(playerid, 9326, DIALOG_STYLE_MSGBOX, "Invito in fazione", body, "Accetta", "Rifiuta");
 	return 0;
 }
 
@@ -622,7 +622,7 @@ PlayerText:UI_FhText(playerid, Float:x, Float:y, const text[], Float:lw, Float:l
 	PlayerTextDrawLetterSize(playerid, td, lw, lh);
 	PlayerTextDrawAlignment(playerid, td, align);
 	PlayerTextDrawColour(playerid, td, color);
-	PlayerTextDrawFont(playerid, td, 1);
+	PlayerTextDrawFont(playerid, td, TEXT_DRAW_FONT_1);
 	PlayerTextDrawSetProportional(playerid, td, true);
 	PlayerTextDrawSetOutline(playerid, td, 1);
 	PlayerTextDrawSetShadow(playerid, td, 0);
@@ -637,12 +637,12 @@ PlayerText:UI_FhBox(playerid, Float:x, Float:y, Float:w, Float:h, color)
 	PlayerTextDrawTextSize(playerid, td, (x + w), 0.0);
 	PlayerTextDrawUseBox(playerid, td, true);
 	PlayerTextDrawBoxColour(playerid, td, color);
-	PlayerTextDrawFont(playerid, td, 1);
+	PlayerTextDrawFont(playerid, td, TEXT_DRAW_FONT_1);
 	PlayerTextDrawSetShadow(playerid, td, 0);
 	PlayerTextDrawSetOutline(playerid, td, 0);
 	return td;
 }
-new g_UiFHud[MAX_PLAYERS][3];
+new PlayerText:g_UiFHud[MAX_PLAYERS][3];
 new bool:g_UiFHudCreated[MAX_PLAYERS];
 new bool:g_UiFHudShown[MAX_PLAYERS];
 new bool:g_UiFHudKit[MAX_PLAYERS];
@@ -657,7 +657,7 @@ UI_FhCreate(playerid)
 	g_UiFHud[playerid][0] = _:UI_FhBox(playerid, left, 356.0, 150.0, 24.0, 153);
 	g_UiFHud[playerid][1] = UI_FhText(playerid, (5.0 + left), (356.0 + 2.0), "IN SERVIZIO", 0.2, 0.9, -1, t_TEXT_DRAW_ALIGN:1);
 	g_UiFHud[playerid][2] = UI_FhText(playerid, (5.0 + left), (356.0 + 12.0), "Kit medico: 0", 0.2, 0.9, -1, t_TEXT_DRAW_ALIGN:1);
-	g_UiFHudCreated[playerid] = 1;
+	g_UiFHudCreated[playerid] = true;
 	return 0;
 }
 
@@ -675,12 +675,12 @@ UI_FhApply(playerid, faction, rank, kitCharges)
 		Lang_PlayerTextDrawSetString(playerid, g_UiFHud[playerid][2], str);
 		PlayerTextDrawColour(playerid, PlayerText:g_UiFHud[playerid][2], kitCharges == 0 ? -10066177 : -1);
 		PlayerTextDrawShow(playerid, PlayerText:g_UiFHud[playerid][2]);
-		g_UiFHudKit[playerid] = 1;
+		g_UiFHudKit[playerid] = true;
 	}
 	else if (g_UiFHudKit[playerid])
 	{
 		PlayerTextDrawHide(playerid, PlayerText:g_UiFHud[playerid][2]);
-		g_UiFHudKit[playerid] = 0;
+		g_UiFHudKit[playerid] = false;
 	}
 }
 
@@ -695,8 +695,8 @@ UI_FactionHudShow(playerid, faction, rank)
 		return 0;
 	}
 	UI_FhCreate(playerid);
-	g_UiFHudShown[playerid] = 1;
-	g_UiFHudKit[playerid] = 0;
+	g_UiFHudShown[playerid] = true;
+	g_UiFHudKit[playerid] = false;
 	PlayerTextDrawShow(playerid, PlayerText:g_UiFHud[playerid][0]);
 	PlayerTextDrawHide(playerid, PlayerText:g_UiFHud[playerid][2]);
 	UI_FhApply(playerid, faction, rank, -1);
@@ -723,15 +723,15 @@ UI_FactionHudHide(playerid)
 	{
 		return 0;
 	}
-	g_UiFHudShown[playerid] = 0;
-	g_UiFHudKit[playerid] = 0;
+	g_UiFHudShown[playerid] = false;
+	g_UiFHudKit[playerid] = false;
 	for (new i = 0; i < 3; i++)
 	{
 		PlayerTextDrawHide(playerid, PlayerText:g_UiFHud[playerid][i]);
 	}
 	return 0;
 }
-new g_UiIHud[MAX_PLAYERS][6];
+new PlayerText:g_UiIHud[MAX_PLAYERS][6];
 new bool:g_UiIHudCreated[MAX_PLAYERS];
 new bool:g_UiIHudShown[MAX_PLAYERS];
 
@@ -747,7 +747,7 @@ UI_IhCreate(playerid)
 	g_UiIHud[playerid][3] = UI_FhBox(playerid, (210.0 + 6.0), (60.0 + 35.0), 208.0, 5.0, 0x444444FF);
 	g_UiIHud[playerid][4] = UI_FhBox(playerid, (210.0 + 6.0), (60.0 + 35.0), 208.0, 5.0, -12303105);
 	g_UiIHud[playerid][5] = UI_FhText(playerid, (210.0 + 6.0), (60.0 + 43.0), "Attendi un medico EMS. Non puoi muoverti.", 0.18, 0.85, _:-0.005729198, t_TEXT_DRAW_ALIGN:1);
-	g_UiIHudCreated[playerid] = 1;
+	g_UiIHudCreated[playerid] = true;
 	return 0;
 }
 
@@ -785,7 +785,7 @@ UI_InjuryHudShow(playerid, secondsLeft)
 		return 0;
 	}
 	UI_IhCreate(playerid);
-	g_UiIHudShown[playerid] = 1;
+	g_UiIHudShown[playerid] = true;
 	for (new i = 0; i < 6; i++)
 	{
 		PlayerTextDrawShow(playerid, PlayerText:g_UiIHud[playerid][i]);
@@ -800,7 +800,7 @@ UI_InjuryHudHide(playerid)
 	{
 		return 0;
 	}
-	g_UiIHudShown[playerid] = 0;
+	g_UiIHudShown[playerid] = false;
 	for (new i = 0; i < 6; i++)
 	{
 		PlayerTextDrawHide(playerid, PlayerText:g_UiIHud[playerid][i]);
@@ -827,12 +827,12 @@ UI_InjuryEndShow(playerid, reason, fee)
 		{
 			format(body, 384, "{FFFFFF}Nessun soccorso e' arrivato in tempo: sei stato ricoverato all'ospedale di All Saints e ti sei ripreso.\n\nNessuna spesa addebitata (fondi insufficienti).");
 		}
-		Lang_ShowPlayerDialog(playerid, 9327, 0, "Ricovero in ospedale", body, "OK", "");
+		Lang_ShowPlayerDialog(playerid, 9327, DIALOG_STYLE_MSGBOX, "Ricovero in ospedale", body, "OK", "");
 	}
 	else
 	{
 		format(body, 384, "{FFFFFF}Un medico EMS ti ha soccorso: sei di nuovo in piedi.\nRiprendi il gioco con prudenza.");
-		Lang_ShowPlayerDialog(playerid, 9327, 0, "Soccorso", body, "OK", "");
+		Lang_ShowPlayerDialog(playerid, 9327, DIALOG_STYLE_MSGBOX, "Soccorso", body, "OK", "");
 	}
 	return 0;
 }
@@ -848,7 +848,7 @@ UI_FactionUiDestroy(playerid)
 		for (new i = 0; i < 3; i++)
 		{
 			PlayerTextDrawDestroy(playerid, PlayerText:g_UiFHud[playerid][i]);
-			g_UiFHud[playerid][i] = 65535;
+			g_UiFHud[playerid][i] = INVALID_PLAYER_TEXT_DRAW;
 		}
 	}
 	if (g_UiIHudCreated[playerid])
@@ -856,17 +856,17 @@ UI_FactionUiDestroy(playerid)
 		for (new i = 0; i < 6; i++)
 		{
 			PlayerTextDrawDestroy(playerid, PlayerText:g_UiIHud[playerid][i]);
-			g_UiIHud[playerid][i] = 65535;
+			g_UiIHud[playerid][i] = INVALID_PLAYER_TEXT_DRAW;
 		}
 	}
-	g_UiFHudCreated[playerid] = 0;
-	g_UiFHudShown[playerid] = 0;
-	g_UiFHudKit[playerid] = 0;
-	g_UiIHudCreated[playerid] = 0;
-	g_UiIHudShown[playerid] = 0;
+	g_UiFHudCreated[playerid] = false;
+	g_UiFHudShown[playerid] = false;
+	g_UiFHudKit[playerid] = false;
+	g_UiIHudCreated[playerid] = false;
+	g_UiIHudShown[playerid] = false;
 	g_UiFcFaction[playerid] = 0;
 	g_UiFcRank[playerid] = 0;
-	g_UiFcDuty[playerid] = 0;
+	g_UiFcDuty[playerid] = false;
 	g_UiFcOnline[playerid] = 0;
 	g_UiFcTotal[playerid] = 0;
 	g_UiFcMode[playerid] = 2;

@@ -96,7 +96,7 @@ UI_VehicleShopShow(playerid, level, money, bank)
 		}
 		strcat(body, line, 1536);
 	}
-	Lang_ShowPlayerDialog(playerid, 9100, 4, "Concessionario di Los Santos", body, "Scegli", "Chiudi");
+	Lang_ShowPlayerDialog(playerid, 9100, DIALOG_STYLE_TABLIST, "Concessionario di Los Santos", body, "Scegli", "Chiudi");
 	return 0;
 }
 
@@ -112,7 +112,7 @@ UI_VehPayShow(playerid)
 	strcat(body, t, 320);
 	new title[64];
 	format(title, 64, "%s - $%s: pagamento", g_UiVehName[idx], price);
-	Lang_ShowPlayerDialog(playerid, 9101, 4, title, body, "Acquista", "Indietro");
+	Lang_ShowPlayerDialog(playerid, 9101, DIALOG_STYLE_TABLIST, title, body, "Acquista", "Indietro");
 }
 
 UI_VehicleListClear(playerid)
@@ -161,7 +161,7 @@ UI_VehicleListShow(playerid)
 	}
 	if (g_UiVehCount[playerid] <= 0)
 	{
-		Lang_ShowPlayerDialog(playerid, 9105, 0, "I miei veicoli", "{FFFFFF}Non possiedi veicoli.\nAcquistane uno al concessionario di Los Santos.", "Ok", "");
+		Lang_ShowPlayerDialog(playerid, 9105, DIALOG_STYLE_MSGBOX, "I miei veicoli", "{FFFFFF}Non possiedi veicoli.\nAcquistane uno al concessionario di Los Santos.", "Ok", "");
 		return 0;
 	}
 	new body[1536], line[128], name[16], stxt[24];
@@ -187,7 +187,7 @@ UI_VehicleListShow(playerid)
 		format(line, 128, "%d\t%s\t%s\t%d%%\t%s\n", g_UiVehSlot[playerid][i], name, g_UiVehLPlate[playerid][i], g_UiVehFuel[playerid][i], stxt);
 		strcat(body, line, 1536);
 	}
-	Lang_ShowPlayerDialog(playerid, 9102, 5, "I miei veicoli", body, "Seleziona", "Chiudi");
+	Lang_ShowPlayerDialog(playerid, 9102, DIALOG_STYLE_TABLIST_HEADERS, "I miei veicoli", body, "Seleziona", "Chiudi");
 	return 0;
 }
 
@@ -196,7 +196,7 @@ UI_VehActionShow(playerid)
 	new i = g_UiVehSel[playerid], name[16], title[64];
 	UI_VehModelName(g_UiVehLModel[playerid][i], name, 16);
 	format(title, 64, "%s [%s]", name, g_UiVehLPlate[playerid][i]);
-	Lang_ShowPlayerDialog(playerid, 9103, 2, title, "Trova veicolo\nVendi veicolo", "Scegli", "Indietro");
+	Lang_ShowPlayerDialog(playerid, 9103, DIALOG_STYLE_LIST, title, "Trova veicolo\nVendi veicolo", "Scegli", "Indietro");
 }
 
 UI_VehSellConfirmShow(playerid)
@@ -213,7 +213,7 @@ UI_VehSellConfirmShow(playerid)
 	{
 		format(body, 256, "{FFFFFF}Vendere {FFD24D}%s{FFFFFF} (targa %s)?\n\nRiceverai il %d%% del prezzo di listino in banca.\nL'operazione non e' reversibile.", name, g_UiVehLPlate[playerid][i], 60);
 	}
-	Lang_ShowPlayerDialog(playerid, 9104, 0, "Conferma vendita", body, "Vendi", "Annulla");
+	Lang_ShowPlayerDialog(playerid, 9104, DIALOG_STYLE_MSGBOX, "Conferma vendita", body, "Vendi", "Annulla");
 }
 
 bool:UI_VehicleOnDialogResponse(playerid, dialogid, response, listitem)
@@ -330,7 +330,7 @@ bool:UI_VehicleOnDialogResponse(playerid, dialogid, response, listitem)
 	}
 	return false;
 }
-new g_UiVHud[MAX_PLAYERS][6];
+new PlayerText:g_UiVHud[MAX_PLAYERS][6];
 new bool:g_UiVHudCreated[MAX_PLAYERS];
 new bool:g_UiVHudShown[MAX_PLAYERS];
 
@@ -340,7 +340,7 @@ PlayerText:UI_VHudText(playerid, Float:x, Float:y, const text[], Float:lw, Float
 	PlayerTextDrawLetterSize(playerid, td, lw, lh);
 	PlayerTextDrawAlignment(playerid, td, align);
 	PlayerTextDrawColour(playerid, td, color);
-	PlayerTextDrawFont(playerid, td, 1);
+	PlayerTextDrawFont(playerid, td, TEXT_DRAW_FONT_1);
 	PlayerTextDrawSetProportional(playerid, td, true);
 	PlayerTextDrawSetOutline(playerid, td, 1);
 	PlayerTextDrawSetShadow(playerid, td, 0);
@@ -355,7 +355,7 @@ PlayerText:UI_VHudBox(playerid, Float:x, Float:y, Float:w, Float:h, color)
 	PlayerTextDrawTextSize(playerid, td, (x + w), 0.0);
 	PlayerTextDrawUseBox(playerid, td, true);
 	PlayerTextDrawBoxColour(playerid, td, color);
-	PlayerTextDrawFont(playerid, td, 1);
+	PlayerTextDrawFont(playerid, td, TEXT_DRAW_FONT_1);
 	PlayerTextDrawSetShadow(playerid, td, 0);
 	PlayerTextDrawSetOutline(playerid, td, 0);
 	return td;
@@ -374,7 +374,7 @@ UI_VHudCreate(playerid)
 	g_UiVHud[playerid][3] = UI_VHudBox(playerid, (5.0 + left), (398.0 + 35.0), 140.0, 6.0, 0x444444FF);
 	g_UiVHud[playerid][4] = UI_VHudBox(playerid, (5.0 + left), (398.0 + 35.0), 140.0, 6.0, 0x66DD66FF);
 	g_UiVHud[playerid][5] = UI_VHudText(playerid, (5.0 + left), (398.0 + 43.0), "MOTORE SPENTO", 0.2, 0.9, -10066177, t_TEXT_DRAW_ALIGN:1);
-	g_UiVHudCreated[playerid] = 1;
+	g_UiVHudCreated[playerid] = true;
 	return 0;
 }
 
@@ -404,7 +404,7 @@ UI_VehicleHudShow(playerid)
 		return 0;    // tachimetro CEF (ui/hud_cef.inc)
 	}
 	UI_VHudCreate(playerid);
-	g_UiVHudShown[playerid] = 1;
+	g_UiVHudShown[playerid] = true;
 	UI_VHudSetVisible(playerid, true);
 	return 0;
 }
@@ -415,7 +415,7 @@ UI_VehicleHudHide(playerid)
 	{
 		return 0;
 	}
-	g_UiVHudShown[playerid] = 0;
+	g_UiVHudShown[playerid] = false;
 	UI_VHudSetVisible(playerid, false);
 	return 0;
 }
@@ -472,11 +472,11 @@ UI_VehicleUiDestroy(playerid)
 		for (new i = 0; i < 6; i++)
 		{
 			PlayerTextDrawDestroy(playerid, PlayerText:g_UiVHud[playerid][i]);
-			g_UiVHud[playerid][i] = 65535;
+			g_UiVHud[playerid][i] = INVALID_PLAYER_TEXT_DRAW;
 		}
 	}
-	g_UiVHudCreated[playerid] = 0;
-	g_UiVHudShown[playerid] = 0;
+	g_UiVHudCreated[playerid] = false;
+	g_UiVHudShown[playerid] = false;
 	g_UiVehCount[playerid] = 0;
 	g_UiVehSel[playerid] = 0;
 	return 0;

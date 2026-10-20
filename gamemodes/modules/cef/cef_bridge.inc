@@ -178,7 +178,7 @@ public Cef_OnReady(playerid, const arguments[])
 	if (UI_HudIsActive(playerid))
 	{
 		UI_HudDestroy(playerid);
-		CefUI_HudShow(playerid, 1);
+		CefUI_HudShow(playerid, true);
 	}
 	else
 	{

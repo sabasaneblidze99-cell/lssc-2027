@@ -141,19 +141,19 @@ Taxi_ResetPlayer(playerid)
 	g_TxMeterF[playerid] = 0.0;
 	g_TxStartX[playerid] = 0.0;
 	g_TxStartY[playerid] = 0.0;
-	g_TxMeterStarted[playerid] = 0;
+	g_TxMeterStarted[playerid] = false;
 	g_TxBoardUntil[playerid] = 0;
 	g_TxPayPrompts[playerid] = 0;
 	g_TxPayMeters[playerid] = 0;
 	g_TxPayToD[playerid] = 0;
 	g_TxPayFare[playerid] = 0;
-	g_TxPayAccept[playerid] = 0;
+	g_TxPayAccept[playerid] = false;
 	g_TxPayRating[playerid] = 0;
 	g_TxStartKind[playerid] = 0;
 	g_TxStartPeer[playerid] = 65535;
 	g_TxStartFromD[playerid] = 0;
 	g_TxCancelRide[playerid] = 0;
-	g_TxAbort[playerid] = 0;
+	g_TxAbort[playerid] = false;
 	g_TxCdUntil[playerid] = 0;
 	g_TxRetry[playerid] = 0;
 	g_TxRetryAt[playerid] = 0;
@@ -377,7 +377,7 @@ Taxi_NpcOffer(driverid)
 	g_TxOfferUntil[driverid] = Taxi_TickAfter(30000);
 	g_TxOfferFromPt[driverid] = fromPt;
 	g_TxOfferToPt[driverid] = toPt;
-	UI_LivingTaxiOffer(driverid, g_TxOfferCall[driverid], 1, "Cliente", fromD, toD, straight, est, 30);
+	UI_LivingTaxiOffer(driverid, g_TxOfferCall[driverid], true, "Cliente", fromD, toD, straight, est, 30);
 	new a[16], b[16];
 	LD_DistrictName(fromD, a, 16);
 	LD_DistrictName(toD, b, 16);
@@ -748,7 +748,7 @@ Taxi_OnPayResult(driverid, result, rideId, net, points, tax)
 			{
 				LD_SetProPoints(driverid, 2, points);
 			}
-			UI_LivingTaxiReceipt(driverid, 1, rideId, other, g_TxPayMeters[driverid], npc ? net : net + tax, tax, net);
+			UI_LivingTaxiReceipt(driverid, true, rideId, other, g_TxPayMeters[driverid], npc ? net : net + tax, tax, net);
 			if (result == 6)
 			{
 				Util_Send(driverid, -2994689, "Tetto orario del lavoro dinamico raggiunto: e' stato pagato solo il residuo.");
@@ -903,7 +903,7 @@ public Living_OnDBTaxiCharged(playerid, rideId, result, charged, balance)
 				g_TxRateDriverChar[playerid] = gPlayer[d][pCharId];
 			}
 			UI_LivingTaxiMeterHide(playerid);
-			UI_LivingTaxiReceipt(playerid, 0, rideId, name, meters, charged, 0, 0);
+			UI_LivingTaxiReceipt(playerid, false, rideId, name, meters, charged, 0, 0);
 			if (g_TxRateDriverChar[playerid] > 0 && gPlayer[playerid][pTaxiPendOp] == 0)
 			{
 				g_TxRateRide[playerid] = rideId;
@@ -1131,7 +1131,7 @@ Taxi_CmdChiamataxi(playerid, const params[])
 		{
 			g_TxOfferCall[d] = playerid + 1;
 			g_TxOfferUntil[d] = Taxi_TickAfter(30000);
-			UI_LivingTaxiOffer(d, playerid + 1, 0, name, fromD, fromD, Taxi_Dist2D(dx, dy, px, py), LD_TaxiFare(0), 30);
+			UI_LivingTaxiOffer(d, playerid + 1, false, name, fromD, fromD, Taxi_Dist2D(dx, dy, px, py), LD_TaxiFare(0), 30);
 		}
 		sent++;
 	}
@@ -1478,7 +1478,7 @@ Taxi_OnInit()
 	g_TxTimer = SetTimer("Taxi_OnTick", 1000, true);
 	LD_Listen("Taxi_OnDistrictEvent", 20);
 	CreatePickup(1239, 1, 1771.0, -1895.0, 13.6, 0);
-	Lang_Create3DTextLabel("Deposito taxi\n/taxi on  ·  /taxi off", -2994689, 1771.0, -1895.0, (13.6 + 0.8), 20.0, 0, 0);
+	Lang_Create3DTextLabel("Deposito taxi\n/taxi on  ·  /taxi off", -2994689, 1771.0, -1895.0, (13.6 + 0.8), 20.0, 0, false);
 }
 
 Taxi_OnExit()

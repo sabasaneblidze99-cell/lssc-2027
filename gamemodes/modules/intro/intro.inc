@@ -118,14 +118,14 @@ Intro_Camera(playerid, scene, flags)
 	if (hold)
 	{
 		SetPlayerCameraPos(playerid, g_IntroCam[row][3], g_IntroCam[row][4], g_IntroCam[row][5]);
-		SetPlayerCameraLookAt(playerid, g_IntroCam[row][9], g_IntroCam[row][10], g_IntroCam[row][11], 2);
+		SetPlayerCameraLookAt(playerid, g_IntroCam[row][9], g_IntroCam[row][10], g_IntroCam[row][11], CAMERA_CUT);
 		return 0;
 	}
 	new ms = Intro_SceneMs(scene, flags);
 	SetPlayerCameraPos(playerid, g_IntroCam[row][0], g_IntroCam[row][1], g_IntroCam[row][2]);
-	SetPlayerCameraLookAt(playerid, g_IntroCam[row][6], g_IntroCam[row][7], g_IntroCam[row][8], 2);
-	InterpolateCameraPos(playerid, g_IntroCam[row][0], g_IntroCam[row][1], g_IntroCam[row][2], g_IntroCam[row][3], g_IntroCam[row][4], g_IntroCam[row][5], ms, 1);
-	InterpolateCameraLookAt(playerid, g_IntroCam[row][6], g_IntroCam[row][7], g_IntroCam[row][8], g_IntroCam[row][9], g_IntroCam[row][10], g_IntroCam[row][11], ms, 1);
+	SetPlayerCameraLookAt(playerid, g_IntroCam[row][6], g_IntroCam[row][7], g_IntroCam[row][8], CAMERA_CUT);
+	InterpolateCameraPos(playerid, g_IntroCam[row][0], g_IntroCam[row][1], g_IntroCam[row][2], g_IntroCam[row][3], g_IntroCam[row][4], g_IntroCam[row][5], ms, CAMERA_MOVE);
+	InterpolateCameraLookAt(playerid, g_IntroCam[row][6], g_IntroCam[row][7], g_IntroCam[row][8], g_IntroCam[row][9], g_IntroCam[row][10], g_IntroCam[row][11], ms, CAMERA_MOVE);
 	return 0;
 }
 

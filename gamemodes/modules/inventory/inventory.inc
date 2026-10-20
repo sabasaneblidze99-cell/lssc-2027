@@ -221,7 +221,7 @@ public Inv_OnDBLoaded(playerid, count)
 	}
 	if (count == 0 && Inv_Count(playerid, 10) == 0 && !gPlayer[playerid][pInvOpBusy])
 	{
-		Inv_StartDoc(playerid, 1);
+		Inv_StartDoc(playerid, true);
 	}
 	Inv_PushUi(playerid);
 	return 1;
@@ -857,7 +857,7 @@ public Inv_OnDBAdded(playerid, itemId, qty, result)
 
 public Inv_IssueStartDoc(playerid)
 {
-	return Inv_StartDoc(playerid, 0);
+	return Inv_StartDoc(playerid, false);
 }
 
 Inv_StartDoc(playerid, bool:retry)

@@ -104,7 +104,7 @@ District_ResetPlayer(playerid)
 		g_DistHookCount[playerid][d] = 0;
 	}
 	g_DistLoadTry[playerid] = 0;
-	g_DistQuietLoad[playerid] = 0;
+	g_DistQuietLoad[playerid] = false;
 	g_DistAdminOp[playerid][0] = 0;
 	DB_LivingPlayerReset(playerid);
 	return 0;
@@ -172,7 +172,7 @@ District_OnPlayerConnect(playerid)
 District_OnCharReady(playerid)
 {
 	g_DistLoadTry[playerid] = 0;
-	g_DistQuietLoad[playerid] = 0;
+	g_DistQuietLoad[playerid] = false;
 	DB_LivingLoadPlayer(playerid, true);
 }
 
@@ -188,7 +188,7 @@ District_ReloadPlayer(playerid)
 	{
 		return 0;
 	}
-	g_DistQuietLoad[playerid] = 1;
+	g_DistQuietLoad[playerid] = true;
 	DB_LivingLoadPlayer(playerid, false);
 	return 0;
 }
@@ -376,7 +376,7 @@ public Living_OnDBPlayer(playerid, result, refund)
 	if (result == 1)
 	{
 		g_DistLoadTry[playerid] = 0;
-		g_DistQuietLoad[playerid] = 0;
+		g_DistQuietLoad[playerid] = false;
 		if (refund > 0)
 		{
 			new msg[160];
@@ -388,12 +388,12 @@ public Living_OnDBPlayer(playerid, result, refund)
 	}
 	if (quiet && result != -1 && result != 10)
 	{
-		g_DistQuietLoad[playerid] = 0;
+		g_DistQuietLoad[playerid] = false;
 		return 1;
 	}
 	if (g_DistLoadTry[playerid] >= 3)
 	{
-		g_DistQuietLoad[playerid] = 0;
+		g_DistQuietLoad[playerid] = false;
 		if (!quiet)
 		{
 			Util_Send(playerid, -10270721, "Non e' stato possibile caricare la tua reputazione: riprova a rientrare piu' tardi.");

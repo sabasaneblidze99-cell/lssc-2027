@@ -128,18 +128,18 @@ CityOS_OnExit()
 
 CityOS_OnPlayerConnect(playerid)
 {
-	g_CosWaitBoard[playerid] = 0;
+	g_CosWaitBoard[playerid] = false;
 }
 
 CityOS_OnCharReady(playerid)
 {
-	g_CosWaitBoard[playerid] = 0;
+	g_CosWaitBoard[playerid] = false;
 }
 
 CityOS_OnPlayerDisconnect(playerid, reason)
 {
 	#pragma unused reason
-	g_CosWaitBoard[playerid] = 0;
+	g_CosWaitBoard[playerid] = false;
 }
 
 public CityOS_OnDistrictEvent(type, districtId, charId, value, const opId[])
@@ -329,7 +329,7 @@ public UI_OnContractBoardRefresh(playerid)
 		CityOS_ShowBoard(playerid);
 		return 1;
 	}
-	g_CosWaitBoard[playerid] = 1;
+	g_CosWaitBoard[playerid] = true;
 	DB_LivingBoard(65535);
 	return 1;
 }

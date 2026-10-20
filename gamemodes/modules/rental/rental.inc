@@ -78,7 +78,7 @@ Rental_ResetPlayer(playerid)
 	g_RtDeposit[playerid] = 0;
 	g_RtOpenTs[playerid] = 0;
 	g_RtBlocks[playerid] = 0;
-	g_RtAbortOpen[playerid] = 0;
+	g_RtAbortOpen[playerid] = false;
 	g_RtCloseMode[playerid] = 0;
 	g_RtCloseHealth[playerid] = 0;
 	g_RtCloseReason[playerid] = 0;
@@ -298,7 +298,7 @@ Rental_OnOpenResult(playerid, result, rentalId, amount, dueAt)
 		gPlayer[playerid][pRentalClass] = 0;
 		gPlayer[playerid][pRentalKind] = 0;
 		gPlayer[playerid][pRentalOpId][0] = 0;
-		g_RtAbortOpen[playerid] = 0;
+		g_RtAbortOpen[playerid] = false;
 		if (pro)
 		{
 			Taxi_OnProRental(playerid, result, 0);
@@ -337,7 +337,7 @@ Rental_OnOpenResult(playerid, result, rentalId, amount, dueAt)
 	g_RtOpenTs[playerid] = gettime();
 	if (g_RtAbortOpen[playerid] || !Util_IsPlaying(playerid))
 	{
-		g_RtAbortOpen[playerid] = 0;
+		g_RtAbortOpen[playerid] = false;
 		Rental_SendClose(playerid, 3, 0, pro ? 3 : 1);
 		return 0;
 	}
@@ -626,7 +626,7 @@ bool:Rental_ClosePro(playerid, reason)
 	}
 	if (gPlayer[playerid][pRentalPendOp] == 5)
 	{
-		g_RtAbortOpen[playerid] = 1;
+		g_RtAbortOpen[playerid] = true;
 		return true;
 	}
 	if (gPlayer[playerid][pRentalId] == 0)
@@ -756,7 +756,7 @@ Rental_OnInit()
 	}
 	g_RtTimer = SetTimer("Rental_OnTick", 1000, true);
 	CreatePickup(1239, 1, 1505.0, -1700.0, 13.5, 0);
-	Lang_Create3DTextLabel("Noleggio veicoli\n/noleggio  ·  /riconsegna", -2994689, 1505.0, -1700.0, (13.5 + 0.8), 20.0, 0, 0);
+	Lang_Create3DTextLabel("Noleggio veicoli\n/noleggio  ·  /riconsegna", -2994689, 1505.0, -1700.0, (13.5 + 0.8), 20.0, 0, false);
 }
 
 Rental_OnExit()
@@ -816,7 +816,7 @@ Rental_OnPlayerDeath(playerid)
 	}
 	if (gPlayer[playerid][pRentalPendOp] == 5)
 	{
-		g_RtAbortOpen[playerid] = 1;
+		g_RtAbortOpen[playerid] = true;
 		return 0;
 	}
 	if (gPlayer[playerid][pRentalId] == 0 || gPlayer[playerid][pRentalPendOp] != 0)
@@ -846,7 +846,7 @@ Rental_OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
 	{
 		return 0;
 	}
-	ClearAnimations(playerid, 0);
+	ClearAnimations(playerid, SYNC_NONE);
 	Util_Send(playerid, -10270721, mod == 2 ? "Questo taxi e' in servizio: puoi salire solo come passeggero." : "Questo mezzo e' a noleggio di un altro cliente.");
 	return 0;
 }
