@@ -77,7 +77,7 @@ bool:DB_HashFormatOk(const hash[], const salt[], algo)
 	{
 		return strlen(hash) == 60 && strlen(salt) < 17;
 	}
-	return 0;
+	return false;
 }
 
 DB_CreateAccountEx(playerid, const hash[], const salt[], algo)

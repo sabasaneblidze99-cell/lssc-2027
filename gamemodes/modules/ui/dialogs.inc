@@ -84,7 +84,7 @@ bool:UI_OnDialogResponse(playerid, dialogid, response, listitem, const inputtext
 			if (!response)
 			{
 				UI_OnDialogCancel(playerid, dialogid);
-				return 1;
+				return true;
 			}
 			new len = strlen(inputtext);
 			if (len < 6 || len > 32)
@@ -92,54 +92,54 @@ bool:UI_OnDialogResponse(playerid, dialogid, response, listitem, const inputtext
 				new err[256];
 				format(err, 256, "{FF4444}პაროლი უნდა შეიცავდეს %d-დან %d-მდე სიმბოლოს.\n{FFFFFF}", 6, 32);
 				UI_ShowRegisterEx(playerid, err);
-				return 1;
+				return true;
 			}
 			UI_OnRegisterSubmit(playerid, inputtext);
-			return 1;
+			return true;
 		}
 		case 9002:
 		{
 			if (!response)
 			{
 				UI_OnDialogCancel(playerid, dialogid);
-				return 1;
+				return true;
 			}
 			if (strlen(inputtext) < 1)
 			{
-				UI_ShowLogin(playerid, 0);
-				return 1;
+				UI_ShowLogin(playerid, false);
+				return true;
 			}
 			UI_OnLoginSubmit(playerid, inputtext);
-			return 1;
+			return true;
 		}
 		case 9003:
 		{
 			if (!response || listitem < 0 || listitem > 1)
 			{
 				UI_ShowGenderSelect(playerid);
-				return 1;
+				return true;
 			}
 			UI_OnGenderChosen(playerid, listitem);
-			return 1;
+			return true;
 		}
 		case 9004:
 		{
 			if (!response || listitem < 0 || listitem >= 7)
 			{
 				UI_ShowSkinSelect(playerid, g_UiSkinGender[playerid]);
-				return 1;
+				return true;
 			}
 			new skin = Valid_SkinAt(g_UiSkinGender[playerid], listitem);
 			if (skin == -1)
 			{
 				UI_ShowSkinSelect(playerid, g_UiSkinGender[playerid]);
-				return 1;
+				return true;
 			}
 			UI_OnSkinChosen(playerid, skin);
-			return 1;
+			return true;
 		}
 	}
-	return 0;
+	return false;
 }
 
 UI_CefRegisterSubmit(playerid, const password[])
@@ -158,7 +158,7 @@ UI_CefLoginSubmit(playerid, const password[])
 {
 	if (password[0] == 0)
 	{
-		UI_ShowLogin(playerid, 0);
+		UI_ShowLogin(playerid, false);
 		return 0;
 	}
 	UI_OnLoginSubmit(playerid, password);

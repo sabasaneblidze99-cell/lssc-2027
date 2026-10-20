@@ -209,7 +209,7 @@ bool:UI_IntroOnDialogResponse(playerid, dialogid, response, listitem, const inpu
 	#pragma unused inputtext
 	if (!UI_IntroValid(playerid) || dialogid < 9600 || dialogid > 9603)
 	{
-		return 0;
+		return false;
 	}
 	switch (dialogid)
 	{
@@ -217,30 +217,30 @@ bool:UI_IntroOnDialogResponse(playerid, dialogid, response, listitem, const inpu
 		{
 			if (!g_UiStoryActive[playerid])
 			{
-				return 1;
+				return true;
 			}
 			if (!response || listitem < 0 || listitem > 5)
 			{
 				UI_ShowOriginSelect(playerid);
-				return 1;
+				return true;
 			}
 			if (listitem == 5)
 			{
 				g_UiStoryOrigin[playerid] = 0;
 				g_UiStoryMotive[playerid] = 0;
 				UI_StoryConfirmShow(playerid);
-				return 1;
+				return true;
 			}
 			g_UiStoryOrigin[playerid] = listitem + 1;
 			g_UiStoryMotive[playerid] = 0;
 			UI_ShowMotiveSelect(playerid);
-			return 1;
+			return true;
 		}
 		case 9601:
 		{
 			if (!g_UiStoryActive[playerid])
 			{
-				return 1;
+				return true;
 			}
 			if (!response || listitem < 0 || listitem > 4)
 			{
@@ -252,17 +252,17 @@ bool:UI_IntroOnDialogResponse(playerid, dialogid, response, listitem, const inpu
 				{
 					UI_ShowOriginSelect(playerid);
 				}
-				return 1;
+				return true;
 			}
 			g_UiStoryMotive[playerid] = listitem == 4 ? 0 : listitem + 1;
 			UI_StoryConfirmShow(playerid);
-			return 1;
+			return true;
 		}
 		case 9602:
 		{
 			if (!g_UiStoryActive[playerid])
 			{
-				return 1;
+				return true;
 			}
 			if (!response)
 			{
@@ -274,7 +274,7 @@ bool:UI_IntroOnDialogResponse(playerid, dialogid, response, listitem, const inpu
 				{
 					UI_ShowMotiveSelect(playerid);
 				}
-				return 1;
+				return true;
 			}
 			new origin = g_UiStoryOrigin[playerid], reason = g_UiStoryMotive[playerid];
 			if (origin == 0)
@@ -285,14 +285,14 @@ bool:UI_IntroOnDialogResponse(playerid, dialogid, response, listitem, const inpu
 			g_UiStoryOrigin[playerid] = 0;
 			g_UiStoryMotive[playerid] = 0;
 			UI_OnStoryChosen(playerid, origin, reason);
-			return 1;
+			return true;
 		}
 		case 9603:
 		{
-			return 1;
+			return true;
 		}
 	}
-	return 0;
+	return false;
 }
 
 PlayerText:UI_IntroBox(playerid, Float:x, Float:y, Float:w, Float:h, color)
@@ -300,7 +300,7 @@ PlayerText:UI_IntroBox(playerid, Float:x, Float:y, Float:w, Float:h, color)
 	new PlayerText:td = Lang_CreatePlayerTextDraw(playerid, x, y, "_");
 	PlayerTextDrawLetterSize(playerid, td, 0.0, (h / 9.0));
 	PlayerTextDrawTextSize(playerid, td, (x + w), 0.0);
-	PlayerTextDrawUseBox(playerid, td, 1);
+	PlayerTextDrawUseBox(playerid, td, true);
 	PlayerTextDrawBoxColour(playerid, td, color);
 	PlayerTextDrawFont(playerid, td, 1);
 	PlayerTextDrawSetShadow(playerid, td, 0);
@@ -315,7 +315,7 @@ PlayerText:UI_IntroText(playerid, Float:x, Float:y, const text[], Float:lw, Floa
 	PlayerTextDrawAlignment(playerid, td, 2);
 	PlayerTextDrawColour(playerid, td, color);
 	PlayerTextDrawFont(playerid, td, font);
-	PlayerTextDrawSetProportional(playerid, td, 1);
+	PlayerTextDrawSetProportional(playerid, td, true);
 	PlayerTextDrawSetOutline(playerid, td, 1);
 	PlayerTextDrawSetShadow(playerid, td, 0);
 	PlayerTextDrawBackgroundColour(playerid, td, 255);
@@ -336,7 +336,7 @@ UI_IntroTimerEnsure(playerid)
 {
 	if (g_UiIntroTimer[playerid] == 0)
 	{
-		g_UiIntroTimer[playerid] = SetTimerEx("UI_IntroOnTimer", 60, 1, "d", playerid);
+		g_UiIntroTimer[playerid] = SetTimerEx("UI_IntroOnTimer", 60, true, "d", playerid);
 	}
 }
 
@@ -351,8 +351,8 @@ UI_IntroApplyAlpha(playerid)
 	{
 		return 0;
 	}
-	PlayerTextDrawBoxColour(playerid, g_UiIntroTd[playerid][0], g_UiIntroAlpha[playerid] & 255);
-	PlayerTextDrawShow(playerid, g_UiIntroTd[playerid][0]);
+	PlayerTextDrawBoxColour(playerid, PlayerText:g_UiIntroTd[playerid][0], g_UiIntroAlpha[playerid] & 255);
+	PlayerTextDrawShow(playerid, PlayerText:g_UiIntroTd[playerid][0]);
 	return 0;
 }
 
@@ -387,7 +387,7 @@ UI_IntroUiDestroy(playerid)
 		{
 			if (g_UiIntroTd[playerid][i] != 65535)
 			{
-				PlayerTextDrawDestroy(playerid, g_UiIntroTd[playerid][i]);
+				PlayerTextDrawDestroy(playerid, PlayerText:g_UiIntroTd[playerid][i]);
 			}
 		}
 	}
@@ -407,16 +407,16 @@ UI_IntroCreate(playerid)
 	UI_IntroUiDestroy(playerid);
 	CefUI_AuthClose(playerid);
 	g_UiIntroActive[playerid] = 1;
-	g_UiIntroTd[playerid][0] = UI_IntroBox(playerid, 0.0, 0.0, 640.0, 482.0, 0);
-	g_UiIntroTd[playerid][1] = UI_IntroBox(playerid, 0.0, 0.0, 640.0, 56.0, 255);
+	g_UiIntroTd[playerid][0] = _:UI_IntroBox(playerid, 0.0, 0.0, 640.0, 482.0, 0);
+	g_UiIntroTd[playerid][1] = _:UI_IntroBox(playerid, 0.0, 0.0, 640.0, 56.0, 255);
 	g_UiIntroTd[playerid][2] = UI_IntroBox(playerid, 0.0, (480.0 - 56.0), 640.0, (56.0 + 2.0), 255);
-	g_UiIntroTd[playerid][3] = UI_IntroText(playerid, 320.0, (8.0 + (480.0 - 56.0)), "_", 0.3, 1.4, 0xF2F2F2FF, 1);
-	g_UiIntroTd[playerid][4] = UI_IntroText(playerid, 320.0, 170.0, "LOS SANTOS", 0.9, 3.6, -1, 3);
-	g_UiIntroTd[playerid][5] = UI_IntroText(playerid, 320.0, 232.0, "ყველას ისტორია აქ იწყება.", 0.34, 1.5, 0xF2F2F2FF, 1);
-	g_UiIntroTd[playerid][6] = UI_IntroText(playerid, 320.0, (480.0 - 20.0), "_", 0.22, 1.0, 0xB8B8B8FF, 1);
+	g_UiIntroTd[playerid][3] = UI_IntroText(playerid, 320.0, (8.0 + (480.0 - 56.0)), "_", 0.3, 1.4, 0xF2F2F2FF, t_TEXT_DRAW_FONT:1);
+	g_UiIntroTd[playerid][4] = _:UI_IntroText(playerid, 320.0, 170.0, "LOS SANTOS", 0.9, 3.6, -1, t_TEXT_DRAW_FONT:3);
+	g_UiIntroTd[playerid][5] = _:UI_IntroText(playerid, 320.0, 232.0, "ყველას ისტორია აქ იწყება.", 0.34, 1.5, 0xF2F2F2FF, t_TEXT_DRAW_FONT:1);
+	g_UiIntroTd[playerid][6] = UI_IntroText(playerid, 320.0, (480.0 - 20.0), "_", 0.22, 1.0, 0xB8B8B8FF, t_TEXT_DRAW_FONT:1);
 	UI_IntroApplyAlpha(playerid);
-	PlayerTextDrawShow(playerid, g_UiIntroTd[playerid][1]);
-	PlayerTextDrawShow(playerid, g_UiIntroTd[playerid][2]);
+	PlayerTextDrawShow(playerid, PlayerText:g_UiIntroTd[playerid][1]);
+	PlayerTextDrawShow(playerid, PlayerText:g_UiIntroTd[playerid][2]);
 	return 0;
 }
 
@@ -428,13 +428,13 @@ UI_IntroLetterbox(playerid, bool:on)
 	}
 	if (on)
 	{
-		PlayerTextDrawShow(playerid, g_UiIntroTd[playerid][1]);
-		PlayerTextDrawShow(playerid, g_UiIntroTd[playerid][2]);
+		PlayerTextDrawShow(playerid, PlayerText:g_UiIntroTd[playerid][1]);
+		PlayerTextDrawShow(playerid, PlayerText:g_UiIntroTd[playerid][2]);
 	}
 	else
 	{
-		PlayerTextDrawHide(playerid, g_UiIntroTd[playerid][1]);
-		PlayerTextDrawHide(playerid, g_UiIntroTd[playerid][2]);
+		PlayerTextDrawHide(playerid, PlayerText:g_UiIntroTd[playerid][1]);
+		PlayerTextDrawHide(playerid, PlayerText:g_UiIntroTd[playerid][2]);
 	}
 	return 0;
 }
@@ -517,14 +517,14 @@ UI_IntroSubtitle(playerid, const text[])
 	}
 	if (text[0] == 0)
 	{
-		PlayerTextDrawHide(playerid, g_UiIntroTd[playerid][3]);
+		PlayerTextDrawHide(playerid, PlayerText:g_UiIntroTd[playerid][3]);
 		return 0;
 	}
 	new tl[256], buf[71];
 	Lang_Translit(text, tl, 256);
 	strcopy(buf, tl, 71);
 	Lang_PlayerTextDrawSetString(playerid, g_UiIntroTd[playerid][3], buf);
-	PlayerTextDrawShow(playerid, g_UiIntroTd[playerid][3]);
+	PlayerTextDrawShow(playerid, PlayerText:g_UiIntroTd[playerid][3]);
 	return 0;
 }
 
@@ -548,13 +548,13 @@ UI_IntroTitle(playerid, bool:show)
 	}
 	if (show)
 	{
-		PlayerTextDrawShow(playerid, g_UiIntroTd[playerid][4]);
-		PlayerTextDrawShow(playerid, g_UiIntroTd[playerid][5]);
+		PlayerTextDrawShow(playerid, PlayerText:g_UiIntroTd[playerid][4]);
+		PlayerTextDrawShow(playerid, PlayerText:g_UiIntroTd[playerid][5]);
 	}
 	else
 	{
-		PlayerTextDrawHide(playerid, g_UiIntroTd[playerid][4]);
-		PlayerTextDrawHide(playerid, g_UiIntroTd[playerid][5]);
+		PlayerTextDrawHide(playerid, PlayerText:g_UiIntroTd[playerid][4]);
+		PlayerTextDrawHide(playerid, PlayerText:g_UiIntroTd[playerid][5]);
 	}
 	return 0;
 }
@@ -571,7 +571,7 @@ UI_IntroHintRender(playerid, secondsLeft)
 		strcopy(text, "/salta (ან Enter) გამოსატოვებლად", 96);
 	}
 	Lang_PlayerTextDrawSetString(playerid, g_UiIntroTd[playerid][6], text);
-	PlayerTextDrawShow(playerid, g_UiIntroTd[playerid][6]);
+	PlayerTextDrawShow(playerid, PlayerText:g_UiIntroTd[playerid][6]);
 	g_UiIntroLockShown[playerid] = secondsLeft;
 }
 
@@ -613,7 +613,7 @@ UI_IntroSkipHintHide(playerid)
 	g_UiIntroHintOn[playerid] = 0;
 	g_UiIntroLockEnd[playerid] = 0;
 	g_UiIntroLockShown[playerid] = -1;
-	PlayerTextDrawHide(playerid, g_UiIntroTd[playerid][6]);
+	PlayerTextDrawHide(playerid, PlayerText:g_UiIntroTd[playerid][6]);
 	if (!UI_IntroNeedTimer(playerid))
 	{
 		UI_IntroTimerStop(playerid);

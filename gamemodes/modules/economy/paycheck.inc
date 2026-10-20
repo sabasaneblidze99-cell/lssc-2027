@@ -2,7 +2,7 @@ new g_EconomyTimer;
 
 Economy_OnInit()
 {
-	g_EconomyTimer = SetTimer("Economy_OnTick", 1000, 1);
+	g_EconomyTimer = SetTimer("Economy_OnTick", 1000, true);
 }
 
 Economy_OnExit()

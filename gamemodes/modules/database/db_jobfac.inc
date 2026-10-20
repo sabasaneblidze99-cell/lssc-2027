@@ -8,7 +8,7 @@ bool:DB_JFSessionOk(playerid, const name[], charId)
 {
 	if (!DB_PlayerMatches(playerid, name))
 	{
-		return 0;
+		return false;
 	}
 	return charId > 0 && gPlayer[playerid][pCharId] == charId;
 }
@@ -116,35 +116,35 @@ public DB_JobFacFailure(playerid, op)
 
 public DB_JobFacQueryError(const callback[])
 {
-	if (!strcmp(callback, "DB_OnJFPayout", 0, 0x7FFFFFFF))
+	if (!strcmp(callback, "DB_OnJFPayout", false, 0x7FFFFFFF))
 	{
 		DB_FailAllPending(262144);
 	}
-	else if (!strcmp(callback, "DB_OnJFJobSet", 0, 0x7FFFFFFF))
+	else if (!strcmp(callback, "DB_OnJFJobSet", false, 0x7FFFFFFF))
 	{
 		DB_FailAllPending(524288);
 	}
-	else if (!strcmp(callback, "DB_OnJFFinesLoaded", 0, 0x7FFFFFFF))
+	else if (!strcmp(callback, "DB_OnJFFinesLoaded", false, 0x7FFFFFFF))
 	{
 		DB_FailAllPending(2097152);
 	}
-	else if (!strcmp(callback, "DB_OnJFFacChanged", 0, 0x7FFFFFFF))
+	else if (!strcmp(callback, "DB_OnJFFacChanged", false, 0x7FFFFFFF))
 	{
 		DB_FailAllPending(4194304);
 	}
-	else if (!strcmp(callback, "DB_OnJFFacMembers", 0, 0x7FFFFFFF))
+	else if (!strcmp(callback, "DB_OnJFFacMembers", false, 0x7FFFFFFF))
 	{
 		DB_FailAllPending(8388608);
 	}
-	else if (!strcmp(callback, "DB_OnJFFacFound", 0, 0x7FFFFFFF))
+	else if (!strcmp(callback, "DB_OnJFFacFound", false, 0x7FFFFFFF))
 	{
 		DB_FailAllPending(0x01000000);
 	}
-	else if (!strcmp(callback, "DB_OnJFFineAdded", 0, 0x7FFFFFFF))
+	else if (!strcmp(callback, "DB_OnJFFineAdded", false, 0x7FFFFFFF))
 	{
 		DB_JFFailAllFines();
 	}
-	else if (!strcmp(callback, "DB_OnJFComp", 0, 0x7FFFFFFF))
+	else if (!strcmp(callback, "DB_OnJFComp", false, 0x7FFFFFFF))
 	{
 		Log_Write("DBJOB", "compensazione FALLITA per errore DB: verificare a mano");
 	}

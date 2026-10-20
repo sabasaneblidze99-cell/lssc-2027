@@ -24,7 +24,7 @@ bool:DB_HouseSessionOk(playerid, const name[], ownerId)
 {
 	if (!DB_PlayerMatches(playerid, name))
 	{
-		return 0;
+		return false;
 	}
 	return ownerId > 0 && gPlayer[playerid][pCharId] == ownerId;
 }
@@ -59,12 +59,12 @@ bool:DB_HouseBegin(playerid, op, bool:valid, houseId, targetId, kind)
 {
 	if (playerid < 0 || playerid >= MAX_PLAYERS || !IsPlayerConnected(playerid))
 	{
-		return 0;
+		return false;
 	}
 	if (g_DBPending[playerid] & op)
 	{
 		DB_HouseDeliver(playerid, op, 0, houseId, targetId, kind);
-		return 0;
+		return false;
 	}
 	new slot = DB_HouseOpSlot(op);
 	if (slot >= 0)
@@ -76,10 +76,10 @@ bool:DB_HouseBegin(playerid, op, bool:valid, houseId, targetId, kind)
 	if (!DB_IsReady() || !valid)
 	{
 		DB_DeliverFailure(playerid, op);
-		return 0;
+		return false;
 	}
 	DB_PendingSet(playerid, op);
-	return 1;
+	return true;
 }
 
 DB_HouseDeliver(playerid, op, result, h, t, k)
@@ -167,9 +167,9 @@ public DB_HouseFailure(playerid, op, result)
 
 public DB_HouseGlobalFailure(const callback[])
 {
-	if (!strcmp(callback, "DB_OnHouseSeeded", 0, 0x7FFFFFFF) || !strcmp(callback, "DB_OnHouseSeedUtil", 0, 0x7FFFFFFF))
+	if (!strcmp(callback, "DB_OnHouseSeeded", false, 0x7FFFFFFF) || !strcmp(callback, "DB_OnHouseSeedUtil", false, 0x7FFFFFFF))
 	{
-		g_HouseBootLoad = 0;
+		g_HouseBootLoad = false;
 		g_HouseCount = 0;
 		if (funcidx("House_OnDBSeeded") != -1)
 		{
@@ -180,7 +180,7 @@ public DB_HouseGlobalFailure(const callback[])
 			CallLocalFunction("House_OnDBLoaded", "d", -1);
 		}
 	}
-	else if (!strcmp(callback, "DB_OnHousesLoaded", 0, 0x7FFFFFFF) || !strcmp(callback, "DB_OnHouseKeysAllLoaded", 0, 0x7FFFFFFF) || !strcmp(callback, "DB_OnHouseLoadUtil", 0, 0x7FFFFFFF))
+	else if (!strcmp(callback, "DB_OnHousesLoaded", false, 0x7FFFFFFF) || !strcmp(callback, "DB_OnHouseKeysAllLoaded", false, 0x7FFFFFFF) || !strcmp(callback, "DB_OnHouseLoadUtil", false, 0x7FFFFFFF))
 	{
 		g_HouseCount = 0;
 		if (funcidx("House_OnDBLoaded") != -1)
@@ -188,14 +188,14 @@ public DB_HouseGlobalFailure(const callback[])
 			CallLocalFunction("House_OnDBLoaded", "d", -1);
 		}
 	}
-	else if (!strcmp(callback, "DB_OnHouseBillAdded", 0, 0x7FFFFFFF))
+	else if (!strcmp(callback, "DB_OnHouseBillAdded", false, 0x7FFFFFFF))
 	{
 		if (funcidx("House_OnDBBillAdded") != -1)
 		{
 			CallLocalFunction("House_OnDBBillAdded", "dddd", 0, -1, -1, 0);
 		}
 	}
-	else if (!strcmp(callback, "DB_OnHouseBillsAgedStep", 0, 0x7FFFFFFF) || !strcmp(callback, "DB_OnHouseBillsAged", 0, 0x7FFFFFFF))
+	else if (!strcmp(callback, "DB_OnHouseBillsAgedStep", false, 0x7FFFFFFF) || !strcmp(callback, "DB_OnHouseBillsAged", false, 0x7FFFFFFF))
 	{
 		if (funcidx("House_OnDBBillsAged") != -1)
 		{
@@ -268,7 +268,7 @@ DB_SeedHouses()
 {
 	if (!DB_IsReady())
 	{
-		g_HouseBootLoad = 0;
+		g_HouseBootLoad = false;
 		g_HouseCount = 0;
 		if (funcidx("House_OnDBSeeded") != -1)
 		{
@@ -308,7 +308,7 @@ public DB_OnHouseSeedUtil()
 	}
 	if (g_HouseBootLoad)
 	{
-		g_HouseBootLoad = 0;
+		g_HouseBootLoad = false;
 		DB_LoadHouses();
 	}
 	return 1;
@@ -316,7 +316,7 @@ public DB_OnHouseSeedUtil()
 
 DB_BootHouses()
 {
-	g_HouseBootLoad = 1;
+	g_HouseBootLoad = true;
 	DB_SeedHouses();
 }
 
@@ -441,7 +441,7 @@ public DB_OnHouseBought(playerid, const name[], ownerId, houseId, pricePaid)
 	{
 		if (affected == 1)
 		{
-			DB_HouseCompensate(1, ownerId, houseId, 0, 0, 0);
+			DB_HouseCompensate(1, ownerId, houseId, 0, 0, false);
 		}
 		else if (funcidx("House_OnDBCompensated") != -1)
 		{
@@ -478,7 +478,7 @@ public DB_OnHouseSold(playerid, const name[], ownerId, houseId)
 	{
 		if (affected == 1)
 		{
-			DB_HouseCompensate(2, ownerId, houseId, 0, 0, 0);
+			DB_HouseCompensate(2, ownerId, houseId, 0, 0, false);
 		}
 		else if (funcidx("House_OnDBCompensated") != -1)
 		{
@@ -968,7 +968,7 @@ public DB_OnHouseRestored(playerid, const name[], ownerId, houseId, kind, total,
 	{
 		if (restored)
 		{
-			DB_HouseCompensate(3, ownerId, houseId, kind, token, 1);
+			DB_HouseCompensate(3, ownerId, houseId, kind, token, true);
 		}
 		DB_HouseStaleRelease(playerid, 32768);
 		return 1;

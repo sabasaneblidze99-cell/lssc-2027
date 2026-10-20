@@ -31,7 +31,7 @@ bool:Money_Can(playerid, amount)
 {
 	if (!Money_ValidPlayer(playerid) || amount <= 0)
 	{
-		return 0;
+		return false;
 	}
 	return gPlayer[playerid][pMoney] >= amount;
 }
@@ -40,7 +40,7 @@ bool:Money_CanReceive(playerid, amount)
 {
 	if (!Money_ValidPlayer(playerid) || amount <= 0)
 	{
-		return 0;
+		return false;
 	}
 	return amount <= 0x3B9ACA00 - gPlayer[playerid][pMoney];
 }
@@ -49,33 +49,33 @@ bool:Money_Give(playerid, amount)
 {
 	if (!Money_CanReceive(playerid, amount))
 	{
-		return 0;
+		return false;
 	}
 	gPlayer[playerid][pMoney] += amount;
 	Money_Refresh(playerid);
-	return 1;
+	return true;
 }
 
 bool:Money_Take(playerid, amount)
 {
 	if (!Money_Can(playerid, amount))
 	{
-		return 0;
+		return false;
 	}
 	gPlayer[playerid][pMoney] -= amount;
 	Money_Refresh(playerid);
-	return 1;
+	return true;
 }
 
 bool:Money_Set(playerid, amount)
 {
 	if (!Money_ValidPlayer(playerid) || amount < 0 || amount > 0x3B9ACA00)
 	{
-		return 0;
+		return false;
 	}
 	gPlayer[playerid][pMoney] = amount;
 	Money_Refresh(playerid);
-	return 1;
+	return true;
 }
 
 Money_BankRoom(playerid)
@@ -91,7 +91,7 @@ bool:Money_GiveBank(playerid, amount, const kind[], const ref[])
 {
 	if (!Money_ValidPlayer(playerid) || amount <= 0 || amount > Money_BankRoom(playerid))
 	{
-		return 0;
+		return false;
 	}
 	gPlayer[playerid][pBank] += amount;
 	Char_RefreshHud(playerid);
@@ -99,18 +99,18 @@ bool:Money_GiveBank(playerid, amount, const kind[], const ref[])
 	{
 		Money_BankLog(playerid, kind, amount, ref);
 	}
-	return 1;
+	return true;
 }
 
 bool:Money_CanBank(playerid, amount)
 {
 	if (!Money_ValidPlayer(playerid) || amount <= 0)
 	{
-		return 0;
+		return false;
 	}
 	if (gPlayer[playerid][pBankOpBusy] != 0)
 	{
-		return 0;
+		return false;
 	}
 	return gPlayer[playerid][pBank] >= amount;
 }
@@ -119,7 +119,7 @@ bool:Money_TakeBank(playerid, amount, const kind[], const ref[])
 {
 	if (!Money_CanBank(playerid, amount))
 	{
-		return 0;
+		return false;
 	}
 	gPlayer[playerid][pBank] -= amount;
 	Char_RefreshHud(playerid);
@@ -127,5 +127,5 @@ bool:Money_TakeBank(playerid, amount, const kind[], const ref[])
 	{
 		Money_BankLog(playerid, kind, -amount, ref);
 	}
-	return 1;
+	return true;
 }

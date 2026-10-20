@@ -34,25 +34,25 @@ bool:LD_LsnBefore(prio, const fn[], idx)
 	{
 		return prio < g_LdLsnPrio[idx];
 	}
-	return strcmp(fn, g_LdLsnName[idx], 0, 0x7FFFFFFF) < 0;
+	return bool:(strcmp(fn, g_LdLsnName[idx], false, 0x7FFFFFFF) < 0);
 }
 
 bool:LD_Listen(const fn[], prio)
 {
 	if (strlen(fn) >= 32 || funcidx(fn) == -1)
 	{
-		return 0;
+		return false;
 	}
 	for (new i = 0; i < g_LdLsnCount; i++)
 	{
-		if (!strcmp(fn, g_LdLsnName[i], 0, 0x7FFFFFFF))
+		if (!strcmp(fn, g_LdLsnName[i], false, 0x7FFFFFFF))
 		{
-			return 0;
+			return false;
 		}
 	}
 	if (g_LdLsnCount >= 8)
 	{
-		return 0;
+		return false;
 	}
 	new pos = g_LdLsnCount;
 	while (pos > 0 && LD_LsnBefore(prio, fn, pos - 1))
@@ -64,7 +64,7 @@ bool:LD_Listen(const fn[], prio)
 	g_LdLsnPrio[pos] = prio;
 	strmid(g_LdLsnName[pos], fn, 0, 32, 32);
 	g_LdLsnCount++;
-	return 1;
+	return true;
 }
 
 LD_Emit(type, districtId, charId, value, const opId[])
@@ -217,10 +217,10 @@ bool:LD_SendBlock(playerid, block)
 		}
 		default:
 		{
-			return 0;
+			return false;
 		}
 	}
-	return 1;
+	return true;
 }
 
 bool:LD_PoolHasRoom()
@@ -311,7 +311,7 @@ LD_VehCleanupOwner(playerid)
 
 Living_OnInit()
 {
-	g_LdReady = 0;
+	g_LdReady = false;
 	g_LdLsnCount = 0;
 	g_LdEmitDepth = 0;
 	g_LdPool = 0;
@@ -339,7 +339,7 @@ Living_OnExit()
 	Hub_OnExit();
 	CityOS_OnExit();
 	District_OnExit();
-	g_LdReady = 0;
+	g_LdReady = false;
 	g_LdLsnCount = 0;
 }
 

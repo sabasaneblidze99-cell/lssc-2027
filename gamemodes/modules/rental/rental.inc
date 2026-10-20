@@ -65,7 +65,7 @@ Rental_VehHealth(vehicleid)
 	}
 	new Float:hp;
 	GetVehicleHealth(vehicleid, hp);
-	return LD_Clamp(floatround(hp, 1), 0, 1000);
+	return LD_Clamp(floatround(hp, floatround_method:1), 0, 1000);
 }
 
 Rental_ResetPlayer(playerid)
@@ -103,7 +103,7 @@ Rental_VehDestroy(playerid)
 	{
 		if (IsPlayerConnected(playerid) && GetPlayerVehicleID(playerid) == veh)
 		{
-			RemovePlayerFromVehicle(playerid, 0);
+			RemovePlayerFromVehicle(playerid, false);
 		}
 		DestroyVehicle(veh);
 	}
@@ -138,11 +138,11 @@ bool:Rental_BeginOpen(playerid, vkind, blocks, rentClass, streetModel = 0)
 	new model = vkind == SRENT_VKIND ? streetModel : LD_RentalModel(vkind);
 	if (model <= 0 || gPlayer[playerid][pRentalId] != 0 || gPlayer[playerid][pRentalPendOp] != 0)
 	{
-		return 0;
+		return false;
 	}
 	if (DB_LivingBusy(playerid, 1))
 	{
-		return 0;
+		return false;
 	}
 	Rental_ResetPlayer(playerid);
 	gPlayer[playerid][pRentalClass] = rentClass;
@@ -151,7 +151,7 @@ bool:Rental_BeginOpen(playerid, vkind, blocks, rentClass, streetModel = 0)
 	g_RtBlocks[playerid] = blocks;
 	DB_LivingMakeOpId(gPlayer[playerid][pRentalOpId], 41, "ro", vkind, gPlayer[playerid][pCharId]);
 	DB_LivingRentOpen(playerid, vkind, model, blocks, gPlayer[playerid][pRentalOpId]);
-	return 1;
+	return true;
 }
 
 bool:Rental_SpawnVehicle(playerid)
@@ -170,30 +170,30 @@ bool:Rental_SpawnVehicle(playerid)
 	}
 	if (model <= 0 || !LD_PoolHasRoom())
 	{
-		return 0;
+		return false;
 	}
-	new veh = CreateVehicle(model, x, y, z, a, pro ? 6 : 1, pro ? 6 : 1, -1, 0);
+	new veh = CreateVehicle(model, x, y, z, a, pro ? 6 : 1, pro ? 6 : 1, -1, false);
 	if (veh == 65535 || veh <= 0 || veh >= 2000)
 	{
-		return 0;
+		return false;
 	}
 	if (LD_VehRegister(veh, pro ? 2 : 1, playerid) == 0)
 	{
 		DestroyVehicle(veh);
-		return 0;
+		return false;
 	}
 	SetVehicleHealth(veh, float(1000));
 	SetVehicleParamsEx(veh, 1, 0, 0, 0, 0, 0, 0);
 	gPlayer[playerid][pRentalVehicle] = veh;
 	PutPlayerInVehicle(playerid, veh, 0);
-	return 1;
+	return true;
 }
 
 bool:Rental_SendClose(playerid, mode, health, reason)
 {
 	if (gPlayer[playerid][pRentalId] == 0 || gPlayer[playerid][pRentalPendOp] != 0)
 	{
-		return 0;
+		return false;
 	}
 	Rental_VehDestroy(playerid);
 	g_RtCloseMode[playerid] = mode;
@@ -204,7 +204,7 @@ bool:Rental_SendClose(playerid, mode, health, reason)
 	gPlayer[playerid][pRentalPendOp] = 6;
 	DB_LivingMakeOpId(gPlayer[playerid][pRentalOpId], 41, "rc", gPlayer[playerid][pRentalId], gPlayer[playerid][pCharId]);
 	DB_LivingRentClose(playerid, gPlayer[playerid][pRentalId], mode, g_RtCloseHealth[playerid], gPlayer[playerid][pRentalOpId]);
-	return 1;
+	return true;
 }
 
 bool:Rental_CloseInterrupted(playerid, reason)
@@ -418,35 +418,35 @@ bool:Rental_CanStart(playerid)
 {
 	if (!Util_IsPlaying(playerid))
 	{
-		return 0;
+		return false;
 	}
 	if (gPlayer[playerid][pRentalPendOp] != 0)
 	{
 		Util_Send(playerid, -10270721, "Pratica di noleggio gia' in corso: attendi.");
-		return 0;
+		return false;
 	}
 	new block = LD_CheckStart(playerid);
 	if (block != 0)
 	{
 		LD_SendBlock(playerid, block);
-		return 0;
+		return false;
 	}
 	if (!Rental_AtOffice(playerid, 4.0))
 	{
 		Util_Send(playerid, -10270721, "Devi trovarti all'agenzia di noleggio di Pershing Square.");
-		return 0;
+		return false;
 	}
 	if (GetPlayerState(playerid) != 1)
 	{
 		Util_Send(playerid, -10270721, "Scendi dal veicolo per noleggiare.");
-		return 0;
+		return false;
 	}
 	if (gPlayer[playerid][pLevel] < 1)
 	{
 		SendClientMessage(playerid, -10270721, "Serve almeno il livello %d per noleggiare.", 1);
-		return 0;
+		return false;
 	}
-	return 1;
+	return true;
 }
 
 Rental_CmdNoleggio(playerid, const params[])
@@ -510,7 +510,7 @@ bool:Rental_CanReturn(playerid, bool:verbose)
 {
 	if (!Util_IsPlaying(playerid))
 	{
-		return 0;
+		return false;
 	}
 	if (gPlayer[playerid][pRentalId] == 0)
 	{
@@ -518,7 +518,7 @@ bool:Rental_CanReturn(playerid, bool:verbose)
 		{
 			Util_Send(playerid, -10270721, "Non hai un noleggio attivo.");
 		}
-		return 0;
+		return false;
 	}
 	if (gPlayer[playerid][pRentalClass] == 2)
 	{
@@ -526,7 +526,7 @@ bool:Rental_CanReturn(playerid, bool:verbose)
 		{
 			Util_Send(playerid, -10270721, "Il taxi si restituisce al deposito con /taxi off.");
 		}
-		return 0;
+		return false;
 	}
 	if (gPlayer[playerid][pRentalPendOp] != 0)
 	{
@@ -534,7 +534,7 @@ bool:Rental_CanReturn(playerid, bool:verbose)
 		{
 			Util_Send(playerid, -10270721, "Pratica di noleggio gia' in corso: attendi.");
 		}
-		return 0;
+		return false;
 	}
 	new veh = gPlayer[playerid][pRentalVehicle];
 	if (veh <= 0 || GetPlayerVehicleID(playerid) != veh || GetPlayerState(playerid) != 2)
@@ -543,7 +543,7 @@ bool:Rental_CanReturn(playerid, bool:verbose)
 		{
 			Util_Send(playerid, -10270721, "Devi essere al volante del mezzo noleggiato.");
 		}
-		return 0;
+		return false;
 	}
 	if (gPlayer[playerid][pRentalKind] != SRENT_VKIND && !Rental_AtOffice(playerid, 12.0))
 	{
@@ -551,15 +551,15 @@ bool:Rental_CanReturn(playerid, bool:verbose)
 		{
 			Util_Send(playerid, -10270721, "Riporta il mezzo all'agenzia di noleggio di Pershing Square.");
 		}
-		return 0;
+		return false;
 	}
-	return 1;
+	return true;
 }
 
 Rental_CmdRiconsegna(playerid, const params[])
 {
 	#pragma unused params
-	if (!Rental_CanReturn(playerid, 1))
+	if (!Rental_CanReturn(playerid, true))
 	{
 		return 1;
 	}
@@ -582,7 +582,7 @@ public UI_OnRentalReturnConfirm(playerid, rentalId)
 		UI_LivingReject(playerid, "Questo noleggio non e' piu' attivo.");
 		return 1;
 	}
-	if (!Rental_CanReturn(playerid, 1))
+	if (!Rental_CanReturn(playerid, true))
 	{
 		return 1;
 	}
@@ -609,11 +609,11 @@ bool:Rental_OpenPro(playerid, vkind)
 {
 	if (!Rental_ValidPlayer(playerid) || !Util_IsPlaying(playerid) || vkind != 4)
 	{
-		return 0;
+		return false;
 	}
 	if (!LD_PoolHasRoom())
 	{
-		return 0;
+		return false;
 	}
 	return Rental_BeginOpen(playerid, vkind, 1, 2);
 }
@@ -622,16 +622,16 @@ bool:Rental_ClosePro(playerid, reason)
 {
 	if (!Rental_ValidPlayer(playerid) || gPlayer[playerid][pRentalClass] != 2)
 	{
-		return 0;
+		return false;
 	}
 	if (gPlayer[playerid][pRentalPendOp] == 5)
 	{
 		g_RtAbortOpen[playerid] = 1;
-		return 1;
+		return true;
 	}
 	if (gPlayer[playerid][pRentalId] == 0)
 	{
-		return 0;
+		return false;
 	}
 	new veh = gPlayer[playerid][pRentalVehicle];
 	switch (reason)
@@ -754,7 +754,7 @@ Rental_OnInit()
 	{
 		KillTimer(g_RtTimer);
 	}
-	g_RtTimer = SetTimer("Rental_OnTick", 1000, 1);
+	g_RtTimer = SetTimer("Rental_OnTick", 1000, true);
 	CreatePickup(1239, 1, 1505.0, -1700.0, 13.5, 0);
 	Lang_Create3DTextLabel("Noleggio veicoli\n/noleggio  ·  /riconsegna", -2994689, 1505.0, -1700.0, (13.5 + 0.8), 20.0, 0, 0);
 }
@@ -873,7 +873,7 @@ Rental_OnPlayerStateChange(playerid, t_PLAYER_STATE:newstate, t_PLAYER_STATE:old
 	{
 		return 0;
 	}
-	RemovePlayerFromVehicle(playerid, 0);
+	RemovePlayerFromVehicle(playerid, false);
 	Util_Send(playerid, -10270721, "Solo chi ha noleggiato questo mezzo puo' guidarlo.");
 	return 0;
 }

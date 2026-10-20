@@ -73,7 +73,7 @@ bool:UI_InvParseNum(const s[], &value)
 	{
 		if (digits >= 4)
 		{
-			return 0;
+			return false;
 		}
 		value = value * 10 + (s[i] - 48);
 		digits++;
@@ -99,7 +99,7 @@ bool:UI_InvSelOk(playerid)
 	new slot = g_UiInvSel[playerid];
 	if (slot < 0 || slot >= 20 || slot >= g_UiInvMax[playerid])
 	{
-		return 0;
+		return false;
 	}
 	return g_UiInvItem[playerid][slot] == g_UiInvSelItem[playerid] && g_UiInvQty[playerid][slot] > 0;
 }
@@ -353,7 +353,7 @@ UI_InvTimerEnsure(playerid)
 {
 	if (g_UiInvTimer[playerid] == 0)
 	{
-		g_UiInvTimer[playerid] = SetTimerEx("UI_InvOnTimer", 1000, 1, "d", playerid);
+		g_UiInvTimer[playerid] = SetTimerEx("UI_InvOnTimer", 1000, true, "d", playerid);
 	}
 }
 
@@ -364,7 +364,7 @@ PlayerText:UI_InvText(playerid, Float:x, Float:y, const text[], Float:lw, Float:
 	PlayerTextDrawAlignment(playerid, td, align);
 	PlayerTextDrawColour(playerid, td, color);
 	PlayerTextDrawFont(playerid, td, 1);
-	PlayerTextDrawSetProportional(playerid, td, 1);
+	PlayerTextDrawSetProportional(playerid, td, true);
 	PlayerTextDrawSetOutline(playerid, td, 1);
 	PlayerTextDrawSetShadow(playerid, td, 0);
 	PlayerTextDrawBackgroundColour(playerid, td, 255);
@@ -376,7 +376,7 @@ PlayerText:UI_InvBox(playerid, Float:x, Float:y, Float:w, Float:h, color)
 	new PlayerText:td = Lang_CreatePlayerTextDraw(playerid, x, y, "_");
 	PlayerTextDrawLetterSize(playerid, td, 0.0, (h / 9.0));
 	PlayerTextDrawTextSize(playerid, td, (x + w), 0.0);
-	PlayerTextDrawUseBox(playerid, td, 1);
+	PlayerTextDrawUseBox(playerid, td, true);
 	PlayerTextDrawBoxColour(playerid, td, color);
 	PlayerTextDrawFont(playerid, td, 1);
 	PlayerTextDrawSetShadow(playerid, td, 0);
@@ -390,7 +390,7 @@ UI_InvRecvDestroyTds(playerid)
 	{
 		if (g_UiInvRecvTd[playerid][i] != 65535)
 		{
-			PlayerTextDrawDestroy(playerid, g_UiInvRecvTd[playerid][i]);
+			PlayerTextDrawDestroy(playerid, PlayerText:g_UiInvRecvTd[playerid][i]);
 		}
 		g_UiInvRecvTd[playerid][i] = 65535;
 	}
@@ -410,9 +410,9 @@ UI_InvRecvRefresh(playerid)
 	{
 		fraction = 1.0;
 	}
-	PlayerTextDrawTextSize(playerid, g_UiInvRecvTd[playerid][3], (0.1 + ((210.0 + 6.0) + (208.0 * fraction))), 0.0);
-	PlayerTextDrawShow(playerid, g_UiInvRecvTd[playerid][1]);
-	PlayerTextDrawShow(playerid, g_UiInvRecvTd[playerid][3]);
+	PlayerTextDrawTextSize(playerid, PlayerText:g_UiInvRecvTd[playerid][3], (0.1 + ((210.0 + 6.0) + (208.0 * fraction))), 0.0);
+	PlayerTextDrawShow(playerid, PlayerText:g_UiInvRecvTd[playerid][1]);
+	PlayerTextDrawShow(playerid, PlayerText:g_UiInvRecvTd[playerid][3]);
 }
 
 UI_InvRecvEnd(playerid)
@@ -426,16 +426,16 @@ bool:UI_InvNeedTimer(playerid)
 {
 	if (g_UiInvRecvActive[playerid])
 	{
-		return 1;
+		return true;
 	}
 	for (new i = 0; i < 3; i++)
 	{
 		if (g_UiInvToastTtl[playerid][i] > 0)
 		{
-			return 1;
+			return true;
 		}
 	}
-	return 0;
+	return false;
 }
 
 UI_InvGiveConfirmShow(playerid, const giverName[], itemId, qty, ttlSec)
@@ -456,15 +456,15 @@ UI_InvGiveConfirmShow(playerid, const giverName[], itemId, qty, ttlSec)
 	{
 		g_UiInvRecvTd[playerid][i] = 65535;
 	}
-	g_UiInvRecvTd[playerid][0] = UI_InvBox(playerid, 210.0, 124.0, 220.0, 26.0, 170);
-	g_UiInvRecvTd[playerid][1] = UI_InvText(playerid, (210.0 + 6.0), (124.0 + 2.0), "Scambio in attesa", 0.24, 1.1, -2994689, 1);
+	g_UiInvRecvTd[playerid][0] = _:UI_InvBox(playerid, 210.0, 124.0, 220.0, 26.0, 170);
+	g_UiInvRecvTd[playerid][1] = UI_InvText(playerid, (210.0 + 6.0), (124.0 + 2.0), "Scambio in attesa", 0.24, 1.1, -2994689, t_TEXT_DRAW_ALIGN:1);
 	g_UiInvRecvTd[playerid][2] = UI_InvBox(playerid, (210.0 + 6.0), (124.0 + 17.0), 208.0, 5.0, 0x444444FF);
 	g_UiInvRecvTd[playerid][3] = UI_InvBox(playerid, (210.0 + 6.0), (124.0 + 17.0), 208.0, 5.0, -2994689);
 	g_UiInvRecvActive[playerid] = 1;
 	g_UiInvRecvTotal[playerid] = ttlSec;
 	g_UiInvRecvLeft[playerid] = ttlSec;
-	PlayerTextDrawShow(playerid, g_UiInvRecvTd[playerid][0]);
-	PlayerTextDrawShow(playerid, g_UiInvRecvTd[playerid][2]);
+	PlayerTextDrawShow(playerid, PlayerText:g_UiInvRecvTd[playerid][0]);
+	PlayerTextDrawShow(playerid, PlayerText:g_UiInvRecvTd[playerid][2]);
 	UI_InvRecvRefresh(playerid);
 	UI_InvTimerEnsure(playerid);
 	new body[320], name[24], giver[25];
@@ -504,7 +504,7 @@ UI_InvToastCreate(playerid)
 	}
 	for (new i = 0; i < 3; i++)
 	{
-		g_UiInvToastTd[playerid][i] = UI_InvText(playerid, 130.0, (404.0 + (12.0 * _:(i))), "_", 0.22, 1.0, 0x66DD66FF, 1);
+		g_UiInvToastTd[playerid][i] = UI_InvText(playerid, 130.0, (404.0 + (12.0 * _:(i))), "_", 0.22, 1.0, 0x66DD66FF, t_TEXT_DRAW_ALIGN:1);
 		g_UiInvToastTtl[playerid][i] = 0;
 		g_UiInvToastItem[playerid][i] = 0;
 		g_UiInvToastDelta[playerid][i] = 0;
@@ -524,14 +524,14 @@ UI_InvToastRedraw(playerid)
 	{
 		if (g_UiInvToastTtl[playerid][i] <= 0 || !UI_InvItemOk(g_UiInvToastItem[playerid][i]))
 		{
-			PlayerTextDrawHide(playerid, g_UiInvToastTd[playerid][i]);
+			PlayerTextDrawHide(playerid, PlayerText:g_UiInvToastTd[playerid][i]);
 			continue;
 		}
 		new delta = g_UiInvToastDelta[playerid][i];
 		format(str, 48, "%s%d %s", delta > 0 ? "+" : "", delta, g_UiInvName[g_UiInvToastItem[playerid][i]]);
 		Lang_PlayerTextDrawSetString(playerid, g_UiInvToastTd[playerid][i], str);
-		PlayerTextDrawColour(playerid, g_UiInvToastTd[playerid][i], delta > 0 ? 0x66DD66FF : -10066177);
-		PlayerTextDrawShow(playerid, g_UiInvToastTd[playerid][i]);
+		PlayerTextDrawColour(playerid, PlayerText:g_UiInvToastTd[playerid][i], delta > 0 ? 0x66DD66FF : -10066177);
+		PlayerTextDrawShow(playerid, PlayerText:g_UiInvToastTd[playerid][i]);
 	}
 	return 0;
 }
@@ -613,7 +613,7 @@ bool:UI_InvOnDialogResponse(playerid, dialogid, response, listitem, const inputt
 {
 	if (!UI_InvValid(playerid) || dialogid < 9400 || dialogid > 9406)
 	{
-		return 0;
+		return false;
 	}
 	switch (dialogid)
 	{
@@ -621,17 +621,17 @@ bool:UI_InvOnDialogResponse(playerid, dialogid, response, listitem, const inputt
 		{
 			if (!response)
 			{
-				return 1;
+				return true;
 			}
 			if (listitem < 0)
 			{
-				return 1;
+				return true;
 			}
 			if (listitem < g_UiInvRowCount[playerid])
 			{
 				new slot = g_UiInvRows[playerid][listitem];
 				UI_InvItemShow(playerid, slot);
-				return 1;
+				return true;
 			}
 			if (listitem == g_UiInvNavNext[playerid])
 			{
@@ -645,7 +645,7 @@ bool:UI_InvOnDialogResponse(playerid, dialogid, response, listitem, const inputt
 			{
 				UI_InvListPage(playerid, g_UiInvPage[playerid]);
 			}
-			return 1;
+			return true;
 		}
 		case 9401:
 		{
@@ -653,12 +653,12 @@ bool:UI_InvOnDialogResponse(playerid, dialogid, response, listitem, const inputt
 			{
 				UI_InvSelReset(playerid);
 				UI_InvListPage(playerid, g_UiInvPage[playerid]);
-				return 1;
+				return true;
 			}
 			if (!UI_InvSelOk(playerid))
 			{
 				UI_InvActionShow(playerid);
-				return 1;
+				return true;
 			}
 			new slot = g_UiInvSel[playerid], itemId = g_UiInvSelItem[playerid], flags = g_UiInvFlags[itemId];
 			switch (listitem)
@@ -669,7 +669,7 @@ bool:UI_InvOnDialogResponse(playerid, dialogid, response, listitem, const inputt
 					{
 						SendClientMessage(playerid, -10066177, "Questo oggetto non si puo' usare.");
 						UI_InvActionShow(playerid);
-						return 1;
+						return true;
 					}
 					UI_InvSelReset(playerid);
 					UI_OnInvUse(playerid, slot);
@@ -680,7 +680,7 @@ bool:UI_InvOnDialogResponse(playerid, dialogid, response, listitem, const inputt
 					{
 						SendClientMessage(playerid, -10066177, listitem == 1 ? "Questo oggetto non si puo' dare." : "Questo oggetto non si puo' gettare.");
 						UI_InvActionShow(playerid);
-						return 1;
+						return true;
 					}
 					g_UiInvPendAct[playerid] = listitem;
 					g_UiInvSelQty[playerid] = 1;
@@ -706,7 +706,7 @@ bool:UI_InvOnDialogResponse(playerid, dialogid, response, listitem, const inputt
 					UI_InvActionShow(playerid);
 				}
 			}
-			return 1;
+			return true;
 		}
 		case 9402:
 		{
@@ -718,19 +718,19 @@ bool:UI_InvOnDialogResponse(playerid, dialogid, response, listitem, const inputt
 			{
 				UI_InvSelReset(playerid);
 			}
-			return 1;
+			return true;
 		}
 		case 9403:
 		{
 			if (!response)
 			{
 				UI_InvActionShow(playerid);
-				return 1;
+				return true;
 			}
 			if (!UI_InvSelOk(playerid))
 			{
 				UI_InvActionShow(playerid);
-				return 1;
+				return true;
 			}
 			new q = 0, maxQ = g_UiInvQty[playerid][g_UiInvSel[playerid]];
 			if (!UI_InvParseNum(inputtext, q) || q < 1 || q > maxQ)
@@ -738,7 +738,7 @@ bool:UI_InvOnDialogResponse(playerid, dialogid, response, listitem, const inputt
 				new err[144];
 				format(err, 144, "{FF6666}Quantita' non valida: serve un numero da 1 a %d.\n\n", maxQ);
 				UI_InvQtyShow(playerid, err);
-				return 1;
+				return true;
 			}
 			g_UiInvSelQty[playerid] = q;
 			if (g_UiInvPendAct[playerid] == 1)
@@ -749,7 +749,7 @@ bool:UI_InvOnDialogResponse(playerid, dialogid, response, listitem, const inputt
 			{
 				UI_InvDropConfirmShow(playerid);
 			}
-			return 1;
+			return true;
 		}
 		case 9404:
 		{
@@ -763,56 +763,56 @@ bool:UI_InvOnDialogResponse(playerid, dialogid, response, listitem, const inputt
 				{
 					UI_InvActionShow(playerid);
 				}
-				return 1;
+				return true;
 			}
 			if (!UI_InvSelOk(playerid) || g_UiInvSelQty[playerid] < 1 || g_UiInvSelQty[playerid] > g_UiInvQty[playerid][g_UiInvSel[playerid]])
 			{
 				UI_InvActionShow(playerid);
-				return 1;
+				return true;
 			}
 			new target = 0;
 			if (!UI_InvParseNum(inputtext, target))
 			{
 				UI_InvTargetShow(playerid, "{FF6666}Inserisci l'ID numerico del giocatore.\n\n");
-				return 1;
+				return true;
 			}
 			if (target < 0 || target >= MAX_PLAYERS || !IsPlayerConnected(target))
 			{
 				UI_InvTargetShow(playerid, "{FF6666}ID non valido o giocatore non connesso.\n\n");
-				return 1;
+				return true;
 			}
 			if (target == playerid)
 			{
 				UI_InvTargetShow(playerid, "{FF6666}Non puoi dare oggetti a te stesso.\n\n");
-				return 1;
+				return true;
 			}
 			new slot = g_UiInvSel[playerid], qty = g_UiInvSelQty[playerid];
 			UI_InvSelReset(playerid);
 			UI_OnInvGive(playerid, slot, target, qty);
-			return 1;
+			return true;
 		}
 		case 9405:
 		{
 			if (!response)
 			{
 				UI_InvActionShow(playerid);
-				return 1;
+				return true;
 			}
 			if (!UI_InvSelOk(playerid) || g_UiInvSelQty[playerid] < 1 || g_UiInvSelQty[playerid] > g_UiInvQty[playerid][g_UiInvSel[playerid]])
 			{
 				UI_InvActionShow(playerid);
-				return 1;
+				return true;
 			}
 			new slot = g_UiInvSel[playerid], qty = g_UiInvSelQty[playerid];
 			UI_InvSelReset(playerid);
 			UI_OnInvDrop(playerid, slot, qty);
-			return 1;
+			return true;
 		}
 		case 9406:
 		{
 			if (!g_UiInvRecvActive[playerid])
 			{
-				return 1;
+				return true;
 			}
 			UI_InvRecvEnd(playerid);
 			if (!UI_InvNeedTimer(playerid))
@@ -820,10 +820,10 @@ bool:UI_InvOnDialogResponse(playerid, dialogid, response, listitem, const inputt
 				UI_InvTimerStop(playerid);
 			}
 			UI_OnInvGiveReply(playerid, response ? 1 : 0);
-			return 1;
+			return true;
 		}
 	}
-	return 0;
+	return false;
 }
 
 UI_InvUiDestroy(playerid)
@@ -837,7 +837,7 @@ UI_InvUiDestroy(playerid)
 	{
 		for (new i = 0; i < 3; i++)
 		{
-			PlayerTextDrawDestroy(playerid, g_UiInvToastTd[playerid][i]);
+			PlayerTextDrawDestroy(playerid, PlayerText:g_UiInvToastTd[playerid][i]);
 			g_UiInvToastTd[playerid][i] = 65535;
 			g_UiInvToastTtl[playerid][i] = 0;
 			g_UiInvToastItem[playerid][i] = 0;

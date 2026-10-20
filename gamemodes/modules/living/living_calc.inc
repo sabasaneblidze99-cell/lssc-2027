@@ -54,7 +54,7 @@ bool:LD_ContractSlot(bucket, slot, &fromD, &toD, &cargo)
 	new off = LD_HashMod(h >>> 8, 2) + 1;
 	toD = (fromD - 1 + off) % 3 + 1;
 	cargo = LD_HashMod(h >>> 16, 3) + 1;
-	return 1;
+	return true;
 }
 
 LD_ProTier(points)
@@ -267,11 +267,11 @@ bool:LD_DonationValid(amount, donatedToday)
 {
 	if (amount < 50 || amount > 500)
 	{
-		return 0;
+		return false;
 	}
 	if (donatedToday < 0)
 	{
-		return 0;
+		return false;
 	}
 	return donatedToday + amount <= 1000;
 }
@@ -312,7 +312,7 @@ bool:LD_StrEqI(const a[], const b[])
 	{
 		if (tolower(a[i]) != tolower(b[i]))
 		{
-			return 0;
+			return false;
 		}
 		i++;
 	}

@@ -220,7 +220,7 @@ bool:UI_VehicleOnDialogResponse(playerid, dialogid, response, listitem)
 {
 	if (playerid < 0 || playerid >= MAX_PLAYERS)
 	{
-		return 0;
+		return false;
 	}
 	switch (dialogid)
 	{
@@ -228,71 +228,71 @@ bool:UI_VehicleOnDialogResponse(playerid, dialogid, response, listitem)
 		{
 			if (!response)
 			{
-				return 1;
+				return true;
 			}
 			if (listitem < 0 || listitem >= 13)
 			{
 				UI_VehicleShopShow(playerid, g_UiVehLevel[playerid], g_UiVehMoney[playerid], g_UiVehBank[playerid]);
-				return 1;
+				return true;
 			}
 			if (g_UiVehLevel[playerid] < g_UiVehMinLevel[listitem])
 			{
 				SendClientMessage(playerid, -10066177, "Questo modello richiede un livello superiore.");
 				UI_VehicleShopShow(playerid, g_UiVehLevel[playerid], g_UiVehMoney[playerid], g_UiVehBank[playerid]);
-				return 1;
+				return true;
 			}
 			g_UiVehSel[playerid] = listitem;
 			UI_VehPayShow(playerid);
-			return 1;
+			return true;
 		}
 		case 9101:
 		{
 			if (!response || listitem < 0 || listitem > 1)
 			{
 				UI_VehicleShopShow(playerid, g_UiVehLevel[playerid], g_UiVehMoney[playerid], g_UiVehBank[playerid]);
-				return 1;
+				return true;
 			}
 			new idx = g_UiVehSel[playerid];
 			new funds = listitem == 1 ? g_UiVehBank[playerid] : g_UiVehMoney[playerid];
 			if (idx < 0 || idx >= 13)
 			{
-				return 1;
+				return true;
 			}
 			if (funds < g_UiVehPrice[idx])
 			{
 				SendClientMessage(playerid, -10066177, "Fondi insufficienti con questo metodo di pagamento.");
 				UI_VehPayShow(playerid);
-				return 1;
+				return true;
 			}
 			UI_OnVehicleBuyConfirm(playerid, idx, listitem);
-			return 1;
+			return true;
 		}
 		case 9102:
 		{
 			if (!response)
 			{
-				return 1;
+				return true;
 			}
 			if (listitem < 0 || listitem >= g_UiVehCount[playerid])
 			{
 				UI_VehicleListShow(playerid);
-				return 1;
+				return true;
 			}
 			g_UiVehSel[playerid] = listitem;
 			UI_VehActionShow(playerid);
-			return 1;
+			return true;
 		}
 		case 9103:
 		{
 			if (!response)
 			{
 				UI_VehicleListShow(playerid);
-				return 1;
+				return true;
 			}
 			new i = g_UiVehSel[playerid];
 			if (i < 0 || i >= g_UiVehCount[playerid])
 			{
-				return 1;
+				return true;
 			}
 			if (listitem == 0)
 			{
@@ -306,7 +306,7 @@ bool:UI_VehicleOnDialogResponse(playerid, dialogid, response, listitem)
 			{
 				UI_VehActionShow(playerid);
 			}
-			return 1;
+			return true;
 		}
 		case 9104:
 		{
@@ -314,21 +314,21 @@ bool:UI_VehicleOnDialogResponse(playerid, dialogid, response, listitem)
 			if (!response)
 			{
 				UI_VehActionShow(playerid);
-				return 1;
+				return true;
 			}
 			if (i < 0 || i >= g_UiVehCount[playerid])
 			{
-				return 1;
+				return true;
 			}
 			UI_OnVehicleListAction(playerid, g_UiVehSlot[playerid][i], 1);
-			return 1;
+			return true;
 		}
 		case 9105:
 		{
-			return 1;
+			return true;
 		}
 	}
-	return 0;
+	return false;
 }
 new g_UiVHud[MAX_PLAYERS][6];
 new bool:g_UiVHudCreated[MAX_PLAYERS];
@@ -341,7 +341,7 @@ PlayerText:UI_VHudText(playerid, Float:x, Float:y, const text[], Float:lw, Float
 	PlayerTextDrawAlignment(playerid, td, align);
 	PlayerTextDrawColour(playerid, td, color);
 	PlayerTextDrawFont(playerid, td, 1);
-	PlayerTextDrawSetProportional(playerid, td, 1);
+	PlayerTextDrawSetProportional(playerid, td, true);
 	PlayerTextDrawSetOutline(playerid, td, 1);
 	PlayerTextDrawSetShadow(playerid, td, 0);
 	PlayerTextDrawBackgroundColour(playerid, td, 255);
@@ -353,7 +353,7 @@ PlayerText:UI_VHudBox(playerid, Float:x, Float:y, Float:w, Float:h, color)
 	new PlayerText:td = Lang_CreatePlayerTextDraw(playerid, x, y, "_");
 	PlayerTextDrawLetterSize(playerid, td, 0.0, (h / 9.0));
 	PlayerTextDrawTextSize(playerid, td, (x + w), 0.0);
-	PlayerTextDrawUseBox(playerid, td, 1);
+	PlayerTextDrawUseBox(playerid, td, true);
 	PlayerTextDrawBoxColour(playerid, td, color);
 	PlayerTextDrawFont(playerid, td, 1);
 	PlayerTextDrawSetShadow(playerid, td, 0);
@@ -368,12 +368,12 @@ UI_VHudCreate(playerid)
 		return 0;
 	}
 	new Float:left = (632.0 - 150.0);
-	g_UiVHud[playerid][0] = UI_VHudBox(playerid, left, 398.0, 150.0, 56.0, 153);
-	g_UiVHud[playerid][1] = UI_VHudText(playerid, (632.0 - 5.0), (398.0 + 2.0), "0 km/h", 0.3, 1.2, -1, 3);
-	g_UiVHud[playerid][2] = UI_VHudText(playerid, (5.0 + left), (398.0 + 22.0), "Benzina 0.0/0 L", 0.22, 1.0, -1, 1);
+	g_UiVHud[playerid][0] = _:UI_VHudBox(playerid, left, 398.0, 150.0, 56.0, 153);
+	g_UiVHud[playerid][1] = UI_VHudText(playerid, (632.0 - 5.0), (398.0 + 2.0), "0 km/h", 0.3, 1.2, -1, t_TEXT_DRAW_ALIGN:3);
+	g_UiVHud[playerid][2] = UI_VHudText(playerid, (5.0 + left), (398.0 + 22.0), "Benzina 0.0/0 L", 0.22, 1.0, -1, t_TEXT_DRAW_ALIGN:1);
 	g_UiVHud[playerid][3] = UI_VHudBox(playerid, (5.0 + left), (398.0 + 35.0), 140.0, 6.0, 0x444444FF);
 	g_UiVHud[playerid][4] = UI_VHudBox(playerid, (5.0 + left), (398.0 + 35.0), 140.0, 6.0, 0x66DD66FF);
-	g_UiVHud[playerid][5] = UI_VHudText(playerid, (5.0 + left), (398.0 + 43.0), "MOTORE SPENTO", 0.2, 0.9, -10066177, 1);
+	g_UiVHud[playerid][5] = UI_VHudText(playerid, (5.0 + left), (398.0 + 43.0), "MOTORE SPENTO", 0.2, 0.9, -10066177, t_TEXT_DRAW_ALIGN:1);
 	g_UiVHudCreated[playerid] = 1;
 	return 0;
 }
@@ -384,11 +384,11 @@ UI_VHudSetVisible(playerid, bool:visible)
 	{
 		if (visible)
 		{
-			PlayerTextDrawShow(playerid, g_UiVHud[playerid][i]);
+			PlayerTextDrawShow(playerid, PlayerText:g_UiVHud[playerid][i]);
 		}
 		else
 		{
-			PlayerTextDrawHide(playerid, g_UiVHud[playerid][i]);
+			PlayerTextDrawHide(playerid, PlayerText:g_UiVHud[playerid][i]);
 		}
 	}
 }
@@ -405,7 +405,7 @@ UI_VehicleHudShow(playerid)
 	}
 	UI_VHudCreate(playerid);
 	g_UiVHudShown[playerid] = 1;
-	UI_VHudSetVisible(playerid, 1);
+	UI_VHudSetVisible(playerid, true);
 	return 0;
 }
 
@@ -416,7 +416,7 @@ UI_VehicleHudHide(playerid)
 		return 0;
 	}
 	g_UiVHudShown[playerid] = 0;
-	UI_VHudSetVisible(playerid, 0);
+	UI_VHudSetVisible(playerid, false);
 	return 0;
 }
 
@@ -450,14 +450,14 @@ UI_VehicleHudUpdate(playerid, Float:fuel, Float:fuelMax, speedKmh, bool:engineOn
 	format(str, 48, "Benzina %.1f/%.0f L", fuel, fuelMax);
 	Lang_PlayerTextDrawSetString(playerid, g_UiVHud[playerid][2], str);
 	new bool:blinkOff = low && GetTickCount() / 500 % 2 == 1;
-	PlayerTextDrawColour(playerid, g_UiVHud[playerid][2], low ? (blinkOff ? -10066364 : -10066177) : -1);
-	PlayerTextDrawShow(playerid, g_UiVHud[playerid][2]);
-	PlayerTextDrawBoxColour(playerid, g_UiVHud[playerid][4], low ? -12303105 : 0x66DD66FF);
-	PlayerTextDrawTextSize(playerid, g_UiVHud[playerid][4], (0.1 + ((5.0 + (632.0 - 150.0)) + (140.0 * fraction))), 0.0);
-	PlayerTextDrawShow(playerid, g_UiVHud[playerid][4]);
+	PlayerTextDrawColour(playerid, PlayerText:g_UiVHud[playerid][2], low ? (blinkOff ? -10066364 : -10066177) : -1);
+	PlayerTextDrawShow(playerid, PlayerText:g_UiVHud[playerid][2]);
+	PlayerTextDrawBoxColour(playerid, PlayerText:g_UiVHud[playerid][4], low ? -12303105 : 0x66DD66FF);
+	PlayerTextDrawTextSize(playerid, PlayerText:g_UiVHud[playerid][4], (0.1 + ((5.0 + (632.0 - 150.0)) + (140.0 * fraction))), 0.0);
+	PlayerTextDrawShow(playerid, PlayerText:g_UiVHud[playerid][4]);
 	Lang_PlayerTextDrawSetString(playerid, g_UiVHud[playerid][5], engineOn ? "MOTORE ACCESO" : "MOTORE SPENTO");
-	PlayerTextDrawColour(playerid, g_UiVHud[playerid][5], engineOn ? 0x66DD66FF : -10066177);
-	PlayerTextDrawShow(playerid, g_UiVHud[playerid][5]);
+	PlayerTextDrawColour(playerid, PlayerText:g_UiVHud[playerid][5], engineOn ? 0x66DD66FF : -10066177);
+	PlayerTextDrawShow(playerid, PlayerText:g_UiVHud[playerid][5]);
 	return 0;
 }
 
@@ -471,7 +471,7 @@ UI_VehicleUiDestroy(playerid)
 	{
 		for (new i = 0; i < 6; i++)
 		{
-			PlayerTextDrawDestroy(playerid, g_UiVHud[playerid][i]);
+			PlayerTextDrawDestroy(playerid, PlayerText:g_UiVHud[playerid][i]);
 			g_UiVHud[playerid][i] = 65535;
 		}
 	}

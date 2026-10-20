@@ -23,7 +23,7 @@ bool:DB_LivingBusy(playerid, cat)
 {
 	if (playerid < 0 || playerid >= MAX_PLAYERS || cat < 0 || cat >= 6)
 	{
-		return 0;
+		return false;
 	}
 	return (g_LdPending[playerid] & 1 << cat) != 0;
 }
@@ -135,15 +135,15 @@ bool:DB_LdLive(playerid, const name[], cat, token, charId)
 {
 	if (!DB_PlayerMatches(playerid, name))
 	{
-		return 0;
+		return false;
 	}
 	if (charId <= 0 || gPlayer[playerid][pCharId] != charId)
 	{
-		return 0;
+		return false;
 	}
 	if (!(g_LdPending[playerid] & 1 << cat))
 	{
-		return 0;
+		return false;
 	}
 	new idx = DB_LdIdx(playerid, cat);
 	return g_LdReq[idx][lqToken] == token && g_LdReq[idx][lqGen] == g_BankGen[playerid];
@@ -235,19 +235,19 @@ bool:DB_LdBegin(playerid, action, bool:valid, ref, aux, const opId[], bool:needO
 {
 	if (playerid < 0 || playerid >= MAX_PLAYERS || !IsPlayerConnected(playerid))
 	{
-		return 0;
+		return false;
 	}
 	new cat = DB_LdCatOf(action);
 	if (g_LdPending[playerid] & 1 << cat)
 	{
 		DB_LdDeliver(playerid, action, 10, ref, 0, 0, 0, 0, 0);
-		return 0;
+		return false;
 	}
 	new charId = gPlayer[playerid][pCharId];
 	if (!valid || charId <= 0 || (needOp && !DB_LdOpIdOk(opId)))
 	{
 		DB_LdDeliver(playerid, action, 9, ref, 0, 0, 0, 0, 0);
-		return 0;
+		return false;
 	}
 	new idx = DB_LdIdx(playerid, cat);
 	g_LdReq[idx][lqToken] = ++g_LdTokenSeq;
@@ -261,11 +261,11 @@ bool:DB_LdBegin(playerid, action, bool:valid, ref, aux, const opId[], bool:needO
 	if (!DB_IsReady())
 	{
 		DB_LdDeliver(playerid, action, -1, ref, 0, 0, 0, 0, 0);
-		return 0;
+		return false;
 	}
 	g_LdPending[playerid] |= 1 << cat;
 	DB_BankFlush(playerid);
-	return 1;
+	return true;
 }
 
 DB_LdSend(playerid, action, const query[], other)
@@ -346,7 +346,7 @@ public DB_OnLdResult(playerid, const name[], cat, token, action, charId, aux, ot
 	}
 	if (!live)
 	{
-		DB_LdCompensate(action, charId, aux, opId, 1);
+		DB_LdCompensate(action, charId, aux, opId, true);
 		DB_LdStaleRelease(playerid, cat);
 		return 1;
 	}
@@ -493,7 +493,7 @@ public DB_OnLdUndoResult(playerid, const name[], gen, charId, const opId[])
 
 DB_LivingCtAccept(playerid, contractId, const opId[])
 {
-	if (!DB_LdBegin(playerid, 1, contractId > 0, contractId, 0, opId, 1))
+	if (!DB_LdBegin(playerid, 1, bool:(contractId > 0), contractId, 0, opId, true))
 	{
 		return 0;
 	}
@@ -505,7 +505,7 @@ DB_LivingCtAccept(playerid, contractId, const opId[])
 
 DB_LivingCtPickup(playerid, contractId, const opId[])
 {
-	if (!DB_LdBegin(playerid, 2, contractId > 0, contractId, 0, opId, 1))
+	if (!DB_LdBegin(playerid, 2, bool:(contractId > 0), contractId, 0, opId, true))
 	{
 		return 0;
 	}
@@ -517,7 +517,7 @@ DB_LivingCtPickup(playerid, contractId, const opId[])
 
 DB_LivingCtRelease(playerid, contractId, const opId[], reason)
 {
-	if (!DB_LdBegin(playerid, 3, contractId > 0 && (reason == 0 || reason == 1), contractId, 0, opId, 1))
+	if (!DB_LdBegin(playerid, 3, contractId > 0 && (reason == 0 || reason == 1), contractId, 0, opId, true))
 	{
 		return 0;
 	}
@@ -529,7 +529,7 @@ DB_LivingCtRelease(playerid, contractId, const opId[], reason)
 
 DB_LivingCtComplete(playerid, contractId, const opId[], integrityPct, seconds)
 {
-	if (!DB_LdBegin(playerid, 4, contractId > 0 && integrityPct >= 0 && integrityPct <= 100 && seconds >= 0, contractId, 0, opId, 1))
+	if (!DB_LdBegin(playerid, 4, contractId > 0 && integrityPct >= 0 && integrityPct <= 100 && seconds >= 0, contractId, 0, opId, true))
 	{
 		return 0;
 	}
@@ -579,7 +579,7 @@ DB_LivingRentOpen(playerid, vkind, model, blocks, const opId[])
 			cash = gPlayer[playerid][pMoney] > 0 ? gPlayer[playerid][pMoney] : 0;
 		}
 	}
-	if (!DB_LdBegin(playerid, 5, ok, 0, cash, opId, 1))
+	if (!DB_LdBegin(playerid, 5, ok, 0, cash, opId, true))
 	{
 		return 0;
 	}
@@ -592,7 +592,7 @@ DB_LivingRentOpen(playerid, vkind, model, blocks, const opId[])
 
 DB_LivingRentClose(playerid, rentalId, mode, health, const opId[])
 {
-	if (!DB_LdBegin(playerid, 6, rentalId > 0 && (mode == 1 || mode == 2 || mode == 3 || mode == 5), rentalId, 0, opId, 1))
+	if (!DB_LdBegin(playerid, 6, rentalId > 0 && (mode == 1 || mode == 2 || mode == 3 || mode == 5), rentalId, 0, opId, true))
 	{
 		return 0;
 	}
@@ -610,7 +610,7 @@ DB_LivingTaxiStart(playerid, kind, passengerid, fromDistrict, const opId[])
 		pchar = gPlayer[passengerid][pCharId];
 	}
 	new bool:ok = ((kind == 1 && passengerid == INVALID_PLAYER_ID) || (kind == 2 && pchar > 0 && passengerid != playerid)) && fromDistrict >= 0 && fromDistrict <= 3;
-	if (!DB_LdBegin(playerid, 7, ok, 0, 0, opId, 1))
+	if (!DB_LdBegin(playerid, 7, ok, 0, 0, opId, true))
 	{
 		return 0;
 	}
@@ -623,7 +623,7 @@ DB_LivingTaxiStart(playerid, kind, passengerid, fromDistrict, const opId[])
 DB_LivingTaxiPay(playerid, rideId, passengerid, meters, toDistrict, bool:accept, rating, const opId[])
 {
 	new bool:ok = rideId > 0 && meters >= 0 && toDistrict >= 0 && toDistrict <= 3 && rating >= 0 && rating <= 5;
-	if (!DB_LdBegin(playerid, 8, ok, rideId, 0, opId, 1))
+	if (!DB_LdBegin(playerid, 8, ok, rideId, 0, opId, true))
 	{
 		return 0;
 	}
@@ -639,7 +639,7 @@ DB_LivingTaxiPay(playerid, rideId, passengerid, meters, toDistrict, bool:accept,
 
 DB_LivingTaxiCancel(playerid, rideId, const opId[])
 {
-	if (!DB_LdBegin(playerid, 9, rideId > 0, rideId, 0, opId, 1))
+	if (!DB_LdBegin(playerid, 9, bool:(rideId > 0), rideId, 0, opId, true))
 	{
 		return 0;
 	}
@@ -651,7 +651,7 @@ DB_LivingTaxiCancel(playerid, rideId, const opId[])
 
 DB_LivingTaxiRate(passengerid, rideId, stars, const opId[])
 {
-	if (!DB_LdBegin(passengerid, 10, rideId > 0 && stars >= 1 && stars <= 5, rideId, 0, opId, 1))
+	if (!DB_LdBegin(passengerid, 10, rideId > 0 && stars >= 1 && stars <= 5, rideId, 0, opId, true))
 	{
 		return 0;
 	}
@@ -663,7 +663,7 @@ DB_LivingTaxiRate(passengerid, rideId, stars, const opId[])
 
 DB_LivingProjectContrib(playerid, projectId, amount, const opId[])
 {
-	if (!DB_LdBegin(playerid, 11, projectId > 0 && amount > 0, projectId, 0, opId, 1))
+	if (!DB_LdBegin(playerid, 11, projectId > 0 && amount > 0, projectId, 0, opId, true))
 	{
 		return 0;
 	}
@@ -675,7 +675,7 @@ DB_LivingProjectContrib(playerid, projectId, amount, const opId[])
 
 DB_LivingOnboardStep(playerid, step, const opId[])
 {
-	if (!DB_LdBegin(playerid, 12, step >= 0 && step <= 5, 0, 0, opId, 1))
+	if (!DB_LdBegin(playerid, 12, step >= 0 && step <= 5, 0, 0, opId, true))
 	{
 		return 0;
 	}
@@ -712,7 +712,7 @@ DB_LivingLoadPlayer(playerid, bool:cleanup)
 	{
 		DB_LivingMakeOpId(opId, 37, "lc", 0, gPlayer[playerid][pCharId]);
 	}
-	if (!DB_LdBegin(playerid, 13, 1, 0, 0, opId, cleanup))
+	if (!DB_LdBegin(playerid, 13, true, 0, 0, opId, cleanup))
 	{
 		return 0;
 	}
@@ -803,7 +803,7 @@ DB_LivingBoard(playerid)
 	}
 	else
 	{
-		if (!DB_LdBegin(playerid, 14, 1, 0, 0, "", 0))
+		if (!DB_LdBegin(playerid, 14, true, 0, 0, "", false))
 		{
 			return 0;
 		}
@@ -862,7 +862,7 @@ public DB_OnLdBoard(playerid, const name[], token)
 
 DB_LivingHistory(playerid, districtId)
 {
-	if (!DB_LdBegin(playerid, 15, districtId >= 1 && districtId <= 3, districtId, districtId, "", 0))
+	if (!DB_LdBegin(playerid, 15, districtId >= 1 && districtId <= 3, districtId, districtId, "", false))
 	{
 		return 0;
 	}
@@ -1227,7 +1227,7 @@ DB_LivingPushConfig()
 
 public DB_LivingQueryError(const callback[])
 {
-	if (!strcmp(callback, "DB_OnLdDistricts", 0, 0x7FFFFFFF) || !strcmp(callback, "DB_OnLdTicked", 0, 0x7FFFFFFF))
+	if (!strcmp(callback, "DB_OnLdDistricts", false, 0x7FFFFFFF) || !strcmp(callback, "DB_OnLdTicked", false, 0x7FFFFFFF))
 	{
 		if (funcidx("Living_OnDBDistricts") != -1)
 		{
@@ -1235,7 +1235,7 @@ public DB_LivingQueryError(const callback[])
 		}
 		return 1;
 	}
-	if (!strcmp(callback, "DB_OnLdBoot", 0, 0x7FFFFFFF))
+	if (!strcmp(callback, "DB_OnLdBoot", false, 0x7FFFFFFF))
 	{
 		if (funcidx("Living_OnDBBoot") != -1)
 		{
@@ -1243,19 +1243,19 @@ public DB_LivingQueryError(const callback[])
 		}
 		return 1;
 	}
-	if (!strcmp(callback, "DB_OnLdGlobal", 0, 13) || !strcmp(callback, "DB_OnLdFire", 0, 0x7FFFFFFF) || !strcmp(callback, "DB_OnLdCleanup", 0, 0x7FFFFFFF) || !strcmp(callback, "DB_OnLdUndo", 0, 11))
+	if (!strcmp(callback, "DB_OnLdGlobal", false, 13) || !strcmp(callback, "DB_OnLdFire", false, 0x7FFFFFFF) || !strcmp(callback, "DB_OnLdCleanup", false, 0x7FFFFFFF) || !strcmp(callback, "DB_OnLdUndo", false, 11))
 	{
 		Log_Write("DBLIVING", "errore query di sistema/compensazione living: verificare a mano");
 		return 1;
 	}
-	if (!strcmp(callback, "DB_OnLdBoard", 0, 0x7FFFFFFF))
+	if (!strcmp(callback, "DB_OnLdBoard", false, 0x7FFFFFFF))
 	{
 		if (funcidx("Living_OnDBBoard") != -1)
 		{
 			CallLocalFunction("Living_OnDBBoard", "ddd", 65535, -1, 0);
 		}
 	}
-	new bool:info = !strcmp(callback, "DB_OnLdPlayer", 0, 13) || !strcmp(callback, "DB_OnLdBoard", 0, 0x7FFFFFFF) || !strcmp(callback, "DB_OnLdHist", 0, 0x7FFFFFFF);
+	new bool:info = !strcmp(callback, "DB_OnLdPlayer", false, 13) || !strcmp(callback, "DB_OnLdBoard", false, 0x7FFFFFFF) || !strcmp(callback, "DB_OnLdHist", false, 0x7FFFFFFF);
 	for (new i = 0; i < MAX_PLAYERS; i++)
 	{
 		for (new cat = 0; cat < 6; cat++)

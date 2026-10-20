@@ -15,7 +15,7 @@ Log_Write(const category[], const text[])
 	}
 	format(line, 320, "[%04d-%02d-%02d %02d:%02d:%02d] [%s] %s", y, mo, d, h, mi, s, category, clean);
 	printf("%s", line);
-	new File:f = fopen("lsrp.log", 3);
+	new File:f = fopen("lsrp.log", filemode:3);
 	if (f)
 	{
 		fwrite(f, line);

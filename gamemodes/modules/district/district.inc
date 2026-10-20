@@ -29,15 +29,15 @@ District_CopyCache()
 {
 	for (new d = 1; d <= 3; d++)
 	{
-		if (!DB_LivingDistrictGet(d, 0))
+		if (!DB_LivingDistrictGet(d, E_LD_DISTRICT:0))
 		{
 			continue;
 		}
-		new act = DB_LivingDistrictGet(d, 1);
+		new act = DB_LivingDistrictGet(d, E_LD_DISTRICT:1);
 		new bool:changed = g_DistBooted && act != g_DistAct[d];
 		g_DistAct[d] = act;
-		g_DistSec[d] = DB_LivingDistrictGet(d, 2);
-		g_DistCrime[d] = DB_LivingDistrictGet(d, 3);
+		g_DistSec[d] = DB_LivingDistrictGet(d, E_LD_DISTRICT:2);
+		g_DistCrime[d] = DB_LivingDistrictGet(d, E_LD_DISTRICT:3);
 		if (changed)
 		{
 			LD_Emit(105, d, 0, act, "-");
@@ -47,33 +47,33 @@ District_CopyCache()
 
 bool:District_SeenOp(const opId[])
 {
-	if (opId[0] == 0 || !strcmp(opId, "-", 0, 0x7FFFFFFF))
+	if (opId[0] == 0 || !strcmp(opId, "-", false, 0x7FFFFFFF))
 	{
-		return 0;
+		return false;
 	}
 	for (new i = 0; i < 32; i++)
 	{
-		if (g_DistSeen[i][0] != 0 && !strcmp(g_DistSeen[i], opId, 0, 0x7FFFFFFF))
+		if (g_DistSeen[i][0] != 0 && !strcmp(g_DistSeen[i], opId, false, 0x7FFFFFFF))
 		{
-			return 1;
+			return true;
 		}
 	}
 	g_DistSeen[g_DistSeenPos][0] = 0;
 	strcat(g_DistSeen[g_DistSeenPos], opId, 41);
 	g_DistSeenPos = (g_DistSeenPos + 1) % 32;
-	return 0;
+	return false;
 }
 
 bool:District_HookAllowed(districtId, charId)
 {
 	if (charId <= 0)
 	{
-		return 1;
+		return true;
 	}
 	new p = DB_LdCharOnline(charId);
 	if (p == INVALID_PLAYER_ID)
 	{
-		return 1;
+		return true;
 	}
 	new hour = gettime() / 3600;
 	if (g_DistHookHour[p] != hour)
@@ -86,10 +86,10 @@ bool:District_HookAllowed(districtId, charId)
 	}
 	if (g_DistHookCount[p][districtId] >= 3)
 	{
-		return 0;
+		return false;
 	}
 	g_DistHookCount[p][districtId]++;
-	return 1;
+	return true;
 }
 
 District_ResetPlayer(playerid)
@@ -116,7 +116,7 @@ District_StartBoot()
 	{
 		return 0;
 	}
-	g_DistBootInFlight = 1;
+	g_DistBootInFlight = true;
 	DB_LivingPushConfig();
 	DB_LivingBoot();
 	return 0;
@@ -124,9 +124,9 @@ District_StartBoot()
 
 District_OnInit()
 {
-	g_DistBooted = 0;
-	g_DistBootInFlight = 0;
-	g_DistCycle = 0;
+	g_DistBooted = false;
+	g_DistBootInFlight = false;
+	g_DistCycle = false;
 	g_DistQHead = 0;
 	g_DistQCount = 0;
 	g_DistSeenPos = 0;
@@ -148,7 +148,7 @@ District_OnInit()
 	{
 		KillTimer(g_DistTimer);
 	}
-	g_DistTimer = SetTimer("District_OnTick", 30000, 1);
+	g_DistTimer = SetTimer("District_OnTick", 30000, true);
 	District_StartBoot();
 }
 
@@ -159,8 +159,8 @@ District_OnExit()
 		KillTimer(g_DistTimer);
 	}
 	g_DistTimer = 0;
-	g_DistBooted = 0;
-	g_DistBootInFlight = 0;
+	g_DistBooted = false;
+	g_DistBootInFlight = false;
 	g_DistQCount = 0;
 }
 
@@ -173,7 +173,7 @@ District_OnCharReady(playerid)
 {
 	g_DistLoadTry[playerid] = 0;
 	g_DistQuietLoad[playerid] = 0;
-	DB_LivingLoadPlayer(playerid, 1);
+	DB_LivingLoadPlayer(playerid, true);
 }
 
 District_OnPlayerDisconnect(playerid, reason)
@@ -189,7 +189,7 @@ District_ReloadPlayer(playerid)
 		return 0;
 	}
 	g_DistQuietLoad[playerid] = 1;
-	DB_LivingLoadPlayer(playerid, 0);
+	DB_LivingLoadPlayer(playerid, false);
 	return 0;
 }
 
@@ -200,7 +200,7 @@ public District_OnTick()
 		District_StartBoot();
 		return 1;
 	}
-	g_DistCycle = 1;
+	g_DistCycle = true;
 	DB_LivingTick();
 	return 1;
 }
@@ -209,7 +209,7 @@ public Living_OnDBBoot(result)
 {
 	if (result != 1)
 	{
-		g_DistBootInFlight = 0;
+		g_DistBootInFlight = false;
 		Log_Write("DISTRICT", "boot living fallito (DB): nuovo tentativo al prossimo tick");
 	}
 	return 1;
@@ -221,10 +221,10 @@ public Living_OnDBDistricts(result, count)
 	{
 		if (!g_DistBooted && g_DistBootInFlight)
 		{
-			g_DistBootInFlight = 0;
+			g_DistBootInFlight = false;
 			Log_Write("DISTRICT", "lettura quartieri fallita durante il boot: nuovo tentativo al prossimo tick");
 		}
-		g_DistCycle = 0;
+		g_DistCycle = false;
 		return 1;
 	}
 	District_CopyCache();
@@ -234,17 +234,17 @@ public Living_OnDBDistricts(result, count)
 		{
 			return 1;
 		}
-		g_DistBooted = 1;
-		g_DistBootInFlight = 0;
-		g_DistCycle = 1;
+		g_DistBooted = true;
+		g_DistBootInFlight = false;
+		g_DistCycle = true;
 		new msg[160];
 		format(msg, 160, "boot living completato: %d quartieri, %d contratti per bucket", count, DB_LivingBucketSlots());
 		Log_Write("DISTRICT", msg);
-		LD_SetReady(1);
+		LD_SetReady(true);
 	}
 	if (g_DistCycle)
 	{
-		g_DistCycle = 0;
+		g_DistCycle = false;
 		if (funcidx("Director_OnCycle") != -1)
 		{
 			CallLocalFunction("Director_OnCycle", "");
@@ -310,7 +310,7 @@ District_Emit(type, districtId, charId, value, const opId[])
 			return 0;
 		}
 		new op[41];
-		if (opId[0] == 0 || !strcmp(opId, "-", 0, 0x7FFFFFFF))
+		if (opId[0] == 0 || !strcmp(opId, "-", false, 0x7FFFFFFF))
 		{
 			DB_LivingMakeOpId(op, 41, "le", districtId, charId > 0 ? charId : 0);
 		}
@@ -402,7 +402,7 @@ public Living_OnDBPlayer(playerid, result, refund)
 		return 1;
 	}
 	g_DistLoadTry[playerid]++;
-	SetTimerEx("District_OnLoadRetry", 3000, 0, "dd", playerid, gPlayer[playerid][pCharId]);
+	SetTimerEx("District_OnLoadRetry", 3000, false, "dd", playerid, gPlayer[playerid][pCharId]);
 	return 1;
 }
 
@@ -419,13 +419,13 @@ public District_OnLoadRetry(playerid, charId)
 bool:District_ParseOpt(const tok[], &value)
 {
 	value = -1;
-	if (tok[0] == 0 || !strcmp(tok, "-", 0, 0x7FFFFFFF))
+	if (tok[0] == 0 || !strcmp(tok, "-", false, 0x7FFFFFFF))
 	{
-		return 1;
+		return true;
 	}
 	if (!Util_ParseInt(tok, value))
 	{
-		return 0;
+		return false;
 	}
 	return value >= -1;
 }
@@ -434,12 +434,12 @@ bool:District_CmdLdset(playerid, const params[])
 {
 	if (Util_GetAdmin(playerid) < 3)
 	{
-		return 0;
+		return false;
 	}
 	if (!g_DistBooted)
 	{
 		LD_SendBlock(playerid, 1);
-		return 1;
+		return true;
 	}
 	new pos = 0, tName[16], tAct[16], tSec[16], tCrime[16];
 	Util_NextToken(params, pos, tName, 16);
@@ -450,16 +450,16 @@ bool:District_CmdLdset(playerid, const params[])
 	if (d == 0 || tAct[0] == 0 || !District_ParseOpt(tAct, act) || !District_ParseOpt(tSec, sec) || !District_ParseOpt(tCrime, crime))
 	{
 		Util_Send(playerid, 0x99CCFFFF, "Uso: /ldset <idlewood|ganton|jefferson> <attivita' 0-1000> [sicurezza 0-100] [pressione 0-100]  (- = invariato)");
-		return 1;
+		return true;
 	}
 	if (act > 1000 || sec > 100 || crime > 100)
 	{
 		Util_Send(playerid, -10270721, "Valori fuori range: attivita' 0-1000, sicurezza e pressione 0-100.");
-		return 1;
+		return true;
 	}
 	DB_LivingMakeOpId(g_DistAdminOp[playerid], 41, "la", d, gPlayer[playerid][pCharId]);
 	DB_LivingAdminSet(playerid, g_DistAdminOp[playerid], d, act, sec, crime);
-	return 1;
+	return true;
 }
 
 public Living_OnDBAdminSet(playerid, result, districtId, activity, security, crime)
@@ -484,7 +484,7 @@ public Living_OnDBAdminSet(playerid, result, districtId, activity, security, cri
 	{
 		LD_Emit(9, districtId, gPlayer[playerid][pCharId], activity, g_DistAdminOp[playerid]);
 	}
-	g_DistCycle = 1;
+	g_DistCycle = true;
 	DB_LivingLoadDistricts();
 	return 1;
 }

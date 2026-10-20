@@ -46,7 +46,7 @@ Intro_Schedule(playerid, ev, ms)
 			ms = remaining;
 		}
 	}
-	gPlayer[playerid][pIntroTimer] = SetTimerEx("Intro_OnTimer", ms, 0, "dddd", playerid, ev, gPlayer[playerid][pIntroScene], gPlayer[playerid][pIntroSeq]);
+	gPlayer[playerid][pIntroTimer] = SetTimerEx("Intro_OnTimer", ms, false, "dddd", playerid, ev, gPlayer[playerid][pIntroScene], gPlayer[playerid][pIntroSeq]);
 }
 
 Intro_SceneMs(scene, flags)
@@ -105,11 +105,11 @@ Intro_NextScene(scene, flags)
 
 Intro_Camera(playerid, scene, flags)
 {
-	new row = scene, bool:hold = 0;
+	new row = scene, bool:hold = false;
 	if (scene == 5)
 	{
 		row = (flags & 3) != 0 ? 3 : 4;
-		hold = 1;
+		hold = true;
 	}
 	if (row < 1 || row > 4)
 	{
@@ -159,24 +159,24 @@ Intro_DestroyObjects(playerid)
 bool:Intro_CreateObjects(playerid)
 {
 	new world = playerid + 20000;
-	new veh = CreateVehicle(437, 1758.0, -1888.0, 13.8, 0.0, 1, 1, -1, 0);
+	new veh = CreateVehicle(437, 1758.0, -1888.0, 13.8, 0.0, 1, 1, -1, false);
 	if (veh == 65535)
 	{
-		return 0;
+		return false;
 	}
 	SetVehicleVirtualWorld(veh, world);
 	new actor = CreateActor(gPlayer[playerid][pSkin], 1753.5, -1884.5, 13.55, 180.0);
 	if (actor == 65535)
 	{
 		DestroyVehicle(veh);
-		return 0;
+		return false;
 	}
 	SetActorVirtualWorld(actor, world);
 	SetActorFacingAngle(actor, 180.0);
-	ApplyActorAnimation(actor, "PED", "IDLE_stance", 4.1, 1, 0, 0, 0, 0);
+	ApplyActorAnimation(actor, "PED", "IDLE_stance", 4.1, true, false, false, false, 0);
 	gPlayer[playerid][pIntroVehicle] = veh;
 	gPlayer[playerid][pIntroActor] = actor + 1;
-	return 1;
+	return true;
 }
 
 Intro_AudioStart(playerid)
@@ -184,7 +184,7 @@ Intro_AudioStart(playerid)
 	new url[1];
 	if (url[0] != 0)
 	{
-		PlayAudioStreamForPlayer(playerid, url, 0.0, 0.0, 0.0, 50.0, 0);
+		PlayAudioStreamForPlayer(playerid, url, 0.0, 0.0, 0.0, 50.0, false);
 	}
 }
 
@@ -205,11 +205,11 @@ Intro_BeginScene(playerid, scene)
 	if (scene == 5)
 	{
 		UI_IntroSubtitle(playerid, "");
-		UI_IntroTitle(playerid, 1);
+		UI_IntroTitle(playerid, true);
 	}
 	else
 	{
-		UI_IntroTitle(playerid, 0);
+		UI_IntroTitle(playerid, false);
 		UI_IntroNarrate(playerid, scene);
 	}
 	UI_IntroFadeTo(playerid, 0, 8, 60);
@@ -273,10 +273,10 @@ public Intro_Finish(playerid, reason)
 	Intro_StopTimer(playerid);
 	Intro_DestroyObjects(playerid);
 	Intro_AudioStop(playerid);
-	UI_IntroTitle(playerid, 0);
+	UI_IntroTitle(playerid, false);
 	UI_IntroSubtitle(playerid, "");
 	UI_IntroSkipHintHide(playerid);
-	UI_IntroLetterbox(playerid, 0);
+	UI_IntroLetterbox(playerid, false);
 	UI_IntroFade(playerid, 255);
 	gPlayer[playerid][pIntroScene] = 0;
 	gPlayer[playerid][pIntroFlags] |= 8;
@@ -530,7 +530,7 @@ public UI_OnStoryChosen(playerid, origin, reason)
 		}
 		gPlayer[playerid][pStoryDraftOrigin] = origin;
 		gPlayer[playerid][pStoryDraftMotive] = reason;
-		Intro_SaveStory(playerid, 0);
+		Intro_SaveStory(playerid, false);
 	}
 	return 1;
 }
@@ -547,7 +547,7 @@ public Intro_OnCharCreated(playerid, charId)
 		gPlayer[playerid][pStoryMotive] = gPlayer[playerid][pStoryDraftMotive];
 		if (charId > 0)
 		{
-			Intro_SaveStory(playerid, 1);
+			Intro_SaveStory(playerid, true);
 		}
 	}
 	return Intro_Begin(playerid);
@@ -632,7 +632,7 @@ Intro_CmdStoria(playerid, const params[])
 		UI_StoryShowOwn(playerid, name, gPlayer[playerid][pStoryOrigin], gPlayer[playerid][pStoryMotive]);
 		return 0;
 	}
-	if (!strcmp(tok, "imposta", 1, 0x7FFFFFFF))
+	if (!strcmp(tok, "imposta", true, 0x7FFFFFFF))
 	{
 		if (gPlayer[playerid][pStoryOrigin] != 0 || gPlayer[playerid][pStoryMotive] != 0)
 		{

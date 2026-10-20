@@ -9,11 +9,11 @@ bool:Util_IsPlaying(playerid)
 {
 	if (playerid < 0 || playerid >= MAX_PLAYERS)
 	{
-		return 0;
+		return false;
 	}
 	if (!IsPlayerConnected(playerid) || IsPlayerNPC(playerid))
 	{
-		return 0;
+		return false;
 	}
 	return gPlayer[playerid][pLoggedIn] && gPlayer[playerid][pSpawned];
 }
@@ -54,13 +54,13 @@ bool:Util_IsColorCodeAt(const str[], pos)
 {
 	if (str[pos] != 123)
 	{
-		return 0;
+		return false;
 	}
 	for (new i = 1; i <= 6; i++)
 	{
 		if (!Util_IsHexChar(str[pos + i]))
 		{
-			return 0;
+			return false;
 		}
 	}
 	return str[pos + 7] == 125;
@@ -106,39 +106,39 @@ bool:Util_SanitizeText(const src[], dest[], maxLen)
 
 bool:Util_ParseInt(const str[], &value)
 {
-	new i = 0, digits = 0, bool:neg = 0;
+	new i = 0, digits = false, bool:neg = false;
 	value = 0;
 	if (str[0] == 45)
 	{
-		neg = 1;
+		neg = true;
 		i++;
 	}
 	for (;str[i] != 0; i++)
 	{
 		if (str[i] < 48 || str[i] > 57)
 		{
-			return 0;
+			return false;
 		}
 		new d = str[i] - 48;
 		if (value > (0x7FFFFFFF - d) / 10)
 		{
-			return 0;
+			return false;
 		}
 		value = value * 10 + d;
 		if (++digits > 10)
 		{
-			return 0;
+			return false;
 		}
 	}
 	if (digits == 0)
 	{
-		return 0;
+		return false;
 	}
 	if (neg)
 	{
 		value = -value;
 	}
-	return 1;
+	return true;
 }
 
 Util_NextToken(const src[], &pos, dest[], size)
@@ -164,7 +164,7 @@ bool:Util_ParsePlayerId(const token[], &id)
 {
 	if (!Util_ParseInt(token, id))
 	{
-		return 0;
+		return false;
 	}
 	return id >= 0 && id < 1000;
 }
@@ -190,19 +190,19 @@ bool:Util_IsValidRPName(const name[])
 		{
 			if (us != -1)
 			{
-				return 0;
+				return false;
 			}
 			us = i;
 			continue;
 		}
 		if (c < 65 || (c > 90 && c < 97) || c > 122)
 		{
-			return 0;
+			return false;
 		}
 	}
 	if (us < 2 || len - us - 1 < 2)
 	{
-		return 0;
+		return false;
 	}
 	return name[0] >= 65 && name[0] <= 90 && name[us + 1] >= 65 && name[us + 1] <= 90;
 }
@@ -275,11 +275,11 @@ bool:Util_InRange(playerid, targetid, Float:radius)
 {
 	if (GetPlayerInterior(playerid) != GetPlayerInterior(targetid))
 	{
-		return 0;
+		return false;
 	}
 	if (GetPlayerVirtualWorld(playerid) != GetPlayerVirtualWorld(targetid))
 	{
-		return 0;
+		return false;
 	}
 	new Float:x, Float:y, Float:z;
 	GetPlayerPos(targetid, x, y, z);

@@ -52,15 +52,15 @@ bool:DB_BankLive(playerid, const name[], charId, token, op)
 {
 	if (!DB_PlayerMatches(playerid, name))
 	{
-		return 0;
+		return false;
 	}
 	if (charId <= 0 || gPlayer[playerid][pCharId] != charId)
 	{
-		return 0;
+		return false;
 	}
 	if (!(g_DBPending[playerid] & 0x08000000))
 	{
-		return 0;
+		return false;
 	}
 	return g_BankReq[playerid][bqToken] == token && g_BankReq[playerid][bqOp] == op && g_BankReq[playerid][bqGen] == g_BankGen[playerid];
 }
@@ -69,15 +69,15 @@ bool:DB_BankInfoLive(playerid, const name[], charId, token, infoOp)
 {
 	if (!DB_PlayerMatches(playerid, name))
 	{
-		return 0;
+		return false;
 	}
 	if (charId <= 0 || gPlayer[playerid][pCharId] != charId)
 	{
-		return 0;
+		return false;
 	}
 	if (!(g_DBPending[playerid] & 0x10000000))
 	{
-		return 0;
+		return false;
 	}
 	return g_BankInfo[playerid][biToken] == token && g_BankInfo[playerid][biInfoOp] == infoOp;
 }
@@ -149,17 +149,17 @@ bool:DB_BankBegin(playerid, op, bool:valid, charId, amount, const opId[])
 {
 	if (playerid < 0 || playerid >= MAX_PLAYERS || !IsPlayerConnected(playerid))
 	{
-		return 0;
+		return false;
 	}
 	if (g_DBPending[playerid] & 0x08000000)
 	{
 		DB_BankDeliver(playerid, op, 7, amount, 0, 0, 65535);
-		return 0;
+		return false;
 	}
 	if (!valid || charId <= 0 || gPlayer[playerid][pCharId] != charId || !DB_BankOpIdOk(opId))
 	{
 		DB_BankDeliver(playerid, op, 0, amount, 0, 0, 65535);
-		return 0;
+		return false;
 	}
 	g_BankReq[playerid][bqToken] = ++g_BankTokenSeq;
 	g_BankReq[playerid][bqOp] = op;
@@ -171,10 +171,10 @@ bool:DB_BankBegin(playerid, op, bool:valid, charId, amount, const opId[])
 	if (!DB_IsReady())
 	{
 		DB_BankDeliver(playerid, op, -1, amount, 0, 0, 65535);
-		return 0;
+		return false;
 	}
 	DB_PendingSet(playerid, 0x08000000);
-	return 1;
+	return true;
 }
 
 DB_BankCompensate(const opId[], op)
@@ -226,28 +226,28 @@ bool:DB_BankInfoBegin(playerid, infoOp, charId, page)
 {
 	if (playerid < 0 || playerid >= MAX_PLAYERS || !IsPlayerConnected(playerid))
 	{
-		return 0;
+		return false;
 	}
 	if (g_DBPending[playerid] & 0x10000000)
 	{
-		DB_BankInfoDeliver(playerid, infoOp, 7, page, 0, 0, 0, -1, 0);
-		return 0;
+		DB_BankInfoDeliver(playerid, infoOp, 7, page, 0, 0, 0, -1, false);
+		return false;
 	}
 	if (charId <= 0 || gPlayer[playerid][pCharId] != charId)
 	{
-		DB_BankInfoDeliver(playerid, infoOp, 0, page, 0, 0, 0, -1, 0);
-		return 0;
+		DB_BankInfoDeliver(playerid, infoOp, 0, page, 0, 0, 0, -1, false);
+		return false;
 	}
 	g_BankInfo[playerid][biToken] = ++g_BankTokenSeq;
 	g_BankInfo[playerid][biInfoOp] = infoOp;
 	g_BankInfo[playerid][biPage] = page;
 	if (!DB_IsReady())
 	{
-		DB_BankInfoDeliver(playerid, infoOp, -1, page, 0, 0, 0, -1, 0);
-		return 0;
+		DB_BankInfoDeliver(playerid, infoOp, -1, page, 0, 0, 0, -1, false);
+		return false;
 	}
 	DB_PendingSet(playerid, 0x10000000);
-	return 1;
+	return true;
 }
 
 DB_BankLimits(playerid, charId)
@@ -281,7 +281,7 @@ public DB_OnBankLimits(playerid, const name[], charId, token)
 		cache_get_value_name_int(0, "xi", xi);
 		cache_get_value_name_int(0, "since", since);
 	}
-	DB_BankInfoDeliver(playerid, 1, result, 0, wd, xo, xi, since, 0);
+	DB_BankInfoDeliver(playerid, 1, result, 0, wd, xo, xi, since, false);
 	return 1;
 }
 
@@ -291,7 +291,7 @@ DB_BankStatement(playerid, charId, page)
 	{
 		if (playerid >= 0 && playerid < MAX_PLAYERS && IsPlayerConnected(playerid))
 		{
-			DB_BankInfoDeliver(playerid, 2, 0, page, 0, 0, 0, 0, 0);
+			DB_BankInfoDeliver(playerid, 2, 0, page, 0, 0, 0, 0, false);
 		}
 		return 0;
 	}
@@ -363,7 +363,7 @@ public DB_OnBankSynced(playerid, const name[], charId, token)
 		cache_get_value_name_int(0, "bank", bank);
 		DB_BankMirror(playerid, bank - g_BankDb[playerid]);
 	}
-	DB_BankInfoDeliver(playerid, 3, result, 0, bank, 0, 0, 0, 0);
+	DB_BankInfoDeliver(playerid, 3, result, 0, bank, 0, 0, 0, false);
 	return 1;
 }
 
@@ -549,7 +549,7 @@ public DB_OnBankUndoResult(const opId[], notify)
 	cache_get_row_count(rows);
 	if (rows > 0)
 	{
-		new bool:isNull = 1;
+		new bool:isNull = true;
 		result = -1;
 		cache_is_value_name_null(0, "undo_result", isNull);
 		if (!isNull)
@@ -569,7 +569,7 @@ public DB_OnBankUndoResult(const opId[], notify)
 		{
 			for (new i = 0; i < MAX_PLAYERS; i++)
 			{
-				if (!IsPlayerConnected(i) || !g_BankReq[i][bqXferPending] || strcmp(g_BankReq[i][bqOpId], opId, 0, 0x7FFFFFFF) != 0)
+				if (!IsPlayerConnected(i) || !g_BankReq[i][bqXferPending] || strcmp(g_BankReq[i][bqOpId], opId, false, 0x7FFFFFFF) != 0)
 				{
 					continue;
 				}
@@ -577,7 +577,7 @@ public DB_OnBankUndoResult(const opId[], notify)
 				{
 					break;
 				}
-				DB_BankMirror(i, !strcmp(kind, "deposit", 0, 0x7FFFFFFF) ? -amount : amount);
+				DB_BankMirror(i, !strcmp(kind, "deposit", false, 0x7FFFFFFF) ? -amount : amount);
 				g_BankReq[i][bqXferPending] = 0;
 				owner = i;
 				break;
@@ -598,7 +598,7 @@ public DB_OnBankUndoResult(const opId[], notify)
 
 bool:DB_BankSystemKindOk(const kind[])
 {
-	return !strcmp(kind, "paycheck", 0, 0x7FFFFFFF) || !strcmp(kind, "job", 0, 0x7FFFFFFF) || !strcmp(kind, "faction", 0, 0x7FFFFFFF) || !strcmp(kind, "bill", 0, 0x7FFFFFFF) || !strcmp(kind, "house", 0, 0x7FFFFFFF) || !strcmp(kind, "vehicle", 0, 0x7FFFFFFF) || !strcmp(kind, "fine", 0, 0x7FFFFFFF) || !strcmp(kind, "refund", 0, 0x7FFFFFFF) || !strcmp(kind, "admin", 0, 0x7FFFFFFF);
+	return !strcmp(kind, "paycheck", false, 0x7FFFFFFF) || !strcmp(kind, "job", false, 0x7FFFFFFF) || !strcmp(kind, "faction", false, 0x7FFFFFFF) || !strcmp(kind, "bill", false, 0x7FFFFFFF) || !strcmp(kind, "house", false, 0x7FFFFFFF) || !strcmp(kind, "vehicle", false, 0x7FFFFFFF) || !strcmp(kind, "fine", false, 0x7FFFFFFF) || !strcmp(kind, "refund", false, 0x7FFFFFFF) || !strcmp(kind, "admin", false, 0x7FFFFFFF);
 }
 
 DB_BankLog(const opId[], charId, otherCharId, const kind[], delta, balAfter, channel, const ref[])
@@ -626,7 +626,7 @@ public DB_BankFailure(playerid, op)
 	DB_PendingClear(playerid, op);
 	if (op == 0x10000000)
 	{
-		DB_BankInfoDeliver(playerid, g_BankInfo[playerid][biInfoOp], -1, g_BankInfo[playerid][biPage], 0, 0, 0, -1, 0);
+		DB_BankInfoDeliver(playerid, g_BankInfo[playerid][biInfoOp], -1, g_BankInfo[playerid][biPage], 0, 0, 0, -1, false);
 		return 1;
 	}
 	new reqOp = g_BankReq[playerid][bqOp];
@@ -644,11 +644,11 @@ public DB_BankFailure(playerid, op)
 
 public DB_BankQueryError(const callback[])
 {
-	if (!strcmp(callback, "DB_OnBankLimits", 0, 0x7FFFFFFF) || !strcmp(callback, "DB_OnBankStatement", 0, 0x7FFFFFFF) || !strcmp(callback, "DB_OnBankSynced", 0, 0x7FFFFFFF))
+	if (!strcmp(callback, "DB_OnBankLimits", false, 0x7FFFFFFF) || !strcmp(callback, "DB_OnBankStatement", false, 0x7FFFFFFF) || !strcmp(callback, "DB_OnBankSynced", false, 0x7FFFFFFF))
 	{
 		DB_FailAllPending(0x10000000);
 	}
-	else if (!strcmp(callback, "DB_OnBankUndo", 0, 13))
+	else if (!strcmp(callback, "DB_OnBankUndo", false, 13))
 	{
 		Log_Write("DBBANK", "errore query in annullamento banca: verificare a mano");
 		if (g_BankUndoNotify > 0)

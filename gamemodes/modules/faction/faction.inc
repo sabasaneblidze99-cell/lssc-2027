@@ -234,11 +234,11 @@ bool:Fac_CmdBlocked(playerid)
 	if (left > 0)
 	{
 		SendClientMessage(playerid, -10270721, "Attendi %d secondi prima di un altro comando di fazione.", Fac_SecCeil(left));
-		return 1;
+		return true;
 	}
 	g_FcCmdSet[playerid] = 1;
 	g_FcCmdLast[playerid] = GetTickCount();
-	return 0;
+	return false;
 }
 
 bool:Fac_NeedMember(playerid, faction)
@@ -247,9 +247,9 @@ bool:Fac_NeedMember(playerid, faction)
 	if (f < 1 || f > 2 || gPlayer[playerid][pFactionRank] < 1 || (faction != 0 && f != faction))
 	{
 		Util_Send(playerid, -10270721, "Non sei autorizzato a usare questo comando.");
-		return 0;
+		return false;
 	}
-	return 1;
+	return true;
 }
 
 bool:Fac_NeedActive(playerid)
@@ -257,9 +257,9 @@ bool:Fac_NeedActive(playerid)
 	if (gPlayer[playerid][pWounded] || gPlayer[playerid][pCuffed])
 	{
 		Util_Send(playerid, -10270721, "Non puoi farlo nelle tue condizioni.");
-		return 0;
+		return false;
 	}
-	return 1;
+	return true;
 }
 
 bool:Fac_NeedDuty(playerid)
@@ -267,9 +267,9 @@ bool:Fac_NeedDuty(playerid)
 	if (!gPlayer[playerid][pOnDuty])
 	{
 		Util_Send(playerid, -10270721, "Devi essere in servizio (/duty vicino alla sede).");
-		return 0;
+		return false;
 	}
-	return 1;
+	return true;
 }
 
 bool:Fac_ParseTarget(playerid, const token[], &targetid)
@@ -277,9 +277,9 @@ bool:Fac_ParseTarget(playerid, const token[], &targetid)
 	if (!Util_ParsePlayerId(token, targetid) || !Util_IsPlaying(targetid))
 	{
 		Util_Send(playerid, -10270721, "Giocatore non valido.");
-		return 0;
+		return false;
 	}
-	return 1;
+	return true;
 }
 
 Fac_Emote(playerid, const text[])
@@ -371,7 +371,7 @@ Fac_GiveKit(playerid)
 		SetPlayerArmour(playerid, 50.0);
 		return 0;
 	}
-	if (!g_FcKitSet[playerid] || Fac_CdLeftMs(1, g_FcKitRefillLast[playerid], 900000) == 0)
+	if (!g_FcKitSet[playerid] || Fac_CdLeftMs(true, g_FcKitRefillLast[playerid], 900000) == 0)
 	{
 		g_FcKitSet[playerid] = 1;
 		g_FcKit[playerid] = 8;
@@ -467,7 +467,7 @@ Faction_CmdDuty(playerid)
 	g_FcDutyLast[playerid] = GetTickCount();
 	if (gPlayer[playerid][pOnDuty])
 	{
-		Faction_ForceOff(playerid, 1);
+		Faction_ForceOff(playerid, true);
 		Util_Send(playerid, 0x66DD66FF, "Sei fuori servizio.");
 		Fac_Emote(playerid, "si toglie la divisa ed esce dal servizio");
 	}
@@ -634,12 +634,12 @@ Faction_CmdRadio(playerid, const params[], bool:interdept)
 	if (interdept)
 	{
 		format(msg, 256, "[DIP] %s %s %s: %s", g_FacShort[f], rn, name, text);
-		Fac_Radio(f, 1, -4698625, msg);
+		Fac_Radio(f, true, -4698625, msg);
 	}
 	else
 	{
 		format(msg, 256, "[RADIO] %s %s: %s", rn, name, text);
-		Fac_Radio(f, 0, 0x8D8DFFFF, msg);
+		Fac_Radio(f, false, 0x8D8DFFFF, msg);
 	}
 	return 0;
 }
@@ -719,7 +719,7 @@ Faction_CmdMulta(playerid, const params[])
 	}
 	g_FcFineBusy[playerid] = 1;
 	g_FcFineTarget[playerid] = gPlayer[target][pCharId];
-	g_FcFinePend[target] = 1;
+	g_FcFinePend[target] = true;
 	strmid(g_FcFineReason[playerid], reason, 0, strlen(reason), 65);
 	DB_AddFine(playerid, gPlayer[playerid][pCharId], gPlayer[target][pCharId], 1, amount, reason);
 	return 0;
@@ -747,14 +747,14 @@ Fac_Debit(playerid, amount)
 public Fine_OnDBAdded(playerid, targetChar, fineId, amount)
 {
 	new target = Fac_FindByChar(targetChar), issuer = Fac_ValidPlayer(playerid) ? playerid : 65535;
-	new reason[65], bool:hasReason = 0;
+	new reason[65], bool:hasReason = false;
 	if (issuer != INVALID_PLAYER_ID)
 	{
 		if (g_FcFineBusy[issuer] && g_FcFineTarget[issuer] == targetChar)
 		{
-			g_FcFineBusy[issuer] = 0;
+			g_FcFineBusy[issuer] = false;
 			strmid(reason, g_FcFineReason[issuer], 0, strlen(g_FcFineReason[issuer]), 65);
-			hasReason = 1;
+			hasReason = true;
 		}
 		else
 		{
@@ -763,7 +763,7 @@ public Fine_OnDBAdded(playerid, targetChar, fineId, amount)
 	}
 	if (target != INVALID_PLAYER_ID)
 	{
-		g_FcFinePend[target] = 0;
+		g_FcFinePend[target] = false;
 	}
 	new an[25], msg[128];
 	if (issuer != INVALID_PLAYER_ID)
@@ -798,7 +798,7 @@ public Fine_OnDBAdded(playerid, targetChar, fineId, amount)
 		format(msg, 128, "multa %d: addebitati $%d su $%d (fondi cambiati durante la registrazione)", fineId, taken, amount);
 		Log_Write("FINE", msg);
 	}
-	g_FcFineTgtSet[target] = 1;
+	g_FcFineTgtSet[target] = true;
 	g_FcFineTgtLast[target] = GetTickCount();
 	Char_Save(target);
 	SendClientMessage(target, -10270721, "Hai ricevuto una multa di $%d da %s%s%s.", taken, an, hasReason ? ": " : "", reason);
@@ -924,7 +924,7 @@ Faction_CmdCura(playerid, const params[])
 	SetPlayerHealth(target, hp);
 	g_FcHealSet[playerid] = 1;
 	g_FcHealLast[playerid] = GetTickCount();
-	g_FcHealTgtSet[target] = 1;
+	g_FcHealTgtSet[target] = true;
 	g_FcHealTgtLast[target] = GetTickCount();
 	Fac_UseCharge(playerid);
 	new tn[25], msg[128];
@@ -990,7 +990,7 @@ Faction_CmdRianima(playerid, const params[])
 	g_FcRevTarget[playerid] = target;
 	g_FcRevTargetChar[playerid] = gPlayer[target][pCharId];
 	g_FcRevStart[playerid] = GetTickCount();
-	ApplyAnimation(playerid, "MEDIC", "CPR", 4.1, 1, 0, 0, 0, 0, 0);
+	ApplyAnimation(playerid, "MEDIC", "CPR", 4.1, true, false, false, false, 0, 0);
 	new tn[25], msg[128];
 	GetPlayerName(target, tn, 25);
 	format(msg, 128, "inizia a rianimare %s", tn);
@@ -1034,7 +1034,7 @@ Fac_ReviveDone(medic, target)
 
 Fac_ApplyInjuredPose(playerid)
 {
-	ApplyAnimation(playerid, "CRACK", "crckidle2", 4.1, 1, 0, 0, 1, 0, 0);
+	ApplyAnimation(playerid, "CRACK", "crckidle2", 4.1, true, false, false, true, 0, 0);
 }
 
 Faction_Hospitalize(playerid)
@@ -1061,7 +1061,7 @@ Faction_Hospitalize(playerid)
 
 Fac_ClearInvite(targetid, bool:closeDialog)
 {
-	g_FcInvActive[targetid] = 0;
+	g_FcInvActive[targetid] = false;
 	g_FcInvFrom[targetid] = 65535;
 	g_FcInvFromChar[targetid] = 0;
 	g_FcInvFac[targetid] = 0;
@@ -1104,12 +1104,12 @@ Fac_DoInvite(playerid, target)
 		SendClientMessage(playerid, -10270721, "Il giocatore deve essere almeno livello %d.", 3);
 		return 0;
 	}
-	if ((g_FcInvActive[target] && Fac_CdLeftMs(1, g_FcInvStart[target], 60000) > 0) || g_FcJoinPending[target])
+	if ((g_FcInvActive[target] && Fac_CdLeftMs(true, g_FcInvStart[target], 60000) > 0) || g_FcJoinPending[target])
 	{
 		Util_Send(playerid, -10270721, "Il giocatore ha gia' un invito in sospeso.");
 		return 0;
 	}
-	g_FcInvActive[target] = 1;
+	g_FcInvActive[target] = true;
 	g_FcInvFrom[target] = playerid;
 	g_FcInvFromChar[target] = gPlayer[playerid][pCharId];
 	g_FcInvFac[target] = f;
@@ -1161,8 +1161,8 @@ Fac_InviteReply(playerid, bool:accept)
 		return 0;
 	}
 	new from = g_FcInvFrom[playerid], fromChar = g_FcInvFromChar[playerid], f = g_FcInvFac[playerid];
-	new bool:expired = Fac_CdLeftMs(1, g_FcInvStart[playerid], 60000) <= 0;
-	Fac_ClearInvite(playerid, 0);
+	new bool:expired = Fac_CdLeftMs(true, g_FcInvStart[playerid], 60000) <= 0;
+	Fac_ClearInvite(playerid, false);
 	if (!Util_IsPlaying(playerid))
 	{
 		return 0;
@@ -1211,7 +1211,7 @@ Faction_CmdAccetta(playerid)
 		return 0;
 	}
 	UI_FactionInviteClose(playerid);
-	Fac_InviteReply(playerid, 1);
+	Fac_InviteReply(playerid, true);
 	return 0;
 }
 
@@ -1409,7 +1409,7 @@ public Faction_OnDBChanged(playerid, targetChar, cmd, faction, rank, result)
 	new target = Fac_FindByChar(targetChar);
 	if (target != INVALID_PLAYER_ID && cmd == 1)
 	{
-		g_FcJoinPending[target] = 0;
+		g_FcJoinPending[target] = false;
 	}
 	new req = Fac_ValidPlayer(playerid) ? playerid : 65535;
 	new ctx = cmd == 6 ? Fac_SetCtxByTarget(targetChar) : 65535;
@@ -1495,7 +1495,7 @@ public Faction_OnDBChanged(playerid, targetChar, cmd, faction, rank, result)
 	}
 	if (ctx != 65535)
 	{
-		g_FcSetActive[ctx] = 0;
+		g_FcSetActive[ctx] = false;
 	}
 	return 1;
 }
@@ -1508,7 +1508,7 @@ Fac_RequestMembers(playerid, mode)
 		Util_Send(playerid, -10270721, "Non appartieni a nessuna fazione.");
 		return 0;
 	}
-	if (g_FcMemBusy[playerid] && Fac_CdLeftMs(1, g_FcMemBusyTick[playerid], 10000) > 0)
+	if (g_FcMemBusy[playerid] && Fac_CdLeftMs(true, g_FcMemBusyTick[playerid], 10000) > 0)
 	{
 		Util_Send(playerid, -10270721, "Richiesta gia' in corso: attendi.");
 		return 0;
@@ -1529,17 +1529,17 @@ Faction_CmdFazione(playerid, const params[])
 	}
 	new pos = 0, sub[16];
 	Util_NextToken(params, pos, sub, 16);
-	if (sub[0] == 0 || !strcmp(sub, "info", 1, 0x7FFFFFFF))
+	if (sub[0] == 0 || !strcmp(sub, "info", true, 0x7FFFFFFF))
 	{
 		Fac_RequestMembers(playerid, 0);
 		return 0;
 	}
-	if (!strcmp(sub, "membri", 1, 0x7FFFFFFF))
+	if (!strcmp(sub, "membri", true, 0x7FFFFFFF))
 	{
 		Fac_RequestMembers(playerid, 2);
 		return 0;
 	}
-	if (!strcmp(sub, "lascia", 1, 0x7FFFFFFF))
+	if (!strcmp(sub, "lascia", true, 0x7FFFFFFF))
 	{
 		if (Fac_CmdBlocked(playerid) || !Fac_NeedActive(playerid))
 		{
@@ -1593,7 +1593,7 @@ public Faction_OnDBMembers(playerid, faction, count)
 	}
 	if (mode == 0)
 	{
-		UI_FactionMenuShow(playerid, faction, gPlayer[playerid][pFactionRank], gPlayer[playerid][pOnDuty], online, count);
+		UI_FactionMenuShow(playerid, faction, gPlayer[playerid][pFactionRank], bool:gPlayer[playerid][pOnDuty], online, count);
 		return 1;
 	}
 	UI_FactionMemberListClear(playerid);
@@ -1625,7 +1625,7 @@ public Faction_OnDBMembers(playerid, faction, count)
 
 Fac_SetStart(staff, targetChar, targetAcc, const targetName[], faction, rank)
 {
-	g_FcSetActive[staff] = 1;
+	g_FcSetActive[staff] = true;
 	g_FcSetTargetChar[staff] = targetChar;
 	g_FcSetTargetAcc[staff] = targetAcc;
 	g_FcSetStaffAcc[staff] = gPlayer[staff][pAccountId];
@@ -1640,7 +1640,7 @@ bool:Faction_CmdSetfazione(playerid, const params[])
 {
 	if (Util_GetAdmin(playerid) < 3)
 	{
-		return 0;
+		return false;
 	}
 	new pos = 0, who[25], tf[12], tr[12], faction = 0, rank = 0;
 	Util_NextToken(params, pos, who, 25);
@@ -1649,7 +1649,7 @@ bool:Faction_CmdSetfazione(playerid, const params[])
 	if (who[0] == 0 || !Util_ParseInt(tf, faction) || faction < 0 || faction > 2 || (faction != 0 && (!Util_ParseInt(tr, rank) || rank < 1 || rank > 6)))
 	{
 		SendClientMessage(playerid, 0x99CCFFFF, "Uso: /setfazione id|Nome_Cognome fazione(%d-%d, 0 = rimuovi) grado(1-%d)", 0, 2, 6);
-		return 1;
+		return true;
 	}
 	if (faction == 0)
 	{
@@ -1658,7 +1658,7 @@ bool:Faction_CmdSetfazione(playerid, const params[])
 	if (g_FcSetActive[playerid])
 	{
 		Util_Send(playerid, -10270721, "Hai gia' un'operazione /setfazione in corso.");
-		return 1;
+		return true;
 	}
 	new targetid = INVALID_PLAYER_ID;
 	if (Util_ParsePlayerId(who, targetid))
@@ -1666,7 +1666,7 @@ bool:Faction_CmdSetfazione(playerid, const params[])
 		if (!Util_IsPlaying(targetid) || gPlayer[targetid][pCharId] <= 0)
 		{
 			Util_Send(playerid, -10270721, "Giocatore non valido.");
-			return 1;
+			return true;
 		}
 	}
 	else
@@ -1678,12 +1678,12 @@ bool:Faction_CmdSetfazione(playerid, const params[])
 		new tn[25];
 		GetPlayerName(targetid, tn, 25);
 		Fac_SetStart(playerid, gPlayer[targetid][pCharId], gPlayer[targetid][pAccountId], tn, faction, rank);
-		return 1;
+		return true;
 	}
 	if (!Util_IsValidRPName(who))
 	{
 		Util_Send(playerid, -10270721, "Giocatore non valido (usa id oppure Nome_Cognome).");
-		return 1;
+		return true;
 	}
 	g_FcSetActive[playerid] = 1;
 	g_FcSetTargetChar[playerid] = 0;
@@ -1694,7 +1694,7 @@ bool:Faction_CmdSetfazione(playerid, const params[])
 	strmid(g_FcSetName[playerid], who, 0, strlen(who), 25);
 	GetPlayerName(playerid, g_FcSetStaffName[playerid], 25);
 	DB_FactionFindByName(playerid, who, 1);
-	return 1;
+	return true;
 }
 
 public Faction_OnDBFound(playerid, tag, charId, const name[], faction, rank, level)
@@ -1723,10 +1723,10 @@ public Faction_OnTick()
 		{
 			continue;
 		}
-		if (g_FcInvActive[i] && Fac_CdLeftMs(1, g_FcInvStart[i], 60000) <= 0)
+		if (g_FcInvActive[i] && Fac_CdLeftMs(true, g_FcInvStart[i], 60000) <= 0)
 		{
 			new from = g_FcInvFrom[i], fromChar = g_FcInvFromChar[i];
-			Fac_ClearInvite(i, 1);
+			Fac_ClearInvite(i, true);
 			Util_Send(i, -1, "L'invito in fazione e' scaduto.");
 			if (Fac_ValidPlayer(from) && gPlayer[from][pCharId] == fromChar)
 			{
@@ -1740,7 +1740,7 @@ public Faction_OnTick()
 		if (gPlayer[i][pCuffed])
 		{
 			new by = g_FcCuffBy[i];
-			if (Fac_CdLeftMs(1, g_FcCuffTick[i], 600000) <= 0 || !Util_IsPlaying(by) || !gPlayer[by][pOnDuty])
+			if (Fac_CdLeftMs(true, g_FcCuffTick[i], 600000) <= 0 || !Util_IsPlaying(by) || !gPlayer[by][pOnDuty])
 			{
 				Fac_Uncuff(i);
 			}
@@ -1749,7 +1749,7 @@ public Faction_OnTick()
 		{
 			if (gPlayer[i][pFaction] < 1 || Admin_IsMuted(i))
 			{
-				Faction_ForceOff(i, 1);
+				Faction_ForceOff(i, true);
 				Util_Send(i, -10270721, "Sei stato messo fuori servizio.");
 			}
 			else
@@ -1810,7 +1810,7 @@ Faction_OnInit()
 	{
 		Faction_ResetPlayer(p);
 	}
-	g_FacTimer = SetTimer("Faction_OnTick", 500, 1);
+	g_FacTimer = SetTimer("Faction_OnTick", 500, true);
 }
 
 Faction_OnExit()
@@ -1836,17 +1836,17 @@ Faction_OnPlayerDisconnect(playerid)
 	Fac_ReleaseCuffedBy(playerid);
 	if (gPlayer[playerid][pOnDuty])
 	{
-		Faction_ForceOff(playerid, 1);
+		Faction_ForceOff(playerid, true);
 	}
 	if (g_FcInvActive[playerid])
 	{
-		Fac_ClearInvite(playerid, 0);
+		Fac_ClearInvite(playerid, false);
 	}
 	for (new i = 0; i < MAX_PLAYERS; i++)
 	{
 		if (g_FcInvActive[i] && g_FcInvFrom[i] == playerid)
 		{
-			Fac_ClearInvite(i, 1);
+			Fac_ClearInvite(i, true);
 		}
 		if (g_FcRevTarget[i] == playerid)
 		{
@@ -1885,7 +1885,7 @@ Faction_OnPlayerDeath(playerid)
 	}
 	if (gPlayer[playerid][pOnDuty])
 	{
-		Faction_ForceOff(playerid, 0);
+		Faction_ForceOff(playerid, false);
 	}
 	g_FcRevTarget[playerid] = 65535;
 	for (new i = 0; i < MAX_PLAYERS; i++)
@@ -1915,7 +1915,7 @@ Faction_OnPlayerSpawn(playerid)
 	}
 	if (gPlayer[playerid][pOnDuty])
 	{
-		Faction_ForceOff(playerid, 1);
+		Faction_ForceOff(playerid, true);
 	}
 	if (g_FcHospPending[playerid])
 	{

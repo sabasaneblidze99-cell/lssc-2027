@@ -18,10 +18,10 @@ bool:Valid_SkinAllowed(gender, skin)
 	{
 		if (Valid_SkinAt(gender, i) == skin)
 		{
-			return 1;
+			return true;
 		}
 	}
-	return 0;
+	return false;
 }
 
 bool:Valid_PasswordLength(const pw[])
@@ -56,7 +56,7 @@ bool:Valid_Email(const s[])
 	new len = strlen(s);
 	if (len < 6 || len > 254)
 	{
-		return 0;
+		return false;
 	}
 	new at = -1;
 	for (new i = 0; i < len; i++)
@@ -65,26 +65,26 @@ bool:Valid_Email(const s[])
 		{
 			if (at != -1)
 			{
-				return 0;
+				return false;
 			}
 			at = i;
 		}
 	}
 	if (at < 1 || at > 64 || at >= len - 4)
 	{
-		return 0;
+		return false;
 	}
 	for (new i = 0; i < at; i++)
 	{
 		new c = s[i];
 		if (!((c >= 97 && c <= 122) || (c >= 65 && c <= 90) || (c >= 48 && c <= 57) || c == 46 || c == 95 || c == 37 || c == 43 || c == 45))
 		{
-			return 0;
+			return false;
 		}
 	}
 	if (s[0] == 46 || s[at - 1] == 46)
 	{
-		return 0;
+		return false;
 	}
 	new dots = 0, label = 0, lastDot = -1;
 	for (new i = at + 1; i < len; i++)
@@ -94,7 +94,7 @@ bool:Valid_Email(const s[])
 		{
 			if (label == 0)
 			{
-				return 0;
+				return false;
 			}
 			dots++;
 			label = 0;
@@ -103,21 +103,21 @@ bool:Valid_Email(const s[])
 		}
 		if (!((c >= 97 && c <= 122) || (c >= 65 && c <= 90) || (c >= 48 && c <= 57) || c == 45))
 		{
-			return 0;
+			return false;
 		}
 		label++;
 	}
 	if (dots < 1 || label < 2)
 	{
-		return 0;
+		return false;
 	}
 	for (new i = lastDot + 1; i < len; i++)
 	{
 		new c = s[i];
 		if (!((c >= 97 && c <= 122) || (c >= 65 && c <= 90)))
 		{
-			return 0;
+			return false;
 		}
 	}
-	return 1;
+	return true;
 }

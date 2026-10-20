@@ -19,7 +19,7 @@ CityOS_Integrity(playerid)
 	}
 	new Float:h;
 	GetVehicleHealth(veh, h);
-	return LD_Clamp(floatround(h, 1) / 10, 0, 100);
+	return LD_Clamp(floatround(h, floatround_method:1) / 10, 0, 100);
 }
 
 CityOS_NextDistance(playerid)
@@ -51,7 +51,7 @@ CityOS_NextDistance(playerid)
 	}
 	GetPlayerPos(playerid, px, py, pz);
 	new Float:dx = (tx - px), Float:dy = (ty - py);
-	return floatround(floatsqroot(((dx * dx) + (dy * dy))), 1);
+	return floatround(floatsqroot(((dx * dx) + (dy * dy))), floatround_method:1);
 }
 
 CityOS_ShowBoard(playerid)
@@ -97,7 +97,7 @@ CityOS_ShowDistrict(playerid, districtId)
 
 CityOS_RenderDistrict(playerid, districtId, count)
 {
-	new now = gettime(), fest = DB_LivingDistrictGet(districtId, 4), festH = 0;
+	new now = gettime(), fest = DB_LivingDistrictGet(districtId, E_LD_DISTRICT:4), festH = 0;
 	if (fest > now)
 	{
 		festH = (fest - now + 3600 - 1) / 3600;
@@ -117,7 +117,7 @@ CityOS_OnInit()
 {
 	for (new i = 0; i < MAX_PLAYERS; i++)
 	{
-		g_CosWaitBoard[i] = 0;
+		g_CosWaitBoard[i] = false;
 	}
 	LD_Listen("CityOS_OnDistrictEvent", 30);
 }
@@ -154,7 +154,7 @@ public CityOS_OnDistrictEvent(type, districtId, charId, value, const opId[])
 		{
 			continue;
 		}
-		g_CosWaitBoard[i] = 0;
+		g_CosWaitBoard[i] = false;
 		if (IsPlayerConnected(i))
 		{
 			CityOS_ShowBoard(i);
@@ -172,7 +172,7 @@ CityOS_CmdContratti(playerid, const params[])
 	}
 	new pos = 0, tok[24], num[24];
 	Util_NextToken(params, pos, tok, 24);
-	if (!strcmp(tok, "accetta", 1, 0x7FFFFFFF) && tok[0] != 0)
+	if (!strcmp(tok, "accetta", true, 0x7FFFFFFF) && tok[0] != 0)
 	{
 		new id = 0;
 		Util_NextToken(params, pos, num, 24);
@@ -199,7 +199,7 @@ CityOS_CmdContratto(playerid, const params[])
 	Util_NextToken(params, pos, tok, 24);
 	new ct = gPlayer[playerid][pContractId];
 	new bool:active = ct != 0 && (gPlayer[playerid][pContractPhase] == 1 || gPlayer[playerid][pContractPhase] == 2);
-	if (tok[0] != 0 && !strcmp(tok, "abbandona", 1, 0x7FFFFFFF))
+	if (tok[0] != 0 && !strcmp(tok, "abbandona", true, 0x7FFFFFFF))
 	{
 		if (!active)
 		{
@@ -240,7 +240,7 @@ CityOS_CmdReputazione(playerid, const params[])
 	}
 	UI_CityRepBegin(playerid);
 	UI_CityRepTrack(playerid, 1, LD_GetProPoints(playerid, 1), 0, 0, 0, 0, 0);
-	new rating = DB_LivingPlayerGet(playerid, 3);
+	new rating = DB_LivingPlayerGet(playerid, E_LD_PLAYER:3);
 	UI_CityRepTrack(playerid, 2, LD_GetProPoints(playerid, 2), 0, 0, rating, rating > 0 ? 100 : 0, 0);
 	for (new d = 1; d <= 3; d++)
 	{

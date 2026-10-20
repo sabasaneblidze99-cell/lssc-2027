@@ -15,7 +15,7 @@ bool:Account_SeqValid(playerid, seq, phase)
 {
 	if (playerid < 0 || playerid >= MAX_PLAYERS || !IsPlayerConnected(playerid))
 	{
-		return 0;
+		return false;
 	}
 	return seq != 0 && gPlayer[playerid][pAuthSeq] == seq && gPlayer[playerid][pAuthState] == phase;
 }
@@ -34,7 +34,7 @@ Account_Kick(playerid, const reason[])
 	Util_Send(playerid, -10270721, reason);
 	gPlayer[playerid][pAuthState] = 10;
 	UI_CloseDialogs(playerid);
-	gPlayer[playerid][pKickTimer] = SetTimerEx("Account_OnKickTimer", 750, 0, "d", playerid);
+	gPlayer[playerid][pKickTimer] = SetTimerEx("Account_OnKickTimer", 750, false, "d", playerid);
 	return 0;
 }
 
@@ -287,7 +287,7 @@ Account_LoginFailed(playerid)
 	new err[512];
 	format(err, 512, "პაროლი არასწორია. დარჩენილი მცდელობა: %d.", 3 - gPlayer[playerid][pLoginAttempts]);
 	Util_Send(playerid, -10270721, err);
-	UI_ShowLogin(playerid, 1);
+	UI_ShowLogin(playerid, true);
 	return 0;
 }
 
@@ -310,7 +310,7 @@ public UI_OnLoginSubmit(playerid, const password[])
 	}
 	new hash[65];
 	SHA256_Hash(password, gPlayer[playerid][pPassSalt], hash, 65);
-	if (strcmp(hash, gPlayer[playerid][pPassHash], 1, 0x7FFFFFFF) != 0)
+	if (strcmp(hash, gPlayer[playerid][pPassHash], true, 0x7FFFFFFF) != 0)
 	{
 		Account_LoginFailed(playerid);
 		return 1;

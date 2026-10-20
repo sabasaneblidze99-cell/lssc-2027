@@ -28,7 +28,7 @@ CefBridge_OnInit()
 	cef_subscribe("lssc:view_ok", "Cef_OnViewOk");
 	cef_subscribe("lssc:char_create", "Cef_OnCharCreate");
 	cef_subscribe("lssc:char_back", "Cef_OnCharBack");
-	SetTimer("CefBridge_ClockTick", 30000, 1);
+	SetTimer("CefBridge_ClockTick", 30000, true);
 	Log_Write("CEF", "interfaccia CEF attiva: pagine da <GTA>/cef/assets/index.html");
 #endif
 }
@@ -38,7 +38,7 @@ CefBridge_OnPlayerConnect(playerid)
 	CefUI_Reset(playerid);
 #if defined LSRP_CEF
 	g_CefNonce[playerid]++;
-	SetTimerEx("CefBridge_DecideTimeout", 9000, 0, "dd", playerid, g_CefNonce[playerid]);
+	SetTimerEx("CefBridge_DecideTimeout", 9000, false, "dd", playerid, g_CefNonce[playerid]);
 #endif
 }
 
@@ -85,7 +85,7 @@ CefBridge_OnInitialize(playerid, success)
 		return 0;
 	}
 	CefUI_SetState(playerid, 1);
-	cef_create_browser(playerid, 1, "index.html", 0, 0);
+	cef_create_browser(playerid, 1, "index.html", false, false);
 #endif
 	return 0;
 }
@@ -336,7 +336,7 @@ bool:CefBridge_HexDecode(const hex[], dest[], size)
 	new len = strlen(hex);
 	if (len == 0 || len % 2 != 0 || len / 2 >= size)
 	{
-		return 0;
+		return false;
 	}
 	for (new i = 0, o = 0; i < len; i += 2, o++)
 	{
@@ -344,12 +344,12 @@ bool:CefBridge_HexDecode(const hex[], dest[], size)
 		if (hi < 0 || lo < 0 || (hi == 0 && lo == 0))
 		{
 			dest[0] = 0;
-			return 0;
+			return false;
 		}
 		dest[o] = hi * 16 + lo;
 		dest[o + 1] = 0;
 	}
-	return 1;
+	return true;
 }
 
 CefBridge_HexVal(c)

@@ -50,7 +50,7 @@ public House_OnDBCompensated(houseId)
 	new idx = House_Find(houseId);
 	if (idx != -1)
 	{
-		g_HsBusy[idx] = 0;
+		g_HsBusy[idx] = false;
 	}
 	return 1;
 }
@@ -79,16 +79,16 @@ bool:House_IsGuest(idx, charId)
 {
 	if (charId <= 0)
 	{
-		return 0;
+		return false;
 	}
 	for (new k = 0; k < g_HouseRows[idx][hrKeyCount] && k < 3; k++)
 	{
 		if (g_HouseRows[idx][hrKeyChars][k] == charId)
 		{
-			return 1;
+			return true;
 		}
 	}
-	return 0;
+	return false;
 }
 
 House_Role(idx, playerid)
@@ -206,7 +206,7 @@ bool:House_PlayerActive(playerid, now)
 {
 	if (!Util_IsPlaying(playerid))
 	{
-		return 0;
+		return false;
 	}
 	return now - gPlayer[playerid][pLastActiveTick] <= 10000;
 }
@@ -228,14 +228,14 @@ bool:House_OpMatches(playerid, &houseId, result)
 {
 	if (g_HPl[playerid][hpOpHouseId] == houseId)
 	{
-		return 1;
+		return true;
 	}
 	if (result != -1)
 	{
-		return 0;
+		return false;
 	}
 	houseId = g_HPl[playerid][hpOpHouseId];
-	return 1;
+	return true;
 }
 
 bool:House_CooldownBlocked(playerid)
@@ -244,33 +244,33 @@ bool:House_CooldownBlocked(playerid)
 	if (now - g_HPl[playerid][hpCmdTick] < 1500)
 	{
 		Util_Send(playerid, -10270721, "Attendi un attimo prima di usare un altro comando della casa.");
-		return 1;
+		return true;
 	}
 	g_HPl[playerid][hpCmdTick] = now;
-	return 0;
+	return false;
 }
 
 bool:House_CmdGuard(playerid, bool:needIdle)
 {
 	if (!House_PlayerOk(playerid))
 	{
-		return 0;
+		return false;
 	}
 	if (!g_HsReady)
 	{
 		Util_Send(playerid, -10270721, "Il sistema case non e' disponibile al momento.");
-		return 0;
+		return false;
 	}
 	if (House_CooldownBlocked(playerid))
 	{
-		return 0;
+		return false;
 	}
 	if (needIdle && g_HPl[playerid][hpPendingOp] != 0)
 	{
 		Util_Send(playerid, -10270721, "Hai un'operazione della casa in corso: attendi.");
-		return 0;
+		return false;
 	}
-	return 1;
+	return true;
 }
 
 House_ClearInside(playerid)
@@ -336,16 +336,16 @@ bool:House_NearShop(playerid)
 {
 	if (GetPlayerInterior(playerid) != 0 || GetPlayerVirtualWorld(playerid) != 0)
 	{
-		return 0;
+		return false;
 	}
 	for (new i = 0; i < 2; i++)
 	{
 		if ((GetPlayerDistanceFromPoint(playerid, s_HsShops[i][0], s_HsShops[i][1], s_HsShops[i][2]) <= 3.0))
 		{
-			return 1;
+			return true;
 		}
 	}
-	return 0;
+	return false;
 }
 
 House_RefreshWorld(idx)
@@ -526,9 +526,9 @@ bool:House_FoodReady(playerid)
 	if (g_HPl[playerid][hpHungerState] != 2)
 	{
 		Util_Send(playerid, -10270721, "I tuoi dati sul cibo non sono ancora stati caricati: riprova tra poco.");
-		return 0;
+		return false;
 	}
-	return 1;
+	return true;
 }
 
 House_NotifyBills(playerid)
@@ -613,7 +613,7 @@ House_BillSum(playerid, kind, &count)
 House_PushUi(playerid, idx)
 {
 	new id = g_HouseRows[idx][hrId];
-	UI_HouseDataSet(playerid, id, House_Role(idx, playerid), House_Tier(idx), House_IntIdx(idx), g_HouseRows[idx][hrLocked], House_UtilState(g_HouseRows[idx][hrLuceOn], g_HouseRows[idx][hrLuceCut]), House_UtilState(g_HouseRows[idx][hrGasOn], g_HouseRows[idx][hrGasCut]), g_HouseRows[idx][hrFridgeUnits], Inv_Count(playerid, 1), g_HouseRows[idx][hrKeyCount], gPlayer[playerid][pLevel], gPlayer[playerid][pMoney], gPlayer[playerid][pBank]);
+	UI_HouseDataSet(playerid, id, House_Role(idx, playerid), House_Tier(idx), House_IntIdx(idx), bool:g_HouseRows[idx][hrLocked], House_UtilState(bool:g_HouseRows[idx][hrLuceOn], bool:g_HouseRows[idx][hrLuceCut]), House_UtilState(bool:g_HouseRows[idx][hrGasOn], bool:g_HouseRows[idx][hrGasCut]), g_HouseRows[idx][hrFridgeUnits], Inv_Count(playerid, 1), g_HouseRows[idx][hrKeyCount], gPlayer[playerid][pLevel], gPlayer[playerid][pMoney], gPlayer[playerid][pBank]);
 	new lightDue = 0, lightCnt = 0, gasDue = 0, gasCnt = 0;
 	if (g_HPl[playerid][hpBillsHouseId] == id)
 	{
@@ -724,7 +724,7 @@ House_DoBuy(playerid, idx, payWithBank)
 		Util_Send(playerid, -10270721, "Fondi insufficienti con questo metodo di pagamento.");
 		return 0;
 	}
-	g_HsBusy[idx] = 1;
+	g_HsBusy[idx] = true;
 	g_HPl[playerid][hpPendingOp] = 1;
 	g_HPl[playerid][hpOpHouseId] = g_HouseRows[idx][hrId];
 	g_HPl[playerid][hpPayWithBank] = payWithBank;
@@ -754,7 +754,7 @@ public House_OnDBBought(playerid, houseId, affected)
 	g_HPl[playerid][hpPendingOp] = 0;
 	if (idx != -1)
 	{
-		g_HsBusy[idx] = 0;
+		g_HsBusy[idx] = false;
 	}
 	if (affected == -1)
 	{
@@ -773,7 +773,7 @@ public House_OnDBBought(playerid, houseId, affected)
 	}
 	if (!ok)
 	{
-		g_HsBusy[idx] = 1;
+		g_HsBusy[idx] = true;
 		g_HPl[playerid][hpPendingOp] = 3;
 		g_HPl[playerid][hpOpHouseId] = houseId;
 		DB_SellHouse(playerid, houseId, charId);
@@ -834,7 +834,7 @@ House_DoSell(playerid, idx, bool:confirmed)
 		Util_Send(playerid, 0x99CCFFFF, "Per confermare: /casa vendi conferma");
 		return 0;
 	}
-	g_HsBusy[idx] = 1;
+	g_HsBusy[idx] = true;
 	g_HPl[playerid][hpPendingOp] = 2;
 	g_HPl[playerid][hpOpHouseId] = g_HouseRows[idx][hrId];
 	g_HPl[playerid][hpOpAmount] = refund;
@@ -856,7 +856,7 @@ public House_OnDBSold(playerid, houseId, affected)
 		g_HPl[playerid][hpPendingOp] = 0;
 		if (idx != -1)
 		{
-			g_HsBusy[idx] = 0;
+			g_HsBusy[idx] = false;
 		}
 		if (affected != 1)
 		{
@@ -877,7 +877,7 @@ public House_OnDBSold(playerid, houseId, affected)
 	g_HPl[playerid][hpPendingOp] = 0;
 	if (idx != -1)
 	{
-		g_HsBusy[idx] = 0;
+		g_HsBusy[idx] = false;
 	}
 	if (affected == -1)
 	{
@@ -924,7 +924,7 @@ House_ToggleLock(playerid, idx)
 		return 0;
 	}
 	g_HouseRows[idx][hrLocked] = !g_HouseRows[idx][hrLocked];
-	DB_SetHouseLock(g_HouseRows[idx][hrId], g_HouseRows[idx][hrOwnerId], g_HouseRows[idx][hrLocked]);
+	DB_SetHouseLock(g_HouseRows[idx][hrId], g_HouseRows[idx][hrOwnerId], bool:g_HouseRows[idx][hrLocked]);
 	House_RefreshWorld(idx);
 	SendClientMessage(playerid, 0x66DD66FF, "Porta della casa %d: %s.", g_HouseRows[idx][hrId], g_HouseRows[idx][hrLocked] ? "chiusa a chiave" : "aperta");
 	return 0;
@@ -935,19 +935,19 @@ bool:House_SetUtility(playerid, idx, utility, bool:on)
 	if (House_FindInside(playerid) != idx)
 	{
 		Util_Send(playerid, -10270721, "Devi essere dentro la casa.");
-		return 0;
+		return false;
 	}
 	new role = House_Role(idx, playerid);
 	if (role != 1 && !(utility == 0 && role == 2))
 	{
 		Util_Send(playerid, -10270721, utility == 1 ? "Solo il proprietario puo' gestire il gas." : "Non hai accesso alle utenze di questa casa.");
-		return 0;
+		return false;
 	}
 	new bool:cut = utility == 1 ? g_HouseRows[idx][hrGasCut] : g_HouseRows[idx][hrLuceCut];
 	if (cut)
 	{
 		Util_Send(playerid, -10270721, "Utenza staccata per morosita': paga le bollette (/bollette).");
-		return 0;
+		return false;
 	}
 	if (utility == 1)
 	{
@@ -960,12 +960,12 @@ bool:House_SetUtility(playerid, idx, utility, bool:on)
 	DB_SetUtility(g_HouseRows[idx][hrId], gPlayer[playerid][pCharId], utility, on);
 	House_RefreshInside(idx);
 	SendClientMessage(playerid, 0x66DD66FF, "%s %s.", utility == 1 ? "Gas" : "Luce", utility == 1 ? (on ? "acceso" : "spento") : (on ? "accesa" : "spenta"));
-	return 1;
+	return true;
 }
 
 House_CmdToggleUtility(playerid, utility)
 {
-	if (!House_CmdGuard(playerid, 1))
+	if (!House_CmdGuard(playerid, true))
 	{
 		return 0;
 	}
@@ -1038,7 +1038,7 @@ House_EatCold(playerid)
 	}
 	g_HouseRows[idx][hrFridgeUnits]--;
 	House_FridgeChanged(playerid, idx, -1);
-	House_HungerSet(playerid, g_HPl[playerid][hpHunger] + 25, 1);
+	House_HungerSet(playerid, g_HPl[playerid][hpHunger] + 25, true);
 	SendClientMessage(playerid, 0x66DD66FF, "Mangi qualcosa di freddo dal frigo. Sazieta': %d%%.", g_HPl[playerid][hpHunger]);
 	return 0;
 }
@@ -1072,7 +1072,7 @@ House_StartCook(playerid)
 	}
 	g_HPl[playerid][hpCooking] = 1;
 	g_HPl[playerid][hpCookHouseId] = g_HouseRows[idx][hrId];
-	SetTimerEx("House_OnCookDone", 6000, 0, "dd", playerid, g_HPl[playerid][hpSession]);
+	SetTimerEx("House_OnCookDone", 6000, false, "dd", playerid, g_HPl[playerid][hpSession]);
 	Util_Send(playerid, -1, "Inizi a cucinare...");
 	return 0;
 }
@@ -1123,7 +1123,7 @@ House_EatPlate(playerid)
 		return 0;
 	}
 	g_HPl[playerid][hpCookCooldown] = 0;
-	House_HungerSet(playerid, g_HPl[playerid][hpHunger] + 45, 1);
+	House_HungerSet(playerid, g_HPl[playerid][hpHunger] + 45, true);
 	new Float:hp;
 	GetPlayerHealth(playerid, hp);
 	hp += float(5);
@@ -1160,10 +1160,10 @@ House_Store(playerid, n)
 		SendClientMessage(playerid, -10270721, "Nel frigo c'e' posto solo per altre %d porzioni.", cap - g_HouseRows[idx][hrFridgeUnits]);
 		return 0;
 	}
-	g_HsFridgeBusy[idx] = 1;
+	g_HsFridgeBusy[idx] = true;
 	if (!Inv_FridgeMove(playerid, g_HouseRows[idx][hrId], 1, n, cap))
 	{
-		g_HsFridgeBusy[idx] = 0;
+		g_HsFridgeBusy[idx] = false;
 	}
 	return 0;
 }
@@ -1190,10 +1190,10 @@ House_Take(playerid, n)
 		SendClientMessage(playerid, -10270721, "Puoi portare al massimo %d porzioni.", 12);
 		return 0;
 	}
-	g_HsFridgeBusy[idx] = 1;
+	g_HsFridgeBusy[idx] = true;
 	if (!Inv_FridgeMove(playerid, g_HouseRows[idx][hrId], 2, n, House_FridgeCap(idx)))
 	{
-		g_HsFridgeBusy[idx] = 0;
+		g_HsFridgeBusy[idx] = false;
 	}
 	return 0;
 }
@@ -1205,7 +1205,7 @@ public House_InvFridgeResult(playerid, houseId, direction, qty, result)
 	{
 		return 1;
 	}
-	g_HsFridgeBusy[idx] = 0;
+	g_HsFridgeBusy[idx] = false;
 	if (!Inv_ValidPlayer(playerid))
 	{
 		return 1;
@@ -1271,8 +1271,8 @@ public House_InvFridgeAbort(houseId)
 	{
 		return 1;
 	}
-	g_HsFridgeBusy[idx] = 1;
-	SetTimerEx("House_FridgeReloadLater", 1500, 0, "d", houseId);
+	g_HsFridgeBusy[idx] = true;
+	SetTimerEx("House_FridgeReloadLater", 1500, false, "d", houseId);
 	return 1;
 }
 
@@ -1294,7 +1294,7 @@ public House_OnDBFridgeReloaded(houseId, units)
 		g_HouseRows[idx][hrFridgeUnits] = units;
 		House_RefreshInside(idx);
 	}
-	g_HsFridgeBusy[idx] = 0;
+	g_HsFridgeBusy[idx] = false;
 	return 1;
 }
 
@@ -1313,13 +1313,13 @@ public House_InvHungerAdd(playerid, amount)
 	{
 		return -1;
 	}
-	House_HungerSet(playerid, g_HPl[playerid][hpHunger] + amount, 1);
+	House_HungerSet(playerid, g_HPl[playerid][hpHunger] + amount, true);
 	return g_HPl[playerid][hpHunger];
 }
 
 House_CmdFrigo(playerid, const params[])
 {
-	if (!House_CmdGuard(playerid, 0))
+	if (!House_CmdGuard(playerid, false))
 	{
 		return 0;
 	}
@@ -1340,8 +1340,8 @@ House_CmdFrigo(playerid, const params[])
 		Util_Send(playerid, 0x99CCFFFF, "Uso: /frigo metti [n] (solo proprietario) · /frigo prendi [n] (proprietario o ospite)");
 		return 0;
 	}
-	new bool:store = !strcmp(sub, "metti", 1, 0x7FFFFFFF);
-	if (!store && strcmp(sub, "prendi", 1, 0x7FFFFFFF))
+	new bool:store = !strcmp(sub, "metti", true, 0x7FFFFFFF);
+	if (!store && strcmp(sub, "prendi", true, 0x7FFFFFFF))
 	{
 		Util_Send(playerid, 0x99CCFFFF, "Uso: /frigo metti [n] · /frigo prendi [n]");
 		return 0;
@@ -1366,7 +1366,7 @@ House_CmdFrigo(playerid, const params[])
 
 House_CmdMangia(playerid, const params[])
 {
-	if (!House_CmdGuard(playerid, 0))
+	if (!House_CmdGuard(playerid, false))
 	{
 		return 0;
 	}
@@ -1377,7 +1377,7 @@ House_CmdMangia(playerid, const params[])
 		House_EatPlate(playerid);
 		return 0;
 	}
-	if (!strcmp(sub, "freddo", 1, 0x7FFFFFFF))
+	if (!strcmp(sub, "freddo", true, 0x7FFFFFFF))
 	{
 		House_EatCold(playerid);
 		return 0;
@@ -1388,7 +1388,7 @@ House_CmdMangia(playerid, const params[])
 
 House_CmdCucina(playerid)
 {
-	if (!House_CmdGuard(playerid, 0))
+	if (!House_CmdGuard(playerid, false))
 	{
 		return 0;
 	}
@@ -1398,7 +1398,7 @@ House_CmdCucina(playerid)
 
 House_CmdCompra(playerid, const params[])
 {
-	if (!House_CmdGuard(playerid, 0))
+	if (!House_CmdGuard(playerid, false))
 	{
 		return 0;
 	}
@@ -1700,7 +1700,7 @@ public House_OnDBBillsPaid(playerid, houseId, kind, paidAmount, restored)
 
 House_CmdBollette(playerid)
 {
-	if (!House_CmdGuard(playerid, 1))
+	if (!House_CmdGuard(playerid, true))
 	{
 		return 0;
 	}
@@ -1868,7 +1868,7 @@ public House_OnDBKeysLoaded(playerid, houseId, count)
 	new target = 0, num = 0;
 	for (new i = 0; i < count && target == 0; i++)
 	{
-		if (!strcmp(g_HouseKeyList[playerid][i][hkName], g_HPl[playerid][hpKeyToken], 1, 0x7FFFFFFF))
+		if (!strcmp(g_HouseKeyList[playerid][i][hkName], g_HPl[playerid][hpKeyToken], true, 0x7FFFFFFF))
 		{
 			target = g_HouseKeyList[playerid][i][hkCharId];
 		}
@@ -1967,8 +1967,8 @@ House_Info(playerid, idx)
 	{
 		return 0;
 	}
-	House_UtilText(g_HouseRows[idx][hrLuceOn], g_HouseRows[idx][hrLuceCut], st1, 12);
-	House_UtilText(g_HouseRows[idx][hrGasOn], g_HouseRows[idx][hrGasCut], st2, 12);
+	House_UtilText(bool:g_HouseRows[idx][hrLuceOn], bool:g_HouseRows[idx][hrLuceCut], st1, 12);
+	House_UtilText(bool:g_HouseRows[idx][hrGasOn], bool:g_HouseRows[idx][hrGasCut], st2, 12);
 	SendClientMessage(playerid, -1, "Luce: %s - Gas: %s - Frigo: %d/%d", st1, st2, g_HouseRows[idx][hrFridgeUnits], s_HsFridgeCap[tier]);
 	if (role == 1)
 	{
@@ -1979,7 +1979,7 @@ House_Info(playerid, idx)
 
 House_CmdCasa(playerid, const params[])
 {
-	if (!House_CmdGuard(playerid, 0))
+	if (!House_CmdGuard(playerid, false))
 	{
 		return 0;
 	}
@@ -2001,22 +2001,22 @@ House_CmdCasa(playerid, const params[])
 		House_OpenMenu(playerid, idx);
 		return 0;
 	}
-	if (!strcmp(sub, "info", 1, 0x7FFFFFFF))
+	if (!strcmp(sub, "info", true, 0x7FFFFFFF))
 	{
 		House_Info(playerid, idx);
 		return 0;
 	}
-	if (!strcmp(sub, "serratura", 1, 0x7FFFFFFF))
+	if (!strcmp(sub, "serratura", true, 0x7FFFFFFF))
 	{
 		House_ToggleLock(playerid, idx);
 		return 0;
 	}
-	if (!strcmp(sub, "chiavi", 1, 0x7FFFFFFF))
+	if (!strcmp(sub, "chiavi", true, 0x7FFFFFFF))
 	{
 		House_LoadKeys(playerid, 3, "");
 		return 0;
 	}
-	if (!strcmp(sub, "chiave", 1, 0x7FFFFFFF))
+	if (!strcmp(sub, "chiave", true, 0x7FFFFFFF))
 	{
 		Util_NextToken(params, pos, arg, 32);
 		if (arg[0] == 0)
@@ -2027,7 +2027,7 @@ House_CmdCasa(playerid, const params[])
 		House_GiveKey(playerid, arg);
 		return 0;
 	}
-	if (!strcmp(sub, "revoca", 1, 0x7FFFFFFF))
+	if (!strcmp(sub, "revoca", true, 0x7FFFFFFF))
 	{
 		Util_NextToken(params, pos, arg, 32);
 		if (arg[0] == 0)
@@ -2038,13 +2038,13 @@ House_CmdCasa(playerid, const params[])
 		House_LoadKeys(playerid, 4, arg);
 		return 0;
 	}
-	if (!strcmp(sub, "vendi", 1, 0x7FFFFFFF))
+	if (!strcmp(sub, "vendi", true, 0x7FFFFFFF))
 	{
 		Util_NextToken(params, pos, arg, 32);
-		House_DoSell(playerid, idx, !strcmp(arg, "conferma", 1, 0x7FFFFFFF));
+		House_DoSell(playerid, idx, !strcmp(arg, "conferma", true, 0x7FFFFFFF));
 		return 0;
 	}
-	if (!strcmp(sub, "compra", 1, 0x7FFFFFFF))
+	if (!strcmp(sub, "compra", true, 0x7FFFFFFF))
 	{
 		if (g_HouseRows[idx][hrOwnerId] > 0 || House_FindNear(playerid) != idx)
 		{
@@ -2057,12 +2057,12 @@ House_CmdCasa(playerid, const params[])
 			House_OpenMenu(playerid, idx);
 			return 0;
 		}
-		if (!strcmp(arg, "contanti", 1, 0x7FFFFFFF))
+		if (!strcmp(arg, "contanti", true, 0x7FFFFFFF))
 		{
 			House_DoBuy(playerid, idx, 0);
 			return 0;
 		}
-		if (!strcmp(arg, "banca", 1, 0x7FFFFFFF))
+		if (!strcmp(arg, "banca", true, 0x7FFFFFFF))
 		{
 			House_DoBuy(playerid, idx, 1);
 			return 0;
@@ -2076,7 +2076,7 @@ House_CmdCasa(playerid, const params[])
 
 House_CmdEntra(playerid)
 {
-	if (!House_CmdGuard(playerid, 1))
+	if (!House_CmdGuard(playerid, true))
 	{
 		return 0;
 	}
@@ -2113,7 +2113,7 @@ House_CmdEntra(playerid)
 
 House_CmdEsci(playerid)
 {
-	if (!House_CmdGuard(playerid, 1))
+	if (!House_CmdGuard(playerid, true))
 	{
 		return 0;
 	}
@@ -2134,7 +2134,7 @@ House_CmdEsci(playerid)
 
 House_CmdBussa(playerid)
 {
-	if (!House_CmdGuard(playerid, 1))
+	if (!House_CmdGuard(playerid, true))
 	{
 		return 0;
 	}
@@ -2253,7 +2253,7 @@ public UI_OnHouseAction(playerid, houseId, action)
 		}
 		case 6:
 		{
-			House_DoSell(playerid, idx, 1);
+			House_DoSell(playerid, idx, true);
 		}
 	}
 	return 1;
@@ -2401,7 +2401,7 @@ public House_OnTick()
 			g_HPl[p][hpHungerAccumMs] -= 360000;
 			if (g_HPl[p][hpHunger] > 0)
 			{
-				House_HungerSet(p, g_HPl[p][hpHunger] - 1, 1);
+				House_HungerSet(p, g_HPl[p][hpHunger] - 1, true);
 			}
 		}
 	}
@@ -2438,16 +2438,16 @@ public House_OnDBLoaded(count)
 {
 	if (count == -1)
 	{
-		g_HsReady = 0;
+		g_HsReady = false;
 		Log_Write("HOUSE", "caricamento case fallito: sistema case disabilitato");
 		return 1;
 	}
 	for (new i = 0; i < count && i < 64; i++)
 	{
-		g_HsBusy[i] = 0;
+		g_HsBusy[i] = false;
 		House_RefreshWorld(i);
 	}
-	g_HsReady = 1;
+	g_HsReady = true;
 	new msg[128];
 	format(msg, 128, "caricate %d case", count);
 	Log_Write("HOUSE", msg);
@@ -2463,17 +2463,17 @@ House_OnInit()
 	for (new i = 0; i < 64; i++)
 	{
 		g_HsPickup[i] = -1;
-		g_HsLabel[i] = 65535;
-		g_HsBusy[i] = 0;
-		g_HsFridgeBusy[i] = 0;
+		g_HsLabel[i] = Text3D:65535;
+		g_HsBusy[i] = false;
+		g_HsFridgeBusy[i] = false;
 	}
-	g_HsReady = 0;
+	g_HsReady = false;
 	for (new s = 0; s < 2; s++)
 	{
 		Lang_Create3DTextLabel("Supermercato\n/compra - cibo, pasto, acqua, snack, kit, benda, zaino...", 0x66DD66FF, s_HsShops[s][0], s_HsShops[s][1], (0.9 + s_HsShops[s][2]), 12.0, 0, 0);
 	}
-	g_HsTickTimer = SetTimer("House_OnTick", 60000, 1);
-	g_HsSaveTimer = SetTimer("House_OnSaveTick", 300000, 1);
+	g_HsTickTimer = SetTimer("House_OnTick", 60000, true);
+	g_HsSaveTimer = SetTimer("House_OnSaveTick", 300000, true);
 	DB_BootHouses();
 }
 

@@ -77,13 +77,13 @@ CefUI_Open(playerid, const view[], const arg[])
 	{
 		return 0;
 	}
-	new v = !strcmp(view, "phone", 0, 0x7FFFFFFF) ? 2 : (!strcmp(view, "auth", 0, 0x7FFFFFFF) ? 3 : 1);
+	new v = !strcmp(view, "phone", false, 0x7FFFFFFF) ? 2 : (!strcmp(view, "auth", false, 0x7FFFFFFF) ? 3 : 1);
 	if (v == 2 && g_CefView[playerid] == 2)
 	{
 		return 0;
 	}
 	cef_emit_event(playerid, "lssc:open", 0, view, 0, arg);
-	cef_focus_browser(playerid, 1, 1);
+	cef_focus_browser(playerid, 1, true);
 	g_CefFocus[playerid] = 1;
 	g_CefView[playerid] = v;
 	return 0;
@@ -118,7 +118,7 @@ CefUI_ReleaseFocus(playerid)
 	{
 		return 0;
 	}
-	cef_focus_browser(playerid, 1, 0);
+	cef_focus_browser(playerid, 1, false);
 	g_CefFocus[playerid] = 0;
 	return 0;
 }
@@ -200,7 +200,7 @@ bool:CefUI_HudIsOn(playerid)
 {
 	if (playerid < 0 || playerid >= MAX_PLAYERS)
 	{
-		return 0;
+		return false;
 	}
 	return g_CefHudOn[playerid];
 }
@@ -227,7 +227,7 @@ bool:CefUI_Decide(playerid)
 {
 	if (playerid < 0 || playerid >= MAX_PLAYERS)
 	{
-		return 0;
+		return false;
 	}
 	g_CefDecided[playerid] = 1;
 	new bool:wait = g_CefPromptWait[playerid];
@@ -239,7 +239,7 @@ bool:CefUI_IsDecided(playerid)
 {
 	if (playerid < 0 || playerid >= MAX_PLAYERS)
 	{
-		return 1;
+		return true;
 	}
 	return g_CefDecided[playerid];
 }

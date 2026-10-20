@@ -122,7 +122,7 @@ Cmd_Dispatch(playerid, const cmdtext[])
 	new index = -1;
 	for (new i = 0; i < sizeof g_CmdNames; i++)
 	{
-		if (!strcmp(name, g_CmdNames[i], 0, 0x7FFFFFFF))
+		if (!strcmp(name, g_CmdNames[i], false, 0x7FFFFFFF))
 		{
 			index = i;
 			break;
@@ -134,7 +134,7 @@ Cmd_Dispatch(playerid, const cmdtext[])
 	}
 	if (!Util_IsPlaying(playerid))
 	{
-		if (!strcmp(name, "salta", 0, 0x7FFFFFFF) && gPlayer[playerid][pLoggedIn] && gPlayer[playerid][pAuthState] == 14)
+		if (!strcmp(name, "salta", false, 0x7FFFFFFF) && gPlayer[playerid][pLoggedIn] && gPlayer[playerid][pAuthState] == 14)
 		{
 			Intro_CmdSalta(playerid);
 			return 1;
@@ -225,7 +225,7 @@ public Cmd_ame(playerid, const params[])
 	}
 	new name[25], msg[256];
 	GetPlayerName(playerid, name, 25);
-	SetPlayerChatBubble(playerid, "* %s", -81.42773, 20.0, 6000, text);
+	SetPlayerChatBubble(playerid, "* %s", _:-81.42773, 20.0, 6000, text);
 	format(msg, 256, "> %s %s", name, text);
 	Util_SendNear(playerid, 0xC2A2DAFF, 20.0, msg);
 	return 1;
@@ -351,25 +351,25 @@ public Cmd_duty(playerid, const params[])
 
 public Cmd_r(playerid, const params[])
 {
-	Faction_CmdRadio(playerid, params, 0);
+	Faction_CmdRadio(playerid, params, false);
 	return 1;
 }
 
 public Cmd_dep(playerid, const params[])
 {
-	Faction_CmdRadio(playerid, params, 1);
+	Faction_CmdRadio(playerid, params, true);
 	return 1;
 }
 
 public Cmd_ammanetta(playerid, const params[])
 {
-	Faction_CmdAmmanetta(playerid, params, 1);
+	Faction_CmdAmmanetta(playerid, params, true);
 	return 1;
 }
 
 public Cmd_smanetta(playerid, const params[])
 {
-	Faction_CmdAmmanetta(playerid, params, 0);
+	Faction_CmdAmmanetta(playerid, params, false);
 	return 1;
 }
 
@@ -681,13 +681,13 @@ public Cmd_mostrastoria(playerid, const params[])
 
 public Cmd_atm(playerid, const params[])
 {
-	Bank_CmdAtm(playerid, 0);
+	Bank_CmdAtm(playerid, false);
 	return 1;
 }
 
 public Cmd_banca(playerid, const params[])
 {
-	Bank_CmdAtm(playerid, 1);
+	Bank_CmdAtm(playerid, true);
 	return 1;
 }
 
@@ -725,10 +725,10 @@ bool:Cmd_LivingGate(playerid)
 {
 	if (LD_IsReady())
 	{
-		return 1;
+		return true;
 	}
 	LD_SendBlock(playerid, 1);
-	return 0;
+	return false;
 }
 
 public Cmd_noleggio(playerid, const params[])

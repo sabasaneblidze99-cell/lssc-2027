@@ -201,12 +201,12 @@ bool:UI_FactionMemberListAdd(playerid, memberId, const name[], rank, status)
 {
 	if (!UI_FcValid(playerid))
 	{
-		return 0;
+		return false;
 	}
 	new n = g_UiFcCount[playerid];
 	if (n >= 32)
 	{
-		return 0;
+		return false;
 	}
 	if (rank < 1)
 	{
@@ -224,7 +224,7 @@ bool:UI_FactionMemberListAdd(playerid, memberId, const name[], rank, status)
 	g_UiFcMemInfo[playerid][n] = rank | status << 8;
 	strpack(g_UiFcMemName[playerid][n], name, 7);
 	g_UiFcCount[playerid] = n + 1;
-	return 1;
+	return true;
 }
 
 UI_FcMemberName(playerid, idx, out[], size)
@@ -236,24 +236,24 @@ bool:UI_FcEligible(ownRank, action, rank, reason[], size)
 {
 	if (action == 2)
 	{
-		return 1;
+		return true;
 	}
 	if (rank >= ownRank)
 	{
 		format(reason, size, "Il bersaglio non ha un grado inferiore al tuo.");
-		return 0;
+		return false;
 	}
 	if (action == 4 && rank + 1 >= ownRank)
 	{
 		format(reason, size, "Il nuovo grado deve restare inferiore al tuo.");
-		return 0;
+		return false;
 	}
 	if (action == 5 && rank <= 1)
 	{
 		format(reason, size, "Il membro e' gia' al grado minimo.");
-		return 0;
+		return false;
 	}
-	return 1;
+	return true;
 }
 
 UI_FcPagesCount(playerid)
@@ -433,7 +433,7 @@ bool:UI_FactionOnDialogResponse(playerid, dialogid, response, listitem, const in
 {
 	if (!UI_FcValid(playerid))
 	{
-		return 0;
+		return false;
 	}
 	switch (dialogid)
 	{
@@ -441,12 +441,12 @@ bool:UI_FactionOnDialogResponse(playerid, dialogid, response, listitem, const in
 		{
 			if (!response)
 			{
-				return 1;
+				return true;
 			}
 			if (listitem < 0 || listitem >= 8 || g_UiFcMenuAct[playerid][listitem] == 0)
 			{
 				UI_FactionMenuShow(playerid, g_UiFcFaction[playerid], g_UiFcRank[playerid], g_UiFcDuty[playerid], g_UiFcOnline[playerid], g_UiFcTotal[playerid]);
-				return 1;
+				return true;
 			}
 			new act = g_UiFcMenuAct[playerid][listitem];
 			if (act == 1)
@@ -457,7 +457,7 @@ bool:UI_FactionOnDialogResponse(playerid, dialogid, response, listitem, const in
 			{
 				if (g_UiFcRank[playerid] < 5)
 				{
-					return 1;
+					return true;
 				}
 				UI_FcInviteTargetShow(playerid, "");
 			}
@@ -465,11 +465,11 @@ bool:UI_FactionOnDialogResponse(playerid, dialogid, response, listitem, const in
 			{
 				if (act != 2 && g_UiFcRank[playerid] < 5)
 				{
-					return 1;
+					return true;
 				}
 				UI_OnFactionMenuAction(playerid, act);
 			}
-			return 1;
+			return true;
 		}
 		case 9321:
 		{
@@ -477,13 +477,13 @@ bool:UI_FactionOnDialogResponse(playerid, dialogid, response, listitem, const in
 			{
 				UI_FactionMenuShow(playerid, g_UiFcFaction[playerid], g_UiFcRank[playerid], g_UiFcDuty[playerid], g_UiFcOnline[playerid], g_UiFcTotal[playerid]);
 			}
-			return 1;
+			return true;
 		}
 		case 9322:
 		{
 			if (!response)
 			{
-				return 1;
+				return true;
 			}
 			new page = g_UiFcPage[playerid];
 			new pages = UI_FcPagesCount(playerid);
@@ -496,7 +496,7 @@ bool:UI_FactionOnDialogResponse(playerid, dialogid, response, listitem, const in
 			if (listitem < 0)
 			{
 				UI_FcMembersPage(playerid, page);
-				return 1;
+				return true;
 			}
 			if (listitem < n)
 			{
@@ -506,7 +506,7 @@ bool:UI_FactionOnDialogResponse(playerid, dialogid, response, listitem, const in
 				{
 					g_UiFcSel[playerid] = idx;
 					UI_FcMemberInfoShow(playerid, idx);
-					return 1;
+					return true;
 				}
 				new reason[64];
 				reason[0] = 0;
@@ -517,10 +517,10 @@ bool:UI_FactionOnDialogResponse(playerid, dialogid, response, listitem, const in
 						SendClientMessage(playerid, -10066177, reason);
 					}
 					UI_FcMembersPage(playerid, page);
-					return 1;
+					return true;
 				}
 				UI_FcConfirmShow(playerid, idx);
-				return 1;
+				return true;
 			}
 			new pos = listitem - n;
 			if (page > 0)
@@ -528,17 +528,17 @@ bool:UI_FactionOnDialogResponse(playerid, dialogid, response, listitem, const in
 				if (pos == 0)
 				{
 					UI_FcMembersPage(playerid, page - 1);
-					return 1;
+					return true;
 				}
 				pos--;
 			}
 			if (page < pages - 1 && pos == 0)
 			{
 				UI_FcMembersPage(playerid, page + 1);
-				return 1;
+				return true;
 			}
 			UI_FcMembersPage(playerid, page);
-			return 1;
+			return true;
 		}
 		case 9323:
 		{
@@ -546,7 +546,7 @@ bool:UI_FactionOnDialogResponse(playerid, dialogid, response, listitem, const in
 			{
 				UI_FcMembersPage(playerid, g_UiFcPage[playerid]);
 			}
-			return 1;
+			return true;
 		}
 		case 9324:
 		{
@@ -554,66 +554,66 @@ bool:UI_FactionOnDialogResponse(playerid, dialogid, response, listitem, const in
 			new mode = g_UiFcMode[playerid];
 			if (idx < 0 || idx >= g_UiFcCount[playerid])
 			{
-				return 1;
+				return true;
 			}
 			if (!response)
 			{
 				UI_FcMembersPage(playerid, g_UiFcPage[playerid]);
-				return 1;
+				return true;
 			}
 			new reason[64];
 			if (g_UiFcRank[playerid] < 5 || !UI_FcEligible(g_UiFcRank[playerid], mode, g_UiFcMemInfo[playerid][idx] & 255, reason, 64))
 			{
-				return 1;
+				return true;
 			}
 			new memberId = g_UiFcMemId[playerid][idx];
 			g_UiFcSel[playerid] = -1;
 			UI_OnFactionMemberAction(playerid, mode, memberId);
-			return 1;
+			return true;
 		}
 		case 9325:
 		{
 			if (!response)
 			{
-				return 1;
+				return true;
 			}
 			if (g_UiFcRank[playerid] < 5)
 			{
-				return 1;
+				return true;
 			}
 			new len = strlen(inputtext), bool:digits = len >= 1 && len <= 4;
 			for (new i = 0; digits && i < len; i++)
 			{
 				if (inputtext[i] < 48 || inputtext[i] > 57)
 				{
-					digits = 0;
+					digits = false;
 				}
 			}
 			new target = digits ? strval(inputtext) : -1;
 			if (target < 0 || target >= MAX_PLAYERS || !IsPlayerConnected(target))
 			{
 				UI_FcInviteTargetShow(playerid, "{FF4444}ID non valido o giocatore non connesso.");
-				return 1;
+				return true;
 			}
 			if (target == playerid)
 			{
 				UI_FcInviteTargetShow(playerid, "{FF4444}Non puoi invitare te stesso.");
-				return 1;
+				return true;
 			}
 			UI_OnFactionInviteTarget(playerid, target);
-			return 1;
+			return true;
 		}
 		case 9326:
 		{
 			UI_OnFactionInviteReply(playerid, response ? 1 : 0);
-			return 1;
+			return true;
 		}
 		case 9327:
 		{
-			return 1;
+			return true;
 		}
 	}
-	return 0;
+	return false;
 }
 
 PlayerText:UI_FhText(playerid, Float:x, Float:y, const text[], Float:lw, Float:lh, color, t_TEXT_DRAW_ALIGN:align)
@@ -623,7 +623,7 @@ PlayerText:UI_FhText(playerid, Float:x, Float:y, const text[], Float:lw, Float:l
 	PlayerTextDrawAlignment(playerid, td, align);
 	PlayerTextDrawColour(playerid, td, color);
 	PlayerTextDrawFont(playerid, td, 1);
-	PlayerTextDrawSetProportional(playerid, td, 1);
+	PlayerTextDrawSetProportional(playerid, td, true);
 	PlayerTextDrawSetOutline(playerid, td, 1);
 	PlayerTextDrawSetShadow(playerid, td, 0);
 	PlayerTextDrawBackgroundColour(playerid, td, 255);
@@ -635,7 +635,7 @@ PlayerText:UI_FhBox(playerid, Float:x, Float:y, Float:w, Float:h, color)
 	new PlayerText:td = Lang_CreatePlayerTextDraw(playerid, x, y, "_");
 	PlayerTextDrawLetterSize(playerid, td, 0.0, (h / 9.0));
 	PlayerTextDrawTextSize(playerid, td, (x + w), 0.0);
-	PlayerTextDrawUseBox(playerid, td, 1);
+	PlayerTextDrawUseBox(playerid, td, true);
 	PlayerTextDrawBoxColour(playerid, td, color);
 	PlayerTextDrawFont(playerid, td, 1);
 	PlayerTextDrawSetShadow(playerid, td, 0);
@@ -654,9 +654,9 @@ UI_FhCreate(playerid)
 		return 0;
 	}
 	new Float:left = (476.0 - 150.0);
-	g_UiFHud[playerid][0] = UI_FhBox(playerid, left, 356.0, 150.0, 24.0, 153);
-	g_UiFHud[playerid][1] = UI_FhText(playerid, (5.0 + left), (356.0 + 2.0), "IN SERVIZIO", 0.2, 0.9, -1, 1);
-	g_UiFHud[playerid][2] = UI_FhText(playerid, (5.0 + left), (356.0 + 12.0), "Kit medico: 0", 0.2, 0.9, -1, 1);
+	g_UiFHud[playerid][0] = _:UI_FhBox(playerid, left, 356.0, 150.0, 24.0, 153);
+	g_UiFHud[playerid][1] = UI_FhText(playerid, (5.0 + left), (356.0 + 2.0), "IN SERVIZIO", 0.2, 0.9, -1, t_TEXT_DRAW_ALIGN:1);
+	g_UiFHud[playerid][2] = UI_FhText(playerid, (5.0 + left), (356.0 + 12.0), "Kit medico: 0", 0.2, 0.9, -1, t_TEXT_DRAW_ALIGN:1);
 	g_UiFHudCreated[playerid] = 1;
 	return 0;
 }
@@ -667,19 +667,19 @@ UI_FhApply(playerid, faction, rank, kitCharges)
 	UI_FcRankText(faction, rank, rankName, 24);
 	format(str, 64, "IN SERVIZIO - %s", rankName);
 	Lang_PlayerTextDrawSetString(playerid, g_UiFHud[playerid][1], str);
-	PlayerTextDrawColour(playerid, g_UiFHud[playerid][1], g_UiFcColor[faction]);
-	PlayerTextDrawShow(playerid, g_UiFHud[playerid][1]);
+	PlayerTextDrawColour(playerid, PlayerText:g_UiFHud[playerid][1], g_UiFcColor[faction]);
+	PlayerTextDrawShow(playerid, PlayerText:g_UiFHud[playerid][1]);
 	if (kitCharges >= 0)
 	{
 		format(str, 64, "Kit medico: %d/%d", kitCharges, 8);
 		Lang_PlayerTextDrawSetString(playerid, g_UiFHud[playerid][2], str);
-		PlayerTextDrawColour(playerid, g_UiFHud[playerid][2], kitCharges == 0 ? -10066177 : -1);
-		PlayerTextDrawShow(playerid, g_UiFHud[playerid][2]);
+		PlayerTextDrawColour(playerid, PlayerText:g_UiFHud[playerid][2], kitCharges == 0 ? -10066177 : -1);
+		PlayerTextDrawShow(playerid, PlayerText:g_UiFHud[playerid][2]);
 		g_UiFHudKit[playerid] = 1;
 	}
 	else if (g_UiFHudKit[playerid])
 	{
-		PlayerTextDrawHide(playerid, g_UiFHud[playerid][2]);
+		PlayerTextDrawHide(playerid, PlayerText:g_UiFHud[playerid][2]);
 		g_UiFHudKit[playerid] = 0;
 	}
 }
@@ -697,8 +697,8 @@ UI_FactionHudShow(playerid, faction, rank)
 	UI_FhCreate(playerid);
 	g_UiFHudShown[playerid] = 1;
 	g_UiFHudKit[playerid] = 0;
-	PlayerTextDrawShow(playerid, g_UiFHud[playerid][0]);
-	PlayerTextDrawHide(playerid, g_UiFHud[playerid][2]);
+	PlayerTextDrawShow(playerid, PlayerText:g_UiFHud[playerid][0]);
+	PlayerTextDrawHide(playerid, PlayerText:g_UiFHud[playerid][2]);
 	UI_FhApply(playerid, faction, rank, -1);
 	return 0;
 }
@@ -727,7 +727,7 @@ UI_FactionHudHide(playerid)
 	g_UiFHudKit[playerid] = 0;
 	for (new i = 0; i < 3; i++)
 	{
-		PlayerTextDrawHide(playerid, g_UiFHud[playerid][i]);
+		PlayerTextDrawHide(playerid, PlayerText:g_UiFHud[playerid][i]);
 	}
 	return 0;
 }
@@ -741,12 +741,12 @@ UI_IhCreate(playerid)
 	{
 		return 0;
 	}
-	g_UiIHud[playerid][0] = UI_FhBox(playerid, 210.0, 60.0, 220.0, 58.0, 170);
-	g_UiIHud[playerid][1] = UI_FhText(playerid, (210.0 + 6.0), (60.0 + 2.0), "SEI FERITO", 0.3, 1.3, -12303105, 1);
-	g_UiIHud[playerid][2] = UI_FhText(playerid, (210.0 + 6.0), (60.0 + 21.0), "Ricovero automatico tra 3:00", 0.22, 1.0, -1, 1);
+	g_UiIHud[playerid][0] = _:UI_FhBox(playerid, 210.0, 60.0, 220.0, 58.0, 170);
+	g_UiIHud[playerid][1] = UI_FhText(playerid, (210.0 + 6.0), (60.0 + 2.0), "SEI FERITO", 0.3, 1.3, -12303105, t_TEXT_DRAW_ALIGN:1);
+	g_UiIHud[playerid][2] = UI_FhText(playerid, (210.0 + 6.0), (60.0 + 21.0), "Ricovero automatico tra 3:00", 0.22, 1.0, -1, t_TEXT_DRAW_ALIGN:1);
 	g_UiIHud[playerid][3] = UI_FhBox(playerid, (210.0 + 6.0), (60.0 + 35.0), 208.0, 5.0, 0x444444FF);
 	g_UiIHud[playerid][4] = UI_FhBox(playerid, (210.0 + 6.0), (60.0 + 35.0), 208.0, 5.0, -12303105);
-	g_UiIHud[playerid][5] = UI_FhText(playerid, (210.0 + 6.0), (60.0 + 43.0), "Attendi un medico EMS. Non puoi muoverti.", 0.18, 0.85, -0.005729198, 1);
+	g_UiIHud[playerid][5] = UI_FhText(playerid, (210.0 + 6.0), (60.0 + 43.0), "Attendi un medico EMS. Non puoi muoverti.", 0.18, 0.85, _:-0.005729198, t_TEXT_DRAW_ALIGN:1);
 	g_UiIHudCreated[playerid] = 1;
 	return 0;
 }
@@ -770,11 +770,11 @@ UI_InjuryHudUpdate(playerid, secondsLeft)
 	Lang_PlayerTextDrawSetString(playerid, g_UiIHud[playerid][2], str);
 	new bool:warn = secondsLeft <= 30;
 	new bool:blinkOff = warn && GetTickCount() / 500 % 2 == 1;
-	PlayerTextDrawColour(playerid, g_UiIHud[playerid][2], warn ? (blinkOff ? -12303292 : -12303105) : -1);
-	PlayerTextDrawShow(playerid, g_UiIHud[playerid][2]);
+	PlayerTextDrawColour(playerid, PlayerText:g_UiIHud[playerid][2], warn ? (blinkOff ? -12303292 : -12303105) : -1);
+	PlayerTextDrawShow(playerid, PlayerText:g_UiIHud[playerid][2]);
 	new Float:fraction = (float(secondsLeft) / float(180));
-	PlayerTextDrawTextSize(playerid, g_UiIHud[playerid][4], (0.1 + ((210.0 + 6.0) + (208.0 * fraction))), 0.0);
-	PlayerTextDrawShow(playerid, g_UiIHud[playerid][4]);
+	PlayerTextDrawTextSize(playerid, PlayerText:g_UiIHud[playerid][4], (0.1 + ((210.0 + 6.0) + (208.0 * fraction))), 0.0);
+	PlayerTextDrawShow(playerid, PlayerText:g_UiIHud[playerid][4]);
 	return 0;
 }
 
@@ -788,7 +788,7 @@ UI_InjuryHudShow(playerid, secondsLeft)
 	g_UiIHudShown[playerid] = 1;
 	for (new i = 0; i < 6; i++)
 	{
-		PlayerTextDrawShow(playerid, g_UiIHud[playerid][i]);
+		PlayerTextDrawShow(playerid, PlayerText:g_UiIHud[playerid][i]);
 	}
 	UI_InjuryHudUpdate(playerid, secondsLeft);
 	return 0;
@@ -803,7 +803,7 @@ UI_InjuryHudHide(playerid)
 	g_UiIHudShown[playerid] = 0;
 	for (new i = 0; i < 6; i++)
 	{
-		PlayerTextDrawHide(playerid, g_UiIHud[playerid][i]);
+		PlayerTextDrawHide(playerid, PlayerText:g_UiIHud[playerid][i]);
 	}
 	return 0;
 }
@@ -847,7 +847,7 @@ UI_FactionUiDestroy(playerid)
 	{
 		for (new i = 0; i < 3; i++)
 		{
-			PlayerTextDrawDestroy(playerid, g_UiFHud[playerid][i]);
+			PlayerTextDrawDestroy(playerid, PlayerText:g_UiFHud[playerid][i]);
 			g_UiFHud[playerid][i] = 65535;
 		}
 	}
@@ -855,7 +855,7 @@ UI_FactionUiDestroy(playerid)
 	{
 		for (new i = 0; i < 6; i++)
 		{
-			PlayerTextDrawDestroy(playerid, g_UiIHud[playerid][i]);
+			PlayerTextDrawDestroy(playerid, PlayerText:g_UiIHud[playerid][i]);
 			g_UiIHud[playerid][i] = 65535;
 		}
 	}

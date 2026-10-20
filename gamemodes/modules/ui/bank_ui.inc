@@ -41,7 +41,7 @@ UI_BankFmt(value, dest[], size)
 	{
 		value = -value;
 	}
-	valstr(s, value, 0);
+	valstr(s, value, false);
 	len = strlen(s);
 	dest[0] = 0;
 	if (neg)
@@ -73,7 +73,7 @@ bool:UI_BankParseAmount(const s[], &value)
 	{
 		if (digits >= 9)
 		{
-			return 0;
+			return false;
 		}
 		value = value * 10 + (s[i] - 48);
 		digits++;
@@ -102,12 +102,12 @@ UI_BankFindTarget(const input[])
 		return -1;
 	}
 	strmid(text, input, start, end, 25);
-	new bool:numeric = 1;
+	new bool:numeric = true;
 	for (new i = 0; text[i] != 0; i++)
 	{
 		if (text[i] < 48 || text[i] > 57)
 		{
-			numeric = 0;
+			numeric = false;
 			break;
 		}
 	}
@@ -128,11 +128,11 @@ UI_BankFindTarget(const input[])
 			continue;
 		}
 		GetPlayerName(p, name, 25);
-		if (!strcmp(name, text, 1, 0x7FFFFFFF))
+		if (!strcmp(name, text, true, 0x7FFFFFFF))
 		{
 			return p;
 		}
-		if (strfind(name, text, 1, 0) != -1)
+		if (strfind(name, text, true, 0) != -1)
 		{
 			if (found != -1)
 			{
@@ -162,7 +162,7 @@ UI_BankTimerEnsure(playerid)
 {
 	if (g_UiBkTimer[playerid] == 0)
 	{
-		g_UiBkTimer[playerid] = SetTimerEx("UI_BankOnTimer", 1000, 1, "d", playerid);
+		g_UiBkTimer[playerid] = SetTimerEx("UI_BankOnTimer", 1000, true, "d", playerid);
 	}
 }
 
@@ -217,7 +217,7 @@ UI_BankToastCreate(playerid)
 	PlayerTextDrawAlignment(playerid, td, 1);
 	PlayerTextDrawColour(playerid, td, 0x66DD66FF);
 	PlayerTextDrawFont(playerid, td, 1);
-	PlayerTextDrawSetProportional(playerid, td, 1);
+	PlayerTextDrawSetProportional(playerid, td, true);
 	PlayerTextDrawSetOutline(playerid, td, 1);
 	PlayerTextDrawSetShadow(playerid, td, 0);
 	PlayerTextDrawBackgroundColour(playerid, td, 255);
@@ -335,7 +335,7 @@ bool:UI_BankRange(playerid, op, &lo, &hi)
 		default:
 		{
 			hi = 0;
-			return 0;
+			return false;
 		}
 	}
 	if (hi > 0x3B9ACA00)
@@ -367,7 +367,7 @@ UI_BankAmountShow(playerid, op, const err[])
 			}
 		}
 		SendClientMessage(playerid, -10066177, msg);
-		UI_BankToast(playerid, "Operazione non disponibile", 0);
+		UI_BankToast(playerid, "Operazione non disponibile", false);
 		UI_BankMenuShow(playerid);
 		return 0;
 	}
@@ -558,7 +558,7 @@ UI_BankReject(playerid, const msg[])
 	if (msg[0] != 0)
 	{
 		SendClientMessage(playerid, -10066177, msg);
-		UI_BankToast(playerid, msg, 0);
+		UI_BankToast(playerid, msg, false);
 	}
 	UI_BankMenuShow(playerid);
 	return 0;
@@ -642,7 +642,7 @@ public UI_BankOnTimer(playerid)
 				HidePlayerDialog(playerid);
 			}
 			SendClientMessage(playerid, -2994689, "La conferma del bonifico e' scaduta: nessun addebito.");
-			UI_BankToast(playerid, "Bonifico scaduto", 0);
+			UI_BankToast(playerid, "Bonifico scaduto", false);
 			UI_OnBankTransferExpired(playerid, target, amount);
 		}
 	}
@@ -657,7 +657,7 @@ bool:UI_BankOnDialogResponse(playerid, dialogid, response, listitem, const input
 {
 	if (!UI_BankValid(playerid) || !UI_BankIsBankDialog(dialogid))
 	{
-		return 0;
+		return false;
 	}
 	switch (dialogid)
 	{
@@ -665,7 +665,7 @@ bool:UI_BankOnDialogResponse(playerid, dialogid, response, listitem, const input
 		{
 			if (!response)
 			{
-				return 1;
+				return true;
 			}
 			UI_OnBankBalanceRefresh(playerid);
 			switch (listitem)
@@ -689,7 +689,7 @@ bool:UI_BankOnDialogResponse(playerid, dialogid, response, listitem, const input
 				}
 				case 4:
 				{
-					UI_BankToast(playerid, "Caricamento estratto conto...", 1);
+					UI_BankToast(playerid, "Caricamento estratto conto...", true);
 					UI_OnBankStatement(playerid, 0);
 				}
 				default:
@@ -697,7 +697,7 @@ bool:UI_BankOnDialogResponse(playerid, dialogid, response, listitem, const input
 					UI_BankMenuShow(playerid);
 				}
 			}
-			return 1;
+			return true;
 		}
 		case 9505:
 		{
@@ -705,34 +705,34 @@ bool:UI_BankOnDialogResponse(playerid, dialogid, response, listitem, const input
 			{
 				UI_BankMenuShow(playerid);
 			}
-			return 1;
+			return true;
 		}
 		case 9502:
 		{
 			if (!response)
 			{
 				UI_BankMenuShow(playerid);
-				return 1;
+				return true;
 			}
 			new target = UI_BankFindTarget(inputtext);
 			if (target == -2)
 			{
 				UI_BankTargetShow(playerid, "{FF6666}Piu' giocatori corrispondono: usa l'ID o un nome piu' preciso.\n\n");
-				return 1;
+				return true;
 			}
 			if (target < 0)
 			{
 				UI_BankTargetShow(playerid, "{FF6666}Giocatore non trovato tra gli online.\n\n");
-				return 1;
+				return true;
 			}
 			if (target == playerid)
 			{
 				UI_BankTargetShow(playerid, "{FF6666}Non puoi inviare un bonifico a te stesso.\n\n");
-				return 1;
+				return true;
 			}
 			g_UiBkTarget[playerid] = target;
 			UI_BankAmountShow(playerid, 2, "");
-			return 1;
+			return true;
 		}
 		case 9501:
 		{
@@ -747,18 +747,18 @@ bool:UI_BankOnDialogResponse(playerid, dialogid, response, listitem, const input
 				{
 					UI_BankMenuShow(playerid);
 				}
-				return 1;
+				return true;
 			}
 			new amount = 0, lo = 0, hi = 0;
 			if (!UI_BankRange(playerid, op, lo, hi))
 			{
 				UI_BankAmountShow(playerid, op, "");
-				return 1;
+				return true;
 			}
 			if (!UI_BankParseAmount(inputtext, amount))
 			{
 				UI_BankAmountShow(playerid, op, "{FF6666}Importo non valido: solo cifre, intero positivo.\n\n");
-				return 1;
+				return true;
 			}
 			if (amount < lo || amount > hi)
 			{
@@ -767,7 +767,7 @@ bool:UI_BankOnDialogResponse(playerid, dialogid, response, listitem, const input
 				UI_BankFmt(hi, sHi, 16);
 				format(err, 160, "{FF6666}Importo fuori limite: da $%s a $%s.\n\n", sLo, sHi);
 				UI_BankAmountShow(playerid, op, err);
-				return 1;
+				return true;
 			}
 			switch (op)
 			{
@@ -786,18 +786,18 @@ bool:UI_BankOnDialogResponse(playerid, dialogid, response, listitem, const input
 					{
 						g_UiBkTarget[playerid] = -1;
 						UI_BankTargetShow(playerid, "{FF6666}Il destinatario non e' piu' disponibile: sceglilo di nuovo.\n\n");
-						return 1;
+						return true;
 					}
 					UI_OnBankTransfer(playerid, target, amount);
 				}
 			}
-			return 1;
+			return true;
 		}
 		case 9503:
 		{
 			if (!g_UiBkConfActive[playerid])
 			{
-				return 1;
+				return true;
 			}
 			new target = g_UiBkConfTarget[playerid], amount = g_UiBkConfAmount[playerid];
 			if (!response)
@@ -807,15 +807,15 @@ bool:UI_BankOnDialogResponse(playerid, dialogid, response, listitem, const input
 				{
 					UI_BankTimerStop(playerid);
 				}
-				UI_BankToast(playerid, "Bonifico annullato", 0);
+				UI_BankToast(playerid, "Bonifico annullato", false);
 				UI_OnBankTransferCancel(playerid, target, amount);
-				return 1;
+				return true;
 			}
-			new name[25], bool:same = 0;
+			new name[25], bool:same = false;
 			if (target >= 0 && target < MAX_PLAYERS && IsPlayerConnected(target))
 			{
 				GetPlayerName(target, name, 25);
-				same = !strcmp(name, g_UiBkConfName[playerid], 0, 0x7FFFFFFF);
+				same = !strcmp(name, g_UiBkConfName[playerid], false, 0x7FFFFFFF);
 			}
 			UI_BankConfReset(playerid);
 			if (!UI_BankNeedTimer(playerid))
@@ -825,19 +825,19 @@ bool:UI_BankOnDialogResponse(playerid, dialogid, response, listitem, const input
 			if (!same)
 			{
 				SendClientMessage(playerid, -10066177, "Il destinatario non e' piu' online: bonifico annullato.");
-				UI_BankToast(playerid, "Destinatario non disponibile", 0);
+				UI_BankToast(playerid, "Destinatario non disponibile", false);
 				UI_OnBankTransferCancel(playerid, target, amount);
-				return 1;
+				return true;
 			}
 			UI_OnBankTransferConfirm(playerid, target, amount);
-			return 1;
+			return true;
 		}
 		case 9504:
 		{
 			if (!response)
 			{
 				UI_BankMenuShow(playerid);
-				return 1;
+				return true;
 			}
 			if (g_UiBkStCount[playerid] == 0)
 			{
@@ -849,24 +849,24 @@ bool:UI_BankOnDialogResponse(playerid, dialogid, response, listitem, const input
 				{
 					UI_BankMenuShow(playerid);
 				}
-				return 1;
+				return true;
 			}
 			if (listitem >= 0 && listitem == g_UiBkStNavNext[playerid] && g_UiBkStNext[playerid])
 			{
-				UI_BankToast(playerid, "Caricamento estratto conto...", 1);
+				UI_BankToast(playerid, "Caricamento estratto conto...", true);
 				UI_OnBankStatement(playerid, g_UiBkStPage[playerid] + 1);
 			}
 			else if (listitem >= 0 && listitem == g_UiBkStNavPrev[playerid] && g_UiBkStPage[playerid] > 0)
 			{
-				UI_BankToast(playerid, "Caricamento estratto conto...", 1);
+				UI_BankToast(playerid, "Caricamento estratto conto...", true);
 				UI_OnBankStatement(playerid, g_UiBkStPage[playerid] - 1);
 			}
 			else
 			{
 				UI_BankStatementShow(playerid);
 			}
-			return 1;
+			return true;
 		}
 	}
-	return 1;
+	return true;
 }

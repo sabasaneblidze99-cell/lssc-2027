@@ -173,7 +173,7 @@ bool:Admin_ParseReason(const params[], pos, reason[], size)
 	reason[0] = 0;
 	if (!Util_SanitizeText(params[pos], reason, min(size - 1, 64)))
 	{
-		return 0;
+		return false;
 	}
 	for (new i = 0; reason[i] != 0; i++)
 	{
@@ -211,7 +211,7 @@ Admin_FindByName(const name[])
 			continue;
 		}
 		GetPlayerName(i, cur, 25);
-		if (!strcmp(cur, name, 1, 0x7FFFFFFF))
+		if (!strcmp(cur, name, true, 0x7FFFFFFF))
 		{
 			return i;
 		}
@@ -290,35 +290,35 @@ bool:Admin_IsMuted(playerid)
 {
 	if (playerid < 0 || playerid >= MAX_PLAYERS)
 	{
-		return 0;
+		return false;
 	}
 	new until = gPlayer[playerid][pMutedUntil];
 	if (until == 0)
 	{
-		return 0;
+		return false;
 	}
 	if (until > gettime())
 	{
-		return 1;
+		return true;
 	}
 	gPlayer[playerid][pMutedUntil] = 0;
 	if (gPlayer[playerid][pAccountId] > 0)
 	{
 		DB_SetMute(gPlayer[playerid][pAccountId], 0);
 	}
-	return 0;
+	return false;
 }
 
 bool:Admin_CheckMuted(playerid)
 {
 	if (!Admin_IsMuted(playerid))
 	{
-		return 0;
+		return false;
 	}
 	new left[24];
 	Admin_FormatDuration(gPlayer[playerid][pMutedUntil] - gettime(), left, 24);
 	SendClientMessage(playerid, -10270721, "Sei mutato ancora %s.", left);
-	return 1;
+	return true;
 }
 
 Admin_OnText(playerid)
@@ -356,7 +356,7 @@ Admin_PendTake(op, accountKey, const nameKey[])
 		{
 			continue;
 		}
-		if (accountKey <= 0 && nameKey[0] != 0 && strcmp(g_AdmPend[i][apTargetName], nameKey, 1, 0x7FFFFFFF) != 0)
+		if (accountKey <= 0 && nameKey[0] != 0 && strcmp(g_AdmPend[i][apTargetName], nameKey, true, 0x7FFFFFFF) != 0)
 		{
 			continue;
 		}
@@ -670,7 +670,7 @@ Admin_OnRconCommand(const cmd[])
 {
 	new pos = 0, word[16], name[25], tlv[12], level = 0;
 	Util_NextToken(cmd, pos, word, 16);
-	if (strcmp(word, "setadmin", 1, 0x7FFFFFFF) != 0)
+	if (strcmp(word, "setadmin", true, 0x7FFFFFFF) != 0)
 	{
 		return 0;
 	}

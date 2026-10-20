@@ -215,7 +215,7 @@ UI_LvFmt(value, dest[], size)
 	{
 		value = -value;
 	}
-	valstr(s, value, 0);
+	valstr(s, value, false);
 	len = strlen(s);
 	dest[0] = 0;
 	if (neg)
@@ -311,7 +311,7 @@ bool:UI_LvParseAmount(const s[], &value)
 	{
 		if (digits >= 9)
 		{
-			return 0;
+			return false;
 		}
 		value = value * 10 + (s[i] - 48);
 		digits++;
@@ -433,7 +433,7 @@ PlayerText:UI_LvText(playerid, Float:x, Float:y, const text[], Float:lw, Float:l
 	PlayerTextDrawAlignment(playerid, td, align);
 	PlayerTextDrawColour(playerid, td, color);
 	PlayerTextDrawFont(playerid, td, 1);
-	PlayerTextDrawSetProportional(playerid, td, 1);
+	PlayerTextDrawSetProportional(playerid, td, true);
 	PlayerTextDrawSetOutline(playerid, td, 1);
 	PlayerTextDrawSetShadow(playerid, td, 0);
 	PlayerTextDrawBackgroundColour(playerid, td, 255);
@@ -445,7 +445,7 @@ PlayerText:UI_LvBox(playerid, Float:x, Float:y, Float:w, Float:h, color)
 	new PlayerText:td = Lang_CreatePlayerTextDraw(playerid, x, y, "_");
 	PlayerTextDrawLetterSize(playerid, td, 0.0, (h / 9.0));
 	PlayerTextDrawTextSize(playerid, td, (x + w), 0.0);
-	PlayerTextDrawUseBox(playerid, td, 1);
+	PlayerTextDrawUseBox(playerid, td, true);
 	PlayerTextDrawBoxColour(playerid, td, color);
 	PlayerTextDrawFont(playerid, td, 1);
 	PlayerTextDrawSetShadow(playerid, td, 0);
@@ -459,18 +459,18 @@ UI_LvTdEnsure(playerid)
 	{
 		return 0;
 	}
-	g_UiLvTd[playerid][0] = UI_LvBox(playerid, 14.0, 150.0, 200.0, 56.0, 153);
-	g_UiLvTd[playerid][1] = UI_LvText(playerid, (14.0 + 5.0), (150.0 + 2.0), "CONTRATTO", 0.22, 1.0, -2994689, 1);
-	g_UiLvTd[playerid][2] = UI_LvText(playerid, (14.0 + 5.0), (150.0 + 15.0), "_", 0.2, 0.9, -1, 1);
-	g_UiLvTd[playerid][3] = UI_LvText(playerid, (14.0 + 5.0), (150.0 + 27.0), "_", 0.2, 0.9, -1, 1);
-	g_UiLvTd[playerid][4] = UI_LvText(playerid, (14.0 + 5.0), (150.0 + 39.0), "_", 0.2, 0.9, 0xC8C8C8FF, 1);
-	g_UiLvTd[playerid][5] = UI_LvBox(playerid, 14.0, 212.0, 150.0, 32.0, 153);
-	g_UiLvTd[playerid][6] = UI_LvText(playerid, (14.0 + 5.0), (212.0 + 2.0), "TASSAMETRO", 0.22, 1.0, -2994689, 1);
-	g_UiLvTd[playerid][7] = UI_LvText(playerid, (14.0 + 5.0), (212.0 + 15.0), "_", 0.26, 1.1, 0x66DD66FF, 1);
-	g_UiLvTd[playerid][8] = UI_LvBox(playerid, 14.0, 252.0, 220.0, 40.0, 153);
-	g_UiLvTd[playerid][9] = UI_LvText(playerid, (14.0 + 5.0), (252.0 + 2.0), "_", 0.2, 0.9, -1, 1);
-	PlayerTextDrawTextSize(playerid, g_UiLvTd[playerid][9], ((14.0 + 220.0) - 4.0), 0.0);
-	g_UiLvTd[playerid][10] = UI_LvText(playerid, 320.0, 318.0, "_", 0.24, 1.1, -2994689, 2);
+	g_UiLvTd[playerid][0] = _:UI_LvBox(playerid, 14.0, 150.0, 200.0, 56.0, 153);
+	g_UiLvTd[playerid][1] = UI_LvText(playerid, (14.0 + 5.0), (150.0 + 2.0), "CONTRATTO", 0.22, 1.0, -2994689, t_TEXT_DRAW_ALIGN:1);
+	g_UiLvTd[playerid][2] = UI_LvText(playerid, (14.0 + 5.0), (150.0 + 15.0), "_", 0.2, 0.9, -1, t_TEXT_DRAW_ALIGN:1);
+	g_UiLvTd[playerid][3] = UI_LvText(playerid, (14.0 + 5.0), (150.0 + 27.0), "_", 0.2, 0.9, -1, t_TEXT_DRAW_ALIGN:1);
+	g_UiLvTd[playerid][4] = UI_LvText(playerid, (14.0 + 5.0), (150.0 + 39.0), "_", 0.2, 0.9, 0xC8C8C8FF, t_TEXT_DRAW_ALIGN:1);
+	g_UiLvTd[playerid][5] = _:UI_LvBox(playerid, 14.0, 212.0, 150.0, 32.0, 153);
+	g_UiLvTd[playerid][6] = UI_LvText(playerid, (14.0 + 5.0), (212.0 + 2.0), "TASSAMETRO", 0.22, 1.0, -2994689, t_TEXT_DRAW_ALIGN:1);
+	g_UiLvTd[playerid][7] = UI_LvText(playerid, (14.0 + 5.0), (212.0 + 15.0), "_", 0.26, 1.1, 0x66DD66FF, t_TEXT_DRAW_ALIGN:1);
+	g_UiLvTd[playerid][8] = _:UI_LvBox(playerid, 14.0, 252.0, 220.0, 40.0, 153);
+	g_UiLvTd[playerid][9] = UI_LvText(playerid, (14.0 + 5.0), (252.0 + 2.0), "_", 0.2, 0.9, -1, t_TEXT_DRAW_ALIGN:1);
+	PlayerTextDrawTextSize(playerid, PlayerText:g_UiLvTd[playerid][9], ((14.0 + 220.0) - 4.0), 0.0);
+	g_UiLvTd[playerid][10] = _:UI_LvText(playerid, 320.0, 318.0, "_", 0.24, 1.1, -2994689, t_TEXT_DRAW_ALIGN:2);
 	g_UiLvTdMade[playerid] = 1;
 	return 0;
 }
@@ -485,11 +485,11 @@ UI_LvTdShow(playerid, first, last, bool:show)
 	{
 		if (show)
 		{
-			PlayerTextDrawShow(playerid, g_UiLvTd[playerid][i]);
+			PlayerTextDrawShow(playerid, PlayerText:g_UiLvTd[playerid][i]);
 		}
 		else
 		{
-			PlayerTextDrawHide(playerid, g_UiLvTd[playerid][i]);
+			PlayerTextDrawHide(playerid, PlayerText:g_UiLvTd[playerid][i]);
 		}
 	}
 	return 0;
@@ -515,7 +515,7 @@ UI_LvTimerSync(playerid)
 	{
 		if (g_UiLvTimer[playerid] == 0)
 		{
-			g_UiLvTimer[playerid] = SetTimerEx("UI_LivingOnTimer", 1000, 1, "d", playerid);
+			g_UiLvTimer[playerid] = SetTimerEx("UI_LivingOnTimer", 1000, true, "d", playerid);
 		}
 	}
 	else
@@ -621,8 +621,8 @@ UI_LivingToast(playerid, const text[], kind)
 	}
 	UI_LvTdEnsure(playerid);
 	Lang_PlayerTextDrawSetString(playerid, g_UiLvTd[playerid][10], text);
-	PlayerTextDrawColour(playerid, g_UiLvTd[playerid][10], UI_LvToastColor(kind));
-	PlayerTextDrawShow(playerid, g_UiLvTd[playerid][10]);
+	PlayerTextDrawColour(playerid, PlayerText:g_UiLvTd[playerid][10], UI_LvToastColor(kind));
+	PlayerTextDrawShow(playerid, PlayerText:g_UiLvTd[playerid][10]);
 	g_UiLvToastTtl[playerid] = 4;
 	UI_LvTimerSync(playerid);
 	return 0;
@@ -683,17 +683,17 @@ bool:UI_LvBoardMatch(playerid, i)
 	new d = g_UiLvFltDistrict[playerid];
 	if (d != 0 && g_UiLvBdFrom[playerid][i] != d && g_UiLvBdTo[playerid][i] != d)
 	{
-		return 0;
+		return false;
 	}
 	if (g_UiLvFltKind[playerid] != 0 && g_UiLvBdKind[playerid][i] != g_UiLvFltKind[playerid])
 	{
-		return 0;
+		return false;
 	}
 	if (g_UiLvFltEligible[playerid] && g_UiLvBdBlock[playerid][i] != 0)
 	{
-		return 0;
+		return false;
 	}
-	return 1;
+	return true;
 }
 
 UI_LvRequirement(playerid, i, dest[], size)
@@ -959,7 +959,7 @@ UI_CityContractHud(playerid, contractId, ctState, const objective[], const desti
 	UI_LvHudRender(playerid);
 	if (!g_UiLvHudOn[playerid])
 	{
-		UI_LvTdShow(playerid, 0, 4, 1);
+		UI_LvTdShow(playerid, 0, 4, true);
 	}
 	g_UiLvHudOn[playerid] = 1;
 	UI_LvTimerSync(playerid);
@@ -978,7 +978,7 @@ UI_CityContractHudHide(playerid)
 	}
 	if (g_UiLvHudOn[playerid] && IsPlayerConnected(playerid))
 	{
-		UI_LvTdShow(playerid, 0, 4, 0);
+		UI_LvTdShow(playerid, 0, 4, false);
 	}
 	g_UiLvHudOn[playerid] = 0;
 	g_UiLvHudId[playerid] = 0;
@@ -1129,7 +1129,7 @@ UI_CityRepBegin(playerid)
 	}
 	for (new t = 0; t <= 2; t++)
 	{
-		g_UiLvRpHas[playerid][t] = 0;
+		g_UiLvRpHas[playerid][t] = false;
 	}
 	for (new d = 0; d <= 3; d++)
 	{
@@ -1144,7 +1144,7 @@ UI_CityRepTrack(playerid, track, points, completed, failed, ratingSum, ratingCnt
 	{
 		return 0;
 	}
-	g_UiLvRpHas[playerid][track] = 1;
+	g_UiLvRpHas[playerid][track] = true;
 	g_UiLvRpPoints[playerid][track] = points < 0 ? 0 : points;
 	g_UiLvRpDone[playerid][track] = completed < 0 ? 0 : completed;
 	g_UiLvRpFail[playerid][track] = failed < 0 ? 0 : failed;
@@ -1416,8 +1416,8 @@ UI_LivingTaxiMeter(playerid, fare, distanceM, bool:running)
 	format(line, 128, "$%s  -  %s", sFare, sDist);
 	Lang_PlayerTextDrawSetString(playerid, g_UiLvTd[playerid][7], line);
 	Lang_PlayerTextDrawSetString(playerid, g_UiLvTd[playerid][6], running ? "TASSAMETRO - in corsa" : "TASSAMETRO - fermo");
-	PlayerTextDrawColour(playerid, g_UiLvTd[playerid][7], running ? 0x66DD66FF : 0xC8C8C8FF);
-	UI_LvTdShow(playerid, 5, 7, 1);
+	PlayerTextDrawColour(playerid, PlayerText:g_UiLvTd[playerid][7], running ? 0x66DD66FF : 0xC8C8C8FF);
+	UI_LvTdShow(playerid, 5, 7, true);
 	g_UiLvMeterOn[playerid] = 1;
 	return 0;
 }
@@ -1430,7 +1430,7 @@ UI_LivingTaxiMeterHide(playerid)
 	}
 	if (g_UiLvMeterOn[playerid] && IsPlayerConnected(playerid))
 	{
-		UI_LvTdShow(playerid, 5, 7, 0);
+		UI_LvTdShow(playerid, 5, 7, false);
 	}
 	g_UiLvMeterOn[playerid] = 0;
 	return 0;
@@ -1649,16 +1649,16 @@ bool:UI_LvPrjCheck(playerid, amount, err[], size)
 	err[0] = 0;
 	if (!UI_LvPrjRange(playerid, lo, hi))
 	{
-		return 0;
+		return false;
 	}
 	if (amount < lo || amount > hi)
 	{
 		UI_LvFmt(lo, sLo, 16);
 		UI_LvFmt(hi, sHi, 16);
 		format(err, size, "{FF6666}Importo fuori limite: da $%s a $%s.\n\n", sLo, sHi);
-		return 0;
+		return false;
 	}
-	return 1;
+	return true;
 }
 
 UI_LivingProjectContribute(playerid, amount)
@@ -1771,7 +1771,7 @@ UI_LivingHint(playerid, step)
 	new text[160];
 	format(text, 160, "~y~Primo giorno %d/%d~n~~w~%s", step, 5, g_UiLvStepHint[step]);
 	Lang_PlayerTextDrawSetString(playerid, g_UiLvTd[playerid][9], text);
-	UI_LvTdShow(playerid, 8, 9, 1);
+	UI_LvTdShow(playerid, 8, 9, true);
 	g_UiLvHintTtl[playerid] = 10;
 	UI_LvTimerSync(playerid);
 	return 0;
@@ -1785,7 +1785,7 @@ UI_LivingHintHide(playerid)
 	}
 	if (g_UiLvHintTtl[playerid] > 0 && IsPlayerConnected(playerid))
 	{
-		UI_LvTdShow(playerid, 8, 9, 0);
+		UI_LvTdShow(playerid, 8, 9, false);
 	}
 	g_UiLvHintTtl[playerid] = 0;
 	if (IsPlayerConnected(playerid))
@@ -1876,7 +1876,7 @@ UI_LivingUiDestroy(playerid)
 	{
 		for (new i = 0; i < 11; i++)
 		{
-			PlayerTextDrawDestroy(playerid, g_UiLvTd[playerid][i]);
+			PlayerTextDrawDestroy(playerid, PlayerText:g_UiLvTd[playerid][i]);
 			g_UiLvTd[playerid][i] = 65535;
 		}
 	}
@@ -1928,7 +1928,7 @@ public UI_LivingOnTimer(playerid)
 		g_UiLvToastTtl[playerid]--;
 		if (g_UiLvToastTtl[playerid] <= 0 && g_UiLvTdMade[playerid])
 		{
-			PlayerTextDrawHide(playerid, g_UiLvTd[playerid][10]);
+			PlayerTextDrawHide(playerid, PlayerText:g_UiLvTd[playerid][10]);
 		}
 	}
 	if (g_UiLvHintTtl[playerid] > 0)
@@ -1936,7 +1936,7 @@ public UI_LivingOnTimer(playerid)
 		g_UiLvHintTtl[playerid]--;
 		if (g_UiLvHintTtl[playerid] <= 0)
 		{
-			UI_LvTdShow(playerid, 8, 9, 0);
+			UI_LvTdShow(playerid, 8, 9, false);
 		}
 	}
 	if (g_UiLvHudOn[playerid] && g_UiLvHudExpAt[playerid] != 0)
@@ -1982,7 +1982,7 @@ bool:UI_LivingOnDialogResponse(playerid, dialogid, response, listitem, const inp
 {
 	if (!UI_LvValid(playerid) || !UI_LvIsLivingDialog(dialogid))
 	{
-		return 0;
+		return false;
 	}
 	switch (dialogid)
 	{
@@ -1990,34 +1990,34 @@ bool:UI_LivingOnDialogResponse(playerid, dialogid, response, listitem, const inp
 		{
 			if (!response)
 			{
-				return 1;
+				return true;
 			}
 			if (listitem == 0)
 			{
 				UI_LvFilterShow(playerid);
-				return 1;
+				return true;
 			}
 			new row = listitem - 1, rows = g_UiLvBdRows[playerid];
 			if (row >= 0 && row < rows)
 			{
 				UI_LvDetailShow(playerid, g_UiLvBdRow[playerid][row]);
-				return 1;
+				return true;
 			}
 			if (row == (rows == 0 ? 1 : rows))
 			{
 				UI_LivingToast(playerid, "Aggiorno la bacheca...", 0);
 				UI_OnContractBoardRefresh(playerid);
-				return 1;
+				return true;
 			}
 			UI_LvBoardRender(playerid);
-			return 1;
+			return true;
 		}
 		case 9701:
 		{
 			if (!response)
 			{
 				UI_LvBoardRender(playerid);
-				return 1;
+				return true;
 			}
 			switch (listitem)
 			{
@@ -2036,11 +2036,11 @@ bool:UI_LivingOnDialogResponse(playerid, dialogid, response, listitem, const inp
 				default:
 				{
 					UI_LvBoardRender(playerid);
-					return 1;
+					return true;
 				}
 			}
 			UI_LvFilterShow(playerid);
-			return 1;
+			return true;
 		}
 		case 9702:
 		{
@@ -2060,7 +2060,7 @@ bool:UI_LivingOnDialogResponse(playerid, dialogid, response, listitem, const inp
 			{
 				UI_LvBoardRender(playerid);
 			}
-			return 1;
+			return true;
 		}
 		case 9703:
 		{
@@ -2068,61 +2068,61 @@ bool:UI_LivingOnDialogResponse(playerid, dialogid, response, listitem, const inp
 			if (i < 0 || i >= g_UiLvBdCount[playerid])
 			{
 				UI_LvBoardRender(playerid);
-				return 1;
+				return true;
 			}
 			if (!response)
 			{
 				UI_LvDetailShow(playerid, i);
-				return 1;
+				return true;
 			}
 			g_UiLvDetCan[playerid] = 0;
 			UI_LivingToast(playerid, "Contratto richiesto, un attimo...", 0);
 			UI_OnContractAccept(playerid, g_UiLvBdId[playerid][i]);
-			return 1;
+			return true;
 		}
 		case 9704:
 		{
 			if (!response)
 			{
-				return 1;
+				return true;
 			}
 			if (g_UiLvStId[playerid] <= 0)
 			{
 				UI_OnContractBoardRefresh(playerid);
-				return 1;
+				return true;
 			}
 			new body[256];
 			format(body, 256, "{FFFFFF}Vuoi davvero lasciare il contratto {FFD24D}#%d{FFFFFF}?\n\n{AAAAAA}Il mezzo tornera' al magazzino e il contratto tornera' in bacheca per qualcun altro.", g_UiLvStId[playerid]);
 			Lang_ShowPlayerDialog(playerid, 9705, 0, "Lasciare il contratto?", body, "Lascia", "Indietro");
-			return 1;
+			return true;
 		}
 		case 9705:
 		{
 			new id = g_UiLvStId[playerid];
 			if (id <= 0)
 			{
-				return 1;
+				return true;
 			}
 			if (!response)
 			{
 				UI_LivingToast(playerid, "Il contratto resta tuo", 1);
-				return 1;
+				return true;
 			}
 			g_UiLvStId[playerid] = 0;
 			UI_OnContractAbandon(playerid, id);
-			return 1;
+			return true;
 		}
 		case 9706:
 		{
 			if (!response)
 			{
-				return 1;
+				return true;
 			}
 			if (listitem >= 0 && listitem < 3)
 			{
 				UI_OnDistrictPick(playerid, listitem + 1);
 			}
-			return 1;
+			return true;
 		}
 		case 9707:
 		{
@@ -2130,32 +2130,32 @@ bool:UI_LivingOnDialogResponse(playerid, dialogid, response, listitem, const inp
 			{
 				UI_OnProjectOpen(playerid, g_UiLvDsId[playerid]);
 			}
-			return 1;
+			return true;
 		}
 		case 9708, 9713, 9718, 9725:
 		{
-			return 1;
+			return true;
 		}
 		case 9709:
 		{
 			if (!response)
 			{
-				return 1;
+				return true;
 			}
 			if (listitem < 0 || listitem >= g_UiLvRnCount[playerid])
 			{
 				UI_LvRentModelShow(playerid);
-				return 1;
+				return true;
 			}
 			if (!g_UiLvRnAvail[playerid][listitem])
 			{
 				UI_LivingToast(playerid, "Questo mezzo non e' disponibile per te ora", 2);
 				UI_LvRentModelShow(playerid);
-				return 1;
+				return true;
 			}
 			g_UiLvRnSel[playerid] = listitem;
 			UI_LvRentBlocksShow(playerid);
-			return 1;
+			return true;
 		}
 		case 9710:
 		{
@@ -2163,16 +2163,16 @@ bool:UI_LivingOnDialogResponse(playerid, dialogid, response, listitem, const inp
 			if (!response || s < 0 || s >= g_UiLvRnCount[playerid])
 			{
 				UI_LvRentModelShow(playerid);
-				return 1;
+				return true;
 			}
 			if (listitem < 0 || listitem >= g_UiLvRnMaxBlocks[playerid])
 			{
 				UI_LvRentBlocksShow(playerid);
-				return 1;
+				return true;
 			}
 			g_UiLvRnBlocks[playerid] = listitem + 1;
 			UI_LvRentSummaryShow(playerid);
-			return 1;
+			return true;
 		}
 		case 9711:
 		{
@@ -2180,18 +2180,18 @@ bool:UI_LivingOnDialogResponse(playerid, dialogid, response, listitem, const inp
 			if (s < 0 || s >= g_UiLvRnCount[playerid] || b < 1)
 			{
 				UI_LvRentModelShow(playerid);
-				return 1;
+				return true;
 			}
 			if (!response)
 			{
 				UI_LvRentBlocksShow(playerid);
-				return 1;
+				return true;
 			}
 			g_UiLvRnSel[playerid] = -1;
 			g_UiLvRnBlocks[playerid] = 0;
 			UI_LivingToast(playerid, "Preparo il mezzo...", 0);
 			UI_OnRentalConfirm(playerid, g_UiLvRnIdx[playerid][s], b);
-			return 1;
+			return true;
 		}
 		case 9712:
 		{
@@ -2199,10 +2199,10 @@ bool:UI_LivingOnDialogResponse(playerid, dialogid, response, listitem, const inp
 			g_UiLvRnReturnId[playerid] = 0;
 			if (id <= 0 || !response)
 			{
-				return 1;
+				return true;
 			}
 			UI_OnRentalReturnConfirm(playerid, id);
-			return 1;
+			return true;
 		}
 		case 9714:
 		{
@@ -2212,44 +2212,44 @@ bool:UI_LivingOnDialogResponse(playerid, dialogid, response, listitem, const inp
 			UI_LvTimerSync(playerid);
 			if (id <= 0 || !response)
 			{
-				return 1;
+				return true;
 			}
 			UI_OnTaxiCallAccept(playerid, id);
-			return 1;
+			return true;
 		}
 		case 9715:
 		{
 			new id = g_UiLvTxPayId[playerid];
 			if (id <= 0)
 			{
-				return 1;
+				return true;
 			}
 			if (response)
 			{
 				UI_LvTaxiPayReset(playerid);
 				UI_LvTimerSync(playerid);
 				UI_OnTaxiPayConfirm(playerid, id, 1);
-				return 1;
+				return true;
 			}
 			Lang_ShowPlayerDialog(playerid, 9716, 0, "Contestare la corsa?", "{FFFFFF}Se contesti, la corsa non viene pagata e resta in sospeso per lo staff.\n\n{AAAAAA}Usalo solo se qualcosa e' andato davvero storto.", "Contesta", "Indietro");
-			return 1;
+			return true;
 		}
 		case 9716:
 		{
 			new id = g_UiLvTxPayId[playerid];
 			if (id <= 0)
 			{
-				return 1;
+				return true;
 			}
 			if (!response)
 			{
 				UI_LvTaxiPayShow(playerid);
-				return 1;
+				return true;
 			}
 			UI_LvTaxiPayReset(playerid);
 			UI_LvTimerSync(playerid);
 			UI_OnTaxiPayConfirm(playerid, id, 0);
-			return 1;
+			return true;
 		}
 		case 9717:
 		{
@@ -2257,11 +2257,11 @@ bool:UI_LivingOnDialogResponse(playerid, dialogid, response, listitem, const inp
 			g_UiLvTxRateId[playerid] = 0;
 			if (id <= 0 || !response || listitem < 0 || listitem >= 5)
 			{
-				return 1;
+				return true;
 			}
 			UI_LivingToast(playerid, "Grazie per il tuo voto", 1);
 			UI_OnTaxiRate(playerid, id, 5 - listitem);
-			return 1;
+			return true;
 		}
 		case 9719:
 		{
@@ -2270,20 +2270,20 @@ bool:UI_LivingOnDialogResponse(playerid, dialogid, response, listitem, const inp
 			{
 				UI_LvPrjAmountShow(playerid, "");
 			}
-			return 1;
+			return true;
 		}
 		case 9720:
 		{
 			if (!response)
 			{
 				UI_LivingProjectShow(playerid);
-				return 1;
+				return true;
 			}
 			new amount = 0, err[160];
 			if (!UI_LvParseAmount(inputtext, amount))
 			{
 				UI_LvPrjAmountShow(playerid, "{FF6666}Importo non valido: solo cifre, intero positivo.\n\n");
-				return 1;
+				return true;
 			}
 			if (!UI_LvPrjCheck(playerid, amount, err, 160))
 			{
@@ -2295,11 +2295,11 @@ bool:UI_LivingOnDialogResponse(playerid, dialogid, response, listitem, const inp
 				{
 					UI_LivingProjectShow(playerid);
 				}
-				return 1;
+				return true;
 			}
 			g_UiLvPjAmount[playerid] = amount;
 			UI_LvPrjConfirmShow(playerid);
-			return 1;
+			return true;
 		}
 		case 9721:
 		{
@@ -2307,36 +2307,36 @@ bool:UI_LivingOnDialogResponse(playerid, dialogid, response, listitem, const inp
 			if (!response)
 			{
 				UI_LvPrjAmountShow(playerid, "");
-				return 1;
+				return true;
 			}
 			if (amount <= 0 || !UI_LvPrjCheck(playerid, amount, err, 160))
 			{
 				UI_LivingProjectShow(playerid);
-				return 1;
+				return true;
 			}
 			g_UiLvPjAmount[playerid] = 0;
 			UI_LivingToast(playerid, "Grazie: registro la tua donazione...", 1);
 			UI_OnProjectContribute(playerid, g_UiLvPjId[playerid], amount);
-			return 1;
+			return true;
 		}
 		case 9722:
 		{
 			if (!response)
 			{
-				return 1;
+				return true;
 			}
 			if (listitem >= 0 && listitem < 5)
 			{
 				UI_LvHelpStepShow(playerid, listitem + 1);
-				return 1;
+				return true;
 			}
 			if (listitem >= 0 && listitem == g_UiLvHpOffRow[playerid])
 			{
 				Lang_ShowPlayerDialog(playerid, 9724, 0, "Spegnere i suggerimenti?", "{FFFFFF}Il percorso del primo giorno si chiude qui, senza il pacco accoglienza.\n\n{AAAAAA}Potrai sempre chiedere a chi incontri: Los Santos e' piu' gentile di quanto sembri.", "Spegni", "Indietro");
-				return 1;
+				return true;
 			}
 			UI_LivingHelpShow(playerid);
-			return 1;
+			return true;
 		}
 		case 9723:
 		{
@@ -2358,20 +2358,20 @@ bool:UI_LivingOnDialogResponse(playerid, dialogid, response, listitem, const inp
 			{
 				UI_LivingHelpShow(playerid);
 			}
-			return 1;
+			return true;
 		}
 		case 9724:
 		{
 			if (!response)
 			{
 				UI_LivingHelpShow(playerid);
-				return 1;
+				return true;
 			}
 			g_UiLvHpOff[playerid] = 1;
 			UI_LivingHintHide(playerid);
 			UI_OnHelpHintsOff(playerid);
-			return 1;
+			return true;
 		}
 	}
-	return 1;
+	return true;
 }

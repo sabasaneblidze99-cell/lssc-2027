@@ -29,7 +29,7 @@ bool:Level_AddExp(playerid, amount)
 {
 	if (playerid < 0 || playerid >= MAX_PLAYERS || !IsPlayerConnected(playerid) || amount <= 0)
 	{
-		return 0;
+		return false;
 	}
 	new maxExp = Level_ExpForLevel(50), exp = gPlayer[playerid][pExp];
 	exp = amount > maxExp - exp ? maxExp : exp + amount;
@@ -48,14 +48,14 @@ bool:Level_Set(playerid, level)
 {
 	if (playerid < 0 || playerid >= MAX_PLAYERS || !IsPlayerConnected(playerid))
 	{
-		return 0;
+		return false;
 	}
 	if (level < 1 || level > 50)
 	{
-		return 0;
+		return false;
 	}
 	gPlayer[playerid][pLevel] = level;
 	gPlayer[playerid][pExp] = Level_ExpForLevel(level);
 	Char_RefreshHud(playerid);
-	return 1;
+	return true;
 }

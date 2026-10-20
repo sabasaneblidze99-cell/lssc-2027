@@ -61,11 +61,11 @@ bool:DB_StoryInfoLive(playerid, const name[], token, kind)
 {
 	if (!DB_PlayerMatches(playerid, name))
 	{
-		return 0;
+		return false;
 	}
 	if (!(g_DBPending[playerid] & 0x20000000))
 	{
-		return 0;
+		return false;
 	}
 	return g_StoryInfo[playerid][siToken] == token && g_StoryInfo[playerid][siKind] == kind;
 }
@@ -74,15 +74,15 @@ bool:DB_StoryOpLive(playerid, const name[], charId, token)
 {
 	if (!DB_PlayerMatches(playerid, name))
 	{
-		return 0;
+		return false;
 	}
 	if (charId <= 0 || gPlayer[playerid][pCharId] != charId)
 	{
-		return 0;
+		return false;
 	}
 	if (!(g_DBPending[playerid] & 0x40000000))
 	{
-		return 0;
+		return false;
 	}
 	return g_StoryReq[playerid][sqToken] == token && g_StoryReq[playerid][sqGen] == g_BankGen[playerid];
 }
@@ -128,7 +128,7 @@ bool:DB_StoryInfoBegin(playerid, kind, bool:valid, accountId, charId, targetid, 
 {
 	if (playerid < 0 || playerid >= MAX_PLAYERS || !IsPlayerConnected(playerid))
 	{
-		return 0;
+		return false;
 	}
 	new tchar = 0, tgen = 0;
 	if (kind == 2 && targetid >= 0 && targetid < MAX_PLAYERS && IsPlayerConnected(targetid))
@@ -140,25 +140,25 @@ bool:DB_StoryInfoBegin(playerid, kind, bool:valid, accountId, charId, targetid, 
 	{
 		if (kind == 1)
 		{
-			DB_StoryDeliverLoad(playerid, 5, 0, 0, 0, 0);
+			DB_StoryDeliverLoad(playerid, 5, 0, 0, 0, false);
 		}
 		else
 		{
-			DB_StoryDeliverRead(playerid, targetid, purpose, 5, 0, 0, 0);
+			DB_StoryDeliverRead(playerid, targetid, purpose, 5, 0, 0, false);
 		}
-		return 0;
+		return false;
 	}
 	if (!valid)
 	{
 		if (kind == 1)
 		{
-			DB_StoryDeliverLoad(playerid, 0, 0, 0, 0, 0);
+			DB_StoryDeliverLoad(playerid, 0, 0, 0, 0, false);
 		}
 		else
 		{
-			DB_StoryDeliverRead(playerid, targetid, purpose, 0, 0, 0, 0);
+			DB_StoryDeliverRead(playerid, targetid, purpose, 0, 0, 0, false);
 		}
-		return 0;
+		return false;
 	}
 	g_StoryInfo[playerid][siToken] = ++g_StoryTokenSeq;
 	g_StoryInfo[playerid][siKind] = kind;
@@ -172,21 +172,21 @@ bool:DB_StoryInfoBegin(playerid, kind, bool:valid, accountId, charId, targetid, 
 	{
 		if (kind == 1)
 		{
-			DB_StoryDeliverLoad(playerid, -1, 0, 0, 0, 0);
+			DB_StoryDeliverLoad(playerid, -1, 0, 0, 0, false);
 		}
 		else
 		{
-			DB_StoryDeliverRead(playerid, targetid, purpose, -1, 0, 0, 0);
+			DB_StoryDeliverRead(playerid, targetid, purpose, -1, 0, 0, false);
 		}
-		return 0;
+		return false;
 	}
 	DB_PendingSet(playerid, 0x20000000);
-	return 1;
+	return true;
 }
 
 DB_StoryLoad(playerid, accountId, charId)
 {
-	new bool:ok = 0;
+	new bool:ok = false;
 	if (playerid >= 0 && playerid < MAX_PLAYERS && IsPlayerConnected(playerid))
 	{
 		ok = accountId > 0 && gPlayer[playerid][pAccountId] == accountId && charId >= 0 && gPlayer[playerid][pCharId] == charId;
@@ -218,7 +218,7 @@ public DB_OnStoryLoaded(playerid, const name[], accountId, charId, token)
 	cache_get_row_count(rows);
 	if (rows < 1)
 	{
-		DB_StoryDeliverLoad(playerid, 0, 0, 0, 0, 0);
+		DB_StoryDeliverLoad(playerid, 0, 0, 0, 0, false);
 		return 1;
 	}
 	cache_get_value_name_int(0, "intro_seen", intro);
@@ -237,7 +237,7 @@ public DB_OnStoryLoaded(playerid, const name[], accountId, charId, token)
 
 DB_StoryRead(playerid, targetid, purpose)
 {
-	new bool:ok = 0;
+	new bool:ok = false;
 	if (playerid >= 0 && playerid < MAX_PLAYERS && IsPlayerConnected(playerid) && targetid >= 0 && targetid < MAX_PLAYERS && IsPlayerConnected(targetid))
 	{
 		ok = gPlayer[targetid][pCharId] > 0 && gPlayer[playerid][pCharId] > 0;
@@ -274,7 +274,7 @@ public DB_OnStoryRead(playerid, const name[], token)
 	cache_get_row_count(rows);
 	if (rows < 1)
 	{
-		DB_StoryDeliverRead(playerid, target, purpose, 0, 0, 0, 0);
+		DB_StoryDeliverRead(playerid, target, purpose, 0, 0, 0, false);
 		return 1;
 	}
 	cache_get_value_name_int(0, "origin", origin);
@@ -311,7 +311,7 @@ DB_StorySave(playerid, charId, origin, motive, const opId[], bool:creation)
 		DB_StoryDeliverSaved(playerid, -1, 0, 0, 0);
 		return 0;
 	}
-	DB_PendingSet(playerid, 2.0);
+	DB_PendingSet(playerid, _:2.0);
 	new query[512], name[25];
 	GetPlayerName(playerid, name, 25);
 	mysql_format(g_DB, query, 512, "CALL story_save('%e', %d, %d, %d, %d)", opId, charId, origin, motive, creation ? 0 : 1);
@@ -323,7 +323,7 @@ public DB_OnStoryCalled(playerid, const name[], charId, token, const opId[])
 {
 	if (!DB_StoryOpLive(playerid, name, charId, token))
 	{
-		DB_StoryStaleRelease(playerid, 2.0);
+		DB_StoryStaleRelease(playerid, _:2.0);
 		return 1;
 	}
 	new query[512];
@@ -349,10 +349,10 @@ public DB_OnStoryResult(playerid, const name[], charId, token, const opId[])
 		{
 			Log_Write("DBSTORY", "sessione scaduta dopo una ripartizione dei soldi iniziali: verificare i saldi del personaggio (story_ops)");
 		}
-		DB_StoryStaleRelease(playerid, 2.0);
+		DB_StoryStaleRelease(playerid, _:2.0);
 		return 1;
 	}
-	DB_PendingClear(playerid, 2.0);
+	DB_PendingClear(playerid, _:2.0);
 	if (result == 1 || result == 3 || result == 4 || result == 2)
 	{
 		DB_StoryApply(playerid, origin, motive);
@@ -412,11 +412,11 @@ public DB_StoryFailure(playerid, op)
 	{
 		if (g_StoryInfo[playerid][siKind] == 1)
 		{
-			DB_StoryDeliverLoad(playerid, -1, 0, 0, 0, 0);
+			DB_StoryDeliverLoad(playerid, -1, 0, 0, 0, false);
 		}
 		else
 		{
-			DB_StoryDeliverRead(playerid, g_StoryInfo[playerid][siTargetId], g_StoryInfo[playerid][siPurpose], -1, 0, 0, 0);
+			DB_StoryDeliverRead(playerid, g_StoryInfo[playerid][siTargetId], g_StoryInfo[playerid][siPurpose], -1, 0, 0, false);
 		}
 		return 1;
 	}
@@ -426,17 +426,17 @@ public DB_StoryFailure(playerid, op)
 
 public DB_StoryQueryError(const callback[])
 {
-	if (!strcmp(callback, "DB_OnStoryLoaded", 0, 0x7FFFFFFF) || !strcmp(callback, "DB_OnStoryRead", 0, 0x7FFFFFFF))
+	if (!strcmp(callback, "DB_OnStoryLoaded", false, 0x7FFFFFFF) || !strcmp(callback, "DB_OnStoryRead", false, 0x7FFFFFFF))
 	{
 		DB_FailAllPending(0x20000000);
 	}
-	else if (!strcmp(callback, "DB_OnStoryIntroSet", 0, 0x7FFFFFFF))
+	else if (!strcmp(callback, "DB_OnStoryIntroSet", false, 0x7FFFFFFF))
 	{
 		Log_Write("DBSTORY", "errore query: intro_seen non salvato");
 	}
 	else
 	{
-		DB_FailAllPending(2.0);
+		DB_FailAllPending(_:2.0);
 	}
 	return 1;
 }

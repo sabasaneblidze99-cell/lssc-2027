@@ -4,9 +4,9 @@ bool:Admin_ParseTarget(playerid, const token[], &targetid)
 	if (!Util_ParsePlayerId(token, targetid) || !Util_IsPlaying(targetid))
 	{
 		Util_Send(playerid, -10270721, "Giocatore non valido.");
-		return 0;
+		return false;
 	}
-	return 1;
+	return true;
 }
 
 public Cmd_goto(playerid, const params[])
@@ -135,19 +135,19 @@ bool:Admin_ParseSanctionTarget(playerid, const token[], &targetid)
 {
 	if (!Admin_ParseTarget(playerid, token, targetid))
 	{
-		return 0;
+		return false;
 	}
 	if (targetid == playerid)
 	{
 		Util_Send(playerid, -10270721, "Giocatore non valido.");
-		return 0;
+		return false;
 	}
-	if (!Admin_CanTarget(playerid, targetid, 0))
+	if (!Admin_CanTarget(playerid, targetid, false))
 	{
 		Util_Send(playerid, -10270721, "Non puoi agire su questo giocatore.");
-		return 0;
+		return false;
 	}
-	return 1;
+	return true;
 }
 
 public Cmd_ah(playerid, const params[])
@@ -274,7 +274,7 @@ public Cmd_freeze(playerid, const params[])
 		reason[0] = 0;
 	}
 	gPlayer[targetid][pFrozen] = 1;
-	TogglePlayerControllable(targetid, 0);
+	TogglePlayerControllable(targetid, false);
 	new an[25], tn[25];
 	GetPlayerName(playerid, an, 25);
 	GetPlayerName(targetid, tn, 25);
@@ -330,7 +330,7 @@ public Cmd_sethp(playerid, const params[])
 	{
 		return 1;
 	}
-	if (!Admin_CanTarget(playerid, targetid, 1))
+	if (!Admin_CanTarget(playerid, targetid, true))
 	{
 		Util_Send(playerid, -10270721, "Non puoi agire su questo giocatore.");
 		return 1;
@@ -519,7 +519,7 @@ public Cmd_setadmin(playerid, const params[])
 	}
 	if (targetid != INVALID_PLAYER_ID && gPlayer[targetid][pLoggedIn])
 	{
-		if (!Admin_CanTarget(playerid, targetid, 0))
+		if (!Admin_CanTarget(playerid, targetid, false))
 		{
 			Util_Send(playerid, -10270721, "Non puoi agire su questo giocatore.");
 			return 1;

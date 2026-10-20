@@ -189,7 +189,7 @@ bool:Job_NearCenter(playerid)
 {
 	if (GetPlayerInterior(playerid) != 0 || GetPlayerVirtualWorld(playerid) != 0)
 	{
-		return 0;
+		return false;
 	}
 	return (GetPlayerDistanceFromPoint(playerid, 1480.5, -1736.0, 13.5) <= 4.0);
 }
@@ -331,7 +331,7 @@ Job_VehRemove(playerid)
 		{
 			if (GetPlayerVehicleID(playerid) == veh)
 			{
-				RemovePlayerFromVehicle(playerid, 0);
+				RemovePlayerFromVehicle(playerid, false);
 			}
 			DestroyVehicle(veh);
 		}
@@ -374,7 +374,7 @@ Job_Cancel(playerid, const reason[])
 		g_JcHourEarned[playerid][job] = 0;
 	}
 	new lost = g_JsEarned[playerid];
-	Job_Teardown(playerid, 1);
+	Job_Teardown(playerid, true);
 	if (reason[0] != 0 && IsPlayerConnected(playerid))
 	{
 		SendClientMessage(playerid, -10270721, "Turno annullato: %s", reason);
@@ -410,7 +410,7 @@ Job_Finish(playerid, bool:completed)
 {
 	new amount = g_JsEarned[playerid], job = g_JsJob[playerid], cap = g_JsCapUsed[playerid];
 	new bool:busy = g_JpPending[playerid];
-	Job_Teardown(playerid, 1);
+	Job_Teardown(playerid, true);
 	if (amount <= 0)
 	{
 		SendClientMessage(playerid, -1, "Turno terminato: nessun compenso maturato.");
@@ -523,7 +523,7 @@ Job_StepDone(playerid, now)
 	{
 		Job_Accrue(playerid, g_JobPayBonus[job]);
 		SendClientMessage(playerid, 0x66DD66FF, "Rientro completato: bonus di fine giro.");
-		Job_Finish(playerid, 1);
+		Job_Finish(playerid, true);
 		return 0;
 	}
 	new granted = Job_Accrue(playerid, g_JobPayStep[job]);
@@ -572,13 +572,13 @@ public Job_OnTick()
 		new bool:inVeh = GetPlayerVehicleID(i) == veh && GetPlayerVehicleSeat(i) == 0, offSec = -1;
 		if (inVeh)
 		{
-			g_JsOff[i] = 0;
+			g_JsOff[i] = false;
 		}
 		else
 		{
 			if (!g_JsOff[i])
 			{
-				g_JsOff[i] = 1;
+				g_JsOff[i] = true;
 				g_JsOffTick[i] = now;
 			}
 			new offMs = now - g_JsOffTick[i], Float:px, Float:py, Float:pz;
@@ -601,7 +601,7 @@ public Job_OnTick()
 			{
 				if (!g_JsDwelling[i])
 				{
-					g_JsDwelling[i] = 1;
+					g_JsDwelling[i] = true;
 					g_JsDwellTick[i] = now;
 				}
 				new dwellMs = ret ? 0 : g_JobDwellMs[job], waited = now - g_JsDwellTick[i];
@@ -620,12 +620,12 @@ public Job_OnTick()
 			}
 			else
 			{
-				g_JsDwelling[i] = 0;
+				g_JsDwelling[i] = false;
 			}
 		}
 		else
 		{
-			g_JsDwelling[i] = 0;
+			g_JsDwelling[i] = false;
 		}
 		UI_JobHudUpdate(i, g_JsStep[i] + 1, g_JobSteps[job], g_JsEarned[i], (now - g_JsStartTick[i]) / 1000, dwellSec, offSec);
 	}
@@ -678,7 +678,7 @@ Job_Start(playerid)
 		Util_Send(playerid, -10270721, "Nessun veicolo di lavoro disponibile al momento. Riprova tra poco.");
 		return 0;
 	}
-	new veh = CreateVehicle(g_JobModel[job], x, y, z, a, 1, 1, -1, 0);
+	new veh = CreateVehicle(g_JobModel[job], x, y, z, a, 1, 1, -1, false);
 	if (veh == 65535 || veh <= 0 || veh > 2000)
 	{
 		Util_Send(playerid, -10270721, "Impossibile creare il veicolo di lavoro. Riprova.");
@@ -708,7 +708,7 @@ Job_Start(playerid)
 	Job_BuildRoute(playerid, job);
 	if (!PutPlayerInVehicle(playerid, veh, 0))
 	{
-		Job_Teardown(playerid, 0);
+		Job_Teardown(playerid, false);
 		Util_Send(playerid, -10270721, "Impossibile salire sul veicolo di lavoro. Riprova.");
 		return 0;
 	}
@@ -730,7 +730,7 @@ Job_CmdFine(playerid)
 		Util_Send(playerid, -10270721, "Non hai nessun turno in corso.");
 		return 0;
 	}
-	Job_Finish(playerid, 0);
+	Job_Finish(playerid, false);
 	return 0;
 }
 
@@ -738,12 +738,12 @@ Job_CmdLavoro(playerid, const params[])
 {
 	new pos = 0, sub[12];
 	Util_NextToken(params, pos, sub, 12);
-	if (sub[0] == 0 || !strcmp(sub, "info", 1, 0x7FFFFFFF))
+	if (sub[0] == 0 || !strcmp(sub, "info", true, 0x7FFFFFFF))
 	{
 		UI_JobInfoShow(playerid, gPlayer[playerid][pJob], gPlayer[playerid][pLevel], g_JcSessRuns[playerid], g_JcSessEarned[playerid]);
 		return 0;
 	}
-	new bool:take = !strcmp(sub, "prendi", 1, 0x7FFFFFFF), bool:leave = !strcmp(sub, "lascia", 1, 0x7FFFFFFF);
+	new bool:take = !strcmp(sub, "prendi", true, 0x7FFFFFFF), bool:leave = !strcmp(sub, "lascia", true, 0x7FFFFFFF);
 	if (!take && !leave)
 	{
 		Util_Send(playerid, 0x99CCFFFF, "Uso: /lavoro [info|prendi|lascia]  (prendi e lascia solo al Job Center)");
@@ -885,7 +885,7 @@ Job_OnInit()
 		Job_ResetPlayer(p);
 	}
 	g_JPool = 0;
-	g_JTimer = SetTimer("Job_OnTick", 500, 1);
+	g_JTimer = SetTimer("Job_OnTick", 500, true);
 	CreatePickup(1239, 1, 1480.5, -1736.0, 13.5, 0);
 	Lang_Create3DTextLabel("Job Center\nUsa /lavoro", -2994689, 1480.5, -1736.0, (13.5 + 1.0), 15.0, 0, 0);
 }
@@ -901,7 +901,7 @@ Job_OnExit()
 	{
 		if (g_JsActive[i])
 		{
-			Job_Teardown(i, 0);
+			Job_Teardown(i, false);
 		}
 	}
 }
@@ -978,7 +978,7 @@ Job_OnPlayerStateChange(playerid, t_PLAYER_STATE:newstate)
 	}
 	if (owner != playerid)
 	{
-		RemovePlayerFromVehicle(playerid, 0);
+		RemovePlayerFromVehicle(playerid, false);
 		Util_Send(playerid, -10270721, "Questo veicolo di lavoro e' in uso da un altro lavoratore.");
 		return 0;
 	}

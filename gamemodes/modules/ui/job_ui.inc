@@ -147,23 +147,23 @@ UI_JbDetailShow(playerid, job)
 	format(line, 192, "Stima: circa {66DD66}$%s{FFFFFF}/ora (tetto $%s/ora). La paga e' accreditata in banca a fine turno.\n\n", hourly, cap);
 	strcat(body, line, 1024);
 	strcat(body, "Il turno inizia con /inizia e termina con /fine. Veicolo distrutto o abbandonato, morte o\ndisconnessione annullano il turno e il guadagno maturato va perso.", 1024);
-	new bool:ok = 1;
+	new bool:ok = true;
 	if (g_UiJbLevel[playerid] < g_UiJbMinLevel[job])
 	{
 		format(line, 192, "\n\n{FF6666}Richiede il livello %d (tu sei livello %d).", g_UiJbMinLevel[job], g_UiJbLevel[playerid]);
 		strcat(body, line, 1024);
-		ok = 0;
+		ok = false;
 	}
 	else if (job == g_UiJbCurrent[playerid])
 	{
 		strcat(body, "\n\n{FFD24D}Questo e' gia' il tuo lavoro attuale.", 1024);
-		ok = 0;
+		ok = false;
 	}
 	else if (g_UiJbCooldown[playerid] > 0)
 	{
 		format(line, 192, "\n\n{FF6666}Potrai cambiare lavoro tra %d min %02d s.", g_UiJbCooldown[playerid] / 60, g_UiJbCooldown[playerid] % 60);
 		strcat(body, line, 1024);
-		ok = 0;
+		ok = false;
 	}
 	else
 	{
@@ -230,7 +230,7 @@ bool:UI_JobOnDialogResponse(playerid, dialogid, response, listitem, const inputt
 	#pragma unused inputtext
 	if (!UI_JbValid(playerid))
 	{
-		return 0;
+		return false;
 	}
 	switch (dialogid)
 	{
@@ -238,7 +238,7 @@ bool:UI_JobOnDialogResponse(playerid, dialogid, response, listitem, const inputt
 		{
 			if (!response)
 			{
-				return 1;
+				return true;
 			}
 			if (listitem >= 0 && listitem < 3)
 			{
@@ -252,7 +252,7 @@ bool:UI_JobOnDialogResponse(playerid, dialogid, response, listitem, const inputt
 			{
 				UI_JobCenterShow(playerid, g_UiJbLevel[playerid], g_UiJbCurrent[playerid], g_UiJbCooldown[playerid]);
 			}
-			return 1;
+			return true;
 		}
 		case 9301:
 		{
@@ -261,27 +261,27 @@ bool:UI_JobOnDialogResponse(playerid, dialogid, response, listitem, const inputt
 			if (response && ok)
 			{
 				UI_OnJobSelect(playerid, job);
-				return 1;
+				return true;
 			}
 			UI_JobCenterShow(playerid, g_UiJbLevel[playerid], g_UiJbCurrent[playerid], g_UiJbCooldown[playerid]);
-			return 1;
+			return true;
 		}
 		case 9302:
 		{
 			if (response && g_UiJbCurrent[playerid] != 0)
 			{
 				UI_OnJobQuit(playerid);
-				return 1;
+				return true;
 			}
 			UI_JobCenterShow(playerid, g_UiJbLevel[playerid], g_UiJbCurrent[playerid], g_UiJbCooldown[playerid]);
-			return 1;
+			return true;
 		}
 		case 9303:
 		{
-			return 1;
+			return true;
 		}
 	}
-	return 0;
+	return false;
 }
 new g_UiJHud[MAX_PLAYERS][6];
 new bool:g_UiJHudCreated[MAX_PLAYERS];
@@ -296,7 +296,7 @@ PlayerText:UI_JhText(playerid, Float:x, Float:y, const text[], Float:lw, Float:l
 	PlayerTextDrawAlignment(playerid, td, align);
 	PlayerTextDrawColour(playerid, td, color);
 	PlayerTextDrawFont(playerid, td, 1);
-	PlayerTextDrawSetProportional(playerid, td, 1);
+	PlayerTextDrawSetProportional(playerid, td, true);
 	PlayerTextDrawSetOutline(playerid, td, 1);
 	PlayerTextDrawSetShadow(playerid, td, 0);
 	PlayerTextDrawBackgroundColour(playerid, td, 255);
@@ -308,7 +308,7 @@ PlayerText:UI_JhBox(playerid, Float:x, Float:y, Float:w, Float:h, color)
 	new PlayerText:td = Lang_CreatePlayerTextDraw(playerid, x, y, "_");
 	PlayerTextDrawLetterSize(playerid, td, 0.0, (h / 9.0));
 	PlayerTextDrawTextSize(playerid, td, (x + w), 0.0);
-	PlayerTextDrawUseBox(playerid, td, 1);
+	PlayerTextDrawUseBox(playerid, td, true);
 	PlayerTextDrawBoxColour(playerid, td, color);
 	PlayerTextDrawFont(playerid, td, 1);
 	PlayerTextDrawSetShadow(playerid, td, 0);
@@ -323,12 +323,12 @@ UI_JhCreate(playerid)
 		return 0;
 	}
 	new Float:left = (476.0 - 150.0);
-	g_UiJHud[playerid][0] = UI_JhBox(playerid, left, 384.0, 150.0, 66.0, 153);
-	g_UiJHud[playerid][1] = UI_JhText(playerid, (5.0 + left), (384.0 + 2.0), "LAVORO", 0.22, 1.0, -2994689, 1);
-	g_UiJHud[playerid][2] = UI_JhText(playerid, (5.0 + left), (384.0 + 14.0), "Tappa 0/0", 0.22, 1.0, -1, 1);
-	g_UiJHud[playerid][3] = UI_JhText(playerid, (5.0 + left), (384.0 + 26.0), "Maturato: $0", 0.22, 1.0, 0x66DD66FF, 1);
-	g_UiJHud[playerid][4] = UI_JhText(playerid, (5.0 + left), (384.0 + 38.0), "Tempo 00:00", 0.22, 1.0, -1, 1);
-	g_UiJHud[playerid][5] = UI_JhText(playerid, (5.0 + left), (384.0 + 51.0), "TORNA AL VEICOLO: 45s", 0.2, 0.9, -12303105, 1);
+	g_UiJHud[playerid][0] = _:UI_JhBox(playerid, left, 384.0, 150.0, 66.0, 153);
+	g_UiJHud[playerid][1] = UI_JhText(playerid, (5.0 + left), (384.0 + 2.0), "LAVORO", 0.22, 1.0, -2994689, t_TEXT_DRAW_ALIGN:1);
+	g_UiJHud[playerid][2] = UI_JhText(playerid, (5.0 + left), (384.0 + 14.0), "Tappa 0/0", 0.22, 1.0, -1, t_TEXT_DRAW_ALIGN:1);
+	g_UiJHud[playerid][3] = UI_JhText(playerid, (5.0 + left), (384.0 + 26.0), "Maturato: $0", 0.22, 1.0, 0x66DD66FF, t_TEXT_DRAW_ALIGN:1);
+	g_UiJHud[playerid][4] = UI_JhText(playerid, (5.0 + left), (384.0 + 38.0), "Tempo 00:00", 0.22, 1.0, -1, t_TEXT_DRAW_ALIGN:1);
+	g_UiJHud[playerid][5] = UI_JhText(playerid, (5.0 + left), (384.0 + 51.0), "TORNA AL VEICOLO: 45s", 0.2, 0.9, -12303105, t_TEXT_DRAW_ALIGN:1);
 	g_UiJHudCreated[playerid] = 1;
 	return 0;
 }
@@ -343,16 +343,16 @@ UI_JhSetVisible(playerid, bool:visible)
 		}
 		if (visible)
 		{
-			PlayerTextDrawShow(playerid, g_UiJHud[playerid][i]);
+			PlayerTextDrawShow(playerid, PlayerText:g_UiJHud[playerid][i]);
 		}
 		else
 		{
-			PlayerTextDrawHide(playerid, g_UiJHud[playerid][i]);
+			PlayerTextDrawHide(playerid, PlayerText:g_UiJHud[playerid][i]);
 		}
 	}
 	if (!visible || !g_UiJHudWarn[playerid])
 	{
-		PlayerTextDrawHide(playerid, g_UiJHud[playerid][5]);
+		PlayerTextDrawHide(playerid, PlayerText:g_UiJHud[playerid][5]);
 		g_UiJHudWarn[playerid] = 0;
 	}
 }
@@ -378,7 +378,7 @@ UI_JobHudShow(playerid, jobId)
 	Lang_PlayerTextDrawSetString(playerid, g_UiJHud[playerid][2], str);
 	Lang_PlayerTextDrawSetString(playerid, g_UiJHud[playerid][3], "Maturato: $0");
 	Lang_PlayerTextDrawSetString(playerid, g_UiJHud[playerid][4], "Tempo 00:00");
-	UI_JhSetVisible(playerid, 1);
+	UI_JhSetVisible(playerid, true);
 	return 0;
 }
 
@@ -389,7 +389,7 @@ UI_JobHudHide(playerid)
 		return 0;
 	}
 	g_UiJHudShown[playerid] = 0;
-	UI_JhSetVisible(playerid, 0);
+	UI_JhSetVisible(playerid, false);
 	return 0;
 }
 
@@ -439,18 +439,18 @@ UI_JobHudUpdate(playerid, step, stepTotal, earned, elapsedSec, dwellSec, offVehi
 		format(str, 64, "TORNA AL VEICOLO: %ds", offVehicleSec);
 		Lang_PlayerTextDrawSetString(playerid, g_UiJHud[playerid][5], str);
 		new bool:blinkOff = GetTickCount() / 500 % 2 == 1;
-		PlayerTextDrawColour(playerid, g_UiJHud[playerid][5], blinkOff ? -12303292 : -12303105);
-		PlayerTextDrawShow(playerid, g_UiJHud[playerid][5]);
+		PlayerTextDrawColour(playerid, PlayerText:g_UiJHud[playerid][5], blinkOff ? -12303292 : -12303105);
+		PlayerTextDrawShow(playerid, PlayerText:g_UiJHud[playerid][5]);
 		g_UiJHudWarn[playerid] = 1;
 	}
 	else if (g_UiJHudWarn[playerid])
 	{
-		PlayerTextDrawHide(playerid, g_UiJHud[playerid][5]);
+		PlayerTextDrawHide(playerid, PlayerText:g_UiJHud[playerid][5]);
 		g_UiJHudWarn[playerid] = 0;
 	}
-	PlayerTextDrawShow(playerid, g_UiJHud[playerid][2]);
-	PlayerTextDrawShow(playerid, g_UiJHud[playerid][3]);
-	PlayerTextDrawShow(playerid, g_UiJHud[playerid][4]);
+	PlayerTextDrawShow(playerid, PlayerText:g_UiJHud[playerid][2]);
+	PlayerTextDrawShow(playerid, PlayerText:g_UiJHud[playerid][3]);
+	PlayerTextDrawShow(playerid, PlayerText:g_UiJHud[playerid][4]);
 	return 0;
 }
 
@@ -464,7 +464,7 @@ UI_JobUiDestroy(playerid)
 	{
 		for (new i = 0; i < 6; i++)
 		{
-			PlayerTextDrawDestroy(playerid, g_UiJHud[playerid][i]);
+			PlayerTextDrawDestroy(playerid, PlayerText:g_UiJHud[playerid][i]);
 			g_UiJHud[playerid][i] = 65535;
 		}
 	}

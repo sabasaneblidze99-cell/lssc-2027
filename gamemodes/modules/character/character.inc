@@ -235,7 +235,7 @@ public Char_OnDBCreated(playerid, charId)
 Char_OnInit()
 {
 	AddPlayerClass(7, 1481.0, -1749.5, 15.45, 0.0, 0, 0, 0, 0, 0, 0);
-	g_CharAutosaveTimer = SetTimer("Char_OnAutosave", 300000, 1);
+	g_CharAutosaveTimer = SetTimer("Char_OnAutosave", 300000, true);
 }
 
 Char_OnExit()
@@ -303,7 +303,7 @@ Char_OnSpawn(playerid)
 	Char_SyncMoney(playerid);
 	if (gPlayer[playerid][pFrozen])
 	{
-		TogglePlayerControllable(playerid, 0);
+		TogglePlayerControllable(playerid, false);
 	}
 	if (!gPlayer[playerid][pHudCreated])
 	{

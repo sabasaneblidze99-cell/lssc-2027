@@ -34,7 +34,7 @@ Inv_CmdDocumento(playerid, const params[])
 {
 	new pos = 0, tok[24], target = 0;
 	Util_NextToken(params, pos, tok, 24);
-	if (!strcmp(tok, "richiedi", 1, 0x7FFFFFFF))
+	if (!strcmp(tok, "richiedi", true, 0x7FFFFFFF))
 	{
 		Inv_DocRequest(playerid);
 		return 0;

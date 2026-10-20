@@ -96,7 +96,7 @@ Inv_ParseItem(const token[])
 	}
 	for (new i = 0; i < 16; i++)
 	{
-		if (!strcmp(token, s_InvAliasName[i], 1, 0x7FFFFFFF))
+		if (!strcmp(token, s_InvAliasName[i], true, 0x7FFFFFFF))
 		{
 			return s_InvAliasId[i];
 		}
@@ -257,7 +257,7 @@ bool:Inv_StateOk(playerid)
 {
 	if (!Util_IsPlaying(playerid))
 	{
-		return 0;
+		return false;
 	}
 	return gPlayer[playerid][pInvState] == 2 && !gPlayer[playerid][pInvOpBusy] && !gPlayer[playerid][pWounded] && !gPlayer[playerid][pCuffed];
 }
@@ -266,7 +266,7 @@ bool:Inv_Guard(playerid)
 {
 	if (!Util_IsPlaying(playerid))
 	{
-		return 0;
+		return false;
 	}
 	switch (gPlayer[playerid][pInvState])
 	{
@@ -276,33 +276,33 @@ bool:Inv_Guard(playerid)
 		case 1:
 		{
 			Inv_Say(playerid, -10270721, "L'inventario si sta caricando: riprova tra un attimo.");
-			return 0;
+			return false;
 		}
 		default:
 		{
 			Inv_Say(playerid, -10270721, "Inventario non disponibile: provo a ricaricarlo, riprova tra poco.");
 			Inv_Load(playerid);
-			return 0;
+			return false;
 		}
 	}
 	if (gPlayer[playerid][pInvOpBusy])
 	{
 		Inv_Say(playerid, -10270721, "Hai un'operazione di inventario in corso: attendi.");
-		return 0;
+		return false;
 	}
 	if (gPlayer[playerid][pWounded] || gPlayer[playerid][pCuffed])
 	{
 		Inv_Say(playerid, -10270721, "Non puoi farlo da ferito o ammanettato.");
-		return 0;
+		return false;
 	}
 	new now = GetTickCount();
 	if (gPlayer[playerid][pInvLastActionTick] != 0 && now - gPlayer[playerid][pInvLastActionTick] < 1500)
 	{
 		Inv_Say(playerid, -10270721, "Attendi un attimo prima di un'altra azione con l'inventario.");
-		return 0;
+		return false;
 	}
 	gPlayer[playerid][pInvLastActionTick] = now != 0 ? now : 1;
-	return 1;
+	return true;
 }
 
 Inv_CmdInventario(playerid)
@@ -464,7 +464,7 @@ Inv_ApplyUse(playerid, itemId)
 			}
 			SetPlayerHealth(playerid, hp);
 			Inv_RpUse(playerid, itemId == 5 ? "usa un kit di pronto soccorso." : "si medica con una benda.");
-			SendClientMessage(playerid, 0x66DD66FF, "Salute: %d.", floatround(hp, 0));
+			SendClientMessage(playerid, 0x66DD66FF, "Salute: %d.", floatround(hp, floatround_method:0));
 		}
 		case 7:
 		{
@@ -1041,12 +1041,12 @@ public UI_OnInvGive(playerid, slot, targetId, qty)
 
 public UI_OnInvGiveReply(playerid, accept)
 {
-	return Inv_GiveReply(playerid, accept, 0);
+	return Inv_GiveReply(playerid, accept, false);
 }
 
 public UI_OnInvGiveExpired(playerid)
 {
-	return Inv_GiveReply(playerid, 0, 1);
+	return Inv_GiveReply(playerid, 0, true);
 }
 
 Inv_GiveReply(playerid, accept, bool:expired)
@@ -1326,7 +1326,7 @@ public Inv_OnDBUndone(const opId[], result)
 {
 	for (new p = 0; p < MAX_PLAYERS; p++)
 	{
-		if (!IsPlayerConnected(p) || gPlayer[p][pInvUndoOpId][0] == 0 || strcmp(gPlayer[p][pInvUndoOpId], opId, 0, 0x7FFFFFFF))
+		if (!IsPlayerConnected(p) || gPlayer[p][pInvUndoOpId][0] == 0 || strcmp(gPlayer[p][pInvUndoOpId], opId, false, 0x7FFFFFFF))
 		{
 			continue;
 		}
@@ -1348,26 +1348,26 @@ bool:Inv_FridgeMove(playerid, houseId, direction, qty, fridgeCap)
 {
 	if (!Inv_Guard(playerid))
 	{
-		return 0;
+		return false;
 	}
 	if (qty < 1 || qty > 40)
 	{
 		Inv_Say(playerid, -10270721, "Quantita' non valida.");
-		return 0;
+		return false;
 	}
 	if (direction == 1 && Inv_Count(playerid, 1) < qty)
 	{
 		Inv_Say(playerid, -10270721, "Non hai tutta quella spesa con te.");
-		return 0;
+		return false;
 	}
 	if (direction == 2 && Inv_Count(playerid, 1) + qty > 12)
 	{
 		SendClientMessage(playerid, -10270721, "Puoi portare al massimo %d porzioni.", 12);
-		return 0;
+		return false;
 	}
 	Inv_BeginOp(playerid, 7, 1, qty, houseId);
 	DB_FridgeMove(playerid, gPlayer[playerid][pCharId], houseId, 1, qty, direction, gPlayer[playerid][pInvOpId], fridgeCap, direction == 2 ? 12 : 0);
-	return 1;
+	return true;
 }
 
 public Inv_OnDBFridge(playerid, houseId, direction, qty, result)
@@ -1430,7 +1430,7 @@ Inv_OnInit()
 		g_InvGround[i][igObject] = 65535;
 		g_InvGround[i][igState] = 0;
 	}
-	g_InvTickTimer = SetTimer("Inv_OnTick", 1000, 1);
+	g_InvTickTimer = SetTimer("Inv_OnTick", 1000, true);
 }
 
 Inv_OnExit()

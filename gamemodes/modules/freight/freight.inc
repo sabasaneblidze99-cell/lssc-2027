@@ -113,21 +113,21 @@ bool:Freight_Point(d, bool:shop, &Float:x, &Float:y, &Float:z)
 			x = 0.0;
 			y = 0.0;
 			z = 0.0;
-			return 0;
+			return false;
 		}
 	}
-	return 1;
+	return true;
 }
 
 Freight_PairDistance(fromD, toD)
 {
 	new Float:ax, Float:ay, Float:az, Float:bx, Float:by, Float:bz;
-	if (!Freight_Point(fromD, 0, ax, ay, az) || !Freight_Point(toD, 1, bx, by, bz))
+	if (!Freight_Point(fromD, false, ax, ay, az) || !Freight_Point(toD, true, bx, by, bz))
 	{
 		return 0;
 	}
 	new Float:dx = (bx - ax), Float:dy = (by - ay);
-	return floatround(floatsqroot(((dx * dx) + (dy * dy))), 1);
+	return floatround(floatsqroot(((dx * dx) + (dy * dy))), floatround_method:1);
 }
 
 Freight_CargoName(cargo, dest[], size)
@@ -174,7 +174,7 @@ Freight_IntegrityOf(vehicleid)
 {
 	new Float:hp;
 	GetVehicleHealth(vehicleid, hp);
-	return LD_Clamp(floatround((hp / 10.0), 1), 0, 100);
+	return LD_Clamp(floatround((hp / 10.0), floatround_method:1), 0, 100);
 }
 
 bool:Freight_VehOk(playerid)
@@ -182,7 +182,7 @@ bool:Freight_VehOk(playerid)
 	new veh = g_FrtVeh[playerid];
 	if (veh == 65535 || veh <= 0 || veh >= 2000 || !IsValidVehicle(veh))
 	{
-		return 0;
+		return false;
 	}
 	return LD_VehModule(veh) == 3 && LD_VehOwner(veh) == playerid && LD_VehSerial(veh) == g_FrtSerial[playerid];
 }
@@ -204,7 +204,7 @@ Freight_RemoveVehicle(playerid)
 			{
 				if (IsPlayerConnected(playerid) && GetPlayerVehicleID(playerid) == veh)
 				{
-					RemovePlayerFromVehicle(playerid, 0);
+					RemovePlayerFromVehicle(playerid, false);
 				}
 				DestroyVehicle(veh);
 			}
@@ -511,25 +511,25 @@ bool:Freight_Begin(playerid, contractId, fromD, toD, cargo, distanceM, bool:welc
 {
 	if (!Freight_ValidId(playerid) || !Util_IsPlaying(playerid) || g_FrtActive[playerid])
 	{
-		return 0;
+		return false;
 	}
 	if (!LD_IsReady() || gPlayer[playerid][pLivingReady] == 0 || gPlayer[playerid][pCharId] <= 0)
 	{
-		return 0;
+		return false;
 	}
 	if (gPlayer[playerid][pWounded] || gPlayer[playerid][pCuffed])
 	{
-		return 0;
+		return false;
 	}
 	if (Job_IsOnShift(playerid) || gPlayer[playerid][pTaxiOnDuty] != 0 || gPlayer[playerid][pRentalId] != 0)
 	{
-		return 0;
+		return false;
 	}
 	if (welcome)
 	{
 		if (contractId != 0 || gPlayer[playerid][pContractId] != 0)
 		{
-			return 0;
+			return false;
 		}
 		fromD = 1;
 		toD = 1;
@@ -542,38 +542,38 @@ bool:Freight_Begin(playerid, contractId, fromD, toD, cargo, distanceM, bool:welc
 	{
 		if (contractId <= 0 || gPlayer[playerid][pFreightWelcome] != 0)
 		{
-			return 0;
+			return false;
 		}
 		if (gPlayer[playerid][pContractId] != 0 && gPlayer[playerid][pContractId] != contractId)
 		{
-			return 0;
+			return false;
 		}
 		if (fromD == toD || cargo < 1 || cargo > 3)
 		{
-			return 0;
+			return false;
 		}
 		if (gPlayer[playerid][pLevel] < 2)
 		{
-			return 0;
+			return false;
 		}
 	}
 	new pair = Freight_PairDistance(fromD, toD);
 	if (pair <= 0)
 	{
-		return 0;
+		return false;
 	}
 	new dist = welcome ? pair : (distanceM > pair ? distanceM : pair);
 	if (!welcome && dist < 300)
 	{
-		return 0;
+		return false;
 	}
 	if (!LD_PoolHasRoom())
 	{
 		Util_Send(playerid, -10270721, "Nessun veicolo da carico disponibile al momento. Riprova tra poco.");
-		return 0;
+		return false;
 	}
 	new Float:x, Float:y, Float:z, slot = 0;
-	Freight_Point(fromD, 0, x, y, z);
+	Freight_Point(fromD, false, x, y, z);
 	for (new i = 0; i < MAX_PLAYERS; i++)
 	{
 		if (g_FrtActive[i] && g_FrtFrom[i] == fromD && g_FrtPhase[i] == 1)
@@ -582,18 +582,18 @@ bool:Freight_Begin(playerid, contractId, fromD, toD, cargo, distanceM, bool:welc
 		}
 	}
 	x += (5.0 * float(slot % 4));
-	new veh = CreateVehicle(414, x, y, z, 0.0, 1, 1, -1, 0);
+	new veh = CreateVehicle(414, x, y, z, 0.0, 1, 1, -1, false);
 	if (veh == 65535 || veh <= 0 || veh >= 2000)
 	{
 		Util_Send(playerid, -10270721, "Impossibile preparare il veicolo da carico. Riprova.");
-		return 0;
+		return false;
 	}
 	new serial = LD_VehRegister(veh, 3, playerid);
 	if (serial == 0)
 	{
 		DestroyVehicle(veh);
 		Util_Send(playerid, -10270721, "Nessun veicolo da carico disponibile al momento. Riprova tra poco.");
-		return 0;
+		return false;
 	}
 	SetVehicleVirtualWorld(veh, 0);
 	SetVehicleHealth(veh, 1000.0);
@@ -647,7 +647,7 @@ bool:Freight_Begin(playerid, contractId, fromD, toD, cargo, distanceM, bool:welc
 		SendClientMessage(playerid, 0x66DD66FF, "Contratto #%d: ritira il Mule al magazzino di %s, fermati nel checkpoint (max %.0f km/h) %d s per caricare %s, poi consegna al negozio di %s (%d m).", contractId, fromName, 0x41200000, 6, cargoName, toName, dist);
 		Freight_Hud(playerid, -1, -1);
 	}
-	return 1;
+	return true;
 }
 
 Freight_OnPickupResult(playerid, result)
@@ -786,10 +786,10 @@ bool:Freight_SamplePath(playerid, now)
 		new msg[256];
 		format(msg, 256, "salto del Mule: pers. %d contratto %d %.0f m in %d ms", gPlayer[playerid][pCharId], g_FrtCt[playerid], seg, dt);
 		Log_Write("FREIGHT", msg);
-		return 0;
+		return false;
 	}
 	g_FrtPath[playerid] += seg;
-	return 1;
+	return true;
 }
 
 Freight_TickPlayer(playerid, now)
@@ -864,7 +864,7 @@ Freight_TickPlayer(playerid, now)
 			Freight_Stop(playerid, 4, "Spostamento anomalo del Mule: contratto di trasporto annullato.");
 			return 0;
 		}
-		new integ = LD_Clamp(floatround((hp / 10.0), 1), 0, 100);
+		new integ = LD_Clamp(floatround((hp / 10.0), floatround_method:1), 0, 100);
 		if (integ < g_FrtInteg[playerid])
 		{
 			g_FrtInteg[playerid] = integ;
@@ -916,7 +916,7 @@ Freight_TickPlayer(playerid, now)
 		g_FrtDwell[playerid] = 0;
 		gPlayer[playerid][pFreightDwellTick] = 0;
 	}
-	Freight_Hud(playerid, floatround(dist, 1), dwellSec);
+	Freight_Hud(playerid, floatround(dist, floatround_method:1), dwellSec);
 	return 0;
 }
 
@@ -949,7 +949,7 @@ Freight_OnInit()
 	{
 		KillTimer(g_FrtTimer);
 	}
-	g_FrtTimer = SetTimer("Freight_OnTick", 1000, 1);
+	g_FrtTimer = SetTimer("Freight_OnTick", 1000, true);
 }
 
 Freight_OnExit()
@@ -1053,7 +1053,7 @@ Freight_OnPlayerStateChange(playerid, t_PLAYER_STATE:newstate, t_PLAYER_STATE:ol
 	}
 	if (LD_VehOwner(veh) != playerid)
 	{
-		RemovePlayerFromVehicle(playerid, 0);
+		RemovePlayerFromVehicle(playerid, false);
 		Util_Send(playerid, -10270721, "Questo veicolo da carico e' assegnato a un altro trasportatore.");
 		return 0;
 	}

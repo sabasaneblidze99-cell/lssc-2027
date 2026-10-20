@@ -7,7 +7,7 @@ new s_HubBoardDistrict[3] = {1, 2, 3};
 new s_HubKitItem[3] = {3, 2, 6};
 new s_HubKitQty[3] = {2, 1, 2};
 new g_HubPickup[3] = {-1, -1, -1};
-new Text3D:g_HubLabel[3] = {65535, 65535, 65535};
+new Text3D:g_HubLabel[3] = {INVALID_3DTEXT_ID, INVALID_3DTEXT_ID, INVALID_3DTEXT_ID};
 new g_HubZone = -1;
 new g_HubTimer;
 new g_HubTickCount;
@@ -167,10 +167,10 @@ bool:Hub_TargetPos(target, &Float:x, &Float:y, &Float:z)
 		}
 		default:
 		{
-			return 0;
+			return false;
 		}
 	}
-	return 1;
+	return true;
 }
 
 Hub_ClearTarget(playerid)
@@ -247,7 +247,7 @@ Hub_OnInit()
 	g_HubZone = GangZoneCreate((1850.0 - 22.0), (-1800.0 - 22.0), (1850.0 + 22.0), (-1800.0 + 22.0));
 	g_HubTickCount = 0;
 	g_HubLastRefresh = 0;
-	g_HubRefreshed = 0;
+	g_HubRefreshed = false;
 	for (new d = 0; d <= 3; d++)
 	{
 		g_HubFestInit[d] = 0;
@@ -266,7 +266,7 @@ Hub_OnInit()
 	{
 		Log_Write("HUB", "registrazione del listener Hub_OnDistrictEvent non riuscita");
 	}
-	g_HubTimer = SetTimer("Hub_OnTick", 1000, 1);
+	g_HubTimer = SetTimer("Hub_OnTick", 1000, true);
 }
 
 Hub_OnExit()
@@ -334,15 +334,15 @@ Hub_OnPlayerDisconnect(playerid, reason)
 
 Hub_TryLoad(playerid)
 {
-	if (g_HubOnb[playerid] != 0 || DB_LivingPlayerGet(playerid, 0) == 0)
+	if (g_HubOnb[playerid] != 0 || DB_LivingPlayerGet(playerid, E_LD_PLAYER:0) == 0)
 	{
 		return 0;
 	}
-	new step = LD_Clamp(DB_LivingPlayerGet(playerid, 4), 0, 5);
-	new bool:done = DB_LivingPlayerGet(playerid, 5) != 0 || step >= 5;
+	new step = LD_Clamp(DB_LivingPlayerGet(playerid, E_LD_PLAYER:4), 0, 5);
+	new bool:done = DB_LivingPlayerGet(playerid, E_LD_PLAYER:5) != 0 || step >= 5;
 	g_HubStep[playerid] = step;
 	gPlayer[playerid][pOnboardStep] = step;
-	gPlayer[playerid][pHintsOff] = DB_LivingPlayerGet(playerid, 6) != 0 ? 1 : 0;
+	gPlayer[playerid][pHintsOff] = DB_LivingPlayerGet(playerid, E_LD_PLAYER:6) != 0 ? 1 : 0;
 	if (done)
 	{
 		g_HubOnb[playerid] = 2;
@@ -370,7 +370,7 @@ Hub_TryLoad(playerid)
 	new target = Hub_StepTarget(Hub_CurStep(playerid));
 	if (target != 0)
 	{
-		Hub_SetTarget(playerid, target, 0);
+		Hub_SetTarget(playerid, target, false);
 	}
 	return 0;
 }
@@ -410,7 +410,7 @@ Hub_Advance(playerid, step)
 		g_HubAhead[playerid] |= Hub_Bit(step);
 		return 0;
 	}
-	Hub_SendStep(playerid, step, 1);
+	Hub_SendStep(playerid, step, true);
 	return 0;
 }
 
@@ -436,7 +436,7 @@ Hub_StepBegin(playerid)
 	}
 	else if (target != g_HubTarget[playerid])
 	{
-		Hub_SetTarget(playerid, target, 0);
+		Hub_SetTarget(playerid, target, false);
 	}
 	return 0;
 }
@@ -548,7 +548,7 @@ public Living_OnDBOnboard(playerid, result, step, paid, balance, giveKit, exp)
 			g_HubOpId[playerid][0] = 0;
 			if (sent == 0)
 			{
-				Hub_Finish(playerid, 0);
+				Hub_Finish(playerid, false);
 				return 1;
 			}
 			g_HubStep[playerid] = LD_Clamp(step, 0, 5);
@@ -618,7 +618,7 @@ Hub_HintsOff(playerid)
 		{
 			if (Hub_HintsOn(playerid))
 			{
-				DB_LivingOnboardHints(playerid, 1);
+				DB_LivingOnboardHints(playerid, true);
 			}
 			gPlayer[playerid][pHintsOff] = 1;
 			UI_LivingHintHide(playerid);
@@ -635,7 +635,7 @@ Hub_HintsOff(playerid)
 			g_HubHintDue[playerid] = 0;
 			UI_LivingHintHide(playerid);
 			Hub_ClearTarget(playerid);
-			Hub_SendStep(playerid, 0, 1);
+			Hub_SendStep(playerid, 0, true);
 		}
 	}
 	return 0;
@@ -663,7 +663,7 @@ Hub_StartWelcome(playerid)
 	if (Hub_NearBoard(playerid) == -1)
 	{
 		Util_Send(playerid, 0x99CCFFFF, "La consegna si prende a una bacheca: ti ho segnato la Casa del Quartiere di Idlewood sulla mappa.");
-		Hub_SetTarget(playerid, 1, 1);
+		Hub_SetTarget(playerid, 1, true);
 		return 0;
 	}
 	new block = LD_CheckStart(playerid);
@@ -673,7 +673,7 @@ Hub_StartWelcome(playerid)
 		return 0;
 	}
 	Hub_ClearTarget(playerid);
-	if (!Freight_Begin(playerid, 0, 1, 1, 1, 0, 1))
+	if (!Freight_Begin(playerid, 0, 1, 1, 1, 0, true))
 	{
 		Util_Send(playerid, -10270721, "Il furgone della consegna di benvenuto non e' disponibile proprio ora: riprova tra poco.");
 		return 0;
@@ -729,22 +729,22 @@ Hub_CmdAiuto(playerid, const params[])
 		UI_LivingHelpShow(playerid);
 		return 1;
 	}
-	if (!strcmp(sub, "off", 1, 0x7FFFFFFF))
+	if (!strcmp(sub, "off", true, 0x7FFFFFFF))
 	{
 		Hub_HintsOff(playerid);
 		return 1;
 	}
-	if (!strcmp(sub, "servizi", 1, 0x7FFFFFFF) || !strcmp(sub, "hub", 1, 0x7FFFFFFF))
+	if (!strcmp(sub, "servizi", true, 0x7FFFFFFF) || !strcmp(sub, "hub", true, 0x7FFFFFFF))
 	{
 		Hub_ShowServices(playerid);
 		return 1;
 	}
-	if (!strcmp(sub, "consegna", 1, 0x7FFFFFFF))
+	if (!strcmp(sub, "consegna", true, 0x7FFFFFFF))
 	{
 		Hub_StartWelcome(playerid);
 		return 1;
 	}
-	if (!strcmp(sub, "mappa", 1, 0x7FFFFFFF))
+	if (!strcmp(sub, "mappa", true, 0x7FFFFFFF))
 	{
 		if (g_HubOnb[playerid] == 1)
 		{
@@ -756,21 +756,21 @@ Hub_CmdAiuto(playerid, const params[])
 		}
 		return 1;
 	}
-	if (!strcmp(sub, "casa", 1, 0x7FFFFFFF))
+	if (!strcmp(sub, "casa", true, 0x7FFFFFFF))
 	{
-		Hub_SetTarget(playerid, 1, 1);
+		Hub_SetTarget(playerid, 1, true);
 		Util_Send(playerid, 0x99CCFFFF, "Ti ho segnato la Casa del Quartiere di Idlewood sulla mappa.");
 		return 1;
 	}
-	if (!strcmp(sub, "lavoro", 1, 0x7FFFFFFF))
+	if (!strcmp(sub, "lavoro", true, 0x7FFFFFFF))
 	{
-		Hub_SetTarget(playerid, 2, 1);
+		Hub_SetTarget(playerid, 2, true);
 		Util_Send(playerid, 0x99CCFFFF, "Il Job Center e' a Pershing Square, vicino al municipio: te l'ho segnato sulla mappa. Li', /lavoro prendi.");
 		return 1;
 	}
-	if (!strcmp(sub, "noleggio", 1, 0x7FFFFFFF))
+	if (!strcmp(sub, "noleggio", true, 0x7FFFFFFF))
 	{
-		Hub_SetTarget(playerid, 3, 1);
+		Hub_SetTarget(playerid, 3, true);
 		Util_Send(playerid, 0x99CCFFFF, "Il noleggio mezzi e' a Pershing Square: te l'ho segnato sulla mappa. Li', /noleggio.");
 		return 1;
 	}
@@ -793,7 +793,7 @@ public UI_OnHelpWaypoint(playerid, step)
 	{
 		case 1:
 		{
-			Hub_SetTarget(playerid, 1, 1);
+			Hub_SetTarget(playerid, 1, true);
 			Util_Send(playerid, 0x99CCFFFF, "Segui il segnale: la Casa del Quartiere e' a due passi da Unity Station.");
 		}
 		case 3:
@@ -804,13 +804,13 @@ public UI_OnHelpWaypoint(playerid, step)
 			}
 			else
 			{
-				Hub_SetTarget(playerid, 1, 1);
+				Hub_SetTarget(playerid, 1, true);
 				Util_Send(playerid, 0x99CCFFFF, "Ti ho segnato la Casa del Quartiere: li', /aiuto consegna.");
 			}
 		}
 		case 5:
 		{
-			Hub_SetTarget(playerid, 2, 1);
+			Hub_SetTarget(playerid, 2, true);
 			Util_Send(playerid, 0x99CCFFFF, "Ti ho segnato il Job Center di Pershing Square. Puoi anche solo scrivere /lavoro o /noleggio da qui.");
 		}
 		default:
@@ -844,7 +844,7 @@ Hub_DayLeft(playerid)
 
 Hub_ProjectFund(districtId)
 {
-	new prj = DB_LivingDistrictGet(districtId, 6), fund = DB_LivingDistrictGet(districtId, 8);
+	new prj = DB_LivingDistrictGet(districtId, E_LD_DISTRICT:6), fund = DB_LivingDistrictGet(districtId, E_LD_DISTRICT:8);
 	if (prj > 0 && g_HubFundPrj[districtId] == prj && g_HubFund[districtId] > fund)
 	{
 		fund = g_HubFund[districtId];
@@ -854,7 +854,7 @@ Hub_ProjectFund(districtId)
 
 bool:Hub_ProjectOpen(districtId)
 {
-	return DB_LivingDistrictGet(districtId, 6) > 0 && DB_LivingDistrictGet(districtId, 9) > gettime();
+	return DB_LivingDistrictGet(districtId, E_LD_DISTRICT:6) > 0 && DB_LivingDistrictGet(districtId, E_LD_DISTRICT:9) > gettime();
 }
 
 Hub_ProjectBlock(playerid, districtId)
@@ -880,14 +880,14 @@ Hub_ProjectBlock(playerid, districtId)
 
 Hub_ProjectFill(playerid, districtId)
 {
-	new name[65], prj = DB_LivingDistrictGet(districtId, 6), hours = 0;
+	new name[65], prj = DB_LivingDistrictGet(districtId, E_LD_DISTRICT:6), hours = 0;
 	DB_LivingProjectName(districtId, name, 65);
-	new left = DB_LivingDistrictGet(districtId, 9) - gettime();
+	new left = DB_LivingDistrictGet(districtId, E_LD_DISTRICT:9) - gettime();
 	if (left > 0)
 	{
 		hours = (left + 3600 - 1) / 3600;
 	}
-	UI_LivingProjectSet(playerid, Hub_ProjectOpen(districtId) ? prj : 0, districtId, name, DB_LivingDistrictGet(districtId, 7), Hub_ProjectFund(districtId), hours, 50, 500, Hub_DayLeft(playerid), Hub_ProjectBlock(playerid, districtId));
+	UI_LivingProjectSet(playerid, Hub_ProjectOpen(districtId) ? prj : 0, districtId, name, DB_LivingDistrictGet(districtId, E_LD_DISTRICT:7), Hub_ProjectFund(districtId), hours, 50, 500, Hub_DayLeft(playerid), Hub_ProjectBlock(playerid, districtId));
 }
 
 Hub_DistrictOfProject(projectId)
@@ -898,7 +898,7 @@ Hub_DistrictOfProject(projectId)
 	}
 	for (new d = 1; d <= 3; d++)
 	{
-		if (DB_LivingDistrictGet(d, 6) == projectId)
+		if (DB_LivingDistrictGet(d, E_LD_DISTRICT:6) == projectId)
 		{
 			return d;
 		}
@@ -1063,7 +1063,7 @@ public Living_OnDBProject(playerid, result, projectId, donated, balance, points,
 				g_HubFundPrj[d] = projectId;
 				g_HubFund[d] = fund;
 			}
-			format(msg, 256, "Grazie! Hai donato $%d per \"%s\": raccolti $%d su $%d.", donated, name, fund, DB_LivingDistrictGet(d, 7));
+			format(msg, 256, "Grazie! Hai donato $%d per \"%s\": raccolti $%d su $%d.", donated, name, fund, DB_LivingDistrictGet(d, E_LD_DISTRICT:7));
 			UI_LivingNotify(playerid, msg, 1);
 			if (points > 0)
 			{
@@ -1124,7 +1124,7 @@ Hub_RequestRefresh(bool:force)
 	{
 		return 0;
 	}
-	g_HubRefreshed = 1;
+	g_HubRefreshed = true;
 	g_HubLastRefresh = now;
 	DB_LivingLoadDistricts();
 	return 0;
@@ -1146,17 +1146,17 @@ Hub_CheckFestivals()
 	new msg[256], dname[16], opId[37];
 	for (new d = 1; d <= 3; d++)
 	{
-		if (DB_LivingDistrictGet(d, 0) == 0)
+		if (DB_LivingDistrictGet(d, E_LD_DISTRICT:0) == 0)
 		{
 			continue;
 		}
-		new fest = DB_LivingDistrictGet(d, 4), prj = DB_LivingDistrictGet(d, 6);
+		new fest = DB_LivingDistrictGet(d, E_LD_DISTRICT:4), prj = DB_LivingDistrictGet(d, E_LD_DISTRICT:6);
 		if (!g_HubFestInit[d])
 		{
 			g_HubFestInit[d] = 1;
 			g_HubFestSeen[d] = fest;
 			g_HubPrjSeen[d] = prj;
-			g_HubGoalSeen[d] = DB_LivingDistrictGet(d, 7);
+			g_HubGoalSeen[d] = DB_LivingDistrictGet(d, E_LD_DISTRICT:7);
 			DB_LivingProjectName(d, g_HubPrjNameSeen[d], 65);
 			continue;
 		}
@@ -1181,7 +1181,7 @@ Hub_CheckFestivals()
 		}
 		g_HubFestSeen[d] = fest;
 		g_HubPrjSeen[d] = prj;
-		g_HubGoalSeen[d] = DB_LivingDistrictGet(d, 7);
+		g_HubGoalSeen[d] = DB_LivingDistrictGet(d, E_LD_DISTRICT:7);
 		DB_LivingProjectName(d, g_HubPrjNameSeen[d], 65);
 	}
 }
@@ -1285,7 +1285,7 @@ Hub_PlayerTick(playerid, now)
 		{
 			if (g_HubOpRetryAt[playerid] != 0 && now - g_HubOpRetryAt[playerid] >= 0)
 			{
-				Hub_SendStep(playerid, g_HubOpStep[playerid], 0);
+				Hub_SendStep(playerid, g_HubOpStep[playerid], false);
 			}
 		}
 		else if (cur == 1 && board == 0)

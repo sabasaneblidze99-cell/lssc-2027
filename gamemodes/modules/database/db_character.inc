@@ -80,7 +80,7 @@ public DB_OnCharLoaded(playerid, const name[], accountId)
 	cache_get_row_count(rows);
 	if (rows < 1)
 	{
-		Char_OnDBLoaded(playerid, 0);
+		Char_OnDBLoaded(playerid, false);
 		return 1;
 	}
 	cache_get_value_name_int(0, "id", gPlayer[playerid][pCharId]);
@@ -106,7 +106,7 @@ public DB_OnCharLoaded(playerid, const name[], accountId)
 	cache_get_value_name(0, "cn", cn, sizeof cn);
 	CharSel_SetLoadedName(playerid, cn);
 	gPlayer[playerid][pCivilSkin] = gPlayer[playerid][pSkin];
-	Char_OnDBLoaded(playerid, 1);
+	Char_OnDBLoaded(playerid, true);
 	return 1;
 }
 

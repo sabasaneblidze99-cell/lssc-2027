@@ -409,25 +409,25 @@ bool:UI_HsParseAmount(const text[], &value)
 	new len = strlen(text);
 	if (len < 1 || len > 4)
 	{
-		return 0;
+		return false;
 	}
 	value = 0;
 	for (new i = 0; i < len; i++)
 	{
 		if (text[i] < 48 || text[i] > 57)
 		{
-			return 0;
+			return false;
 		}
 		value = value * 10 + (text[i] - 48);
 	}
-	return 1;
+	return true;
 }
 
 bool:UI_HouseOnDialogResponse(playerid, dialogid, response, listitem, const inputtext[])
 {
 	if (!UI_HsValid(playerid))
 	{
-		return 0;
+		return false;
 	}
 	new houseId = g_UiHsHouse[playerid];
 	switch (dialogid)
@@ -436,12 +436,12 @@ bool:UI_HouseOnDialogResponse(playerid, dialogid, response, listitem, const inpu
 		{
 			if (!response)
 			{
-				return 1;
+				return true;
 			}
 			if (listitem < 0 || listitem >= 10 || g_UiHsItemAct[playerid][listitem] == 0)
 			{
 				UI_HouseMenuShow(playerid);
-				return 1;
+				return true;
 			}
 			new act = g_UiHsItemAct[playerid][listitem];
 			if (act == 100)
@@ -450,25 +450,25 @@ bool:UI_HouseOnDialogResponse(playerid, dialogid, response, listitem, const inpu
 				{
 					SendClientMessage(playerid, -10066177, "Il tuo livello e' troppo basso per questa casa.");
 					UI_HouseMenuShow(playerid);
-					return 1;
+					return true;
 				}
 				UI_HsBuyPayShow(playerid);
-				return 1;
+				return true;
 			}
 			if (act == 6)
 			{
 				UI_HsSellConfirmShow(playerid);
-				return 1;
+				return true;
 			}
 			UI_OnHouseAction(playerid, houseId, act);
-			return 1;
+			return true;
 		}
 		case 9201:
 		{
 			if (!response || listitem < 0 || listitem > 1)
 			{
 				UI_HouseMenuShow(playerid);
-				return 1;
+				return true;
 			}
 			new p = g_UiHsTierPrice[g_UiHsTier[playerid]];
 			new funds = listitem == 1 ? g_UiHsBank[playerid] : g_UiHsMoney[playerid];
@@ -476,55 +476,55 @@ bool:UI_HouseOnDialogResponse(playerid, dialogid, response, listitem, const inpu
 			{
 				SendClientMessage(playerid, -10066177, "Fondi insufficienti con questo metodo di pagamento.");
 				UI_HsBuyPayShow(playerid);
-				return 1;
+				return true;
 			}
 			UI_OnHouseBuyConfirm(playerid, houseId, listitem);
-			return 1;
+			return true;
 		}
 		case 9202:
 		{
 			if (!response)
 			{
 				UI_HouseMenuShow(playerid);
-				return 1;
+				return true;
 			}
 			UI_OnHouseAction(playerid, houseId, 6);
-			return 1;
+			return true;
 		}
 		case 9203:
 		{
 			if (!response)
 			{
 				UI_HouseMenuShow(playerid);
-				return 1;
+				return true;
 			}
 			if (listitem != 0 && listitem != 1)
 			{
 				UI_HouseUtilityShow(playerid);
-				return 1;
+				return true;
 			}
 			new st = listitem == 0 ? g_UiHsLight[playerid] : g_UiHsGas[playerid];
 			if (st == 2)
 			{
 				SendClientMessage(playerid, -10066177, "Utenza staccata per morosita': paga le bollette per riattivarla.");
 				UI_HouseUtilityShow(playerid);
-				return 1;
+				return true;
 			}
 			if (listitem == 1 && g_UiHsRole[playerid] != 1)
 			{
 				SendClientMessage(playerid, -10066177, "Solo il proprietario puo' gestire il gas.");
 				UI_HouseUtilityShow(playerid);
-				return 1;
+				return true;
 			}
 			UI_OnHouseUtilityToggle(playerid, houseId, listitem, st == 1 ? 0 : 1);
-			return 1;
+			return true;
 		}
 		case 9204:
 		{
 			if (!response)
 			{
 				UI_HouseMenuShow(playerid);
-				return 1;
+				return true;
 			}
 			new act = listitem >= 0 && listitem < 10 ? g_UiHsItemAct[playerid][listitem] : 0;
 			new units = g_UiHsFridge[playerid], cap = UI_HsFridgeCap(playerid);
@@ -536,7 +536,7 @@ bool:UI_HouseOnDialogResponse(playerid, dialogid, response, listitem, const inpu
 					{
 						SendClientMessage(playerid, -10066177, "Il frigo e' vuoto.");
 						UI_HouseFridgeShow(playerid);
-						return 1;
+						return true;
 					}
 					UI_OnHouseFridgeAction(playerid, houseId, 1, 0);
 				}
@@ -546,13 +546,13 @@ bool:UI_HouseOnDialogResponse(playerid, dialogid, response, listitem, const inpu
 					{
 						SendClientMessage(playerid, -10066177, "Il frigo e' vuoto.");
 						UI_HouseFridgeShow(playerid);
-						return 1;
+						return true;
 					}
 					if (g_UiHsGas[playerid] != 1)
 					{
 						SendClientMessage(playerid, -10066177, "Il gas non e' attivo: non puoi cucinare.");
 						UI_HouseFridgeShow(playerid);
-						return 1;
+						return true;
 					}
 					UI_OnHouseFridgeAction(playerid, houseId, 2, 0);
 				}
@@ -567,7 +567,7 @@ bool:UI_HouseOnDialogResponse(playerid, dialogid, response, listitem, const inpu
 					{
 						SendClientMessage(playerid, -10066177, "Non hai spesa da riporre o il frigo e' pieno.");
 						UI_HouseFridgeShow(playerid);
-						return 1;
+						return true;
 					}
 					UI_HsAmountShow(playerid, 3, m);
 				}
@@ -582,7 +582,7 @@ bool:UI_HouseOnDialogResponse(playerid, dialogid, response, listitem, const inpu
 					{
 						SendClientMessage(playerid, -10066177, "Frigo vuoto o borsa piena.");
 						UI_HouseFridgeShow(playerid);
-						return 1;
+						return true;
 					}
 					UI_HsAmountShow(playerid, 4, m);
 				}
@@ -591,47 +591,47 @@ bool:UI_HouseOnDialogResponse(playerid, dialogid, response, listitem, const inpu
 					UI_HouseFridgeShow(playerid);
 				}
 			}
-			return 1;
+			return true;
 		}
 		case 9205:
 		{
 			if (!response)
 			{
 				UI_HouseFridgeShow(playerid);
-				return 1;
+				return true;
 			}
 			new amount = 0;
 			if (!UI_HsParseAmount(inputtext, amount) || amount < 1 || amount > g_UiHsAmtMax[playerid])
 			{
 				SendClientMessage(playerid, -10066177, "Quantita' non valida.");
 				UI_HsAmountShow(playerid, g_UiHsAmtAction[playerid], g_UiHsAmtMax[playerid]);
-				return 1;
+				return true;
 			}
 			UI_OnHouseFridgeAction(playerid, houseId, g_UiHsAmtAction[playerid], amount);
-			return 1;
+			return true;
 		}
 		case 9206:
 		{
 			if (!response)
 			{
 				UI_HouseMenuShow(playerid);
-				return 1;
+				return true;
 			}
 			if (UI_HsBillsTotal(playerid) <= 0)
 			{
 				SendClientMessage(playerid, 0x66DD66FF, "Nessuna bolletta da pagare.");
 				UI_HouseBillsShow(playerid);
-				return 1;
+				return true;
 			}
 			UI_HsBillsPayShow(playerid);
-			return 1;
+			return true;
 		}
 		case 9207:
 		{
 			if (!response || listitem < 0 || listitem > 1)
 			{
 				UI_HouseBillsShow(playerid);
-				return 1;
+				return true;
 			}
 			new bool:bank = listitem == 0;
 			new funds = bank ? g_UiHsBank[playerid] : g_UiHsMoney[playerid];
@@ -639,17 +639,17 @@ bool:UI_HouseOnDialogResponse(playerid, dialogid, response, listitem, const inpu
 			{
 				SendClientMessage(playerid, -10066177, "Fondi insufficienti con questo metodo di pagamento.");
 				UI_HsBillsPayShow(playerid);
-				return 1;
+				return true;
 			}
 			UI_OnHouseBillsPayAll(playerid, houseId, bank ? 1 : 0);
-			return 1;
+			return true;
 		}
 		case 9208:
 		{
-			return 1;
+			return true;
 		}
 	}
-	return 0;
+	return false;
 }
 new g_UiHh[MAX_PLAYERS][7];
 new bool:g_UiHhCreated[MAX_PLAYERS];
@@ -664,7 +664,7 @@ PlayerText:UI_HhText(playerid, Float:x, Float:y, const text[], Float:lw, Float:l
 	PlayerTextDrawAlignment(playerid, td, align);
 	PlayerTextDrawColour(playerid, td, color);
 	PlayerTextDrawFont(playerid, td, 1);
-	PlayerTextDrawSetProportional(playerid, td, 1);
+	PlayerTextDrawSetProportional(playerid, td, true);
 	PlayerTextDrawSetOutline(playerid, td, 1);
 	PlayerTextDrawSetShadow(playerid, td, 0);
 	PlayerTextDrawBackgroundColour(playerid, td, 255);
@@ -676,7 +676,7 @@ PlayerText:UI_HhBox(playerid, Float:x, Float:y, Float:w, Float:h, color)
 	new PlayerText:td = Lang_CreatePlayerTextDraw(playerid, x, y, "_");
 	PlayerTextDrawLetterSize(playerid, td, 0.0, (h / 9.0));
 	PlayerTextDrawTextSize(playerid, td, (x + w), 0.0);
-	PlayerTextDrawUseBox(playerid, td, 1);
+	PlayerTextDrawUseBox(playerid, td, true);
 	PlayerTextDrawBoxColour(playerid, td, color);
 	PlayerTextDrawFont(playerid, td, 1);
 	PlayerTextDrawSetShadow(playerid, td, 0);
@@ -692,13 +692,13 @@ UI_HhCreate(playerid)
 	}
 	new Float:left = (632.0 - 150.0);
 	new Float:homeLeft = ((left - 150.0) - 4.0);
-	g_UiHh[playerid][0] = UI_HhBox(playerid, 0.0, 0.0, 640.0, 490.0, 176);
-	g_UiHh[playerid][1] = UI_HhBox(playerid, left, 458.0, 150.0, 18.0, 153);
-	g_UiHh[playerid][2] = UI_HhText(playerid, (4.0 + left), (458.0 + 1.0), "Sazieta' 0%", 0.2, 0.9, -1, 1);
+	g_UiHh[playerid][0] = _:UI_HhBox(playerid, 0.0, 0.0, 640.0, 490.0, 176);
+	g_UiHh[playerid][1] = _:UI_HhBox(playerid, left, 458.0, 150.0, 18.0, 153);
+	g_UiHh[playerid][2] = UI_HhText(playerid, (4.0 + left), (458.0 + 1.0), "Sazieta' 0%", 0.2, 0.9, -1, t_TEXT_DRAW_ALIGN:1);
 	g_UiHh[playerid][3] = UI_HhBox(playerid, (4.0 + left), (458.0 + 12.0), 142.0, 4.0, 0x444444FF);
 	g_UiHh[playerid][4] = UI_HhBox(playerid, (4.0 + left), (458.0 + 12.0), 142.0, 4.0, 0x66DD66FF);
-	g_UiHh[playerid][5] = UI_HhBox(playerid, homeLeft, 458.0, 150.0, 18.0, 153);
-	g_UiHh[playerid][6] = UI_HhText(playerid, (4.0 + homeLeft), (458.0 + 3.0), "Luce ON | Gas ON | Frigo 0/0", 0.2, 0.9, -1, 1);
+	g_UiHh[playerid][5] = _:UI_HhBox(playerid, homeLeft, 458.0, 150.0, 18.0, 153);
+	g_UiHh[playerid][6] = UI_HhText(playerid, (4.0 + homeLeft), (458.0 + 3.0), "Luce ON | Gas ON | Frigo 0/0", 0.2, 0.9, -1, t_TEXT_DRAW_ALIGN:1);
 	g_UiHhCreated[playerid] = 1;
 	return 0;
 }
@@ -711,7 +711,7 @@ UI_HouseDarkShow(playerid)
 	}
 	UI_HhCreate(playerid);
 	g_UiHhDark[playerid] = 1;
-	PlayerTextDrawShow(playerid, g_UiHh[playerid][0]);
+	PlayerTextDrawShow(playerid, PlayerText:g_UiHh[playerid][0]);
 	return 0;
 }
 
@@ -722,7 +722,7 @@ UI_HouseDarkHide(playerid)
 		return 0;
 	}
 	g_UiHhDark[playerid] = 0;
-	PlayerTextDrawHide(playerid, g_UiHh[playerid][0]);
+	PlayerTextDrawHide(playerid, PlayerText:g_UiHh[playerid][0]);
 	return 0;
 }
 
@@ -759,18 +759,18 @@ UI_HungerHudUpdate(playerid, hunger)
 	new str[32];
 	format(str, 32, "Sazieta' %d%%", hunger);
 	Lang_PlayerTextDrawSetString(playerid, g_UiHh[playerid][2], str);
-	PlayerTextDrawColour(playerid, g_UiHh[playerid][2], color);
-	PlayerTextDrawBoxColour(playerid, g_UiHh[playerid][4], barColor);
+	PlayerTextDrawColour(playerid, PlayerText:g_UiHh[playerid][2], color);
+	PlayerTextDrawBoxColour(playerid, PlayerText:g_UiHh[playerid][4], barColor);
 	new Float:fraction = (float(hunger) / float(100));
-	PlayerTextDrawTextSize(playerid, g_UiHh[playerid][4], (0.1 + ((4.0 + (632.0 - 150.0)) + (142.0 * fraction))), 0.0);
+	PlayerTextDrawTextSize(playerid, PlayerText:g_UiHh[playerid][4], (0.1 + ((4.0 + (632.0 - 150.0)) + (142.0 * fraction))), 0.0);
 	if (!g_UiHhHunger[playerid])
 	{
 		g_UiHhHunger[playerid] = 1;
-		PlayerTextDrawShow(playerid, g_UiHh[playerid][1]);
-		PlayerTextDrawShow(playerid, g_UiHh[playerid][3]);
+		PlayerTextDrawShow(playerid, PlayerText:g_UiHh[playerid][1]);
+		PlayerTextDrawShow(playerid, PlayerText:g_UiHh[playerid][3]);
 	}
-	PlayerTextDrawShow(playerid, g_UiHh[playerid][2]);
-	PlayerTextDrawShow(playerid, g_UiHh[playerid][4]);
+	PlayerTextDrawShow(playerid, PlayerText:g_UiHh[playerid][2]);
+	PlayerTextDrawShow(playerid, PlayerText:g_UiHh[playerid][4]);
 	return 0;
 }
 
@@ -787,9 +787,9 @@ UI_HouseHudUpdate(playerid, bool:lightOn, bool:gasOn, fridgeUnits, fridgeCap)
 	if (!g_UiHhHome[playerid])
 	{
 		g_UiHhHome[playerid] = 1;
-		PlayerTextDrawShow(playerid, g_UiHh[playerid][5]);
+		PlayerTextDrawShow(playerid, PlayerText:g_UiHh[playerid][5]);
 	}
-	PlayerTextDrawShow(playerid, g_UiHh[playerid][6]);
+	PlayerTextDrawShow(playerid, PlayerText:g_UiHh[playerid][6]);
 	return 0;
 }
 
@@ -800,8 +800,8 @@ UI_HouseHudHide(playerid)
 		return 0;
 	}
 	g_UiHhHome[playerid] = 0;
-	PlayerTextDrawHide(playerid, g_UiHh[playerid][5]);
-	PlayerTextDrawHide(playerid, g_UiHh[playerid][6]);
+	PlayerTextDrawHide(playerid, PlayerText:g_UiHh[playerid][5]);
+	PlayerTextDrawHide(playerid, PlayerText:g_UiHh[playerid][6]);
 	return 0;
 }
 
@@ -815,7 +815,7 @@ UI_HouseUiDestroy(playerid)
 	{
 		for (new i = 0; i < 7; i++)
 		{
-			PlayerTextDrawDestroy(playerid, g_UiHh[playerid][i]);
+			PlayerTextDrawDestroy(playerid, PlayerText:g_UiHh[playerid][i]);
 			g_UiHh[playerid][i] = 65535;
 		}
 	}

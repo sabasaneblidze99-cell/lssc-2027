@@ -44,22 +44,22 @@ bool:DB_InvItemOk(itemId)
 
 bool:DB_InvAddKindOk(const kind[])
 {
-	return !strcmp(kind, "add", 0, 0x7FFFFFFF) || !strcmp(kind, "pickup", 0, 0x7FFFFFFF);
+	return !strcmp(kind, "add", false, 0x7FFFFFFF) || !strcmp(kind, "pickup", false, 0x7FFFFFFF);
 }
 
 bool:DB_InvLive(playerid, const name[], charId, token, op)
 {
 	if (!DB_PlayerMatches(playerid, name))
 	{
-		return 0;
+		return false;
 	}
 	if (charId <= 0 || gPlayer[playerid][pCharId] != charId)
 	{
-		return 0;
+		return false;
 	}
 	if (!(g_DBPending[playerid] & 0x04000000))
 	{
-		return 0;
+		return false;
 	}
 	return g_InvReq[playerid][iqToken] == token && g_InvReq[playerid][iqOp] == op;
 }
@@ -149,17 +149,17 @@ bool:DB_InvBegin(playerid, op, bool:valid, charId, itemId, qty, const opId[], di
 {
 	if (playerid < 0 || playerid >= MAX_PLAYERS || !IsPlayerConnected(playerid))
 	{
-		return 0;
+		return false;
 	}
 	if (g_DBPending[playerid] & 0x04000000)
 	{
 		DB_InvDeliver(playerid, op, 7, itemId, qty, dir, houseId, 65535);
-		return 0;
+		return false;
 	}
 	if (!valid || charId <= 0 || gPlayer[playerid][pCharId] != charId || !DB_InvOpIdOk(opId))
 	{
 		DB_InvDeliver(playerid, op, 0, itemId, qty, dir, houseId, 65535);
-		return 0;
+		return false;
 	}
 	g_InvReq[playerid][iqToken] = ++g_InvTokenSeq;
 	g_InvReq[playerid][iqOp] = op;
@@ -179,10 +179,10 @@ bool:DB_InvBegin(playerid, op, bool:valid, charId, itemId, qty, const opId[], di
 	if (!DB_IsReady())
 	{
 		DB_InvDeliver(playerid, op, -1, itemId, qty, dir, houseId, 65535);
-		return 0;
+		return false;
 	}
 	DB_PendingSet(playerid, 0x04000000);
-	return 1;
+	return true;
 }
 
 DB_InvRun(playerid, op, const query[])
@@ -344,7 +344,7 @@ DB_InvDrop(playerid, charId, itemId, qty, const opId[])
 
 DB_InvSetBag(playerid, charId, const opId[])
 {
-	if (!DB_InvBegin(playerid, 7, 1, charId, 0, 1, opId, 0, 0, 65535, 0))
+	if (!DB_InvBegin(playerid, 7, true, charId, 0, 1, opId, 0, 0, 65535, 0))
 	{
 		return 0;
 	}
@@ -494,7 +494,7 @@ public DB_OnInvUndoResult(const opId[], notify)
 	cache_get_row_count(rows);
 	if (rows > 0)
 	{
-		new bool:isNull = 1;
+		new bool:isNull = true;
 		result = -1;
 		cache_is_value_name_null(0, "undo_result", isNull);
 		if (!isNull)
@@ -542,11 +542,11 @@ public DB_InvFailure(playerid, op)
 
 public DB_InvQueryError(const callback[])
 {
-	if (!strcmp(callback, "DB_OnInvLoaded", 0, 0x7FFFFFFF))
+	if (!strcmp(callback, "DB_OnInvLoaded", false, 0x7FFFFFFF))
 	{
 		DB_FailAllPending(0x02000000);
 	}
-	else if (!strcmp(callback, "DB_OnInvUndo", 0, 12))
+	else if (!strcmp(callback, "DB_OnInvUndo", false, 12))
 	{
 		Log_Write("DBINV", "errore query in annullamento inventario: verificare a mano");
 		if (g_InvUndoNotify > 0)

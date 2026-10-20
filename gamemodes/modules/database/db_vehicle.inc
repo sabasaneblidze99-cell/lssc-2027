@@ -46,7 +46,7 @@ bool:DB_VehSessionOk(playerid, const name[], ownerId)
 {
 	if (!DB_PlayerMatches(playerid, name))
 	{
-		return 0;
+		return false;
 	}
 	return ownerId > 0 && gPlayer[playerid][pCharId] == ownerId;
 }

@@ -74,7 +74,7 @@ Director_RouteMeters(fromD, toD)
 	Director_WarehousePos(fromD, ax, ay);
 	Director_ShopPos(toD, bx, by);
 	new Float:dx = (bx - ax), Float:dy = (by - ay);
-	return floatround(floatsqroot(((dx * dx) + (dy * dy))), 1);
+	return floatround(floatsqroot(((dx * dx) + (dy * dy))), floatround_method:1);
 }
 
 Director_BoardFind(contractId)
@@ -135,7 +135,7 @@ Director_BlockCode(playerid, i)
 	{
 		return 6;
 	}
-	if (DB_LivingPlayerGet(playerid, 2) >= 8 || DB_LivingPlayerGet(playerid, 1) >= 2800)
+	if (DB_LivingPlayerGet(playerid, E_LD_PLAYER:2) >= 8 || DB_LivingPlayerGet(playerid, E_LD_PLAYER:1) >= 2800)
 	{
 		return 7;
 	}
@@ -154,13 +154,13 @@ bool:Director_BoardVisible(playerid, i)
 {
 	if (i < 0 || i >= g_DirBoardCount || g_DirBoard[i][dbExpiresAt] <= gettime())
 	{
-		return 0;
+		return false;
 	}
 	if (g_DirBoard[i][dbPremium] != 0 && !Director_PremiumOk(playerid, g_DirBoard[i][dbFromDistrict], g_DirBoard[i][dbToDistrict]))
 	{
-		return 0;
+		return false;
 	}
-	return 1;
+	return true;
 }
 
 Director_ClearContract(playerid)
@@ -237,11 +237,11 @@ bool:Director_ScheduleRetry(playerid)
 {
 	if (g_DirRetry[playerid] >= 3)
 	{
-		return 0;
+		return false;
 	}
 	g_DirRetry[playerid]++;
-	SetTimerEx("Director_OnRetry", 2500, 0, "ddd", playerid, gPlayer[playerid][pCharId], g_DirSeq[playerid]);
-	return 1;
+	SetTimerEx("Director_OnRetry", 2500, false, "ddd", playerid, gPlayer[playerid][pCharId], g_DirSeq[playerid]);
+	return true;
 }
 
 public Director_OnRetry(playerid, charId, seq)
@@ -285,7 +285,7 @@ Director_EndLocal(playerid, freightReason, bool:released, relReason)
 Director_OnInit()
 {
 	g_DirBoardCount = 0;
-	g_DirBoardLoaded = 0;
+	g_DirBoardLoaded = false;
 	for (new p = 0; p < MAX_PLAYERS; p++)
 	{
 		Director_ResetPlayer(p);
@@ -366,7 +366,7 @@ Director_Generate(bucket)
 		{
 			continue;
 		}
-		new bool:premium = 0;
+		new bool:premium = false;
 		if (s >= 3)
 		{
 			new h = LD_Hash32(bucket, s, 2);
@@ -433,7 +433,7 @@ public Living_OnDBBoard(playerid, result, count)
 		n++;
 	}
 	g_DirBoardCount = n;
-	g_DirBoardLoaded = 1;
+	g_DirBoardLoaded = true;
 	LD_Emit(104, 0, 0, n, "-");
 	return 1;
 }
@@ -458,7 +458,7 @@ bool:Director_BoardGet(index, &contractId, &fromD, &toD, &cargo, &reward, &dista
 		minRep = 0;
 		minLocalRep = 0;
 		premium = 0;
-		return 0;
+		return false;
 	}
 	contractId = g_DirBoard[index][dbContractId];
 	fromD = g_DirBoard[index][dbFromDistrict];
@@ -471,7 +471,7 @@ bool:Director_BoardGet(index, &contractId, &fromD, &toD, &cargo, &reward, &dista
 	minRep = g_DirBoard[index][dbMinRep];
 	minLocalRep = g_DirBoard[index][dbMinLocalRep];
 	premium = g_DirBoard[index][dbPremium];
-	return 1;
+	return true;
 }
 
 Director_ExpiresAt(playerid)
@@ -530,45 +530,45 @@ bool:Director_Accept(playerid, contractId)
 {
 	if (!Util_IsPlaying(playerid))
 	{
-		return 0;
+		return false;
 	}
 	if (!LD_IsReady() || gPlayer[playerid][pLivingReady] == 0)
 	{
 		LD_SendBlock(playerid, 1);
-		return 0;
+		return false;
 	}
 	if (gPlayer[playerid][pContractPendOp] != 0 || DB_LivingBusy(playerid, 0))
 	{
 		Util_Send(playerid, -10270721, "Un'operazione sul contratto e' gia' in corso: attendi.");
-		return 0;
+		return false;
 	}
 	if (Hub_NearBoard(playerid) < 0)
 	{
 		Util_Send(playerid, -10270721, "I contratti si accettano a una bacheca: Casa del Quartiere di Idlewood, magazzino di Ganton o di Jefferson.");
-		return 0;
+		return false;
 	}
 	new block = LD_CheckStart(playerid);
 	if (block != 0)
 	{
 		LD_SendBlock(playerid, block);
-		return 0;
+		return false;
 	}
 	if (gPlayer[playerid][pLevel] < 2)
 	{
 		Director_BlockMsg(playerid, 1);
-		return 0;
+		return false;
 	}
 	new i = Director_BoardFind(contractId);
 	if (i < 0 || !Director_BoardVisible(playerid, i))
 	{
 		Director_BlockMsg(playerid, 9);
-		return 0;
+		return false;
 	}
 	new code = Director_BlockCode(playerid, i);
 	if (code != 0)
 	{
 		Director_BlockMsg(playerid, code);
-		return 0;
+		return false;
 	}
 	gPlayer[playerid][pContractId] = contractId;
 	gPlayer[playerid][pContractPhase] = 0;
@@ -580,22 +580,22 @@ bool:Director_Accept(playerid, contractId)
 	g_DirExpAt[playerid] = g_DirBoard[i][dbExpiresAt];
 	Director_SetOp(playerid, 1, "ca", contractId);
 	Director_Send(playerid);
-	return 1;
+	return true;
 }
 
 bool:Director_Pickup(playerid)
 {
 	if (!IsPlayerConnected(playerid) || gPlayer[playerid][pContractId] == 0 || gPlayer[playerid][pContractPhase] != 1)
 	{
-		return 0;
+		return false;
 	}
 	if (gPlayer[playerid][pContractPendOp] != 0)
 	{
-		return 0;
+		return false;
 	}
 	Director_SetOp(playerid, 2, "cp", gPlayer[playerid][pContractId]);
 	Director_Send(playerid);
-	return 1;
+	return true;
 }
 
 bool:Director_Complete(playerid, integrityPct, seconds)
@@ -603,11 +603,11 @@ bool:Director_Complete(playerid, integrityPct, seconds)
 	new ct = gPlayer[playerid][pContractId];
 	if (!IsPlayerConnected(playerid) || ct == 0 || gPlayer[playerid][pContractPhase] != 2)
 	{
-		return 0;
+		return false;
 	}
 	if (gPlayer[playerid][pContractPendOp] != 0)
 	{
-		return 0;
+		return false;
 	}
 	g_DirCompInteg[playerid] = LD_Clamp(integrityPct, 0, 100);
 	g_DirCompSec[playerid] = seconds > 0 ? seconds : 0;
@@ -626,29 +626,29 @@ bool:Director_Complete(playerid, integrityPct, seconds)
 		strcat(g_DirCompOp[playerid], gPlayer[playerid][pContractOpId], 41);
 	}
 	Director_Send(playerid);
-	return 1;
+	return true;
 }
 
 bool:Director_Release(playerid, reason)
 {
 	if (!IsPlayerConnected(playerid) || gPlayer[playerid][pContractId] == 0)
 	{
-		return 0;
+		return false;
 	}
 	if (gPlayer[playerid][pContractPendOp] == 4)
 	{
-		return 1;
+		return true;
 	}
 	if (gPlayer[playerid][pContractPendOp] != 0)
 	{
 		g_DirRelAfter[playerid] = reason;
-		return 1;
+		return true;
 	}
 	Freight_End(playerid, reason);
 	g_DirRelReason[playerid] = reason;
 	Director_SetOp(playerid, 4, "cr", gPlayer[playerid][pContractId]);
 	Director_Send(playerid);
-	return 1;
+	return true;
 }
 
 Director_OnAccept(playerid, result, contractId, v2)
@@ -664,7 +664,7 @@ Director_OnAccept(playerid, result, contractId, v2)
 		{
 			g_DirExpAt[playerid] = v2;
 		}
-		if (!Freight_Begin(playerid, contractId, gPlayer[playerid][pContractFromDistrict], gPlayer[playerid][pContractToDistrict], gPlayer[playerid][pContractCargo], gPlayer[playerid][pContractDistance], 0))
+		if (!Freight_Begin(playerid, contractId, gPlayer[playerid][pContractFromDistrict], gPlayer[playerid][pContractToDistrict], gPlayer[playerid][pContractCargo], gPlayer[playerid][pContractDistance], false))
 		{
 			Util_Send(playerid, -10270721, "Il magazzino non ha un mezzo disponibile adesso: contratto rimesso in bacheca senza penalita'.");
 			Director_Release(playerid, 6);
@@ -759,7 +759,7 @@ Director_OnPickup(playerid, result)
 		}
 		LD_Emit(102, gPlayer[playerid][pContractFromDistrict], gPlayer[playerid][pCharId], ct, gPlayer[playerid][pContractOpId]);
 		Freight_OnPickupResult(playerid, 1);
-		Director_AfterFreight(playerid, ct, 0, 0);
+		Director_AfterFreight(playerid, ct, false, 0);
 		return 0;
 	}
 	new bool:terminal = result != -1 && result != 10;
@@ -785,7 +785,7 @@ Director_OnComplete(playerid, result, amount, balance, v1, v2)
 			g_DirCompCt[playerid] = 0;
 		}
 		Freight_OnCompleteResult(playerid, result, 0, 0);
-		Director_AfterFreight(playerid, ct, 0, 0);
+		Director_AfterFreight(playerid, ct, false, 0);
 		return 0;
 	}
 	new op[41];
@@ -801,7 +801,7 @@ Director_OnComplete(playerid, result, amount, balance, v1, v2)
 	if (paid || result == 8 || result == 2)
 	{
 		Freight_OnCompleteResult(playerid, result, paid ? amount : 0, balance);
-		Director_EndLocal(playerid, 0, 0, 0);
+		Director_EndLocal(playerid, 0, false, 0);
 		gPlayer[playerid][pContractCooldownUntil] = GetTickCount() + 90000;
 		if (paid)
 		{
@@ -817,7 +817,7 @@ Director_OnComplete(playerid, result, amount, balance, v1, v2)
 	g_DirCompOp[playerid][0] = 0;
 	g_DirCompCt[playerid] = 0;
 	Freight_OnCompleteResult(playerid, result, 0, balance);
-	Director_AfterFreight(playerid, ct, 1, 5);
+	Director_AfterFreight(playerid, ct, true, 5);
 	return 0;
 }
 
@@ -847,7 +847,7 @@ Director_OnReleased(playerid, result, v2)
 			Util_Send(playerid, -1, "Contratto interrotto senza penalita': e' tornato in bacheca.");
 		}
 	}
-	Director_EndLocal(playerid, reason, 1, reason);
+	Director_EndLocal(playerid, reason, true, reason);
 	return 0;
 }
 
