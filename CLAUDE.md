@@ -24,7 +24,8 @@ all'utente deve includere anche il sorgente.
 
 ## Compilazione
 - `gamemodes/lsrp_completo.pwn` = tutto in un file (per Qawno), rigenerato da `scripts/build.sh`: va committato **a ogni aggiornamento** e messo in ogni pacchetto (l'utente lo vuole sempre).
-- Linux: `PAWNCC=/percorso/pawncc scripts/build.sh` (CEF) e `scripts/build.sh --nocef`.
+- UN SOLO gamemode ufficiale: `lsrp.amx` = CEF + voce (SampVoice -omp, componente). Niente varianti per l'utente.
+- Linux: `PAWNCC=/percorso/pawncc scripts/build.sh`; `--test` = senza CEF per il server di prova (tests/server, con componente sampvoice).
 - Windows: `compila.bat`.
 - Compiler: pawncc 3.10.10, sempre con `-d3`. Provare SEMPRE anche con pawncc 3.10.11 (quello di Qawno/open.mp, piu severo: es. array const a parametro non const = errore), compilato in /home/claude/tools/omp-compiler (repo openmultiplayer/compiler). `LSRP_CEF=1` attiva il CEF; senza, gli
   stub in `ui/cef_ui.inc` rendono il gamemode autonomo (solo dialog/TextDraw).
