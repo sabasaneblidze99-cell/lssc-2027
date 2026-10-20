@@ -1,0 +1,1256 @@
+new g_CefState[1000];
+new bool:g_CefFocus[1000];
+new bool:g_CefHudOn[1000];
+new g_CefHud[1000][5] = {
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0},
+	{0}
+};
+new bool:g_CefHudHas[1000];
+new g_CefView[1000];
+new bool:g_CefDecided[1000];
+new bool:g_CefPromptWait[1000];
+
+CefUI_Reset(playerid)
+{
+	if (playerid < 0 || playerid >= 1000)
+	{
+		return 0;
+	}
+	g_CefState[playerid] = 0;
+	g_CefFocus[playerid] = 0;
+	g_CefHudOn[playerid] = 0;
+	g_CefHudHas[playerid] = 0;
+	g_CefView[playerid] = 0;
+	g_CefDecided[playerid] = 0;
+	g_CefPromptWait[playerid] = 0;
+	for (new i = 0; i < 5; i++)
+	{
+		g_CefHud[playerid][i] = 0;
+	}
+}
+
+CefUI_Active(playerid)
+{
+	if (playerid < 0 || playerid >= 1000)
+	{
+		return 0;
+	}
+	return g_CefState[playerid] == 2 ? 1 : 0;
+}
+
+CefUI_State(playerid)
+{
+	if (playerid < 0 || playerid >= 1000)
+	{
+		return 0;
+	}
+	return g_CefState[playerid];
+}
+
+CefUI_SetState(playerid, st)
+{
+	if (playerid < 0 || playerid >= 1000)
+	{
+		return 0;
+	}
+	g_CefState[playerid] = st;
+}
+
+CefUI_Open(playerid, view[], arg[])
+{
+	if (!CefUI_Active(playerid))
+	{
+		return 0;
+	}
+	new v = !strcmp(view, "phone", 0, 0x7FFFFFFF) ? 2 : (!strcmp(view, "auth", 0, 0x7FFFFFFF) ? 3 : 1);
+	if (v == 2 && g_CefView[playerid] == 2)
+	{
+		return 0;
+	}
+	cef_emit_event(playerid, "lssc:open", 0, view, 0, arg);
+	cef_focus_browser(playerid, 1, 1);
+	g_CefFocus[playerid] = 1;
+	g_CefView[playerid] = v;
+}
+
+CefUI_OnPageClosed(playerid)
+{
+	if (playerid < 0 || playerid >= 1000)
+	{
+		return 0;
+	}
+	g_CefView[playerid] = 0;
+	CefUI_ReleaseFocus(playerid);
+}
+
+CefUI_Close(playerid, view[])
+{
+	if (!CefUI_Active(playerid))
+	{
+		return 0;
+	}
+	cef_emit_event(playerid, "lssc:close", 0, view);
+	g_CefView[playerid] = 0;
+	CefUI_ReleaseFocus(playerid);
+}
+
+CefUI_ReleaseFocus(playerid)
+{
+	if (playerid < 0 || playerid >= 1000 || !g_CefFocus[playerid])
+	{
+		return 0;
+	}
+	cef_focus_browser(playerid, 1, 0);
+	g_CefFocus[playerid] = 0;
+}
+
+CefUI_Toast(playerid, text[], kind)
+{
+	if (!CefUI_Active(playerid) || text[0] == 0)
+	{
+		return 0;
+	}
+	cef_emit_event(playerid, "lssc:toast", 0, text, 1, kind);
+}
+
+CefUI_Reject(playerid, text[])
+{
+	if (!CefUI_Active(playerid))
+	{
+		return 0;
+	}
+	cef_emit_event(playerid, "lssc:reject", 0, text);
+}
+
+CefUI_HudData(playerid, money, bank, level, expIn, expStep)
+{
+	if (playerid < 0 || playerid >= 1000)
+	{
+		return 0;
+	}
+	g_CefHud[playerid][0] = money;
+	g_CefHud[playerid][1] = bank;
+	g_CefHud[playerid][2] = level;
+	g_CefHud[playerid][3] = expIn;
+	g_CefHud[playerid][4] = expStep;
+	g_CefHudHas[playerid] = 1;
+	if (CefUI_Active(playerid) && g_CefHudOn[playerid])
+	{
+		CefUI_HudSend(playerid);
+	}
+}
+
+CefUI_HudSend(playerid)
+{
+	if (!CefUI_Active(playerid) || !g_CefHudHas[playerid])
+	{
+		return 0;
+	}
+	new hour = 0, minute = 0;
+	gettime(hour, minute);
+	cef_emit_event(playerid, "lssc:hud", 1, g_CefHud[playerid], 1, g_CefHud[playerid][1], 1, g_CefHud[playerid][2], 1, g_CefHud[playerid][3], 1, g_CefHud[playerid][4], 1, hour, 1, minute);
+}
+
+CefUI_HudShow(playerid, bool:show)
+{
+	if (playerid < 0 || playerid >= 1000)
+	{
+		return 0;
+	}
+	g_CefHudOn[playerid] = show;
+	if (!CefUI_Active(playerid))
+	{
+		return 0;
+	}
+	cef_emit_event(playerid, "lssc:hud_visible", 1, show ? 1 : 0);
+	if (show)
+	{
+		CefUI_AuthClose(playerid);
+		CefUI_HudSend(playerid);
+	}
+}
+
+bool:CefUI_HudIsOn(playerid)
+{
+	if (playerid < 0 || playerid >= 1000)
+	{
+		return 0;
+	}
+	return g_CefHudOn[playerid];
+}
+
+CefUI_AuthGate(playerid)
+{
+	if (playerid < 0 || playerid >= 1000)
+	{
+		return 1;
+	}
+	if (g_CefDecided[playerid])
+	{
+		return 1;
+	}
+	if (!g_CefPromptWait[playerid])
+	{
+		SendClientMessage(playerid, 0xAAAAAAFF, "Caricamento dell'interfaccia...");
+	}
+	g_CefPromptWait[playerid] = 1;
+	return 0;
+}
+
+bool:CefUI_Decide(playerid)
+{
+	if (playerid < 0 || playerid >= 1000)
+	{
+		return 0;
+	}
+	g_CefDecided[playerid] = 1;
+	new bool:wait = g_CefPromptWait[playerid];
+	g_CefPromptWait[playerid] = 0;
+	return wait;
+}
+
+bool:CefUI_IsDecided(playerid)
+{
+	if (playerid < 0 || playerid >= 1000)
+	{
+		return 1;
+	}
+	return g_CefDecided[playerid];
+}
+
+CefUI_AuthStep(playerid, step[], err[], n)
+{
+	if (!CefUI_Active(playerid))
+	{
+		return 0;
+	}
+	new name[25];
+	GetPlayerName(playerid, name, 25);
+	cef_emit_event(playerid, "lssc:auth", 0, step, 0, name, 0, err, 1, n, 1, 6, 1, 32);
+	CefUI_Open(playerid, "auth", step);
+}
+
+CefUI_AuthSkin(playerid, idx, skin)
+{
+	if (!CefUI_Active(playerid))
+	{
+		return 0;
+	}
+	cef_emit_event(playerid, "lssc:auth_skin", 1, idx, 1, skin);
+}
+
+CefUI_AuthStoryOpt(playerid, kind, idx, shortText[], longText[])
+{
+	if (!CefUI_Active(playerid))
+	{
+		return 0;
+	}
+	cef_emit_event(playerid, "lssc:auth_story", 1, kind, 1, idx, 0, shortText, 0, longText);
+}
+
+CefUI_AuthClose(playerid)
+{
+	if (playerid < 0 || playerid >= 1000 || g_CefView[playerid] != 3)
+	{
+		return 0;
+	}
+	CefUI_Close(playerid, "auth");
+}

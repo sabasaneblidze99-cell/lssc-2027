@@ -3,3 +3,6 @@ mysql.ini
 logs/
 *.log
 scriptfiles/
+image.bin
+*.lst
+__pycache__/

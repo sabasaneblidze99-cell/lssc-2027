@@ -1,0 +1,303 @@
+// LSSC 2027 - Los Santos Street Crime's - gamemode (sorgente ricostruito dalla v8)
+#include <open.mp>
+#include <a_mysql>
+#include <samp_bcrypt>
+#include <cef>
+
+#pragma dynamic 32768
+
+#include "modules/core/enums.inc"
+#include "modules/core/forwards.inc"
+#include "modules/core/lang.inc"
+#include "modules/core/player_data.inc"
+#include "modules/core/utils.inc"
+#include "modules/core/logger.inc"
+#include "modules/ui/cef_ui.inc"
+#include "modules/core/validation.inc"
+#include "modules/ui/dialogs.inc"
+#include "modules/ui/hud.inc"
+#include "modules/ui/vehicle_ui.inc"
+#include "modules/ui/house_ui.inc"
+#include "modules/ui/job_ui.inc"
+#include "modules/ui/faction_ui.inc"
+#include "modules/ui/inventory_ui.inc"
+#include "modules/ui/bank_ui.inc"
+#include "modules/ui/intro_ui.inc"
+#include "modules/ui/living_ui.inc"
+#include "modules/database/db_core.inc"
+#include "modules/database/db_account.inc"
+#include "modules/database/db_character.inc"
+#include "modules/database/db_admin.inc"
+#include "modules/database/db_vehicle.inc"
+#include "modules/database/db_house.inc"
+#include "modules/database/db_jobfac.inc"
+#include "modules/database/db_inventory.inc"
+#include "modules/database/db_bank.inc"
+#include "modules/database/db_story.inc"
+#include "modules/database/db_living.inc"
+#include "modules/account/account.inc"
+#include "modules/character/spawn.inc"
+#include "modules/character/character.inc"
+#include "modules/economy/money.inc"
+#include "modules/economy/level.inc"
+#include "modules/economy/paycheck.inc"
+#include "modules/admin/admin.inc"
+#include "modules/vehicle/vehicle.inc"
+#include "modules/inventory/inventory.inc"
+#include "modules/bank/bank.inc"
+#include "modules/intro/intro.inc"
+#include "modules/house/house.inc"
+#include "modules/job/job.inc"
+#include "modules/faction/faction.inc"
+#include "modules/inventory/inv_doc.inc"
+#include "modules/living/living_calc.inc"
+#include "modules/living/living_api.inc"
+#include "modules/district/district.inc"
+#include "modules/director/director.inc"
+#include "modules/rental/rental.inc"
+#include "modules/taxi/taxi.inc"
+#include "modules/freight/freight.inc"
+#include "modules/cityos/cityos.inc"
+#include "modules/hub/hub.inc"
+#include "modules/cef/cef_bridge.inc"
+#include "modules/commands/admin_commands.inc"
+#include "modules/commands/rp_commands.inc"
+
+
+main()
+{
+	printf("LSRP %s", "0.1.0-proto");
+}
+
+public OnGameModeInit()
+{
+	SetGameModeText("LSRP 0.1.0-proto");
+	for (new i = 0; i < 1000; i++)
+	{
+		Player_Reset(i);
+	}
+	DB_Connect();
+	Char_OnInit();
+	Economy_OnInit();
+	Veh_OnInit();
+	House_OnInit();
+	Job_OnInit();
+	Faction_OnInit();
+	Inv_OnInit();
+	Bank_OnInit();
+	Living_OnInit();
+	CefBridge_OnInit();
+	return 1;
+}
+
+public OnGameModeExit()
+{
+	Economy_OnExit();
+	Inv_OnExit();
+	Bank_OnExit();
+	Intro_OnExit();
+	Job_OnExit();
+	Living_OnExit();
+	Faction_OnExit();
+	Veh_OnExit();
+	House_OnExit();
+	Char_OnExit();
+	DB_Shutdown();
+	return 1;
+}
+
+public CEF_OnPlayerConnect(playerid)
+{
+	Player_Reset(playerid);
+	CefBridge_OnPlayerConnect(playerid);
+	Bank_OnPlayerConnect(playerid);
+	Intro_OnPlayerConnect(playerid);
+	Veh_OnPlayerConnect(playerid);
+	House_OnPlayerConnect(playerid);
+	Job_OnPlayerConnect(playerid);
+	Faction_OnPlayerConnect(playerid);
+	Living_OnPlayerConnect(playerid);
+	Account_OnConnect(playerid);
+	return 1;
+}
+
+public CEF_OnPlayerDisconnect(playerid, reason)
+{
+	Bank_OnPlayerDisconnect(playerid);
+	Inv_OnPlayerDisconnect(playerid);
+	Job_OnPlayerDisconnect(playerid);
+	Living_OnPlayerDisconnect(playerid, reason);
+	Veh_OnPlayerDisconnect(playerid);
+	UI_VehicleUiDestroy(playerid);
+	House_OnPlayerDisconnect(playerid);
+	UI_HouseUiDestroy(playerid);
+	UI_JobUiDestroy(playerid);
+	UI_FactionUiDestroy(playerid);
+	UI_InvUiDestroy(playerid);
+	UI_BankUiDestroy(playerid);
+	UI_LivingUiDestroy(playerid);
+	Intro_OnPlayerDisconnect(playerid);
+	Faction_OnPlayerDisconnect(playerid);
+	Char_OnDisconnect(playerid);
+	Account_OnDisconnect(playerid);
+	CefBridge_OnPlayerDisconnect(playerid);
+	Player_Reset(playerid);
+	return 1;
+}
+
+public OnCefInitialize(player_id, success)
+{
+	CefBridge_OnInitialize(player_id, success);
+	return 1;
+}
+
+public OnCefBrowserCreated(player_id, browser_id, status_code)
+{
+	if (status_code != 200)
+	{
+		new msg[96];
+		format(msg, 96, "browser %d del giocatore %d non creato (codice %d)", browser_id, player_id, status_code);
+		Log_Write("CEF", msg);
+	}
+	return 1;
+}
+
+public OnPlayerRequestClass(playerid, classid)
+{
+	Char_OnRequestClass(playerid);
+	return 1;
+}
+
+public OnPlayerRequestSpawn(playerid)
+{
+	return Char_OnRequestSpawn(playerid);
+}
+
+public OnPlayerSpawn(playerid)
+{
+	Char_OnSpawn(playerid);
+	Veh_OnPlayerSpawn(playerid);
+	House_OnPlayerSpawn(playerid);
+	Faction_OnPlayerSpawn(playerid);
+	Inv_OnPlayerSpawn(playerid);
+	Living_OnPlayerSpawn(playerid);
+	return 1;
+}
+
+public OnPlayerDeath(playerid, killerid, WEAPON:reason)
+{
+	Job_OnPlayerDeath(playerid);
+	Living_OnPlayerDeath(playerid);
+	Faction_OnPlayerDeath(playerid);
+	Char_OnDeath(playerid);
+	return 1;
+}
+
+public OnPlayerUpdate(playerid)
+{
+	return Char_OnUpdate(playerid);
+}
+
+public OnPlayerText(playerid, text[])
+{
+	if (!Char_OnText(playerid))
+	{
+		return 0;
+	}
+	return Admin_OnText(playerid);
+}
+
+public OnRconCommand(cmd[])
+{
+	return Admin_OnRconCommand(cmd);
+}
+
+public OnPlayerCommandText(playerid, cmdtext[])
+{
+	return Cmd_Dispatch(playerid, cmdtext);
+}
+
+public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
+{
+	if (UI_OnDialogResponse(playerid, dialogid, response, listitem, inputtext))
+	{
+		return 1;
+	}
+	if (UI_VehicleOnDialogResponse(playerid, dialogid, response, listitem))
+	{
+		return 1;
+	}
+	if (UI_HouseOnDialogResponse(playerid, dialogid, response, listitem, inputtext))
+	{
+		return 1;
+	}
+	if (UI_JobOnDialogResponse(playerid, dialogid, response, listitem, inputtext))
+	{
+		return 1;
+	}
+	if (UI_FactionOnDialogResponse(playerid, dialogid, response, listitem, inputtext))
+	{
+		return 1;
+	}
+	if (UI_InvOnDialogResponse(playerid, dialogid, response, listitem, inputtext))
+	{
+		return 1;
+	}
+	if (UI_BankOnDialogResponse(playerid, dialogid, response, listitem, inputtext))
+	{
+		return 1;
+	}
+	if (UI_IntroOnDialogResponse(playerid, dialogid, response, listitem, inputtext))
+	{
+		return 1;
+	}
+	if (UI_LivingOnDialogResponse(playerid, dialogid, response, listitem, inputtext))
+	{
+		return 1;
+	}
+	return 0;
+}
+
+public OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
+{
+	Veh_OnPlayerEnterVehicle(playerid, vehicleid, ispassenger);
+	Job_OnPlayerEnterVehicle(playerid, vehicleid, ispassenger);
+	Living_OnPlayerEnterVehicle(playerid, vehicleid, ispassenger);
+	return 1;
+}
+
+public OnPlayerExitVehicle(playerid, vehicleid)
+{
+	Veh_OnPlayerExitVehicle(playerid, vehicleid);
+	Job_OnPlayerExitVehicle(playerid, vehicleid);
+	Living_OnPlayerExitVehicle(playerid, vehicleid);
+	return 1;
+}
+
+public OnPlayerStateChange(playerid, PLAYER_STATE:newstate, PLAYER_STATE:oldstate)
+{
+	Veh_OnPlayerStateChange(playerid, newstate, oldstate);
+	Job_OnPlayerStateChange(playerid, newstate);
+	Living_OnPlayerStateChange(playerid, newstate, oldstate);
+	return 1;
+}
+
+public OnVehicleDeath(vehicleid, killerid)
+{
+	Veh_OnVehicleDeath(vehicleid, killerid);
+	Job_OnVehicleDeath(vehicleid);
+	Living_OnVehicleDeath(vehicleid, killerid);
+	return 1;
+}
+
+public OnPlayerKeyStateChange(playerid, KEY:newkeys, KEY:oldkeys)
+{
+	Intro_OnKeyStateChange(playerid, newkeys);
+	return 1;
+}
+
+public OnPlayerPickUpPickup(playerid, pickupid)
+{
+	House_OnPlayerPickUpPickup(playerid, pickupid);
+	return 1;
+}
