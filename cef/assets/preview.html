@@ -42,7 +42,18 @@
     <h1>Anteprima CityOS</h1>
     <p>Simula gli eventi del server con dati finti. In gioco gli stessi eventi arrivano da samp-cef.</p>
     <h2>Risoluzione</h2>
-    <select id="res"><option value="720">1280 × 720</option><option value="1080">1920 × 1080</option></select>
+    <select id="res"><option value="720">1280 × 720</option><option value="768">1366 × 768</option><option value="900">1600 × 900</option><option value="1080">1920 × 1080</option><option value="1440">2560 × 1440</option></select>
+    <h2>HUD Glass UI (dati finti)</h2>
+    <button data-c="hudDemo">Mostra HUD completo</button>
+    <button data-c="vehOn">Sali in macchina</button>
+    <button data-c="vehOff">Scendi dalla macchina</button>
+    <button data-c="chatOpen">Apri input chat (F6)</button>
+    <button data-c="quickOpen">Azioni rapide (N)</button>
+    <button data-c="iaOn">Punto interattivo vicino</button>
+    <button data-c="iaOff">Lontano dal punto</button>
+    <button data-c="money">+$250</button>
+    <button data-c="levelUp">Nuovo livello</button>
+    <button data-c="danger">Zona pericolosa</button>
     <h2>HUD</h2>
     <button data-c="startDelivery">Contratto in consegna</button>
     <button data-c="clearContract">Nessun contratto</button>
@@ -97,13 +108,14 @@
       });
 
       function fit() {
-        var r = resSel.value === "1080" ? [1920, 1080] : [1280, 720];
+        var R = { "720": [1280, 720], "768": [1366, 768], "900": [1600, 900], "1080": [1920, 1080], "1440": [2560, 1440] };
+        var r = R[resSel.value] || R["720"];
         stage.style.width = r[0] + "px"; stage.style.height = r[1] + "px";
         var host = stage.parentNode.getBoundingClientRect();
         var s = Math.min(1, host.width / r[0], host.height / r[1]);
         stage.style.transform = "scale(" + s + ")";
       }
-      resSel.value = q.get("res") === "1080" ? "1080" : "720";
+      resSel.value = ["720", "768", "900", "1080", "1440"].indexOf(q.get("res")) >= 0 ? q.get("res") : "720";
       resSel.addEventListener("change", fit);
       window.addEventListener("resize", fit);
       fit();
@@ -117,7 +129,17 @@
         boardAway: function () { sim.setAtBoard(false); sim.board(true); },
         phone: function () { sim.openPhone("home"); },
         phoneDistrict: function () { sim.openPhone("district"); },
-        close: function () { sim.close(); }
+        close: function () { sim.close(); },
+        hudDemo: function () { sim.hudDemo(); },
+        vehOn: function () { sim.vehicleDemo(true); },
+        vehOff: function () { sim.vehicleDemo(false); },
+        chatOpen: function () { sim.chatOpen(); },
+        quickOpen: function () { sim.quickOpen(); },
+        iaOn: function () { sim.interactDemo(true); },
+        iaOff: function () { sim.interactDemo(false); },
+        money: function () { sim.moneyDemo(); },
+        levelUp: function () { sim.levelDemo(); },
+        danger: function () { sim.dangerDemo(); }
       };
       document.querySelectorAll("[data-c]").forEach(function (b) {
         b.addEventListener("click", function () { C[b.getAttribute("data-c")](); frame.focus(); });
@@ -129,6 +151,9 @@
         if (!scene) return;
         var later = function (fn, ms) { setTimeout(fn, ms || 60); };
         switch (scene) {
+          case "hud2": sim.hudDemo(); sim.vehicleDemo(true); sim.startDelivery(); sim.interactDemo(true); break;
+          case "hud2-chat": sim.hudDemo(); sim.vehicleDemo(true); later(function () { sim.chatOpen(); }, 100); break;
+          case "hud2-quick": sim.hudDemo(); later(function () { sim.quickOpen(); }, 100); break;
           case "hud":
             sim.startDelivery(); sim.toast("Carico a bordo: guida con calma, la merce e' fragile.", 0); break;
           case "board": sim.board(true); break;

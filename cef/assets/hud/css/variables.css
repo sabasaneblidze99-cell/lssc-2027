@@ -1,0 +1,66 @@
+/* STREET CRIME'S GLASS UI - token del design system (HUD).
+   Palette ufficiale + font locali. Nessuna risorsa da Internet.
+   samp-cef disegna in software (OSR): niente backdrop-filter sui pannelli sempre visibili. */
+
+@font-face { font-family: "Rajdhani"; font-weight: 500; font-style: normal; font-display: block; src: url("../../fonts/rajdhani-latin-500-normal.woff2") format("woff2"); }
+@font-face { font-family: "Rajdhani"; font-weight: 600; font-style: normal; font-display: block; src: url("../../fonts/rajdhani-latin-600-normal.woff2") format("woff2"); }
+@font-face { font-family: "Rajdhani"; font-weight: 700; font-style: normal; font-display: block; src: url("../../fonts/rajdhani-latin-700-normal.woff2") format("woff2"); }
+
+:root {
+  /* palette */
+  --sc-bg: #111126;
+  --sc-navy: #171629;
+  --sc-glass: rgba(87, 74, 119, 0.20);
+  --sc-glass-border: rgba(255, 255, 255, 0.13);
+  --sc-purple: #A855F7;
+  --sc-pink: #FF3674;
+  --sc-orange: #FF914D;
+  --sc-white: #F6F3FA;
+  --sc-text2: #B8AEC8;
+  --sc-text3: rgba(184, 174, 200, 0.62);
+  --sc-green: #26C985;
+  --sc-amber: #FFB547;
+  --sc-red: #FF4D65;
+  --sc-blue: #5BA8FF;
+
+  /* superfici: pannello HUD = vetro scuro piu' opaco (niente blur) */
+  --sc-panel: linear-gradient(160deg, rgba(38, 31, 66, 0.80) 0%, rgba(20, 19, 42, 0.76) 100%);
+  --sc-panel-flat: rgba(23, 22, 41, 0.82);
+  --sc-panel-soft: rgba(255, 255, 255, 0.045);
+  --sc-panel-line: rgba(255, 255, 255, 0.075);
+  --sc-radius: 0.9rem;
+  --sc-radius-sm: 0.55rem;
+  --sc-shadow: 0 0.6rem 1.8rem rgba(6, 4, 18, 0.45);
+  --sc-highlight: inset 0 1px 0 rgba(255, 255, 255, 0.07);
+
+  /* gradiente firma: viola -> rosa -> arancione */
+  --sc-grad: linear-gradient(90deg, var(--sc-purple) 0%, var(--sc-pink) 55%, var(--sc-orange) 100%);
+  --sc-grad-v: linear-gradient(180deg, var(--sc-purple) 0%, var(--sc-pink) 60%, var(--sc-orange) 100%);
+
+  /* indicatori */
+  --sc-hp: #FF3674;
+  --sc-armor: #A855F7;
+  --sc-hunger: #FF914D;
+  --sc-thirst: #4FB6FF;
+
+  /* categorie chat */
+  --chat-ic: #F6F3FA;
+  --chat-ooc: #B8AEC8;
+  --chat-faction: #5BA8FF;
+  --chat-job: #FFB547;
+  --chat-ads: #26C985;
+  --chat-system: #C79BFF;
+  --chat-emergency: #FF4D65;
+  --chat-admin: #FF3674;
+
+  /* tipografia: numeri Rajdhani, testo Barlow (latino) + Noto Sans Georgian (georgiano) */
+  --sc-num: "Rajdhani", "Barlow Condensed", "Noto Sans Georgian", sans-serif;
+  --sc-text: "Barlow", "Noto Sans Georgian", "Sylfaen", "Segoe UI", sans-serif;
+  --sc-cond: "Barlow Condensed", "Noto Sans Georgian", "Sylfaen", sans-serif;
+
+  /* scala dell'HUD (impostazioni giocatore, 0.85 - 1.15) */
+  --hud-scale: 1;
+  /* chat */
+  --chat-opacity: 0.92;
+  --chat-lines: 10;
+}

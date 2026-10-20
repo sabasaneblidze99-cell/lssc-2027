@@ -120,8 +120,66 @@
           case "lssc:rep_req": rep(); break;
           case "lssc:job_waypoint": out("lssc:toast", "Job Center segnato sulla mappa.", 0); break;
           case "lssc:close": break;
+          case "lssc:chat_send": {
+            var hex = a[0] || "", bytes = [];
+            for (var i = 0; i + 1 < hex.length; i += 2) bytes.push(parseInt(hex.substr(i, 2), 16));
+            var txt = new TextDecoder().decode(new Uint8Array(bytes));
+            if (txt.charAt(0) === "/") out("lssc:chat", 0, "{FF4D65}ბრძანება ვერ მოიძებნა: " + txt);
+            else out("lssc:chat", 1, "{F6F3FA}Tyrese Wilson: " + txt);
+            break;
+          }
+          case "lssc:quick":
+            out("lssc:notify", 1, "", "მოქმედება: " + a[0], 2500);
+            break;
         }
       },
+      // ---- HUD Glass UI: dati dimostrativi (SOLO anteprima)
+      hudDemo: function () {
+        out("lssc:hud_visible", 1);
+        out("lssc:identity", "Tyrese_Wilson", 24);
+        out("lssc:clock", 20, 42, 20, 10, 2026);
+        out("lssc:status", 100, 80, 72, -1);
+        out("lssc:hud", 19354, 328930, 12, 320, 1000, 20, 42);
+        out("lssc:zone", 1, 0, 0);
+        out("lssc:voice", 2, "B");
+        out("lssc:chat_mode", 1);
+        var lines = [
+          [0, "გადახდა მიღებულია: $250 (ხელფასი)."],
+          [4, "{FFB547}Carlo_Russo:{F6F3FA} ტაქსი მზადაა, დარეკე /chiamataxi"],
+          [5, "იყიდება Sultan სრული ტუნინგით - 245678"],
+          [6, "ჩხუბი აიდლვუდში, სასწრაფოდ!"],
+          [3, "{5BA8FF}Jamal_Brooks:{F6F3FA} ყველა ბლოკთან?"],
+          [7, "Luca_Vitali: ადმინი, დამეხმარე გთხოვ"],
+          [2, "(( Tyrese_Wilson: ბიჭებო, კარგი თამაშია ))"],
+          [1, "Tyrese Wilson ამბობს: გამარჯობა, როგორ ხარ?"]
+        ];
+        lines.forEach(function (l) { out("lssc:chat", l[0], l[1]); });
+        out("lssc:notify", 4, "", "ხელფასი · სამსახური", 9000);
+        out("lssc:notify", 1, "უსაფრთხოების ღვედი", "ჩართულია", 9000);
+        out("lssc:notify", 2, "მშიერი ხარ", "იპოვე ადგილი საჭმელად.", 9000);
+        out("lssc:notify", 3, "არასწორი ბრძანება", "შეამოწმე სინტაქსი.", 9000);
+      },
+      vehicleDemo: function (on) {
+        if (S.vehTimer) { clearInterval(S.vehTimer); S.vehTimer = 0; }
+        if (on === false) { out("lssc:veh_show", 0, ""); return; }
+        out("lssc:veh_show", 1, "Premier");
+        var t = 0;
+        out("lssc:veh", 86, 87, 1, 1, 92, 0);
+        S.vehTimer = setInterval(function () {
+          t += 0.25;
+          var sp = Math.round(86 + 40 * Math.sin(t / 2));
+          out("lssc:veh", sp, 87, 1, 1, 92, 0);
+        }, 250);
+      },
+      chatOpen: function () { out("lssc:chat_open", ""); },
+      quickOpen: function () { out("lssc:quick_open", 1 | 2 | 8 | 16); },
+      interactDemo: function (on) {
+        if (on === false) { out("lssc:interact", 0, "", "", -1); return; }
+        out("lssc:interact", 1, "Y", "ბანკომატი", -1);
+      },
+      moneyDemo: function () { S.money += 250; out("lssc:hud", S.money, S.bank, S.level, S.expIn, S.expStep, 20, 43); out("lssc:money_delta", 250, 0); },
+      levelDemo: function () { out("lssc:levelup", 13); },
+      dangerDemo: function () { out("lssc:zone", 2, 2, 0); },
       // comandi dell'anteprima (equivalenti a comandi/tasti lato server)
       hud: hud, contract: contract, board: board, district: district, rep: rep,
       openPhone: function (appName) { out("lssc:open", "phone", appName || "home"); },

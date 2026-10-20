@@ -1,0 +1,37 @@
+/* Animazioni: solo transform/opacity, brevi, mai infinite (rendering software di samp-cef). */
+
+.anim-in-right { animation: scInRight 0.26s ease-out both; }
+.anim-out-right { animation: scOutRight 0.22s ease-in both; }
+.anim-pop { animation: scPop 0.24s ease-out both; }
+.anim-fade-in { animation: scFade 0.2s ease-out both; }
+
+@keyframes scInRight { from { opacity: 0; transform: translateX(1.6rem); } to { opacity: 1; transform: none; } }
+@keyframes scOutRight { from { opacity: 1; transform: none; } to { opacity: 0; transform: translateX(1.6rem); } }
+@keyframes scPop { from { opacity: 0; transform: scale(0.94); } to { opacity: 1; transform: none; } }
+@keyframes scFade { from { opacity: 0; } to { opacity: 1; } }
+
+/* +$250 / -$120 */
+.money-delta { animation: scDelta 1.6s ease-out both; }
+@keyframes scDelta {
+  0% { opacity: 0; transform: translateY(0.5rem); }
+  15% { opacity: 1; transform: none; }
+  75% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(-0.8rem); }
+}
+
+/* valore cambiato: breve evidenziazione */
+.flash { animation: scFlash 0.6s ease-out; }
+@keyframes scFlash { 0% { opacity: 0.35; } 100% { opacity: 1; } }
+
+/* livello raggiunto */
+.lvup.show { animation: scLevel 2.6s ease-out both; }
+@keyframes scLevel {
+  0% { opacity: 0; transform: translateY(-0.6rem) scale(0.95); }
+  12% { opacity: 1; transform: none; }
+  80% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(-0.4rem); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}

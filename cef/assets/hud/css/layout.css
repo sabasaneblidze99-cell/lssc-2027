@@ -1,0 +1,43 @@
+/* Disposizione dell'HUD sopra GTA San Andreas.
+   Unita' rem = 100vh / 67.5 (styles.css): la UI scala con l'altezza, quindi funziona da 720p a 1440p
+   e in widescreen (gli ancoraggi sono ai bordi, non coordinate assolute del mockup).
+   Zone riservate al gioco: in alto a destra l'HUD nativo di GTA (arma, soldi, vita) fino a ~24vh;
+   in basso a sinistra il radar nativo (circa 13.5rem dal bordo sinistro). */
+
+#hud { position: fixed; inset: 0; pointer-events: none; z-index: 10; font-family: var(--sc-text); color: var(--sc-white); }
+#hud .hud-scale { position: absolute; inset: 0; }
+
+/* colonna destra: stato giocatore, contratto, notifiche */
+.hud-right {
+  position: absolute; right: 1.6rem; top: 25vh; width: 21.5rem;
+  display: flex; flex-direction: column; gap: 0.7rem; align-items: stretch;
+  transform: scale(var(--hud-scale)); transform-origin: top right;
+}
+
+/* basso a destra: tachimetro */
+.hud-vehicle { position: absolute; right: 1.8rem; bottom: 1.8rem; width: 19rem; transform: scale(var(--hud-scale)); transform-origin: bottom right; }
+
+/* basso a sinistra: accanto al radar nativo, senza coprirlo */
+.hud-zone { position: absolute; left: 16.6rem; bottom: 2.2rem; max-width: 17rem; transform: scale(var(--hud-scale)); transform-origin: bottom left; }
+
+/* sinistra: chat roleplay (sotto la chat nativa, sopra il radar) */
+.hud-chat { position: absolute; left: 1.6rem; top: 31vh; width: clamp(24rem, 30vw, 34rem); }
+
+/* centro basso: interazioni */
+.hud-interact { position: absolute; left: 50%; bottom: 13vh; transform: translateX(-50%); }
+
+/* centro: azioni rapide e impostazioni (solo su richiesta) */
+.hud-overlay { position: absolute; inset: 0; display: grid; place-items: center; pointer-events: auto; }
+
+/* in alto al centro: livello raggiunto */
+.hud-levelup { position: absolute; left: 50%; top: 9vh; transform: translateX(-50%); }
+
+/* marchio discreto in alto a sinistra (sotto la chat nativa resta libero) */
+.hud-brand { position: absolute; left: 1.6rem; bottom: 16.4rem; opacity: 0.72; }
+
+/* risoluzioni basse: la colonna destra scende un poco per non toccare l'HUD nativo */
+@media (max-aspect-ratio: 4/3) {
+  .hud-right { top: 27vh; width: 19rem; }
+  .hud-chat { width: 24rem; }
+  .hud-zone { left: 15.6rem; }
+}

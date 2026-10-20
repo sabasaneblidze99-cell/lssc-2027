@@ -8,17 +8,34 @@
        Nessuna risorsa esterna: tutto e' locale. Protocollo eventi: PROTOCOLLO.md -->
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="auth.css">
+  <!-- HUD: STREET CRIME'S GLASS UI -->
+  <link rel="stylesheet" href="hud/css/variables.css">
+  <link rel="stylesheet" href="hud/css/layout.css">
+  <link rel="stylesheet" href="hud/css/components.css">
+  <link rel="stylesheet" href="hud/css/animations.css">
 </head>
 <body>
   <div id="hud"></div>
-  <div id="toasts" aria-live="polite"></div>
   <div class="view" id="view-board" hidden></div>
   <div class="view" id="view-phone" hidden></div>
   <div id="view-auth" hidden></div>
 
   <script src="i18n.js"></script>
   <script src="bridge.js"></script>
-  <script src="hud.js"></script>
+  <script src="hud/js/strings.js"></script>
+  <script src="hud/js/icons.js"></script>
+  <script src="hud/js/bridge.js"></script>
+  <script src="hud/js/state.js"></script>
+  <script src="hud/js/modules/player-status.js"></script>
+  <script src="hud/js/modules/contract.js"></script>
+  <script src="hud/js/modules/notifications.js"></script>
+  <script src="hud/js/modules/vehicle-hud.js"></script>
+  <script src="hud/js/modules/zone.js"></script>
+  <script src="hud/js/modules/chat.js"></script>
+  <script src="hud/js/modules/interactions.js"></script>
+  <script src="hud/js/modules/quick-actions.js"></script>
+  <script src="hud/js/events.js"></script>
+  <script src="hud/js/app.js"></script>
   <script src="bacheca.js"></script>
   <script src="telefono.js"></script>
   <script src="auth.js"></script>
