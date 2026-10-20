@@ -31,7 +31,7 @@ CityOS_NextDistance(playerid)
 	{
 		case 1:
 		{
-			tx = Float:((shop ? 1927.0 : 0x44EB0000));
+			tx = (shop ? 1927.0 : 1880.0);
 			ty = Float:((shop ? 0xC4DFC000 : 0xC4DE8000));
 		}
 		case 2:
@@ -41,7 +41,7 @@ CityOS_NextDistance(playerid)
 		}
 		case 3:
 		{
-			tx = Float:((shop ? 0x4508E000 : 2145.0));
+			tx = (shop ? 2190.0 : 2145.0);
 			ty = Float:((shop ? -1155.0 : -1215.0));
 		}
 		default:

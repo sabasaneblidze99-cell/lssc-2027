@@ -20,7 +20,7 @@ new g_FacRankSkin[3][7] = {
 };
 new g_FacSkinFemale[3] = {0, 306, 308};
 new Float:g_FacHq[3][3] = {
-	{0},
+	{0.0, 0.0, 0.0},
 	{1554.0, -1675.5, 16.2},
 	{1177.0, -1323.5, 14.0}
 };
@@ -574,7 +574,7 @@ Faction_CmdAmmanetta(playerid, const params[], bool:cuff)
 			SendClientMessage(playerid, -10270721, "Attendi ancora %d secondi.", Fac_SecCeil(left));
 			return 0;
 		}
-		if (gPlayer[target][pCuffed] || gPlayer[target][pWounded] || GetPlayerState(target) != 1)
+		if (gPlayer[target][pCuffed] || gPlayer[target][pWounded] || GetPlayerState(target) != PLAYER_STATE_ONFOOT)
 		{
 			Util_Send(playerid, -10270721, "Il bersaglio non puo' essere ammanettato (gia' ammanettato, ferito o non a piedi).");
 			return 0;

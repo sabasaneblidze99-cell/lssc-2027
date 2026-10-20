@@ -189,7 +189,7 @@ bool:Freight_VehOk(playerid)
 
 bool:Freight_IsDriving(playerid)
 {
-	return Freight_VehOk(playerid) && GetPlayerVehicleID(playerid) == g_FrtVeh[playerid] && GetPlayerState(playerid) == 2;
+	return Freight_VehOk(playerid) && GetPlayerVehicleID(playerid) == g_FrtVeh[playerid] && GetPlayerState(playerid) == PLAYER_STATE_DRIVER;
 }
 
 Freight_RemoveVehicle(playerid)
@@ -308,7 +308,7 @@ Freight_End(playerid, reason)
 		return 0;
 	}
 	new bool:welcome = g_FrtWelcome[playerid];
-	new bool:online = IsPlayerConnected(playerid) != 0;
+	new bool:online = IsPlayerConnected(playerid);
 	Freight_RemoveVehicle(playerid);
 	if (online)
 	{
@@ -1042,7 +1042,7 @@ Freight_OnPlayerExitVehicle(playerid, vehicleid)
 Freight_OnPlayerStateChange(playerid, t_PLAYER_STATE:newstate, t_PLAYER_STATE:oldstate)
 {
 	#pragma unused oldstate
-	if (newstate != 2)
+	if (newstate != PLAYER_STATE_DRIVER)
 	{
 		return 0;
 	}

@@ -57,7 +57,7 @@ UI_HudDestroy(playerid)
 	}
 	for (new i = 0; i < 6; i++)
 	{
-		if (g_UiHud[playerid][i] != 65535)
+		if (g_UiHud[playerid][i] != INVALID_PLAYER_TEXT_DRAW)
 		{
 			PlayerTextDrawDestroy(playerid, PlayerText:g_UiHud[playerid][i]);
 		}
@@ -87,7 +87,7 @@ UI_HudCreate(playerid)
 		g_UiHud[playerid][i] = INVALID_PLAYER_TEXT_DRAW;
 	}
 	new Float:left = (632.0 - 150.0);
-	g_UiHud[playerid][0] = _:UI_HudBox(playerid, left, 330.0, 150.0, 62.0, 153);
+	g_UiHud[playerid][0] = UI_HudBox(playerid, left, 330.0, 150.0, 62.0, 153);
 	g_UiHud[playerid][1] = UI_HudText(playerid, (632.0 - 5.0), (330.0 + 3.0), "$0", 0.3, 1.2, 0x66DD66FF, t_TEXT_DRAW_ALIGN:3);
 	g_UiHud[playerid][2] = UI_HudText(playerid, (632.0 - 5.0), (330.0 + 20.0), "Banca: $0", 0.22, 1.0, -1, t_TEXT_DRAW_ALIGN:3);
 	g_UiHud[playerid][3] = UI_HudText(playerid, (5.0 + left), (330.0 + 36.0), "Liv. 1  Exp 0", 0.22, 1.0, -2994689, t_TEXT_DRAW_ALIGN:1);

@@ -564,106 +564,106 @@ forward UI_InvOnTimer(playerid);
 forward UI_BankOnTimer(playerid);
 forward UI_IntroOnTimer(playerid);
 forward UI_LivingOnTimer(playerid);
-forward DB_OnAccountLoaded(playerid, name[]);
-forward DB_OnAccountCreated(playerid, name[]);
-forward DB_OnAccountEmailSet(playerid, accountId, email[]);
+forward DB_OnAccountLoaded(playerid, const name[]);
+forward DB_OnAccountCreated(playerid, const name[]);
+forward DB_OnAccountEmailSet(playerid, accountId, const email[]);
 forward DB_OnAccountEmailCheck(playerid, accountId);
-forward DB_OnBankDeltaSaved(playerid, name[], charId, gen, delta);
+forward DB_OnBankDeltaSaved(playerid, const name[], charId, gen, delta);
 forward DB_BankDeltaFailed();
-forward DB_OnCharLoaded(playerid, name[], accountId);
-forward DB_OnCharCreated(playerid, name[]);
-forward DB_OnWarnInserted(requesterid, reqName[], targetAccountId);
-forward DB_OnWarnCounted(requesterid, reqName[], targetAccountId);
-forward DB_OnBanInserted(requesterid, reqName[], name[]);
-forward DB_OnUnbanDone(requesterid, reqName[], name[]);
-forward DB_OnBanChecked(playerid, name[]);
-forward DB_OnAccountFound(requesterid, reqName[], tag, name[]);
+forward DB_OnCharLoaded(playerid, const name[], accountId);
+forward DB_OnCharCreated(playerid, const name[]);
+forward DB_OnWarnInserted(requesterid, const reqName[], targetAccountId);
+forward DB_OnWarnCounted(requesterid, const reqName[], targetAccountId);
+forward DB_OnBanInserted(requesterid, const reqName[], const name[]);
+forward DB_OnUnbanDone(requesterid, const reqName[], const name[]);
+forward DB_OnBanChecked(playerid, const name[]);
+forward DB_OnAccountFound(requesterid, const reqName[], tag, const name[]);
 forward DB_OnVehicleCompensated(kind, ownerId, vehDbId);
-forward DB_OnVehiclesLoaded(playerid, name[], ownerId);
-forward DB_OnVehiclesCounted(playerid, name[], ownerId);
-forward DB_OnVehicleCreated(playerid, name[], ownerId, attempt, plate[]);
-forward DB_OnVehicleDeleted(playerid, name[], ownerId, vehDbId);
+forward DB_OnVehiclesLoaded(playerid, const name[], ownerId);
+forward DB_OnVehiclesCounted(playerid, const name[], ownerId);
+forward DB_OnVehicleCreated(playerid, const name[], ownerId, attempt, const plate[]);
+forward DB_OnVehicleDeleted(playerid, const name[], ownerId, vehDbId);
 forward DB_HouseFailure(playerid, op, result);
-forward DB_HouseGlobalFailure(callback[]);
+forward DB_HouseGlobalFailure(const callback[]);
 forward DB_OnHouseCompensated(what, ownerId, houseId);
 forward DB_OnHouseSeeded();
 forward DB_OnHouseSeedUtil();
 forward DB_OnHouseLoadUtil();
 forward DB_OnHousesLoaded();
 forward DB_OnHouseKeysAllLoaded();
-forward DB_OnHouseBought(playerid, name[], ownerId, houseId, pricePaid);
-forward DB_OnHouseSold(playerid, name[], ownerId, houseId);
+forward DB_OnHouseBought(playerid, const name[], ownerId, houseId, pricePaid);
+forward DB_OnHouseSold(playerid, const name[], ownerId, houseId);
 forward DB_OnFridgeReloaded(houseId);
-forward DB_OnHouseFoodLoaded(playerid, name[], charId);
-forward DB_OnHouseStored(playerid, name[], ownerId, houseId, n);
-forward DB_OnHouseKeyAdded(playerid, name[], ownerId, houseId, targetId);
-forward DB_OnHouseKeyRemoved(playerid, name[], ownerId, houseId, targetId);
-forward DB_OnHouseKeysLoaded(playerid, name[], ownerId, houseId);
+forward DB_OnHouseFoodLoaded(playerid, const name[], charId);
+forward DB_OnHouseStored(playerid, const name[], ownerId, houseId, n);
+forward DB_OnHouseKeyAdded(playerid, const name[], ownerId, houseId, targetId);
+forward DB_OnHouseKeyRemoved(playerid, const name[], ownerId, houseId, targetId);
+forward DB_OnHouseKeysLoaded(playerid, const name[], ownerId, houseId);
 forward DB_OnHouseBillAdded(houseId, kind, amount);
 forward DB_OnHouseBillsAgedStep(houseId, dueCycles);
 forward DB_OnHouseBillsAged(houseId, dueCycles);
-forward DB_OnHouseBillsLoaded(playerid, name[], ownerId, houseId);
-forward DB_OnHouseBillsPaid(playerid, name[], ownerId, houseId, kind, total, token, restore);
-forward DB_OnHouseRestored(playerid, name[], ownerId, houseId, kind, total, token);
+forward DB_OnHouseBillsLoaded(playerid, const name[], ownerId, houseId);
+forward DB_OnHouseBillsPaid(playerid, const name[], ownerId, houseId, kind, total, token, restore);
+forward DB_OnHouseRestored(playerid, const name[], ownerId, houseId, kind, total, token);
 forward DB_OnJFComp(kind, charId, id);
 forward DB_JobFacFailure(playerid, op);
-forward DB_JobFacQueryError(callback[]);
-forward DB_OnJFPayout(playerid, name[], charId, jobId, amount);
-forward DB_OnJFJobSet(playerid, name[], charId, jobId);
+forward DB_JobFacQueryError(const callback[]);
+forward DB_OnJFPayout(playerid, const name[], charId, jobId, amount);
+forward DB_OnJFJobSet(playerid, const name[], charId, jobId);
 forward DB_OnJFFineAdded(idx, token);
-forward DB_OnJFFinesLoaded(playerid, name[], charId);
-forward DB_OnJFFacChanged(playerid, name[], actorChar, targetChar, cmd, faction, rank);
-forward DB_OnJFFacMembers(playerid, name[], charId, faction);
-forward DB_OnJFFacFound(playerid, name[], charId, tag);
-forward DB_OnInvLoaded(playerid, name[], charId);
-forward DB_OnInvCalled(playerid, name[], charId, token, op, opId[]);
-forward DB_OnInvResult(playerid, name[], charId, token, op, opId[]);
-forward DB_OnInvGiveCalled(playerid, name[], charId, token, recv, rname[], rchar, itemId, qty, opId[]);
-forward DB_OnInvGiveResult(playerid, name[], charId, token, recv, rname[], rchar, itemId, qty, opId[]);
-forward DB_OnInvUndoCalled(opId[], notify);
-forward DB_OnInvUndoResult(opId[], notify);
+forward DB_OnJFFinesLoaded(playerid, const name[], charId);
+forward DB_OnJFFacChanged(playerid, const name[], actorChar, targetChar, cmd, faction, rank);
+forward DB_OnJFFacMembers(playerid, const name[], charId, faction);
+forward DB_OnJFFacFound(playerid, const name[], charId, tag);
+forward DB_OnInvLoaded(playerid, const name[], charId);
+forward DB_OnInvCalled(playerid, const name[], charId, token, op, const opId[]);
+forward DB_OnInvResult(playerid, const name[], charId, token, op, const opId[]);
+forward DB_OnInvGiveCalled(playerid, const name[], charId, token, recv, const rname[], rchar, itemId, qty, const opId[]);
+forward DB_OnInvGiveResult(playerid, const name[], charId, token, recv, const rname[], rchar, itemId, qty, const opId[]);
+forward DB_OnInvUndoCalled(const opId[], notify);
+forward DB_OnInvUndoResult(const opId[], notify);
 forward DB_InvFailure(playerid, op);
-forward DB_InvQueryError(callback[]);
-forward DB_OnBankLimits(playerid, name[], charId, token);
-forward DB_OnBankStatement(playerid, name[], charId, token);
-forward DB_OnBankSynced(playerid, name[], charId, token);
-forward DB_OnBankCalled(playerid, name[], charId, token, op, opId[]);
-forward DB_OnBankResult(playerid, name[], charId, token, op, opId[]);
-forward DB_OnBankXferCalled(playerid, name[], charId, token, recv, rname[], rchar, rgen, amount, opId[]);
-forward DB_OnBankXferResult(playerid, name[], charId, token, recv, rname[], rchar, rgen, amount, opId[]);
-forward DB_OnBankUndoCalled(opId[], notify);
-forward DB_OnBankUndoResult(opId[], notify);
+forward DB_InvQueryError(const callback[]);
+forward DB_OnBankLimits(playerid, const name[], charId, token);
+forward DB_OnBankStatement(playerid, const name[], charId, token);
+forward DB_OnBankSynced(playerid, const name[], charId, token);
+forward DB_OnBankCalled(playerid, const name[], charId, token, op, const opId[]);
+forward DB_OnBankResult(playerid, const name[], charId, token, op, const opId[]);
+forward DB_OnBankXferCalled(playerid, const name[], charId, token, recv, const rname[], rchar, rgen, amount, const opId[]);
+forward DB_OnBankXferResult(playerid, const name[], charId, token, recv, const rname[], rchar, rgen, amount, const opId[]);
+forward DB_OnBankUndoCalled(const opId[], notify);
+forward DB_OnBankUndoResult(const opId[], notify);
 forward DB_BankFailure(playerid, op);
-forward DB_BankQueryError(callback[]);
-forward DB_OnStoryLoaded(playerid, name[], accountId, charId, token);
-forward DB_OnStoryRead(playerid, name[], token);
-forward DB_OnStoryCalled(playerid, name[], charId, token, opId[]);
-forward DB_OnStoryResult(playerid, name[], charId, token, opId[]);
+forward DB_BankQueryError(const callback[]);
+forward DB_OnStoryLoaded(playerid, const name[], accountId, charId, token);
+forward DB_OnStoryRead(playerid, const name[], token);
+forward DB_OnStoryCalled(playerid, const name[], charId, token, const opId[]);
+forward DB_OnStoryResult(playerid, const name[], charId, token, const opId[]);
 forward DB_OnStoryIntroSet(accountId);
 forward DB_StoryFailure(playerid, op);
-forward DB_StoryQueryError(callback[]);
+forward DB_StoryQueryError(const callback[]);
 forward DB_OnLdCleanup(charId);
-forward DB_OnLdCalled(playerid, name[], cat, token, action, charId, aux, other, otherGen, opId[]);
-forward DB_OnLdResult(playerid, name[], cat, token, action, charId, aux, other, otherGen, opId[]);
-forward DB_OnLdUndoCalled(playerid, name[], gen, charId, opId[]);
-forward DB_OnLdUndoResult(playerid, name[], gen, charId, opId[]);
+forward DB_OnLdCalled(playerid, const name[], cat, token, action, charId, aux, other, otherGen, const opId[]);
+forward DB_OnLdResult(playerid, const name[], cat, token, action, charId, aux, other, otherGen, const opId[]);
+forward DB_OnLdUndoCalled(playerid, const name[], gen, charId, const opId[]);
+forward DB_OnLdUndoResult(playerid, const name[], gen, charId, const opId[]);
 forward DB_OnLdFire();
-forward DB_OnLdPlayerCalled(playerid, name[], token, charId, opId[]);
-forward DB_OnLdPlayer(playerid, name[], token, charId);
-forward DB_OnLdBoard(playerid, name[], token);
-forward DB_OnLdHist(playerid, name[], token, districtId);
+forward DB_OnLdPlayerCalled(playerid, const name[], token, charId, const opId[]);
+forward DB_OnLdPlayer(playerid, const name[], token, charId);
+forward DB_OnLdBoard(playerid, const name[], token);
+forward DB_OnLdHist(playerid, const name[], token, districtId);
 forward DB_OnLdDistricts();
 forward DB_OnLdBoot();
 forward DB_OnLdTicked();
-forward DB_OnLdGlobalCalled(kind, playerid, name[], opId[]);
-forward DB_OnLdGlobalResult(kind, playerid, name[], opId[]);
-forward DB_LivingQueryError(callback[]);
+forward DB_OnLdGlobalCalled(kind, playerid, const name[], const opId[]);
+forward DB_OnLdGlobalResult(kind, playerid, const name[], const opId[]);
+forward DB_LivingQueryError(const callback[]);
 forward Account_OnKickTimer(playerid);
-forward Account_OnDBLoaded(playerid, accountId, hash[], salt[], adminLevel);
-forward UI_OnRegisterSubmit(playerid, password[]);
+forward Account_OnDBLoaded(playerid, accountId, const hash[], const salt[], adminLevel);
+forward UI_OnRegisterSubmit(playerid, const password[]);
 forward Account_OnRegisterHashed(playerid, seq);
 forward Account_OnDBCreated(playerid, accountId);
-forward UI_OnLoginSubmit(playerid, password[]);
+forward UI_OnLoginSubmit(playerid, const password[]);
 forward Account_OnLoginVerified(playerid, bool:success, seq, accountId);
 forward Account_OnMigrateHashed(playerid, seq, accountId);
 forward UI_OnDialogCancel(playerid, dialogid);
@@ -675,11 +675,11 @@ forward UI_OnGenderChosen(playerid, gender);
 forward UI_OnSkinChosen(playerid, skin);
 forward Char_OnDBCreated(playerid, charId);
 forward Economy_OnTick();
-forward Admin_OnBanChecked(playerid, bool:banned, reason[], expiresAt);
+forward Admin_OnBanChecked(playerid, bool:banned, const reason[], expiresAt);
 forward Admin_OnWarnAdded(requesterid, targetAccountId, activeCount);
-forward Admin_OnBanAdded(requesterid, name[], banId);
-forward Admin_OnUnbanned(requesterid, name[], affected);
-forward Admin_OnAccountFound(requesterid, tag, accountId, name[], adminLevel, lastIp[]);
+forward Admin_OnBanAdded(requesterid, const name[], banId);
+forward Admin_OnUnbanned(requesterid, const name[], affected);
+forward Admin_OnAccountFound(requesterid, tag, accountId, const name[], adminLevel, const lastIp[]);
 forward Veh_OnFuelTick();
 forward Veh_OnHudTick();
 forward Veh_OnSaveTick();
@@ -687,7 +687,7 @@ forward Veh_OnFindExpire(playerid, session);
 forward Veh_OnWreckRemove(vehicleid, owner, session);
 forward Veh_OnDBLoaded(playerid, count);
 forward UI_OnVehicleBuyConfirm(playerid, catalogIndex, payWithBank);
-forward Veh_OnDBCreated(playerid, vehDbId, plate[]);
+forward Veh_OnDBCreated(playerid, vehDbId, const plate[]);
 forward Veh_OnDBDeleted(playerid, vehDbId, affected);
 forward UI_OnVehicleListAction(playerid, slot, action);
 forward Inv_OnDBLoaded(playerid, count);
@@ -703,7 +703,7 @@ forward UI_OnInvGiveExpired(playerid);
 forward Inv_OnDBTransferred(giverid, receiverid, itemId, qty, result);
 forward Inv_OnDBBought(playerid, itemId, qty, result);
 forward Inv_OnDBBag(playerid, result);
-forward Inv_OnDBUndone(opId[], result);
+forward Inv_OnDBUndone(const opId[], result);
 forward Inv_OnDBFridge(playerid, houseId, direction, qty, result);
 forward Inv_OnTick();
 forward UI_OnBankBalanceRefresh(playerid);
@@ -711,7 +711,7 @@ forward UI_OnBankDeposit(playerid, amount);
 forward Bank_OnDBDeposit(playerid, amount, result, balance);
 forward UI_OnBankWithdraw(playerid, amount);
 forward Bank_OnDBWithdraw(playerid, amount, result, balance);
-forward Bank_OnDBUndone(playerid, opId[], result);
+forward Bank_OnDBUndone(playerid, const opId[], result);
 forward Bank_OnResyncTimer(playerid, tok);
 forward Bank_OnDBSynced(playerid, result, balance);
 forward UI_OnBankTransfer(playerid, targetId, amount);
@@ -779,7 +779,7 @@ forward UI_OnFactionMemberAction(playerid, action, memberId);
 forward Faction_OnDBChanged(playerid, targetChar, cmd, faction, rank, result);
 forward UI_OnFactionMenuAction(playerid, action);
 forward Faction_OnDBMembers(playerid, faction, count);
-forward Faction_OnDBFound(playerid, tag, charId, name[], faction, rank, level);
+forward Faction_OnDBFound(playerid, tag, charId, const name[], faction, rank, level);
 forward Faction_OnTick();
 forward Inv_ShowDocument(playerid, viewerid);
 forward District_OnTick();
@@ -790,7 +790,7 @@ forward Living_OnDBPlayer(playerid, result, refund);
 forward District_OnLoadRetry(playerid, charId);
 forward Living_OnDBAdminSet(playerid, result, districtId, activity, security, crime);
 forward Director_OnRetry(playerid, charId, seq);
-forward Director_OnDistrictEvent(type, districtId, charId, value, opId[]);
+forward Director_OnDistrictEvent(type, districtId, charId, value, const opId[]);
 forward Director_OnCycle();
 forward Living_OnDBBoard(playerid, result, count);
 forward Living_OnDBContract(playerid, action, result, contractId, amount, balance, v1, v2, v3);
@@ -804,10 +804,10 @@ forward UI_OnTaxiCallAccept(playerid, callId);
 forward UI_OnTaxiPayConfirm(playerid, rideId, accept);
 forward UI_OnTaxiPayExpired(playerid, rideId);
 forward UI_OnTaxiRate(playerid, rideId, stars);
-forward Taxi_OnDistrictEvent(type, districtId, charId, value, opId[]);
+forward Taxi_OnDistrictEvent(type, districtId, charId, value, const opId[]);
 forward Taxi_OnTick();
 forward Freight_OnTick();
-forward CityOS_OnDistrictEvent(type, districtId, charId, value, opId[]);
+forward CityOS_OnDistrictEvent(type, districtId, charId, value, const opId[]);
 forward Living_OnDBHistory(playerid, result, districtId, count);
 forward UI_OnContractAccept(playerid, contractId);
 forward UI_OnContractAbandon(playerid, contractId);
@@ -819,141 +819,151 @@ forward UI_OnHelpHintsOff(playerid);
 forward UI_OnProjectOpen(playerid, districtId);
 forward UI_OnProjectContribute(playerid, projectId, amount);
 forward Living_OnDBProject(playerid, result, projectId, donated, balance, points, fund, projectState);
-forward Hub_OnDistrictEvent(type, districtId, charId, value, opId[]);
+forward Hub_OnDistrictEvent(type, districtId, charId, value, const opId[]);
 forward Hub_OnTick();
 forward CefBridge_DecideTimeout(playerid, nonce);
 forward CefBridge_ClockTick();
-forward Cef_OnReady(playerid, arguments[]);
-forward Cef_OnClose(playerid, arguments[]);
-forward Cef_OnAccept(playerid, arguments[]);
-forward Cef_OnAbandon(playerid, arguments[]);
-forward Cef_OnBoardRefresh(playerid, arguments[]);
-forward Cef_OnDistrict(playerid, arguments[]);
-forward Cef_OnProjectOpen(playerid, arguments[]);
-forward Cef_OnContribute(playerid, arguments[]);
-forward Cef_OnBankReq(playerid, arguments[]);
-forward Cef_OnRepReq(playerid, arguments[]);
-forward Cef_OnJobWaypoint(playerid, arguments[]);
-forward Cef_OnLogin(playerid, arguments[]);
-forward Cef_OnRegister(playerid, arguments[]);
-forward Cef_OnGender(playerid, arguments[]);
-forward Cef_OnSkin(playerid, arguments[]);
-forward Cef_OnStory(playerid, arguments[]);
-forward Cef_OnQuit(playerid, arguments[]);
-forward Cmd_goto(playerid, params[]);
-forward Cmd_setlevel(playerid, params[]);
-forward Cmd_setmoney(playerid, params[]);
-forward Cmd_ah(playerid, params[]);
-forward Cmd_a(playerid, params[]);
-forward Cmd_reports(playerid, params[]);
-forward Cmd_rr(playerid, params[]);
-forward Cmd_gethere(playerid, params[]);
-forward Cmd_freeze(playerid, params[]);
-forward Cmd_unfreeze(playerid, params[]);
-forward Cmd_sethp(playerid, params[]);
-forward Cmd_kick(playerid, params[]);
-forward Cmd_mute(playerid, params[]);
-forward Cmd_unmute(playerid, params[]);
-forward Cmd_warn(playerid, params[]);
-forward Cmd_setadmin(playerid, params[]);
-forward Cmd_givemoney(playerid, params[]);
-forward Cmd_ban(playerid, params[]);
-forward Cmd_unban(playerid, params[]);
-forward Cmd_me(playerid, params[]);
-forward Cmd_do(playerid, params[]);
-forward Cmd_try(playerid, params[]);
-forward Cmd_b(playerid, params[]);
-forward Cmd_ame(playerid, params[]);
-forward Cmd_pay(playerid, params[]);
-forward Cmd_lavoro(playerid, params[]);
-forward Cmd_inizia(playerid, params[]);
-forward Cmd_fine(playerid, params[]);
-forward Cmd_fazione(playerid, params[]);
-forward Cmd_invita(playerid, params[]);
-forward Cmd_accetta(playerid, params[]);
-forward Cmd_promuovi(playerid, params[]);
-forward Cmd_degrada(playerid, params[]);
-forward Cmd_licenzia(playerid, params[]);
-forward Cmd_duty(playerid, params[]);
-forward Cmd_r(playerid, params[]);
-forward Cmd_dep(playerid, params[]);
-forward Cmd_ammanetta(playerid, params[]);
-forward Cmd_smanetta(playerid, params[]);
-forward Cmd_multa(playerid, params[]);
-forward Cmd_multe(playerid, params[]);
-forward Cmd_cura(playerid, params[]);
-forward Cmd_rianima(playerid, params[]);
-forward Cmd_setfazione(playerid, params[]);
-forward Cmd_stats(playerid, params[]);
-forward Cmd_who(playerid, params[]);
-forward Cmd_help(playerid, params[]);
-forward Cmd_report(playerid, params[]);
-forward Cmd_v(playerid, params[]);
-forward Cmd_refuel(playerid, params[]);
-forward Cmd_concessionario(playerid, params[]);
-forward Cmd_casa(playerid, params[]);
-forward Cmd_entra(playerid, params[]);
-forward Cmd_esci(playerid, params[]);
-forward Cmd_luce(playerid, params[]);
-forward Cmd_gas(playerid, params[]);
-forward Cmd_frigo(playerid, params[]);
-forward Cmd_bollette(playerid, params[]);
-forward Cmd_bussa(playerid, params[]);
-forward Cmd_cucina(playerid, params[]);
-forward Cmd_mangia(playerid, params[]);
-forward Cmd_compra(playerid, params[]);
-forward Cmd_inventario(playerid, params[]);
-forward Cmd_inv(playerid, params[]);
-forward Cmd_usa(playerid, params[]);
-forward Cmd_dai(playerid, params[]);
-forward Cmd_getta(playerid, params[]);
-forward Cmd_prendi(playerid, params[]);
-forward Cmd_documento(playerid, params[]);
-forward Cmd_salta(playerid, params[]);
-forward Cmd_storia(playerid, params[]);
-forward Cmd_mostrastoria(playerid, params[]);
-forward Cmd_atm(playerid, params[]);
-forward Cmd_banca(playerid, params[]);
-forward Cmd_saldo(playerid, params[]);
-forward Cmd_deposita(playerid, params[]);
-forward Cmd_preleva(playerid, params[]);
-forward Cmd_bonifico(playerid, params[]);
-forward Cmd_estratto(playerid, params[]);
-forward Cmd_noleggio(playerid, params[]);
-forward Cmd_noleggia(playerid, params[]);
-forward Cmd_riconsegna(playerid, params[]);
-forward Cmd_taxi(playerid, params[]);
-forward Cmd_chiamataxi(playerid, params[]);
-forward Cmd_accettacorsa(playerid, params[]);
-forward Cmd_tassametro(playerid, params[]);
-forward Cmd_contratti(playerid, params[]);
-forward Cmd_contratto(playerid, params[]);
-forward Cmd_reputazione(playerid, params[]);
-forward Cmd_quartiere(playerid, params[]);
-forward Cmd_contribuisci(playerid, params[]);
-forward Cmd_email(playerid, params[]);
-forward Cmd_telefono(playerid, params[]);
-forward Cmd_aiuto(playerid, params[]);
-forward Cmd_ldset(playerid, params[]);
+forward Cef_OnReady(playerid, const arguments[]);
+forward Cef_OnClose(playerid, const arguments[]);
+forward Cef_OnAccept(playerid, const arguments[]);
+forward Cef_OnAbandon(playerid, const arguments[]);
+forward Cef_OnBoardRefresh(playerid, const arguments[]);
+forward Cef_OnDistrict(playerid, const arguments[]);
+forward Cef_OnProjectOpen(playerid, const arguments[]);
+forward Cef_OnContribute(playerid, const arguments[]);
+forward Cef_OnBankReq(playerid, const arguments[]);
+forward Cef_OnRepReq(playerid, const arguments[]);
+forward Cef_OnJobWaypoint(playerid, const arguments[]);
+forward Cef_OnLogin(playerid, const arguments[]);
+forward Cef_OnRegister(playerid, const arguments[]);
+forward Cef_OnGender(playerid, const arguments[]);
+forward Cef_OnSkin(playerid, const arguments[]);
+forward Cef_OnStory(playerid, const arguments[]);
+forward Cef_OnQuit(playerid, const arguments[]);
+forward Cmd_goto(playerid, const params[]);
+forward Cmd_setlevel(playerid, const params[]);
+forward Cmd_setmoney(playerid, const params[]);
+forward Cmd_ah(playerid, const params[]);
+forward Cmd_a(playerid, const params[]);
+forward Cmd_reports(playerid, const params[]);
+forward Cmd_rr(playerid, const params[]);
+forward Cmd_gethere(playerid, const params[]);
+forward Cmd_freeze(playerid, const params[]);
+forward Cmd_unfreeze(playerid, const params[]);
+forward Cmd_sethp(playerid, const params[]);
+forward Cmd_kick(playerid, const params[]);
+forward Cmd_mute(playerid, const params[]);
+forward Cmd_unmute(playerid, const params[]);
+forward Cmd_warn(playerid, const params[]);
+forward Cmd_setadmin(playerid, const params[]);
+forward Cmd_givemoney(playerid, const params[]);
+forward Cmd_ban(playerid, const params[]);
+forward Cmd_unban(playerid, const params[]);
+forward Cmd_me(playerid, const params[]);
+forward Cmd_do(playerid, const params[]);
+forward Cmd_try(playerid, const params[]);
+forward Cmd_b(playerid, const params[]);
+forward Cmd_ame(playerid, const params[]);
+forward Cmd_pay(playerid, const params[]);
+forward Cmd_lavoro(playerid, const params[]);
+forward Cmd_inizia(playerid, const params[]);
+forward Cmd_fine(playerid, const params[]);
+forward Cmd_fazione(playerid, const params[]);
+forward Cmd_invita(playerid, const params[]);
+forward Cmd_accetta(playerid, const params[]);
+forward Cmd_promuovi(playerid, const params[]);
+forward Cmd_degrada(playerid, const params[]);
+forward Cmd_licenzia(playerid, const params[]);
+forward Cmd_duty(playerid, const params[]);
+forward Cmd_r(playerid, const params[]);
+forward Cmd_dep(playerid, const params[]);
+forward Cmd_ammanetta(playerid, const params[]);
+forward Cmd_smanetta(playerid, const params[]);
+forward Cmd_multa(playerid, const params[]);
+forward Cmd_multe(playerid, const params[]);
+forward Cmd_cura(playerid, const params[]);
+forward Cmd_rianima(playerid, const params[]);
+forward Cmd_setfazione(playerid, const params[]);
+forward Cmd_stats(playerid, const params[]);
+forward Cmd_who(playerid, const params[]);
+forward Cmd_help(playerid, const params[]);
+forward Cmd_report(playerid, const params[]);
+forward Cmd_v(playerid, const params[]);
+forward Cmd_refuel(playerid, const params[]);
+forward Cmd_concessionario(playerid, const params[]);
+forward Cmd_casa(playerid, const params[]);
+forward Cmd_entra(playerid, const params[]);
+forward Cmd_esci(playerid, const params[]);
+forward Cmd_luce(playerid, const params[]);
+forward Cmd_gas(playerid, const params[]);
+forward Cmd_frigo(playerid, const params[]);
+forward Cmd_bollette(playerid, const params[]);
+forward Cmd_bussa(playerid, const params[]);
+forward Cmd_cucina(playerid, const params[]);
+forward Cmd_mangia(playerid, const params[]);
+forward Cmd_compra(playerid, const params[]);
+forward Cmd_inventario(playerid, const params[]);
+forward Cmd_inv(playerid, const params[]);
+forward Cmd_usa(playerid, const params[]);
+forward Cmd_dai(playerid, const params[]);
+forward Cmd_getta(playerid, const params[]);
+forward Cmd_prendi(playerid, const params[]);
+forward Cmd_documento(playerid, const params[]);
+forward Cmd_salta(playerid, const params[]);
+forward Cmd_storia(playerid, const params[]);
+forward Cmd_mostrastoria(playerid, const params[]);
+forward Cmd_atm(playerid, const params[]);
+forward Cmd_banca(playerid, const params[]);
+forward Cmd_saldo(playerid, const params[]);
+forward Cmd_deposita(playerid, const params[]);
+forward Cmd_preleva(playerid, const params[]);
+forward Cmd_bonifico(playerid, const params[]);
+forward Cmd_estratto(playerid, const params[]);
+forward Cmd_noleggio(playerid, const params[]);
+forward Cmd_noleggia(playerid, const params[]);
+forward Cmd_riconsegna(playerid, const params[]);
+forward Cmd_taxi(playerid, const params[]);
+forward Cmd_chiamataxi(playerid, const params[]);
+forward Cmd_accettacorsa(playerid, const params[]);
+forward Cmd_tassametro(playerid, const params[]);
+forward Cmd_contratti(playerid, const params[]);
+forward Cmd_contratto(playerid, const params[]);
+forward Cmd_reputazione(playerid, const params[]);
+forward Cmd_quartiere(playerid, const params[]);
+forward Cmd_contribuisci(playerid, const params[]);
+forward Cmd_email(playerid, const params[]);
+forward Cmd_telefono(playerid, const params[]);
+forward Cmd_aiuto(playerid, const params[]);
+forward Cmd_ldset(playerid, const params[]);
 forward HudCef_OnTick();
-forward Cef_OnQuick(playerid, arguments[]);
-forward Cef_OnQuickClose(playerid, arguments[]);
-forward Cef_OnChatSend(playerid, arguments[]);
-forward Cmd_chatsamp(playerid, params[]);
-forward Cmd_chatcef(playerid, params[]);
+forward Cef_OnQuick(playerid, const arguments[]);
+forward Cef_OnQuickClose(playerid, const arguments[]);
+forward Cef_OnChatSend(playerid, const arguments[]);
+forward Cmd_chatsamp(playerid, const params[]);
+forward Cmd_chatcef(playerid, const params[]);
 forward StreetRental_OnTick();
 forward CharSel_OnList(playerid, accountId, token);
 forward CharSel_OnListTimeout(playerid, token);
 forward CharSel_OnNameChecked(playerid, token);
-forward Cef_OnCharPick(playerid, arguments[]);
-forward Cef_OnCharCreate(playerid, arguments[]);
-forward Cef_OnCharBack(playerid, arguments[]);
+forward Cef_OnCharPick(playerid, const arguments[]);
+forward Cef_OnCharCreate(playerid, const arguments[]);
+forward Cef_OnCharBack(playerid, const arguments[]);
 forward SpawnSel_OnInfo(playerid, charId, token);
 forward SpawnSel_OnTimeout(playerid, token);
-forward Cef_OnSpawnPick(playerid, arguments[]);
+forward Cef_OnSpawnPick(playerid, const arguments[]);
 forward LSRP_VoiceInfo(playerid);
-forward Cef_OnViewOk(playerid, arguments[]);
+forward Cef_OnViewOk(playerid, const arguments[]);
 forward CefViews_OnTimeout(playerid, which);
+
+// funzioni con tag di ritorno usate prima della definizione (evita il warning 208)
+forward bool:Util_IsValidRPName(const name[]);
+forward bool:Job_IsOnShift(playerid);
+forward bool:Director_Release(playerid, reason);
+forward bool:Rental_BeginOpen(playerid, vkind, blocks, rentClass, streetModel = 0);
+forward bool:Freight_Begin(playerid, contractId, fromD, toD, cargo, distanceM, bool:welcome);
+forward bool:SpawnSel_Active(playerid);
+forward bool:CharSel_Active(playerid);
+forward bool:CharSel_ApplyLoadedName(playerid);
 
 // ===== modules/core/chat.inc =====
 // =============================================================================
@@ -1508,28 +1518,28 @@ bool:Lang_ShowPlayerDialog(playerid, dialogid, t_DIALOG_STYLE:style, const title
 	return ShowPlayerDialog(playerid, dialogid, style, cap, out, b1, b2);
 }
 
-PlayerText:Lang_CreatePlayerTextDraw(playerid, Float:x, Float:y, text[])
+PlayerText:Lang_CreatePlayerTextDraw(playerid, Float:x, Float:y, const text[])
 {
 	static out[1024];
 	Lang_Translit(text, out, 1024);
 	return CreatePlayerTextDraw(playerid, x, y, "%s", out);
 }
 
-bool:Lang_PlayerTextDrawSetString(playerid, PlayerText:textid, text[])
+bool:Lang_PlayerTextDrawSetString(playerid, PlayerText:textid, const text[])
 {
 	static out[1024];
 	Lang_Translit(text, out, 1024);
 	return PlayerTextDrawSetString(playerid, textid, "%s", out);
 }
 
-Text3D:Lang_Create3DTextLabel(text[], colour, Float:x, Float:y, Float:z, Float:drawDistance, virtualWorld, bool:testLOS)
+Text3D:Lang_Create3DTextLabel(const text[], colour, Float:x, Float:y, Float:z, Float:drawDistance, virtualWorld, bool:testLOS)
 {
 	static out[512];
 	Lang_Translit(text, out, 512);
 	return Create3DTextLabel(out, colour, x, y, z, drawDistance, virtualWorld, testLOS);
 }
 
-bool:Lang_Update3DTextLabelText(Text3D:textid, colour, text[])
+bool:Lang_Update3DTextLabelText(Text3D:textid, colour, const text[])
 {
 	static out[512];
 	Lang_Translit(text, out, 512);
@@ -1547,12 +1557,12 @@ Player_Reset(playerid)
 	}
 	for (new i = 0; i < _:E_PLAYER_DATA; i++)
 	{
-		gPlayer[playerid][i] = 0;
+		gPlayer[playerid][E_PLAYER_DATA:i] = 0;
 	}
+	return 0;
 }
 
 // ===== modules/core/utils.inc =====
-new g_UtilSaltChars[63];
 
 Util_Send(playerid, color, const text[])
 {
@@ -1564,11 +1574,11 @@ bool:Util_IsPlaying(playerid)
 {
 	if (playerid < 0 || playerid >= MAX_PLAYERS)
 	{
-		return 0;
+		return false;
 	}
 	if (!IsPlayerConnected(playerid) || IsPlayerNPC(playerid))
 	{
-		return 0;
+		return false;
 	}
 	return gPlayer[playerid][pLoggedIn] && gPlayer[playerid][pSpawned];
 }
@@ -1605,17 +1615,17 @@ bool:Util_IsHexChar(c)
 	return (c >= 48 && c <= 57) || (c >= 97 && c <= 102) || (c >= 65 && c <= 70);
 }
 
-bool:Util_IsColorCodeAt(str[], pos)
+bool:Util_IsColorCodeAt(const str[], pos)
 {
 	if (str[pos] != 123)
 	{
-		return 0;
+		return false;
 	}
 	for (new i = 1; i <= 6; i++)
 	{
 		if (!Util_IsHexChar(str[pos + i]))
 		{
-			return 0;
+			return false;
 		}
 	}
 	return str[pos + 7] == 125;
@@ -1638,7 +1648,7 @@ Util_StripColorCodes(str[])
 	}
 }
 
-bool:Util_SanitizeText(src[], dest[], maxLen)
+bool:Util_SanitizeText(const src[], dest[], maxLen)
 {
 	new tmp[256];
 	strmid(tmp, src, 0, 255, 256);
@@ -1659,44 +1669,44 @@ bool:Util_SanitizeText(src[], dest[], maxLen)
 	return dest[0] != 0;
 }
 
-bool:Util_ParseInt(str[], &value)
+bool:Util_ParseInt(const str[], &value)
 {
-	new i = 0, digits = 0, bool:neg = 0;
+	new i = 0, digits = false, bool:neg = false;
 	value = 0;
 	if (str[0] == 45)
 	{
-		neg = 1;
+		neg = true;
 		i++;
 	}
 	for (;str[i] != 0; i++)
 	{
 		if (str[i] < 48 || str[i] > 57)
 		{
-			return 0;
+			return false;
 		}
 		new d = str[i] - 48;
 		if (value > (0x7FFFFFFF - d) / 10)
 		{
-			return 0;
+			return false;
 		}
 		value = value * 10 + d;
 		if (++digits > 10)
 		{
-			return 0;
+			return false;
 		}
 	}
 	if (digits == 0)
 	{
-		return 0;
+		return false;
 	}
 	if (neg)
 	{
 		value = -value;
 	}
-	return 1;
+	return true;
 }
 
-Util_NextToken(src[], &pos, dest[], size)
+Util_NextToken(const src[], &pos, dest[], size)
 {
 	while (src[pos] == 32)
 	{
@@ -1715,11 +1725,11 @@ Util_NextToken(src[], &pos, dest[], size)
 	return n;
 }
 
-bool:Util_ParsePlayerId(token[], &id)
+bool:Util_ParsePlayerId(const token[], &id)
 {
 	if (!Util_ParseInt(token, id))
 	{
-		return 0;
+		return false;
 	}
 	return id >= 0 && id < 1000;
 }
@@ -1735,7 +1745,7 @@ bool:Util_IsValidRPNameC(const name[])
 	return Util_IsValidRPName(tmp);
 }
 
-bool:Util_IsValidRPName(name[])
+bool:Util_IsValidRPName(const name[])
 {
 	new us = -1, len = strlen(name);
 	for (new i = 0; i < len; i++)
@@ -1745,24 +1755,24 @@ bool:Util_IsValidRPName(name[])
 		{
 			if (us != -1)
 			{
-				return 0;
+				return false;
 			}
 			us = i;
 			continue;
 		}
 		if (c < 65 || (c > 90 && c < 97) || c > 122)
 		{
-			return 0;
+			return false;
 		}
 	}
 	if (us < 2 || len - us - 1 < 2)
 	{
-		return 0;
+		return false;
 	}
 	return name[0] >= 65 && name[0] <= 90 && name[us + 1] >= 65 && name[us + 1] <= 90;
 }
 
-Util_SplitText(text[], out[][], maxLines)
+Util_SplitText(const text[], const out[][], maxLines)
 {
 	new len = strlen(text), start = 0, count = 0;
 	while (start < len && count < maxLines)
@@ -1791,7 +1801,7 @@ Util_SplitText(text[], out[][], maxLines)
 	return count;
 }
 
-Util_SendNear(sourceid, color, Float:radius, text[])
+Util_SendNear(sourceid, color, Float:radius, const text[])
 {
 	new lines[3][128];
 	new count = Util_SplitText(text, lines, 3);
@@ -1823,17 +1833,18 @@ Util_SendNear(sourceid, color, Float:radius, text[])
 		}
 	}
 	Chat_SetCategory(CHAT_CAT_AUTO);
+	return 0;
 }
 
 bool:Util_InRange(playerid, targetid, Float:radius)
 {
 	if (GetPlayerInterior(playerid) != GetPlayerInterior(targetid))
 	{
-		return 0;
+		return false;
 	}
 	if (GetPlayerVirtualWorld(playerid) != GetPlayerVirtualWorld(targetid))
 	{
-		return 0;
+		return false;
 	}
 	new Float:x, Float:y, Float:z;
 	GetPlayerPos(targetid, x, y, z);
@@ -1842,7 +1853,7 @@ bool:Util_InRange(playerid, targetid, Float:radius)
 
 // ===== modules/core/logger.inc =====
 
-Log_Write(category[], text[])
+Log_Write(const category[], const text[])
 {
 	new h = 0, mi = 0, s = 0, y = 0, mo = 0, d = 0;
 	new clean[320], line[320];
@@ -1858,7 +1869,7 @@ Log_Write(category[], text[])
 	}
 	format(line, 320, "[%04d-%02d-%02d %02d:%02d:%02d] [%s] %s", y, mo, d, h, mi, s, category, clean);
 	printf("%s", line);
-	new File:f = fopen("lsrp.log", 3);
+	new File:f = fopen("lsrp.log", filemode:3);
 	if (f)
 	{
 		fwrite(f, line);
@@ -1870,13 +1881,15 @@ Log_Write(category[], text[])
 // ===== modules/ui/cef_ui.inc =====
 #if !defined LSRP_CEF
 
-cef_emit_event(player_id, event[], {Float,_}:...)
+cef_emit_event(player_id, const event[], {Float,_}:...)
 {
+	#pragma unused player_id, event
 	return 0;
 }
 
 cef_focus_browser(player_id, browser_id, bool:focused)
 {
+	#pragma unused player_id, browser_id, focused
 	return 0;
 }
 #endif
@@ -1896,20 +1909,21 @@ CefUI_Reset(playerid)
 		return 0;
 	}
 	g_CefState[playerid] = 0;
-	g_CefFocus[playerid] = 0;
-	g_CefHudOn[playerid] = 0;
-	g_CefHudHas[playerid] = 0;
+	g_CefFocus[playerid] = false;
+	g_CefHudOn[playerid] = false;
+	g_CefHudHas[playerid] = false;
 	g_CefView[playerid] = 0;
 #if defined LSRP_CEF
-	g_CefDecided[playerid] = 0;
+	g_CefDecided[playerid] = false;
 #else
-	g_CefDecided[playerid] = 1;
+	g_CefDecided[playerid] = true;
 #endif
-	g_CefPromptWait[playerid] = 0;
+	g_CefPromptWait[playerid] = false;
 	for (new i = 0; i < 5; i++)
 	{
 		g_CefHud[playerid][i] = 0;
 	}
+	return 0;
 }
 
 CefUI_Active(playerid)
@@ -1937,23 +1951,25 @@ CefUI_SetState(playerid, st)
 		return 0;
 	}
 	g_CefState[playerid] = st;
+	return 0;
 }
 
-CefUI_Open(playerid, view[], arg[])
+CefUI_Open(playerid, const view[], const arg[])
 {
 	if (!CefUI_Active(playerid))
 	{
 		return 0;
 	}
-	new v = !strcmp(view, "phone", 0, 0x7FFFFFFF) ? 2 : (!strcmp(view, "auth", 0, 0x7FFFFFFF) ? 3 : 1);
+	new v = !strcmp(view, "phone", false, 0x7FFFFFFF) ? 2 : (!strcmp(view, "auth", false, 0x7FFFFFFF) ? 3 : 1);
 	if (v == 2 && g_CefView[playerid] == 2)
 	{
 		return 0;
 	}
 	cef_emit_event(playerid, "lssc:open", 0, view, 0, arg);
-	cef_focus_browser(playerid, 1, 1);
-	g_CefFocus[playerid] = 1;
+	cef_focus_browser(playerid, 1, true);
+	g_CefFocus[playerid] = true;
 	g_CefView[playerid] = v;
+	return 0;
 }
 
 CefUI_OnPageClosed(playerid)
@@ -1964,9 +1980,10 @@ CefUI_OnPageClosed(playerid)
 	}
 	g_CefView[playerid] = 0;
 	CefUI_ReleaseFocus(playerid);
+	return 0;
 }
 
-CefUI_Close(playerid, view[])
+CefUI_Close(playerid, const view[])
 {
 	if (!CefUI_Active(playerid))
 	{
@@ -1975,6 +1992,7 @@ CefUI_Close(playerid, view[])
 	cef_emit_event(playerid, "lssc:close", 0, view);
 	g_CefView[playerid] = 0;
 	CefUI_ReleaseFocus(playerid);
+	return 0;
 }
 
 CefUI_ReleaseFocus(playerid)
@@ -1983,26 +2001,29 @@ CefUI_ReleaseFocus(playerid)
 	{
 		return 0;
 	}
-	cef_focus_browser(playerid, 1, 0);
-	g_CefFocus[playerid] = 0;
+	cef_focus_browser(playerid, 1, false);
+	g_CefFocus[playerid] = false;
+	return 0;
 }
 
-CefUI_Toast(playerid, text[], kind)
+CefUI_Toast(playerid, const text[], kind)
 {
 	if (!CefUI_Active(playerid) || text[0] == 0)
 	{
 		return 0;
 	}
 	cef_emit_event(playerid, "lssc:toast", 0, text, 1, kind);
+	return 0;
 }
 
-CefUI_Reject(playerid, text[])
+CefUI_Reject(playerid, const text[])
 {
 	if (!CefUI_Active(playerid))
 	{
 		return 0;
 	}
 	cef_emit_event(playerid, "lssc:reject", 0, text);
+	return 0;
 }
 
 CefUI_HudData(playerid, money, bank, level, expIn, expStep)
@@ -2016,12 +2037,13 @@ CefUI_HudData(playerid, money, bank, level, expIn, expStep)
 	g_CefHud[playerid][2] = level;
 	g_CefHud[playerid][3] = expIn;
 	g_CefHud[playerid][4] = expStep;
-	g_CefHudHas[playerid] = 1;
+	g_CefHudHas[playerid] = true;
 	HudCef_OnHudData(playerid, money, bank, level);
 	if (CefUI_Active(playerid) && g_CefHudOn[playerid])
 	{
 		CefUI_HudSend(playerid);
 	}
+	return 0;
 }
 
 CefUI_HudSend(playerid)
@@ -2033,6 +2055,7 @@ CefUI_HudSend(playerid)
 	new hour = 0, minute = 0;
 	gettime(hour, minute);
 	cef_emit_event(playerid, "lssc:hud", 1, g_CefHud[playerid], 1, g_CefHud[playerid][1], 1, g_CefHud[playerid][2], 1, g_CefHud[playerid][3], 1, g_CefHud[playerid][4], 1, hour, 1, minute);
+	return 0;
 }
 
 CefUI_HudShow(playerid, bool:show)
@@ -2053,13 +2076,14 @@ CefUI_HudShow(playerid, bool:show)
 		CefUI_HudSend(playerid);
 	}
 	HudCef_OnVisible(playerid, show);
+	return 0;
 }
 
 bool:CefUI_HudIsOn(playerid)
 {
 	if (playerid < 0 || playerid >= MAX_PLAYERS)
 	{
-		return 0;
+		return false;
 	}
 	return g_CefHudOn[playerid];
 }
@@ -2078,7 +2102,7 @@ CefUI_AuthGate(playerid)
 	{
 		SendClientMessage(playerid, 0xAAAAAAFF, "Caricamento dell'interfaccia...");
 	}
-	g_CefPromptWait[playerid] = 1;
+	g_CefPromptWait[playerid] = true;
 	return 0;
 }
 
@@ -2086,11 +2110,11 @@ bool:CefUI_Decide(playerid)
 {
 	if (playerid < 0 || playerid >= MAX_PLAYERS)
 	{
-		return 0;
+		return false;
 	}
-	g_CefDecided[playerid] = 1;
+	g_CefDecided[playerid] = true;
 	new bool:wait = g_CefPromptWait[playerid];
-	g_CefPromptWait[playerid] = 0;
+	g_CefPromptWait[playerid] = false;
 	return wait;
 }
 
@@ -2098,12 +2122,12 @@ bool:CefUI_IsDecided(playerid)
 {
 	if (playerid < 0 || playerid >= MAX_PLAYERS)
 	{
-		return 1;
+		return true;
 	}
 	return g_CefDecided[playerid];
 }
 
-CefUI_AuthStep(playerid, step[], err[], n)
+CefUI_AuthStep(playerid, const step[], const err[], n)
 {
 	if (!CefUI_Active(playerid))
 	{
@@ -2113,6 +2137,7 @@ CefUI_AuthStep(playerid, step[], err[], n)
 	GetPlayerName(playerid, name, 25);
 	cef_emit_event(playerid, "lssc:auth", 0, step, 0, name, 0, err, 1, n, 1, 6, 1, 32);
 	CefUI_Open(playerid, "auth", step);
+	return 0;
 }
 
 CefUI_AuthSkin(playerid, idx, skin)
@@ -2122,15 +2147,17 @@ CefUI_AuthSkin(playerid, idx, skin)
 		return 0;
 	}
 	cef_emit_event(playerid, "lssc:auth_skin", 1, idx, 1, skin);
+	return 0;
 }
 
-CefUI_AuthStoryOpt(playerid, kind, idx, shortText[], longText[])
+CefUI_AuthStoryOpt(playerid, kind, idx, const shortText[], const longText[])
 {
 	if (!CefUI_Active(playerid))
 	{
 		return 0;
 	}
 	cef_emit_event(playerid, "lssc:auth_story", 1, kind, 1, idx, 0, shortText, 0, longText);
+	return 0;
 }
 
 CefUI_AuthClose(playerid)
@@ -2140,6 +2167,7 @@ CefUI_AuthClose(playerid)
 		return 0;
 	}
 	CefUI_Close(playerid, "auth");
+	return 0;
 }
 
 // ===== modules/core/validation.inc =====
@@ -2163,13 +2191,13 @@ bool:Valid_SkinAllowed(gender, skin)
 	{
 		if (Valid_SkinAt(gender, i) == skin)
 		{
-			return 1;
+			return true;
 		}
 	}
-	return 0;
+	return false;
 }
 
-bool:Valid_PasswordLength(pw[])
+bool:Valid_PasswordLength(const pw[])
 {
 	new len = strlen(pw);
 	return len >= 6 && len <= 32;
@@ -2196,12 +2224,12 @@ Valid_PayAmount(amount, senderMoney, receiverMoney)
 	return 0;
 }
 
-bool:Valid_Email(s[])
+bool:Valid_Email(const s[])
 {
 	new len = strlen(s);
 	if (len < 6 || len > 254)
 	{
-		return 0;
+		return false;
 	}
 	new at = -1;
 	for (new i = 0; i < len; i++)
@@ -2210,26 +2238,26 @@ bool:Valid_Email(s[])
 		{
 			if (at != -1)
 			{
-				return 0;
+				return false;
 			}
 			at = i;
 		}
 	}
 	if (at < 1 || at > 64 || at >= len - 4)
 	{
-		return 0;
+		return false;
 	}
 	for (new i = 0; i < at; i++)
 	{
 		new c = s[i];
 		if (!((c >= 97 && c <= 122) || (c >= 65 && c <= 90) || (c >= 48 && c <= 57) || c == 46 || c == 95 || c == 37 || c == 43 || c == 45))
 		{
-			return 0;
+			return false;
 		}
 	}
 	if (s[0] == 46 || s[at - 1] == 46)
 	{
-		return 0;
+		return false;
 	}
 	new dots = 0, label = 0, lastDot = -1;
 	for (new i = at + 1; i < len; i++)
@@ -2239,7 +2267,7 @@ bool:Valid_Email(s[])
 		{
 			if (label == 0)
 			{
-				return 0;
+				return false;
 			}
 			dots++;
 			label = 0;
@@ -2248,29 +2276,29 @@ bool:Valid_Email(s[])
 		}
 		if (!((c >= 97 && c <= 122) || (c >= 65 && c <= 90) || (c >= 48 && c <= 57) || c == 45))
 		{
-			return 0;
+			return false;
 		}
 		label++;
 	}
 	if (dots < 1 || label < 2)
 	{
-		return 0;
+		return false;
 	}
 	for (new i = lastDot + 1; i < len; i++)
 	{
 		new c = s[i];
 		if (!((c >= 97 && c <= 122) || (c >= 65 && c <= 90)))
 		{
-			return 0;
+			return false;
 		}
 	}
-	return 1;
+	return true;
 }
 
 // ===== modules/ui/dialogs.inc =====
 new g_UiSkinGender[MAX_PLAYERS];
 
-UI_ShowRegisterEx(playerid, error[])
+UI_ShowRegisterEx(playerid, const error[])
 {
 	if (CefUI_Active(playerid))
 	{
@@ -2279,7 +2307,8 @@ UI_ShowRegisterEx(playerid, error[])
 	}
 	new body[1024];
 	format(body, 1024, "{FFFFFF}მოგესალმებით {33AA33}Los Santos Street Crime's{FFFFFF}-ზე!\nეს სახელი ჯერ არ არის რეგისტრირებული.\n\n%sაირჩიე პაროლი (%d-%d სიმბოლო):", error, 6, 32);
-	Lang_ShowPlayerDialog(playerid, 9001, 3, "რეგისტრაცია", body, "რეგისტრაცია", "გასვლა");
+	Lang_ShowPlayerDialog(playerid, 9001, DIALOG_STYLE_PASSWORD, "რეგისტრაცია", body, "რეგისტრაცია", "გასვლა");
+	return 0;
 }
 
 UI_ShowRegister(playerid)
@@ -2297,7 +2326,8 @@ UI_ShowLogin(playerid, bool:wrongPassword)
 	}
 	new body[1024];
 	format(body, 1024, "{FFFFFF}კეთილი იყოს შენი დაბრუნება {33AA33}Los Santos Street Crime's{FFFFFF}-ზე!\n\n%sშეიყვანე პაროლი:", wrongPassword ? "{FF4444}პაროლი არასწორია.\n{FFFFFF}" : "");
-	Lang_ShowPlayerDialog(playerid, 9002, 3, "შესვლა", body, "შესვლა", "გასვლა");
+	Lang_ShowPlayerDialog(playerid, 9002, DIALOG_STYLE_PASSWORD, "შესვლა", body, "შესვლა", "გასვლა");
+	return 0;
 }
 
 UI_ShowGenderSelect(playerid)
@@ -2307,7 +2337,8 @@ UI_ShowGenderSelect(playerid)
 		CefUI_AuthStep(playerid, "gender", "", 0);
 		return 0;
 	}
-	Lang_ShowPlayerDialog(playerid, 9003, 2, "პერსონაჟის შექმნა - სქესი", "მამაკაცი\nქალი", "შემდეგი", "");
+	Lang_ShowPlayerDialog(playerid, 9003, DIALOG_STYLE_LIST, "პერსონაჟის შექმნა - სქესი", "მამაკაცი\nქალი", "შემდეგი", "");
+	return 0;
 }
 
 UI_ShowSkinSelect(playerid, gender)
@@ -2333,7 +2364,8 @@ UI_ShowSkinSelect(playerid, gender)
 		format(line, 96, "ვარიანტი %d (სკინი %d)\n", i + 1, Valid_SkinAt(g, i));
 		strcat(body, line, 1024);
 	}
-	Lang_ShowPlayerDialog(playerid, 9004, 2, "პერსონაჟის შექმნა - გარეგნობა", body, "დადასტურება", "");
+	Lang_ShowPlayerDialog(playerid, 9004, DIALOG_STYLE_LIST, "პერსონაჟის შექმნა - გარეგნობა", body, "დადასტურება", "");
+	return 0;
 }
 
 UI_CloseDialogs(playerid)
@@ -2341,7 +2373,7 @@ UI_CloseDialogs(playerid)
 	HidePlayerDialog(playerid);
 }
 
-bool:UI_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
+bool:UI_OnDialogResponse(playerid, dialogid, response, listitem, const inputtext[])
 {
 	switch (dialogid)
 	{
@@ -2350,7 +2382,7 @@ bool:UI_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			if (!response)
 			{
 				UI_OnDialogCancel(playerid, dialogid);
-				return 1;
+				return true;
 			}
 			new len = strlen(inputtext);
 			if (len < 6 || len > 32)
@@ -2358,57 +2390,57 @@ bool:UI_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				new err[256];
 				format(err, 256, "{FF4444}პაროლი უნდა შეიცავდეს %d-დან %d-მდე სიმბოლოს.\n{FFFFFF}", 6, 32);
 				UI_ShowRegisterEx(playerid, err);
-				return 1;
+				return true;
 			}
 			UI_OnRegisterSubmit(playerid, inputtext);
-			return 1;
+			return true;
 		}
 		case 9002:
 		{
 			if (!response)
 			{
 				UI_OnDialogCancel(playerid, dialogid);
-				return 1;
+				return true;
 			}
 			if (strlen(inputtext) < 1)
 			{
-				UI_ShowLogin(playerid, 0);
-				return 1;
+				UI_ShowLogin(playerid, false);
+				return true;
 			}
 			UI_OnLoginSubmit(playerid, inputtext);
-			return 1;
+			return true;
 		}
 		case 9003:
 		{
 			if (!response || listitem < 0 || listitem > 1)
 			{
 				UI_ShowGenderSelect(playerid);
-				return 1;
+				return true;
 			}
 			UI_OnGenderChosen(playerid, listitem);
-			return 1;
+			return true;
 		}
 		case 9004:
 		{
 			if (!response || listitem < 0 || listitem >= 7)
 			{
 				UI_ShowSkinSelect(playerid, g_UiSkinGender[playerid]);
-				return 1;
+				return true;
 			}
 			new skin = Valid_SkinAt(g_UiSkinGender[playerid], listitem);
 			if (skin == -1)
 			{
 				UI_ShowSkinSelect(playerid, g_UiSkinGender[playerid]);
-				return 1;
+				return true;
 			}
 			UI_OnSkinChosen(playerid, skin);
-			return 1;
+			return true;
 		}
 	}
-	return 0;
+	return false;
 }
 
-UI_CefRegisterSubmit(playerid, password[])
+UI_CefRegisterSubmit(playerid, const password[])
 {
 	new len = strlen(password);
 	if (len < 6 || len > 32)
@@ -2417,16 +2449,18 @@ UI_CefRegisterSubmit(playerid, password[])
 		return 0;
 	}
 	UI_OnRegisterSubmit(playerid, password);
+	return 0;
 }
 
-UI_CefLoginSubmit(playerid, password[])
+UI_CefLoginSubmit(playerid, const password[])
 {
 	if (password[0] == 0)
 	{
-		UI_ShowLogin(playerid, 0);
+		UI_ShowLogin(playerid, false);
 		return 0;
 	}
 	UI_OnLoginSubmit(playerid, password);
+	return 0;
 }
 
 UI_CefSkinPick(playerid, idx)
@@ -2443,10 +2477,11 @@ UI_CefSkinPick(playerid, idx)
 		return 0;
 	}
 	UI_OnSkinChosen(playerid, skin);
+	return 0;
 }
 
 // ===== modules/ui/hud.inc =====
-new g_UiHud[MAX_PLAYERS][6];
+new PlayerText:g_UiHud[MAX_PLAYERS][6];
 new bool:g_UiHudActive[MAX_PLAYERS];
 
 UI_ExpForLevel(level)
@@ -2454,17 +2489,17 @@ UI_ExpForLevel(level)
 	return (level - 1) * 2 * level / 2 + (level - 1) * 2;
 }
 
-PlayerText:UI_HudText(playerid, Float:x, Float:y, text[], Float:lw, Float:lh, color, t_TEXT_DRAW_ALIGN:align)
+PlayerText:UI_HudText(playerid, Float:x, Float:y, const text[], Float:lw, Float:lh, color, t_TEXT_DRAW_ALIGN:align)
 {
 	new PlayerText:td = Lang_CreatePlayerTextDraw(playerid, x, y, text);
 	PlayerTextDrawLetterSize(playerid, td, lw, lh);
 	PlayerTextDrawAlignment(playerid, td, align);
-	PlayerTextDrawColor(playerid, td, color);
-	PlayerTextDrawFont(playerid, td, 1);
-	PlayerTextDrawSetProportional(playerid, td, 1);
+	PlayerTextDrawColour(playerid, td, color);
+	PlayerTextDrawFont(playerid, td, TEXT_DRAW_FONT_1);
+	PlayerTextDrawSetProportional(playerid, td, true);
 	PlayerTextDrawSetOutline(playerid, td, 1);
 	PlayerTextDrawSetShadow(playerid, td, 0);
-	PlayerTextDrawBackgroundColor(playerid, td, 255);
+	PlayerTextDrawBackgroundColour(playerid, td, 255);
 	return td;
 }
 
@@ -2473,9 +2508,9 @@ PlayerText:UI_HudBox(playerid, Float:x, Float:y, Float:w, Float:h, color)
 	new PlayerText:td = Lang_CreatePlayerTextDraw(playerid, x, y, "_");
 	PlayerTextDrawLetterSize(playerid, td, 0.0, (h / 9.0));
 	PlayerTextDrawTextSize(playerid, td, (x + w), 0.0);
-	PlayerTextDrawUseBox(playerid, td, 1);
-	PlayerTextDrawBoxColor(playerid, td, color);
-	PlayerTextDrawFont(playerid, td, 1);
+	PlayerTextDrawUseBox(playerid, td, true);
+	PlayerTextDrawBoxColour(playerid, td, color);
+	PlayerTextDrawFont(playerid, td, TEXT_DRAW_FONT_1);
 	PlayerTextDrawSetShadow(playerid, td, 0);
 	PlayerTextDrawSetOutline(playerid, td, 0);
 	return td;
@@ -2492,26 +2527,27 @@ UI_HudSetBar(playerid, Float:fraction)
 		fraction = 1.0;
 	}
 	new Float:x = (5.0 + (632.0 - 150.0));
-	PlayerTextDrawTextSize(playerid, g_UiHud[playerid][5], (0.1 + (x + (140.0 * fraction))), 0.0);
-	PlayerTextDrawShow(playerid, g_UiHud[playerid][5]);
+	PlayerTextDrawTextSize(playerid, PlayerText:g_UiHud[playerid][5], (0.1 + (x + (140.0 * fraction))), 0.0);
+	PlayerTextDrawShow(playerid, PlayerText:g_UiHud[playerid][5]);
 }
 
 UI_HudDestroy(playerid)
 {
-	CefUI_HudShow(playerid, 0);
+	CefUI_HudShow(playerid, false);
 	if (playerid < 0 || playerid >= MAX_PLAYERS || !g_UiHudActive[playerid])
 	{
 		return 0;
 	}
 	for (new i = 0; i < 6; i++)
 	{
-		if (g_UiHud[playerid][i] != 65535)
+		if (g_UiHud[playerid][i] != INVALID_PLAYER_TEXT_DRAW)
 		{
-			PlayerTextDrawDestroy(playerid, g_UiHud[playerid][i]);
+			PlayerTextDrawDestroy(playerid, PlayerText:g_UiHud[playerid][i]);
 		}
-		g_UiHud[playerid][i] = 65535;
+		g_UiHud[playerid][i] = INVALID_PLAYER_TEXT_DRAW;
 	}
-	g_UiHudActive[playerid] = 0;
+	g_UiHudActive[playerid] = false;
+	return 0;
 }
 
 UI_HudCreate(playerid)
@@ -2526,29 +2562,30 @@ UI_HudCreate(playerid)
 	}
 	if (CefUI_Active(playerid))
 	{
-		CefUI_HudShow(playerid, 1);
+		CefUI_HudShow(playerid, true);
 		return 0;
 	}
 	for (new i = 0; i < 6; i++)
 	{
-		g_UiHud[playerid][i] = 65535;
+		g_UiHud[playerid][i] = INVALID_PLAYER_TEXT_DRAW;
 	}
 	new Float:left = (632.0 - 150.0);
 	g_UiHud[playerid][0] = UI_HudBox(playerid, left, 330.0, 150.0, 62.0, 153);
-	g_UiHud[playerid][1] = UI_HudText(playerid, (632.0 - 5.0), (330.0 + 3.0), "$0", 0.3, 1.2, 0x66DD66FF, 3);
-	g_UiHud[playerid][2] = UI_HudText(playerid, (632.0 - 5.0), (330.0 + 20.0), "Banca: $0", 0.22, 1.0, -1, 3);
-	g_UiHud[playerid][3] = UI_HudText(playerid, (5.0 + left), (330.0 + 36.0), "Liv. 1  Exp 0", 0.22, 1.0, -2994689, 1);
+	g_UiHud[playerid][1] = UI_HudText(playerid, (632.0 - 5.0), (330.0 + 3.0), "$0", 0.3, 1.2, 0x66DD66FF, t_TEXT_DRAW_ALIGN:3);
+	g_UiHud[playerid][2] = UI_HudText(playerid, (632.0 - 5.0), (330.0 + 20.0), "Banca: $0", 0.22, 1.0, -1, t_TEXT_DRAW_ALIGN:3);
+	g_UiHud[playerid][3] = UI_HudText(playerid, (5.0 + left), (330.0 + 36.0), "Liv. 1  Exp 0", 0.22, 1.0, -2994689, t_TEXT_DRAW_ALIGN:1);
 	g_UiHud[playerid][4] = UI_HudBox(playerid, (5.0 + left), (330.0 + 51.0), 140.0, 6.0, 0x444444FF);
 	g_UiHud[playerid][5] = UI_HudBox(playerid, (5.0 + left), (330.0 + 51.0), 140.0, 6.0, -2994689);
 	for (new i = 0; i < 6; i++)
 	{
 		if (i != 5)
 		{
-			PlayerTextDrawShow(playerid, g_UiHud[playerid][i]);
+			PlayerTextDrawShow(playerid, PlayerText:g_UiHud[playerid][i]);
 		}
 	}
-	g_UiHudActive[playerid] = 1;
+	g_UiHudActive[playerid] = true;
 	UI_HudSetBar(playerid, 0.0);
+	return 0;
 }
 
 UI_HudCefData(playerid, money, bank, level, exp)
@@ -2573,13 +2610,14 @@ UI_HudCefData(playerid, money, bank, level, exp)
 		inLevel = step;
 	}
 	CefUI_HudData(playerid, money, bank, level, inLevel, step);
+	return 0;
 }
 
 bool:UI_HudIsActive(playerid)
 {
 	if (playerid < 0 || playerid >= MAX_PLAYERS)
 	{
-		return 0;
+		return false;
 	}
 	return g_UiHudActive[playerid];
 }
@@ -2625,6 +2663,7 @@ UI_HudUpdate(playerid, money, bank, level, exp)
 	format(str, 48, "Liv. %d  Exp %d/%d", level, inLevel, step);
 	Lang_PlayerTextDrawSetString(playerid, g_UiHud[playerid][3], str);
 	UI_HudSetBar(playerid, (float(inLevel) / float(step)));
+	return 0;
 }
 
 // ===== modules/ui/vehicle_ui.inc =====
@@ -2726,7 +2765,8 @@ UI_VehicleShopShow(playerid, level, money, bank)
 		}
 		strcat(body, line, 1536);
 	}
-	Lang_ShowPlayerDialog(playerid, 9100, 4, "Concessionario di Los Santos", body, "Scegli", "Chiudi");
+	Lang_ShowPlayerDialog(playerid, 9100, DIALOG_STYLE_TABLIST, "Concessionario di Los Santos", body, "Scegli", "Chiudi");
+	return 0;
 }
 
 UI_VehPayShow(playerid)
@@ -2741,7 +2781,7 @@ UI_VehPayShow(playerid)
 	strcat(body, t, 320);
 	new title[64];
 	format(title, 64, "%s - $%s: pagamento", g_UiVehName[idx], price);
-	Lang_ShowPlayerDialog(playerid, 9101, 4, title, body, "Acquista", "Indietro");
+	Lang_ShowPlayerDialog(playerid, 9101, DIALOG_STYLE_TABLIST, title, body, "Acquista", "Indietro");
 }
 
 UI_VehicleListClear(playerid)
@@ -2751,9 +2791,10 @@ UI_VehicleListClear(playerid)
 		return 0;
 	}
 	g_UiVehCount[playerid] = 0;
+	return 0;
 }
 
-UI_VehicleListAdd(playerid, slot, model, plate[], fuelPct, vstate)
+UI_VehicleListAdd(playerid, slot, model, const plate[], fuelPct, vstate)
 {
 	if (playerid < 0 || playerid >= MAX_PLAYERS)
 	{
@@ -2778,6 +2819,7 @@ UI_VehicleListAdd(playerid, slot, model, plate[], fuelPct, vstate)
 	g_UiVehFuel[playerid][n] = fuelPct;
 	g_UiVehState[playerid][n] = vstate;
 	g_UiVehCount[playerid] = n + 1;
+	return 0;
 }
 
 UI_VehicleListShow(playerid)
@@ -2788,7 +2830,7 @@ UI_VehicleListShow(playerid)
 	}
 	if (g_UiVehCount[playerid] <= 0)
 	{
-		Lang_ShowPlayerDialog(playerid, 9105, 0, "I miei veicoli", "{FFFFFF}Non possiedi veicoli.\nAcquistane uno al concessionario di Los Santos.", "Ok", "");
+		Lang_ShowPlayerDialog(playerid, 9105, DIALOG_STYLE_MSGBOX, "I miei veicoli", "{FFFFFF}Non possiedi veicoli.\nAcquistane uno al concessionario di Los Santos.", "Ok", "");
 		return 0;
 	}
 	new body[1536], line[128], name[16], stxt[24];
@@ -2814,7 +2856,8 @@ UI_VehicleListShow(playerid)
 		format(line, 128, "%d\t%s\t%s\t%d%%\t%s\n", g_UiVehSlot[playerid][i], name, g_UiVehLPlate[playerid][i], g_UiVehFuel[playerid][i], stxt);
 		strcat(body, line, 1536);
 	}
-	Lang_ShowPlayerDialog(playerid, 9102, 5, "I miei veicoli", body, "Seleziona", "Chiudi");
+	Lang_ShowPlayerDialog(playerid, 9102, DIALOG_STYLE_TABLIST_HEADERS, "I miei veicoli", body, "Seleziona", "Chiudi");
+	return 0;
 }
 
 UI_VehActionShow(playerid)
@@ -2822,7 +2865,7 @@ UI_VehActionShow(playerid)
 	new i = g_UiVehSel[playerid], name[16], title[64];
 	UI_VehModelName(g_UiVehLModel[playerid][i], name, 16);
 	format(title, 64, "%s [%s]", name, g_UiVehLPlate[playerid][i]);
-	Lang_ShowPlayerDialog(playerid, 9103, 2, title, "Trova veicolo\nVendi veicolo", "Scegli", "Indietro");
+	Lang_ShowPlayerDialog(playerid, 9103, DIALOG_STYLE_LIST, title, "Trova veicolo\nVendi veicolo", "Scegli", "Indietro");
 }
 
 UI_VehSellConfirmShow(playerid)
@@ -2839,14 +2882,14 @@ UI_VehSellConfirmShow(playerid)
 	{
 		format(body, 256, "{FFFFFF}Vendere {FFD24D}%s{FFFFFF} (targa %s)?\n\nRiceverai il %d%% del prezzo di listino in banca.\nL'operazione non e' reversibile.", name, g_UiVehLPlate[playerid][i], 60);
 	}
-	Lang_ShowPlayerDialog(playerid, 9104, 0, "Conferma vendita", body, "Vendi", "Annulla");
+	Lang_ShowPlayerDialog(playerid, 9104, DIALOG_STYLE_MSGBOX, "Conferma vendita", body, "Vendi", "Annulla");
 }
 
 bool:UI_VehicleOnDialogResponse(playerid, dialogid, response, listitem)
 {
 	if (playerid < 0 || playerid >= MAX_PLAYERS)
 	{
-		return 0;
+		return false;
 	}
 	switch (dialogid)
 	{
@@ -2854,71 +2897,71 @@ bool:UI_VehicleOnDialogResponse(playerid, dialogid, response, listitem)
 		{
 			if (!response)
 			{
-				return 1;
+				return true;
 			}
 			if (listitem < 0 || listitem >= 13)
 			{
 				UI_VehicleShopShow(playerid, g_UiVehLevel[playerid], g_UiVehMoney[playerid], g_UiVehBank[playerid]);
-				return 1;
+				return true;
 			}
 			if (g_UiVehLevel[playerid] < g_UiVehMinLevel[listitem])
 			{
 				SendClientMessage(playerid, -10066177, "Questo modello richiede un livello superiore.");
 				UI_VehicleShopShow(playerid, g_UiVehLevel[playerid], g_UiVehMoney[playerid], g_UiVehBank[playerid]);
-				return 1;
+				return true;
 			}
 			g_UiVehSel[playerid] = listitem;
 			UI_VehPayShow(playerid);
-			return 1;
+			return true;
 		}
 		case 9101:
 		{
 			if (!response || listitem < 0 || listitem > 1)
 			{
 				UI_VehicleShopShow(playerid, g_UiVehLevel[playerid], g_UiVehMoney[playerid], g_UiVehBank[playerid]);
-				return 1;
+				return true;
 			}
 			new idx = g_UiVehSel[playerid];
 			new funds = listitem == 1 ? g_UiVehBank[playerid] : g_UiVehMoney[playerid];
 			if (idx < 0 || idx >= 13)
 			{
-				return 1;
+				return true;
 			}
 			if (funds < g_UiVehPrice[idx])
 			{
 				SendClientMessage(playerid, -10066177, "Fondi insufficienti con questo metodo di pagamento.");
 				UI_VehPayShow(playerid);
-				return 1;
+				return true;
 			}
 			UI_OnVehicleBuyConfirm(playerid, idx, listitem);
-			return 1;
+			return true;
 		}
 		case 9102:
 		{
 			if (!response)
 			{
-				return 1;
+				return true;
 			}
 			if (listitem < 0 || listitem >= g_UiVehCount[playerid])
 			{
 				UI_VehicleListShow(playerid);
-				return 1;
+				return true;
 			}
 			g_UiVehSel[playerid] = listitem;
 			UI_VehActionShow(playerid);
-			return 1;
+			return true;
 		}
 		case 9103:
 		{
 			if (!response)
 			{
 				UI_VehicleListShow(playerid);
-				return 1;
+				return true;
 			}
 			new i = g_UiVehSel[playerid];
 			if (i < 0 || i >= g_UiVehCount[playerid])
 			{
-				return 1;
+				return true;
 			}
 			if (listitem == 0)
 			{
@@ -2932,7 +2975,7 @@ bool:UI_VehicleOnDialogResponse(playerid, dialogid, response, listitem)
 			{
 				UI_VehActionShow(playerid);
 			}
-			return 1;
+			return true;
 		}
 		case 9104:
 		{
@@ -2940,37 +2983,37 @@ bool:UI_VehicleOnDialogResponse(playerid, dialogid, response, listitem)
 			if (!response)
 			{
 				UI_VehActionShow(playerid);
-				return 1;
+				return true;
 			}
 			if (i < 0 || i >= g_UiVehCount[playerid])
 			{
-				return 1;
+				return true;
 			}
 			UI_OnVehicleListAction(playerid, g_UiVehSlot[playerid][i], 1);
-			return 1;
+			return true;
 		}
 		case 9105:
 		{
-			return 1;
+			return true;
 		}
 	}
-	return 0;
+	return false;
 }
-new g_UiVHud[MAX_PLAYERS][6];
+new PlayerText:g_UiVHud[MAX_PLAYERS][6];
 new bool:g_UiVHudCreated[MAX_PLAYERS];
 new bool:g_UiVHudShown[MAX_PLAYERS];
 
-PlayerText:UI_VHudText(playerid, Float:x, Float:y, text[], Float:lw, Float:lh, color, t_TEXT_DRAW_ALIGN:align)
+PlayerText:UI_VHudText(playerid, Float:x, Float:y, const text[], Float:lw, Float:lh, color, t_TEXT_DRAW_ALIGN:align)
 {
 	new PlayerText:td = Lang_CreatePlayerTextDraw(playerid, x, y, text);
 	PlayerTextDrawLetterSize(playerid, td, lw, lh);
 	PlayerTextDrawAlignment(playerid, td, align);
-	PlayerTextDrawColor(playerid, td, color);
-	PlayerTextDrawFont(playerid, td, 1);
-	PlayerTextDrawSetProportional(playerid, td, 1);
+	PlayerTextDrawColour(playerid, td, color);
+	PlayerTextDrawFont(playerid, td, TEXT_DRAW_FONT_1);
+	PlayerTextDrawSetProportional(playerid, td, true);
 	PlayerTextDrawSetOutline(playerid, td, 1);
 	PlayerTextDrawSetShadow(playerid, td, 0);
-	PlayerTextDrawBackgroundColor(playerid, td, 255);
+	PlayerTextDrawBackgroundColour(playerid, td, 255);
 	return td;
 }
 
@@ -2979,9 +3022,9 @@ PlayerText:UI_VHudBox(playerid, Float:x, Float:y, Float:w, Float:h, color)
 	new PlayerText:td = Lang_CreatePlayerTextDraw(playerid, x, y, "_");
 	PlayerTextDrawLetterSize(playerid, td, 0.0, (h / 9.0));
 	PlayerTextDrawTextSize(playerid, td, (x + w), 0.0);
-	PlayerTextDrawUseBox(playerid, td, 1);
-	PlayerTextDrawBoxColor(playerid, td, color);
-	PlayerTextDrawFont(playerid, td, 1);
+	PlayerTextDrawUseBox(playerid, td, true);
+	PlayerTextDrawBoxColour(playerid, td, color);
+	PlayerTextDrawFont(playerid, td, TEXT_DRAW_FONT_1);
 	PlayerTextDrawSetShadow(playerid, td, 0);
 	PlayerTextDrawSetOutline(playerid, td, 0);
 	return td;
@@ -2995,12 +3038,13 @@ UI_VHudCreate(playerid)
 	}
 	new Float:left = (632.0 - 150.0);
 	g_UiVHud[playerid][0] = UI_VHudBox(playerid, left, 398.0, 150.0, 56.0, 153);
-	g_UiVHud[playerid][1] = UI_VHudText(playerid, (632.0 - 5.0), (398.0 + 2.0), "0 km/h", 0.3, 1.2, -1, 3);
-	g_UiVHud[playerid][2] = UI_VHudText(playerid, (5.0 + left), (398.0 + 22.0), "Benzina 0.0/0 L", 0.22, 1.0, -1, 1);
+	g_UiVHud[playerid][1] = UI_VHudText(playerid, (632.0 - 5.0), (398.0 + 2.0), "0 km/h", 0.3, 1.2, -1, t_TEXT_DRAW_ALIGN:3);
+	g_UiVHud[playerid][2] = UI_VHudText(playerid, (5.0 + left), (398.0 + 22.0), "Benzina 0.0/0 L", 0.22, 1.0, -1, t_TEXT_DRAW_ALIGN:1);
 	g_UiVHud[playerid][3] = UI_VHudBox(playerid, (5.0 + left), (398.0 + 35.0), 140.0, 6.0, 0x444444FF);
 	g_UiVHud[playerid][4] = UI_VHudBox(playerid, (5.0 + left), (398.0 + 35.0), 140.0, 6.0, 0x66DD66FF);
-	g_UiVHud[playerid][5] = UI_VHudText(playerid, (5.0 + left), (398.0 + 43.0), "MOTORE SPENTO", 0.2, 0.9, -10066177, 1);
-	g_UiVHudCreated[playerid] = 1;
+	g_UiVHud[playerid][5] = UI_VHudText(playerid, (5.0 + left), (398.0 + 43.0), "MOTORE SPENTO", 0.2, 0.9, -10066177, t_TEXT_DRAW_ALIGN:1);
+	g_UiVHudCreated[playerid] = true;
+	return 0;
 }
 
 UI_VHudSetVisible(playerid, bool:visible)
@@ -3009,11 +3053,11 @@ UI_VHudSetVisible(playerid, bool:visible)
 	{
 		if (visible)
 		{
-			PlayerTextDrawShow(playerid, g_UiVHud[playerid][i]);
+			PlayerTextDrawShow(playerid, PlayerText:g_UiVHud[playerid][i]);
 		}
 		else
 		{
-			PlayerTextDrawHide(playerid, g_UiVHud[playerid][i]);
+			PlayerTextDrawHide(playerid, PlayerText:g_UiVHud[playerid][i]);
 		}
 	}
 }
@@ -3029,8 +3073,9 @@ UI_VehicleHudShow(playerid)
 		return 0;    // tachimetro CEF (ui/hud_cef.inc)
 	}
 	UI_VHudCreate(playerid);
-	g_UiVHudShown[playerid] = 1;
-	UI_VHudSetVisible(playerid, 1);
+	g_UiVHudShown[playerid] = true;
+	UI_VHudSetVisible(playerid, true);
+	return 0;
 }
 
 UI_VehicleHudHide(playerid)
@@ -3039,8 +3084,9 @@ UI_VehicleHudHide(playerid)
 	{
 		return 0;
 	}
-	g_UiVHudShown[playerid] = 0;
-	UI_VHudSetVisible(playerid, 0);
+	g_UiVHudShown[playerid] = false;
+	UI_VHudSetVisible(playerid, false);
+	return 0;
 }
 
 UI_VehicleHudUpdate(playerid, Float:fuel, Float:fuelMax, speedKmh, bool:engineOn)
@@ -3073,14 +3119,15 @@ UI_VehicleHudUpdate(playerid, Float:fuel, Float:fuelMax, speedKmh, bool:engineOn
 	format(str, 48, "Benzina %.1f/%.0f L", fuel, fuelMax);
 	Lang_PlayerTextDrawSetString(playerid, g_UiVHud[playerid][2], str);
 	new bool:blinkOff = low && GetTickCount() / 500 % 2 == 1;
-	PlayerTextDrawColor(playerid, g_UiVHud[playerid][2], low ? (blinkOff ? -10066364 : -10066177) : -1);
-	PlayerTextDrawShow(playerid, g_UiVHud[playerid][2]);
-	PlayerTextDrawBoxColor(playerid, g_UiVHud[playerid][4], low ? -12303105 : 0x66DD66FF);
-	PlayerTextDrawTextSize(playerid, g_UiVHud[playerid][4], (0.1 + ((5.0 + (632.0 - 150.0)) + (140.0 * fraction))), 0.0);
-	PlayerTextDrawShow(playerid, g_UiVHud[playerid][4]);
+	PlayerTextDrawColour(playerid, PlayerText:g_UiVHud[playerid][2], low ? (blinkOff ? -10066364 : -10066177) : -1);
+	PlayerTextDrawShow(playerid, PlayerText:g_UiVHud[playerid][2]);
+	PlayerTextDrawBoxColour(playerid, PlayerText:g_UiVHud[playerid][4], low ? -12303105 : 0x66DD66FF);
+	PlayerTextDrawTextSize(playerid, PlayerText:g_UiVHud[playerid][4], (0.1 + ((5.0 + (632.0 - 150.0)) + (140.0 * fraction))), 0.0);
+	PlayerTextDrawShow(playerid, PlayerText:g_UiVHud[playerid][4]);
 	Lang_PlayerTextDrawSetString(playerid, g_UiVHud[playerid][5], engineOn ? "MOTORE ACCESO" : "MOTORE SPENTO");
-	PlayerTextDrawColor(playerid, g_UiVHud[playerid][5], engineOn ? 0x66DD66FF : -10066177);
-	PlayerTextDrawShow(playerid, g_UiVHud[playerid][5]);
+	PlayerTextDrawColour(playerid, PlayerText:g_UiVHud[playerid][5], engineOn ? 0x66DD66FF : -10066177);
+	PlayerTextDrawShow(playerid, PlayerText:g_UiVHud[playerid][5]);
+	return 0;
 }
 
 UI_VehicleUiDestroy(playerid)
@@ -3093,14 +3140,15 @@ UI_VehicleUiDestroy(playerid)
 	{
 		for (new i = 0; i < 6; i++)
 		{
-			PlayerTextDrawDestroy(playerid, g_UiVHud[playerid][i]);
-			g_UiVHud[playerid][i] = 65535;
+			PlayerTextDrawDestroy(playerid, PlayerText:g_UiVHud[playerid][i]);
+			g_UiVHud[playerid][i] = INVALID_PLAYER_TEXT_DRAW;
 		}
 	}
-	g_UiVHudCreated[playerid] = 0;
-	g_UiVHudShown[playerid] = 0;
+	g_UiVHudCreated[playerid] = false;
+	g_UiVHudShown[playerid] = false;
 	g_UiVehCount[playerid] = 0;
 	g_UiVehSel[playerid] = 0;
+	return 0;
 }
 
 // ===== modules/ui/house_ui.inc =====
@@ -3195,7 +3243,7 @@ UI_HsUtilText(ustate, out[], size)
 	}
 }
 
-UI_HsTitle(playerid, prefix[], out[], size)
+UI_HsTitle(playerid, const prefix[], out[], size)
 {
 	format(out, size, "%s - Casa %d", prefix, g_UiHsHouse[playerid]);
 }
@@ -3239,6 +3287,7 @@ UI_HouseDataSet(playerid, houseId, role, tier, interiorIdx, bool:locked, lightSt
 	g_UiHsLevel[playerid] = level;
 	g_UiHsMoney[playerid] = money;
 	g_UiHsBank[playerid] = bank;
+	return 0;
 }
 
 UI_HouseBillsSet(playerid, lightDue, lightCount, gasDue, gasCount)
@@ -3251,6 +3300,7 @@ UI_HouseBillsSet(playerid, lightDue, lightCount, gasDue, gasCount)
 	g_UiHsLightCnt[playerid] = lightCount < 0 ? 0 : lightCount;
 	g_UiHsGasDue[playerid] = gasDue < 0 ? 0 : gasDue;
 	g_UiHsGasCnt[playerid] = gasCount < 0 ? 0 : gasCount;
+	return 0;
 }
 
 UI_HsBillsTotal(playerid)
@@ -3267,7 +3317,7 @@ UI_HsBillsTotal(playerid)
 	return total;
 }
 
-UI_HsMenuRow(playerid, &n, act, line[], body[], size)
+UI_HsMenuRow(playerid, &n, act, const line[], body[], size)
 {
 	if (n >= 10)
 	{
@@ -3275,6 +3325,7 @@ UI_HsMenuRow(playerid, &n, act, line[], body[], size)
 	}
 	g_UiHsItemAct[playerid][n++] = act;
 	strcat(body, line, size);
+	return 0;
 }
 
 UI_HouseMenuShow(playerid)
@@ -3334,7 +3385,8 @@ UI_HouseMenuShow(playerid)
 			UI_HsMenuRow(playerid, n, 6, "{FF6666}Vendi la casa\n", body, 1024);
 		}
 	}
-	Lang_ShowPlayerDialog(playerid, 9200, 2, title, body, "Scegli", "Chiudi");
+	Lang_ShowPlayerDialog(playerid, 9200, DIALOG_STYLE_LIST, title, body, "Scegli", "Chiudi");
+	return 0;
 }
 
 UI_HsBuyPayShow(playerid)
@@ -3349,7 +3401,7 @@ UI_HsBuyPayShow(playerid)
 	format(tl, 48, "{FFFFFF}Banca\t%s$%s\n", g_UiHsBank[playerid] >= p ? "{66DD66}" : "{FF6666}", bank);
 	strcat(body, tl, 320);
 	format(title, 64, "%s $%s - pagamento", g_UiHsTierName[t], price);
-	Lang_ShowPlayerDialog(playerid, 9201, 4, title, body, "Acquista", "Indietro");
+	Lang_ShowPlayerDialog(playerid, 9201, DIALOG_STYLE_TABLIST, title, body, "Acquista", "Indietro");
 }
 
 UI_HsSellConfirmShow(playerid)
@@ -3358,7 +3410,7 @@ UI_HsSellConfirmShow(playerid)
 	UI_HsMoney(g_UiHsTierPrice[g_UiHsTier[playerid]] * 70 / 100, amount, 16);
 	format(body, 320, "{FFFFFF}Vendere la casa {FFD24D}%d{FFFFFF} (%s)?\n\nRiceverai circa {66DD66}$%s{FFFFFF} (%d%% del prezzo) in banca.\nUtenze, chiavi e bollette verranno azzerate; l'operazione non e' reversibile.", g_UiHsHouse[playerid], g_UiHsIntName[g_UiHsInt[playerid]], amount, 70);
 	UI_HsTitle(playerid, "Conferma vendita", title, 64);
-	Lang_ShowPlayerDialog(playerid, 9202, 0, title, body, "Vendi", "Annulla");
+	Lang_ShowPlayerDialog(playerid, 9202, DIALOG_STYLE_MSGBOX, title, body, "Vendi", "Annulla");
 }
 
 UI_HouseUtilityShow(playerid)
@@ -3411,7 +3463,8 @@ UI_HouseUtilityShow(playerid)
 	}
 	strcat(body, line, 512);
 	UI_HsTitle(playerid, "Utenze", title, 64);
-	Lang_ShowPlayerDialog(playerid, 9203, 5, title, body, "Cambia", "Indietro");
+	Lang_ShowPlayerDialog(playerid, 9203, DIALOG_STYLE_TABLIST_HEADERS, title, body, "Cambia", "Indietro");
+	return 0;
 }
 
 UI_HouseFridgeShow(playerid)
@@ -3445,7 +3498,8 @@ UI_HouseFridgeShow(playerid)
 		UI_HsMenuRow(playerid, n, 4, line, body, 512);
 	}
 	UI_HsTitle(playerid, "Frigo", title, 64);
-	Lang_ShowPlayerDialog(playerid, 9204, 2, title, body, "Scegli", "Indietro");
+	Lang_ShowPlayerDialog(playerid, 9204, DIALOG_STYLE_LIST, title, body, "Scegli", "Indietro");
+	return 0;
 }
 
 UI_HsAmountShow(playerid, action, maxAmount)
@@ -3455,7 +3509,7 @@ UI_HsAmountShow(playerid, action, maxAmount)
 	g_UiHsAmtMax[playerid] = maxAmount;
 	format(body, 192, "{FFFFFF}%s\nQuantita' (1-%d):", action == 3 ? "Porzioni da riporre nel frigo." : "Porzioni da prendere dal frigo.", maxAmount);
 	UI_HsTitle(playerid, action == 3 ? "Riponi" : "Prendi", title, 64);
-	Lang_ShowPlayerDialog(playerid, 9205, 1, title, body, "Conferma", "Indietro");
+	Lang_ShowPlayerDialog(playerid, 9205, DIALOG_STYLE_INPUT, title, body, "Conferma", "Indietro");
 }
 
 UI_HouseBillsShow(playerid)
@@ -3486,7 +3540,8 @@ UI_HouseBillsShow(playerid)
 	}
 	strcat(body, line, 512);
 	UI_HsTitle(playerid, "Bollette", title, 64);
-	Lang_ShowPlayerDialog(playerid, 9206, 5, title, body, "Paga tutte", "Indietro");
+	Lang_ShowPlayerDialog(playerid, 9206, DIALOG_STYLE_TABLIST_HEADERS, title, body, "Paga tutte", "Indietro");
+	return 0;
 }
 
 UI_HsBillsPayShow(playerid)
@@ -3500,33 +3555,33 @@ UI_HsBillsPayShow(playerid)
 	format(tl, 48, "{FFFFFF}Contanti\t%s$%s\n", g_UiHsMoney[playerid] >= p ? "{66DD66}" : "{FF6666}", cash);
 	strcat(body, tl, 320);
 	format(title, 64, "Paga bollette $%s", total);
-	Lang_ShowPlayerDialog(playerid, 9207, 4, title, body, "Paga", "Indietro");
+	Lang_ShowPlayerDialog(playerid, 9207, DIALOG_STYLE_TABLIST, title, body, "Paga", "Indietro");
 }
 
-bool:UI_HsParseAmount(text[], &value)
+bool:UI_HsParseAmount(const text[], &value)
 {
 	new len = strlen(text);
 	if (len < 1 || len > 4)
 	{
-		return 0;
+		return false;
 	}
 	value = 0;
 	for (new i = 0; i < len; i++)
 	{
 		if (text[i] < 48 || text[i] > 57)
 		{
-			return 0;
+			return false;
 		}
 		value = value * 10 + (text[i] - 48);
 	}
-	return 1;
+	return true;
 }
 
-bool:UI_HouseOnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
+bool:UI_HouseOnDialogResponse(playerid, dialogid, response, listitem, const inputtext[])
 {
 	if (!UI_HsValid(playerid))
 	{
-		return 0;
+		return false;
 	}
 	new houseId = g_UiHsHouse[playerid];
 	switch (dialogid)
@@ -3535,12 +3590,12 @@ bool:UI_HouseOnDialogResponse(playerid, dialogid, response, listitem, inputtext[
 		{
 			if (!response)
 			{
-				return 1;
+				return true;
 			}
 			if (listitem < 0 || listitem >= 10 || g_UiHsItemAct[playerid][listitem] == 0)
 			{
 				UI_HouseMenuShow(playerid);
-				return 1;
+				return true;
 			}
 			new act = g_UiHsItemAct[playerid][listitem];
 			if (act == 100)
@@ -3549,25 +3604,25 @@ bool:UI_HouseOnDialogResponse(playerid, dialogid, response, listitem, inputtext[
 				{
 					SendClientMessage(playerid, -10066177, "Il tuo livello e' troppo basso per questa casa.");
 					UI_HouseMenuShow(playerid);
-					return 1;
+					return true;
 				}
 				UI_HsBuyPayShow(playerid);
-				return 1;
+				return true;
 			}
 			if (act == 6)
 			{
 				UI_HsSellConfirmShow(playerid);
-				return 1;
+				return true;
 			}
 			UI_OnHouseAction(playerid, houseId, act);
-			return 1;
+			return true;
 		}
 		case 9201:
 		{
 			if (!response || listitem < 0 || listitem > 1)
 			{
 				UI_HouseMenuShow(playerid);
-				return 1;
+				return true;
 			}
 			new p = g_UiHsTierPrice[g_UiHsTier[playerid]];
 			new funds = listitem == 1 ? g_UiHsBank[playerid] : g_UiHsMoney[playerid];
@@ -3575,55 +3630,55 @@ bool:UI_HouseOnDialogResponse(playerid, dialogid, response, listitem, inputtext[
 			{
 				SendClientMessage(playerid, -10066177, "Fondi insufficienti con questo metodo di pagamento.");
 				UI_HsBuyPayShow(playerid);
-				return 1;
+				return true;
 			}
 			UI_OnHouseBuyConfirm(playerid, houseId, listitem);
-			return 1;
+			return true;
 		}
 		case 9202:
 		{
 			if (!response)
 			{
 				UI_HouseMenuShow(playerid);
-				return 1;
+				return true;
 			}
 			UI_OnHouseAction(playerid, houseId, 6);
-			return 1;
+			return true;
 		}
 		case 9203:
 		{
 			if (!response)
 			{
 				UI_HouseMenuShow(playerid);
-				return 1;
+				return true;
 			}
 			if (listitem != 0 && listitem != 1)
 			{
 				UI_HouseUtilityShow(playerid);
-				return 1;
+				return true;
 			}
 			new st = listitem == 0 ? g_UiHsLight[playerid] : g_UiHsGas[playerid];
 			if (st == 2)
 			{
 				SendClientMessage(playerid, -10066177, "Utenza staccata per morosita': paga le bollette per riattivarla.");
 				UI_HouseUtilityShow(playerid);
-				return 1;
+				return true;
 			}
 			if (listitem == 1 && g_UiHsRole[playerid] != 1)
 			{
 				SendClientMessage(playerid, -10066177, "Solo il proprietario puo' gestire il gas.");
 				UI_HouseUtilityShow(playerid);
-				return 1;
+				return true;
 			}
 			UI_OnHouseUtilityToggle(playerid, houseId, listitem, st == 1 ? 0 : 1);
-			return 1;
+			return true;
 		}
 		case 9204:
 		{
 			if (!response)
 			{
 				UI_HouseMenuShow(playerid);
-				return 1;
+				return true;
 			}
 			new act = listitem >= 0 && listitem < 10 ? g_UiHsItemAct[playerid][listitem] : 0;
 			new units = g_UiHsFridge[playerid], cap = UI_HsFridgeCap(playerid);
@@ -3635,7 +3690,7 @@ bool:UI_HouseOnDialogResponse(playerid, dialogid, response, listitem, inputtext[
 					{
 						SendClientMessage(playerid, -10066177, "Il frigo e' vuoto.");
 						UI_HouseFridgeShow(playerid);
-						return 1;
+						return true;
 					}
 					UI_OnHouseFridgeAction(playerid, houseId, 1, 0);
 				}
@@ -3645,13 +3700,13 @@ bool:UI_HouseOnDialogResponse(playerid, dialogid, response, listitem, inputtext[
 					{
 						SendClientMessage(playerid, -10066177, "Il frigo e' vuoto.");
 						UI_HouseFridgeShow(playerid);
-						return 1;
+						return true;
 					}
 					if (g_UiHsGas[playerid] != 1)
 					{
 						SendClientMessage(playerid, -10066177, "Il gas non e' attivo: non puoi cucinare.");
 						UI_HouseFridgeShow(playerid);
-						return 1;
+						return true;
 					}
 					UI_OnHouseFridgeAction(playerid, houseId, 2, 0);
 				}
@@ -3666,7 +3721,7 @@ bool:UI_HouseOnDialogResponse(playerid, dialogid, response, listitem, inputtext[
 					{
 						SendClientMessage(playerid, -10066177, "Non hai spesa da riporre o il frigo e' pieno.");
 						UI_HouseFridgeShow(playerid);
-						return 1;
+						return true;
 					}
 					UI_HsAmountShow(playerid, 3, m);
 				}
@@ -3681,7 +3736,7 @@ bool:UI_HouseOnDialogResponse(playerid, dialogid, response, listitem, inputtext[
 					{
 						SendClientMessage(playerid, -10066177, "Frigo vuoto o borsa piena.");
 						UI_HouseFridgeShow(playerid);
-						return 1;
+						return true;
 					}
 					UI_HsAmountShow(playerid, 4, m);
 				}
@@ -3690,47 +3745,47 @@ bool:UI_HouseOnDialogResponse(playerid, dialogid, response, listitem, inputtext[
 					UI_HouseFridgeShow(playerid);
 				}
 			}
-			return 1;
+			return true;
 		}
 		case 9205:
 		{
 			if (!response)
 			{
 				UI_HouseFridgeShow(playerid);
-				return 1;
+				return true;
 			}
 			new amount = 0;
 			if (!UI_HsParseAmount(inputtext, amount) || amount < 1 || amount > g_UiHsAmtMax[playerid])
 			{
 				SendClientMessage(playerid, -10066177, "Quantita' non valida.");
 				UI_HsAmountShow(playerid, g_UiHsAmtAction[playerid], g_UiHsAmtMax[playerid]);
-				return 1;
+				return true;
 			}
 			UI_OnHouseFridgeAction(playerid, houseId, g_UiHsAmtAction[playerid], amount);
-			return 1;
+			return true;
 		}
 		case 9206:
 		{
 			if (!response)
 			{
 				UI_HouseMenuShow(playerid);
-				return 1;
+				return true;
 			}
 			if (UI_HsBillsTotal(playerid) <= 0)
 			{
 				SendClientMessage(playerid, 0x66DD66FF, "Nessuna bolletta da pagare.");
 				UI_HouseBillsShow(playerid);
-				return 1;
+				return true;
 			}
 			UI_HsBillsPayShow(playerid);
-			return 1;
+			return true;
 		}
 		case 9207:
 		{
 			if (!response || listitem < 0 || listitem > 1)
 			{
 				UI_HouseBillsShow(playerid);
-				return 1;
+				return true;
 			}
 			new bool:bank = listitem == 0;
 			new funds = bank ? g_UiHsBank[playerid] : g_UiHsMoney[playerid];
@@ -3738,35 +3793,35 @@ bool:UI_HouseOnDialogResponse(playerid, dialogid, response, listitem, inputtext[
 			{
 				SendClientMessage(playerid, -10066177, "Fondi insufficienti con questo metodo di pagamento.");
 				UI_HsBillsPayShow(playerid);
-				return 1;
+				return true;
 			}
 			UI_OnHouseBillsPayAll(playerid, houseId, bank ? 1 : 0);
-			return 1;
+			return true;
 		}
 		case 9208:
 		{
-			return 1;
+			return true;
 		}
 	}
-	return 0;
+	return false;
 }
-new g_UiHh[MAX_PLAYERS][7];
+new PlayerText:g_UiHh[MAX_PLAYERS][7];
 new bool:g_UiHhCreated[MAX_PLAYERS];
 new bool:g_UiHhDark[MAX_PLAYERS];
 new bool:g_UiHhHunger[MAX_PLAYERS];
 new bool:g_UiHhHome[MAX_PLAYERS];
 
-PlayerText:UI_HhText(playerid, Float:x, Float:y, text[], Float:lw, Float:lh, color, t_TEXT_DRAW_ALIGN:align)
+PlayerText:UI_HhText(playerid, Float:x, Float:y, const text[], Float:lw, Float:lh, color, t_TEXT_DRAW_ALIGN:align)
 {
 	new PlayerText:td = Lang_CreatePlayerTextDraw(playerid, x, y, text);
 	PlayerTextDrawLetterSize(playerid, td, lw, lh);
 	PlayerTextDrawAlignment(playerid, td, align);
-	PlayerTextDrawColor(playerid, td, color);
-	PlayerTextDrawFont(playerid, td, 1);
-	PlayerTextDrawSetProportional(playerid, td, 1);
+	PlayerTextDrawColour(playerid, td, color);
+	PlayerTextDrawFont(playerid, td, TEXT_DRAW_FONT_1);
+	PlayerTextDrawSetProportional(playerid, td, true);
 	PlayerTextDrawSetOutline(playerid, td, 1);
 	PlayerTextDrawSetShadow(playerid, td, 0);
-	PlayerTextDrawBackgroundColor(playerid, td, 255);
+	PlayerTextDrawBackgroundColour(playerid, td, 255);
 	return td;
 }
 
@@ -3775,9 +3830,9 @@ PlayerText:UI_HhBox(playerid, Float:x, Float:y, Float:w, Float:h, color)
 	new PlayerText:td = Lang_CreatePlayerTextDraw(playerid, x, y, "_");
 	PlayerTextDrawLetterSize(playerid, td, 0.0, (h / 9.0));
 	PlayerTextDrawTextSize(playerid, td, (x + w), 0.0);
-	PlayerTextDrawUseBox(playerid, td, 1);
-	PlayerTextDrawBoxColor(playerid, td, color);
-	PlayerTextDrawFont(playerid, td, 1);
+	PlayerTextDrawUseBox(playerid, td, true);
+	PlayerTextDrawBoxColour(playerid, td, color);
+	PlayerTextDrawFont(playerid, td, TEXT_DRAW_FONT_1);
 	PlayerTextDrawSetShadow(playerid, td, 0);
 	PlayerTextDrawSetOutline(playerid, td, 0);
 	return td;
@@ -3793,12 +3848,13 @@ UI_HhCreate(playerid)
 	new Float:homeLeft = ((left - 150.0) - 4.0);
 	g_UiHh[playerid][0] = UI_HhBox(playerid, 0.0, 0.0, 640.0, 490.0, 176);
 	g_UiHh[playerid][1] = UI_HhBox(playerid, left, 458.0, 150.0, 18.0, 153);
-	g_UiHh[playerid][2] = UI_HhText(playerid, (4.0 + left), (458.0 + 1.0), "Sazieta' 0%", 0.2, 0.9, -1, 1);
+	g_UiHh[playerid][2] = UI_HhText(playerid, (4.0 + left), (458.0 + 1.0), "Sazieta' 0%", 0.2, 0.9, -1, t_TEXT_DRAW_ALIGN:1);
 	g_UiHh[playerid][3] = UI_HhBox(playerid, (4.0 + left), (458.0 + 12.0), 142.0, 4.0, 0x444444FF);
 	g_UiHh[playerid][4] = UI_HhBox(playerid, (4.0 + left), (458.0 + 12.0), 142.0, 4.0, 0x66DD66FF);
 	g_UiHh[playerid][5] = UI_HhBox(playerid, homeLeft, 458.0, 150.0, 18.0, 153);
-	g_UiHh[playerid][6] = UI_HhText(playerid, (4.0 + homeLeft), (458.0 + 3.0), "Luce ON | Gas ON | Frigo 0/0", 0.2, 0.9, -1, 1);
-	g_UiHhCreated[playerid] = 1;
+	g_UiHh[playerid][6] = UI_HhText(playerid, (4.0 + homeLeft), (458.0 + 3.0), "Luce ON | Gas ON | Frigo 0/0", 0.2, 0.9, -1, t_TEXT_DRAW_ALIGN:1);
+	g_UiHhCreated[playerid] = true;
+	return 0;
 }
 
 UI_HouseDarkShow(playerid)
@@ -3808,8 +3864,9 @@ UI_HouseDarkShow(playerid)
 		return 0;
 	}
 	UI_HhCreate(playerid);
-	g_UiHhDark[playerid] = 1;
-	PlayerTextDrawShow(playerid, g_UiHh[playerid][0]);
+	g_UiHhDark[playerid] = true;
+	PlayerTextDrawShow(playerid, PlayerText:g_UiHh[playerid][0]);
+	return 0;
 }
 
 UI_HouseDarkHide(playerid)
@@ -3818,8 +3875,9 @@ UI_HouseDarkHide(playerid)
 	{
 		return 0;
 	}
-	g_UiHhDark[playerid] = 0;
-	PlayerTextDrawHide(playerid, g_UiHh[playerid][0]);
+	g_UiHhDark[playerid] = false;
+	PlayerTextDrawHide(playerid, PlayerText:g_UiHh[playerid][0]);
+	return 0;
 }
 
 UI_HungerHudUpdate(playerid, hunger)
@@ -3855,18 +3913,19 @@ UI_HungerHudUpdate(playerid, hunger)
 	new str[32];
 	format(str, 32, "Sazieta' %d%%", hunger);
 	Lang_PlayerTextDrawSetString(playerid, g_UiHh[playerid][2], str);
-	PlayerTextDrawColor(playerid, g_UiHh[playerid][2], color);
-	PlayerTextDrawBoxColor(playerid, g_UiHh[playerid][4], barColor);
+	PlayerTextDrawColour(playerid, PlayerText:g_UiHh[playerid][2], color);
+	PlayerTextDrawBoxColour(playerid, PlayerText:g_UiHh[playerid][4], barColor);
 	new Float:fraction = (float(hunger) / float(100));
-	PlayerTextDrawTextSize(playerid, g_UiHh[playerid][4], (0.1 + ((4.0 + (632.0 - 150.0)) + (142.0 * fraction))), 0.0);
+	PlayerTextDrawTextSize(playerid, PlayerText:g_UiHh[playerid][4], (0.1 + ((4.0 + (632.0 - 150.0)) + (142.0 * fraction))), 0.0);
 	if (!g_UiHhHunger[playerid])
 	{
-		g_UiHhHunger[playerid] = 1;
-		PlayerTextDrawShow(playerid, g_UiHh[playerid][1]);
-		PlayerTextDrawShow(playerid, g_UiHh[playerid][3]);
+		g_UiHhHunger[playerid] = true;
+		PlayerTextDrawShow(playerid, PlayerText:g_UiHh[playerid][1]);
+		PlayerTextDrawShow(playerid, PlayerText:g_UiHh[playerid][3]);
 	}
-	PlayerTextDrawShow(playerid, g_UiHh[playerid][2]);
-	PlayerTextDrawShow(playerid, g_UiHh[playerid][4]);
+	PlayerTextDrawShow(playerid, PlayerText:g_UiHh[playerid][2]);
+	PlayerTextDrawShow(playerid, PlayerText:g_UiHh[playerid][4]);
+	return 0;
 }
 
 UI_HouseHudUpdate(playerid, bool:lightOn, bool:gasOn, fridgeUnits, fridgeCap)
@@ -3881,10 +3940,11 @@ UI_HouseHudUpdate(playerid, bool:lightOn, bool:gasOn, fridgeUnits, fridgeCap)
 	Lang_PlayerTextDrawSetString(playerid, g_UiHh[playerid][6], str);
 	if (!g_UiHhHome[playerid])
 	{
-		g_UiHhHome[playerid] = 1;
-		PlayerTextDrawShow(playerid, g_UiHh[playerid][5]);
+		g_UiHhHome[playerid] = true;
+		PlayerTextDrawShow(playerid, PlayerText:g_UiHh[playerid][5]);
 	}
-	PlayerTextDrawShow(playerid, g_UiHh[playerid][6]);
+	PlayerTextDrawShow(playerid, PlayerText:g_UiHh[playerid][6]);
+	return 0;
 }
 
 UI_HouseHudHide(playerid)
@@ -3893,9 +3953,10 @@ UI_HouseHudHide(playerid)
 	{
 		return 0;
 	}
-	g_UiHhHome[playerid] = 0;
-	PlayerTextDrawHide(playerid, g_UiHh[playerid][5]);
-	PlayerTextDrawHide(playerid, g_UiHh[playerid][6]);
+	g_UiHhHome[playerid] = false;
+	PlayerTextDrawHide(playerid, PlayerText:g_UiHh[playerid][5]);
+	PlayerTextDrawHide(playerid, PlayerText:g_UiHh[playerid][6]);
+	return 0;
 }
 
 UI_HouseUiDestroy(playerid)
@@ -3908,14 +3969,14 @@ UI_HouseUiDestroy(playerid)
 	{
 		for (new i = 0; i < 7; i++)
 		{
-			PlayerTextDrawDestroy(playerid, g_UiHh[playerid][i]);
-			g_UiHh[playerid][i] = 65535;
+			PlayerTextDrawDestroy(playerid, PlayerText:g_UiHh[playerid][i]);
+			g_UiHh[playerid][i] = INVALID_PLAYER_TEXT_DRAW;
 		}
 	}
-	g_UiHhCreated[playerid] = 0;
-	g_UiHhDark[playerid] = 0;
-	g_UiHhHunger[playerid] = 0;
-	g_UiHhHome[playerid] = 0;
+	g_UiHhCreated[playerid] = false;
+	g_UiHhDark[playerid] = false;
+	g_UiHhHunger[playerid] = false;
+	g_UiHhHome[playerid] = false;
 	g_UiHsHouse[playerid] = 0;
 	g_UiHsRole[playerid] = 3;
 	g_UiHsLightDue[playerid] = 0;
@@ -3926,6 +3987,7 @@ UI_HouseUiDestroy(playerid)
 	{
 		g_UiHsItemAct[playerid][i] = 0;
 	}
+	return 0;
 }
 
 // ===== modules/ui/job_ui.inc =====
@@ -4049,7 +4111,8 @@ UI_JobCenterShow(playerid, level, currentJob, cooldownSec)
 	{
 		strcat(body, "{FF6666}Lascia il lavoro attuale\t\t\t\n", 1024);
 	}
-	Lang_ShowPlayerDialog(playerid, 9300, 5, "Job Center", body, "Dettagli", "Chiudi");
+	Lang_ShowPlayerDialog(playerid, 9300, DIALOG_STYLE_TABLIST_HEADERS, "Job Center", body, "Dettagli", "Chiudi");
+	return 0;
 }
 
 UI_JbDetailShow(playerid, job)
@@ -4077,23 +4140,23 @@ UI_JbDetailShow(playerid, job)
 	format(line, 192, "Stima: circa {66DD66}$%s{FFFFFF}/ora (tetto $%s/ora). La paga e' accreditata in banca a fine turno.\n\n", hourly, cap);
 	strcat(body, line, 1024);
 	strcat(body, "Il turno inizia con /inizia e termina con /fine. Veicolo distrutto o abbandonato, morte o\ndisconnessione annullano il turno e il guadagno maturato va perso.", 1024);
-	new bool:ok = 1;
+	new bool:ok = true;
 	if (g_UiJbLevel[playerid] < g_UiJbMinLevel[job])
 	{
 		format(line, 192, "\n\n{FF6666}Richiede il livello %d (tu sei livello %d).", g_UiJbMinLevel[job], g_UiJbLevel[playerid]);
 		strcat(body, line, 1024);
-		ok = 0;
+		ok = false;
 	}
 	else if (job == g_UiJbCurrent[playerid])
 	{
 		strcat(body, "\n\n{FFD24D}Questo e' gia' il tuo lavoro attuale.", 1024);
-		ok = 0;
+		ok = false;
 	}
 	else if (g_UiJbCooldown[playerid] > 0)
 	{
 		format(line, 192, "\n\n{FF6666}Potrai cambiare lavoro tra %d min %02d s.", g_UiJbCooldown[playerid] / 60, g_UiJbCooldown[playerid] % 60);
 		strcat(body, line, 1024);
-		ok = 0;
+		ok = false;
 	}
 	else
 	{
@@ -4101,7 +4164,8 @@ UI_JbDetailShow(playerid, job)
 		strcat(body, line, 1024);
 	}
 	format(title, 64, "Job Center - %s", g_UiJbName[job]);
-	Lang_ShowPlayerDialog(playerid, 9301, 0, title, body, ok ? "Prendi lavoro" : "Indietro", ok ? "Indietro" : "");
+	Lang_ShowPlayerDialog(playerid, 9301, DIALOG_STYLE_MSGBOX, title, body, ok ? "Prendi lavoro" : "Indietro", ok ? "Indietro" : "");
+	return 0;
 }
 
 UI_JbQuitShow(playerid)
@@ -4112,7 +4176,8 @@ UI_JbQuitShow(playerid)
 		return 0;
 	}
 	format(body, 256, "{FFFFFF}Vuoi davvero lasciare il lavoro di {FFD24D}%s{FFFFFF}?\n\nSe poi scegli un altro lavoro dovrai rispettare il cooldown di %d minuti.", g_UiJbName[cur], 10);
-	Lang_ShowPlayerDialog(playerid, 9302, 0, "Lascia il lavoro", body, "Lascia", "Annulla");
+	Lang_ShowPlayerDialog(playerid, 9302, DIALOG_STYLE_MSGBOX, "Lascia il lavoro", body, "Lascia", "Annulla");
+	return 0;
 }
 
 UI_JobInfoShow(playerid, jobId, level, runs, earned)
@@ -4149,14 +4214,16 @@ UI_JobInfoShow(playerid, jobId, level, runs, earned)
 		strcat(body, line, 1024);
 		strcat(body, "Comandi: /inizia (avvia il turno), /fine (chiude e paga il maturato), /lavoro lascia (al Job Center).", 1024);
 	}
-	Lang_ShowPlayerDialog(playerid, 9303, 0, "Il tuo lavoro", body, "Chiudi", "");
+	Lang_ShowPlayerDialog(playerid, 9303, DIALOG_STYLE_MSGBOX, "Il tuo lavoro", body, "Chiudi", "");
+	return 0;
 }
 
-bool:UI_JobOnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
+bool:UI_JobOnDialogResponse(playerid, dialogid, response, listitem, const inputtext[])
 {
+	#pragma unused inputtext
 	if (!UI_JbValid(playerid))
 	{
-		return 0;
+		return false;
 	}
 	switch (dialogid)
 	{
@@ -4164,7 +4231,7 @@ bool:UI_JobOnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		{
 			if (!response)
 			{
-				return 1;
+				return true;
 			}
 			if (listitem >= 0 && listitem < 3)
 			{
@@ -4178,7 +4245,7 @@ bool:UI_JobOnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			{
 				UI_JobCenterShow(playerid, g_UiJbLevel[playerid], g_UiJbCurrent[playerid], g_UiJbCooldown[playerid]);
 			}
-			return 1;
+			return true;
 		}
 		case 9301:
 		{
@@ -4187,45 +4254,45 @@ bool:UI_JobOnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			if (response && ok)
 			{
 				UI_OnJobSelect(playerid, job);
-				return 1;
+				return true;
 			}
 			UI_JobCenterShow(playerid, g_UiJbLevel[playerid], g_UiJbCurrent[playerid], g_UiJbCooldown[playerid]);
-			return 1;
+			return true;
 		}
 		case 9302:
 		{
 			if (response && g_UiJbCurrent[playerid] != 0)
 			{
 				UI_OnJobQuit(playerid);
-				return 1;
+				return true;
 			}
 			UI_JobCenterShow(playerid, g_UiJbLevel[playerid], g_UiJbCurrent[playerid], g_UiJbCooldown[playerid]);
-			return 1;
+			return true;
 		}
 		case 9303:
 		{
-			return 1;
+			return true;
 		}
 	}
-	return 0;
+	return false;
 }
-new g_UiJHud[MAX_PLAYERS][6];
+new PlayerText:g_UiJHud[MAX_PLAYERS][6];
 new bool:g_UiJHudCreated[MAX_PLAYERS];
 new bool:g_UiJHudShown[MAX_PLAYERS];
 new bool:g_UiJHudWarn[MAX_PLAYERS];
 new g_UiJHudJob[MAX_PLAYERS];
 
-PlayerText:UI_JhText(playerid, Float:x, Float:y, text[], Float:lw, Float:lh, color, t_TEXT_DRAW_ALIGN:align)
+PlayerText:UI_JhText(playerid, Float:x, Float:y, const text[], Float:lw, Float:lh, color, t_TEXT_DRAW_ALIGN:align)
 {
 	new PlayerText:td = Lang_CreatePlayerTextDraw(playerid, x, y, text);
 	PlayerTextDrawLetterSize(playerid, td, lw, lh);
 	PlayerTextDrawAlignment(playerid, td, align);
-	PlayerTextDrawColor(playerid, td, color);
-	PlayerTextDrawFont(playerid, td, 1);
-	PlayerTextDrawSetProportional(playerid, td, 1);
+	PlayerTextDrawColour(playerid, td, color);
+	PlayerTextDrawFont(playerid, td, TEXT_DRAW_FONT_1);
+	PlayerTextDrawSetProportional(playerid, td, true);
 	PlayerTextDrawSetOutline(playerid, td, 1);
 	PlayerTextDrawSetShadow(playerid, td, 0);
-	PlayerTextDrawBackgroundColor(playerid, td, 255);
+	PlayerTextDrawBackgroundColour(playerid, td, 255);
 	return td;
 }
 
@@ -4234,9 +4301,9 @@ PlayerText:UI_JhBox(playerid, Float:x, Float:y, Float:w, Float:h, color)
 	new PlayerText:td = Lang_CreatePlayerTextDraw(playerid, x, y, "_");
 	PlayerTextDrawLetterSize(playerid, td, 0.0, (h / 9.0));
 	PlayerTextDrawTextSize(playerid, td, (x + w), 0.0);
-	PlayerTextDrawUseBox(playerid, td, 1);
-	PlayerTextDrawBoxColor(playerid, td, color);
-	PlayerTextDrawFont(playerid, td, 1);
+	PlayerTextDrawUseBox(playerid, td, true);
+	PlayerTextDrawBoxColour(playerid, td, color);
+	PlayerTextDrawFont(playerid, td, TEXT_DRAW_FONT_1);
 	PlayerTextDrawSetShadow(playerid, td, 0);
 	PlayerTextDrawSetOutline(playerid, td, 0);
 	return td;
@@ -4250,12 +4317,13 @@ UI_JhCreate(playerid)
 	}
 	new Float:left = (476.0 - 150.0);
 	g_UiJHud[playerid][0] = UI_JhBox(playerid, left, 384.0, 150.0, 66.0, 153);
-	g_UiJHud[playerid][1] = UI_JhText(playerid, (5.0 + left), (384.0 + 2.0), "LAVORO", 0.22, 1.0, -2994689, 1);
-	g_UiJHud[playerid][2] = UI_JhText(playerid, (5.0 + left), (384.0 + 14.0), "Tappa 0/0", 0.22, 1.0, -1, 1);
-	g_UiJHud[playerid][3] = UI_JhText(playerid, (5.0 + left), (384.0 + 26.0), "Maturato: $0", 0.22, 1.0, 0x66DD66FF, 1);
-	g_UiJHud[playerid][4] = UI_JhText(playerid, (5.0 + left), (384.0 + 38.0), "Tempo 00:00", 0.22, 1.0, -1, 1);
-	g_UiJHud[playerid][5] = UI_JhText(playerid, (5.0 + left), (384.0 + 51.0), "TORNA AL VEICOLO: 45s", 0.2, 0.9, -12303105, 1);
-	g_UiJHudCreated[playerid] = 1;
+	g_UiJHud[playerid][1] = UI_JhText(playerid, (5.0 + left), (384.0 + 2.0), "LAVORO", 0.22, 1.0, -2994689, t_TEXT_DRAW_ALIGN:1);
+	g_UiJHud[playerid][2] = UI_JhText(playerid, (5.0 + left), (384.0 + 14.0), "Tappa 0/0", 0.22, 1.0, -1, t_TEXT_DRAW_ALIGN:1);
+	g_UiJHud[playerid][3] = UI_JhText(playerid, (5.0 + left), (384.0 + 26.0), "Maturato: $0", 0.22, 1.0, 0x66DD66FF, t_TEXT_DRAW_ALIGN:1);
+	g_UiJHud[playerid][4] = UI_JhText(playerid, (5.0 + left), (384.0 + 38.0), "Tempo 00:00", 0.22, 1.0, -1, t_TEXT_DRAW_ALIGN:1);
+	g_UiJHud[playerid][5] = UI_JhText(playerid, (5.0 + left), (384.0 + 51.0), "TORNA AL VEICOLO: 45s", 0.2, 0.9, -12303105, t_TEXT_DRAW_ALIGN:1);
+	g_UiJHudCreated[playerid] = true;
+	return 0;
 }
 
 UI_JhSetVisible(playerid, bool:visible)
@@ -4268,17 +4336,17 @@ UI_JhSetVisible(playerid, bool:visible)
 		}
 		if (visible)
 		{
-			PlayerTextDrawShow(playerid, g_UiJHud[playerid][i]);
+			PlayerTextDrawShow(playerid, PlayerText:g_UiJHud[playerid][i]);
 		}
 		else
 		{
-			PlayerTextDrawHide(playerid, g_UiJHud[playerid][i]);
+			PlayerTextDrawHide(playerid, PlayerText:g_UiJHud[playerid][i]);
 		}
 	}
 	if (!visible || !g_UiJHudWarn[playerid])
 	{
-		PlayerTextDrawHide(playerid, g_UiJHud[playerid][5]);
-		g_UiJHudWarn[playerid] = 0;
+		PlayerTextDrawHide(playerid, PlayerText:g_UiJHud[playerid][5]);
+		g_UiJHudWarn[playerid] = false;
 	}
 }
 
@@ -4294,8 +4362,8 @@ UI_JobHudShow(playerid, jobId)
 	}
 	UI_JhCreate(playerid);
 	g_UiJHudJob[playerid] = jobId;
-	g_UiJHudShown[playerid] = 1;
-	g_UiJHudWarn[playerid] = 0;
+	g_UiJHudShown[playerid] = true;
+	g_UiJHudWarn[playerid] = false;
 	new str[48];
 	format(str, 48, "LAVORO: %s", g_UiJbName[jobId]);
 	Lang_PlayerTextDrawSetString(playerid, g_UiJHud[playerid][1], str);
@@ -4303,7 +4371,8 @@ UI_JobHudShow(playerid, jobId)
 	Lang_PlayerTextDrawSetString(playerid, g_UiJHud[playerid][2], str);
 	Lang_PlayerTextDrawSetString(playerid, g_UiJHud[playerid][3], "Maturato: $0");
 	Lang_PlayerTextDrawSetString(playerid, g_UiJHud[playerid][4], "Tempo 00:00");
-	UI_JhSetVisible(playerid, 1);
+	UI_JhSetVisible(playerid, true);
+	return 0;
 }
 
 UI_JobHudHide(playerid)
@@ -4312,8 +4381,9 @@ UI_JobHudHide(playerid)
 	{
 		return 0;
 	}
-	g_UiJHudShown[playerid] = 0;
-	UI_JhSetVisible(playerid, 0);
+	g_UiJHudShown[playerid] = false;
+	UI_JhSetVisible(playerid, false);
+	return 0;
 }
 
 UI_JobHudUpdate(playerid, step, stepTotal, earned, elapsedSec, dwellSec, offVehicleSec)
@@ -4362,18 +4432,19 @@ UI_JobHudUpdate(playerid, step, stepTotal, earned, elapsedSec, dwellSec, offVehi
 		format(str, 64, "TORNA AL VEICOLO: %ds", offVehicleSec);
 		Lang_PlayerTextDrawSetString(playerid, g_UiJHud[playerid][5], str);
 		new bool:blinkOff = GetTickCount() / 500 % 2 == 1;
-		PlayerTextDrawColor(playerid, g_UiJHud[playerid][5], blinkOff ? -12303292 : -12303105);
-		PlayerTextDrawShow(playerid, g_UiJHud[playerid][5]);
-		g_UiJHudWarn[playerid] = 1;
+		PlayerTextDrawColour(playerid, PlayerText:g_UiJHud[playerid][5], blinkOff ? -12303292 : -12303105);
+		PlayerTextDrawShow(playerid, PlayerText:g_UiJHud[playerid][5]);
+		g_UiJHudWarn[playerid] = true;
 	}
 	else if (g_UiJHudWarn[playerid])
 	{
-		PlayerTextDrawHide(playerid, g_UiJHud[playerid][5]);
-		g_UiJHudWarn[playerid] = 0;
+		PlayerTextDrawHide(playerid, PlayerText:g_UiJHud[playerid][5]);
+		g_UiJHudWarn[playerid] = false;
 	}
-	PlayerTextDrawShow(playerid, g_UiJHud[playerid][2]);
-	PlayerTextDrawShow(playerid, g_UiJHud[playerid][3]);
-	PlayerTextDrawShow(playerid, g_UiJHud[playerid][4]);
+	PlayerTextDrawShow(playerid, PlayerText:g_UiJHud[playerid][2]);
+	PlayerTextDrawShow(playerid, PlayerText:g_UiJHud[playerid][3]);
+	PlayerTextDrawShow(playerid, PlayerText:g_UiJHud[playerid][4]);
+	return 0;
 }
 
 UI_JobUiDestroy(playerid)
@@ -4386,18 +4457,19 @@ UI_JobUiDestroy(playerid)
 	{
 		for (new i = 0; i < 6; i++)
 		{
-			PlayerTextDrawDestroy(playerid, g_UiJHud[playerid][i]);
-			g_UiJHud[playerid][i] = 65535;
+			PlayerTextDrawDestroy(playerid, PlayerText:g_UiJHud[playerid][i]);
+			g_UiJHud[playerid][i] = INVALID_PLAYER_TEXT_DRAW;
 		}
 	}
-	g_UiJHudCreated[playerid] = 0;
-	g_UiJHudShown[playerid] = 0;
-	g_UiJHudWarn[playerid] = 0;
+	g_UiJHudCreated[playerid] = false;
+	g_UiJHudShown[playerid] = false;
+	g_UiJHudWarn[playerid] = false;
 	g_UiJHudJob[playerid] = 0;
 	g_UiJbLevel[playerid] = 0;
 	g_UiJbCurrent[playerid] = 0;
 	g_UiJbCooldown[playerid] = 0;
 	g_UiJbSel[playerid] = 0;
+	return 0;
 }
 
 // ===== modules/ui/faction_ui.inc =====
@@ -4449,6 +4521,7 @@ UI_FcRankText(faction, rank, out[], size)
 		return 0;
 	}
 	format(out, size, "%s", g_UiFcRankName[faction][rank]);
+	return 0;
 }
 
 UI_FcMoney(value, out[], size)
@@ -4547,11 +4620,12 @@ UI_FactionMenuShow(playerid, faction, rank, bool:onDuty, membersOnline, membersT
 		g_UiFcMenuAct[playerid][n++] = 3;
 		g_UiFcMenuAct[playerid][n++] = 4;
 		g_UiFcMenuAct[playerid][n++] = 5;
-		g_UiFcMenuAct[playerid][n++] = 6;
+		g_UiFcMenuAct[playerid][n] = 6;
 	}
 	UI_FcRankText(faction, rank, rankName, 24);
 	format(title, 64, "%s - %s%s", g_UiFcShort[faction], rankName, onDuty ? " (in servizio)" : "");
-	Lang_ShowPlayerDialog(playerid, 9320, 2, title, body, "Seleziona", "Chiudi");
+	Lang_ShowPlayerDialog(playerid, 9320, DIALOG_STYLE_LIST, title, body, "Seleziona", "Chiudi");
+	return 0;
 }
 
 UI_FcInfoShow(playerid)
@@ -4576,14 +4650,15 @@ UI_FcInfoShow(playerid)
 		format(line, 192, "\nComando: /invita, /promuovi, /degrada, /licenzia (solo su gradi inferiori al tuo; il grado %d si assegna solo da staff).", 6);
 		strcat(body, line, 1536);
 	}
-	Lang_ShowPlayerDialog(playerid, 9321, 0, "Informazioni fazione", body, "Menu", "Chiudi");
+	Lang_ShowPlayerDialog(playerid, 9321, DIALOG_STYLE_MSGBOX, "Informazioni fazione", body, "Menu", "Chiudi");
+	return 0;
 }
 
-UI_FcInviteTargetShow(playerid, error[])
+UI_FcInviteTargetShow(playerid, const error[])
 {
 	new body[384];
 	format(body, 384, "{FFFFFF}Inserisci l'ID del giocatore da invitare in {FFD24D}%s{FFFFFF}.\nDeve essere senza fazione, di livello %d o superiore e a meno di %.0f metri.\nL'invito resta valido %d secondi.\n\n%s", g_UiFcShort[g_UiFcFaction[playerid]], 3, 5.0, 60, error);
-	Lang_ShowPlayerDialog(playerid, 9325, 1, "Invita giocatore", body, "Invita", "Annulla");
+	Lang_ShowPlayerDialog(playerid, 9325, DIALOG_STYLE_INPUT, "Invita giocatore", body, "Invita", "Annulla");
 }
 
 UI_FactionMemberListClear(playerid)
@@ -4594,18 +4669,19 @@ UI_FactionMemberListClear(playerid)
 	}
 	g_UiFcCount[playerid] = 0;
 	g_UiFcSel[playerid] = -1;
+	return 0;
 }
 
-bool:UI_FactionMemberListAdd(playerid, memberId, name[], rank, status)
+bool:UI_FactionMemberListAdd(playerid, memberId, const name[], rank, status)
 {
 	if (!UI_FcValid(playerid))
 	{
-		return 0;
+		return false;
 	}
 	new n = g_UiFcCount[playerid];
 	if (n >= 32)
 	{
-		return 0;
+		return false;
 	}
 	if (rank < 1)
 	{
@@ -4623,7 +4699,7 @@ bool:UI_FactionMemberListAdd(playerid, memberId, name[], rank, status)
 	g_UiFcMemInfo[playerid][n] = rank | status << 8;
 	strpack(g_UiFcMemName[playerid][n], name, 7);
 	g_UiFcCount[playerid] = n + 1;
-	return 1;
+	return true;
 }
 
 UI_FcMemberName(playerid, idx, out[], size)
@@ -4635,24 +4711,24 @@ bool:UI_FcEligible(ownRank, action, rank, reason[], size)
 {
 	if (action == 2)
 	{
-		return 1;
+		return true;
 	}
 	if (rank >= ownRank)
 	{
 		format(reason, size, "Il bersaglio non ha un grado inferiore al tuo.");
-		return 0;
+		return false;
 	}
 	if (action == 4 && rank + 1 >= ownRank)
 	{
 		format(reason, size, "Il nuovo grado deve restare inferiore al tuo.");
-		return 0;
+		return false;
 	}
 	if (action == 5 && rank <= 1)
 	{
 		format(reason, size, "Il membro e' gia' al grado minimo.");
-		return 0;
+		return false;
 	}
-	return 1;
+	return true;
 }
 
 UI_FcPagesCount(playerid)
@@ -4680,7 +4756,7 @@ UI_FcMembersPage(playerid, page)
 	if (g_UiFcCount[playerid] == 0)
 	{
 		format(title, 64, "%s - %s", verb, g_UiFcShort[faction]);
-		Lang_ShowPlayerDialog(playerid, 9323, 0, title, "{FFFFFF}Nessun membro da mostrare.", "Chiudi", "");
+		Lang_ShowPlayerDialog(playerid, 9323, DIALOG_STYLE_MSGBOX, title, "{FFFFFF}Nessun membro da mostrare.", "Chiudi", "");
 		return 0;
 	}
 	new body[1536], line[192], name[25], rankName[24], status[24], reason[8];
@@ -4725,7 +4801,8 @@ UI_FcMembersPage(playerid, page)
 	{
 		format(title, 64, "%s membro - %s (pag. %d/%d)", verb, g_UiFcShort[faction], page + 1, pages);
 	}
-	Lang_ShowPlayerDialog(playerid, 9322, 5, title, body, mode == 2 ? "Dettagli" : "Seleziona", "Chiudi");
+	Lang_ShowPlayerDialog(playerid, 9322, DIALOG_STYLE_TABLIST_HEADERS, title, body, mode == 2 ? "Dettagli" : "Seleziona", "Chiudi");
+	return 0;
 }
 
 UI_FactionMembersShow(playerid, faction, ownRank, mode)
@@ -4751,6 +4828,7 @@ UI_FactionMembersShow(playerid, faction, ownRank, mode)
 	g_UiFcRank[playerid] = ownRank;
 	g_UiFcMode[playerid] = mode;
 	UI_FcMembersPage(playerid, 0);
+	return 0;
 }
 
 UI_FcMemberInfoShow(playerid, idx)
@@ -4764,7 +4842,7 @@ UI_FcMemberInfoShow(playerid, idx)
 	UI_FcStatusText(st, status, 24);
 	UI_FcMoney(g_UiFcRankPay[faction][rank], pay, 16);
 	format(body, 384, "{FFD24D}%s{FFFFFF}\n\nFazione: %s\nGrado: %s (%d/%d)\nStato: %s{FFFFFF}\nStipendio di grado: {66DD66}$%s{FFFFFF} ogni %d min di servizio", name, g_UiFcFull[faction], rankName, rank, 6, status, pay, 15);
-	Lang_ShowPlayerDialog(playerid, 9323, 0, "Dettaglio membro", body, "Indietro", "");
+	Lang_ShowPlayerDialog(playerid, 9323, DIALOG_STYLE_MSGBOX, "Dettaglio membro", body, "Indietro", "");
 }
 
 UI_FcConfirmShow(playerid, idx)
@@ -4793,10 +4871,10 @@ UI_FcConfirmShow(playerid, idx)
 			format(body, 512, "{FFFFFF}Licenziare {FFD24D}%s{FFFFFF} ({FFD24D}%s{FFFFFF}) da {FFD24D}%s{FFFFFF}?\n\n{FF6666}Perdera' fazione, grado e servizio. L'operazione non e' reversibile.", name, oldName, g_UiFcShort[faction]);
 		}
 	}
-	Lang_ShowPlayerDialog(playerid, 9324, 0, verb, body, "Conferma", "Annulla");
+	Lang_ShowPlayerDialog(playerid, 9324, DIALOG_STYLE_MSGBOX, verb, body, "Conferma", "Annulla");
 }
 
-UI_FactionInviteShow(playerid, faction, inviterName[], ttlSec)
+UI_FactionInviteShow(playerid, faction, const inviterName[], ttlSec)
 {
 	if (!UI_FcValid(playerid))
 	{
@@ -4809,7 +4887,8 @@ UI_FactionInviteShow(playerid, faction, inviterName[], ttlSec)
 	new body[512], rank1[24];
 	UI_FcRankText(faction, 1, rank1, 24);
 	format(body, 512, "{FFD24D}%s{FFFFFF} ti invita a entrare in {FFD24D}%s{FFFFFF}.\n\nEntrerai con il grado {FFD24D}%s{FFFFFF}.\nL'invito scade tra {FF6666}%d{FFFFFF} secondi.", inviterName, g_UiFcFull[faction], rank1, ttlSec > 0 ? ttlSec : 60);
-	Lang_ShowPlayerDialog(playerid, 9326, 0, "Invito in fazione", body, "Accetta", "Rifiuta");
+	Lang_ShowPlayerDialog(playerid, 9326, DIALOG_STYLE_MSGBOX, "Invito in fazione", body, "Accetta", "Rifiuta");
+	return 0;
 }
 
 UI_FactionInviteClose(playerid)
@@ -4822,13 +4901,14 @@ UI_FactionInviteClose(playerid)
 	{
 		HidePlayerDialog(playerid);
 	}
+	return 0;
 }
 
-bool:UI_FactionOnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
+bool:UI_FactionOnDialogResponse(playerid, dialogid, response, listitem, const inputtext[])
 {
 	if (!UI_FcValid(playerid))
 	{
-		return 0;
+		return false;
 	}
 	switch (dialogid)
 	{
@@ -4836,12 +4916,12 @@ bool:UI_FactionOnDialogResponse(playerid, dialogid, response, listitem, inputtex
 		{
 			if (!response)
 			{
-				return 1;
+				return true;
 			}
 			if (listitem < 0 || listitem >= 8 || g_UiFcMenuAct[playerid][listitem] == 0)
 			{
 				UI_FactionMenuShow(playerid, g_UiFcFaction[playerid], g_UiFcRank[playerid], g_UiFcDuty[playerid], g_UiFcOnline[playerid], g_UiFcTotal[playerid]);
-				return 1;
+				return true;
 			}
 			new act = g_UiFcMenuAct[playerid][listitem];
 			if (act == 1)
@@ -4852,7 +4932,7 @@ bool:UI_FactionOnDialogResponse(playerid, dialogid, response, listitem, inputtex
 			{
 				if (g_UiFcRank[playerid] < 5)
 				{
-					return 1;
+					return true;
 				}
 				UI_FcInviteTargetShow(playerid, "");
 			}
@@ -4860,11 +4940,11 @@ bool:UI_FactionOnDialogResponse(playerid, dialogid, response, listitem, inputtex
 			{
 				if (act != 2 && g_UiFcRank[playerid] < 5)
 				{
-					return 1;
+					return true;
 				}
 				UI_OnFactionMenuAction(playerid, act);
 			}
-			return 1;
+			return true;
 		}
 		case 9321:
 		{
@@ -4872,13 +4952,13 @@ bool:UI_FactionOnDialogResponse(playerid, dialogid, response, listitem, inputtex
 			{
 				UI_FactionMenuShow(playerid, g_UiFcFaction[playerid], g_UiFcRank[playerid], g_UiFcDuty[playerid], g_UiFcOnline[playerid], g_UiFcTotal[playerid]);
 			}
-			return 1;
+			return true;
 		}
 		case 9322:
 		{
 			if (!response)
 			{
-				return 1;
+				return true;
 			}
 			new page = g_UiFcPage[playerid];
 			new pages = UI_FcPagesCount(playerid);
@@ -4891,7 +4971,7 @@ bool:UI_FactionOnDialogResponse(playerid, dialogid, response, listitem, inputtex
 			if (listitem < 0)
 			{
 				UI_FcMembersPage(playerid, page);
-				return 1;
+				return true;
 			}
 			if (listitem < n)
 			{
@@ -4901,7 +4981,7 @@ bool:UI_FactionOnDialogResponse(playerid, dialogid, response, listitem, inputtex
 				{
 					g_UiFcSel[playerid] = idx;
 					UI_FcMemberInfoShow(playerid, idx);
-					return 1;
+					return true;
 				}
 				new reason[64];
 				reason[0] = 0;
@@ -4912,10 +4992,10 @@ bool:UI_FactionOnDialogResponse(playerid, dialogid, response, listitem, inputtex
 						SendClientMessage(playerid, -10066177, reason);
 					}
 					UI_FcMembersPage(playerid, page);
-					return 1;
+					return true;
 				}
 				UI_FcConfirmShow(playerid, idx);
-				return 1;
+				return true;
 			}
 			new pos = listitem - n;
 			if (page > 0)
@@ -4923,17 +5003,17 @@ bool:UI_FactionOnDialogResponse(playerid, dialogid, response, listitem, inputtex
 				if (pos == 0)
 				{
 					UI_FcMembersPage(playerid, page - 1);
-					return 1;
+					return true;
 				}
 				pos--;
 			}
 			if (page < pages - 1 && pos == 0)
 			{
 				UI_FcMembersPage(playerid, page + 1);
-				return 1;
+				return true;
 			}
 			UI_FcMembersPage(playerid, page);
-			return 1;
+			return true;
 		}
 		case 9323:
 		{
@@ -4941,7 +5021,7 @@ bool:UI_FactionOnDialogResponse(playerid, dialogid, response, listitem, inputtex
 			{
 				UI_FcMembersPage(playerid, g_UiFcPage[playerid]);
 			}
-			return 1;
+			return true;
 		}
 		case 9324:
 		{
@@ -4949,79 +5029,79 @@ bool:UI_FactionOnDialogResponse(playerid, dialogid, response, listitem, inputtex
 			new mode = g_UiFcMode[playerid];
 			if (idx < 0 || idx >= g_UiFcCount[playerid])
 			{
-				return 1;
+				return true;
 			}
 			if (!response)
 			{
 				UI_FcMembersPage(playerid, g_UiFcPage[playerid]);
-				return 1;
+				return true;
 			}
 			new reason[64];
 			if (g_UiFcRank[playerid] < 5 || !UI_FcEligible(g_UiFcRank[playerid], mode, g_UiFcMemInfo[playerid][idx] & 255, reason, 64))
 			{
-				return 1;
+				return true;
 			}
 			new memberId = g_UiFcMemId[playerid][idx];
 			g_UiFcSel[playerid] = -1;
 			UI_OnFactionMemberAction(playerid, mode, memberId);
-			return 1;
+			return true;
 		}
 		case 9325:
 		{
 			if (!response)
 			{
-				return 1;
+				return true;
 			}
 			if (g_UiFcRank[playerid] < 5)
 			{
-				return 1;
+				return true;
 			}
 			new len = strlen(inputtext), bool:digits = len >= 1 && len <= 4;
 			for (new i = 0; digits && i < len; i++)
 			{
 				if (inputtext[i] < 48 || inputtext[i] > 57)
 				{
-					digits = 0;
+					digits = false;
 				}
 			}
 			new target = digits ? strval(inputtext) : -1;
 			if (target < 0 || target >= MAX_PLAYERS || !IsPlayerConnected(target))
 			{
 				UI_FcInviteTargetShow(playerid, "{FF4444}ID non valido o giocatore non connesso.");
-				return 1;
+				return true;
 			}
 			if (target == playerid)
 			{
 				UI_FcInviteTargetShow(playerid, "{FF4444}Non puoi invitare te stesso.");
-				return 1;
+				return true;
 			}
 			UI_OnFactionInviteTarget(playerid, target);
-			return 1;
+			return true;
 		}
 		case 9326:
 		{
 			UI_OnFactionInviteReply(playerid, response ? 1 : 0);
-			return 1;
+			return true;
 		}
 		case 9327:
 		{
-			return 1;
+			return true;
 		}
 	}
-	return 0;
+	return false;
 }
 
-PlayerText:UI_FhText(playerid, Float:x, Float:y, text[], Float:lw, Float:lh, color, t_TEXT_DRAW_ALIGN:align)
+PlayerText:UI_FhText(playerid, Float:x, Float:y, const text[], Float:lw, Float:lh, color, t_TEXT_DRAW_ALIGN:align)
 {
 	new PlayerText:td = Lang_CreatePlayerTextDraw(playerid, x, y, text);
 	PlayerTextDrawLetterSize(playerid, td, lw, lh);
 	PlayerTextDrawAlignment(playerid, td, align);
-	PlayerTextDrawColor(playerid, td, color);
-	PlayerTextDrawFont(playerid, td, 1);
-	PlayerTextDrawSetProportional(playerid, td, 1);
+	PlayerTextDrawColour(playerid, td, color);
+	PlayerTextDrawFont(playerid, td, TEXT_DRAW_FONT_1);
+	PlayerTextDrawSetProportional(playerid, td, true);
 	PlayerTextDrawSetOutline(playerid, td, 1);
 	PlayerTextDrawSetShadow(playerid, td, 0);
-	PlayerTextDrawBackgroundColor(playerid, td, 255);
+	PlayerTextDrawBackgroundColour(playerid, td, 255);
 	return td;
 }
 
@@ -5030,14 +5110,14 @@ PlayerText:UI_FhBox(playerid, Float:x, Float:y, Float:w, Float:h, color)
 	new PlayerText:td = Lang_CreatePlayerTextDraw(playerid, x, y, "_");
 	PlayerTextDrawLetterSize(playerid, td, 0.0, (h / 9.0));
 	PlayerTextDrawTextSize(playerid, td, (x + w), 0.0);
-	PlayerTextDrawUseBox(playerid, td, 1);
-	PlayerTextDrawBoxColor(playerid, td, color);
-	PlayerTextDrawFont(playerid, td, 1);
+	PlayerTextDrawUseBox(playerid, td, true);
+	PlayerTextDrawBoxColour(playerid, td, color);
+	PlayerTextDrawFont(playerid, td, TEXT_DRAW_FONT_1);
 	PlayerTextDrawSetShadow(playerid, td, 0);
 	PlayerTextDrawSetOutline(playerid, td, 0);
 	return td;
 }
-new g_UiFHud[MAX_PLAYERS][3];
+new PlayerText:g_UiFHud[MAX_PLAYERS][3];
 new bool:g_UiFHudCreated[MAX_PLAYERS];
 new bool:g_UiFHudShown[MAX_PLAYERS];
 new bool:g_UiFHudKit[MAX_PLAYERS];
@@ -5050,9 +5130,10 @@ UI_FhCreate(playerid)
 	}
 	new Float:left = (476.0 - 150.0);
 	g_UiFHud[playerid][0] = UI_FhBox(playerid, left, 356.0, 150.0, 24.0, 153);
-	g_UiFHud[playerid][1] = UI_FhText(playerid, (5.0 + left), (356.0 + 2.0), "IN SERVIZIO", 0.2, 0.9, -1, 1);
-	g_UiFHud[playerid][2] = UI_FhText(playerid, (5.0 + left), (356.0 + 12.0), "Kit medico: 0", 0.2, 0.9, -1, 1);
-	g_UiFHudCreated[playerid] = 1;
+	g_UiFHud[playerid][1] = UI_FhText(playerid, (5.0 + left), (356.0 + 2.0), "IN SERVIZIO", 0.2, 0.9, -1, t_TEXT_DRAW_ALIGN:1);
+	g_UiFHud[playerid][2] = UI_FhText(playerid, (5.0 + left), (356.0 + 12.0), "Kit medico: 0", 0.2, 0.9, -1, t_TEXT_DRAW_ALIGN:1);
+	g_UiFHudCreated[playerid] = true;
+	return 0;
 }
 
 UI_FhApply(playerid, faction, rank, kitCharges)
@@ -5061,20 +5142,20 @@ UI_FhApply(playerid, faction, rank, kitCharges)
 	UI_FcRankText(faction, rank, rankName, 24);
 	format(str, 64, "IN SERVIZIO - %s", rankName);
 	Lang_PlayerTextDrawSetString(playerid, g_UiFHud[playerid][1], str);
-	PlayerTextDrawColor(playerid, g_UiFHud[playerid][1], g_UiFcColor[faction]);
-	PlayerTextDrawShow(playerid, g_UiFHud[playerid][1]);
+	PlayerTextDrawColour(playerid, PlayerText:g_UiFHud[playerid][1], g_UiFcColor[faction]);
+	PlayerTextDrawShow(playerid, PlayerText:g_UiFHud[playerid][1]);
 	if (kitCharges >= 0)
 	{
 		format(str, 64, "Kit medico: %d/%d", kitCharges, 8);
 		Lang_PlayerTextDrawSetString(playerid, g_UiFHud[playerid][2], str);
-		PlayerTextDrawColor(playerid, g_UiFHud[playerid][2], kitCharges == 0 ? -10066177 : -1);
-		PlayerTextDrawShow(playerid, g_UiFHud[playerid][2]);
-		g_UiFHudKit[playerid] = 1;
+		PlayerTextDrawColour(playerid, PlayerText:g_UiFHud[playerid][2], kitCharges == 0 ? -10066177 : -1);
+		PlayerTextDrawShow(playerid, PlayerText:g_UiFHud[playerid][2]);
+		g_UiFHudKit[playerid] = true;
 	}
 	else if (g_UiFHudKit[playerid])
 	{
-		PlayerTextDrawHide(playerid, g_UiFHud[playerid][2]);
-		g_UiFHudKit[playerid] = 0;
+		PlayerTextDrawHide(playerid, PlayerText:g_UiFHud[playerid][2]);
+		g_UiFHudKit[playerid] = false;
 	}
 }
 
@@ -5089,11 +5170,12 @@ UI_FactionHudShow(playerid, faction, rank)
 		return 0;
 	}
 	UI_FhCreate(playerid);
-	g_UiFHudShown[playerid] = 1;
-	g_UiFHudKit[playerid] = 0;
-	PlayerTextDrawShow(playerid, g_UiFHud[playerid][0]);
-	PlayerTextDrawHide(playerid, g_UiFHud[playerid][2]);
+	g_UiFHudShown[playerid] = true;
+	g_UiFHudKit[playerid] = false;
+	PlayerTextDrawShow(playerid, PlayerText:g_UiFHud[playerid][0]);
+	PlayerTextDrawHide(playerid, PlayerText:g_UiFHud[playerid][2]);
 	UI_FhApply(playerid, faction, rank, -1);
+	return 0;
 }
 
 UI_FactionHudUpdate(playerid, faction, rank, kitCharges)
@@ -5107,6 +5189,7 @@ UI_FactionHudUpdate(playerid, faction, rank, kitCharges)
 		return 0;
 	}
 	UI_FhApply(playerid, faction, rank, kitCharges);
+	return 0;
 }
 
 UI_FactionHudHide(playerid)
@@ -5115,14 +5198,15 @@ UI_FactionHudHide(playerid)
 	{
 		return 0;
 	}
-	g_UiFHudShown[playerid] = 0;
-	g_UiFHudKit[playerid] = 0;
+	g_UiFHudShown[playerid] = false;
+	g_UiFHudKit[playerid] = false;
 	for (new i = 0; i < 3; i++)
 	{
-		PlayerTextDrawHide(playerid, g_UiFHud[playerid][i]);
+		PlayerTextDrawHide(playerid, PlayerText:g_UiFHud[playerid][i]);
 	}
+	return 0;
 }
-new g_UiIHud[MAX_PLAYERS][6];
+new PlayerText:g_UiIHud[MAX_PLAYERS][6];
 new bool:g_UiIHudCreated[MAX_PLAYERS];
 new bool:g_UiIHudShown[MAX_PLAYERS];
 
@@ -5133,12 +5217,13 @@ UI_IhCreate(playerid)
 		return 0;
 	}
 	g_UiIHud[playerid][0] = UI_FhBox(playerid, 210.0, 60.0, 220.0, 58.0, 170);
-	g_UiIHud[playerid][1] = UI_FhText(playerid, (210.0 + 6.0), (60.0 + 2.0), "SEI FERITO", 0.3, 1.3, -12303105, 1);
-	g_UiIHud[playerid][2] = UI_FhText(playerid, (210.0 + 6.0), (60.0 + 21.0), "Ricovero automatico tra 3:00", 0.22, 1.0, -1, 1);
+	g_UiIHud[playerid][1] = UI_FhText(playerid, (210.0 + 6.0), (60.0 + 2.0), "SEI FERITO", 0.3, 1.3, -12303105, t_TEXT_DRAW_ALIGN:1);
+	g_UiIHud[playerid][2] = UI_FhText(playerid, (210.0 + 6.0), (60.0 + 21.0), "Ricovero automatico tra 3:00", 0.22, 1.0, -1, t_TEXT_DRAW_ALIGN:1);
 	g_UiIHud[playerid][3] = UI_FhBox(playerid, (210.0 + 6.0), (60.0 + 35.0), 208.0, 5.0, 0x444444FF);
 	g_UiIHud[playerid][4] = UI_FhBox(playerid, (210.0 + 6.0), (60.0 + 35.0), 208.0, 5.0, -12303105);
-	g_UiIHud[playerid][5] = UI_FhText(playerid, (210.0 + 6.0), (60.0 + 43.0), "Attendi un medico EMS. Non puoi muoverti.", 0.18, 0.85, -0.005729198, 1);
-	g_UiIHudCreated[playerid] = 1;
+	g_UiIHud[playerid][5] = UI_FhText(playerid, (210.0 + 6.0), (60.0 + 43.0), "Attendi un medico EMS. Non puoi muoverti.", 0.18, 0.85, _:-0.005729198, t_TEXT_DRAW_ALIGN:1);
+	g_UiIHudCreated[playerid] = true;
+	return 0;
 }
 
 UI_InjuryHudUpdate(playerid, secondsLeft)
@@ -5160,11 +5245,12 @@ UI_InjuryHudUpdate(playerid, secondsLeft)
 	Lang_PlayerTextDrawSetString(playerid, g_UiIHud[playerid][2], str);
 	new bool:warn = secondsLeft <= 30;
 	new bool:blinkOff = warn && GetTickCount() / 500 % 2 == 1;
-	PlayerTextDrawColor(playerid, g_UiIHud[playerid][2], warn ? (blinkOff ? -12303292 : -12303105) : -1);
-	PlayerTextDrawShow(playerid, g_UiIHud[playerid][2]);
+	PlayerTextDrawColour(playerid, PlayerText:g_UiIHud[playerid][2], warn ? (blinkOff ? -12303292 : -12303105) : -1);
+	PlayerTextDrawShow(playerid, PlayerText:g_UiIHud[playerid][2]);
 	new Float:fraction = (float(secondsLeft) / float(180));
-	PlayerTextDrawTextSize(playerid, g_UiIHud[playerid][4], (0.1 + ((210.0 + 6.0) + (208.0 * fraction))), 0.0);
-	PlayerTextDrawShow(playerid, g_UiIHud[playerid][4]);
+	PlayerTextDrawTextSize(playerid, PlayerText:g_UiIHud[playerid][4], (0.1 + ((210.0 + 6.0) + (208.0 * fraction))), 0.0);
+	PlayerTextDrawShow(playerid, PlayerText:g_UiIHud[playerid][4]);
+	return 0;
 }
 
 UI_InjuryHudShow(playerid, secondsLeft)
@@ -5174,12 +5260,13 @@ UI_InjuryHudShow(playerid, secondsLeft)
 		return 0;
 	}
 	UI_IhCreate(playerid);
-	g_UiIHudShown[playerid] = 1;
+	g_UiIHudShown[playerid] = true;
 	for (new i = 0; i < 6; i++)
 	{
-		PlayerTextDrawShow(playerid, g_UiIHud[playerid][i]);
+		PlayerTextDrawShow(playerid, PlayerText:g_UiIHud[playerid][i]);
 	}
 	UI_InjuryHudUpdate(playerid, secondsLeft);
+	return 0;
 }
 
 UI_InjuryHudHide(playerid)
@@ -5188,11 +5275,12 @@ UI_InjuryHudHide(playerid)
 	{
 		return 0;
 	}
-	g_UiIHudShown[playerid] = 0;
+	g_UiIHudShown[playerid] = false;
 	for (new i = 0; i < 6; i++)
 	{
-		PlayerTextDrawHide(playerid, g_UiIHud[playerid][i]);
+		PlayerTextDrawHide(playerid, PlayerText:g_UiIHud[playerid][i]);
 	}
+	return 0;
 }
 
 UI_InjuryEndShow(playerid, reason, fee)
@@ -5214,13 +5302,14 @@ UI_InjuryEndShow(playerid, reason, fee)
 		{
 			format(body, 384, "{FFFFFF}Nessun soccorso e' arrivato in tempo: sei stato ricoverato all'ospedale di All Saints e ti sei ripreso.\n\nNessuna spesa addebitata (fondi insufficienti).");
 		}
-		Lang_ShowPlayerDialog(playerid, 9327, 0, "Ricovero in ospedale", body, "OK", "");
+		Lang_ShowPlayerDialog(playerid, 9327, DIALOG_STYLE_MSGBOX, "Ricovero in ospedale", body, "OK", "");
 	}
 	else
 	{
 		format(body, 384, "{FFFFFF}Un medico EMS ti ha soccorso: sei di nuovo in piedi.\nRiprendi il gioco con prudenza.");
-		Lang_ShowPlayerDialog(playerid, 9327, 0, "Soccorso", body, "OK", "");
+		Lang_ShowPlayerDialog(playerid, 9327, DIALOG_STYLE_MSGBOX, "Soccorso", body, "OK", "");
 	}
+	return 0;
 }
 
 UI_FactionUiDestroy(playerid)
@@ -5233,26 +5322,26 @@ UI_FactionUiDestroy(playerid)
 	{
 		for (new i = 0; i < 3; i++)
 		{
-			PlayerTextDrawDestroy(playerid, g_UiFHud[playerid][i]);
-			g_UiFHud[playerid][i] = 65535;
+			PlayerTextDrawDestroy(playerid, PlayerText:g_UiFHud[playerid][i]);
+			g_UiFHud[playerid][i] = INVALID_PLAYER_TEXT_DRAW;
 		}
 	}
 	if (g_UiIHudCreated[playerid])
 	{
 		for (new i = 0; i < 6; i++)
 		{
-			PlayerTextDrawDestroy(playerid, g_UiIHud[playerid][i]);
-			g_UiIHud[playerid][i] = 65535;
+			PlayerTextDrawDestroy(playerid, PlayerText:g_UiIHud[playerid][i]);
+			g_UiIHud[playerid][i] = INVALID_PLAYER_TEXT_DRAW;
 		}
 	}
-	g_UiFHudCreated[playerid] = 0;
-	g_UiFHudShown[playerid] = 0;
-	g_UiFHudKit[playerid] = 0;
-	g_UiIHudCreated[playerid] = 0;
-	g_UiIHudShown[playerid] = 0;
+	g_UiFHudCreated[playerid] = false;
+	g_UiFHudShown[playerid] = false;
+	g_UiFHudKit[playerid] = false;
+	g_UiIHudCreated[playerid] = false;
+	g_UiIHudShown[playerid] = false;
 	g_UiFcFaction[playerid] = 0;
 	g_UiFcRank[playerid] = 0;
-	g_UiFcDuty[playerid] = 0;
+	g_UiFcDuty[playerid] = false;
 	g_UiFcOnline[playerid] = 0;
 	g_UiFcTotal[playerid] = 0;
 	g_UiFcMode[playerid] = 2;
@@ -5263,6 +5352,7 @@ UI_FactionUiDestroy(playerid)
 	{
 		g_UiFcMenuAct[playerid][i] = 0;
 	}
+	return 0;
 }
 
 // ===== modules/ui/inventory_ui.inc =====
@@ -5308,12 +5398,12 @@ new g_UiInvSel[MAX_PLAYERS];
 new g_UiInvSelItem[MAX_PLAYERS];
 new g_UiInvSelQty[MAX_PLAYERS];
 new g_UiInvPendAct[MAX_PLAYERS];
-new g_UiInvToastTd[MAX_PLAYERS][3];
+new PlayerText:g_UiInvToastTd[MAX_PLAYERS][3];
 new g_UiInvToastItem[MAX_PLAYERS][3];
 new g_UiInvToastDelta[MAX_PLAYERS][3];
 new g_UiInvToastTtl[MAX_PLAYERS][3];
 new bool:g_UiInvToastCreated[MAX_PLAYERS];
-new g_UiInvRecvTd[MAX_PLAYERS][4];
+new PlayerText:g_UiInvRecvTd[MAX_PLAYERS][4];
 new bool:g_UiInvRecvActive[MAX_PLAYERS];
 new g_UiInvRecvLeft[MAX_PLAYERS];
 new g_UiInvRecvTotal[MAX_PLAYERS];
@@ -5329,7 +5419,7 @@ bool:UI_InvItemOk(itemId)
 	return itemId >= 1 && itemId < 11;
 }
 
-bool:UI_InvParseNum(s[], &value)
+bool:UI_InvParseNum(const s[], &value)
 {
 	new i = 0, len = strlen(s), digits = 0;
 	value = 0;
@@ -5341,7 +5431,7 @@ bool:UI_InvParseNum(s[], &value)
 	{
 		if (digits >= 4)
 		{
-			return 0;
+			return false;
 		}
 		value = value * 10 + (s[i] - 48);
 		digits++;
@@ -5367,7 +5457,7 @@ bool:UI_InvSelOk(playerid)
 	new slot = g_UiInvSel[playerid];
 	if (slot < 0 || slot >= 20 || slot >= g_UiInvMax[playerid])
 	{
-		return 0;
+		return false;
 	}
 	return g_UiInvItem[playerid][slot] == g_UiInvSelItem[playerid] && g_UiInvQty[playerid][slot] > 0;
 }
@@ -5384,6 +5474,7 @@ UI_InvClear(playerid)
 		g_UiInvQty[playerid][i] = 0;
 	}
 	g_UiInvUsed[playerid] = 0;
+	return 0;
 }
 
 UI_InvSet(playerid, slot, itemId, qty)
@@ -5400,6 +5491,7 @@ UI_InvSet(playerid, slot, itemId, qty)
 	}
 	g_UiInvItem[playerid][slot] = itemId;
 	g_UiInvQty[playerid][slot] = qty;
+	return 0;
 }
 
 UI_InvMeta(playerid, slotsUsed, slotsMax, bool:bag)
@@ -5427,6 +5519,7 @@ UI_InvMeta(playerid, slotsUsed, slotsMax, bool:bag)
 	g_UiInvUsed[playerid] = slotsUsed;
 	g_UiInvMax[playerid] = slotsMax;
 	g_UiInvBag[playerid] = bag;
+	return 0;
 }
 
 UI_InvListPage(playerid, page)
@@ -5457,7 +5550,7 @@ UI_InvListPage(playerid, page)
 		g_UiInvRowCount[playerid] = 0;
 		g_UiInvNavNext[playerid] = -1;
 		g_UiInvNavPrev[playerid] = -1;
-		Lang_ShowPlayerDialog(playerid, 9400, 0, title, empty, "Chiudi", "");
+		Lang_ShowPlayerDialog(playerid, 9400, DIALOG_STYLE_MSGBOX, title, empty, "Chiudi", "");
 		return 0;
 	}
 	new pages = (n + 10 - 1) / 10;
@@ -5493,13 +5586,14 @@ UI_InvListPage(playerid, page)
 	if (page > 0)
 	{
 		strcat(body, "{FFD24D}<< Pagina precedente\t\t\n", 1024);
-		g_UiInvNavPrev[playerid] = idx++;
+		g_UiInvNavPrev[playerid] = idx;
 	}
 	if (pages > 1)
 	{
 		format(title, 64, "Inventario %d/%d - zaino %s - pag. %d/%d", used, limit, g_UiInvBag[playerid] ? "si" : "no", page + 1, pages);
 	}
-	Lang_ShowPlayerDialog(playerid, 9400, 5, title, body, "Apri", "Chiudi");
+	Lang_ShowPlayerDialog(playerid, 9400, DIALOG_STYLE_TABLIST_HEADERS, title, body, "Apri", "Chiudi");
+	return 0;
 }
 
 UI_InvShow(playerid)
@@ -5510,6 +5604,7 @@ UI_InvShow(playerid)
 	}
 	UI_InvSelReset(playerid);
 	UI_InvListPage(playerid, 0);
+	return 0;
 }
 
 UI_InvActionShow(playerid)
@@ -5542,7 +5637,8 @@ UI_InvActionShow(playerid)
 		strcat(body, "{888888}Dai (non trasferibile){FFFFFF}\n{888888}Getta (non droppabile){FFFFFF}\n", 256);
 	}
 	strcat(body, "Descrizione", 256);
-	Lang_ShowPlayerDialog(playerid, 9401, 2, title, body, "Scegli", "Indietro");
+	Lang_ShowPlayerDialog(playerid, 9401, DIALOG_STYLE_LIST, title, body, "Scegli", "Indietro");
+	return 0;
 }
 
 UI_InvItemShow(playerid, slot)
@@ -5560,6 +5656,7 @@ UI_InvItemShow(playerid, slot)
 	g_UiInvSelItem[playerid] = g_UiInvItem[playerid][slot];
 	g_UiInvSelQty[playerid] = 0;
 	UI_InvActionShow(playerid);
+	return 0;
 }
 
 UI_InvInfoShow(playerid)
@@ -5571,26 +5668,26 @@ UI_InvInfoShow(playerid)
 	new flags = g_UiInvFlags[itemId];
 	format(title, 64, "%s", name);
 	format(body, 384, "{FFFFFF}%s\n\nPosseduti: {FFD24D}%d{FFFFFF} (max %d per slot)\nUso: {FFD24D}%s{FFFFFF}\nDare/Gettare: {FFD24D}%s", desc, g_UiInvQty[playerid][slot], g_UiInvStack[itemId], flags & 1 ? "si" : "no", flags & 2 ? "si" : "no");
-	Lang_ShowPlayerDialog(playerid, 9402, 0, title, body, "Indietro", "Chiudi");
+	Lang_ShowPlayerDialog(playerid, 9402, DIALOG_STYLE_MSGBOX, title, body, "Indietro", "Chiudi");
 }
 
-UI_InvQtyShow(playerid, err[])
+UI_InvQtyShow(playerid, const err[])
 {
 	new slot = g_UiInvSel[playerid], itemId = g_UiInvItem[playerid][slot], maxQ = g_UiInvQty[playerid][slot];
 	new body[320], title[64], name[24];
 	strcopy(name, g_UiInvName[itemId], 24);
 	format(title, 64, "%s: quantita'", name);
 	format(body, 320, "%s{FFFFFF}Quante unita' di {FFD24D}%s{FFFFFF} vuoi %s?\nInserisci un numero da {FFD24D}1{FFFFFF} a {FFD24D}%d{FFFFFF}.", err, name, g_UiInvPendAct[playerid] == 1 ? "dare" : "gettare", maxQ);
-	Lang_ShowPlayerDialog(playerid, 9403, 1, title, body, "Avanti", "Indietro");
+	Lang_ShowPlayerDialog(playerid, 9403, DIALOG_STYLE_INPUT, title, body, "Avanti", "Indietro");
 }
 
-UI_InvTargetShow(playerid, err[])
+UI_InvTargetShow(playerid, const err[])
 {
 	new body[320], title[64], name[24], itemId = g_UiInvSelItem[playerid];
 	strcopy(name, g_UiInvName[itemId], 24);
 	format(title, 64, "Dai %s x%d", name, g_UiInvSelQty[playerid]);
 	format(body, 320, "%s{FFFFFF}Inserisci l'{FFD24D}ID{FFFFFF} del giocatore vicino a cui dare l'oggetto.\nDeve trovarsi entro %.0f metri e accettare lo scambio.", err, 3.0);
-	Lang_ShowPlayerDialog(playerid, 9404, 1, title, body, "Invia", "Indietro");
+	Lang_ShowPlayerDialog(playerid, 9404, DIALOG_STYLE_INPUT, title, body, "Invia", "Indietro");
 }
 
 UI_InvDropConfirmShow(playerid)
@@ -5598,7 +5695,7 @@ UI_InvDropConfirmShow(playerid)
 	new body[320], name[24], itemId = g_UiInvSelItem[playerid];
 	strcopy(name, g_UiInvName[itemId], 24);
 	format(body, 320, "{FFFFFF}Gettare {FFD24D}%s x%d{FFFFFF}?\n\n{FF6666}L'oggetto finira' a terra e scomparira' dopo %d minuti. Chiunque vicino potra' raccoglierlo.", name, g_UiInvSelQty[playerid], 10);
-	Lang_ShowPlayerDialog(playerid, 9405, 0, "Conferma: getta", body, "Getta", "Annulla");
+	Lang_ShowPlayerDialog(playerid, 9405, DIALOG_STYLE_MSGBOX, "Conferma: getta", body, "Getta", "Annulla");
 }
 
 UI_InvTimerStop(playerid)
@@ -5614,21 +5711,21 @@ UI_InvTimerEnsure(playerid)
 {
 	if (g_UiInvTimer[playerid] == 0)
 	{
-		g_UiInvTimer[playerid] = SetTimerEx("UI_InvOnTimer", 1000, 1, "d", playerid);
+		g_UiInvTimer[playerid] = SetTimerEx("UI_InvOnTimer", 1000, true, "d", playerid);
 	}
 }
 
-PlayerText:UI_InvText(playerid, Float:x, Float:y, text[], Float:lw, Float:lh, color, t_TEXT_DRAW_ALIGN:align)
+PlayerText:UI_InvText(playerid, Float:x, Float:y, const text[], Float:lw, Float:lh, color, t_TEXT_DRAW_ALIGN:align)
 {
 	new PlayerText:td = Lang_CreatePlayerTextDraw(playerid, x, y, text);
 	PlayerTextDrawLetterSize(playerid, td, lw, lh);
 	PlayerTextDrawAlignment(playerid, td, align);
-	PlayerTextDrawColor(playerid, td, color);
-	PlayerTextDrawFont(playerid, td, 1);
-	PlayerTextDrawSetProportional(playerid, td, 1);
+	PlayerTextDrawColour(playerid, td, color);
+	PlayerTextDrawFont(playerid, td, TEXT_DRAW_FONT_1);
+	PlayerTextDrawSetProportional(playerid, td, true);
 	PlayerTextDrawSetOutline(playerid, td, 1);
 	PlayerTextDrawSetShadow(playerid, td, 0);
-	PlayerTextDrawBackgroundColor(playerid, td, 255);
+	PlayerTextDrawBackgroundColour(playerid, td, 255);
 	return td;
 }
 
@@ -5637,9 +5734,9 @@ PlayerText:UI_InvBox(playerid, Float:x, Float:y, Float:w, Float:h, color)
 	new PlayerText:td = Lang_CreatePlayerTextDraw(playerid, x, y, "_");
 	PlayerTextDrawLetterSize(playerid, td, 0.0, (h / 9.0));
 	PlayerTextDrawTextSize(playerid, td, (x + w), 0.0);
-	PlayerTextDrawUseBox(playerid, td, 1);
-	PlayerTextDrawBoxColor(playerid, td, color);
-	PlayerTextDrawFont(playerid, td, 1);
+	PlayerTextDrawUseBox(playerid, td, true);
+	PlayerTextDrawBoxColour(playerid, td, color);
+	PlayerTextDrawFont(playerid, td, TEXT_DRAW_FONT_1);
 	PlayerTextDrawSetShadow(playerid, td, 0);
 	PlayerTextDrawSetOutline(playerid, td, 0);
 	return td;
@@ -5649,11 +5746,11 @@ UI_InvRecvDestroyTds(playerid)
 {
 	for (new i = 0; i < 4; i++)
 	{
-		if (g_UiInvRecvTd[playerid][i] != 65535)
+		if (g_UiInvRecvTd[playerid][i] != INVALID_PLAYER_TEXT_DRAW)
 		{
-			PlayerTextDrawDestroy(playerid, g_UiInvRecvTd[playerid][i]);
+			PlayerTextDrawDestroy(playerid, PlayerText:g_UiInvRecvTd[playerid][i]);
 		}
-		g_UiInvRecvTd[playerid][i] = 65535;
+		g_UiInvRecvTd[playerid][i] = INVALID_PLAYER_TEXT_DRAW;
 	}
 }
 
@@ -5662,7 +5759,7 @@ UI_InvRecvRefresh(playerid)
 	new str[48], left = g_UiInvRecvLeft[playerid], total = g_UiInvRecvTotal[playerid];
 	format(str, 48, "Scambio in attesa: %d s", left);
 	Lang_PlayerTextDrawSetString(playerid, g_UiInvRecvTd[playerid][1], str);
-	new Float:fraction = Float:((total > 0 ? (float(left) / float(total)) : 0));
+	new Float:fraction = (total > 0 ? (float(left) / float(total)) : 0.0);
 	if ((fraction < 0.0))
 	{
 		fraction = 0.0;
@@ -5671,14 +5768,14 @@ UI_InvRecvRefresh(playerid)
 	{
 		fraction = 1.0;
 	}
-	PlayerTextDrawTextSize(playerid, g_UiInvRecvTd[playerid][3], (0.1 + ((210.0 + 6.0) + (208.0 * fraction))), 0.0);
-	PlayerTextDrawShow(playerid, g_UiInvRecvTd[playerid][1]);
-	PlayerTextDrawShow(playerid, g_UiInvRecvTd[playerid][3]);
+	PlayerTextDrawTextSize(playerid, PlayerText:g_UiInvRecvTd[playerid][3], (0.1 + ((210.0 + 6.0) + (208.0 * fraction))), 0.0);
+	PlayerTextDrawShow(playerid, PlayerText:g_UiInvRecvTd[playerid][1]);
+	PlayerTextDrawShow(playerid, PlayerText:g_UiInvRecvTd[playerid][3]);
 }
 
 UI_InvRecvEnd(playerid)
 {
-	g_UiInvRecvActive[playerid] = 0;
+	g_UiInvRecvActive[playerid] = false;
 	g_UiInvRecvLeft[playerid] = 0;
 	UI_InvRecvDestroyTds(playerid);
 }
@@ -5687,19 +5784,19 @@ bool:UI_InvNeedTimer(playerid)
 {
 	if (g_UiInvRecvActive[playerid])
 	{
-		return 1;
+		return true;
 	}
 	for (new i = 0; i < 3; i++)
 	{
 		if (g_UiInvToastTtl[playerid][i] > 0)
 		{
-			return 1;
+			return true;
 		}
 	}
-	return 0;
+	return false;
 }
 
-UI_InvGiveConfirmShow(playerid, giverName[], itemId, qty, ttlSec)
+UI_InvGiveConfirmShow(playerid, const giverName[], itemId, qty, ttlSec)
 {
 	if (!UI_InvValid(playerid) || !UI_InvItemOk(itemId) || qty <= 0)
 	{
@@ -5715,24 +5812,25 @@ UI_InvGiveConfirmShow(playerid, giverName[], itemId, qty, ttlSec)
 	}
 	for (new i = 0; i < 4; i++)
 	{
-		g_UiInvRecvTd[playerid][i] = 65535;
+		g_UiInvRecvTd[playerid][i] = INVALID_PLAYER_TEXT_DRAW;
 	}
 	g_UiInvRecvTd[playerid][0] = UI_InvBox(playerid, 210.0, 124.0, 220.0, 26.0, 170);
-	g_UiInvRecvTd[playerid][1] = UI_InvText(playerid, (210.0 + 6.0), (124.0 + 2.0), "Scambio in attesa", 0.24, 1.1, -2994689, 1);
+	g_UiInvRecvTd[playerid][1] = UI_InvText(playerid, (210.0 + 6.0), (124.0 + 2.0), "Scambio in attesa", 0.24, 1.1, -2994689, t_TEXT_DRAW_ALIGN:1);
 	g_UiInvRecvTd[playerid][2] = UI_InvBox(playerid, (210.0 + 6.0), (124.0 + 17.0), 208.0, 5.0, 0x444444FF);
 	g_UiInvRecvTd[playerid][3] = UI_InvBox(playerid, (210.0 + 6.0), (124.0 + 17.0), 208.0, 5.0, -2994689);
-	g_UiInvRecvActive[playerid] = 1;
+	g_UiInvRecvActive[playerid] = true;
 	g_UiInvRecvTotal[playerid] = ttlSec;
 	g_UiInvRecvLeft[playerid] = ttlSec;
-	PlayerTextDrawShow(playerid, g_UiInvRecvTd[playerid][0]);
-	PlayerTextDrawShow(playerid, g_UiInvRecvTd[playerid][2]);
+	PlayerTextDrawShow(playerid, PlayerText:g_UiInvRecvTd[playerid][0]);
+	PlayerTextDrawShow(playerid, PlayerText:g_UiInvRecvTd[playerid][2]);
 	UI_InvRecvRefresh(playerid);
 	UI_InvTimerEnsure(playerid);
 	new body[320], name[24], giver[25];
 	strcopy(name, g_UiInvName[itemId], 24);
 	strcopy(giver, giverName, 25);
 	format(body, 320, "{FFD24D}%s{FFFFFF} vuole darti {FFD24D}%s x%d{FFFFFF}.\n\nLa richiesta scade tra {FF6666}%d{FFFFFF} secondi.\nSe non c'e' posto nel tuo inventario lo scambio fallira'.", giver, name, qty, ttlSec);
-	Lang_ShowPlayerDialog(playerid, 9406, 0, "Oggetto in arrivo", body, "Accetta", "Rifiuta");
+	Lang_ShowPlayerDialog(playerid, 9406, DIALOG_STYLE_MSGBOX, "Oggetto in arrivo", body, "Accetta", "Rifiuta");
+	return 0;
 }
 
 UI_InvGiveConfirmClose(playerid)
@@ -5753,6 +5851,7 @@ UI_InvGiveConfirmClose(playerid)
 	{
 		UI_InvTimerStop(playerid);
 	}
+	return 0;
 }
 
 UI_InvToastCreate(playerid)
@@ -5763,12 +5862,13 @@ UI_InvToastCreate(playerid)
 	}
 	for (new i = 0; i < 3; i++)
 	{
-		g_UiInvToastTd[playerid][i] = UI_InvText(playerid, 130.0, (404.0 + (12.0 * _:(i))), "_", 0.22, 1.0, 0x66DD66FF, 1);
+		g_UiInvToastTd[playerid][i] = UI_InvText(playerid, 130.0, (404.0 + (12.0 * _:(i))), "_", 0.22, 1.0, 0x66DD66FF, t_TEXT_DRAW_ALIGN:1);
 		g_UiInvToastTtl[playerid][i] = 0;
 		g_UiInvToastItem[playerid][i] = 0;
 		g_UiInvToastDelta[playerid][i] = 0;
 	}
-	g_UiInvToastCreated[playerid] = 1;
+	g_UiInvToastCreated[playerid] = true;
+	return 0;
 }
 
 UI_InvToastRedraw(playerid)
@@ -5782,15 +5882,16 @@ UI_InvToastRedraw(playerid)
 	{
 		if (g_UiInvToastTtl[playerid][i] <= 0 || !UI_InvItemOk(g_UiInvToastItem[playerid][i]))
 		{
-			PlayerTextDrawHide(playerid, g_UiInvToastTd[playerid][i]);
+			PlayerTextDrawHide(playerid, PlayerText:g_UiInvToastTd[playerid][i]);
 			continue;
 		}
 		new delta = g_UiInvToastDelta[playerid][i];
 		format(str, 48, "%s%d %s", delta > 0 ? "+" : "", delta, g_UiInvName[g_UiInvToastItem[playerid][i]]);
 		Lang_PlayerTextDrawSetString(playerid, g_UiInvToastTd[playerid][i], str);
-		PlayerTextDrawColor(playerid, g_UiInvToastTd[playerid][i], delta > 0 ? 0x66DD66FF : -10066177);
-		PlayerTextDrawShow(playerid, g_UiInvToastTd[playerid][i]);
+		PlayerTextDrawColour(playerid, PlayerText:g_UiInvToastTd[playerid][i], delta > 0 ? 0x66DD66FF : -10066177);
+		PlayerTextDrawShow(playerid, PlayerText:g_UiInvToastTd[playerid][i]);
 	}
+	return 0;
 }
 
 UI_InvToast(playerid, itemId, delta)
@@ -5819,6 +5920,7 @@ UI_InvToast(playerid, itemId, delta)
 	}
 	UI_InvToastRedraw(playerid);
 	UI_InvTimerEnsure(playerid);
+	return 0;
 }
 
 public UI_InvOnTimer(playerid)
@@ -5865,11 +5967,11 @@ public UI_InvOnTimer(playerid)
 	return 1;
 }
 
-bool:UI_InvOnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
+bool:UI_InvOnDialogResponse(playerid, dialogid, response, listitem, const inputtext[])
 {
 	if (!UI_InvValid(playerid) || dialogid < 9400 || dialogid > 9406)
 	{
-		return 0;
+		return false;
 	}
 	switch (dialogid)
 	{
@@ -5877,17 +5979,17 @@ bool:UI_InvOnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		{
 			if (!response)
 			{
-				return 1;
+				return true;
 			}
 			if (listitem < 0)
 			{
-				return 1;
+				return true;
 			}
 			if (listitem < g_UiInvRowCount[playerid])
 			{
 				new slot = g_UiInvRows[playerid][listitem];
 				UI_InvItemShow(playerid, slot);
-				return 1;
+				return true;
 			}
 			if (listitem == g_UiInvNavNext[playerid])
 			{
@@ -5901,7 +6003,7 @@ bool:UI_InvOnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			{
 				UI_InvListPage(playerid, g_UiInvPage[playerid]);
 			}
-			return 1;
+			return true;
 		}
 		case 9401:
 		{
@@ -5909,12 +6011,12 @@ bool:UI_InvOnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			{
 				UI_InvSelReset(playerid);
 				UI_InvListPage(playerid, g_UiInvPage[playerid]);
-				return 1;
+				return true;
 			}
 			if (!UI_InvSelOk(playerid))
 			{
 				UI_InvActionShow(playerid);
-				return 1;
+				return true;
 			}
 			new slot = g_UiInvSel[playerid], itemId = g_UiInvSelItem[playerid], flags = g_UiInvFlags[itemId];
 			switch (listitem)
@@ -5925,7 +6027,7 @@ bool:UI_InvOnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					{
 						SendClientMessage(playerid, -10066177, "Questo oggetto non si puo' usare.");
 						UI_InvActionShow(playerid);
-						return 1;
+						return true;
 					}
 					UI_InvSelReset(playerid);
 					UI_OnInvUse(playerid, slot);
@@ -5936,7 +6038,7 @@ bool:UI_InvOnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					{
 						SendClientMessage(playerid, -10066177, listitem == 1 ? "Questo oggetto non si puo' dare." : "Questo oggetto non si puo' gettare.");
 						UI_InvActionShow(playerid);
-						return 1;
+						return true;
 					}
 					g_UiInvPendAct[playerid] = listitem;
 					g_UiInvSelQty[playerid] = 1;
@@ -5962,7 +6064,7 @@ bool:UI_InvOnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					UI_InvActionShow(playerid);
 				}
 			}
-			return 1;
+			return true;
 		}
 		case 9402:
 		{
@@ -5974,19 +6076,19 @@ bool:UI_InvOnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			{
 				UI_InvSelReset(playerid);
 			}
-			return 1;
+			return true;
 		}
 		case 9403:
 		{
 			if (!response)
 			{
 				UI_InvActionShow(playerid);
-				return 1;
+				return true;
 			}
 			if (!UI_InvSelOk(playerid))
 			{
 				UI_InvActionShow(playerid);
-				return 1;
+				return true;
 			}
 			new q = 0, maxQ = g_UiInvQty[playerid][g_UiInvSel[playerid]];
 			if (!UI_InvParseNum(inputtext, q) || q < 1 || q > maxQ)
@@ -5994,7 +6096,7 @@ bool:UI_InvOnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				new err[144];
 				format(err, 144, "{FF6666}Quantita' non valida: serve un numero da 1 a %d.\n\n", maxQ);
 				UI_InvQtyShow(playerid, err);
-				return 1;
+				return true;
 			}
 			g_UiInvSelQty[playerid] = q;
 			if (g_UiInvPendAct[playerid] == 1)
@@ -6005,7 +6107,7 @@ bool:UI_InvOnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			{
 				UI_InvDropConfirmShow(playerid);
 			}
-			return 1;
+			return true;
 		}
 		case 9404:
 		{
@@ -6019,56 +6121,56 @@ bool:UI_InvOnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				{
 					UI_InvActionShow(playerid);
 				}
-				return 1;
+				return true;
 			}
 			if (!UI_InvSelOk(playerid) || g_UiInvSelQty[playerid] < 1 || g_UiInvSelQty[playerid] > g_UiInvQty[playerid][g_UiInvSel[playerid]])
 			{
 				UI_InvActionShow(playerid);
-				return 1;
+				return true;
 			}
 			new target = 0;
 			if (!UI_InvParseNum(inputtext, target))
 			{
 				UI_InvTargetShow(playerid, "{FF6666}Inserisci l'ID numerico del giocatore.\n\n");
-				return 1;
+				return true;
 			}
 			if (target < 0 || target >= MAX_PLAYERS || !IsPlayerConnected(target))
 			{
 				UI_InvTargetShow(playerid, "{FF6666}ID non valido o giocatore non connesso.\n\n");
-				return 1;
+				return true;
 			}
 			if (target == playerid)
 			{
 				UI_InvTargetShow(playerid, "{FF6666}Non puoi dare oggetti a te stesso.\n\n");
-				return 1;
+				return true;
 			}
 			new slot = g_UiInvSel[playerid], qty = g_UiInvSelQty[playerid];
 			UI_InvSelReset(playerid);
 			UI_OnInvGive(playerid, slot, target, qty);
-			return 1;
+			return true;
 		}
 		case 9405:
 		{
 			if (!response)
 			{
 				UI_InvActionShow(playerid);
-				return 1;
+				return true;
 			}
 			if (!UI_InvSelOk(playerid) || g_UiInvSelQty[playerid] < 1 || g_UiInvSelQty[playerid] > g_UiInvQty[playerid][g_UiInvSel[playerid]])
 			{
 				UI_InvActionShow(playerid);
-				return 1;
+				return true;
 			}
 			new slot = g_UiInvSel[playerid], qty = g_UiInvSelQty[playerid];
 			UI_InvSelReset(playerid);
 			UI_OnInvDrop(playerid, slot, qty);
-			return 1;
+			return true;
 		}
 		case 9406:
 		{
 			if (!g_UiInvRecvActive[playerid])
 			{
-				return 1;
+				return true;
 			}
 			UI_InvRecvEnd(playerid);
 			if (!UI_InvNeedTimer(playerid))
@@ -6076,10 +6178,10 @@ bool:UI_InvOnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				UI_InvTimerStop(playerid);
 			}
 			UI_OnInvGiveReply(playerid, response ? 1 : 0);
-			return 1;
+			return true;
 		}
 	}
-	return 0;
+	return false;
 }
 
 UI_InvUiDestroy(playerid)
@@ -6093,27 +6195,28 @@ UI_InvUiDestroy(playerid)
 	{
 		for (new i = 0; i < 3; i++)
 		{
-			PlayerTextDrawDestroy(playerid, g_UiInvToastTd[playerid][i]);
-			g_UiInvToastTd[playerid][i] = 65535;
+			PlayerTextDrawDestroy(playerid, PlayerText:g_UiInvToastTd[playerid][i]);
+			g_UiInvToastTd[playerid][i] = INVALID_PLAYER_TEXT_DRAW;
 			g_UiInvToastTtl[playerid][i] = 0;
 			g_UiInvToastItem[playerid][i] = 0;
 			g_UiInvToastDelta[playerid][i] = 0;
 		}
 	}
-	g_UiInvToastCreated[playerid] = 0;
+	g_UiInvToastCreated[playerid] = false;
 	if (g_UiInvRecvActive[playerid])
 	{
 		UI_InvRecvEnd(playerid);
 	}
-	g_UiInvRecvActive[playerid] = 0;
+	g_UiInvRecvActive[playerid] = false;
 	UI_InvClear(playerid);
 	g_UiInvMax[playerid] = 0;
-	g_UiInvBag[playerid] = 0;
+	g_UiInvBag[playerid] = false;
 	g_UiInvPage[playerid] = 0;
 	g_UiInvRowCount[playerid] = 0;
 	g_UiInvNavNext[playerid] = -1;
 	g_UiInvNavPrev[playerid] = -1;
 	UI_InvSelReset(playerid);
+	return 0;
 }
 
 // ===== modules/ui/bank_ui.inc =====
@@ -6160,7 +6263,7 @@ UI_BankFmt(value, dest[], size)
 	{
 		value = -value;
 	}
-	valstr(s, value, 0);
+	valstr(s, value, false);
 	len = strlen(s);
 	dest[0] = 0;
 	if (neg)
@@ -6180,7 +6283,7 @@ UI_BankFmt(value, dest[], size)
 	}
 }
 
-bool:UI_BankParseAmount(s[], &value)
+bool:UI_BankParseAmount(const s[], &value)
 {
 	new i = 0, len = strlen(s), digits = 0;
 	value = 0;
@@ -6192,7 +6295,7 @@ bool:UI_BankParseAmount(s[], &value)
 	{
 		if (digits >= 9)
 		{
-			return 0;
+			return false;
 		}
 		value = value * 10 + (s[i] - 48);
 		digits++;
@@ -6205,7 +6308,7 @@ bool:UI_BankParseAmount(s[], &value)
 	return digits > 0 && i == len && value >= 1;
 }
 
-UI_BankFindTarget(input[])
+UI_BankFindTarget(const input[])
 {
 	new text[25], len = strlen(input), start = 0, end = len;
 	while (start < len && input[start] == 32)
@@ -6221,12 +6324,12 @@ UI_BankFindTarget(input[])
 		return -1;
 	}
 	strmid(text, input, start, end, 25);
-	new bool:numeric = 1;
+	new bool:numeric = true;
 	for (new i = 0; text[i] != 0; i++)
 	{
 		if (text[i] < 48 || text[i] > 57)
 		{
-			numeric = 0;
+			numeric = false;
 			break;
 		}
 	}
@@ -6247,11 +6350,11 @@ UI_BankFindTarget(input[])
 			continue;
 		}
 		GetPlayerName(p, name, 25);
-		if (!strcmp(name, text, 1, 0x7FFFFFFF))
+		if (!strcmp(name, text, true, 0x7FFFFFFF))
 		{
 			return p;
 		}
-		if (strfind(name, text, 1, 0) != -1)
+		if (strfind(name, text, true, 0) != -1)
 		{
 			if (found != -1)
 			{
@@ -6281,13 +6384,13 @@ UI_BankTimerEnsure(playerid)
 {
 	if (g_UiBkTimer[playerid] == 0)
 	{
-		g_UiBkTimer[playerid] = SetTimerEx("UI_BankOnTimer", 1000, 1, "d", playerid);
+		g_UiBkTimer[playerid] = SetTimerEx("UI_BankOnTimer", 1000, true, "d", playerid);
 	}
 }
 
 UI_BankConfReset(playerid)
 {
-	g_UiBkConfActive[playerid] = 0;
+	g_UiBkConfActive[playerid] = false;
 	g_UiBkConfTarget[playerid] = -1;
 	g_UiBkConfAmount[playerid] = 0;
 	g_UiBkConfLeft[playerid] = 0;
@@ -6307,6 +6410,7 @@ UI_BankSetBalance(playerid, cash, bank)
 	}
 	g_UiBkCash[playerid] = cash < 0 ? 0 : cash;
 	g_UiBkBank[playerid] = bank < 0 ? 0 : bank;
+	return 0;
 }
 
 UI_BankSetLimits(playerid, depositMax, withdrawMax, withdrawLeft, xferMin, xferMax, sendLeft)
@@ -6321,6 +6425,7 @@ UI_BankSetLimits(playerid, depositMax, withdrawMax, withdrawLeft, xferMin, xferM
 	g_UiBkXferMin[playerid] = xferMin < 1 ? 1 : xferMin;
 	g_UiBkXferMax[playerid] = xferMax < 0 ? 0 : xferMax;
 	g_UiBkSendLeft[playerid] = sendLeft;
+	return 0;
 }
 
 UI_BankToastCreate(playerid)
@@ -6331,30 +6436,32 @@ UI_BankToastCreate(playerid)
 	}
 	new PlayerText:td = Lang_CreatePlayerTextDraw(playerid, 130.0, 380.0, "_");
 	PlayerTextDrawLetterSize(playerid, td, 0.22, 1.0);
-	PlayerTextDrawAlignment(playerid, td, 1);
-	PlayerTextDrawColor(playerid, td, 0x66DD66FF);
-	PlayerTextDrawFont(playerid, td, 1);
-	PlayerTextDrawSetProportional(playerid, td, 1);
+	PlayerTextDrawAlignment(playerid, td, TEXT_DRAW_ALIGN_LEFT);
+	PlayerTextDrawColour(playerid, td, 0x66DD66FF);
+	PlayerTextDrawFont(playerid, td, TEXT_DRAW_FONT_1);
+	PlayerTextDrawSetProportional(playerid, td, true);
 	PlayerTextDrawSetOutline(playerid, td, 1);
 	PlayerTextDrawSetShadow(playerid, td, 0);
-	PlayerTextDrawBackgroundColor(playerid, td, 255);
-	g_UiBkToastTd[playerid] = td;
-	g_UiBkToastCreated[playerid] = 1;
+	PlayerTextDrawBackgroundColour(playerid, td, 255);
+	g_UiBkToastTd[playerid] = _:td;
+	g_UiBkToastCreated[playerid] = true;
+	return 0;
 }
 
-UI_BankToast(playerid, text[], bool:ok)
+UI_BankToast(playerid, const text[], bool:ok)
 {
 	if (!UI_BankValid(playerid) || !IsPlayerConnected(playerid) || text[0] == 0)
 	{
 		return 0;
 	}
 	UI_BankToastCreate(playerid);
-	new PlayerText:td = g_UiBkToastTd[playerid];
+	new PlayerText:td = PlayerText:g_UiBkToastTd[playerid];
 	Lang_PlayerTextDrawSetString(playerid, td, text);
-	PlayerTextDrawColor(playerid, td, ok ? 0x66DD66FF : -10066177);
+	PlayerTextDrawColour(playerid, td, ok ? 0x66DD66FF : -10066177);
 	PlayerTextDrawShow(playerid, td);
 	g_UiBkToastTtl[playerid] = 4;
 	UI_BankTimerEnsure(playerid);
+	return 0;
 }
 
 UI_BankMenuShow(playerid)
@@ -6367,7 +6474,7 @@ UI_BankMenuShow(playerid)
 	format(body, 320, "Operazione\tDettaglio\nSaldo\t{66DD66}$%s\nDeposita\tContanti: $%s\nPrelievo\tBanca: $%s\nBonifico\t{FFD24D}commissione inclusa\nEstratto conto\tultime %d righe", a, b, c, 15);
 	g_UiBkOp[playerid] = 0;
 	g_UiBkTarget[playerid] = -1;
-	Lang_ShowPlayerDialog(playerid, 9500, 5, title, body, "Scegli", "Chiudi");
+	Lang_ShowPlayerDialog(playerid, 9500, DIALOG_STYLE_TABLIST_HEADERS, title, body, "Scegli", "Chiudi");
 }
 
 UI_BankMenu(playerid, bool:counter)
@@ -6378,6 +6485,7 @@ UI_BankMenu(playerid, bool:counter)
 	}
 	g_UiBkCounter[playerid] = counter;
 	UI_BankMenuShow(playerid);
+	return 0;
 }
 
 UI_BankBalanceShow(playerid)
@@ -6405,7 +6513,7 @@ UI_BankBalanceShow(playerid)
 		strcopy(snd, "{AAAAAA}n/d", 48);
 	}
 	format(body, 512, "{FFFFFF}Contanti: {66DD66}$%s\n{FFFFFF}Conto bancario: {66DD66}$%s\n{FFFFFF}Totale: {66DD66}$%s\n\n{FFFFFF}Prelevabile oggi: %s\n{FFFFFF}Inviabile oggi: %s", cash, bank, total, wd, snd);
-	Lang_ShowPlayerDialog(playerid, 9505, 0, "Saldo", body, "Menu", "Chiudi");
+	Lang_ShowPlayerDialog(playerid, 9505, DIALOG_STYLE_MSGBOX, "Saldo", body, "Menu", "Chiudi");
 }
 
 bool:UI_BankRange(playerid, op, &lo, &hi)
@@ -6449,7 +6557,7 @@ bool:UI_BankRange(playerid, op, &lo, &hi)
 		default:
 		{
 			hi = 0;
-			return 0;
+			return false;
 		}
 	}
 	if (hi > 0x3B9ACA00)
@@ -6459,7 +6567,7 @@ bool:UI_BankRange(playerid, op, &lo, &hi)
 	return hi >= lo;
 }
 
-UI_BankAmountShow(playerid, op, err[])
+UI_BankAmountShow(playerid, op, const err[])
 {
 	new lo = 0, hi = 0;
 	if (!UI_BankRange(playerid, op, lo, hi))
@@ -6481,7 +6589,7 @@ UI_BankAmountShow(playerid, op, err[])
 			}
 		}
 		SendClientMessage(playerid, -10066177, msg);
-		UI_BankToast(playerid, "Operazione non disponibile", 0);
+		UI_BankToast(playerid, "Operazione non disponibile", false);
 		UI_BankMenuShow(playerid);
 		return 0;
 	}
@@ -6510,14 +6618,15 @@ UI_BankAmountShow(playerid, op, err[])
 		}
 	}
 	format(body, 512, "%s{FFFFFF}%s\nImporto ammesso: da {FFD24D}$%s{FFFFFF} a {FFD24D}$%s{FFFFFF}.\nInserisci un numero intero:", err, sub, sLo, sHi);
-	Lang_ShowPlayerDialog(playerid, 9501, 1, title, body, "Avanti", "Indietro");
+	Lang_ShowPlayerDialog(playerid, 9501, DIALOG_STYLE_INPUT, title, body, "Avanti", "Indietro");
+	return 0;
 }
 
-UI_BankTargetShow(playerid, err[])
+UI_BankTargetShow(playerid, const err[])
 {
 	new body[320];
 	format(body, 320, "%s{FFFFFF}Inserisci l'{FFD24D}ID{FFFFFF} o parte del {FFD24D}nome{FFFFFF} del giocatore online che riceve il bonifico.\nIl destinatario non deve confermare: il credito e' immediato.", err);
-	Lang_ShowPlayerDialog(playerid, 9502, 1, "Bonifico: destinatario", body, "Avanti", "Indietro");
+	Lang_ShowPlayerDialog(playerid, 9502, DIALOG_STYLE_INPUT, "Bonifico: destinatario", body, "Avanti", "Indietro");
 }
 
 UI_BankTransferConfirm(playerid, targetId, amount, fee, balanceAfter, ttlSec)
@@ -6534,7 +6643,7 @@ UI_BankTransferConfirm(playerid, targetId, amount, fee, balanceAfter, ttlSec)
 	{
 		ttlSec = 30;
 	}
-	g_UiBkConfActive[playerid] = 1;
+	g_UiBkConfActive[playerid] = true;
 	g_UiBkConfTarget[playerid] = targetId;
 	g_UiBkConfAmount[playerid] = amount;
 	g_UiBkConfLeft[playerid] = ttlSec;
@@ -6546,7 +6655,8 @@ UI_BankTransferConfirm(playerid, targetId, amount, fee, balanceAfter, ttlSec)
 	UI_BankFmt(amount + fee, sTotal, 16);
 	UI_BankFmt(balanceAfter, sAfter, 16);
 	format(body, 512, "{FFFFFF}Destinatario: {FFD24D}%s (ID %d)\n{FFFFFF}Importo: {66DD66}$%s\n{FFFFFF}Commissione: {FF6666}$%s\n{FFFFFF}Totale addebitato: {FF6666}$%s\n{FFFFFF}Saldo dopo l'operazione: {66DD66}$%s\n\n{AAAAAA}La conferma scade tra %d secondi.", g_UiBkConfName[playerid], targetId, sAmount, sFee, sTotal, sAfter, ttlSec);
-	Lang_ShowPlayerDialog(playerid, 9503, 0, "Conferma bonifico", body, "Conferma", "Annulla");
+	Lang_ShowPlayerDialog(playerid, 9503, DIALOG_STYLE_MSGBOX, "Conferma bonifico", body, "Conferma", "Annulla");
+	return 0;
 }
 
 UI_BankTransferConfirmClose(playerid)
@@ -6564,6 +6674,7 @@ UI_BankTransferConfirmClose(playerid)
 	{
 		UI_BankTimerStop(playerid);
 	}
+	return 0;
 }
 
 UI_BankStatementBegin(playerid, page, bool:hasNext)
@@ -6583,9 +6694,10 @@ UI_BankStatementBegin(playerid, page, bool:hasNext)
 	g_UiBkStPage[playerid] = page;
 	g_UiBkStNext[playerid] = hasNext && page < 4;
 	g_UiBkStCount[playerid] = 0;
+	return 0;
 }
 
-UI_BankStatementAdd(playerid, when[], kind[], other[], amount, balanceAfter)
+UI_BankStatementAdd(playerid, const when[], const kind[], const other[], amount, balanceAfter)
 {
 	if (!UI_BankValid(playerid))
 	{
@@ -6602,6 +6714,7 @@ UI_BankStatementAdd(playerid, when[], kind[], other[], amount, balanceAfter)
 	g_UiBkStAmount[playerid][n] = amount;
 	g_UiBkStBalance[playerid][n] = balanceAfter;
 	g_UiBkStCount[playerid] = n + 1;
+	return 0;
 }
 
 UI_BankStatementShow(playerid)
@@ -6617,7 +6730,7 @@ UI_BankStatementShow(playerid)
 	if (n == 0)
 	{
 		format(title, 64, "Estratto conto - pag. %d", page + 1);
-		Lang_ShowPlayerDialog(playerid, 9504, 0, title, "{FFFFFF}Nessun movimento da mostrare.", page > 0 ? "Precedente" : "Menu", "Chiudi");
+		Lang_ShowPlayerDialog(playerid, 9504, DIALOG_STYLE_MSGBOX, title, "{FFFFFF}Nessun movimento da mostrare.", page > 0 ? "Precedente" : "Menu", "Chiudi");
 		if (page == 0)
 		{
 			g_UiBkStNavPrev[playerid] = -1;
@@ -6650,13 +6763,14 @@ UI_BankStatementShow(playerid)
 	if (page > 0)
 	{
 		strcat(body, "{FFD24D}<< Pagina precedente\t\t\t\n", 2048);
-		g_UiBkStNavPrev[playerid] = idx++;
+		g_UiBkStNavPrev[playerid] = idx;
 	}
 	format(title, 64, "Estratto conto - pag. %d/%d", page + 1, 5);
-	Lang_ShowPlayerDialog(playerid, 9504, 5, title, body, "Vai", "Menu");
+	Lang_ShowPlayerDialog(playerid, 9504, DIALOG_STYLE_TABLIST_HEADERS, title, body, "Vai", "Menu");
+	return 0;
 }
 
-UI_BankReject(playerid, msg[])
+UI_BankReject(playerid, const msg[])
 {
 	if (!UI_BankValid(playerid) || !IsPlayerConnected(playerid))
 	{
@@ -6666,9 +6780,10 @@ UI_BankReject(playerid, msg[])
 	if (msg[0] != 0)
 	{
 		SendClientMessage(playerid, -10066177, msg);
-		UI_BankToast(playerid, msg, 0);
+		UI_BankToast(playerid, msg, false);
 	}
 	UI_BankMenuShow(playerid);
+	return 0;
 }
 
 UI_BankClose(playerid)
@@ -6686,6 +6801,7 @@ UI_BankClose(playerid)
 	{
 		UI_BankTimerStop(playerid);
 	}
+	return 0;
 }
 
 UI_BankUiDestroy(playerid)
@@ -6697,10 +6813,10 @@ UI_BankUiDestroy(playerid)
 	UI_BankTimerStop(playerid);
 	if (g_UiBkToastCreated[playerid])
 	{
-		PlayerTextDrawDestroy(playerid, g_UiBkToastTd[playerid]);
+		PlayerTextDrawDestroy(playerid, PlayerText:g_UiBkToastTd[playerid]);
 	}
 	g_UiBkToastTd[playerid] = 65535;
-	g_UiBkToastCreated[playerid] = 0;
+	g_UiBkToastCreated[playerid] = false;
 	g_UiBkToastTtl[playerid] = 0;
 	UI_BankConfReset(playerid);
 	g_UiBkCash[playerid] = 0;
@@ -6711,14 +6827,15 @@ UI_BankUiDestroy(playerid)
 	g_UiBkXferMin[playerid] = 1;
 	g_UiBkXferMax[playerid] = 0;
 	g_UiBkSendLeft[playerid] = -1;
-	g_UiBkCounter[playerid] = 0;
+	g_UiBkCounter[playerid] = false;
 	g_UiBkOp[playerid] = 0;
 	g_UiBkTarget[playerid] = -1;
 	g_UiBkStPage[playerid] = 0;
-	g_UiBkStNext[playerid] = 0;
+	g_UiBkStNext[playerid] = false;
 	g_UiBkStCount[playerid] = 0;
 	g_UiBkStNavNext[playerid] = -1;
 	g_UiBkStNavPrev[playerid] = -1;
+	return 0;
 }
 
 public UI_BankOnTimer(playerid)
@@ -6732,7 +6849,7 @@ public UI_BankOnTimer(playerid)
 		g_UiBkToastTtl[playerid]--;
 		if (g_UiBkToastTtl[playerid] <= 0 && g_UiBkToastCreated[playerid])
 		{
-			PlayerTextDrawHide(playerid, g_UiBkToastTd[playerid]);
+			PlayerTextDrawHide(playerid, PlayerText:g_UiBkToastTd[playerid]);
 		}
 	}
 	if (g_UiBkConfActive[playerid])
@@ -6747,7 +6864,7 @@ public UI_BankOnTimer(playerid)
 				HidePlayerDialog(playerid);
 			}
 			SendClientMessage(playerid, -2994689, "La conferma del bonifico e' scaduta: nessun addebito.");
-			UI_BankToast(playerid, "Bonifico scaduto", 0);
+			UI_BankToast(playerid, "Bonifico scaduto", false);
 			UI_OnBankTransferExpired(playerid, target, amount);
 		}
 	}
@@ -6758,11 +6875,11 @@ public UI_BankOnTimer(playerid)
 	return 1;
 }
 
-bool:UI_BankOnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
+bool:UI_BankOnDialogResponse(playerid, dialogid, response, listitem, const inputtext[])
 {
 	if (!UI_BankValid(playerid) || !UI_BankIsBankDialog(dialogid))
 	{
-		return 0;
+		return false;
 	}
 	switch (dialogid)
 	{
@@ -6770,7 +6887,7 @@ bool:UI_BankOnDialogResponse(playerid, dialogid, response, listitem, inputtext[]
 		{
 			if (!response)
 			{
-				return 1;
+				return true;
 			}
 			UI_OnBankBalanceRefresh(playerid);
 			switch (listitem)
@@ -6794,7 +6911,7 @@ bool:UI_BankOnDialogResponse(playerid, dialogid, response, listitem, inputtext[]
 				}
 				case 4:
 				{
-					UI_BankToast(playerid, "Caricamento estratto conto...", 1);
+					UI_BankToast(playerid, "Caricamento estratto conto...", true);
 					UI_OnBankStatement(playerid, 0);
 				}
 				default:
@@ -6802,7 +6919,7 @@ bool:UI_BankOnDialogResponse(playerid, dialogid, response, listitem, inputtext[]
 					UI_BankMenuShow(playerid);
 				}
 			}
-			return 1;
+			return true;
 		}
 		case 9505:
 		{
@@ -6810,34 +6927,34 @@ bool:UI_BankOnDialogResponse(playerid, dialogid, response, listitem, inputtext[]
 			{
 				UI_BankMenuShow(playerid);
 			}
-			return 1;
+			return true;
 		}
 		case 9502:
 		{
 			if (!response)
 			{
 				UI_BankMenuShow(playerid);
-				return 1;
+				return true;
 			}
 			new target = UI_BankFindTarget(inputtext);
 			if (target == -2)
 			{
 				UI_BankTargetShow(playerid, "{FF6666}Piu' giocatori corrispondono: usa l'ID o un nome piu' preciso.\n\n");
-				return 1;
+				return true;
 			}
 			if (target < 0)
 			{
 				UI_BankTargetShow(playerid, "{FF6666}Giocatore non trovato tra gli online.\n\n");
-				return 1;
+				return true;
 			}
 			if (target == playerid)
 			{
 				UI_BankTargetShow(playerid, "{FF6666}Non puoi inviare un bonifico a te stesso.\n\n");
-				return 1;
+				return true;
 			}
 			g_UiBkTarget[playerid] = target;
 			UI_BankAmountShow(playerid, 2, "");
-			return 1;
+			return true;
 		}
 		case 9501:
 		{
@@ -6852,18 +6969,18 @@ bool:UI_BankOnDialogResponse(playerid, dialogid, response, listitem, inputtext[]
 				{
 					UI_BankMenuShow(playerid);
 				}
-				return 1;
+				return true;
 			}
 			new amount = 0, lo = 0, hi = 0;
 			if (!UI_BankRange(playerid, op, lo, hi))
 			{
 				UI_BankAmountShow(playerid, op, "");
-				return 1;
+				return true;
 			}
 			if (!UI_BankParseAmount(inputtext, amount))
 			{
 				UI_BankAmountShow(playerid, op, "{FF6666}Importo non valido: solo cifre, intero positivo.\n\n");
-				return 1;
+				return true;
 			}
 			if (amount < lo || amount > hi)
 			{
@@ -6872,7 +6989,7 @@ bool:UI_BankOnDialogResponse(playerid, dialogid, response, listitem, inputtext[]
 				UI_BankFmt(hi, sHi, 16);
 				format(err, 160, "{FF6666}Importo fuori limite: da $%s a $%s.\n\n", sLo, sHi);
 				UI_BankAmountShow(playerid, op, err);
-				return 1;
+				return true;
 			}
 			switch (op)
 			{
@@ -6891,18 +7008,18 @@ bool:UI_BankOnDialogResponse(playerid, dialogid, response, listitem, inputtext[]
 					{
 						g_UiBkTarget[playerid] = -1;
 						UI_BankTargetShow(playerid, "{FF6666}Il destinatario non e' piu' disponibile: sceglilo di nuovo.\n\n");
-						return 1;
+						return true;
 					}
 					UI_OnBankTransfer(playerid, target, amount);
 				}
 			}
-			return 1;
+			return true;
 		}
 		case 9503:
 		{
 			if (!g_UiBkConfActive[playerid])
 			{
-				return 1;
+				return true;
 			}
 			new target = g_UiBkConfTarget[playerid], amount = g_UiBkConfAmount[playerid];
 			if (!response)
@@ -6912,15 +7029,15 @@ bool:UI_BankOnDialogResponse(playerid, dialogid, response, listitem, inputtext[]
 				{
 					UI_BankTimerStop(playerid);
 				}
-				UI_BankToast(playerid, "Bonifico annullato", 0);
+				UI_BankToast(playerid, "Bonifico annullato", false);
 				UI_OnBankTransferCancel(playerid, target, amount);
-				return 1;
+				return true;
 			}
-			new name[25], bool:same = 0;
+			new name[25], bool:same = false;
 			if (target >= 0 && target < MAX_PLAYERS && IsPlayerConnected(target))
 			{
 				GetPlayerName(target, name, 25);
-				same = !strcmp(name, g_UiBkConfName[playerid], 0, 0x7FFFFFFF);
+				same = !strcmp(name, g_UiBkConfName[playerid], false, 0x7FFFFFFF);
 			}
 			UI_BankConfReset(playerid);
 			if (!UI_BankNeedTimer(playerid))
@@ -6930,19 +7047,19 @@ bool:UI_BankOnDialogResponse(playerid, dialogid, response, listitem, inputtext[]
 			if (!same)
 			{
 				SendClientMessage(playerid, -10066177, "Il destinatario non e' piu' online: bonifico annullato.");
-				UI_BankToast(playerid, "Destinatario non disponibile", 0);
+				UI_BankToast(playerid, "Destinatario non disponibile", false);
 				UI_OnBankTransferCancel(playerid, target, amount);
-				return 1;
+				return true;
 			}
 			UI_OnBankTransferConfirm(playerid, target, amount);
-			return 1;
+			return true;
 		}
 		case 9504:
 		{
 			if (!response)
 			{
 				UI_BankMenuShow(playerid);
-				return 1;
+				return true;
 			}
 			if (g_UiBkStCount[playerid] == 0)
 			{
@@ -6954,26 +7071,26 @@ bool:UI_BankOnDialogResponse(playerid, dialogid, response, listitem, inputtext[]
 				{
 					UI_BankMenuShow(playerid);
 				}
-				return 1;
+				return true;
 			}
 			if (listitem >= 0 && listitem == g_UiBkStNavNext[playerid] && g_UiBkStNext[playerid])
 			{
-				UI_BankToast(playerid, "Caricamento estratto conto...", 1);
+				UI_BankToast(playerid, "Caricamento estratto conto...", true);
 				UI_OnBankStatement(playerid, g_UiBkStPage[playerid] + 1);
 			}
 			else if (listitem >= 0 && listitem == g_UiBkStNavPrev[playerid] && g_UiBkStPage[playerid] > 0)
 			{
-				UI_BankToast(playerid, "Caricamento estratto conto...", 1);
+				UI_BankToast(playerid, "Caricamento estratto conto...", true);
 				UI_OnBankStatement(playerid, g_UiBkStPage[playerid] - 1);
 			}
 			else
 			{
 				UI_BankStatementShow(playerid);
 			}
-			return 1;
+			return true;
 		}
 	}
-	return 1;
+	return true;
 }
 
 // ===== modules/ui/intro_ui.inc =====
@@ -7014,7 +7131,7 @@ new g_UiIntroNarration[5][256] = {
 	"ლოს-სანტოსი. ჯერ არ ვიცოდი, რას ვიპოვიდი.",
 	"ერთი ჩემოდანი, ცოტა ფული და არანაირი გეგმა."
 };
-new g_UiIntroTd[MAX_PLAYERS][7];
+new PlayerText:g_UiIntroTd[MAX_PLAYERS][7];
 new bool:g_UiIntroActive[MAX_PLAYERS];
 new g_UiIntroTimer[MAX_PLAYERS];
 new g_UiIntroAlpha[MAX_PLAYERS];
@@ -7044,7 +7161,7 @@ UI_StoryOriginName(origin, dest[], size)
 	}
 }
 
-UI_StoryCompose(name[], origin, motive, dest[], size)
+UI_StoryCompose(const name[], origin, motive, dest[], size)
 {
 	if (origin < 0 || origin > 5)
 	{
@@ -7080,6 +7197,7 @@ UI_StoryCompose(name[], origin, motive, dest[], size)
 	{
 		format(dest, size, "%s. %s %s", nm, g_UiStoryOriginText[origin], g_UiStoryMotiveText[motive]);
 	}
+	return 0;
 }
 
 UI_ShowOriginSelect(playerid)
@@ -7088,7 +7206,7 @@ UI_ShowOriginSelect(playerid)
 	{
 		return 0;
 	}
-	g_UiStoryActive[playerid] = 1;
+	g_UiStoryActive[playerid] = true;
 	new body[1600], line[128];
 	body[0] = 0;
 	for (new i = 1; i <= 5; i++)
@@ -7097,7 +7215,8 @@ UI_ShowOriginSelect(playerid)
 		strcat(body, line, 1600);
 	}
 	strcat(body, "{AAAAAA}არ მინდა თქმა", 1600);
-	Lang_ShowPlayerDialog(playerid, 9600, 2, "შენი ისტორია: წარმოშობა", body, "არჩევა", "");
+	Lang_ShowPlayerDialog(playerid, 9600, DIALOG_STYLE_LIST, "შენი ისტორია: წარმოშობა", body, "არჩევა", "");
+	return 0;
 }
 
 UI_ShowMotiveSelect(playerid)
@@ -7106,7 +7225,7 @@ UI_ShowMotiveSelect(playerid)
 	{
 		return 0;
 	}
-	g_UiStoryActive[playerid] = 1;
+	g_UiStoryActive[playerid] = true;
 	new body[1600], line[128];
 	body[0] = 0;
 	for (new i = 1; i <= 4; i++)
@@ -7115,7 +7234,8 @@ UI_ShowMotiveSelect(playerid)
 		strcat(body, line, 1600);
 	}
 	strcat(body, "{AAAAAA}არ მინდა თქმა", 1600);
-	Lang_ShowPlayerDialog(playerid, 9601, 2, "შენი ისტორია: რატომ ლოს-სანტოსი", body, "არჩევა", "უკან");
+	Lang_ShowPlayerDialog(playerid, 9601, DIALOG_STYLE_LIST, "შენი ისტორია: რატომ ლოს-სანტოსი", body, "არჩევა", "უკან");
+	return 0;
 }
 
 UI_StoryConfirmShow(playerid)
@@ -7124,7 +7244,7 @@ UI_StoryConfirmShow(playerid)
 	GetPlayerName(playerid, name, 32);
 	UI_StoryCompose(name, g_UiStoryOrigin[playerid], g_UiStoryMotive[playerid], text, 768);
 	format(body, 1600, "{FFFFFF}შენი პერსონაჟის წარსული:\n\n{FFD24D}%s\n\n{FFFFFF}ეს მხოლოდ ისტორიაა: თამაშში შესაძლებლობებს არ ცვლის.\nირჩევა მხოლოდ ერთხელ.", text);
-	Lang_ShowPlayerDialog(playerid, 9602, 0, "დაადასტურე შენი ისტორია", body, "დადასტურება", "უკან");
+	Lang_ShowPlayerDialog(playerid, 9602, DIALOG_STYLE_MSGBOX, "დაადასტურე შენი ისტორია", body, "დადასტურება", "უკან");
 }
 
 UI_StoryBegin(playerid)
@@ -7149,39 +7269,43 @@ UI_StoryBegin(playerid)
 		return 0;
 	}
 	UI_ShowOriginSelect(playerid);
+	return 0;
 }
 
-UI_StoryViewShow(playerid, name[], origin, motive, title[])
+UI_StoryViewShow(playerid, const name[], origin, motive, const title[])
 {
 	new text[768], body[1600];
 	UI_StoryCompose(name, origin, motive, text, 768);
 	format(body, 1600, "{FFD24D}%s", text);
-	Lang_ShowPlayerDialog(playerid, 9603, 0, title, body, "დახურვა", "");
+	Lang_ShowPlayerDialog(playerid, 9603, DIALOG_STYLE_MSGBOX, title, body, "დახურვა", "");
 }
 
-UI_StoryShowOwn(playerid, name[], origin, motive)
+UI_StoryShowOwn(playerid, const name[], origin, motive)
 {
 	if (!UI_IntroValid(playerid))
 	{
 		return 0;
 	}
 	UI_StoryViewShow(playerid, name, origin, motive, "შენი ისტორია");
+	return 0;
 }
 
-UI_StoryShowOther(playerid, name[], origin, motive)
+UI_StoryShowOther(playerid, const name[], origin, motive)
 {
 	if (!UI_IntroValid(playerid))
 	{
 		return 0;
 	}
 	UI_StoryViewShow(playerid, name, origin, motive, "პერსონაჟის ისტორია");
+	return 0;
 }
 
-bool:UI_IntroOnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
+bool:UI_IntroOnDialogResponse(playerid, dialogid, response, listitem, const inputtext[])
 {
+	#pragma unused inputtext
 	if (!UI_IntroValid(playerid) || dialogid < 9600 || dialogid > 9603)
 	{
-		return 0;
+		return false;
 	}
 	switch (dialogid)
 	{
@@ -7189,30 +7313,30 @@ bool:UI_IntroOnDialogResponse(playerid, dialogid, response, listitem, inputtext[
 		{
 			if (!g_UiStoryActive[playerid])
 			{
-				return 1;
+				return true;
 			}
 			if (!response || listitem < 0 || listitem > 5)
 			{
 				UI_ShowOriginSelect(playerid);
-				return 1;
+				return true;
 			}
 			if (listitem == 5)
 			{
 				g_UiStoryOrigin[playerid] = 0;
 				g_UiStoryMotive[playerid] = 0;
 				UI_StoryConfirmShow(playerid);
-				return 1;
+				return true;
 			}
 			g_UiStoryOrigin[playerid] = listitem + 1;
 			g_UiStoryMotive[playerid] = 0;
 			UI_ShowMotiveSelect(playerid);
-			return 1;
+			return true;
 		}
 		case 9601:
 		{
 			if (!g_UiStoryActive[playerid])
 			{
-				return 1;
+				return true;
 			}
 			if (!response || listitem < 0 || listitem > 4)
 			{
@@ -7224,17 +7348,17 @@ bool:UI_IntroOnDialogResponse(playerid, dialogid, response, listitem, inputtext[
 				{
 					UI_ShowOriginSelect(playerid);
 				}
-				return 1;
+				return true;
 			}
 			g_UiStoryMotive[playerid] = listitem == 4 ? 0 : listitem + 1;
 			UI_StoryConfirmShow(playerid);
-			return 1;
+			return true;
 		}
 		case 9602:
 		{
 			if (!g_UiStoryActive[playerid])
 			{
-				return 1;
+				return true;
 			}
 			if (!response)
 			{
@@ -7246,25 +7370,25 @@ bool:UI_IntroOnDialogResponse(playerid, dialogid, response, listitem, inputtext[
 				{
 					UI_ShowMotiveSelect(playerid);
 				}
-				return 1;
+				return true;
 			}
 			new origin = g_UiStoryOrigin[playerid], reason = g_UiStoryMotive[playerid];
 			if (origin == 0)
 			{
 				reason = 0;
 			}
-			g_UiStoryActive[playerid] = 0;
+			g_UiStoryActive[playerid] = false;
 			g_UiStoryOrigin[playerid] = 0;
 			g_UiStoryMotive[playerid] = 0;
 			UI_OnStoryChosen(playerid, origin, reason);
-			return 1;
+			return true;
 		}
 		case 9603:
 		{
-			return 1;
+			return true;
 		}
 	}
-	return 0;
+	return false;
 }
 
 PlayerText:UI_IntroBox(playerid, Float:x, Float:y, Float:w, Float:h, color)
@@ -7272,25 +7396,25 @@ PlayerText:UI_IntroBox(playerid, Float:x, Float:y, Float:w, Float:h, color)
 	new PlayerText:td = Lang_CreatePlayerTextDraw(playerid, x, y, "_");
 	PlayerTextDrawLetterSize(playerid, td, 0.0, (h / 9.0));
 	PlayerTextDrawTextSize(playerid, td, (x + w), 0.0);
-	PlayerTextDrawUseBox(playerid, td, 1);
-	PlayerTextDrawBoxColor(playerid, td, color);
-	PlayerTextDrawFont(playerid, td, 1);
+	PlayerTextDrawUseBox(playerid, td, true);
+	PlayerTextDrawBoxColour(playerid, td, color);
+	PlayerTextDrawFont(playerid, td, TEXT_DRAW_FONT_1);
 	PlayerTextDrawSetShadow(playerid, td, 0);
 	PlayerTextDrawSetOutline(playerid, td, 0);
 	return td;
 }
 
-PlayerText:UI_IntroText(playerid, Float:x, Float:y, text[], Float:lw, Float:lh, color, t_TEXT_DRAW_FONT:font)
+PlayerText:UI_IntroText(playerid, Float:x, Float:y, const text[], Float:lw, Float:lh, color, t_TEXT_DRAW_FONT:font)
 {
 	new PlayerText:td = Lang_CreatePlayerTextDraw(playerid, x, y, text);
 	PlayerTextDrawLetterSize(playerid, td, lw, lh);
-	PlayerTextDrawAlignment(playerid, td, 2);
-	PlayerTextDrawColor(playerid, td, color);
+	PlayerTextDrawAlignment(playerid, td, TEXT_DRAW_ALIGN_CENTRE);
+	PlayerTextDrawColour(playerid, td, color);
 	PlayerTextDrawFont(playerid, td, font);
-	PlayerTextDrawSetProportional(playerid, td, 1);
+	PlayerTextDrawSetProportional(playerid, td, true);
 	PlayerTextDrawSetOutline(playerid, td, 1);
 	PlayerTextDrawSetShadow(playerid, td, 0);
-	PlayerTextDrawBackgroundColor(playerid, td, 255);
+	PlayerTextDrawBackgroundColour(playerid, td, 255);
 	PlayerTextDrawTextSize(playerid, td, 0.0, 600.0);
 	return td;
 }
@@ -7308,7 +7432,7 @@ UI_IntroTimerEnsure(playerid)
 {
 	if (g_UiIntroTimer[playerid] == 0)
 	{
-		g_UiIntroTimer[playerid] = SetTimerEx("UI_IntroOnTimer", 60, 1, "d", playerid);
+		g_UiIntroTimer[playerid] = SetTimerEx("UI_IntroOnTimer", 60, true, "d", playerid);
 	}
 }
 
@@ -7323,13 +7447,14 @@ UI_IntroApplyAlpha(playerid)
 	{
 		return 0;
 	}
-	PlayerTextDrawBoxColor(playerid, g_UiIntroTd[playerid][0], g_UiIntroAlpha[playerid] & 255);
-	PlayerTextDrawShow(playerid, g_UiIntroTd[playerid][0]);
+	PlayerTextDrawBoxColour(playerid, PlayerText:g_UiIntroTd[playerid][0], g_UiIntroAlpha[playerid] & 255);
+	PlayerTextDrawShow(playerid, PlayerText:g_UiIntroTd[playerid][0]);
+	return 0;
 }
 
 UI_IntroResetState(playerid)
 {
-	g_UiIntroActive[playerid] = 0;
+	g_UiIntroActive[playerid] = false;
 	g_UiIntroAlpha[playerid] = 0;
 	g_UiIntroFadeTarget[playerid] = 0;
 	g_UiIntroFadeStep[playerid] = 0;
@@ -7338,10 +7463,10 @@ UI_IntroResetState(playerid)
 	g_UiIntroFadeNext[playerid] = 0;
 	g_UiIntroLockEnd[playerid] = 0;
 	g_UiIntroLockShown[playerid] = -1;
-	g_UiIntroHintOn[playerid] = 0;
+	g_UiIntroHintOn[playerid] = false;
 	for (new i = 0; i < 7; i++)
 	{
-		g_UiIntroTd[playerid][i] = 65535;
+		g_UiIntroTd[playerid][i] = INVALID_PLAYER_TEXT_DRAW;
 	}
 }
 
@@ -7356,16 +7481,17 @@ UI_IntroUiDestroy(playerid)
 	{
 		for (new i = 0; i < 7; i++)
 		{
-			if (g_UiIntroTd[playerid][i] != 65535)
+			if (g_UiIntroTd[playerid][i] != INVALID_PLAYER_TEXT_DRAW)
 			{
-				PlayerTextDrawDestroy(playerid, g_UiIntroTd[playerid][i]);
+				PlayerTextDrawDestroy(playerid, PlayerText:g_UiIntroTd[playerid][i]);
 			}
 		}
 	}
 	UI_IntroResetState(playerid);
-	g_UiStoryActive[playerid] = 0;
+	g_UiStoryActive[playerid] = false;
 	g_UiStoryOrigin[playerid] = 0;
 	g_UiStoryMotive[playerid] = 0;
+	return 0;
 }
 
 UI_IntroCreate(playerid)
@@ -7376,17 +7502,18 @@ UI_IntroCreate(playerid)
 	}
 	UI_IntroUiDestroy(playerid);
 	CefUI_AuthClose(playerid);
-	g_UiIntroActive[playerid] = 1;
+	g_UiIntroActive[playerid] = true;
 	g_UiIntroTd[playerid][0] = UI_IntroBox(playerid, 0.0, 0.0, 640.0, 482.0, 0);
 	g_UiIntroTd[playerid][1] = UI_IntroBox(playerid, 0.0, 0.0, 640.0, 56.0, 255);
 	g_UiIntroTd[playerid][2] = UI_IntroBox(playerid, 0.0, (480.0 - 56.0), 640.0, (56.0 + 2.0), 255);
-	g_UiIntroTd[playerid][3] = UI_IntroText(playerid, 320.0, (8.0 + (480.0 - 56.0)), "_", 0.3, 1.4, 0xF2F2F2FF, 1);
-	g_UiIntroTd[playerid][4] = UI_IntroText(playerid, 320.0, 170.0, "LOS SANTOS", 0.9, 3.6, -1, 3);
-	g_UiIntroTd[playerid][5] = UI_IntroText(playerid, 320.0, 232.0, "ყველას ისტორია აქ იწყება.", 0.34, 1.5, 0xF2F2F2FF, 1);
-	g_UiIntroTd[playerid][6] = UI_IntroText(playerid, 320.0, (480.0 - 20.0), "_", 0.22, 1.0, 0xB8B8B8FF, 1);
+	g_UiIntroTd[playerid][3] = UI_IntroText(playerid, 320.0, (8.0 + (480.0 - 56.0)), "_", 0.3, 1.4, 0xF2F2F2FF, t_TEXT_DRAW_FONT:1);
+	g_UiIntroTd[playerid][4] = UI_IntroText(playerid, 320.0, 170.0, "LOS SANTOS", 0.9, 3.6, -1, t_TEXT_DRAW_FONT:3);
+	g_UiIntroTd[playerid][5] = UI_IntroText(playerid, 320.0, 232.0, "ყველას ისტორია აქ იწყება.", 0.34, 1.5, 0xF2F2F2FF, t_TEXT_DRAW_FONT:1);
+	g_UiIntroTd[playerid][6] = UI_IntroText(playerid, 320.0, (480.0 - 20.0), "_", 0.22, 1.0, 0xB8B8B8FF, t_TEXT_DRAW_FONT:1);
 	UI_IntroApplyAlpha(playerid);
-	PlayerTextDrawShow(playerid, g_UiIntroTd[playerid][1]);
-	PlayerTextDrawShow(playerid, g_UiIntroTd[playerid][2]);
+	PlayerTextDrawShow(playerid, PlayerText:g_UiIntroTd[playerid][1]);
+	PlayerTextDrawShow(playerid, PlayerText:g_UiIntroTd[playerid][2]);
+	return 0;
 }
 
 UI_IntroLetterbox(playerid, bool:on)
@@ -7397,14 +7524,15 @@ UI_IntroLetterbox(playerid, bool:on)
 	}
 	if (on)
 	{
-		PlayerTextDrawShow(playerid, g_UiIntroTd[playerid][1]);
-		PlayerTextDrawShow(playerid, g_UiIntroTd[playerid][2]);
+		PlayerTextDrawShow(playerid, PlayerText:g_UiIntroTd[playerid][1]);
+		PlayerTextDrawShow(playerid, PlayerText:g_UiIntroTd[playerid][2]);
 	}
 	else
 	{
-		PlayerTextDrawHide(playerid, g_UiIntroTd[playerid][1]);
-		PlayerTextDrawHide(playerid, g_UiIntroTd[playerid][2]);
+		PlayerTextDrawHide(playerid, PlayerText:g_UiIntroTd[playerid][1]);
+		PlayerTextDrawHide(playerid, PlayerText:g_UiIntroTd[playerid][2]);
 	}
+	return 0;
 }
 
 UI_IntroFade(playerid, alpha)
@@ -7428,6 +7556,7 @@ UI_IntroFade(playerid, alpha)
 	{
 		UI_IntroTimerStop(playerid);
 	}
+	return 0;
 }
 
 UI_IntroFadeTo(playerid, alpha, steps, stepMs)
@@ -7473,9 +7602,10 @@ UI_IntroFadeTo(playerid, alpha, steps, stepMs)
 	g_UiIntroFadeTick[playerid] = stepMs;
 	g_UiIntroFadeNext[playerid] = GetTickCount() + stepMs;
 	UI_IntroTimerEnsure(playerid);
+	return 0;
 }
 
-UI_IntroSubtitle(playerid, text[])
+UI_IntroSubtitle(playerid, const text[])
 {
 	if (!UI_IntroValid(playerid) || !g_UiIntroActive[playerid])
 	{
@@ -7483,14 +7613,15 @@ UI_IntroSubtitle(playerid, text[])
 	}
 	if (text[0] == 0)
 	{
-		PlayerTextDrawHide(playerid, g_UiIntroTd[playerid][3]);
+		PlayerTextDrawHide(playerid, PlayerText:g_UiIntroTd[playerid][3]);
 		return 0;
 	}
 	new tl[256], buf[71];
 	Lang_Translit(text, tl, 256);
 	strcopy(buf, tl, 71);
 	Lang_PlayerTextDrawSetString(playerid, g_UiIntroTd[playerid][3], buf);
-	PlayerTextDrawShow(playerid, g_UiIntroTd[playerid][3]);
+	PlayerTextDrawShow(playerid, PlayerText:g_UiIntroTd[playerid][3]);
+	return 0;
 }
 
 UI_IntroNarrate(playerid, phase)
@@ -7513,14 +7644,15 @@ UI_IntroTitle(playerid, bool:show)
 	}
 	if (show)
 	{
-		PlayerTextDrawShow(playerid, g_UiIntroTd[playerid][4]);
-		PlayerTextDrawShow(playerid, g_UiIntroTd[playerid][5]);
+		PlayerTextDrawShow(playerid, PlayerText:g_UiIntroTd[playerid][4]);
+		PlayerTextDrawShow(playerid, PlayerText:g_UiIntroTd[playerid][5]);
 	}
 	else
 	{
-		PlayerTextDrawHide(playerid, g_UiIntroTd[playerid][4]);
-		PlayerTextDrawHide(playerid, g_UiIntroTd[playerid][5]);
+		PlayerTextDrawHide(playerid, PlayerText:g_UiIntroTd[playerid][4]);
+		PlayerTextDrawHide(playerid, PlayerText:g_UiIntroTd[playerid][5]);
 	}
+	return 0;
 }
 
 UI_IntroHintRender(playerid, secondsLeft)
@@ -7535,7 +7667,7 @@ UI_IntroHintRender(playerid, secondsLeft)
 		strcopy(text, "/salta (ან Enter) გამოსატოვებლად", 96);
 	}
 	Lang_PlayerTextDrawSetString(playerid, g_UiIntroTd[playerid][6], text);
-	PlayerTextDrawShow(playerid, g_UiIntroTd[playerid][6]);
+	PlayerTextDrawShow(playerid, PlayerText:g_UiIntroTd[playerid][6]);
 	g_UiIntroLockShown[playerid] = secondsLeft;
 }
 
@@ -7545,7 +7677,7 @@ UI_IntroSkipHint(playerid, lockSeconds)
 	{
 		return 0;
 	}
-	g_UiIntroHintOn[playerid] = 1;
+	g_UiIntroHintOn[playerid] = true;
 	if (lockSeconds > 0)
 	{
 		g_UiIntroLockEnd[playerid] = GetTickCount() + lockSeconds * 1000;
@@ -7565,6 +7697,7 @@ UI_IntroSkipHint(playerid, lockSeconds)
 			UI_IntroTimerStop(playerid);
 		}
 	}
+	return 0;
 }
 
 UI_IntroSkipHintHide(playerid)
@@ -7573,14 +7706,15 @@ UI_IntroSkipHintHide(playerid)
 	{
 		return 0;
 	}
-	g_UiIntroHintOn[playerid] = 0;
+	g_UiIntroHintOn[playerid] = false;
 	g_UiIntroLockEnd[playerid] = 0;
 	g_UiIntroLockShown[playerid] = -1;
-	PlayerTextDrawHide(playerid, g_UiIntroTd[playerid][6]);
+	PlayerTextDrawHide(playerid, PlayerText:g_UiIntroTd[playerid][6]);
 	if (!UI_IntroNeedTimer(playerid))
 	{
 		UI_IntroTimerStop(playerid);
 	}
+	return 0;
 }
 
 public UI_IntroOnTimer(playerid)
@@ -7825,7 +7959,7 @@ new bool:g_UiLvHpOff[MAX_PLAYERS];
 new g_UiLvHpView[MAX_PLAYERS];
 new g_UiLvHpOffRow[MAX_PLAYERS];
 new g_UiLvHintTtl[MAX_PLAYERS];
-new g_UiLvTd[MAX_PLAYERS][11];
+new PlayerText:g_UiLvTd[MAX_PLAYERS][11];
 new bool:g_UiLvTdMade[MAX_PLAYERS];
 new g_UiLvToastTtl[MAX_PLAYERS];
 new g_UiLvTimer[MAX_PLAYERS];
@@ -7870,7 +8004,7 @@ UI_LvFmt(value, dest[], size)
 	{
 		value = -value;
 	}
-	valstr(s, value, 0);
+	valstr(s, value, false);
 	len = strlen(s);
 	dest[0] = 0;
 	if (neg)
@@ -7897,6 +8031,7 @@ UI_LvFmtTime(seconds, dest[], size)
 		return 0;
 	}
 	format(dest, size, "%02d:%02d", seconds / 60, seconds % 60);
+	return 0;
 }
 
 UI_LvFmtDist(meters, dest[], size)
@@ -7935,7 +8070,7 @@ UI_LvFmtAgo(seconds, dest[], size)
 	}
 }
 
-UI_LvBar(value, maxValue, color[], dest[], size)
+UI_LvBar(value, maxValue, const color[], dest[], size)
 {
 	new filled = 0;
 	if (maxValue > 0)
@@ -7953,7 +8088,7 @@ UI_LvBar(value, maxValue, color[], dest[], size)
 	}
 }
 
-bool:UI_LvParseAmount(s[], &value)
+bool:UI_LvParseAmount(const s[], &value)
 {
 	new i = 0, len = strlen(s), digits = 0;
 	value = 0;
@@ -7965,7 +8100,7 @@ bool:UI_LvParseAmount(s[], &value)
 	{
 		if (digits >= 9)
 		{
-			return 0;
+			return false;
 		}
 		value = value * 10 + (s[i] - 48);
 		digits++;
@@ -8075,22 +8210,22 @@ UI_LvToastColor(kind)
 	return -2994689;
 }
 
-UI_LvInfo(playerid, title[], body[])
+UI_LvInfo(playerid, const title[], const body[])
 {
-	Lang_ShowPlayerDialog(playerid, 9725, 0, title, body, "Chiudi", "");
+	Lang_ShowPlayerDialog(playerid, 9725, DIALOG_STYLE_MSGBOX, title, body, "Chiudi", "");
 }
 
-PlayerText:UI_LvText(playerid, Float:x, Float:y, text[], Float:lw, Float:lh, color, t_TEXT_DRAW_ALIGN:align)
+PlayerText:UI_LvText(playerid, Float:x, Float:y, const text[], Float:lw, Float:lh, color, t_TEXT_DRAW_ALIGN:align)
 {
 	new PlayerText:td = Lang_CreatePlayerTextDraw(playerid, x, y, text);
 	PlayerTextDrawLetterSize(playerid, td, lw, lh);
 	PlayerTextDrawAlignment(playerid, td, align);
-	PlayerTextDrawColor(playerid, td, color);
-	PlayerTextDrawFont(playerid, td, 1);
-	PlayerTextDrawSetProportional(playerid, td, 1);
+	PlayerTextDrawColour(playerid, td, color);
+	PlayerTextDrawFont(playerid, td, TEXT_DRAW_FONT_1);
+	PlayerTextDrawSetProportional(playerid, td, true);
 	PlayerTextDrawSetOutline(playerid, td, 1);
 	PlayerTextDrawSetShadow(playerid, td, 0);
-	PlayerTextDrawBackgroundColor(playerid, td, 255);
+	PlayerTextDrawBackgroundColour(playerid, td, 255);
 	return td;
 }
 
@@ -8099,9 +8234,9 @@ PlayerText:UI_LvBox(playerid, Float:x, Float:y, Float:w, Float:h, color)
 	new PlayerText:td = Lang_CreatePlayerTextDraw(playerid, x, y, "_");
 	PlayerTextDrawLetterSize(playerid, td, 0.0, (h / 9.0));
 	PlayerTextDrawTextSize(playerid, td, (x + w), 0.0);
-	PlayerTextDrawUseBox(playerid, td, 1);
-	PlayerTextDrawBoxColor(playerid, td, color);
-	PlayerTextDrawFont(playerid, td, 1);
+	PlayerTextDrawUseBox(playerid, td, true);
+	PlayerTextDrawBoxColour(playerid, td, color);
+	PlayerTextDrawFont(playerid, td, TEXT_DRAW_FONT_1);
 	PlayerTextDrawSetShadow(playerid, td, 0);
 	PlayerTextDrawSetOutline(playerid, td, 0);
 	return td;
@@ -8114,18 +8249,19 @@ UI_LvTdEnsure(playerid)
 		return 0;
 	}
 	g_UiLvTd[playerid][0] = UI_LvBox(playerid, 14.0, 150.0, 200.0, 56.0, 153);
-	g_UiLvTd[playerid][1] = UI_LvText(playerid, (14.0 + 5.0), (150.0 + 2.0), "CONTRATTO", 0.22, 1.0, -2994689, 1);
-	g_UiLvTd[playerid][2] = UI_LvText(playerid, (14.0 + 5.0), (150.0 + 15.0), "_", 0.2, 0.9, -1, 1);
-	g_UiLvTd[playerid][3] = UI_LvText(playerid, (14.0 + 5.0), (150.0 + 27.0), "_", 0.2, 0.9, -1, 1);
-	g_UiLvTd[playerid][4] = UI_LvText(playerid, (14.0 + 5.0), (150.0 + 39.0), "_", 0.2, 0.9, 0xC8C8C8FF, 1);
+	g_UiLvTd[playerid][1] = UI_LvText(playerid, (14.0 + 5.0), (150.0 + 2.0), "CONTRATTO", 0.22, 1.0, -2994689, t_TEXT_DRAW_ALIGN:1);
+	g_UiLvTd[playerid][2] = UI_LvText(playerid, (14.0 + 5.0), (150.0 + 15.0), "_", 0.2, 0.9, -1, t_TEXT_DRAW_ALIGN:1);
+	g_UiLvTd[playerid][3] = UI_LvText(playerid, (14.0 + 5.0), (150.0 + 27.0), "_", 0.2, 0.9, -1, t_TEXT_DRAW_ALIGN:1);
+	g_UiLvTd[playerid][4] = UI_LvText(playerid, (14.0 + 5.0), (150.0 + 39.0), "_", 0.2, 0.9, 0xC8C8C8FF, t_TEXT_DRAW_ALIGN:1);
 	g_UiLvTd[playerid][5] = UI_LvBox(playerid, 14.0, 212.0, 150.0, 32.0, 153);
-	g_UiLvTd[playerid][6] = UI_LvText(playerid, (14.0 + 5.0), (212.0 + 2.0), "TASSAMETRO", 0.22, 1.0, -2994689, 1);
-	g_UiLvTd[playerid][7] = UI_LvText(playerid, (14.0 + 5.0), (212.0 + 15.0), "_", 0.26, 1.1, 0x66DD66FF, 1);
+	g_UiLvTd[playerid][6] = UI_LvText(playerid, (14.0 + 5.0), (212.0 + 2.0), "TASSAMETRO", 0.22, 1.0, -2994689, t_TEXT_DRAW_ALIGN:1);
+	g_UiLvTd[playerid][7] = UI_LvText(playerid, (14.0 + 5.0), (212.0 + 15.0), "_", 0.26, 1.1, 0x66DD66FF, t_TEXT_DRAW_ALIGN:1);
 	g_UiLvTd[playerid][8] = UI_LvBox(playerid, 14.0, 252.0, 220.0, 40.0, 153);
-	g_UiLvTd[playerid][9] = UI_LvText(playerid, (14.0 + 5.0), (252.0 + 2.0), "_", 0.2, 0.9, -1, 1);
-	PlayerTextDrawTextSize(playerid, g_UiLvTd[playerid][9], ((14.0 + 220.0) - 4.0), 0.0);
-	g_UiLvTd[playerid][10] = UI_LvText(playerid, 320.0, 318.0, "_", 0.24, 1.1, -2994689, 2);
-	g_UiLvTdMade[playerid] = 1;
+	g_UiLvTd[playerid][9] = UI_LvText(playerid, (14.0 + 5.0), (252.0 + 2.0), "_", 0.2, 0.9, -1, t_TEXT_DRAW_ALIGN:1);
+	PlayerTextDrawTextSize(playerid, PlayerText:g_UiLvTd[playerid][9], ((14.0 + 220.0) - 4.0), 0.0);
+	g_UiLvTd[playerid][10] = UI_LvText(playerid, 320.0, 318.0, "_", 0.24, 1.1, -2994689, t_TEXT_DRAW_ALIGN:2);
+	g_UiLvTdMade[playerid] = true;
+	return 0;
 }
 
 UI_LvTdShow(playerid, first, last, bool:show)
@@ -8138,13 +8274,14 @@ UI_LvTdShow(playerid, first, last, bool:show)
 	{
 		if (show)
 		{
-			PlayerTextDrawShow(playerid, g_UiLvTd[playerid][i]);
+			PlayerTextDrawShow(playerid, PlayerText:g_UiLvTd[playerid][i]);
 		}
 		else
 		{
-			PlayerTextDrawHide(playerid, g_UiLvTd[playerid][i]);
+			PlayerTextDrawHide(playerid, PlayerText:g_UiLvTd[playerid][i]);
 		}
 	}
+	return 0;
 }
 
 bool:UI_LvNeedTimer(playerid)
@@ -8167,7 +8304,7 @@ UI_LvTimerSync(playerid)
 	{
 		if (g_UiLvTimer[playerid] == 0)
 		{
-			g_UiLvTimer[playerid] = SetTimerEx("UI_LivingOnTimer", 1000, 1, "d", playerid);
+			g_UiLvTimer[playerid] = SetTimerEx("UI_LivingOnTimer", 1000, true, "d", playerid);
 		}
 	}
 	else
@@ -8260,7 +8397,7 @@ UI_LvCefProject(playerid)
 	CefUI_Open(playerid, "phone", "project");
 }
 
-UI_LivingToast(playerid, text[], kind)
+UI_LivingToast(playerid, const text[], kind)
 {
 	if (!UI_LvReady(playerid) || text[0] == 0)
 	{
@@ -8273,13 +8410,14 @@ UI_LivingToast(playerid, text[], kind)
 	}
 	UI_LvTdEnsure(playerid);
 	Lang_PlayerTextDrawSetString(playerid, g_UiLvTd[playerid][10], text);
-	PlayerTextDrawColor(playerid, g_UiLvTd[playerid][10], UI_LvToastColor(kind));
-	PlayerTextDrawShow(playerid, g_UiLvTd[playerid][10]);
+	PlayerTextDrawColour(playerid, PlayerText:g_UiLvTd[playerid][10], UI_LvToastColor(kind));
+	PlayerTextDrawShow(playerid, PlayerText:g_UiLvTd[playerid][10]);
 	g_UiLvToastTtl[playerid] = 4;
 	UI_LvTimerSync(playerid);
+	return 0;
 }
 
-UI_LivingNotify(playerid, text[], kind)
+UI_LivingNotify(playerid, const text[], kind)
 {
 	if (!UI_LvReady(playerid) || text[0] == 0)
 	{
@@ -8287,6 +8425,7 @@ UI_LivingNotify(playerid, text[], kind)
 	}
 	SendClientMessage(playerid, UI_LvToastColor(kind), text);
 	UI_LivingToast(playerid, text, kind);
+	return 0;
 }
 
 UI_CityBoardBegin(playerid)
@@ -8297,6 +8436,7 @@ UI_CityBoardBegin(playerid)
 	}
 	g_UiLvBdCount[playerid] = 0;
 	g_UiLvBdRows[playerid] = 0;
+	return 0;
 }
 
 UI_CityBoardAdd(playerid, contractId, kind, fromDistrict, toDistrict, cargo, reward, distanceM, secondsLeft, bool:premium, minLevel, minRep, minLocalRep, blockCode)
@@ -8324,6 +8464,7 @@ UI_CityBoardAdd(playerid, contractId, kind, fromDistrict, toDistrict, cargo, rew
 	g_UiLvBdMinLRep[playerid][n] = minLocalRep;
 	g_UiLvBdBlock[playerid][n] = blockCode >= 0 && blockCode < 11 ? blockCode : 10;
 	g_UiLvBdCount[playerid] = n + 1;
+	return 0;
 }
 
 bool:UI_LvBoardMatch(playerid, i)
@@ -8331,17 +8472,17 @@ bool:UI_LvBoardMatch(playerid, i)
 	new d = g_UiLvFltDistrict[playerid];
 	if (d != 0 && g_UiLvBdFrom[playerid][i] != d && g_UiLvBdTo[playerid][i] != d)
 	{
-		return 0;
+		return false;
 	}
 	if (g_UiLvFltKind[playerid] != 0 && g_UiLvBdKind[playerid][i] != g_UiLvFltKind[playerid])
 	{
-		return 0;
+		return false;
 	}
 	if (g_UiLvFltEligible[playerid] && g_UiLvBdBlock[playerid][i] != 0)
 	{
-		return 0;
+		return false;
 	}
-	return 1;
+	return true;
 }
 
 UI_LvRequirement(playerid, i, dest[], size)
@@ -8394,7 +8535,7 @@ UI_LvBoardRender(playerid)
 	}
 	strcat(body, "{AAAAAA}Aggiorna la bacheca\t\t\t", 1536);
 	format(title, 64, "Bacheca contratti%s", g_UiLvBdAt[playerid] ? "" : " (consultazione)");
-	Lang_ShowPlayerDialog(playerid, 9700, 5, title, body, "Apri", "Chiudi");
+	Lang_ShowPlayerDialog(playerid, 9700, DIALOG_STYLE_TABLIST_HEADERS, title, body, "Apri", "Chiudi");
 }
 
 UI_CityBoardShow(playerid, bool:atBoard)
@@ -8410,13 +8551,14 @@ UI_CityBoardShow(playerid, bool:atBoard)
 		return 0;
 	}
 	UI_LvBoardRender(playerid);
+	return 0;
 }
 
 UI_LvFilterShow(playerid)
 {
 	new body[384];
 	format(body, 384, "Quartiere: {FFD24D}%s\nProfessione: {FFD24D}%s\nMostra: {FFD24D}%s\n{66DD66}Torna alla bacheca", g_UiLvDistrictName[g_UiLvFltDistrict[playerid]], g_UiLvKindName[g_UiLvFltKind[playerid]], g_UiLvFltEligible[playerid] ? "solo quelli che posso accettare" : "tutti i contratti");
-	Lang_ShowPlayerDialog(playerid, 9701, 2, "Filtra la bacheca", body, "Cambia", "Indietro");
+	Lang_ShowPlayerDialog(playerid, 9701, DIALOG_STYLE_LIST, "Filtra la bacheca", body, "Cambia", "Indietro");
 }
 
 UI_LvDetailRender(playerid, i)
@@ -8445,11 +8587,11 @@ UI_LvDetailRender(playerid, i)
 	format(title, 64, "Contratto #%d", g_UiLvBdId[playerid][i]);
 	if (g_UiLvDetCan[playerid])
 	{
-		Lang_ShowPlayerDialog(playerid, 9702, 0, title, body, "Accetta", "Indietro");
+		Lang_ShowPlayerDialog(playerid, 9702, DIALOG_STYLE_MSGBOX, title, body, "Accetta", "Indietro");
 	}
 	else
 	{
-		Lang_ShowPlayerDialog(playerid, 9702, 0, title, body, "Indietro", "Chiudi");
+		Lang_ShowPlayerDialog(playerid, 9702, DIALOG_STYLE_MSGBOX, title, body, "Indietro", "Chiudi");
 	}
 }
 
@@ -8470,7 +8612,7 @@ UI_LvAcceptShow(playerid, i)
 	new body[512], sTime[12];
 	UI_LvFmtTime(g_UiLvBdExpAt[playerid][i] - gettime(), sTime, 12);
 	format(body, 512, "{FFFFFF}Accetti il contratto {FFD24D}#%d{FFFFFF}?\n\nUn furgone ti aspetta al magazzino di {FFD24D}%s{FFFFFF}.\nPorta il carico al negozio di {FFD24D}%s{FFFFFF} con calma e attenzione.\n\n{AAAAAA}Puoi seguire un solo contratto alla volta. Il contratto resta valido per %s.", g_UiLvBdId[playerid][i], g_UiLvDistrictName[g_UiLvBdFrom[playerid][i]], g_UiLvDistrictName[g_UiLvBdTo[playerid][i]], sTime);
-	Lang_ShowPlayerDialog(playerid, 9703, 0, "Conferma contratto", body, "Conferma", "Annulla");
+	Lang_ShowPlayerDialog(playerid, 9703, DIALOG_STYLE_MSGBOX, "Conferma contratto", body, "Conferma", "Annulla");
 }
 
 UI_CityContractStatus(playerid, contractId, ctState, fromDistrict, toDistrict, cargo, reward, secondsLeft, integrityPct, distanceM, repPenalty)
@@ -8525,7 +8667,8 @@ UI_CityContractStatus(playerid, contractId, ctState, fromDistrict, toDistrict, c
 	}
 	format(body, 1024, "{FFFFFF}Stato: {FFD24D}%s\n{FFFFFF}Prossimo passo: {FFD24D}%s\n{FFFFFF}Distanza: {FFD24D}%s\n{FFFFFF}Tempo rimasto: {FFD24D}%s\n{FFFFFF}Merce: {FFD24D}%s{FFFFFF}, integrita' {FFD24D}%s\n{FFFFFF}Compenso indicativo: {66DD66}$%s\n\n{AAAAAA}Se lasci il contratto non perdi denaro, ma perdi %d punti di reputazione nei trasporti.", ctState == 2 ? "in consegna" : "accettato", step, sDist, sTime, g_UiLvCargoName[cargo >= 1 && cargo <= 3 ? cargo : 0], sInteg, sReward, repPenalty < 0 ? -repPenalty : repPenalty);
 	format(title, 64, "Il tuo contratto #%d", contractId);
-	Lang_ShowPlayerDialog(playerid, 9704, 0, title, body, "Lascia", "Chiudi");
+	Lang_ShowPlayerDialog(playerid, 9704, DIALOG_STYLE_MSGBOX, title, body, "Lascia", "Chiudi");
+	return 0;
 }
 
 UI_CityContractNone(playerid)
@@ -8541,7 +8684,8 @@ UI_CityContractNone(playerid)
 		CefUI_Open(playerid, "phone", "contracts");
 		return 0;
 	}
-	Lang_ShowPlayerDialog(playerid, 9704, 0, "Nessun contratto", "{FFFFFF}Al momento non stai seguendo nessun contratto.\n\n{AAAAAA}La bacheca della Casa del Quartiere di Idlewood ha sempre qualcosa da fare.", "Bacheca", "Chiudi");
+	Lang_ShowPlayerDialog(playerid, 9704, DIALOG_STYLE_MSGBOX, "Nessun contratto", "{FFFFFF}Al momento non stai seguendo nessun contratto.\n\n{AAAAAA}La bacheca della Casa del Quartiere di Idlewood ha sempre qualcosa da fare.", "Bacheca", "Chiudi");
+	return 0;
 }
 
 UI_LvHudRender(playerid)
@@ -8577,7 +8721,7 @@ UI_LvHudRender(playerid)
 	Lang_PlayerTextDrawSetString(playerid, g_UiLvTd[playerid][4], line);
 }
 
-UI_CityContractHud(playerid, contractId, ctState, objective[], destination[], distanceM, secondsLeft, integrityPct)
+UI_CityContractHud(playerid, contractId, ctState, const objective[], const destination[], distanceM, secondsLeft, integrityPct)
 {
 	if (!UI_LvReady(playerid) || contractId <= 0)
 	{
@@ -8604,10 +8748,11 @@ UI_CityContractHud(playerid, contractId, ctState, objective[], destination[], di
 	UI_LvHudRender(playerid);
 	if (!g_UiLvHudOn[playerid])
 	{
-		UI_LvTdShow(playerid, 0, 4, 1);
+		UI_LvTdShow(playerid, 0, 4, true);
 	}
-	g_UiLvHudOn[playerid] = 1;
+	g_UiLvHudOn[playerid] = true;
 	UI_LvTimerSync(playerid);
+	return 0;
 }
 
 UI_CityContractHudHide(playerid)
@@ -8622,15 +8767,16 @@ UI_CityContractHudHide(playerid)
 	}
 	if (g_UiLvHudOn[playerid] && IsPlayerConnected(playerid))
 	{
-		UI_LvTdShow(playerid, 0, 4, 0);
+		UI_LvTdShow(playerid, 0, 4, false);
 	}
-	g_UiLvHudOn[playerid] = 0;
+	g_UiLvHudOn[playerid] = false;
 	g_UiLvHudId[playerid] = 0;
 	g_UiLvHudExpAt[playerid] = 0;
 	if (IsPlayerConnected(playerid))
 	{
 		UI_LvTimerSync(playerid);
 	}
+	return 0;
 }
 
 UI_CityDistrictPick(playerid)
@@ -8641,7 +8787,8 @@ UI_CityDistrictPick(playerid)
 	}
 	new body[128];
 	format(body, 128, "%s\n%s\n%s", g_UiLvDistrictName[1], g_UiLvDistrictName[2], g_UiLvDistrictName[3]);
-	Lang_ShowPlayerDialog(playerid, 9706, 2, "Quale quartiere?", body, "Apri", "Chiudi");
+	Lang_ShowPlayerDialog(playerid, 9706, DIALOG_STYLE_LIST, "Quale quartiere?", body, "Apri", "Chiudi");
+	return 0;
 }
 
 UI_CityDistrictBegin(playerid, districtId, activity, security, crime, localRep, festivalHours)
@@ -8658,15 +8805,17 @@ UI_CityDistrictBegin(playerid, districtId, activity, security, crime, localRep, 
 	g_UiLvDsFest[playerid] = festivalHours < 0 ? 0 : festivalHours;
 	g_UiLvDsRumor[playerid][0] = 0;
 	g_UiLvDsEvCount[playerid] = 0;
+	return 0;
 }
 
-UI_CityDistrictRumor(playerid, text[])
+UI_CityDistrictRumor(playerid, const text[])
 {
 	if (!UI_LvValid(playerid))
 	{
 		return 0;
 	}
 	strcopy(g_UiLvDsRumor[playerid], text, 96);
+	return 0;
 }
 
 UI_CityDistrictEvent(playerid, type, secondsAgo, value)
@@ -8684,6 +8833,7 @@ UI_CityDistrictEvent(playerid, type, secondsAgo, value)
 	g_UiLvDsEvAgo[playerid][n] = secondsAgo < 0 ? 0 : secondsAgo;
 	g_UiLvDsEvValue[playerid][n] = value;
 	g_UiLvDsEvCount[playerid] = n + 1;
+	return 0;
 }
 
 UI_CityDistrictShow(playerid)
@@ -8756,7 +8906,8 @@ UI_CityDistrictShow(playerid)
 		strcat(body, line, 1280);
 	}
 	format(title, 64, "Quartiere: %s", g_UiLvDistrictName[d]);
-	Lang_ShowPlayerDialog(playerid, 9707, 0, title, body, "Progetto", "Chiudi");
+	Lang_ShowPlayerDialog(playerid, 9707, DIALOG_STYLE_MSGBOX, title, body, "Progetto", "Chiudi");
+	return 0;
 }
 
 UI_CityRepBegin(playerid)
@@ -8767,12 +8918,13 @@ UI_CityRepBegin(playerid)
 	}
 	for (new t = 0; t <= 2; t++)
 	{
-		g_UiLvRpHas[playerid][t] = 0;
+		g_UiLvRpHas[playerid][t] = false;
 	}
 	for (new d = 0; d <= 3; d++)
 	{
-		g_UiLvRpLHas[playerid][d] = 0;
+		g_UiLvRpLHas[playerid][d] = false;
 	}
+	return 0;
 }
 
 UI_CityRepTrack(playerid, track, points, completed, failed, ratingSum, ratingCnt, dayGain)
@@ -8781,13 +8933,14 @@ UI_CityRepTrack(playerid, track, points, completed, failed, ratingSum, ratingCnt
 	{
 		return 0;
 	}
-	g_UiLvRpHas[playerid][track] = 1;
+	g_UiLvRpHas[playerid][track] = true;
 	g_UiLvRpPoints[playerid][track] = points < 0 ? 0 : points;
 	g_UiLvRpDone[playerid][track] = completed < 0 ? 0 : completed;
 	g_UiLvRpFail[playerid][track] = failed < 0 ? 0 : failed;
 	g_UiLvRpRSum[playerid][track] = ratingSum < 0 ? 0 : ratingSum;
 	g_UiLvRpRCnt[playerid][track] = ratingCnt < 0 ? 0 : ratingCnt;
 	g_UiLvRpDay[playerid][track] = dayGain;
+	return 0;
 }
 
 UI_CityRepLocal(playerid, districtId, rep)
@@ -8797,8 +8950,9 @@ UI_CityRepLocal(playerid, districtId, rep)
 	{
 		return 0;
 	}
-	g_UiLvRpLHas[playerid][d] = 1;
+	g_UiLvRpLHas[playerid][d] = true;
 	g_UiLvRpLocal[playerid][d] = rep;
+	return 0;
 }
 
 UI_CityRepShow(playerid)
@@ -8855,7 +9009,8 @@ UI_CityRepShow(playerid)
 		strcat(body, line, 1280);
 	}
 	strcat(body, "\n{AAAAAA}La reputazione non si compra: cresce con il lavoro, ogni giorno un passo alla volta.", 1280);
-	Lang_ShowPlayerDialog(playerid, 9708, 0, "Reputazione", body, "Chiudi", "");
+	Lang_ShowPlayerDialog(playerid, 9708, DIALOG_STYLE_MSGBOX, "Reputazione", body, "Chiudi", "");
+	return 0;
 }
 
 UI_LivingRentalBegin(playerid, blockMinutes, maxBlocks, discountPct)
@@ -8870,9 +9025,10 @@ UI_LivingRentalBegin(playerid, blockMinutes, maxBlocks, discountPct)
 	g_UiLvRnCount[playerid] = 0;
 	g_UiLvRnSel[playerid] = -1;
 	g_UiLvRnBlocks[playerid] = 0;
+	return 0;
 }
 
-UI_LivingRentalAddModel(playerid, modelIdx, name[], feePerBlock, deposit, minLevel, bool:available)
+UI_LivingRentalAddModel(playerid, modelIdx, const name[], feePerBlock, deposit, minLevel, bool:available)
 {
 	if (!UI_LvValid(playerid))
 	{
@@ -8890,6 +9046,7 @@ UI_LivingRentalAddModel(playerid, modelIdx, name[], feePerBlock, deposit, minLev
 	g_UiLvRnLevel[playerid][n] = minLevel;
 	g_UiLvRnAvail[playerid][n] = available;
 	g_UiLvRnCount[playerid] = n + 1;
+	return 0;
 }
 
 UI_LvRentModelShow(playerid)
@@ -8912,7 +9069,7 @@ UI_LvRentModelShow(playerid)
 	{
 		strcopy(title, "Noleggio veicoli", 64);
 	}
-	Lang_ShowPlayerDialog(playerid, 9709, 5, title, body, "Scegli", "Chiudi");
+	Lang_ShowPlayerDialog(playerid, 9709, DIALOG_STYLE_TABLIST_HEADERS, title, body, "Scegli", "Chiudi");
 }
 
 UI_LivingRentalShow(playerid)
@@ -8927,6 +9084,7 @@ UI_LivingRentalShow(playerid)
 		return 0;
 	}
 	UI_LvRentModelShow(playerid);
+	return 0;
 }
 
 UI_LvRentBlocksShow(playerid)
@@ -8940,7 +9098,7 @@ UI_LvRentBlocksShow(playerid)
 		strcat(body, line, 512);
 	}
 	format(title, 64, "%s - per quanto tempo?", g_UiLvRnName[playerid][s]);
-	Lang_ShowPlayerDialog(playerid, 9710, 4, title, body, "Avanti", "Indietro");
+	Lang_ShowPlayerDialog(playerid, 9710, DIALOG_STYLE_TABLIST, title, body, "Avanti", "Indietro");
 }
 
 UI_LvRentSummaryShow(playerid)
@@ -8959,10 +9117,10 @@ UI_LvRentSummaryShow(playerid)
 		disc[0] = 0;
 	}
 	format(body, 1024, "{FFFFFF}Veicolo: {FFD24D}%s\n{FFFFFF}Durata: {FFD24D}%d minuti\n{FFFFFF}Canone: {66DD66}$%s%s\n{FFFFFF}Cauzione: {FFD24D}$%s {AAAAAA}(ti torna alla riconsegna, in base alle condizioni del mezzo)\n{FFFFFF}Addebito ora: {66DD66}$%s\n\n{AAAAAA}Si paga dal conto in banca, poi dai contanti. Riporta il mezzo qui con /riconsegna:\ndopo la scadenza c'e' qualche minuto di tolleranza, poi la cauzione resta all'agenzia.", g_UiLvRnName[playerid][s], g_UiLvRnBlockMin[playerid] * b, sFee, disc, sDep, sTot);
-	Lang_ShowPlayerDialog(playerid, 9711, 0, "Riepilogo noleggio", body, "Noleggia", "Indietro");
+	Lang_ShowPlayerDialog(playerid, 9711, DIALOG_STYLE_MSGBOX, "Riepilogo noleggio", body, "Noleggia", "Indietro");
 }
 
-UI_LivingRentalReturnConfirm(playerid, rentalId, modelName[], healthPct, deposit, refund)
+UI_LivingRentalReturnConfirm(playerid, rentalId, const modelName[], healthPct, deposit, refund)
 {
 	if (!UI_LvReady(playerid) || rentalId <= 0)
 	{
@@ -8973,10 +9131,11 @@ UI_LivingRentalReturnConfirm(playerid, rentalId, modelName[], healthPct, deposit
 	UI_LvFmt(deposit < 0 ? 0 : deposit, sDep, 16);
 	UI_LvFmt(refund < 0 ? 0 : refund, sRef, 16);
 	format(body, 512, "{FFFFFF}Riconsegni la {FFD24D}%s{FFFFFF}?\n\nCondizioni del mezzo: {FFD24D}%d%%\n{FFFFFF}Cauzione versata: {FFD24D}$%s\n{FFFFFF}Ti restituiamo: {66DD66}$%s\n\n{AAAAAA}Il canone non si rimborsa. Grazie per averci scelto.", modelName, UI_LvClamp(healthPct, 0, 100), sDep, sRef);
-	Lang_ShowPlayerDialog(playerid, 9712, 0, "Riconsegna", body, "Riconsegna", "Annulla");
+	Lang_ShowPlayerDialog(playerid, 9712, DIALOG_STYLE_MSGBOX, "Riconsegna", body, "Riconsegna", "Annulla");
+	return 0;
 }
 
-UI_LivingRentalReceipt(playerid, modelName[], fee, deposit, refund, minutesUsed)
+UI_LivingRentalReceipt(playerid, const modelName[], fee, deposit, refund, minutesUsed)
 {
 	if (!UI_LvReady(playerid))
 	{
@@ -8988,10 +9147,11 @@ UI_LivingRentalReceipt(playerid, modelName[], fee, deposit, refund, minutesUsed)
 	UI_LvFmt(refund < 0 ? 0 : refund, sRef, 16);
 	UI_LvFmt(deposit - refund < 0 ? 0 : deposit - refund, sKept, 16);
 	format(body, 512, "{FFFFFF}Veicolo: {FFD24D}%s\n{FFFFFF}Utilizzo: {FFD24D}%d minuti\n{FFFFFF}Canone pagato: {FFD24D}$%s\n{FFFFFF}Cauzione: {FFD24D}$%s\n{FFFFFF}Rimborsata: {66DD66}$%s\n{FFFFFF}Trattenuta per danni o ritardo: {FF8866}$%s\n\n{AAAAAA}Buona strada, e a presto.", modelName, minutesUsed < 0 ? 0 : minutesUsed, sFee, sDep, sRef, sKept);
-	Lang_ShowPlayerDialog(playerid, 9713, 0, "Ricevuta noleggio", body, "Chiudi", "");
+	Lang_ShowPlayerDialog(playerid, 9713, DIALOG_STYLE_MSGBOX, "Ricevuta noleggio", body, "Chiudi", "");
+	return 0;
 }
 
-UI_LivingTaxiOffer(playerid, callId, bool:npc, passenger[], fromDistrict, toDistrict, distanceM, fareEstimate, ttlSec)
+UI_LivingTaxiOffer(playerid, callId, bool:npc, const passenger[], fromDistrict, toDistrict, distanceM, fareEstimate, ttlSec)
 {
 	if (!UI_LvReady(playerid) || callId <= 0)
 	{
@@ -9007,8 +9167,9 @@ UI_LivingTaxiOffer(playerid, callId, bool:npc, passenger[], fromDistrict, toDist
 	UI_LvFmtDist(distanceM, sDist, 16);
 	UI_LvFmt(fareEstimate < 0 ? 0 : fareEstimate, sFare, 16);
 	format(body, 512, "{FFFFFF}%s {FFD24D}%s{FFFFFF} cerca un taxi.\n\nDa: {FFD24D}%s\n{FFFFFF}A: {FFD24D}%s\n{FFFFFF}Percorso stimato: {FFD24D}%s\n{FFFFFF}Tariffa stimata: {66DD66}$%s\n\n{AAAAAA}Hai %d secondi per rispondere (anche con /accettacorsa).", npc ? "Un cliente," : "Il giocatore", passenger[0] != 0 ? passenger : "-", g_UiLvDistrictName[UI_LvClampDistrict(fromDistrict)], g_UiLvDistrictName[UI_LvClampDistrict(toDistrict)], sDist, sFare, ttlSec);
-	Lang_ShowPlayerDialog(playerid, 9714, 0, "Chiamata taxi", body, "Accetta corsa", "Ignora");
+	Lang_ShowPlayerDialog(playerid, 9714, DIALOG_STYLE_MSGBOX, "Chiamata taxi", body, "Accetta corsa", "Ignora");
 	UI_LvTimerSync(playerid);
+	return 0;
 }
 
 UI_LivingTaxiOfferClose(playerid)
@@ -9028,6 +9189,7 @@ UI_LivingTaxiOfferClose(playerid)
 		HidePlayerDialog(playerid);
 	}
 	UI_LvTimerSync(playerid);
+	return 0;
 }
 
 UI_LivingTaxiMeter(playerid, fare, distanceM, bool:running)
@@ -9043,9 +9205,10 @@ UI_LivingTaxiMeter(playerid, fare, distanceM, bool:running)
 	format(line, 128, "$%s  -  %s", sFare, sDist);
 	Lang_PlayerTextDrawSetString(playerid, g_UiLvTd[playerid][7], line);
 	Lang_PlayerTextDrawSetString(playerid, g_UiLvTd[playerid][6], running ? "TASSAMETRO - in corsa" : "TASSAMETRO - fermo");
-	PlayerTextDrawColor(playerid, g_UiLvTd[playerid][7], running ? 0x66DD66FF : 0xC8C8C8FF);
-	UI_LvTdShow(playerid, 5, 7, 1);
-	g_UiLvMeterOn[playerid] = 1;
+	PlayerTextDrawColour(playerid, PlayerText:g_UiLvTd[playerid][7], running ? 0x66DD66FF : 0xC8C8C8FF);
+	UI_LvTdShow(playerid, 5, 7, true);
+	g_UiLvMeterOn[playerid] = true;
+	return 0;
 }
 
 UI_LivingTaxiMeterHide(playerid)
@@ -9056,9 +9219,10 @@ UI_LivingTaxiMeterHide(playerid)
 	}
 	if (g_UiLvMeterOn[playerid] && IsPlayerConnected(playerid))
 	{
-		UI_LvTdShow(playerid, 5, 7, 0);
+		UI_LvTdShow(playerid, 5, 7, false);
 	}
-	g_UiLvMeterOn[playerid] = 0;
+	g_UiLvMeterOn[playerid] = false;
+	return 0;
 }
 
 UI_LvTaxiPayShow(playerid)
@@ -9075,10 +9239,10 @@ UI_LvTaxiPayShow(playerid)
 		disc[0] = 0;
 	}
 	format(body, 640, "{FFFFFF}Corsa con {FFD24D}%s{FFFFFF} conclusa.\n\nPercorso: {FFD24D}%s\n{FFFFFF}Importo: {66DD66}$%s%s\n\n{AAAAAA}Il pagamento parte dal tuo conto in banca. Se qualcosa non va puoi contestare:\nla corsa restera' in sospeso e lo staff la verifichera'. Rispondi entro %d secondi.", g_UiLvTxPayDriver[playerid], sDist, sFare, disc, g_UiLvTxPayLeft[playerid]);
-	Lang_ShowPlayerDialog(playerid, 9715, 0, "Pagamento corsa", body, "Paga", "Contesta");
+	Lang_ShowPlayerDialog(playerid, 9715, DIALOG_STYLE_MSGBOX, "Pagamento corsa", body, "Paga", "Contesta");
 }
 
-UI_LivingTaxiPayConfirm(playerid, rideId, driver[], distanceM, fare, discountPct, ttlSec)
+UI_LivingTaxiPayConfirm(playerid, rideId, const driver[], distanceM, fare, discountPct, ttlSec)
 {
 	if (!UI_LvReady(playerid) || rideId <= 0)
 	{
@@ -9096,6 +9260,7 @@ UI_LivingTaxiPayConfirm(playerid, rideId, driver[], distanceM, fare, discountPct
 	strcopy(g_UiLvTxPayDriver[playerid], driver[0] != 0 ? driver : "-", 25);
 	UI_LvTaxiPayShow(playerid);
 	UI_LvTimerSync(playerid);
+	return 0;
 }
 
 UI_LvTaxiPayReset(playerid)
@@ -9121,9 +9286,10 @@ UI_LivingTaxiPayClose(playerid)
 		HidePlayerDialog(playerid);
 	}
 	UI_LvTimerSync(playerid);
+	return 0;
 }
 
-UI_LivingTaxiRate(playerid, rideId, driver[])
+UI_LivingTaxiRate(playerid, rideId, const driver[])
 {
 	if (!UI_LvReady(playerid) || rideId <= 0)
 	{
@@ -9132,10 +9298,11 @@ UI_LivingTaxiRate(playerid, rideId, driver[])
 	new title[64];
 	g_UiLvTxRateId[playerid] = rideId;
 	format(title, 64, "Com'e' andata con %s?", driver[0] != 0 ? driver : "il tassista");
-	Lang_ShowPlayerDialog(playerid, 9717, 2, title, "{66DD66}***** Ottima\n{66DD66}**** Buona\n{FFD24D}*** Nella norma\n{FFAA33}** Da migliorare\n{FF8866}* Deludente", "Vota", "Salta");
+	Lang_ShowPlayerDialog(playerid, 9717, DIALOG_STYLE_LIST, title, "{66DD66}***** Ottima\n{66DD66}**** Buona\n{FFD24D}*** Nella norma\n{FFAA33}** Da migliorare\n{FF8866}* Deludente", "Vota", "Salta");
+	return 0;
 }
 
-UI_LivingTaxiReceipt(playerid, bool:asDriver, rideId, other[], distanceM, fare, tax, net)
+UI_LivingTaxiReceipt(playerid, bool:asDriver, rideId, const other[], distanceM, fare, tax, net)
 {
 	if (!UI_LvReady(playerid))
 	{
@@ -9155,10 +9322,11 @@ UI_LivingTaxiReceipt(playerid, bool:asDriver, rideId, other[], distanceM, fare, 
 		format(body, 512, "{FFFFFF}Tassista: {FFD24D}%s\n{FFFFFF}Percorso: {FFD24D}%s\n{FFFFFF}Pagato: {66DD66}$%s\n\n{AAAAAA}Grazie per aver viaggiato con i taxi di Los Santos.", other[0] != 0 ? other : "-", sDist, sFare);
 	}
 	format(title, 64, "Ricevuta corsa #%d", rideId);
-	Lang_ShowPlayerDialog(playerid, 9718, 0, title, body, "Chiudi", "");
+	Lang_ShowPlayerDialog(playerid, 9718, DIALOG_STYLE_MSGBOX, title, body, "Chiudi", "");
+	return 0;
 }
 
-UI_LivingProjectSet(playerid, projectId, districtId, name[], goal, fund, hoursLeft, donMin, donMax, dayLeft, blockCode)
+UI_LivingProjectSet(playerid, projectId, districtId, const name[], goal, fund, hoursLeft, donMin, donMax, dayLeft, blockCode)
 {
 	if (!UI_LvValid(playerid))
 	{
@@ -9175,6 +9343,7 @@ UI_LivingProjectSet(playerid, projectId, districtId, name[], goal, fund, hoursLe
 	g_UiLvPjDayLeft[playerid] = dayLeft < 0 ? 0 : dayLeft;
 	g_UiLvPjBlock[playerid] = blockCode >= 0 && blockCode < 5 ? blockCode : 3;
 	g_UiLvPjAmount[playerid] = 0;
+	return 0;
 }
 
 bool:UI_LvPrjRange(playerid, &lo, &hi)
@@ -9231,15 +9400,16 @@ UI_LivingProjectShow(playerid)
 	strcopy(title, "Progetto della comunita'", 64);
 	if (can)
 	{
-		Lang_ShowPlayerDialog(playerid, 9719, 0, title, body, "Contribuisci", "Chiudi");
+		Lang_ShowPlayerDialog(playerid, 9719, DIALOG_STYLE_MSGBOX, title, body, "Contribuisci", "Chiudi");
 	}
 	else
 	{
-		Lang_ShowPlayerDialog(playerid, 9719, 0, title, body, "Chiudi", "");
+		Lang_ShowPlayerDialog(playerid, 9719, DIALOG_STYLE_MSGBOX, title, body, "Chiudi", "");
 	}
+	return 0;
 }
 
-UI_LvPrjAmountShow(playerid, err[])
+UI_LvPrjAmountShow(playerid, const err[])
 {
 	new lo = 0, hi = 0, body[512], sLo[16], sHi[16];
 	if (!UI_LvPrjRange(playerid, lo, hi))
@@ -9250,7 +9420,8 @@ UI_LvPrjAmountShow(playerid, err[])
 	UI_LvFmt(lo, sLo, 16);
 	UI_LvFmt(hi, sHi, 16);
 	format(body, 512, "%s{FFFFFF}Quanto vuoi donare a {FFD24D}%s{FFFFFF}?\nImporto ammesso: da {FFD24D}$%s{FFFFFF} a {FFD24D}$%s{FFFFFF}. Inserisci un numero intero:", err, g_UiLvPjName[playerid], sLo, sHi);
-	Lang_ShowPlayerDialog(playerid, 9720, 1, "Contribuisci", body, "Avanti", "Indietro");
+	Lang_ShowPlayerDialog(playerid, 9720, DIALOG_STYLE_INPUT, "Contribuisci", body, "Avanti", "Indietro");
+	return 0;
 }
 
 UI_LvPrjConfirmShow(playerid)
@@ -9258,7 +9429,7 @@ UI_LvPrjConfirmShow(playerid)
 	new body[384], sAmt[16];
 	UI_LvFmt(g_UiLvPjAmount[playerid], sAmt, 16);
 	format(body, 384, "{FFFFFF}Doni {66DD66}$%s{FFFFFF} a {FFD24D}%s{FFFFFF}?\n\n{AAAAAA}L'importo si paga dal conto in banca, poi dai contanti, e non si restituisce.\nIl quartiere se ne ricordera'.", sAmt, g_UiLvPjName[playerid]);
-	Lang_ShowPlayerDialog(playerid, 9721, 0, "Conferma donazione", body, "Dona", "Indietro");
+	Lang_ShowPlayerDialog(playerid, 9721, DIALOG_STYLE_MSGBOX, "Conferma donazione", body, "Dona", "Indietro");
 }
 
 bool:UI_LvPrjCheck(playerid, amount, err[], size)
@@ -9267,16 +9438,16 @@ bool:UI_LvPrjCheck(playerid, amount, err[], size)
 	err[0] = 0;
 	if (!UI_LvPrjRange(playerid, lo, hi))
 	{
-		return 0;
+		return false;
 	}
 	if (amount < lo || amount > hi)
 	{
 		UI_LvFmt(lo, sLo, 16);
 		UI_LvFmt(hi, sHi, 16);
 		format(err, size, "{FF6666}Importo fuori limite: da $%s a $%s.\n\n", sLo, sHi);
-		return 0;
+		return false;
 	}
-	return 1;
+	return true;
 }
 
 UI_LivingProjectContribute(playerid, amount)
@@ -9303,6 +9474,7 @@ UI_LivingProjectContribute(playerid, amount)
 	}
 	g_UiLvPjAmount[playerid] = amount;
 	UI_LvPrjConfirmShow(playerid);
+	return 0;
 }
 
 UI_LivingHelpSet(playerid, step, bool:hintsOff)
@@ -9313,6 +9485,7 @@ UI_LivingHelpSet(playerid, step, bool:hintsOff)
 	}
 	g_UiLvHpStep[playerid] = UI_LvClamp(step, 1, 6);
 	g_UiLvHpOff[playerid] = hintsOff;
+	return 0;
 }
 
 UI_LivingHelpShow(playerid)
@@ -9357,7 +9530,8 @@ UI_LivingHelpShow(playerid)
 	{
 		format(title, 64, "Primo giorno - passo %d di %d", cur, 5);
 	}
-	Lang_ShowPlayerDialog(playerid, 9722, 2, title, body, "Apri", "Chiudi");
+	Lang_ShowPlayerDialog(playerid, 9722, DIALOG_STYLE_LIST, title, body, "Apri", "Chiudi");
+	return 0;
 }
 
 UI_LvHelpStepShow(playerid, step)
@@ -9368,11 +9542,11 @@ UI_LvHelpStepShow(playerid, step)
 	format(title, 64, "%d. %s", step, g_UiLvStepTitle[step]);
 	if (step == cur && !g_UiLvHpOff[playerid])
 	{
-		Lang_ShowPlayerDialog(playerid, 9723, 0, title, body, "Segna sulla mappa", "Indietro");
+		Lang_ShowPlayerDialog(playerid, 9723, DIALOG_STYLE_MSGBOX, title, body, "Segna sulla mappa", "Indietro");
 	}
 	else
 	{
-		Lang_ShowPlayerDialog(playerid, 9723, 0, title, body, "Indietro", "Chiudi");
+		Lang_ShowPlayerDialog(playerid, 9723, DIALOG_STYLE_MSGBOX, title, body, "Indietro", "Chiudi");
 	}
 }
 
@@ -9386,9 +9560,10 @@ UI_LivingHint(playerid, step)
 	new text[160];
 	format(text, 160, "~y~Primo giorno %d/%d~n~~w~%s", step, 5, g_UiLvStepHint[step]);
 	Lang_PlayerTextDrawSetString(playerid, g_UiLvTd[playerid][9], text);
-	UI_LvTdShow(playerid, 8, 9, 1);
+	UI_LvTdShow(playerid, 8, 9, true);
 	g_UiLvHintTtl[playerid] = 10;
 	UI_LvTimerSync(playerid);
+	return 0;
 }
 
 UI_LivingHintHide(playerid)
@@ -9399,13 +9574,14 @@ UI_LivingHintHide(playerid)
 	}
 	if (g_UiLvHintTtl[playerid] > 0 && IsPlayerConnected(playerid))
 	{
-		UI_LvTdShow(playerid, 8, 9, 0);
+		UI_LvTdShow(playerid, 8, 9, false);
 	}
 	g_UiLvHintTtl[playerid] = 0;
 	if (IsPlayerConnected(playerid))
 	{
 		UI_LvTimerSync(playerid);
 	}
+	return 0;
 }
 
 UI_LivingHelpComplete(playerid, bool:rewarded)
@@ -9424,6 +9600,7 @@ UI_LivingHelpComplete(playerid, bool:rewarded)
 	{
 		UI_LvInfo(playerid, "Suggerimenti spenti", "{FFFFFF}Va bene, niente piu' suggerimenti.\n\n{AAAAAA}Se ti serve una mano, la Casa del Quartiere di Idlewood e' sempre aperta.");
 	}
+	return 0;
 }
 
 UI_LvConfirmsReset(playerid)
@@ -9451,9 +9628,10 @@ UI_LivingClose(playerid)
 		HidePlayerDialog(playerid);
 	}
 	UI_LvTimerSync(playerid);
+	return 0;
 }
 
-UI_LivingReject(playerid, msg[])
+UI_LivingReject(playerid, const msg[])
 {
 	if (!UI_LvReady(playerid))
 	{
@@ -9473,6 +9651,7 @@ UI_LivingReject(playerid, msg[])
 	{
 		UI_LivingNotify(playerid, msg, 3);
 	}
+	return 0;
 }
 
 UI_LivingUiDestroy(playerid)
@@ -9486,26 +9665,26 @@ UI_LivingUiDestroy(playerid)
 	{
 		for (new i = 0; i < 11; i++)
 		{
-			PlayerTextDrawDestroy(playerid, g_UiLvTd[playerid][i]);
-			g_UiLvTd[playerid][i] = 65535;
+			PlayerTextDrawDestroy(playerid, PlayerText:g_UiLvTd[playerid][i]);
+			g_UiLvTd[playerid][i] = INVALID_PLAYER_TEXT_DRAW;
 		}
 	}
-	g_UiLvTdMade[playerid] = 0;
+	g_UiLvTdMade[playerid] = false;
 	g_UiLvToastTtl[playerid] = 0;
 	g_UiLvHintTtl[playerid] = 0;
-	g_UiLvHudOn[playerid] = 0;
+	g_UiLvHudOn[playerid] = false;
 	g_UiLvHudId[playerid] = 0;
 	g_UiLvHudExpAt[playerid] = 0;
-	g_UiLvMeterOn[playerid] = 0;
+	g_UiLvMeterOn[playerid] = false;
 	UI_LvConfirmsReset(playerid);
 	g_UiLvBdCount[playerid] = 0;
 	g_UiLvBdRows[playerid] = 0;
-	g_UiLvBdAt[playerid] = 0;
+	g_UiLvBdAt[playerid] = false;
 	g_UiLvFltDistrict[playerid] = 0;
 	g_UiLvFltKind[playerid] = 0;
-	g_UiLvFltEligible[playerid] = 0;
+	g_UiLvFltEligible[playerid] = false;
 	g_UiLvDetIdx[playerid] = -1;
-	g_UiLvDetCan[playerid] = 0;
+	g_UiLvDetCan[playerid] = false;
 	g_UiLvStId[playerid] = 0;
 	g_UiLvDsId[playerid] = 0;
 	g_UiLvDsEvCount[playerid] = 0;
@@ -9517,9 +9696,10 @@ UI_LivingUiDestroy(playerid)
 	g_UiLvPjId[playerid] = 0;
 	g_UiLvPjAmount[playerid] = 0;
 	g_UiLvHpStep[playerid] = 1;
-	g_UiLvHpOff[playerid] = 0;
+	g_UiLvHpOff[playerid] = false;
 	g_UiLvHpView[playerid] = 0;
 	g_UiLvHpOffRow[playerid] = -1;
+	return 0;
 }
 
 public UI_LivingOnTimer(playerid)
@@ -9537,7 +9717,7 @@ public UI_LivingOnTimer(playerid)
 		g_UiLvToastTtl[playerid]--;
 		if (g_UiLvToastTtl[playerid] <= 0 && g_UiLvTdMade[playerid])
 		{
-			PlayerTextDrawHide(playerid, g_UiLvTd[playerid][10]);
+			PlayerTextDrawHide(playerid, PlayerText:g_UiLvTd[playerid][10]);
 		}
 	}
 	if (g_UiLvHintTtl[playerid] > 0)
@@ -9545,7 +9725,7 @@ public UI_LivingOnTimer(playerid)
 		g_UiLvHintTtl[playerid]--;
 		if (g_UiLvHintTtl[playerid] <= 0)
 		{
-			UI_LvTdShow(playerid, 8, 9, 0);
+			UI_LvTdShow(playerid, 8, 9, false);
 		}
 	}
 	if (g_UiLvHudOn[playerid] && g_UiLvHudExpAt[playerid] != 0)
@@ -9587,11 +9767,11 @@ public UI_LivingOnTimer(playerid)
 	return 1;
 }
 
-bool:UI_LivingOnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
+bool:UI_LivingOnDialogResponse(playerid, dialogid, response, listitem, const inputtext[])
 {
 	if (!UI_LvValid(playerid) || !UI_LvIsLivingDialog(dialogid))
 	{
-		return 0;
+		return false;
 	}
 	switch (dialogid)
 	{
@@ -9599,34 +9779,34 @@ bool:UI_LivingOnDialogResponse(playerid, dialogid, response, listitem, inputtext
 		{
 			if (!response)
 			{
-				return 1;
+				return true;
 			}
 			if (listitem == 0)
 			{
 				UI_LvFilterShow(playerid);
-				return 1;
+				return true;
 			}
 			new row = listitem - 1, rows = g_UiLvBdRows[playerid];
 			if (row >= 0 && row < rows)
 			{
 				UI_LvDetailShow(playerid, g_UiLvBdRow[playerid][row]);
-				return 1;
+				return true;
 			}
 			if (row == (rows == 0 ? 1 : rows))
 			{
 				UI_LivingToast(playerid, "Aggiorno la bacheca...", 0);
 				UI_OnContractBoardRefresh(playerid);
-				return 1;
+				return true;
 			}
 			UI_LvBoardRender(playerid);
-			return 1;
+			return true;
 		}
 		case 9701:
 		{
 			if (!response)
 			{
 				UI_LvBoardRender(playerid);
-				return 1;
+				return true;
 			}
 			switch (listitem)
 			{
@@ -9645,11 +9825,11 @@ bool:UI_LivingOnDialogResponse(playerid, dialogid, response, listitem, inputtext
 				default:
 				{
 					UI_LvBoardRender(playerid);
-					return 1;
+					return true;
 				}
 			}
 			UI_LvFilterShow(playerid);
-			return 1;
+			return true;
 		}
 		case 9702:
 		{
@@ -9669,7 +9849,7 @@ bool:UI_LivingOnDialogResponse(playerid, dialogid, response, listitem, inputtext
 			{
 				UI_LvBoardRender(playerid);
 			}
-			return 1;
+			return true;
 		}
 		case 9703:
 		{
@@ -9677,61 +9857,61 @@ bool:UI_LivingOnDialogResponse(playerid, dialogid, response, listitem, inputtext
 			if (i < 0 || i >= g_UiLvBdCount[playerid])
 			{
 				UI_LvBoardRender(playerid);
-				return 1;
+				return true;
 			}
 			if (!response)
 			{
 				UI_LvDetailShow(playerid, i);
-				return 1;
+				return true;
 			}
-			g_UiLvDetCan[playerid] = 0;
+			g_UiLvDetCan[playerid] = false;
 			UI_LivingToast(playerid, "Contratto richiesto, un attimo...", 0);
 			UI_OnContractAccept(playerid, g_UiLvBdId[playerid][i]);
-			return 1;
+			return true;
 		}
 		case 9704:
 		{
 			if (!response)
 			{
-				return 1;
+				return true;
 			}
 			if (g_UiLvStId[playerid] <= 0)
 			{
 				UI_OnContractBoardRefresh(playerid);
-				return 1;
+				return true;
 			}
 			new body[256];
 			format(body, 256, "{FFFFFF}Vuoi davvero lasciare il contratto {FFD24D}#%d{FFFFFF}?\n\n{AAAAAA}Il mezzo tornera' al magazzino e il contratto tornera' in bacheca per qualcun altro.", g_UiLvStId[playerid]);
-			Lang_ShowPlayerDialog(playerid, 9705, 0, "Lasciare il contratto?", body, "Lascia", "Indietro");
-			return 1;
+			Lang_ShowPlayerDialog(playerid, 9705, DIALOG_STYLE_MSGBOX, "Lasciare il contratto?", body, "Lascia", "Indietro");
+			return true;
 		}
 		case 9705:
 		{
 			new id = g_UiLvStId[playerid];
 			if (id <= 0)
 			{
-				return 1;
+				return true;
 			}
 			if (!response)
 			{
 				UI_LivingToast(playerid, "Il contratto resta tuo", 1);
-				return 1;
+				return true;
 			}
 			g_UiLvStId[playerid] = 0;
 			UI_OnContractAbandon(playerid, id);
-			return 1;
+			return true;
 		}
 		case 9706:
 		{
 			if (!response)
 			{
-				return 1;
+				return true;
 			}
 			if (listitem >= 0 && listitem < 3)
 			{
 				UI_OnDistrictPick(playerid, listitem + 1);
 			}
-			return 1;
+			return true;
 		}
 		case 9707:
 		{
@@ -9739,32 +9919,32 @@ bool:UI_LivingOnDialogResponse(playerid, dialogid, response, listitem, inputtext
 			{
 				UI_OnProjectOpen(playerid, g_UiLvDsId[playerid]);
 			}
-			return 1;
+			return true;
 		}
 		case 9708, 9713, 9718, 9725:
 		{
-			return 1;
+			return true;
 		}
 		case 9709:
 		{
 			if (!response)
 			{
-				return 1;
+				return true;
 			}
 			if (listitem < 0 || listitem >= g_UiLvRnCount[playerid])
 			{
 				UI_LvRentModelShow(playerid);
-				return 1;
+				return true;
 			}
 			if (!g_UiLvRnAvail[playerid][listitem])
 			{
 				UI_LivingToast(playerid, "Questo mezzo non e' disponibile per te ora", 2);
 				UI_LvRentModelShow(playerid);
-				return 1;
+				return true;
 			}
 			g_UiLvRnSel[playerid] = listitem;
 			UI_LvRentBlocksShow(playerid);
-			return 1;
+			return true;
 		}
 		case 9710:
 		{
@@ -9772,16 +9952,16 @@ bool:UI_LivingOnDialogResponse(playerid, dialogid, response, listitem, inputtext
 			if (!response || s < 0 || s >= g_UiLvRnCount[playerid])
 			{
 				UI_LvRentModelShow(playerid);
-				return 1;
+				return true;
 			}
 			if (listitem < 0 || listitem >= g_UiLvRnMaxBlocks[playerid])
 			{
 				UI_LvRentBlocksShow(playerid);
-				return 1;
+				return true;
 			}
 			g_UiLvRnBlocks[playerid] = listitem + 1;
 			UI_LvRentSummaryShow(playerid);
-			return 1;
+			return true;
 		}
 		case 9711:
 		{
@@ -9789,18 +9969,18 @@ bool:UI_LivingOnDialogResponse(playerid, dialogid, response, listitem, inputtext
 			if (s < 0 || s >= g_UiLvRnCount[playerid] || b < 1)
 			{
 				UI_LvRentModelShow(playerid);
-				return 1;
+				return true;
 			}
 			if (!response)
 			{
 				UI_LvRentBlocksShow(playerid);
-				return 1;
+				return true;
 			}
 			g_UiLvRnSel[playerid] = -1;
 			g_UiLvRnBlocks[playerid] = 0;
 			UI_LivingToast(playerid, "Preparo il mezzo...", 0);
 			UI_OnRentalConfirm(playerid, g_UiLvRnIdx[playerid][s], b);
-			return 1;
+			return true;
 		}
 		case 9712:
 		{
@@ -9808,10 +9988,10 @@ bool:UI_LivingOnDialogResponse(playerid, dialogid, response, listitem, inputtext
 			g_UiLvRnReturnId[playerid] = 0;
 			if (id <= 0 || !response)
 			{
-				return 1;
+				return true;
 			}
 			UI_OnRentalReturnConfirm(playerid, id);
-			return 1;
+			return true;
 		}
 		case 9714:
 		{
@@ -9821,44 +10001,44 @@ bool:UI_LivingOnDialogResponse(playerid, dialogid, response, listitem, inputtext
 			UI_LvTimerSync(playerid);
 			if (id <= 0 || !response)
 			{
-				return 1;
+				return true;
 			}
 			UI_OnTaxiCallAccept(playerid, id);
-			return 1;
+			return true;
 		}
 		case 9715:
 		{
 			new id = g_UiLvTxPayId[playerid];
 			if (id <= 0)
 			{
-				return 1;
+				return true;
 			}
 			if (response)
 			{
 				UI_LvTaxiPayReset(playerid);
 				UI_LvTimerSync(playerid);
 				UI_OnTaxiPayConfirm(playerid, id, 1);
-				return 1;
+				return true;
 			}
-			Lang_ShowPlayerDialog(playerid, 9716, 0, "Contestare la corsa?", "{FFFFFF}Se contesti, la corsa non viene pagata e resta in sospeso per lo staff.\n\n{AAAAAA}Usalo solo se qualcosa e' andato davvero storto.", "Contesta", "Indietro");
-			return 1;
+			Lang_ShowPlayerDialog(playerid, 9716, DIALOG_STYLE_MSGBOX, "Contestare la corsa?", "{FFFFFF}Se contesti, la corsa non viene pagata e resta in sospeso per lo staff.\n\n{AAAAAA}Usalo solo se qualcosa e' andato davvero storto.", "Contesta", "Indietro");
+			return true;
 		}
 		case 9716:
 		{
 			new id = g_UiLvTxPayId[playerid];
 			if (id <= 0)
 			{
-				return 1;
+				return true;
 			}
 			if (!response)
 			{
 				UI_LvTaxiPayShow(playerid);
-				return 1;
+				return true;
 			}
 			UI_LvTaxiPayReset(playerid);
 			UI_LvTimerSync(playerid);
 			UI_OnTaxiPayConfirm(playerid, id, 0);
-			return 1;
+			return true;
 		}
 		case 9717:
 		{
@@ -9866,11 +10046,11 @@ bool:UI_LivingOnDialogResponse(playerid, dialogid, response, listitem, inputtext
 			g_UiLvTxRateId[playerid] = 0;
 			if (id <= 0 || !response || listitem < 0 || listitem >= 5)
 			{
-				return 1;
+				return true;
 			}
 			UI_LivingToast(playerid, "Grazie per il tuo voto", 1);
 			UI_OnTaxiRate(playerid, id, 5 - listitem);
-			return 1;
+			return true;
 		}
 		case 9719:
 		{
@@ -9879,20 +10059,20 @@ bool:UI_LivingOnDialogResponse(playerid, dialogid, response, listitem, inputtext
 			{
 				UI_LvPrjAmountShow(playerid, "");
 			}
-			return 1;
+			return true;
 		}
 		case 9720:
 		{
 			if (!response)
 			{
 				UI_LivingProjectShow(playerid);
-				return 1;
+				return true;
 			}
 			new amount = 0, err[160];
 			if (!UI_LvParseAmount(inputtext, amount))
 			{
 				UI_LvPrjAmountShow(playerid, "{FF6666}Importo non valido: solo cifre, intero positivo.\n\n");
-				return 1;
+				return true;
 			}
 			if (!UI_LvPrjCheck(playerid, amount, err, 160))
 			{
@@ -9904,11 +10084,11 @@ bool:UI_LivingOnDialogResponse(playerid, dialogid, response, listitem, inputtext
 				{
 					UI_LivingProjectShow(playerid);
 				}
-				return 1;
+				return true;
 			}
 			g_UiLvPjAmount[playerid] = amount;
 			UI_LvPrjConfirmShow(playerid);
-			return 1;
+			return true;
 		}
 		case 9721:
 		{
@@ -9916,36 +10096,36 @@ bool:UI_LivingOnDialogResponse(playerid, dialogid, response, listitem, inputtext
 			if (!response)
 			{
 				UI_LvPrjAmountShow(playerid, "");
-				return 1;
+				return true;
 			}
 			if (amount <= 0 || !UI_LvPrjCheck(playerid, amount, err, 160))
 			{
 				UI_LivingProjectShow(playerid);
-				return 1;
+				return true;
 			}
 			g_UiLvPjAmount[playerid] = 0;
 			UI_LivingToast(playerid, "Grazie: registro la tua donazione...", 1);
 			UI_OnProjectContribute(playerid, g_UiLvPjId[playerid], amount);
-			return 1;
+			return true;
 		}
 		case 9722:
 		{
 			if (!response)
 			{
-				return 1;
+				return true;
 			}
 			if (listitem >= 0 && listitem < 5)
 			{
 				UI_LvHelpStepShow(playerid, listitem + 1);
-				return 1;
+				return true;
 			}
 			if (listitem >= 0 && listitem == g_UiLvHpOffRow[playerid])
 			{
-				Lang_ShowPlayerDialog(playerid, 9724, 0, "Spegnere i suggerimenti?", "{FFFFFF}Il percorso del primo giorno si chiude qui, senza il pacco accoglienza.\n\n{AAAAAA}Potrai sempre chiedere a chi incontri: Los Santos e' piu' gentile di quanto sembri.", "Spegni", "Indietro");
-				return 1;
+				Lang_ShowPlayerDialog(playerid, 9724, DIALOG_STYLE_MSGBOX, "Spegnere i suggerimenti?", "{FFFFFF}Il percorso del primo giorno si chiude qui, senza il pacco accoglienza.\n\n{AAAAAA}Potrai sempre chiedere a chi incontri: Los Santos e' piu' gentile di quanto sembri.", "Spegni", "Indietro");
+				return true;
 			}
 			UI_LivingHelpShow(playerid);
-			return 1;
+			return true;
 		}
 		case 9723:
 		{
@@ -9967,22 +10147,22 @@ bool:UI_LivingOnDialogResponse(playerid, dialogid, response, listitem, inputtext
 			{
 				UI_LivingHelpShow(playerid);
 			}
-			return 1;
+			return true;
 		}
 		case 9724:
 		{
 			if (!response)
 			{
 				UI_LivingHelpShow(playerid);
-				return 1;
+				return true;
 			}
-			g_UiLvHpOff[playerid] = 1;
+			g_UiLvHpOff[playerid] = true;
 			UI_LivingHintHide(playerid);
 			UI_OnHelpHintsOff(playerid);
-			return 1;
+			return true;
 		}
 	}
-	return 1;
+	return true;
 }
 
 // ===== modules/database/db_core.inc =====
@@ -9996,7 +10176,7 @@ new g_DBLockedUntil[MAX_PLAYERS];
 
 bool:DB_IsReady()
 {
-	return g_DB != 0;
+	return g_DB != MYSQL_INVALID_HANDLE;
 }
 
 DB_IniTrim(str[])
@@ -10017,22 +10197,22 @@ DB_IniTrim(str[])
 	}
 }
 
-bool:DB_IniRead(path[], host[], user[], pass[], dbname[], &port, &mask, size)
+bool:DB_IniRead(const path[], host[], user[], pass[], dbname[], &port, &mask, size)
 {
-	new File:f = fopen(path, 0);
+	new File:f = fopen(path, filemode:0);
 	if (!f)
 	{
-		return 0;
+		return false;
 	}
-	new line[320], key[32], val[128], bool:first = 1;
+	new line[320], key[32], val[128], bool:first = true;
 	host[0] = user[0] = pass[0] = dbname[0] = 0;
 	port = 3306;
 	mask = 0;
-	while (fread(f, line, 320, 0))
+	while (fread(f, line, 320, false))
 	{
 		if (first)
 		{
-			first = 0;
+			first = false;
 			if ((line[0] & 255) == 239 && (line[1] & 255) == 187 && (line[2] & 255) == 191)
 			{
 				strdel(line, 0, 3);
@@ -10042,7 +10222,7 @@ bool:DB_IniRead(path[], host[], user[], pass[], dbname[], &port, &mask, size)
 				strdel(line, 0, 1);
 			}
 		}
-		new eq = strfind(line, "=", 0, 0);
+		new eq = strfind(line, "=", false, 0);
 		if (eq < 1)
 		{
 			continue;
@@ -10055,26 +10235,26 @@ bool:DB_IniRead(path[], host[], user[], pass[], dbname[], &port, &mask, size)
 		{
 			continue;
 		}
-		if (!strcmp(key, "hostname", 1, 0x7FFFFFFF))
+		if (!strcmp(key, "hostname", true, 0x7FFFFFFF))
 		{
 			strcopy(host, val, size);
 			mask |= 1;
 		}
-		else if (!strcmp(key, "username", 1, 0x7FFFFFFF))
+		else if (!strcmp(key, "username", true, 0x7FFFFFFF))
 		{
 			strcopy(user, val, size);
 			mask |= 2;
 		}
-		else if (!strcmp(key, "password", 1, 0x7FFFFFFF))
+		else if (!strcmp(key, "password", true, 0x7FFFFFFF))
 		{
 			strcopy(pass, val, size);
 		}
-		else if (!strcmp(key, "database", 1, 0x7FFFFFFF))
+		else if (!strcmp(key, "database", true, 0x7FFFFFFF))
 		{
 			strcopy(dbname, val, size);
 			mask |= 4;
 		}
-		else if (!strcmp(key, "server_port", 1, 0x7FFFFFFF) || !strcmp(key, "port", 1, 0x7FFFFFFF))
+		else if (!strcmp(key, "server_port", true, 0x7FFFFFFF) || !strcmp(key, "port", true, 0x7FFFFFFF))
 		{
 			new p = strval(val);
 			if (p > 0 && p < 65536)
@@ -10084,10 +10264,10 @@ bool:DB_IniRead(path[], host[], user[], pass[], dbname[], &port, &mask, size)
 		}
 	}
 	fclose(f);
-	return 1;
+	return true;
 }
 
-DB_ConnectHint(errno, errtxt[])
+DB_ConnectHint(errno, const errtxt[])
 {
 	switch (errno)
 	{
@@ -10109,7 +10289,7 @@ DB_ConnectHint(errno, errtxt[])
 		}
 		default:
 		{
-			if (strfind(errtxt, "authentication", 1, 0) != -1 || strfind(errtxt, "caching_sha2", 1, 0) != -1)
+			if (strfind(errtxt, "authentication", true, 0) != -1 || strfind(errtxt, "caching_sha2", true, 0) != -1)
 			{
 				print("[DB] suggerimento: possibile problema di autenticazione MySQL 8: ALTER USER 'utente'@'host' IDENTIFIED WITH mysql_native_password BY 'password'; FLUSH PRIVILEGES;");
 			}
@@ -10121,30 +10301,30 @@ DB_ConnectHint(errno, errtxt[])
 	}
 }
 
-bool:DB_ConnectFinish(MySQL:h, where[])
+bool:DB_ConnectFinish(MySQL:h, const where[])
 {
 	new errbuf[128], errno = 0;
-	if (h != 0)
+	if (h != MYSQL_INVALID_HANDLE)
 	{
 		errno = mysql_errno(h);
 	}
-	if (h == 0 || errno != 0)
+	if (h == MYSQL_INVALID_HANDLE || errno != 0)
 	{
 		errbuf[0] = 0;
 		mysql_error(errbuf, 128, h);
 		printf("[DB] connessione fallita (%s): errno %d, %s", where, errno, errbuf[0] ? errbuf : "(nessun messaggio dal plugin)");
 		DB_ConnectHint(errno, errbuf);
-		if (h != 0)
+		if (h != MYSQL_INVALID_HANDLE)
 		{
 			mysql_close(h);
 		}
-		return 0;
+		return false;
 	}
 	g_DB = h;
 	mysql_set_charset("utf8mb4", g_DB);
 	DB_AlignCollation();
 	print("[DB] connesso (utf8mb4)");
-	return 1;
+	return true;
 }
 
 DB_AlignCollation()
@@ -10156,7 +10336,7 @@ bool:DB_Connect()
 {
 	if (DB_IsReady())
 	{
-		return 1;
+		return true;
 	}
 	new host[128], user[128], pass[128], dbname[128], port = 0, mask = 0;
 	new bool:read = DB_IniRead("mysql.ini", host, user, pass, dbname, port, mask, 128);
@@ -10167,26 +10347,26 @@ bool:DB_Connect()
 	if (!read)
 	{
 		new MySQL:h = mysql_connect_file("mysql.ini");
-		if (h != 0 && mysql_errno(h) == 0)
+		if (h != MYSQL_INVALID_HANDLE && mysql_errno(h) == 0)
 		{
 			g_DB = h;
 			mysql_set_charset("utf8mb4", g_DB);
 			DB_AlignCollation();
 			print("[DB] connesso (utf8mb4, via mysql_connect_file)");
-			return 1;
+			return true;
 		}
 		printf("[DB] connessione con '%s' fallita: il file va nella radice del server (accanto a omp-server) oppure in scriptfiles/.", "mysql.ini");
 		print("[DB] attenzione: su Windows controlla che non si chiami 'mysql.ini.txt' (estensioni nascoste) e che le chiavi siano hostname, username, password, database, server_port.");
 		DB_ConnectFinish(h, "mysql_connect_file");
-		return 0;
+		return false;
 	}
 	if (mask != 7)
 	{
 		printf("[DB] %s: chiavi mancanti o vuote:%s%s%s (servono hostname, username, database; password e server_port opzionali).", "mysql.ini", mask & 1 ? "" : " hostname", mask & 2 ? "" : " username", mask & 4 ? "" : " database");
-		return 0;
+		return false;
 	}
 	new MySQLOpt:opts = mysql_init_options();
-	mysql_set_option(opts, 3, port);
+	mysql_set_option(opts, E_MYSQL_OPTION:3, port);
 	new MySQL:h2 = mysql_connect(host, user, pass, dbname, opts);
 	pass[0] = 0;
 	new where[96];
@@ -10201,19 +10381,20 @@ DB_Shutdown()
 		return 0;
 	}
 	mysql_close(g_DB);
-	g_DB = 0;
+	g_DB = MySQL:0;
 	print("[DB] connessione chiusa");
+	return 0;
 }
 
-bool:DB_PlayerMatches(playerid, name[])
+bool:DB_PlayerMatches(playerid, const name[])
 {
 	if (playerid < 0 || playerid >= MAX_PLAYERS || !IsPlayerConnected(playerid))
 	{
-		return 0;
+		return false;
 	}
 	new cur[25];
 	GetPlayerName(playerid, cur, 25);
-	return strcmp(cur, name, 0, 0x7FFFFFFF) == 0;
+	return strcmp(cur, name, false, 0x7FFFFFFF) == 0;
 }
 
 DB_PendingSet(playerid, op)
@@ -10255,7 +10436,7 @@ DB_DeliverFailure(playerid, op)
 			}
 			else
 			{
-				Char_OnDBLoaded(playerid, 0);
+				Char_OnDBLoaded(playerid, false);
 			}
 		}
 		case 8:
@@ -10333,6 +10514,7 @@ DB_DeliverFailure(playerid, op)
 			}
 		}
 	}
+	return 0;
 }
 
 DB_DeliverAdminFailure(slot, op)
@@ -10378,6 +10560,7 @@ DB_DeliverAdminFailure(slot, op)
 			}
 		}
 	}
+	return 0;
 }
 
 DB_FailAllAdminPending(op)
@@ -10405,122 +10588,122 @@ DB_FailAllPending(op)
 public OnQueryError(errorid, const error[], const callback[], const query[], MySQL:handle)
 {
 	printf("[DB] errore %d (callback '%s'): %s", errorid, callback, error);
-	if (!strcmp(callback, "DB_OnAccountLoaded", 0, 0x7FFFFFFF))
+	if (!strcmp(callback, "DB_OnAccountLoaded", false, 0x7FFFFFFF))
 	{
 		DB_FailAllPending(1);
 	}
-	else if (!strcmp(callback, "DB_OnAccountCreated", 0, 0x7FFFFFFF))
+	else if (!strcmp(callback, "DB_OnAccountCreated", false, 0x7FFFFFFF))
 	{
 		DB_FailAllPending(2);
 	}
-	else if (!strcmp(callback, "DB_OnCharLoaded", 0, 0x7FFFFFFF))
+	else if (!strcmp(callback, "DB_OnCharLoaded", false, 0x7FFFFFFF))
 	{
 		DB_FailAllPending(4);
 	}
-	else if (!strcmp(callback, "DB_OnCharCreated", 0, 0x7FFFFFFF))
+	else if (!strcmp(callback, "DB_OnCharCreated", false, 0x7FFFFFFF))
 	{
 		DB_FailAllPending(8);
 	}
-	else if (!strcmp(callback, "DB_OnBanChecked", 0, 0x7FFFFFFF))
+	else if (!strcmp(callback, "DB_OnBanChecked", false, 0x7FFFFFFF))
 	{
 		DB_FailAllPending(16);
 	}
-	else if (!strcmp(callback, "DB_OnVehiclesLoaded", 0, 0x7FFFFFFF))
+	else if (!strcmp(callback, "DB_OnVehiclesLoaded", false, 0x7FFFFFFF))
 	{
 		DB_FailAllPending(32);
 	}
-	else if (!strcmp(callback, "DB_OnVehiclesCounted", 0, 0x7FFFFFFF))
+	else if (!strcmp(callback, "DB_OnVehiclesCounted", false, 0x7FFFFFFF))
 	{
 		DB_FailAllPending(256);
 	}
-	else if (!strcmp(callback, "DB_OnVehicleCreated", 0, 0x7FFFFFFF))
+	else if (!strcmp(callback, "DB_OnVehicleCreated", false, 0x7FFFFFFF))
 	{
 		DB_FailAllPending(64);
 	}
-	else if (!strcmp(callback, "DB_OnVehicleDeleted", 0, 0x7FFFFFFF))
+	else if (!strcmp(callback, "DB_OnVehicleDeleted", false, 0x7FFFFFFF))
 	{
 		DB_FailAllPending(128);
 	}
-	else if (!strcmp(callback, "DB_OnHouseBought", 0, 0x7FFFFFFF))
+	else if (!strcmp(callback, "DB_OnHouseBought", false, 0x7FFFFFFF))
 	{
 		DB_FailAllPending(512);
 	}
-	else if (!strcmp(callback, "DB_OnHouseSold", 0, 0x7FFFFFFF))
+	else if (!strcmp(callback, "DB_OnHouseSold", false, 0x7FFFFFFF))
 	{
 		DB_FailAllPending(1024);
 	}
-	else if (!strcmp(callback, "DB_OnHouseKeyAdded", 0, 0x7FFFFFFF))
+	else if (!strcmp(callback, "DB_OnHouseKeyAdded", false, 0x7FFFFFFF))
 	{
 		DB_FailAllPending(2048);
 	}
-	else if (!strcmp(callback, "DB_OnHouseKeyRemoved", 0, 0x7FFFFFFF))
+	else if (!strcmp(callback, "DB_OnHouseKeyRemoved", false, 0x7FFFFFFF))
 	{
 		DB_FailAllPending(4096);
 	}
-	else if (!strcmp(callback, "DB_OnHouseKeysLoaded", 0, 0x7FFFFFFF))
+	else if (!strcmp(callback, "DB_OnHouseKeysLoaded", false, 0x7FFFFFFF))
 	{
 		DB_FailAllPending(8192);
 	}
-	else if (!strcmp(callback, "DB_OnHouseBillsLoaded", 0, 0x7FFFFFFF))
+	else if (!strcmp(callback, "DB_OnHouseBillsLoaded", false, 0x7FFFFFFF))
 	{
 		DB_FailAllPending(16384);
 	}
-	else if (!strcmp(callback, "DB_OnHouseBillsPaid", 0, 0x7FFFFFFF) || !strcmp(callback, "DB_OnHouseRestored", 0, 0x7FFFFFFF))
+	else if (!strcmp(callback, "DB_OnHouseBillsPaid", false, 0x7FFFFFFF) || !strcmp(callback, "DB_OnHouseRestored", false, 0x7FFFFFFF))
 	{
 		DB_FailAllPending(32768);
 	}
-	else if (!strcmp(callback, "DB_OnHouseFoodLoaded", 0, 0x7FFFFFFF))
+	else if (!strcmp(callback, "DB_OnHouseFoodLoaded", false, 0x7FFFFFFF))
 	{
 		DB_FailAllPending(65536);
 	}
-	else if (!strcmp(callback, "DB_OnHouseStored", 0, 0x7FFFFFFF))
+	else if (!strcmp(callback, "DB_OnHouseStored", false, 0x7FFFFFFF))
 	{
 		DB_FailAllPending(131072);
 	}
-	else if (!strcmp(callback, "DB_OnHouse", 0, 10) && funcidx("DB_HouseGlobalFailure") != -1)
+	else if (!strcmp(callback, "DB_OnHouse", false, 10) && funcidx("DB_HouseGlobalFailure") != -1)
 	{
 		CallLocalFunction("DB_HouseGlobalFailure", "s", callback);
 	}
-	else if (!strcmp(callback, "DB_OnJF", 0, 7) && funcidx("DB_JobFacQueryError") != -1)
+	else if (!strcmp(callback, "DB_OnJF", false, 7) && funcidx("DB_JobFacQueryError") != -1)
 	{
 		CallLocalFunction("DB_JobFacQueryError", "s", callback);
 	}
-	else if (!strcmp(callback, "DB_OnInv", 0, 8) && funcidx("DB_InvQueryError") != -1)
+	else if (!strcmp(callback, "DB_OnInv", false, 8) && funcidx("DB_InvQueryError") != -1)
 	{
 		CallLocalFunction("DB_InvQueryError", "s", callback);
 	}
-	else if (!strcmp(callback, "DB_OnBankDeltaSaved", 0, 0x7FFFFFFF))
+	else if (!strcmp(callback, "DB_OnBankDeltaSaved", false, 0x7FFFFFFF))
 	{
 		if (funcidx("DB_BankDeltaFailed") != -1)
 		{
 			CallLocalFunction("DB_BankDeltaFailed", "");
 		}
 	}
-	else if (!strcmp(callback, "DB_OnBank", 0, 9) && funcidx("DB_BankQueryError") != -1)
+	else if (!strcmp(callback, "DB_OnBank", false, 9) && funcidx("DB_BankQueryError") != -1)
 	{
 		CallLocalFunction("DB_BankQueryError", "s", callback);
 	}
-	else if (!strcmp(callback, "DB_OnStory", 0, 10) && funcidx("DB_StoryQueryError") != -1)
+	else if (!strcmp(callback, "DB_OnStory", false, 10) && funcidx("DB_StoryQueryError") != -1)
 	{
 		CallLocalFunction("DB_StoryQueryError", "s", callback);
 	}
-	else if (!strcmp(callback, "DB_OnLd", 0, 7) && funcidx("DB_LivingQueryError") != -1)
+	else if (!strcmp(callback, "DB_OnLd", false, 7) && funcidx("DB_LivingQueryError") != -1)
 	{
 		CallLocalFunction("DB_LivingQueryError", "s", callback);
 	}
-	else if (!strcmp(callback, "DB_OnWarnInserted", 0, 0x7FFFFFFF) || !strcmp(callback, "DB_OnWarnCounted", 0, 0x7FFFFFFF))
+	else if (!strcmp(callback, "DB_OnWarnInserted", false, 0x7FFFFFFF) || !strcmp(callback, "DB_OnWarnCounted", false, 0x7FFFFFFF))
 	{
 		DB_FailAllAdminPending(1);
 	}
-	else if (!strcmp(callback, "DB_OnBanInserted", 0, 0x7FFFFFFF))
+	else if (!strcmp(callback, "DB_OnBanInserted", false, 0x7FFFFFFF))
 	{
 		DB_FailAllAdminPending(2);
 	}
-	else if (!strcmp(callback, "DB_OnUnbanDone", 0, 0x7FFFFFFF))
+	else if (!strcmp(callback, "DB_OnUnbanDone", false, 0x7FFFFFFF))
 	{
 		DB_FailAllAdminPending(4);
 	}
-	else if (!strcmp(callback, "DB_OnAccountFound", 0, 0x7FFFFFFF))
+	else if (!strcmp(callback, "DB_OnAccountFound", false, 0x7FFFFFFF))
 	{
 		DB_FailAllAdminPending(8);
 	}
@@ -10563,9 +10746,10 @@ DB_LoadAccount(playerid)
 	mysql_format(g_DB, query, 512, "SELECT id, password_hash, salt, hash_algo, muted_until, admin_level, locked_until FROM accounts WHERE name = '%e' LIMIT 1", name);
 	DB_PendingSet(playerid, 1);
 	mysql_tquery(g_DB, query, "DB_OnAccountLoaded", "ds", playerid, name);
+	return 0;
 }
 
-public DB_OnAccountLoaded(playerid, name[])
+public DB_OnAccountLoaded(playerid, const name[])
 {
 	if (!DB_PlayerMatches(playerid, name))
 	{
@@ -10596,7 +10780,7 @@ public DB_OnAccountLoaded(playerid, name[])
 	return 1;
 }
 
-bool:DB_HashFormatOk(hash[], salt[], algo)
+bool:DB_HashFormatOk(const hash[], const salt[], algo)
 {
 	if (algo == 0)
 	{
@@ -10606,10 +10790,10 @@ bool:DB_HashFormatOk(hash[], salt[], algo)
 	{
 		return strlen(hash) == 60 && strlen(salt) < 17;
 	}
-	return 0;
+	return false;
 }
 
-DB_CreateAccountEx(playerid, hash[], salt[], algo)
+DB_CreateAccountEx(playerid, const hash[], const salt[], algo)
 {
 	if (playerid < 0 || playerid >= MAX_PLAYERS || !IsPlayerConnected(playerid))
 	{
@@ -10625,9 +10809,10 @@ DB_CreateAccountEx(playerid, hash[], salt[], algo)
 	mysql_format(g_DB, query, 512, "INSERT IGNORE INTO accounts (name, password_hash, salt, hash_algo) VALUES ('%e', '%e', '%e', %d)", name, hash, salt, algo);
 	DB_PendingSet(playerid, 2);
 	mysql_tquery(g_DB, query, "DB_OnAccountCreated", "ds", playerid, name);
+	return 0;
 }
 
-public DB_OnAccountCreated(playerid, name[])
+public DB_OnAccountCreated(playerid, const name[])
 {
 	if (!DB_PlayerMatches(playerid, name))
 	{
@@ -10647,7 +10832,7 @@ public DB_OnAccountCreated(playerid, name[])
 	return 1;
 }
 
-DB_UpdateLogin(accountId, ip[])
+DB_UpdateLogin(accountId, const ip[])
 {
 	if (!DB_IsReady() || accountId <= 0)
 	{
@@ -10656,9 +10841,10 @@ DB_UpdateLogin(accountId, ip[])
 	new query[512];
 	mysql_format(g_DB, query, 512, "UPDATE accounts SET last_login = NOW(), last_ip = '%e', failed_logins = 0 WHERE id = %d", ip, accountId);
 	mysql_tquery(g_DB, query, "", "");
+	return 0;
 }
 
-DB_UpdatePasswordHash(accountId, hash[], algo)
+DB_UpdatePasswordHash(accountId, const hash[], algo)
 {
 	if (!DB_IsReady() || accountId <= 0)
 	{
@@ -10672,6 +10858,7 @@ DB_UpdatePasswordHash(accountId, hash[], algo)
 	new query[512];
 	mysql_format(g_DB, query, 512, "UPDATE accounts SET password_hash = '%e', hash_algo = %d WHERE id = %d", hash, algo, accountId);
 	mysql_tquery(g_DB, query, "", "");
+	return 0;
 }
 
 DB_AccountLoginFailed(accountId)
@@ -10683,9 +10870,10 @@ DB_AccountLoginFailed(accountId)
 	new query[512];
 	mysql_format(g_DB, query, 512, "UPDATE accounts SET locked_until = IF(failed_logins + 1 >= %d, UNIX_TIMESTAMP() + %d, locked_until), failed_logins = IF(failed_logins + 1 >= %d, 0, failed_logins + 1) WHERE id = %d", 9, 600, 9, accountId);
 	mysql_tquery(g_DB, query, "", "");
+	return 0;
 }
 
-DB_AccountSetEmail(playerid, accountId, email[])
+DB_AccountSetEmail(playerid, accountId, const email[])
 {
 	if (playerid < 0 || playerid >= MAX_PLAYERS)
 	{
@@ -10699,9 +10887,10 @@ DB_AccountSetEmail(playerid, accountId, email[])
 	new query[512];
 	mysql_format(g_DB, query, 512, "UPDATE IGNORE accounts SET email = '%e', email_verified = 0, email_token_hash = NULL WHERE id = %d", email, accountId);
 	mysql_tquery(g_DB, query, "DB_OnAccountEmailSet", "dds", playerid, accountId, email);
+	return 0;
 }
 
-public DB_OnAccountEmailSet(playerid, accountId, email[])
+public DB_OnAccountEmailSet(playerid, accountId, const email[])
 {
 	if (!IsPlayerConnected(playerid) || gPlayer[playerid][pAccountId] != accountId)
 	{
@@ -10758,7 +10947,7 @@ DB_BankDeltaTake(playerid)
 	return d;
 }
 
-public DB_OnBankDeltaSaved(playerid, name[], charId, gen, delta)
+public DB_OnBankDeltaSaved(playerid, const name[], charId, gen, delta)
 {
 	if (!DB_PlayerMatches(playerid, name) || gPlayer[playerid][pCharId] != charId || g_BankGen[playerid] != gen || g_BankFlyChar[playerid] != charId)
 	{
@@ -10796,9 +10985,10 @@ DB_LoadCharacter(playerid, accountId)
 	mysql_format(g_DB, query, 512, "SELECT id, money, bank, level, exp, health, armor, pos_x, pos_y, pos_z, angle, interior, world, skin, LEAST(played_ms, %d) AS played_ms%s FROM characters WHERE account_id = %d AND slot = %d LIMIT 1", 0x7FFFFFFF, jfCols, accountId, CharSel_Slot(playerid));
 	DB_PendingSet(playerid, 4);
 	mysql_tquery(g_DB, query, "DB_OnCharLoaded", "dsd", playerid, name, accountId);
+	return 0;
 }
 
-public DB_OnCharLoaded(playerid, name[], accountId)
+public DB_OnCharLoaded(playerid, const name[], accountId)
 {
 	if (!DB_PlayerMatches(playerid, name))
 	{
@@ -10813,7 +11003,7 @@ public DB_OnCharLoaded(playerid, name[], accountId)
 	cache_get_row_count(rows);
 	if (rows < 1)
 	{
-		Char_OnDBLoaded(playerid, 0);
+		Char_OnDBLoaded(playerid, false);
 		return 1;
 	}
 	cache_get_value_name_int(0, "id", gPlayer[playerid][pCharId]);
@@ -10839,7 +11029,7 @@ public DB_OnCharLoaded(playerid, name[], accountId)
 	cache_get_value_name(0, "cn", cn, sizeof cn);
 	CharSel_SetLoadedName(playerid, cn);
 	gPlayer[playerid][pCivilSkin] = gPlayer[playerid][pSkin];
-	Char_OnDBLoaded(playerid, 1);
+	Char_OnDBLoaded(playerid, true);
 	return 1;
 }
 
@@ -10861,9 +11051,10 @@ DB_CreateCharacter(playerid, accountId)
 	g_BankDb[playerid] = gPlayer[playerid][pBank];
 	DB_PendingSet(playerid, 8);
 	mysql_tquery(g_DB, query, "DB_OnCharCreated", "ds", playerid, name);
+	return 0;
 }
 
-public DB_OnCharCreated(playerid, name[])
+public DB_OnCharCreated(playerid, const name[])
 {
 	if (!DB_PlayerMatches(playerid, name))
 	{
@@ -10905,12 +11096,13 @@ DB_SaveCharacter(playerid)
 	{
 		return 0;
 	}
-	new query[768], skin = gPlayer[playerid][pSkin], name[25];
+	new query[768], skin, name[25];
 	GetPlayerName(playerid, name, 25);
 	new bankDelta = DB_BankDeltaTake(playerid);
 	skin = gPlayer[playerid][pCivilSkin];
 	mysql_format(g_DB, query, 768, "UPDATE characters SET money = %d, bank = GREATEST(0, LEAST(%d, CAST(bank AS SIGNED) + (%d))), level = %d, exp = %d, health = %f, armor = %f, pos_x = %f, pos_y = %f, pos_z = %f, angle = %f, interior = %d, world = %d, skin = %d, played_ms = %d, last_save = NOW(), last_played_at = NOW() WHERE id = %d", gPlayer[playerid][pMoney], 0x3B9ACA00, bankDelta, gPlayer[playerid][pLevel], gPlayer[playerid][pExp], gPlayer[playerid][pHealth], gPlayer[playerid][pArmor], gPlayer[playerid][pPosX], gPlayer[playerid][pPosY], gPlayer[playerid][pPosZ], gPlayer[playerid][pAngle], gPlayer[playerid][pInterior], gPlayer[playerid][pWorld], skin, max(gPlayer[playerid][pPlayedMs], 0), gPlayer[playerid][pCharId]);
 	mysql_tquery(g_DB, query, "DB_OnBankDeltaSaved", "dsddd", playerid, name, gPlayer[playerid][pCharId], g_BankGen[playerid], bankDelta);
+	return 0;
 }
 
 // ===== modules/database/db_admin.inc =====
@@ -10929,7 +11121,7 @@ DB_ReqName(requesterid, name[], size)
 	}
 }
 
-DB_ReqResolve(requesterid, reqName[])
+DB_ReqResolve(requesterid, const reqName[])
 {
 	if (requesterid < 0 || requesterid >= 1000 || reqName[0] == 0)
 	{
@@ -10952,7 +11144,7 @@ DB_ReqEnd(requesterid, op)
 	g_DBAdminPending[DB_ReqSlot(requesterid)] &= ~op;
 }
 
-DB_AdminLog(staffAccountId, targetAccountId, action[], reason[])
+DB_AdminLog(staffAccountId, targetAccountId, const action[], const reason[])
 {
 	if (!DB_IsReady() || action[0] == 0)
 	{
@@ -10969,6 +11161,7 @@ DB_AdminLog(staffAccountId, targetAccountId, action[], reason[])
 	}
 	mysql_format(g_DB, query, 1024, "INSERT INTO admin_log (staff_account_id, target_account_id, action, reason) VALUES (%d, %s, LEFT('%e', %d), LEFT('%e', %d))", max(staffAccountId, 0), target, action, 24, reason, 128);
 	mysql_tquery(g_DB, query, "", "");
+	return 0;
 }
 
 DB_SetMute(accountId, untilTimestamp)
@@ -10980,6 +11173,7 @@ DB_SetMute(accountId, untilTimestamp)
 	new query[512];
 	mysql_format(g_DB, query, 512, "UPDATE accounts SET muted_until = %d WHERE id = %d", max(untilTimestamp, 0), accountId);
 	mysql_tquery(g_DB, query, "", "");
+	return 0;
 }
 
 DB_SetAdminLevel(accountId, level)
@@ -10991,9 +11185,10 @@ DB_SetAdminLevel(accountId, level)
 	new query[512];
 	mysql_format(g_DB, query, 512, "UPDATE accounts SET admin_level = %d WHERE id = %d", level, accountId);
 	mysql_tquery(g_DB, query, "", "");
+	return 0;
 }
 
-DB_AddWarn(requesterid, targetAccountId, staffAccountId, reason[])
+DB_AddWarn(requesterid, targetAccountId, staffAccountId, const reason[])
 {
 	if (!DB_IsReady() || targetAccountId <= 0)
 	{
@@ -11006,9 +11201,10 @@ DB_AddWarn(requesterid, targetAccountId, staffAccountId, reason[])
 	mysql_format(g_DB, query, 1024, "INSERT INTO warns (account_id, staff_account_id, reason) VALUES (%d, %d, LEFT('%e', %d))", targetAccountId, max(staffAccountId, 0), reason, 64);
 	DB_ReqBegin(requesterid, 1);
 	mysql_tquery(g_DB, query, "DB_OnWarnInserted", "dsd", requesterid, reqName, targetAccountId);
+	return 0;
 }
 
-public DB_OnWarnInserted(requesterid, reqName[], targetAccountId)
+public DB_OnWarnInserted(requesterid, const reqName[], targetAccountId)
 {
 	new query[512];
 	mysql_format(g_DB, query, 512, "SELECT COUNT(*) AS cnt FROM warns WHERE account_id = %d AND active = 1", targetAccountId);
@@ -11016,7 +11212,7 @@ public DB_OnWarnInserted(requesterid, reqName[], targetAccountId)
 	return 1;
 }
 
-public DB_OnWarnCounted(requesterid, reqName[], targetAccountId)
+public DB_OnWarnCounted(requesterid, const reqName[], targetAccountId)
 {
 	DB_ReqEnd(requesterid, 1);
 	new cnt = 0;
@@ -11028,7 +11224,7 @@ public DB_OnWarnCounted(requesterid, reqName[], targetAccountId)
 	return 1;
 }
 
-DB_AddBan(requesterid, accountId, name[], ip[], staffAccountId, reason[], minutes)
+DB_AddBan(requesterid, accountId, const name[], const ip[], staffAccountId, const reason[], minutes)
 {
 	if (!DB_IsReady() || name[0] == 0)
 	{
@@ -11057,9 +11253,10 @@ DB_AddBan(requesterid, accountId, name[], ip[], staffAccountId, reason[], minute
 	mysql_format(g_DB, query, 1024, "INSERT INTO bans (account_id, account_name, ip, staff_account_id, reason, expires_at) VALUES (%s, LEFT('%e', 24), LEFT('%e', 15), %d, LEFT('%e', %d), %s)", accStr, name, ip, max(staffAccountId, 0), reason, 64, expStr);
 	DB_ReqBegin(requesterid, 2);
 	mysql_tquery(g_DB, query, "DB_OnBanInserted", "dss", requesterid, reqName, name);
+	return 0;
 }
 
-public DB_OnBanInserted(requesterid, reqName[], name[])
+public DB_OnBanInserted(requesterid, const reqName[], const name[])
 {
 	DB_ReqEnd(requesterid, 2);
 	new banId = 0;
@@ -11074,7 +11271,7 @@ public DB_OnBanInserted(requesterid, reqName[], name[])
 	return 1;
 }
 
-DB_Unban(requesterid, accountName[])
+DB_Unban(requesterid, const accountName[])
 {
 	if (!DB_IsReady() || accountName[0] == 0)
 	{
@@ -11087,9 +11284,10 @@ DB_Unban(requesterid, accountName[])
 	mysql_format(g_DB, query, 512, "UPDATE bans SET active = 0 WHERE active = 1 AND account_name = '%e'", accountName);
 	DB_ReqBegin(requesterid, 4);
 	mysql_tquery(g_DB, query, "DB_OnUnbanDone", "dss", requesterid, reqName, accountName);
+	return 0;
 }
 
-public DB_OnUnbanDone(requesterid, reqName[], name[])
+public DB_OnUnbanDone(requesterid, const reqName[], const name[])
 {
 	DB_ReqEnd(requesterid, 4);
 	if (funcidx("Admin_OnUnbanned") != -1)
@@ -11099,8 +11297,9 @@ public DB_OnUnbanDone(requesterid, reqName[], name[])
 	return 1;
 }
 
-DB_CheckBan(playerid, name[], ip[])
+DB_CheckBan(playerid, const name[], const ip[])
 {
+	#pragma unused ip
 	if (playerid < 0 || playerid >= MAX_PLAYERS || !IsPlayerConnected(playerid))
 	{
 		return 0;
@@ -11117,9 +11316,10 @@ DB_CheckBan(playerid, name[], ip[])
 	mysql_format(g_DB, query, 512, "SELECT reason, IFNULL(expires_at, 0) AS expires_at FROM bans WHERE active = 1 AND (expires_at IS NULL OR expires_at > UNIX_TIMESTAMP()) AND account_name = '%e' ORDER BY (expires_at IS NULL) DESC, expires_at DESC LIMIT 1", name);
 	DB_PendingSet(playerid, 16);
 	mysql_tquery(g_DB, query, "DB_OnBanChecked", "ds", playerid, pname);
+	return 0;
 }
 
-public DB_OnBanChecked(playerid, name[])
+public DB_OnBanChecked(playerid, const name[])
 {
 	if (!DB_PlayerMatches(playerid, name))
 	{
@@ -11140,7 +11340,7 @@ public DB_OnBanChecked(playerid, name[])
 	return 1;
 }
 
-DB_FindAccountByName(requesterid, name[], tag)
+DB_FindAccountByName(requesterid, const name[], tag)
 {
 	new slot = DB_ReqSlot(requesterid);
 	g_DBFindTag[slot] = tag;
@@ -11155,9 +11355,10 @@ DB_FindAccountByName(requesterid, name[], tag)
 	mysql_format(g_DB, query, 512, "SELECT id, name, admin_level, IFNULL(last_ip, '') AS last_ip FROM accounts WHERE name = '%e' LIMIT 1", name);
 	DB_ReqBegin(requesterid, 8);
 	mysql_tquery(g_DB, query, "DB_OnAccountFound", "dsds", requesterid, reqName, tag, name);
+	return 0;
 }
 
-public DB_OnAccountFound(requesterid, reqName[], tag, name[])
+public DB_OnAccountFound(requesterid, const reqName[], tag, const name[])
 {
 	DB_ReqEnd(requesterid, 8);
 	new rows = 0, accountId = 0, adminLevel = 0, canon[25], lastIp[16];
@@ -11194,6 +11395,7 @@ DB_VehStaleRelease(playerid, op)
 	{
 		DB_PendingClear(playerid, op);
 	}
+	return 0;
 }
 
 DB_VehCompensate(kind, ownerId, vehDbId)
@@ -11213,6 +11415,7 @@ DB_VehCompensate(kind, ownerId, vehDbId)
 		mysql_format(g_DB, query, 512, "UPDATE vehicles SET deleted = 0 WHERE id = %d AND owner_id = %d AND deleted = 1", vehDbId, ownerId);
 	}
 	mysql_tquery(g_DB, query, "DB_OnVehicleCompensated", "ddd", kind, ownerId, vehDbId);
+	return 0;
 }
 
 public DB_OnVehicleCompensated(kind, ownerId, vehDbId)
@@ -11223,11 +11426,11 @@ public DB_OnVehicleCompensated(kind, ownerId, vehDbId)
 	return 1;
 }
 
-bool:DB_VehSessionOk(playerid, name[], ownerId)
+bool:DB_VehSessionOk(playerid, const name[], ownerId)
 {
 	if (!DB_PlayerMatches(playerid, name))
 	{
-		return 0;
+		return false;
 	}
 	return ownerId > 0 && gPlayer[playerid][pCharId] == ownerId;
 }
@@ -11248,9 +11451,10 @@ DB_LoadVehicles(playerid, ownerId)
 	mysql_format(g_DB, query, 768, "SELECT id, model, plate, color1, color2, price_paid, pos_x, pos_y, pos_z, pos_a, park_x, park_y, park_z, park_a, interior, world, health, fuel_cl, locked, destroyed FROM vehicles WHERE owner_id = %d AND deleted = 0 ORDER BY id LIMIT %d", ownerId, 4);
 	DB_PendingSet(playerid, 32);
 	mysql_tquery(g_DB, query, "DB_OnVehiclesLoaded", "dsd", playerid, name, ownerId);
+	return 0;
 }
 
-public DB_OnVehiclesLoaded(playerid, name[], ownerId)
+public DB_OnVehiclesLoaded(playerid, const name[], ownerId)
 {
 	if (!DB_VehSessionOk(playerid, name, ownerId))
 	{
@@ -11292,7 +11496,7 @@ public DB_OnVehiclesLoaded(playerid, name[], ownerId)
 	return 1;
 }
 
-public DB_OnVehiclesCounted(playerid, name[], ownerId)
+public DB_OnVehiclesCounted(playerid, const name[], ownerId)
 {
 	if (!DB_VehSessionOk(playerid, name, ownerId))
 	{
@@ -11313,7 +11517,7 @@ DB_VehGeneratePlate(plate[], size)
 	format(plate, size, "%d%c%c%c%03d", random(10), random(26) + 65, random(26) + 65, random(26) + 65, random(1000));
 }
 
-DB_VehInsertAttempt(playerid, name[], attempt)
+DB_VehInsertAttempt(playerid, const name[], attempt)
 {
 	new plate[8], query[768];
 	DB_VehGeneratePlate(plate, 8);
@@ -11354,9 +11558,10 @@ DB_CreateVehicle(playerid, ownerId, model, color1, color2, pricePaid, Float:x, F
 	GetPlayerName(playerid, name, 25);
 	DB_PendingSet(playerid, 64);
 	DB_VehInsertAttempt(playerid, name, 1);
+	return 0;
 }
 
-public DB_OnVehicleCreated(playerid, name[], ownerId, attempt, plate[])
+public DB_OnVehicleCreated(playerid, const name[], ownerId, attempt, const plate[])
 {
 	if (!DB_VehSessionOk(playerid, name, ownerId))
 	{
@@ -11406,9 +11611,10 @@ DB_DeleteVehicle(playerid, ownerId, vehDbId)
 	mysql_format(g_DB, query, 512, "UPDATE vehicles SET deleted = 1 WHERE id = %d AND owner_id = %d AND deleted = 0", vehDbId, ownerId);
 	DB_PendingSet(playerid, 128);
 	mysql_tquery(g_DB, query, "DB_OnVehicleDeleted", "dsdd", playerid, name, ownerId, vehDbId);
+	return 0;
 }
 
-public DB_OnVehicleDeleted(playerid, name[], ownerId, vehDbId)
+public DB_OnVehicleDeleted(playerid, const name[], ownerId, vehDbId)
 {
 	if (!DB_VehSessionOk(playerid, name, ownerId))
 	{
@@ -11436,6 +11642,7 @@ DB_SaveVehicle(vehDbId, Float:x, Float:y, Float:z, Float:a, interior, world, Flo
 	new query[768];
 	mysql_format(g_DB, query, 768, "UPDATE vehicles SET pos_x = %f, pos_y = %f, pos_z = %f, pos_a = %f, interior = %d, world = %d, health = %f, fuel_cl = %d, locked = %d, destroyed = %d WHERE id = %d AND deleted = 0", x, y, z, a, clamp(interior, -32768, 32767), clamp(world, -32768, 32767), health, max(fuelCl, 0), locked ? 1 : 0, destroyed ? 1 : 0, vehDbId);
 	mysql_tquery(g_DB, query, "", "");
+	return 0;
 }
 
 DB_SetVehiclePark(vehDbId, ownerId, Float:x, Float:y, Float:z, Float:a)
@@ -11447,6 +11654,7 @@ DB_SetVehiclePark(vehDbId, ownerId, Float:x, Float:y, Float:z, Float:a)
 	new query[768];
 	mysql_format(g_DB, query, 768, "UPDATE vehicles SET park_x = %f, park_y = %f, park_z = %f, park_a = %f WHERE id = %d AND owner_id = %d AND deleted = 0", x, y, z, a, vehDbId, ownerId);
 	mysql_tquery(g_DB, query, "", "");
+	return 0;
 }
 
 DB_RecoverVehicle(vehDbId, ownerId, Float:health, minFuelCl)
@@ -11458,6 +11666,7 @@ DB_RecoverVehicle(vehDbId, ownerId, Float:health, minFuelCl)
 	new query[768];
 	mysql_format(g_DB, query, 768, "UPDATE vehicles SET destroyed = 0, health = %f, fuel_cl = GREATEST(fuel_cl, %d), pos_x = park_x, pos_y = park_y, pos_z = park_z, pos_a = park_a WHERE id = %d AND owner_id = %d AND deleted = 0 AND destroyed = 1", health, max(minFuelCl, 0), vehDbId, ownerId);
 	mysql_tquery(g_DB, query, "", "");
+	return 0;
 }
 
 // ===== modules/database/db_house.inc =====
@@ -11483,11 +11692,11 @@ new s_HouseIntIdx[10] = {3, 5, 2, 0, 1, 3, 4, 6, 7, 7};
 new s_HouseIntTier[8] = {0, 0, 1, 1, 2, 2, 2, 3};
 new s_HouseTierPrice[4] = {14000, 24000, 45000, 130000};
 
-bool:DB_HouseSessionOk(playerid, name[], ownerId)
+bool:DB_HouseSessionOk(playerid, const name[], ownerId)
 {
 	if (!DB_PlayerMatches(playerid, name))
 	{
-		return 0;
+		return false;
 	}
 	return ownerId > 0 && gPlayer[playerid][pCharId] == ownerId;
 }
@@ -11502,6 +11711,7 @@ DB_HouseStaleRelease(playerid, op)
 	{
 		DB_PendingClear(playerid, op);
 	}
+	return 0;
 }
 
 DB_HouseOpSlot(op)
@@ -11521,12 +11731,12 @@ bool:DB_HouseBegin(playerid, op, bool:valid, houseId, targetId, kind)
 {
 	if (playerid < 0 || playerid >= MAX_PLAYERS || !IsPlayerConnected(playerid))
 	{
-		return 0;
+		return false;
 	}
 	if (g_DBPending[playerid] & op)
 	{
 		DB_HouseDeliver(playerid, op, 0, houseId, targetId, kind);
-		return 0;
+		return false;
 	}
 	new slot = DB_HouseOpSlot(op);
 	if (slot >= 0)
@@ -11538,10 +11748,10 @@ bool:DB_HouseBegin(playerid, op, bool:valid, houseId, targetId, kind)
 	if (!DB_IsReady() || !valid)
 	{
 		DB_DeliverFailure(playerid, op);
-		return 0;
+		return false;
 	}
 	DB_PendingSet(playerid, op);
-	return 1;
+	return true;
 }
 
 DB_HouseDeliver(playerid, op, result, h, t, k)
@@ -11627,11 +11837,11 @@ public DB_HouseFailure(playerid, op, result)
 	return 1;
 }
 
-public DB_HouseGlobalFailure(callback[])
+public DB_HouseGlobalFailure(const callback[])
 {
-	if (!strcmp(callback, "DB_OnHouseSeeded", 0, 0x7FFFFFFF) || !strcmp(callback, "DB_OnHouseSeedUtil", 0, 0x7FFFFFFF))
+	if (!strcmp(callback, "DB_OnHouseSeeded", false, 0x7FFFFFFF) || !strcmp(callback, "DB_OnHouseSeedUtil", false, 0x7FFFFFFF))
 	{
-		g_HouseBootLoad = 0;
+		g_HouseBootLoad = false;
 		g_HouseCount = 0;
 		if (funcidx("House_OnDBSeeded") != -1)
 		{
@@ -11642,7 +11852,7 @@ public DB_HouseGlobalFailure(callback[])
 			CallLocalFunction("House_OnDBLoaded", "d", -1);
 		}
 	}
-	else if (!strcmp(callback, "DB_OnHousesLoaded", 0, 0x7FFFFFFF) || !strcmp(callback, "DB_OnHouseKeysAllLoaded", 0, 0x7FFFFFFF) || !strcmp(callback, "DB_OnHouseLoadUtil", 0, 0x7FFFFFFF))
+	else if (!strcmp(callback, "DB_OnHousesLoaded", false, 0x7FFFFFFF) || !strcmp(callback, "DB_OnHouseKeysAllLoaded", false, 0x7FFFFFFF) || !strcmp(callback, "DB_OnHouseLoadUtil", false, 0x7FFFFFFF))
 	{
 		g_HouseCount = 0;
 		if (funcidx("House_OnDBLoaded") != -1)
@@ -11650,14 +11860,14 @@ public DB_HouseGlobalFailure(callback[])
 			CallLocalFunction("House_OnDBLoaded", "d", -1);
 		}
 	}
-	else if (!strcmp(callback, "DB_OnHouseBillAdded", 0, 0x7FFFFFFF))
+	else if (!strcmp(callback, "DB_OnHouseBillAdded", false, 0x7FFFFFFF))
 	{
 		if (funcidx("House_OnDBBillAdded") != -1)
 		{
 			CallLocalFunction("House_OnDBBillAdded", "dddd", 0, -1, -1, 0);
 		}
 	}
-	else if (!strcmp(callback, "DB_OnHouseBillsAgedStep", 0, 0x7FFFFFFF) || !strcmp(callback, "DB_OnHouseBillsAged", 0, 0x7FFFFFFF))
+	else if (!strcmp(callback, "DB_OnHouseBillsAgedStep", false, 0x7FFFFFFF) || !strcmp(callback, "DB_OnHouseBillsAged", false, 0x7FFFFFFF))
 	{
 		if (funcidx("House_OnDBBillsAged") != -1)
 		{
@@ -11690,11 +11900,12 @@ DB_HouseCompensate(what, ownerId, houseId, kind, token, bool:recut)
 			mysql_format(g_DB, query, 768, "UPDATE house_bills b JOIN houses h ON h.id = b.house_id SET b.paid = 0, b.paid_at = NULL, b.pay_id = NULL WHERE b.house_id = %d AND b.kind = %d AND b.paid = 1 AND b.paid_at = FROM_UNIXTIME(%d) AND h.owner_id = %d AND b.pay_id = (SELECT m FROM (SELECT MAX(pay_id) AS m FROM house_bills WHERE house_id = %d AND kind = %d AND paid = 1) t)", houseId, kind, token, ownerId, houseId, kind);
 			if (recut)
 			{
-				DB_HouseSetCut(houseId, kind, 1);
+				DB_HouseSetCut(houseId, kind, true);
 			}
 		}
 	}
 	mysql_tquery(g_DB, query, "DB_OnHouseCompensated", "ddd", what, ownerId, houseId);
+	return 0;
 }
 
 public DB_OnHouseCompensated(what, ownerId, houseId)
@@ -11722,13 +11933,14 @@ DB_HouseResetState(houseId)
 	mysql_tquery(g_DB, query, "", "");
 	mysql_format(g_DB, query, 768, "DELETE FROM house_bills WHERE house_id = %d AND paid = 0", houseId);
 	mysql_tquery(g_DB, query, "", "");
+	return 0;
 }
 
 DB_SeedHouses()
 {
 	if (!DB_IsReady())
 	{
-		g_HouseBootLoad = 0;
+		g_HouseBootLoad = false;
 		g_HouseCount = 0;
 		if (funcidx("House_OnDBSeeded") != -1)
 		{
@@ -11751,6 +11963,7 @@ DB_SeedHouses()
 	}
 	strcat(query, " ON DUPLICATE KEY UPDATE tier = IF(owner_id IS NULL, VALUES(tier), tier), interior_idx = IF(owner_id IS NULL, VALUES(interior_idx), interior_idx), ext_x = IF(owner_id IS NULL, VALUES(ext_x), ext_x), ext_y = IF(owner_id IS NULL, VALUES(ext_y), ext_y), ext_z = IF(owner_id IS NULL, VALUES(ext_z), ext_z), ext_a = IF(owner_id IS NULL, VALUES(ext_a), ext_a), price = IF(owner_id IS NULL, VALUES(price), price)", 2304);
 	mysql_tquery(g_DB, query, "DB_OnHouseSeeded", "");
+	return 0;
 }
 
 public DB_OnHouseSeeded()
@@ -11767,7 +11980,7 @@ public DB_OnHouseSeedUtil()
 	}
 	if (g_HouseBootLoad)
 	{
-		g_HouseBootLoad = 0;
+		g_HouseBootLoad = false;
 		DB_LoadHouses();
 	}
 	return 1;
@@ -11775,7 +11988,7 @@ public DB_OnHouseSeedUtil()
 
 DB_BootHouses()
 {
-	g_HouseBootLoad = 1;
+	g_HouseBootLoad = true;
 	DB_SeedHouses();
 }
 
@@ -11791,6 +12004,7 @@ DB_LoadHouses()
 		return 0;
 	}
 	mysql_tquery(g_DB, "INSERT IGNORE INTO house_utilities (house_id) SELECT id FROM houses", "DB_OnHouseLoadUtil", "");
+	return 0;
 }
 
 public DB_OnHouseLoadUtil()
@@ -11885,9 +12099,10 @@ DB_BuyHouse(playerid, houseId, ownerCharId, pricePaid, maxHouses)
 	GetPlayerName(playerid, name, 25);
 	mysql_format(g_DB, query, 768, "UPDATE houses SET owner_id = %d, price_paid = %d, locked = 1 WHERE id = %d AND owner_id IS NULL AND (%d <= 0 OR (SELECT n FROM (SELECT COUNT(*) AS n FROM houses WHERE owner_id = %d) t) < %d)", ownerCharId, max(pricePaid, 0), houseId, maxHouses, ownerCharId, maxHouses);
 	mysql_tquery(g_DB, query, "DB_OnHouseBought", "dsddd", playerid, name, ownerCharId, houseId, max(pricePaid, 0));
+	return 0;
 }
 
-public DB_OnHouseBought(playerid, name[], ownerId, houseId, pricePaid)
+public DB_OnHouseBought(playerid, const name[], ownerId, houseId, pricePaid)
 {
 	new affected = cache_affected_rows();
 	if (affected == 1)
@@ -11898,7 +12113,7 @@ public DB_OnHouseBought(playerid, name[], ownerId, houseId, pricePaid)
 	{
 		if (affected == 1)
 		{
-			DB_HouseCompensate(1, ownerId, houseId, 0, 0, 0);
+			DB_HouseCompensate(1, ownerId, houseId, 0, 0, false);
 		}
 		else if (funcidx("House_OnDBCompensated") != -1)
 		{
@@ -11925,16 +12140,17 @@ DB_SellHouse(playerid, houseId, ownerCharId)
 	GetPlayerName(playerid, name, 25);
 	mysql_format(g_DB, query, 768, "UPDATE houses SET owner_id = NULL WHERE id = %d AND owner_id = %d", houseId, ownerCharId);
 	mysql_tquery(g_DB, query, "DB_OnHouseSold", "dsdd", playerid, name, ownerCharId, houseId);
+	return 0;
 }
 
-public DB_OnHouseSold(playerid, name[], ownerId, houseId)
+public DB_OnHouseSold(playerid, const name[], ownerId, houseId)
 {
 	new affected = cache_affected_rows();
 	if (!DB_HouseSessionOk(playerid, name, ownerId))
 	{
 		if (affected == 1)
 		{
-			DB_HouseCompensate(2, ownerId, houseId, 0, 0, 0);
+			DB_HouseCompensate(2, ownerId, houseId, 0, 0, false);
 		}
 		else if (funcidx("House_OnDBCompensated") != -1)
 		{
@@ -11967,6 +12183,7 @@ DB_SetHouseLock(houseId, ownerCharId, bool:locked)
 	new query[512];
 	mysql_format(g_DB, query, 512, "UPDATE houses SET locked = %d WHERE id = %d AND owner_id = %d", locked ? 1 : 0, houseId, ownerCharId);
 	mysql_tquery(g_DB, query, "", "");
+	return 0;
 }
 
 DB_SetUtility(houseId, actorCharId, utility, bool:on)
@@ -11989,6 +12206,7 @@ DB_SetUtility(houseId, actorCharId, utility, bool:on)
 		return 0;
 	}
 	mysql_tquery(g_DB, query, "", "");
+	return 0;
 }
 
 DB_FridgeAdd(houseId, actorCharId, delta)
@@ -12000,6 +12218,7 @@ DB_FridgeAdd(houseId, actorCharId, delta)
 	new query[768];
 	mysql_format(g_DB, query, 768, "UPDATE house_utilities u JOIN houses h ON h.id = u.house_id SET u.fridge_units = LEAST(65535, GREATEST(0, CAST(u.fridge_units AS SIGNED) + %d)) WHERE u.house_id = %d AND (h.owner_id = %d OR EXISTS (SELECT 1 FROM house_keys k WHERE k.house_id = h.id AND k.char_id = %d))", delta, houseId, actorCharId, actorCharId);
 	mysql_tquery(g_DB, query, "", "");
+	return 0;
 }
 
 DB_FridgeAddSys(houseId, delta)
@@ -12011,6 +12230,7 @@ DB_FridgeAddSys(houseId, delta)
 	new query[768];
 	mysql_format(g_DB, query, 768, "UPDATE house_utilities SET fridge_units = LEAST(65535, GREATEST(0, CAST(fridge_units AS SIGNED) + %d)) WHERE house_id = %d", delta, houseId);
 	mysql_tquery(g_DB, query, "", "");
+	return 0;
 }
 
 DB_ReloadFridge(houseId)
@@ -12026,6 +12246,7 @@ DB_ReloadFridge(houseId)
 	new query[768];
 	mysql_format(g_DB, query, 768, "SELECT fridge_units FROM house_utilities WHERE house_id = %d", houseId);
 	mysql_tquery(g_DB, query, "DB_OnFridgeReloaded", "d", houseId);
+	return 0;
 }
 
 public DB_OnFridgeReloaded(houseId)
@@ -12051,6 +12272,7 @@ DB_SaveHouseTick(houseId, ownerCharId, luceMin, gasMin, cycleMin, fridgeOffMin)
 	new query[768];
 	mysql_format(g_DB, query, 768, "UPDATE house_utilities u JOIN houses h ON h.id = u.house_id SET u.luce_min = %d, u.gas_min = %d, u.cycle_min = %d, u.fridge_off_min = %d WHERE u.house_id = %d AND h.owner_id = %d", clamp(luceMin, 0, 65535), clamp(gasMin, 0, 65535), clamp(cycleMin, 0, 65535), clamp(fridgeOffMin, 0, 65535), houseId, ownerCharId);
 	mysql_tquery(g_DB, query, "", "");
+	return 0;
 }
 
 DB_HouseSetCut(houseId, utility, bool:cut)
@@ -12073,11 +12295,12 @@ DB_HouseSetCut(houseId, utility, bool:cut)
 		return 0;
 	}
 	mysql_tquery(g_DB, query, "", "");
+	return 0;
 }
 
 DB_CutUtility(houseId, utility)
 {
-	DB_HouseSetCut(houseId, utility, 1);
+	DB_HouseSetCut(houseId, utility, true);
 }
 
 DB_LoadFood(playerid, charId)
@@ -12090,9 +12313,10 @@ DB_LoadFood(playerid, charId)
 	GetPlayerName(playerid, name, 25);
 	mysql_format(g_DB, query, 512, "SELECT hunger, groceries FROM characters WHERE id = %d", charId);
 	mysql_tquery(g_DB, query, "DB_OnHouseFoodLoaded", "dsd", playerid, name, charId);
+	return 0;
 }
 
-public DB_OnHouseFoodLoaded(playerid, name[], charId)
+public DB_OnHouseFoodLoaded(playerid, const name[], charId)
 {
 	if (!DB_HouseSessionOk(playerid, name, charId))
 	{
@@ -12123,9 +12347,10 @@ DB_SaveHunger(charId, hunger)
 	new query[512];
 	mysql_format(g_DB, query, 512, "UPDATE characters SET hunger = %d WHERE id = %d", clamp(hunger, 0, 100), charId);
 	mysql_tquery(g_DB, query, "", "");
+	return 0;
 }
 
-public DB_OnHouseStored(playerid, name[], ownerId, houseId, n)
+public DB_OnHouseStored(playerid, const name[], ownerId, houseId, n)
 {
 	if (!DB_HouseSessionOk(playerid, name, ownerId))
 	{
@@ -12150,9 +12375,10 @@ DB_AddKey(playerid, houseId, ownerCharId, targetCharId)
 	GetPlayerName(playerid, name, 25);
 	mysql_format(g_DB, query, 768, "INSERT IGNORE INTO house_keys (house_id, char_id) SELECT h.id, %d FROM houses h WHERE h.id = %d AND h.owner_id = %d AND h.owner_id <> %d AND (SELECT COUNT(*) FROM house_keys k WHERE k.house_id = h.id) < %d", targetCharId, houseId, ownerCharId, targetCharId, 3);
 	mysql_tquery(g_DB, query, "DB_OnHouseKeyAdded", "dsddd", playerid, name, ownerCharId, houseId, targetCharId);
+	return 0;
 }
 
-public DB_OnHouseKeyAdded(playerid, name[], ownerId, houseId, targetId)
+public DB_OnHouseKeyAdded(playerid, const name[], ownerId, houseId, targetId)
 {
 	if (!DB_HouseSessionOk(playerid, name, ownerId))
 	{
@@ -12177,9 +12403,10 @@ DB_RemoveKey(playerid, houseId, ownerCharId, targetCharId)
 	GetPlayerName(playerid, name, 25);
 	mysql_format(g_DB, query, 768, "DELETE k FROM house_keys k JOIN houses h ON h.id = k.house_id WHERE k.house_id = %d AND k.char_id = %d AND h.owner_id = %d", houseId, targetCharId, ownerCharId);
 	mysql_tquery(g_DB, query, "DB_OnHouseKeyRemoved", "dsddd", playerid, name, ownerCharId, houseId, targetCharId);
+	return 0;
 }
 
-public DB_OnHouseKeyRemoved(playerid, name[], ownerId, houseId, targetId)
+public DB_OnHouseKeyRemoved(playerid, const name[], ownerId, houseId, targetId)
 {
 	if (!DB_HouseSessionOk(playerid, name, ownerId))
 	{
@@ -12204,9 +12431,10 @@ DB_LoadKeys(playerid, houseId, ownerCharId)
 	GetPlayerName(playerid, name, 25);
 	mysql_format(g_DB, query, 768, "SELECT k.char_id, IFNULL(a.name, '') AS name FROM house_keys k JOIN houses h ON h.id = k.house_id JOIN characters c ON c.id = k.char_id JOIN accounts a ON a.id = c.account_id WHERE k.house_id = %d AND h.owner_id = %d ORDER BY k.created_at, k.char_id LIMIT %d", houseId, ownerCharId, 3);
 	mysql_tquery(g_DB, query, "DB_OnHouseKeysLoaded", "dsdd", playerid, name, ownerCharId, houseId);
+	return 0;
 }
 
-public DB_OnHouseKeysLoaded(playerid, name[], ownerId, houseId)
+public DB_OnHouseKeysLoaded(playerid, const name[], ownerId, houseId)
 {
 	if (!DB_HouseSessionOk(playerid, name, ownerId))
 	{
@@ -12242,6 +12470,7 @@ DB_AddBill(houseId, kind, amount, maxPending)
 	new query[768];
 	mysql_format(g_DB, query, 768, "INSERT INTO house_bills (house_id, kind, amount) SELECT h.id, %d, %d FROM houses h WHERE h.id = %d AND h.owner_id IS NOT NULL AND (SELECT COUNT(*) FROM house_bills b WHERE b.house_id = h.id AND b.kind = %d AND b.paid = 0) < %d", kind, max(amount, 0), houseId, kind, maxPending);
 	mysql_tquery(g_DB, query, "DB_OnHouseBillAdded", "ddd", houseId, kind, max(amount, 0));
+	return 0;
 }
 
 public DB_OnHouseBillAdded(houseId, kind, amount)
@@ -12267,6 +12496,7 @@ DB_AgeBills(houseId, dueCycles)
 	new query[512];
 	mysql_format(g_DB, query, 512, "UPDATE house_bills SET cycles_age = LEAST(cycles_age + 1, 255) WHERE house_id = %d AND paid = 0", houseId);
 	mysql_tquery(g_DB, query, "DB_OnHouseBillsAgedStep", "dd", houseId, dueCycles);
+	return 0;
 }
 
 public DB_OnHouseBillsAgedStep(houseId, dueCycles)
@@ -12307,9 +12537,10 @@ DB_LoadBills(playerid, houseId, ownerCharId)
 	GetPlayerName(playerid, name, 25);
 	mysql_format(g_DB, query, 768, "SELECT b.id, b.kind, b.amount, b.cycles_age FROM house_bills b JOIN houses h ON h.id = b.house_id WHERE b.house_id = %d AND h.owner_id = %d AND b.paid = 0 ORDER BY b.kind, b.id LIMIT %d", houseId, ownerCharId, 8);
 	mysql_tquery(g_DB, query, "DB_OnHouseBillsLoaded", "dsdd", playerid, name, ownerCharId, houseId);
+	return 0;
 }
 
-public DB_OnHouseBillsLoaded(playerid, name[], ownerId, houseId)
+public DB_OnHouseBillsLoaded(playerid, const name[], ownerId, houseId)
 {
 	if (!DB_HouseSessionOk(playerid, name, ownerId))
 	{
@@ -12364,9 +12595,10 @@ DB_PayBills(playerid, houseId, ownerCharId, kind, expectedTotal, bool:restoreCut
 		mysql_format(g_DB, query, 1536, "UPDATE house_bills b JOIN houses h ON h.id = b.house_id SET b.paid = 1, b.paid_at = FROM_UNIXTIME(%d), b.pay_id = (SELECT m FROM (SELECT MIN(id) AS m FROM house_bills WHERE house_id = %d AND kind = %d AND paid = 0) pm) WHERE b.house_id = %d AND b.kind = %d AND b.paid = 0 AND h.owner_id = %d AND (SELECT s FROM (SELECT COALESCE(SUM(amount), 0) AS s FROM house_bills WHERE house_id = %d AND kind = %d AND paid = 0) t) = %d", token, houseId, kind, houseId, kind, ownerCharId, houseId, kind, expectedTotal);
 	}
 	mysql_tquery(g_DB, query, "DB_OnHouseBillsPaid", "dsdddddd", playerid, name, ownerCharId, houseId, kind, expectedTotal, token, restoreCut ? 1 : 0);
+	return 0;
 }
 
-public DB_OnHouseBillsPaid(playerid, name[], ownerId, houseId, kind, total, token, restore)
+public DB_OnHouseBillsPaid(playerid, const name[], ownerId, houseId, kind, total, token, restore)
 {
 	new affected = cache_affected_rows();
 	if (!DB_HouseSessionOk(playerid, name, ownerId))
@@ -12394,21 +12626,21 @@ public DB_OnHouseBillsPaid(playerid, name[], ownerId, houseId, kind, total, toke
 	return 1;
 }
 
-DB_HouseRestoreStep(playerid, name[], ownerId, houseId, kind, total, token)
+DB_HouseRestoreStep(playerid, const name[], ownerId, houseId, kind, total, token)
 {
 	new query[768];
 	mysql_format(g_DB, query, 768, "UPDATE house_utilities u JOIN houses h ON h.id = u.house_id SET u.%s_cut = 0, u.%s_on = 1 WHERE u.house_id = %d AND h.owner_id = %d AND u.%s_cut = 1", kind == 1 ? "gas" : "luce", kind == 1 ? "gas" : "luce", houseId, ownerId, kind == 1 ? "gas" : "luce");
 	mysql_tquery(g_DB, query, "DB_OnHouseRestored", "dsddddd", playerid, name, ownerId, houseId, kind, total, token);
 }
 
-public DB_OnHouseRestored(playerid, name[], ownerId, houseId, kind, total, token)
+public DB_OnHouseRestored(playerid, const name[], ownerId, houseId, kind, total, token)
 {
 	new restored = cache_affected_rows() == 1 ? 1 : 0;
 	if (!DB_HouseSessionOk(playerid, name, ownerId))
 	{
 		if (restored)
 		{
-			DB_HouseCompensate(3, ownerId, houseId, kind, token, 1);
+			DB_HouseCompensate(3, ownerId, houseId, kind, token, true);
 		}
 		DB_HouseStaleRelease(playerid, 32768);
 		return 1;
@@ -12432,8 +12664,9 @@ DB_RevertBillPayment(houseId, ownerCharId, kind, bool:recut)
 	mysql_tquery(g_DB, query, "", "");
 	if (recut)
 	{
-		DB_HouseSetCut(houseId, kind, 1);
+		DB_HouseSetCut(houseId, kind, true);
 	}
+	return 0;
 }
 
 DB_RestoreSoldHouse(houseId, ownerCharId, pricePaid)
@@ -12446,6 +12679,7 @@ DB_RestoreSoldHouse(houseId, ownerCharId, pricePaid)
 	new query[768];
 	mysql_format(g_DB, query, 768, "UPDATE houses SET owner_id = %d, price_paid = IF(%d > 0, %d, price_paid) WHERE id = %d AND owner_id IS NULL", ownerCharId, pricePaid, pricePaid, houseId);
 	mysql_tquery(g_DB, query, "DB_OnHouseCompensated", "ddd", 2, ownerCharId, houseId);
+	return 0;
 }
 
 // ===== modules/database/db_jobfac.inc =====
@@ -12455,11 +12689,11 @@ new g_JFReq[MAX_PLAYERS][E_JF_REQ];
 new g_FineInfl[32][E_FINE_INFL];
 new g_FineToken;
 
-bool:DB_JFSessionOk(playerid, name[], charId)
+bool:DB_JFSessionOk(playerid, const name[], charId)
 {
 	if (!DB_PlayerMatches(playerid, name))
 	{
-		return 0;
+		return false;
 	}
 	return charId > 0 && gPlayer[playerid][pCharId] == charId;
 }
@@ -12474,6 +12708,7 @@ DB_JFStaleRelease(playerid, op)
 	{
 		DB_PendingClear(playerid, op);
 	}
+	return 0;
 }
 
 bool:DB_JFCanStart(playerid, op)
@@ -12498,6 +12733,7 @@ DB_JFCompensate(kind, charId, id, amount)
 		mysql_format(g_DB, query, 512, "DELETE FROM fines WHERE id = %d AND issuer_char = %d", id, charId);
 	}
 	mysql_tquery(g_DB, query, "DB_OnJFComp", "ddd", kind, charId, id);
+	return 0;
 }
 
 public DB_OnJFComp(kind, charId, id)
@@ -12563,37 +12799,37 @@ public DB_JobFacFailure(playerid, op)
 	return 1;
 }
 
-public DB_JobFacQueryError(callback[])
+public DB_JobFacQueryError(const callback[])
 {
-	if (!strcmp(callback, "DB_OnJFPayout", 0, 0x7FFFFFFF))
+	if (!strcmp(callback, "DB_OnJFPayout", false, 0x7FFFFFFF))
 	{
 		DB_FailAllPending(262144);
 	}
-	else if (!strcmp(callback, "DB_OnJFJobSet", 0, 0x7FFFFFFF))
+	else if (!strcmp(callback, "DB_OnJFJobSet", false, 0x7FFFFFFF))
 	{
 		DB_FailAllPending(524288);
 	}
-	else if (!strcmp(callback, "DB_OnJFFinesLoaded", 0, 0x7FFFFFFF))
+	else if (!strcmp(callback, "DB_OnJFFinesLoaded", false, 0x7FFFFFFF))
 	{
 		DB_FailAllPending(2097152);
 	}
-	else if (!strcmp(callback, "DB_OnJFFacChanged", 0, 0x7FFFFFFF))
+	else if (!strcmp(callback, "DB_OnJFFacChanged", false, 0x7FFFFFFF))
 	{
 		DB_FailAllPending(4194304);
 	}
-	else if (!strcmp(callback, "DB_OnJFFacMembers", 0, 0x7FFFFFFF))
+	else if (!strcmp(callback, "DB_OnJFFacMembers", false, 0x7FFFFFFF))
 	{
 		DB_FailAllPending(8388608);
 	}
-	else if (!strcmp(callback, "DB_OnJFFacFound", 0, 0x7FFFFFFF))
+	else if (!strcmp(callback, "DB_OnJFFacFound", false, 0x7FFFFFFF))
 	{
 		DB_FailAllPending(0x01000000);
 	}
-	else if (!strcmp(callback, "DB_OnJFFineAdded", 0, 0x7FFFFFFF))
+	else if (!strcmp(callback, "DB_OnJFFineAdded", false, 0x7FFFFFFF))
 	{
 		DB_JFFailAllFines();
 	}
-	else if (!strcmp(callback, "DB_OnJFComp", 0, 0x7FFFFFFF))
+	else if (!strcmp(callback, "DB_OnJFComp", false, 0x7FFFFFFF))
 	{
 		Log_Write("DBJOB", "compensazione FALLITA per errore DB: verificare a mano");
 	}
@@ -12630,9 +12866,10 @@ DB_JobPayout(playerid, charId, jobId, amount)
 	{
 		CallLocalFunction("Job_OnDBPayout", "dddd", playerid, jobId, amount, result);
 	}
+	return 0;
 }
 
-public DB_OnJFPayout(playerid, name[], charId, jobId, amount)
+public DB_OnJFPayout(playerid, const name[], charId, jobId, amount)
 {
 	new affected = cache_affected_rows();
 	if (!DB_JFSessionOk(playerid, name, charId))
@@ -12681,9 +12918,10 @@ DB_SetJob(playerid, charId, jobId)
 	{
 		CallLocalFunction("Job_OnDBSet", "ddd", playerid, jobId, result);
 	}
+	return 0;
 }
 
-public DB_OnJFJobSet(playerid, name[], charId, jobId)
+public DB_OnJFJobSet(playerid, const name[], charId, jobId)
 {
 	if (!DB_JFSessionOk(playerid, name, charId))
 	{
@@ -12741,7 +12979,7 @@ DB_JFFailAllFines()
 	}
 }
 
-DB_AddFine(playerid, issuerChar, targetChar, faction, amount, reason[])
+DB_AddFine(playerid, issuerChar, targetChar, faction, amount, const reason[])
 {
 	if (playerid < 0 || playerid >= MAX_PLAYERS || !IsPlayerConnected(playerid))
 	{
@@ -12785,6 +13023,7 @@ DB_AddFine(playerid, issuerChar, targetChar, faction, amount, reason[])
 	mysql_format(g_DB, query, 1024, "INSERT IGNORE INTO fines (faction, issuer_char, target_char, amount, reason) SELECT i.faction, i.id, t.id, %d, LEFT('%e', %d) FROM characters i JOIN characters t ON t.id = %d WHERE i.id = %d AND i.faction = %d AND i.id <> t.id AND i.faction_rank >= %d AND %d <= CASE i.faction_rank WHEN 2 THEN %d WHEN 3 THEN %d WHEN 4 THEN %d ELSE %d END", amount, rsn, 64, targetChar, issuerChar, faction, 2, amount, 500, 1000, 2500, 5000);
 	DB_PendingSet(playerid, 1048576);
 	mysql_tquery(g_DB, query, "DB_OnJFFineAdded", "dd", idx, g_FineInfl[idx][fiToken]);
+	return 0;
 }
 
 public DB_OnJFFineAdded(idx, token)
@@ -12827,9 +13066,10 @@ DB_LoadFines(playerid, charId)
 	mysql_format(g_DB, query, 1024, "SELECT f.id, f.faction, f.amount, UNIX_TIMESTAMP(f.created_at) AS ts, f.reason, a.name AS issuer FROM fines f JOIN characters c ON c.id = f.issuer_char JOIN accounts a ON a.id = c.account_id WHERE f.target_char = %d ORDER BY f.id DESC LIMIT %d", charId, 5);
 	DB_PendingSet(playerid, 2097152);
 	mysql_tquery(g_DB, query, "DB_OnJFFinesLoaded", "dsd", playerid, name, charId);
+	return 0;
 }
 
-public DB_OnJFFinesLoaded(playerid, name[], charId)
+public DB_OnJFFinesLoaded(playerid, const name[], charId)
 {
 	if (!DB_JFSessionOk(playerid, name, charId))
 	{
@@ -12934,9 +13174,10 @@ DB_JFFacExec(playerid, actorChar, targetChar, cmd, faction, newRank)
 	{
 		CallLocalFunction("Faction_OnDBChanged", "dddddd", playerid, targetChar, cmd, faction, newRank, result);
 	}
+	return 0;
 }
 
-public DB_OnJFFacChanged(playerid, name[], actorChar, targetChar, cmd, faction, rank)
+public DB_OnJFFacChanged(playerid, const name[], actorChar, targetChar, cmd, faction, rank)
 {
 	new affected = cache_affected_rows();
 	if (affected > 0)
@@ -13004,9 +13245,10 @@ DB_FactionSet(playerid, charId, faction, rank)
 		return 0;
 	}
 	DB_JFFacExec(playerid, gPlayer[playerid][pCharId], charId, 6, faction, rank);
+	return 0;
 }
 
-DB_FactionLogAdd(faction, actorChar, targetChar, action[], detail[])
+DB_FactionLogAdd(faction, actorChar, targetChar, const action[], const detail[])
 {
 	if (!DB_IsReady() || action[0] == 0)
 	{
@@ -13015,6 +13257,7 @@ DB_FactionLogAdd(faction, actorChar, targetChar, action[], detail[])
 	new query[1024];
 	mysql_format(g_DB, query, 1024, "INSERT INTO faction_log (faction, actor_char, target_char, action, detail) VALUES (%d, (SELECT id FROM characters WHERE id = %d), (SELECT id FROM characters WHERE id = %d), LEFT('%e', %d), LEFT('%e', %d))", clamp(faction, 0, 255), max(actorChar, 0), max(targetChar, 0), action, 24, detail, 64);
 	mysql_tquery(g_DB, query, "", "");
+	return 0;
 }
 
 DB_FactionMembers(playerid, faction)
@@ -13045,9 +13288,10 @@ DB_FactionMembers(playerid, faction)
 	mysql_format(g_DB, query, 1024, "SELECT c.id, a.name, c.faction_rank, c.level, COALESCE(UNIX_TIMESTAMP(a.last_login), 0) AS last_login FROM characters c JOIN accounts a ON a.id = c.account_id WHERE c.faction = %d ORDER BY c.faction_rank DESC, a.name LIMIT %d", faction, 100);
 	DB_PendingSet(playerid, 8388608);
 	mysql_tquery(g_DB, query, "DB_OnJFFacMembers", "dsdd", playerid, name, gPlayer[playerid][pCharId], faction);
+	return 0;
 }
 
-public DB_OnJFFacMembers(playerid, name[], charId, faction)
+public DB_OnJFFacMembers(playerid, const name[], charId, faction)
 {
 	if (!DB_JFSessionOk(playerid, name, charId))
 	{
@@ -13073,7 +13317,7 @@ public DB_OnJFFacMembers(playerid, name[], charId, faction)
 	return 1;
 }
 
-DB_FactionFindByName(playerid, name[], tag)
+DB_FactionFindByName(playerid, const name[], tag)
 {
 	if (playerid < 0 || playerid >= MAX_PLAYERS || !IsPlayerConnected(playerid))
 	{
@@ -13101,9 +13345,10 @@ DB_FactionFindByName(playerid, name[], tag)
 	mysql_format(g_DB, query, 1024, "SELECT c.id, a.name, c.faction, c.faction_rank, c.level FROM characters c JOIN accounts a ON a.id = c.account_id WHERE a.name = '%e' AND c.slot = %d LIMIT 1", name, 0);
 	DB_PendingSet(playerid, 0x01000000);
 	mysql_tquery(g_DB, query, "DB_OnJFFacFound", "dsdd", playerid, me, gPlayer[playerid][pCharId], tag);
+	return 0;
 }
 
-public DB_OnJFFacFound(playerid, name[], charId, tag)
+public DB_OnJFFacFound(playerid, const name[], charId, tag)
 {
 	if (!DB_JFSessionOk(playerid, name, charId))
 	{
@@ -13162,7 +13407,7 @@ DB_InvMakeOpId(dest[], size, charId)
 	format(dest, size, "%08x%08x%08x%08x", charId, g_InvOpSeq, gettime(), GetTickCount());
 }
 
-bool:DB_InvOpIdOk(opId[])
+bool:DB_InvOpIdOk(const opId[])
 {
 	new len = strlen(opId);
 	return len >= 1 && len <= 32;
@@ -13173,24 +13418,24 @@ bool:DB_InvItemOk(itemId)
 	return itemId >= 1 && itemId <= 10;
 }
 
-bool:DB_InvAddKindOk(kind[])
+bool:DB_InvAddKindOk(const kind[])
 {
-	return !strcmp(kind, "add", 0, 0x7FFFFFFF) || !strcmp(kind, "pickup", 0, 0x7FFFFFFF);
+	return !strcmp(kind, "add", false, 0x7FFFFFFF) || !strcmp(kind, "pickup", false, 0x7FFFFFFF);
 }
 
-bool:DB_InvLive(playerid, name[], charId, token, op)
+bool:DB_InvLive(playerid, const name[], charId, token, op)
 {
 	if (!DB_PlayerMatches(playerid, name))
 	{
-		return 0;
+		return false;
 	}
 	if (charId <= 0 || gPlayer[playerid][pCharId] != charId)
 	{
-		return 0;
+		return false;
 	}
 	if (!(g_DBPending[playerid] & 0x04000000))
 	{
-		return 0;
+		return false;
 	}
 	return g_InvReq[playerid][iqToken] == token && g_InvReq[playerid][iqOp] == op;
 }
@@ -13205,6 +13450,7 @@ DB_InvStaleRelease(playerid)
 	{
 		DB_PendingClear(playerid, 0x04000000);
 	}
+	return 0;
 }
 
 DB_InvDeliver(playerid, op, result, itemId, qty, dir, houseId, recv)
@@ -13272,23 +13518,24 @@ DB_InvDeliver(playerid, op, result, itemId, qty, dir, houseId, recv)
 			}
 		}
 	}
+	return 0;
 }
 
-bool:DB_InvBegin(playerid, op, bool:valid, charId, itemId, qty, opId[], dir, houseId, recv, recvChar)
+bool:DB_InvBegin(playerid, op, bool:valid, charId, itemId, qty, const opId[], dir, houseId, recv, recvChar)
 {
 	if (playerid < 0 || playerid >= MAX_PLAYERS || !IsPlayerConnected(playerid))
 	{
-		return 0;
+		return false;
 	}
 	if (g_DBPending[playerid] & 0x04000000)
 	{
 		DB_InvDeliver(playerid, op, 7, itemId, qty, dir, houseId, 65535);
-		return 0;
+		return false;
 	}
 	if (!valid || charId <= 0 || gPlayer[playerid][pCharId] != charId || !DB_InvOpIdOk(opId))
 	{
 		DB_InvDeliver(playerid, op, 0, itemId, qty, dir, houseId, 65535);
-		return 0;
+		return false;
 	}
 	g_InvReq[playerid][iqToken] = ++g_InvTokenSeq;
 	g_InvReq[playerid][iqOp] = op;
@@ -13308,20 +13555,20 @@ bool:DB_InvBegin(playerid, op, bool:valid, charId, itemId, qty, opId[], dir, hou
 	if (!DB_IsReady())
 	{
 		DB_InvDeliver(playerid, op, -1, itemId, qty, dir, houseId, 65535);
-		return 0;
+		return false;
 	}
 	DB_PendingSet(playerid, 0x04000000);
-	return 1;
+	return true;
 }
 
-DB_InvRun(playerid, op, query[])
+DB_InvRun(playerid, op, const query[])
 {
 	new name[25];
 	GetPlayerName(playerid, name, 25);
 	mysql_tquery(g_DB, query, "DB_OnInvCalled", "dsddds", playerid, name, gPlayer[playerid][pCharId], g_InvReq[playerid][iqToken], op, g_InvReq[playerid][iqOpId]);
 }
 
-DB_InvCompensate(opId[], op)
+DB_InvCompensate(const opId[], op)
 {
 	if (op != 1 && op != 2 && op != 3 && op != 5 && op != 7)
 	{
@@ -13335,6 +13582,7 @@ DB_InvCompensate(opId[], op)
 	new query[512];
 	mysql_format(g_DB, query, 512, "CALL inv_undo('%e')", opId);
 	mysql_tquery(g_DB, query, "DB_OnInvUndoCalled", "sd", opId, 0);
+	return 0;
 }
 
 DB_InvLoad(playerid, charId)
@@ -13357,9 +13605,10 @@ DB_InvLoad(playerid, charId)
 	mysql_format(g_DB, query, 512, "SELECT c.inv_bag, COALESCE(i.slot, 0) AS slot, COALESCE(i.item_id, 0) AS item_id, COALESCE(i.quantity, 0) AS quantity FROM characters c LEFT JOIN inventory_items i ON i.character_id = c.id WHERE c.id = %d ORDER BY i.slot", charId);
 	DB_PendingSet(playerid, 0x02000000);
 	mysql_tquery(g_DB, query, "DB_OnInvLoaded", "dsd", playerid, name, charId);
+	return 0;
 }
 
-public DB_OnInvLoaded(playerid, name[], charId)
+public DB_OnInvLoaded(playerid, const name[], charId)
 {
 	if (!DB_PlayerMatches(playerid, name) || charId <= 0 || gPlayer[playerid][pCharId] != charId)
 	{
@@ -13411,7 +13660,7 @@ public DB_OnInvLoaded(playerid, name[], charId)
 	return 1;
 }
 
-DB_InvAddCommon(playerid, op, charId, itemId, qty, opId[], kind[], maxTotal)
+DB_InvAddCommon(playerid, op, charId, itemId, qty, const opId[], const kind[], maxTotal)
 {
 	new bool:ok = DB_InvItemOk(itemId) && qty >= 1 && qty <= 1000 && maxTotal >= 0;
 	if (!DB_InvBegin(playerid, op, ok, charId, itemId, qty, opId, 0, 0, 65535, 0))
@@ -13421,9 +13670,10 @@ DB_InvAddCommon(playerid, op, charId, itemId, qty, opId[], kind[], maxTotal)
 	new query[512];
 	mysql_format(g_DB, query, 512, "CALL inv_add('%e', %d, %d, %d, %d, %d, %d, %d, '%e')", opId, charId, itemId, qty, DB_InvStackMax(itemId), 12, 8, maxTotal, kind);
 	DB_InvRun(playerid, op, query);
+	return 0;
 }
 
-DB_InvAdd(playerid, charId, itemId, qty, opId[], kind[], maxTotal)
+DB_InvAdd(playerid, charId, itemId, qty, const opId[], const kind[], maxTotal)
 {
 	if (!DB_InvAddKindOk(kind))
 	{
@@ -13431,14 +13681,15 @@ DB_InvAdd(playerid, charId, itemId, qty, opId[], kind[], maxTotal)
 		return 0;
 	}
 	DB_InvAddCommon(playerid, 1, charId, itemId, qty, opId, kind, maxTotal);
+	return 0;
 }
 
-DB_InvBuy(playerid, charId, itemId, qty, opId[], maxTotal)
+DB_InvBuy(playerid, charId, itemId, qty, const opId[], maxTotal)
 {
 	DB_InvAddCommon(playerid, 2, charId, itemId, qty, opId, "buy", maxTotal);
 }
 
-DB_InvRemoveCommon(playerid, op, charId, itemId, qty, opId[], kind[])
+DB_InvRemoveCommon(playerid, op, charId, itemId, qty, const opId[], const kind[])
 {
 	new bool:ok = DB_InvItemOk(itemId) && qty >= 1 && qty <= 1000;
 	if (!DB_InvBegin(playerid, op, ok, charId, itemId, qty, opId, 0, 0, 65535, 0))
@@ -13448,14 +13699,15 @@ DB_InvRemoveCommon(playerid, op, charId, itemId, qty, opId[], kind[])
 	new query[512];
 	mysql_format(g_DB, query, 512, "CALL inv_remove('%e', %d, %d, %d, %d, %d, %d, '%e')", opId, charId, itemId, qty, DB_InvStackMax(itemId), 12, 8, kind);
 	DB_InvRun(playerid, op, query);
+	return 0;
 }
 
-DB_InvUse(playerid, charId, itemId, opId[])
+DB_InvUse(playerid, charId, itemId, const opId[])
 {
 	DB_InvRemoveCommon(playerid, 4, charId, itemId, 1, opId, "use");
 }
 
-DB_InvDrop(playerid, charId, itemId, qty, opId[])
+DB_InvDrop(playerid, charId, itemId, qty, const opId[])
 {
 	if (DB_InvItemOk(itemId) && !DB_InvItemMovable(itemId))
 	{
@@ -13463,20 +13715,22 @@ DB_InvDrop(playerid, charId, itemId, qty, opId[])
 		return 0;
 	}
 	DB_InvRemoveCommon(playerid, 5, charId, itemId, qty, opId, "drop");
+	return 0;
 }
 
-DB_InvSetBag(playerid, charId, opId[])
+DB_InvSetBag(playerid, charId, const opId[])
 {
-	if (!DB_InvBegin(playerid, 7, 1, charId, 0, 1, opId, 0, 0, 65535, 0))
+	if (!DB_InvBegin(playerid, 7, true, charId, 0, 1, opId, 0, 0, 65535, 0))
 	{
 		return 0;
 	}
 	new query[512];
 	mysql_format(g_DB, query, 512, "CALL inv_set_bag('%e', %d, %d, %d)", opId, charId, 12, 8);
 	DB_InvRun(playerid, 7, query);
+	return 0;
 }
 
-DB_FridgeMove(playerid, charId, houseId, itemId, qty, direction, opId[], fridgeCap, carryMax)
+DB_FridgeMove(playerid, charId, houseId, itemId, qty, direction, const opId[], fridgeCap, carryMax)
 {
 	new bool:ok = houseId > 0 && itemId == 1 && qty >= 1 && qty <= 1000 && (direction == 1 || direction == 2) && fridgeCap >= 1 && fridgeCap <= 65535 && carryMax >= 0;
 	if (!DB_InvBegin(playerid, 8, ok, charId, itemId, qty, opId, direction, houseId, 65535, 0))
@@ -13486,9 +13740,10 @@ DB_FridgeMove(playerid, charId, houseId, itemId, qty, direction, opId[], fridgeC
 	new query[512];
 	mysql_format(g_DB, query, 512, "CALL inv_fridge('%e', %d, %d, %d, %d, %d, %d, %d, %d, %d, %d)", opId, charId, houseId, itemId, qty, direction, DB_InvStackMax(itemId), 12, 8, fridgeCap, carryMax);
 	DB_InvRun(playerid, 8, query);
+	return 0;
 }
 
-public DB_OnInvCalled(playerid, name[], charId, token, op, opId[])
+public DB_OnInvCalled(playerid, const name[], charId, token, op, const opId[])
 {
 	if (!DB_InvLive(playerid, name, charId, token, op))
 	{
@@ -13502,7 +13757,7 @@ public DB_OnInvCalled(playerid, name[], charId, token, op, opId[])
 	return 1;
 }
 
-public DB_OnInvResult(playerid, name[], charId, token, op, opId[])
+public DB_OnInvResult(playerid, const name[], charId, token, op, const opId[])
 {
 	new rows = 0, result = -1;
 	cache_get_row_count(rows);
@@ -13521,7 +13776,7 @@ public DB_OnInvResult(playerid, name[], charId, token, op, opId[])
 	return 1;
 }
 
-DB_InvTransfer(giverId, receiverId, itemId, qty, opId[])
+DB_InvTransfer(giverId, receiverId, itemId, qty, const opId[])
 {
 	if (giverId < 0 || giverId >= 1000 || !IsPlayerConnected(giverId))
 	{
@@ -13547,9 +13802,10 @@ DB_InvTransfer(giverId, receiverId, itemId, qty, opId[])
 	GetPlayerName(giverId, gname, 25);
 	mysql_format(g_DB, query, 512, "CALL inv_transfer('%e', %d, %d, %d, %d, %d, %d, %d)", opId, giverChar, recvChar, itemId, qty, DB_InvStackMax(itemId), 12, 8);
 	mysql_tquery(g_DB, query, "DB_OnInvGiveCalled", "dsdddsddds", giverId, gname, giverChar, g_InvReq[giverId][iqToken], receiverId, g_InvReq[giverId][iqRecvName], recvChar, itemId, qty, opId);
+	return 0;
 }
 
-public DB_OnInvGiveCalled(playerid, name[], charId, token, recv, rname[], rchar, itemId, qty, opId[])
+public DB_OnInvGiveCalled(playerid, const name[], charId, token, recv, const rname[], rchar, itemId, qty, const opId[])
 {
 	new query[512];
 	mysql_format(g_DB, query, 512, "SELECT result FROM inventory_log WHERE op_id = '%e'", opId);
@@ -13557,7 +13813,7 @@ public DB_OnInvGiveCalled(playerid, name[], charId, token, recv, rname[], rchar,
 	return 1;
 }
 
-public DB_OnInvGiveResult(playerid, name[], charId, token, recv, rname[], rchar, itemId, qty, opId[])
+public DB_OnInvGiveResult(playerid, const name[], charId, token, recv, const rname[], rchar, itemId, qty, const opId[])
 {
 	new rows = 0, result = -1;
 	cache_get_row_count(rows);
@@ -13583,7 +13839,7 @@ public DB_OnInvGiveResult(playerid, name[], charId, token, recv, rname[], rchar,
 	return 1;
 }
 
-DB_InvUndo(opId[])
+DB_InvUndo(const opId[])
 {
 	new query[512];
 	if (!DB_IsReady() || !DB_InvOpIdOk(opId))
@@ -13597,9 +13853,10 @@ DB_InvUndo(opId[])
 	g_InvUndoNotify++;
 	mysql_format(g_DB, query, 512, "CALL inv_undo('%e')", opId);
 	mysql_tquery(g_DB, query, "DB_OnInvUndoCalled", "sd", opId, 1);
+	return 0;
 }
 
-public DB_OnInvUndoCalled(opId[], notify)
+public DB_OnInvUndoCalled(const opId[], notify)
 {
 	new query[512];
 	mysql_format(g_DB, query, 512, "SELECT undo_result FROM inventory_log WHERE op_id = '%e'", opId);
@@ -13607,13 +13864,13 @@ public DB_OnInvUndoCalled(opId[], notify)
 	return 1;
 }
 
-public DB_OnInvUndoResult(opId[], notify)
+public DB_OnInvUndoResult(const opId[], notify)
 {
 	new rows = 0, result = 8, msg[112];
 	cache_get_row_count(rows);
 	if (rows > 0)
 	{
-		new bool:isNull = 1;
+		new bool:isNull = true;
 		result = -1;
 		cache_is_value_name_null(0, "undo_result", isNull);
 		if (!isNull)
@@ -13659,13 +13916,13 @@ public DB_InvFailure(playerid, op)
 	return 1;
 }
 
-public DB_InvQueryError(callback[])
+public DB_InvQueryError(const callback[])
 {
-	if (!strcmp(callback, "DB_OnInvLoaded", 0, 0x7FFFFFFF))
+	if (!strcmp(callback, "DB_OnInvLoaded", false, 0x7FFFFFFF))
 	{
 		DB_FailAllPending(0x02000000);
 	}
-	else if (!strcmp(callback, "DB_OnInvUndo", 0, 12))
+	else if (!strcmp(callback, "DB_OnInvUndo", false, 12))
 	{
 		Log_Write("DBINV", "errore query in annullamento inventario: verificare a mano");
 		if (g_InvUndoNotify > 0)
@@ -13706,6 +13963,7 @@ DB_BankLastOpId(playerid, dest[], size)
 		return 0;
 	}
 	strcat(dest, g_BankReq[playerid][bqOpId], size);
+	return 0;
 }
 
 DB_BankXferFee(amount)
@@ -13722,7 +13980,7 @@ DB_BankXferFee(amount)
 	return fee < 5 ? 5 : fee;
 }
 
-bool:DB_BankOpIdOk(opId[])
+bool:DB_BankOpIdOk(const opId[])
 {
 	new len = strlen(opId);
 	return len >= 1 && len <= 36;
@@ -13734,36 +13992,36 @@ DB_BankMirror(playerid, delta)
 	g_BankDb[playerid] += delta;
 }
 
-bool:DB_BankLive(playerid, name[], charId, token, op)
+bool:DB_BankLive(playerid, const name[], charId, token, op)
 {
 	if (!DB_PlayerMatches(playerid, name))
 	{
-		return 0;
+		return false;
 	}
 	if (charId <= 0 || gPlayer[playerid][pCharId] != charId)
 	{
-		return 0;
+		return false;
 	}
 	if (!(g_DBPending[playerid] & 0x08000000))
 	{
-		return 0;
+		return false;
 	}
 	return g_BankReq[playerid][bqToken] == token && g_BankReq[playerid][bqOp] == op && g_BankReq[playerid][bqGen] == g_BankGen[playerid];
 }
 
-bool:DB_BankInfoLive(playerid, name[], charId, token, infoOp)
+bool:DB_BankInfoLive(playerid, const name[], charId, token, infoOp)
 {
 	if (!DB_PlayerMatches(playerid, name))
 	{
-		return 0;
+		return false;
 	}
 	if (charId <= 0 || gPlayer[playerid][pCharId] != charId)
 	{
-		return 0;
+		return false;
 	}
 	if (!(g_DBPending[playerid] & 0x10000000))
 	{
-		return 0;
+		return false;
 	}
 	return g_BankInfo[playerid][biToken] == token && g_BankInfo[playerid][biInfoOp] == infoOp;
 }
@@ -13778,6 +14036,7 @@ DB_BankStaleRelease(playerid, bit)
 	{
 		DB_PendingClear(playerid, bit);
 	}
+	return 0;
 }
 
 DB_BankDeliver(playerid, op, result, amount, fee, balance, recv)
@@ -13827,23 +14086,24 @@ DB_BankFlush(playerid)
 	GetPlayerName(playerid, name, 25);
 	mysql_format(g_DB, query, 512, "UPDATE characters SET bank = GREATEST(0, LEAST(%d, CAST(bank AS SIGNED) + (%d))) WHERE id = %d", 0x3B9ACA00, d, gPlayer[playerid][pCharId]);
 	mysql_tquery(g_DB, query, "DB_OnBankDeltaSaved", "dsddd", playerid, name, gPlayer[playerid][pCharId], g_BankGen[playerid], d);
+	return 0;
 }
 
-bool:DB_BankBegin(playerid, op, bool:valid, charId, amount, opId[])
+bool:DB_BankBegin(playerid, op, bool:valid, charId, amount, const opId[])
 {
 	if (playerid < 0 || playerid >= MAX_PLAYERS || !IsPlayerConnected(playerid))
 	{
-		return 0;
+		return false;
 	}
 	if (g_DBPending[playerid] & 0x08000000)
 	{
 		DB_BankDeliver(playerid, op, 7, amount, 0, 0, 65535);
-		return 0;
+		return false;
 	}
 	if (!valid || charId <= 0 || gPlayer[playerid][pCharId] != charId || !DB_BankOpIdOk(opId))
 	{
 		DB_BankDeliver(playerid, op, 0, amount, 0, 0, 65535);
-		return 0;
+		return false;
 	}
 	g_BankReq[playerid][bqToken] = ++g_BankTokenSeq;
 	g_BankReq[playerid][bqOp] = op;
@@ -13855,13 +14115,13 @@ bool:DB_BankBegin(playerid, op, bool:valid, charId, amount, opId[])
 	if (!DB_IsReady())
 	{
 		DB_BankDeliver(playerid, op, -1, amount, 0, 0, 65535);
-		return 0;
+		return false;
 	}
 	DB_PendingSet(playerid, 0x08000000);
-	return 1;
+	return true;
 }
 
-DB_BankCompensate(opId[], op)
+DB_BankCompensate(const opId[], op)
 {
 	if (op != 1 && op != 2)
 	{
@@ -13875,6 +14135,7 @@ DB_BankCompensate(opId[], op)
 	new query[512];
 	mysql_format(g_DB, query, 512, "CALL bank_undo('%e', %d)", opId, 0x3B9ACA00);
 	mysql_tquery(g_DB, query, "DB_OnBankUndoCalled", "sd", opId, 0);
+	return 0;
 }
 
 DB_BankInfoDeliver(playerid, infoOp, result, page, a, b, c, d, bool:more)
@@ -13909,28 +14170,28 @@ bool:DB_BankInfoBegin(playerid, infoOp, charId, page)
 {
 	if (playerid < 0 || playerid >= MAX_PLAYERS || !IsPlayerConnected(playerid))
 	{
-		return 0;
+		return false;
 	}
 	if (g_DBPending[playerid] & 0x10000000)
 	{
-		DB_BankInfoDeliver(playerid, infoOp, 7, page, 0, 0, 0, -1, 0);
-		return 0;
+		DB_BankInfoDeliver(playerid, infoOp, 7, page, 0, 0, 0, -1, false);
+		return false;
 	}
 	if (charId <= 0 || gPlayer[playerid][pCharId] != charId)
 	{
-		DB_BankInfoDeliver(playerid, infoOp, 0, page, 0, 0, 0, -1, 0);
-		return 0;
+		DB_BankInfoDeliver(playerid, infoOp, 0, page, 0, 0, 0, -1, false);
+		return false;
 	}
 	g_BankInfo[playerid][biToken] = ++g_BankTokenSeq;
 	g_BankInfo[playerid][biInfoOp] = infoOp;
 	g_BankInfo[playerid][biPage] = page;
 	if (!DB_IsReady())
 	{
-		DB_BankInfoDeliver(playerid, infoOp, -1, page, 0, 0, 0, -1, 0);
-		return 0;
+		DB_BankInfoDeliver(playerid, infoOp, -1, page, 0, 0, 0, -1, false);
+		return false;
 	}
 	DB_PendingSet(playerid, 0x10000000);
-	return 1;
+	return true;
 }
 
 DB_BankLimits(playerid, charId)
@@ -13943,9 +14204,10 @@ DB_BankLimits(playerid, charId)
 	GetPlayerName(playerid, name, 25);
 	mysql_format(g_DB, query, 512, "SELECT LEAST(bank_day_withdrawn(c.id, %d), 2147483647) AS wd, LEAST(bank_day_xfer_out(c.id, %d), 2147483647) AS xo, LEAST(bank_day_xfer_in(c.id, %d), 2147483647) AS xi, COALESCE(TIMESTAMPDIFF(SECOND, (SELECT MAX(ts) FROM bank_ledger WHERE character_id = c.id AND kind = 'xfer_out'), NOW()), -1) AS since FROM characters c WHERE c.id = %d", 24, 24, 24, charId);
 	mysql_tquery(g_DB, query, "DB_OnBankLimits", "dsdd", playerid, name, charId, g_BankInfo[playerid][biToken]);
+	return 0;
 }
 
-public DB_OnBankLimits(playerid, name[], charId, token)
+public DB_OnBankLimits(playerid, const name[], charId, token)
 {
 	if (!DB_BankInfoLive(playerid, name, charId, token, 1))
 	{
@@ -13963,7 +14225,7 @@ public DB_OnBankLimits(playerid, name[], charId, token)
 		cache_get_value_name_int(0, "xi", xi);
 		cache_get_value_name_int(0, "since", since);
 	}
-	DB_BankInfoDeliver(playerid, 1, result, 0, wd, xo, xi, since, 0);
+	DB_BankInfoDeliver(playerid, 1, result, 0, wd, xo, xi, since, false);
 	return 1;
 }
 
@@ -13973,7 +14235,7 @@ DB_BankStatement(playerid, charId, page)
 	{
 		if (playerid >= 0 && playerid < MAX_PLAYERS && IsPlayerConnected(playerid))
 		{
-			DB_BankInfoDeliver(playerid, 2, 0, page, 0, 0, 0, 0, 0);
+			DB_BankInfoDeliver(playerid, 2, 0, page, 0, 0, 0, 0, false);
 		}
 		return 0;
 	}
@@ -13985,9 +14247,10 @@ DB_BankStatement(playerid, charId, page)
 	GetPlayerName(playerid, name, 25);
 	mysql_format(g_DB, query, 512, "SELECT UNIX_TIMESTAMP(l.ts) AS ts, l.kind AS kind, l.delta AS delta, l.balance_after AS balance, COALESCE(a.name, '') AS other, COALESCE(l.ref, '') AS ref FROM bank_ledger l LEFT JOIN characters oc ON oc.id = l.other_character_id LEFT JOIN accounts a ON a.id = oc.account_id WHERE l.character_id = %d ORDER BY l.id DESC LIMIT %d OFFSET %d", charId, 16, page * 15);
 	mysql_tquery(g_DB, query, "DB_OnBankStatement", "dsdd", playerid, name, charId, g_BankInfo[playerid][biToken]);
+	return 0;
 }
 
-public DB_OnBankStatement(playerid, name[], charId, token)
+public DB_OnBankStatement(playerid, const name[], charId, token)
 {
 	if (!DB_BankInfoLive(playerid, name, charId, token, 2))
 	{
@@ -14025,9 +14288,10 @@ DB_BankResync(playerid, charId)
 	GetPlayerName(playerid, name, 25);
 	mysql_format(g_DB, query, 512, "SELECT bank FROM characters WHERE id = %d", charId);
 	mysql_tquery(g_DB, query, "DB_OnBankSynced", "dsdd", playerid, name, charId, g_BankInfo[playerid][biToken]);
+	return 0;
 }
 
-public DB_OnBankSynced(playerid, name[], charId, token)
+public DB_OnBankSynced(playerid, const name[], charId, token)
 {
 	if (!DB_BankInfoLive(playerid, name, charId, token, 3))
 	{
@@ -14043,11 +14307,11 @@ public DB_OnBankSynced(playerid, name[], charId, token)
 		cache_get_value_name_int(0, "bank", bank);
 		DB_BankMirror(playerid, bank - g_BankDb[playerid]);
 	}
-	DB_BankInfoDeliver(playerid, 3, result, 0, bank, 0, 0, 0, 0);
+	DB_BankInfoDeliver(playerid, 3, result, 0, bank, 0, 0, 0, false);
 	return 1;
 }
 
-DB_BankDeposit(playerid, charId, amount, channel, opId[])
+DB_BankDeposit(playerid, charId, amount, channel, const opId[])
 {
 	new bool:ok = amount >= 1 && amount <= 0x3B9ACA00 && (channel == 0 || channel == 1);
 	if (!DB_BankBegin(playerid, 1, ok, charId, amount, opId))
@@ -14059,9 +14323,10 @@ DB_BankDeposit(playerid, charId, amount, channel, opId[])
 	GetPlayerName(playerid, name, 25);
 	mysql_format(g_DB, query, 512, "CALL bank_deposit('%e', %d, %d, %d, %d, %d)", opId, charId, amount, channel, channel == 0 ? 20000 : 0, 0x3B9ACA00);
 	mysql_tquery(g_DB, query, "DB_OnBankCalled", "dsddds", playerid, name, charId, g_BankReq[playerid][bqToken], 1, opId);
+	return 0;
 }
 
-DB_BankWithdraw(playerid, charId, amount, channel, opId[])
+DB_BankWithdraw(playerid, charId, amount, channel, const opId[])
 {
 	new bool:ok = amount >= 1 && amount <= 0x3B9ACA00 && (channel == 0 || channel == 1);
 	if (!DB_BankBegin(playerid, 2, ok, charId, amount, opId))
@@ -14073,9 +14338,10 @@ DB_BankWithdraw(playerid, charId, amount, channel, opId[])
 	GetPlayerName(playerid, name, 25);
 	mysql_format(g_DB, query, 512, "CALL bank_withdraw('%e', %d, %d, %d, %d, %d, %d)", opId, charId, amount, channel, atm ? 5000 : 50000, atm ? 15000 : 100000, 24);
 	mysql_tquery(g_DB, query, "DB_OnBankCalled", "dsddds", playerid, name, charId, g_BankReq[playerid][bqToken], 2, opId);
+	return 0;
 }
 
-public DB_OnBankCalled(playerid, name[], charId, token, op, opId[])
+public DB_OnBankCalled(playerid, const name[], charId, token, op, const opId[])
 {
 	if (!DB_BankLive(playerid, name, charId, token, op))
 	{
@@ -14089,7 +14355,7 @@ public DB_OnBankCalled(playerid, name[], charId, token, op, opId[])
 	return 1;
 }
 
-public DB_OnBankResult(playerid, name[], charId, token, op, opId[])
+public DB_OnBankResult(playerid, const name[], charId, token, op, const opId[])
 {
 	new rows = 0, result = -1, balance = 0;
 	cache_get_row_count(rows);
@@ -14119,7 +14385,7 @@ public DB_OnBankResult(playerid, name[], charId, token, op, opId[])
 	return 1;
 }
 
-DB_BankTransfer(playerid, toPlayerid, amount, opId[], flag)
+DB_BankTransfer(playerid, toPlayerid, amount, const opId[], flag)
 {
 	if (playerid < 0 || playerid >= MAX_PLAYERS || !IsPlayerConnected(playerid))
 	{
@@ -14142,9 +14408,10 @@ DB_BankTransfer(playerid, toPlayerid, amount, opId[], flag)
 	GetPlayerName(toPlayerid, rname, 25);
 	mysql_format(g_DB, query, 512, "CALL bank_transfer('%e', %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d)", opId, fromChar, toChar, amount, 2, 5, 10, 25000, 50000, 100000, 0x3B9ACA00, 24, flag != 0 ? 1 : 0);
 	mysql_tquery(g_DB, query, "DB_OnBankXferCalled", "dsdddsddds", playerid, name, fromChar, g_BankReq[playerid][bqToken], toPlayerid, rname, toChar, g_BankGen[toPlayerid], amount, opId);
+	return 0;
 }
 
-public DB_OnBankXferCalled(playerid, name[], charId, token, recv, rname[], rchar, rgen, amount, opId[])
+public DB_OnBankXferCalled(playerid, const name[], charId, token, recv, const rname[], rchar, rgen, amount, const opId[])
 {
 	new query[512];
 	mysql_format(g_DB, query, 512, "SELECT result, fee, balance_after FROM bank_ops WHERE op_id = '%e'", opId);
@@ -14152,7 +14419,7 @@ public DB_OnBankXferCalled(playerid, name[], charId, token, recv, rname[], rchar
 	return 1;
 }
 
-public DB_OnBankXferResult(playerid, name[], charId, token, recv, rname[], rchar, rgen, amount, opId[])
+public DB_OnBankXferResult(playerid, const name[], charId, token, recv, const rname[], rchar, rgen, amount, const opId[])
 {
 	new rows = 0, result = -1, fee = 0, balance = 0;
 	cache_get_row_count(rows);
@@ -14195,7 +14462,7 @@ public DB_OnBankXferResult(playerid, name[], charId, token, recv, rname[], rchar
 	return 1;
 }
 
-DB_BankUndo(opId[])
+DB_BankUndo(const opId[])
 {
 	if (!DB_IsReady() || !DB_BankOpIdOk(opId))
 	{
@@ -14209,9 +14476,10 @@ DB_BankUndo(opId[])
 	g_BankUndoNotify++;
 	mysql_format(g_DB, query, 512, "CALL bank_undo('%e', %d)", opId, 0x3B9ACA00);
 	mysql_tquery(g_DB, query, "DB_OnBankUndoCalled", "sd", opId, 1);
+	return 0;
 }
 
-public DB_OnBankUndoCalled(opId[], notify)
+public DB_OnBankUndoCalled(const opId[], notify)
 {
 	new query[512];
 	mysql_format(g_DB, query, 512, "SELECT undo_result, kind, amount FROM bank_ops WHERE op_id = '%e'", opId);
@@ -14219,13 +14487,13 @@ public DB_OnBankUndoCalled(opId[], notify)
 	return 1;
 }
 
-public DB_OnBankUndoResult(opId[], notify)
+public DB_OnBankUndoResult(const opId[], notify)
 {
 	new rows = 0, result = 8, msg[126], kind[13], amount = 0, owner = 65535;
 	cache_get_row_count(rows);
 	if (rows > 0)
 	{
-		new bool:isNull = 1;
+		new bool:isNull = true;
 		result = -1;
 		cache_is_value_name_null(0, "undo_result", isNull);
 		if (!isNull)
@@ -14245,7 +14513,7 @@ public DB_OnBankUndoResult(opId[], notify)
 		{
 			for (new i = 0; i < MAX_PLAYERS; i++)
 			{
-				if (!IsPlayerConnected(i) || !g_BankReq[i][bqXferPending] || strcmp(g_BankReq[i][bqOpId], opId, 0, 0x7FFFFFFF) != 0)
+				if (!IsPlayerConnected(i) || !g_BankReq[i][bqXferPending] || strcmp(g_BankReq[i][bqOpId], opId, false, 0x7FFFFFFF) != 0)
 				{
 					continue;
 				}
@@ -14253,7 +14521,7 @@ public DB_OnBankUndoResult(opId[], notify)
 				{
 					break;
 				}
-				DB_BankMirror(i, !strcmp(kind, "deposit", 0, 0x7FFFFFFF) ? -amount : amount);
+				DB_BankMirror(i, !strcmp(kind, "deposit", false, 0x7FFFFFFF) ? -amount : amount);
 				g_BankReq[i][bqXferPending] = 0;
 				owner = i;
 				break;
@@ -14272,12 +14540,12 @@ public DB_OnBankUndoResult(opId[], notify)
 	return 1;
 }
 
-bool:DB_BankSystemKindOk(kind[])
+bool:DB_BankSystemKindOk(const kind[])
 {
-	return !strcmp(kind, "paycheck", 0, 0x7FFFFFFF) || !strcmp(kind, "job", 0, 0x7FFFFFFF) || !strcmp(kind, "faction", 0, 0x7FFFFFFF) || !strcmp(kind, "bill", 0, 0x7FFFFFFF) || !strcmp(kind, "house", 0, 0x7FFFFFFF) || !strcmp(kind, "vehicle", 0, 0x7FFFFFFF) || !strcmp(kind, "fine", 0, 0x7FFFFFFF) || !strcmp(kind, "refund", 0, 0x7FFFFFFF) || !strcmp(kind, "admin", 0, 0x7FFFFFFF);
+	return !strcmp(kind, "paycheck", false, 0x7FFFFFFF) || !strcmp(kind, "job", false, 0x7FFFFFFF) || !strcmp(kind, "faction", false, 0x7FFFFFFF) || !strcmp(kind, "bill", false, 0x7FFFFFFF) || !strcmp(kind, "house", false, 0x7FFFFFFF) || !strcmp(kind, "vehicle", false, 0x7FFFFFFF) || !strcmp(kind, "fine", false, 0x7FFFFFFF) || !strcmp(kind, "refund", false, 0x7FFFFFFF) || !strcmp(kind, "admin", false, 0x7FFFFFFF);
 }
 
-DB_BankLog(opId[], charId, otherCharId, kind[], delta, balAfter, channel, ref[])
+DB_BankLog(const opId[], charId, otherCharId, const kind[], delta, balAfter, channel, const ref[])
 {
 	if (!DB_IsReady() || charId <= 0 || delta == 0 || !DB_BankOpIdOk(opId) || !DB_BankSystemKindOk(kind) || channel < 0 || channel > 2)
 	{
@@ -14290,6 +14558,7 @@ DB_BankLog(opId[], charId, otherCharId, kind[], delta, balAfter, channel, ref[])
 	new query[512];
 	mysql_format(g_DB, query, 512, "INSERT IGNORE INTO bank_ledger (op_id, character_id, other_character_id, kind, delta, balance_after, channel, ref) VALUES ('%e', %d, NULLIF(%d, 0), '%e', %d, %d, %d, NULLIF('%e', ''))", opId, charId, otherCharId > 0 ? otherCharId : 0, kind, delta, balAfter, channel, ref);
 	mysql_tquery(g_DB, query, "", "");
+	return 0;
 }
 
 public DB_BankFailure(playerid, op)
@@ -14301,7 +14570,7 @@ public DB_BankFailure(playerid, op)
 	DB_PendingClear(playerid, op);
 	if (op == 0x10000000)
 	{
-		DB_BankInfoDeliver(playerid, g_BankInfo[playerid][biInfoOp], -1, g_BankInfo[playerid][biPage], 0, 0, 0, -1, 0);
+		DB_BankInfoDeliver(playerid, g_BankInfo[playerid][biInfoOp], -1, g_BankInfo[playerid][biPage], 0, 0, 0, -1, false);
 		return 1;
 	}
 	new reqOp = g_BankReq[playerid][bqOp];
@@ -14317,13 +14586,13 @@ public DB_BankFailure(playerid, op)
 	return 1;
 }
 
-public DB_BankQueryError(callback[])
+public DB_BankQueryError(const callback[])
 {
-	if (!strcmp(callback, "DB_OnBankLimits", 0, 0x7FFFFFFF) || !strcmp(callback, "DB_OnBankStatement", 0, 0x7FFFFFFF) || !strcmp(callback, "DB_OnBankSynced", 0, 0x7FFFFFFF))
+	if (!strcmp(callback, "DB_OnBankLimits", false, 0x7FFFFFFF) || !strcmp(callback, "DB_OnBankStatement", false, 0x7FFFFFFF) || !strcmp(callback, "DB_OnBankSynced", false, 0x7FFFFFFF))
 	{
 		DB_FailAllPending(0x10000000);
 	}
-	else if (!strcmp(callback, "DB_OnBankUndo", 0, 13))
+	else if (!strcmp(callback, "DB_OnBankUndo", false, 13))
 	{
 		Log_Write("DBBANK", "errore query in annullamento banca: verificare a mano");
 		if (g_BankUndoNotify > 0)
@@ -14362,6 +14631,7 @@ DB_StoryLastOpId(playerid, dest[], size)
 		return 0;
 	}
 	strcat(dest, g_StoryReq[playerid][sqOpId], size);
+	return 0;
 }
 
 DB_StoryCash(motive)
@@ -14389,7 +14659,7 @@ DB_StoryBankStart(motive)
 	return 7500 - DB_StoryCash(motive);
 }
 
-bool:DB_StoryOpIdOk(opId[])
+bool:DB_StoryOpIdOk(const opId[])
 {
 	new len = strlen(opId);
 	return len >= 1 && len <= 36;
@@ -14401,32 +14671,32 @@ DB_StoryApply(playerid, origin, motive)
 	gPlayer[playerid][pStoryMotive] = motive;
 }
 
-bool:DB_StoryInfoLive(playerid, name[], token, kind)
+bool:DB_StoryInfoLive(playerid, const name[], token, kind)
 {
 	if (!DB_PlayerMatches(playerid, name))
 	{
-		return 0;
+		return false;
 	}
 	if (!(g_DBPending[playerid] & 0x20000000))
 	{
-		return 0;
+		return false;
 	}
 	return g_StoryInfo[playerid][siToken] == token && g_StoryInfo[playerid][siKind] == kind;
 }
 
-bool:DB_StoryOpLive(playerid, name[], charId, token)
+bool:DB_StoryOpLive(playerid, const name[], charId, token)
 {
 	if (!DB_PlayerMatches(playerid, name))
 	{
-		return 0;
+		return false;
 	}
 	if (charId <= 0 || gPlayer[playerid][pCharId] != charId)
 	{
-		return 0;
+		return false;
 	}
 	if (!(g_DBPending[playerid] & 0x40000000))
 	{
-		return 0;
+		return false;
 	}
 	return g_StoryReq[playerid][sqToken] == token && g_StoryReq[playerid][sqGen] == g_BankGen[playerid];
 }
@@ -14441,6 +14711,7 @@ DB_StoryStaleRelease(playerid, bit)
 	{
 		DB_PendingClear(playerid, bit);
 	}
+	return 0;
 }
 
 DB_StoryDeliverLoad(playerid, result, introSeen, origin, motive, bool:hasStory)
@@ -14471,7 +14742,7 @@ bool:DB_StoryInfoBegin(playerid, kind, bool:valid, accountId, charId, targetid, 
 {
 	if (playerid < 0 || playerid >= MAX_PLAYERS || !IsPlayerConnected(playerid))
 	{
-		return 0;
+		return false;
 	}
 	new tchar = 0, tgen = 0;
 	if (kind == 2 && targetid >= 0 && targetid < MAX_PLAYERS && IsPlayerConnected(targetid))
@@ -14483,25 +14754,25 @@ bool:DB_StoryInfoBegin(playerid, kind, bool:valid, accountId, charId, targetid, 
 	{
 		if (kind == 1)
 		{
-			DB_StoryDeliverLoad(playerid, 5, 0, 0, 0, 0);
+			DB_StoryDeliverLoad(playerid, 5, 0, 0, 0, false);
 		}
 		else
 		{
-			DB_StoryDeliverRead(playerid, targetid, purpose, 5, 0, 0, 0);
+			DB_StoryDeliverRead(playerid, targetid, purpose, 5, 0, 0, false);
 		}
-		return 0;
+		return false;
 	}
 	if (!valid)
 	{
 		if (kind == 1)
 		{
-			DB_StoryDeliverLoad(playerid, 0, 0, 0, 0, 0);
+			DB_StoryDeliverLoad(playerid, 0, 0, 0, 0, false);
 		}
 		else
 		{
-			DB_StoryDeliverRead(playerid, targetid, purpose, 0, 0, 0, 0);
+			DB_StoryDeliverRead(playerid, targetid, purpose, 0, 0, 0, false);
 		}
-		return 0;
+		return false;
 	}
 	g_StoryInfo[playerid][siToken] = ++g_StoryTokenSeq;
 	g_StoryInfo[playerid][siKind] = kind;
@@ -14515,21 +14786,21 @@ bool:DB_StoryInfoBegin(playerid, kind, bool:valid, accountId, charId, targetid, 
 	{
 		if (kind == 1)
 		{
-			DB_StoryDeliverLoad(playerid, -1, 0, 0, 0, 0);
+			DB_StoryDeliverLoad(playerid, -1, 0, 0, 0, false);
 		}
 		else
 		{
-			DB_StoryDeliverRead(playerid, targetid, purpose, -1, 0, 0, 0);
+			DB_StoryDeliverRead(playerid, targetid, purpose, -1, 0, 0, false);
 		}
-		return 0;
+		return false;
 	}
 	DB_PendingSet(playerid, 0x20000000);
-	return 1;
+	return true;
 }
 
 DB_StoryLoad(playerid, accountId, charId)
 {
-	new bool:ok = 0;
+	new bool:ok = false;
 	if (playerid >= 0 && playerid < MAX_PLAYERS && IsPlayerConnected(playerid))
 	{
 		ok = accountId > 0 && gPlayer[playerid][pAccountId] == accountId && charId >= 0 && gPlayer[playerid][pCharId] == charId;
@@ -14542,9 +14813,10 @@ DB_StoryLoad(playerid, accountId, charId)
 	GetPlayerName(playerid, name, 25);
 	mysql_format(g_DB, query, 512, "SELECT a.intro_seen AS intro_seen, COALESCE(s.origin, 0) AS origin, COALESCE(s.motive, 0) AS motive, (s.character_id IS NOT NULL) AS has_story FROM accounts a LEFT JOIN character_story s ON s.character_id = %d WHERE a.id = %d", charId, accountId);
 	mysql_tquery(g_DB, query, "DB_OnStoryLoaded", "dsddd", playerid, name, accountId, charId, g_StoryInfo[playerid][siToken]);
+	return 0;
 }
 
-public DB_OnStoryLoaded(playerid, name[], accountId, charId, token)
+public DB_OnStoryLoaded(playerid, const name[], accountId, charId, token)
 {
 	if (!DB_StoryInfoLive(playerid, name, token, 1))
 	{
@@ -14560,7 +14832,7 @@ public DB_OnStoryLoaded(playerid, name[], accountId, charId, token)
 	cache_get_row_count(rows);
 	if (rows < 1)
 	{
-		DB_StoryDeliverLoad(playerid, 0, 0, 0, 0, 0);
+		DB_StoryDeliverLoad(playerid, 0, 0, 0, 0, false);
 		return 1;
 	}
 	cache_get_value_name_int(0, "intro_seen", intro);
@@ -14579,7 +14851,7 @@ public DB_OnStoryLoaded(playerid, name[], accountId, charId, token)
 
 DB_StoryRead(playerid, targetid, purpose)
 {
-	new bool:ok = 0;
+	new bool:ok = false;
 	if (playerid >= 0 && playerid < MAX_PLAYERS && IsPlayerConnected(playerid) && targetid >= 0 && targetid < MAX_PLAYERS && IsPlayerConnected(targetid))
 	{
 		ok = gPlayer[targetid][pCharId] > 0 && gPlayer[playerid][pCharId] > 0;
@@ -14592,9 +14864,10 @@ DB_StoryRead(playerid, targetid, purpose)
 	GetPlayerName(playerid, name, 25);
 	mysql_format(g_DB, query, 512, "SELECT COALESCE(s.origin, 0) AS origin, COALESCE(s.motive, 0) AS motive, (s.character_id IS NOT NULL) AS has_story FROM characters c LEFT JOIN character_story s ON s.character_id = c.id WHERE c.id = %d", g_StoryInfo[playerid][siTargetChar]);
 	mysql_tquery(g_DB, query, "DB_OnStoryRead", "dsd", playerid, name, g_StoryInfo[playerid][siToken]);
+	return 0;
 }
 
-public DB_OnStoryRead(playerid, name[], token)
+public DB_OnStoryRead(playerid, const name[], token)
 {
 	if (!DB_StoryInfoLive(playerid, name, token, 2))
 	{
@@ -14615,7 +14888,7 @@ public DB_OnStoryRead(playerid, name[], token)
 	cache_get_row_count(rows);
 	if (rows < 1)
 	{
-		DB_StoryDeliverRead(playerid, target, purpose, 0, 0, 0, 0);
+		DB_StoryDeliverRead(playerid, target, purpose, 0, 0, 0, false);
 		return 1;
 	}
 	cache_get_value_name_int(0, "origin", origin);
@@ -14625,7 +14898,7 @@ public DB_OnStoryRead(playerid, name[], token)
 	return 1;
 }
 
-DB_StorySave(playerid, charId, origin, motive, opId[], bool:creation)
+DB_StorySave(playerid, charId, origin, motive, const opId[], bool:creation)
 {
 	if (playerid < 0 || playerid >= MAX_PLAYERS || !IsPlayerConnected(playerid))
 	{
@@ -14652,18 +14925,19 @@ DB_StorySave(playerid, charId, origin, motive, opId[], bool:creation)
 		DB_StoryDeliverSaved(playerid, -1, 0, 0, 0);
 		return 0;
 	}
-	DB_PendingSet(playerid, 2.0);
+	DB_PendingSet(playerid, _:2.0);
 	new query[512], name[25];
 	GetPlayerName(playerid, name, 25);
 	mysql_format(g_DB, query, 512, "CALL story_save('%e', %d, %d, %d, %d)", opId, charId, origin, motive, creation ? 0 : 1);
 	mysql_tquery(g_DB, query, "DB_OnStoryCalled", "dsdds", playerid, name, charId, g_StoryReq[playerid][sqToken], opId);
+	return 0;
 }
 
-public DB_OnStoryCalled(playerid, name[], charId, token, opId[])
+public DB_OnStoryCalled(playerid, const name[], charId, token, const opId[])
 {
 	if (!DB_StoryOpLive(playerid, name, charId, token))
 	{
-		DB_StoryStaleRelease(playerid, 2.0);
+		DB_StoryStaleRelease(playerid, _:2.0);
 		return 1;
 	}
 	new query[512];
@@ -14672,7 +14946,7 @@ public DB_OnStoryCalled(playerid, name[], charId, token, opId[])
 	return 1;
 }
 
-public DB_OnStoryResult(playerid, name[], charId, token, opId[])
+public DB_OnStoryResult(playerid, const name[], charId, token, const opId[])
 {
 	new rows = 0, result = -1, delta = 0, origin = 0, motive = 0;
 	cache_get_row_count(rows);
@@ -14689,10 +14963,10 @@ public DB_OnStoryResult(playerid, name[], charId, token, opId[])
 		{
 			Log_Write("DBSTORY", "sessione scaduta dopo una ripartizione dei soldi iniziali: verificare i saldi del personaggio (story_ops)");
 		}
-		DB_StoryStaleRelease(playerid, 2.0);
+		DB_StoryStaleRelease(playerid, _:2.0);
 		return 1;
 	}
-	DB_PendingClear(playerid, 2.0);
+	DB_PendingClear(playerid, _:2.0);
 	if (result == 1 || result == 3 || result == 4 || result == 2)
 	{
 		DB_StoryApply(playerid, origin, motive);
@@ -14733,6 +15007,7 @@ DB_StoryIntroSeen(accountId, playerid)
 	new query[512];
 	mysql_format(g_DB, query, 512, "UPDATE accounts SET intro_seen = 1 WHERE id = %d", accountId);
 	mysql_tquery(g_DB, query, "DB_OnStoryIntroSet", "d", accountId);
+	return 0;
 }
 
 public DB_OnStoryIntroSet(accountId)
@@ -14751,11 +15026,11 @@ public DB_StoryFailure(playerid, op)
 	{
 		if (g_StoryInfo[playerid][siKind] == 1)
 		{
-			DB_StoryDeliverLoad(playerid, -1, 0, 0, 0, 0);
+			DB_StoryDeliverLoad(playerid, -1, 0, 0, 0, false);
 		}
 		else
 		{
-			DB_StoryDeliverRead(playerid, g_StoryInfo[playerid][siTargetId], g_StoryInfo[playerid][siPurpose], -1, 0, 0, 0);
+			DB_StoryDeliverRead(playerid, g_StoryInfo[playerid][siTargetId], g_StoryInfo[playerid][siPurpose], -1, 0, 0, false);
 		}
 		return 1;
 	}
@@ -14763,19 +15038,19 @@ public DB_StoryFailure(playerid, op)
 	return 1;
 }
 
-public DB_StoryQueryError(callback[])
+public DB_StoryQueryError(const callback[])
 {
-	if (!strcmp(callback, "DB_OnStoryLoaded", 0, 0x7FFFFFFF) || !strcmp(callback, "DB_OnStoryRead", 0, 0x7FFFFFFF))
+	if (!strcmp(callback, "DB_OnStoryLoaded", false, 0x7FFFFFFF) || !strcmp(callback, "DB_OnStoryRead", false, 0x7FFFFFFF))
 	{
 		DB_FailAllPending(0x20000000);
 	}
-	else if (!strcmp(callback, "DB_OnStoryIntroSet", 0, 0x7FFFFFFF))
+	else if (!strcmp(callback, "DB_OnStoryIntroSet", false, 0x7FFFFFFF))
 	{
 		Log_Write("DBSTORY", "errore query: intro_seen non salvato");
 	}
 	else
 	{
-		DB_FailAllPending(2.0);
+		DB_FailAllPending(_:2.0);
 	}
 	return 1;
 }
@@ -14792,7 +15067,7 @@ new g_LdTokenSeq;
 new g_LdOpSeq;
 new g_LdBoardToken;
 
-DB_LivingMakeOpId(dest[], size, tag[], ref, charId)
+DB_LivingMakeOpId(dest[], size, const tag[], ref, charId)
 {
 	g_LdOpSeq++;
 	format(dest, size, "%.2s%d-%d-%08x", tag, ref, charId, gettime() << 8 | g_LdOpSeq & 255);
@@ -14806,14 +15081,14 @@ bool:DB_LivingBusy(playerid, cat)
 {
 	if (playerid < 0 || playerid >= MAX_PLAYERS || cat < 0 || cat >= 6)
 	{
-		return 0;
+		return false;
 	}
 	return (g_LdPending[playerid] & 1 << cat) != 0;
 }
 
 DB_LivingDistrictGet(districtId, E_LD_DISTRICT:field)
 {
-	if (districtId < 1 || districtId > 3 || field == 10)
+	if (districtId < 1 || districtId > 3 || _:field == 10)
 	{
 		return 0;
 	}
@@ -14828,6 +15103,7 @@ DB_LivingProjectName(districtId, dest[], size)
 		return 0;
 	}
 	strcat(dest, g_LdDistrict[districtId][ldProjectName], size);
+	return 0;
 }
 
 DB_LivingBucketSlots()
@@ -14852,9 +15128,10 @@ DB_LivingPlayerReset(playerid)
 	}
 	for (new i = 0; i < 8; i++)
 	{
-		g_LdPlayer[playerid][i] = 0;
+		g_LdPlayer[playerid][E_LD_PLAYER:i] = 0;
 	}
 	g_LdPlayer[playerid][lpSecsSincePayout] = -1;
+	return 0;
 }
 
 DB_LdIdx(playerid, cat)
@@ -14862,7 +15139,7 @@ DB_LdIdx(playerid, cat)
 	return playerid * 6 + cat;
 }
 
-bool:DB_LdOpIdOk(opId[])
+bool:DB_LdOpIdOk(const opId[])
 {
 	new len = strlen(opId);
 	return len >= 1 && len <= 36;
@@ -14912,19 +15189,19 @@ DB_LdCharOnline(charId)
 	return 65535;
 }
 
-bool:DB_LdLive(playerid, name[], cat, token, charId)
+bool:DB_LdLive(playerid, const name[], cat, token, charId)
 {
 	if (!DB_PlayerMatches(playerid, name))
 	{
-		return 0;
+		return false;
 	}
 	if (charId <= 0 || gPlayer[playerid][pCharId] != charId)
 	{
-		return 0;
+		return false;
 	}
 	if (!(g_LdPending[playerid] & 1 << cat))
 	{
-		return 0;
+		return false;
 	}
 	new idx = DB_LdIdx(playerid, cat);
 	return g_LdReq[idx][lqToken] == token && g_LdReq[idx][lqGen] == g_BankGen[playerid];
@@ -14940,6 +15217,7 @@ DB_LdStaleRelease(playerid, cat)
 	{
 		g_LdPending[playerid] &= ~(1 << cat);
 	}
+	return 0;
 }
 
 DB_LdDeliver(playerid, action, result, ref, amount, balance, a, b, c)
@@ -15011,23 +15289,23 @@ DB_LdDeliver(playerid, action, result, ref, amount, balance, a, b, c)
 	}
 }
 
-bool:DB_LdBegin(playerid, action, bool:valid, ref, aux, opId[], bool:needOp)
+bool:DB_LdBegin(playerid, action, bool:valid, ref, aux, const opId[], bool:needOp)
 {
 	if (playerid < 0 || playerid >= MAX_PLAYERS || !IsPlayerConnected(playerid))
 	{
-		return 0;
+		return false;
 	}
 	new cat = DB_LdCatOf(action);
 	if (g_LdPending[playerid] & 1 << cat)
 	{
 		DB_LdDeliver(playerid, action, 10, ref, 0, 0, 0, 0, 0);
-		return 0;
+		return false;
 	}
 	new charId = gPlayer[playerid][pCharId];
 	if (!valid || charId <= 0 || (needOp && !DB_LdOpIdOk(opId)))
 	{
 		DB_LdDeliver(playerid, action, 9, ref, 0, 0, 0, 0, 0);
-		return 0;
+		return false;
 	}
 	new idx = DB_LdIdx(playerid, cat);
 	g_LdReq[idx][lqToken] = ++g_LdTokenSeq;
@@ -15041,14 +15319,14 @@ bool:DB_LdBegin(playerid, action, bool:valid, ref, aux, opId[], bool:needOp)
 	if (!DB_IsReady())
 	{
 		DB_LdDeliver(playerid, action, -1, ref, 0, 0, 0, 0, 0);
-		return 0;
+		return false;
 	}
 	g_LdPending[playerid] |= 1 << cat;
 	DB_BankFlush(playerid);
-	return 1;
+	return true;
 }
 
-DB_LdSend(playerid, action, query[], other)
+DB_LdSend(playerid, action, const query[], other)
 {
 	new cat = DB_LdCatOf(action), idx = DB_LdIdx(playerid, cat), name[25], ogen = 0;
 	GetPlayerName(playerid, name, 25);
@@ -15060,7 +15338,7 @@ DB_LdSend(playerid, action, query[], other)
 	mysql_tquery(g_DB, query, "DB_OnLdCalled", "dsddddddds", playerid, name, cat, g_LdReq[idx][lqToken], action, g_LdReq[idx][lqCharId], g_LdReq[idx][lqAux], other, ogen, g_LdReq[idx][lqOpId]);
 }
 
-DB_LdCompensate(action, charId, aux, opId[], bool:stale)
+DB_LdCompensate(action, charId, aux, const opId[], bool:stale)
 {
 	if (!DB_IsReady() || charId <= 0)
 	{
@@ -15078,6 +15356,7 @@ DB_LdCompensate(action, charId, aux, opId[], bool:stale)
 		mysql_format(g_DB, query, 1024, "CALL sp_ld_char_cleanup(%d, NULL)", charId);
 		mysql_tquery(g_DB, query, "DB_OnLdCleanup", "d", charId);
 	}
+	return 0;
 }
 
 public DB_OnLdCleanup(charId)
@@ -15085,7 +15364,7 @@ public DB_OnLdCleanup(charId)
 	return 1;
 }
 
-public DB_OnLdCalled(playerid, name[], cat, token, action, charId, aux, other, otherGen, opId[])
+public DB_OnLdCalled(playerid, const name[], cat, token, action, charId, aux, other, otherGen, const opId[])
 {
 	new query[1024];
 	mysql_format(g_DB, query, 1024, "SELECT result, ref, amount, balance_after, other_character_id, other_amount, other_balance_after, v1, v2, v3 FROM ld_ops WHERE op_id = '%e'", opId);
@@ -15093,7 +15372,7 @@ public DB_OnLdCalled(playerid, name[], cat, token, action, charId, aux, other, o
 	return 1;
 }
 
-public DB_OnLdResult(playerid, name[], cat, token, action, charId, aux, other, otherGen, opId[])
+public DB_OnLdResult(playerid, const name[], cat, token, action, charId, aux, other, otherGen, const opId[])
 {
 	new rows = 0, result = -1, ref = 0, amount = 0, balance = 0, ochar = 0, oamount = 0, obalance = 0, v1 = 0, v2 = 0, v3 = 0;
 	cache_get_row_count(rows);
@@ -15125,7 +15404,7 @@ public DB_OnLdResult(playerid, name[], cat, token, action, charId, aux, other, o
 	}
 	if (!live)
 	{
-		DB_LdCompensate(action, charId, aux, opId, 1);
+		DB_LdCompensate(action, charId, aux, opId, true);
 		DB_LdStaleRelease(playerid, cat);
 		return 1;
 	}
@@ -15229,7 +15508,7 @@ public DB_OnLdResult(playerid, name[], cat, token, action, charId, aux, other, o
 	return 1;
 }
 
-DB_LivingRentUndo(playerid, charId, cash, opId[])
+DB_LivingRentUndo(playerid, charId, cash, const opId[])
 {
 	if (!DB_IsReady() || !DB_LdOpIdOk(opId))
 	{
@@ -15240,9 +15519,10 @@ DB_LivingRentUndo(playerid, charId, cash, opId[])
 	GetPlayerName(playerid, name, 25);
 	mysql_format(g_DB, query, 1024, "CALL sp_rental_undo('%e', %d, %d)", opId, charId, cash > 0 ? cash : 0);
 	mysql_tquery(g_DB, query, "DB_OnLdUndoCalled", "dsdds", playerid, name, g_BankGen[playerid], charId, opId);
+	return 0;
 }
 
-public DB_OnLdUndoCalled(playerid, name[], gen, charId, opId[])
+public DB_OnLdUndoCalled(playerid, const name[], gen, charId, const opId[])
 {
 	new query[1024];
 	mysql_format(g_DB, query, 1024, "SELECT amount FROM ld_ops WHERE op_id = CONCAT('%e', '-x')", opId);
@@ -15250,7 +15530,7 @@ public DB_OnLdUndoCalled(playerid, name[], gen, charId, opId[])
 	return 1;
 }
 
-public DB_OnLdUndoResult(playerid, name[], gen, charId, opId[])
+public DB_OnLdUndoResult(playerid, const name[], gen, charId, const opId[])
 {
 	new rows = 0, amount = 0;
 	cache_get_row_count(rows);
@@ -15269,48 +15549,52 @@ public DB_OnLdUndoResult(playerid, name[], gen, charId, opId[])
 	return 1;
 }
 
-DB_LivingCtAccept(playerid, contractId, opId[])
+DB_LivingCtAccept(playerid, contractId, const opId[])
 {
-	if (!DB_LdBegin(playerid, 1, contractId > 0, contractId, 0, opId, 1))
+	if (!DB_LdBegin(playerid, 1, bool:(contractId > 0), contractId, 0, opId, true))
 	{
 		return 0;
 	}
 	new query[1024];
 	mysql_format(g_DB, query, 1024, "CALL sp_ct_accept(%d, %d, '%e', %d)", contractId, gPlayer[playerid][pCharId], opId, gPlayer[playerid][pLevel]);
 	DB_LdSend(playerid, 1, query, 65535);
+	return 0;
 }
 
-DB_LivingCtPickup(playerid, contractId, opId[])
+DB_LivingCtPickup(playerid, contractId, const opId[])
 {
-	if (!DB_LdBegin(playerid, 2, contractId > 0, contractId, 0, opId, 1))
+	if (!DB_LdBegin(playerid, 2, bool:(contractId > 0), contractId, 0, opId, true))
 	{
 		return 0;
 	}
 	new query[1024];
 	mysql_format(g_DB, query, 1024, "CALL sp_ct_pickup(%d, %d, '%e')", contractId, gPlayer[playerid][pCharId], opId);
 	DB_LdSend(playerid, 2, query, 65535);
+	return 0;
 }
 
-DB_LivingCtRelease(playerid, contractId, opId[], reason)
+DB_LivingCtRelease(playerid, contractId, const opId[], reason)
 {
-	if (!DB_LdBegin(playerid, 3, contractId > 0 && (reason == 0 || reason == 1), contractId, 0, opId, 1))
+	if (!DB_LdBegin(playerid, 3, contractId > 0 && (reason == 0 || reason == 1), contractId, 0, opId, true))
 	{
 		return 0;
 	}
 	new query[1024];
 	mysql_format(g_DB, query, 1024, "CALL sp_ct_release(%d, %d, '%e', %d)", contractId, gPlayer[playerid][pCharId], opId, reason);
 	DB_LdSend(playerid, 3, query, 65535);
+	return 0;
 }
 
-DB_LivingCtComplete(playerid, contractId, opId[], integrityPct, seconds)
+DB_LivingCtComplete(playerid, contractId, const opId[], integrityPct, seconds)
 {
-	if (!DB_LdBegin(playerid, 4, contractId > 0 && integrityPct >= 0 && integrityPct <= 100 && seconds >= 0, contractId, 0, opId, 1))
+	if (!DB_LdBegin(playerid, 4, contractId > 0 && integrityPct >= 0 && integrityPct <= 100 && seconds >= 0, contractId, 0, opId, true))
 	{
 		return 0;
 	}
 	new query[1024];
 	mysql_format(g_DB, query, 1024, "CALL sp_ct_complete(%d, %d, '%e', %d, %d)", contractId, gPlayer[playerid][pCharId], opId, integrityPct, seconds);
 	DB_LdSend(playerid, 4, query, 65535);
+	return 0;
 }
 
 DB_LdRentTotal(vkind, blocks)
@@ -15337,7 +15621,7 @@ DB_LdRentTotal(vkind, blocks)
 	return 0;
 }
 
-DB_LivingRentOpen(playerid, vkind, model, blocks, opId[])
+DB_LivingRentOpen(playerid, vkind, model, blocks, const opId[])
 {
 	if (playerid < 0 || playerid >= MAX_PLAYERS || !IsPlayerConnected(playerid))
 	{
@@ -15353,7 +15637,7 @@ DB_LivingRentOpen(playerid, vkind, model, blocks, opId[])
 			cash = gPlayer[playerid][pMoney] > 0 ? gPlayer[playerid][pMoney] : 0;
 		}
 	}
-	if (!DB_LdBegin(playerid, 5, ok, 0, cash, opId, 1))
+	if (!DB_LdBegin(playerid, 5, ok, 0, cash, opId, true))
 	{
 		return 0;
 	}
@@ -15361,20 +15645,22 @@ DB_LivingRentOpen(playerid, vkind, model, blocks, opId[])
 	new query[1024];
 	mysql_format(g_DB, query, 1024, "CALL sp_rental_open('%e', %d, %d, %d, %d, %d, %d)", opId, gPlayer[playerid][pCharId], vkind, model, blocks, cash, gPlayer[playerid][pLevel]);
 	DB_LdSend(playerid, 5, query, 65535);
+	return 0;
 }
 
-DB_LivingRentClose(playerid, rentalId, mode, health, opId[])
+DB_LivingRentClose(playerid, rentalId, mode, health, const opId[])
 {
-	if (!DB_LdBegin(playerid, 6, rentalId > 0 && (mode == 1 || mode == 2 || mode == 3 || mode == 5), rentalId, 0, opId, 1))
+	if (!DB_LdBegin(playerid, 6, rentalId > 0 && (mode == 1 || mode == 2 || mode == 3 || mode == 5), rentalId, 0, opId, true))
 	{
 		return 0;
 	}
 	new query[1024];
 	mysql_format(g_DB, query, 1024, "CALL sp_rental_close('%e', %d, %d, %d, %d)", opId, rentalId, gPlayer[playerid][pCharId], mode, health > 0 ? health : 0);
 	DB_LdSend(playerid, 6, query, 65535);
+	return 0;
 }
 
-DB_LivingTaxiStart(playerid, kind, passengerid, fromDistrict, opId[])
+DB_LivingTaxiStart(playerid, kind, passengerid, fromDistrict, const opId[])
 {
 	new pchar = 0;
 	if (kind == 2 && passengerid >= 0 && passengerid < MAX_PLAYERS && IsPlayerConnected(passengerid))
@@ -15382,19 +15668,20 @@ DB_LivingTaxiStart(playerid, kind, passengerid, fromDistrict, opId[])
 		pchar = gPlayer[passengerid][pCharId];
 	}
 	new bool:ok = ((kind == 1 && passengerid == INVALID_PLAYER_ID) || (kind == 2 && pchar > 0 && passengerid != playerid)) && fromDistrict >= 0 && fromDistrict <= 3;
-	if (!DB_LdBegin(playerid, 7, ok, 0, 0, opId, 1))
+	if (!DB_LdBegin(playerid, 7, ok, 0, 0, opId, true))
 	{
 		return 0;
 	}
 	new query[1024];
 	mysql_format(g_DB, query, 1024, "CALL sp_taxi_start('%e', %d, %d, %d, %d, %d)", opId, kind, gPlayer[playerid][pCharId], pchar, fromDistrict, gPlayer[playerid][pLevel]);
 	DB_LdSend(playerid, 7, query, 65535);
+	return 0;
 }
 
-DB_LivingTaxiPay(playerid, rideId, passengerid, meters, toDistrict, bool:accept, rating, opId[])
+DB_LivingTaxiPay(playerid, rideId, passengerid, meters, toDistrict, bool:accept, rating, const opId[])
 {
 	new bool:ok = rideId > 0 && meters >= 0 && toDistrict >= 0 && toDistrict <= 3 && rating >= 0 && rating <= 5;
-	if (!DB_LdBegin(playerid, 8, ok, rideId, 0, opId, 1))
+	if (!DB_LdBegin(playerid, 8, ok, rideId, 0, opId, true))
 	{
 		return 0;
 	}
@@ -15405,50 +15692,55 @@ DB_LivingTaxiPay(playerid, rideId, passengerid, meters, toDistrict, bool:accept,
 	}
 	mysql_format(g_DB, query, 1024, "CALL sp_taxi_pay('%e', %d, %d, %d, %d, %d, %d)", opId, rideId, gPlayer[playerid][pCharId], meters, toDistrict, accept ? 1 : 0, rating);
 	DB_LdSend(playerid, 8, query, other);
+	return 0;
 }
 
-DB_LivingTaxiCancel(playerid, rideId, opId[])
+DB_LivingTaxiCancel(playerid, rideId, const opId[])
 {
-	if (!DB_LdBegin(playerid, 9, rideId > 0, rideId, 0, opId, 1))
+	if (!DB_LdBegin(playerid, 9, bool:(rideId > 0), rideId, 0, opId, true))
 	{
 		return 0;
 	}
 	new query[1024];
 	mysql_format(g_DB, query, 1024, "CALL sp_taxi_cancel('%e', %d, %d)", opId, rideId, gPlayer[playerid][pCharId]);
 	DB_LdSend(playerid, 9, query, 65535);
+	return 0;
 }
 
-DB_LivingTaxiRate(passengerid, rideId, stars, opId[])
+DB_LivingTaxiRate(passengerid, rideId, stars, const opId[])
 {
-	if (!DB_LdBegin(passengerid, 10, rideId > 0 && stars >= 1 && stars <= 5, rideId, 0, opId, 1))
+	if (!DB_LdBegin(passengerid, 10, rideId > 0 && stars >= 1 && stars <= 5, rideId, 0, opId, true))
 	{
 		return 0;
 	}
 	new query[1024];
 	mysql_format(g_DB, query, 1024, "CALL sp_taxi_rate('%e', %d, %d, %d)", opId, rideId, gPlayer[passengerid][pCharId], stars);
 	DB_LdSend(passengerid, 10, query, 65535);
+	return 0;
 }
 
-DB_LivingProjectContrib(playerid, projectId, amount, opId[])
+DB_LivingProjectContrib(playerid, projectId, amount, const opId[])
 {
-	if (!DB_LdBegin(playerid, 11, projectId > 0 && amount > 0, projectId, 0, opId, 1))
+	if (!DB_LdBegin(playerid, 11, projectId > 0 && amount > 0, projectId, 0, opId, true))
 	{
 		return 0;
 	}
 	new query[1024], played = gPlayer[playerid][pPlayedMs] / 60000;
 	mysql_format(g_DB, query, 1024, "CALL sp_project_contrib('%e', %d, %d, %d, %d)", opId, gPlayer[playerid][pCharId], projectId, amount, played > 0 ? played : 0);
 	DB_LdSend(playerid, 11, query, 65535);
+	return 0;
 }
 
-DB_LivingOnboardStep(playerid, step, opId[])
+DB_LivingOnboardStep(playerid, step, const opId[])
 {
-	if (!DB_LdBegin(playerid, 12, step >= 0 && step <= 5, 0, 0, opId, 1))
+	if (!DB_LdBegin(playerid, 12, step >= 0 && step <= 5, 0, 0, opId, true))
 	{
 		return 0;
 	}
 	new query[1024];
 	mysql_format(g_DB, query, 1024, "CALL sp_onboard_step('%e', %d, %d)", opId, gPlayer[playerid][pCharId], step);
 	DB_LdSend(playerid, 12, query, 65535);
+	return 0;
 }
 
 DB_LivingOnboardHints(playerid, bool:off)
@@ -15462,6 +15754,7 @@ DB_LivingOnboardHints(playerid, bool:off)
 	new query[1024];
 	mysql_format(g_DB, query, 1024, "CALL sp_onboard_hints(%d, %d)", gPlayer[playerid][pCharId], off ? 1 : 0);
 	mysql_tquery(g_DB, query, "DB_OnLdFire", "");
+	return 0;
 }
 
 public DB_OnLdFire()
@@ -15477,7 +15770,7 @@ DB_LivingLoadPlayer(playerid, bool:cleanup)
 	{
 		DB_LivingMakeOpId(opId, 37, "lc", 0, gPlayer[playerid][pCharId]);
 	}
-	if (!DB_LdBegin(playerid, 13, 1, 0, 0, opId, cleanup))
+	if (!DB_LdBegin(playerid, 13, true, 0, 0, opId, cleanup))
 	{
 		return 0;
 	}
@@ -15492,9 +15785,10 @@ DB_LivingLoadPlayer(playerid, bool:cleanup)
 	{
 		DB_OnLdPlayerCalled(playerid, name, g_LdReq[idx][lqToken], charId, "");
 	}
+	return 0;
 }
 
-public DB_OnLdPlayerCalled(playerid, name[], token, charId, opId[])
+public DB_OnLdPlayerCalled(playerid, const name[], token, charId, const opId[])
 {
 	new query[1024];
 	mysql_format(g_DB, query, 1024, "SELECT COALESCE((SELECT amount FROM ld_ops WHERE op_id = '%e'), 0) AS refund, ld_pro_points(c.id, 1) AS p1, ld_pro_points(c.id, 2) AS p2, ld_local_rep(c.id, 1) AS r1, ld_local_rep(c.id, 2) AS r2, ld_local_rep(c.id, 3) AS r3, COALESCE(o.step, 0) AS step, COALESCE(o.hints_off, 0) AS hoff, (o.done_at IS NOT NULL) AS odone, ld_work_earned(c.id) AS earned, (SELECT COUNT(*) FROM ct_payouts WHERE character_id = c.id AND paid_at > NOW() - INTERVAL 1 HOUR) AS ctn, COALESCE(TIMESTAMPDIFF(SECOND, (SELECT MAX(paid_at) FROM ct_payouts WHERE character_id = c.id), NOW()), -1) AS since, COALESCE((SELECT ROUND(AVG(z.rating) * 100) FROM (SELECT rating FROM taxi_rides WHERE driver_char = c.id AND rating IS NOT NULL ORDER BY id DESC LIMIT %d) z), 0) AS rating FROM characters c LEFT JOIN ld_onboarding o ON o.character_id = c.id WHERE c.id = %d", opId, 20, charId);
@@ -15502,7 +15796,7 @@ public DB_OnLdPlayerCalled(playerid, name[], token, charId, opId[])
 	return 1;
 }
 
-public DB_OnLdPlayer(playerid, name[], token, charId)
+public DB_OnLdPlayer(playerid, const name[], token, charId)
 {
 	if (!DB_LdLive(playerid, name, 5, token, charId))
 	{
@@ -15567,7 +15861,7 @@ DB_LivingBoard(playerid)
 	}
 	else
 	{
-		if (!DB_LdBegin(playerid, 14, 1, 0, 0, "", 0))
+		if (!DB_LdBegin(playerid, 14, true, 0, 0, "", false))
 		{
 			return 0;
 		}
@@ -15576,9 +15870,10 @@ DB_LivingBoard(playerid)
 	}
 	mysql_format(g_DB, query, 1024, "SELECT id, from_district, to_district, from_pt, to_pt, cargo, distance_m, reward, UNIX_TIMESTAMP(expires_at) AS exp, min_level, min_rep, min_local_rep, premium, state FROM ct_contracts WHERE state IN (0, 7) AND expires_at > NOW() ORDER BY expires_at, id LIMIT %d", 24);
 	mysql_tquery(g_DB, query, "DB_OnLdBoard", "dsd", playerid, name, token);
+	return 0;
 }
 
-public DB_OnLdBoard(playerid, name[], token)
+public DB_OnLdBoard(playerid, const name[], token)
 {
 	if (playerid == INVALID_PLAYER_ID)
 	{
@@ -15625,7 +15920,7 @@ public DB_OnLdBoard(playerid, name[], token)
 
 DB_LivingHistory(playerid, districtId)
 {
-	if (!DB_LdBegin(playerid, 15, districtId >= 1 && districtId <= 3, districtId, districtId, "", 0))
+	if (!DB_LdBegin(playerid, 15, districtId >= 1 && districtId <= 3, districtId, districtId, "", false))
 	{
 		return 0;
 	}
@@ -15633,9 +15928,10 @@ DB_LivingHistory(playerid, districtId)
 	GetPlayerName(playerid, name, 25);
 	mysql_format(g_DB, query, 1024, "SELECT type, UNIX_TIMESTAMP(created_at) AS ts, value, act_delta, (actor_char <=> %d) AS mine FROM ld_events WHERE district_id = %d ORDER BY id DESC LIMIT %d", gPlayer[playerid][pCharId], districtId, 8);
 	mysql_tquery(g_DB, query, "DB_OnLdHist", "dsdd", playerid, name, g_LdReq[DB_LdIdx(playerid, 5)], districtId);
+	return 0;
 }
 
-public DB_OnLdHist(playerid, name[], token, districtId)
+public DB_OnLdHist(playerid, const name[], token, districtId)
 {
 	if (!DB_LdLive(playerid, name, 5, token, gPlayer[playerid][pCharId]))
 	{
@@ -15669,6 +15965,7 @@ DB_LivingLoadDistricts()
 		return 0;
 	}
 	mysql_tquery(g_DB, "SELECT d.id, d.activity, d.security, d.crime, COALESCE(UNIX_TIMESTAMP(d.fest_until), 0) AS fest, UNIX_TIMESTAMP(d.last_tick_at) AS lt, COALESCE(p.id, 0) AS pid, COALESCE(p.name, '') AS pname, COALESCE(p.goal, 0) AS goal, COALESCE(FLOOR(p.fund), 0) AS fund, COALESCE(UNIX_TIMESTAMP(p.ends_at), 0) AS pend, ct_bucket_slots() AS slots FROM ld_districts d LEFT JOIN ld_projects p ON p.active_district = d.id ORDER BY d.id", "DB_OnLdDistricts", "");
+	return 0;
 }
 
 public DB_OnLdDistricts()
@@ -15714,6 +16011,7 @@ DB_LivingBoot()
 		return 0;
 	}
 	mysql_tquery(g_DB, "CALL sp_ld_boot()", "DB_OnLdBoot", "");
+	return 0;
 }
 
 public DB_OnLdBoot()
@@ -15734,6 +16032,7 @@ DB_LivingTick()
 	}
 	mysql_tquery(g_DB, "CALL sp_ld_tick_all()", "DB_OnLdFire", "");
 	mysql_tquery(g_DB, "CALL sp_ct_sweep()", "DB_OnLdTicked", "");
+	return 0;
 }
 
 public DB_OnLdTicked()
@@ -15751,9 +16050,10 @@ DB_LivingGenerate(bucket, slot, fromPt, toPt, fromD, toD, cargo, meters, minLeve
 	new query[1024];
 	mysql_format(g_DB, query, 1024, "CALL sp_ct_generate(%d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d)", bucket, slot, 1, fromPt, toPt, fromD, toD, cargo, meters, minLevel, minRep, minLocalRep, premium ? 1 : 0);
 	mysql_tquery(g_DB, query, "DB_OnLdFire", "");
+	return 0;
 }
 
-DB_LivingEmit(opId[], districtId, type, actorChar, value)
+DB_LivingEmit(const opId[], districtId, type, actorChar, value)
 {
 	if (!DB_IsReady() || !DB_LdOpIdOk(opId))
 	{
@@ -15766,9 +16066,10 @@ DB_LivingEmit(opId[], districtId, type, actorChar, value)
 	new query[1024];
 	mysql_format(g_DB, query, 1024, "CALL sp_ld_emit('%e', %d, %d, %d, %d)", opId, districtId, type, actorChar > 0 ? actorChar : 0, value);
 	mysql_tquery(g_DB, query, "DB_OnLdGlobalCalled", "ddss", 1, 65535, "", opId);
+	return 0;
 }
 
-DB_LivingAdminSet(playerid, opId[], districtId, activity, security, crime)
+DB_LivingAdminSet(playerid, const opId[], districtId, activity, security, crime)
 {
 	if (!DB_IsReady() || !DB_LdOpIdOk(opId) || playerid < 0 || playerid >= MAX_PLAYERS || !IsPlayerConnected(playerid))
 	{
@@ -15782,9 +16083,10 @@ DB_LivingAdminSet(playerid, opId[], districtId, activity, security, crime)
 	GetPlayerName(playerid, name, 25);
 	mysql_format(g_DB, query, 1024, "CALL sp_ld_admin_set('%e', %d, %d, %d, %d, %d)", opId, districtId, activity, security, crime, gPlayer[playerid][pCharId]);
 	mysql_tquery(g_DB, query, "DB_OnLdGlobalCalled", "ddss", 2, playerid, name, opId);
+	return 0;
 }
 
-public DB_OnLdGlobalCalled(kind, playerid, name[], opId[])
+public DB_OnLdGlobalCalled(kind, playerid, const name[], const opId[])
 {
 	new query[1024];
 	mysql_format(g_DB, query, 1024, "SELECT result, ref, v1, v2, v3 FROM ld_ops WHERE op_id = '%e'", opId);
@@ -15792,7 +16094,7 @@ public DB_OnLdGlobalCalled(kind, playerid, name[], opId[])
 	return 1;
 }
 
-public DB_OnLdGlobalResult(kind, playerid, name[], opId[])
+public DB_OnLdGlobalResult(kind, playerid, const name[], const opId[])
 {
 	new rows = 0, result = -1, ref = 0, v1 = 0, v2 = 0, v3 = 0;
 	cache_get_row_count(rows);
@@ -15824,7 +16126,7 @@ public DB_OnLdGlobalResult(kind, playerid, name[], opId[])
 	return 1;
 }
 
-DB_LdCfgAdd(query[], size, key[], value)
+DB_LdCfgAdd(query[], size, const key[], value)
 {
 	new part[64];
 	mysql_format(g_DB, part, 64, "%s('%e', %d)", query[0] ? "," : "", key, value);
@@ -15838,6 +16140,7 @@ DB_LdCfgAdd(query[], size, key[], value)
 
 DB_LdCfgFlush(query[], size)
 {
+	#pragma unused size
 	if (!query[0])
 	{
 		return 0;
@@ -15846,6 +16149,7 @@ DB_LdCfgFlush(query[], size)
 	format(full, 1088, "INSERT INTO ld_config (k, v) VALUES %s ON DUPLICATE KEY UPDATE v = VALUES(v)", query);
 	mysql_tquery(g_DB, full, "DB_OnLdFire", "");
 	query[0] = 0;
+	return 0;
 }
 
 DB_LivingPushConfig()
@@ -15976,11 +16280,12 @@ DB_LivingPushConfig()
 	DB_LdCfgAdd(q, 1024, "ONB_REWARD", 120);
 	DB_LdCfgAdd(q, 1024, "ONB_EXP", 1);
 	DB_LdCfgFlush(q, 1024);
+	return 0;
 }
 
-public DB_LivingQueryError(callback[])
+public DB_LivingQueryError(const callback[])
 {
-	if (!strcmp(callback, "DB_OnLdDistricts", 0, 0x7FFFFFFF) || !strcmp(callback, "DB_OnLdTicked", 0, 0x7FFFFFFF))
+	if (!strcmp(callback, "DB_OnLdDistricts", false, 0x7FFFFFFF) || !strcmp(callback, "DB_OnLdTicked", false, 0x7FFFFFFF))
 	{
 		if (funcidx("Living_OnDBDistricts") != -1)
 		{
@@ -15988,7 +16293,7 @@ public DB_LivingQueryError(callback[])
 		}
 		return 1;
 	}
-	if (!strcmp(callback, "DB_OnLdBoot", 0, 0x7FFFFFFF))
+	if (!strcmp(callback, "DB_OnLdBoot", false, 0x7FFFFFFF))
 	{
 		if (funcidx("Living_OnDBBoot") != -1)
 		{
@@ -15996,19 +16301,19 @@ public DB_LivingQueryError(callback[])
 		}
 		return 1;
 	}
-	if (!strcmp(callback, "DB_OnLdGlobal", 0, 13) || !strcmp(callback, "DB_OnLdFire", 0, 0x7FFFFFFF) || !strcmp(callback, "DB_OnLdCleanup", 0, 0x7FFFFFFF) || !strcmp(callback, "DB_OnLdUndo", 0, 11))
+	if (!strcmp(callback, "DB_OnLdGlobal", false, 13) || !strcmp(callback, "DB_OnLdFire", false, 0x7FFFFFFF) || !strcmp(callback, "DB_OnLdCleanup", false, 0x7FFFFFFF) || !strcmp(callback, "DB_OnLdUndo", false, 11))
 	{
 		Log_Write("DBLIVING", "errore query di sistema/compensazione living: verificare a mano");
 		return 1;
 	}
-	if (!strcmp(callback, "DB_OnLdBoard", 0, 0x7FFFFFFF))
+	if (!strcmp(callback, "DB_OnLdBoard", false, 0x7FFFFFFF))
 	{
 		if (funcidx("Living_OnDBBoard") != -1)
 		{
 			CallLocalFunction("Living_OnDBBoard", "ddd", 65535, -1, 0);
 		}
 	}
-	new bool:info = !strcmp(callback, "DB_OnLdPlayer", 0, 13) || !strcmp(callback, "DB_OnLdBoard", 0, 0x7FFFFFFF) || !strcmp(callback, "DB_OnLdHist", 0, 0x7FFFFFFF);
+	new bool:info = !strcmp(callback, "DB_OnLdPlayer", false, 13) || !strcmp(callback, "DB_OnLdBoard", false, 0x7FFFFFFF) || !strcmp(callback, "DB_OnLdHist", false, 0x7FFFFFFF);
 	for (new i = 0; i < MAX_PLAYERS; i++)
 	{
 		for (new cat = 0; cat < 6; cat++)
@@ -16055,13 +16360,13 @@ bool:Account_SeqValid(playerid, seq, phase)
 {
 	if (playerid < 0 || playerid >= MAX_PLAYERS || !IsPlayerConnected(playerid))
 	{
-		return 0;
+		return false;
 	}
 	return seq != 0 && gPlayer[playerid][pAuthSeq] == seq && gPlayer[playerid][pAuthState] == phase;
 }
 new g_AccPendingEmail[MAX_PLAYERS][255];
 
-Account_Kick(playerid, reason[])
+Account_Kick(playerid, const reason[])
 {
 	if (playerid < 0 || playerid >= MAX_PLAYERS || !IsPlayerConnected(playerid))
 	{
@@ -16074,7 +16379,8 @@ Account_Kick(playerid, reason[])
 	Util_Send(playerid, -10270721, reason);
 	gPlayer[playerid][pAuthState] = 10;
 	UI_CloseDialogs(playerid);
-	gPlayer[playerid][pKickTimer] = SetTimerEx("Account_OnKickTimer", 750, 0, "d", playerid);
+	gPlayer[playerid][pKickTimer] = SetTimerEx("Account_OnKickTimer", 750, false, "d", playerid);
+	return 0;
 }
 
 public Account_OnKickTimer(playerid)
@@ -16117,6 +16423,7 @@ Account_ShowPrompt(playerid)
 			UI_ShowSkinSelect(playerid, gPlayer[playerid][pGender]);
 		}
 	}
+	return 0;
 }
 
 Account_OnConnect(playerid)
@@ -16142,6 +16449,7 @@ Account_OnConnect(playerid)
 	GetPlayerIp(playerid, ip, 16);
 	gPlayer[playerid][pAuthState] = 11;
 	DB_CheckBan(playerid, name, ip);
+	return 0;
 }
 
 Account_ContinueConnect(playerid)
@@ -16156,6 +16464,7 @@ Account_ContinueConnect(playerid)
 	}
 	gPlayer[playerid][pAuthState] = 0;
 	DB_LoadAccount(playerid);
+	return 0;
 }
 
 Account_OnDisconnect(playerid)
@@ -16170,9 +16479,10 @@ Account_OnDisconnect(playerid)
 		KillTimer(gPlayer[playerid][pKickTimer]);
 	}
 	g_DBPending[playerid] = 0;
+	return 0;
 }
 
-public Account_OnDBLoaded(playerid, accountId, hash[], salt[], adminLevel)
+public Account_OnDBLoaded(playerid, accountId, const hash[], const salt[], adminLevel)
 {
 	if (!IsPlayerConnected(playerid) || gPlayer[playerid][pAuthState] != 0)
 	{
@@ -16229,7 +16539,7 @@ Account_CompleteLogin(playerid, accountId, adminLevel)
 	CharSel_Begin(playerid);       // M15: selezione dei 3 personaggi (character/char_select.inc)
 }
 
-Account_SetPendingEmail(playerid, email[])
+Account_SetPendingEmail(playerid, const email[])
 {
 	if (playerid < 0 || playerid >= MAX_PLAYERS)
 	{
@@ -16240,9 +16550,10 @@ Account_SetPendingEmail(playerid, email[])
 	{
 		strcopy(g_AccPendingEmail[playerid], email, 255);
 	}
+	return 0;
 }
 
-public UI_OnRegisterSubmit(playerid, password[])
+public UI_OnRegisterSubmit(playerid, const password[])
 {
 	if (!IsPlayerConnected(playerid) || gPlayer[playerid][pAuthState] != 1)
 	{
@@ -16321,10 +16632,11 @@ Account_LoginFailed(playerid)
 	new err[512];
 	format(err, 512, "პაროლი არასწორია. დარჩენილი მცდელობა: %d.", 3 - gPlayer[playerid][pLoginAttempts]);
 	Util_Send(playerid, -10270721, err);
-	UI_ShowLogin(playerid, 1);
+	UI_ShowLogin(playerid, true);
+	return 0;
 }
 
-public UI_OnLoginSubmit(playerid, password[])
+public UI_OnLoginSubmit(playerid, const password[])
 {
 	if (!IsPlayerConnected(playerid) || gPlayer[playerid][pAuthState] != 3)
 	{
@@ -16342,8 +16654,8 @@ public UI_OnLoginSubmit(playerid, password[])
 		return 1;
 	}
 	new hash[65];
-	SHA256_PassHash(password, gPlayer[playerid][pPassSalt], hash, 65);
-	if (strcmp(hash, gPlayer[playerid][pPassHash], 1, 0x7FFFFFFF) != 0)
+	SHA256_Hash(password, gPlayer[playerid][pPassSalt], hash, 65);
+	if (strcmp(hash, gPlayer[playerid][pPassHash], true, 0x7FFFFFFF) != 0)
 	{
 		Account_LoginFailed(playerid);
 		return 1;
@@ -16437,7 +16749,7 @@ public Account_OnDBEmailSet(playerid, result)
 	return 1;
 }
 
-Account_CmdEmail(playerid, params[])
+Account_CmdEmail(playerid, const params[])
 {
 	new pos = 0, email[255];
 	Util_NextToken(params, pos, email, 255);
@@ -16452,6 +16764,7 @@ Account_CmdEmail(playerid, params[])
 		return 0;
 	}
 	DB_AccountSetEmail(playerid, gPlayer[playerid][pAccountId], email);
+	return 0;
 }
 
 // ===== modules/character/spawn.inc =====
@@ -16505,7 +16818,7 @@ Char_PickSpawn(playerid)
 
 Char_ApplySpawnInfo(playerid)
 {
-	SetSpawnInfo(playerid, 255, gPlayer[playerid][pSkin], gPlayer[playerid][pPosX], gPlayer[playerid][pPosY], gPlayer[playerid][pPosZ], gPlayer[playerid][pAngle], 0, 0, 0, 0, 0, 0);
+	SetSpawnInfo(playerid, 255, gPlayer[playerid][pSkin], gPlayer[playerid][pPosX], gPlayer[playerid][pPosY], gPlayer[playerid][pPosZ], gPlayer[playerid][pAngle], WEAPON_FIST, 0, WEAPON_FIST, 0, WEAPON_FIST, 0);
 	SetPlayerInterior(playerid, gPlayer[playerid][pInterior]);
 	SetPlayerVirtualWorld(playerid, gPlayer[playerid][pWorld]);
 }
@@ -16522,7 +16835,7 @@ Char_SetLoginCamera(playerid)
 	SetPlayerInterior(playerid, 0);
 	SetPlayerVirtualWorld(playerid, 0);
 	SetPlayerCameraPos(playerid, (1481.0 + 60.0), (-1749.5 + 50.0), (15.45 + 25.0));
-	SetPlayerCameraLookAt(playerid, 1481.0, -1749.5, 15.45, 2);
+	SetPlayerCameraLookAt(playerid, 1481.0, -1749.5, 15.45, CAMERA_CUT);
 }
 
 // ===== modules/character/character.inc =====
@@ -16546,6 +16859,7 @@ Char_RefreshHud(playerid)
 		return 0;
 	}
 	UI_HudUpdate(playerid, gPlayer[playerid][pMoney], gPlayer[playerid][pBank], gPlayer[playerid][pLevel], gPlayer[playerid][pExp]);
+	return 0;
 }
 
 Char_RefreshState(playerid)
@@ -16568,6 +16882,7 @@ Char_RefreshState(playerid)
 	gPlayer[playerid][pInterior] = GetPlayerInterior(playerid);
 	gPlayer[playerid][pWorld] = GetPlayerVirtualWorld(playerid);
 	gPlayer[playerid][pSkin] = GetPlayerSkin(playerid);
+	return 0;
 }
 
 Char_Save(playerid)
@@ -16582,6 +16897,7 @@ Char_Save(playerid)
 	}
 	Char_RefreshState(playerid);
 	DB_SaveCharacter(playerid);
+	return 0;
 }
 
 Char_SaveAll()
@@ -16759,8 +17075,8 @@ public Char_OnDBCreated(playerid, charId)
 
 Char_OnInit()
 {
-	AddPlayerClass(7, 1481.0, -1749.5, 15.45, 0.0, 0, 0, 0, 0, 0, 0);
-	g_CharAutosaveTimer = SetTimer("Char_OnAutosave", 300000, 1);
+	AddPlayerClass(7, 1481.0, -1749.5, 15.45, 0.0, WEAPON_FIST, 0, WEAPON_FIST, 0, WEAPON_FIST, 0);
+	g_CharAutosaveTimer = SetTimer("Char_OnAutosave", 300000, true);
 }
 
 Char_OnExit()
@@ -16803,6 +17119,7 @@ Char_OnRequestClass(playerid)
 
 Char_OnRequestSpawn(playerid)
 {
+	#pragma unused playerid
 	return 0;
 }
 
@@ -16827,7 +17144,7 @@ Char_OnSpawn(playerid)
 	Char_SyncMoney(playerid);
 	if (gPlayer[playerid][pFrozen])
 	{
-		TogglePlayerControllable(playerid, 0);
+		TogglePlayerControllable(playerid, false);
 	}
 	if (!gPlayer[playerid][pHudCreated])
 	{
@@ -16859,6 +17176,7 @@ Char_OnDeath(playerid)
 	gPlayer[playerid][pHealth] = 100.0;
 	gPlayer[playerid][pArmor] = 0.0;
 	Char_ApplySpawnInfo(playerid);
+	return 0;
 }
 
 Char_OnDisconnect(playerid)
@@ -16884,7 +17202,7 @@ Char_OnText(playerid)
 
 // ===== modules/economy/money.inc =====
 
-Money_BankLog(playerid, kind[], delta, ref[])
+Money_BankLog(playerid, const kind[], delta, const ref[])
 {
 	if (playerid < 0 || playerid >= MAX_PLAYERS || !IsPlayerConnected(playerid))
 	{
@@ -16898,6 +17216,7 @@ Money_BankLog(playerid, kind[], delta, ref[])
 	new opId[37];
 	DB_BankMakeOpId(opId, 37, charId);
 	DB_BankLog(opId, charId, 0, kind, delta, gPlayer[playerid][pBank], 2, ref);
+	return 0;
 }
 
 Money_Refresh(playerid)
@@ -16915,7 +17234,7 @@ bool:Money_Can(playerid, amount)
 {
 	if (!Money_ValidPlayer(playerid) || amount <= 0)
 	{
-		return 0;
+		return false;
 	}
 	return gPlayer[playerid][pMoney] >= amount;
 }
@@ -16924,7 +17243,7 @@ bool:Money_CanReceive(playerid, amount)
 {
 	if (!Money_ValidPlayer(playerid) || amount <= 0)
 	{
-		return 0;
+		return false;
 	}
 	return amount <= 0x3B9ACA00 - gPlayer[playerid][pMoney];
 }
@@ -16933,33 +17252,33 @@ bool:Money_Give(playerid, amount)
 {
 	if (!Money_CanReceive(playerid, amount))
 	{
-		return 0;
+		return false;
 	}
 	gPlayer[playerid][pMoney] += amount;
 	Money_Refresh(playerid);
-	return 1;
+	return true;
 }
 
 bool:Money_Take(playerid, amount)
 {
 	if (!Money_Can(playerid, amount))
 	{
-		return 0;
+		return false;
 	}
 	gPlayer[playerid][pMoney] -= amount;
 	Money_Refresh(playerid);
-	return 1;
+	return true;
 }
 
 bool:Money_Set(playerid, amount)
 {
 	if (!Money_ValidPlayer(playerid) || amount < 0 || amount > 0x3B9ACA00)
 	{
-		return 0;
+		return false;
 	}
 	gPlayer[playerid][pMoney] = amount;
 	Money_Refresh(playerid);
-	return 1;
+	return true;
 }
 
 Money_BankRoom(playerid)
@@ -16971,11 +17290,11 @@ Money_BankRoom(playerid)
 	return 0x3B9ACA00 - gPlayer[playerid][pBank];
 }
 
-bool:Money_GiveBank(playerid, amount, kind[], ref[])
+bool:Money_GiveBank(playerid, amount, const kind[], const ref[])
 {
 	if (!Money_ValidPlayer(playerid) || amount <= 0 || amount > Money_BankRoom(playerid))
 	{
-		return 0;
+		return false;
 	}
 	gPlayer[playerid][pBank] += amount;
 	Char_RefreshHud(playerid);
@@ -16983,27 +17302,27 @@ bool:Money_GiveBank(playerid, amount, kind[], ref[])
 	{
 		Money_BankLog(playerid, kind, amount, ref);
 	}
-	return 1;
+	return true;
 }
 
 bool:Money_CanBank(playerid, amount)
 {
 	if (!Money_ValidPlayer(playerid) || amount <= 0)
 	{
-		return 0;
+		return false;
 	}
 	if (gPlayer[playerid][pBankOpBusy] != 0)
 	{
-		return 0;
+		return false;
 	}
 	return gPlayer[playerid][pBank] >= amount;
 }
 
-bool:Money_TakeBank(playerid, amount, kind[], ref[])
+bool:Money_TakeBank(playerid, amount, const kind[], const ref[])
 {
 	if (!Money_CanBank(playerid, amount))
 	{
-		return 0;
+		return false;
 	}
 	gPlayer[playerid][pBank] -= amount;
 	Char_RefreshHud(playerid);
@@ -17011,7 +17330,7 @@ bool:Money_TakeBank(playerid, amount, kind[], ref[])
 	{
 		Money_BankLog(playerid, kind, -amount, ref);
 	}
-	return 1;
+	return true;
 }
 
 // ===== modules/economy/level.inc =====
@@ -17046,7 +17365,7 @@ bool:Level_AddExp(playerid, amount)
 {
 	if (playerid < 0 || playerid >= MAX_PLAYERS || !IsPlayerConnected(playerid) || amount <= 0)
 	{
-		return 0;
+		return false;
 	}
 	new maxExp = Level_ExpForLevel(50), exp = gPlayer[playerid][pExp];
 	exp = amount > maxExp - exp ? maxExp : exp + amount;
@@ -17065,16 +17384,16 @@ bool:Level_Set(playerid, level)
 {
 	if (playerid < 0 || playerid >= MAX_PLAYERS || !IsPlayerConnected(playerid))
 	{
-		return 0;
+		return false;
 	}
 	if (level < 1 || level > 50)
 	{
-		return 0;
+		return false;
 	}
 	gPlayer[playerid][pLevel] = level;
 	gPlayer[playerid][pExp] = Level_ExpForLevel(level);
 	Char_RefreshHud(playerid);
-	return 1;
+	return true;
 }
 
 // ===== modules/economy/paycheck.inc =====
@@ -17082,7 +17401,7 @@ new g_EconomyTimer;
 
 Economy_OnInit()
 {
-	g_EconomyTimer = SetTimer("Economy_OnTick", 1000, 1);
+	g_EconomyTimer = SetTimer("Economy_OnTick", 1000, true);
 }
 
 Economy_OnExit()
@@ -17236,16 +17555,17 @@ Admin_ActorAccount(playerid)
 	return gPlayer[playerid][pAccountId];
 }
 
-Admin_Reply(playerid, color, text[])
+Admin_Reply(playerid, color, const text[])
 {
 	if (playerid < 0 || playerid >= MAX_PLAYERS || !IsPlayerConnected(playerid))
 	{
 		return 0;
 	}
 	Util_Send(playerid, color, text);
+	return 0;
 }
 
-Admin_Notify(text[], color)
+Admin_Notify(const text[], color)
 {
 	new lines[3][128];
 	new count = Util_SplitText(text, lines, 3);
@@ -17262,7 +17582,7 @@ Admin_Notify(text[], color)
 	}
 }
 
-Admin_PublicNotice(text[])
+Admin_PublicNotice(const text[])
 {
 	new lines[3][128];
 	new count = Util_SplitText(text, lines, 3);
@@ -17279,7 +17599,7 @@ Admin_PublicNotice(text[])
 	}
 }
 
-Admin_AdmCmd(staffName[], action[], targetName[], reason[], participle[])
+Admin_AdmCmd(const staffName[], const action[], const targetName[], const reason[], const participle[])
 {
 	new msg[256];
 	if (reason[0] != 0)
@@ -17305,7 +17625,7 @@ Admin_AdmCmd(staffName[], action[], targetName[], reason[], participle[])
 	}
 }
 
-Admin_LogRaw(staffAcc, staffName[], targetAcc, action[], reason[])
+Admin_LogRaw(staffAcc, const staffName[], targetAcc, const action[], const reason[])
 {
 	new line[320];
 	DB_AdminLog(staffAcc, targetAcc, action, reason);
@@ -17313,14 +17633,14 @@ Admin_LogRaw(staffAcc, staffName[], targetAcc, action[], reason[])
 	Log_Write("ADMIN", line);
 }
 
-Admin_Log(staffid, targetAcc, action[], reason[])
+Admin_Log(staffid, targetAcc, const action[], const reason[])
 {
 	new name[25];
 	Admin_ActorName(staffid, name, 25);
 	Admin_LogRaw(Admin_ActorAccount(staffid), name, targetAcc, action, reason);
 }
 
-bool:Admin_ParseReason(params[], pos, reason[], size)
+bool:Admin_ParseReason(const params[], pos, reason[], size)
 {
 	while (params[pos] == 32)
 	{
@@ -17329,7 +17649,7 @@ bool:Admin_ParseReason(params[], pos, reason[], size)
 	reason[0] = 0;
 	if (!Util_SanitizeText(params[pos], reason, min(size - 1, 64)))
 	{
-		return 0;
+		return false;
 	}
 	for (new i = 0; reason[i] != 0; i++)
 	{
@@ -17357,7 +17677,7 @@ Admin_FindByAccount(accountId)
 	return 65535;
 }
 
-Admin_FindByName(name[])
+Admin_FindByName(const name[])
 {
 	new cur[25];
 	for (new i = 0; i < MAX_PLAYERS; i++)
@@ -17367,7 +17687,7 @@ Admin_FindByName(name[])
 			continue;
 		}
 		GetPlayerName(i, cur, 25);
-		if (!strcmp(cur, name, 1, 0x7FFFFFFF))
+		if (!strcmp(cur, name, true, 0x7FFFFFFF))
 		{
 			return i;
 		}
@@ -17396,7 +17716,7 @@ Admin_FormatDuration(seconds, dest[], size)
 	}
 }
 
-Admin_Notify_One(playerid, text[])
+Admin_Notify_One(playerid, const text[])
 {
 	new lines[3][128];
 	new count = Util_SplitText(text, lines, 3);
@@ -17439,41 +17759,42 @@ Admin_SendHelp(playerid)
 		format(out, 256, "[%s] %s", name, line);
 		Admin_Notify_One(playerid, out);
 	}
+	return 0;
 }
 
 bool:Admin_IsMuted(playerid)
 {
 	if (playerid < 0 || playerid >= MAX_PLAYERS)
 	{
-		return 0;
+		return false;
 	}
 	new until = gPlayer[playerid][pMutedUntil];
 	if (until == 0)
 	{
-		return 0;
+		return false;
 	}
 	if (until > gettime())
 	{
-		return 1;
+		return true;
 	}
 	gPlayer[playerid][pMutedUntil] = 0;
 	if (gPlayer[playerid][pAccountId] > 0)
 	{
 		DB_SetMute(gPlayer[playerid][pAccountId], 0);
 	}
-	return 0;
+	return false;
 }
 
 bool:Admin_CheckMuted(playerid)
 {
 	if (!Admin_IsMuted(playerid))
 	{
-		return 0;
+		return false;
 	}
 	new left[24];
 	Admin_FormatDuration(gPlayer[playerid][pMutedUntil] - gettime(), left, 24);
 	SendClientMessage(playerid, -10270721, "Sei mutato ancora %s.", left);
-	return 1;
+	return true;
 }
 
 Admin_OnText(playerid)
@@ -17481,7 +17802,7 @@ Admin_OnText(playerid)
 	return Admin_CheckMuted(playerid) ? 0 : 1;
 }
 
-Admin_PendSet(requesterid, op, targetAcc, targetName[], val, reason[])
+Admin_PendSet(requesterid, op, targetAcc, const targetName[], val, const reason[])
 {
 	new slot = DB_ReqSlot(requesterid);
 	g_AdmPend[slot][apActive] = 1;
@@ -17499,7 +17820,7 @@ bool:Admin_Busy(requesterid)
 	return g_DBAdminPending[DB_ReqSlot(requesterid)] != 0;
 }
 
-Admin_PendTake(op, accountKey, nameKey[])
+Admin_PendTake(op, accountKey, const nameKey[])
 {
 	for (new i = 0; i <= 1000; i++)
 	{
@@ -17511,7 +17832,7 @@ Admin_PendTake(op, accountKey, nameKey[])
 		{
 			continue;
 		}
-		if (accountKey <= 0 && nameKey[0] != 0 && strcmp(g_AdmPend[i][apTargetName], nameKey, 1, 0x7FFFFFFF) != 0)
+		if (accountKey <= 0 && nameKey[0] != 0 && strcmp(g_AdmPend[i][apTargetName], nameKey, true, 0x7FFFFFFF) != 0)
 		{
 			continue;
 		}
@@ -17540,7 +17861,7 @@ Admin_ApplyLevel(accountId, level)
 	return online;
 }
 
-public Admin_OnBanChecked(playerid, bool:banned, reason[], expiresAt)
+public Admin_OnBanChecked(playerid, bool:banned, const reason[], expiresAt)
 {
 	if (playerid < 0 || playerid >= MAX_PLAYERS || !IsPlayerConnected(playerid))
 	{
@@ -17613,7 +17934,7 @@ public Admin_OnWarnAdded(requesterid, targetAccountId, activeCount)
 	return 1;
 }
 
-public Admin_OnBanAdded(requesterid, name[], banId)
+public Admin_OnBanAdded(requesterid, const name[], banId)
 {
 	new e = Admin_PendTake(2, 0, name);
 	if (e < 0)
@@ -17650,7 +17971,7 @@ public Admin_OnBanAdded(requesterid, name[], banId)
 	return 1;
 }
 
-public Admin_OnUnbanned(requesterid, name[], affected)
+public Admin_OnUnbanned(requesterid, const name[], affected)
 {
 	new e = Admin_PendTake(3, 0, name);
 	if (e < 0)
@@ -17675,7 +17996,7 @@ public Admin_OnUnbanned(requesterid, name[], affected)
 	return 1;
 }
 
-public Admin_OnAccountFound(requesterid, tag, accountId, name[], adminLevel, lastIp[])
+public Admin_OnAccountFound(requesterid, tag, accountId, const name[], adminLevel, const lastIp[])
 {
 	new e = Admin_PendTake(tag, 0, name);
 	if (e < 0)
@@ -17764,7 +18085,7 @@ public Admin_OnAccountFound(requesterid, tag, accountId, name[], adminLevel, las
 	return 1;
 }
 
-Admin_StoreReport(playerid, text[])
+Admin_StoreReport(playerid, const text[])
 {
 	g_RepSeq++;
 	new slot = g_RepSeq % 10;
@@ -17799,7 +18120,7 @@ Admin_ListReports(playerid)
 	}
 }
 
-Admin_ReplyReport(playerid, reportId, text[])
+Admin_ReplyReport(playerid, reportId, const text[])
 {
 	if (reportId < 1 || reportId > g_RepSeq)
 	{
@@ -17821,11 +18142,11 @@ Admin_ReplyReport(playerid, reportId, text[])
 	return 1;
 }
 
-Admin_OnRconCommand(cmd[])
+Admin_OnRconCommand(const cmd[])
 {
 	new pos = 0, word[16], name[25], tlv[12], level = 0;
 	Util_NextToken(cmd, pos, word, 16);
-	if (strcmp(word, "setadmin", 1, 0x7FFFFFFF) != 0)
+	if (strcmp(word, "setadmin", true, 0x7FFFFFFF) != 0)
 	{
 		return 0;
 	}
@@ -17986,7 +18307,7 @@ Veh_SpeedKmh(vehicleid)
 {
 	new Float:vx, Float:vy, Float:vz;
 	GetVehicleVelocity(vehicleid, vx, vy, vz);
-	return floatround((180.0 * floatsqroot((((vx * vx) + (vy * vy)) + (vz * vz)))), 0);
+	return floatround((180.0 * floatsqroot((((vx * vx) + (vy * vy)) + (vz * vz)))), floatround_method:0);
 }
 
 Veh_FuelPct(playerid, slot)
@@ -18003,7 +18324,7 @@ bool:Veh_NearDealer(playerid)
 {
 	if (GetPlayerInterior(playerid) != 0)
 	{
-		return 0;
+		return false;
 	}
 	return (GetPlayerDistanceFromPoint(playerid, 1655.0, -1665.0, 22.5) <= 4.0);
 }
@@ -18014,10 +18335,10 @@ bool:Veh_NearStation(playerid)
 	{
 		if ((GetPlayerDistanceFromPoint(playerid, g_VehStations[i][0], g_VehStations[i][1], g_VehStations[i][2]) <= 12.0))
 		{
-			return 1;
+			return true;
 		}
 	}
-	return 0;
+	return false;
 }
 
 bool:Veh_Busy(playerid)
@@ -18031,10 +18352,10 @@ bool:Veh_CooldownBlocked(playerid)
 	if (now - g_VPl[playerid][vpCmdTick] < 2000)
 	{
 		Util_Send(playerid, -10270721, "Attendi un attimo prima di usare un altro comando veicolo.");
-		return 1;
+		return true;
 	}
 	g_VPl[playerid][vpCmdTick] = now;
-	return 0;
+	return false;
 }
 
 Veh_SetParams(vehicleid, engine, lights, doors)
@@ -18079,7 +18400,7 @@ Veh_SyncTimers()
 	}
 	if (engines > 0 && g_VFuelTimer == 0)
 	{
-		g_VFuelTimer = SetTimer("Veh_OnFuelTick", 10000, 1);
+		g_VFuelTimer = SetTimer("Veh_OnFuelTick", 10000, true);
 	}
 	else if (engines == 0 && g_VFuelTimer != 0)
 	{
@@ -18088,7 +18409,7 @@ Veh_SyncTimers()
 	}
 	if (huds > 0 && g_VHudTimer == 0)
 	{
-		g_VHudTimer = SetTimer("Veh_OnHudTick", 500, 1);
+		g_VHudTimer = SetTimer("Veh_OnHudTick", 500, true);
 	}
 	else if (huds == 0 && g_VHudTimer != 0)
 	{
@@ -18103,28 +18424,28 @@ bool:Veh_Lookup(vehicleid, &owner, &slot)
 	slot = -1;
 	if (vehicleid <= 0 || vehicleid > 2000)
 	{
-		return 0;
+		return false;
 	}
 	new o = g_VMapOwner[vehicleid], s = g_VMapSlot[vehicleid];
 	if (o < 0 || o >= 1000 || !IsPlayerConnected(o))
 	{
-		return 0;
+		return false;
 	}
 	if (g_VMapSession[vehicleid] != g_VPl[o][vpSession] || g_VPl[o][vpSession] == 0)
 	{
-		return 0;
+		return false;
 	}
 	if (s < 0 || s >= 4)
 	{
-		return 0;
+		return false;
 	}
 	if (!g_VSlot[o][s][vsUsed] || g_VSlot[o][s][vsVehicleId] != vehicleid)
 	{
-		return 0;
+		return false;
 	}
 	owner = o;
 	slot = s;
-	return 1;
+	return true;
 }
 
 Veh_HudStop(playerid)
@@ -18136,6 +18457,7 @@ Veh_HudStop(playerid)
 	g_VPl[playerid][vpLastVehicle] = 0;
 	UI_VehicleHudHide(playerid);
 	Veh_SyncTimers();
+	return 0;
 }
 
 Veh_HudRefresh(playerid)
@@ -18151,7 +18473,8 @@ Veh_HudRefresh(playerid)
 		return 0;
 	}
 	new cap = Veh_CapacityCl(g_VSlot[playerid][slot][vsModel]);
-	UI_VehicleHudUpdate(playerid, (float(g_VSlot[playerid][slot][vsFuelCl]) / float(100)), (float(cap) / float(100)), Veh_SpeedKmh(vid), g_VSlot[playerid][slot][vsEngineOn]);
+	UI_VehicleHudUpdate(playerid, (float(g_VSlot[playerid][slot][vsFuelCl]) / float(100)), (float(cap) / float(100)), Veh_SpeedKmh(vid), bool:g_VSlot[playerid][slot][vsEngineOn]);
+	return 0;
 }
 
 Veh_HudStart(playerid, vehicleid)
@@ -18177,16 +18500,16 @@ bool:Veh_Spawn(playerid, slot, Float:x, Float:y, Float:z, Float:a)
 {
 	if (g_VPool >= 300)
 	{
-		return 0;
+		return false;
 	}
 	if (g_VSlot[playerid][slot][vsVehicleId] != 65535)
 	{
-		return 0;
+		return false;
 	}
-	new vid = CreateVehicle(g_VSlot[playerid][slot][vsModel], x, y, z, a, g_VSlot[playerid][slot][vsColor1], g_VSlot[playerid][slot][vsColor2], -1, 0);
+	new vid = CreateVehicle(g_VSlot[playerid][slot][vsModel], x, y, z, a, g_VSlot[playerid][slot][vsColor1], g_VSlot[playerid][slot][vsColor2], -1, false);
 	if (vid == 65535 || vid <= 0 || vid > 2000)
 	{
-		return 0;
+		return false;
 	}
 	SetVehicleNumberPlate(vid, g_VSlot[playerid][slot][vsPlate]);
 	new Float:hp = g_VSlot[playerid][slot][vsHealth];
@@ -18208,7 +18531,7 @@ bool:Veh_Spawn(playerid, slot, Float:x, Float:y, Float:z, Float:a)
 	g_VMapSession[vid] = g_VPl[playerid][vpSession];
 	g_VSlot[playerid][slot][vsVehicleId] = vid;
 	g_VPool++;
-	return 1;
+	return true;
 }
 
 Veh_Despawn(playerid, slot)
@@ -18233,6 +18556,7 @@ Veh_Despawn(playerid, slot)
 		g_VPool--;
 	}
 	Veh_SyncTimers();
+	return 0;
 }
 
 Veh_SaveSlot(playerid, slot)
@@ -18261,7 +18585,8 @@ Veh_SaveSlot(playerid, slot)
 	{
 		return 0;
 	}
-	DB_SaveVehicle(g_VSlot[playerid][slot][vsDbId], g_VSlot[playerid][slot][vsPosX], g_VSlot[playerid][slot][vsPosY], g_VSlot[playerid][slot][vsPosZ], g_VSlot[playerid][slot][vsPosA], 0, 0, g_VSlot[playerid][slot][vsHealth], g_VSlot[playerid][slot][vsFuelCl], g_VSlot[playerid][slot][vsLocked], g_VSlot[playerid][slot][vsDestroyed]);
+	DB_SaveVehicle(g_VSlot[playerid][slot][vsDbId], g_VSlot[playerid][slot][vsPosX], g_VSlot[playerid][slot][vsPosY], g_VSlot[playerid][slot][vsPosZ], g_VSlot[playerid][slot][vsPosA], 0, 0, g_VSlot[playerid][slot][vsHealth], g_VSlot[playerid][slot][vsFuelCl], bool:g_VSlot[playerid][slot][vsLocked], bool:g_VSlot[playerid][slot][vsDestroyed]);
+	return 0;
 }
 
 Veh_SaveAll()
@@ -18292,6 +18617,7 @@ Veh_SetEngine(playerid, slot, bool:on)
 	g_VSlot[playerid][slot][vsEngineOn] = on;
 	Veh_SetParams(vid, on ? 1 : 0, -1, -1);
 	Veh_SyncTimers();
+	return 0;
 }
 
 Veh_ResetPlayer(playerid)
@@ -18300,13 +18626,13 @@ Veh_ResetPlayer(playerid)
 	{
 		for (new i = 0; i < 30; i++)
 		{
-			g_VSlot[playerid][s][i] = 0;
+			g_VSlot[playerid][s][E_VSLOT:i] = 0;
 		}
 		g_VSlot[playerid][s][vsVehicleId] = 65535;
 	}
 	for (new i = 0; i < 14; i++)
 	{
-		g_VPl[playerid][i] = 0;
+		g_VPl[playerid][E_VPLAYER:i] = 0;
 	}
 }
 
@@ -18329,7 +18655,7 @@ public Veh_OnFuelTick()
 			g_VSlot[p][s][vsFuelCl] = max(g_VSlot[p][s][vsFuelCl] - use, 0);
 			if (g_VSlot[p][s][vsFuelCl] <= 0)
 			{
-				Veh_SetEngine(p, s, 0);
+				Veh_SetEngine(p, s, false);
 				Veh_SaveSlot(p, s);
 				new driver = GetVehicleDriver(vid);
 				if (driver >= 0 && driver < 1000)
@@ -18374,6 +18700,7 @@ public Veh_OnFindExpire(playerid, session)
 	}
 	g_VPl[playerid][vpFindTimer] = 0;
 	DisablePlayerCheckpoint(playerid);
+	return 0;
 }
 
 public Veh_OnWreckRemove(vehicleid, owner, session)
@@ -18388,6 +18715,7 @@ public Veh_OnWreckRemove(vehicleid, owner, session)
 		return 0;
 	}
 	Veh_Despawn(o, s);
+	return 0;
 }
 
 Veh_BeginLoad(playerid)
@@ -18417,7 +18745,7 @@ public Veh_OnDBLoaded(playerid, count)
 	{
 		for (new f = 0; f < 30; f++)
 		{
-			g_VSlot[playerid][i][f] = 0;
+			g_VSlot[playerid][i][E_VSLOT:f] = 0;
 		}
 		g_VSlot[playerid][i][vsVehicleId] = 65535;
 		g_VSlot[playerid][i][vsUsed] = 1;
@@ -18490,7 +18818,7 @@ Veh_CmdDealer(playerid)
 		Util_Send(playerid, -10270721, "Devi essere al concessionario di Los Santos.");
 		return 0;
 	}
-	if (GetPlayerState(playerid) != 1)
+	if (GetPlayerState(playerid) != PLAYER_STATE_ONFOOT)
 	{
 		Util_Send(playerid, -10270721, "Scendi dal veicolo per usare il concessionario.");
 		return 0;
@@ -18506,6 +18834,7 @@ Veh_CmdDealer(playerid)
 		return 0;
 	}
 	UI_VehicleShopShow(playerid, gPlayer[playerid][pLevel], gPlayer[playerid][pMoney], gPlayer[playerid][pBank]);
+	return 0;
 }
 
 public UI_OnVehicleBuyConfirm(playerid, catalogIndex, payWithBank)
@@ -18574,7 +18903,7 @@ Veh_RollbackCreate(playerid, vehDbId)
 	DB_DeleteVehicle(playerid, gPlayer[playerid][pCharId], vehDbId);
 }
 
-public Veh_OnDBCreated(playerid, vehDbId, plate[])
+public Veh_OnDBCreated(playerid, vehDbId, const plate[])
 {
 	if (playerid < 0 || playerid >= MAX_PLAYERS || !IsPlayerConnected(playerid))
 	{
@@ -18605,7 +18934,7 @@ public Veh_OnDBCreated(playerid, vehDbId, plate[])
 	}
 	for (new f = 0; f < 30; f++)
 	{
-		g_VSlot[playerid][slot][f] = 0;
+		g_VSlot[playerid][slot][E_VSLOT:f] = 0;
 	}
 	g_VSlot[playerid][slot][vsVehicleId] = 65535;
 	g_VSlot[playerid][slot][vsUsed] = 1;
@@ -18701,6 +19030,7 @@ Veh_DoSell(playerid, slot, bool:confirmed)
 	g_VSlot[playerid][slot][vsSelling] = 1;
 	Util_Send(playerid, -1, "Vendita in corso...");
 	DB_DeleteVehicle(playerid, gPlayer[playerid][pCharId], g_VSlot[playerid][slot][vsDbId]);
+	return 0;
 }
 
 public Veh_OnDBDeleted(playerid, vehDbId, affected)
@@ -18713,7 +19043,7 @@ public Veh_OnDBDeleted(playerid, vehDbId, affected)
 	{
 		return 1;
 	}
-	new slot = g_VPl[playerid][vpSellSlot], bool:rollback = g_VPl[playerid][vpSellRollback];
+	new slot = g_VPl[playerid][vpSellSlot], bool:rollback = bool:g_VPl[playerid][vpSellRollback];
 	new dbId = g_VPl[playerid][vpSellDbId], refund = g_VPl[playerid][vpSellRefund];
 	g_VPl[playerid][vpSellPending] = 0;
 	g_VPl[playerid][vpSellRollback] = 0;
@@ -18782,7 +19112,7 @@ public UI_OnVehicleListAction(playerid, slot, action)
 		}
 		case 1:
 		{
-			Veh_DoSell(playerid, slot - 1, 1);
+			Veh_DoSell(playerid, slot - 1, true);
 		}
 	}
 	return 1;
@@ -18816,7 +19146,7 @@ Veh_NearestOwnSlot(playerid)
 
 Veh_DrivenSlot(playerid)
 {
-	if (GetPlayerState(playerid) != 2)
+	if (GetPlayerState(playerid) != PLAYER_STATE_DRIVER)
 	{
 		return -1;
 	}
@@ -18828,18 +19158,18 @@ Veh_DrivenSlot(playerid)
 	return s;
 }
 
-bool:Veh_ParseSlot(token[], &slot)
+bool:Veh_ParseSlot(const token[], &slot)
 {
 	new v = 0;
 	if (!Util_ParseInt(token, v) || v < 1 || v > 4)
 	{
-		return 0;
+		return false;
 	}
 	slot = v - 1;
-	return 1;
+	return true;
 }
 
-Veh_Emote(playerid, action[])
+Veh_Emote(playerid, const action[])
 {
 	new name[25], msg[256];
 	GetPlayerName(playerid, name, 25);
@@ -18865,6 +19195,7 @@ Veh_DoLock(playerid)
 	Veh_SetParams(g_VSlot[playerid][slot][vsVehicleId], -1, -1, lock ? 1 : 0);
 	Veh_Emote(playerid, lock ? "blocca le porte del proprio veicolo." : "sblocca le porte del proprio veicolo.");
 	Veh_SaveSlot(playerid, slot);
+	return 0;
 }
 
 // motore dei veicoli che non sono personali: noleggio, auto di strada, lavoro, merci
@@ -18910,7 +19241,7 @@ Veh_DoEngine(playerid)
 	}
 	if (g_VSlot[playerid][slot][vsEngineOn])
 	{
-		Veh_SetEngine(playerid, slot, 0);
+		Veh_SetEngine(playerid, slot, false);
 		Veh_Emote(playerid, "spegne il motore.");
 		return 0;
 	}
@@ -18924,8 +19255,9 @@ Veh_DoEngine(playerid)
 		Util_Send(playerid, -10270721, "Il serbatoio e' vuoto.");
 		return 0;
 	}
-	Veh_SetEngine(playerid, slot, 1);
+	Veh_SetEngine(playerid, slot, true);
 	Veh_Emote(playerid, "avvia il motore.");
+	return 0;
 }
 
 Veh_DoLights(playerid)
@@ -18940,6 +19272,7 @@ Veh_DoLights(playerid)
 	GetVehicleParamsEx(vid, e, l, a, d, b, bt, o);
 	Veh_SetParams(vid, -1, l == 1 ? 0 : 1, -1);
 	Util_Send(playerid, -1, l == 1 ? "Fari spenti." : "Fari accesi.");
+	return 0;
 }
 
 Veh_DoPark(playerid)
@@ -18971,6 +19304,7 @@ Veh_DoPark(playerid)
 	DB_SetVehiclePark(g_VSlot[playerid][slot][vsDbId], gPlayer[playerid][pCharId], x, y, z, a);
 	Veh_SaveSlot(playerid, slot);
 	Util_Send(playerid, 0x66DD66FF, "Posizione di parcheggio salvata.");
+	return 0;
 }
 
 Veh_DoFind(playerid, slot)
@@ -18994,8 +19328,9 @@ Veh_DoFind(playerid, slot)
 		KillTimer(g_VPl[playerid][vpFindTimer]);
 	}
 	SetPlayerCheckpoint(playerid, x, y, z, 4.0);
-	g_VPl[playerid][vpFindTimer] = SetTimerEx("Veh_OnFindExpire", 60000, 0, "dd", playerid, g_VPl[playerid][vpSession]);
+	g_VPl[playerid][vpFindTimer] = SetTimerEx("Veh_OnFindExpire", 60000, false, "dd", playerid, g_VPl[playerid][vpSession]);
 	SendClientMessage(playerid, -1, "Veicolo %d segnato sulla mappa per %d secondi (distanza: %.0f m).", slot + 1, 60, GetVehicleDistanceFromPoint(vid, px, py, pz));
+	return 0;
 }
 
 Veh_DoList(playerid)
@@ -19028,6 +19363,7 @@ Veh_DoList(playerid)
 		UI_VehicleListAdd(playerid, s + 1, g_VSlot[playerid][s][vsModel], g_VSlot[playerid][s][vsPlate], Veh_FuelPct(playerid, s), st);
 	}
 	UI_VehicleListShow(playerid);
+	return 0;
 }
 
 Veh_DoRecover(playerid, slot)
@@ -19091,9 +19427,10 @@ Veh_DoRecover(playerid, slot)
 	GetPlayerName(playerid, pname, 25);
 	format(msg, 256, "RECUPERO %s: %s dbId %d costo $%d", pname, mname, g_VSlot[playerid][slot][vsDbId], cost);
 	Log_Write("VEH", msg);
+	return 0;
 }
 
-Veh_CmdV(playerid, params[])
+Veh_CmdV(playerid, const params[])
 {
 	if (!Veh_PlayerReady(playerid))
 	{
@@ -19116,48 +19453,48 @@ Veh_CmdV(playerid, params[])
 	{
 		return 0;
 	}
-	if (!strcmp(sub, "lock", 0, 0x7FFFFFFF))
+	if (!strcmp(sub, "lock", false, 0x7FFFFFFF))
 	{
 		Veh_DoLock(playerid);
 		return 0;
 	}
-	if (!strcmp(sub, "engine", 0, 0x7FFFFFFF))
+	if (!strcmp(sub, "engine", false, 0x7FFFFFFF))
 	{
 		Veh_DoEngine(playerid);
 		return 0;
 	}
-	if (!strcmp(sub, "lights", 0, 0x7FFFFFFF))
+	if (!strcmp(sub, "lights", false, 0x7FFFFFFF))
 	{
 		Veh_DoLights(playerid);
 		return 0;
 	}
-	if (!strcmp(sub, "park", 0, 0x7FFFFFFF))
+	if (!strcmp(sub, "park", false, 0x7FFFFFFF))
 	{
 		Veh_DoPark(playerid);
 		return 0;
 	}
-	if (!strcmp(sub, "list", 0, 0x7FFFFFFF))
+	if (!strcmp(sub, "list", false, 0x7FFFFFFF))
 	{
 		Veh_DoList(playerid);
 		return 0;
 	}
-	if (!strcmp(sub, "tow", 0, 0x7FFFFFFF))
+	if (!strcmp(sub, "tow", false, 0x7FFFFFFF))
 	{
 		Util_Send(playerid, -10270721, "Il carro attrezzi non e' ancora disponibile.");
 		return 0;
 	}
 	new slot = -1;
-	if (!strcmp(sub, "find", 0, 0x7FFFFFFF) || !strcmp(sub, "sell", 0, 0x7FFFFFFF) || !strcmp(sub, "recover", 0, 0x7FFFFFFF))
+	if (!strcmp(sub, "find", false, 0x7FFFFFFF) || !strcmp(sub, "sell", false, 0x7FFFFFFF) || !strcmp(sub, "recover", false, 0x7FFFFFFF))
 	{
-		new bool:confirm = 0;
-		if (!strcmp(sub, "sell", 0, 0x7FFFFFFF) && !strcmp(a1, "conferma", 0, 0x7FFFFFFF))
+		new bool:confirm = false;
+		if (!strcmp(sub, "sell", false, 0x7FFFFFFF) && !strcmp(a1, "conferma", false, 0x7FFFFFFF))
 		{
-			confirm = 1;
+			confirm = true;
 			a1[0] = 0;
 		}
-		else if (!strcmp(sub, "sell", 0, 0x7FFFFFFF) && !strcmp(a2, "conferma", 0, 0x7FFFFFFF))
+		else if (!strcmp(sub, "sell", false, 0x7FFFFFFF) && !strcmp(a2, "conferma", false, 0x7FFFFFFF))
 		{
-			confirm = 1;
+			confirm = true;
 		}
 		if (a1[0] != 0)
 		{
@@ -19167,7 +19504,7 @@ Veh_CmdV(playerid, params[])
 				return 0;
 			}
 		}
-		else if (!strcmp(sub, "recover", 0, 0x7FFFFFFF))
+		else if (!strcmp(sub, "recover", false, 0x7FFFFFFF))
 		{
 			new destroyed = 0;
 			for (new s = 0; s < 4; s++)
@@ -19203,11 +19540,11 @@ Veh_CmdV(playerid, params[])
 				return 0;
 			}
 		}
-		if (!strcmp(sub, "find", 0, 0x7FFFFFFF))
+		if (!strcmp(sub, "find", false, 0x7FFFFFFF))
 		{
 			Veh_DoFind(playerid, slot);
 		}
-		else if (!strcmp(sub, "recover", 0, 0x7FFFFFFF))
+		else if (!strcmp(sub, "recover", false, 0x7FFFFFFF))
 		{
 			Veh_DoRecover(playerid, slot);
 		}
@@ -19218,9 +19555,10 @@ Veh_CmdV(playerid, params[])
 		return 0;
 	}
 	Util_Send(playerid, 0x99CCFFFF, "Uso: /v lock | engine | lights | park | find [slot] | list | sell [slot] | recover [slot]");
+	return 0;
 }
 
-Veh_CmdRefuel(playerid, params[])
+Veh_CmdRefuel(playerid, const params[])
 {
 	if (!Veh_PlayerReady(playerid))
 	{
@@ -19293,6 +19631,7 @@ Veh_CmdRefuel(playerid, params[])
 	Veh_SaveSlot(playerid, slot);
 	Veh_HudRefresh(playerid);
 	SendClientMessage(playerid, 0x66DD66FF, "Rifornimento: +%.1f L per $%d. Serbatoio: %.1f/%.0f L.", (float(add) / float(100)), cost, (float(g_VSlot[playerid][slot][vsFuelCl]) / float(100)), (float(cap) / float(100)));
+	return 0;
 }
 
 Veh_OnInit()
@@ -19308,12 +19647,12 @@ Veh_OnInit()
 		Veh_ResetPlayer(p);
 	}
 	g_VPool = 0;
-	g_VSaveTimer = SetTimer("Veh_OnSaveTick", 120000, 1);
+	g_VSaveTimer = SetTimer("Veh_OnSaveTick", 120000, true);
 	CreatePickup(1239, 1, 1655.0, -1665.0, 22.5, 0);
-	Lang_Create3DTextLabel("Concessionario di Los Santos\nUsa /concessionario", -2994689, 1655.0, -1665.0, (22.5 + 1.0), 15.0, 0, 0);
+	Lang_Create3DTextLabel("Concessionario di Los Santos\nUsa /concessionario", -2994689, 1655.0, -1665.0, (22.5 + 1.0), 15.0, 0, false);
 	for (new i = 0; i < 3; i++)
 	{
-		Lang_Create3DTextLabel("Distributore\nUsa /refuel [litri]", -2994689, g_VehStations[i][0], g_VehStations[i][1], (1.0 + g_VehStations[i][2]), 15.0, 0, 0);
+		Lang_Create3DTextLabel("Distributore\nUsa /refuel [litri]", -2994689, g_VehStations[i][0], g_VehStations[i][1], (1.0 + g_VehStations[i][2]), 15.0, 0, false);
 	}
 }
 
@@ -19355,6 +19694,7 @@ Veh_OnPlayerSpawn(playerid)
 	{
 		Veh_BeginLoad(playerid);
 	}
+	return 0;
 }
 
 Veh_OnPlayerDisconnect(playerid)
@@ -19386,6 +19726,7 @@ Veh_OnPlayerDisconnect(playerid)
 	}
 	Veh_ResetPlayer(playerid);
 	Veh_SyncTimers();
+	return 0;
 }
 
 Veh_OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
@@ -19397,13 +19738,15 @@ Veh_OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
 	}
 	if (ispassenger == 0)
 	{
-		ClearAnimations(playerid, 0);
+		ClearAnimations(playerid, SYNC_NONE);
 		Util_Send(playerid, -10270721, "Non hai le chiavi di questo veicolo.");
 	}
+	return 0;
 }
 
 Veh_OnPlayerExitVehicle(playerid, vehicleid)
 {
+	#pragma unused playerid
 	new o = 65535, s = -1;
 	if (Veh_Lookup(vehicleid, o, s))
 	{
@@ -19413,7 +19756,7 @@ Veh_OnPlayerExitVehicle(playerid, vehicleid)
 
 Veh_OnPlayerStateChange(playerid, t_PLAYER_STATE:newstate, t_PLAYER_STATE:oldstate)
 {
-	if (oldstate == 2 && g_VPl[playerid][vpLastVehicle] != 0)
+	if (oldstate == PLAYER_STATE_DRIVER && g_VPl[playerid][vpLastVehicle] != 0)
 	{
 		new vid = g_VPl[playerid][vpLastVehicle], o = 65535, s = -1;
 		Veh_HudStop(playerid);
@@ -19421,12 +19764,12 @@ Veh_OnPlayerStateChange(playerid, t_PLAYER_STATE:newstate, t_PLAYER_STATE:oldsta
 		{
 			if (g_VSlot[o][s][vsEngineOn])
 			{
-				Veh_SetEngine(o, s, 0);
+				Veh_SetEngine(o, s, false);
 			}
 			Veh_SaveSlot(o, s);
 		}
 	}
-	if (newstate == 2)
+	if (newstate == PLAYER_STATE_DRIVER)
 	{
 		new vid = GetPlayerVehicleID(playerid), o = 65535, s = -1;
 		if (!Veh_Lookup(vid, o, s))
@@ -19436,7 +19779,7 @@ Veh_OnPlayerStateChange(playerid, t_PLAYER_STATE:newstate, t_PLAYER_STATE:oldsta
 		if (o != playerid)
 		{
 			Util_Send(playerid, -10270721, "Non hai le chiavi di questo veicolo.");
-			RemovePlayerFromVehicle(playerid, 0);
+			RemovePlayerFromVehicle(playerid, false);
 			return 0;
 		}
 		Veh_SetParams(vid, g_VSlot[o][s][vsEngineOn] ? 1 : 0, -1, -1);
@@ -19446,10 +19789,12 @@ Veh_OnPlayerStateChange(playerid, t_PLAYER_STATE:newstate, t_PLAYER_STATE:oldsta
 			Util_Send(playerid, 0x99CCFFFF, "ძრავი გამორთულია: დააჭირე N ან დაწერე /v engine.");
 		}
 	}
+	return 0;
 }
 
 Veh_OnVehicleDeath(vehicleid, killerid)
 {
+	#pragma unused killerid
 	new o = 65535, s = -1;
 	if (!Veh_Lookup(vehicleid, o, s) || g_VSlot[o][s][vsDestroyed])
 	{
@@ -19457,18 +19802,19 @@ Veh_OnVehicleDeath(vehicleid, killerid)
 	}
 	if (g_VSlot[o][s][vsEngineOn])
 	{
-		Veh_SetEngine(o, s, 0);
+		Veh_SetEngine(o, s, false);
 	}
 	g_VSlot[o][s][vsDestroyed] = 1;
 	g_VSlot[o][s][vsHealth] = 350.0;
 	Veh_SaveSlot(o, s);
-	SetTimerEx("Veh_OnWreckRemove", 10000, 0, "ddd", vehicleid, o, g_VMapSession[vehicleid]);
+	SetTimerEx("Veh_OnWreckRemove", 10000, false, "ddd", vehicleid, o, g_VMapSession[vehicleid]);
 	new mname[12], pname[25], msg[256];
 	Veh_ModelName(g_VSlot[o][s][vsModel], mname, 12);
 	SendClientMessage(o, -10270721, "La tua %s (slot %d) e' stata distrutta. Recuperala con /v recover %d.", mname, s + 1, s + 1);
 	GetPlayerName(o, pname, 25);
 	format(msg, 256, "DISTRUTTO %s: %s dbId %d", pname, mname, g_VSlot[o][s][vsDbId]);
 	Log_Write("VEH", msg);
+	return 0;
 }
 
 // ===== modules/inventory/inventory.inc =====
@@ -19557,7 +19903,7 @@ bool:Inv_Ready(playerid)
 	return playerid >= 0 && playerid < MAX_PLAYERS && gPlayer[playerid][pInvState] == 2;
 }
 
-Inv_ParseItem(token[])
+Inv_ParseItem(const token[])
 {
 	new value = 0;
 	if (token[0] == 0)
@@ -19570,7 +19916,7 @@ Inv_ParseItem(token[])
 	}
 	for (new i = 0; i < 16; i++)
 	{
-		if (!strcmp(token, s_InvAliasName[i], 1, 0x7FFFFFFF))
+		if (!strcmp(token, s_InvAliasName[i], true, 0x7FFFFFFF))
 		{
 			return s_InvAliasId[i];
 		}
@@ -19578,7 +19924,7 @@ Inv_ParseItem(token[])
 	return 0;
 }
 
-Inv_Say(playerid, color, text[])
+Inv_Say(playerid, color, const text[])
 {
 	Util_Send(playerid, color, text);
 }
@@ -19616,6 +19962,7 @@ Inv_Load(playerid)
 	}
 	gPlayer[playerid][pInvState] = 1;
 	DB_InvLoad(playerid, gPlayer[playerid][pCharId]);
+	return 0;
 }
 
 Inv_Reload(playerid)
@@ -19630,6 +19977,7 @@ Inv_Reload(playerid)
 		return 0;
 	}
 	Inv_Load(playerid);
+	return 0;
 }
 
 public Inv_OnDBLoaded(playerid, count)
@@ -19693,7 +20041,7 @@ public Inv_OnDBLoaded(playerid, count)
 	}
 	if (count == 0 && Inv_Count(playerid, 10) == 0 && !gPlayer[playerid][pInvOpBusy])
 	{
-		Inv_StartDoc(playerid, 1);
+		Inv_StartDoc(playerid, true);
 	}
 	Inv_PushUi(playerid);
 	return 1;
@@ -19729,7 +20077,7 @@ bool:Inv_StateOk(playerid)
 {
 	if (!Util_IsPlaying(playerid))
 	{
-		return 0;
+		return false;
 	}
 	return gPlayer[playerid][pInvState] == 2 && !gPlayer[playerid][pInvOpBusy] && !gPlayer[playerid][pWounded] && !gPlayer[playerid][pCuffed];
 }
@@ -19738,7 +20086,7 @@ bool:Inv_Guard(playerid)
 {
 	if (!Util_IsPlaying(playerid))
 	{
-		return 0;
+		return false;
 	}
 	switch (gPlayer[playerid][pInvState])
 	{
@@ -19748,33 +20096,33 @@ bool:Inv_Guard(playerid)
 		case 1:
 		{
 			Inv_Say(playerid, -10270721, "L'inventario si sta caricando: riprova tra un attimo.");
-			return 0;
+			return false;
 		}
 		default:
 		{
 			Inv_Say(playerid, -10270721, "Inventario non disponibile: provo a ricaricarlo, riprova tra poco.");
 			Inv_Load(playerid);
-			return 0;
+			return false;
 		}
 	}
 	if (gPlayer[playerid][pInvOpBusy])
 	{
 		Inv_Say(playerid, -10270721, "Hai un'operazione di inventario in corso: attendi.");
-		return 0;
+		return false;
 	}
 	if (gPlayer[playerid][pWounded] || gPlayer[playerid][pCuffed])
 	{
 		Inv_Say(playerid, -10270721, "Non puoi farlo da ferito o ammanettato.");
-		return 0;
+		return false;
 	}
 	new now = GetTickCount();
 	if (gPlayer[playerid][pInvLastActionTick] != 0 && now - gPlayer[playerid][pInvLastActionTick] < 1500)
 	{
 		Inv_Say(playerid, -10270721, "Attendi un attimo prima di un'altra azione con l'inventario.");
-		return 0;
+		return false;
 	}
 	gPlayer[playerid][pInvLastActionTick] = now != 0 ? now : 1;
-	return 1;
+	return true;
 }
 
 Inv_CmdInventario(playerid)
@@ -19792,6 +20140,7 @@ Inv_CmdInventario(playerid)
 	}
 	Inv_PushUi(playerid);
 	UI_InvShow(playerid);
+	return 0;
 }
 
 Inv_CdLeftSec(playerid, itemId)
@@ -19899,9 +20248,10 @@ Inv_UseStart(playerid, itemId)
 	}
 	Inv_BeginOp(playerid, 1, itemId, 1, 0);
 	DB_InvUse(playerid, gPlayer[playerid][pCharId], itemId, gPlayer[playerid][pInvOpId]);
+	return 0;
 }
 
-Inv_RpUse(playerid, action[])
+Inv_RpUse(playerid, const action[])
 {
 	new name[25], msg[256];
 	GetPlayerName(playerid, name, 25);
@@ -19934,7 +20284,7 @@ Inv_ApplyUse(playerid, itemId)
 			}
 			SetPlayerHealth(playerid, hp);
 			Inv_RpUse(playerid, itemId == 5 ? "usa un kit di pronto soccorso." : "si medica con una benda.");
-			SendClientMessage(playerid, 0x66DD66FF, "Salute: %d.", floatround(hp, 0));
+			SendClientMessage(playerid, 0x66DD66FF, "Salute: %d.", floatround(hp, floatround_method:0));
 		}
 		case 7:
 		{
@@ -20038,6 +20388,7 @@ Inv_GroundFree(idx)
 	g_InvGround[idx][igDropper] = 0;
 	g_InvGround[idx][igDropperChar] = 0;
 	g_InvGround[idx][igPicker] = 0;
+	return 0;
 }
 
 Inv_GroundSlot()
@@ -20067,7 +20418,7 @@ Inv_GroundRelease(playerid)
 	}
 }
 
-Inv_CmdGetta(playerid, params[])
+Inv_CmdGetta(playerid, const params[])
 {
 	new pos = 0, tok[24], itemId = 0, qty = 1;
 	Util_NextToken(params, pos, tok, 24);
@@ -20084,6 +20435,7 @@ Inv_CmdGetta(playerid, params[])
 		return 0;
 	}
 	Inv_DropStart(playerid, itemId, qty);
+	return 0;
 }
 
 Inv_DropStart(playerid, itemId, qty)
@@ -20102,7 +20454,7 @@ Inv_DropStart(playerid, itemId, qty)
 		SendClientMessage(playerid, -10270721, "Non hai abbastanza: %s.", s_InvName[itemId]);
 		return 0;
 	}
-	if (GetPlayerState(playerid) != 1 || GetPlayerInterior(playerid) != 0 || GetPlayerVirtualWorld(playerid) != 0)
+	if (GetPlayerState(playerid) != PLAYER_STATE_ONFOOT || GetPlayerInterior(playerid) != 0 || GetPlayerVirtualWorld(playerid) != 0)
 	{
 		Inv_Say(playerid, -10270721, "Puoi gettare oggetti solo a piedi, all'aperto.");
 		return 0;
@@ -20138,6 +20490,7 @@ Inv_DropStart(playerid, itemId, qty)
 	g_InvGround[idx][igPicker] = 0;
 	Inv_BeginOp(playerid, 3, itemId, qty, idx);
 	DB_InvDrop(playerid, charId, itemId, qty, gPlayer[playerid][pInvOpId]);
+	return 0;
 }
 
 public Inv_OnDBDropped(playerid, itemId, qty, result)
@@ -20221,7 +20574,7 @@ Inv_CmdPrendi(playerid)
 	{
 		return 0;
 	}
-	if (GetPlayerState(playerid) != 1 || GetPlayerInterior(playerid) != 0 || GetPlayerVirtualWorld(playerid) != 0)
+	if (GetPlayerState(playerid) != PLAYER_STATE_ONFOOT || GetPlayerInterior(playerid) != 0 || GetPlayerVirtualWorld(playerid) != 0)
 	{
 		Inv_Say(playerid, -10270721, "Puoi raccogliere oggetti solo a piedi, all'aperto.");
 		return 0;
@@ -20248,6 +20601,7 @@ Inv_CmdPrendi(playerid)
 	g_InvGround[best][igPicker] = playerid + 1;
 	Inv_BeginOp(playerid, 4, g_InvGround[best][igItemId], g_InvGround[best][igQty], best);
 	DB_InvAdd(playerid, gPlayer[playerid][pCharId], g_InvGround[best][igItemId], g_InvGround[best][igQty], gPlayer[playerid][pInvOpId], "pickup", 0);
+	return 0;
 }
 
 public Inv_OnDBAdded(playerid, itemId, qty, result)
@@ -20323,7 +20677,7 @@ public Inv_OnDBAdded(playerid, itemId, qty, result)
 
 public Inv_IssueStartDoc(playerid)
 {
-	return Inv_StartDoc(playerid, 0);
+	return Inv_StartDoc(playerid, false);
 }
 
 Inv_StartDoc(playerid, bool:retry)
@@ -20361,9 +20715,10 @@ Inv_DocRequest(playerid)
 	gPlayer[playerid][pDocRequestTick] = now != 0 ? now : 1;
 	Inv_BeginOp(playerid, 8, 10, 1, 0);
 	DB_InvAdd(playerid, gPlayer[playerid][pCharId], 10, 1, gPlayer[playerid][pInvOpId], "add", 1);
+	return 0;
 }
 
-Inv_GiveCancel(giver, reason[])
+Inv_GiveCancel(giver, const reason[])
 {
 	if (!Inv_ValidPlayer(giver) || gPlayer[giver][pInvGiveTo] == 0)
 	{
@@ -20380,6 +20735,7 @@ Inv_GiveCancel(giver, reason[])
 		UI_InvGiveConfirmClose(recv);
 		Inv_Say(recv, -10270721, reason);
 	}
+	return 0;
 }
 
 bool:Inv_GiveRateOk(playerid)
@@ -20393,7 +20749,7 @@ bool:Inv_GiveRateOk(playerid)
 	return gPlayer[playerid][pInvGiveHourCount] < 20;
 }
 
-Inv_CmdDai(playerid, params[])
+Inv_CmdDai(playerid, const params[])
 {
 	new pos = 0, tok[24], target = 0, itemId = 0, qty = 1;
 	Util_NextToken(params, pos, tok, 24);
@@ -20416,6 +20772,7 @@ Inv_CmdDai(playerid, params[])
 		return 0;
 	}
 	Inv_GiveStart(playerid, target, itemId, qty);
+	return 0;
 }
 
 Inv_GiveStart(playerid, target, itemId, qty)
@@ -20485,6 +20842,7 @@ Inv_GiveStart(playerid, target, itemId, qty)
 	GetPlayerName(target, tname, 25);
 	UI_InvGiveConfirmShow(target, name, itemId, qty, 15);
 	SendClientMessage(playerid, -1, "Hai offerto %s x%d a %s: attendi la risposta (%d secondi).", s_InvName[itemId], qty, tname, 15);
+	return 0;
 }
 
 public UI_OnInvGive(playerid, slot, targetId, qty)
@@ -20503,12 +20861,12 @@ public UI_OnInvGive(playerid, slot, targetId, qty)
 
 public UI_OnInvGiveReply(playerid, accept)
 {
-	return Inv_GiveReply(playerid, accept, 0);
+	return Inv_GiveReply(playerid, accept, false);
 }
 
 public UI_OnInvGiveExpired(playerid)
 {
-	return Inv_GiveReply(playerid, 0, 1);
+	return Inv_GiveReply(playerid, 0, true);
 }
 
 Inv_GiveReply(playerid, accept, bool:expired)
@@ -20677,6 +21035,7 @@ Inv_Buy(playerid, itemId, qty)
 	}
 	Inv_BeginOp(playerid, 5, itemId, qty, cost);
 	DB_InvBuy(playerid, gPlayer[playerid][pCharId], itemId, qty, gPlayer[playerid][pInvOpId], maxTotal);
+	return 0;
 }
 
 Inv_BuyBag(playerid)
@@ -20693,6 +21052,7 @@ Inv_BuyBag(playerid)
 	}
 	Inv_BeginOp(playerid, 6, 11, 1, 350);
 	DB_InvSetBag(playerid, gPlayer[playerid][pCharId], gPlayer[playerid][pInvOpId]);
+	return 0;
 }
 
 Inv_UndoPurchase(playerid)
@@ -20782,11 +21142,11 @@ public Inv_OnDBBag(playerid, result)
 	return 1;
 }
 
-public Inv_OnDBUndone(opId[], result)
+public Inv_OnDBUndone(const opId[], result)
 {
 	for (new p = 0; p < MAX_PLAYERS; p++)
 	{
-		if (!IsPlayerConnected(p) || gPlayer[p][pInvUndoOpId][0] == 0 || strcmp(gPlayer[p][pInvUndoOpId], opId, 0, 0x7FFFFFFF))
+		if (!IsPlayerConnected(p) || gPlayer[p][pInvUndoOpId][0] == 0 || strcmp(gPlayer[p][pInvUndoOpId], opId, false, 0x7FFFFFFF))
 		{
 			continue;
 		}
@@ -20808,26 +21168,26 @@ bool:Inv_FridgeMove(playerid, houseId, direction, qty, fridgeCap)
 {
 	if (!Inv_Guard(playerid))
 	{
-		return 0;
+		return false;
 	}
 	if (qty < 1 || qty > 40)
 	{
 		Inv_Say(playerid, -10270721, "Quantita' non valida.");
-		return 0;
+		return false;
 	}
 	if (direction == 1 && Inv_Count(playerid, 1) < qty)
 	{
 		Inv_Say(playerid, -10270721, "Non hai tutta quella spesa con te.");
-		return 0;
+		return false;
 	}
 	if (direction == 2 && Inv_Count(playerid, 1) + qty > 12)
 	{
 		SendClientMessage(playerid, -10270721, "Puoi portare al massimo %d porzioni.", 12);
-		return 0;
+		return false;
 	}
 	Inv_BeginOp(playerid, 7, 1, qty, houseId);
 	DB_FridgeMove(playerid, gPlayer[playerid][pCharId], houseId, 1, qty, direction, gPlayer[playerid][pInvOpId], fridgeCap, direction == 2 ? 12 : 0);
-	return 1;
+	return true;
 }
 
 public Inv_OnDBFridge(playerid, houseId, direction, qty, result)
@@ -20890,7 +21250,7 @@ Inv_OnInit()
 		g_InvGround[i][igObject] = 65535;
 		g_InvGround[i][igState] = 0;
 	}
-	g_InvTickTimer = SetTimer("Inv_OnTick", 1000, 1);
+	g_InvTickTimer = SetTimer("Inv_OnTick", 1000, true);
 }
 
 Inv_OnExit()
@@ -20916,6 +21276,7 @@ Inv_OnPlayerSpawn(playerid)
 	{
 		Inv_Load(playerid);
 	}
+	return 0;
 }
 
 Inv_OnPlayerDisconnect(playerid)
@@ -20950,6 +21311,7 @@ Inv_OnPlayerDisconnect(playerid)
 		House_InvFridgeAbort(gPlayer[playerid][pFridgeHouse]);
 	}
 	Inv_GroundRelease(playerid);
+	return 0;
 }
 
 // ===== modules/bank/bank.inc =====
@@ -20965,7 +21327,7 @@ new Float:s_BankPoints[9][3] = {
 	{2490.0, -1680.0, 13.5}
 };
 new g_BankPickup[9];
-new g_BankLabel[9];
+new Text3D:g_BankLabel[9];
 
 bool:Bank_Valid(playerid)
 {
@@ -21018,7 +21380,7 @@ Bank_NearPoint(playerid, bool:counterOnly)
 	return best;
 }
 
-bool:Bank_ParseAmount(s[], &value)
+bool:Bank_ParseAmount(const s[], &value)
 {
 	new i = 0, len = strlen(s), digits = 0;
 	value = 0;
@@ -21030,7 +21392,7 @@ bool:Bank_ParseAmount(s[], &value)
 	{
 		if (digits >= 9)
 		{
-			return 0;
+			return false;
 		}
 		value = value * 10 + (s[i] - 48);
 		digits++;
@@ -21043,7 +21405,7 @@ bool:Bank_ParseAmount(s[], &value)
 	return digits > 0 && i == len && value >= 1;
 }
 
-Bank_FindPlayer(input[])
+Bank_FindPlayer(const input[])
 {
 	new text[25], len = strlen(input), start = 0, end = len;
 	while (start < len && input[start] == 32)
@@ -21059,12 +21421,12 @@ Bank_FindPlayer(input[])
 		return -1;
 	}
 	strmid(text, input, start, end, 25);
-	new bool:numeric = 1;
+	new bool:numeric = true;
 	for (new i = 0; text[i] != 0; i++)
 	{
 		if (text[i] < 48 || text[i] > 57)
 		{
-			numeric = 0;
+			numeric = false;
 			break;
 		}
 	}
@@ -21081,11 +21443,11 @@ Bank_FindPlayer(input[])
 			continue;
 		}
 		GetPlayerName(p, name, 25);
-		if (!strcmp(name, text, 1, 0x7FFFFFFF))
+		if (!strcmp(name, text, true, 0x7FFFFFFF))
 		{
 			return p;
 		}
-		if (strfind(name, text, 1, 0) != -1)
+		if (strfind(name, text, true, 0) != -1)
 		{
 			if (found != -1)
 			{
@@ -21101,12 +21463,12 @@ bool:Bank_SameIp(a, b)
 {
 	if (gPlayer[a][pAccountId] == gPlayer[b][pAccountId])
 	{
-		return 0;
+		return false;
 	}
 	new ipA[16], ipB[16];
 	GetPlayerIp(a, ipA, 16);
 	GetPlayerIp(b, ipB, 16);
-	return ipA[0] != 0 && !strcmp(ipA, ipB, 0, 0x7FFFFFFF);
+	return ipA[0] != 0 && !strcmp(ipA, ipB, false, 0x7FFFFFFF);
 }
 
 Bank_LocalOffset()
@@ -21142,67 +21504,68 @@ Bank_FormatWhen(ts, dest[], size)
 	new doy = doe - (yoe * 365 + yoe / 4 - yoe / 100), mp = (doy * 5 + 2) / 153;
 	new day = doy - (mp * 153 + 2) / 5 + 1, month = mp < 10 ? mp + 3 : mp - 9;
 	format(dest, size, "%02d/%02d %02d:%02d", day, month, secs / 3600, secs % 3600 / 60);
+	return 0;
 }
 
-Bank_KindLabel(kind[], dest[], size)
+Bank_KindLabel(const kind[], dest[], size)
 {
-	if (!strcmp(kind, "deposit", 0, 0x7FFFFFFF))
+	if (!strcmp(kind, "deposit", false, 0x7FFFFFFF))
 	{
 		strcopy(dest, "Deposito", size);
 	}
-	else if (!strcmp(kind, "withdraw", 0, 0x7FFFFFFF))
+	else if (!strcmp(kind, "withdraw", false, 0x7FFFFFFF))
 	{
 		strcopy(dest, "Prelievo", size);
 	}
-	else if (!strcmp(kind, "xfer_out", 0, 0x7FFFFFFF))
+	else if (!strcmp(kind, "xfer_out", false, 0x7FFFFFFF))
 	{
 		strcopy(dest, "Bonifico a", size);
 	}
-	else if (!strcmp(kind, "xfer_in", 0, 0x7FFFFFFF))
+	else if (!strcmp(kind, "xfer_in", false, 0x7FFFFFFF))
 	{
 		strcopy(dest, "Bonifico da", size);
 	}
-	else if (!strcmp(kind, "fee", 0, 0x7FFFFFFF))
+	else if (!strcmp(kind, "fee", false, 0x7FFFFFFF))
 	{
 		strcopy(dest, "Commissione", size);
 	}
-	else if (!strcmp(kind, "paycheck", 0, 0x7FFFFFFF))
+	else if (!strcmp(kind, "paycheck", false, 0x7FFFFFFF))
 	{
 		strcopy(dest, "Stipendio", size);
 	}
-	else if (!strcmp(kind, "job", 0, 0x7FFFFFFF))
+	else if (!strcmp(kind, "job", false, 0x7FFFFFFF))
 	{
 		strcopy(dest, "Compenso lavoro", size);
 	}
-	else if (!strcmp(kind, "faction", 0, 0x7FFFFFFF))
+	else if (!strcmp(kind, "faction", false, 0x7FFFFFFF))
 	{
 		strcopy(dest, "Stipendio fazione", size);
 	}
-	else if (!strcmp(kind, "bill", 0, 0x7FFFFFFF))
+	else if (!strcmp(kind, "bill", false, 0x7FFFFFFF))
 	{
 		strcopy(dest, "Bolletta", size);
 	}
-	else if (!strcmp(kind, "house", 0, 0x7FFFFFFF))
+	else if (!strcmp(kind, "house", false, 0x7FFFFFFF))
 	{
 		strcopy(dest, "Casa", size);
 	}
-	else if (!strcmp(kind, "vehicle", 0, 0x7FFFFFFF))
+	else if (!strcmp(kind, "vehicle", false, 0x7FFFFFFF))
 	{
 		strcopy(dest, "Veicolo", size);
 	}
-	else if (!strcmp(kind, "fine", 0, 0x7FFFFFFF))
+	else if (!strcmp(kind, "fine", false, 0x7FFFFFFF))
 	{
 		strcopy(dest, "Multa", size);
 	}
-	else if (!strcmp(kind, "refund", 0, 0x7FFFFFFF))
+	else if (!strcmp(kind, "refund", false, 0x7FFFFFFF))
 	{
 		strcopy(dest, "Rimborso", size);
 	}
-	else if (!strcmp(kind, "admin", 0, 0x7FFFFFFF))
+	else if (!strcmp(kind, "admin", false, 0x7FFFFFFF))
 	{
 		strcopy(dest, "Staff", size);
 	}
-	else if (!strcmp(kind, "undo", 0, 4))
+	else if (!strcmp(kind, "undo", false, 4))
 	{
 		strcopy(dest, "Storno", size);
 	}
@@ -21252,13 +21615,13 @@ Bank_StartResync(playerid)
 	gPlayer[playerid][pBankOpAux] = 0;
 	gPlayer[playerid][pBankOpTick] = Bank_Tick();
 	gPlayer[playerid][pBankOpToken]++;
-	SetTimerEx("Bank_OnResyncTimer", 2500, 0, "dd", playerid, gPlayer[playerid][pBankOpToken]);
+	SetTimerEx("Bank_OnResyncTimer", 2500, false, "dd", playerid, gPlayer[playerid][pBankOpToken]);
 }
 
 Bank_ScheduleResync(playerid)
 {
 	gPlayer[playerid][pBankOpToken]++;
-	SetTimerEx("Bank_OnResyncTimer", 2500, 0, "dd", playerid, gPlayer[playerid][pBankOpToken]);
+	SetTimerEx("Bank_OnResyncTimer", 2500, false, "dd", playerid, gPlayer[playerid][pBankOpToken]);
 }
 
 Bank_ClearPending(playerid, bool:closeUi)
@@ -21284,7 +21647,7 @@ Bank_ConfirmFailed(playerid)
 	}
 }
 
-Bank_Reply(playerid, bool:ui, text[])
+Bank_Reply(playerid, bool:ui, const text[])
 {
 	if (ui)
 	{
@@ -21296,12 +21659,12 @@ Bank_Reply(playerid, bool:ui, text[])
 	}
 }
 
-Bank_Deny(playerid, bool:ui, text[])
+Bank_Deny(playerid, bool:ui, const text[])
 {
 	Util_Send(playerid, -10270721, text);
 	if (ui)
 	{
-		Bank_ClearPending(playerid, 1);
+		Bank_ClearPending(playerid, true);
 		UI_BankClose(playerid);
 	}
 }
@@ -21332,7 +21695,7 @@ Bank_StateGuard(playerid, bool:ui, bool:counterOnly)
 		Bank_Deny(playerid, ui, "Non puoi usare la banca all'interno di un edificio: serve un ATM o uno sportello all'aperto.");
 		return -1;
 	}
-	new point = Bank_NearPoint(playerid, 0);
+	new point = Bank_NearPoint(playerid, false);
 	if (point < 0)
 	{
 		Bank_Deny(playerid, ui, "Devi essere vicino a un ATM o a uno sportello bancario.");
@@ -21372,7 +21735,7 @@ Bank_Guard(playerid, bool:ui, bool:counterOnly)
 	{
 		if (now - gPlayer[playerid][pBankPendTick] >= 35000)
 		{
-			Bank_ClearPending(playerid, 1);
+			Bank_ClearPending(playerid, true);
 		}
 		else
 		{
@@ -21413,6 +21776,7 @@ Bank_RefreshLimits(playerid)
 	Bank_BeginOp(playerid, 4, 0, gPlayer[playerid][pBankOpPoint]);
 	gPlayer[playerid][pBankOpAux] = 0;
 	DB_BankLimits(playerid, gPlayer[playerid][pCharId]);
+	return 0;
 }
 
 Bank_CmdSaldo(playerid)
@@ -21423,7 +21787,7 @@ Bank_CmdSaldo(playerid)
 
 Bank_CmdAtm(playerid, bool:counterOnly)
 {
-	new point = Bank_Guard(playerid, 0, counterOnly);
+	new point = Bank_Guard(playerid, false, counterOnly);
 	if (point < 0)
 	{
 		return 0;
@@ -21431,6 +21795,7 @@ Bank_CmdAtm(playerid, bool:counterOnly)
 	Bank_PushUi(playerid);
 	UI_BankMenu(playerid, Bank_IsCounter(point));
 	Bank_RefreshLimits(playerid);
+	return 0;
 }
 
 public UI_OnBankBalanceRefresh(playerid)
@@ -21446,7 +21811,7 @@ public UI_OnBankBalanceRefresh(playerid)
 
 Bank_Deposit(playerid, amount, bool:ui)
 {
-	new point = Bank_Guard(playerid, ui, 0);
+	new point = Bank_Guard(playerid, ui, false);
 	if (point < 0)
 	{
 		return 0;
@@ -21476,13 +21841,14 @@ Bank_Deposit(playerid, amount, bool:ui)
 	Bank_BeginWrite(playerid, 1, amount, point);
 	gPlayer[playerid][pBankOpAux] = ui ? 1 : 0;
 	DB_BankDeposit(playerid, gPlayer[playerid][pCharId], amount, Bank_IsCounter(point) ? 1 : 0, gPlayer[playerid][pBankOpId]);
+	return 0;
 }
 
 public UI_OnBankDeposit(playerid, amount)
 {
 	if (Bank_Valid(playerid))
 	{
-		Bank_Deposit(playerid, amount, 1);
+		Bank_Deposit(playerid, amount, true);
 	}
 	return 1;
 }
@@ -21526,7 +21892,7 @@ Bank_ResultText(op, result, dest[], size)
 	}
 }
 
-Bank_StartUndo(playerid, reason[])
+Bank_StartUndo(playerid, const reason[])
 {
 	new opId[37];
 	strcopy(opId, gPlayer[playerid][pBankOpId], 37);
@@ -21571,7 +21937,7 @@ public Bank_OnDBDeposit(playerid, amount, result, balance)
 		Util_Send(playerid, 0x66DD66FF, msg);
 		if (ui)
 		{
-			UI_BankToast(playerid, "Deposito eseguito", 1);
+			UI_BankToast(playerid, "Deposito eseguito", true);
 		}
 		return 1;
 	}
@@ -21590,7 +21956,7 @@ public Bank_OnDBDeposit(playerid, amount, result, balance)
 
 Bank_Withdraw(playerid, amount, bool:ui)
 {
-	new point = Bank_Guard(playerid, ui, 0);
+	new point = Bank_Guard(playerid, ui, false);
 	if (point < 0)
 	{
 		return 0;
@@ -21621,13 +21987,14 @@ Bank_Withdraw(playerid, amount, bool:ui)
 	Bank_BeginWrite(playerid, 2, amount, point);
 	gPlayer[playerid][pBankOpAux] = ui ? 1 : 0;
 	DB_BankWithdraw(playerid, gPlayer[playerid][pCharId], amount, counter ? 1 : 0, gPlayer[playerid][pBankOpId]);
+	return 0;
 }
 
 public UI_OnBankWithdraw(playerid, amount)
 {
 	if (Bank_Valid(playerid))
 	{
-		Bank_Withdraw(playerid, amount, 1);
+		Bank_Withdraw(playerid, amount, true);
 	}
 	return 1;
 }
@@ -21670,7 +22037,7 @@ public Bank_OnDBWithdraw(playerid, amount, result, balance)
 		Util_Send(playerid, 0x66DD66FF, msg);
 		if (ui)
 		{
-			UI_BankToast(playerid, "Prelievo eseguito", 1);
+			UI_BankToast(playerid, "Prelievo eseguito", true);
 		}
 		return 1;
 	}
@@ -21691,7 +22058,7 @@ public Bank_OnDBWithdraw(playerid, amount, result, balance)
 	return 1;
 }
 
-public Bank_OnDBUndone(playerid, opId[], result)
+public Bank_OnDBUndone(playerid, const opId[], result)
 {
 	for (new i = 0; i < MAX_PLAYERS; i++)
 	{
@@ -21699,7 +22066,7 @@ public Bank_OnDBUndone(playerid, opId[], result)
 		{
 			continue;
 		}
-		if (opId[0] != 0 && strcmp(gPlayer[i][pBankOpId], opId, 0, 0x7FFFFFFF) != 0)
+		if (opId[0] != 0 && strcmp(gPlayer[i][pBankOpId], opId, false, 0x7FFFFFFF) != 0)
 		{
 			continue;
 		}
@@ -21784,7 +22151,7 @@ bool:Bank_XferCheck(playerid, target, amount, bool:ui)
 		{
 			format(msg, 176, "Bonifici sospesi per altri %d secondi (troppe conferme fallite).", (left + 1000 - 1) / 1000);
 			Bank_Reply(playerid, ui, msg);
-			return 0;
+			return false;
 		}
 		gPlayer[playerid][pBankXferBlockUntil] = 0;
 	}
@@ -21792,49 +22159,49 @@ bool:Bank_XferCheck(playerid, target, amount, bool:ui)
 	{
 		format(msg, 176, "Servono almeno il livello %d per fare bonifici.", 3);
 		Bank_Reply(playerid, ui, msg);
-		return 0;
+		return false;
 	}
 	if (gPlayer[playerid][pPlayedMs] < 3600000)
 	{
 		format(msg, 176, "Servono almeno %d minuti di gioco con questo personaggio per fare bonifici.", 60);
 		Bank_Reply(playerid, ui, msg);
-		return 0;
+		return false;
 	}
 	if (target < 0 || target >= MAX_PLAYERS || target == playerid || !Util_IsPlaying(target) || gPlayer[target][pCharId] <= 0)
 	{
 		Bank_Reply(playerid, ui, "Destinatario non valido: deve essere un altro giocatore online e in gioco.");
-		return 0;
+		return false;
 	}
 	if (amount < 10 || amount > 25000)
 	{
 		format(msg, 176, "Importo del bonifico: da $%d a $%d.", 10, 25000);
 		Bank_Reply(playerid, ui, msg);
-		return 0;
+		return false;
 	}
 	new fee = DB_BankXferFee(amount), total = amount + fee;
 	if (gPlayer[playerid][pBank] < total)
 	{
 		format(msg, 176, "Fondi insufficienti: servono $%d (importo $%d + commissione $%d), hai $%d.", total, amount, fee, gPlayer[playerid][pBank]);
 		Bank_Reply(playerid, ui, msg);
-		return 0;
+		return false;
 	}
 	if (amount > 0x3B9ACA00 - gPlayer[target][pBank])
 	{
 		Bank_Reply(playerid, ui, "Il destinatario non puo' ricevere questa somma (conto al limite).");
-		return 0;
+		return false;
 	}
 	if (gPlayer[playerid][pBankLastXferTick] != 0 && now - gPlayer[playerid][pBankLastXferTick] < 30000)
 	{
 		format(msg, 176, "Attendi ancora %d secondi prima di un nuovo bonifico.", (30000 - (now - gPlayer[playerid][pBankLastXferTick]) + 1000 - 1) / 1000);
 		Bank_Reply(playerid, ui, msg);
-		return 0;
+		return false;
 	}
-	return 1;
+	return true;
 }
 
 Bank_Transfer(playerid, target, amount, bool:ui)
 {
-	new point = Bank_Guard(playerid, ui, 0);
+	new point = Bank_Guard(playerid, ui, false);
 	if (point < 0)
 	{
 		return 0;
@@ -21847,13 +22214,14 @@ Bank_Transfer(playerid, target, amount, bool:ui)
 	gPlayer[playerid][pBankOpAux] = ui ? 2 : 1;
 	gPlayer[playerid][pBankOpTarget] = target + 1;
 	DB_BankLimits(playerid, gPlayer[playerid][pCharId]);
+	return 0;
 }
 
 public UI_OnBankTransfer(playerid, targetId, amount)
 {
 	if (Bank_Valid(playerid))
 	{
-		Bank_Transfer(playerid, targetId, amount, 1);
+		Bank_Transfer(playerid, targetId, amount, true);
 	}
 	return 1;
 }
@@ -21897,7 +22265,7 @@ public Bank_OnDBLimits(playerid, result, withdrawn, xferOut, xferIn, sinceXfer)
 		Bank_Reply(playerid, ui, result == 7 ? "Sistema bancario occupato: riprova tra un attimo." : "Servizio bancario non disponibile: riprova piu' tardi.");
 		return 1;
 	}
-	if (Bank_StateGuard(playerid, ui, 0) < 0)
+	if (Bank_StateGuard(playerid, ui, false) < 0)
 	{
 		return 1;
 	}
@@ -21932,7 +22300,7 @@ public UI_OnBankTransferCancel(playerid, targetId, amount)
 	}
 	if (gPlayer[playerid][pBankPendTarget] == targetId + 1 && gPlayer[playerid][pBankPendAmount] == amount)
 	{
-		Bank_ClearPending(playerid, 0);
+		Bank_ClearPending(playerid, false);
 	}
 	return 1;
 }
@@ -21945,7 +22313,7 @@ public UI_OnBankTransferExpired(playerid, targetId, amount)
 	}
 	if (gPlayer[playerid][pBankPendTarget] == targetId + 1 && gPlayer[playerid][pBankPendAmount] == amount)
 	{
-		Bank_ClearPending(playerid, 0);
+		Bank_ClearPending(playerid, false);
 		Bank_ConfirmFailed(playerid);
 	}
 	return 1;
@@ -21962,7 +22330,7 @@ public UI_OnBankTransferConfirm(playerid, targetId, amount)
 		return 1;
 	}
 	new pendChar = gPlayer[playerid][pBankPendCharId], pendAt = gPlayer[playerid][pBankPendTick];
-	Bank_ClearPending(playerid, 0);
+	Bank_ClearPending(playerid, false);
 	if (gPlayer[playerid][pBankOpBusy] != 0)
 	{
 		return 1;
@@ -21973,7 +22341,7 @@ public UI_OnBankTransferConfirm(playerid, targetId, amount)
 		Bank_ConfirmFailed(playerid);
 		return 1;
 	}
-	new point = Bank_StateGuard(playerid, 0, 0);
+	new point = Bank_StateGuard(playerid, false, false);
 	if (point < 0)
 	{
 		Bank_ConfirmFailed(playerid);
@@ -21985,7 +22353,7 @@ public UI_OnBankTransferConfirm(playerid, targetId, amount)
 		Bank_ConfirmFailed(playerid);
 		return 1;
 	}
-	if (!Bank_XferCheck(playerid, targetId, amount, 0))
+	if (!Bank_XferCheck(playerid, targetId, amount, false))
 	{
 		Bank_ConfirmFailed(playerid);
 		return 1;
@@ -22072,7 +22440,7 @@ public Bank_OnDBTransfer(playerid, targetid, amount, fee, result, balance)
 
 Bank_Statement(playerid, page, bool:ui)
 {
-	new point = Bank_Guard(playerid, ui, 0);
+	new point = Bank_Guard(playerid, ui, false);
 	if (point < 0)
 	{
 		return 0;
@@ -22085,13 +22453,14 @@ Bank_Statement(playerid, page, bool:ui)
 	gPlayer[playerid][pBankOpAux] = page;
 	gPlayer[playerid][pBankOpTarget] = ui ? 1 : 0;
 	DB_BankStatement(playerid, gPlayer[playerid][pCharId], page);
+	return 0;
 }
 
 public UI_OnBankStatement(playerid, page)
 {
 	if (Bank_Valid(playerid))
 	{
-		Bank_Statement(playerid, page, 1);
+		Bank_Statement(playerid, page, true);
 	}
 	return 1;
 }
@@ -22129,7 +22498,7 @@ public Bank_OnDBStatement(playerid, result, page, count, bool:more)
 	return 1;
 }
 
-Bank_CmdDeposita(playerid, params[])
+Bank_CmdDeposita(playerid, const params[])
 {
 	new amount = 0;
 	if (!Bank_ParseAmount(params, amount))
@@ -22137,10 +22506,11 @@ Bank_CmdDeposita(playerid, params[])
 		Util_Send(playerid, 0x99CCFFFF, "Uso: /deposita importo (intero positivo, vicino a un ATM o sportello)");
 		return 0;
 	}
-	Bank_Deposit(playerid, amount, 0);
+	Bank_Deposit(playerid, amount, false);
+	return 0;
 }
 
-Bank_CmdPreleva(playerid, params[])
+Bank_CmdPreleva(playerid, const params[])
 {
 	new amount = 0;
 	if (!Bank_ParseAmount(params, amount))
@@ -22148,10 +22518,11 @@ Bank_CmdPreleva(playerid, params[])
 		Util_Send(playerid, 0x99CCFFFF, "Uso: /preleva importo (intero positivo, vicino a un ATM o sportello)");
 		return 0;
 	}
-	Bank_Withdraw(playerid, amount, 0);
+	Bank_Withdraw(playerid, amount, false);
+	return 0;
 }
 
-Bank_CmdBonifico(playerid, params[])
+Bank_CmdBonifico(playerid, const params[])
 {
 	new pos = 0, tTarget[25], tAmount[12], amount = 0;
 	Util_NextToken(params, pos, tTarget, 25);
@@ -22172,12 +22543,13 @@ Bank_CmdBonifico(playerid, params[])
 		Util_Send(playerid, -10270721, "Giocatore non trovato tra quelli in gioco.");
 		return 0;
 	}
-	Bank_Transfer(playerid, target, amount, 0);
+	Bank_Transfer(playerid, target, amount, false);
+	return 0;
 }
 
 Bank_CmdEstratto(playerid)
 {
-	Bank_Statement(playerid, 0, 0);
+	Bank_Statement(playerid, 0, false);
 }
 
 Bank_OnInit()
@@ -22186,7 +22558,7 @@ Bank_OnInit()
 	{
 		new bool:counter = Bank_IsCounter(i);
 		g_BankPickup[i] = CreatePickup(1274, 1, s_BankPoints[i][0], s_BankPoints[i][1], s_BankPoints[i][2], 0);
-		g_BankLabel[i] = Lang_Create3DTextLabel(counter ? "Banca - Sportello\nUsa /atm" : "ATM\nUsa /atm", 0x66DD66FF, s_BankPoints[i][0], s_BankPoints[i][1], (1.0 + s_BankPoints[i][2]), 12.0, 0, 0);
+		g_BankLabel[i] = Lang_Create3DTextLabel(counter ? "Banca - Sportello\nUsa /atm" : "ATM\nUsa /atm", 0x66DD66FF, s_BankPoints[i][0], s_BankPoints[i][1], (1.0 + s_BankPoints[i][2]), 12.0, 0, false);
 	}
 }
 
@@ -22200,7 +22572,7 @@ Bank_OnExit()
 		}
 		Delete3DTextLabel(g_BankLabel[i]);
 		g_BankPickup[i] = -1;
-		g_BankLabel[i] = 65535;
+		g_BankLabel[i] = INVALID_3DTEXT_ID;
 	}
 }
 
@@ -22211,6 +22583,7 @@ Bank_OnPlayerConnect(playerid)
 		return 0;
 	}
 	gPlayer[playerid][pBankOpBusy] = 0;
+	return 0;
 }
 
 Bank_OnPlayerDisconnect(playerid)
@@ -22227,17 +22600,18 @@ Bank_OnPlayerDisconnect(playerid)
 		Log_Write("BANK", msg);
 	}
 	gPlayer[playerid][pBankPendTarget] = 0;
+	return 0;
 }
 
 // ===== modules/intro/intro.inc =====
 new g_IntroSeq;
 new Float:g_IntroCam[6][12] = {
-	{0},
+	{0.0, ...},
 	{-300.0, -1400.0, 25.0, -260.0, -1330.0, 22.0, -230.0, -1250.0, 18.0, -230.0, -1250.0, 18.0},
 	{1180.0, -780.0, 110.0, 1260.0, -800.0, 108.0, 1500.0, -1100.0, 60.0, 1500.0, -1100.0, 60.0},
 	{1380.0, -830.0, 112.0, 1330.0, -880.0, 100.0, 1500.0, -1500.0, 40.0, 1480.0, -1750.0, 40.0},
 	{1752.0, -1880.0, 16.0, 1747.0, -1873.0, 15.0, 1758.0, -1888.0, 14.0, 1758.0, -1888.0, 14.0},
-	{0}
+	{0.0, ...}
 };
 
 bool:Intro_ValidId(playerid)
@@ -22278,7 +22652,7 @@ Intro_Schedule(playerid, ev, ms)
 			ms = remaining;
 		}
 	}
-	gPlayer[playerid][pIntroTimer] = SetTimerEx("Intro_OnTimer", ms, 0, "dddd", playerid, ev, gPlayer[playerid][pIntroScene], gPlayer[playerid][pIntroSeq]);
+	gPlayer[playerid][pIntroTimer] = SetTimerEx("Intro_OnTimer", ms, false, "dddd", playerid, ev, gPlayer[playerid][pIntroScene], gPlayer[playerid][pIntroSeq]);
 }
 
 Intro_SceneMs(scene, flags)
@@ -22337,11 +22711,11 @@ Intro_NextScene(scene, flags)
 
 Intro_Camera(playerid, scene, flags)
 {
-	new row = scene, bool:hold = 0;
+	new row = scene, bool:hold = false;
 	if (scene == 5)
 	{
 		row = (flags & 3) != 0 ? 3 : 4;
-		hold = 1;
+		hold = true;
 	}
 	if (row < 1 || row > 4)
 	{
@@ -22350,14 +22724,15 @@ Intro_Camera(playerid, scene, flags)
 	if (hold)
 	{
 		SetPlayerCameraPos(playerid, g_IntroCam[row][3], g_IntroCam[row][4], g_IntroCam[row][5]);
-		SetPlayerCameraLookAt(playerid, g_IntroCam[row][9], g_IntroCam[row][10], g_IntroCam[row][11], 2);
+		SetPlayerCameraLookAt(playerid, g_IntroCam[row][9], g_IntroCam[row][10], g_IntroCam[row][11], CAMERA_CUT);
 		return 0;
 	}
 	new ms = Intro_SceneMs(scene, flags);
 	SetPlayerCameraPos(playerid, g_IntroCam[row][0], g_IntroCam[row][1], g_IntroCam[row][2]);
-	SetPlayerCameraLookAt(playerid, g_IntroCam[row][6], g_IntroCam[row][7], g_IntroCam[row][8], 2);
-	InterpolateCameraPos(playerid, g_IntroCam[row][0], g_IntroCam[row][1], g_IntroCam[row][2], g_IntroCam[row][3], g_IntroCam[row][4], g_IntroCam[row][5], ms, 1);
-	InterpolateCameraLookAt(playerid, g_IntroCam[row][6], g_IntroCam[row][7], g_IntroCam[row][8], g_IntroCam[row][9], g_IntroCam[row][10], g_IntroCam[row][11], ms, 1);
+	SetPlayerCameraLookAt(playerid, g_IntroCam[row][6], g_IntroCam[row][7], g_IntroCam[row][8], CAMERA_CUT);
+	InterpolateCameraPos(playerid, g_IntroCam[row][0], g_IntroCam[row][1], g_IntroCam[row][2], g_IntroCam[row][3], g_IntroCam[row][4], g_IntroCam[row][5], ms, CAMERA_MOVE);
+	InterpolateCameraLookAt(playerid, g_IntroCam[row][6], g_IntroCam[row][7], g_IntroCam[row][8], g_IntroCam[row][9], g_IntroCam[row][10], g_IntroCam[row][11], ms, CAMERA_MOVE);
+	return 0;
 }
 
 Intro_ObjectCount()
@@ -22390,24 +22765,24 @@ Intro_DestroyObjects(playerid)
 bool:Intro_CreateObjects(playerid)
 {
 	new world = playerid + 20000;
-	new veh = CreateVehicle(437, 1758.0, -1888.0, 13.8, 0.0, 1, 1, -1, 0);
+	new veh = CreateVehicle(437, 1758.0, -1888.0, 13.8, 0.0, 1, 1, -1, false);
 	if (veh == 65535)
 	{
-		return 0;
+		return false;
 	}
 	SetVehicleVirtualWorld(veh, world);
 	new actor = CreateActor(gPlayer[playerid][pSkin], 1753.5, -1884.5, 13.55, 180.0);
 	if (actor == 65535)
 	{
 		DestroyVehicle(veh);
-		return 0;
+		return false;
 	}
 	SetActorVirtualWorld(actor, world);
 	SetActorFacingAngle(actor, 180.0);
-	ApplyActorAnimation(actor, "PED", "IDLE_stance", 4.1, 1, 0, 0, 0, 0);
+	ApplyActorAnimation(actor, "PED", "IDLE_stance", 4.1, true, false, false, false, 0);
 	gPlayer[playerid][pIntroVehicle] = veh;
 	gPlayer[playerid][pIntroActor] = actor + 1;
-	return 1;
+	return true;
 }
 
 Intro_AudioStart(playerid)
@@ -22415,7 +22790,7 @@ Intro_AudioStart(playerid)
 	new url[1];
 	if (url[0] != 0)
 	{
-		PlayAudioStreamForPlayer(playerid, url, 0.0, 0.0, 0.0, 50.0, 0);
+		PlayAudioStreamForPlayer(playerid, url, 0.0, 0.0, 0.0, 50.0, false);
 	}
 }
 
@@ -22436,11 +22811,11 @@ Intro_BeginScene(playerid, scene)
 	if (scene == 5)
 	{
 		UI_IntroSubtitle(playerid, "");
-		UI_IntroTitle(playerid, 1);
+		UI_IntroTitle(playerid, true);
 	}
 	else
 	{
-		UI_IntroTitle(playerid, 0);
+		UI_IntroTitle(playerid, false);
 		UI_IntroNarrate(playerid, scene);
 	}
 	UI_IntroFadeTo(playerid, 0, 8, 60);
@@ -22504,10 +22879,10 @@ public Intro_Finish(playerid, reason)
 	Intro_StopTimer(playerid);
 	Intro_DestroyObjects(playerid);
 	Intro_AudioStop(playerid);
-	UI_IntroTitle(playerid, 0);
+	UI_IntroTitle(playerid, false);
 	UI_IntroSubtitle(playerid, "");
 	UI_IntroSkipHintHide(playerid);
-	UI_IntroLetterbox(playerid, 0);
+	UI_IntroLetterbox(playerid, false);
 	UI_IntroFade(playerid, 255);
 	gPlayer[playerid][pIntroScene] = 0;
 	gPlayer[playerid][pIntroFlags] |= 8;
@@ -22628,10 +23003,11 @@ Intro_OnKeyStateChange(playerid, t_KEY:newkeys)
 	{
 		return 0;
 	}
-	if ((newkeys & 16) != 0)
+	if ((newkeys & KEY_SECONDARY_ATTACK) != KEY:0)
 	{
 		Intro_Skip(playerid);
 	}
+	return 0;
 }
 
 public Intro_OnPlayerConnect(playerid)
@@ -22760,7 +23136,7 @@ public UI_OnStoryChosen(playerid, origin, reason)
 		}
 		gPlayer[playerid][pStoryDraftOrigin] = origin;
 		gPlayer[playerid][pStoryDraftMotive] = reason;
-		Intro_SaveStory(playerid, 0);
+		Intro_SaveStory(playerid, false);
 	}
 	return 1;
 }
@@ -22777,7 +23153,7 @@ public Intro_OnCharCreated(playerid, charId)
 		gPlayer[playerid][pStoryMotive] = gPlayer[playerid][pStoryDraftMotive];
 		if (charId > 0)
 		{
-			Intro_SaveStory(playerid, 1);
+			Intro_SaveStory(playerid, true);
 		}
 	}
 	return Intro_Begin(playerid);
@@ -22852,7 +23228,7 @@ Intro_CmdSalta(playerid)
 	}
 }
 
-Intro_CmdStoria(playerid, params[])
+Intro_CmdStoria(playerid, const params[])
 {
 	new pos = 0, tok[16], name[25], target = INVALID_PLAYER_ID;
 	Util_NextToken(params, pos, tok, 16);
@@ -22862,7 +23238,7 @@ Intro_CmdStoria(playerid, params[])
 		UI_StoryShowOwn(playerid, name, gPlayer[playerid][pStoryOrigin], gPlayer[playerid][pStoryMotive]);
 		return 0;
 	}
-	if (!strcmp(tok, "imposta", 1, 0x7FFFFFFF))
+	if (!strcmp(tok, "imposta", true, 0x7FFFFFFF))
 	{
 		if (gPlayer[playerid][pStoryOrigin] != 0 || gPlayer[playerid][pStoryMotive] != 0)
 		{
@@ -22886,9 +23262,10 @@ Intro_CmdStoria(playerid, params[])
 	{
 		Util_Send(playerid, 0x99CCFFFF, "Uso: /storia · /storia imposta (una sola volta, solo se non hai una storia)");
 	}
+	return 0;
 }
 
-Intro_CmdMostra(playerid, params[])
+Intro_CmdMostra(playerid, const params[])
 {
 	new pos = 0, tok[16], target = INVALID_PLAYER_ID;
 	Util_NextToken(params, pos, tok, 16);
@@ -22911,6 +23288,7 @@ Intro_CmdMostra(playerid, params[])
 	gPlayer[playerid][pStoryLastShowTick] = now != 0 ? now : 1;
 	gPlayer[playerid][pStoryShowTarget] = target + 1;
 	DB_StoryRead(playerid, playerid, 1);
+	return 0;
 }
 
 public Story_OnDBRead(playerid, targetid, purpose, result, origin, motive, bool:hasStory)
@@ -23027,7 +23405,7 @@ public House_OnDBCompensated(houseId)
 	new idx = House_Find(houseId);
 	if (idx != -1)
 	{
-		g_HsBusy[idx] = 0;
+		g_HsBusy[idx] = false;
 	}
 	return 1;
 }
@@ -23056,16 +23434,16 @@ bool:House_IsGuest(idx, charId)
 {
 	if (charId <= 0)
 	{
-		return 0;
+		return false;
 	}
 	for (new k = 0; k < g_HouseRows[idx][hrKeyCount] && k < 3; k++)
 	{
 		if (g_HouseRows[idx][hrKeyChars][k] == charId)
 		{
-			return 1;
+			return true;
 		}
 	}
-	return 0;
+	return false;
 }
 
 House_Role(idx, playerid)
@@ -23183,7 +23561,7 @@ bool:House_PlayerActive(playerid, now)
 {
 	if (!Util_IsPlaying(playerid))
 	{
-		return 0;
+		return false;
 	}
 	return now - gPlayer[playerid][pLastActiveTick] <= 10000;
 }
@@ -23196,22 +23574,23 @@ House_ResetPlayer(playerid)
 	}
 	for (new i = 0; i < 56; i++)
 	{
-		g_HPl[playerid][i] = 0;
+		g_HPl[playerid][E_HPLAYER:i] = 0;
 	}
+	return 0;
 }
 
 bool:House_OpMatches(playerid, &houseId, result)
 {
 	if (g_HPl[playerid][hpOpHouseId] == houseId)
 	{
-		return 1;
+		return true;
 	}
 	if (result != -1)
 	{
-		return 0;
+		return false;
 	}
 	houseId = g_HPl[playerid][hpOpHouseId];
-	return 1;
+	return true;
 }
 
 bool:House_CooldownBlocked(playerid)
@@ -23220,33 +23599,33 @@ bool:House_CooldownBlocked(playerid)
 	if (now - g_HPl[playerid][hpCmdTick] < 1500)
 	{
 		Util_Send(playerid, -10270721, "Attendi un attimo prima di usare un altro comando della casa.");
-		return 1;
+		return true;
 	}
 	g_HPl[playerid][hpCmdTick] = now;
-	return 0;
+	return false;
 }
 
 bool:House_CmdGuard(playerid, bool:needIdle)
 {
 	if (!House_PlayerOk(playerid))
 	{
-		return 0;
+		return false;
 	}
 	if (!g_HsReady)
 	{
 		Util_Send(playerid, -10270721, "Il sistema case non e' disponibile al momento.");
-		return 0;
+		return false;
 	}
 	if (House_CooldownBlocked(playerid))
 	{
-		return 0;
+		return false;
 	}
 	if (needIdle && g_HPl[playerid][hpPendingOp] != 0)
 	{
 		Util_Send(playerid, -10270721, "Hai un'operazione della casa in corso: attendi.");
-		return 0;
+		return false;
 	}
-	return 1;
+	return true;
 }
 
 House_ClearInside(playerid)
@@ -23312,16 +23691,16 @@ bool:House_NearShop(playerid)
 {
 	if (GetPlayerInterior(playerid) != 0 || GetPlayerVirtualWorld(playerid) != 0)
 	{
-		return 0;
+		return false;
 	}
 	for (new i = 0; i < 2; i++)
 	{
 		if ((GetPlayerDistanceFromPoint(playerid, s_HsShops[i][0], s_HsShops[i][1], s_HsShops[i][2]) <= 3.0))
 		{
-			return 1;
+			return true;
 		}
 	}
-	return 0;
+	return false;
 }
 
 House_RefreshWorld(idx)
@@ -23340,19 +23719,20 @@ House_RefreshWorld(idx)
 		format(text, 160, "Casa %d - %s\nProprieta' di %s\n%s", g_HouseRows[idx][hrId], s_HsTierName[tier], g_HouseRows[idx][hrOwnerName], g_HouseRows[idx][hrLocked] ? "Chiusa a chiave (/bussa)" : "Aperta (/entra)");
 	}
 	new color = free ? 0x66DD66FF : -2994689;
-	if (g_HsLabel[idx] != 65535)
+	if (g_HsLabel[idx] != INVALID_3DTEXT_ID)
 	{
 		Lang_Update3DTextLabelText(g_HsLabel[idx], color, text);
 	}
 	else
 	{
-		g_HsLabel[idx] = Lang_Create3DTextLabel(text, color, g_HouseRows[idx][hrExtX], g_HouseRows[idx][hrExtY], (0.9 + g_HouseRows[idx][hrExtZ]), 12.0, 0, 0);
+		g_HsLabel[idx] = Lang_Create3DTextLabel(text, color, g_HouseRows[idx][hrExtX], g_HouseRows[idx][hrExtY], (0.9 + g_HouseRows[idx][hrExtZ]), 12.0, 0, false);
 	}
 	if (g_HsPickup[idx] >= 0)
 	{
 		DestroyPickup(g_HsPickup[idx]);
 	}
 	g_HsPickup[idx] = CreatePickup(free ? 1273 : 1272, 1, g_HouseRows[idx][hrExtX], g_HouseRows[idx][hrExtY], g_HouseRows[idx][hrExtZ], 0);
+	return 0;
 }
 
 House_ResetRowState(idx)
@@ -23382,6 +23762,7 @@ House_SaveTick(idx)
 		return 0;
 	}
 	DB_SaveHouseTick(g_HouseRows[idx][hrId], g_HouseRows[idx][hrOwnerId], g_HouseRows[idx][hrLuceMin], g_HouseRows[idx][hrGasMin], g_HouseRows[idx][hrCycleMin], g_HouseRows[idx][hrFridgeOffMin]);
+	return 0;
 }
 
 House_ApplyInsideUi(playerid, idx)
@@ -23432,7 +23813,7 @@ House_PlaceOutside(playerid, idx)
 	House_ClearInside(playerid);
 }
 
-House_EvictAll(idx, reason[])
+House_EvictAll(idx, const reason[])
 {
 	new id = g_HouseRows[idx][hrId];
 	for (new p = 0; p < MAX_PLAYERS; p++)
@@ -23481,6 +23862,7 @@ House_CapHealthIfWeak(playerid)
 	{
 		SetPlayerHealth(playerid, float(70));
 	}
+	return 0;
 }
 
 House_BeginFoodLoad(playerid)
@@ -23491,6 +23873,7 @@ House_BeginFoodLoad(playerid)
 	}
 	g_HPl[playerid][hpHungerState] = 1;
 	DB_LoadFood(playerid, gPlayer[playerid][pCharId]);
+	return 0;
 }
 
 bool:House_FoodReady(playerid)
@@ -23498,9 +23881,9 @@ bool:House_FoodReady(playerid)
 	if (g_HPl[playerid][hpHungerState] != 2)
 	{
 		Util_Send(playerid, -10270721, "I tuoi dati sul cibo non sono ancora stati caricati: riprova tra poco.");
-		return 0;
+		return false;
 	}
-	return 1;
+	return true;
 }
 
 House_NotifyBills(playerid)
@@ -23585,7 +23968,7 @@ House_BillSum(playerid, kind, &count)
 House_PushUi(playerid, idx)
 {
 	new id = g_HouseRows[idx][hrId];
-	UI_HouseDataSet(playerid, id, House_Role(idx, playerid), House_Tier(idx), House_IntIdx(idx), g_HouseRows[idx][hrLocked], House_UtilState(g_HouseRows[idx][hrLuceOn], g_HouseRows[idx][hrLuceCut]), House_UtilState(g_HouseRows[idx][hrGasOn], g_HouseRows[idx][hrGasCut]), g_HouseRows[idx][hrFridgeUnits], Inv_Count(playerid, 1), g_HouseRows[idx][hrKeyCount], gPlayer[playerid][pLevel], gPlayer[playerid][pMoney], gPlayer[playerid][pBank]);
+	UI_HouseDataSet(playerid, id, House_Role(idx, playerid), House_Tier(idx), House_IntIdx(idx), bool:g_HouseRows[idx][hrLocked], House_UtilState(bool:g_HouseRows[idx][hrLuceOn], bool:g_HouseRows[idx][hrLuceCut]), House_UtilState(bool:g_HouseRows[idx][hrGasOn], bool:g_HouseRows[idx][hrGasCut]), g_HouseRows[idx][hrFridgeUnits], Inv_Count(playerid, 1), g_HouseRows[idx][hrKeyCount], gPlayer[playerid][pLevel], gPlayer[playerid][pMoney], gPlayer[playerid][pBank]);
 	new lightDue = 0, lightCnt = 0, gasDue = 0, gasCnt = 0;
 	if (g_HPl[playerid][hpBillsHouseId] == id)
 	{
@@ -23608,6 +23991,7 @@ House_OpenMenu(playerid, idx)
 	g_HPl[playerid][hpBillsHouseId] = 0;
 	House_PushUi(playerid, idx);
 	UI_HouseMenuShow(playerid);
+	return 0;
 }
 
 House_OpenBills(playerid, idx)
@@ -23658,7 +24042,7 @@ House_DoBuy(playerid, idx, payWithBank)
 		Util_Send(playerid, -10270721, "Operazione in corso: attendi.");
 		return 0;
 	}
-	if (House_FindNear(playerid) != idx || GetPlayerState(playerid) != 1)
+	if (House_FindNear(playerid) != idx || GetPlayerState(playerid) != PLAYER_STATE_ONFOOT)
 	{
 		Util_Send(playerid, -10270721, "Devi essere a piedi davanti alla porta della casa.");
 		return 0;
@@ -23695,13 +24079,14 @@ House_DoBuy(playerid, idx, payWithBank)
 		Util_Send(playerid, -10270721, "Fondi insufficienti con questo metodo di pagamento.");
 		return 0;
 	}
-	g_HsBusy[idx] = 1;
+	g_HsBusy[idx] = true;
 	g_HPl[playerid][hpPendingOp] = 1;
 	g_HPl[playerid][hpOpHouseId] = g_HouseRows[idx][hrId];
 	g_HPl[playerid][hpPayWithBank] = payWithBank;
 	g_HPl[playerid][hpOpAmount] = price;
 	Util_Send(playerid, -1, "Pratica di acquisto in corso...");
 	DB_BuyHouse(playerid, g_HouseRows[idx][hrId], charId, price, maxHouses);
+	return 0;
 }
 
 public House_OnDBBought(playerid, houseId, affected)
@@ -23710,7 +24095,7 @@ public House_OnDBBought(playerid, houseId, affected)
 	{
 		return 1;
 	}
-	new idx = -1;
+	new idx;
 	if (g_HPl[playerid][hpPendingOp] != 1 || !House_OpMatches(playerid, houseId, affected))
 	{
 		if (affected == 1)
@@ -23724,7 +24109,7 @@ public House_OnDBBought(playerid, houseId, affected)
 	g_HPl[playerid][hpPendingOp] = 0;
 	if (idx != -1)
 	{
-		g_HsBusy[idx] = 0;
+		g_HsBusy[idx] = false;
 	}
 	if (affected == -1)
 	{
@@ -23743,7 +24128,7 @@ public House_OnDBBought(playerid, houseId, affected)
 	}
 	if (!ok)
 	{
-		g_HsBusy[idx] = 1;
+		g_HsBusy[idx] = true;
 		g_HPl[playerid][hpPendingOp] = 3;
 		g_HPl[playerid][hpOpHouseId] = houseId;
 		DB_SellHouse(playerid, houseId, charId);
@@ -23804,12 +24189,13 @@ House_DoSell(playerid, idx, bool:confirmed)
 		Util_Send(playerid, 0x99CCFFFF, "Per confermare: /casa vendi conferma");
 		return 0;
 	}
-	g_HsBusy[idx] = 1;
+	g_HsBusy[idx] = true;
 	g_HPl[playerid][hpPendingOp] = 2;
 	g_HPl[playerid][hpOpHouseId] = g_HouseRows[idx][hrId];
 	g_HPl[playerid][hpOpAmount] = refund;
 	Util_Send(playerid, -1, "Vendita in corso...");
 	DB_SellHouse(playerid, g_HouseRows[idx][hrId], gPlayer[playerid][pCharId]);
+	return 0;
 }
 
 public House_OnDBSold(playerid, houseId, affected)
@@ -23825,7 +24211,7 @@ public House_OnDBSold(playerid, houseId, affected)
 		g_HPl[playerid][hpPendingOp] = 0;
 		if (idx != -1)
 		{
-			g_HsBusy[idx] = 0;
+			g_HsBusy[idx] = false;
 		}
 		if (affected != 1)
 		{
@@ -23846,7 +24232,7 @@ public House_OnDBSold(playerid, houseId, affected)
 	g_HPl[playerid][hpPendingOp] = 0;
 	if (idx != -1)
 	{
-		g_HsBusy[idx] = 0;
+		g_HsBusy[idx] = false;
 	}
 	if (affected == -1)
 	{
@@ -23893,9 +24279,10 @@ House_ToggleLock(playerid, idx)
 		return 0;
 	}
 	g_HouseRows[idx][hrLocked] = !g_HouseRows[idx][hrLocked];
-	DB_SetHouseLock(g_HouseRows[idx][hrId], g_HouseRows[idx][hrOwnerId], g_HouseRows[idx][hrLocked]);
+	DB_SetHouseLock(g_HouseRows[idx][hrId], g_HouseRows[idx][hrOwnerId], bool:g_HouseRows[idx][hrLocked]);
 	House_RefreshWorld(idx);
 	SendClientMessage(playerid, 0x66DD66FF, "Porta della casa %d: %s.", g_HouseRows[idx][hrId], g_HouseRows[idx][hrLocked] ? "chiusa a chiave" : "aperta");
+	return 0;
 }
 
 bool:House_SetUtility(playerid, idx, utility, bool:on)
@@ -23903,19 +24290,19 @@ bool:House_SetUtility(playerid, idx, utility, bool:on)
 	if (House_FindInside(playerid) != idx)
 	{
 		Util_Send(playerid, -10270721, "Devi essere dentro la casa.");
-		return 0;
+		return false;
 	}
 	new role = House_Role(idx, playerid);
 	if (role != 1 && !(utility == 0 && role == 2))
 	{
 		Util_Send(playerid, -10270721, utility == 1 ? "Solo il proprietario puo' gestire il gas." : "Non hai accesso alle utenze di questa casa.");
-		return 0;
+		return false;
 	}
-	new bool:cut = utility == 1 ? g_HouseRows[idx][hrGasCut] : g_HouseRows[idx][hrLuceCut];
+	new bool:cut = bool:(utility == 1 ? g_HouseRows[idx][hrGasCut] : g_HouseRows[idx][hrLuceCut]);
 	if (cut)
 	{
 		Util_Send(playerid, -10270721, "Utenza staccata per morosita': paga le bollette (/bollette).");
-		return 0;
+		return false;
 	}
 	if (utility == 1)
 	{
@@ -23928,12 +24315,12 @@ bool:House_SetUtility(playerid, idx, utility, bool:on)
 	DB_SetUtility(g_HouseRows[idx][hrId], gPlayer[playerid][pCharId], utility, on);
 	House_RefreshInside(idx);
 	SendClientMessage(playerid, 0x66DD66FF, "%s %s.", utility == 1 ? "Gas" : "Luce", utility == 1 ? (on ? "acceso" : "spento") : (on ? "accesa" : "spenta"));
-	return 1;
+	return true;
 }
 
 House_CmdToggleUtility(playerid, utility)
 {
-	if (!House_CmdGuard(playerid, 1))
+	if (!House_CmdGuard(playerid, true))
 	{
 		return 0;
 	}
@@ -23943,8 +24330,9 @@ House_CmdToggleUtility(playerid, utility)
 		Util_Send(playerid, -10270721, "Devi essere dentro una casa.");
 		return 0;
 	}
-	new bool:cur = utility == 1 ? g_HouseRows[idx][hrGasOn] : g_HouseRows[idx][hrLuceOn];
+	new bool:cur = bool:(utility == 1 ? g_HouseRows[idx][hrGasOn] : g_HouseRows[idx][hrLuceOn]);
 	House_SetUtility(playerid, idx, utility, !cur);
+	return 0;
 }
 
 House_ReopenFridge(playerid)
@@ -23956,6 +24344,7 @@ House_ReopenFridge(playerid)
 	}
 	House_PushUi(playerid, idx);
 	UI_HouseFridgeShow(playerid);
+	return 0;
 }
 
 House_FridgeChanged(playerid, idx, delta)
@@ -24004,8 +24393,9 @@ House_EatCold(playerid)
 	}
 	g_HouseRows[idx][hrFridgeUnits]--;
 	House_FridgeChanged(playerid, idx, -1);
-	House_HungerSet(playerid, g_HPl[playerid][hpHunger] + 25, 1);
+	House_HungerSet(playerid, g_HPl[playerid][hpHunger] + 25, true);
 	SendClientMessage(playerid, 0x66DD66FF, "Mangi qualcosa di freddo dal frigo. Sazieta': %d%%.", g_HPl[playerid][hpHunger]);
+	return 0;
 }
 
 House_StartCook(playerid)
@@ -24037,8 +24427,9 @@ House_StartCook(playerid)
 	}
 	g_HPl[playerid][hpCooking] = 1;
 	g_HPl[playerid][hpCookHouseId] = g_HouseRows[idx][hrId];
-	SetTimerEx("House_OnCookDone", 6000, 0, "dd", playerid, g_HPl[playerid][hpSession]);
+	SetTimerEx("House_OnCookDone", 6000, false, "dd", playerid, g_HPl[playerid][hpSession]);
 	Util_Send(playerid, -1, "Inizi a cucinare...");
+	return 0;
 }
 
 public House_OnCookDone(playerid, session)
@@ -24087,7 +24478,7 @@ House_EatPlate(playerid)
 		return 0;
 	}
 	g_HPl[playerid][hpCookCooldown] = 0;
-	House_HungerSet(playerid, g_HPl[playerid][hpHunger] + 45, 1);
+	House_HungerSet(playerid, g_HPl[playerid][hpHunger] + 45, true);
 	new Float:hp;
 	GetPlayerHealth(playerid, hp);
 	hp += float(5);
@@ -24097,6 +24488,7 @@ House_EatPlate(playerid)
 	}
 	SetPlayerHealth(playerid, hp);
 	SendClientMessage(playerid, 0x66DD66FF, "Mangi il piatto caldo. Sazieta': %d%%.", g_HPl[playerid][hpHunger]);
+	return 0;
 }
 
 House_Store(playerid, n)
@@ -24123,11 +24515,12 @@ House_Store(playerid, n)
 		SendClientMessage(playerid, -10270721, "Nel frigo c'e' posto solo per altre %d porzioni.", cap - g_HouseRows[idx][hrFridgeUnits]);
 		return 0;
 	}
-	g_HsFridgeBusy[idx] = 1;
+	g_HsFridgeBusy[idx] = true;
 	if (!Inv_FridgeMove(playerid, g_HouseRows[idx][hrId], 1, n, cap))
 	{
-		g_HsFridgeBusy[idx] = 0;
+		g_HsFridgeBusy[idx] = false;
 	}
+	return 0;
 }
 
 House_Take(playerid, n)
@@ -24152,11 +24545,12 @@ House_Take(playerid, n)
 		SendClientMessage(playerid, -10270721, "Puoi portare al massimo %d porzioni.", 12);
 		return 0;
 	}
-	g_HsFridgeBusy[idx] = 1;
+	g_HsFridgeBusy[idx] = true;
 	if (!Inv_FridgeMove(playerid, g_HouseRows[idx][hrId], 2, n, House_FridgeCap(idx)))
 	{
-		g_HsFridgeBusy[idx] = 0;
+		g_HsFridgeBusy[idx] = false;
 	}
+	return 0;
 }
 
 public House_InvFridgeResult(playerid, houseId, direction, qty, result)
@@ -24166,7 +24560,7 @@ public House_InvFridgeResult(playerid, houseId, direction, qty, result)
 	{
 		return 1;
 	}
-	g_HsFridgeBusy[idx] = 0;
+	g_HsFridgeBusy[idx] = false;
 	if (!Inv_ValidPlayer(playerid))
 	{
 		return 1;
@@ -24232,8 +24626,8 @@ public House_InvFridgeAbort(houseId)
 	{
 		return 1;
 	}
-	g_HsFridgeBusy[idx] = 1;
-	SetTimerEx("House_FridgeReloadLater", 1500, 0, "d", houseId);
+	g_HsFridgeBusy[idx] = true;
+	SetTimerEx("House_FridgeReloadLater", 1500, false, "d", houseId);
 	return 1;
 }
 
@@ -24255,7 +24649,7 @@ public House_OnDBFridgeReloaded(houseId, units)
 		g_HouseRows[idx][hrFridgeUnits] = units;
 		House_RefreshInside(idx);
 	}
-	g_HsFridgeBusy[idx] = 0;
+	g_HsFridgeBusy[idx] = false;
 	return 1;
 }
 
@@ -24274,13 +24668,13 @@ public House_InvHungerAdd(playerid, amount)
 	{
 		return -1;
 	}
-	House_HungerSet(playerid, g_HPl[playerid][hpHunger] + amount, 1);
+	House_HungerSet(playerid, g_HPl[playerid][hpHunger] + amount, true);
 	return g_HPl[playerid][hpHunger];
 }
 
-House_CmdFrigo(playerid, params[])
+House_CmdFrigo(playerid, const params[])
 {
-	if (!House_CmdGuard(playerid, 0))
+	if (!House_CmdGuard(playerid, false))
 	{
 		return 0;
 	}
@@ -24301,8 +24695,8 @@ House_CmdFrigo(playerid, params[])
 		Util_Send(playerid, 0x99CCFFFF, "Uso: /frigo metti [n] (solo proprietario) · /frigo prendi [n] (proprietario o ospite)");
 		return 0;
 	}
-	new bool:store = !strcmp(sub, "metti", 1, 0x7FFFFFFF);
-	if (!store && strcmp(sub, "prendi", 1, 0x7FFFFFFF))
+	new bool:store = !strcmp(sub, "metti", true, 0x7FFFFFFF);
+	if (!store && strcmp(sub, "prendi", true, 0x7FFFFFFF))
 	{
 		Util_Send(playerid, 0x99CCFFFF, "Uso: /frigo metti [n] · /frigo prendi [n]");
 		return 0;
@@ -24322,11 +24716,12 @@ House_CmdFrigo(playerid, params[])
 	{
 		House_Take(playerid, n);
 	}
+	return 0;
 }
 
-House_CmdMangia(playerid, params[])
+House_CmdMangia(playerid, const params[])
 {
-	if (!House_CmdGuard(playerid, 0))
+	if (!House_CmdGuard(playerid, false))
 	{
 		return 0;
 	}
@@ -24337,26 +24732,28 @@ House_CmdMangia(playerid, params[])
 		House_EatPlate(playerid);
 		return 0;
 	}
-	if (!strcmp(sub, "freddo", 1, 0x7FFFFFFF))
+	if (!strcmp(sub, "freddo", true, 0x7FFFFFFF))
 	{
 		House_EatCold(playerid);
 		return 0;
 	}
 	Util_Send(playerid, 0x99CCFFFF, "Uso: /mangia (piatto caldo dopo /cucina) · /mangia freddo");
+	return 0;
 }
 
 House_CmdCucina(playerid)
 {
-	if (!House_CmdGuard(playerid, 0))
+	if (!House_CmdGuard(playerid, false))
 	{
 		return 0;
 	}
 	House_StartCook(playerid);
+	return 0;
 }
 
-House_CmdCompra(playerid, params[])
+House_CmdCompra(playerid, const params[])
 {
-	if (!House_CmdGuard(playerid, 0))
+	if (!House_CmdGuard(playerid, false))
 	{
 		return 0;
 	}
@@ -24365,7 +24762,7 @@ House_CmdCompra(playerid, params[])
 		Util_Send(playerid, -10270721, "Devi essere in un supermercato.");
 		return 0;
 	}
-	if (GetPlayerState(playerid) != 1)
+	if (GetPlayerState(playerid) != PLAYER_STATE_ONFOOT)
 	{
 		Util_Send(playerid, -10270721, "Scendi dal veicolo.");
 		return 0;
@@ -24394,6 +24791,7 @@ House_CmdCompra(playerid, params[])
 		return 0;
 	}
 	Inv_Buy(playerid, itemId, n);
+	return 0;
 }
 
 House_BillAmount(tariff, minutesOn)
@@ -24424,6 +24822,7 @@ House_CloseCycle(idx)
 	DB_AgeBills(id, 2);
 	DB_AddBill(id, 0, luceAmt, 4);
 	DB_AddBill(id, 1, gasAmt, 4);
+	return 0;
 }
 
 public House_OnDBBillAdded(houseId, kind, billId, amount)
@@ -24478,6 +24877,7 @@ House_CutUtil(idx, kind)
 	new msg[256];
 	format(msg, 256, "DISTACCO casa %d: %s", id, kind == 1 ? "gas" : "luce");
 	Log_Write("HOUSE", msg);
+	return 0;
 }
 
 public House_OnDBBillsAged(houseId, overdueMask)
@@ -24513,9 +24913,10 @@ House_PayNext(playerid)
 	}
 	new kind = mask & 1 ? 0 : 1, cnt = 0;
 	new sum = House_BillSum(playerid, kind, cnt);
-	new bool:cut = kind == 1 ? g_HouseRows[idx][hrGasCut] : g_HouseRows[idx][hrLuceCut];
+	new bool:cut = bool:(kind == 1 ? g_HouseRows[idx][hrGasCut] : g_HouseRows[idx][hrLuceCut]);
 	g_HPl[playerid][hpBillKind] = kind;
 	DB_PayBills(playerid, g_HouseRows[idx][hrId], gPlayer[playerid][pCharId], kind, sum, cut);
+	return 0;
 }
 
 public UI_OnHouseBillsPayAll(playerid, houseId, payWithBank)
@@ -24548,7 +24949,7 @@ public UI_OnHouseBillsPayAll(playerid, houseId, payWithBank)
 	for (new kind = 0; kind < 2; kind++)
 	{
 		new cnt = 0, sum = House_BillSum(playerid, kind, cnt);
-		new bool:cut = kind == 1 ? g_HouseRows[idx][hrGasCut] : g_HouseRows[idx][hrLuceCut];
+		new bool:cut = bool:(kind == 1 ? g_HouseRows[idx][hrGasCut] : g_HouseRows[idx][hrLuceCut]);
 		if (sum <= 0 && !cut)
 		{
 			continue;
@@ -24654,7 +25055,7 @@ public House_OnDBBillsPaid(playerid, houseId, kind, paidAmount, restored)
 
 House_CmdBollette(playerid)
 {
-	if (!House_CmdGuard(playerid, 1))
+	if (!House_CmdGuard(playerid, true))
 	{
 		return 0;
 	}
@@ -24683,6 +25084,7 @@ House_CmdBollette(playerid)
 		idx = found;
 	}
 	House_OpenBills(playerid, idx);
+	return 0;
 }
 
 House_KeyContext(playerid)
@@ -24696,7 +25098,7 @@ House_KeyContext(playerid)
 	return idx;
 }
 
-House_GiveKey(playerid, token[])
+House_GiveKey(playerid, const token[])
 {
 	new idx = House_KeyContext(playerid), target = 0;
 	if (idx == -1)
@@ -24727,6 +25129,7 @@ House_GiveKey(playerid, token[])
 	g_HPl[playerid][hpOpHouseId] = g_HouseRows[idx][hrId];
 	g_HPl[playerid][hpKeyTargetChar] = gPlayer[target][pCharId];
 	DB_AddKey(playerid, g_HouseRows[idx][hrId], gPlayer[playerid][pCharId], gPlayer[target][pCharId]);
+	return 0;
 }
 
 public House_OnDBKeyAdded(playerid, houseId, targetId, affected)
@@ -24767,7 +25170,7 @@ public House_OnDBKeyAdded(playerid, houseId, targetId, affected)
 	return 1;
 }
 
-House_LoadKeys(playerid, intent, token[])
+House_LoadKeys(playerid, intent, const token[])
 {
 	new idx = House_KeyContext(playerid);
 	if (idx == -1)
@@ -24779,6 +25182,7 @@ House_LoadKeys(playerid, intent, token[])
 	g_HPl[playerid][hpBillIntent] = intent;
 	strmid(g_HPl[playerid][hpKeyToken], token, 0, strlen(token), 32);
 	DB_LoadKeys(playerid, g_HouseRows[idx][hrId], gPlayer[playerid][pCharId]);
+	return 0;
 }
 
 public House_OnDBKeysLoaded(playerid, houseId, count)
@@ -24819,7 +25223,7 @@ public House_OnDBKeysLoaded(playerid, houseId, count)
 	new target = 0, num = 0;
 	for (new i = 0; i < count && target == 0; i++)
 	{
-		if (!strcmp(g_HouseKeyList[playerid][i][hkName], g_HPl[playerid][hpKeyToken], 1, 0x7FFFFFFF))
+		if (!strcmp(g_HouseKeyList[playerid][i][hkName], g_HPl[playerid][hpKeyToken], true, 0x7FFFFFFF))
 		{
 			target = g_HouseKeyList[playerid][i][hkCharId];
 		}
@@ -24918,18 +25322,19 @@ House_Info(playerid, idx)
 	{
 		return 0;
 	}
-	House_UtilText(g_HouseRows[idx][hrLuceOn], g_HouseRows[idx][hrLuceCut], st1, 12);
-	House_UtilText(g_HouseRows[idx][hrGasOn], g_HouseRows[idx][hrGasCut], st2, 12);
+	House_UtilText(bool:g_HouseRows[idx][hrLuceOn], bool:g_HouseRows[idx][hrLuceCut], st1, 12);
+	House_UtilText(bool:g_HouseRows[idx][hrGasOn], bool:g_HouseRows[idx][hrGasCut], st2, 12);
 	SendClientMessage(playerid, -1, "Luce: %s - Gas: %s - Frigo: %d/%d", st1, st2, g_HouseRows[idx][hrFridgeUnits], s_HsFridgeCap[tier]);
 	if (role == 1)
 	{
 		SendClientMessage(playerid, -1, "Bollette non pagate: %d - Chiavi consegnate: %d/%d", g_HouseRows[idx][hrBills], g_HouseRows[idx][hrKeyCount], 3);
 	}
+	return 0;
 }
 
-House_CmdCasa(playerid, params[])
+House_CmdCasa(playerid, const params[])
 {
-	if (!House_CmdGuard(playerid, 0))
+	if (!House_CmdGuard(playerid, false))
 	{
 		return 0;
 	}
@@ -24951,22 +25356,22 @@ House_CmdCasa(playerid, params[])
 		House_OpenMenu(playerid, idx);
 		return 0;
 	}
-	if (!strcmp(sub, "info", 1, 0x7FFFFFFF))
+	if (!strcmp(sub, "info", true, 0x7FFFFFFF))
 	{
 		House_Info(playerid, idx);
 		return 0;
 	}
-	if (!strcmp(sub, "serratura", 1, 0x7FFFFFFF))
+	if (!strcmp(sub, "serratura", true, 0x7FFFFFFF))
 	{
 		House_ToggleLock(playerid, idx);
 		return 0;
 	}
-	if (!strcmp(sub, "chiavi", 1, 0x7FFFFFFF))
+	if (!strcmp(sub, "chiavi", true, 0x7FFFFFFF))
 	{
 		House_LoadKeys(playerid, 3, "");
 		return 0;
 	}
-	if (!strcmp(sub, "chiave", 1, 0x7FFFFFFF))
+	if (!strcmp(sub, "chiave", true, 0x7FFFFFFF))
 	{
 		Util_NextToken(params, pos, arg, 32);
 		if (arg[0] == 0)
@@ -24977,7 +25382,7 @@ House_CmdCasa(playerid, params[])
 		House_GiveKey(playerid, arg);
 		return 0;
 	}
-	if (!strcmp(sub, "revoca", 1, 0x7FFFFFFF))
+	if (!strcmp(sub, "revoca", true, 0x7FFFFFFF))
 	{
 		Util_NextToken(params, pos, arg, 32);
 		if (arg[0] == 0)
@@ -24988,13 +25393,13 @@ House_CmdCasa(playerid, params[])
 		House_LoadKeys(playerid, 4, arg);
 		return 0;
 	}
-	if (!strcmp(sub, "vendi", 1, 0x7FFFFFFF))
+	if (!strcmp(sub, "vendi", true, 0x7FFFFFFF))
 	{
 		Util_NextToken(params, pos, arg, 32);
-		House_DoSell(playerid, idx, !strcmp(arg, "conferma", 1, 0x7FFFFFFF));
+		House_DoSell(playerid, idx, !strcmp(arg, "conferma", true, 0x7FFFFFFF));
 		return 0;
 	}
-	if (!strcmp(sub, "compra", 1, 0x7FFFFFFF))
+	if (!strcmp(sub, "compra", true, 0x7FFFFFFF))
 	{
 		if (g_HouseRows[idx][hrOwnerId] > 0 || House_FindNear(playerid) != idx)
 		{
@@ -25007,12 +25412,12 @@ House_CmdCasa(playerid, params[])
 			House_OpenMenu(playerid, idx);
 			return 0;
 		}
-		if (!strcmp(arg, "contanti", 1, 0x7FFFFFFF))
+		if (!strcmp(arg, "contanti", true, 0x7FFFFFFF))
 		{
 			House_DoBuy(playerid, idx, 0);
 			return 0;
 		}
-		if (!strcmp(arg, "banca", 1, 0x7FFFFFFF))
+		if (!strcmp(arg, "banca", true, 0x7FFFFFFF))
 		{
 			House_DoBuy(playerid, idx, 1);
 			return 0;
@@ -25021,11 +25426,12 @@ House_CmdCasa(playerid, params[])
 		return 0;
 	}
 	Util_Send(playerid, 0x99CCFFFF, "Uso: /casa [info|compra|vendi|serratura|chiave|chiavi|revoca]");
+	return 0;
 }
 
 House_CmdEntra(playerid)
 {
-	if (!House_CmdGuard(playerid, 1))
+	if (!House_CmdGuard(playerid, true))
 	{
 		return 0;
 	}
@@ -25040,7 +25446,7 @@ House_CmdEntra(playerid)
 		Util_Send(playerid, -10270721, "Non sei davanti alla porta di una casa.");
 		return 0;
 	}
-	if (GetPlayerState(playerid) != 1)
+	if (GetPlayerState(playerid) != PLAYER_STATE_ONFOOT)
 	{
 		Util_Send(playerid, -10270721, "Scendi dal veicolo per entrare.");
 		return 0;
@@ -25057,11 +25463,12 @@ House_CmdEntra(playerid)
 	}
 	House_DoEnter(playerid, idx);
 	SendClientMessage(playerid, -1, "Sei entrato nella casa %d. Usa /esci per uscire.", g_HouseRows[idx][hrId]);
+	return 0;
 }
 
 House_CmdEsci(playerid)
 {
-	if (!House_CmdGuard(playerid, 1))
+	if (!House_CmdGuard(playerid, true))
 	{
 		return 0;
 	}
@@ -25077,11 +25484,12 @@ House_CmdEsci(playerid)
 		return 0;
 	}
 	House_PlaceOutside(playerid, idx);
+	return 0;
 }
 
 House_CmdBussa(playerid)
 {
-	if (!House_CmdGuard(playerid, 1))
+	if (!House_CmdGuard(playerid, true))
 	{
 		return 0;
 	}
@@ -25119,6 +25527,7 @@ House_CmdBussa(playerid)
 	{
 		Util_Send(playerid, -1, "Non sembra esserci nessuno in casa.");
 	}
+	return 0;
 }
 
 House_UiGuard(playerid, houseId)
@@ -25199,7 +25608,7 @@ public UI_OnHouseAction(playerid, houseId, action)
 		}
 		case 6:
 		{
-			House_DoSell(playerid, idx, 1);
+			House_DoSell(playerid, idx, true);
 		}
 	}
 	return 1;
@@ -25347,7 +25756,7 @@ public House_OnTick()
 			g_HPl[p][hpHungerAccumMs] -= 360000;
 			if (g_HPl[p][hpHunger] > 0)
 			{
-				House_HungerSet(p, g_HPl[p][hpHunger] - 1, 1);
+				House_HungerSet(p, g_HPl[p][hpHunger] - 1, true);
 			}
 		}
 	}
@@ -25384,16 +25793,16 @@ public House_OnDBLoaded(count)
 {
 	if (count == -1)
 	{
-		g_HsReady = 0;
+		g_HsReady = false;
 		Log_Write("HOUSE", "caricamento case fallito: sistema case disabilitato");
 		return 1;
 	}
 	for (new i = 0; i < count && i < 64; i++)
 	{
-		g_HsBusy[i] = 0;
+		g_HsBusy[i] = false;
 		House_RefreshWorld(i);
 	}
-	g_HsReady = 1;
+	g_HsReady = true;
 	new msg[128];
 	format(msg, 128, "caricate %d case", count);
 	Log_Write("HOUSE", msg);
@@ -25409,17 +25818,17 @@ House_OnInit()
 	for (new i = 0; i < 64; i++)
 	{
 		g_HsPickup[i] = -1;
-		g_HsLabel[i] = 65535;
-		g_HsBusy[i] = 0;
-		g_HsFridgeBusy[i] = 0;
+		g_HsLabel[i] = Text3D:65535;
+		g_HsBusy[i] = false;
+		g_HsFridgeBusy[i] = false;
 	}
-	g_HsReady = 0;
+	g_HsReady = false;
 	for (new s = 0; s < 2; s++)
 	{
-		Lang_Create3DTextLabel("Supermercato\n/compra - cibo, pasto, acqua, snack, kit, benda, zaino...", 0x66DD66FF, s_HsShops[s][0], s_HsShops[s][1], (0.9 + s_HsShops[s][2]), 12.0, 0, 0);
+		Lang_Create3DTextLabel("Supermercato\n/compra - cibo, pasto, acqua, snack, kit, benda, zaino...", 0x66DD66FF, s_HsShops[s][0], s_HsShops[s][1], (0.9 + s_HsShops[s][2]), 12.0, 0, false);
 	}
-	g_HsTickTimer = SetTimer("House_OnTick", 60000, 1);
-	g_HsSaveTimer = SetTimer("House_OnSaveTick", 300000, 1);
+	g_HsTickTimer = SetTimer("House_OnTick", 60000, true);
+	g_HsSaveTimer = SetTimer("House_OnSaveTick", 300000, true);
 	DB_BootHouses();
 }
 
@@ -25430,6 +25839,7 @@ House_SavePlayerFood(playerid)
 		return 0;
 	}
 	DB_SaveHunger(gPlayer[playerid][pCharId], g_HPl[playerid][hpHunger]);
+	return 0;
 }
 
 House_OnExit()
@@ -25483,6 +25893,7 @@ House_OnPlayerDisconnect(playerid)
 	}
 	House_SavePlayerFood(playerid);
 	House_ResetPlayer(playerid);
+	return 0;
 }
 
 House_OnPlayerSpawn(playerid)
@@ -25529,6 +25940,7 @@ House_OnPlayerSpawn(playerid)
 		g_HPl[playerid][hpCapHealthOnLoad] = 1;
 		House_BeginFoodLoad(playerid);
 	}
+	return 0;
 }
 
 House_OnPlayerPickUpPickup(playerid, pickupid)
@@ -25569,6 +25981,7 @@ House_OnPlayerPickUpPickup(playerid, pickupid)
 	{
 		SendClientMessage(playerid, -1, "Casa %d di %s: porta chiusa a chiave. Usa /bussa.", g_HouseRows[idx][hrId], g_HouseRows[idx][hrOwnerName]);
 	}
+	return 0;
 }
 
 // ===== modules/job/job.inc =====
@@ -25700,7 +26113,7 @@ Job_ResetPlayer(playerid)
 	{
 		return 0;
 	}
-	g_JsActive[playerid] = 0;
+	g_JsActive[playerid] = false;
 	g_JsJob[playerid] = 0;
 	g_JsVeh[playerid] = 65535;
 	g_JsSerial[playerid] = 0;
@@ -25716,21 +26129,21 @@ Job_ResetPlayer(playerid)
 	g_JsLastPos[playerid][0] = 0.0;
 	g_JsLastPos[playerid][1] = 0.0;
 	g_JsLastPos[playerid][2] = 0.0;
-	g_JsDwelling[playerid] = 0;
+	g_JsDwelling[playerid] = false;
 	g_JsDwellTick[playerid] = 0;
-	g_JsOff[playerid] = 0;
+	g_JsOff[playerid] = false;
 	g_JsOffTick[playerid] = 0;
-	g_JsCapWarned[playerid] = 0;
-	g_JpPending[playerid] = 0;
+	g_JsCapWarned[playerid] = false;
+	g_JpPending[playerid] = false;
 	g_JpJob[playerid] = 0;
 	g_JpAmount[playerid] = 0;
 	g_JpCap[playerid] = 0;
-	g_JpCompleted[playerid] = 0;
-	g_JcRunSet[playerid] = 0;
+	g_JpCompleted[playerid] = false;
+	g_JcRunSet[playerid] = false;
 	g_JcRunLast[playerid] = 0;
-	g_JcChgSet[playerid] = 0;
+	g_JcChgSet[playerid] = false;
 	g_JcChgLast[playerid] = 0;
-	g_JcSetPending[playerid] = 0;
+	g_JcSetPending[playerid] = false;
 	g_JcSetJob[playerid] = 0;
 	g_JcHourBucket[playerid] = 0;
 	for (new j = 0; j <= 3; j++)
@@ -25740,6 +26153,7 @@ Job_ResetPlayer(playerid)
 	g_JcHourExp[playerid] = 0;
 	g_JcSessRuns[playerid] = 0;
 	g_JcSessEarned[playerid] = 0;
+	return 0;
 }
 
 Job_RollHour(playerid)
@@ -25755,13 +26169,14 @@ Job_RollHour(playerid)
 		g_JcHourEarned[playerid][j] = 0;
 	}
 	g_JcHourExp[playerid] = 0;
+	return 0;
 }
 
 bool:Job_NearCenter(playerid)
 {
 	if (GetPlayerInterior(playerid) != 0 || GetPlayerVirtualWorld(playerid) != 0)
 	{
-		return 0;
+		return false;
 	}
 	return (GetPlayerDistanceFromPoint(playerid, 1480.5, -1736.0, 13.5) <= 4.0);
 }
@@ -25848,6 +26263,7 @@ Job_TargetPos(playerid, &Float:x, &Float:y, &Float:z)
 			z = g_JobBinPts[idx][2];
 		}
 	}
+	return 0;
 }
 
 Job_ShowCheckpoint(playerid)
@@ -25855,7 +26271,7 @@ Job_ShowCheckpoint(playerid)
 	new Float:x, Float:y, Float:z;
 	Job_TargetPos(playerid, x, y, z);
 	DisablePlayerCheckpoint(playerid);
-	SetPlayerCheckpoint(playerid, x, y, z, Float:((Job_IsReturnStep(playerid) ? 0x41200000 : 6.0)));
+	SetPlayerCheckpoint(playerid, x, y, z, (Job_IsReturnStep(playerid) ? 10.0 : 6.0));
 }
 
 Job_BuildRoute(playerid, job)
@@ -25881,6 +26297,7 @@ Job_BuildRoute(playerid, job)
 	{
 		g_JsRoute[playerid][i] = i;
 	}
+	return 0;
 }
 
 Job_VehRemove(playerid)
@@ -25901,7 +26318,7 @@ Job_VehRemove(playerid)
 		{
 			if (GetPlayerVehicleID(playerid) == veh)
 			{
-				RemovePlayerFromVehicle(playerid, 0);
+				RemovePlayerFromVehicle(playerid, false);
 			}
 			DestroyVehicle(veh);
 		}
@@ -25917,20 +26334,20 @@ Job_Teardown(playerid, bool:startCooldown)
 		UI_JobHudHide(playerid);
 	}
 	Job_VehRemove(playerid);
-	g_JsActive[playerid] = 0;
+	g_JsActive[playerid] = false;
 	g_JsEarned[playerid] = 0;
 	g_JsCapUsed[playerid] = 0;
-	g_JsDwelling[playerid] = 0;
-	g_JsOff[playerid] = 0;
+	g_JsDwelling[playerid] = false;
+	g_JsOff[playerid] = false;
 	g_JsSerial[playerid] = 0;
 	if (startCooldown)
 	{
-		g_JcRunSet[playerid] = 1;
+		g_JcRunSet[playerid] = true;
 		g_JcRunLast[playerid] = GetTickCount();
 	}
 }
 
-Job_Cancel(playerid, reason[])
+Job_Cancel(playerid, const reason[])
 {
 	if (playerid < 0 || playerid >= MAX_PLAYERS || !g_JsActive[playerid])
 	{
@@ -25944,7 +26361,7 @@ Job_Cancel(playerid, reason[])
 		g_JcHourEarned[playerid][job] = 0;
 	}
 	new lost = g_JsEarned[playerid];
-	Job_Teardown(playerid, 1);
+	Job_Teardown(playerid, true);
 	if (reason[0] != 0 && IsPlayerConnected(playerid))
 	{
 		SendClientMessage(playerid, -10270721, "Turno annullato: %s", reason);
@@ -25953,6 +26370,7 @@ Job_Cancel(playerid, reason[])
 			SendClientMessage(playerid, -10270721, "Il compenso maturato ($%d) e' andato perso.", lost);
 		}
 	}
+	return 0;
 }
 
 Job_Accrue(playerid, amount)
@@ -25966,7 +26384,7 @@ Job_Accrue(playerid, amount)
 	new granted = amount > room ? room : amount;
 	if (granted < amount && !g_JsCapWarned[playerid])
 	{
-		g_JsCapWarned[playerid] = 1;
+		g_JsCapWarned[playerid] = true;
 		SendClientMessage(playerid, -10270721, "Tetto orario di $%d raggiunto: il turno prosegue ma non matura altro compenso.", 2200);
 	}
 	g_JcHourEarned[playerid][job] += granted;
@@ -25979,7 +26397,7 @@ Job_Finish(playerid, bool:completed)
 {
 	new amount = g_JsEarned[playerid], job = g_JsJob[playerid], cap = g_JsCapUsed[playerid];
 	new bool:busy = g_JpPending[playerid];
-	Job_Teardown(playerid, 1);
+	Job_Teardown(playerid, true);
 	if (amount <= 0)
 	{
 		SendClientMessage(playerid, -1, "Turno terminato: nessun compenso maturato.");
@@ -25995,13 +26413,14 @@ Job_Finish(playerid, bool:completed)
 		SendClientMessage(playerid, -10270721, "Un accredito precedente e' ancora in corso: compenso non registrato.");
 		return 0;
 	}
-	g_JpPending[playerid] = 1;
+	g_JpPending[playerid] = true;
 	g_JpJob[playerid] = job;
 	g_JpAmount[playerid] = amount;
 	g_JpCap[playerid] = cap;
 	g_JpCompleted[playerid] = completed;
 	SendClientMessage(playerid, -1, "Turno terminato: registrazione del compenso ($%d) in corso...", amount);
 	DB_JobPayout(playerid, gPlayer[playerid][pCharId], job, amount);
+	return 0;
 }
 
 public Job_OnDBPayout(playerid, jobId, amount, result)
@@ -26014,7 +26433,7 @@ public Job_OnDBPayout(playerid, jobId, amount, result)
 	{
 		return 1;
 	}
-	g_JpPending[playerid] = 0;
+	g_JpPending[playerid] = false;
 	new cap = g_JpCap[playerid];
 	new bool:completed = g_JpCompleted[playerid];
 	g_JpCap[playerid] = 0;
@@ -26086,12 +26505,12 @@ Job_StepDone(playerid, now)
 	g_JsLastPos[playerid][1] = ty;
 	g_JsLastPos[playerid][2] = tz;
 	g_JsLastCpTick[playerid] = now;
-	g_JsDwelling[playerid] = 0;
+	g_JsDwelling[playerid] = false;
 	if (g_JsStep[playerid] >= total)
 	{
 		Job_Accrue(playerid, g_JobPayBonus[job]);
 		SendClientMessage(playerid, 0x66DD66FF, "Rientro completato: bonus di fine giro.");
-		Job_Finish(playerid, 1);
+		Job_Finish(playerid, true);
 		return 0;
 	}
 	new granted = Job_Accrue(playerid, g_JobPayStep[job]);
@@ -26102,6 +26521,7 @@ Job_StepDone(playerid, now)
 		SendClientMessage(playerid, 0x99CCFFFF, "Ultima tappa fatta: rientra al deposito per il bonus (checkpoint sulla mappa).");
 	}
 	Job_ShowCheckpoint(playerid);
+	return 0;
 }
 
 public Job_OnTick()
@@ -26139,13 +26559,13 @@ public Job_OnTick()
 		new bool:inVeh = GetPlayerVehicleID(i) == veh && GetPlayerVehicleSeat(i) == 0, offSec = -1;
 		if (inVeh)
 		{
-			g_JsOff[i] = 0;
+			g_JsOff[i] = false;
 		}
 		else
 		{
 			if (!g_JsOff[i])
 			{
-				g_JsOff[i] = 1;
+				g_JsOff[i] = true;
 				g_JsOffTick[i] = now;
 			}
 			new offMs = now - g_JsOffTick[i], Float:px, Float:py, Float:pz;
@@ -26163,12 +26583,12 @@ public Job_OnTick()
 		{
 			new Float:tx, Float:ty, Float:tz;
 			Job_TargetPos(i, tx, ty, tz);
-			new Float:radius = Float:((ret ? 0x41200000 : 6.0));
+			new Float:radius = (ret ? 10.0 : 6.0);
 			if ((GetVehicleDistanceFromPoint(veh, tx, ty, tz) <= radius) && (float(Veh_SpeedKmh(veh)) <= 12.0))
 			{
 				if (!g_JsDwelling[i])
 				{
-					g_JsDwelling[i] = 1;
+					g_JsDwelling[i] = true;
 					g_JsDwellTick[i] = now;
 				}
 				new dwellMs = ret ? 0 : g_JobDwellMs[job], waited = now - g_JsDwellTick[i];
@@ -26187,12 +26607,12 @@ public Job_OnTick()
 			}
 			else
 			{
-				g_JsDwelling[i] = 0;
+				g_JsDwelling[i] = false;
 			}
 		}
 		else
 		{
-			g_JsDwelling[i] = 0;
+			g_JsDwelling[i] = false;
 		}
 		UI_JobHudUpdate(i, g_JsStep[i] + 1, g_JobSteps[job], g_JsEarned[i], (now - g_JsStartTick[i]) / 1000, dwellSec, offSec);
 	}
@@ -26245,7 +26665,7 @@ Job_Start(playerid)
 		Util_Send(playerid, -10270721, "Nessun veicolo di lavoro disponibile al momento. Riprova tra poco.");
 		return 0;
 	}
-	new veh = CreateVehicle(g_JobModel[job], x, y, z, a, 1, 1, -1, 0);
+	new veh = CreateVehicle(g_JobModel[job], x, y, z, a, 1, 1, -1, false);
 	if (veh == 65535 || veh <= 0 || veh > 2000)
 	{
 		Util_Send(playerid, -10270721, "Impossibile creare il veicolo di lavoro. Riprova.");
@@ -26257,16 +26677,16 @@ Job_Start(playerid)
 	g_JVehOwner[veh] = playerid;
 	g_JVehSerial[veh] = g_JSerialSeq;
 	g_JPool++;
-	g_JsActive[playerid] = 1;
+	g_JsActive[playerid] = true;
 	g_JsJob[playerid] = job;
 	g_JsVeh[playerid] = veh;
 	g_JsSerial[playerid] = g_JSerialSeq;
 	g_JsStep[playerid] = 0;
 	g_JsEarned[playerid] = 0;
 	g_JsCapUsed[playerid] = 0;
-	g_JsCapWarned[playerid] = 0;
-	g_JsDwelling[playerid] = 0;
-	g_JsOff[playerid] = 0;
+	g_JsCapWarned[playerid] = false;
+	g_JsDwelling[playerid] = false;
+	g_JsOff[playerid] = false;
 	g_JsStartTick[playerid] = GetTickCount();
 	g_JsLastCpTick[playerid] = g_JsStartTick[playerid];
 	g_JsLastPos[playerid][0] = x;
@@ -26275,13 +26695,14 @@ Job_Start(playerid)
 	Job_BuildRoute(playerid, job);
 	if (!PutPlayerInVehicle(playerid, veh, 0))
 	{
-		Job_Teardown(playerid, 0);
+		Job_Teardown(playerid, false);
 		Util_Send(playerid, -10270721, "Impossibile salire sul veicolo di lavoro. Riprova.");
 		return 0;
 	}
 	Job_ShowCheckpoint(playerid);
 	UI_JobHudShow(playerid, job);
 	SendClientMessage(playerid, 0x66DD66FF, "Turno iniziato (%s). Segui i checkpoint sulla mappa: fermati nel cerchio (max %.0f km/h) per %d secondi. /fine per terminare.", g_JobName[job], 12.0, g_JobDwellMs[job] / 1000);
+	return 0;
 }
 
 Job_CmdInizia(playerid)
@@ -26296,19 +26717,20 @@ Job_CmdFine(playerid)
 		Util_Send(playerid, -10270721, "Non hai nessun turno in corso.");
 		return 0;
 	}
-	Job_Finish(playerid, 0);
+	Job_Finish(playerid, false);
+	return 0;
 }
 
-Job_CmdLavoro(playerid, params[])
+Job_CmdLavoro(playerid, const params[])
 {
 	new pos = 0, sub[12];
 	Util_NextToken(params, pos, sub, 12);
-	if (sub[0] == 0 || !strcmp(sub, "info", 1, 0x7FFFFFFF))
+	if (sub[0] == 0 || !strcmp(sub, "info", true, 0x7FFFFFFF))
 	{
 		UI_JobInfoShow(playerid, gPlayer[playerid][pJob], gPlayer[playerid][pLevel], g_JcSessRuns[playerid], g_JcSessEarned[playerid]);
 		return 0;
 	}
-	new bool:take = !strcmp(sub, "prendi", 1, 0x7FFFFFFF), bool:leave = !strcmp(sub, "lascia", 1, 0x7FFFFFFF);
+	new bool:take = !strcmp(sub, "prendi", true, 0x7FFFFFFF), bool:leave = !strcmp(sub, "lascia", true, 0x7FFFFFFF);
 	if (!take && !leave)
 	{
 		Util_Send(playerid, 0x99CCFFFF, "Uso: /lavoro [info|prendi|lascia]  (prendi e lascia solo al Job Center)");
@@ -26331,6 +26753,7 @@ Job_CmdLavoro(playerid, params[])
 	}
 	new left = Job_CdLeftMs(g_JcChgSet[playerid], g_JcChgLast[playerid], 600000);
 	UI_JobCenterShow(playerid, gPlayer[playerid][pLevel], gPlayer[playerid][pJob], Job_SecCeil(left));
+	return 0;
 }
 
 public UI_OnJobSelect(playerid, jobIndex)
@@ -26369,7 +26792,7 @@ public UI_OnJobSelect(playerid, jobIndex)
 		SendClientMessage(playerid, -10270721, "Potrai cambiare lavoro tra %d secondi.", Job_SecCeil(left));
 		return 1;
 	}
-	g_JcSetPending[playerid] = 1;
+	g_JcSetPending[playerid] = true;
 	g_JcSetJob[playerid] = jobIndex;
 	DB_SetJob(playerid, gPlayer[playerid][pCharId], jobIndex);
 	return 1;
@@ -26391,7 +26814,7 @@ public UI_OnJobQuit(playerid)
 		Util_Send(playerid, -10270721, "Non puoi lasciare il lavoro adesso.");
 		return 1;
 	}
-	g_JcSetPending[playerid] = 1;
+	g_JcSetPending[playerid] = true;
 	g_JcSetJob[playerid] = 0;
 	DB_SetJob(playerid, gPlayer[playerid][pCharId], 0);
 	return 1;
@@ -26407,11 +26830,11 @@ public Job_OnDBSet(playerid, jobId, result)
 	{
 		return 1;
 	}
-	g_JcSetPending[playerid] = 0;
+	g_JcSetPending[playerid] = false;
 	if (result == 1)
 	{
 		gPlayer[playerid][pJob] = jobId;
-		g_JcChgSet[playerid] = 1;
+		g_JcChgSet[playerid] = true;
 		g_JcChgLast[playerid] = GetTickCount();
 		if (jobId == 0)
 		{
@@ -26449,9 +26872,9 @@ Job_OnInit()
 		Job_ResetPlayer(p);
 	}
 	g_JPool = 0;
-	g_JTimer = SetTimer("Job_OnTick", 500, 1);
+	g_JTimer = SetTimer("Job_OnTick", 500, true);
 	CreatePickup(1239, 1, 1480.5, -1736.0, 13.5, 0);
-	Lang_Create3DTextLabel("Job Center\nUsa /lavoro", -2994689, 1480.5, -1736.0, (13.5 + 1.0), 15.0, 0, 0);
+	Lang_Create3DTextLabel("Job Center\nUsa /lavoro", -2994689, 1480.5, -1736.0, (13.5 + 1.0), 15.0, 0, false);
 }
 
 Job_OnExit()
@@ -26465,7 +26888,7 @@ Job_OnExit()
 	{
 		if (g_JsActive[i])
 		{
-			Job_Teardown(i, 0);
+			Job_Teardown(i, false);
 		}
 	}
 }
@@ -26486,6 +26909,7 @@ Job_OnPlayerDisconnect(playerid)
 		Job_Cancel(playerid, "");
 	}
 	Job_ResetPlayer(playerid);
+	return 0;
 }
 
 Job_OnPlayerDeath(playerid)
@@ -26495,6 +26919,7 @@ Job_OnPlayerDeath(playerid)
 		return 0;
 	}
 	Job_Cancel(playerid, "sei morto o ferito.");
+	return 0;
 }
 
 Job_OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
@@ -26506,9 +26931,10 @@ Job_OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
 	}
 	if (ispassenger == 0)
 	{
-		ClearAnimations(playerid, 0);
+		ClearAnimations(playerid, SYNC_NONE);
 		Util_Send(playerid, -10270721, "Questo veicolo di lavoro e' in uso da un altro lavoratore.");
 	}
+	return 0;
 }
 
 Job_OnPlayerExitVehicle(playerid, vehicleid)
@@ -26519,15 +26945,16 @@ Job_OnPlayerExitVehicle(playerid, vehicleid)
 	}
 	if (!g_JsOff[playerid])
 	{
-		g_JsOff[playerid] = 1;
+		g_JsOff[playerid] = true;
 		g_JsOffTick[playerid] = GetTickCount();
 		SendClientMessage(playerid, -10270721, "Torna sul veicolo di lavoro entro %d secondi o il turno sara' annullato.", 45);
 	}
+	return 0;
 }
 
 Job_OnPlayerStateChange(playerid, t_PLAYER_STATE:newstate)
 {
-	if (newstate != 2)
+	if (newstate != PLAYER_STATE_DRIVER)
 	{
 		return 0;
 	}
@@ -26538,11 +26965,12 @@ Job_OnPlayerStateChange(playerid, t_PLAYER_STATE:newstate)
 	}
 	if (owner != playerid)
 	{
-		RemovePlayerFromVehicle(playerid, 0);
+		RemovePlayerFromVehicle(playerid, false);
 		Util_Send(playerid, -10270721, "Questo veicolo di lavoro e' in uso da un altro lavoratore.");
 		return 0;
 	}
-	g_JsOff[playerid] = 0;
+	g_JsOff[playerid] = false;
+	return 0;
 }
 
 Job_OnVehicleDeath(vehicleid)
@@ -26577,7 +27005,7 @@ new g_FacRankSkin[3][7] = {
 };
 new g_FacSkinFemale[3] = {0, 306, 308};
 new Float:g_FacHq[3][3] = {
-	{0},
+	{0.0, 0.0, 0.0},
 	{1554.0, -1675.5, 16.2},
 	{1177.0, -1323.5, 14.0}
 };
@@ -26671,17 +27099,17 @@ Faction_ResetPlayer(playerid)
 	{
 		return 0;
 	}
-	g_FcCmdSet[playerid] = 0;
+	g_FcCmdSet[playerid] = false;
 	g_FcCmdLast[playerid] = 0;
-	g_FcDutySet[playerid] = 0;
+	g_FcDutySet[playerid] = false;
 	g_FcDutyLast[playerid] = 0;
-	g_FcRadioSet[playerid] = 0;
+	g_FcRadioSet[playerid] = false;
 	g_FcRadioLast[playerid] = 0;
-	g_FcCuffSet[playerid] = 0;
+	g_FcCuffSet[playerid] = false;
 	g_FcCuffLast[playerid] = 0;
-	g_FcHealSet[playerid] = 0;
+	g_FcHealSet[playerid] = false;
 	g_FcHealLast[playerid] = 0;
-	g_FcHealTgtSet[playerid] = 0;
+	g_FcHealTgtSet[playerid] = false;
 	g_FcHealTgtLast[playerid] = 0;
 	g_FcPrevArmor[playerid] = 0.0;
 	g_FcPayMs[playerid] = 0;
@@ -26690,38 +27118,38 @@ Faction_ResetPlayer(playerid)
 	g_FcLastPos[playerid][1] = 0.0;
 	g_FcLastPos[playerid][2] = 0.0;
 	g_FcKit[playerid] = 0;
-	g_FcKitSet[playerid] = 0;
+	g_FcKitSet[playerid] = false;
 	g_FcKitRefillLast[playerid] = 0;
 	g_FcCuffBy[playerid] = 65535;
 	g_FcCuffTick[playerid] = 0;
 	g_FcInjLeftMs[playerid] = 0;
 	g_FcInjSec[playerid] = -1;
-	g_FcHospPending[playerid] = 0;
+	g_FcHospPending[playerid] = false;
 	g_FcRevTarget[playerid] = 65535;
 	g_FcRevTargetChar[playerid] = 0;
 	g_FcRevStart[playerid] = 0;
 	g_FcReviveBucket[playerid] = 0;
 	g_FcReviveCount[playerid] = 0;
-	g_FcInvActive[playerid] = 0;
+	g_FcInvActive[playerid] = false;
 	g_FcInvFrom[playerid] = 65535;
 	g_FcInvFromChar[playerid] = 0;
 	g_FcInvFac[playerid] = 0;
 	g_FcInvStart[playerid] = 0;
-	g_FcJoinPending[playerid] = 0;
-	g_FcFineBusy[playerid] = 0;
+	g_FcJoinPending[playerid] = false;
+	g_FcFineBusy[playerid] = false;
 	g_FcFineTarget[playerid] = 0;
 	g_FcFineReason[playerid][0] = 0;
-	g_FcFinePend[playerid] = 0;
-	g_FcFineTgtSet[playerid] = 0;
+	g_FcFinePend[playerid] = false;
+	g_FcFineTgtSet[playerid] = false;
 	g_FcFineTgtLast[playerid] = 0;
 	g_FcFineBucket[playerid] = 0;
 	g_FcFineSum[playerid] = 0;
-	g_FcMemBusy[playerid] = 0;
+	g_FcMemBusy[playerid] = false;
 	g_FcMemBusyTick[playerid] = 0;
 	g_FcMemMode[playerid] = 0;
 	g_FcMemCount[playerid] = 0;
 	g_FcOpName[playerid][0] = 0;
-	g_FcSetActive[playerid] = 0;
+	g_FcSetActive[playerid] = false;
 	g_FcSetTargetChar[playerid] = 0;
 	g_FcSetTargetAcc[playerid] = 0;
 	g_FcSetStaffAcc[playerid] = 0;
@@ -26729,6 +27157,7 @@ Faction_ResetPlayer(playerid)
 	g_FcSetRank[playerid] = 0;
 	g_FcSetName[playerid][0] = 0;
 	g_FcSetStaffName[playerid][0] = 0;
+	return 0;
 }
 
 Fac_ShortName(faction, out[], size)
@@ -26749,6 +27178,7 @@ Fac_RankName(faction, rank, out[], size)
 		return 0;
 	}
 	format(out, size, "%s", g_FacRankName[faction][rank]);
+	return 0;
 }
 
 Faction_UpdateControl(playerid)
@@ -26759,6 +27189,7 @@ Faction_UpdateControl(playerid)
 	}
 	new bool:lock = gPlayer[playerid][pFrozen] || gPlayer[playerid][pCuffed] || gPlayer[playerid][pWounded];
 	TogglePlayerControllable(playerid, !lock);
+	return 0;
 }
 
 Fac_FindByChar(charId)
@@ -26788,11 +27219,11 @@ bool:Fac_CmdBlocked(playerid)
 	if (left > 0)
 	{
 		SendClientMessage(playerid, -10270721, "Attendi %d secondi prima di un altro comando di fazione.", Fac_SecCeil(left));
-		return 1;
+		return true;
 	}
-	g_FcCmdSet[playerid] = 1;
+	g_FcCmdSet[playerid] = true;
 	g_FcCmdLast[playerid] = GetTickCount();
-	return 0;
+	return false;
 }
 
 bool:Fac_NeedMember(playerid, faction)
@@ -26801,9 +27232,9 @@ bool:Fac_NeedMember(playerid, faction)
 	if (f < 1 || f > 2 || gPlayer[playerid][pFactionRank] < 1 || (faction != 0 && f != faction))
 	{
 		Util_Send(playerid, -10270721, "Non sei autorizzato a usare questo comando.");
-		return 0;
+		return false;
 	}
-	return 1;
+	return true;
 }
 
 bool:Fac_NeedActive(playerid)
@@ -26811,9 +27242,9 @@ bool:Fac_NeedActive(playerid)
 	if (gPlayer[playerid][pWounded] || gPlayer[playerid][pCuffed])
 	{
 		Util_Send(playerid, -10270721, "Non puoi farlo nelle tue condizioni.");
-		return 0;
+		return false;
 	}
-	return 1;
+	return true;
 }
 
 bool:Fac_NeedDuty(playerid)
@@ -26821,22 +27252,22 @@ bool:Fac_NeedDuty(playerid)
 	if (!gPlayer[playerid][pOnDuty])
 	{
 		Util_Send(playerid, -10270721, "Devi essere in servizio (/duty vicino alla sede).");
-		return 0;
+		return false;
 	}
-	return 1;
+	return true;
 }
 
-bool:Fac_ParseTarget(playerid, token[], &targetid)
+bool:Fac_ParseTarget(playerid, const token[], &targetid)
 {
 	if (!Util_ParsePlayerId(token, targetid) || !Util_IsPlaying(targetid))
 	{
 		Util_Send(playerid, -10270721, "Giocatore non valido.");
-		return 0;
+		return false;
 	}
-	return 1;
+	return true;
 }
 
-Fac_Emote(playerid, text[])
+Fac_Emote(playerid, const text[])
 {
 	new name[25], msg[256];
 	GetPlayerName(playerid, name, 25);
@@ -26877,7 +27308,7 @@ Fac_KitHudValue(playerid)
 	return gPlayer[playerid][pFaction] == 2 ? g_FcKit[playerid] : -1;
 }
 
-Fac_Radio(faction, bool:both, color, text[])
+Fac_Radio(faction, bool:both, color, const text[])
 {
 	for (new i = 0; i < MAX_PLAYERS; i++)
 	{
@@ -26919,18 +27350,19 @@ Fac_GiveKit(playerid)
 	if (gPlayer[playerid][pFaction] == 1)
 	{
 		ResetPlayerWeapons(playerid);
-		GivePlayerWeapon(playerid, 3, 1);
-		GivePlayerWeapon(playerid, 22, 51);
-		GivePlayerWeapon(playerid, 41, 100);
+		GivePlayerWeapon(playerid, WEAPON_NITESTICK, 1);
+		GivePlayerWeapon(playerid, WEAPON_COLT45, 51);
+		GivePlayerWeapon(playerid, WEAPON_SPRAYCAN, 100);
 		SetPlayerArmour(playerid, 50.0);
 		return 0;
 	}
-	if (!g_FcKitSet[playerid] || Fac_CdLeftMs(1, g_FcKitRefillLast[playerid], 900000) == 0)
+	if (!g_FcKitSet[playerid] || Fac_CdLeftMs(true, g_FcKitRefillLast[playerid], 900000) == 0)
 	{
-		g_FcKitSet[playerid] = 1;
+		g_FcKitSet[playerid] = true;
 		g_FcKit[playerid] = 8;
 		g_FcKitRefillLast[playerid] = GetTickCount();
 	}
+	return 0;
 }
 
 Fac_ReleaseCuffedBy(agentid)
@@ -26966,6 +27398,7 @@ Faction_ForceOff(playerid, bool:applyWorld)
 	}
 	gPlayer[playerid][pSkin] = gPlayer[playerid][pCivilSkin];
 	Fac_ReleaseCuffedBy(playerid);
+	return 0;
 }
 
 Fac_DutyOn(playerid)
@@ -27015,11 +27448,11 @@ Faction_CmdDuty(playerid)
 	{
 		return 0;
 	}
-	g_FcDutySet[playerid] = 1;
+	g_FcDutySet[playerid] = true;
 	g_FcDutyLast[playerid] = GetTickCount();
 	if (gPlayer[playerid][pOnDuty])
 	{
-		Faction_ForceOff(playerid, 1);
+		Faction_ForceOff(playerid, true);
 		Util_Send(playerid, 0x66DD66FF, "Sei fuori servizio.");
 		Fac_Emote(playerid, "si toglie la divisa ed esce dal servizio");
 	}
@@ -27027,6 +27460,7 @@ Faction_CmdDuty(playerid)
 	{
 		Fac_DutyOn(playerid);
 	}
+	return 0;
 }
 
 Fac_PayTick(playerid, now)
@@ -27070,6 +27504,7 @@ Fac_PayTick(playerid, now)
 	{
 		Util_Send(playerid, -10270721, "Il conto bancario e' al limite: stipendio di fazione non versato.");
 	}
+	return 0;
 }
 
 Fac_Uncuff(targetid)
@@ -27083,14 +27518,15 @@ Fac_Uncuff(targetid)
 	g_FcCuffTick[targetid] = 0;
 	if (IsPlayerConnected(targetid))
 	{
-		SetPlayerSpecialAction(targetid, 0);
-		ClearAnimations(targetid, 0);
+		SetPlayerSpecialAction(targetid, SPECIAL_ACTION_NONE);
+		ClearAnimations(targetid, SYNC_NONE);
 		Faction_UpdateControl(targetid);
 		Util_Send(targetid, 0x66DD66FF, "Sei stato liberato dalle manette.");
 	}
+	return 0;
 }
 
-Faction_CmdAmmanetta(playerid, params[], bool:cuff)
+Faction_CmdAmmanetta(playerid, const params[], bool:cuff)
 {
 	if (!Fac_NeedMember(playerid, 1) || !Fac_NeedDuty(playerid) || !Fac_NeedActive(playerid) || Fac_CmdBlocked(playerid))
 	{
@@ -27123,19 +27559,19 @@ Faction_CmdAmmanetta(playerid, params[], bool:cuff)
 			SendClientMessage(playerid, -10270721, "Attendi ancora %d secondi.", Fac_SecCeil(left));
 			return 0;
 		}
-		if (gPlayer[target][pCuffed] || gPlayer[target][pWounded] || GetPlayerState(target) != 1)
+		if (gPlayer[target][pCuffed] || gPlayer[target][pWounded] || GetPlayerState(target) != PLAYER_STATE_ONFOOT)
 		{
 			Util_Send(playerid, -10270721, "Il bersaglio non puo' essere ammanettato (gia' ammanettato, ferito o non a piedi).");
 			return 0;
 		}
-		g_FcCuffSet[playerid] = 1;
+		g_FcCuffSet[playerid] = true;
 		g_FcCuffLast[playerid] = GetTickCount();
 		gPlayer[target][pCuffed] = 1;
 		g_FcCuffBy[target] = playerid;
 		g_FcCuffTick[target] = GetTickCount();
 		Job_Cancel(target, "sei stato ammanettato.");
 		Faction_UpdateControl(target);
-		SetPlayerSpecialAction(target, 24);
+		SetPlayerSpecialAction(target, SPECIAL_ACTION_CUFFED);
 		format(msg, 128, "ammanetta %s", tn);
 		Fac_Emote(playerid, msg);
 		DB_FactionLogAdd(1, gPlayer[playerid][pCharId], gPlayer[target][pCharId], "cuff", "");
@@ -27150,9 +27586,10 @@ Faction_CmdAmmanetta(playerid, params[], bool:cuff)
 	format(msg, 128, "toglie le manette a %s", tn);
 	Fac_Emote(playerid, msg);
 	DB_FactionLogAdd(1, gPlayer[playerid][pCharId], gPlayer[target][pCharId], "uncuff", "");
+	return 0;
 }
 
-Faction_CmdRadio(playerid, params[], bool:interdept)
+Faction_CmdRadio(playerid, const params[], bool:interdept)
 {
 	if (!Fac_NeedMember(playerid, 0) || !Fac_NeedDuty(playerid) || !Fac_NeedActive(playerid))
 	{
@@ -27174,7 +27611,7 @@ Faction_CmdRadio(playerid, params[], bool:interdept)
 		Util_Send(playerid, -10270721, "Rallenta con la radio.");
 		return 0;
 	}
-	g_FcRadioSet[playerid] = 1;
+	g_FcRadioSet[playerid] = true;
 	g_FcRadioLast[playerid] = GetTickCount();
 	new f = gPlayer[playerid][pFaction], rn[24], name[25], msg[256];
 	Fac_RankName(f, gPlayer[playerid][pFactionRank], rn, 24);
@@ -27182,16 +27619,17 @@ Faction_CmdRadio(playerid, params[], bool:interdept)
 	if (interdept)
 	{
 		format(msg, 256, "[DIP] %s %s %s: %s", g_FacShort[f], rn, name, text);
-		Fac_Radio(f, 1, -4698625, msg);
+		Fac_Radio(f, true, -4698625, msg);
 	}
 	else
 	{
 		format(msg, 256, "[RADIO] %s %s: %s", rn, name, text);
-		Fac_Radio(f, 0, 0x8D8DFFFF, msg);
+		Fac_Radio(f, false, 0x8D8DFFFF, msg);
 	}
+	return 0;
 }
 
-Faction_CmdMulta(playerid, params[])
+Faction_CmdMulta(playerid, const params[])
 {
 	if (!Fac_NeedMember(playerid, 1) || !Fac_NeedDuty(playerid) || !Fac_NeedActive(playerid) || Fac_CmdBlocked(playerid))
 	{
@@ -27264,11 +27702,12 @@ Faction_CmdMulta(playerid, params[])
 		Util_Send(playerid, -10270721, "Il cittadino non ha fondi sufficienti: multa rifiutata.");
 		return 0;
 	}
-	g_FcFineBusy[playerid] = 1;
+	g_FcFineBusy[playerid] = true;
 	g_FcFineTarget[playerid] = gPlayer[target][pCharId];
-	g_FcFinePend[target] = 1;
+	g_FcFinePend[target] = true;
 	strmid(g_FcFineReason[playerid], reason, 0, strlen(reason), 65);
 	DB_AddFine(playerid, gPlayer[playerid][pCharId], gPlayer[target][pCharId], 1, amount, reason);
+	return 0;
 }
 
 Fac_Debit(playerid, amount)
@@ -27293,14 +27732,14 @@ Fac_Debit(playerid, amount)
 public Fine_OnDBAdded(playerid, targetChar, fineId, amount)
 {
 	new target = Fac_FindByChar(targetChar), issuer = Fac_ValidPlayer(playerid) ? playerid : 65535;
-	new reason[65], bool:hasReason = 0;
+	new reason[65], bool:hasReason = false;
 	if (issuer != INVALID_PLAYER_ID)
 	{
 		if (g_FcFineBusy[issuer] && g_FcFineTarget[issuer] == targetChar)
 		{
-			g_FcFineBusy[issuer] = 0;
+			g_FcFineBusy[issuer] = false;
 			strmid(reason, g_FcFineReason[issuer], 0, strlen(g_FcFineReason[issuer]), 65);
-			hasReason = 1;
+			hasReason = true;
 		}
 		else
 		{
@@ -27309,7 +27748,7 @@ public Fine_OnDBAdded(playerid, targetChar, fineId, amount)
 	}
 	if (target != INVALID_PLAYER_ID)
 	{
-		g_FcFinePend[target] = 0;
+		g_FcFinePend[target] = false;
 	}
 	new an[25], msg[128];
 	if (issuer != INVALID_PLAYER_ID)
@@ -27344,7 +27783,7 @@ public Fine_OnDBAdded(playerid, targetChar, fineId, amount)
 		format(msg, 128, "multa %d: addebitati $%d su $%d (fondi cambiati durante la registrazione)", fineId, taken, amount);
 		Log_Write("FINE", msg);
 	}
-	g_FcFineTgtSet[target] = 1;
+	g_FcFineTgtSet[target] = true;
 	g_FcFineTgtLast[target] = GetTickCount();
 	Char_Save(target);
 	SendClientMessage(target, -10270721, "Hai ricevuto una multa di $%d da %s%s%s.", taken, an, hasReason ? ": " : "", reason);
@@ -27373,6 +27812,7 @@ Faction_CmdMulte(playerid)
 		return 0;
 	}
 	DB_LoadFines(playerid, gPlayer[playerid][pCharId]);
+	return 0;
 }
 
 public Fine_OnDBLoaded(playerid, count)
@@ -27410,7 +27850,7 @@ Fac_UseCharge(playerid)
 	UI_FactionHudUpdate(playerid, gPlayer[playerid][pFaction], gPlayer[playerid][pFactionRank], g_FcKit[playerid]);
 }
 
-Faction_CmdCura(playerid, params[])
+Faction_CmdCura(playerid, const params[])
 {
 	if (!Fac_NeedMember(playerid, 2) || !Fac_NeedDuty(playerid) || !Fac_NeedActive(playerid) || Fac_CmdBlocked(playerid))
 	{
@@ -27467,9 +27907,9 @@ Faction_CmdCura(playerid, params[])
 		hp = 100.0;
 	}
 	SetPlayerHealth(target, hp);
-	g_FcHealSet[playerid] = 1;
+	g_FcHealSet[playerid] = true;
 	g_FcHealLast[playerid] = GetTickCount();
-	g_FcHealTgtSet[target] = 1;
+	g_FcHealTgtSet[target] = true;
 	g_FcHealTgtLast[target] = GetTickCount();
 	Fac_UseCharge(playerid);
 	new tn[25], msg[128];
@@ -27478,15 +27918,16 @@ Faction_CmdCura(playerid, params[])
 	Fac_Emote(playerid, msg);
 	SendClientMessage(target, 0x66DD66FF, "Sei stato curato (salute %.0f).", hp);
 	DB_FactionLogAdd(2, gPlayer[playerid][pCharId], gPlayer[target][pCharId], "heal", "");
+	return 0;
 }
 
-Fac_ReviveCancel(medic, reason[])
+Fac_ReviveCancel(medic, const reason[])
 {
 	g_FcRevTarget[medic] = 65535;
 	g_FcRevTargetChar[medic] = 0;
 	if (IsPlayerConnected(medic))
 	{
-		ClearAnimations(medic, 0);
+		ClearAnimations(medic, SYNC_NONE);
 		if (reason[0] != 0)
 		{
 			Util_Send(medic, -10270721, reason);
@@ -27494,7 +27935,7 @@ Fac_ReviveCancel(medic, reason[])
 	}
 }
 
-Faction_CmdRianima(playerid, params[])
+Faction_CmdRianima(playerid, const params[])
 {
 	if (!Fac_NeedMember(playerid, 2) || !Fac_NeedDuty(playerid) || !Fac_NeedActive(playerid) || Fac_CmdBlocked(playerid))
 	{
@@ -27534,23 +27975,24 @@ Faction_CmdRianima(playerid, params[])
 	g_FcRevTarget[playerid] = target;
 	g_FcRevTargetChar[playerid] = gPlayer[target][pCharId];
 	g_FcRevStart[playerid] = GetTickCount();
-	ApplyAnimation(playerid, "MEDIC", "CPR", 4.1, 1, 0, 0, 0, 0, 0);
+	ApplyAnimation(playerid, "MEDIC", "CPR", 4.1, true, false, false, false, 0, SYNC_NONE);
 	new tn[25], msg[128];
 	GetPlayerName(target, tn, 25);
 	format(msg, 128, "inizia a rianimare %s", tn);
 	Fac_Emote(playerid, msg);
 	SendClientMessage(playerid, -1, "Rianimazione in corso (%d secondi): non allontanarti.", 8);
+	return 0;
 }
 
 Fac_ReviveDone(medic, target)
 {
 	g_FcRevTarget[medic] = 65535;
 	g_FcRevTargetChar[medic] = 0;
-	ClearAnimations(medic, 0);
+	ClearAnimations(medic, SYNC_NONE);
 	gPlayer[target][pWounded] = 0;
 	g_FcInjLeftMs[target] = 0;
 	SetPlayerHealth(target, 60.0);
-	ClearAnimations(target, 0);
+	ClearAnimations(target, SYNC_NONE);
 	Faction_UpdateControl(target);
 	UI_InjuryEndShow(target, 2, 0);
 	Fac_UseCharge(medic);
@@ -27577,7 +28019,7 @@ Fac_ReviveDone(medic, target)
 
 Fac_ApplyInjuredPose(playerid)
 {
-	ApplyAnimation(playerid, "CRACK", "crckidle2", 4.1, 1, 0, 0, 1, 0, 0);
+	ApplyAnimation(playerid, "CRACK", "crckidle2", 4.1, true, false, false, true, 0, SYNC_NONE);
 }
 
 Faction_Hospitalize(playerid)
@@ -27585,13 +28027,13 @@ Faction_Hospitalize(playerid)
 	new fee = Fac_Debit(playerid, 200);
 	gPlayer[playerid][pWounded] = 0;
 	g_FcInjLeftMs[playerid] = 0;
-	g_FcHospPending[playerid] = 0;
+	g_FcHospPending[playerid] = false;
 	SetPlayerInterior(playerid, 0);
 	SetPlayerVirtualWorld(playerid, 0);
 	SetPlayerPos(playerid, 1182.0, -1330.0, 13.9);
 	SetPlayerFacingAngle(playerid, 270.0);
 	SetCameraBehindPlayer(playerid);
-	ClearAnimations(playerid, 0);
+	ClearAnimations(playerid, SYNC_NONE);
 	SetPlayerHealth(playerid, 100.0);
 	Faction_UpdateControl(playerid);
 	UI_InjuryEndShow(playerid, 1, fee);
@@ -27604,7 +28046,7 @@ Faction_Hospitalize(playerid)
 
 Fac_ClearInvite(targetid, bool:closeDialog)
 {
-	g_FcInvActive[targetid] = 0;
+	g_FcInvActive[targetid] = false;
 	g_FcInvFrom[targetid] = 65535;
 	g_FcInvFromChar[targetid] = 0;
 	g_FcInvFac[targetid] = 0;
@@ -27647,12 +28089,12 @@ Fac_DoInvite(playerid, target)
 		SendClientMessage(playerid, -10270721, "Il giocatore deve essere almeno livello %d.", 3);
 		return 0;
 	}
-	if ((g_FcInvActive[target] && Fac_CdLeftMs(1, g_FcInvStart[target], 60000) > 0) || g_FcJoinPending[target])
+	if ((g_FcInvActive[target] && Fac_CdLeftMs(true, g_FcInvStart[target], 60000) > 0) || g_FcJoinPending[target])
 	{
 		Util_Send(playerid, -10270721, "Il giocatore ha gia' un invito in sospeso.");
 		return 0;
 	}
-	g_FcInvActive[target] = 1;
+	g_FcInvActive[target] = true;
 	g_FcInvFrom[target] = playerid;
 	g_FcInvFromChar[target] = gPlayer[playerid][pCharId];
 	g_FcInvFac[target] = f;
@@ -27663,9 +28105,10 @@ Fac_DoInvite(playerid, target)
 	UI_FactionInviteShow(target, f, an, 60);
 	SendClientMessage(target, -1, "%s ti invita in %s. Accetta dal pannello o con /accetta (valido %d secondi).", an, g_FacShort[f], 60);
 	SendClientMessage(playerid, 0x66DD66FF, "Invito inviato a %s.", tn);
+	return 0;
 }
 
-Faction_CmdInvita(playerid, params[])
+Faction_CmdInvita(playerid, const params[])
 {
 	if (!Fac_NeedMember(playerid, 0) || Fac_CmdBlocked(playerid))
 	{
@@ -27683,6 +28126,7 @@ Faction_CmdInvita(playerid, params[])
 		return 0;
 	}
 	Fac_DoInvite(playerid, target);
+	return 0;
 }
 
 public UI_OnFactionInviteTarget(playerid, targetId)
@@ -27702,8 +28146,8 @@ Fac_InviteReply(playerid, bool:accept)
 		return 0;
 	}
 	new from = g_FcInvFrom[playerid], fromChar = g_FcInvFromChar[playerid], f = g_FcInvFac[playerid];
-	new bool:expired = Fac_CdLeftMs(1, g_FcInvStart[playerid], 60000) <= 0;
-	Fac_ClearInvite(playerid, 0);
+	new bool:expired = Fac_CdLeftMs(true, g_FcInvStart[playerid], 60000) <= 0;
+	Fac_ClearInvite(playerid, false);
 	if (!Util_IsPlaying(playerid))
 	{
 		return 0;
@@ -27732,9 +28176,10 @@ Fac_InviteReply(playerid, bool:accept)
 		Util_Send(playerid, -10270721, "Non puoi entrare in una fazione adesso.");
 		return 0;
 	}
-	g_FcJoinPending[playerid] = 1;
+	g_FcJoinPending[playerid] = true;
 	GetPlayerName(playerid, g_FcOpName[from], 25);
 	DB_FactionJoin(from, fromChar, gPlayer[playerid][pCharId], f);
+	return 0;
 }
 
 public UI_OnFactionInviteReply(playerid, accept)
@@ -27751,10 +28196,11 @@ Faction_CmdAccetta(playerid)
 		return 0;
 	}
 	UI_FactionInviteClose(playerid);
-	Fac_InviteReply(playerid, 1);
+	Fac_InviteReply(playerid, true);
+	return 0;
 }
 
-Fac_DoRankOp(playerid, action, targetChar, targetRank, targetName[])
+Fac_DoRankOp(playerid, action, targetChar, targetRank, const targetName[])
 {
 	new f = gPlayer[playerid][pFaction], own = gPlayer[playerid][pFactionRank];
 	if (f < 1 || own < 5)
@@ -27802,9 +28248,10 @@ Fac_DoRankOp(playerid, action, targetChar, targetRank, targetName[])
 			DB_FactionFire(playerid, gPlayer[playerid][pCharId], targetChar, f);
 		}
 	}
+	return 0;
 }
 
-Faction_CmdRankOp(playerid, params[], action)
+Faction_CmdRankOp(playerid, const params[], action)
 {
 	if (!Fac_NeedMember(playerid, 0) || Fac_CmdBlocked(playerid))
 	{
@@ -27829,6 +28276,7 @@ Faction_CmdRankOp(playerid, params[], action)
 	new tn[25];
 	GetPlayerName(target, tn, 25);
 	Fac_DoRankOp(playerid, action, gPlayer[target][pCharId], gPlayer[target][pFactionRank], tn);
+	return 0;
 }
 
 public UI_OnFactionMemberAction(playerid, action, memberId)
@@ -27946,7 +28394,7 @@ public Faction_OnDBChanged(playerid, targetChar, cmd, faction, rank, result)
 	new target = Fac_FindByChar(targetChar);
 	if (target != INVALID_PLAYER_ID && cmd == 1)
 	{
-		g_FcJoinPending[target] = 0;
+		g_FcJoinPending[target] = false;
 	}
 	new req = Fac_ValidPlayer(playerid) ? playerid : 65535;
 	new ctx = cmd == 6 ? Fac_SetCtxByTarget(targetChar) : 65535;
@@ -28032,7 +28480,7 @@ public Faction_OnDBChanged(playerid, targetChar, cmd, faction, rank, result)
 	}
 	if (ctx != 65535)
 	{
-		g_FcSetActive[ctx] = 0;
+		g_FcSetActive[ctx] = false;
 	}
 	return 1;
 }
@@ -28045,18 +28493,19 @@ Fac_RequestMembers(playerid, mode)
 		Util_Send(playerid, -10270721, "Non appartieni a nessuna fazione.");
 		return 0;
 	}
-	if (g_FcMemBusy[playerid] && Fac_CdLeftMs(1, g_FcMemBusyTick[playerid], 10000) > 0)
+	if (g_FcMemBusy[playerid] && Fac_CdLeftMs(true, g_FcMemBusyTick[playerid], 10000) > 0)
 	{
 		Util_Send(playerid, -10270721, "Richiesta gia' in corso: attendi.");
 		return 0;
 	}
-	g_FcMemBusy[playerid] = 1;
+	g_FcMemBusy[playerid] = true;
 	g_FcMemBusyTick[playerid] = GetTickCount();
 	g_FcMemMode[playerid] = mode;
 	DB_FactionMembers(playerid, f);
+	return 0;
 }
 
-Faction_CmdFazione(playerid, params[])
+Faction_CmdFazione(playerid, const params[])
 {
 	if (gPlayer[playerid][pFaction] < 1 || gPlayer[playerid][pFactionRank] < 1)
 	{
@@ -28065,17 +28514,17 @@ Faction_CmdFazione(playerid, params[])
 	}
 	new pos = 0, sub[16];
 	Util_NextToken(params, pos, sub, 16);
-	if (sub[0] == 0 || !strcmp(sub, "info", 1, 0x7FFFFFFF))
+	if (sub[0] == 0 || !strcmp(sub, "info", true, 0x7FFFFFFF))
 	{
 		Fac_RequestMembers(playerid, 0);
 		return 0;
 	}
-	if (!strcmp(sub, "membri", 1, 0x7FFFFFFF))
+	if (!strcmp(sub, "membri", true, 0x7FFFFFFF))
 	{
 		Fac_RequestMembers(playerid, 2);
 		return 0;
 	}
-	if (!strcmp(sub, "lascia", 1, 0x7FFFFFFF))
+	if (!strcmp(sub, "lascia", true, 0x7FFFFFFF))
 	{
 		if (Fac_CmdBlocked(playerid) || !Fac_NeedActive(playerid))
 		{
@@ -28086,6 +28535,7 @@ Faction_CmdFazione(playerid, params[])
 		return 0;
 	}
 	Util_Send(playerid, 0x99CCFFFF, "Uso: /fazione [info|membri|lascia]");
+	return 0;
 }
 
 public UI_OnFactionMenuAction(playerid, action)
@@ -28108,7 +28558,7 @@ public Faction_OnDBMembers(playerid, faction, count)
 	{
 		return 1;
 	}
-	g_FcMemBusy[playerid] = 0;
+	g_FcMemBusy[playerid] = false;
 	if (count < 0)
 	{
 		Util_Send(playerid, -10270721, "Servizio temporaneamente non disponibile: riprova piu' tardi.");
@@ -28128,7 +28578,7 @@ public Faction_OnDBMembers(playerid, faction, count)
 	}
 	if (mode == 0)
 	{
-		UI_FactionMenuShow(playerid, faction, gPlayer[playerid][pFactionRank], gPlayer[playerid][pOnDuty], online, count);
+		UI_FactionMenuShow(playerid, faction, gPlayer[playerid][pFactionRank], bool:gPlayer[playerid][pOnDuty], online, count);
 		return 1;
 	}
 	UI_FactionMemberListClear(playerid);
@@ -28158,9 +28608,9 @@ public Faction_OnDBMembers(playerid, faction, count)
 	return 1;
 }
 
-Fac_SetStart(staff, targetChar, targetAcc, targetName[], faction, rank)
+Fac_SetStart(staff, targetChar, targetAcc, const targetName[], faction, rank)
 {
-	g_FcSetActive[staff] = 1;
+	g_FcSetActive[staff] = true;
 	g_FcSetTargetChar[staff] = targetChar;
 	g_FcSetTargetAcc[staff] = targetAcc;
 	g_FcSetStaffAcc[staff] = gPlayer[staff][pAccountId];
@@ -28171,11 +28621,11 @@ Fac_SetStart(staff, targetChar, targetAcc, targetName[], faction, rank)
 	DB_FactionSet(staff, targetChar, faction, rank);
 }
 
-bool:Faction_CmdSetfazione(playerid, params[])
+bool:Faction_CmdSetfazione(playerid, const params[])
 {
 	if (Util_GetAdmin(playerid) < 3)
 	{
-		return 0;
+		return false;
 	}
 	new pos = 0, who[25], tf[12], tr[12], faction = 0, rank = 0;
 	Util_NextToken(params, pos, who, 25);
@@ -28184,7 +28634,7 @@ bool:Faction_CmdSetfazione(playerid, params[])
 	if (who[0] == 0 || !Util_ParseInt(tf, faction) || faction < 0 || faction > 2 || (faction != 0 && (!Util_ParseInt(tr, rank) || rank < 1 || rank > 6)))
 	{
 		SendClientMessage(playerid, 0x99CCFFFF, "Uso: /setfazione id|Nome_Cognome fazione(%d-%d, 0 = rimuovi) grado(1-%d)", 0, 2, 6);
-		return 1;
+		return true;
 	}
 	if (faction == 0)
 	{
@@ -28193,7 +28643,7 @@ bool:Faction_CmdSetfazione(playerid, params[])
 	if (g_FcSetActive[playerid])
 	{
 		Util_Send(playerid, -10270721, "Hai gia' un'operazione /setfazione in corso.");
-		return 1;
+		return true;
 	}
 	new targetid = INVALID_PLAYER_ID;
 	if (Util_ParsePlayerId(who, targetid))
@@ -28201,7 +28651,7 @@ bool:Faction_CmdSetfazione(playerid, params[])
 		if (!Util_IsPlaying(targetid) || gPlayer[targetid][pCharId] <= 0)
 		{
 			Util_Send(playerid, -10270721, "Giocatore non valido.");
-			return 1;
+			return true;
 		}
 	}
 	else
@@ -28213,14 +28663,14 @@ bool:Faction_CmdSetfazione(playerid, params[])
 		new tn[25];
 		GetPlayerName(targetid, tn, 25);
 		Fac_SetStart(playerid, gPlayer[targetid][pCharId], gPlayer[targetid][pAccountId], tn, faction, rank);
-		return 1;
+		return true;
 	}
 	if (!Util_IsValidRPName(who))
 	{
 		Util_Send(playerid, -10270721, "Giocatore non valido (usa id oppure Nome_Cognome).");
-		return 1;
+		return true;
 	}
-	g_FcSetActive[playerid] = 1;
+	g_FcSetActive[playerid] = true;
 	g_FcSetTargetChar[playerid] = 0;
 	g_FcSetTargetAcc[playerid] = 0;
 	g_FcSetStaffAcc[playerid] = gPlayer[playerid][pAccountId];
@@ -28229,10 +28679,10 @@ bool:Faction_CmdSetfazione(playerid, params[])
 	strmid(g_FcSetName[playerid], who, 0, strlen(who), 25);
 	GetPlayerName(playerid, g_FcSetStaffName[playerid], 25);
 	DB_FactionFindByName(playerid, who, 1);
-	return 1;
+	return true;
 }
 
-public Faction_OnDBFound(playerid, tag, charId, name[], faction, rank, level)
+public Faction_OnDBFound(playerid, tag, charId, const name[], faction, rank, level)
 {
 	if (tag != 1 || !Fac_ValidPlayer(playerid) || !g_FcSetActive[playerid] || g_FcSetTargetChar[playerid] != 0)
 	{
@@ -28240,7 +28690,7 @@ public Faction_OnDBFound(playerid, tag, charId, name[], faction, rank, level)
 	}
 	if (charId <= 0)
 	{
-		g_FcSetActive[playerid] = 0;
+		g_FcSetActive[playerid] = false;
 		Util_Send(playerid, -10270721, charId < 0 ? "Servizio temporaneamente non disponibile: riprova piu' tardi." : "Personaggio non trovato.");
 		return 1;
 	}
@@ -28258,10 +28708,10 @@ public Faction_OnTick()
 		{
 			continue;
 		}
-		if (g_FcInvActive[i] && Fac_CdLeftMs(1, g_FcInvStart[i], 60000) <= 0)
+		if (g_FcInvActive[i] && Fac_CdLeftMs(true, g_FcInvStart[i], 60000) <= 0)
 		{
 			new from = g_FcInvFrom[i], fromChar = g_FcInvFromChar[i];
-			Fac_ClearInvite(i, 1);
+			Fac_ClearInvite(i, true);
 			Util_Send(i, -1, "L'invito in fazione e' scaduto.");
 			if (Fac_ValidPlayer(from) && gPlayer[from][pCharId] == fromChar)
 			{
@@ -28275,7 +28725,7 @@ public Faction_OnTick()
 		if (gPlayer[i][pCuffed])
 		{
 			new by = g_FcCuffBy[i];
-			if (Fac_CdLeftMs(1, g_FcCuffTick[i], 600000) <= 0 || !Util_IsPlaying(by) || !gPlayer[by][pOnDuty])
+			if (Fac_CdLeftMs(true, g_FcCuffTick[i], 600000) <= 0 || !Util_IsPlaying(by) || !gPlayer[by][pOnDuty])
 			{
 				Fac_Uncuff(i);
 			}
@@ -28284,7 +28734,7 @@ public Faction_OnTick()
 		{
 			if (gPlayer[i][pFaction] < 1 || Admin_IsMuted(i))
 			{
-				Faction_ForceOff(i, 1);
+				Faction_ForceOff(i, true);
 				Util_Send(i, -10270721, "Sei stato messo fuori servizio.");
 			}
 			else
@@ -28345,7 +28795,7 @@ Faction_OnInit()
 	{
 		Faction_ResetPlayer(p);
 	}
-	g_FacTimer = SetTimer("Faction_OnTick", 500, 1);
+	g_FacTimer = SetTimer("Faction_OnTick", 500, true);
 }
 
 Faction_OnExit()
@@ -28371,17 +28821,17 @@ Faction_OnPlayerDisconnect(playerid)
 	Fac_ReleaseCuffedBy(playerid);
 	if (gPlayer[playerid][pOnDuty])
 	{
-		Faction_ForceOff(playerid, 1);
+		Faction_ForceOff(playerid, true);
 	}
 	if (g_FcInvActive[playerid])
 	{
-		Fac_ClearInvite(playerid, 0);
+		Fac_ClearInvite(playerid, false);
 	}
 	for (new i = 0; i < MAX_PLAYERS; i++)
 	{
 		if (g_FcInvActive[i] && g_FcInvFrom[i] == playerid)
 		{
-			Fac_ClearInvite(i, 1);
+			Fac_ClearInvite(i, true);
 		}
 		if (g_FcRevTarget[i] == playerid)
 		{
@@ -28403,6 +28853,7 @@ Faction_OnPlayerDisconnect(playerid)
 	}
 	gPlayer[playerid][pSkin] = gPlayer[playerid][pCivilSkin];
 	Faction_ResetPlayer(playerid);
+	return 0;
 }
 
 Faction_OnPlayerDeath(playerid)
@@ -28419,7 +28870,7 @@ Faction_OnPlayerDeath(playerid)
 	}
 	if (gPlayer[playerid][pOnDuty])
 	{
-		Faction_ForceOff(playerid, 0);
+		Faction_ForceOff(playerid, false);
 	}
 	g_FcRevTarget[playerid] = 65535;
 	for (new i = 0; i < MAX_PLAYERS; i++)
@@ -28431,13 +28882,14 @@ Faction_OnPlayerDeath(playerid)
 	}
 	if (gPlayer[playerid][pWounded])
 	{
-		g_FcHospPending[playerid] = 1;
+		g_FcHospPending[playerid] = true;
 		return 0;
 	}
 	gPlayer[playerid][pWounded] = 1;
 	g_FcInjLeftMs[playerid] = 180000;
 	g_FcInjSec[playerid] = -1;
 	UI_InjuryHudHide(playerid);
+	return 0;
 }
 
 Faction_OnPlayerSpawn(playerid)
@@ -28448,7 +28900,7 @@ Faction_OnPlayerSpawn(playerid)
 	}
 	if (gPlayer[playerid][pOnDuty])
 	{
-		Faction_ForceOff(playerid, 1);
+		Faction_ForceOff(playerid, true);
 	}
 	if (g_FcHospPending[playerid])
 	{
@@ -28466,6 +28918,7 @@ Faction_OnPlayerSpawn(playerid)
 	g_FcInjSec[playerid] = 180;
 	UI_InjuryHudShow(playerid, 180);
 	SendClientMessage(playerid, -10270721, "Sei ferito. Attendi i soccorsi (EMS): senza aiuto verrai ricoverato tra %d secondi ($%d).", 180, 200);
+	return 0;
 }
 
 Faction_SendHelp(playerid)
@@ -28493,6 +28946,7 @@ Faction_SendHelp(playerid)
 	{
 		Util_Send(playerid, 0x99CCFFFF, "/invita id · /promuovi id · /degrada id · /licenzia id");
 	}
+	return 0;
 }
 
 // ===== modules/inventory/inv_doc.inc =====
@@ -28528,11 +28982,11 @@ public Inv_ShowDocument(playerid, viewerid)
 	return 1;
 }
 
-Inv_CmdDocumento(playerid, params[])
+Inv_CmdDocumento(playerid, const params[])
 {
 	new pos = 0, tok[24], target = 0;
 	Util_NextToken(params, pos, tok, 24);
-	if (!strcmp(tok, "richiedi", 1, 0x7FFFFFFF))
+	if (!strcmp(tok, "richiedi", true, 0x7FFFFFFF))
 	{
 		Inv_DocRequest(playerid);
 		return 0;
@@ -28569,6 +29023,7 @@ Inv_CmdDocumento(playerid, params[])
 	{
 		SendClientMessage(playerid, 0x66DD66FF, "Hai mostrato il documento a %s.", tname);
 	}
+	return 0;
 }
 
 // ===== modules/living/living_calc.inc =====
@@ -28623,15 +29078,12 @@ LD_Bucket(unixTs)
 
 bool:LD_ContractSlot(bucket, slot, &fromD, &toD, &cargo)
 {
-	fromD = 0;
-	toD = 0;
-	cargo = 0;
 	new h = LD_Hash32(bucket, slot, 1);
 	fromD = LD_HashMod(h, 3) + 1;
 	new off = LD_HashMod(h >>> 8, 2) + 1;
 	toD = (fromD - 1 + off) % 3 + 1;
 	cargo = LD_HashMod(h >>> 16, 3) + 1;
-	return 1;
+	return true;
 }
 
 LD_ProTier(points)
@@ -28844,18 +29296,18 @@ bool:LD_DonationValid(amount, donatedToday)
 {
 	if (amount < 50 || amount > 500)
 	{
-		return 0;
+		return false;
 	}
 	if (donatedToday < 0)
 	{
-		return 0;
+		return false;
 	}
 	return donatedToday + amount <= 1000;
 }
 
 LD_FloatKey(Float:f)
 {
-	new i = f;
+	new i = _:f;
 	return i >= 0 ? i : cellmin - i;
 }
 
@@ -28882,21 +29334,21 @@ District_At(Float:x, Float:y)
 	return 0;
 }
 
-bool:LD_StrEqI(a[], b[])
+bool:LD_StrEqI(const a[], const b[])
 {
 	new i = 0;
 	while (a[i] != 0 && b[i] != 0)
 	{
 		if (tolower(a[i]) != tolower(b[i]))
 		{
-			return 0;
+			return false;
 		}
 		i++;
 	}
 	return a[i] == 0 && b[i] == 0;
 }
 
-LD_ParseDistrict(name[])
+LD_ParseDistrict(const name[])
 {
 	if (name[0] >= 49 && name[0] < 52 && name[1] == 0)
 	{
@@ -28917,7 +29369,7 @@ LD_ParseDistrict(name[])
 	return 0;
 }
 
-LD_CopyStr(dest[], size, src[])
+LD_CopyStr(dest[], size, const src[])
 {
 	if (size <= 0)
 	{
@@ -28981,33 +29433,34 @@ LD_SetReady(bool:ready)
 	{
 		Living_TryCharReady(i);
 	}
+	return 0;
 }
 
-bool:LD_LsnBefore(prio, fn[], idx)
+bool:LD_LsnBefore(prio, const fn[], idx)
 {
 	if (prio != g_LdLsnPrio[idx])
 	{
 		return prio < g_LdLsnPrio[idx];
 	}
-	return strcmp(fn, g_LdLsnName[idx], 0, 0x7FFFFFFF) < 0;
+	return bool:(strcmp(fn, g_LdLsnName[idx], false, 0x7FFFFFFF) < 0);
 }
 
-bool:LD_Listen(fn[], prio)
+bool:LD_Listen(const fn[], prio)
 {
 	if (strlen(fn) >= 32 || funcidx(fn) == -1)
 	{
-		return 0;
+		return false;
 	}
 	for (new i = 0; i < g_LdLsnCount; i++)
 	{
-		if (!strcmp(fn, g_LdLsnName[i], 0, 0x7FFFFFFF))
+		if (!strcmp(fn, g_LdLsnName[i], false, 0x7FFFFFFF))
 		{
-			return 0;
+			return false;
 		}
 	}
 	if (g_LdLsnCount >= 8)
 	{
-		return 0;
+		return false;
 	}
 	new pos = g_LdLsnCount;
 	while (pos > 0 && LD_LsnBefore(prio, fn, pos - 1))
@@ -29019,10 +29472,10 @@ bool:LD_Listen(fn[], prio)
 	g_LdLsnPrio[pos] = prio;
 	strmid(g_LdLsnName[pos], fn, 0, 32, 32);
 	g_LdLsnCount++;
-	return 1;
+	return true;
 }
 
-LD_Emit(type, districtId, charId, value, opId[])
+LD_Emit(type, districtId, charId, value, const opId[])
 {
 	if (g_LdEmitDepth >= 2)
 	{
@@ -29055,6 +29508,7 @@ LD_OnboardAction(playerid, step)
 		return 0;
 	}
 	LD_Emit(106, 0, gPlayer[playerid][pCharId], step, "-");
+	return 0;
 }
 
 LD_GetLocalRep(playerid, districtId)
@@ -29082,6 +29536,7 @@ LD_SetProPoints(playerid, track, points)
 		return 0;
 	}
 	gPlayer[playerid][pProPoints][track] = points > 0 ? points : 0;
+	return 0;
 }
 
 LD_ActiveFlow(playerid)
@@ -29170,10 +29625,10 @@ bool:LD_SendBlock(playerid, block)
 		}
 		default:
 		{
-			return 0;
+			return false;
 		}
 	}
-	return 1;
+	return true;
 }
 
 bool:LD_PoolHasRoom()
@@ -29216,6 +29671,7 @@ LD_VehRelease(vehicleid)
 	{
 		g_LdPool--;
 	}
+	return 0;
 }
 
 LD_VehModule(vehicleid)
@@ -29263,7 +29719,7 @@ LD_VehCleanupOwner(playerid)
 
 Living_OnInit()
 {
-	g_LdReady = 0;
+	g_LdReady = false;
 	g_LdLsnCount = 0;
 	g_LdEmitDepth = 0;
 	g_LdPool = 0;
@@ -29291,7 +29747,7 @@ Living_OnExit()
 	Hub_OnExit();
 	CityOS_OnExit();
 	District_OnExit();
-	g_LdReady = 0;
+	g_LdReady = false;
 	g_LdLsnCount = 0;
 }
 
@@ -29336,6 +29792,7 @@ Living_TryCharReady(playerid)
 	Taxi_OnCharReady(playerid);
 	Freight_OnCharReady(playerid);
 	Hub_OnCharReady(playerid);
+	return 0;
 }
 
 Living_OnPlayerSpawn(playerid)
@@ -29410,15 +29867,15 @@ District_CopyCache()
 {
 	for (new d = 1; d <= 3; d++)
 	{
-		if (!DB_LivingDistrictGet(d, 0))
+		if (!DB_LivingDistrictGet(d, E_LD_DISTRICT:0))
 		{
 			continue;
 		}
-		new act = DB_LivingDistrictGet(d, 1);
+		new act = DB_LivingDistrictGet(d, E_LD_DISTRICT:1);
 		new bool:changed = g_DistBooted && act != g_DistAct[d];
 		g_DistAct[d] = act;
-		g_DistSec[d] = DB_LivingDistrictGet(d, 2);
-		g_DistCrime[d] = DB_LivingDistrictGet(d, 3);
+		g_DistSec[d] = DB_LivingDistrictGet(d, E_LD_DISTRICT:2);
+		g_DistCrime[d] = DB_LivingDistrictGet(d, E_LD_DISTRICT:3);
 		if (changed)
 		{
 			LD_Emit(105, d, 0, act, "-");
@@ -29426,35 +29883,35 @@ District_CopyCache()
 	}
 }
 
-bool:District_SeenOp(opId[])
+bool:District_SeenOp(const opId[])
 {
-	if (opId[0] == 0 || !strcmp(opId, "-", 0, 0x7FFFFFFF))
+	if (opId[0] == 0 || !strcmp(opId, "-", false, 0x7FFFFFFF))
 	{
-		return 0;
+		return false;
 	}
 	for (new i = 0; i < 32; i++)
 	{
-		if (g_DistSeen[i][0] != 0 && !strcmp(g_DistSeen[i], opId, 0, 0x7FFFFFFF))
+		if (g_DistSeen[i][0] != 0 && !strcmp(g_DistSeen[i], opId, false, 0x7FFFFFFF))
 		{
-			return 1;
+			return true;
 		}
 	}
 	g_DistSeen[g_DistSeenPos][0] = 0;
 	strcat(g_DistSeen[g_DistSeenPos], opId, 41);
 	g_DistSeenPos = (g_DistSeenPos + 1) % 32;
-	return 0;
+	return false;
 }
 
 bool:District_HookAllowed(districtId, charId)
 {
 	if (charId <= 0)
 	{
-		return 1;
+		return true;
 	}
 	new p = DB_LdCharOnline(charId);
 	if (p == INVALID_PLAYER_ID)
 	{
-		return 1;
+		return true;
 	}
 	new hour = gettime() / 3600;
 	if (g_DistHookHour[p] != hour)
@@ -29467,10 +29924,10 @@ bool:District_HookAllowed(districtId, charId)
 	}
 	if (g_DistHookCount[p][districtId] >= 3)
 	{
-		return 0;
+		return false;
 	}
 	g_DistHookCount[p][districtId]++;
-	return 1;
+	return true;
 }
 
 District_ResetPlayer(playerid)
@@ -29485,9 +29942,10 @@ District_ResetPlayer(playerid)
 		g_DistHookCount[playerid][d] = 0;
 	}
 	g_DistLoadTry[playerid] = 0;
-	g_DistQuietLoad[playerid] = 0;
+	g_DistQuietLoad[playerid] = false;
 	g_DistAdminOp[playerid][0] = 0;
 	DB_LivingPlayerReset(playerid);
+	return 0;
 }
 
 District_StartBoot()
@@ -29496,16 +29954,17 @@ District_StartBoot()
 	{
 		return 0;
 	}
-	g_DistBootInFlight = 1;
+	g_DistBootInFlight = true;
 	DB_LivingPushConfig();
 	DB_LivingBoot();
+	return 0;
 }
 
 District_OnInit()
 {
-	g_DistBooted = 0;
-	g_DistBootInFlight = 0;
-	g_DistCycle = 0;
+	g_DistBooted = false;
+	g_DistBootInFlight = false;
+	g_DistCycle = false;
 	g_DistQHead = 0;
 	g_DistQCount = 0;
 	g_DistSeenPos = 0;
@@ -29527,7 +29986,7 @@ District_OnInit()
 	{
 		KillTimer(g_DistTimer);
 	}
-	g_DistTimer = SetTimer("District_OnTick", 30000, 1);
+	g_DistTimer = SetTimer("District_OnTick", 30000, true);
 	District_StartBoot();
 }
 
@@ -29538,8 +29997,8 @@ District_OnExit()
 		KillTimer(g_DistTimer);
 	}
 	g_DistTimer = 0;
-	g_DistBooted = 0;
-	g_DistBootInFlight = 0;
+	g_DistBooted = false;
+	g_DistBootInFlight = false;
 	g_DistQCount = 0;
 }
 
@@ -29551,12 +30010,13 @@ District_OnPlayerConnect(playerid)
 District_OnCharReady(playerid)
 {
 	g_DistLoadTry[playerid] = 0;
-	g_DistQuietLoad[playerid] = 0;
-	DB_LivingLoadPlayer(playerid, 1);
+	g_DistQuietLoad[playerid] = false;
+	DB_LivingLoadPlayer(playerid, true);
 }
 
 District_OnPlayerDisconnect(playerid, reason)
 {
+	#pragma unused reason
 	District_ResetPlayer(playerid);
 }
 
@@ -29566,8 +30026,9 @@ District_ReloadPlayer(playerid)
 	{
 		return 0;
 	}
-	g_DistQuietLoad[playerid] = 1;
-	DB_LivingLoadPlayer(playerid, 0);
+	g_DistQuietLoad[playerid] = true;
+	DB_LivingLoadPlayer(playerid, false);
+	return 0;
 }
 
 public District_OnTick()
@@ -29577,7 +30038,7 @@ public District_OnTick()
 		District_StartBoot();
 		return 1;
 	}
-	g_DistCycle = 1;
+	g_DistCycle = true;
 	DB_LivingTick();
 	return 1;
 }
@@ -29586,7 +30047,7 @@ public Living_OnDBBoot(result)
 {
 	if (result != 1)
 	{
-		g_DistBootInFlight = 0;
+		g_DistBootInFlight = false;
 		Log_Write("DISTRICT", "boot living fallito (DB): nuovo tentativo al prossimo tick");
 	}
 	return 1;
@@ -29598,10 +30059,10 @@ public Living_OnDBDistricts(result, count)
 	{
 		if (!g_DistBooted && g_DistBootInFlight)
 		{
-			g_DistBootInFlight = 0;
+			g_DistBootInFlight = false;
 			Log_Write("DISTRICT", "lettura quartieri fallita durante il boot: nuovo tentativo al prossimo tick");
 		}
-		g_DistCycle = 0;
+		g_DistCycle = false;
 		return 1;
 	}
 	District_CopyCache();
@@ -29611,17 +30072,17 @@ public Living_OnDBDistricts(result, count)
 		{
 			return 1;
 		}
-		g_DistBooted = 1;
-		g_DistBootInFlight = 0;
-		g_DistCycle = 1;
+		g_DistBooted = true;
+		g_DistBootInFlight = false;
+		g_DistCycle = true;
 		new msg[160];
 		format(msg, 160, "boot living completato: %d quartieri, %d contratti per bucket", count, DB_LivingBucketSlots());
 		Log_Write("DISTRICT", msg);
-		LD_SetReady(1);
+		LD_SetReady(true);
 	}
 	if (g_DistCycle)
 	{
-		g_DistCycle = 0;
+		g_DistCycle = false;
 		if (funcidx("Director_OnCycle") != -1)
 		{
 			CallLocalFunction("Director_OnCycle", "");
@@ -29666,7 +30127,7 @@ District_SetCache(districtId, activity, security, crime)
 	return 1;
 }
 
-District_Emit(type, districtId, charId, value, opId[])
+District_Emit(type, districtId, charId, value, const opId[])
 {
 	if (type >= 100)
 	{
@@ -29687,7 +30148,7 @@ District_Emit(type, districtId, charId, value, opId[])
 			return 0;
 		}
 		new op[41];
-		if (opId[0] == 0 || !strcmp(opId, "-", 0, 0x7FFFFFFF))
+		if (opId[0] == 0 || !strcmp(opId, "-", false, 0x7FFFFFFF))
 		{
 			DB_LivingMakeOpId(op, 41, "le", districtId, charId > 0 ? charId : 0);
 		}
@@ -29753,7 +30214,7 @@ public Living_OnDBPlayer(playerid, result, refund)
 	if (result == 1)
 	{
 		g_DistLoadTry[playerid] = 0;
-		g_DistQuietLoad[playerid] = 0;
+		g_DistQuietLoad[playerid] = false;
 		if (refund > 0)
 		{
 			new msg[160];
@@ -29765,12 +30226,12 @@ public Living_OnDBPlayer(playerid, result, refund)
 	}
 	if (quiet && result != -1 && result != 10)
 	{
-		g_DistQuietLoad[playerid] = 0;
+		g_DistQuietLoad[playerid] = false;
 		return 1;
 	}
 	if (g_DistLoadTry[playerid] >= 3)
 	{
-		g_DistQuietLoad[playerid] = 0;
+		g_DistQuietLoad[playerid] = false;
 		if (!quiet)
 		{
 			Util_Send(playerid, -10270721, "Non e' stato possibile caricare la tua reputazione: riprova a rientrare piu' tardi.");
@@ -29779,7 +30240,7 @@ public Living_OnDBPlayer(playerid, result, refund)
 		return 1;
 	}
 	g_DistLoadTry[playerid]++;
-	SetTimerEx("District_OnLoadRetry", 3000, 0, "dd", playerid, gPlayer[playerid][pCharId]);
+	SetTimerEx("District_OnLoadRetry", 3000, false, "dd", playerid, gPlayer[playerid][pCharId]);
 	return 1;
 }
 
@@ -29793,30 +30254,30 @@ public District_OnLoadRetry(playerid, charId)
 	return 1;
 }
 
-bool:District_ParseOpt(tok[], &value)
+bool:District_ParseOpt(const tok[], &value)
 {
 	value = -1;
-	if (tok[0] == 0 || !strcmp(tok, "-", 0, 0x7FFFFFFF))
+	if (tok[0] == 0 || !strcmp(tok, "-", false, 0x7FFFFFFF))
 	{
-		return 1;
+		return true;
 	}
 	if (!Util_ParseInt(tok, value))
 	{
-		return 0;
+		return false;
 	}
 	return value >= -1;
 }
 
-bool:District_CmdLdset(playerid, params[])
+bool:District_CmdLdset(playerid, const params[])
 {
 	if (Util_GetAdmin(playerid) < 3)
 	{
-		return 0;
+		return false;
 	}
 	if (!g_DistBooted)
 	{
 		LD_SendBlock(playerid, 1);
-		return 1;
+		return true;
 	}
 	new pos = 0, tName[16], tAct[16], tSec[16], tCrime[16];
 	Util_NextToken(params, pos, tName, 16);
@@ -29827,16 +30288,16 @@ bool:District_CmdLdset(playerid, params[])
 	if (d == 0 || tAct[0] == 0 || !District_ParseOpt(tAct, act) || !District_ParseOpt(tSec, sec) || !District_ParseOpt(tCrime, crime))
 	{
 		Util_Send(playerid, 0x99CCFFFF, "Uso: /ldset <idlewood|ganton|jefferson> <attivita' 0-1000> [sicurezza 0-100] [pressione 0-100]  (- = invariato)");
-		return 1;
+		return true;
 	}
 	if (act > 1000 || sec > 100 || crime > 100)
 	{
 		Util_Send(playerid, -10270721, "Valori fuori range: attivita' 0-1000, sicurezza e pressione 0-100.");
-		return 1;
+		return true;
 	}
 	DB_LivingMakeOpId(g_DistAdminOp[playerid], 41, "la", d, gPlayer[playerid][pCharId]);
 	DB_LivingAdminSet(playerid, g_DistAdminOp[playerid], d, act, sec, crime);
-	return 1;
+	return true;
 }
 
 public Living_OnDBAdminSet(playerid, result, districtId, activity, security, crime)
@@ -29861,7 +30322,7 @@ public Living_OnDBAdminSet(playerid, result, districtId, activity, security, cri
 	{
 		LD_Emit(9, districtId, gPlayer[playerid][pCharId], activity, g_DistAdminOp[playerid]);
 	}
-	g_DistCycle = 1;
+	g_DistCycle = true;
 	DB_LivingLoadDistricts();
 	return 1;
 }
@@ -29943,7 +30404,7 @@ Director_RouteMeters(fromD, toD)
 	Director_WarehousePos(fromD, ax, ay);
 	Director_ShopPos(toD, bx, by);
 	new Float:dx = (bx - ax), Float:dy = (by - ay);
-	return floatround(floatsqroot(((dx * dx) + (dy * dy))), 1);
+	return floatround(floatsqroot(((dx * dx) + (dy * dy))), floatround_method:1);
 }
 
 Director_BoardFind(contractId)
@@ -30004,7 +30465,7 @@ Director_BlockCode(playerid, i)
 	{
 		return 6;
 	}
-	if (DB_LivingPlayerGet(playerid, 2) >= 8 || DB_LivingPlayerGet(playerid, 1) >= 2800)
+	if (DB_LivingPlayerGet(playerid, E_LD_PLAYER:2) >= 8 || DB_LivingPlayerGet(playerid, E_LD_PLAYER:1) >= 2800)
 	{
 		return 7;
 	}
@@ -30023,13 +30484,13 @@ bool:Director_BoardVisible(playerid, i)
 {
 	if (i < 0 || i >= g_DirBoardCount || g_DirBoard[i][dbExpiresAt] <= gettime())
 	{
-		return 0;
+		return false;
 	}
 	if (g_DirBoard[i][dbPremium] != 0 && !Director_PremiumOk(playerid, g_DirBoard[i][dbFromDistrict], g_DirBoard[i][dbToDistrict]))
 	{
-		return 0;
+		return false;
 	}
-	return 1;
+	return true;
 }
 
 Director_ClearContract(playerid)
@@ -30049,7 +30510,7 @@ Director_ClearContract(playerid)
 	g_DirRetry[playerid] = 0;
 	g_DirRelAfter[playerid] = 0;
 	g_DirRelReason[playerid] = 0;
-	g_DirRelSilent[playerid] = 0;
+	g_DirRelSilent[playerid] = false;
 	g_DirCompOp[playerid][0] = 0;
 	g_DirCompCt[playerid] = 0;
 	g_DirSeq[playerid]++;
@@ -30066,9 +30527,10 @@ Director_ResetPlayer(playerid)
 	g_DirLockAt[playerid] = 0;
 	g_DirCompInteg[playerid] = 0;
 	g_DirCompSec[playerid] = 0;
+	return 0;
 }
 
-Director_SetOp(playerid, pend, tag[], ref)
+Director_SetOp(playerid, pend, const tag[], ref)
 {
 	gPlayer[playerid][pContractPendOp] = pend;
 	gPlayer[playerid][pContractOpId][0] = 0;
@@ -30105,11 +30567,11 @@ bool:Director_ScheduleRetry(playerid)
 {
 	if (g_DirRetry[playerid] >= 3)
 	{
-		return 0;
+		return false;
 	}
 	g_DirRetry[playerid]++;
-	SetTimerEx("Director_OnRetry", 2500, 0, "ddd", playerid, gPlayer[playerid][pCharId], g_DirSeq[playerid]);
-	return 1;
+	SetTimerEx("Director_OnRetry", 2500, false, "ddd", playerid, gPlayer[playerid][pCharId], g_DirSeq[playerid]);
+	return true;
 }
 
 public Director_OnRetry(playerid, charId, seq)
@@ -30153,7 +30615,7 @@ Director_EndLocal(playerid, freightReason, bool:released, relReason)
 Director_OnInit()
 {
 	g_DirBoardCount = 0;
-	g_DirBoardLoaded = 0;
+	g_DirBoardLoaded = false;
 	for (new p = 0; p < MAX_PLAYERS; p++)
 	{
 		Director_ResetPlayer(p);
@@ -30177,6 +30639,7 @@ Director_OnPlayerConnect(playerid)
 
 Director_OnCharReady(playerid)
 {
+	#pragma unused playerid
 	if (!g_DirBoardLoaded || g_DirBoardCount < 4)
 	{
 		Director_OnCycle();
@@ -30185,6 +30648,7 @@ Director_OnCharReady(playerid)
 
 Director_OnPlayerDisconnect(playerid, reason)
 {
+	#pragma unused reason
 	new ct = gPlayer[playerid][pContractId];
 	if (ct != 0 && gPlayer[playerid][pContractPendOp] == 0 && gPlayer[playerid][pContractPhase] != 0)
 	{
@@ -30195,7 +30659,7 @@ Director_OnPlayerDisconnect(playerid, reason)
 	Director_ResetPlayer(playerid);
 }
 
-public Director_OnDistrictEvent(type, districtId, charId, value, opId[])
+public Director_OnDistrictEvent(type, districtId, charId, value, const opId[])
 {
 	if (type == 9 || type == 8)
 	{
@@ -30232,7 +30696,7 @@ Director_Generate(bucket)
 		{
 			continue;
 		}
-		new bool:premium = 0;
+		new bool:premium = false;
 		if (s >= 3)
 		{
 			new h = LD_Hash32(bucket, s, 2);
@@ -30299,7 +30763,7 @@ public Living_OnDBBoard(playerid, result, count)
 		n++;
 	}
 	g_DirBoardCount = n;
-	g_DirBoardLoaded = 1;
+	g_DirBoardLoaded = true;
 	LD_Emit(104, 0, 0, n, "-");
 	return 1;
 }
@@ -30324,7 +30788,7 @@ bool:Director_BoardGet(index, &contractId, &fromD, &toD, &cargo, &reward, &dista
 		minRep = 0;
 		minLocalRep = 0;
 		premium = 0;
-		return 0;
+		return false;
 	}
 	contractId = g_DirBoard[index][dbContractId];
 	fromD = g_DirBoard[index][dbFromDistrict];
@@ -30337,7 +30801,7 @@ bool:Director_BoardGet(index, &contractId, &fromD, &toD, &cargo, &reward, &dista
 	minRep = g_DirBoard[index][dbMinRep];
 	minLocalRep = g_DirBoard[index][dbMinLocalRep];
 	premium = g_DirBoard[index][dbPremium];
-	return 1;
+	return true;
 }
 
 Director_ExpiresAt(playerid)
@@ -30396,45 +30860,45 @@ bool:Director_Accept(playerid, contractId)
 {
 	if (!Util_IsPlaying(playerid))
 	{
-		return 0;
+		return false;
 	}
 	if (!LD_IsReady() || gPlayer[playerid][pLivingReady] == 0)
 	{
 		LD_SendBlock(playerid, 1);
-		return 0;
+		return false;
 	}
 	if (gPlayer[playerid][pContractPendOp] != 0 || DB_LivingBusy(playerid, 0))
 	{
 		Util_Send(playerid, -10270721, "Un'operazione sul contratto e' gia' in corso: attendi.");
-		return 0;
+		return false;
 	}
 	if (Hub_NearBoard(playerid) < 0)
 	{
 		Util_Send(playerid, -10270721, "I contratti si accettano a una bacheca: Casa del Quartiere di Idlewood, magazzino di Ganton o di Jefferson.");
-		return 0;
+		return false;
 	}
 	new block = LD_CheckStart(playerid);
 	if (block != 0)
 	{
 		LD_SendBlock(playerid, block);
-		return 0;
+		return false;
 	}
 	if (gPlayer[playerid][pLevel] < 2)
 	{
 		Director_BlockMsg(playerid, 1);
-		return 0;
+		return false;
 	}
 	new i = Director_BoardFind(contractId);
 	if (i < 0 || !Director_BoardVisible(playerid, i))
 	{
 		Director_BlockMsg(playerid, 9);
-		return 0;
+		return false;
 	}
 	new code = Director_BlockCode(playerid, i);
 	if (code != 0)
 	{
 		Director_BlockMsg(playerid, code);
-		return 0;
+		return false;
 	}
 	gPlayer[playerid][pContractId] = contractId;
 	gPlayer[playerid][pContractPhase] = 0;
@@ -30446,22 +30910,22 @@ bool:Director_Accept(playerid, contractId)
 	g_DirExpAt[playerid] = g_DirBoard[i][dbExpiresAt];
 	Director_SetOp(playerid, 1, "ca", contractId);
 	Director_Send(playerid);
-	return 1;
+	return true;
 }
 
 bool:Director_Pickup(playerid)
 {
 	if (!IsPlayerConnected(playerid) || gPlayer[playerid][pContractId] == 0 || gPlayer[playerid][pContractPhase] != 1)
 	{
-		return 0;
+		return false;
 	}
 	if (gPlayer[playerid][pContractPendOp] != 0)
 	{
-		return 0;
+		return false;
 	}
 	Director_SetOp(playerid, 2, "cp", gPlayer[playerid][pContractId]);
 	Director_Send(playerid);
-	return 1;
+	return true;
 }
 
 bool:Director_Complete(playerid, integrityPct, seconds)
@@ -30469,11 +30933,11 @@ bool:Director_Complete(playerid, integrityPct, seconds)
 	new ct = gPlayer[playerid][pContractId];
 	if (!IsPlayerConnected(playerid) || ct == 0 || gPlayer[playerid][pContractPhase] != 2)
 	{
-		return 0;
+		return false;
 	}
 	if (gPlayer[playerid][pContractPendOp] != 0)
 	{
-		return 0;
+		return false;
 	}
 	g_DirCompInteg[playerid] = LD_Clamp(integrityPct, 0, 100);
 	g_DirCompSec[playerid] = seconds > 0 ? seconds : 0;
@@ -30492,29 +30956,29 @@ bool:Director_Complete(playerid, integrityPct, seconds)
 		strcat(g_DirCompOp[playerid], gPlayer[playerid][pContractOpId], 41);
 	}
 	Director_Send(playerid);
-	return 1;
+	return true;
 }
 
 bool:Director_Release(playerid, reason)
 {
 	if (!IsPlayerConnected(playerid) || gPlayer[playerid][pContractId] == 0)
 	{
-		return 0;
+		return false;
 	}
 	if (gPlayer[playerid][pContractPendOp] == 4)
 	{
-		return 1;
+		return true;
 	}
 	if (gPlayer[playerid][pContractPendOp] != 0)
 	{
 		g_DirRelAfter[playerid] = reason;
-		return 1;
+		return true;
 	}
 	Freight_End(playerid, reason);
 	g_DirRelReason[playerid] = reason;
 	Director_SetOp(playerid, 4, "cr", gPlayer[playerid][pContractId]);
 	Director_Send(playerid);
-	return 1;
+	return true;
 }
 
 Director_OnAccept(playerid, result, contractId, v2)
@@ -30530,7 +30994,7 @@ Director_OnAccept(playerid, result, contractId, v2)
 		{
 			g_DirExpAt[playerid] = v2;
 		}
-		if (!Freight_Begin(playerid, contractId, gPlayer[playerid][pContractFromDistrict], gPlayer[playerid][pContractToDistrict], gPlayer[playerid][pContractCargo], gPlayer[playerid][pContractDistance], 0))
+		if (!Freight_Begin(playerid, contractId, gPlayer[playerid][pContractFromDistrict], gPlayer[playerid][pContractToDistrict], gPlayer[playerid][pContractCargo], gPlayer[playerid][pContractDistance], false))
 		{
 			Util_Send(playerid, -10270721, "Il magazzino non ha un mezzo disponibile adesso: contratto rimesso in bacheca senza penalita'.");
 			Director_Release(playerid, 6);
@@ -30547,7 +31011,7 @@ Director_OnAccept(playerid, result, contractId, v2)
 		{
 			return 0;
 		}
-		g_DirRelSilent[playerid] = 1;
+		g_DirRelSilent[playerid] = true;
 		g_DirRelReason[playerid] = 6;
 		Director_SetOp(playerid, 4, "cr", contractId);
 		Director_Send(playerid);
@@ -30588,6 +31052,7 @@ Director_OnAccept(playerid, result, contractId, v2)
 		}
 	}
 	DB_LivingBoard(65535);
+	return 0;
 }
 
 Director_AfterFreight(playerid, contractId, bool:terminal, relReason)
@@ -30604,6 +31069,7 @@ Director_AfterFreight(playerid, contractId, bool:terminal, relReason)
 	{
 		Director_RunDeferred(playerid);
 	}
+	return 0;
 }
 
 Director_OnPickup(playerid, result)
@@ -30623,12 +31089,13 @@ Director_OnPickup(playerid, result)
 		}
 		LD_Emit(102, gPlayer[playerid][pContractFromDistrict], gPlayer[playerid][pCharId], ct, gPlayer[playerid][pContractOpId]);
 		Freight_OnPickupResult(playerid, 1);
-		Director_AfterFreight(playerid, ct, 0, 0);
+		Director_AfterFreight(playerid, ct, false, 0);
 		return 0;
 	}
 	new bool:terminal = result != -1 && result != 10;
 	Freight_OnPickupResult(playerid, result);
 	Director_AfterFreight(playerid, ct, terminal, 5);
+	return 0;
 }
 
 Director_OnComplete(playerid, result, amount, balance, v1, v2)
@@ -30648,7 +31115,7 @@ Director_OnComplete(playerid, result, amount, balance, v1, v2)
 			g_DirCompCt[playerid] = 0;
 		}
 		Freight_OnCompleteResult(playerid, result, 0, 0);
-		Director_AfterFreight(playerid, ct, 0, 0);
+		Director_AfterFreight(playerid, ct, false, 0);
 		return 0;
 	}
 	new op[41];
@@ -30664,7 +31131,7 @@ Director_OnComplete(playerid, result, amount, balance, v1, v2)
 	if (paid || result == 8 || result == 2)
 	{
 		Freight_OnCompleteResult(playerid, result, paid ? amount : 0, balance);
-		Director_EndLocal(playerid, 0, 0, 0);
+		Director_EndLocal(playerid, 0, false, 0);
 		gPlayer[playerid][pContractCooldownUntil] = GetTickCount() + 90000;
 		if (paid)
 		{
@@ -30680,7 +31147,8 @@ Director_OnComplete(playerid, result, amount, balance, v1, v2)
 	g_DirCompOp[playerid][0] = 0;
 	g_DirCompCt[playerid] = 0;
 	Freight_OnCompleteResult(playerid, result, 0, balance);
-	Director_AfterFreight(playerid, ct, 1, 5);
+	Director_AfterFreight(playerid, ct, true, 5);
+	return 0;
 }
 
 Director_OnReleased(playerid, result, v2)
@@ -30709,7 +31177,8 @@ Director_OnReleased(playerid, result, v2)
 			Util_Send(playerid, -1, "Contratto interrotto senza penalita': e' tornato in bacheca.");
 		}
 	}
-	Director_EndLocal(playerid, reason, 1, reason);
+	Director_EndLocal(playerid, reason, true, reason);
+	return 0;
 }
 
 public Living_OnDBContract(playerid, action, result, contractId, amount, balance, v1, v2, v3)
@@ -31119,7 +31588,7 @@ Rental_VehHealth(vehicleid)
 	}
 	new Float:hp;
 	GetVehicleHealth(vehicleid, hp);
-	return LD_Clamp(floatround(hp, 1), 0, 1000);
+	return LD_Clamp(floatround(hp, floatround_method:1), 0, 1000);
 }
 
 Rental_ResetPlayer(playerid)
@@ -31132,12 +31601,13 @@ Rental_ResetPlayer(playerid)
 	g_RtDeposit[playerid] = 0;
 	g_RtOpenTs[playerid] = 0;
 	g_RtBlocks[playerid] = 0;
-	g_RtAbortOpen[playerid] = 0;
+	g_RtAbortOpen[playerid] = false;
 	g_RtCloseMode[playerid] = 0;
 	g_RtCloseHealth[playerid] = 0;
 	g_RtCloseReason[playerid] = 0;
 	g_RtRetry[playerid] = 0;
 	g_RtRetryAt[playerid] = 0;
+	return 0;
 }
 
 Rental_VehDestroy(playerid)
@@ -31156,10 +31626,11 @@ Rental_VehDestroy(playerid)
 	{
 		if (IsPlayerConnected(playerid) && GetPlayerVehicleID(playerid) == veh)
 		{
-			RemovePlayerFromVehicle(playerid, 0);
+			RemovePlayerFromVehicle(playerid, false);
 		}
 		DestroyVehicle(veh);
 	}
+	return 0;
 }
 
 Rental_ClearLocal(playerid)
@@ -31190,11 +31661,11 @@ bool:Rental_BeginOpen(playerid, vkind, blocks, rentClass, streetModel = 0)
 	new model = vkind == SRENT_VKIND ? streetModel : LD_RentalModel(vkind);
 	if (model <= 0 || gPlayer[playerid][pRentalId] != 0 || gPlayer[playerid][pRentalPendOp] != 0)
 	{
-		return 0;
+		return false;
 	}
 	if (DB_LivingBusy(playerid, 1))
 	{
-		return 0;
+		return false;
 	}
 	Rental_ResetPlayer(playerid);
 	gPlayer[playerid][pRentalClass] = rentClass;
@@ -31203,7 +31674,7 @@ bool:Rental_BeginOpen(playerid, vkind, blocks, rentClass, streetModel = 0)
 	g_RtBlocks[playerid] = blocks;
 	DB_LivingMakeOpId(gPlayer[playerid][pRentalOpId], 41, "ro", vkind, gPlayer[playerid][pCharId]);
 	DB_LivingRentOpen(playerid, vkind, model, blocks, gPlayer[playerid][pRentalOpId]);
-	return 1;
+	return true;
 }
 
 bool:Rental_SpawnVehicle(playerid)
@@ -31222,30 +31693,30 @@ bool:Rental_SpawnVehicle(playerid)
 	}
 	if (model <= 0 || !LD_PoolHasRoom())
 	{
-		return 0;
+		return false;
 	}
-	new veh = CreateVehicle(model, x, y, z, a, pro ? 6 : 1, pro ? 6 : 1, -1, 0);
+	new veh = CreateVehicle(model, x, y, z, a, pro ? 6 : 1, pro ? 6 : 1, -1, false);
 	if (veh == 65535 || veh <= 0 || veh >= 2000)
 	{
-		return 0;
+		return false;
 	}
 	if (LD_VehRegister(veh, pro ? 2 : 1, playerid) == 0)
 	{
 		DestroyVehicle(veh);
-		return 0;
+		return false;
 	}
 	SetVehicleHealth(veh, float(1000));
 	SetVehicleParamsEx(veh, 1, 0, 0, 0, 0, 0, 0);
 	gPlayer[playerid][pRentalVehicle] = veh;
 	PutPlayerInVehicle(playerid, veh, 0);
-	return 1;
+	return true;
 }
 
 bool:Rental_SendClose(playerid, mode, health, reason)
 {
 	if (gPlayer[playerid][pRentalId] == 0 || gPlayer[playerid][pRentalPendOp] != 0)
 	{
-		return 0;
+		return false;
 	}
 	Rental_VehDestroy(playerid);
 	g_RtCloseMode[playerid] = mode;
@@ -31256,7 +31727,7 @@ bool:Rental_SendClose(playerid, mode, health, reason)
 	gPlayer[playerid][pRentalPendOp] = 6;
 	DB_LivingMakeOpId(gPlayer[playerid][pRentalOpId], 41, "rc", gPlayer[playerid][pRentalId], gPlayer[playerid][pCharId]);
 	DB_LivingRentClose(playerid, gPlayer[playerid][pRentalId], mode, g_RtCloseHealth[playerid], gPlayer[playerid][pRentalOpId]);
-	return 1;
+	return true;
 }
 
 bool:Rental_CloseInterrupted(playerid, reason)
@@ -31330,6 +31801,7 @@ Rental_NotifyClosed(playerid, result, refund, newState)
 			Util_Send(playerid, -10270721, "Chiusura del noleggio non riuscita: verra' sistemata automaticamente al prossimo accesso.");
 		}
 	}
+	return 0;
 }
 
 Rental_OnOpenResult(playerid, result, rentalId, amount, dueAt)
@@ -31349,7 +31821,7 @@ Rental_OnOpenResult(playerid, result, rentalId, amount, dueAt)
 		gPlayer[playerid][pRentalClass] = 0;
 		gPlayer[playerid][pRentalKind] = 0;
 		gPlayer[playerid][pRentalOpId][0] = 0;
-		g_RtAbortOpen[playerid] = 0;
+		g_RtAbortOpen[playerid] = false;
 		if (pro)
 		{
 			Taxi_OnProRental(playerid, result, 0);
@@ -31388,7 +31860,7 @@ Rental_OnOpenResult(playerid, result, rentalId, amount, dueAt)
 	g_RtOpenTs[playerid] = gettime();
 	if (g_RtAbortOpen[playerid] || !Util_IsPlaying(playerid))
 	{
-		g_RtAbortOpen[playerid] = 0;
+		g_RtAbortOpen[playerid] = false;
 		Rental_SendClose(playerid, 3, 0, pro ? 3 : 1);
 		return 0;
 	}
@@ -31416,6 +31888,7 @@ Rental_OnOpenResult(playerid, result, rentalId, amount, dueAt)
 	}
 	Rental_KindName(gPlayer[playerid][pRentalKind], name, 16);
 	SendClientMessage(playerid, 0x66DD66FF, "Noleggio attivo: %s per %d minuti (canone $%d, cauzione $%d). Riportalo qui con /riconsegna.", name, minutes > 0 ? minutes : 0, g_RtFee[playerid], g_RtDeposit[playerid]);
+	return 0;
 }
 
 Rental_OnCloseResult(playerid, result, amount, newState)
@@ -31436,6 +31909,7 @@ Rental_OnCloseResult(playerid, result, amount, newState)
 	gPlayer[playerid][pRentalPendOp] = 0;
 	Rental_NotifyClosed(playerid, result, amount > 0 ? amount : 0, newState);
 	Rental_ClearLocal(playerid);
+	return 0;
 }
 
 public Living_OnDBRental(playerid, action, result, rentalId, amount, balance, cashUsed, dueAt)
@@ -31467,39 +31941,40 @@ bool:Rental_CanStart(playerid)
 {
 	if (!Util_IsPlaying(playerid))
 	{
-		return 0;
+		return false;
 	}
 	if (gPlayer[playerid][pRentalPendOp] != 0)
 	{
 		Util_Send(playerid, -10270721, "Pratica di noleggio gia' in corso: attendi.");
-		return 0;
+		return false;
 	}
 	new block = LD_CheckStart(playerid);
 	if (block != 0)
 	{
 		LD_SendBlock(playerid, block);
-		return 0;
+		return false;
 	}
 	if (!Rental_AtOffice(playerid, 4.0))
 	{
 		Util_Send(playerid, -10270721, "Devi trovarti all'agenzia di noleggio di Pershing Square.");
-		return 0;
+		return false;
 	}
-	if (GetPlayerState(playerid) != 1)
+	if (GetPlayerState(playerid) != PLAYER_STATE_ONFOOT)
 	{
 		Util_Send(playerid, -10270721, "Scendi dal veicolo per noleggiare.");
-		return 0;
+		return false;
 	}
 	if (gPlayer[playerid][pLevel] < 1)
 	{
 		SendClientMessage(playerid, -10270721, "Serve almeno il livello %d per noleggiare.", 1);
-		return 0;
+		return false;
 	}
-	return 1;
+	return true;
 }
 
-Rental_CmdNoleggio(playerid, params[])
+Rental_CmdNoleggio(playerid, const params[])
 {
+	#pragma unused params
 	if (!Rental_CanStart(playerid))
 	{
 		return 1;
@@ -31558,7 +32033,7 @@ bool:Rental_CanReturn(playerid, bool:verbose)
 {
 	if (!Util_IsPlaying(playerid))
 	{
-		return 0;
+		return false;
 	}
 	if (gPlayer[playerid][pRentalId] == 0)
 	{
@@ -31566,7 +32041,7 @@ bool:Rental_CanReturn(playerid, bool:verbose)
 		{
 			Util_Send(playerid, -10270721, "Non hai un noleggio attivo.");
 		}
-		return 0;
+		return false;
 	}
 	if (gPlayer[playerid][pRentalClass] == 2)
 	{
@@ -31574,7 +32049,7 @@ bool:Rental_CanReturn(playerid, bool:verbose)
 		{
 			Util_Send(playerid, -10270721, "Il taxi si restituisce al deposito con /taxi off.");
 		}
-		return 0;
+		return false;
 	}
 	if (gPlayer[playerid][pRentalPendOp] != 0)
 	{
@@ -31582,16 +32057,16 @@ bool:Rental_CanReturn(playerid, bool:verbose)
 		{
 			Util_Send(playerid, -10270721, "Pratica di noleggio gia' in corso: attendi.");
 		}
-		return 0;
+		return false;
 	}
 	new veh = gPlayer[playerid][pRentalVehicle];
-	if (veh <= 0 || GetPlayerVehicleID(playerid) != veh || GetPlayerState(playerid) != 2)
+	if (veh <= 0 || GetPlayerVehicleID(playerid) != veh || GetPlayerState(playerid) != PLAYER_STATE_DRIVER)
 	{
 		if (verbose)
 		{
 			Util_Send(playerid, -10270721, "Devi essere al volante del mezzo noleggiato.");
 		}
-		return 0;
+		return false;
 	}
 	if (gPlayer[playerid][pRentalKind] != SRENT_VKIND && !Rental_AtOffice(playerid, 12.0))
 	{
@@ -31599,14 +32074,15 @@ bool:Rental_CanReturn(playerid, bool:verbose)
 		{
 			Util_Send(playerid, -10270721, "Riporta il mezzo all'agenzia di noleggio di Pershing Square.");
 		}
-		return 0;
+		return false;
 	}
-	return 1;
+	return true;
 }
 
-Rental_CmdRiconsegna(playerid, params[])
+Rental_CmdRiconsegna(playerid, const params[])
 {
-	if (!Rental_CanReturn(playerid, 1))
+	#pragma unused params
+	if (!Rental_CanReturn(playerid, true))
 	{
 		return 1;
 	}
@@ -31629,7 +32105,7 @@ public UI_OnRentalReturnConfirm(playerid, rentalId)
 		UI_LivingReject(playerid, "Questo noleggio non e' piu' attivo.");
 		return 1;
 	}
-	if (!Rental_CanReturn(playerid, 1))
+	if (!Rental_CanReturn(playerid, true))
 	{
 		return 1;
 	}
@@ -31656,11 +32132,11 @@ bool:Rental_OpenPro(playerid, vkind)
 {
 	if (!Rental_ValidPlayer(playerid) || !Util_IsPlaying(playerid) || vkind != 4)
 	{
-		return 0;
+		return false;
 	}
 	if (!LD_PoolHasRoom())
 	{
-		return 0;
+		return false;
 	}
 	return Rental_BeginOpen(playerid, vkind, 1, 2);
 }
@@ -31669,16 +32145,16 @@ bool:Rental_ClosePro(playerid, reason)
 {
 	if (!Rental_ValidPlayer(playerid) || gPlayer[playerid][pRentalClass] != 2)
 	{
-		return 0;
+		return false;
 	}
 	if (gPlayer[playerid][pRentalPendOp] == 5)
 	{
-		g_RtAbortOpen[playerid] = 1;
-		return 1;
+		g_RtAbortOpen[playerid] = true;
+		return true;
 	}
 	if (gPlayer[playerid][pRentalId] == 0)
 	{
-		return 0;
+		return false;
 	}
 	new veh = gPlayer[playerid][pRentalVehicle];
 	switch (reason)
@@ -31703,6 +32179,7 @@ Rental_RetrySend(playerid)
 		return 0;
 	}
 	DB_LivingRentClose(playerid, gPlayer[playerid][pRentalId], g_RtCloseMode[playerid], g_RtCloseHealth[playerid], gPlayer[playerid][pRentalOpId]);
+	return 0;
 }
 
 Rental_TickPlayer(playerid, now, nowTick)
@@ -31769,6 +32246,7 @@ Rental_TickPlayer(playerid, now, nowTick)
 		Util_Send(playerid, -10270721, "Tolleranza scaduta: il mezzo torna all'agenzia.");
 		Rental_SendClose(playerid, 2, 0, 5);
 	}
+	return 0;
 }
 
 public Rental_OnTick()
@@ -31799,9 +32277,9 @@ Rental_OnInit()
 	{
 		KillTimer(g_RtTimer);
 	}
-	g_RtTimer = SetTimer("Rental_OnTick", 1000, 1);
+	g_RtTimer = SetTimer("Rental_OnTick", 1000, true);
 	CreatePickup(1239, 1, 1505.0, -1700.0, 13.5, 0);
-	Lang_Create3DTextLabel("Noleggio veicoli\n/noleggio  ·  /riconsegna", -2994689, 1505.0, -1700.0, (13.5 + 0.8), 20.0, 0, 0);
+	Lang_Create3DTextLabel("Noleggio veicoli\n/noleggio  ·  /riconsegna", -2994689, 1505.0, -1700.0, (13.5 + 0.8), 20.0, 0, false);
 }
 
 Rental_OnExit()
@@ -31827,10 +32305,12 @@ Rental_OnPlayerConnect(playerid)
 
 Rental_OnCharReady(playerid)
 {
+	#pragma unused playerid
 }
 
 Rental_OnPlayerDisconnect(playerid, reason)
 {
+	#pragma unused reason
 	if (!Rental_ValidPlayer(playerid))
 	{
 		return 0;
@@ -31848,6 +32328,7 @@ Rental_OnPlayerDisconnect(playerid, reason)
 	}
 	Rental_VehDestroy(playerid);
 	Rental_ResetPlayer(playerid);
+	return 0;
 }
 
 Rental_OnPlayerDeath(playerid)
@@ -31858,7 +32339,7 @@ Rental_OnPlayerDeath(playerid)
 	}
 	if (gPlayer[playerid][pRentalPendOp] == 5)
 	{
-		g_RtAbortOpen[playerid] = 1;
+		g_RtAbortOpen[playerid] = true;
 		return 0;
 	}
 	if (gPlayer[playerid][pRentalId] == 0 || gPlayer[playerid][pRentalPendOp] != 0)
@@ -31873,6 +32354,7 @@ Rental_OnPlayerDeath(playerid)
 	{
 		Util_Send(playerid, -1, "Noleggio interrotto: il mezzo torna all'agenzia.");
 	}
+	return 0;
 }
 
 Rental_OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
@@ -31887,17 +32369,20 @@ Rental_OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
 	{
 		return 0;
 	}
-	ClearAnimations(playerid, 0);
+	ClearAnimations(playerid, SYNC_NONE);
 	Util_Send(playerid, -10270721, mod == 2 ? "Questo taxi e' in servizio: puoi salire solo come passeggero." : "Questo mezzo e' a noleggio di un altro cliente.");
+	return 0;
 }
 
 Rental_OnPlayerExitVehicle(playerid, vehicleid)
 {
+	#pragma unused playerid, vehicleid
 }
 
 Rental_OnPlayerStateChange(playerid, t_PLAYER_STATE:newstate, t_PLAYER_STATE:oldstate)
 {
-	if (newstate != 2)
+	#pragma unused oldstate
+	if (newstate != PLAYER_STATE_DRIVER)
 	{
 		return 0;
 	}
@@ -31911,12 +32396,14 @@ Rental_OnPlayerStateChange(playerid, t_PLAYER_STATE:newstate, t_PLAYER_STATE:old
 	{
 		return 0;
 	}
-	RemovePlayerFromVehicle(playerid, 0);
+	RemovePlayerFromVehicle(playerid, false);
 	Util_Send(playerid, -10270721, "Solo chi ha noleggiato questo mezzo puo' guidarlo.");
+	return 0;
 }
 
 Rental_OnVehicleDeath(vehicleid, killerid)
 {
+	#pragma unused killerid
 	new mod = LD_VehModule(vehicleid);
 	if (mod != 1 && mod != 2)
 	{
@@ -31938,6 +32425,7 @@ Rental_OnVehicleDeath(vehicleid, killerid)
 	{
 		Util_Send(owner, -10270721, "Il mezzo a noleggio e' stato distrutto: la cauzione copre i danni.");
 	}
+	return 0;
 }
 
 // ===== modules/taxi/taxi.inc =====
@@ -32001,7 +32489,7 @@ bool:Taxi_TickReached(tick)
 Taxi_Dist2D(Float:x1, Float:y1, Float:x2, Float:y2)
 {
 	new Float:dx = (x2 - x1), Float:dy = (y2 - y1);
-	return floatround(floatsqroot(((dx * dx) + (dy * dy))), 1);
+	return floatround(floatsqroot(((dx * dx) + (dy * dy))), floatround_method:1);
 }
 
 Taxi_MaxLocalRep(playerid)
@@ -32026,7 +32514,7 @@ Taxi_VehHealth(vehicleid)
 	}
 	new Float:hp;
 	GetVehicleHealth(vehicleid, hp);
-	return floatround(hp, 1);
+	return floatround(hp, floatround_method:1);
 }
 
 Taxi_PassengerOf(driverid)
@@ -32064,7 +32552,7 @@ bool:Taxi_AtDepot(playerid)
 
 bool:Taxi_InTaxi(driverid, vehicleid)
 {
-	return vehicleid > 0 && GetPlayerVehicleID(driverid) == vehicleid && GetPlayerState(driverid) == 2;
+	return vehicleid > 0 && GetPlayerVehicleID(driverid) == vehicleid && GetPlayerState(driverid) == PLAYER_STATE_DRIVER;
 }
 
 Taxi_ResetPlayer(playerid)
@@ -32084,19 +32572,19 @@ Taxi_ResetPlayer(playerid)
 	g_TxMeterF[playerid] = 0.0;
 	g_TxStartX[playerid] = 0.0;
 	g_TxStartY[playerid] = 0.0;
-	g_TxMeterStarted[playerid] = 0;
+	g_TxMeterStarted[playerid] = false;
 	g_TxBoardUntil[playerid] = 0;
 	g_TxPayPrompts[playerid] = 0;
 	g_TxPayMeters[playerid] = 0;
 	g_TxPayToD[playerid] = 0;
 	g_TxPayFare[playerid] = 0;
-	g_TxPayAccept[playerid] = 0;
+	g_TxPayAccept[playerid] = false;
 	g_TxPayRating[playerid] = 0;
 	g_TxStartKind[playerid] = 0;
 	g_TxStartPeer[playerid] = 65535;
 	g_TxStartFromD[playerid] = 0;
 	g_TxCancelRide[playerid] = 0;
-	g_TxAbort[playerid] = 0;
+	g_TxAbort[playerid] = false;
 	g_TxCdUntil[playerid] = 0;
 	g_TxRetry[playerid] = 0;
 	g_TxRetryAt[playerid] = 0;
@@ -32121,6 +32609,7 @@ Taxi_ClearOffer(driverid)
 	g_TxOfferCall[driverid] = 0;
 	g_TxOfferUntil[driverid] = 0;
 	UI_LivingTaxiOfferClose(driverid);
+	return 0;
 }
 
 Taxi_ScheduleNpc(driverid)
@@ -32157,7 +32646,7 @@ Taxi_ResetRide(driverid)
 	g_TxOffTick[driverid] = 0;
 	g_TxPeerChar[driverid] = 0;
 	g_TxMeterF[driverid] = 0.0;
-	g_TxMeterStarted[driverid] = 0;
+	g_TxMeterStarted[driverid] = false;
 	g_TxBoardUntil[driverid] = 0;
 	g_TxPayPrompts[driverid] = 0;
 	g_TxCdUntil[driverid] = Taxi_TickAfter(10000);
@@ -32167,7 +32656,7 @@ Taxi_ResetRide(driverid)
 	}
 }
 
-Taxi_CancelRide(driverid, driverMsg[], passengerMsg[])
+Taxi_CancelRide(driverid, const driverMsg[], const passengerMsg[])
 {
 	if (g_TxPhase[driverid] == 0 && gPlayer[driverid][pTaxiRideId] == 0)
 	{
@@ -32196,7 +32685,7 @@ Taxi_CancelRide(driverid, driverMsg[], passengerMsg[])
 	}
 	if (g_TxPhase[driverid] == 1)
 	{
-		g_TxAbort[driverid] = 1;
+		g_TxAbort[driverid] = true;
 		if (p != INVALID_PLAYER_ID)
 		{
 			gPlayer[p][pTaxiPeer] = 0;
@@ -32213,6 +32702,7 @@ Taxi_CancelRide(driverid, driverMsg[], passengerMsg[])
 		DB_LivingTaxiCancel(driverid, ride, gPlayer[driverid][pTaxiOpId]);
 	}
 	Taxi_ResetRide(driverid);
+	return 0;
 }
 
 Taxi_EndDuty(driverid, reason, bool:closeRental)
@@ -32318,11 +32808,12 @@ Taxi_NpcOffer(driverid)
 	g_TxOfferUntil[driverid] = Taxi_TickAfter(30000);
 	g_TxOfferFromPt[driverid] = fromPt;
 	g_TxOfferToPt[driverid] = toPt;
-	UI_LivingTaxiOffer(driverid, g_TxOfferCall[driverid], 1, "Cliente", fromD, toD, straight, est, 30);
+	UI_LivingTaxiOffer(driverid, g_TxOfferCall[driverid], true, "Cliente", fromD, toD, straight, est, 30);
 	new a[16], b[16];
 	LD_DistrictName(fromD, a, 16);
 	LD_DistrictName(toD, b, 16);
 	SendClientMessage(driverid, -2994689, "[Taxi] Chiamata: cliente a %s diretto a %s (~$%d). /accettacorsa entro %d s.", a, b, est, 30);
+	return 0;
 }
 
 bool:Taxi_CanAccept(driverid, bool:verbose)
@@ -32333,7 +32824,7 @@ bool:Taxi_CanAccept(driverid, bool:verbose)
 		{
 			Util_Send(driverid, -10270721, "Non sei in servizio come tassista (/taxi on al deposito di Unity).");
 		}
-		return 0;
+		return false;
 	}
 	if (g_TxPhase[driverid] != 0 || gPlayer[driverid][pTaxiRideId] != 0)
 	{
@@ -32341,7 +32832,7 @@ bool:Taxi_CanAccept(driverid, bool:verbose)
 		{
 			Util_Send(driverid, -10270721, "Hai gia' una corsa in corso.");
 		}
-		return 0;
+		return false;
 	}
 	if (gPlayer[driverid][pTaxiPendOp] != 0)
 	{
@@ -32349,7 +32840,7 @@ bool:Taxi_CanAccept(driverid, bool:verbose)
 		{
 			Util_Send(driverid, -10270721, "Operazione taxi in corso: attendi.");
 		}
-		return 0;
+		return false;
 	}
 	if (Rental_GetVehicle(driverid) == 0)
 	{
@@ -32357,7 +32848,7 @@ bool:Taxi_CanAccept(driverid, bool:verbose)
 		{
 			Util_Send(driverid, -10270721, "Il tuo taxi non e' disponibile.");
 		}
-		return 0;
+		return false;
 	}
 	if (g_TxCdUntil[driverid] != 0 && !Taxi_TickReached(g_TxCdUntil[driverid]))
 	{
@@ -32365,9 +32856,9 @@ bool:Taxi_CanAccept(driverid, bool:verbose)
 		{
 			Util_Send(driverid, -10270721, "Attendi qualche secondo prima di accettare una nuova corsa.");
 		}
-		return 0;
+		return false;
 	}
-	return 1;
+	return true;
 }
 
 Taxi_SendStart(driverid)
@@ -32377,7 +32868,7 @@ Taxi_SendStart(driverid)
 
 Taxi_AcceptNpc(driverid)
 {
-	if (!Taxi_CanAccept(driverid, 1))
+	if (!Taxi_CanAccept(driverid, true))
 	{
 		return 0;
 	}
@@ -32395,7 +32886,7 @@ Taxi_AcceptNpc(driverid)
 	g_TxDestPt[driverid] = toPt;
 	g_TxStraightM[driverid] = Taxi_Dist2D(g_TxNpcX[fromPt], g_TxNpcY[fromPt], g_TxNpcX[toPt], g_TxNpcY[toPt]);
 	g_TxPhase[driverid] = 1;
-	g_TxAbort[driverid] = 0;
+	g_TxAbort[driverid] = false;
 	g_TxStartKind[driverid] = 1;
 	g_TxStartPeer[driverid] = 65535;
 	g_TxStartFromD[driverid] = g_TxNpcD[fromPt];
@@ -32403,11 +32894,12 @@ Taxi_AcceptNpc(driverid)
 	gPlayer[driverid][pTaxiPendOp] = 1;
 	DB_LivingMakeOpId(gPlayer[driverid][pTaxiOpId], 41, "ts", gPlayer[driverid][pTaxiOpSeq], gPlayer[driverid][pCharId]);
 	Taxi_SendStart(driverid);
+	return 0;
 }
 
 Taxi_AcceptPlayer(driverid, passengerid)
 {
-	if (!Taxi_CanAccept(driverid, 1))
+	if (!Taxi_CanAccept(driverid, true))
 	{
 		return 0;
 	}
@@ -32444,7 +32936,7 @@ Taxi_AcceptPlayer(driverid, passengerid)
 	gPlayer[driverid][pTaxiPeer] = passengerid + 1;
 	g_TxPeerChar[driverid] = gPlayer[passengerid][pCharId];
 	g_TxPhase[driverid] = 1;
-	g_TxAbort[driverid] = 0;
+	g_TxAbort[driverid] = false;
 	g_TxStartKind[driverid] = 2;
 	g_TxStartPeer[driverid] = passengerid;
 	g_TxStartFromD[driverid] = gPlayer[driverid][pTaxiFromDistrict];
@@ -32452,6 +32944,7 @@ Taxi_AcceptPlayer(driverid, passengerid)
 	gPlayer[driverid][pTaxiPendOp] = 1;
 	DB_LivingMakeOpId(gPlayer[driverid][pTaxiOpId], 41, "ts", gPlayer[passengerid][pCharId], gPlayer[driverid][pCharId]);
 	Taxi_SendStart(driverid);
+	return 0;
 }
 
 Taxi_OnStartResult(driverid, result, rideId)
@@ -32479,7 +32972,7 @@ Taxi_OnStartResult(driverid, result, rideId)
 		g_TxOffTick[driverid] = 0;
 		if (g_TxAbort[driverid] || gPlayer[driverid][pTaxiOnDuty] == 0 || (!npc && p == INVALID_PLAYER_ID))
 		{
-			g_TxAbort[driverid] = 0;
+			g_TxAbort[driverid] = false;
 			Taxi_CancelRide(driverid, "", "");
 			return 0;
 		}
@@ -32499,7 +32992,7 @@ Taxi_OnStartResult(driverid, result, rideId)
 		Util_Send(driverid, 0x66DD66FF, "Corsa accettata: raggiungi il cliente (checkpoint). Quando e' a bordo: /tassametro start.");
 		return 0;
 	}
-	g_TxAbort[driverid] = 0;
+	g_TxAbort[driverid] = false;
 	if (p != INVALID_PLAYER_ID)
 	{
 		Util_Send(p, -10270721, "Il taxi non ha potuto accettare la corsa: puoi chiamarne un altro.");
@@ -32527,6 +33020,7 @@ Taxi_OnStartResult(driverid, result, rideId)
 		}
 	}
 	Taxi_ResetRide(driverid);
+	return 0;
 }
 
 Taxi_MeterSample(driverid, vehicleid, bool:count)
@@ -32541,7 +33035,7 @@ Taxi_MeterSample(driverid, vehicleid, bool:count)
 		{
 			g_TxMeterF[driverid] += step;
 		}
-		gPlayer[driverid][pTaxiMeterM] = floatround(g_TxMeterF[driverid], 1);
+		gPlayer[driverid][pTaxiMeterM] = floatround(g_TxMeterF[driverid], floatround_method:1);
 	}
 	gPlayer[driverid][pTaxiLastX] = x;
 	gPlayer[driverid][pTaxiLastY] = y;
@@ -32561,19 +33055,20 @@ Taxi_MeterShow(driverid, bool:running)
 	{
 		UI_LivingTaxiMeter(p, fare, meters, running);
 	}
+	return 0;
 }
 
 Taxi_MeterBegin(driverid, vehicleid)
 {
-	Taxi_MeterSample(driverid, vehicleid, 0);
+	Taxi_MeterSample(driverid, vehicleid, false);
 	if (!g_TxMeterStarted[driverid])
 	{
-		g_TxMeterStarted[driverid] = 1;
+		g_TxMeterStarted[driverid] = true;
 		g_TxStartX[driverid] = gPlayer[driverid][pTaxiLastX];
 		g_TxStartY[driverid] = gPlayer[driverid][pTaxiLastY];
 	}
 	gPlayer[driverid][pTaxiMeterOn] = 1;
-	Taxi_MeterShow(driverid, 1);
+	Taxi_MeterShow(driverid, true);
 }
 
 Taxi_NpcPay(driverid, vehicleid)
@@ -32592,7 +33087,7 @@ Taxi_NpcPay(driverid, vehicleid)
 	}
 	g_TxPayMeters[driverid] = meters;
 	g_TxPayToD[driverid] = g_TxNpcD[g_TxDestPt[driverid]];
-	g_TxPayAccept[driverid] = 1;
+	g_TxPayAccept[driverid] = true;
 	g_TxPayRating[driverid] = rating;
 	g_TxPayFare[driverid] = LD_TaxiFare(meters);
 	g_TxPhase[driverid] = 5;
@@ -32601,8 +33096,8 @@ Taxi_NpcPay(driverid, vehicleid)
 	gPlayer[driverid][pTaxiPendOp] = 7;
 	DB_LivingMakeOpId(gPlayer[driverid][pTaxiOpId], 41, "tp", gPlayer[driverid][pTaxiRideId], gPlayer[driverid][pCharId]);
 	DisablePlayerCheckpoint(driverid);
-	Taxi_MeterShow(driverid, 0);
-	DB_LivingTaxiPay(driverid, gPlayer[driverid][pTaxiRideId], 65535, meters, g_TxPayToD[driverid], 1, rating, gPlayer[driverid][pTaxiOpId]);
+	Taxi_MeterShow(driverid, false);
+	DB_LivingTaxiPay(driverid, gPlayer[driverid][pTaxiRideId], 65535, meters, g_TxPayToD[driverid], true, rating, gPlayer[driverid][pTaxiOpId]);
 }
 
 Taxi_PayPrompt(driverid)
@@ -32629,9 +33124,10 @@ Taxi_PayPrompt(driverid)
 	g_TxPayRating[driverid] = 0;
 	gPlayer[driverid][pTaxiToDistrict] = g_TxPayToD[driverid];
 	g_TxPhase[driverid] = 4;
-	Taxi_MeterShow(driverid, 0);
+	Taxi_MeterShow(driverid, false);
 	UI_LivingTaxiPayConfirm(p, gPlayer[driverid][pTaxiRideId], name, meters, g_TxPayFare[driverid], LD_DiscountPct(rep), 60);
 	SendClientMessage(driverid, -1, "Tassametro fermo: $%d per %d m. In attesa della conferma del cliente.", g_TxPayFare[driverid], meters);
+	return 0;
 }
 
 Taxi_MeterStop(driverid)
@@ -32647,6 +33143,7 @@ Taxi_MeterStop(driverid)
 	}
 	gPlayer[driverid][pTaxiMeterOn] = 0;
 	Taxi_PayPrompt(driverid);
+	return 0;
 }
 
 Taxi_OnPayResult(driverid, result, rideId, net, points, tax)
@@ -32682,7 +33179,7 @@ Taxi_OnPayResult(driverid, result, rideId, net, points, tax)
 			{
 				LD_SetProPoints(driverid, 2, points);
 			}
-			UI_LivingTaxiReceipt(driverid, 1, rideId, other, g_TxPayMeters[driverid], npc ? net : net + tax, tax, net);
+			UI_LivingTaxiReceipt(driverid, true, rideId, other, g_TxPayMeters[driverid], npc ? net : net + tax, tax, net);
 			if (result == 6)
 			{
 				Util_Send(driverid, -2994689, "Tetto orario del lavoro dinamico raggiunto: e' stato pagato solo il residuo.");
@@ -32713,6 +33210,7 @@ Taxi_OnPayResult(driverid, result, rideId, net, points, tax)
 		}
 	}
 	Taxi_ResetRide(driverid);
+	return 0;
 }
 
 Taxi_RetrySend(playerid)
@@ -32836,7 +33334,7 @@ public Living_OnDBTaxiCharged(playerid, rideId, result, charged, balance)
 				g_TxRateDriverChar[playerid] = gPlayer[d][pCharId];
 			}
 			UI_LivingTaxiMeterHide(playerid);
-			UI_LivingTaxiReceipt(playerid, 0, rideId, name, meters, charged, 0, 0);
+			UI_LivingTaxiReceipt(playerid, false, rideId, name, meters, charged, 0, 0);
 			if (g_TxRateDriverChar[playerid] > 0 && gPlayer[playerid][pTaxiPendOp] == 0)
 			{
 				g_TxRateRide[playerid] = rideId;
@@ -32926,11 +33424,11 @@ public UI_OnTaxiRate(playerid, rideId, stars)
 	return 1;
 }
 
-Taxi_CmdTaxi(playerid, params[])
+Taxi_CmdTaxi(playerid, const params[])
 {
 	new pos = 0, tok[16];
 	Util_NextToken(params, pos, tok, 16);
-	if (!strcmp(tok, "on", 1, 0x7FFFFFFF) && tok[0] != 0)
+	if (!strcmp(tok, "on", true, 0x7FFFFFFF) && tok[0] != 0)
 	{
 		if (gPlayer[playerid][pTaxiOnDuty] != 0)
 		{
@@ -32953,7 +33451,7 @@ Taxi_CmdTaxi(playerid, params[])
 			SendClientMessage(playerid, -10270721, "Serve almeno il livello %d per guidare un taxi.", 2);
 			return 1;
 		}
-		if (!Taxi_AtDepot(playerid) || GetPlayerState(playerid) != 1)
+		if (!Taxi_AtDepot(playerid) || GetPlayerState(playerid) != PLAYER_STATE_ONFOOT)
 		{
 			Util_Send(playerid, -10270721, "Presentati a piedi al deposito taxi di Unity Station.");
 			return 1;
@@ -32972,7 +33470,7 @@ Taxi_CmdTaxi(playerid, params[])
 		Util_Send(playerid, -1, "Pratica del taxi in corso...");
 		return 1;
 	}
-	if (!strcmp(tok, "off", 1, 0x7FFFFFFF) && tok[0] != 0)
+	if (!strcmp(tok, "off", true, 0x7FFFFFFF) && tok[0] != 0)
 	{
 		if (gPlayer[playerid][pTaxiOnDuty] == 0)
 		{
@@ -32989,7 +33487,7 @@ Taxi_CmdTaxi(playerid, params[])
 			Util_Send(playerid, -10270721, "Riporta il taxi al deposito di Unity Station per chiudere il turno.");
 			return 1;
 		}
-		Taxi_EndDuty(playerid, 1, 1);
+		Taxi_EndDuty(playerid, 1, true);
 		Util_Send(playerid, -1, "Fine turno: riconsegna del taxi in corso...");
 		return 1;
 	}
@@ -33004,8 +33502,9 @@ Taxi_CmdTaxi(playerid, params[])
 	return 1;
 }
 
-Taxi_CmdChiamataxi(playerid, params[])
+Taxi_CmdChiamataxi(playerid, const params[])
 {
+	#pragma unused params
 	if (!Util_IsPlaying(playerid) || gPlayer[playerid][pLivingReady] == 0)
 	{
 		LD_SendBlock(playerid, 1);
@@ -33063,7 +33562,7 @@ Taxi_CmdChiamataxi(playerid, params[])
 		{
 			g_TxOfferCall[d] = playerid + 1;
 			g_TxOfferUntil[d] = Taxi_TickAfter(30000);
-			UI_LivingTaxiOffer(d, playerid + 1, 0, name, fromD, fromD, Taxi_Dist2D(dx, dy, px, py), LD_TaxiFare(0), 30);
+			UI_LivingTaxiOffer(d, playerid + 1, false, name, fromD, fromD, Taxi_Dist2D(dx, dy, px, py), LD_TaxiFare(0), 30);
 		}
 		sent++;
 	}
@@ -33078,7 +33577,7 @@ Taxi_CmdChiamataxi(playerid, params[])
 	return 1;
 }
 
-Taxi_CmdAccettacorsa(playerid, params[])
+Taxi_CmdAccettacorsa(playerid, const params[])
 {
 	new pos = 0, tok[16], id = 0;
 	Util_NextToken(params, pos, tok, 16);
@@ -33109,7 +33608,7 @@ Taxi_CmdAccettacorsa(playerid, params[])
 	return 1;
 }
 
-Taxi_CmdTassametro(playerid, params[])
+Taxi_CmdTassametro(playerid, const params[])
 {
 	new pos = 0, tok[16];
 	Util_NextToken(params, pos, tok, 16);
@@ -33129,7 +33628,7 @@ Taxi_CmdTassametro(playerid, params[])
 		return 1;
 	}
 	new veh = Rental_GetVehicle(playerid), p = Taxi_PassengerOf(playerid);
-	if (!strcmp(tok, "start", 1, 0x7FFFFFFF) && tok[0] != 0)
+	if (!strcmp(tok, "start", true, 0x7FFFFFFF) && tok[0] != 0)
 	{
 		if (g_TxPhase[playerid] != 2 && g_TxPhase[playerid] != 3)
 		{
@@ -33141,7 +33640,7 @@ Taxi_CmdTassametro(playerid, params[])
 			Util_Send(playerid, -10270721, "Il tassametro e' gia' acceso.");
 			return 1;
 		}
-		if (!Taxi_InTaxi(playerid, veh) || p == INVALID_PLAYER_ID || GetPlayerVehicleID(p) != veh || GetPlayerState(p) != 3)
+		if (!Taxi_InTaxi(playerid, veh) || p == INVALID_PLAYER_ID || GetPlayerVehicleID(p) != veh || GetPlayerState(p) != PLAYER_STATE_PASSENGER)
 		{
 			Util_Send(playerid, -10270721, "Devi essere al volante del taxi con il cliente a bordo.");
 			return 1;
@@ -33153,7 +33652,7 @@ Taxi_CmdTassametro(playerid, params[])
 		Util_Send(p, -1, "Il tassametro e' acceso.");
 		return 1;
 	}
-	if (!strcmp(tok, "stop", 1, 0x7FFFFFFF) && tok[0] != 0)
+	if (!strcmp(tok, "stop", true, 0x7FFFFFFF) && tok[0] != 0)
 	{
 		if (gPlayer[playerid][pTaxiMeterOn] != 0)
 		{
@@ -33168,7 +33667,7 @@ Taxi_CmdTassametro(playerid, params[])
 		Util_Send(playerid, -10270721, "Il tassametro non e' acceso.");
 		return 1;
 	}
-	if (!strcmp(tok, "annulla", 1, 0x7FFFFFFF) && tok[0] != 0)
+	if (!strcmp(tok, "annulla", true, 0x7FFFFFFF) && tok[0] != 0)
 	{
 		Taxi_CancelRide(playerid, "Corsa annullata senza addebito.", "Il tassista ha annullato la corsa: nessun addebito.");
 		return 1;
@@ -33219,7 +33718,7 @@ Taxi_OnProRentalClosed(playerid, result, refund)
 	}
 	if (gPlayer[playerid][pTaxiOnDuty] != 0 || g_TxPhase[playerid] != 0)
 	{
-		Taxi_EndDuty(playerid, 5, 0);
+		Taxi_EndDuty(playerid, 5, false);
 	}
 	if (!Util_IsPlaying(playerid))
 	{
@@ -33247,7 +33746,7 @@ Taxi_OnProRentalClosed(playerid, result, refund)
 	return 1;
 }
 
-public Taxi_OnDistrictEvent(type, districtId, charId, value, opId[])
+public Taxi_OnDistrictEvent(type, districtId, charId, value, const opId[])
 {
 	return 1;
 }
@@ -33282,6 +33781,7 @@ Taxi_TickNpc(driverid, vehicleid, bool:inVeh)
 		return 0;
 	}
 	Taxi_NpcPay(driverid, vehicleid);
+	return 0;
 }
 
 Taxi_TickDriver(driverid)
@@ -33297,7 +33797,7 @@ Taxi_TickDriver(driverid)
 		if (gPlayer[driverid][pRentalId] == 0 && gPlayer[driverid][pRentalPendOp] == 0)
 		{
 			Util_Send(driverid, -10270721, "Il tuo taxi non e' piu' disponibile: fuori servizio.");
-			Taxi_EndDuty(driverid, 4, 0);
+			Taxi_EndDuty(driverid, 4, false);
 		}
 		else if (g_TxPhase[driverid] >= 2 && g_TxPhase[driverid] <= 4)
 		{
@@ -33327,7 +33827,7 @@ Taxi_TickDriver(driverid)
 	if (gPlayer[driverid][pTaxiMeterOn] != 0)
 	{
 		Taxi_MeterSample(driverid, veh, inVeh);
-		Taxi_MeterShow(driverid, 1);
+		Taxi_MeterShow(driverid, true);
 	}
 	if (phase == 0)
 	{
@@ -33364,6 +33864,7 @@ Taxi_TickDriver(driverid)
 	{
 		Taxi_MeterStop(driverid);
 	}
+	return 0;
 }
 
 public Taxi_OnTick()
@@ -33405,10 +33906,10 @@ Taxi_OnInit()
 	{
 		KillTimer(g_TxTimer);
 	}
-	g_TxTimer = SetTimer("Taxi_OnTick", 1000, 1);
+	g_TxTimer = SetTimer("Taxi_OnTick", 1000, true);
 	LD_Listen("Taxi_OnDistrictEvent", 20);
 	CreatePickup(1239, 1, 1771.0, -1895.0, 13.6, 0);
-	Lang_Create3DTextLabel("Deposito taxi\n/taxi on  ·  /taxi off", -2994689, 1771.0, -1895.0, (13.6 + 0.8), 20.0, 0, 0);
+	Lang_Create3DTextLabel("Deposito taxi\n/taxi on  ·  /taxi off", -2994689, 1771.0, -1895.0, (13.6 + 0.8), 20.0, 0, false);
 }
 
 Taxi_OnExit()
@@ -33427,17 +33928,19 @@ Taxi_OnPlayerConnect(playerid)
 
 Taxi_OnCharReady(playerid)
 {
+	#pragma unused playerid
 }
 
 Taxi_OnPlayerDisconnect(playerid, reason)
 {
+	#pragma unused reason
 	if (!Taxi_Valid(playerid))
 	{
 		return 0;
 	}
 	if (gPlayer[playerid][pTaxiOnDuty] != 0 || g_TxPhase[playerid] != 0)
 	{
-		Taxi_EndDuty(playerid, 2, 1);
+		Taxi_EndDuty(playerid, 2, true);
 	}
 	new d = Taxi_DriverOf(playerid);
 	if (d != 65535)
@@ -33452,6 +33955,7 @@ Taxi_OnPlayerDisconnect(playerid, reason)
 		}
 	}
 	Taxi_ResetPlayer(playerid);
+	return 0;
 }
 
 Taxi_OnPlayerDeath(playerid)
@@ -33463,7 +33967,7 @@ Taxi_OnPlayerDeath(playerid)
 	if (gPlayer[playerid][pTaxiOnDuty] != 0)
 	{
 		Util_Send(playerid, -10270721, "Turno di taxi interrotto.");
-		Taxi_EndDuty(playerid, 3, 1);
+		Taxi_EndDuty(playerid, 3, true);
 	}
 	new d = Taxi_DriverOf(playerid);
 	if (d != 65535)
@@ -33471,14 +33975,17 @@ Taxi_OnPlayerDeath(playerid)
 		Taxi_CancelRide(d, "Il cliente non e' in condizione di proseguire: corsa annullata.", "");
 	}
 	g_TxCallUntil[playerid] = 0;
+	return 0;
 }
 
 Taxi_OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
 {
+	#pragma unused ispassenger, playerid, vehicleid
 }
 
 Taxi_OnPlayerExitVehicle(playerid, vehicleid)
 {
+	#pragma unused playerid, vehicleid
 }
 
 Taxi_OnPlayerStateChange(playerid, t_PLAYER_STATE:newstate, t_PLAYER_STATE:oldstate)
@@ -33492,20 +33999,22 @@ Taxi_OnPlayerStateChange(playerid, t_PLAYER_STATE:newstate, t_PLAYER_STATE:oldst
 	{
 		return 0;
 	}
-	if (newstate == 3 && g_TxPhase[d] == 2 && GetPlayerVehicleID(playerid) == Rental_GetVehicle(d))
+	if (newstate == PLAYER_STATE_PASSENGER && g_TxPhase[d] == 2 && GetPlayerVehicleID(playerid) == Rental_GetVehicle(d))
 	{
 		DisablePlayerCheckpoint(d);
 		Util_Send(d, 0x66DD66FF, "Il cliente e' a bordo: /tassametro start.");
 		return 0;
 	}
-	if (oldstate == 3 && gPlayer[d][pTaxiMeterOn] != 0)
+	if (oldstate == PLAYER_STATE_PASSENGER && _:gPlayer[d][pTaxiMeterOn] != 0)
 	{
 		Taxi_MeterStop(d);
 	}
+	return 0;
 }
 
 Taxi_OnVehicleDeath(vehicleid, killerid)
 {
+	#pragma unused killerid
 	if (LD_VehModule(vehicleid) != 2)
 	{
 		return 0;
@@ -33516,7 +34025,8 @@ Taxi_OnVehicleDeath(vehicleid, killerid)
 		return 0;
 	}
 	Util_Send(d, -10270721, "Il taxi e' stato distrutto: fine del turno.");
-	Taxi_EndDuty(d, 4, 1);
+	Taxi_EndDuty(d, 4, true);
+	return 0;
 }
 
 // ===== modules/freight/freight.inc =====
@@ -33554,8 +34064,8 @@ bool:Freight_ValidId(playerid)
 
 Freight_ResetPlayer(playerid)
 {
-	g_FrtActive[playerid] = 0;
-	g_FrtWelcome[playerid] = 0;
+	g_FrtActive[playerid] = false;
+	g_FrtWelcome[playerid] = false;
 	g_FrtCt[playerid] = 0;
 	g_FrtFrom[playerid] = 0;
 	g_FrtTo[playerid] = 0;
@@ -33564,9 +34074,9 @@ Freight_ResetPlayer(playerid)
 	g_FrtPhase[playerid] = 0;
 	g_FrtVeh[playerid] = 65535;
 	g_FrtSerial[playerid] = 0;
-	g_FrtBoarded[playerid] = 0;
-	g_FrtDwell[playerid] = 0;
-	g_FrtOff[playerid] = 0;
+	g_FrtBoarded[playerid] = false;
+	g_FrtDwell[playerid] = false;
+	g_FrtOff[playerid] = false;
 	g_FrtStartTick[playerid] = 0;
 	g_FrtWaitTick[playerid] = 0;
 	g_FrtDefer[playerid] = 0;
@@ -33635,21 +34145,21 @@ bool:Freight_Point(d, bool:shop, &Float:x, &Float:y, &Float:z)
 			x = 0.0;
 			y = 0.0;
 			z = 0.0;
-			return 0;
+			return false;
 		}
 	}
-	return 1;
+	return true;
 }
 
 Freight_PairDistance(fromD, toD)
 {
 	new Float:ax, Float:ay, Float:az, Float:bx, Float:by, Float:bz;
-	if (!Freight_Point(fromD, 0, ax, ay, az) || !Freight_Point(toD, 1, bx, by, bz))
+	if (!Freight_Point(fromD, false, ax, ay, az) || !Freight_Point(toD, true, bx, by, bz))
 	{
 		return 0;
 	}
 	new Float:dx = (bx - ax), Float:dy = (by - ay);
-	return floatround(floatsqroot(((dx * dx) + (dy * dy))), 1);
+	return floatround(floatsqroot(((dx * dx) + (dy * dy))), floatround_method:1);
 }
 
 Freight_CargoName(cargo, dest[], size)
@@ -33680,7 +34190,7 @@ Freight_SecCeil(ms)
 	return (ms + 1000 - 1) / 1000;
 }
 
-Freight_Note(playerid, text[])
+Freight_Note(playerid, const text[])
 {
 	new now = GetTickCount();
 	if (g_FrtNoteTick[playerid] != 0 && now - g_FrtNoteTick[playerid] < 4000)
@@ -33689,13 +34199,14 @@ Freight_Note(playerid, text[])
 	}
 	g_FrtNoteTick[playerid] = now;
 	Util_Send(playerid, -10270721, text);
+	return 0;
 }
 
 Freight_IntegrityOf(vehicleid)
 {
 	new Float:hp;
 	GetVehicleHealth(vehicleid, hp);
-	return LD_Clamp(floatround((hp / 10.0), 1), 0, 100);
+	return LD_Clamp(floatround((hp / 10.0), floatround_method:1), 0, 100);
 }
 
 bool:Freight_VehOk(playerid)
@@ -33703,14 +34214,14 @@ bool:Freight_VehOk(playerid)
 	new veh = g_FrtVeh[playerid];
 	if (veh == 65535 || veh <= 0 || veh >= 2000 || !IsValidVehicle(veh))
 	{
-		return 0;
+		return false;
 	}
 	return LD_VehModule(veh) == 3 && LD_VehOwner(veh) == playerid && LD_VehSerial(veh) == g_FrtSerial[playerid];
 }
 
 bool:Freight_IsDriving(playerid)
 {
-	return Freight_VehOk(playerid) && GetPlayerVehicleID(playerid) == g_FrtVeh[playerid] && GetPlayerState(playerid) == 2;
+	return Freight_VehOk(playerid) && GetPlayerVehicleID(playerid) == g_FrtVeh[playerid] && GetPlayerState(playerid) == PLAYER_STATE_DRIVER;
 }
 
 Freight_RemoveVehicle(playerid)
@@ -33725,7 +34236,7 @@ Freight_RemoveVehicle(playerid)
 			{
 				if (IsPlayerConnected(playerid) && GetPlayerVehicleID(playerid) == veh)
 				{
-					RemovePlayerFromVehicle(playerid, 0);
+					RemovePlayerFromVehicle(playerid, false);
 				}
 				DestroyVehicle(veh);
 			}
@@ -33750,6 +34261,7 @@ Freight_ShowCheckpoint(playerid)
 	}
 	DisablePlayerCheckpoint(playerid);
 	SetPlayerCheckpoint(playerid, x, y, z, 6.0);
+	return 0;
 }
 
 Freight_TimeLeft(playerid)
@@ -33818,6 +34330,7 @@ Freight_Hud(playerid, distM, dwellSec)
 		}
 	}
 	UI_CityContractHud(playerid, g_FrtCt[playerid], shop ? 2 : 1, goal, dest, distM, Freight_TimeLeft(playerid), shop ? g_FrtInteg[playerid] : -1);
+	return 0;
 }
 
 Freight_End(playerid, reason)
@@ -33827,7 +34340,7 @@ Freight_End(playerid, reason)
 		return 0;
 	}
 	new bool:welcome = g_FrtWelcome[playerid];
-	new bool:online = IsPlayerConnected(playerid) != 0;
+	new bool:online = IsPlayerConnected(playerid);
 	Freight_RemoveVehicle(playerid);
 	if (online)
 	{
@@ -33862,7 +34375,7 @@ Freight_End(playerid, reason)
 	Freight_ResetPlayer(playerid);
 	if (welcome && online && reason != 0 && reason != 2 && reason != 6)
 	{
-		Hub_OnWelcomeDelivered(playerid, 0);
+		Hub_OnWelcomeDelivered(playerid, false);
 	}
 	return 1;
 }
@@ -33883,9 +34396,10 @@ Freight_Release(playerid, reason)
 	{
 		Freight_End(playerid, reason);
 	}
+	return 0;
 }
 
-Freight_Stop(playerid, reason, text[])
+Freight_Stop(playerid, reason, const text[])
 {
 	if (!g_FrtActive[playerid])
 	{
@@ -33910,13 +34424,14 @@ Freight_Stop(playerid, reason, text[])
 		return 0;
 	}
 	Freight_Release(playerid, reason);
+	return 0;
 }
 
 Freight_Picked(playerid)
 {
 	new now = GetTickCount();
 	g_FrtPhase[playerid] = 3;
-	g_FrtDwell[playerid] = 0;
+	g_FrtDwell[playerid] = false;
 	g_FrtStateRetry[playerid] = 0;
 	gPlayer[playerid][pFreightLegTick] = now;
 	gPlayer[playerid][pFreightDwellTick] = 0;
@@ -33960,6 +34475,7 @@ Freight_DoPickup(playerid)
 			Util_Send(playerid, -10270721, "Carico non registrato al momento: resta nel checkpoint e riprova tra qualche secondo.");
 		}
 	}
+	return 0;
 }
 
 Freight_DoDeliver(playerid)
@@ -34002,7 +34518,7 @@ Freight_DoDeliver(playerid)
 	{
 		Freight_End(playerid, 0);
 		Util_Send(playerid, 0x66DD66FF, "Consegna di benvenuto completata: il negozio di Idlewood ti ringrazia!");
-		Hub_OnWelcomeDelivered(playerid, 1);
+		Hub_OnWelcomeDelivered(playerid, true);
 		return 0;
 	}
 	g_FrtPhase[playerid] = 4;
@@ -34020,31 +34536,32 @@ Freight_DoDeliver(playerid)
 			Util_Send(playerid, -10270721, "Consegna non registrata al momento: resta nel checkpoint e riprova tra qualche secondo.");
 		}
 	}
+	return 0;
 }
 
 bool:Freight_Begin(playerid, contractId, fromD, toD, cargo, distanceM, bool:welcome)
 {
 	if (!Freight_ValidId(playerid) || !Util_IsPlaying(playerid) || g_FrtActive[playerid])
 	{
-		return 0;
+		return false;
 	}
 	if (!LD_IsReady() || gPlayer[playerid][pLivingReady] == 0 || gPlayer[playerid][pCharId] <= 0)
 	{
-		return 0;
+		return false;
 	}
 	if (gPlayer[playerid][pWounded] || gPlayer[playerid][pCuffed])
 	{
-		return 0;
+		return false;
 	}
 	if (Job_IsOnShift(playerid) || gPlayer[playerid][pTaxiOnDuty] != 0 || gPlayer[playerid][pRentalId] != 0)
 	{
-		return 0;
+		return false;
 	}
 	if (welcome)
 	{
 		if (contractId != 0 || gPlayer[playerid][pContractId] != 0)
 		{
-			return 0;
+			return false;
 		}
 		fromD = 1;
 		toD = 1;
@@ -34057,38 +34574,38 @@ bool:Freight_Begin(playerid, contractId, fromD, toD, cargo, distanceM, bool:welc
 	{
 		if (contractId <= 0 || gPlayer[playerid][pFreightWelcome] != 0)
 		{
-			return 0;
+			return false;
 		}
 		if (gPlayer[playerid][pContractId] != 0 && gPlayer[playerid][pContractId] != contractId)
 		{
-			return 0;
+			return false;
 		}
 		if (fromD == toD || cargo < 1 || cargo > 3)
 		{
-			return 0;
+			return false;
 		}
 		if (gPlayer[playerid][pLevel] < 2)
 		{
-			return 0;
+			return false;
 		}
 	}
 	new pair = Freight_PairDistance(fromD, toD);
 	if (pair <= 0)
 	{
-		return 0;
+		return false;
 	}
 	new dist = welcome ? pair : (distanceM > pair ? distanceM : pair);
 	if (!welcome && dist < 300)
 	{
-		return 0;
+		return false;
 	}
 	if (!LD_PoolHasRoom())
 	{
 		Util_Send(playerid, -10270721, "Nessun veicolo da carico disponibile al momento. Riprova tra poco.");
-		return 0;
+		return false;
 	}
 	new Float:x, Float:y, Float:z, slot = 0;
-	Freight_Point(fromD, 0, x, y, z);
+	Freight_Point(fromD, false, x, y, z);
 	for (new i = 0; i < MAX_PLAYERS; i++)
 	{
 		if (g_FrtActive[i] && g_FrtFrom[i] == fromD && g_FrtPhase[i] == 1)
@@ -34097,25 +34614,25 @@ bool:Freight_Begin(playerid, contractId, fromD, toD, cargo, distanceM, bool:welc
 		}
 	}
 	x += (5.0 * float(slot % 4));
-	new veh = CreateVehicle(414, x, y, z, 0.0, 1, 1, -1, 0);
+	new veh = CreateVehicle(414, x, y, z, 0.0, 1, 1, -1, false);
 	if (veh == 65535 || veh <= 0 || veh >= 2000)
 	{
 		Util_Send(playerid, -10270721, "Impossibile preparare il veicolo da carico. Riprova.");
-		return 0;
+		return false;
 	}
 	new serial = LD_VehRegister(veh, 3, playerid);
 	if (serial == 0)
 	{
 		DestroyVehicle(veh);
 		Util_Send(playerid, -10270721, "Nessun veicolo da carico disponibile al momento. Riprova tra poco.");
-		return 0;
+		return false;
 	}
 	SetVehicleVirtualWorld(veh, 0);
 	SetVehicleHealth(veh, 1000.0);
 	SetVehicleParamsEx(veh, 1, 0, 0, 0, 0, 0, 0);
 	new now = GetTickCount();
 	Freight_ResetPlayer(playerid);
-	g_FrtActive[playerid] = 1;
+	g_FrtActive[playerid] = true;
 	g_FrtWelcome[playerid] = welcome;
 	g_FrtCt[playerid] = contractId;
 	g_FrtFrom[playerid] = fromD;
@@ -34162,7 +34679,7 @@ bool:Freight_Begin(playerid, contractId, fromD, toD, cargo, distanceM, bool:welc
 		SendClientMessage(playerid, 0x66DD66FF, "Contratto #%d: ritira il Mule al magazzino di %s, fermati nel checkpoint (max %.0f km/h) %d s per caricare %s, poi consegna al negozio di %s (%d m).", contractId, fromName, 0x41200000, 6, cargoName, toName, dist);
 		Freight_Hud(playerid, -1, -1);
 	}
-	return 1;
+	return true;
 }
 
 Freight_OnPickupResult(playerid, result)
@@ -34190,7 +34707,7 @@ Freight_OnPickupResult(playerid, result)
 		case -1, 10:
 		{
 			g_FrtPhase[playerid] = 1;
-			g_FrtDwell[playerid] = 0;
+			g_FrtDwell[playerid] = false;
 			g_FrtRetryTick[playerid] = GetTickCount() + 5000;
 			Util_Send(playerid, -10270721, "Registrazione del carico non riuscita: resta nel checkpoint per ritentare.");
 		}
@@ -34240,7 +34757,7 @@ Freight_OnCompleteResult(playerid, result, paid, balance)
 				return 1;
 			}
 			g_FrtPhase[playerid] = 3;
-			g_FrtDwell[playerid] = 0;
+			g_FrtDwell[playerid] = false;
 			g_FrtRetryTick[playerid] = GetTickCount() + 5000;
 			Util_Send(playerid, -10270721, "Registrazione della consegna non riuscita: resta nel checkpoint per ritentare.");
 		}
@@ -34253,7 +34770,7 @@ Freight_OnCompleteResult(playerid, result, paid, balance)
 				return 1;
 			}
 			g_FrtPhase[playerid] = 3;
-			g_FrtDwell[playerid] = 0;
+			g_FrtDwell[playerid] = false;
 			g_FrtRetryTick[playerid] = GetTickCount() + 5000;
 			Util_Send(playerid, -10270721, "Consegna rifiutata dal registro (troppo rapida o stato non valido): attendi qualche secondo nel checkpoint.");
 		}
@@ -34276,8 +34793,9 @@ Freight_WaitTimeout(playerid)
 		return 0;
 	}
 	g_FrtPhase[playerid] = g_FrtPhase[playerid] == 2 ? 1 : 3;
-	g_FrtDwell[playerid] = 0;
+	g_FrtDwell[playerid] = false;
 	g_FrtRetryTick[playerid] = GetTickCount() + 5000;
+	return 0;
 }
 
 bool:Freight_SamplePath(playerid, now)
@@ -34300,10 +34818,10 @@ bool:Freight_SamplePath(playerid, now)
 		new msg[256];
 		format(msg, 256, "salto del Mule: pers. %d contratto %d %.0f m in %d ms", gPlayer[playerid][pCharId], g_FrtCt[playerid], seg, dt);
 		Log_Write("FREIGHT", msg);
-		return 0;
+		return false;
 	}
 	g_FrtPath[playerid] += seg;
-	return 1;
+	return true;
 }
 
 Freight_TickPlayer(playerid, now)
@@ -34347,15 +34865,15 @@ Freight_TickPlayer(playerid, now)
 	new bool:driving = Freight_IsDriving(playerid);
 	if (driving)
 	{
-		g_FrtBoarded[playerid] = 1;
-		g_FrtOff[playerid] = 0;
+		g_FrtBoarded[playerid] = true;
+		g_FrtOff[playerid] = false;
 		gPlayer[playerid][pFreightLeftVehTick] = 0;
 	}
 	else if (g_FrtBoarded[playerid])
 	{
 		if (!g_FrtOff[playerid])
 		{
-			g_FrtOff[playerid] = 1;
+			g_FrtOff[playerid] = true;
 			gPlayer[playerid][pFreightLeftVehTick] = now;
 		}
 		new Float:px, Float:py, Float:pz;
@@ -34378,7 +34896,7 @@ Freight_TickPlayer(playerid, now)
 			Freight_Stop(playerid, 4, "Spostamento anomalo del Mule: contratto di trasporto annullato.");
 			return 0;
 		}
-		new integ = LD_Clamp(floatround((hp / 10.0), 1), 0, 100);
+		new integ = LD_Clamp(floatround((hp / 10.0), floatround_method:1), 0, 100);
 		if (integ < g_FrtInteg[playerid])
 		{
 			g_FrtInteg[playerid] = integ;
@@ -34394,7 +34912,7 @@ Freight_TickPlayer(playerid, now)
 	{
 		if (!g_FrtDwell[playerid])
 		{
-			g_FrtDwell[playerid] = 1;
+			g_FrtDwell[playerid] = true;
 			gPlayer[playerid][pFreightDwellTick] = now;
 			if (g_FrtWelcome[playerid])
 			{
@@ -34405,7 +34923,7 @@ Freight_TickPlayer(playerid, now)
 		new waited = now - gPlayer[playerid][pFreightDwellTick];
 		if (waited >= need)
 		{
-			g_FrtDwell[playerid] = 0;
+			g_FrtDwell[playerid] = false;
 			gPlayer[playerid][pFreightDwellTick] = 0;
 			if (shop)
 			{
@@ -34427,10 +34945,11 @@ Freight_TickPlayer(playerid, now)
 	}
 	else
 	{
-		g_FrtDwell[playerid] = 0;
+		g_FrtDwell[playerid] = false;
 		gPlayer[playerid][pFreightDwellTick] = 0;
 	}
-	Freight_Hud(playerid, floatround(dist, 1), dwellSec);
+	Freight_Hud(playerid, floatround(dist, floatround_method:1), dwellSec);
+	return 0;
 }
 
 public Freight_OnTick()
@@ -34462,7 +34981,7 @@ Freight_OnInit()
 	{
 		KillTimer(g_FrtTimer);
 	}
-	g_FrtTimer = SetTimer("Freight_OnTick", 1000, 1);
+	g_FrtTimer = SetTimer("Freight_OnTick", 1000, true);
 }
 
 Freight_OnExit()
@@ -34488,14 +35007,17 @@ Freight_OnPlayerConnect(playerid)
 		return 0;
 	}
 	Freight_ResetPlayer(playerid);
+	return 0;
 }
 
 Freight_OnCharReady(playerid)
 {
+	#pragma unused playerid
 }
 
 Freight_OnPlayerDisconnect(playerid, reason)
 {
+	#pragma unused reason
 	if (!Freight_ValidId(playerid))
 	{
 		return 0;
@@ -34505,6 +35027,7 @@ Freight_OnPlayerDisconnect(playerid, reason)
 		Freight_End(playerid, 2);
 	}
 	Freight_ResetPlayer(playerid);
+	return 0;
 }
 
 Freight_OnPlayerDeath(playerid)
@@ -34514,6 +35037,7 @@ Freight_OnPlayerDeath(playerid)
 		return 0;
 	}
 	Freight_Stop(playerid, 3, "Sei stato ferito: il contratto di trasporto e' interrotto e il Mule ritirato.");
+	return 0;
 }
 
 Freight_OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
@@ -34527,8 +35051,9 @@ Freight_OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
 	{
 		return 0;
 	}
-	ClearAnimations(playerid, 0);
+	ClearAnimations(playerid, SYNC_NONE);
 	Util_Send(playerid, -10270721, "Questo veicolo da carico e' assegnato a un altro trasportatore.");
+	return 0;
 }
 
 Freight_OnPlayerExitVehicle(playerid, vehicleid)
@@ -34539,15 +35064,17 @@ Freight_OnPlayerExitVehicle(playerid, vehicleid)
 	}
 	if (!g_FrtOff[playerid])
 	{
-		g_FrtOff[playerid] = 1;
+		g_FrtOff[playerid] = true;
 		gPlayer[playerid][pFreightLeftVehTick] = GetTickCount();
 		SendClientMessage(playerid, -10270721, "Torna alla guida del Mule entro %d secondi (e resta entro %.0f m) o il contratto sara' rilasciato.", 45, 0x43160000);
 	}
+	return 0;
 }
 
 Freight_OnPlayerStateChange(playerid, t_PLAYER_STATE:newstate, t_PLAYER_STATE:oldstate)
 {
-	if (newstate != 2)
+	#pragma unused oldstate
+	if (newstate != PLAYER_STATE_DRIVER)
 	{
 		return 0;
 	}
@@ -34558,20 +35085,22 @@ Freight_OnPlayerStateChange(playerid, t_PLAYER_STATE:newstate, t_PLAYER_STATE:ol
 	}
 	if (LD_VehOwner(veh) != playerid)
 	{
-		RemovePlayerFromVehicle(playerid, 0);
+		RemovePlayerFromVehicle(playerid, false);
 		Util_Send(playerid, -10270721, "Questo veicolo da carico e' assegnato a un altro trasportatore.");
 		return 0;
 	}
 	if (g_FrtActive[playerid] && g_FrtVeh[playerid] == veh)
 	{
-		g_FrtBoarded[playerid] = 1;
-		g_FrtOff[playerid] = 0;
+		g_FrtBoarded[playerid] = true;
+		g_FrtOff[playerid] = false;
 		gPlayer[playerid][pFreightLeftVehTick] = 0;
 	}
+	return 0;
 }
 
 Freight_OnVehicleDeath(vehicleid, killerid)
 {
+	#pragma unused killerid
 	if (LD_VehModule(vehicleid) != 3)
 	{
 		return 0;
@@ -34582,6 +35111,7 @@ Freight_OnVehicleDeath(vehicleid, killerid)
 		return 0;
 	}
 	Freight_Stop(owner, 4, "Mule distrutto: il carico e' perso e il contratto e' interrotto.");
+	return 0;
 }
 
 // ===== modules/cityos/cityos.inc =====
@@ -34606,7 +35136,7 @@ CityOS_Integrity(playerid)
 	}
 	new Float:h;
 	GetVehicleHealth(veh, h);
-	return LD_Clamp(floatround(h, 1) / 10, 0, 100);
+	return LD_Clamp(floatround(h, floatround_method:1) / 10, 0, 100);
 }
 
 CityOS_NextDistance(playerid)
@@ -34618,7 +35148,7 @@ CityOS_NextDistance(playerid)
 	{
 		case 1:
 		{
-			tx = Float:((shop ? 1927.0 : 0x44EB0000));
+			tx = (shop ? 1927.0 : 1880.0);
 			ty = Float:((shop ? 0xC4DFC000 : 0xC4DE8000));
 		}
 		case 2:
@@ -34628,7 +35158,7 @@ CityOS_NextDistance(playerid)
 		}
 		case 3:
 		{
-			tx = Float:((shop ? 0x4508E000 : 2145.0));
+			tx = (shop ? 2190.0 : 2145.0);
 			ty = Float:((shop ? -1155.0 : -1215.0));
 		}
 		default:
@@ -34638,7 +35168,7 @@ CityOS_NextDistance(playerid)
 	}
 	GetPlayerPos(playerid, px, py, pz);
 	new Float:dx = (tx - px), Float:dy = (ty - py);
-	return floatround(floatsqroot(((dx * dx) + (dy * dy))), 1);
+	return floatround(floatsqroot(((dx * dx) + (dy * dy))), floatround_method:1);
 }
 
 CityOS_ShowBoard(playerid)
@@ -34664,6 +35194,7 @@ CityOS_ShowBoard(playerid)
 		rows++;
 	}
 	UI_CityBoardShow(playerid, Hub_NearBoard(playerid) >= 0);
+	return 0;
 }
 
 CityOS_ShowDistrict(playerid, districtId)
@@ -34678,11 +35209,12 @@ CityOS_ShowDistrict(playerid, districtId)
 		return 0;
 	}
 	DB_LivingHistory(playerid, districtId);
+	return 0;
 }
 
 CityOS_RenderDistrict(playerid, districtId, count)
 {
-	new now = gettime(), fest = DB_LivingDistrictGet(districtId, 4), festH = 0;
+	new now = gettime(), fest = DB_LivingDistrictGet(districtId, E_LD_DISTRICT:4), festH = 0;
 	if (fest > now)
 	{
 		festH = (fest - now + 3600 - 1) / 3600;
@@ -34702,7 +35234,7 @@ CityOS_OnInit()
 {
 	for (new i = 0; i < MAX_PLAYERS; i++)
 	{
-		g_CosWaitBoard[i] = 0;
+		g_CosWaitBoard[i] = false;
 	}
 	LD_Listen("CityOS_OnDistrictEvent", 30);
 }
@@ -34713,20 +35245,21 @@ CityOS_OnExit()
 
 CityOS_OnPlayerConnect(playerid)
 {
-	g_CosWaitBoard[playerid] = 0;
+	g_CosWaitBoard[playerid] = false;
 }
 
 CityOS_OnCharReady(playerid)
 {
-	g_CosWaitBoard[playerid] = 0;
+	g_CosWaitBoard[playerid] = false;
 }
 
 CityOS_OnPlayerDisconnect(playerid, reason)
 {
-	g_CosWaitBoard[playerid] = 0;
+	#pragma unused reason
+	g_CosWaitBoard[playerid] = false;
 }
 
-public CityOS_OnDistrictEvent(type, districtId, charId, value, opId[])
+public CityOS_OnDistrictEvent(type, districtId, charId, value, const opId[])
 {
 	if (type != 104)
 	{
@@ -34738,7 +35271,7 @@ public CityOS_OnDistrictEvent(type, districtId, charId, value, opId[])
 		{
 			continue;
 		}
-		g_CosWaitBoard[i] = 0;
+		g_CosWaitBoard[i] = false;
 		if (IsPlayerConnected(i))
 		{
 			CityOS_ShowBoard(i);
@@ -34747,7 +35280,7 @@ public CityOS_OnDistrictEvent(type, districtId, charId, value, opId[])
 	return 1;
 }
 
-CityOS_CmdContratti(playerid, params[])
+CityOS_CmdContratti(playerid, const params[])
 {
 	if (!CityOS_Playing(playerid))
 	{
@@ -34756,7 +35289,7 @@ CityOS_CmdContratti(playerid, params[])
 	}
 	new pos = 0, tok[24], num[24];
 	Util_NextToken(params, pos, tok, 24);
-	if (!strcmp(tok, "accetta", 1, 0x7FFFFFFF) && tok[0] != 0)
+	if (!strcmp(tok, "accetta", true, 0x7FFFFFFF) && tok[0] != 0)
 	{
 		new id = 0;
 		Util_NextToken(params, pos, num, 24);
@@ -34772,7 +35305,7 @@ CityOS_CmdContratti(playerid, params[])
 	return 1;
 }
 
-CityOS_CmdContratto(playerid, params[])
+CityOS_CmdContratto(playerid, const params[])
 {
 	if (!CityOS_Playing(playerid))
 	{
@@ -34783,7 +35316,7 @@ CityOS_CmdContratto(playerid, params[])
 	Util_NextToken(params, pos, tok, 24);
 	new ct = gPlayer[playerid][pContractId];
 	new bool:active = ct != 0 && (gPlayer[playerid][pContractPhase] == 1 || gPlayer[playerid][pContractPhase] == 2);
-	if (tok[0] != 0 && !strcmp(tok, "abbandona", 1, 0x7FFFFFFF))
+	if (tok[0] != 0 && !strcmp(tok, "abbandona", true, 0x7FFFFFFF))
 	{
 		if (!active)
 		{
@@ -34814,8 +35347,9 @@ CityOS_CmdContratto(playerid, params[])
 	return 1;
 }
 
-CityOS_CmdReputazione(playerid, params[])
+CityOS_CmdReputazione(playerid, const params[])
 {
+	#pragma unused params
 	if (!CityOS_Playing(playerid))
 	{
 		LD_SendBlock(playerid, 1);
@@ -34823,7 +35357,7 @@ CityOS_CmdReputazione(playerid, params[])
 	}
 	UI_CityRepBegin(playerid);
 	UI_CityRepTrack(playerid, 1, LD_GetProPoints(playerid, 1), 0, 0, 0, 0, 0);
-	new rating = DB_LivingPlayerGet(playerid, 3);
+	new rating = DB_LivingPlayerGet(playerid, E_LD_PLAYER:3);
 	UI_CityRepTrack(playerid, 2, LD_GetProPoints(playerid, 2), 0, 0, rating, rating > 0 ? 100 : 0, 0);
 	for (new d = 1; d <= 3; d++)
 	{
@@ -34833,7 +35367,7 @@ CityOS_CmdReputazione(playerid, params[])
 	return 1;
 }
 
-CityOS_CmdQuartiere(playerid, params[])
+CityOS_CmdQuartiere(playerid, const params[])
 {
 	if (!CityOS_Playing(playerid))
 	{
@@ -34912,7 +35446,7 @@ public UI_OnContractBoardRefresh(playerid)
 		CityOS_ShowBoard(playerid);
 		return 1;
 	}
-	g_CosWaitBoard[playerid] = 1;
+	g_CosWaitBoard[playerid] = true;
 	DB_LivingBoard(65535);
 	return 1;
 }
@@ -34937,7 +35471,7 @@ new s_HubBoardDistrict[3] = {1, 2, 3};
 new s_HubKitItem[3] = {3, 2, 6};
 new s_HubKitQty[3] = {2, 1, 2};
 new g_HubPickup[3] = {-1, -1, -1};
-new Text3D:g_HubLabel[3] = {65535, 65535, 65535};
+new Text3D:g_HubLabel[3] = {INVALID_3DTEXT_ID, INVALID_3DTEXT_ID, INVALID_3DTEXT_ID};
 new g_HubZone = -1;
 new g_HubTimer;
 new g_HubTickCount;
@@ -35027,7 +35561,7 @@ Hub_ResetPlayer(playerid)
 	g_HubAhead[playerid] = 0;
 	g_HubHintShown[playerid] = 0;
 	g_HubHintDue[playerid] = 0;
-	g_HubOpBusy[playerid] = 0;
+	g_HubOpBusy[playerid] = false;
 	g_HubOpStep[playerid] = 0;
 	g_HubOpId[playerid][0] = 0;
 	g_HubOpRetryAt[playerid] = 0;
@@ -35035,9 +35569,9 @@ Hub_ResetPlayer(playerid)
 	g_HubKitLeft[playerid] = 0;
 	g_HubKitAt[playerid] = 0;
 	g_HubKitTries[playerid] = 0;
-	g_HubKitReload[playerid] = 0;
+	g_HubKitReload[playerid] = false;
 	g_HubTarget[playerid] = 0;
-	g_HubCpOn[playerid] = 0;
+	g_HubCpOn[playerid] = false;
 	g_HubAtBoard[playerid] = 0;
 	g_HubGreeted[playerid] = 0;
 	g_HubDonDay[playerid] = 0;
@@ -35046,6 +35580,7 @@ Hub_ResetPlayer(playerid)
 	g_HubPrjOpProject[playerid] = 0;
 	g_HubPrjOpAmount[playerid] = 0;
 	g_HubPrjDistrict[playerid] = 0;
+	return 0;
 }
 
 Hub_NearBoard(playerid)
@@ -35054,7 +35589,7 @@ Hub_NearBoard(playerid)
 	{
 		return -1;
 	}
-	if (GetPlayerState(playerid) == 9 || GetPlayerState(playerid) == 7)
+	if (GetPlayerState(playerid) == PLAYER_STATE_SPECTATING || GetPlayerState(playerid) == PLAYER_STATE_WASTED)
 	{
 		return -1;
 	}
@@ -35096,10 +35631,10 @@ bool:Hub_TargetPos(target, &Float:x, &Float:y, &Float:z)
 		}
 		default:
 		{
-			return 0;
+			return false;
 		}
 	}
-	return 1;
+	return true;
 }
 
 Hub_ClearTarget(playerid)
@@ -35116,8 +35651,9 @@ Hub_ClearTarget(playerid)
 	{
 		DisablePlayerCheckpoint(playerid);
 	}
-	g_HubCpOn[playerid] = 0;
+	g_HubCpOn[playerid] = false;
 	g_HubTarget[playerid] = 0;
+	return 0;
 }
 
 Hub_SetTarget(playerid, target, bool:withCheckpoint)
@@ -35129,13 +35665,14 @@ Hub_SetTarget(playerid, target, bool:withCheckpoint)
 		return 0;
 	}
 	Hub_ClearTarget(playerid);
-	SetPlayerMapIcon(playerid, 97, x, y, z, 0, -2994689, 1);
+	SetPlayerMapIcon(playerid, 97, x, y, z, 0, -2994689, MAPICON_GLOBAL);
 	g_HubTarget[playerid] = target;
 	if (withCheckpoint && LD_ActiveFlow(playerid) == 0)
 	{
 		SetPlayerCheckpoint(playerid, x, y, z, 3.0);
-		g_HubCpOn[playerid] = 1;
+		g_HubCpOn[playerid] = true;
 	}
+	return 0;
 }
 
 Hub_StepTarget(step)
@@ -35162,22 +35699,22 @@ Hub_OnInit()
 		g_HubPickup[b] = CreatePickup(1239, 1, s_HubBoard[b][0], s_HubBoard[b][1], s_HubBoard[b][2], 0);
 		if (b == 0)
 		{
-			g_HubLabel[b] = Lang_Create3DTextLabel("Casa del Quartiere di Idlewood\nBacheca contratti - Progetto del quartiere\n/contratti  /contribuisci  /aiuto servizi", -2994689, s_HubBoard[b][0], s_HubBoard[b][1], (0.8 + s_HubBoard[b][2]), 15.0, 0, 0);
+			g_HubLabel[b] = Lang_Create3DTextLabel("Casa del Quartiere di Idlewood\nBacheca contratti - Progetto del quartiere\n/contratti  /contribuisci  /aiuto servizi", -2994689, s_HubBoard[b][0], s_HubBoard[b][1], (0.8 + s_HubBoard[b][2]), 15.0, 0, false);
 		}
 		else
 		{
 			LD_DistrictName(s_HubBoardDistrict[b], name, 16);
 			format(text, 256, "Bacheca di quartiere - %s\nUn pezzo di Casa del Quartiere anche qui\n/contratti  /contribuisci", name);
-			g_HubLabel[b] = Lang_Create3DTextLabel(text, 0x99CCFFFF, s_HubBoard[b][0], s_HubBoard[b][1], (0.8 + s_HubBoard[b][2]), 15.0, 0, 0);
+			g_HubLabel[b] = Lang_Create3DTextLabel(text, 0x99CCFFFF, s_HubBoard[b][0], s_HubBoard[b][1], (0.8 + s_HubBoard[b][2]), 15.0, 0, false);
 		}
 	}
 	g_HubZone = GangZoneCreate((1850.0 - 22.0), (-1800.0 - 22.0), (1850.0 + 22.0), (-1800.0 + 22.0));
 	g_HubTickCount = 0;
 	g_HubLastRefresh = 0;
-	g_HubRefreshed = 0;
+	g_HubRefreshed = false;
 	for (new d = 0; d <= 3; d++)
 	{
-		g_HubFestInit[d] = 0;
+		g_HubFestInit[d] = false;
 		g_HubFestSeen[d] = 0;
 		g_HubPrjSeen[d] = 0;
 		g_HubGoalSeen[d] = 0;
@@ -35193,7 +35730,7 @@ Hub_OnInit()
 	{
 		Log_Write("HUB", "registrazione del listener Hub_OnDistrictEvent non riuscita");
 	}
-	g_HubTimer = SetTimer("Hub_OnTick", 1000, 1);
+	g_HubTimer = SetTimer("Hub_OnTick", 1000, true);
 }
 
 Hub_OnExit()
@@ -35209,12 +35746,12 @@ Hub_OnExit()
 		{
 			DestroyPickup(g_HubPickup[b]);
 		}
-		if (g_HubLabel[b] != 65535)
+		if (g_HubLabel[b] != INVALID_3DTEXT_ID)
 		{
 			Delete3DTextLabel(g_HubLabel[b]);
 		}
 		g_HubPickup[b] = -1;
-		g_HubLabel[b] = 65535;
+		g_HubLabel[b] = Text3D:65535;
 	}
 	if (g_HubZone != -1)
 	{
@@ -35230,6 +35767,7 @@ Hub_OnPlayerConnect(playerid)
 		return 0;
 	}
 	Hub_ResetPlayer(playerid);
+	return 0;
 }
 
 Hub_OnCharReady(playerid)
@@ -35244,28 +35782,31 @@ Hub_OnCharReady(playerid)
 		GangZoneShowForPlayer(playerid, g_HubZone, -2994880);
 	}
 	Hub_TryLoad(playerid);
+	return 0;
 }
 
 Hub_OnPlayerDisconnect(playerid, reason)
 {
+	#pragma unused reason
 	if (!Hub_Valid(playerid))
 	{
 		return 0;
 	}
 	Hub_ResetPlayer(playerid);
+	return 0;
 }
 
 Hub_TryLoad(playerid)
 {
-	if (g_HubOnb[playerid] != 0 || DB_LivingPlayerGet(playerid, 0) == 0)
+	if (g_HubOnb[playerid] != 0 || DB_LivingPlayerGet(playerid, E_LD_PLAYER:0) == 0)
 	{
 		return 0;
 	}
-	new step = LD_Clamp(DB_LivingPlayerGet(playerid, 4), 0, 5);
-	new bool:done = DB_LivingPlayerGet(playerid, 5) != 0 || step >= 5;
+	new step = LD_Clamp(DB_LivingPlayerGet(playerid, E_LD_PLAYER:4), 0, 5);
+	new bool:done = DB_LivingPlayerGet(playerid, E_LD_PLAYER:5) != 0 || step >= 5;
 	g_HubStep[playerid] = step;
 	gPlayer[playerid][pOnboardStep] = step;
-	gPlayer[playerid][pHintsOff] = DB_LivingPlayerGet(playerid, 6) != 0 ? 1 : 0;
+	gPlayer[playerid][pHintsOff] = DB_LivingPlayerGet(playerid, E_LD_PLAYER:6) != 0 ? 1 : 0;
 	if (done)
 	{
 		g_HubOnb[playerid] = 2;
@@ -35293,8 +35834,9 @@ Hub_TryLoad(playerid)
 	new target = Hub_StepTarget(Hub_CurStep(playerid));
 	if (target != 0)
 	{
-		Hub_SetTarget(playerid, target, 0);
+		Hub_SetTarget(playerid, target, false);
 	}
+	return 0;
 }
 
 Hub_SendStep(playerid, step, bool:fresh)
@@ -35304,7 +35846,7 @@ Hub_SendStep(playerid, step, bool:fresh)
 		DB_LivingMakeOpId(g_HubOpId[playerid], 37, "ob", step, gPlayer[playerid][pCharId]);
 		g_HubOpTries[playerid] = 0;
 	}
-	g_HubOpBusy[playerid] = 1;
+	g_HubOpBusy[playerid] = true;
 	g_HubOpStep[playerid] = step;
 	g_HubOpRetryAt[playerid] = 0;
 	if (DB_LivingBusy(playerid, 4))
@@ -35313,6 +35855,7 @@ Hub_SendStep(playerid, step, bool:fresh)
 		return 0;
 	}
 	DB_LivingOnboardStep(playerid, step, g_HubOpId[playerid]);
+	return 0;
 }
 
 Hub_Advance(playerid, step)
@@ -35331,7 +35874,8 @@ Hub_Advance(playerid, step)
 		g_HubAhead[playerid] |= Hub_Bit(step);
 		return 0;
 	}
-	Hub_SendStep(playerid, step, 1);
+	Hub_SendStep(playerid, step, true);
+	return 0;
 }
 
 Hub_StepBegin(playerid)
@@ -35356,8 +35900,9 @@ Hub_StepBegin(playerid)
 	}
 	else if (target != g_HubTarget[playerid])
 	{
-		Hub_SetTarget(playerid, target, 0);
+		Hub_SetTarget(playerid, target, false);
 	}
+	return 0;
 }
 
 Hub_Finish(playerid, bool:rewarded)
@@ -35408,7 +35953,7 @@ Hub_KitTick(playerid, now)
 	{
 		if (g_HubKitReload[playerid] && now - g_HubKitAt[playerid] >= 0 && gPlayer[playerid][pInvOpBusy] == 0)
 		{
-			g_HubKitReload[playerid] = 0;
+			g_HubKitReload[playerid] = false;
 			Inv_Reload(playerid);
 		}
 		return 0;
@@ -35447,8 +35992,9 @@ Hub_KitTick(playerid, now)
 	}
 	if (g_HubKitLeft[playerid] == 0)
 	{
-		g_HubKitReload[playerid] = 1;
+		g_HubKitReload[playerid] = true;
 	}
+	return 0;
 }
 
 public Living_OnDBOnboard(playerid, result, step, paid, balance, giveKit, exp)
@@ -35462,11 +36008,11 @@ public Living_OnDBOnboard(playerid, result, step, paid, balance, giveKit, exp)
 	{
 		case 1:
 		{
-			g_HubOpBusy[playerid] = 0;
+			g_HubOpBusy[playerid] = false;
 			g_HubOpId[playerid][0] = 0;
 			if (sent == 0)
 			{
-				Hub_Finish(playerid, 0);
+				Hub_Finish(playerid, false);
 				return 1;
 			}
 			g_HubStep[playerid] = LD_Clamp(step, 0, 5);
@@ -35492,7 +36038,7 @@ public Living_OnDBOnboard(playerid, result, step, paid, balance, giveKit, exp)
 		}
 		case 2, 4:
 		{
-			g_HubOpBusy[playerid] = 0;
+			g_HubOpBusy[playerid] = false;
 			g_HubOpId[playerid][0] = 0;
 			new dbStep = LD_Clamp(step, 0, 5);
 			if (result == 2 && (sent == 0 || sent > dbStep || dbStep >= 5))
@@ -35514,7 +36060,7 @@ public Living_OnDBOnboard(playerid, result, step, paid, balance, giveKit, exp)
 		}
 		default:
 		{
-			g_HubOpBusy[playerid] = 0;
+			g_HubOpBusy[playerid] = false;
 			g_HubOpId[playerid][0] = 0;
 			new msg[256];
 			format(msg, 256, "onboarding: esito %d per il passo %d del personaggio %d", result, sent, gPlayer[playerid][pCharId]);
@@ -35536,7 +36082,7 @@ Hub_HintsOff(playerid)
 		{
 			if (Hub_HintsOn(playerid))
 			{
-				DB_LivingOnboardHints(playerid, 1);
+				DB_LivingOnboardHints(playerid, true);
 			}
 			gPlayer[playerid][pHintsOff] = 1;
 			UI_LivingHintHide(playerid);
@@ -35553,9 +36099,10 @@ Hub_HintsOff(playerid)
 			g_HubHintDue[playerid] = 0;
 			UI_LivingHintHide(playerid);
 			Hub_ClearTarget(playerid);
-			Hub_SendStep(playerid, 0, 1);
+			Hub_SendStep(playerid, 0, true);
 		}
 	}
+	return 0;
 }
 
 Hub_StartWelcome(playerid)
@@ -35580,7 +36127,7 @@ Hub_StartWelcome(playerid)
 	if (Hub_NearBoard(playerid) == -1)
 	{
 		Util_Send(playerid, 0x99CCFFFF, "La consegna si prende a una bacheca: ti ho segnato la Casa del Quartiere di Idlewood sulla mappa.");
-		Hub_SetTarget(playerid, 1, 1);
+		Hub_SetTarget(playerid, 1, true);
 		return 0;
 	}
 	new block = LD_CheckStart(playerid);
@@ -35590,12 +36137,13 @@ Hub_StartWelcome(playerid)
 		return 0;
 	}
 	Hub_ClearTarget(playerid);
-	if (!Freight_Begin(playerid, 0, 1, 1, 1, 0, 1))
+	if (!Freight_Begin(playerid, 0, 1, 1, 1, 0, true))
 	{
 		Util_Send(playerid, -10270721, "Il furgone della consegna di benvenuto non e' disponibile proprio ora: riprova tra poco.");
 		return 0;
 	}
 	Util_Send(playerid, 0x99CCFFFF, "Un carico di merci dal magazzino al negozio di Idlewood: strada breve, nessuna fretta. Il quartiere ti ringrazia gia'.");
+	return 0;
 }
 
 Hub_OnWelcomeDelivered(playerid, bool:success)
@@ -35626,7 +36174,7 @@ Hub_ShowServices(playerid)
 	Util_Send(playerid, -1, " /aiuto lavoro - la strada per il Job Center di Pershing Square  |  /aiuto noleggio - il noleggio mezzi");
 }
 
-Hub_CmdAiuto(playerid, params[])
+Hub_CmdAiuto(playerid, const params[])
 {
 	if (!Hub_PlayerOk(playerid))
 	{
@@ -35645,22 +36193,22 @@ Hub_CmdAiuto(playerid, params[])
 		UI_LivingHelpShow(playerid);
 		return 1;
 	}
-	if (!strcmp(sub, "off", 1, 0x7FFFFFFF))
+	if (!strcmp(sub, "off", true, 0x7FFFFFFF))
 	{
 		Hub_HintsOff(playerid);
 		return 1;
 	}
-	if (!strcmp(sub, "servizi", 1, 0x7FFFFFFF) || !strcmp(sub, "hub", 1, 0x7FFFFFFF))
+	if (!strcmp(sub, "servizi", true, 0x7FFFFFFF) || !strcmp(sub, "hub", true, 0x7FFFFFFF))
 	{
 		Hub_ShowServices(playerid);
 		return 1;
 	}
-	if (!strcmp(sub, "consegna", 1, 0x7FFFFFFF))
+	if (!strcmp(sub, "consegna", true, 0x7FFFFFFF))
 	{
 		Hub_StartWelcome(playerid);
 		return 1;
 	}
-	if (!strcmp(sub, "mappa", 1, 0x7FFFFFFF))
+	if (!strcmp(sub, "mappa", true, 0x7FFFFFFF))
 	{
 		if (g_HubOnb[playerid] == 1)
 		{
@@ -35672,21 +36220,21 @@ Hub_CmdAiuto(playerid, params[])
 		}
 		return 1;
 	}
-	if (!strcmp(sub, "casa", 1, 0x7FFFFFFF))
+	if (!strcmp(sub, "casa", true, 0x7FFFFFFF))
 	{
-		Hub_SetTarget(playerid, 1, 1);
+		Hub_SetTarget(playerid, 1, true);
 		Util_Send(playerid, 0x99CCFFFF, "Ti ho segnato la Casa del Quartiere di Idlewood sulla mappa.");
 		return 1;
 	}
-	if (!strcmp(sub, "lavoro", 1, 0x7FFFFFFF))
+	if (!strcmp(sub, "lavoro", true, 0x7FFFFFFF))
 	{
-		Hub_SetTarget(playerid, 2, 1);
+		Hub_SetTarget(playerid, 2, true);
 		Util_Send(playerid, 0x99CCFFFF, "Il Job Center e' a Pershing Square, vicino al municipio: te l'ho segnato sulla mappa. Li', /lavoro prendi.");
 		return 1;
 	}
-	if (!strcmp(sub, "noleggio", 1, 0x7FFFFFFF))
+	if (!strcmp(sub, "noleggio", true, 0x7FFFFFFF))
 	{
-		Hub_SetTarget(playerid, 3, 1);
+		Hub_SetTarget(playerid, 3, true);
 		Util_Send(playerid, 0x99CCFFFF, "Il noleggio mezzi e' a Pershing Square: te l'ho segnato sulla mappa. Li', /noleggio.");
 		return 1;
 	}
@@ -35709,7 +36257,7 @@ public UI_OnHelpWaypoint(playerid, step)
 	{
 		case 1:
 		{
-			Hub_SetTarget(playerid, 1, 1);
+			Hub_SetTarget(playerid, 1, true);
 			Util_Send(playerid, 0x99CCFFFF, "Segui il segnale: la Casa del Quartiere e' a due passi da Unity Station.");
 		}
 		case 3:
@@ -35720,13 +36268,13 @@ public UI_OnHelpWaypoint(playerid, step)
 			}
 			else
 			{
-				Hub_SetTarget(playerid, 1, 1);
+				Hub_SetTarget(playerid, 1, true);
 				Util_Send(playerid, 0x99CCFFFF, "Ti ho segnato la Casa del Quartiere: li', /aiuto consegna.");
 			}
 		}
 		case 5:
 		{
-			Hub_SetTarget(playerid, 2, 1);
+			Hub_SetTarget(playerid, 2, true);
 			Util_Send(playerid, 0x99CCFFFF, "Ti ho segnato il Job Center di Pershing Square. Puoi anche solo scrivere /lavoro o /noleggio da qui.");
 		}
 		default:
@@ -35760,7 +36308,7 @@ Hub_DayLeft(playerid)
 
 Hub_ProjectFund(districtId)
 {
-	new prj = DB_LivingDistrictGet(districtId, 6), fund = DB_LivingDistrictGet(districtId, 8);
+	new prj = DB_LivingDistrictGet(districtId, E_LD_DISTRICT:6), fund = DB_LivingDistrictGet(districtId, E_LD_DISTRICT:8);
 	if (prj > 0 && g_HubFundPrj[districtId] == prj && g_HubFund[districtId] > fund)
 	{
 		fund = g_HubFund[districtId];
@@ -35770,7 +36318,7 @@ Hub_ProjectFund(districtId)
 
 bool:Hub_ProjectOpen(districtId)
 {
-	return DB_LivingDistrictGet(districtId, 6) > 0 && DB_LivingDistrictGet(districtId, 9) > gettime();
+	return DB_LivingDistrictGet(districtId, E_LD_DISTRICT:6) > 0 && DB_LivingDistrictGet(districtId, E_LD_DISTRICT:9) > gettime();
 }
 
 Hub_ProjectBlock(playerid, districtId)
@@ -35796,14 +36344,14 @@ Hub_ProjectBlock(playerid, districtId)
 
 Hub_ProjectFill(playerid, districtId)
 {
-	new name[65], prj = DB_LivingDistrictGet(districtId, 6), hours = 0;
+	new name[65], prj = DB_LivingDistrictGet(districtId, E_LD_DISTRICT:6), hours = 0;
 	DB_LivingProjectName(districtId, name, 65);
-	new left = DB_LivingDistrictGet(districtId, 9) - gettime();
+	new left = DB_LivingDistrictGet(districtId, E_LD_DISTRICT:9) - gettime();
 	if (left > 0)
 	{
 		hours = (left + 3600 - 1) / 3600;
 	}
-	UI_LivingProjectSet(playerid, Hub_ProjectOpen(districtId) ? prj : 0, districtId, name, DB_LivingDistrictGet(districtId, 7), Hub_ProjectFund(districtId), hours, 50, 500, Hub_DayLeft(playerid), Hub_ProjectBlock(playerid, districtId));
+	UI_LivingProjectSet(playerid, Hub_ProjectOpen(districtId) ? prj : 0, districtId, name, DB_LivingDistrictGet(districtId, E_LD_DISTRICT:7), Hub_ProjectFund(districtId), hours, 50, 500, Hub_DayLeft(playerid), Hub_ProjectBlock(playerid, districtId));
 }
 
 Hub_DistrictOfProject(projectId)
@@ -35814,7 +36362,7 @@ Hub_DistrictOfProject(projectId)
 	}
 	for (new d = 1; d <= 3; d++)
 	{
-		if (DB_LivingDistrictGet(d, 6) == projectId)
+		if (DB_LivingDistrictGet(d, E_LD_DISTRICT:6) == projectId)
 		{
 			return d;
 		}
@@ -35822,7 +36370,7 @@ Hub_DistrictOfProject(projectId)
 	return 0;
 }
 
-Hub_CmdContribuisci(playerid, params[])
+Hub_CmdContribuisci(playerid, const params[])
 {
 	if (!Hub_PlayerOk(playerid))
 	{
@@ -35979,7 +36527,7 @@ public Living_OnDBProject(playerid, result, projectId, donated, balance, points,
 				g_HubFundPrj[d] = projectId;
 				g_HubFund[d] = fund;
 			}
-			format(msg, 256, "Grazie! Hai donato $%d per \"%s\": raccolti $%d su $%d.", donated, name, fund, DB_LivingDistrictGet(d, 7));
+			format(msg, 256, "Grazie! Hai donato $%d per \"%s\": raccolti $%d su $%d.", donated, name, fund, DB_LivingDistrictGet(d, E_LD_DISTRICT:7));
 			UI_LivingNotify(playerid, msg, 1);
 			if (points > 0)
 			{
@@ -35989,7 +36537,7 @@ public Living_OnDBProject(playerid, result, projectId, donated, balance, points,
 			if (projectState == 2)
 			{
 				Util_Send(playerid, 0x66DD66FF, "E' stata la tua donazione a completare il progetto. Il quartiere fa festa!");
-				Hub_RequestRefresh(1);
+				Hub_RequestRefresh(true);
 			}
 			format(msg, 256, "personaggio %d dona %d al progetto %d (fondo %d, stato %d)", gPlayer[playerid][pCharId], donated, projectId, fund, projectState);
 			Log_Write("HUB", msg);
@@ -36005,7 +36553,7 @@ public Living_OnDBProject(playerid, result, projectId, donated, balance, points,
 		case 4, 5:
 		{
 			UI_LivingReject(playerid, "Questo progetto non raccoglie piu' fondi: ne partira' presto un altro.");
-			Hub_RequestRefresh(1);
+			Hub_RequestRefresh(true);
 		}
 		case 7:
 		{
@@ -36040,12 +36588,13 @@ Hub_RequestRefresh(bool:force)
 	{
 		return 0;
 	}
-	g_HubRefreshed = 1;
+	g_HubRefreshed = true;
 	g_HubLastRefresh = now;
 	DB_LivingLoadDistricts();
+	return 0;
 }
 
-Hub_Broadcast(color, text[])
+Hub_Broadcast(color, const text[])
 {
 	for (new i = 0; i < MAX_PLAYERS; i++)
 	{
@@ -36061,17 +36610,17 @@ Hub_CheckFestivals()
 	new msg[256], dname[16], opId[37];
 	for (new d = 1; d <= 3; d++)
 	{
-		if (DB_LivingDistrictGet(d, 0) == 0)
+		if (DB_LivingDistrictGet(d, E_LD_DISTRICT:0) == 0)
 		{
 			continue;
 		}
-		new fest = DB_LivingDistrictGet(d, 4), prj = DB_LivingDistrictGet(d, 6);
+		new fest = DB_LivingDistrictGet(d, E_LD_DISTRICT:4), prj = DB_LivingDistrictGet(d, E_LD_DISTRICT:6);
 		if (!g_HubFestInit[d])
 		{
-			g_HubFestInit[d] = 1;
+			g_HubFestInit[d] = true;
 			g_HubFestSeen[d] = fest;
 			g_HubPrjSeen[d] = prj;
-			g_HubGoalSeen[d] = DB_LivingDistrictGet(d, 7);
+			g_HubGoalSeen[d] = DB_LivingDistrictGet(d, E_LD_DISTRICT:7);
 			DB_LivingProjectName(d, g_HubPrjNameSeen[d], 65);
 			continue;
 		}
@@ -36096,12 +36645,12 @@ Hub_CheckFestivals()
 		}
 		g_HubFestSeen[d] = fest;
 		g_HubPrjSeen[d] = prj;
-		g_HubGoalSeen[d] = DB_LivingDistrictGet(d, 7);
+		g_HubGoalSeen[d] = DB_LivingDistrictGet(d, E_LD_DISTRICT:7);
 		DB_LivingProjectName(d, g_HubPrjNameSeen[d], 65);
 	}
 }
 
-public Hub_OnDistrictEvent(type, districtId, charId, value, opId[])
+public Hub_OnDistrictEvent(type, districtId, charId, value, const opId[])
 {
 	switch (type)
 	{
@@ -36150,6 +36699,7 @@ Hub_GreetBoard(playerid, board)
 	LD_DistrictName(s_HubBoardDistrict[board], dname, 16);
 	format(msg, 256, "Bacheca di quartiere di %s: qui accetti i contratti (/contratti) e sostieni il progetto della zona (/contribuisci).", dname);
 	Util_Send(playerid, 0x99CCFFFF, msg);
+	return 0;
 }
 
 Hub_PlayerTick(playerid, now)
@@ -36175,7 +36725,7 @@ Hub_PlayerTick(playerid, now)
 	{
 		if (g_HubCpOn[playerid] && LD_ActiveFlow(playerid) != 0)
 		{
-			g_HubCpOn[playerid] = 0;
+			g_HubCpOn[playerid] = false;
 		}
 		new Float:x, Float:y, Float:z;
 		if (Hub_TargetPos(g_HubTarget[playerid], x, y, z) && IsPlayerInRangeOfPoint(playerid, 6.0, x, y, z))
@@ -36199,7 +36749,7 @@ Hub_PlayerTick(playerid, now)
 		{
 			if (g_HubOpRetryAt[playerid] != 0 && now - g_HubOpRetryAt[playerid] >= 0)
 			{
-				Hub_SendStep(playerid, g_HubOpStep[playerid], 0);
+				Hub_SendStep(playerid, g_HubOpStep[playerid], false);
 			}
 		}
 		else if (cur == 1 && board == 0)
@@ -36283,7 +36833,7 @@ CefBridge_OnInit()
 	cef_subscribe("lssc:view_ok", "Cef_OnViewOk");
 	cef_subscribe("lssc:char_create", "Cef_OnCharCreate");
 	cef_subscribe("lssc:char_back", "Cef_OnCharBack");
-	SetTimer("CefBridge_ClockTick", 30000, 1);
+	SetTimer("CefBridge_ClockTick", 30000, true);
 	Log_Write("CEF", "interfaccia CEF attiva: pagine da <GTA>/cef/assets/index.html");
 #endif
 }
@@ -36293,7 +36843,7 @@ CefBridge_OnPlayerConnect(playerid)
 	CefUI_Reset(playerid);
 #if defined LSRP_CEF
 	g_CefNonce[playerid]++;
-	SetTimerEx("CefBridge_DecideTimeout", 9000, 0, "dd", playerid, g_CefNonce[playerid]);
+	SetTimerEx("CefBridge_DecideTimeout", 9000, false, "dd", playerid, g_CefNonce[playerid]);
 #endif
 }
 
@@ -36340,11 +36890,12 @@ CefBridge_OnInitialize(playerid, success)
 		return 0;
 	}
 	CefUI_SetState(playerid, 1);
-	cef_create_browser(playerid, 1, "index.html", 0, 0);
+	cef_create_browser(playerid, 1, "index.html", false, false);
 #endif
+	return 0;
 }
 
-CefBridge_Arg(arguments[], idx, def)
+CefBridge_Arg(const arguments[], idx, def)
 {
 	new pos = 0, tok[16];
 	for (new i = 0; i <= idx; i++)
@@ -36374,6 +36925,7 @@ CefBridge_SendProfile(playerid)
 	GetPlayerName(playerid, name, 25);
 	Job_NameOf(gPlayer[playerid][pJob], job, 32);
 	cef_emit_event(playerid, "lssc:profile", 0, name, 0, job);
+	return 0;
 }
 
 CefBridge_CmdTelefono(playerid)
@@ -36386,6 +36938,7 @@ CefBridge_CmdTelefono(playerid)
 	CefBridge_SendProfile(playerid);
 	CefUI_HudSend(playerid);
 	CefUI_Open(playerid, "phone", "home");
+	return 0;
 }
 
 public CefBridge_ClockTick()
@@ -36400,7 +36953,7 @@ public CefBridge_ClockTick()
 	return 1;
 }
 
-public Cef_OnReady(playerid, arguments[])
+public Cef_OnReady(playerid, const arguments[])
 {
 	if (!IsPlayerConnected(playerid) || CefUI_State(playerid) == 0)
 	{
@@ -36430,7 +36983,7 @@ public Cef_OnReady(playerid, arguments[])
 	if (UI_HudIsActive(playerid))
 	{
 		UI_HudDestroy(playerid);
-		CefUI_HudShow(playerid, 1);
+		CefUI_HudShow(playerid, true);
 	}
 	else
 	{
@@ -36440,7 +36993,7 @@ public Cef_OnReady(playerid, arguments[])
 	return 1;
 }
 
-public Cef_OnClose(playerid, arguments[])
+public Cef_OnClose(playerid, const arguments[])
 {
 	if (IsPlayerConnected(playerid))
 	{
@@ -36449,7 +37002,7 @@ public Cef_OnClose(playerid, arguments[])
 	return 1;
 }
 
-public Cef_OnAccept(playerid, arguments[])
+public Cef_OnAccept(playerid, const arguments[])
 {
 	if (!CefBridge_Ok(playerid))
 	{
@@ -36463,7 +37016,7 @@ public Cef_OnAccept(playerid, arguments[])
 	return 1;
 }
 
-public Cef_OnAbandon(playerid, arguments[])
+public Cef_OnAbandon(playerid, const arguments[])
 {
 	if (!CefBridge_Ok(playerid))
 	{
@@ -36477,7 +37030,7 @@ public Cef_OnAbandon(playerid, arguments[])
 	return 1;
 }
 
-public Cef_OnBoardRefresh(playerid, arguments[])
+public Cef_OnBoardRefresh(playerid, const arguments[])
 {
 	if (!CefBridge_Ok(playerid))
 	{
@@ -36492,7 +37045,7 @@ public Cef_OnBoardRefresh(playerid, arguments[])
 	return 1;
 }
 
-public Cef_OnDistrict(playerid, arguments[])
+public Cef_OnDistrict(playerid, const arguments[])
 {
 	if (!CefBridge_Ok(playerid) || !LD_IsReady())
 	{
@@ -36518,7 +37071,7 @@ public Cef_OnDistrict(playerid, arguments[])
 	return 1;
 }
 
-public Cef_OnProjectOpen(playerid, arguments[])
+public Cef_OnProjectOpen(playerid, const arguments[])
 {
 	if (!CefBridge_Ok(playerid) || !LD_IsReady())
 	{
@@ -36533,7 +37086,7 @@ public Cef_OnProjectOpen(playerid, arguments[])
 	return 1;
 }
 
-public Cef_OnContribute(playerid, arguments[])
+public Cef_OnContribute(playerid, const arguments[])
 {
 	if (!CefBridge_Ok(playerid) || !LD_IsReady())
 	{
@@ -36547,7 +37100,7 @@ public Cef_OnContribute(playerid, arguments[])
 	return 1;
 }
 
-public Cef_OnBankReq(playerid, arguments[])
+public Cef_OnBankReq(playerid, const arguments[])
 {
 	if (!CefBridge_Ok(playerid))
 	{
@@ -36559,7 +37112,7 @@ public Cef_OnBankReq(playerid, arguments[])
 	return 1;
 }
 
-public Cef_OnRepReq(playerid, arguments[])
+public Cef_OnRepReq(playerid, const arguments[])
 {
 	if (!CefBridge_Ok(playerid) || !LD_IsReady())
 	{
@@ -36571,7 +37124,7 @@ public Cef_OnRepReq(playerid, arguments[])
 	return 1;
 }
 
-public Cef_OnJobWaypoint(playerid, arguments[])
+public Cef_OnJobWaypoint(playerid, const arguments[])
 {
 	if (!CefBridge_Ok(playerid) || !LD_IsReady())
 	{
@@ -36582,13 +37135,13 @@ public Cef_OnJobWaypoint(playerid, arguments[])
 	return 1;
 }
 
-bool:CefBridge_HexDecode(hex[], dest[], size)
+bool:CefBridge_HexDecode(const hex[], dest[], size)
 {
 	dest[0] = 0;
 	new len = strlen(hex);
 	if (len == 0 || len % 2 != 0 || len / 2 >= size)
 	{
-		return 0;
+		return false;
 	}
 	for (new i = 0, o = 0; i < len; i += 2, o++)
 	{
@@ -36596,12 +37149,12 @@ bool:CefBridge_HexDecode(hex[], dest[], size)
 		if (hi < 0 || lo < 0 || (hi == 0 && lo == 0))
 		{
 			dest[0] = 0;
-			return 0;
+			return false;
 		}
 		dest[o] = hi * 16 + lo;
 		dest[o + 1] = 0;
 	}
-	return 1;
+	return true;
 }
 
 CefBridge_HexVal(c)
@@ -36626,7 +37179,7 @@ bool:CefBridge_AuthOk(playerid)
 	return IsPlayerConnected(playerid) && CefUI_Active(playerid) && !gPlayer[playerid][pLoggedIn];
 }
 
-public Cef_OnLogin(playerid, arguments[])
+public Cef_OnLogin(playerid, const arguments[])
 {
 	if (!CefBridge_AuthOk(playerid) || gPlayer[playerid][pAuthState] != 3)
 	{
@@ -36650,7 +37203,7 @@ public Cef_OnLogin(playerid, arguments[])
 	return 1;
 }
 
-public Cef_OnRegister(playerid, arguments[])
+public Cef_OnRegister(playerid, const arguments[])
 {
 	if (!CefBridge_AuthOk(playerid) || gPlayer[playerid][pAuthState] != 1)
 	{
@@ -36677,7 +37230,7 @@ public Cef_OnRegister(playerid, arguments[])
 	return 1;
 }
 
-public Cef_OnGender(playerid, arguments[])
+public Cef_OnGender(playerid, const arguments[])
 {
 	if (!IsPlayerConnected(playerid) || !CefUI_Active(playerid) || gPlayer[playerid][pAuthState] != 5)
 	{
@@ -36687,7 +37240,7 @@ public Cef_OnGender(playerid, arguments[])
 	return 1;
 }
 
-public Cef_OnSkin(playerid, arguments[])
+public Cef_OnSkin(playerid, const arguments[])
 {
 	if (!IsPlayerConnected(playerid) || !CefUI_Active(playerid) || gPlayer[playerid][pAuthState] != 6)
 	{
@@ -36697,7 +37250,7 @@ public Cef_OnSkin(playerid, arguments[])
 	return 1;
 }
 
-public Cef_OnStory(playerid, arguments[])
+public Cef_OnStory(playerid, const arguments[])
 {
 	if (!IsPlayerConnected(playerid) || !CefUI_Active(playerid) || gPlayer[playerid][pAuthState] != 15)
 	{
@@ -36707,7 +37260,7 @@ public Cef_OnStory(playerid, arguments[])
 	return 1;
 }
 
-public Cef_OnQuit(playerid, arguments[])
+public Cef_OnQuit(playerid, const arguments[])
 {
 	// "გასვლა": in qualunque momento prima dello spawn (login, registrazione, personaggio, storia)
 	if (!IsPlayerConnected(playerid) || !CefUI_Active(playerid) || gPlayer[playerid][pSpawned])
@@ -37034,7 +37587,7 @@ HudCef_FindInteract(playerid)
 	{
 		return HUDC_IA_NONE;
 	}
-	new st = GetPlayerState(playerid);
+	new PLAYER_STATE:st = GetPlayerState(playerid);
 	if (st == PLAYER_STATE_DRIVER)
 	{
 		return Veh_NearStation(playerid) ? HUDC_IA_STATION : HUDC_IA_NONE;
@@ -37116,7 +37669,7 @@ HudCef_OnKeyStateChange(playerid, KEY:newkeys, KEY:oldkeys)
 }
 
 // pagina -> server: azione rapida scelta (stessi comandi del gioco: il server rivalida tutto)
-public Cef_OnQuick(playerid, arguments[])
+public Cef_OnQuick(playerid, const arguments[])
 {
 	if (!g_HcOn[playerid])
 	{
@@ -37137,14 +37690,14 @@ public Cef_OnQuick(playerid, arguments[])
 	return 1;
 }
 
-public Cef_OnQuickClose(playerid, arguments[])
+public Cef_OnQuickClose(playerid, const arguments[])
 {
 	return 1;
 }
 
 // pagina -> server: messaggio dalla chat CEF (UTF-8 in esadecimale). Comandi '/' come OnPlayerCommandText,
 // testo normale come OnPlayerText (stesse verifiche: login, mute).
-public Cef_OnChatSend(playerid, arguments[])
+public Cef_OnChatSend(playerid, const arguments[])
 {
 	if (!IsPlayerConnected(playerid) || !CefUI_Active(playerid))
 	{
@@ -37229,7 +37782,7 @@ HudCef_OnHudData(playerid, money, bank, level)
 }
 
 // notifica generica (kind: 0 successo, 1 info, 2 avviso, 3 errore, 4 soldi ricevuti, 5 soldi spesi, 6 missione, 7 lavoro, 8 RP)
-HudCef_Notify(playerid, kind, const title[], const text[], ms = 0)
+stock HudCef_Notify(playerid, kind, const title[], const text[], ms = 0)
 {
 	if (!CefUI_Active(playerid))
 	{
@@ -37324,7 +37877,7 @@ CefViews_Open(playerid, which, const view[])
 	g_CvTimer[playerid] = SetTimerEx("CefViews_OnTimeout", CEFV_ACK_MS, false, "dd", playerid, which);
 }
 
-public Cef_OnViewOk(playerid, arguments[])
+public Cef_OnViewOk(playerid, const arguments[])
 {
 	if (IsPlayerConnected(playerid))
 	{
@@ -37811,7 +38364,7 @@ bool:SpawnSel_OnDialogResponse(playerid, dialogid, listitem)
 	return true;
 }
 
-public Cef_OnSpawnPick(playerid, arguments[])
+public Cef_OnSpawnPick(playerid, const arguments[])
 {
 	if (!IsPlayerConnected(playerid) || gPlayer[playerid][pAuthState] != SPAWN_AUTH_STATE || g_SsCount[playerid] == 0)
 	{
@@ -38379,7 +38932,7 @@ CharSel_Identity(playerid, name[], first[], last[], birth[], size = sizeof name)
 }
 
 // ---------------------------------------------------------------- dialog e pagina
-bool:CharSel_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
+bool:CharSel_OnDialogResponse(playerid, dialogid, response, listitem, const inputtext[])
 {
 	if (dialogid != CS_DIALOG_LIST && dialogid != CS_DIALOG_NAME && dialogid != CS_DIALOG_BIRTH)
 	{
@@ -38450,7 +39003,7 @@ bool:CharSel_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[
 	return true;
 }
 
-public Cef_OnCharPick(playerid, arguments[])
+public Cef_OnCharPick(playerid, const arguments[])
 {
 	if (!IsPlayerConnected(playerid) || !CefUI_Active(playerid) || gPlayer[playerid][pAuthState] != CS_STATE_LIST)
 	{
@@ -38461,7 +39014,7 @@ public Cef_OnCharPick(playerid, arguments[])
 }
 
 // lssc:char_create slot nome cognome giorno mese anno (nomi latini: nessuno spazio)
-public Cef_OnCharCreate(playerid, arguments[])
+public Cef_OnCharCreate(playerid, const arguments[])
 {
 	if (!IsPlayerConnected(playerid) || !CefUI_Active(playerid))
 	{
@@ -38500,7 +39053,7 @@ public Cef_OnCharCreate(playerid, arguments[])
 	return 1;
 }
 
-public Cef_OnCharBack(playerid, arguments[])
+public Cef_OnCharBack(playerid, const arguments[])
 {
 	if (!IsPlayerConnected(playerid) || gPlayer[playerid][pAuthState] != CS_STATE_NEW || g_CsBusy[playerid])
 	{
@@ -38516,17 +39069,17 @@ public Cef_OnCharBack(playerid, arguments[])
 
 // ===== modules/commands/admin_commands.inc =====
 
-bool:Admin_ParseTarget(playerid, token[], &targetid)
+bool:Admin_ParseTarget(playerid, const token[], &targetid)
 {
 	if (!Util_ParsePlayerId(token, targetid) || !Util_IsPlaying(targetid))
 	{
 		Util_Send(playerid, -10270721, "Giocatore non valido.");
-		return 0;
+		return false;
 	}
-	return 1;
+	return true;
 }
 
-public Cmd_goto(playerid, params[])
+public Cmd_goto(playerid, const params[])
 {
 	if (Util_GetAdmin(playerid) < 1)
 	{
@@ -38564,7 +39117,7 @@ public Cmd_goto(playerid, params[])
 	return 1;
 }
 
-public Cmd_setlevel(playerid, params[])
+public Cmd_setlevel(playerid, const params[])
 {
 	if (Util_GetAdmin(playerid) < 3)
 	{
@@ -38608,7 +39161,7 @@ public Cmd_setlevel(playerid, params[])
 	return 1;
 }
 
-public Cmd_setmoney(playerid, params[])
+public Cmd_setmoney(playerid, const params[])
 {
 	if (Util_GetAdmin(playerid) < 3)
 	{
@@ -38648,26 +39201,26 @@ public Cmd_setmoney(playerid, params[])
 	return 1;
 }
 
-bool:Admin_ParseSanctionTarget(playerid, token[], &targetid)
+bool:Admin_ParseSanctionTarget(playerid, const token[], &targetid)
 {
 	if (!Admin_ParseTarget(playerid, token, targetid))
 	{
-		return 0;
+		return false;
 	}
 	if (targetid == playerid)
 	{
 		Util_Send(playerid, -10270721, "Giocatore non valido.");
-		return 0;
+		return false;
 	}
-	if (!Admin_CanTarget(playerid, targetid, 0))
+	if (!Admin_CanTarget(playerid, targetid, false))
 	{
 		Util_Send(playerid, -10270721, "Non puoi agire su questo giocatore.");
-		return 0;
+		return false;
 	}
-	return 1;
+	return true;
 }
 
-public Cmd_ah(playerid, params[])
+public Cmd_ah(playerid, const params[])
 {
 	if (Util_GetAdmin(playerid) < 1)
 	{
@@ -38677,7 +39230,7 @@ public Cmd_ah(playerid, params[])
 	return 1;
 }
 
-public Cmd_a(playerid, params[])
+public Cmd_a(playerid, const params[])
 {
 	if (Util_GetAdmin(playerid) < 1)
 	{
@@ -38697,7 +39250,7 @@ public Cmd_a(playerid, params[])
 	return 1;
 }
 
-public Cmd_reports(playerid, params[])
+public Cmd_reports(playerid, const params[])
 {
 	if (Util_GetAdmin(playerid) < 1)
 	{
@@ -38707,7 +39260,7 @@ public Cmd_reports(playerid, params[])
 	return 1;
 }
 
-public Cmd_rr(playerid, params[])
+public Cmd_rr(playerid, const params[])
 {
 	if (Util_GetAdmin(playerid) < 1)
 	{
@@ -38738,7 +39291,7 @@ public Cmd_rr(playerid, params[])
 	return 1;
 }
 
-public Cmd_gethere(playerid, params[])
+public Cmd_gethere(playerid, const params[])
 {
 	if (Util_GetAdmin(playerid) < 2)
 	{
@@ -38768,7 +39321,7 @@ public Cmd_gethere(playerid, params[])
 	return 1;
 }
 
-public Cmd_freeze(playerid, params[])
+public Cmd_freeze(playerid, const params[])
 {
 	if (Util_GetAdmin(playerid) < 2)
 	{
@@ -38791,7 +39344,7 @@ public Cmd_freeze(playerid, params[])
 		reason[0] = 0;
 	}
 	gPlayer[targetid][pFrozen] = 1;
-	TogglePlayerControllable(targetid, 0);
+	TogglePlayerControllable(targetid, false);
 	new an[25], tn[25];
 	GetPlayerName(playerid, an, 25);
 	GetPlayerName(targetid, tn, 25);
@@ -38801,7 +39354,7 @@ public Cmd_freeze(playerid, params[])
 	return 1;
 }
 
-public Cmd_unfreeze(playerid, params[])
+public Cmd_unfreeze(playerid, const params[])
 {
 	if (Util_GetAdmin(playerid) < 2)
 	{
@@ -38829,7 +39382,7 @@ public Cmd_unfreeze(playerid, params[])
 	return 1;
 }
 
-public Cmd_sethp(playerid, params[])
+public Cmd_sethp(playerid, const params[])
 {
 	if (Util_GetAdmin(playerid) < 2)
 	{
@@ -38847,7 +39400,7 @@ public Cmd_sethp(playerid, params[])
 	{
 		return 1;
 	}
-	if (!Admin_CanTarget(playerid, targetid, 1))
+	if (!Admin_CanTarget(playerid, targetid, true))
 	{
 		Util_Send(playerid, -10270721, "Non puoi agire su questo giocatore.");
 		return 1;
@@ -38867,7 +39420,7 @@ public Cmd_sethp(playerid, params[])
 	return 1;
 }
 
-public Cmd_kick(playerid, params[])
+public Cmd_kick(playerid, const params[])
 {
 	if (Util_GetAdmin(playerid) < 2)
 	{
@@ -38894,7 +39447,7 @@ public Cmd_kick(playerid, params[])
 	return 1;
 }
 
-public Cmd_mute(playerid, params[])
+public Cmd_mute(playerid, const params[])
 {
 	if (Util_GetAdmin(playerid) < 2)
 	{
@@ -38939,7 +39492,7 @@ public Cmd_mute(playerid, params[])
 	return 1;
 }
 
-public Cmd_unmute(playerid, params[])
+public Cmd_unmute(playerid, const params[])
 {
 	if (Util_GetAdmin(playerid) < 2)
 	{
@@ -38972,7 +39525,7 @@ public Cmd_unmute(playerid, params[])
 	return 1;
 }
 
-public Cmd_warn(playerid, params[])
+public Cmd_warn(playerid, const params[])
 {
 	if (Util_GetAdmin(playerid) < 2)
 	{
@@ -39001,7 +39554,7 @@ public Cmd_warn(playerid, params[])
 	return 1;
 }
 
-public Cmd_setadmin(playerid, params[])
+public Cmd_setadmin(playerid, const params[])
 {
 	if (Util_GetAdmin(playerid) < 3)
 	{
@@ -39036,7 +39589,7 @@ public Cmd_setadmin(playerid, params[])
 	}
 	if (targetid != INVALID_PLAYER_ID && gPlayer[targetid][pLoggedIn])
 	{
-		if (!Admin_CanTarget(playerid, targetid, 0))
+		if (!Admin_CanTarget(playerid, targetid, false))
 		{
 			Util_Send(playerid, -10270721, "Non puoi agire su questo giocatore.");
 			return 1;
@@ -39065,7 +39618,7 @@ public Cmd_setadmin(playerid, params[])
 	return 1;
 }
 
-public Cmd_givemoney(playerid, params[])
+public Cmd_givemoney(playerid, const params[])
 {
 	if (Util_GetAdmin(playerid) < 3)
 	{
@@ -39111,7 +39664,7 @@ public Cmd_givemoney(playerid, params[])
 	return 1;
 }
 
-public Cmd_ban(playerid, params[])
+public Cmd_ban(playerid, const params[])
 {
 	if (Util_GetAdmin(playerid) < 3)
 	{
@@ -39147,7 +39700,7 @@ public Cmd_ban(playerid, params[])
 	return 1;
 }
 
-public Cmd_unban(playerid, params[])
+public Cmd_unban(playerid, const params[])
 {
 	if (Util_GetAdmin(playerid) < 3)
 	{
@@ -39271,7 +39824,7 @@ new g_CmdNames[97][16] = {
 	"chatcef"
 };
 
-Cmd_Dispatch(playerid, cmdtext[])
+Cmd_Dispatch(playerid, const cmdtext[])
 {
 	if (cmdtext[0] != 47)
 	{
@@ -39295,7 +39848,7 @@ Cmd_Dispatch(playerid, cmdtext[])
 	new index = -1;
 	for (new i = 0; i < sizeof g_CmdNames; i++)
 	{
-		if (!strcmp(name, g_CmdNames[i], 0, 0x7FFFFFFF))
+		if (!strcmp(name, g_CmdNames[i], false, 0x7FFFFFFF))
 		{
 			index = i;
 			break;
@@ -39307,7 +39860,7 @@ Cmd_Dispatch(playerid, cmdtext[])
 	}
 	if (!Util_IsPlaying(playerid))
 	{
-		if (!strcmp(name, "salta", 0, 0x7FFFFFFF) && gPlayer[playerid][pLoggedIn] && gPlayer[playerid][pAuthState] == 14)
+		if (!strcmp(name, "salta", false, 0x7FFFFFFF) && gPlayer[playerid][pLoggedIn] && gPlayer[playerid][pAuthState] == 14)
 		{
 			Intro_CmdSalta(playerid);
 			return 1;
@@ -39328,7 +39881,7 @@ Cmd_Dispatch(playerid, cmdtext[])
 	return CallLocalFunction(fn, "ds", playerid, cmdtext[pos]);
 }
 
-public Cmd_me(playerid, params[])
+public Cmd_me(playerid, const params[])
 {
 	new text[129];
 	if (!Util_SanitizeText(params, text, 128))
@@ -39343,7 +39896,7 @@ public Cmd_me(playerid, params[])
 	return 1;
 }
 
-public Cmd_do(playerid, params[])
+public Cmd_do(playerid, const params[])
 {
 	new text[129];
 	if (!Util_SanitizeText(params, text, 128))
@@ -39358,7 +39911,7 @@ public Cmd_do(playerid, params[])
 	return 1;
 }
 
-public Cmd_try(playerid, params[])
+public Cmd_try(playerid, const params[])
 {
 	new text[129];
 	if (!Util_SanitizeText(params, text, 128))
@@ -39373,7 +39926,7 @@ public Cmd_try(playerid, params[])
 	return 1;
 }
 
-public Cmd_b(playerid, params[])
+public Cmd_b(playerid, const params[])
 {
 	new text[129];
 	if (!Util_SanitizeText(params, text, 128))
@@ -39388,7 +39941,7 @@ public Cmd_b(playerid, params[])
 	return 1;
 }
 
-public Cmd_ame(playerid, params[])
+public Cmd_ame(playerid, const params[])
 {
 	new text[129];
 	if (!Util_SanitizeText(params, text, 128))
@@ -39398,13 +39951,13 @@ public Cmd_ame(playerid, params[])
 	}
 	new name[25], msg[256];
 	GetPlayerName(playerid, name, 25);
-	SetPlayerChatBubble(playerid, "* %s", -81.42773, 20.0, 6000, text);
+	SetPlayerChatBubble(playerid, "* %s", _:-81.42773, 20.0, 6000, text);
 	format(msg, 256, "> %s %s", name, text);
 	Util_SendNear(playerid, 0xC2A2DAFF, 20.0, msg);
 	return 1;
 }
 
-public Cmd_pay(playerid, params[])
+public Cmd_pay(playerid, const params[])
 {
 	new pos = 0, tid[12], tam[12], targetid = 0, amount = 0;
 	Util_NextToken(params, pos, tid, 12);
@@ -39461,121 +40014,121 @@ public Cmd_pay(playerid, params[])
 	return 1;
 }
 
-public Cmd_lavoro(playerid, params[])
+public Cmd_lavoro(playerid, const params[])
 {
 	Job_CmdLavoro(playerid, params);
 	LD_OnboardAction(playerid, 5);
 	return 1;
 }
 
-public Cmd_inizia(playerid, params[])
+public Cmd_inizia(playerid, const params[])
 {
 	Job_CmdInizia(playerid);
 	return 1;
 }
 
-public Cmd_fine(playerid, params[])
+public Cmd_fine(playerid, const params[])
 {
 	Job_CmdFine(playerid);
 	return 1;
 }
 
-public Cmd_fazione(playerid, params[])
+public Cmd_fazione(playerid, const params[])
 {
 	Faction_CmdFazione(playerid, params);
 	return 1;
 }
 
-public Cmd_invita(playerid, params[])
+public Cmd_invita(playerid, const params[])
 {
 	Faction_CmdInvita(playerid, params);
 	return 1;
 }
 
-public Cmd_accetta(playerid, params[])
+public Cmd_accetta(playerid, const params[])
 {
 	Faction_CmdAccetta(playerid);
 	return 1;
 }
 
-public Cmd_promuovi(playerid, params[])
+public Cmd_promuovi(playerid, const params[])
 {
 	Faction_CmdRankOp(playerid, params, 4);
 	return 1;
 }
 
-public Cmd_degrada(playerid, params[])
+public Cmd_degrada(playerid, const params[])
 {
 	Faction_CmdRankOp(playerid, params, 5);
 	return 1;
 }
 
-public Cmd_licenzia(playerid, params[])
+public Cmd_licenzia(playerid, const params[])
 {
 	Faction_CmdRankOp(playerid, params, 6);
 	return 1;
 }
 
-public Cmd_duty(playerid, params[])
+public Cmd_duty(playerid, const params[])
 {
 	Faction_CmdDuty(playerid);
 	return 1;
 }
 
-public Cmd_r(playerid, params[])
+public Cmd_r(playerid, const params[])
 {
-	Faction_CmdRadio(playerid, params, 0);
+	Faction_CmdRadio(playerid, params, false);
 	return 1;
 }
 
-public Cmd_dep(playerid, params[])
+public Cmd_dep(playerid, const params[])
 {
-	Faction_CmdRadio(playerid, params, 1);
+	Faction_CmdRadio(playerid, params, true);
 	return 1;
 }
 
-public Cmd_ammanetta(playerid, params[])
+public Cmd_ammanetta(playerid, const params[])
 {
-	Faction_CmdAmmanetta(playerid, params, 1);
+	Faction_CmdAmmanetta(playerid, params, true);
 	return 1;
 }
 
-public Cmd_smanetta(playerid, params[])
+public Cmd_smanetta(playerid, const params[])
 {
-	Faction_CmdAmmanetta(playerid, params, 0);
+	Faction_CmdAmmanetta(playerid, params, false);
 	return 1;
 }
 
-public Cmd_multa(playerid, params[])
+public Cmd_multa(playerid, const params[])
 {
 	Faction_CmdMulta(playerid, params);
 	return 1;
 }
 
-public Cmd_multe(playerid, params[])
+public Cmd_multe(playerid, const params[])
 {
 	Faction_CmdMulte(playerid);
 	return 1;
 }
 
-public Cmd_cura(playerid, params[])
+public Cmd_cura(playerid, const params[])
 {
 	Faction_CmdCura(playerid, params);
 	return 1;
 }
 
-public Cmd_rianima(playerid, params[])
+public Cmd_rianima(playerid, const params[])
 {
 	Faction_CmdRianima(playerid, params);
 	return 1;
 }
 
-public Cmd_setfazione(playerid, params[])
+public Cmd_setfazione(playerid, const params[])
 {
 	return Faction_CmdSetfazione(playerid, params) ? 1 : 0;
 }
 
-public Cmd_stats(playerid, params[])
+public Cmd_stats(playerid, const params[])
 {
 	new name[25], level = gPlayer[playerid][pLevel], exp = gPlayer[playerid][pExp];
 	GetPlayerName(playerid, name, 25);
@@ -39601,7 +40154,7 @@ public Cmd_stats(playerid, params[])
 	return 1;
 }
 
-public Cmd_who(playerid, params[])
+public Cmd_who(playerid, const params[])
 {
 	new total = 0;
 	for (new i = 0; i < MAX_PLAYERS; i++)
@@ -39630,7 +40183,7 @@ public Cmd_who(playerid, params[])
 	return 1;
 }
 
-public Cmd_help(playerid, params[])
+public Cmd_help(playerid, const params[])
 {
 	SendClientMessage(playerid, -2994689, "--- Comandi ---");
 	Util_Send(playerid, 0x99CCFFFF, "/me azione · /do descrizione · /try azione · /ame azione");
@@ -39663,7 +40216,7 @@ public Cmd_help(playerid, params[])
 	return 1;
 }
 
-public Cmd_report(playerid, params[])
+public Cmd_report(playerid, const params[])
 {
 	new text[97];
 	if (!Util_SanitizeText(params, text, 96))
@@ -39700,103 +40253,103 @@ public Cmd_report(playerid, params[])
 	return 1;
 }
 
-public Cmd_v(playerid, params[])
+public Cmd_v(playerid, const params[])
 {
 	Veh_CmdV(playerid, params);
 	return 1;
 }
 
-public Cmd_refuel(playerid, params[])
+public Cmd_refuel(playerid, const params[])
 {
 	Veh_CmdRefuel(playerid, params);
 	return 1;
 }
 
-public Cmd_concessionario(playerid, params[])
+public Cmd_concessionario(playerid, const params[])
 {
 	Veh_CmdDealer(playerid);
 	return 1;
 }
 
-public Cmd_casa(playerid, params[])
+public Cmd_casa(playerid, const params[])
 {
 	House_CmdCasa(playerid, params);
 	return 1;
 }
 
-public Cmd_entra(playerid, params[])
+public Cmd_entra(playerid, const params[])
 {
 	House_CmdEntra(playerid);
 	return 1;
 }
 
-public Cmd_esci(playerid, params[])
+public Cmd_esci(playerid, const params[])
 {
 	House_CmdEsci(playerid);
 	return 1;
 }
 
-public Cmd_luce(playerid, params[])
+public Cmd_luce(playerid, const params[])
 {
 	House_CmdToggleUtility(playerid, 0);
 	return 1;
 }
 
-public Cmd_gas(playerid, params[])
+public Cmd_gas(playerid, const params[])
 {
 	House_CmdToggleUtility(playerid, 1);
 	return 1;
 }
 
-public Cmd_frigo(playerid, params[])
+public Cmd_frigo(playerid, const params[])
 {
 	House_CmdFrigo(playerid, params);
 	return 1;
 }
 
-public Cmd_bollette(playerid, params[])
+public Cmd_bollette(playerid, const params[])
 {
 	House_CmdBollette(playerid);
 	return 1;
 }
 
-public Cmd_bussa(playerid, params[])
+public Cmd_bussa(playerid, const params[])
 {
 	House_CmdBussa(playerid);
 	return 1;
 }
 
-public Cmd_cucina(playerid, params[])
+public Cmd_cucina(playerid, const params[])
 {
 	House_CmdCucina(playerid);
 	return 1;
 }
 
-public Cmd_mangia(playerid, params[])
+public Cmd_mangia(playerid, const params[])
 {
 	House_CmdMangia(playerid, params);
 	return 1;
 }
 
-public Cmd_compra(playerid, params[])
+public Cmd_compra(playerid, const params[])
 {
 	House_CmdCompra(playerid, params);
 	return 1;
 }
 
-public Cmd_inventario(playerid, params[])
+public Cmd_inventario(playerid, const params[])
 {
 	Inv_CmdInventario(playerid);
 	return 1;
 }
 
-public Cmd_inv(playerid, params[])
+public Cmd_inv(playerid, const params[])
 {
 	Inv_CmdInventario(playerid);
 	return 1;
 }
 
-public Cmd_usa(playerid, params[])
+public Cmd_usa(playerid, const params[])
 {
 	new pos = 0, tok[24];
 	Util_NextToken(params, pos, tok, 24);
@@ -39810,85 +40363,85 @@ public Cmd_usa(playerid, params[])
 	return 1;
 }
 
-public Cmd_dai(playerid, params[])
+public Cmd_dai(playerid, const params[])
 {
 	Inv_CmdDai(playerid, params);
 	return 1;
 }
 
-public Cmd_getta(playerid, params[])
+public Cmd_getta(playerid, const params[])
 {
 	Inv_CmdGetta(playerid, params);
 	return 1;
 }
 
-public Cmd_prendi(playerid, params[])
+public Cmd_prendi(playerid, const params[])
 {
 	Inv_CmdPrendi(playerid);
 	return 1;
 }
 
-public Cmd_documento(playerid, params[])
+public Cmd_documento(playerid, const params[])
 {
 	Inv_CmdDocumento(playerid, params);
 	return 1;
 }
 
-public Cmd_salta(playerid, params[])
+public Cmd_salta(playerid, const params[])
 {
 	Intro_CmdSalta(playerid);
 	return 1;
 }
 
-public Cmd_storia(playerid, params[])
+public Cmd_storia(playerid, const params[])
 {
 	Intro_CmdStoria(playerid, params);
 	return 1;
 }
 
-public Cmd_mostrastoria(playerid, params[])
+public Cmd_mostrastoria(playerid, const params[])
 {
 	Intro_CmdMostra(playerid, params);
 	return 1;
 }
 
-public Cmd_atm(playerid, params[])
+public Cmd_atm(playerid, const params[])
 {
-	Bank_CmdAtm(playerid, 0);
+	Bank_CmdAtm(playerid, false);
 	return 1;
 }
 
-public Cmd_banca(playerid, params[])
+public Cmd_banca(playerid, const params[])
 {
-	Bank_CmdAtm(playerid, 1);
+	Bank_CmdAtm(playerid, true);
 	return 1;
 }
 
-public Cmd_saldo(playerid, params[])
+public Cmd_saldo(playerid, const params[])
 {
 	Bank_CmdSaldo(playerid);
 	return 1;
 }
 
-public Cmd_deposita(playerid, params[])
+public Cmd_deposita(playerid, const params[])
 {
 	Bank_CmdDeposita(playerid, params);
 	return 1;
 }
 
-public Cmd_preleva(playerid, params[])
+public Cmd_preleva(playerid, const params[])
 {
 	Bank_CmdPreleva(playerid, params);
 	return 1;
 }
 
-public Cmd_bonifico(playerid, params[])
+public Cmd_bonifico(playerid, const params[])
 {
 	Bank_CmdBonifico(playerid, params);
 	return 1;
 }
 
-public Cmd_estratto(playerid, params[])
+public Cmd_estratto(playerid, const params[])
 {
 	Bank_CmdEstratto(playerid);
 	return 1;
@@ -39898,13 +40451,13 @@ bool:Cmd_LivingGate(playerid)
 {
 	if (LD_IsReady())
 	{
-		return 1;
+		return true;
 	}
 	LD_SendBlock(playerid, 1);
-	return 0;
+	return false;
 }
 
-public Cmd_noleggio(playerid, params[])
+public Cmd_noleggio(playerid, const params[])
 {
 	if (!Cmd_LivingGate(playerid))
 	{
@@ -39915,12 +40468,12 @@ public Cmd_noleggio(playerid, params[])
 	return 1;
 }
 
-public Cmd_noleggia(playerid, params[])
+public Cmd_noleggia(playerid, const params[])
 {
 	return Cmd_noleggio(playerid, params);
 }
 
-public Cmd_riconsegna(playerid, params[])
+public Cmd_riconsegna(playerid, const params[])
 {
 	if (Cmd_LivingGate(playerid))
 	{
@@ -39929,7 +40482,7 @@ public Cmd_riconsegna(playerid, params[])
 	return 1;
 }
 
-public Cmd_taxi(playerid, params[])
+public Cmd_taxi(playerid, const params[])
 {
 	if (Cmd_LivingGate(playerid))
 	{
@@ -39938,7 +40491,7 @@ public Cmd_taxi(playerid, params[])
 	return 1;
 }
 
-public Cmd_chiamataxi(playerid, params[])
+public Cmd_chiamataxi(playerid, const params[])
 {
 	if (Cmd_LivingGate(playerid))
 	{
@@ -39947,7 +40500,7 @@ public Cmd_chiamataxi(playerid, params[])
 	return 1;
 }
 
-public Cmd_accettacorsa(playerid, params[])
+public Cmd_accettacorsa(playerid, const params[])
 {
 	if (Cmd_LivingGate(playerid))
 	{
@@ -39956,7 +40509,7 @@ public Cmd_accettacorsa(playerid, params[])
 	return 1;
 }
 
-public Cmd_tassametro(playerid, params[])
+public Cmd_tassametro(playerid, const params[])
 {
 	if (Cmd_LivingGate(playerid))
 	{
@@ -39965,7 +40518,7 @@ public Cmd_tassametro(playerid, params[])
 	return 1;
 }
 
-public Cmd_contratti(playerid, params[])
+public Cmd_contratti(playerid, const params[])
 {
 	if (Cmd_LivingGate(playerid))
 	{
@@ -39974,7 +40527,7 @@ public Cmd_contratti(playerid, params[])
 	return 1;
 }
 
-public Cmd_contratto(playerid, params[])
+public Cmd_contratto(playerid, const params[])
 {
 	if (Cmd_LivingGate(playerid))
 	{
@@ -39983,7 +40536,7 @@ public Cmd_contratto(playerid, params[])
 	return 1;
 }
 
-public Cmd_reputazione(playerid, params[])
+public Cmd_reputazione(playerid, const params[])
 {
 	if (!Cmd_LivingGate(playerid))
 	{
@@ -39994,7 +40547,7 @@ public Cmd_reputazione(playerid, params[])
 	return 1;
 }
 
-public Cmd_quartiere(playerid, params[])
+public Cmd_quartiere(playerid, const params[])
 {
 	if (!Cmd_LivingGate(playerid))
 	{
@@ -40005,7 +40558,7 @@ public Cmd_quartiere(playerid, params[])
 	return 1;
 }
 
-public Cmd_contribuisci(playerid, params[])
+public Cmd_contribuisci(playerid, const params[])
 {
 	if (Cmd_LivingGate(playerid))
 	{
@@ -40014,19 +40567,19 @@ public Cmd_contribuisci(playerid, params[])
 	return 1;
 }
 
-public Cmd_email(playerid, params[])
+public Cmd_email(playerid, const params[])
 {
 	Account_CmdEmail(playerid, params);
 	return 1;
 }
 
-public Cmd_telefono(playerid, params[])
+public Cmd_telefono(playerid, const params[])
 {
 	CefBridge_CmdTelefono(playerid);
 	return 1;
 }
 
-public Cmd_aiuto(playerid, params[])
+public Cmd_aiuto(playerid, const params[])
 {
 	if (Cmd_LivingGate(playerid))
 	{
@@ -40035,18 +40588,18 @@ public Cmd_aiuto(playerid, params[])
 	return 1;
 }
 
-public Cmd_ldset(playerid, params[])
+public Cmd_ldset(playerid, const params[])
 {
 	return District_CmdLdset(playerid, params) ? 1 : 0;
 }
 
-public Cmd_chatsamp(playerid, params[])
+public Cmd_chatsamp(playerid, const params[])
 {
 	HudCef_CmdChat(playerid, false);
 	return 1;
 }
 
-public Cmd_chatcef(playerid, params[])
+public Cmd_chatcef(playerid, const params[])
 {
 	HudCef_CmdChat(playerid, true);
 	return 1;

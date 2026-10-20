@@ -30,7 +30,7 @@ bool:DB_LivingBusy(playerid, cat)
 
 DB_LivingDistrictGet(districtId, E_LD_DISTRICT:field)
 {
-	if (districtId < 1 || districtId > 3 || field == 10)
+	if (districtId < 1 || districtId > 3 || _:field == 10)
 	{
 		return 0;
 	}
@@ -70,7 +70,7 @@ DB_LivingPlayerReset(playerid)
 	}
 	for (new i = 0; i < 8; i++)
 	{
-		g_LdPlayer[playerid][i] = 0;
+		g_LdPlayer[playerid][E_LD_PLAYER:i] = 0;
 	}
 	g_LdPlayer[playerid][lpSecsSincePayout] = -1;
 	return 0;

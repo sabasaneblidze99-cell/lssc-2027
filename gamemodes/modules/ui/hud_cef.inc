@@ -311,7 +311,7 @@ HudCef_FindInteract(playerid)
 	{
 		return HUDC_IA_NONE;
 	}
-	new st = GetPlayerState(playerid);
+	new PLAYER_STATE:st = GetPlayerState(playerid);
 	if (st == PLAYER_STATE_DRIVER)
 	{
 		return Veh_NearStation(playerid) ? HUDC_IA_STATION : HUDC_IA_NONE;

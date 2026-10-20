@@ -323,7 +323,7 @@ UI_JhCreate(playerid)
 		return 0;
 	}
 	new Float:left = (476.0 - 150.0);
-	g_UiJHud[playerid][0] = _:UI_JhBox(playerid, left, 384.0, 150.0, 66.0, 153);
+	g_UiJHud[playerid][0] = UI_JhBox(playerid, left, 384.0, 150.0, 66.0, 153);
 	g_UiJHud[playerid][1] = UI_JhText(playerid, (5.0 + left), (384.0 + 2.0), "LAVORO", 0.22, 1.0, -2994689, t_TEXT_DRAW_ALIGN:1);
 	g_UiJHud[playerid][2] = UI_JhText(playerid, (5.0 + left), (384.0 + 14.0), "Tappa 0/0", 0.22, 1.0, -1, t_TEXT_DRAW_ALIGN:1);
 	g_UiJHud[playerid][3] = UI_JhText(playerid, (5.0 + left), (384.0 + 26.0), "Maturato: $0", 0.22, 1.0, 0x66DD66FF, t_TEXT_DRAW_ALIGN:1);

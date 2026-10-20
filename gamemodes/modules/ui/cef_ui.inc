@@ -2,11 +2,13 @@
 
 cef_emit_event(player_id, const event[], {Float,_}:...)
 {
+	#pragma unused player_id, event
 	return 0;
 }
 
 cef_focus_browser(player_id, browser_id, bool:focused)
 {
+	#pragma unused player_id, browser_id, focused
 	return 0;
 }
 #endif
@@ -33,7 +35,7 @@ CefUI_Reset(playerid)
 #if defined LSRP_CEF
 	g_CefDecided[playerid] = false;
 #else
-	g_CefDecided[playerid] = 1;
+	g_CefDecided[playerid] = true;
 #endif
 	g_CefPromptWait[playerid] = false;
 	for (new i = 0; i < 5; i++)

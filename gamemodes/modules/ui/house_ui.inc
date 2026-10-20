@@ -692,12 +692,12 @@ UI_HhCreate(playerid)
 	}
 	new Float:left = (632.0 - 150.0);
 	new Float:homeLeft = ((left - 150.0) - 4.0);
-	g_UiHh[playerid][0] = _:UI_HhBox(playerid, 0.0, 0.0, 640.0, 490.0, 176);
-	g_UiHh[playerid][1] = _:UI_HhBox(playerid, left, 458.0, 150.0, 18.0, 153);
+	g_UiHh[playerid][0] = UI_HhBox(playerid, 0.0, 0.0, 640.0, 490.0, 176);
+	g_UiHh[playerid][1] = UI_HhBox(playerid, left, 458.0, 150.0, 18.0, 153);
 	g_UiHh[playerid][2] = UI_HhText(playerid, (4.0 + left), (458.0 + 1.0), "Sazieta' 0%", 0.2, 0.9, -1, t_TEXT_DRAW_ALIGN:1);
 	g_UiHh[playerid][3] = UI_HhBox(playerid, (4.0 + left), (458.0 + 12.0), 142.0, 4.0, 0x444444FF);
 	g_UiHh[playerid][4] = UI_HhBox(playerid, (4.0 + left), (458.0 + 12.0), 142.0, 4.0, 0x66DD66FF);
-	g_UiHh[playerid][5] = _:UI_HhBox(playerid, homeLeft, 458.0, 150.0, 18.0, 153);
+	g_UiHh[playerid][5] = UI_HhBox(playerid, homeLeft, 458.0, 150.0, 18.0, 153);
 	g_UiHh[playerid][6] = UI_HhText(playerid, (4.0 + homeLeft), (458.0 + 3.0), "Luce ON | Gas ON | Frigo 0/0", 0.2, 0.9, -1, t_TEXT_DRAW_ALIGN:1);
 	g_UiHhCreated[playerid] = true;
 	return 0;

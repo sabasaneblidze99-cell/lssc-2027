@@ -654,7 +654,7 @@ UI_FhCreate(playerid)
 		return 0;
 	}
 	new Float:left = (476.0 - 150.0);
-	g_UiFHud[playerid][0] = _:UI_FhBox(playerid, left, 356.0, 150.0, 24.0, 153);
+	g_UiFHud[playerid][0] = UI_FhBox(playerid, left, 356.0, 150.0, 24.0, 153);
 	g_UiFHud[playerid][1] = UI_FhText(playerid, (5.0 + left), (356.0 + 2.0), "IN SERVIZIO", 0.2, 0.9, -1, t_TEXT_DRAW_ALIGN:1);
 	g_UiFHud[playerid][2] = UI_FhText(playerid, (5.0 + left), (356.0 + 12.0), "Kit medico: 0", 0.2, 0.9, -1, t_TEXT_DRAW_ALIGN:1);
 	g_UiFHudCreated[playerid] = true;
@@ -741,7 +741,7 @@ UI_IhCreate(playerid)
 	{
 		return 0;
 	}
-	g_UiIHud[playerid][0] = _:UI_FhBox(playerid, 210.0, 60.0, 220.0, 58.0, 170);
+	g_UiIHud[playerid][0] = UI_FhBox(playerid, 210.0, 60.0, 220.0, 58.0, 170);
 	g_UiIHud[playerid][1] = UI_FhText(playerid, (210.0 + 6.0), (60.0 + 2.0), "SEI FERITO", 0.3, 1.3, -12303105, t_TEXT_DRAW_ALIGN:1);
 	g_UiIHud[playerid][2] = UI_FhText(playerid, (210.0 + 6.0), (60.0 + 21.0), "Ricovero automatico tra 3:00", 0.22, 1.0, -1, t_TEXT_DRAW_ALIGN:1);
 	g_UiIHud[playerid][3] = UI_FhBox(playerid, (210.0 + 6.0), (60.0 + 35.0), 208.0, 5.0, 0x444444FF);

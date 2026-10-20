@@ -22,6 +22,7 @@ def norm_funcs(a, d):
         seq = []
         for ad, op, ar in a.disasm(f.cs, f.ce):
             if op == 'break':
+                if os.environ.get('NOBREAK'): continue
                 seq.append('break'); continue
             if op == 'call':
                 g = d.fbyaddr.get(ar[0]); seq.append('call ' + (g.name if g else '?')); continue

@@ -436,7 +436,7 @@ bool:Rental_CanStart(playerid)
 		Util_Send(playerid, -10270721, "Devi trovarti all'agenzia di noleggio di Pershing Square.");
 		return false;
 	}
-	if (GetPlayerState(playerid) != 1)
+	if (GetPlayerState(playerid) != PLAYER_STATE_ONFOOT)
 	{
 		Util_Send(playerid, -10270721, "Scendi dal veicolo per noleggiare.");
 		return false;
@@ -537,7 +537,7 @@ bool:Rental_CanReturn(playerid, bool:verbose)
 		return false;
 	}
 	new veh = gPlayer[playerid][pRentalVehicle];
-	if (veh <= 0 || GetPlayerVehicleID(playerid) != veh || GetPlayerState(playerid) != 2)
+	if (veh <= 0 || GetPlayerVehicleID(playerid) != veh || GetPlayerState(playerid) != PLAYER_STATE_DRIVER)
 	{
 		if (verbose)
 		{
@@ -859,7 +859,7 @@ Rental_OnPlayerExitVehicle(playerid, vehicleid)
 Rental_OnPlayerStateChange(playerid, t_PLAYER_STATE:newstate, t_PLAYER_STATE:oldstate)
 {
 	#pragma unused oldstate
-	if (newstate != 2)
+	if (newstate != PLAYER_STATE_DRIVER)
 	{
 		return 0;
 	}

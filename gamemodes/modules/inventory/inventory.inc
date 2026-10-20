@@ -634,7 +634,7 @@ Inv_DropStart(playerid, itemId, qty)
 		SendClientMessage(playerid, -10270721, "Non hai abbastanza: %s.", s_InvName[itemId]);
 		return 0;
 	}
-	if (GetPlayerState(playerid) != 1 || GetPlayerInterior(playerid) != 0 || GetPlayerVirtualWorld(playerid) != 0)
+	if (GetPlayerState(playerid) != PLAYER_STATE_ONFOOT || GetPlayerInterior(playerid) != 0 || GetPlayerVirtualWorld(playerid) != 0)
 	{
 		Inv_Say(playerid, -10270721, "Puoi gettare oggetti solo a piedi, all'aperto.");
 		return 0;
@@ -754,7 +754,7 @@ Inv_CmdPrendi(playerid)
 	{
 		return 0;
 	}
-	if (GetPlayerState(playerid) != 1 || GetPlayerInterior(playerid) != 0 || GetPlayerVirtualWorld(playerid) != 0)
+	if (GetPlayerState(playerid) != PLAYER_STATE_ONFOOT || GetPlayerInterior(playerid) != 0 || GetPlayerVirtualWorld(playerid) != 0)
 	{
 		Inv_Say(playerid, -10270721, "Puoi raccogliere oggetti solo a piedi, all'aperto.");
 		return 0;

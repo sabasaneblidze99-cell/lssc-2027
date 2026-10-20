@@ -8,7 +8,7 @@ new g_DBLockedUntil[MAX_PLAYERS];
 
 bool:DB_IsReady()
 {
-	return g_DB != 0;
+	return g_DB != MYSQL_INVALID_HANDLE;
 }
 
 DB_IniTrim(str[])
@@ -136,17 +136,17 @@ DB_ConnectHint(errno, const errtxt[])
 bool:DB_ConnectFinish(MySQL:h, const where[])
 {
 	new errbuf[128], errno = 0;
-	if (h != 0)
+	if (h != MYSQL_INVALID_HANDLE)
 	{
 		errno = mysql_errno(h);
 	}
-	if (h == 0 || errno != 0)
+	if (h == MYSQL_INVALID_HANDLE || errno != 0)
 	{
 		errbuf[0] = 0;
 		mysql_error(errbuf, 128, h);
 		printf("[DB] connessione fallita (%s): errno %d, %s", where, errno, errbuf[0] ? errbuf : "(nessun messaggio dal plugin)");
 		DB_ConnectHint(errno, errbuf);
-		if (h != 0)
+		if (h != MYSQL_INVALID_HANDLE)
 		{
 			mysql_close(h);
 		}
@@ -179,7 +179,7 @@ bool:DB_Connect()
 	if (!read)
 	{
 		new MySQL:h = mysql_connect_file("mysql.ini");
-		if (h != 0 && mysql_errno(h) == 0)
+		if (h != MYSQL_INVALID_HANDLE && mysql_errno(h) == 0)
 		{
 			g_DB = h;
 			mysql_set_charset("utf8mb4", g_DB);

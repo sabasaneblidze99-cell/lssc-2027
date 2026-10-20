@@ -219,7 +219,7 @@ House_ResetPlayer(playerid)
 	}
 	for (new i = 0; i < 56; i++)
 	{
-		g_HPl[playerid][i] = 0;
+		g_HPl[playerid][E_HPLAYER:i] = 0;
 	}
 	return 0;
 }
@@ -364,7 +364,7 @@ House_RefreshWorld(idx)
 		format(text, 160, "Casa %d - %s\nProprieta' di %s\n%s", g_HouseRows[idx][hrId], s_HsTierName[tier], g_HouseRows[idx][hrOwnerName], g_HouseRows[idx][hrLocked] ? "Chiusa a chiave (/bussa)" : "Aperta (/entra)");
 	}
 	new color = free ? 0x66DD66FF : -2994689;
-	if (g_HsLabel[idx] != 65535)
+	if (g_HsLabel[idx] != INVALID_3DTEXT_ID)
 	{
 		Lang_Update3DTextLabelText(g_HsLabel[idx], color, text);
 	}
@@ -687,7 +687,7 @@ House_DoBuy(playerid, idx, payWithBank)
 		Util_Send(playerid, -10270721, "Operazione in corso: attendi.");
 		return 0;
 	}
-	if (House_FindNear(playerid) != idx || GetPlayerState(playerid) != 1)
+	if (House_FindNear(playerid) != idx || GetPlayerState(playerid) != PLAYER_STATE_ONFOOT)
 	{
 		Util_Send(playerid, -10270721, "Devi essere a piedi davanti alla porta della casa.");
 		return 0;
@@ -943,7 +943,7 @@ bool:House_SetUtility(playerid, idx, utility, bool:on)
 		Util_Send(playerid, -10270721, utility == 1 ? "Solo il proprietario puo' gestire il gas." : "Non hai accesso alle utenze di questa casa.");
 		return false;
 	}
-	new bool:cut = utility == 1 ? g_HouseRows[idx][hrGasCut] : g_HouseRows[idx][hrLuceCut];
+	new bool:cut = bool:(utility == 1 ? g_HouseRows[idx][hrGasCut] : g_HouseRows[idx][hrLuceCut]);
 	if (cut)
 	{
 		Util_Send(playerid, -10270721, "Utenza staccata per morosita': paga le bollette (/bollette).");
@@ -975,7 +975,7 @@ House_CmdToggleUtility(playerid, utility)
 		Util_Send(playerid, -10270721, "Devi essere dentro una casa.");
 		return 0;
 	}
-	new bool:cur = utility == 1 ? g_HouseRows[idx][hrGasOn] : g_HouseRows[idx][hrLuceOn];
+	new bool:cur = bool:(utility == 1 ? g_HouseRows[idx][hrGasOn] : g_HouseRows[idx][hrLuceOn]);
 	House_SetUtility(playerid, idx, utility, !cur);
 	return 0;
 }
@@ -1407,7 +1407,7 @@ House_CmdCompra(playerid, const params[])
 		Util_Send(playerid, -10270721, "Devi essere in un supermercato.");
 		return 0;
 	}
-	if (GetPlayerState(playerid) != 1)
+	if (GetPlayerState(playerid) != PLAYER_STATE_ONFOOT)
 	{
 		Util_Send(playerid, -10270721, "Scendi dal veicolo.");
 		return 0;
@@ -1558,7 +1558,7 @@ House_PayNext(playerid)
 	}
 	new kind = mask & 1 ? 0 : 1, cnt = 0;
 	new sum = House_BillSum(playerid, kind, cnt);
-	new bool:cut = kind == 1 ? g_HouseRows[idx][hrGasCut] : g_HouseRows[idx][hrLuceCut];
+	new bool:cut = bool:(kind == 1 ? g_HouseRows[idx][hrGasCut] : g_HouseRows[idx][hrLuceCut]);
 	g_HPl[playerid][hpBillKind] = kind;
 	DB_PayBills(playerid, g_HouseRows[idx][hrId], gPlayer[playerid][pCharId], kind, sum, cut);
 	return 0;
@@ -1594,7 +1594,7 @@ public UI_OnHouseBillsPayAll(playerid, houseId, payWithBank)
 	for (new kind = 0; kind < 2; kind++)
 	{
 		new cnt = 0, sum = House_BillSum(playerid, kind, cnt);
-		new bool:cut = kind == 1 ? g_HouseRows[idx][hrGasCut] : g_HouseRows[idx][hrLuceCut];
+		new bool:cut = bool:(kind == 1 ? g_HouseRows[idx][hrGasCut] : g_HouseRows[idx][hrLuceCut]);
 		if (sum <= 0 && !cut)
 		{
 			continue;
@@ -2091,7 +2091,7 @@ House_CmdEntra(playerid)
 		Util_Send(playerid, -10270721, "Non sei davanti alla porta di una casa.");
 		return 0;
 	}
-	if (GetPlayerState(playerid) != 1)
+	if (GetPlayerState(playerid) != PLAYER_STATE_ONFOOT)
 	{
 		Util_Send(playerid, -10270721, "Scendi dal veicolo per entrare.");
 		return 0;

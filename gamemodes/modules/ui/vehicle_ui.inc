@@ -368,7 +368,7 @@ UI_VHudCreate(playerid)
 		return 0;
 	}
 	new Float:left = (632.0 - 150.0);
-	g_UiVHud[playerid][0] = _:UI_VHudBox(playerid, left, 398.0, 150.0, 56.0, 153);
+	g_UiVHud[playerid][0] = UI_VHudBox(playerid, left, 398.0, 150.0, 56.0, 153);
 	g_UiVHud[playerid][1] = UI_VHudText(playerid, (632.0 - 5.0), (398.0 + 2.0), "0 km/h", 0.3, 1.2, -1, t_TEXT_DRAW_ALIGN:3);
 	g_UiVHud[playerid][2] = UI_VHudText(playerid, (5.0 + left), (398.0 + 22.0), "Benzina 0.0/0 L", 0.22, 1.0, -1, t_TEXT_DRAW_ALIGN:1);
 	g_UiVHud[playerid][3] = UI_VHudBox(playerid, (5.0 + left), (398.0 + 35.0), 140.0, 6.0, 0x444444FF);

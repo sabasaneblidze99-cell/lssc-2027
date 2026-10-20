@@ -125,7 +125,7 @@ Hub_NearBoard(playerid)
 	{
 		return -1;
 	}
-	if (GetPlayerState(playerid) == 9 || GetPlayerState(playerid) == 7)
+	if (GetPlayerState(playerid) == PLAYER_STATE_SPECTATING || GetPlayerState(playerid) == PLAYER_STATE_WASTED)
 	{
 		return -1;
 	}
@@ -282,7 +282,7 @@ Hub_OnExit()
 		{
 			DestroyPickup(g_HubPickup[b]);
 		}
-		if (g_HubLabel[b] != 65535)
+		if (g_HubLabel[b] != INVALID_3DTEXT_ID)
 		{
 			Delete3DTextLabel(g_HubLabel[b]);
 		}

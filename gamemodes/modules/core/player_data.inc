@@ -8,7 +8,7 @@ Player_Reset(playerid)
 	}
 	for (new i = 0; i < _:E_PLAYER_DATA; i++)
 	{
-		gPlayer[playerid][i] = 0;
+		gPlayer[playerid][E_PLAYER_DATA:i] = 0;
 	}
 	return 0;
 }

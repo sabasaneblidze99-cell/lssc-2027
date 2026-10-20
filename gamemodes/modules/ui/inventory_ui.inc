@@ -388,7 +388,7 @@ UI_InvRecvDestroyTds(playerid)
 {
 	for (new i = 0; i < 4; i++)
 	{
-		if (g_UiInvRecvTd[playerid][i] != 65535)
+		if (g_UiInvRecvTd[playerid][i] != INVALID_PLAYER_TEXT_DRAW)
 		{
 			PlayerTextDrawDestroy(playerid, PlayerText:g_UiInvRecvTd[playerid][i]);
 		}
@@ -401,7 +401,7 @@ UI_InvRecvRefresh(playerid)
 	new str[48], left = g_UiInvRecvLeft[playerid], total = g_UiInvRecvTotal[playerid];
 	format(str, 48, "Scambio in attesa: %d s", left);
 	Lang_PlayerTextDrawSetString(playerid, g_UiInvRecvTd[playerid][1], str);
-	new Float:fraction = Float:((total > 0 ? (float(left) / float(total)) : 0));
+	new Float:fraction = (total > 0 ? (float(left) / float(total)) : 0.0);
 	if ((fraction < 0.0))
 	{
 		fraction = 0.0;
@@ -456,7 +456,7 @@ UI_InvGiveConfirmShow(playerid, const giverName[], itemId, qty, ttlSec)
 	{
 		g_UiInvRecvTd[playerid][i] = INVALID_PLAYER_TEXT_DRAW;
 	}
-	g_UiInvRecvTd[playerid][0] = _:UI_InvBox(playerid, 210.0, 124.0, 220.0, 26.0, 170);
+	g_UiInvRecvTd[playerid][0] = UI_InvBox(playerid, 210.0, 124.0, 220.0, 26.0, 170);
 	g_UiInvRecvTd[playerid][1] = UI_InvText(playerid, (210.0 + 6.0), (124.0 + 2.0), "Scambio in attesa", 0.24, 1.1, -2994689, t_TEXT_DRAW_ALIGN:1);
 	g_UiInvRecvTd[playerid][2] = UI_InvBox(playerid, (210.0 + 6.0), (124.0 + 17.0), 208.0, 5.0, 0x444444FF);
 	g_UiInvRecvTd[playerid][3] = UI_InvBox(playerid, (210.0 + 6.0), (124.0 + 17.0), 208.0, 5.0, -2994689);

@@ -10,7 +10,7 @@ new Float:s_BankPoints[9][3] = {
 	{2490.0, -1680.0, 13.5}
 };
 new g_BankPickup[9];
-new g_BankLabel[9];
+new Text3D:g_BankLabel[9];
 
 bool:Bank_Valid(playerid)
 {
@@ -1253,9 +1253,9 @@ Bank_OnExit()
 		{
 			DestroyPickup(g_BankPickup[i]);
 		}
-		Delete3DTextLabel(Text3D:g_BankLabel[i]);
+		Delete3DTextLabel(g_BankLabel[i]);
 		g_BankPickup[i] = -1;
-		g_BankLabel[i] = 65535;
+		g_BankLabel[i] = INVALID_3DTEXT_ID;
 	}
 }
 

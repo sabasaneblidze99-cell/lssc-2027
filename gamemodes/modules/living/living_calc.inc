@@ -278,7 +278,7 @@ bool:LD_DonationValid(amount, donatedToday)
 
 LD_FloatKey(Float:f)
 {
-	new i = f;
+	new i = _:f;
 	return i >= 0 ? i : cellmin - i;
 }
 

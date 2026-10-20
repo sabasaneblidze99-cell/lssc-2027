@@ -121,7 +121,7 @@ bool:Taxi_AtDepot(playerid)
 
 bool:Taxi_InTaxi(driverid, vehicleid)
 {
-	return vehicleid > 0 && GetPlayerVehicleID(driverid) == vehicleid && GetPlayerState(driverid) == 2;
+	return vehicleid > 0 && GetPlayerVehicleID(driverid) == vehicleid && GetPlayerState(driverid) == PLAYER_STATE_DRIVER;
 }
 
 Taxi_ResetPlayer(playerid)
@@ -1020,7 +1020,7 @@ Taxi_CmdTaxi(playerid, const params[])
 			SendClientMessage(playerid, -10270721, "Serve almeno il livello %d per guidare un taxi.", 2);
 			return 1;
 		}
-		if (!Taxi_AtDepot(playerid) || GetPlayerState(playerid) != 1)
+		if (!Taxi_AtDepot(playerid) || GetPlayerState(playerid) != PLAYER_STATE_ONFOOT)
 		{
 			Util_Send(playerid, -10270721, "Presentati a piedi al deposito taxi di Unity Station.");
 			return 1;
@@ -1209,7 +1209,7 @@ Taxi_CmdTassametro(playerid, const params[])
 			Util_Send(playerid, -10270721, "Il tassametro e' gia' acceso.");
 			return 1;
 		}
-		if (!Taxi_InTaxi(playerid, veh) || p == INVALID_PLAYER_ID || GetPlayerVehicleID(p) != veh || GetPlayerState(p) != 3)
+		if (!Taxi_InTaxi(playerid, veh) || p == INVALID_PLAYER_ID || GetPlayerVehicleID(p) != veh || GetPlayerState(p) != PLAYER_STATE_PASSENGER)
 		{
 			Util_Send(playerid, -10270721, "Devi essere al volante del taxi con il cliente a bordo.");
 			return 1;
@@ -1568,13 +1568,13 @@ Taxi_OnPlayerStateChange(playerid, t_PLAYER_STATE:newstate, t_PLAYER_STATE:oldst
 	{
 		return 0;
 	}
-	if (newstate == 3 && g_TxPhase[d] == 2 && GetPlayerVehicleID(playerid) == Rental_GetVehicle(d))
+	if (newstate == PLAYER_STATE_PASSENGER && g_TxPhase[d] == 2 && GetPlayerVehicleID(playerid) == Rental_GetVehicle(d))
 	{
 		DisablePlayerCheckpoint(d);
 		Util_Send(d, 0x66DD66FF, "Il cliente e' a bordo: /tassametro start.");
 		return 0;
 	}
-	if (oldstate == 3 && gPlayer[d][pTaxiMeterOn] != 0)
+	if (oldstate == PLAYER_STATE_PASSENGER && _:gPlayer[d][pTaxiMeterOn] != 0)
 	{
 		Taxi_MeterStop(d);
 	}

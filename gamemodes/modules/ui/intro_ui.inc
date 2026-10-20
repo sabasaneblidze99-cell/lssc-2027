@@ -385,7 +385,7 @@ UI_IntroUiDestroy(playerid)
 	{
 		for (new i = 0; i < 7; i++)
 		{
-			if (g_UiIntroTd[playerid][i] != 65535)
+			if (g_UiIntroTd[playerid][i] != INVALID_PLAYER_TEXT_DRAW)
 			{
 				PlayerTextDrawDestroy(playerid, PlayerText:g_UiIntroTd[playerid][i]);
 			}
@@ -407,12 +407,12 @@ UI_IntroCreate(playerid)
 	UI_IntroUiDestroy(playerid);
 	CefUI_AuthClose(playerid);
 	g_UiIntroActive[playerid] = true;
-	g_UiIntroTd[playerid][0] = _:UI_IntroBox(playerid, 0.0, 0.0, 640.0, 482.0, 0);
-	g_UiIntroTd[playerid][1] = _:UI_IntroBox(playerid, 0.0, 0.0, 640.0, 56.0, 255);
+	g_UiIntroTd[playerid][0] = UI_IntroBox(playerid, 0.0, 0.0, 640.0, 482.0, 0);
+	g_UiIntroTd[playerid][1] = UI_IntroBox(playerid, 0.0, 0.0, 640.0, 56.0, 255);
 	g_UiIntroTd[playerid][2] = UI_IntroBox(playerid, 0.0, (480.0 - 56.0), 640.0, (56.0 + 2.0), 255);
 	g_UiIntroTd[playerid][3] = UI_IntroText(playerid, 320.0, (8.0 + (480.0 - 56.0)), "_", 0.3, 1.4, 0xF2F2F2FF, t_TEXT_DRAW_FONT:1);
-	g_UiIntroTd[playerid][4] = _:UI_IntroText(playerid, 320.0, 170.0, "LOS SANTOS", 0.9, 3.6, -1, t_TEXT_DRAW_FONT:3);
-	g_UiIntroTd[playerid][5] = _:UI_IntroText(playerid, 320.0, 232.0, "ყველას ისტორია აქ იწყება.", 0.34, 1.5, 0xF2F2F2FF, t_TEXT_DRAW_FONT:1);
+	g_UiIntroTd[playerid][4] = UI_IntroText(playerid, 320.0, 170.0, "LOS SANTOS", 0.9, 3.6, -1, t_TEXT_DRAW_FONT:3);
+	g_UiIntroTd[playerid][5] = UI_IntroText(playerid, 320.0, 232.0, "ყველას ისტორია აქ იწყება.", 0.34, 1.5, 0xF2F2F2FF, t_TEXT_DRAW_FONT:1);
 	g_UiIntroTd[playerid][6] = UI_IntroText(playerid, 320.0, (480.0 - 20.0), "_", 0.22, 1.0, 0xB8B8B8FF, t_TEXT_DRAW_FONT:1);
 	UI_IntroApplyAlpha(playerid);
 	PlayerTextDrawShow(playerid, PlayerText:g_UiIntroTd[playerid][1]);

@@ -57,9 +57,11 @@ new g_VoiceTimer;
 
 Voice_OnInit()
 {
+	new name[16];
 	for (new f = 1; f < VOICE_MAX_FACTIONS; f++)
 	{
-		g_VoiceRadio[f] = SvCreateGStream(0x5BA8FFFF, f == 2 ? "Radio EMS" : "Radio LSPD");
+		name = f == 2 ? ("Radio EMS") : ("Radio LSPD");   // copia: l'include di SampVoice vuole un array modificabile
+		g_VoiceRadio[f] = SvCreateGStream(0x5BA8FFFF, name);
 	}
 	g_VoiceTimer = SetTimer("Voice_OnTick", 1000, true);
 	print("[VOICE] SampVoice attivo: voce locale (B) e radio di fazione (Z)");
@@ -103,7 +105,8 @@ Voice_OnPlayerSpawn(playerid)
 	{
 		return 0;
 	}
-	g_VoiceLocal[playerid] = SvCreateDLStreamAtPlayer(VOICE_LOCAL_DIST, SV_INFINITY, playerid, 0xF6F3FAFF, "Locale");
+	new name[8] = "Locale";
+	g_VoiceLocal[playerid] = SvCreateDLStreamAtPlayer(VOICE_LOCAL_DIST, SV_INFINITY, playerid, 0xF6F3FAFF, name);
 	if (!g_VoiceLocal[playerid])
 	{
 		return 0;

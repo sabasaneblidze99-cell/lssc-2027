@@ -443,13 +443,13 @@ Veh_ResetPlayer(playerid)
 	{
 		for (new i = 0; i < 30; i++)
 		{
-			g_VSlot[playerid][s][i] = 0;
+			g_VSlot[playerid][s][E_VSLOT:i] = 0;
 		}
 		g_VSlot[playerid][s][vsVehicleId] = 65535;
 	}
 	for (new i = 0; i < 14; i++)
 	{
-		g_VPl[playerid][i] = 0;
+		g_VPl[playerid][E_VPLAYER:i] = 0;
 	}
 }
 
@@ -562,7 +562,7 @@ public Veh_OnDBLoaded(playerid, count)
 	{
 		for (new f = 0; f < 30; f++)
 		{
-			g_VSlot[playerid][i][f] = 0;
+			g_VSlot[playerid][i][E_VSLOT:f] = 0;
 		}
 		g_VSlot[playerid][i][vsVehicleId] = 65535;
 		g_VSlot[playerid][i][vsUsed] = 1;
@@ -635,7 +635,7 @@ Veh_CmdDealer(playerid)
 		Util_Send(playerid, -10270721, "Devi essere al concessionario di Los Santos.");
 		return 0;
 	}
-	if (GetPlayerState(playerid) != 1)
+	if (GetPlayerState(playerid) != PLAYER_STATE_ONFOOT)
 	{
 		Util_Send(playerid, -10270721, "Scendi dal veicolo per usare il concessionario.");
 		return 0;
@@ -751,7 +751,7 @@ public Veh_OnDBCreated(playerid, vehDbId, const plate[])
 	}
 	for (new f = 0; f < 30; f++)
 	{
-		g_VSlot[playerid][slot][f] = 0;
+		g_VSlot[playerid][slot][E_VSLOT:f] = 0;
 	}
 	g_VSlot[playerid][slot][vsVehicleId] = 65535;
 	g_VSlot[playerid][slot][vsUsed] = 1;
@@ -963,7 +963,7 @@ Veh_NearestOwnSlot(playerid)
 
 Veh_DrivenSlot(playerid)
 {
-	if (GetPlayerState(playerid) != 2)
+	if (GetPlayerState(playerid) != PLAYER_STATE_DRIVER)
 	{
 		return -1;
 	}
@@ -1573,7 +1573,7 @@ Veh_OnPlayerExitVehicle(playerid, vehicleid)
 
 Veh_OnPlayerStateChange(playerid, t_PLAYER_STATE:newstate, t_PLAYER_STATE:oldstate)
 {
-	if (oldstate == 2 && g_VPl[playerid][vpLastVehicle] != 0)
+	if (oldstate == PLAYER_STATE_DRIVER && g_VPl[playerid][vpLastVehicle] != 0)
 	{
 		new vid = g_VPl[playerid][vpLastVehicle], o = 65535, s = -1;
 		Veh_HudStop(playerid);
@@ -1586,7 +1586,7 @@ Veh_OnPlayerStateChange(playerid, t_PLAYER_STATE:newstate, t_PLAYER_STATE:oldsta
 			Veh_SaveSlot(o, s);
 		}
 	}
-	if (newstate == 2)
+	if (newstate == PLAYER_STATE_DRIVER)
 	{
 		new vid = GetPlayerVehicleID(playerid), o = 65535, s = -1;
 		if (!Veh_Lookup(vid, o, s))

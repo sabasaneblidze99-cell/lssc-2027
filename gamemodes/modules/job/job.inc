@@ -284,7 +284,7 @@ Job_ShowCheckpoint(playerid)
 	new Float:x, Float:y, Float:z;
 	Job_TargetPos(playerid, x, y, z);
 	DisablePlayerCheckpoint(playerid);
-	SetPlayerCheckpoint(playerid, x, y, z, Float:((Job_IsReturnStep(playerid) ? 0x41200000 : 6.0)));
+	SetPlayerCheckpoint(playerid, x, y, z, (Job_IsReturnStep(playerid) ? 10.0 : 6.0));
 }
 
 Job_BuildRoute(playerid, job)
@@ -596,7 +596,7 @@ public Job_OnTick()
 		{
 			new Float:tx, Float:ty, Float:tz;
 			Job_TargetPos(i, tx, ty, tz);
-			new Float:radius = Float:((ret ? 0x41200000 : 6.0));
+			new Float:radius = (ret ? 10.0 : 6.0);
 			if ((GetVehicleDistanceFromPoint(veh, tx, ty, tz) <= radius) && (float(Veh_SpeedKmh(veh)) <= 12.0))
 			{
 				if (!g_JsDwelling[i])
@@ -967,7 +967,7 @@ Job_OnPlayerExitVehicle(playerid, vehicleid)
 
 Job_OnPlayerStateChange(playerid, t_PLAYER_STATE:newstate)
 {
-	if (newstate != 2)
+	if (newstate != PLAYER_STATE_DRIVER)
 	{
 		return 0;
 	}
