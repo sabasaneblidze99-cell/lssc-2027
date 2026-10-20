@@ -189,7 +189,7 @@ Bank_FormatWhen(ts, dest[], size)
 	format(dest, size, "%02d/%02d %02d:%02d", day, month, secs / 3600, secs % 3600 / 60);
 }
 
-Bank_KindLabel(kind[], dest[], size)
+Bank_KindLabel(const kind[], dest[], size)
 {
 	if (!strcmp(kind, "deposit", 0, 0x7FFFFFFF))
 	{
@@ -1196,7 +1196,7 @@ Bank_CmdPreleva(playerid, const params[])
 	Bank_Withdraw(playerid, amount, 0);
 }
 
-Bank_CmdBonifico(playerid, params[])
+Bank_CmdBonifico(playerid, const params[])
 {
 	new pos = 0, tTarget[25], tAmount[12], amount = 0;
 	Util_NextToken(params, pos, tTarget, 25);

@@ -620,7 +620,7 @@ bool:CharSel_OnDialogResponse(playerid, dialogid, response, listitem, const inpu
 	return true;
 }
 
-public Cef_OnCharPick(playerid, arguments[])
+public Cef_OnCharPick(playerid, const arguments[])
 {
 	if (!IsPlayerConnected(playerid) || !CefUI_Active(playerid) || gPlayer[playerid][pAuthState] != CS_STATE_LIST)
 	{
@@ -631,7 +631,7 @@ public Cef_OnCharPick(playerid, arguments[])
 }
 
 // lssc:char_create slot nome cognome giorno mese anno (nomi latini: nessuno spazio)
-public Cef_OnCharCreate(playerid, arguments[])
+public Cef_OnCharCreate(playerid, const arguments[])
 {
 	if (!IsPlayerConnected(playerid) || !CefUI_Active(playerid))
 	{

@@ -30,7 +30,7 @@ public Inv_ShowDocument(playerid, viewerid)
 	return 1;
 }
 
-Inv_CmdDocumento(playerid, params[])
+Inv_CmdDocumento(playerid, const params[])
 {
 	new pos = 0, tok[24], target = 0;
 	Util_NextToken(params, pos, tok, 24);

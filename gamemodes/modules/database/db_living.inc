@@ -9,7 +9,7 @@ new g_LdTokenSeq;
 new g_LdOpSeq;
 new g_LdBoardToken;
 
-DB_LivingMakeOpId(dest[], size, tag[], ref, charId)
+DB_LivingMakeOpId(dest[], size, const tag[], ref, charId)
 {
 	g_LdOpSeq++;
 	format(dest, size, "%.2s%d-%d-%08x", tag, ref, charId, gettime() << 8 | g_LdOpSeq & 255);
@@ -1041,7 +1041,7 @@ public DB_OnLdGlobalResult(kind, playerid, const name[], const opId[])
 	return 1;
 }
 
-DB_LdCfgAdd(query[], size, key[], value)
+DB_LdCfgAdd(query[], size, const key[], value)
 {
 	new part[64];
 	mysql_format(g_DB, part, 64, "%s('%e', %d)", query[0] ? "," : "", key, value);

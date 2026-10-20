@@ -426,7 +426,7 @@ bool:District_ParseOpt(const tok[], &value)
 	return value >= -1;
 }
 
-bool:District_CmdLdset(playerid, params[])
+bool:District_CmdLdset(playerid, const params[])
 {
 	if (Util_GetAdmin(playerid) < 3)
 	{

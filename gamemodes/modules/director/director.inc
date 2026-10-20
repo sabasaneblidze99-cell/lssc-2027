@@ -199,7 +199,7 @@ Director_ResetPlayer(playerid)
 	g_DirCompSec[playerid] = 0;
 }
 
-Director_SetOp(playerid, pend, tag[], ref)
+Director_SetOp(playerid, pend, const tag[], ref)
 {
 	gPlayer[playerid][pContractPendOp] = pend;
 	gPlayer[playerid][pContractOpId][0] = 0;

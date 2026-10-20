@@ -89,7 +89,7 @@ CefBridge_OnInitialize(playerid, success)
 #endif
 }
 
-CefBridge_Arg(arguments[], idx, def)
+CefBridge_Arg(const arguments[], idx, def)
 {
 	new pos = 0, tok[16];
 	for (new i = 0; i <= idx; i++)
@@ -194,7 +194,7 @@ public Cef_OnClose(playerid, const arguments[])
 	return 1;
 }
 
-public Cef_OnAccept(playerid, arguments[])
+public Cef_OnAccept(playerid, const arguments[])
 {
 	if (!CefBridge_Ok(playerid))
 	{
@@ -208,7 +208,7 @@ public Cef_OnAccept(playerid, arguments[])
 	return 1;
 }
 
-public Cef_OnAbandon(playerid, arguments[])
+public Cef_OnAbandon(playerid, const arguments[])
 {
 	if (!CefBridge_Ok(playerid))
 	{
@@ -237,7 +237,7 @@ public Cef_OnBoardRefresh(playerid, const arguments[])
 	return 1;
 }
 
-public Cef_OnDistrict(playerid, arguments[])
+public Cef_OnDistrict(playerid, const arguments[])
 {
 	if (!CefBridge_Ok(playerid) || !LD_IsReady())
 	{
@@ -263,7 +263,7 @@ public Cef_OnDistrict(playerid, arguments[])
 	return 1;
 }
 
-public Cef_OnProjectOpen(playerid, arguments[])
+public Cef_OnProjectOpen(playerid, const arguments[])
 {
 	if (!CefBridge_Ok(playerid) || !LD_IsReady())
 	{
@@ -278,7 +278,7 @@ public Cef_OnProjectOpen(playerid, arguments[])
 	return 1;
 }
 
-public Cef_OnContribute(playerid, arguments[])
+public Cef_OnContribute(playerid, const arguments[])
 {
 	if (!CefBridge_Ok(playerid) || !LD_IsReady())
 	{
@@ -327,7 +327,7 @@ public Cef_OnJobWaypoint(playerid, const arguments[])
 	return 1;
 }
 
-bool:CefBridge_HexDecode(hex[], dest[], size)
+bool:CefBridge_HexDecode(const hex[], dest[], size)
 {
 	dest[0] = 0;
 	new len = strlen(hex);
@@ -371,7 +371,7 @@ bool:CefBridge_AuthOk(playerid)
 	return IsPlayerConnected(playerid) && CefUI_Active(playerid) && !gPlayer[playerid][pLoggedIn];
 }
 
-public Cef_OnLogin(playerid, arguments[])
+public Cef_OnLogin(playerid, const arguments[])
 {
 	if (!CefBridge_AuthOk(playerid) || gPlayer[playerid][pAuthState] != 3)
 	{
@@ -395,7 +395,7 @@ public Cef_OnLogin(playerid, arguments[])
 	return 1;
 }
 
-public Cef_OnRegister(playerid, arguments[])
+public Cef_OnRegister(playerid, const arguments[])
 {
 	if (!CefBridge_AuthOk(playerid) || gPlayer[playerid][pAuthState] != 1)
 	{
@@ -422,7 +422,7 @@ public Cef_OnRegister(playerid, arguments[])
 	return 1;
 }
 
-public Cef_OnGender(playerid, arguments[])
+public Cef_OnGender(playerid, const arguments[])
 {
 	if (!IsPlayerConnected(playerid) || !CefUI_Active(playerid) || gPlayer[playerid][pAuthState] != 5)
 	{
@@ -432,7 +432,7 @@ public Cef_OnGender(playerid, arguments[])
 	return 1;
 }
 
-public Cef_OnSkin(playerid, arguments[])
+public Cef_OnSkin(playerid, const arguments[])
 {
 	if (!IsPlayerConnected(playerid) || !CefUI_Active(playerid) || gPlayer[playerid][pAuthState] != 6)
 	{
@@ -442,7 +442,7 @@ public Cef_OnSkin(playerid, arguments[])
 	return 1;
 }
 
-public Cef_OnStory(playerid, arguments[])
+public Cef_OnStory(playerid, const arguments[])
 {
 	if (!IsPlayerConnected(playerid) || !CefUI_Active(playerid) || gPlayer[playerid][pAuthState] != 15)
 	{

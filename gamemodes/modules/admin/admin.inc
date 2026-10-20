@@ -163,7 +163,7 @@ Admin_Log(staffid, targetAcc, const action[], const reason[])
 	Admin_LogRaw(Admin_ActorAccount(staffid), name, targetAcc, action, reason);
 }
 
-bool:Admin_ParseReason(params[], pos, reason[], size)
+bool:Admin_ParseReason(const params[], pos, reason[], size)
 {
 	while (params[pos] == 32)
 	{
@@ -664,7 +664,7 @@ Admin_ReplyReport(playerid, reportId, const text[])
 	return 1;
 }
 
-Admin_OnRconCommand(cmd[])
+Admin_OnRconCommand(const cmd[])
 {
 	new pos = 0, word[16], name[25], tlv[12], level = 0;
 	Util_NextToken(cmd, pos, word, 16);

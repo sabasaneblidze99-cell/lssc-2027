@@ -280,7 +280,7 @@ UI_LvFmtAgo(seconds, dest[], size)
 	}
 }
 
-UI_LvBar(value, maxValue, color[], dest[], size)
+UI_LvBar(value, maxValue, const color[], dest[], size)
 {
 	new filled = 0;
 	if (maxValue > 0)

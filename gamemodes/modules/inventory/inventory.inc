@@ -593,7 +593,7 @@ Inv_GroundRelease(playerid)
 	}
 }
 
-Inv_CmdGetta(playerid, params[])
+Inv_CmdGetta(playerid, const params[])
 {
 	new pos = 0, tok[24], itemId = 0, qty = 1;
 	Util_NextToken(params, pos, tok, 24);
@@ -919,7 +919,7 @@ bool:Inv_GiveRateOk(playerid)
 	return gPlayer[playerid][pInvGiveHourCount] < 20;
 }
 
-Inv_CmdDai(playerid, params[])
+Inv_CmdDai(playerid, const params[])
 {
 	new pos = 0, tok[24], target = 0, itemId = 0, qty = 1;
 	Util_NextToken(params, pos, tok, 24);

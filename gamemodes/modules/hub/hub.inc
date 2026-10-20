@@ -696,7 +696,7 @@ Hub_ShowServices(playerid)
 	Util_Send(playerid, -1, " /aiuto lavoro - la strada per il Job Center di Pershing Square  |  /aiuto noleggio - il noleggio mezzi");
 }
 
-Hub_CmdAiuto(playerid, params[])
+Hub_CmdAiuto(playerid, const params[])
 {
 	if (!Hub_PlayerOk(playerid))
 	{
@@ -892,7 +892,7 @@ Hub_DistrictOfProject(projectId)
 	return 0;
 }
 
-Hub_CmdContribuisci(playerid, params[])
+Hub_CmdContribuisci(playerid, const params[])
 {
 	if (!Hub_PlayerOk(playerid))
 	{

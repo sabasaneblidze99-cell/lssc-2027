@@ -84,7 +84,7 @@ Util_StripColorCodes(str[])
 	}
 }
 
-bool:Util_SanitizeText(src[], dest[], maxLen)
+bool:Util_SanitizeText(const src[], dest[], maxLen)
 {
 	new tmp[256];
 	strmid(tmp, src, 0, 255, 256);
@@ -142,7 +142,7 @@ bool:Util_ParseInt(const str[], &value)
 	return 1;
 }
 
-Util_NextToken(src[], &pos, dest[], size)
+Util_NextToken(const src[], &pos, dest[], size)
 {
 	while (src[pos] == 32)
 	{

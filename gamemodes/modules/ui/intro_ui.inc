@@ -65,7 +65,7 @@ UI_StoryOriginName(origin, dest[], size)
 	}
 }
 
-UI_StoryCompose(name[], origin, motive, dest[], size)
+UI_StoryCompose(const name[], origin, motive, dest[], size)
 {
 	if (origin < 0 || origin > 5)
 	{
@@ -172,7 +172,7 @@ UI_StoryBegin(playerid)
 	UI_ShowOriginSelect(playerid);
 }
 
-UI_StoryViewShow(playerid, name[], origin, motive, title[])
+UI_StoryViewShow(playerid, const name[], origin, motive, const title[])
 {
 	new text[768], body[1600];
 	UI_StoryCompose(name, origin, motive, text, 768);
@@ -180,7 +180,7 @@ UI_StoryViewShow(playerid, name[], origin, motive, title[])
 	Lang_ShowPlayerDialog(playerid, 9603, 0, title, body, "დახურვა", "");
 }
 
-UI_StoryShowOwn(playerid, name[], origin, motive)
+UI_StoryShowOwn(playerid, const name[], origin, motive)
 {
 	if (!UI_IntroValid(playerid))
 	{
@@ -189,7 +189,7 @@ UI_StoryShowOwn(playerid, name[], origin, motive)
 	UI_StoryViewShow(playerid, name, origin, motive, "შენი ისტორია");
 }
 
-UI_StoryShowOther(playerid, name[], origin, motive)
+UI_StoryShowOther(playerid, const name[], origin, motive)
 {
 	if (!UI_IntroValid(playerid))
 	{

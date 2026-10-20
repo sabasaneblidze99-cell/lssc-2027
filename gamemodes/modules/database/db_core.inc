@@ -29,7 +29,7 @@ DB_IniTrim(str[])
 	}
 }
 
-bool:DB_IniRead(path[], host[], user[], pass[], dbname[], &port, &mask, size)
+bool:DB_IniRead(const path[], host[], user[], pass[], dbname[], &port, &mask, size)
 {
 	new File:f = fopen(path, 0);
 	if (!f)

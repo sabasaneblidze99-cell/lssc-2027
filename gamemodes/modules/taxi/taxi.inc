@@ -983,7 +983,7 @@ public UI_OnTaxiRate(playerid, rideId, stars)
 	return 1;
 }
 
-Taxi_CmdTaxi(playerid, params[])
+Taxi_CmdTaxi(playerid, const params[])
 {
 	new pos = 0, tok[16];
 	Util_NextToken(params, pos, tok, 16);
@@ -1135,7 +1135,7 @@ Taxi_CmdChiamataxi(playerid, const params[])
 	return 1;
 }
 
-Taxi_CmdAccettacorsa(playerid, params[])
+Taxi_CmdAccettacorsa(playerid, const params[])
 {
 	new pos = 0, tok[16], id = 0;
 	Util_NextToken(params, pos, tok, 16);
@@ -1166,7 +1166,7 @@ Taxi_CmdAccettacorsa(playerid, params[])
 	return 1;
 }
 
-Taxi_CmdTassametro(playerid, params[])
+Taxi_CmdTassametro(playerid, const params[])
 {
 	new pos = 0, tok[16];
 	Util_NextToken(params, pos, tok, 16);

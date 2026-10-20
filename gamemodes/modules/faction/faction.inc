@@ -533,7 +533,7 @@ Fac_Uncuff(targetid)
 	}
 }
 
-Faction_CmdAmmanetta(playerid, params[], bool:cuff)
+Faction_CmdAmmanetta(playerid, const params[], bool:cuff)
 {
 	if (!Fac_NeedMember(playerid, 1) || !Fac_NeedDuty(playerid) || !Fac_NeedActive(playerid) || Fac_CmdBlocked(playerid))
 	{
@@ -595,7 +595,7 @@ Faction_CmdAmmanetta(playerid, params[], bool:cuff)
 	DB_FactionLogAdd(1, gPlayer[playerid][pCharId], gPlayer[target][pCharId], "uncuff", "");
 }
 
-Faction_CmdRadio(playerid, params[], bool:interdept)
+Faction_CmdRadio(playerid, const params[], bool:interdept)
 {
 	if (!Fac_NeedMember(playerid, 0) || !Fac_NeedDuty(playerid) || !Fac_NeedActive(playerid))
 	{
@@ -634,7 +634,7 @@ Faction_CmdRadio(playerid, params[], bool:interdept)
 	}
 }
 
-Faction_CmdMulta(playerid, params[])
+Faction_CmdMulta(playerid, const params[])
 {
 	if (!Fac_NeedMember(playerid, 1) || !Fac_NeedDuty(playerid) || !Fac_NeedActive(playerid) || Fac_CmdBlocked(playerid))
 	{
@@ -853,7 +853,7 @@ Fac_UseCharge(playerid)
 	UI_FactionHudUpdate(playerid, gPlayer[playerid][pFaction], gPlayer[playerid][pFactionRank], g_FcKit[playerid]);
 }
 
-Faction_CmdCura(playerid, params[])
+Faction_CmdCura(playerid, const params[])
 {
 	if (!Fac_NeedMember(playerid, 2) || !Fac_NeedDuty(playerid) || !Fac_NeedActive(playerid) || Fac_CmdBlocked(playerid))
 	{
@@ -937,7 +937,7 @@ Fac_ReviveCancel(medic, const reason[])
 	}
 }
 
-Faction_CmdRianima(playerid, params[])
+Faction_CmdRianima(playerid, const params[])
 {
 	if (!Fac_NeedMember(playerid, 2) || !Fac_NeedDuty(playerid) || !Fac_NeedActive(playerid) || Fac_CmdBlocked(playerid))
 	{
@@ -1108,7 +1108,7 @@ Fac_DoInvite(playerid, target)
 	SendClientMessage(playerid, 0x66DD66FF, "Invito inviato a %s.", tn);
 }
 
-Faction_CmdInvita(playerid, params[])
+Faction_CmdInvita(playerid, const params[])
 {
 	if (!Fac_NeedMember(playerid, 0) || Fac_CmdBlocked(playerid))
 	{
@@ -1247,7 +1247,7 @@ Fac_DoRankOp(playerid, action, targetChar, targetRank, const targetName[])
 	}
 }
 
-Faction_CmdRankOp(playerid, params[], action)
+Faction_CmdRankOp(playerid, const params[], action)
 {
 	if (!Fac_NeedMember(playerid, 0) || Fac_CmdBlocked(playerid))
 	{
@@ -1499,7 +1499,7 @@ Fac_RequestMembers(playerid, mode)
 	DB_FactionMembers(playerid, f);
 }
 
-Faction_CmdFazione(playerid, params[])
+Faction_CmdFazione(playerid, const params[])
 {
 	if (gPlayer[playerid][pFaction] < 1 || gPlayer[playerid][pFactionRank] < 1)
 	{
@@ -1614,7 +1614,7 @@ Fac_SetStart(staff, targetChar, targetAcc, const targetName[], faction, rank)
 	DB_FactionSet(staff, targetChar, faction, rank);
 }
 
-bool:Faction_CmdSetfazione(playerid, params[])
+bool:Faction_CmdSetfazione(playerid, const params[])
 {
 	if (Util_GetAdmin(playerid) < 3)
 	{

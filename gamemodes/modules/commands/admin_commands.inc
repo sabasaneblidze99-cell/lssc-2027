@@ -9,7 +9,7 @@ bool:Admin_ParseTarget(playerid, const token[], &targetid)
 	return 1;
 }
 
-public Cmd_goto(playerid, params[])
+public Cmd_goto(playerid, const params[])
 {
 	if (Util_GetAdmin(playerid) < 1)
 	{
@@ -47,7 +47,7 @@ public Cmd_goto(playerid, params[])
 	return 1;
 }
 
-public Cmd_setlevel(playerid, params[])
+public Cmd_setlevel(playerid, const params[])
 {
 	if (Util_GetAdmin(playerid) < 3)
 	{
@@ -91,7 +91,7 @@ public Cmd_setlevel(playerid, params[])
 	return 1;
 }
 
-public Cmd_setmoney(playerid, params[])
+public Cmd_setmoney(playerid, const params[])
 {
 	if (Util_GetAdmin(playerid) < 3)
 	{
@@ -160,7 +160,7 @@ public Cmd_ah(playerid, const params[])
 	return 1;
 }
 
-public Cmd_a(playerid, params[])
+public Cmd_a(playerid, const params[])
 {
 	if (Util_GetAdmin(playerid) < 1)
 	{
@@ -190,7 +190,7 @@ public Cmd_reports(playerid, const params[])
 	return 1;
 }
 
-public Cmd_rr(playerid, params[])
+public Cmd_rr(playerid, const params[])
 {
 	if (Util_GetAdmin(playerid) < 1)
 	{
@@ -221,7 +221,7 @@ public Cmd_rr(playerid, params[])
 	return 1;
 }
 
-public Cmd_gethere(playerid, params[])
+public Cmd_gethere(playerid, const params[])
 {
 	if (Util_GetAdmin(playerid) < 2)
 	{
@@ -251,7 +251,7 @@ public Cmd_gethere(playerid, params[])
 	return 1;
 }
 
-public Cmd_freeze(playerid, params[])
+public Cmd_freeze(playerid, const params[])
 {
 	if (Util_GetAdmin(playerid) < 2)
 	{
@@ -284,7 +284,7 @@ public Cmd_freeze(playerid, params[])
 	return 1;
 }
 
-public Cmd_unfreeze(playerid, params[])
+public Cmd_unfreeze(playerid, const params[])
 {
 	if (Util_GetAdmin(playerid) < 2)
 	{
@@ -312,7 +312,7 @@ public Cmd_unfreeze(playerid, params[])
 	return 1;
 }
 
-public Cmd_sethp(playerid, params[])
+public Cmd_sethp(playerid, const params[])
 {
 	if (Util_GetAdmin(playerid) < 2)
 	{
@@ -350,7 +350,7 @@ public Cmd_sethp(playerid, params[])
 	return 1;
 }
 
-public Cmd_kick(playerid, params[])
+public Cmd_kick(playerid, const params[])
 {
 	if (Util_GetAdmin(playerid) < 2)
 	{
@@ -377,7 +377,7 @@ public Cmd_kick(playerid, params[])
 	return 1;
 }
 
-public Cmd_mute(playerid, params[])
+public Cmd_mute(playerid, const params[])
 {
 	if (Util_GetAdmin(playerid) < 2)
 	{
@@ -422,7 +422,7 @@ public Cmd_mute(playerid, params[])
 	return 1;
 }
 
-public Cmd_unmute(playerid, params[])
+public Cmd_unmute(playerid, const params[])
 {
 	if (Util_GetAdmin(playerid) < 2)
 	{
@@ -455,7 +455,7 @@ public Cmd_unmute(playerid, params[])
 	return 1;
 }
 
-public Cmd_warn(playerid, params[])
+public Cmd_warn(playerid, const params[])
 {
 	if (Util_GetAdmin(playerid) < 2)
 	{
@@ -484,7 +484,7 @@ public Cmd_warn(playerid, params[])
 	return 1;
 }
 
-public Cmd_setadmin(playerid, params[])
+public Cmd_setadmin(playerid, const params[])
 {
 	if (Util_GetAdmin(playerid) < 3)
 	{
@@ -548,7 +548,7 @@ public Cmd_setadmin(playerid, params[])
 	return 1;
 }
 
-public Cmd_givemoney(playerid, params[])
+public Cmd_givemoney(playerid, const params[])
 {
 	if (Util_GetAdmin(playerid) < 3)
 	{
@@ -594,7 +594,7 @@ public Cmd_givemoney(playerid, params[])
 	return 1;
 }
 
-public Cmd_ban(playerid, params[])
+public Cmd_ban(playerid, const params[])
 {
 	if (Util_GetAdmin(playerid) < 3)
 	{
@@ -630,7 +630,7 @@ public Cmd_ban(playerid, params[])
 	return 1;
 }
 
-public Cmd_unban(playerid, params[])
+public Cmd_unban(playerid, const params[])
 {
 	if (Util_GetAdmin(playerid) < 3)
 	{

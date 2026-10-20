@@ -725,7 +725,7 @@ Job_CmdFine(playerid)
 	Job_Finish(playerid, 0);
 }
 
-Job_CmdLavoro(playerid, params[])
+Job_CmdLavoro(playerid, const params[])
 {
 	new pos = 0, sub[12];
 	Util_NextToken(params, pos, sub, 12);

@@ -450,7 +450,7 @@ bool:SpawnSel_OnDialogResponse(playerid, dialogid, listitem)
 	return true;
 }
 
-public Cef_OnSpawnPick(playerid, arguments[])
+public Cef_OnSpawnPick(playerid, const arguments[])
 {
 	if (!IsPlayerConnected(playerid) || gPlayer[playerid][pAuthState] != SPAWN_AUTH_STATE || g_SsCount[playerid] == 0)
 	{

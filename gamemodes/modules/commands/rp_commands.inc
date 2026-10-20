@@ -155,7 +155,7 @@ Cmd_Dispatch(playerid, const cmdtext[])
 	return CallLocalFunction(fn, "ds", playerid, cmdtext[pos]);
 }
 
-public Cmd_me(playerid, params[])
+public Cmd_me(playerid, const params[])
 {
 	new text[129];
 	if (!Util_SanitizeText(params, text, 128))
@@ -170,7 +170,7 @@ public Cmd_me(playerid, params[])
 	return 1;
 }
 
-public Cmd_do(playerid, params[])
+public Cmd_do(playerid, const params[])
 {
 	new text[129];
 	if (!Util_SanitizeText(params, text, 128))
@@ -185,7 +185,7 @@ public Cmd_do(playerid, params[])
 	return 1;
 }
 
-public Cmd_try(playerid, params[])
+public Cmd_try(playerid, const params[])
 {
 	new text[129];
 	if (!Util_SanitizeText(params, text, 128))
@@ -200,7 +200,7 @@ public Cmd_try(playerid, params[])
 	return 1;
 }
 
-public Cmd_b(playerid, params[])
+public Cmd_b(playerid, const params[])
 {
 	new text[129];
 	if (!Util_SanitizeText(params, text, 128))
@@ -215,7 +215,7 @@ public Cmd_b(playerid, params[])
 	return 1;
 }
 
-public Cmd_ame(playerid, params[])
+public Cmd_ame(playerid, const params[])
 {
 	new text[129];
 	if (!Util_SanitizeText(params, text, 128))
@@ -231,7 +231,7 @@ public Cmd_ame(playerid, params[])
 	return 1;
 }
 
-public Cmd_pay(playerid, params[])
+public Cmd_pay(playerid, const params[])
 {
 	new pos = 0, tid[12], tam[12], targetid = 0, amount = 0;
 	Util_NextToken(params, pos, tid, 12);
@@ -288,7 +288,7 @@ public Cmd_pay(playerid, params[])
 	return 1;
 }
 
-public Cmd_lavoro(playerid, params[])
+public Cmd_lavoro(playerid, const params[])
 {
 	Job_CmdLavoro(playerid, params);
 	LD_OnboardAction(playerid, 5);
@@ -307,13 +307,13 @@ public Cmd_fine(playerid, const params[])
 	return 1;
 }
 
-public Cmd_fazione(playerid, params[])
+public Cmd_fazione(playerid, const params[])
 {
 	Faction_CmdFazione(playerid, params);
 	return 1;
 }
 
-public Cmd_invita(playerid, params[])
+public Cmd_invita(playerid, const params[])
 {
 	Faction_CmdInvita(playerid, params);
 	return 1;
@@ -325,19 +325,19 @@ public Cmd_accetta(playerid, const params[])
 	return 1;
 }
 
-public Cmd_promuovi(playerid, params[])
+public Cmd_promuovi(playerid, const params[])
 {
 	Faction_CmdRankOp(playerid, params, 4);
 	return 1;
 }
 
-public Cmd_degrada(playerid, params[])
+public Cmd_degrada(playerid, const params[])
 {
 	Faction_CmdRankOp(playerid, params, 5);
 	return 1;
 }
 
-public Cmd_licenzia(playerid, params[])
+public Cmd_licenzia(playerid, const params[])
 {
 	Faction_CmdRankOp(playerid, params, 6);
 	return 1;
@@ -349,31 +349,31 @@ public Cmd_duty(playerid, const params[])
 	return 1;
 }
 
-public Cmd_r(playerid, params[])
+public Cmd_r(playerid, const params[])
 {
 	Faction_CmdRadio(playerid, params, 0);
 	return 1;
 }
 
-public Cmd_dep(playerid, params[])
+public Cmd_dep(playerid, const params[])
 {
 	Faction_CmdRadio(playerid, params, 1);
 	return 1;
 }
 
-public Cmd_ammanetta(playerid, params[])
+public Cmd_ammanetta(playerid, const params[])
 {
 	Faction_CmdAmmanetta(playerid, params, 1);
 	return 1;
 }
 
-public Cmd_smanetta(playerid, params[])
+public Cmd_smanetta(playerid, const params[])
 {
 	Faction_CmdAmmanetta(playerid, params, 0);
 	return 1;
 }
 
-public Cmd_multa(playerid, params[])
+public Cmd_multa(playerid, const params[])
 {
 	Faction_CmdMulta(playerid, params);
 	return 1;
@@ -385,19 +385,19 @@ public Cmd_multe(playerid, const params[])
 	return 1;
 }
 
-public Cmd_cura(playerid, params[])
+public Cmd_cura(playerid, const params[])
 {
 	Faction_CmdCura(playerid, params);
 	return 1;
 }
 
-public Cmd_rianima(playerid, params[])
+public Cmd_rianima(playerid, const params[])
 {
 	Faction_CmdRianima(playerid, params);
 	return 1;
 }
 
-public Cmd_setfazione(playerid, params[])
+public Cmd_setfazione(playerid, const params[])
 {
 	return Faction_CmdSetfazione(playerid, params) ? 1 : 0;
 }
@@ -490,7 +490,7 @@ public Cmd_help(playerid, const params[])
 	return 1;
 }
 
-public Cmd_report(playerid, params[])
+public Cmd_report(playerid, const params[])
 {
 	new text[97];
 	if (!Util_SanitizeText(params, text, 96))
@@ -527,13 +527,13 @@ public Cmd_report(playerid, params[])
 	return 1;
 }
 
-public Cmd_v(playerid, params[])
+public Cmd_v(playerid, const params[])
 {
 	Veh_CmdV(playerid, params);
 	return 1;
 }
 
-public Cmd_refuel(playerid, params[])
+public Cmd_refuel(playerid, const params[])
 {
 	Veh_CmdRefuel(playerid, params);
 	return 1;
@@ -545,7 +545,7 @@ public Cmd_concessionario(playerid, const params[])
 	return 1;
 }
 
-public Cmd_casa(playerid, params[])
+public Cmd_casa(playerid, const params[])
 {
 	House_CmdCasa(playerid, params);
 	return 1;
@@ -575,7 +575,7 @@ public Cmd_gas(playerid, const params[])
 	return 1;
 }
 
-public Cmd_frigo(playerid, params[])
+public Cmd_frigo(playerid, const params[])
 {
 	House_CmdFrigo(playerid, params);
 	return 1;
@@ -599,13 +599,13 @@ public Cmd_cucina(playerid, const params[])
 	return 1;
 }
 
-public Cmd_mangia(playerid, params[])
+public Cmd_mangia(playerid, const params[])
 {
 	House_CmdMangia(playerid, params);
 	return 1;
 }
 
-public Cmd_compra(playerid, params[])
+public Cmd_compra(playerid, const params[])
 {
 	House_CmdCompra(playerid, params);
 	return 1;
@@ -623,7 +623,7 @@ public Cmd_inv(playerid, const params[])
 	return 1;
 }
 
-public Cmd_usa(playerid, params[])
+public Cmd_usa(playerid, const params[])
 {
 	new pos = 0, tok[24];
 	Util_NextToken(params, pos, tok, 24);
@@ -637,13 +637,13 @@ public Cmd_usa(playerid, params[])
 	return 1;
 }
 
-public Cmd_dai(playerid, params[])
+public Cmd_dai(playerid, const params[])
 {
 	Inv_CmdDai(playerid, params);
 	return 1;
 }
 
-public Cmd_getta(playerid, params[])
+public Cmd_getta(playerid, const params[])
 {
 	Inv_CmdGetta(playerid, params);
 	return 1;
@@ -655,7 +655,7 @@ public Cmd_prendi(playerid, const params[])
 	return 1;
 }
 
-public Cmd_documento(playerid, params[])
+public Cmd_documento(playerid, const params[])
 {
 	Inv_CmdDocumento(playerid, params);
 	return 1;
@@ -667,13 +667,13 @@ public Cmd_salta(playerid, const params[])
 	return 1;
 }
 
-public Cmd_storia(playerid, params[])
+public Cmd_storia(playerid, const params[])
 {
 	Intro_CmdStoria(playerid, params);
 	return 1;
 }
 
-public Cmd_mostrastoria(playerid, params[])
+public Cmd_mostrastoria(playerid, const params[])
 {
 	Intro_CmdMostra(playerid, params);
 	return 1;
@@ -709,7 +709,7 @@ public Cmd_preleva(playerid, const params[])
 	return 1;
 }
 
-public Cmd_bonifico(playerid, params[])
+public Cmd_bonifico(playerid, const params[])
 {
 	Bank_CmdBonifico(playerid, params);
 	return 1;
@@ -756,7 +756,7 @@ public Cmd_riconsegna(playerid, const params[])
 	return 1;
 }
 
-public Cmd_taxi(playerid, params[])
+public Cmd_taxi(playerid, const params[])
 {
 	if (Cmd_LivingGate(playerid))
 	{
@@ -774,7 +774,7 @@ public Cmd_chiamataxi(playerid, const params[])
 	return 1;
 }
 
-public Cmd_accettacorsa(playerid, params[])
+public Cmd_accettacorsa(playerid, const params[])
 {
 	if (Cmd_LivingGate(playerid))
 	{
@@ -783,7 +783,7 @@ public Cmd_accettacorsa(playerid, params[])
 	return 1;
 }
 
-public Cmd_tassametro(playerid, params[])
+public Cmd_tassametro(playerid, const params[])
 {
 	if (Cmd_LivingGate(playerid))
 	{
@@ -792,7 +792,7 @@ public Cmd_tassametro(playerid, params[])
 	return 1;
 }
 
-public Cmd_contratti(playerid, params[])
+public Cmd_contratti(playerid, const params[])
 {
 	if (Cmd_LivingGate(playerid))
 	{
@@ -801,7 +801,7 @@ public Cmd_contratti(playerid, params[])
 	return 1;
 }
 
-public Cmd_contratto(playerid, params[])
+public Cmd_contratto(playerid, const params[])
 {
 	if (Cmd_LivingGate(playerid))
 	{
@@ -821,7 +821,7 @@ public Cmd_reputazione(playerid, const params[])
 	return 1;
 }
 
-public Cmd_quartiere(playerid, params[])
+public Cmd_quartiere(playerid, const params[])
 {
 	if (!Cmd_LivingGate(playerid))
 	{
@@ -832,7 +832,7 @@ public Cmd_quartiere(playerid, params[])
 	return 1;
 }
 
-public Cmd_contribuisci(playerid, params[])
+public Cmd_contribuisci(playerid, const params[])
 {
 	if (Cmd_LivingGate(playerid))
 	{
@@ -841,7 +841,7 @@ public Cmd_contribuisci(playerid, params[])
 	return 1;
 }
 
-public Cmd_email(playerid, params[])
+public Cmd_email(playerid, const params[])
 {
 	Account_CmdEmail(playerid, params);
 	return 1;
@@ -853,7 +853,7 @@ public Cmd_telefono(playerid, const params[])
 	return 1;
 }
 
-public Cmd_aiuto(playerid, params[])
+public Cmd_aiuto(playerid, const params[])
 {
 	if (Cmd_LivingGate(playerid))
 	{
@@ -862,7 +862,7 @@ public Cmd_aiuto(playerid, params[])
 	return 1;
 }
 
-public Cmd_ldset(playerid, params[])
+public Cmd_ldset(playerid, const params[])
 {
 	return District_CmdLdset(playerid, params) ? 1 : 0;
 }

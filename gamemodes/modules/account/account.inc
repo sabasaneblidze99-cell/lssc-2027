@@ -397,7 +397,7 @@ public Account_OnDBEmailSet(playerid, result)
 	return 1;
 }
 
-Account_CmdEmail(playerid, params[])
+Account_CmdEmail(playerid, const params[])
 {
 	new pos = 0, email[255];
 	Util_NextToken(params, pos, email, 255);

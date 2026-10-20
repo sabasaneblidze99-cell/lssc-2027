@@ -421,7 +421,7 @@ public Cef_OnQuickClose(playerid, const arguments[])
 
 // pagina -> server: messaggio dalla chat CEF (UTF-8 in esadecimale). Comandi '/' come OnPlayerCommandText,
 // testo normale come OnPlayerText (stesse verifiche: login, mute).
-public Cef_OnChatSend(playerid, arguments[])
+public Cef_OnChatSend(playerid, const arguments[])
 {
 	if (!IsPlayerConnected(playerid) || !CefUI_Active(playerid))
 	{

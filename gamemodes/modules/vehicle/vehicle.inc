@@ -1231,7 +1231,7 @@ Veh_DoRecover(playerid, slot)
 	Log_Write("VEH", msg);
 }
 
-Veh_CmdV(playerid, params[])
+Veh_CmdV(playerid, const params[])
 {
 	if (!Veh_PlayerReady(playerid))
 	{
@@ -1358,7 +1358,7 @@ Veh_CmdV(playerid, params[])
 	Util_Send(playerid, 0x99CCFFFF, "Uso: /v lock | engine | lights | park | find [slot] | list | sell [slot] | recover [slot]");
 }
 
-Veh_CmdRefuel(playerid, params[])
+Veh_CmdRefuel(playerid, const params[])
 {
 	if (!Veh_PlayerReady(playerid))
 	{

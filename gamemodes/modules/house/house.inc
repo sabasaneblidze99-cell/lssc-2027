@@ -1301,7 +1301,7 @@ public House_InvHungerAdd(playerid, amount)
 	return g_HPl[playerid][hpHunger];
 }
 
-House_CmdFrigo(playerid, params[])
+House_CmdFrigo(playerid, const params[])
 {
 	if (!House_CmdGuard(playerid, 0))
 	{
@@ -1347,7 +1347,7 @@ House_CmdFrigo(playerid, params[])
 	}
 }
 
-House_CmdMangia(playerid, params[])
+House_CmdMangia(playerid, const params[])
 {
 	if (!House_CmdGuard(playerid, 0))
 	{
@@ -1377,7 +1377,7 @@ House_CmdCucina(playerid)
 	House_StartCook(playerid);
 }
 
-House_CmdCompra(playerid, params[])
+House_CmdCompra(playerid, const params[])
 {
 	if (!House_CmdGuard(playerid, 0))
 	{
@@ -1950,7 +1950,7 @@ House_Info(playerid, idx)
 	}
 }
 
-House_CmdCasa(playerid, params[])
+House_CmdCasa(playerid, const params[])
 {
 	if (!House_CmdGuard(playerid, 0))
 	{

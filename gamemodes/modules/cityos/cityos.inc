@@ -160,7 +160,7 @@ public CityOS_OnDistrictEvent(type, districtId, charId, value, const opId[])
 	return 1;
 }
 
-CityOS_CmdContratti(playerid, params[])
+CityOS_CmdContratti(playerid, const params[])
 {
 	if (!CityOS_Playing(playerid))
 	{
@@ -185,7 +185,7 @@ CityOS_CmdContratti(playerid, params[])
 	return 1;
 }
 
-CityOS_CmdContratto(playerid, params[])
+CityOS_CmdContratto(playerid, const params[])
 {
 	if (!CityOS_Playing(playerid))
 	{
@@ -246,7 +246,7 @@ CityOS_CmdReputazione(playerid, const params[])
 	return 1;
 }
 
-CityOS_CmdQuartiere(playerid, params[])
+CityOS_CmdQuartiere(playerid, const params[])
 {
 	if (!CityOS_Playing(playerid))
 	{

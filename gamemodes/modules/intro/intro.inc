@@ -620,7 +620,7 @@ Intro_CmdSalta(playerid)
 	}
 }
 
-Intro_CmdStoria(playerid, params[])
+Intro_CmdStoria(playerid, const params[])
 {
 	new pos = 0, tok[16], name[25], target = INVALID_PLAYER_ID;
 	Util_NextToken(params, pos, tok, 16);
@@ -656,7 +656,7 @@ Intro_CmdStoria(playerid, params[])
 	}
 }
 
-Intro_CmdMostra(playerid, params[])
+Intro_CmdMostra(playerid, const params[])
 {
 	new pos = 0, tok[16], target = INVALID_PLAYER_ID;
 	Util_NextToken(params, pos, tok, 16);

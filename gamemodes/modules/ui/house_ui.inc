@@ -89,7 +89,7 @@ UI_HsUtilText(ustate, out[], size)
 	}
 }
 
-UI_HsTitle(playerid, prefix[], out[], size)
+UI_HsTitle(playerid, const prefix[], out[], size)
 {
 	format(out, size, "%s - Casa %d", prefix, g_UiHsHouse[playerid]);
 }
@@ -161,7 +161,7 @@ UI_HsBillsTotal(playerid)
 	return total;
 }
 
-UI_HsMenuRow(playerid, &n, act, line[], body[], size)
+UI_HsMenuRow(playerid, &n, act, const line[], body[], size)
 {
 	if (n >= 10)
 	{

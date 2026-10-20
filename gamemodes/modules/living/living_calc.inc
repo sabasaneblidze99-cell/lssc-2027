@@ -343,7 +343,7 @@ LD_ParseDistrict(const name[])
 	return 0;
 }
 
-LD_CopyStr(dest[], size, src[])
+LD_CopyStr(dest[], size, const src[])
 {
 	if (size <= 0)
 	{
