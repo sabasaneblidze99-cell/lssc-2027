@@ -19,3 +19,6 @@ python3 "$ROOT/scripts/flatten.py" lsrp.pwn lsrp_completo.pwn && sed -i '1i // l
   -i"$ROOT/toolchain/include/bcrypt" \
   -i"$ROOT/toolchain/include/sampvoice" \
   -i. -o"$ROOT/gamemodes/$OUT"
+# filterscript della voce (separato: il gamemode non dipende da SampVoice)
+mkdir -p "$ROOT/filterscripts"
+( cd "$ROOT/filterscripts" && "$PAWNCC" lsrp_voce.pwn -d3 -i"$ROOT/toolchain/include/omp-stdlib" -i"$ROOT/toolchain/include/sampvoice" -o"$ROOT/filterscripts/lsrp_voce.amx" )

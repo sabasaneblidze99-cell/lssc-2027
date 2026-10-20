@@ -389,4 +389,4 @@ forward Cef_OnCharBack(playerid, arguments[]);
 forward SpawnSel_OnInfo(playerid, charId, token);
 forward SpawnSel_OnTimeout(playerid, token);
 forward Cef_OnSpawnPick(playerid, arguments[]);
-forward Voice_OnTick();
+forward LSRP_VoiceInfo(playerid);

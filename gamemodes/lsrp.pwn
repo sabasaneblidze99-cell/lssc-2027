@@ -1,12 +1,9 @@
 // LSSC 2027 - Los Santos Street Crime's - gamemode (sorgente ricostruito dalla v8)
-// UN SOLO gamemode: di default CEF + chat vocale (SampVoice per open.mp), anche da Qawno.
-// Richiede sul server: componente CEF e componente SampVoice "-omp" (cartella components/).
-// Solo per casi particolari: LSRP_NO_CEF=1 (senza CEF), LSRP_NO_VOICE=1 (senza voce).
+// UN SOLO gamemode (anche da Qawno): CEF incluso. La chat vocale e' nel filterscript lsrp_voce
+// (filterscripts/lsrp_voce.pwn): se SampVoice manca, il gamemode parte lo stesso.
+// Solo per il server di prova: LSRP_NO_CEF=1.
 #if !defined LSRP_NO_CEF && !defined LSRP_CEF
 	#define LSRP_CEF
-#endif
-#if !defined LSRP_NO_VOICE && !defined LSRP_VOICE
-	#define LSRP_VOICE
 #endif
 #include <open.mp>
 #include <a_mysql>

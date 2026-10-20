@@ -65,8 +65,8 @@ disattivate perche' il gamemode non ha (ancora) quei sistemi.
 ## 6. Voce (SampVoice)
 
 - Versione: **SampVoice per open.mp** (https://github.com/AmyrAhmady/sampvoice/releases, file *x.x.x-omp*), MIT. Il plugin originale di CyberMor viene rifiutato da open.mp ("Skipping legacy plugin").
-- Server: plugin `control` + servizio `voice` (vedi README della release). Il gamemode con voce si compila con `LSRP_VOICE=1`
-  (`scripts/build.sh --voice` -> `lsrp_voce.amx`). Senza il plugin caricato **non** usare `lsrp_voce.amx`.
+- Server: componente sampvoice in `components/` + filterscript `filterscripts/lsrp_voce` (side_scripts). Il gamemode non dipende
+  da SampVoice: senza componente si rifiuta solo il filterscript e il gioco parte senza voce (provato).
 - Client: SampVoice supporta **SA-MP 0.3.7 R1 e R3**. Con altre versioni del client la voce non funziona (l'HUD mostra
   "ხმოვანი ჩატი არ არის").
 - B = voce locale (25 m), Z = radio di fazione (solo in servizio).
