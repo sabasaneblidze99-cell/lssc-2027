@@ -1,0 +1,3 @@
+Metti qui lo sfondo della schermata di accesso:
+  login.jpg   (consigliato 1920x1080, una tua ripresa di Idlewood al tramonto)
+Se manca si vede il tramonto disegnato.

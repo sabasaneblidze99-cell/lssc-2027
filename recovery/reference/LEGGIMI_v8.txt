@@ -1,0 +1,56 @@
+LOS SANTOS STREET CRIME'S 2027 - pacchetto completo v8 (georgiano)
+===================================================================
+
+Novita' rispetto alla v7
+------------------------
+- LINGUA GEORGIANA: le pagine CEF sono in georgiano vero (ქართული), chat / dialog / scritte a schermo in
+  georgiano latino automatico (es. "gamarjoba"). Gia' tradotti: accesso, registrazione, creazione del
+  personaggio, storia, intro del bus. Il resto del gioco e' ancora in italiano: si traduce modulo per modulo.
+- ACCOUNT: email FACOLTATIVA in registrazione (o dopo, con /email). Non viene mai considerata "verificata".
+- SICUREZZA: dopo 9 password sbagliate di fila (anche in piu' accessi) l'account si blocca per 10 minuti.
+- DATABASE: preparato per i prossimi passi (nome/cognome del personaggio, data di nascita, numero di telefono).
+- Nel CEF la password va scritta con la tastiera LATINA (le lettere georgiane non funzionano nei dialog SA-MP).
+
+Cosa ti serve gia' pronto (lo hai): MySQL + phpMyAdmin, cef.dll compilato, cartella C:\lsrp-build\samp-cef\redist,
+plugin mysql.dll e samp_bcrypt.dll (+ libmariadb.dll) dal vecchio server, GTA pulito con SA-MP 0.3.7-R3 e ASI loader.
+
+
+1) DATABASE - scegli UNA strada
+-------------------------------
+A) INSTALLAZIONE NUOVA (si riparte da zero, i vecchi account spariscono):
+   - in phpMyAdmin cancella (o rinomina) il vecchio database "lsrp";
+   - dalla pagina iniziale (NON dentro un database): Importa -> 1_DATABASE\A_installazione_nuova\installa_database.sql -> Esegui.
+B) AGGIORNAMENTO (tieni account e personaggi della v6/v7):
+   - in phpMyAdmin clicca il database "lsrp" a sinistra, poi Importa -> 1_DATABASE\B_aggiornamento_da_v6_v7\aggiorna_012.sql -> Esegui.
+   - Va importato UNA volta sola (la seconda darebbe "Duplicate column": innocuo, ma non serve).
+
+2) SERVER
+---------
+Nella cartella del tuo server open.mp:
+- copia 2_SERVER\gamemodes\lsrp.amx (sostituisci);
+- se e' un server NUOVO: copia anche config.json, mysql.ini e le cartelle (leggi i .txt in components e plugins).
+All'avvio nel log devono comparire:
+   [DB] connesso
+   Successfully loaded component CEF
+   [DISTRICT] boot living completato: 3 quartieri
+Senza cef.dll usa lsrp_senza_cef.amx (rinominalo lsrp.amx).
+
+3) GTA
+------
+Doppio clic su 3_GTA\installa_cef_gta.bat, trascina la cartella del GTA pulito, Invio. Alla fine: tutti OK.
+(Musica tua: <GTA>\cef\assets\audio\login.ogg - Sfondo tuo: <GTA>\cef\assets\img\login.jpg)
+
+4) GIOCA
+--------
+- Entra con un nome nuovo nel formato Nome_Cognome latino (es. Giorgi_Beridze).
+- Registrazione (email facoltativa) -> uomo/donna -> aspetto -> storia -> intro del bus -> Los Santos.
+- Primi passi: /aiuto, /telefono, /contratti alla Casa del Quartiere (Idlewood), /lavoro al Job Center.
+- Admin: dalla console del server  setadmin Giorgi_Beridze 3
+
+Cosa e' verificato e cosa no
+----------------------------
+Verificato da me: compilazione senza errori (con e senza CEF); 6 gruppi di test unitari (anche la traslitterazione
+georgiana) e 35 test del database superati; aggiornamento 012 e installazione nuova provati su un MySQL 8 vero;
+test completo con i bot (giocatori senza CEF): 502 controlli su 502 superati.
+NON verificato da me: le pagine CEF dentro GTA (le provi tu), la correttezza dei testi georgiani (bozza: segnalami
+cosa suona strano).

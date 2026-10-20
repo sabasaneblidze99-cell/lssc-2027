@@ -1,0 +1,6 @@
+Metti qui la musica della schermata di accesso, con uno di questi nomi:
+  login.ogg   (consigliato)
+  login.webm
+  login.mp3
+Parte da sola in loop con dissolvenza; se manca si sente un tappeto sonoro generato.
+Usa solo musica tua o libera da diritti.

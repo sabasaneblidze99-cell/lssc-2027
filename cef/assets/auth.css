@@ -1,0 +1,176 @@
+/* auth.css - schermata di accesso, registrazione, creazione personaggio e storia (vista "auth").
+   E' l'unica vista a tutto schermo: animazioni piu' ricche sono accettabili perche' il giocatore e' fermo in un menu.
+   Solo transform/opacity animati; nessuna immagine di terzi (sfondo in CSS/SVG, sostituibile con una ripresa propria). */
+
+#view-auth { position: fixed; inset: 0; z-index: 50; overflow: hidden; background: #0b0d14; color: var(--text); }
+#view-auth.leaving { animation: au-out .9s ease forwards; }
+@keyframes au-out { to { opacity: 0; } }
+
+/* ------------------------------------------------------------ ambiente */
+.au-sky { position: absolute; inset: 0;
+  background:
+    radial-gradient(60rem 30rem at 72% 78%, rgba(255,120,60,.55), transparent 60%),
+    linear-gradient(180deg, #121830 0%, #2b2347 36%, #6b3150 60%, #c45a3c 81%, #f0a04b 100%); }
+.au-photo { position: absolute; inset: 0; background-size: cover; background-position: center; opacity: 0; transition: opacity 1.2s; }
+.au-photo.on { opacity: .55; }
+.au-sun { position: absolute; left: 60%; top: 55%; width: 24rem; height: 24rem; border-radius: 50%;
+  background: radial-gradient(circle, #ffd98a 0%, #ffb14e 42%, rgba(255,140,60,0) 70%);
+  animation: au-breathe 9s ease-in-out infinite alternate; }
+@keyframes au-breathe { from { transform: scale(1); opacity: .85; } to { transform: scale(1.08); opacity: 1; } }
+.au-clouds { position: absolute; left: -20%; top: 18%; width: 140%; height: 22%; opacity: .35;
+  background:
+    radial-gradient(18rem 2.2rem at 20% 40%, rgba(255,200,220,.5), transparent 70%),
+    radial-gradient(26rem 2.6rem at 55% 70%, rgba(255,170,190,.4), transparent 70%),
+    radial-gradient(20rem 2rem at 85% 30%, rgba(255,210,200,.45), transparent 70%);
+  animation: au-drift 60s linear infinite alternate; }
+@keyframes au-drift { to { transform: translateX(8%); } }
+.au-palms { position: absolute; inset: 0; width: 100%; height: 100%; }
+.au-palm { transform-box: fill-box; transform-origin: 50% 100%; animation: au-sway 7s ease-in-out infinite alternate; }
+.au-palm.p2 { animation-duration: 9s; animation-delay: -3s; }
+.au-palm.p3 { animation-duration: 8s; animation-delay: -5s; }
+@keyframes au-sway { from { transform: rotate(-1.2deg); } to { transform: rotate(1.4deg); } }
+.au-city { position: absolute; left: 0; right: 0; bottom: 0; height: 42vh; background: #0c0e16;
+  clip-path: polygon(0 70%,3% 62%,5% 66%,7% 48%,9% 50%,10% 30%,12% 32%,13% 52%,16% 56%,18% 40%,21% 42%,22% 22%,23% 20%,24% 22%,25% 44%,28% 46%,30% 58%,33% 54%,35% 36%,38% 38%,39% 60%,43% 62%,45% 50%,48% 52%,50% 64%,54% 60%,56% 44%,58% 46%,60% 66%,64% 70%,67% 56%,70% 58%,72% 40%,73% 18%,74% 16%,75% 18%,76% 42%,79% 44%,81% 62%,85% 64%,87% 50%,90% 52%,92% 68%,96% 66%,100% 72%,100% 100%,0 100%); }
+.au-windows { position: absolute; left: 0; right: 0; bottom: 0; height: 30vh; }
+.au-windows i { position: absolute; width: .35rem; height: .35rem; background: #ffd27a; border-radius: 1px; opacity: 0;
+  animation: au-lamp 6s ease-in-out infinite; }
+@keyframes au-lamp { 0%, 100% { opacity: .15; } 50% { opacity: .9; } }
+.au-road { position: absolute; left: 0; right: 0; bottom: 6vh; height: .5rem; overflow: hidden; }
+.au-road b { position: absolute; top: 0; width: 7rem; height: .22rem; border-radius: 1rem;
+  background: linear-gradient(90deg, transparent, #ffe2a6); animation: au-car 7s linear infinite; }
+.au-road b.r { top: .28rem; background: linear-gradient(270deg, transparent, #ff5a4a); animation-name: au-car-back; animation-duration: 9s; }
+@keyframes au-car { from { transform: translateX(-10rem); } to { transform: translateX(130rem); } }
+@keyframes au-car-back { from { transform: translateX(130rem); } to { transform: translateX(-10rem); } }
+.au-vignette { position: absolute; inset: 0; background: radial-gradient(ellipse at center, transparent 40%, rgba(5,6,10,.72) 100%); }
+
+/* ------------------------------------------------------------ marchio */
+.au-brand { position: absolute; left: 6rem; top: 5.5rem; }
+.au-brand .k { font-family: var(--cond); font-weight: 600; letter-spacing: .22em; font-size: 1rem; color: var(--accent); }
+.au-brand .t { font-family: var(--cond); font-weight: 700; font-size: 4.6rem; line-height: .9; letter-spacing: .02em; margin-top: .4rem; }
+.au-brand .t span { display: block; font-size: 1.55rem; color: var(--muted); letter-spacing: .04em; margin-top: .6rem; max-width: 22rem; white-space: normal; line-height: 1.25; }
+.au-brand > * { opacity: 0; transform: translateY(1.2rem); animation: au-up .8s cubic-bezier(.2,.8,.2,1) forwards; }
+.au-brand .t { animation-delay: .15s; }
+@keyframes au-up { to { opacity: 1; transform: none; } }
+
+/* ------------------------------------------------------------ pannelli inclinati */
+.au-stage { position: absolute; left: 57%; top: 50%; transform: translate(-50%, -50%); width: 78rem; height: 40rem; }
+.au-slab { position: absolute; top: 0; height: 100%; border-radius: 1rem; border: 1px solid rgba(255,255,255,.22);
+  background: linear-gradient(160deg, rgba(255,255,255,.16), rgba(255,255,255,.04));
+  backdrop-filter: blur(14px); box-shadow: 0 2rem 5rem rgba(0,0,0,.45);
+  opacity: 0; animation: au-slab 1s cubic-bezier(.2,.8,.2,1) forwards; }
+.au-slab.s1 { left: 0; width: 33rem; --r: -3deg; --o: 1; }
+.au-slab.s2 { left: 34.5rem; width: 11rem; --r: 2deg; --o: .75; animation-delay: .12s; top: 1.4rem; }
+.au-slab.s3 { left: 47rem; width: 11rem; --r: -2deg; --o: .55; animation-delay: .24s; top: -.8rem; }
+.au-slab.s4 { left: 59.5rem; width: 11rem; --r: 3deg; --o: .4; animation-delay: .36s; top: 1rem; }
+@keyframes au-slab {
+  from { opacity: 0; transform: translateY(6rem) skewY(var(--r)) scale(.96); }
+  to   { opacity: var(--o); transform: skewY(var(--r)); }
+}
+.au-wide .au-slab.s1 { width: 70.5rem; }
+.au-wide .au-slab.s2, .au-wide .au-slab.s3, .au-wide .au-slab.s4 { opacity: 0 !important; animation: none; }
+.au-slab.s1 { transition: width .6s cubic-bezier(.2,.8,.2,1); }
+
+/* ------------------------------------------------------------ contenuto del passo */
+.au-pane { position: absolute; left: 2.6rem; top: 4.4rem; width: 28rem; }
+.au-wide .au-pane { width: 65rem; }
+.au-pane > * { opacity: 0; transform: translateY(.8rem); animation: au-up .55s cubic-bezier(.2,.8,.2,1) forwards; }
+.au-pane > *:nth-child(2) { animation-delay: .05s; } .au-pane > *:nth-child(3) { animation-delay: .1s; }
+.au-pane > *:nth-child(4) { animation-delay: .15s; } .au-pane > *:nth-child(5) { animation-delay: .2s; }
+.au-pane > *:nth-child(6) { animation-delay: .25s; } .au-pane > *:nth-child(7) { animation-delay: .3s; }
+.au-pane > *:nth-child(n+8) { animation-delay: .35s; }
+.au-h1 { font-family: var(--cond); font-weight: 700; font-size: 2.6rem; letter-spacing: .06em; white-space: nowrap; font-stretch: 85%; }
+.au-sub { color: var(--muted); font-size: 1.05rem; margin: .4rem 0 1.4rem; }
+.au-lbl { font-family: var(--cond); font-weight: 600; letter-spacing: .08em; font-size: .85rem; color: var(--faint); margin-bottom: .45rem; }
+.au-field { position: relative; margin-bottom: 1.4rem; }
+.au-input { width: 100%; height: 3.6rem; border-radius: .55rem; padding: 0 5rem 0 1.1rem; font: inherit; font-size: 1.15rem; color: var(--text);
+  background: rgba(8,10,16,.55); border: 1px solid rgba(255,255,255,.18); outline: none; user-select: text;
+  transition: border-color .2s, box-shadow .2s; }
+.au-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(242,193,78,.18); }
+.au-input[readonly] { color: var(--muted); }
+.au-tag { position: absolute; right: 1.1rem; top: 50%; transform: translateY(-50%); color: var(--faint); font-size: .95rem; }
+button.au-tag:hover { color: var(--text); }
+.au-meter { display: flex; gap: .35rem; margin: -.8rem 0 1.4rem; }
+.au-meter b { flex: 1; height: .3rem; border-radius: 1rem; background: rgba(255,255,255,.15); transition: background .25s; }
+.au-meter b.on { background: #8fd694; }
+.au-check { display: flex; gap: .7rem; align-items: flex-start; font-size: .95rem; color: var(--muted); margin: -.2rem 0 1.4rem; cursor: pointer; }
+.au-check i { flex: 0 0 1.3rem; height: 1.3rem; border-radius: .3rem; border: 1px solid rgba(255,255,255,.35);
+  display: flex; align-items: center; justify-content: center; font-style: normal; font-weight: 700; font-size: .9rem; color: #1d1405; transition: background .15s; }
+.au-check.on i { background: var(--accent); border-color: var(--accent); }
+
+.au-btn { position: relative; z-index: 0; overflow: hidden; width: 100%; height: 3.8rem; border-radius: .6rem; display: flex; align-items: center; justify-content: center;
+  font-family: var(--cond); font-weight: 700; letter-spacing: .1em; font-size: 1.25rem; color: #1d1405; white-space: nowrap;
+  background: linear-gradient(90deg, #ff6a3d, var(--accent)); box-shadow: 0 .8rem 2.4rem rgba(255,120,60,.35);
+  transition: transform .12s, box-shadow .2s, filter .2s; }
+/* righe diagonali animate in un livello a parte: l'animazione di entrata del pulsante non viene sostituita al passaggio del mouse */
+.au-btn::before { content: ""; position: absolute; z-index: -1; left: 0; top: 0; bottom: 0; width: calc(100% + 2.6rem);
+  background: repeating-linear-gradient(115deg, rgba(255,255,255,.14) 0 1.2rem, transparent 1.2rem 2.4rem); }
+.au-btn:hover { box-shadow: 0 1rem 3rem rgba(255,140,60,.55); filter: brightness(1.06); }
+.au-btn:hover::before { animation: au-stripes 1.2s linear infinite; }
+@keyframes au-stripes { to { transform: translateX(-2.6rem); } }
+.au-btn:active { transform: scale(.98); }
+.au-btn[disabled] { filter: grayscale(.6) brightness(.8); cursor: default; }
+.au-btn[disabled]::before { animation: none; }
+.au-btn.ghost { background: rgba(255,255,255,.08); color: var(--text); box-shadow: none; border: 1px solid rgba(255,255,255,.2); }
+.au-btn.ghost::before { display: none; }
+.au-row { display: flex; gap: 1rem; } .au-row > * { flex: 1; }
+.au-links { display: flex; justify-content: space-between; margin-top: 1.1rem; font-size: .95rem; color: var(--muted); }
+.au-links button { text-decoration: underline; text-underline-offset: .25rem; color: var(--muted); }
+.au-links button:hover { color: var(--text); }
+.au-err { min-height: 1.4rem; color: #ff8a7a; font-size: .98rem; margin: -.6rem 0 .8rem; }
+.au-note { color: var(--muted); font-size: .95rem; margin-top: 1rem; }
+.shake { animation: au-shake .4s !important; opacity: 1 !important; transform: none; }
+@keyframes au-shake { 20% { transform: translateX(-.6rem); } 40% { transform: translateX(.5rem); } 60% { transform: translateX(-.35rem); } 80% { transform: translateX(.2rem); } }
+
+/* carte (genere, aspetto, storia) */
+.au-cards { display: grid; gap: 1rem; margin-bottom: 1.4rem; }
+.au-cards.c2 { grid-template-columns: repeat(2, 1fr); }
+.au-cards.c3 { grid-template-columns: repeat(3, 1fr); }
+.au-cards.c4 { grid-template-columns: repeat(4, 1fr); }
+.au-card { text-align: left; border-radius: .8rem; padding: 1.1rem 1.2rem; min-height: 6rem;
+  background: rgba(8,10,16,.5); border: 1px solid rgba(255,255,255,.16);
+  transition: transform .18s cubic-bezier(.2,.8,.2,1), border-color .18s, background .18s, box-shadow .18s; }
+.au-card:hover { transform: translateY(-.25rem); border-color: rgba(255,255,255,.4); background: rgba(20,22,32,.6); }
+.au-card.sel { border-color: var(--accent); background: rgba(242,193,78,.12); box-shadow: 0 0 0 3px rgba(242,193,78,.18), 0 1rem 2.4rem rgba(0,0,0,.35); }
+.au-card h3 { font-family: var(--cond); font-weight: 700; font-size: 1.45rem; letter-spacing: .06em; }
+.au-card p { color: var(--muted); font-size: .95rem; margin-top: .35rem; line-height: 1.35; }
+.au-card.big { min-height: 13rem; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: .8rem; }
+.au-card.big svg { width: 4.4rem; height: 4.4rem; stroke: currentColor; fill: none; stroke-width: 1.6; }
+.au-card.muted h3 { color: var(--muted); }
+.au-quote { font-size: 1.35rem; line-height: 1.5; padding: 1.4rem 1.6rem; border-left: .25rem solid var(--accent);
+  background: rgba(8,10,16,.45); border-radius: 0 .8rem .8rem 0; margin-bottom: 1rem; }
+
+/* ------------------------------------------------------------ colonna destra */
+.au-side { position: absolute; right: -4rem; top: 15rem; text-align: right; padding: 1.6rem 1.8rem; border-radius: 1rem;
+  background: rgba(10,12,18,.45); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,.12);
+  opacity: 0; animation: au-side .8s .45s cubic-bezier(.2,.8,.2,1) forwards; }
+@keyframes au-side { from { opacity: 0; transform: translateX(3rem); } to { opacity: 1; transform: none; } }
+.au-wide .au-side { display: none; }
+.au-side .q { font-family: var(--cond); font-weight: 700; font-size: 1.9rem; letter-spacing: .06em; }
+.au-side .a { color: var(--muted); font-size: 1.05rem; margin: .2rem 0 1rem; }
+.au-side .b { display: inline-flex; height: 3.4rem; padding: 0 2rem; align-items: center; border-radius: .6rem; background: #ff3d6e;
+  font-family: var(--cond); font-weight: 700; letter-spacing: .1em; font-size: 1.15rem; box-shadow: 0 .8rem 2.4rem rgba(255,61,110,.4);
+  transition: transform .12s, box-shadow .2s; }
+.au-side .b:hover { box-shadow: 0 1rem 3rem rgba(255,61,110,.6); transform: translateY(-.1rem); }
+.au-steps { margin-top: 2rem; display: flex; gap: .5rem; justify-content: flex-end; }
+.au-steps span { font-family: var(--cond); font-weight: 600; letter-spacing: .12em; font-size: .85rem; color: var(--faint);
+  padding: .35rem .7rem; border-radius: 1rem; border: 1px solid rgba(255,255,255,.12); }
+.au-steps span.on { color: #1d1405; background: var(--accent); border-color: var(--accent); }
+
+/* barra in alto a destra nelle fasi larghe */
+.au-progress { position: absolute; right: 6rem; top: 6rem; display: none; gap: .5rem; }
+.au-wide .au-progress { display: flex; }
+.au-progress span { font-family: var(--cond); font-weight: 600; letter-spacing: .12em; font-size: .95rem; color: var(--faint);
+  padding: .4rem .9rem; border-radius: 1rem; border: 1px solid rgba(255,255,255,.14); background: rgba(10,12,18,.4); }
+.au-progress span.on { color: #1d1405; background: var(--accent); border-color: var(--accent); }
+
+/* audio */
+.au-audio { position: absolute; right: 2.4rem; bottom: 2.2rem; display: flex; align-items: center; gap: .7rem; color: var(--muted); font-size: .9rem; }
+.au-audio button { width: 2.8rem; height: 2.8rem; border-radius: 50%; border: 1px solid rgba(255,255,255,.2); background: rgba(10,12,18,.5);
+  display: flex; align-items: center; justify-content: center; }
+.au-audio svg { width: 1.3rem; height: 1.3rem; stroke: currentColor; fill: none; stroke-width: 1.8; }
+.au-eq { display: flex; gap: 2px; align-items: flex-end; height: 1rem; }
+.au-eq i { width: 3px; background: var(--accent); border-radius: 1px; animation: au-eq 1s ease-in-out infinite alternate; }
+.au-eq i:nth-child(2) { animation-delay: -.3s; } .au-eq i:nth-child(3) { animation-delay: -.6s; }
+@keyframes au-eq { from { height: 20%; } to { height: 100%; } }
+.au-muted .au-eq i { animation: none; height: 20%; }
+.au-foot { position: absolute; left: 6rem; bottom: 2.6rem; font-size: .9rem; color: var(--faint); letter-spacing: .05em; }

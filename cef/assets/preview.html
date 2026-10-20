@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Anteprima CityOS</title>
+  <!-- SOLO ANTEPRIMA: apre index.html in un iframe e simula il server (preview-server.js) con dati finti.
+       Parametri: ?res=720|1080 &scene=hud|board|board-detail|board-confirm|phone|phone-contracts|phone-district|phone-profile|phone-bank -->
+  <style>
+    @font-face { font-family: "Barlow"; font-weight: 500; src: url("fonts/barlow-latin-500-normal.woff2") format("woff2"); }
+    @font-face { font-family: "Barlow Condensed"; font-weight: 700; src: url("fonts/barlow-condensed-latin-700-normal.woff2") format("woff2"); }
+    :root { --panel: #15171d; --line: rgba(255,255,255,0.12); --text: #ecebe6; --muted: #9a9890; --accent: #f2c14e; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+    body { display: grid; grid-template-columns: 17rem 1fr; background: #08090c; color: var(--text); font: 500 14px/1.4 "Barlow", sans-serif; }
+    aside { background: var(--panel); border-right: 1px solid var(--line); padding: 1.2rem 1rem; overflow-y: auto; }
+    h1 { font: 700 1.6rem/1 "Barlow Condensed", sans-serif; margin-bottom: 0.3rem; }
+    aside p { color: var(--muted); font-size: 0.85rem; margin-bottom: 1rem; }
+    h2 { font-size: 0.8rem; color: var(--muted); font-weight: 500; margin: 1.1rem 0 0.4rem; }
+    aside button, aside select { display: block; width: 100%; text-align: left; margin-bottom: 0.3rem; padding: 0.45rem 0.6rem; border-radius: 6px; border: 1px solid var(--line); background: rgba(255,255,255,0.04); color: var(--text); font: inherit; cursor: pointer; }
+    aside button:hover { border-color: var(--accent); }
+    #focus { margin-top: 1rem; font-size: 0.85rem; }
+    #focus b { color: var(--accent); }
+    #log { margin-top: 0.4rem; font: 12px/1.45 ui-monospace, monospace; color: var(--muted); white-space: pre-wrap; max-height: 14rem; overflow-y: auto; }
+    main { position: relative; overflow: hidden; display: grid; place-items: center; }
+    #stage { position: relative; transform-origin: center center; flex: none; overflow: hidden; }
+    #stage iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; background: transparent; }
+    /* finto fondale di gioco (tramonto su una citta' generica): serve solo a giudicare trasparenze e blur */
+    .scene { position: absolute; inset: 0; background:
+      radial-gradient(60% 40% at 70% 64%, rgba(255,170,90,0.55), transparent 70%),
+      linear-gradient(180deg, #1d2742 0%, #3b3f63 38%, #b56a55 63%, #e39a5f 70%, #2a2a33 71%, #1a1b21 100%); }
+    .scene svg { position: absolute; left: 0; right: 0; bottom: 29%; width: 100%; height: 38%; }
+    .scene .road { position: absolute; left: 0; right: 0; bottom: 0; height: 29%; background: linear-gradient(180deg, #23242b, #121317); }
+    .scene .road::after { content: ""; position: absolute; left: 0; right: 0; top: 46%; height: 1.2%; background: repeating-linear-gradient(90deg, #d9c27a 0 6%, transparent 6% 12%); opacity: 0.6; }
+    body.shot { display: block; }
+    body.shot aside { display: none; }
+    body.shot main { position: fixed; inset: 0; }
+  </style>
+</head>
+<body>
+  <aside>
+    <h1>Anteprima CityOS</h1>
+    <p>Simula gli eventi del server con dati finti. In gioco gli stessi eventi arrivano da samp-cef.</p>
+    <h2>Risoluzione</h2>
+    <select id="res"><option value="720">1280 × 720</option><option value="1080">1920 × 1080</option></select>
+    <h2>HUD</h2>
+    <button data-c="startDelivery">Contratto in consegna</button>
+    <button data-c="clearContract">Nessun contratto</button>
+    <button data-c="toastOk">Toast di conferma</button>
+    <button data-c="toastErr">Toast di errore</button>
+    <h2>Bacheca</h2>
+    <button data-c="boardAt">Apri alla bacheca</button>
+    <button data-c="boardAway">Apri in consultazione</button>
+    <h2>Telefono</h2>
+    <button data-c="phone">Apri il telefono</button>
+    <button data-c="phoneDistrict">Apri Quartiere</button>
+    <button data-c="close">Chiudi la vista (server)</button>
+    <div id="focus">Focus: <b id="focus-v">gioco</b></div>
+    <h2>Eventi pagina → server</h2>
+    <div id="log"></div>
+  </aside>
+  <main>
+    <div id="stage">
+      <div class="scene">
+        <svg viewBox="0 0 1000 300" preserveAspectRatio="none" aria-hidden="true">
+          <path fill="#2b2a3a" d="M0 300V170h40v-40h30v60h25V90h45v80h20v-50h35v110h30V60h20V30h12v30h18v170h25v-90h40v100h30V120h50v150h20v-70h35v100h25V80h30v-20h20v20h10v190h30v-110h45v120h25V140h40v130h30V100h55v170h20v-60h40v90h25V150h30v150z"/>
+          <path fill="#1c1c27" d="M0 300V230h60v-30h40v100h30v-60h50v60h40v-90h30v90h60v-50h40v50h50v-80h35v80h60v-40h45v40h50v-70h30v70h60v-50h40v50h45v-90h40v90h50v-40h45v40z"/>
+        </svg>
+        <div class="road"></div>
+      </div>
+      <iframe id="ui" src="index.html" title="CityOS"></iframe>
+    </div>
+  </main>
+  <script src="preview-server.js"></script>
+  <script>
+    (function () {
+      "use strict";
+      var q = new URLSearchParams(location.search);
+      var frame = document.getElementById("ui"), stage = document.getElementById("stage");
+      var logBox = document.getElementById("log"), resSel = document.getElementById("res");
+      if (q.get("shot")) document.body.classList.add("shot");
+
+      function send(name, args) { frame.contentWindow.postMessage({ lssc: "event", name: name, args: args }, "*"); }
+      var sim = window.createLsscSim(send);
+      window.lsscSim = sim;
+
+      window.addEventListener("message", function (ev) {
+        var d = ev.data;
+        if (!d || ev.source !== frame.contentWindow) return;
+        if (d.lssc === "emit") {
+          logBox.textContent = d.name + " " + d.args.join(" ") + "\n" + logBox.textContent;
+          sim.handle(d.name, d.args.join(" "));
+          if (d.name === "lssc:ready") runScene(q.get("scene"));
+        } else if (d.lssc === "focus") {
+          document.getElementById("focus-v").textContent = d.on ? "pagina (mouse e tastiera)" : "gioco";
+        }
+      });
+
+      function fit() {
+        var r = resSel.value === "1080" ? [1920, 1080] : [1280, 720];
+        stage.style.width = r[0] + "px"; stage.style.height = r[1] + "px";
+        var host = stage.parentNode.getBoundingClientRect();
+        var s = Math.min(1, host.width / r[0], host.height / r[1]);
+        stage.style.transform = "scale(" + s + ")";
+      }
+      resSel.value = q.get("res") === "1080" ? "1080" : "720";
+      resSel.addEventListener("change", fit);
+      window.addEventListener("resize", fit);
+      fit();
+
+      var C = {
+        startDelivery: function () { sim.startDelivery(); },
+        clearContract: function () { sim.clearContract(); },
+        toastOk: function () { sim.toast("Consegna completata: +$640 e +12 reputazione.", 1); },
+        toastErr: function () { sim.toast("Sei troppo lontano da una bacheca per accettare.", 3); },
+        boardAt: function () { sim.setAtBoard(true); sim.board(true); },
+        boardAway: function () { sim.setAtBoard(false); sim.board(true); },
+        phone: function () { sim.openPhone("home"); },
+        phoneDistrict: function () { sim.openPhone("district"); },
+        close: function () { sim.close(); }
+      };
+      document.querySelectorAll("[data-c]").forEach(function (b) {
+        b.addEventListener("click", function () { C[b.getAttribute("data-c")](); frame.focus(); });
+      });
+
+      // Scene per screenshot automatici (eseguite dopo lssc:ready)
+      function click(sel) { var n = frame.contentDocument && frame.contentDocument.querySelector(sel); if (n) n.click(); }
+      function runScene(scene) {
+        if (!scene) return;
+        var later = function (fn, ms) { setTimeout(fn, ms || 60); };
+        switch (scene) {
+          case "hud":
+            sim.startDelivery(); sim.toast("Carico a bordo: guida con calma, la merce e' fragile.", 0); break;
+          case "board": sim.board(true); break;
+          case "board-detail": sim.board(true); later(function () { click('.ct[data-id="1043"]'); }); break;
+          case "board-confirm": sim.board(true); later(function () { click('.ct[data-id="1043"]'); later(function () { click("#bd-accept"); }); }); break;
+          case "phone": sim.startDelivery(); sim.openPhone("home"); break;
+          case "phone-contracts": sim.startDelivery(); sim.openPhone("contracts"); break;
+          case "phone-district": sim.openPhone("district"); break;
+          case "phone-profile": sim.openPhone("profile"); break;
+          case "phone-bank": sim.openPhone("bank"); break;
+          case "phone-project": sim.openPhone("district"); later(function () { click('[data-act="project"]'); }, 120); break;
+        }
+      }
+    })();
+  </script>
+</body>
+</html>

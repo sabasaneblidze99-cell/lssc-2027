@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="ka">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LSRP CityOS</title>
+  <!-- Shell unica: un solo browser samp-cef per giocatore (cef_create_browser con url "index.html", da <GTA>/cef/assets/).
+       Nessuna risorsa esterna: tutto e' locale. Protocollo eventi: PROTOCOLLO.md -->
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="auth.css">
+</head>
+<body>
+  <div id="hud"></div>
+  <div id="toasts" aria-live="polite"></div>
+  <div class="view" id="view-board" hidden></div>
+  <div class="view" id="view-phone" hidden></div>
+  <div id="view-auth" hidden></div>
+
+  <script src="i18n.js"></script>
+  <script src="bridge.js"></script>
+  <script src="hud.js"></script>
+  <script src="bacheca.js"></script>
+  <script src="telefono.js"></script>
+  <script src="auth.js"></script>
+  <script>
+    // Tutti i moduli hanno registrato i propri eventi: il server puo' iniziare a inviare (lssc:hud, lssc:contract, ...)
+    window.LSSC.emit("lssc:ready");
+  </script>
+</body>
+</html>
