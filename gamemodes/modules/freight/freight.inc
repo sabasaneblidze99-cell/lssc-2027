@@ -970,10 +970,12 @@ Freight_OnPlayerConnect(playerid)
 
 Freight_OnCharReady(playerid)
 {
+	#pragma unused playerid
 }
 
 Freight_OnPlayerDisconnect(playerid, reason)
 {
+	#pragma unused reason
 	if (!Freight_ValidId(playerid))
 	{
 		return 0;
@@ -1025,6 +1027,7 @@ Freight_OnPlayerExitVehicle(playerid, vehicleid)
 
 Freight_OnPlayerStateChange(playerid, t_PLAYER_STATE:newstate, t_PLAYER_STATE:oldstate)
 {
+	#pragma unused oldstate
 	if (newstate != 2)
 	{
 		return 0;
@@ -1050,6 +1053,7 @@ Freight_OnPlayerStateChange(playerid, t_PLAYER_STATE:newstate, t_PLAYER_STATE:ol
 
 Freight_OnVehicleDeath(vehicleid, killerid)
 {
+	#pragma unused killerid
 	if (LD_VehModule(vehicleid) != 3)
 	{
 		return 0;

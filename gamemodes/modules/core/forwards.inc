@@ -392,3 +392,13 @@ forward Cef_OnSpawnPick(playerid, const arguments[]);
 forward LSRP_VoiceInfo(playerid);
 forward Cef_OnViewOk(playerid, const arguments[]);
 forward CefViews_OnTimeout(playerid, which);
+
+// funzioni con tag di ritorno usate prima della definizione (evita il warning 208)
+forward bool:Util_IsValidRPName(const name[]);
+forward bool:Job_IsOnShift(playerid);
+forward bool:Director_Release(playerid, reason);
+forward bool:Rental_BeginOpen(playerid, vkind, blocks, rentClass, streetModel = 0);
+forward bool:Freight_Begin(playerid, contractId, fromD, toD, cargo, distanceM, bool:welcome);
+forward bool:SpawnSel_Active(playerid);
+forward bool:CharSel_Active(playerid);
+forward bool:CharSel_ApplyLoadedName(playerid);

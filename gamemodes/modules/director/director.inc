@@ -308,6 +308,7 @@ Director_OnPlayerConnect(playerid)
 
 Director_OnCharReady(playerid)
 {
+	#pragma unused playerid
 	if (!g_DirBoardLoaded || g_DirBoardCount < 4)
 	{
 		Director_OnCycle();
@@ -316,6 +317,7 @@ Director_OnCharReady(playerid)
 
 Director_OnPlayerDisconnect(playerid, reason)
 {
+	#pragma unused reason
 	new ct = gPlayer[playerid][pContractId];
 	if (ct != 0 && gPlayer[playerid][pContractPendOp] == 0 && gPlayer[playerid][pContractPhase] != 0)
 	{

@@ -200,6 +200,7 @@ UI_StoryShowOther(playerid, const name[], origin, motive)
 
 bool:UI_IntroOnDialogResponse(playerid, dialogid, response, listitem, const inputtext[])
 {
+	#pragma unused inputtext
 	if (!UI_IntroValid(playerid) || dialogid < 9600 || dialogid > 9603)
 	{
 		return 0;

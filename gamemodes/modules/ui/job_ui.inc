@@ -223,6 +223,7 @@ UI_JobInfoShow(playerid, jobId, level, runs, earned)
 
 bool:UI_JobOnDialogResponse(playerid, dialogid, response, listitem, const inputtext[])
 {
+	#pragma unused inputtext
 	if (!UI_JbValid(playerid))
 	{
 		return 0;

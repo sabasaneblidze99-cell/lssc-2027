@@ -185,6 +185,7 @@ public DB_OnUnbanDone(requesterid, const reqName[], const name[])
 
 DB_CheckBan(playerid, const name[], const ip[])
 {
+	#pragma unused ip
 	if (playerid < 0 || playerid >= MAX_PLAYERS || !IsPlayerConnected(playerid))
 	{
 		return 0;

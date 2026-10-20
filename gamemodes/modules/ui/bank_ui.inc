@@ -531,7 +531,7 @@ UI_BankStatementShow(playerid)
 	if (page > 0)
 	{
 		strcat(body, "{FFD24D}<< Pagina precedente\t\t\t\n", 2048);
-		g_UiBkStNavPrev[playerid] = idx++;
+		g_UiBkStNavPrev[playerid] = idx;
 	}
 	format(title, 64, "Estratto conto - pag. %d/%d", page + 1, 5);
 	Lang_ShowPlayerDialog(playerid, 9504, 5, title, body, "Vai", "Menu");

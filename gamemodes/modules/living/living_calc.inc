@@ -49,9 +49,6 @@ LD_Bucket(unixTs)
 
 bool:LD_ContractSlot(bucket, slot, &fromD, &toD, &cargo)
 {
-	fromD = 0;
-	toD = 0;
-	cargo = 0;
 	new h = LD_Hash32(bucket, slot, 1);
 	fromD = LD_HashMod(h, 3) + 1;
 	new off = LD_HashMod(h >>> 8, 2) + 1;

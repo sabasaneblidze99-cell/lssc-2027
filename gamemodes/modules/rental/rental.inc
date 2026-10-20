@@ -446,6 +446,7 @@ bool:Rental_CanStart(playerid)
 
 Rental_CmdNoleggio(playerid, const params[])
 {
+	#pragma unused params
 	if (!Rental_CanStart(playerid))
 	{
 		return 1;
@@ -552,6 +553,7 @@ bool:Rental_CanReturn(playerid, bool:verbose)
 
 Rental_CmdRiconsegna(playerid, const params[])
 {
+	#pragma unused params
 	if (!Rental_CanReturn(playerid, 1))
 	{
 		return 1;
@@ -773,10 +775,12 @@ Rental_OnPlayerConnect(playerid)
 
 Rental_OnCharReady(playerid)
 {
+	#pragma unused playerid
 }
 
 Rental_OnPlayerDisconnect(playerid, reason)
 {
+	#pragma unused reason
 	if (!Rental_ValidPlayer(playerid))
 	{
 		return 0;
@@ -839,10 +843,12 @@ Rental_OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
 
 Rental_OnPlayerExitVehicle(playerid, vehicleid)
 {
+	#pragma unused playerid, vehicleid
 }
 
 Rental_OnPlayerStateChange(playerid, t_PLAYER_STATE:newstate, t_PLAYER_STATE:oldstate)
 {
+	#pragma unused oldstate
 	if (newstate != 2)
 	{
 		return 0;
@@ -863,6 +869,7 @@ Rental_OnPlayerStateChange(playerid, t_PLAYER_STATE:newstate, t_PLAYER_STATE:old
 
 Rental_OnVehicleDeath(vehicleid, killerid)
 {
+	#pragma unused killerid
 	new mod = LD_VehModule(vehicleid);
 	if (mod != 1 && mod != 2)
 	{

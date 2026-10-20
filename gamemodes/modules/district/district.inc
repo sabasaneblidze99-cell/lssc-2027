@@ -176,6 +176,7 @@ District_OnCharReady(playerid)
 
 District_OnPlayerDisconnect(playerid, reason)
 {
+	#pragma unused reason
 	District_ResetPlayer(playerid);
 }
 

@@ -506,7 +506,7 @@ HudCef_OnHudData(playerid, money, bank, level)
 }
 
 // notifica generica (kind: 0 successo, 1 info, 2 avviso, 3 errore, 4 soldi ricevuti, 5 soldi spesi, 6 missione, 7 lavoro, 8 RP)
-HudCef_Notify(playerid, kind, const title[], const text[], ms = 0)
+stock HudCef_Notify(playerid, kind, const title[], const text[], ms = 0)
 {
 	if (!CefUI_Active(playerid))
 	{

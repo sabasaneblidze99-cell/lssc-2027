@@ -733,7 +733,7 @@ public House_OnDBBought(playerid, houseId, affected)
 	{
 		return 1;
 	}
-	new idx = -1;
+	new idx;
 	if (g_HPl[playerid][hpPendingOp] != 1 || !House_OpMatches(playerid, houseId, affected))
 	{
 		if (affected == 1)

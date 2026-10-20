@@ -1,4 +1,3 @@
-new g_UtilSaltChars[63];
 
 Util_Send(playerid, color, const text[])
 {

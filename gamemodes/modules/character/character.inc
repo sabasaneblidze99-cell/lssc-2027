@@ -275,6 +275,7 @@ Char_OnRequestClass(playerid)
 
 Char_OnRequestSpawn(playerid)
 {
+	#pragma unused playerid
 	return 0;
 }
 

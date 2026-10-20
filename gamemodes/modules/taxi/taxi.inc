@@ -1063,6 +1063,7 @@ Taxi_CmdTaxi(playerid, const params[])
 
 Taxi_CmdChiamataxi(playerid, const params[])
 {
+	#pragma unused params
 	if (!Util_IsPlaying(playerid) || gPlayer[playerid][pLivingReady] == 0)
 	{
 		LD_SendBlock(playerid, 1);
@@ -1484,10 +1485,12 @@ Taxi_OnPlayerConnect(playerid)
 
 Taxi_OnCharReady(playerid)
 {
+	#pragma unused playerid
 }
 
 Taxi_OnPlayerDisconnect(playerid, reason)
 {
+	#pragma unused reason
 	if (!Taxi_Valid(playerid))
 	{
 		return 0;
@@ -1532,10 +1535,12 @@ Taxi_OnPlayerDeath(playerid)
 
 Taxi_OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
 {
+	#pragma unused ispassenger, playerid, vehicleid
 }
 
 Taxi_OnPlayerExitVehicle(playerid, vehicleid)
 {
+	#pragma unused playerid, vehicleid
 }
 
 Taxi_OnPlayerStateChange(playerid, t_PLAYER_STATE:newstate, t_PLAYER_STATE:oldstate)
@@ -1563,6 +1568,7 @@ Taxi_OnPlayerStateChange(playerid, t_PLAYER_STATE:newstate, t_PLAYER_STATE:oldst
 
 Taxi_OnVehicleDeath(vehicleid, killerid)
 {
+	#pragma unused killerid
 	if (LD_VehModule(vehicleid) != 2)
 	{
 		return 0;

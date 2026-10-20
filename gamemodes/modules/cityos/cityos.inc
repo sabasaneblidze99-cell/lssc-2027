@@ -136,6 +136,7 @@ CityOS_OnCharReady(playerid)
 
 CityOS_OnPlayerDisconnect(playerid, reason)
 {
+	#pragma unused reason
 	g_CosWaitBoard[playerid] = 0;
 }
 
@@ -229,6 +230,7 @@ CityOS_CmdContratto(playerid, const params[])
 
 CityOS_CmdReputazione(playerid, const params[])
 {
+	#pragma unused params
 	if (!CityOS_Playing(playerid))
 	{
 		LD_SendBlock(playerid, 1);

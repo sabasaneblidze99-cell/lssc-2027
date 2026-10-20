@@ -318,6 +318,7 @@ Hub_OnCharReady(playerid)
 
 Hub_OnPlayerDisconnect(playerid, reason)
 {
+	#pragma unused reason
 	if (!Hub_Valid(playerid))
 	{
 		return 0;

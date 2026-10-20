@@ -1055,6 +1055,7 @@ DB_LdCfgAdd(query[], size, const key[], value)
 
 DB_LdCfgFlush(query[], size)
 {
+	#pragma unused size
 	if (!query[0])
 	{
 		return 0;

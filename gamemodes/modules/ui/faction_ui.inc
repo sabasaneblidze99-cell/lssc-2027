@@ -144,7 +144,7 @@ UI_FactionMenuShow(playerid, faction, rank, bool:onDuty, membersOnline, membersT
 		g_UiFcMenuAct[playerid][n++] = 3;
 		g_UiFcMenuAct[playerid][n++] = 4;
 		g_UiFcMenuAct[playerid][n++] = 5;
-		g_UiFcMenuAct[playerid][n++] = 6;
+		g_UiFcMenuAct[playerid][n] = 6;
 	}
 	UI_FcRankText(faction, rank, rankName, 24);
 	format(title, 64, "%s - %s%s", g_UiFcShort[faction], rankName, onDuty ? " (in servizio)" : "");

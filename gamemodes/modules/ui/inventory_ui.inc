@@ -225,7 +225,7 @@ UI_InvListPage(playerid, page)
 	if (page > 0)
 	{
 		strcat(body, "{FFD24D}<< Pagina precedente\t\t\n", 1024);
-		g_UiInvNavPrev[playerid] = idx++;
+		g_UiInvNavPrev[playerid] = idx;
 	}
 	if (pages > 1)
 	{

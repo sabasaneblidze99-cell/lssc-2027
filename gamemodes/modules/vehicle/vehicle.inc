@@ -1542,6 +1542,7 @@ Veh_OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
 
 Veh_OnPlayerExitVehicle(playerid, vehicleid)
 {
+	#pragma unused playerid
 	new o = 65535, s = -1;
 	if (Veh_Lookup(vehicleid, o, s))
 	{
@@ -1588,6 +1589,7 @@ Veh_OnPlayerStateChange(playerid, t_PLAYER_STATE:newstate, t_PLAYER_STATE:oldsta
 
 Veh_OnVehicleDeath(vehicleid, killerid)
 {
+	#pragma unused killerid
 	new o = 65535, s = -1;
 	if (!Veh_Lookup(vehicleid, o, s) || g_VSlot[o][s][vsDestroyed])
 	{

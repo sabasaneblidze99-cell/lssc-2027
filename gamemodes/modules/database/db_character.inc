@@ -171,7 +171,7 @@ DB_SaveCharacter(playerid)
 	{
 		return 0;
 	}
-	new query[768], skin = gPlayer[playerid][pSkin], name[25];
+	new query[768], skin, name[25];
 	GetPlayerName(playerid, name, 25);
 	new bankDelta = DB_BankDeltaTake(playerid);
 	skin = gPlayer[playerid][pCivilSkin];
