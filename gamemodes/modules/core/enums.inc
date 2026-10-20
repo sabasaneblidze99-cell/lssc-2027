@@ -202,6 +202,10 @@ enum E_VEH_NEW
 enum E_HOUSE_ROW
 {
 	hrId,
+	hrIntGame,          // interno GTA personalizzato (case Arizona), -1 = tabella LSSC
+	Float:hrIntX,
+	Float:hrIntY,
+	Float:hrIntZ,
 	hrOwnerId,
 	hrOwnerName[25],
 	hrTier,

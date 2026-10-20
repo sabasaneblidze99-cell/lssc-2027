@@ -18,6 +18,7 @@ python3 "$ROOT/scripts/flatten.py" lsrp.pwn lsrp_completo.pwn && sed -i '1i // l
   -i"$ROOT/toolchain/include/cef" \
   -i"$ROOT/toolchain/include/bcrypt" \
   -i"$ROOT/toolchain/include/sampvoice" \
+  -i"$ROOT/toolchain/include/streamer" \
   -i. -o"$ROOT/gamemodes/$OUT"
 # filterscript della voce (separato: il gamemode non dipende da SampVoice)
 mkdir -p "$ROOT/filterscripts"

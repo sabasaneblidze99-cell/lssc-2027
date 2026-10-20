@@ -390,6 +390,7 @@ forward SpawnSel_OnInfo(playerid, charId, token);
 forward SpawnSel_OnTimeout(playerid, token);
 forward Cef_OnSpawnPick(playerid, const arguments[]);
 forward LSRP_VoiceInfo(playerid);
+forward DB_OnHouseColsChecked();
 forward Cef_OnViewOk(playerid, const arguments[]);
 forward CefViews_OnTimeout(playerid, which);
 

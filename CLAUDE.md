@@ -42,3 +42,9 @@ con `#define` quando si tocca un modulo.
 - Nessuna modifica a DB o server di produzione senza autorizzazione.
 - Credenziali mai in git; password mai nei log.
 - Non dichiarare funzionante ciò che non è stato testato (il client GTA lo testa l'utente).
+
+## Mondo Arizona (solo Los Santos)
+- Dati in `world/arizona/*.json`, estratti da `recovery/tools/arizona/extract.py`; i moduli `gamemodes/modules/world/az_map.inc`,
+  `az_data.inc` e `sql/migrations/015_arizona_houses.sql` sono GENERATI da `recovery/tools/arizona/gen.py` (non modificarli a mano).
+- Solo dati del mondo (coordinate, interni, modelli, prezzi), nessun codice dei sistemi Arizona, nessun dato personale.
+- Richiede il plugin streamer (include in toolchain/include/streamer).

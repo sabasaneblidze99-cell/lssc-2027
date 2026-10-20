@@ -1031,6 +1031,7 @@ Veh_DoEngineOther(playerid)
 	}
 	new bool:mine = (gPlayer[playerid][pRentalVehicle] != 0 && gPlayer[playerid][pRentalVehicle] == veh)
 		|| LD_VehOwner(veh) == playerid
+		|| AzWorld_CanDrive(playerid, veh) == 1
 		|| Job_VehicleOwner(veh) == playerid;
 	if (!mine)
 	{

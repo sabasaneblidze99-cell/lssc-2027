@@ -8,6 +8,7 @@
 #include <open.mp>
 #include <a_mysql>
 #include <samp_bcrypt>
+#include <streamer>
 #if defined LSRP_CEF
 	#include <cef>
 #endif
@@ -73,6 +74,9 @@
 #include "modules/cef/cef_bridge.inc"
 #include "modules/ui/hud_cef.inc"
 #include "modules/voice/voice.inc"
+#include "modules/world/az_map.inc"
+#include "modules/world/az_data.inc"
+#include "modules/world/az_world.inc"
 #include "modules/ui/cef_views.inc"
 #include "modules/character/spawn_select.inc"
 #include "modules/character/char_select.inc"
@@ -104,6 +108,7 @@ public OnGameModeInit()
 	Living_OnInit();
 	HudCef_OnInit();
 	StreetRental_OnInit();
+	AzWorld_OnInit();
 	Voice_OnInit();
 	CefBridge_OnInit();
 	return 1;
@@ -118,6 +123,7 @@ public OnGameModeExit()
 	Job_OnExit();
 	HudCef_OnExit();
 	StreetRental_OnExit();
+	AzWorld_OnExit();
 	Voice_OnExit();
 	Living_OnExit();
 	Faction_OnExit();
@@ -144,6 +150,7 @@ public OnPlayerConnect(playerid)
 	SpawnSel_OnPlayerConnect(playerid);
 	CharSel_OnPlayerConnect(playerid);
 	CefViews_OnPlayerConnect(playerid);
+	AzWorld_OnPlayerConnect(playerid);
 	Account_OnConnect(playerid);
 	return 1;
 }
@@ -335,6 +342,7 @@ public OnPlayerStateChange(playerid, PLAYER_STATE:newstate, PLAYER_STATE:oldstat
 	Job_OnPlayerStateChange(playerid, newstate);
 	Living_OnPlayerStateChange(playerid, newstate, oldstate);
 	StreetRental_OnStateChange(playerid, newstate);
+	AzWorld_OnStateChange(playerid, newstate);
 	return 1;
 }
 
@@ -360,6 +368,10 @@ public OnPlayerKeyStateChange(playerid, KEY:newkeys, KEY:oldkeys)
 
 public OnPlayerPickUpPickup(playerid, pickupid)
 {
+	if (AzWorld_OnPickUp(playerid, pickupid))
+	{
+		return 1;
+	}
 	House_OnPlayerPickUpPickup(playerid, pickupid);
 	return 1;
 }

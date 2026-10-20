@@ -1,9 +1,9 @@
 new g_HPl[MAX_PLAYERS][E_HPLAYER];
 new g_HSessionSeq;
-new g_HsPickup[64];
-new bool:g_HsFridgeBusy[64];
-new Text3D:g_HsLabel[64];
-new bool:g_HsBusy[64];
+new g_HsPickup[HOUSE_MAX];
+new bool:g_HsFridgeBusy[HOUSE_MAX];
+new Text3D:g_HsLabel[HOUSE_MAX];
+new bool:g_HsBusy[HOUSE_MAX];
 new bool:g_HsReady;
 new g_HsTickTimer;
 new g_HsSaveTimer;
@@ -328,6 +328,10 @@ House_Context(playerid)
 
 bool:House_NearExit(playerid, idx)
 {
+	if (g_HouseRows[idx][hrIntGame] >= 0)
+	{
+		return (GetPlayerDistanceFromPoint(playerid, g_HouseRows[idx][hrIntX], g_HouseRows[idx][hrIntY], g_HouseRows[idx][hrIntZ]) <= 2.5);
+	}
 	new k = House_IntIdx(idx);
 	return (GetPlayerDistanceFromPoint(playerid, s_HsIntPos[k][0], s_HsIntPos[k][1], s_HsIntPos[k][2]) <= 2.5);
 }
@@ -439,10 +443,19 @@ House_RefreshInside(idx)
 House_DoEnter(playerid, idx)
 {
 	new k = House_IntIdx(idx), id = g_HouseRows[idx][hrId];
-	SetPlayerInterior(playerid, s_HsIntId[k]);
 	SetPlayerVirtualWorld(playerid, id + 1000);
-	SetPlayerPos(playerid, s_HsIntPos[k][0], s_HsIntPos[k][1], s_HsIntPos[k][2]);
-	SetPlayerFacingAngle(playerid, s_HsIntPos[k][3]);
+	if (g_HouseRows[idx][hrIntGame] >= 0)
+	{
+		// casa del mondo Arizona: interno GTA e punto proprio
+		SetPlayerInterior(playerid, g_HouseRows[idx][hrIntGame]);
+		SetPlayerPos(playerid, g_HouseRows[idx][hrIntX], g_HouseRows[idx][hrIntY], g_HouseRows[idx][hrIntZ]);
+	}
+	else
+	{
+		SetPlayerInterior(playerid, s_HsIntId[k]);
+		SetPlayerPos(playerid, s_HsIntPos[k][0], s_HsIntPos[k][1], s_HsIntPos[k][2]);
+		SetPlayerFacingAngle(playerid, s_HsIntPos[k][3]);
+	}
 	SetCameraBehindPlayer(playerid);
 	g_HPl[playerid][hpInsideHouse] = id;
 	House_ApplyInsideUi(playerid, idx);
@@ -2442,7 +2455,7 @@ public House_OnDBLoaded(count)
 		Log_Write("HOUSE", "caricamento case fallito: sistema case disabilitato");
 		return 1;
 	}
-	for (new i = 0; i < count && i < 64; i++)
+	for (new i = 0; i < count && i < HOUSE_MAX; i++)
 	{
 		g_HsBusy[i] = false;
 		House_RefreshWorld(i);
@@ -2460,7 +2473,7 @@ House_OnInit()
 	{
 		House_ResetPlayer(p);
 	}
-	for (new i = 0; i < 64; i++)
+	for (new i = 0; i < HOUSE_MAX; i++)
 	{
 		g_HsPickup[i] = -1;
 		g_HsLabel[i] = Text3D:65535;

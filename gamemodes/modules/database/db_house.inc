@@ -1,4 +1,6 @@
-new g_HouseRows[64][E_HOUSE_ROW];
+#define HOUSE_MAX (400)          // case caricate (10 di LSSC + 337 di Arizona + margine)
+new g_HouseRows[HOUSE_MAX][E_HOUSE_ROW];
+new bool:g_HsIntCols;              // colonne int_* presenti (migrazione 015)
 new g_HouseCount;
 new bool:g_HouseBootLoad;
 new g_HouseBills[MAX_PLAYERS][8][E_HOUSE_BILL];
@@ -337,8 +339,22 @@ DB_LoadHouses()
 
 public DB_OnHouseLoadUtil()
 {
-	new query[1024];
-	mysql_format(g_DB, query, 1024, "SELECT h.id, IFNULL(h.owner_id, 0) AS owner_id, IFNULL(a.name, '') AS owner_name, h.tier, h.interior_idx, h.ext_x, h.ext_y, h.ext_z, h.ext_a, h.price, IFNULL(h.price_paid, 0) AS price_paid, h.locked, IFNULL(u.luce_on, 1) AS luce_on, IFNULL(u.gas_on, 1) AS gas_on, IFNULL(u.luce_cut, 0) AS luce_cut, IFNULL(u.gas_cut, 0) AS gas_cut, IFNULL(u.luce_min, 0) AS luce_min, IFNULL(u.gas_min, 0) AS gas_min, IFNULL(u.cycle_min, 0) AS cycle_min, IFNULL(u.fridge_units, 0) AS fridge_units, IFNULL(u.fridge_off_min, 0) AS fridge_off_min, (SELECT COUNT(*) FROM house_bills b WHERE b.house_id = h.id AND b.paid = 0) AS bills FROM houses h LEFT JOIN house_utilities u ON u.house_id = h.id LEFT JOIN characters c ON c.id = h.owner_id LEFT JOIN accounts a ON a.id = c.account_id ORDER BY h.id LIMIT %d", 64);
+	// le colonne dell'interno personalizzato esistono solo dopo la migrazione 015
+	mysql_tquery(g_DB, "SELECT COUNT(*) AS n FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'houses' AND COLUMN_NAME = 'int_game'", "DB_OnHouseColsChecked", "");
+	return 1;
+}
+
+public DB_OnHouseColsChecked()
+{
+	new rows = 0, n = 0;
+	cache_get_row_count(rows);
+	if (rows > 0)
+	{
+		cache_get_value_name_int(0, "n", n);
+	}
+	g_HsIntCols = n > 0;
+	new query[1400];
+	mysql_format(g_DB, query, sizeof query, "SELECT h.id, %s, IFNULL(h.owner_id, 0) AS owner_id, IFNULL(a.name, '') AS owner_name, h.tier, h.interior_idx, h.ext_x, h.ext_y, h.ext_z, h.ext_a, h.price, IFNULL(h.price_paid, 0) AS price_paid, h.locked, IFNULL(u.luce_on, 1) AS luce_on, IFNULL(u.gas_on, 1) AS gas_on, IFNULL(u.luce_cut, 0) AS luce_cut, IFNULL(u.gas_cut, 0) AS gas_cut, IFNULL(u.luce_min, 0) AS luce_min, IFNULL(u.gas_min, 0) AS gas_min, IFNULL(u.cycle_min, 0) AS cycle_min, IFNULL(u.fridge_units, 0) AS fridge_units, IFNULL(u.fridge_off_min, 0) AS fridge_off_min, (SELECT COUNT(*) FROM house_bills b WHERE b.house_id = h.id AND b.paid = 0) AS bills FROM houses h LEFT JOIN house_utilities u ON u.house_id = h.id LEFT JOIN characters c ON c.id = h.owner_id LEFT JOIN accounts a ON a.id = c.account_id ORDER BY h.id LIMIT %d", g_HsIntCols ? ("IFNULL(h.int_game, -1) AS int_game, IFNULL(h.int_x, 0) AS int_x, IFNULL(h.int_y, 0) AS int_y, IFNULL(h.int_z, 0) AS int_z") : ("-1 AS int_game, 0 AS int_x, 0 AS int_y, 0 AS int_z"), HOUSE_MAX);
 	mysql_tquery(g_DB, query, "DB_OnHousesLoaded", "");
 	return 1;
 }
@@ -347,9 +363,13 @@ public DB_OnHousesLoaded()
 {
 	new rows = 0, n = 0, tmp = 0;
 	cache_get_row_count(rows);
-	for (new i = 0; i < rows && n < 64; i++)
+	for (new i = 0; i < rows && n < HOUSE_MAX; i++)
 	{
 		cache_get_value_name_int(i, "id", g_HouseRows[n][hrId]);
+		cache_get_value_name_int(i, "int_game", g_HouseRows[n][hrIntGame]);
+		cache_get_value_name_float(i, "int_x", g_HouseRows[n][hrIntX]);
+		cache_get_value_name_float(i, "int_y", g_HouseRows[n][hrIntY]);
+		cache_get_value_name_float(i, "int_z", g_HouseRows[n][hrIntZ]);
 		cache_get_value_name_int(i, "owner_id", g_HouseRows[n][hrOwnerId]);
 		cache_get_value_name(i, "owner_name", g_HouseRows[n][hrOwnerName], 25);
 		cache_get_value_name_int(i, "tier", g_HouseRows[n][hrTier]);
