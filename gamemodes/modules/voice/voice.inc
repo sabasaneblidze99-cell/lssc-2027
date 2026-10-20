@@ -1,5 +1,5 @@
 // =============================================================================
-// voice/voice.inc - chat vocale con SampVoice (CyberMor, v4.x), opzionale.
+// voice/voice.inc - chat vocale con SampVoice per open.mp (AmyrAhmady/sampvoice, versione x.x.x-omp), opzionale.
 //
 // Compilato solo con LSRP_VOICE (il server deve caricare il plugin SampVoice, altrimenti open.mp
 // rifiuta il gamemode per natives mancanti). Senza LSRP_VOICE tutte le funzioni sono vuote.
@@ -19,16 +19,17 @@
 
 #include <sampvoice>
 
-new SV_UINT:g_VoiceLocal[MAX_PLAYERS] = { SV_NONE, ... };
-new SV_UINT:g_VoiceRadio[VOICE_MAX_FACTIONS] = { SV_NONE, ... };
-new g_VoiceRadioOf[MAX_PLAYERS];        // fazione della radio a cui e' collegato (0 = nessuna)
+new SV_DLSTREAM:g_VoiceLocal[MAX_PLAYERS] = { SV_NULL, ... };
+new SV_GSTREAM:g_VoiceRadio[VOICE_MAX_FACTIONS] = { SV_NULL, ... };
+new g_VoiceRadioOf[MAX_PLAYERS];        // fazione della radio che ascolta (0 = nessuna)
+new bool:g_VoiceRadioTalk[MAX_PLAYERS]; // sta parlando in radio (Z premuto)
 new g_VoiceTimer;
 
 Voice_OnInit()
 {
 	for (new f = 1; f < VOICE_MAX_FACTIONS; f++)
 	{
-		g_VoiceRadio[f] = SvCreateStream();
+		g_VoiceRadio[f] = SvCreateGStream(0x5BA8FFFF, f == 2 ? "Radio EMS" : "Radio LSPD");
 	}
 	g_VoiceTimer = SetTimer("Voice_OnTick", 1000, true);
 	Log_Write("VOICE", "SampVoice attivo: voce locale (B) e radio di fazione (Z)");
@@ -41,12 +42,16 @@ Voice_OnExit()
 		KillTimer(g_VoiceTimer);
 		g_VoiceTimer = 0;
 	}
+	for (new p = 0; p < MAX_PLAYERS; p++)
+	{
+		Voice_OnPlayerDisconnect(p);
+	}
 	for (new f = 1; f < VOICE_MAX_FACTIONS; f++)
 	{
-		if (g_VoiceRadio[f] != SV_NONE)
+		if (g_VoiceRadio[f])
 		{
 			SvDeleteStream(g_VoiceRadio[f]);
-			g_VoiceRadio[f] = SV_NONE;
+			g_VoiceRadio[f] = SV_NULL;
 		}
 	}
 }
@@ -54,7 +59,7 @@ Voice_OnExit()
 // 0 plugin assente sul client, 1 nessun microfono, 2 pronto
 Voice_State(playerid)
 {
-	if (SvGetVersion(playerid) == 0)
+	if (SvGetVersion(playerid) == SV_NULL)
 	{
 		return 0;
 	}
@@ -64,54 +69,89 @@ Voice_State(playerid)
 // la voce si abilita quando il personaggio e' in gioco (dopo il login): niente voce durante registrazione/intro
 Voice_OnPlayerSpawn(playerid)
 {
-	if (Voice_State(playerid) != 2 || g_VoiceLocal[playerid] != SV_NONE)
+	if (Voice_State(playerid) != 2 || g_VoiceLocal[playerid])
 	{
 		return 0;
 	}
-	g_VoiceLocal[playerid] = SvCreateStream(VOICE_LOCAL_DIST);
-	if (g_VoiceLocal[playerid] == SV_NONE)
+	g_VoiceLocal[playerid] = SvCreateDLStreamAtPlayer(VOICE_LOCAL_DIST, SV_INFINITY, playerid, 0xF6F3FAFF, "Locale");
+	if (!g_VoiceLocal[playerid])
 	{
 		return 0;
 	}
-	SvSetKey(playerid, VOICE_KEY_LOCAL, VOICE_CH_LOCAL);
-	SvAttachStream(playerid, g_VoiceLocal[playerid], VOICE_CH_LOCAL);
-	SvSetTarget(g_VoiceLocal[playerid], SvMakePlayer(playerid));
-	SvSetIcon(g_VoiceLocal[playerid], "speaker");
+	SvAddKey(playerid, VOICE_KEY_LOCAL);
+	SvAddKey(playerid, VOICE_KEY_RADIO);
 	return 1;
 }
 
 Voice_OnPlayerDisconnect(playerid)
 {
 	Voice_RadioLeave(playerid);
-	if (g_VoiceLocal[playerid] != SV_NONE)
+	if (g_VoiceLocal[playerid])
 	{
+		SvDetachSpeakerFromStream(g_VoiceLocal[playerid], playerid);
 		SvDeleteStream(g_VoiceLocal[playerid]);
-		g_VoiceLocal[playerid] = SV_NONE;
+		g_VoiceLocal[playerid] = SV_NULL;
 	}
 }
 
 Voice_RadioLeave(playerid)
 {
 	new f = g_VoiceRadioOf[playerid];
+	g_VoiceRadioTalk[playerid] = false;
 	if (f <= 0 || f >= VOICE_MAX_FACTIONS)
 	{
 		return 0;
 	}
-	if (g_VoiceRadio[f] != SV_NONE)
+	if (g_VoiceRadio[f])
 	{
-		SvDetachStream(playerid, g_VoiceRadio[f], VOICE_CH_RADIO);
-		SvDetachListener(g_VoiceRadio[f], playerid);
+		SvDetachSpeakerFromStream(g_VoiceRadio[f], playerid);
+		SvDetachListenerFromStream(g_VoiceRadio[f], playerid);
 	}
 	g_VoiceRadioOf[playerid] = 0;
 	return 1;
 }
 
-// radio: collegata se membro di fazione IN SERVIZIO (stessa regola di /r), scollegata altrimenti
+// B = voce locale, Z = radio (solo chi ascolta la radio della propria fazione, cioe' in servizio)
+public SV_VOID:OnPlayerActivationKeyPress(SV_UINT:playerid, SV_UINT:keyid)
+{
+	if (playerid >= MAX_PLAYERS || !gPlayer[playerid][pSpawned])
+	{
+		return;
+	}
+	if (keyid == VOICE_KEY_LOCAL && g_VoiceLocal[playerid])
+	{
+		SvAttachSpeakerToStream(g_VoiceLocal[playerid], playerid);
+	}
+	else if (keyid == VOICE_KEY_RADIO && g_VoiceRadioOf[playerid] > 0 && g_VoiceRadio[g_VoiceRadioOf[playerid]])
+	{
+		SvAttachSpeakerToStream(g_VoiceRadio[g_VoiceRadioOf[playerid]], playerid);
+		g_VoiceRadioTalk[playerid] = true;
+	}
+}
+
+public SV_VOID:OnPlayerActivationKeyRelease(SV_UINT:playerid, SV_UINT:keyid)
+{
+	if (playerid >= MAX_PLAYERS)
+	{
+		return;
+	}
+	if (keyid == VOICE_KEY_LOCAL && g_VoiceLocal[playerid])
+	{
+		SvDetachSpeakerFromStream(g_VoiceLocal[playerid], playerid);
+	}
+	else if (keyid == VOICE_KEY_RADIO && g_VoiceRadioOf[playerid] > 0 && g_VoiceRadio[g_VoiceRadioOf[playerid]])
+	{
+		SvDetachSpeakerFromStream(g_VoiceRadio[g_VoiceRadioOf[playerid]], playerid);
+		g_VoiceRadioTalk[playerid] = false;
+	}
+}
+
+// radio: in ascolto se membro di fazione IN SERVIZIO (stessa regola di /r), scollegata altrimenti
 public Voice_OnTick()
 {
 	for (new p = 0; p < MAX_PLAYERS; p++)
 	{
-		if (!IsPlayerConnected(p) || g_VoiceLocal[p] == SV_NONE)
+		if (!IsPlayerConnected(p) || !g_VoiceLocal[p])
 		{
 			continue;
 		}
@@ -122,11 +162,9 @@ public Voice_OnTick()
 			continue;
 		}
 		Voice_RadioLeave(p);
-		if (want > 0 && g_VoiceRadio[want] != SV_NONE)
+		if (want > 0 && g_VoiceRadio[want])
 		{
-			SvSetKey(p, VOICE_KEY_RADIO, VOICE_CH_RADIO);
-			SvAttachStream(p, g_VoiceRadio[want], VOICE_CH_RADIO);
-			SvAttachListener(g_VoiceRadio[want], p);
+			SvAttachListenerToStream(g_VoiceRadio[want], p);
 			g_VoiceRadioOf[p] = want;
 		}
 	}
