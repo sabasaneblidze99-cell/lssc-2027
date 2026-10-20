@@ -1,4 +1,4 @@
-new g_UiSkinGender[1000];
+new g_UiSkinGender[MAX_PLAYERS];
 
 UI_ShowRegisterEx(playerid, error[])
 {
@@ -21,7 +21,7 @@ UI_ShowLogin(playerid, bool:wrongPassword)
 {
 	if (CefUI_Active(playerid))
 	{
-		new left = 3 - gPlayer[playerid][PLAYER_DATA_87];
+		new left = 3 - gPlayer[playerid][pLoginAttempts];
 		CefUI_AuthStep(playerid, "login", wrongPassword ? "პაროლი არასწორია." : "", left < 0 ? 0 : left);
 		return 0;
 	}
@@ -42,7 +42,7 @@ UI_ShowGenderSelect(playerid)
 
 UI_ShowSkinSelect(playerid, gender)
 {
-	if (playerid < 0 || playerid >= 1000)
+	if (playerid < 0 || playerid >= MAX_PLAYERS)
 	{
 		return 0;
 	}

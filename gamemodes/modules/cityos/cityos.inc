@@ -1,4 +1,4 @@
-new bool:g_CosWaitBoard[1000];
+new bool:g_CosWaitBoard[MAX_PLAYERS];
 new g_CosRumor[3][8][] = {
 	{"La panetteria di Idlewood ha riaperto dopo l'estate: il pane esce caldo alle sei.", "Alla Casa del Quartiere cercano volontari per il doposcuola del giovedi'.", "Il campetto dietro la stazione ha di nuovo le reti: qualcuno le ha ricucite a mano.", "Un vecchio meccanico ripara bici gratis ai ragazzi, basta portargli un caffe'.", "Le signore del palazzo giallo organizzano una cena di quartiere sabato sera.", "Il negozio all'angolo ha appeso una lavagna: chi ha bisogno lascia un biglietto.", "Dicono che il murale vicino alla fermata sara' restaurato dagli stessi artisti.", "Chi esce dal turno di notte trova sempre una luce accesa alla Casa del Quartiere."},
 	{"A Ganton il barbiere sotto i portici taglia i capelli ai ragazzi prima degli esami.", "Il negozio di Ganton aspetta un carico di frutta: chi consegna e' il benvenuto.", "Sulla Grove hanno ridipinto le panchine, ognuna con un colore diverso.", "Un gruppo di madri accompagna i bambini a scuola a turno, a piedi.", "Il torneo di basket del venerdi' quest'anno raccoglie fondi per il campetto.", "Un ex corriere ha aperto una piccola officina: assume chi vuole imparare.", "Le luci della via principale sono tornate: i commercianti hanno fatto colletta.", "Dicono che il vecchio cinema all'aperto potrebbe tornare per una sera d'estate."},
@@ -7,12 +7,12 @@ new g_CosRumor[3][8][] = {
 
 bool:CityOS_Playing(playerid)
 {
-	return Util_IsPlaying(playerid) && gPlayer[playerid][PLAYER_DATA_338] != 0 && LD_IsReady();
+	return Util_IsPlaying(playerid) && gPlayer[playerid][pLivingReady] != 0 && LD_IsReady();
 }
 
 CityOS_Integrity(playerid)
 {
-	new veh = gPlayer[playerid][PLAYER_DATA_349];
+	new veh = gPlayer[playerid][pFreightVehicle];
 	if (veh <= 0 || veh >= 2000 || LD_VehModule(veh) != 3 || LD_VehOwner(veh) != playerid)
 	{
 		return -1;
@@ -24,9 +24,9 @@ CityOS_Integrity(playerid)
 
 CityOS_NextDistance(playerid)
 {
-	new d = gPlayer[playerid][PLAYER_DATA_348] == 2 ? gPlayer[playerid][PLAYER_DATA_351] : gPlayer[playerid][PLAYER_DATA_350];
+	new d = gPlayer[playerid][pContractPhase] == 2 ? gPlayer[playerid][pContractToDistrict] : gPlayer[playerid][pContractFromDistrict];
 	new Float:tx, Float:ty, Float:px, Float:py, Float:pz;
-	new bool:shop = gPlayer[playerid][PLAYER_DATA_348] == 2;
+	new bool:shop = gPlayer[playerid][pContractPhase] == 2;
 	switch (d)
 	{
 		case 1:
@@ -50,8 +50,8 @@ CityOS_NextDistance(playerid)
 		}
 	}
 	GetPlayerPos(playerid, px, py, pz);
-	new Float:dx = (Float:(tx) - Float:(px)), Float:dy = (Float:(ty) - Float:(py));
-	return floatround(floatsqroot((Float:((Float:(dx) * Float:(dx))) + Float:((Float:(dy) * Float:(dy))))), 1);
+	new Float:dx = (tx - px), Float:dy = (ty - py);
+	return floatround(floatsqroot(((dx * dx) + (dy * dy))), 1);
 }
 
 CityOS_ShowBoard(playerid)
@@ -105,15 +105,15 @@ CityOS_RenderDistrict(playerid, districtId, count)
 	UI_CityDistrictRumor(playerid, g_CosRumor[districtId - 1][r]);
 	for (new i = 0; i < count && i < 8; i++)
 	{
-		new ago = now - g_LdHist[i][LD_HIST_1];
-		UI_CityDistrictEvent(playerid, g_LdHist[i][LD_HIST_0], ago > 0 ? ago : 0, g_LdHist[i][LD_HIST_3]);
+		new ago = now - g_LdHist[i][lhTimestamp];
+		UI_CityDistrictEvent(playerid, g_LdHist[i][lhType], ago > 0 ? ago : 0, g_LdHist[i][lhActDelta]);
 	}
 	UI_CityDistrictShow(playerid);
 }
 
 CityOS_OnInit()
 {
-	for (new i = 0; i < 1000; i++)
+	for (new i = 0; i < MAX_PLAYERS; i++)
 	{
 		g_CosWaitBoard[i] = 0;
 	}
@@ -145,7 +145,7 @@ public CityOS_OnDistrictEvent(type, districtId, charId, value, opId[])
 	{
 		return 1;
 	}
-	for (new i = 0; i < 1000; i++)
+	for (new i = 0; i < MAX_PLAYERS; i++)
 	{
 		if (!g_CosWaitBoard[i])
 		{
@@ -194,8 +194,8 @@ CityOS_CmdContratto(playerid, params[])
 	}
 	new pos = 0, tok[24];
 	Util_NextToken(params, pos, tok, 24);
-	new ct = gPlayer[playerid][PLAYER_DATA_347];
-	new bool:active = ct != 0 && (gPlayer[playerid][PLAYER_DATA_348] == 1 || gPlayer[playerid][PLAYER_DATA_348] == 2);
+	new ct = gPlayer[playerid][pContractId];
+	new bool:active = ct != 0 && (gPlayer[playerid][pContractPhase] == 1 || gPlayer[playerid][pContractPhase] == 2);
 	if (tok[0] != 0 && !strcmp(tok, "abbandona", 1, 0x7FFFFFFF))
 	{
 		if (!active)
@@ -223,7 +223,7 @@ CityOS_CmdContratto(playerid, params[])
 	{
 		left = exp > gettime() ? exp - gettime() : 0;
 	}
-	UI_CityContractStatus(playerid, ct, gPlayer[playerid][PLAYER_DATA_348], gPlayer[playerid][PLAYER_DATA_350], gPlayer[playerid][PLAYER_DATA_351], gPlayer[playerid][PLAYER_DATA_352], gPlayer[playerid][PLAYER_DATA_354], left, CityOS_Integrity(playerid), CityOS_NextDistance(playerid), -5);
+	UI_CityContractStatus(playerid, ct, gPlayer[playerid][pContractPhase], gPlayer[playerid][pContractFromDistrict], gPlayer[playerid][pContractToDistrict], gPlayer[playerid][pContractCargo], gPlayer[playerid][pContractReward], left, CityOS_Integrity(playerid), CityOS_NextDistance(playerid), -5);
 	return 1;
 }
 
@@ -305,7 +305,7 @@ public UI_OnContractAbandon(playerid, contractId)
 	{
 		return 1;
 	}
-	if (contractId <= 0 || gPlayer[playerid][PLAYER_DATA_347] != contractId)
+	if (contractId <= 0 || gPlayer[playerid][pContractId] != contractId)
 	{
 		Util_Send(playerid, -10270721, "Questo contratto non e' piu' attivo.");
 		return 1;

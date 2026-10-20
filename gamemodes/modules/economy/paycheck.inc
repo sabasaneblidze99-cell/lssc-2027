@@ -30,12 +30,12 @@ Economy_PaycheckPaid(amount, room)
 
 Economy_Paycheck(playerid)
 {
-	new amount = Economy_PaycheckAmount(gPlayer[playerid][PLAYER_DATA_90]);
+	new amount = Economy_PaycheckAmount(gPlayer[playerid][pLevel]);
 	new paid = Economy_PaycheckPaid(amount, Money_BankRoom(playerid));
 	SendClientMessage(playerid, -2994689, "--- Stipendio ---");
 	if (paid > 0 && Money_GiveBank(playerid, paid, "paycheck", ""))
 	{
-		SendClientMessage(playerid, 0x66DD66FF, "Stipendio: $%d versato in banca. Saldo: $%d.", paid, gPlayer[playerid][PLAYER_DATA_89]);
+		SendClientMessage(playerid, 0x66DD66FF, "Stipendio: $%d versato in banca. Saldo: $%d.", paid, gPlayer[playerid][pBank]);
 		if (paid < amount)
 		{
 			SendClientMessage(playerid, -10270721, "Il conto ha raggiunto il limite: parte dello stipendio e' andata persa.");
@@ -52,22 +52,22 @@ Economy_Paycheck(playerid)
 public Economy_OnTick()
 {
 	new now = GetTickCount();
-	for (new i = 0; i < 1000; i++)
+	for (new i = 0; i < MAX_PLAYERS; i++)
 	{
-		if (!gPlayer[i][PLAYER_DATA_1] || !Util_IsPlaying(i))
+		if (!gPlayer[i][pSpawned] || !Util_IsPlaying(i))
 		{
 			continue;
 		}
-		if (now - gPlayer[i][PLAYER_DATA_114] > 10000)
+		if (now - gPlayer[i][pLastActiveTick] > 10000)
 		{
 			continue;
 		}
-		gPlayer[i][PLAYER_DATA_112] += 1000;
-		gPlayer[i][PLAYER_DATA_113] += 1000;
-		gPlayer[i][PLAYER_DATA_111] += 1000;
-		if (gPlayer[i][PLAYER_DATA_111] >= 900000)
+		gPlayer[i][pSessionMs] += 1000;
+		gPlayer[i][pPlayedMs] += 1000;
+		gPlayer[i][pPaycheckMs] += 1000;
+		if (gPlayer[i][pPaycheckMs] >= 900000)
 		{
-			gPlayer[i][PLAYER_DATA_111] -= 900000;
+			gPlayer[i][pPaycheckMs] -= 900000;
 			Economy_Paycheck(i);
 		}
 	}

@@ -185,7 +185,7 @@ public DB_OnUnbanDone(requesterid, reqName[], name[])
 
 DB_CheckBan(playerid, name[], ip[])
 {
-	if (playerid < 0 || playerid >= 1000 || !IsPlayerConnected(playerid))
+	if (playerid < 0 || playerid >= MAX_PLAYERS || !IsPlayerConnected(playerid))
 	{
 		return 0;
 	}

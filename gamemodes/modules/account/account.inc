@@ -7,1051 +7,50 @@ Account_NextSeq(playerid)
 	{
 		g_AuthSeq = 1;
 	}
-	gPlayer[playerid][PLAYER_DATA_117] = g_AuthSeq;
+	gPlayer[playerid][pAuthSeq] = g_AuthSeq;
 	return g_AuthSeq;
 }
 
 bool:Account_SeqValid(playerid, seq, phase)
 {
-	if (playerid < 0 || playerid >= 1000 || !IsPlayerConnected(playerid))
+	if (playerid < 0 || playerid >= MAX_PLAYERS || !IsPlayerConnected(playerid))
 	{
 		return 0;
 	}
-	return seq != 0 && gPlayer[playerid][PLAYER_DATA_117] == seq && gPlayer[playerid][PLAYER_DATA_106] == phase;
+	return seq != 0 && gPlayer[playerid][pAuthSeq] == seq && gPlayer[playerid][pAuthState] == phase;
 }
-new g_AccPendingEmail[1000][255] = {
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0}
-};
+new g_AccPendingEmail[MAX_PLAYERS][255];
 
 Account_Kick(playerid, reason[])
 {
-	if (playerid < 0 || playerid >= 1000 || !IsPlayerConnected(playerid))
+	if (playerid < 0 || playerid >= MAX_PLAYERS || !IsPlayerConnected(playerid))
 	{
 		return 0;
 	}
-	if (gPlayer[playerid][PLAYER_DATA_106] == 10)
+	if (gPlayer[playerid][pAuthState] == 10)
 	{
 		return 0;
 	}
 	Util_Send(playerid, -10270721, reason);
-	gPlayer[playerid][PLAYER_DATA_106] = 10;
+	gPlayer[playerid][pAuthState] = 10;
 	UI_CloseDialogs(playerid);
-	gPlayer[playerid][PLAYER_DATA_110] = SetTimerEx("Account_OnKickTimer", 750, 0, "d", playerid);
+	gPlayer[playerid][pKickTimer] = SetTimerEx("Account_OnKickTimer", 750, 0, "d", playerid);
 }
 
 public Account_OnKickTimer(playerid)
 {
-	if (playerid < 0 || playerid >= 1000)
+	if (playerid < 0 || playerid >= MAX_PLAYERS)
 	{
 		return 1;
 	}
-	gPlayer[playerid][PLAYER_DATA_110] = 0;
+	gPlayer[playerid][pKickTimer] = 0;
 	Kick(playerid);
 	return 1;
 }
 
 Account_ShowPrompt(playerid)
 {
-	if (playerid < 0 || playerid >= 1000 || !gPlayer[playerid][PLAYER_DATA_107])
+	if (playerid < 0 || playerid >= MAX_PLAYERS || !gPlayer[playerid][pClassRequested])
 	{
 		return 0;
 	}
@@ -1059,7 +58,7 @@ Account_ShowPrompt(playerid)
 	{
 		return 0;
 	}
-	switch (gPlayer[playerid][PLAYER_DATA_106])
+	switch (gPlayer[playerid][pAuthState])
 	{
 		case 1:
 		{
@@ -1067,7 +66,7 @@ Account_ShowPrompt(playerid)
 		}
 		case 3:
 		{
-			UI_ShowLogin(playerid, gPlayer[playerid][PLAYER_DATA_87] > 0);
+			UI_ShowLogin(playerid, gPlayer[playerid][pLoginAttempts] > 0);
 		}
 		case 5:
 		{
@@ -1075,7 +74,7 @@ Account_ShowPrompt(playerid)
 		}
 		case 6:
 		{
-			UI_ShowSkinSelect(playerid, gPlayer[playerid][PLAYER_DATA_105]);
+			UI_ShowSkinSelect(playerid, gPlayer[playerid][pGender]);
 		}
 	}
 }
@@ -1083,9 +82,9 @@ Account_ShowPrompt(playerid)
 Account_OnConnect(playerid)
 {
 	g_DBPending[playerid] = 0;
-	gPlayer[playerid][PLAYER_DATA_106] = 0;
-	gPlayer[playerid][PLAYER_DATA_115] = GetTickCount() - 30000;
-	gPlayer[playerid][PLAYER_DATA_120] = GetTickCount() - 10000;
+	gPlayer[playerid][pAuthState] = 0;
+	gPlayer[playerid][pLastReportTick] = GetTickCount() - 30000;
+	gPlayer[playerid][pLastGiveMoneyTick] = GetTickCount() - 10000;
 	new name[25];
 	GetPlayerName(playerid, name, 25);
 	if (1 && !Util_IsValidRPName(name))
@@ -1101,41 +100,41 @@ Account_OnConnect(playerid)
 	}
 	new ip[16];
 	GetPlayerIp(playerid, ip, 16);
-	gPlayer[playerid][PLAYER_DATA_106] = 11;
+	gPlayer[playerid][pAuthState] = 11;
 	DB_CheckBan(playerid, name, ip);
 }
 
 Account_ContinueConnect(playerid)
 {
-	if (playerid < 0 || playerid >= 1000 || !IsPlayerConnected(playerid))
+	if (playerid < 0 || playerid >= MAX_PLAYERS || !IsPlayerConnected(playerid))
 	{
 		return 0;
 	}
-	if (gPlayer[playerid][PLAYER_DATA_106] != 11)
+	if (gPlayer[playerid][pAuthState] != 11)
 	{
 		return 0;
 	}
-	gPlayer[playerid][PLAYER_DATA_106] = 0;
+	gPlayer[playerid][pAuthState] = 0;
 	DB_LoadAccount(playerid);
 }
 
 Account_OnDisconnect(playerid)
 {
-	if (playerid < 0 || playerid >= 1000)
+	if (playerid < 0 || playerid >= MAX_PLAYERS)
 	{
 		return 0;
 	}
 	g_AccPendingEmail[playerid][0] = 0;
-	if (gPlayer[playerid][PLAYER_DATA_110] != 0)
+	if (gPlayer[playerid][pKickTimer] != 0)
 	{
-		KillTimer(gPlayer[playerid][PLAYER_DATA_110]);
+		KillTimer(gPlayer[playerid][pKickTimer]);
 	}
 	g_DBPending[playerid] = 0;
 }
 
 public Account_OnDBLoaded(playerid, accountId, hash[], salt[], adminLevel)
 {
-	if (!IsPlayerConnected(playerid) || gPlayer[playerid][PLAYER_DATA_106] != 0)
+	if (!IsPlayerConnected(playerid) || gPlayer[playerid][pAuthState] != 0)
 	{
 		return 1;
 	}
@@ -1146,17 +145,17 @@ public Account_OnDBLoaded(playerid, accountId, hash[], salt[], adminLevel)
 			Account_Kick(playerid, "სერვისი დროებით მიუწვდომელია. სცადე მოგვიანებით.");
 			return 1;
 		}
-		gPlayer[playerid][PLAYER_DATA_106] = 1;
+		gPlayer[playerid][pAuthState] = 1;
 	}
 	else
 	{
-		strmid(gPlayer[playerid][PLAYER_DATA_4], hash, 0, 64, 65);
-		strmid(gPlayer[playerid][PLAYER_DATA_69], salt, 0, 16, 17);
-		gPlayer[playerid][PLAYER_DATA_2] = accountId;
-		gPlayer[playerid][PLAYER_DATA_86] = clamp(adminLevel, 0, 3);
-		gPlayer[playerid][PLAYER_DATA_116] = DB_GetHashAlgo(playerid);
-		gPlayer[playerid][PLAYER_DATA_118] = DB_GetMutedUntil(playerid);
-		gPlayer[playerid][PLAYER_DATA_87] = 0;
+		strmid(gPlayer[playerid][pPassHash], hash, 0, 64, 65);
+		strmid(gPlayer[playerid][pPassSalt], salt, 0, 16, 17);
+		gPlayer[playerid][pAccountId] = accountId;
+		gPlayer[playerid][pAdminLevel] = clamp(adminLevel, 0, 3);
+		gPlayer[playerid][pHashAlgo] = DB_GetHashAlgo(playerid);
+		gPlayer[playerid][pMutedUntil] = DB_GetMutedUntil(playerid);
+		gPlayer[playerid][pLoginAttempts] = 0;
 		new locked = DB_GetLockedUntil(playerid) - gettime();
 		if (locked > 0)
 		{
@@ -1165,7 +164,7 @@ public Account_OnDBLoaded(playerid, accountId, hash[], salt[], adminLevel)
 			Account_Kick(playerid, msg);
 			return 1;
 		}
-		gPlayer[playerid][PLAYER_DATA_106] = 3;
+		gPlayer[playerid][pAuthState] = 3;
 	}
 	Account_ShowPrompt(playerid);
 	return 1;
@@ -1176,13 +175,13 @@ Account_CompleteLogin(playerid, accountId, adminLevel)
 	new name[25], ip[16], msg[128];
 	GetPlayerName(playerid, name, 25);
 	GetPlayerIp(playerid, ip, 16);
-	gPlayer[playerid][PLAYER_DATA_2] = accountId;
-	gPlayer[playerid][PLAYER_DATA_86] = adminLevel;
-	gPlayer[playerid][PLAYER_DATA_0] = 1;
-	gPlayer[playerid][PLAYER_DATA_87] = 0;
-	gPlayer[playerid][PLAYER_DATA_4][0] = 0;
-	gPlayer[playerid][PLAYER_DATA_69][0] = 0;
-	gPlayer[playerid][PLAYER_DATA_106] = 4;
+	gPlayer[playerid][pAccountId] = accountId;
+	gPlayer[playerid][pAdminLevel] = adminLevel;
+	gPlayer[playerid][pLoggedIn] = 1;
+	gPlayer[playerid][pLoginAttempts] = 0;
+	gPlayer[playerid][pPassHash][0] = 0;
+	gPlayer[playerid][pPassSalt][0] = 0;
+	gPlayer[playerid][pAuthState] = 4;
 	DB_UpdateLogin(accountId, ip);
 	format(msg, 128, "login account %d (%s)", accountId, name);
 	Log_Write("ACCOUNT", msg);
@@ -1192,7 +191,7 @@ Account_CompleteLogin(playerid, accountId, adminLevel)
 
 Account_SetPendingEmail(playerid, email[])
 {
-	if (playerid < 0 || playerid >= 1000)
+	if (playerid < 0 || playerid >= MAX_PLAYERS)
 	{
 		return 0;
 	}
@@ -1205,7 +204,7 @@ Account_SetPendingEmail(playerid, email[])
 
 public UI_OnRegisterSubmit(playerid, password[])
 {
-	if (!IsPlayerConnected(playerid) || gPlayer[playerid][PLAYER_DATA_106] != 1)
+	if (!IsPlayerConnected(playerid) || gPlayer[playerid][pAuthState] != 1)
 	{
 		return 1;
 	}
@@ -1217,7 +216,7 @@ public UI_OnRegisterSubmit(playerid, password[])
 		UI_ShowRegister(playerid);
 		return 1;
 	}
-	gPlayer[playerid][PLAYER_DATA_106] = 12;
+	gPlayer[playerid][pAuthState] = 12;
 	bcrypt_hash(playerid, "Account_OnRegisterHashed", password, 11, "d", Account_NextSeq(playerid));
 	return 1;
 }
@@ -1228,7 +227,7 @@ public Account_OnRegisterHashed(playerid, seq)
 	{
 		return 1;
 	}
-	gPlayer[playerid][PLAYER_DATA_117] = 0;
+	gPlayer[playerid][pAuthSeq] = 0;
 	new hash[61];
 	bcrypt_get_hash(hash, 61);
 	if (strlen(hash) != 60)
@@ -1237,14 +236,14 @@ public Account_OnRegisterHashed(playerid, seq)
 		Account_Kick(playerid, "რეგისტრაცია ვერ მოხერხდა. სცადე მოგვიანებით.");
 		return 1;
 	}
-	gPlayer[playerid][PLAYER_DATA_106] = 2;
+	gPlayer[playerid][pAuthState] = 2;
 	DB_CreateAccountEx(playerid, hash, "", 1);
 	return 1;
 }
 
 public Account_OnDBCreated(playerid, accountId)
 {
-	if (!IsPlayerConnected(playerid) || gPlayer[playerid][PLAYER_DATA_106] != 2)
+	if (!IsPlayerConnected(playerid) || gPlayer[playerid][pAuthState] != 2)
 	{
 		return 1;
 	}
@@ -1266,28 +265,28 @@ public Account_OnDBCreated(playerid, accountId)
 
 Account_LoginFailed(playerid)
 {
-	gPlayer[playerid][PLAYER_DATA_106] = 3;
-	gPlayer[playerid][PLAYER_DATA_117] = 0;
-	gPlayer[playerid][PLAYER_DATA_87]++;
+	gPlayer[playerid][pAuthState] = 3;
+	gPlayer[playerid][pAuthSeq] = 0;
+	gPlayer[playerid][pLoginAttempts]++;
 	new name[25], msg[128];
 	GetPlayerName(playerid, name, 25);
-	format(msg, 128, "login fallito %s (tentativo %d/%d)", name, gPlayer[playerid][PLAYER_DATA_87], 3);
+	format(msg, 128, "login fallito %s (tentativo %d/%d)", name, gPlayer[playerid][pLoginAttempts], 3);
 	Log_Write("ACCOUNT", msg);
-	DB_AccountLoginFailed(gPlayer[playerid][PLAYER_DATA_2]);
-	if (gPlayer[playerid][PLAYER_DATA_87] >= 3)
+	DB_AccountLoginFailed(gPlayer[playerid][pAccountId]);
+	if (gPlayer[playerid][pLoginAttempts] >= 3)
 	{
 		Account_Kick(playerid, "შესვლის ძალიან ბევრი წარუმატებელი მცდელობა.");
 		return 0;
 	}
 	new err[512];
-	format(err, 512, "პაროლი არასწორია. დარჩენილი მცდელობა: %d.", 3 - gPlayer[playerid][PLAYER_DATA_87]);
+	format(err, 512, "პაროლი არასწორია. დარჩენილი მცდელობა: %d.", 3 - gPlayer[playerid][pLoginAttempts]);
 	Util_Send(playerid, -10270721, err);
 	UI_ShowLogin(playerid, 1);
 }
 
 public UI_OnLoginSubmit(playerid, password[])
 {
-	if (!IsPlayerConnected(playerid) || gPlayer[playerid][PLAYER_DATA_106] != 3)
+	if (!IsPlayerConnected(playerid) || gPlayer[playerid][pAuthState] != 3)
 	{
 		return 1;
 	}
@@ -1296,27 +295,27 @@ public UI_OnLoginSubmit(playerid, password[])
 		Account_LoginFailed(playerid);
 		return 1;
 	}
-	if (gPlayer[playerid][PLAYER_DATA_116] == 1)
+	if (gPlayer[playerid][pHashAlgo] == 1)
 	{
-		gPlayer[playerid][PLAYER_DATA_106] = 13;
-		bcrypt_verify(playerid, "Account_OnLoginVerified", password, gPlayer[playerid][PLAYER_DATA_4], "dd", Account_NextSeq(playerid), gPlayer[playerid][PLAYER_DATA_2]);
+		gPlayer[playerid][pAuthState] = 13;
+		bcrypt_verify(playerid, "Account_OnLoginVerified", password, gPlayer[playerid][pPassHash], "dd", Account_NextSeq(playerid), gPlayer[playerid][pAccountId]);
 		return 1;
 	}
 	new hash[65];
-	SHA256_PassHash(password, gPlayer[playerid][PLAYER_DATA_69], hash, 65);
-	if (strcmp(hash, gPlayer[playerid][PLAYER_DATA_4], 1, 0x7FFFFFFF) != 0)
+	SHA256_PassHash(password, gPlayer[playerid][pPassSalt], hash, 65);
+	if (strcmp(hash, gPlayer[playerid][pPassHash], 1, 0x7FFFFFFF) != 0)
 	{
 		Account_LoginFailed(playerid);
 		return 1;
 	}
-	gPlayer[playerid][PLAYER_DATA_106] = 12;
-	bcrypt_hash(playerid, "Account_OnMigrateHashed", password, 11, "dd", Account_NextSeq(playerid), gPlayer[playerid][PLAYER_DATA_2]);
+	gPlayer[playerid][pAuthState] = 12;
+	bcrypt_hash(playerid, "Account_OnMigrateHashed", password, 11, "dd", Account_NextSeq(playerid), gPlayer[playerid][pAccountId]);
 	return 1;
 }
 
 public Account_OnLoginVerified(playerid, bool:success, seq, accountId)
 {
-	if (!Account_SeqValid(playerid, seq, 13) || gPlayer[playerid][PLAYER_DATA_2] != accountId)
+	if (!Account_SeqValid(playerid, seq, 13) || gPlayer[playerid][pAccountId] != accountId)
 	{
 		return 1;
 	}
@@ -1325,18 +324,18 @@ public Account_OnLoginVerified(playerid, bool:success, seq, accountId)
 		Account_LoginFailed(playerid);
 		return 1;
 	}
-	gPlayer[playerid][PLAYER_DATA_117] = 0;
-	Account_CompleteLogin(playerid, accountId, gPlayer[playerid][PLAYER_DATA_86]);
+	gPlayer[playerid][pAuthSeq] = 0;
+	Account_CompleteLogin(playerid, accountId, gPlayer[playerid][pAdminLevel]);
 	return 1;
 }
 
 public Account_OnMigrateHashed(playerid, seq, accountId)
 {
-	if (!Account_SeqValid(playerid, seq, 12) || gPlayer[playerid][PLAYER_DATA_2] != accountId)
+	if (!Account_SeqValid(playerid, seq, 12) || gPlayer[playerid][pAccountId] != accountId)
 	{
 		return 1;
 	}
-	gPlayer[playerid][PLAYER_DATA_117] = 0;
+	gPlayer[playerid][pAuthSeq] = 0;
 	new hash[61];
 	bcrypt_get_hash(hash, 61);
 	if (strlen(hash) == 60)
@@ -1348,7 +347,7 @@ public Account_OnMigrateHashed(playerid, seq, accountId)
 	{
 		Log_Write("ACCOUNT", "migrazione bcrypt fallita: resta l'hash legacy");
 	}
-	Account_CompleteLogin(playerid, accountId, gPlayer[playerid][PLAYER_DATA_86]);
+	Account_CompleteLogin(playerid, accountId, gPlayer[playerid][pAdminLevel]);
 	return 1;
 }
 
@@ -1358,7 +357,7 @@ public UI_OnDialogCancel(playerid, dialogid)
 	{
 		return 1;
 	}
-	switch (gPlayer[playerid][PLAYER_DATA_106])
+	switch (gPlayer[playerid][pAuthState])
 	{
 		case 1, 3:
 		{
@@ -1370,7 +369,7 @@ public UI_OnDialogCancel(playerid, dialogid)
 		}
 		case 6:
 		{
-			gPlayer[playerid][PLAYER_DATA_106] = 5;
+			gPlayer[playerid][pAuthState] = 5;
 			UI_ShowGenderSelect(playerid);
 		}
 	}
@@ -1387,16 +386,13 @@ public Account_OnDBEmailSet(playerid, result)
 	{
 		Util_Send(playerid, 0x66DD66FF, "ელფოსტა შენახულია. დადასტურება ჯერ არ ხდება: ის მხოლოდ ანგარიშის აღსადგენად გამოიყენება.");
 	}
+	else if (result == 0)
+	{
+		Util_Send(playerid, -10270721, "ეს ელფოსტა უკვე სხვა ანგარიშს ეკუთვნის.");
+	}
 	else
 	{
-		if (result == 0)
-		{
-			Util_Send(playerid, -10270721, "ეს ელფოსტა უკვე სხვა ანგარიშს ეკუთვნის.");
-		}
-		else
-		{
-			Util_Send(playerid, -10270721, "ელფოსტის შენახვა ახლა ვერ მოხერხდა. სცადე მოგვიანებით: /email");
-		}
+		Util_Send(playerid, -10270721, "ელფოსტის შენახვა ახლა ვერ მოხერხდა. სცადე მოგვიანებით: /email");
 	}
 	return 1;
 }
@@ -1415,5 +411,5 @@ Account_CmdEmail(playerid, params[])
 		Util_Send(playerid, -10270721, "ელფოსტის მისამართი არასწორია.");
 		return 0;
 	}
-	DB_AccountSetEmail(playerid, gPlayer[playerid][PLAYER_DATA_2], email);
+	DB_AccountSetEmail(playerid, gPlayer[playerid][pAccountId], email);
 }

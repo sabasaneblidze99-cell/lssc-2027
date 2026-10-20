@@ -1,14 +1,5 @@
 new bool:g_LdReady;
-new g_LdLsnName[8][32] = {
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0},
-	{0}
-};
+new g_LdLsnName[8][32];
 new g_LdLsnPrio[8];
 new g_LdLsnCount;
 new g_LdEmitDepth;
@@ -30,7 +21,7 @@ LD_SetReady(bool:ready)
 	{
 		return 0;
 	}
-	for (new i = 0; i < 1000; i++)
+	for (new i = 0; i < MAX_PLAYERS; i++)
 	{
 		Living_TryCharReady(i);
 	}
@@ -103,43 +94,43 @@ LD_Emit(type, districtId, charId, value, opId[])
 
 LD_OnboardAction(playerid, step)
 {
-	if (!Util_IsPlaying(playerid) || gPlayer[playerid][PLAYER_DATA_3] <= 0)
+	if (!Util_IsPlaying(playerid) || gPlayer[playerid][pCharId] <= 0)
 	{
 		return 0;
 	}
-	LD_Emit(106, 0, gPlayer[playerid][PLAYER_DATA_3], step, "-");
+	LD_Emit(106, 0, gPlayer[playerid][pCharId], step, "-");
 }
 
 LD_GetLocalRep(playerid, districtId)
 {
-	if (playerid < 0 || playerid >= 1000 || districtId < 1 || districtId > 3)
+	if (playerid < 0 || playerid >= MAX_PLAYERS || districtId < 1 || districtId > 3)
 	{
 		return 0;
 	}
-	return gPlayer[playerid][PLAYER_DATA_339][districtId];
+	return gPlayer[playerid][pDistrictRep][districtId];
 }
 
 LD_GetProPoints(playerid, track)
 {
-	if (playerid < 0 || playerid >= 1000 || track < 1 || track > 2)
+	if (playerid < 0 || playerid >= MAX_PLAYERS || track < 1 || track > 2)
 	{
 		return 0;
 	}
-	return gPlayer[playerid][PLAYER_DATA_343][track];
+	return gPlayer[playerid][pProPoints][track];
 }
 
 LD_SetProPoints(playerid, track, points)
 {
-	if (playerid < 0 || playerid >= 1000 || track < 1 || track > 2)
+	if (playerid < 0 || playerid >= MAX_PLAYERS || track < 1 || track > 2)
 	{
 		return 0;
 	}
-	gPlayer[playerid][PLAYER_DATA_343][track] = points > 0 ? points : 0;
+	gPlayer[playerid][pProPoints][track] = points > 0 ? points : 0;
 }
 
 LD_ActiveFlow(playerid)
 {
-	if (playerid < 0 || playerid >= 1000)
+	if (playerid < 0 || playerid >= MAX_PLAYERS)
 	{
 		return 0;
 	}
@@ -147,15 +138,15 @@ LD_ActiveFlow(playerid)
 	{
 		return 1;
 	}
-	if (gPlayer[playerid][PLAYER_DATA_347] != 0 || gPlayer[playerid][PLAYER_DATA_360] != 0)
+	if (gPlayer[playerid][pContractId] != 0 || gPlayer[playerid][pFreightWelcome] != 0)
 	{
 		return 2;
 	}
-	if (gPlayer[playerid][PLAYER_DATA_451] != 0 || gPlayer[playerid][PLAYER_DATA_405] == 2)
+	if (gPlayer[playerid][pTaxiOnDuty] != 0 || gPlayer[playerid][pRentalClass] == 2)
 	{
 		return 3;
 	}
-	if (gPlayer[playerid][PLAYER_DATA_403] != 0)
+	if (gPlayer[playerid][pRentalId] != 0)
 	{
 		return 4;
 	}
@@ -164,15 +155,15 @@ LD_ActiveFlow(playerid)
 
 LD_CheckStart(playerid)
 {
-	if (!g_LdReady || gPlayer[playerid][PLAYER_DATA_338] == 0)
+	if (!g_LdReady || gPlayer[playerid][pLivingReady] == 0)
 	{
 		return 1;
 	}
-	if (gPlayer[playerid][PLAYER_DATA_123])
+	if (gPlayer[playerid][pWounded])
 	{
 		return 2;
 	}
-	if (gPlayer[playerid][PLAYER_DATA_122])
+	if (gPlayer[playerid][pCuffed])
 	{
 		return 3;
 	}
@@ -377,11 +368,11 @@ Living_TryCharReady(playerid)
 	{
 		return 0;
 	}
-	if (gPlayer[playerid][PLAYER_DATA_3] <= 0 || gPlayer[playerid][PLAYER_DATA_338] != 0)
+	if (gPlayer[playerid][pCharId] <= 0 || gPlayer[playerid][pLivingReady] != 0)
 	{
 		return 0;
 	}
-	gPlayer[playerid][PLAYER_DATA_338] = 1;
+	gPlayer[playerid][pLivingReady] = 1;
 	District_OnCharReady(playerid);
 	Director_OnCharReady(playerid);
 	CityOS_OnCharReady(playerid);

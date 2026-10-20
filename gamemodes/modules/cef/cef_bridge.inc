@@ -1,7 +1,8 @@
-new g_CefNonce[1000];
+new g_CefNonce[MAX_PLAYERS];
 
 CefBridge_OnInit()
 {
+#if defined LSRP_CEF
 	cef_subscribe("lssc:ready", "Cef_OnReady");
 	cef_subscribe("lssc:close", "Cef_OnClose");
 	cef_subscribe("lssc:accept", "Cef_OnAccept");
@@ -21,13 +22,16 @@ CefBridge_OnInit()
 	cef_subscribe("lssc:quit", "Cef_OnQuit");
 	SetTimer("CefBridge_ClockTick", 30000, 1);
 	Log_Write("CEF", "interfaccia CEF attiva: pagine da <GTA>/cef/assets/index.html");
+#endif
 }
 
 CefBridge_OnPlayerConnect(playerid)
 {
 	CefUI_Reset(playerid);
+#if defined LSRP_CEF
 	g_CefNonce[playerid]++;
 	SetTimerEx("CefBridge_DecideTimeout", 9000, 0, "dd", playerid, g_CefNonce[playerid]);
+#endif
 }
 
 CefBridge_Decided(playerid)
@@ -40,7 +44,7 @@ CefBridge_Decided(playerid)
 
 public CefBridge_DecideTimeout(playerid, nonce)
 {
-	if (playerid < 0 || playerid >= 1000 || g_CefNonce[playerid] != nonce || !IsPlayerConnected(playerid))
+	if (playerid < 0 || playerid >= MAX_PLAYERS || g_CefNonce[playerid] != nonce || !IsPlayerConnected(playerid))
 	{
 		return 1;
 	}
@@ -54,6 +58,7 @@ public CefBridge_DecideTimeout(playerid, nonce)
 CefBridge_OnPlayerDisconnect(playerid)
 {
 	CefUI_Reset(playerid);
+#if defined LSRP_CEF
 }
 
 CefBridge_OnInitialize(playerid, success)
@@ -73,6 +78,7 @@ CefBridge_OnInitialize(playerid, success)
 	}
 	CefUI_SetState(playerid, 1);
 	cef_create_browser(playerid, 1, "index.html", 0, 0);
+#endif
 }
 
 CefBridge_Arg(arguments[], idx, def)
@@ -103,7 +109,7 @@ CefBridge_SendProfile(playerid)
 	}
 	new name[25], job[32];
 	GetPlayerName(playerid, name, 25);
-	Job_NameOf(gPlayer[playerid][PLAYER_DATA_101], job, 32);
+	Job_NameOf(gPlayer[playerid][pJob], job, 32);
 	cef_emit_event(playerid, "lssc:profile", 0, name, 0, job);
 }
 
@@ -121,7 +127,7 @@ CefBridge_CmdTelefono(playerid)
 
 public CefBridge_ClockTick()
 {
-	for (new i = 0; i < 1000; i++)
+	for (new i = 0; i < MAX_PLAYERS; i++)
 	{
 		if (IsPlayerConnected(i) && CefUI_Active(i) && CefUI_HudIsOn(i))
 		{
@@ -139,7 +145,7 @@ public Cef_OnReady(playerid, arguments[])
 	}
 	CefUI_SetState(playerid, 2);
 	CefUI_Decide(playerid);
-	switch (gPlayer[playerid][PLAYER_DATA_106])
+	switch (gPlayer[playerid][pAuthState])
 	{
 		case 1, 3, 5, 6:
 		{
@@ -149,7 +155,7 @@ public Cef_OnReady(playerid, arguments[])
 		case 15:
 		{
 			HidePlayerDialog(playerid);
-			if (gPlayer[playerid][PLAYER_DATA_107])
+			if (gPlayer[playerid][pClassRequested])
 			{
 				Intro_StoryBegin(playerid);
 			}
@@ -354,12 +360,12 @@ CefBridge_HexVal(c)
 
 bool:CefBridge_AuthOk(playerid)
 {
-	return IsPlayerConnected(playerid) && CefUI_Active(playerid) && !gPlayer[playerid][PLAYER_DATA_0];
+	return IsPlayerConnected(playerid) && CefUI_Active(playerid) && !gPlayer[playerid][pLoggedIn];
 }
 
 public Cef_OnLogin(playerid, arguments[])
 {
-	if (!CefBridge_AuthOk(playerid) || gPlayer[playerid][PLAYER_DATA_106] != 3)
+	if (!CefBridge_AuthOk(playerid) || gPlayer[playerid][pAuthState] != 3)
 	{
 		return 1;
 	}
@@ -383,7 +389,7 @@ public Cef_OnLogin(playerid, arguments[])
 
 public Cef_OnRegister(playerid, arguments[])
 {
-	if (!CefBridge_AuthOk(playerid) || gPlayer[playerid][PLAYER_DATA_106] != 1)
+	if (!CefBridge_AuthOk(playerid) || gPlayer[playerid][pAuthState] != 1)
 	{
 		return 1;
 	}
@@ -410,7 +416,7 @@ public Cef_OnRegister(playerid, arguments[])
 
 public Cef_OnGender(playerid, arguments[])
 {
-	if (!IsPlayerConnected(playerid) || !CefUI_Active(playerid) || gPlayer[playerid][PLAYER_DATA_106] != 5)
+	if (!IsPlayerConnected(playerid) || !CefUI_Active(playerid) || gPlayer[playerid][pAuthState] != 5)
 	{
 		return 1;
 	}
@@ -420,7 +426,7 @@ public Cef_OnGender(playerid, arguments[])
 
 public Cef_OnSkin(playerid, arguments[])
 {
-	if (!IsPlayerConnected(playerid) || !CefUI_Active(playerid) || gPlayer[playerid][PLAYER_DATA_106] != 6)
+	if (!IsPlayerConnected(playerid) || !CefUI_Active(playerid) || gPlayer[playerid][pAuthState] != 6)
 	{
 		return 1;
 	}
@@ -430,7 +436,7 @@ public Cef_OnSkin(playerid, arguments[])
 
 public Cef_OnStory(playerid, arguments[])
 {
-	if (!IsPlayerConnected(playerid) || !CefUI_Active(playerid) || gPlayer[playerid][PLAYER_DATA_106] != 15)
+	if (!IsPlayerConnected(playerid) || !CefUI_Active(playerid) || gPlayer[playerid][pAuthState] != 15)
 	{
 		return 1;
 	}
@@ -444,7 +450,7 @@ public Cef_OnQuit(playerid, arguments[])
 	{
 		return 1;
 	}
-	new st = gPlayer[playerid][PLAYER_DATA_106];
+	new st = gPlayer[playerid][pAuthState];
 	if (st == 3 || st == 1)
 	{
 		Account_Kick(playerid, "Accesso annullato.");

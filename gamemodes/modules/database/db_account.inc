@@ -1,22 +1,22 @@
 
 DB_GetHashAlgo(playerid)
 {
-	return playerid >= 0 && playerid < 1000 ? g_DBHashAlgo[playerid] : 0;
+	return playerid >= 0 && playerid < MAX_PLAYERS ? g_DBHashAlgo[playerid] : 0;
 }
 
 DB_GetMutedUntil(playerid)
 {
-	return playerid >= 0 && playerid < 1000 ? g_DBMutedUntil[playerid] : 0;
+	return playerid >= 0 && playerid < MAX_PLAYERS ? g_DBMutedUntil[playerid] : 0;
 }
 
 DB_GetLockedUntil(playerid)
 {
-	return playerid >= 0 && playerid < 1000 ? g_DBLockedUntil[playerid] : 0;
+	return playerid >= 0 && playerid < MAX_PLAYERS ? g_DBLockedUntil[playerid] : 0;
 }
 
 DB_LoadAccount(playerid)
 {
-	if (playerid < 0 || playerid >= 1000 || !IsPlayerConnected(playerid))
+	if (playerid < 0 || playerid >= MAX_PLAYERS || !IsPlayerConnected(playerid))
 	{
 		return 0;
 	}
@@ -42,7 +42,7 @@ public DB_OnAccountLoaded(playerid, name[])
 		return 1;
 	}
 	DB_PendingClear(playerid, 1);
-	if (gPlayer[playerid][PLAYER_DATA_106] != 0)
+	if (gPlayer[playerid][pAuthState] != 0)
 	{
 		return 1;
 	}
@@ -81,7 +81,7 @@ bool:DB_HashFormatOk(hash[], salt[], algo)
 
 DB_CreateAccountEx(playerid, hash[], salt[], algo)
 {
-	if (playerid < 0 || playerid >= 1000 || !IsPlayerConnected(playerid))
+	if (playerid < 0 || playerid >= MAX_PLAYERS || !IsPlayerConnected(playerid))
 	{
 		return 0;
 	}
@@ -104,7 +104,7 @@ public DB_OnAccountCreated(playerid, name[])
 		return 1;
 	}
 	DB_PendingClear(playerid, 2);
-	if (gPlayer[playerid][PLAYER_DATA_106] != 2)
+	if (gPlayer[playerid][pAuthState] != 2)
 	{
 		return 1;
 	}
@@ -157,7 +157,7 @@ DB_AccountLoginFailed(accountId)
 
 DB_AccountSetEmail(playerid, accountId, email[])
 {
-	if (playerid < 0 || playerid >= 1000)
+	if (playerid < 0 || playerid >= MAX_PLAYERS)
 	{
 		return 0;
 	}
@@ -173,7 +173,7 @@ DB_AccountSetEmail(playerid, accountId, email[])
 
 public DB_OnAccountEmailSet(playerid, accountId, email[])
 {
-	if (!IsPlayerConnected(playerid) || gPlayer[playerid][PLAYER_DATA_2] != accountId)
+	if (!IsPlayerConnected(playerid) || gPlayer[playerid][pAccountId] != accountId)
 	{
 		return 1;
 	}
@@ -185,7 +185,7 @@ public DB_OnAccountEmailSet(playerid, accountId, email[])
 
 public DB_OnAccountEmailCheck(playerid, accountId)
 {
-	if (!IsPlayerConnected(playerid) || gPlayer[playerid][PLAYER_DATA_2] != accountId)
+	if (!IsPlayerConnected(playerid) || gPlayer[playerid][pAccountId] != accountId)
 	{
 		return 1;
 	}

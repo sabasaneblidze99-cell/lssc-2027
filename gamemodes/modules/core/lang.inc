@@ -48,26 +48,20 @@ Lang_Utf8Next(src[], &i)
 		need = 1;
 		cp = c & 31;
 	}
+	else if ((c & 240) == 224)
+	{
+		need = 2;
+		cp = c & 15;
+	}
+	else if ((c & 248) == 240)
+	{
+		need = 3;
+		cp = c & 7;
+	}
 	else
 	{
-		if ((c & 240) == 224)
-		{
-			need = 2;
-			cp = c & 15;
-		}
-		else
-		{
-			if ((c & 248) == 240)
-			{
-				need = 3;
-				cp = c & 7;
-			}
-			else
-			{
-				i++;
-				return -c;
-			}
-		}
+		i++;
+		return -c;
 	}
 	for (new k = 1; k <= need; k++)
 	{
@@ -104,12 +98,9 @@ Lang_Translit(src[], dest[], size)
 		{
 			idx = cp - 4304;
 		}
-		else
+		else if (cp >= 7312 && cp <= 7344)
 		{
-			if (cp >= 7312 && cp <= 7344)
-			{
-				idx = cp - 7312;
-			}
+			idx = cp - 7312;
 		}
 		if (idx >= 0)
 		{

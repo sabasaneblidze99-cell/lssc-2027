@@ -2,7 +2,9 @@
 #include <open.mp>
 #include <a_mysql>
 #include <samp_bcrypt>
-#include <cef>
+#if defined LSRP_CEF
+	#include <cef>
+#endif
 
 #pragma dynamic 32768
 
@@ -72,7 +74,7 @@ main()
 public OnGameModeInit()
 {
 	SetGameModeText("LSRP 0.1.0-proto");
-	for (new i = 0; i < 1000; i++)
+	for (new i = 0; i < MAX_PLAYERS; i++)
 	{
 		Player_Reset(i);
 	}
@@ -106,7 +108,7 @@ public OnGameModeExit()
 	return 1;
 }
 
-public CEF_OnPlayerConnect(playerid)
+public OnPlayerConnect(playerid)
 {
 	Player_Reset(playerid);
 	CefBridge_OnPlayerConnect(playerid);
@@ -121,7 +123,7 @@ public CEF_OnPlayerConnect(playerid)
 	return 1;
 }
 
-public CEF_OnPlayerDisconnect(playerid, reason)
+public OnPlayerDisconnect(playerid, reason)
 {
 	Bank_OnPlayerDisconnect(playerid);
 	Inv_OnPlayerDisconnect(playerid);
@@ -145,6 +147,7 @@ public CEF_OnPlayerDisconnect(playerid, reason)
 	return 1;
 }
 
+#if defined LSRP_CEF
 public OnCefInitialize(player_id, success)
 {
 	CefBridge_OnInitialize(player_id, success);
@@ -162,6 +165,7 @@ public OnCefBrowserCreated(player_id, browser_id, status_code)
 	return 1;
 }
 
+#endif
 public OnPlayerRequestClass(playerid, classid)
 {
 	Char_OnRequestClass(playerid);

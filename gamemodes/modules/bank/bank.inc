@@ -14,7 +14,7 @@ new g_BankLabel[9];
 
 bool:Bank_Valid(playerid)
 {
-	return playerid >= 0 && playerid < 1000 && IsPlayerConnected(playerid);
+	return playerid >= 0 && playerid < MAX_PLAYERS && IsPlayerConnected(playerid);
 }
 
 Bank_Tick()
@@ -48,13 +48,13 @@ Bank_NearPoint(playerid, bool:counterOnly)
 			continue;
 		}
 		new Float:radius = Float:((Bank_IsCounter(i) ? 2.5 : 2.0));
-		new Float:dx = (Float:(px) - Float:(s_BankPoints[i][0])), Float:dy = (Float:(py) - Float:(s_BankPoints[i][1])), Float:dz = (Float:(pz) - Float:(s_BankPoints[i][2]));
-		new Float:d = floatsqroot((Float:((Float:(dx) * Float:(dx))) + Float:((Float:(dy) * Float:(dy)))));
-		if ((Float:(d) > Float:(radius)) || (Float:(floatabs(dz)) > 4.0))
+		new Float:dx = (px - s_BankPoints[i][0]), Float:dy = (py - s_BankPoints[i][1]), Float:dz = (pz - s_BankPoints[i][2]);
+		new Float:d = floatsqroot(((dx * dx) + (dy * dy)));
+		if ((d > radius) || (floatabs(dz) > 4.0))
 		{
 			continue;
 		}
-		if (best < 0 || (Float:(d) < Float:(bestD)))
+		if (best < 0 || (d < bestD))
 		{
 			best = i;
 			bestD = d;
@@ -119,7 +119,7 @@ Bank_FindPlayer(input[])
 		return id >= 0 && id < 1000 && Util_IsPlaying(id) ? id : -1;
 	}
 	new found = -1, name[25];
-	for (new p = 0; p < 1000; p++)
+	for (new p = 0; p < MAX_PLAYERS; p++)
 	{
 		if (!Util_IsPlaying(p))
 		{
@@ -144,7 +144,7 @@ Bank_FindPlayer(input[])
 
 bool:Bank_SameIp(a, b)
 {
-	if (gPlayer[a][PLAYER_DATA_2] == gPlayer[b][PLAYER_DATA_2])
+	if (gPlayer[a][pAccountId] == gPlayer[b][pAccountId])
 	{
 		return 0;
 	}
@@ -162,12 +162,9 @@ Bank_LocalOffset()
 	{
 		off -= 86400;
 	}
-	else
+	else if (off < -43200)
 	{
-		if (off < -43200)
-		{
-			off += 86400;
-		}
+		off += 86400;
 	}
 	return off;
 }
@@ -198,178 +195,136 @@ Bank_KindLabel(kind[], dest[], size)
 	{
 		strcopy(dest, "Deposito", size);
 	}
+	else if (!strcmp(kind, "withdraw", 0, 0x7FFFFFFF))
+	{
+		strcopy(dest, "Prelievo", size);
+	}
+	else if (!strcmp(kind, "xfer_out", 0, 0x7FFFFFFF))
+	{
+		strcopy(dest, "Bonifico a", size);
+	}
+	else if (!strcmp(kind, "xfer_in", 0, 0x7FFFFFFF))
+	{
+		strcopy(dest, "Bonifico da", size);
+	}
+	else if (!strcmp(kind, "fee", 0, 0x7FFFFFFF))
+	{
+		strcopy(dest, "Commissione", size);
+	}
+	else if (!strcmp(kind, "paycheck", 0, 0x7FFFFFFF))
+	{
+		strcopy(dest, "Stipendio", size);
+	}
+	else if (!strcmp(kind, "job", 0, 0x7FFFFFFF))
+	{
+		strcopy(dest, "Compenso lavoro", size);
+	}
+	else if (!strcmp(kind, "faction", 0, 0x7FFFFFFF))
+	{
+		strcopy(dest, "Stipendio fazione", size);
+	}
+	else if (!strcmp(kind, "bill", 0, 0x7FFFFFFF))
+	{
+		strcopy(dest, "Bolletta", size);
+	}
+	else if (!strcmp(kind, "house", 0, 0x7FFFFFFF))
+	{
+		strcopy(dest, "Casa", size);
+	}
+	else if (!strcmp(kind, "vehicle", 0, 0x7FFFFFFF))
+	{
+		strcopy(dest, "Veicolo", size);
+	}
+	else if (!strcmp(kind, "fine", 0, 0x7FFFFFFF))
+	{
+		strcopy(dest, "Multa", size);
+	}
+	else if (!strcmp(kind, "refund", 0, 0x7FFFFFFF))
+	{
+		strcopy(dest, "Rimborso", size);
+	}
+	else if (!strcmp(kind, "admin", 0, 0x7FFFFFFF))
+	{
+		strcopy(dest, "Staff", size);
+	}
+	else if (!strcmp(kind, "undo", 0, 4))
+	{
+		strcopy(dest, "Storno", size);
+	}
 	else
 	{
-		if (!strcmp(kind, "withdraw", 0, 0x7FFFFFFF))
-		{
-			strcopy(dest, "Prelievo", size);
-		}
-		else
-		{
-			if (!strcmp(kind, "xfer_out", 0, 0x7FFFFFFF))
-			{
-				strcopy(dest, "Bonifico a", size);
-			}
-			else
-			{
-				if (!strcmp(kind, "xfer_in", 0, 0x7FFFFFFF))
-				{
-					strcopy(dest, "Bonifico da", size);
-				}
-				else
-				{
-					if (!strcmp(kind, "fee", 0, 0x7FFFFFFF))
-					{
-						strcopy(dest, "Commissione", size);
-					}
-					else
-					{
-						if (!strcmp(kind, "paycheck", 0, 0x7FFFFFFF))
-						{
-							strcopy(dest, "Stipendio", size);
-						}
-						else
-						{
-							if (!strcmp(kind, "job", 0, 0x7FFFFFFF))
-							{
-								strcopy(dest, "Compenso lavoro", size);
-							}
-							else
-							{
-								if (!strcmp(kind, "faction", 0, 0x7FFFFFFF))
-								{
-									strcopy(dest, "Stipendio fazione", size);
-								}
-								else
-								{
-									if (!strcmp(kind, "bill", 0, 0x7FFFFFFF))
-									{
-										strcopy(dest, "Bolletta", size);
-									}
-									else
-									{
-										if (!strcmp(kind, "house", 0, 0x7FFFFFFF))
-										{
-											strcopy(dest, "Casa", size);
-										}
-										else
-										{
-											if (!strcmp(kind, "vehicle", 0, 0x7FFFFFFF))
-											{
-												strcopy(dest, "Veicolo", size);
-											}
-											else
-											{
-												if (!strcmp(kind, "fine", 0, 0x7FFFFFFF))
-												{
-													strcopy(dest, "Multa", size);
-												}
-												else
-												{
-													if (!strcmp(kind, "refund", 0, 0x7FFFFFFF))
-													{
-														strcopy(dest, "Rimborso", size);
-													}
-													else
-													{
-														if (!strcmp(kind, "admin", 0, 0x7FFFFFFF))
-														{
-															strcopy(dest, "Staff", size);
-														}
-														else
-														{
-															if (!strcmp(kind, "undo", 0, 4))
-															{
-																strcopy(dest, "Storno", size);
-															}
-															else
-															{
-																strcopy(dest, kind, size);
-															}
-														}
-													}
-												}
-											}
-										}
-									}
-								}
-							}
-						}
-					}
-				}
-			}
-		}
+		strcopy(dest, kind, size);
 	}
 }
 
 bool:Bank_OpIs(playerid, op)
 {
-	return Bank_Valid(playerid) && gPlayer[playerid][PLAYER_DATA_265] != 0 && gPlayer[playerid][PLAYER_DATA_266] == op;
+	return Bank_Valid(playerid) && gPlayer[playerid][pBankOpBusy] != 0 && gPlayer[playerid][pBankOp] == op;
 }
 
 Bank_BeginOp(playerid, op, amount, point)
 {
-	gPlayer[playerid][PLAYER_DATA_265] = 1;
-	gPlayer[playerid][PLAYER_DATA_266] = op;
-	gPlayer[playerid][PLAYER_DATA_267] = amount;
-	gPlayer[playerid][PLAYER_DATA_268] = 0;
-	gPlayer[playerid][PLAYER_DATA_269] = 0;
-	gPlayer[playerid][PLAYER_DATA_270] = point;
-	gPlayer[playerid][PLAYER_DATA_271] = Bank_Tick();
-	gPlayer[playerid][PLAYER_DATA_273][0] = 0;
+	gPlayer[playerid][pBankOpBusy] = 1;
+	gPlayer[playerid][pBankOp] = op;
+	gPlayer[playerid][pBankOpAmount] = amount;
+	gPlayer[playerid][pBankOpAux] = 0;
+	gPlayer[playerid][pBankOpTarget] = 0;
+	gPlayer[playerid][pBankOpPoint] = point;
+	gPlayer[playerid][pBankOpTick] = Bank_Tick();
+	gPlayer[playerid][pBankOpId][0] = 0;
 }
 
 Bank_BeginWrite(playerid, op, amount, point)
 {
 	Bank_BeginOp(playerid, op, amount, point);
-	DB_BankMakeOpId(gPlayer[playerid][PLAYER_DATA_273], 37, gPlayer[playerid][PLAYER_DATA_3]);
+	DB_BankMakeOpId(gPlayer[playerid][pBankOpId], 37, gPlayer[playerid][pCharId]);
 }
 
 Bank_EndOp(playerid)
 {
-	gPlayer[playerid][PLAYER_DATA_265] = 0;
-	gPlayer[playerid][PLAYER_DATA_266] = 0;
-	gPlayer[playerid][PLAYER_DATA_267] = 0;
-	gPlayer[playerid][PLAYER_DATA_268] = 0;
-	gPlayer[playerid][PLAYER_DATA_269] = 0;
-	gPlayer[playerid][PLAYER_DATA_272]++;
+	gPlayer[playerid][pBankOpBusy] = 0;
+	gPlayer[playerid][pBankOp] = 0;
+	gPlayer[playerid][pBankOpAmount] = 0;
+	gPlayer[playerid][pBankOpAux] = 0;
+	gPlayer[playerid][pBankOpTarget] = 0;
+	gPlayer[playerid][pBankOpToken]++;
 }
 
 Bank_StartResync(playerid)
 {
-	gPlayer[playerid][PLAYER_DATA_265] = 1;
-	gPlayer[playerid][PLAYER_DATA_266] = 7;
-	gPlayer[playerid][PLAYER_DATA_268] = 0;
-	gPlayer[playerid][PLAYER_DATA_271] = Bank_Tick();
-	gPlayer[playerid][PLAYER_DATA_272]++;
-	SetTimerEx("Bank_OnResyncTimer", 2500, 0, "dd", playerid, gPlayer[playerid][PLAYER_DATA_272]);
+	gPlayer[playerid][pBankOpBusy] = 1;
+	gPlayer[playerid][pBankOp] = 7;
+	gPlayer[playerid][pBankOpAux] = 0;
+	gPlayer[playerid][pBankOpTick] = Bank_Tick();
+	gPlayer[playerid][pBankOpToken]++;
+	SetTimerEx("Bank_OnResyncTimer", 2500, 0, "dd", playerid, gPlayer[playerid][pBankOpToken]);
 }
 
 Bank_ScheduleResync(playerid)
 {
-	gPlayer[playerid][PLAYER_DATA_272]++;
-	SetTimerEx("Bank_OnResyncTimer", 2500, 0, "dd", playerid, gPlayer[playerid][PLAYER_DATA_272]);
+	gPlayer[playerid][pBankOpToken]++;
+	SetTimerEx("Bank_OnResyncTimer", 2500, 0, "dd", playerid, gPlayer[playerid][pBankOpToken]);
 }
 
 Bank_ClearPending(playerid, bool:closeUi)
 {
-	if (closeUi && gPlayer[playerid][PLAYER_DATA_310] != 0)
+	if (closeUi && gPlayer[playerid][pBankPendTarget] != 0)
 	{
 		UI_BankTransferConfirmClose(playerid);
 	}
-	gPlayer[playerid][PLAYER_DATA_310] = 0;
-	gPlayer[playerid][PLAYER_DATA_311] = 0;
-	gPlayer[playerid][PLAYER_DATA_312] = 0;
-	gPlayer[playerid][PLAYER_DATA_313] = 0;
+	gPlayer[playerid][pBankPendTarget] = 0;
+	gPlayer[playerid][pBankPendAmount] = 0;
+	gPlayer[playerid][pBankPendCharId] = 0;
+	gPlayer[playerid][pBankPendTick] = 0;
 }
 
 Bank_ConfirmFailed(playerid)
 {
-	gPlayer[playerid][PLAYER_DATA_316]++;
-	if (gPlayer[playerid][PLAYER_DATA_316] >= 3)
+	gPlayer[playerid][pBankConfirmFails]++;
+	if (gPlayer[playerid][pBankConfirmFails] >= 3)
 	{
-		gPlayer[playerid][PLAYER_DATA_316] = 0;
-		gPlayer[playerid][PLAYER_DATA_317] = Bank_Tick() + 60000;
+		gPlayer[playerid][pBankConfirmFails] = 0;
+		gPlayer[playerid][pBankXferBlockUntil] = Bank_Tick() + 60000;
 		SendClientMessage(playerid, -10270721, "Troppe conferme di bonifico fallite o scadute: bonifici sospesi per %d secondi.", 60);
 	}
 }
@@ -402,7 +357,7 @@ Bank_StateGuard(playerid, bool:ui, bool:counterOnly)
 	{
 		return -1;
 	}
-	if (gPlayer[playerid][PLAYER_DATA_123] || gPlayer[playerid][PLAYER_DATA_122])
+	if (gPlayer[playerid][pWounded] || gPlayer[playerid][pCuffed])
 	{
 		Bank_Deny(playerid, ui, "Non puoi usare la banca da ferito o ammanettato.");
 		return -1;
@@ -433,7 +388,7 @@ Bank_StateGuard(playerid, bool:ui, bool:counterOnly)
 		Bank_Deny(playerid, ui, "Questo e' un ATM: per /banca usa uno sportello.");
 		return -1;
 	}
-	gPlayer[playerid][PLAYER_DATA_321] = Bank_IsCounter(point) ? 1 : 0;
+	gPlayer[playerid][pBankAtCounter] = Bank_IsCounter(point) ? 1 : 0;
 	return point;
 }
 
@@ -445,10 +400,10 @@ Bank_Guard(playerid, bool:ui, bool:counterOnly)
 		return -1;
 	}
 	new now = Bank_Tick();
-	if (gPlayer[playerid][PLAYER_DATA_265] != 0)
+	if (gPlayer[playerid][pBankOpBusy] != 0)
 	{
-		new op = gPlayer[playerid][PLAYER_DATA_266];
-		if ((op == 4 || op == 5) && now - gPlayer[playerid][PLAYER_DATA_271] >= 15000)
+		new op = gPlayer[playerid][pBankOp];
+		if ((op == 4 || op == 5) && now - gPlayer[playerid][pBankOpTick] >= 15000)
 		{
 			Bank_EndOp(playerid);
 		}
@@ -458,9 +413,9 @@ Bank_Guard(playerid, bool:ui, bool:counterOnly)
 			return -1;
 		}
 	}
-	if (gPlayer[playerid][PLAYER_DATA_310] != 0)
+	if (gPlayer[playerid][pBankPendTarget] != 0)
 	{
-		if (now - gPlayer[playerid][PLAYER_DATA_313] >= 35000)
+		if (now - gPlayer[playerid][pBankPendTick] >= 35000)
 		{
 			Bank_ClearPending(playerid, 1);
 		}
@@ -470,45 +425,45 @@ Bank_Guard(playerid, bool:ui, bool:counterOnly)
 			return -1;
 		}
 	}
-	if (gPlayer[playerid][PLAYER_DATA_315] != 0 && now - gPlayer[playerid][PLAYER_DATA_315] < 2000)
+	if (gPlayer[playerid][pBankLastOpTick] != 0 && now - gPlayer[playerid][pBankLastOpTick] < 2000)
 	{
 		Bank_Reply(playerid, ui, "Attendi un attimo prima di un'altra operazione bancaria.");
 		return -1;
 	}
-	gPlayer[playerid][PLAYER_DATA_315] = now;
+	gPlayer[playerid][pBankLastOpTick] = now;
 	return point;
 }
 
 Bank_PushUi(playerid)
 {
-	new bool:counter = gPlayer[playerid][PLAYER_DATA_321] != 0;
+	new bool:counter = gPlayer[playerid][pBankAtCounter] != 0;
 	new wdMax = counter ? 50000 : 5000;
 	new wdDay = counter ? 100000 : 15000;
 	new wdLeft = -1, sendLeft = -1;
-	if (gPlayer[playerid][PLAYER_DATA_318])
+	if (gPlayer[playerid][pBankLimitsLoaded])
 	{
-		wdLeft = gPlayer[playerid][PLAYER_DATA_319] >= wdDay ? 0 : wdDay - gPlayer[playerid][PLAYER_DATA_319];
-		sendLeft = gPlayer[playerid][PLAYER_DATA_320] >= 50000 ? 0 : 50000 - gPlayer[playerid][PLAYER_DATA_320];
+		wdLeft = gPlayer[playerid][pBankWithdrawnToday] >= wdDay ? 0 : wdDay - gPlayer[playerid][pBankWithdrawnToday];
+		sendLeft = gPlayer[playerid][pBankXferOutToday] >= 50000 ? 0 : 50000 - gPlayer[playerid][pBankXferOutToday];
 	}
-	UI_BankSetBalance(playerid, gPlayer[playerid][PLAYER_DATA_88], gPlayer[playerid][PLAYER_DATA_89]);
+	UI_BankSetBalance(playerid, gPlayer[playerid][pMoney], gPlayer[playerid][pBank]);
 	UI_BankSetLimits(playerid, counter ? 0 : 20000, wdMax, wdLeft, 10, 25000, sendLeft);
 }
 
 Bank_RefreshLimits(playerid)
 {
-	if (!Bank_Valid(playerid) || gPlayer[playerid][PLAYER_DATA_265] != 0 || gPlayer[playerid][PLAYER_DATA_310] != 0 || gPlayer[playerid][PLAYER_DATA_3] <= 0)
+	if (!Bank_Valid(playerid) || gPlayer[playerid][pBankOpBusy] != 0 || gPlayer[playerid][pBankPendTarget] != 0 || gPlayer[playerid][pCharId] <= 0)
 	{
 		return 0;
 	}
-	Bank_BeginOp(playerid, 4, 0, gPlayer[playerid][PLAYER_DATA_270]);
-	gPlayer[playerid][PLAYER_DATA_268] = 0;
-	DB_BankLimits(playerid, gPlayer[playerid][PLAYER_DATA_3]);
+	Bank_BeginOp(playerid, 4, 0, gPlayer[playerid][pBankOpPoint]);
+	gPlayer[playerid][pBankOpAux] = 0;
+	DB_BankLimits(playerid, gPlayer[playerid][pCharId]);
 }
 
 Bank_CmdSaldo(playerid)
 {
 	SendClientMessage(playerid, -2994689, "--- Saldo ---");
-	SendClientMessage(playerid, -1, "Contanti: $%d  Banca: $%d  Totale: $%d", gPlayer[playerid][PLAYER_DATA_88], gPlayer[playerid][PLAYER_DATA_89], gPlayer[playerid][PLAYER_DATA_88] + gPlayer[playerid][PLAYER_DATA_89]);
+	SendClientMessage(playerid, -1, "Contanti: $%d  Banca: $%d  Totale: $%d", gPlayer[playerid][pMoney], gPlayer[playerid][pBank], gPlayer[playerid][pMoney] + gPlayer[playerid][pBank]);
 }
 
 Bank_CmdAtm(playerid, bool:counterOnly)
@@ -546,7 +501,7 @@ Bank_Deposit(playerid, amount, bool:ui)
 		Bank_Reply(playerid, ui, "Importo non valido.");
 		return 0;
 	}
-	if (amount > gPlayer[playerid][PLAYER_DATA_88])
+	if (amount > gPlayer[playerid][pMoney])
 	{
 		Bank_Reply(playerid, ui, "Non hai abbastanza contanti.");
 		return 0;
@@ -564,8 +519,8 @@ Bank_Deposit(playerid, amount, bool:ui)
 		return 0;
 	}
 	Bank_BeginWrite(playerid, 1, amount, point);
-	gPlayer[playerid][PLAYER_DATA_268] = ui ? 1 : 0;
-	DB_BankDeposit(playerid, gPlayer[playerid][PLAYER_DATA_3], amount, Bank_IsCounter(point) ? 1 : 0, gPlayer[playerid][PLAYER_DATA_273]);
+	gPlayer[playerid][pBankOpAux] = ui ? 1 : 0;
+	DB_BankDeposit(playerid, gPlayer[playerid][pCharId], amount, Bank_IsCounter(point) ? 1 : 0, gPlayer[playerid][pBankOpId]);
 }
 
 public UI_OnBankDeposit(playerid, amount)
@@ -619,10 +574,10 @@ Bank_ResultText(op, result, dest[], size)
 Bank_StartUndo(playerid, reason[])
 {
 	new opId[37];
-	strcopy(opId, gPlayer[playerid][PLAYER_DATA_273], 37);
-	gPlayer[playerid][PLAYER_DATA_266] = 6;
-	gPlayer[playerid][PLAYER_DATA_268] = 0;
-	gPlayer[playerid][PLAYER_DATA_271] = Bank_Tick();
+	strcopy(opId, gPlayer[playerid][pBankOpId], 37);
+	gPlayer[playerid][pBankOp] = 6;
+	gPlayer[playerid][pBankOpAux] = 0;
+	gPlayer[playerid][pBankOpTick] = Bank_Tick();
 	Util_Send(playerid, -10270721, reason);
 	DB_BankUndo(opId);
 }
@@ -633,7 +588,7 @@ public Bank_OnDBDeposit(playerid, amount, result, balance)
 	{
 		return 1;
 	}
-	if (!Bank_OpIs(playerid, 1) || gPlayer[playerid][PLAYER_DATA_267] != amount)
+	if (!Bank_OpIs(playerid, 1) || gPlayer[playerid][pBankOpAmount] != amount)
 	{
 		if (result == 1)
 		{
@@ -644,7 +599,7 @@ public Bank_OnDBDeposit(playerid, amount, result, balance)
 		}
 		return 1;
 	}
-	new bool:ui = gPlayer[playerid][PLAYER_DATA_268] != 0;
+	new bool:ui = gPlayer[playerid][pBankOpAux] != 0;
 	if (result == 1)
 	{
 		if (!Money_Take(playerid, amount))
@@ -657,7 +612,7 @@ public Bank_OnDBDeposit(playerid, amount, result, balance)
 		Char_Save(playerid);
 		Char_RefreshHud(playerid);
 		new msg[176];
-		format(msg, 176, "Hai depositato $%d. Contanti: $%d  Banca: $%d.", amount, gPlayer[playerid][PLAYER_DATA_88], gPlayer[playerid][PLAYER_DATA_89]);
+		format(msg, 176, "Hai depositato $%d. Contanti: $%d  Banca: $%d.", amount, gPlayer[playerid][pMoney], gPlayer[playerid][pBank]);
 		Util_Send(playerid, 0x66DD66FF, msg);
 		if (ui)
 		{
@@ -690,7 +645,7 @@ Bank_Withdraw(playerid, amount, bool:ui)
 		Bank_Reply(playerid, ui, "Importo non valido.");
 		return 0;
 	}
-	if (amount > gPlayer[playerid][PLAYER_DATA_89])
+	if (amount > gPlayer[playerid][pBank])
 	{
 		Bank_Reply(playerid, ui, "Fondi insufficienti sul conto.");
 		return 0;
@@ -703,14 +658,14 @@ Bank_Withdraw(playerid, amount, bool:ui)
 		Bank_Reply(playerid, ui, msg);
 		return 0;
 	}
-	if (amount > 0x3B9ACA00 - gPlayer[playerid][PLAYER_DATA_88])
+	if (amount > 0x3B9ACA00 - gPlayer[playerid][pMoney])
 	{
 		Bank_Reply(playerid, ui, "Hai troppi contanti: non puoi prelevare questa somma.");
 		return 0;
 	}
 	Bank_BeginWrite(playerid, 2, amount, point);
-	gPlayer[playerid][PLAYER_DATA_268] = ui ? 1 : 0;
-	DB_BankWithdraw(playerid, gPlayer[playerid][PLAYER_DATA_3], amount, counter ? 1 : 0, gPlayer[playerid][PLAYER_DATA_273]);
+	gPlayer[playerid][pBankOpAux] = ui ? 1 : 0;
+	DB_BankWithdraw(playerid, gPlayer[playerid][pCharId], amount, counter ? 1 : 0, gPlayer[playerid][pBankOpId]);
 }
 
 public UI_OnBankWithdraw(playerid, amount)
@@ -728,7 +683,7 @@ public Bank_OnDBWithdraw(playerid, amount, result, balance)
 	{
 		return 1;
 	}
-	if (!Bank_OpIs(playerid, 2) || gPlayer[playerid][PLAYER_DATA_267] != amount)
+	if (!Bank_OpIs(playerid, 2) || gPlayer[playerid][pBankOpAmount] != amount)
 	{
 		if (result == 1)
 		{
@@ -739,7 +694,7 @@ public Bank_OnDBWithdraw(playerid, amount, result, balance)
 		}
 		return 1;
 	}
-	new bool:ui = gPlayer[playerid][PLAYER_DATA_268] != 0;
+	new bool:ui = gPlayer[playerid][pBankOpAux] != 0;
 	if (result == 1)
 	{
 		if (!Money_Give(playerid, amount))
@@ -748,15 +703,15 @@ public Bank_OnDBWithdraw(playerid, amount, result, balance)
 			Char_RefreshHud(playerid);
 			return 1;
 		}
-		if (gPlayer[playerid][PLAYER_DATA_318])
+		if (gPlayer[playerid][pBankLimitsLoaded])
 		{
-			gPlayer[playerid][PLAYER_DATA_319] += amount;
+			gPlayer[playerid][pBankWithdrawnToday] += amount;
 		}
 		Bank_EndOp(playerid);
 		Char_Save(playerid);
 		Char_RefreshHud(playerid);
 		new msg[176];
-		format(msg, 176, "Hai prelevato $%d. Contanti: $%d  Banca: $%d.", amount, gPlayer[playerid][PLAYER_DATA_88], gPlayer[playerid][PLAYER_DATA_89]);
+		format(msg, 176, "Hai prelevato $%d. Contanti: $%d  Banca: $%d.", amount, gPlayer[playerid][pMoney], gPlayer[playerid][pBank]);
 		Util_Send(playerid, 0x66DD66FF, msg);
 		if (ui)
 		{
@@ -773,9 +728,9 @@ public Bank_OnDBWithdraw(playerid, amount, result, balance)
 	Bank_EndOp(playerid);
 	new text[176];
 	Bank_ResultText(2, result, text, 176);
-	if (result == 5 && gPlayer[playerid][PLAYER_DATA_318])
+	if (result == 5 && gPlayer[playerid][pBankLimitsLoaded])
 	{
-		gPlayer[playerid][PLAYER_DATA_318] = 0;
+		gPlayer[playerid][pBankLimitsLoaded] = 0;
 	}
 	Bank_Reply(playerid, ui, text);
 	return 1;
@@ -783,13 +738,13 @@ public Bank_OnDBWithdraw(playerid, amount, result, balance)
 
 public Bank_OnDBUndone(playerid, opId[], result)
 {
-	for (new i = 0; i < 1000; i++)
+	for (new i = 0; i < MAX_PLAYERS; i++)
 	{
 		if (!Bank_OpIs(i, 6))
 		{
 			continue;
 		}
-		if (opId[0] != 0 && strcmp(gPlayer[i][PLAYER_DATA_273], opId, 0, 0x7FFFFFFF) != 0)
+		if (opId[0] != 0 && strcmp(gPlayer[i][pBankOpId], opId, 0, 0x7FFFFFFF) != 0)
 		{
 			continue;
 		}
@@ -797,26 +752,23 @@ public Bank_OnDBUndone(playerid, opId[], result)
 		{
 			Bank_EndOp(i);
 			Char_RefreshHud(i);
-			SendClientMessage(i, -1, "Operazione annullata: nessun importo spostato. Contanti: $%d  Banca: $%d.", gPlayer[i][PLAYER_DATA_88], gPlayer[i][PLAYER_DATA_89]);
+			SendClientMessage(i, -1, "Operazione annullata: nessun importo spostato. Contanti: $%d  Banca: $%d.", gPlayer[i][pMoney], gPlayer[i][pBank]);
+		}
+		else if (result == -1 && gPlayer[i][pBankOpAux] < 3)
+		{
+			new retryId[37];
+			strcopy(retryId, gPlayer[i][pBankOpId], 37);
+			gPlayer[i][pBankOpAux]++;
+			DB_BankUndo(retryId);
 		}
 		else
 		{
-			if (result == -1 && gPlayer[i][PLAYER_DATA_268] < 3)
-			{
-				new retryId[37];
-				strcopy(retryId, gPlayer[i][PLAYER_DATA_273], 37);
-				gPlayer[i][PLAYER_DATA_268]++;
-				DB_BankUndo(retryId);
-			}
-			else
-			{
-				new msg[176], name[25];
-				GetPlayerName(i, name, 25);
-				format(msg, 176, "ANOMALIA annullamento banca %s op %s esito %d: verificare a mano (saldo e contanti)", name, gPlayer[i][PLAYER_DATA_273], result);
-				Log_Write("BANK", msg);
-				Bank_EndOp(i);
-				Util_Send(i, -10270721, "Errore bancario non risolto automaticamente: contatta lo staff (segnala data e ora).");
-			}
+			new msg[176], name[25];
+			GetPlayerName(i, name, 25);
+			format(msg, 176, "ANOMALIA annullamento banca %s op %s esito %d: verificare a mano (saldo e contanti)", name, gPlayer[i][pBankOpId], result);
+			Log_Write("BANK", msg);
+			Bank_EndOp(i);
+			Util_Send(i, -10270721, "Errore bancario non risolto automaticamente: contatta lo staff (segnala data e ora).");
 		}
 	}
 	return 1;
@@ -824,11 +776,11 @@ public Bank_OnDBUndone(playerid, opId[], result)
 
 public Bank_OnResyncTimer(playerid, tok)
 {
-	if (!Bank_OpIs(playerid, 7) || gPlayer[playerid][PLAYER_DATA_272] != tok)
+	if (!Bank_OpIs(playerid, 7) || gPlayer[playerid][pBankOpToken] != tok)
 	{
 		return 1;
 	}
-	if (gPlayer[playerid][PLAYER_DATA_268] >= 3)
+	if (gPlayer[playerid][pBankOpAux] >= 3)
 	{
 		new msg[176], name[25];
 		GetPlayerName(playerid, name, 25);
@@ -838,8 +790,8 @@ public Bank_OnResyncTimer(playerid, tok)
 		Util_Send(playerid, -10270721, "Impossibile verificare il saldo bancario ora: controlla con /saldo piu' tardi o contatta lo staff.");
 		return 1;
 	}
-	gPlayer[playerid][PLAYER_DATA_268]++;
-	DB_BankResync(playerid, gPlayer[playerid][PLAYER_DATA_3]);
+	gPlayer[playerid][pBankOpAux]++;
+	DB_BankResync(playerid, gPlayer[playerid][pCharId]);
 	return 1;
 }
 
@@ -860,7 +812,7 @@ public Bank_OnDBSynced(playerid, result, balance)
 	if (result == 1)
 	{
 		Bank_EndOp(playerid);
-		SendClientMessage(playerid, -1, "Saldo bancario verificato: $%d.", gPlayer[playerid][PLAYER_DATA_89]);
+		SendClientMessage(playerid, -1, "Saldo bancario verificato: $%d.", gPlayer[playerid][pBank]);
 		return 1;
 	}
 	Bank_ScheduleResync(playerid);
@@ -870,30 +822,30 @@ public Bank_OnDBSynced(playerid, result, balance)
 bool:Bank_XferCheck(playerid, target, amount, bool:ui)
 {
 	new now = Bank_Tick(), msg[176];
-	if (gPlayer[playerid][PLAYER_DATA_317] != 0)
+	if (gPlayer[playerid][pBankXferBlockUntil] != 0)
 	{
-		new left = gPlayer[playerid][PLAYER_DATA_317] - now;
+		new left = gPlayer[playerid][pBankXferBlockUntil] - now;
 		if (left > 0)
 		{
 			format(msg, 176, "Bonifici sospesi per altri %d secondi (troppe conferme fallite).", (left + 1000 - 1) / 1000);
 			Bank_Reply(playerid, ui, msg);
 			return 0;
 		}
-		gPlayer[playerid][PLAYER_DATA_317] = 0;
+		gPlayer[playerid][pBankXferBlockUntil] = 0;
 	}
-	if (gPlayer[playerid][PLAYER_DATA_90] < 3)
+	if (gPlayer[playerid][pLevel] < 3)
 	{
 		format(msg, 176, "Servono almeno il livello %d per fare bonifici.", 3);
 		Bank_Reply(playerid, ui, msg);
 		return 0;
 	}
-	if (gPlayer[playerid][PLAYER_DATA_113] < 3600000)
+	if (gPlayer[playerid][pPlayedMs] < 3600000)
 	{
 		format(msg, 176, "Servono almeno %d minuti di gioco con questo personaggio per fare bonifici.", 60);
 		Bank_Reply(playerid, ui, msg);
 		return 0;
 	}
-	if (target < 0 || target >= 1000 || target == playerid || !Util_IsPlaying(target) || gPlayer[target][PLAYER_DATA_3] <= 0)
+	if (target < 0 || target >= MAX_PLAYERS || target == playerid || !Util_IsPlaying(target) || gPlayer[target][pCharId] <= 0)
 	{
 		Bank_Reply(playerid, ui, "Destinatario non valido: deve essere un altro giocatore online e in gioco.");
 		return 0;
@@ -905,20 +857,20 @@ bool:Bank_XferCheck(playerid, target, amount, bool:ui)
 		return 0;
 	}
 	new fee = DB_BankXferFee(amount), total = amount + fee;
-	if (gPlayer[playerid][PLAYER_DATA_89] < total)
+	if (gPlayer[playerid][pBank] < total)
 	{
-		format(msg, 176, "Fondi insufficienti: servono $%d (importo $%d + commissione $%d), hai $%d.", total, amount, fee, gPlayer[playerid][PLAYER_DATA_89]);
+		format(msg, 176, "Fondi insufficienti: servono $%d (importo $%d + commissione $%d), hai $%d.", total, amount, fee, gPlayer[playerid][pBank]);
 		Bank_Reply(playerid, ui, msg);
 		return 0;
 	}
-	if (amount > 0x3B9ACA00 - gPlayer[target][PLAYER_DATA_89])
+	if (amount > 0x3B9ACA00 - gPlayer[target][pBank])
 	{
 		Bank_Reply(playerid, ui, "Il destinatario non puo' ricevere questa somma (conto al limite).");
 		return 0;
 	}
-	if (gPlayer[playerid][PLAYER_DATA_314] != 0 && now - gPlayer[playerid][PLAYER_DATA_314] < 30000)
+	if (gPlayer[playerid][pBankLastXferTick] != 0 && now - gPlayer[playerid][pBankLastXferTick] < 30000)
 	{
-		format(msg, 176, "Attendi ancora %d secondi prima di un nuovo bonifico.", (30000 - (now - gPlayer[playerid][PLAYER_DATA_314]) + 1000 - 1) / 1000);
+		format(msg, 176, "Attendi ancora %d secondi prima di un nuovo bonifico.", (30000 - (now - gPlayer[playerid][pBankLastXferTick]) + 1000 - 1) / 1000);
 		Bank_Reply(playerid, ui, msg);
 		return 0;
 	}
@@ -937,9 +889,9 @@ Bank_Transfer(playerid, target, amount, bool:ui)
 		return 0;
 	}
 	Bank_BeginOp(playerid, 4, amount, point);
-	gPlayer[playerid][PLAYER_DATA_268] = ui ? 2 : 1;
-	gPlayer[playerid][PLAYER_DATA_269] = target + 1;
-	DB_BankLimits(playerid, gPlayer[playerid][PLAYER_DATA_3]);
+	gPlayer[playerid][pBankOpAux] = ui ? 2 : 1;
+	gPlayer[playerid][pBankOpTarget] = target + 1;
+	DB_BankLimits(playerid, gPlayer[playerid][pCharId]);
 }
 
 public UI_OnBankTransfer(playerid, targetId, amount)
@@ -954,12 +906,12 @@ public UI_OnBankTransfer(playerid, targetId, amount)
 Bank_ShowConfirm(playerid, target, amount)
 {
 	new fee = DB_BankXferFee(amount);
-	gPlayer[playerid][PLAYER_DATA_310] = target + 1;
-	gPlayer[playerid][PLAYER_DATA_311] = amount;
-	gPlayer[playerid][PLAYER_DATA_312] = gPlayer[target][PLAYER_DATA_3];
-	gPlayer[playerid][PLAYER_DATA_313] = Bank_Tick();
-	UI_BankSetBalance(playerid, gPlayer[playerid][PLAYER_DATA_88], gPlayer[playerid][PLAYER_DATA_89]);
-	UI_BankTransferConfirm(playerid, target, amount, fee, gPlayer[playerid][PLAYER_DATA_89] - amount - fee, 30);
+	gPlayer[playerid][pBankPendTarget] = target + 1;
+	gPlayer[playerid][pBankPendAmount] = amount;
+	gPlayer[playerid][pBankPendCharId] = gPlayer[target][pCharId];
+	gPlayer[playerid][pBankPendTick] = Bank_Tick();
+	UI_BankSetBalance(playerid, gPlayer[playerid][pMoney], gPlayer[playerid][pBank]);
+	UI_BankTransferConfirm(playerid, target, amount, fee, gPlayer[playerid][pBank] - amount - fee, 30);
 }
 
 public Bank_OnDBLimits(playerid, result, withdrawn, xferOut, xferIn, sinceXfer)
@@ -968,13 +920,13 @@ public Bank_OnDBLimits(playerid, result, withdrawn, xferOut, xferIn, sinceXfer)
 	{
 		return 1;
 	}
-	new aux = gPlayer[playerid][PLAYER_DATA_268], amount = gPlayer[playerid][PLAYER_DATA_267], target = gPlayer[playerid][PLAYER_DATA_269] - 1;
+	new aux = gPlayer[playerid][pBankOpAux], amount = gPlayer[playerid][pBankOpAmount], target = gPlayer[playerid][pBankOpTarget] - 1;
 	Bank_EndOp(playerid);
 	if (result == 1)
 	{
-		gPlayer[playerid][PLAYER_DATA_318] = 1;
-		gPlayer[playerid][PLAYER_DATA_319] = withdrawn;
-		gPlayer[playerid][PLAYER_DATA_320] = xferOut;
+		gPlayer[playerid][pBankLimitsLoaded] = 1;
+		gPlayer[playerid][pBankWithdrawnToday] = withdrawn;
+		gPlayer[playerid][pBankXferOutToday] = xferOut;
 	}
 	if (aux == 0)
 	{
@@ -1023,7 +975,7 @@ public UI_OnBankTransferCancel(playerid, targetId, amount)
 	{
 		return 1;
 	}
-	if (gPlayer[playerid][PLAYER_DATA_310] == targetId + 1 && gPlayer[playerid][PLAYER_DATA_311] == amount)
+	if (gPlayer[playerid][pBankPendTarget] == targetId + 1 && gPlayer[playerid][pBankPendAmount] == amount)
 	{
 		Bank_ClearPending(playerid, 0);
 	}
@@ -1036,7 +988,7 @@ public UI_OnBankTransferExpired(playerid, targetId, amount)
 	{
 		return 1;
 	}
-	if (gPlayer[playerid][PLAYER_DATA_310] == targetId + 1 && gPlayer[playerid][PLAYER_DATA_311] == amount)
+	if (gPlayer[playerid][pBankPendTarget] == targetId + 1 && gPlayer[playerid][pBankPendAmount] == amount)
 	{
 		Bank_ClearPending(playerid, 0);
 		Bank_ConfirmFailed(playerid);
@@ -1050,13 +1002,13 @@ public UI_OnBankTransferConfirm(playerid, targetId, amount)
 	{
 		return 1;
 	}
-	if (gPlayer[playerid][PLAYER_DATA_310] != targetId + 1 || gPlayer[playerid][PLAYER_DATA_311] != amount)
+	if (gPlayer[playerid][pBankPendTarget] != targetId + 1 || gPlayer[playerid][pBankPendAmount] != amount)
 	{
 		return 1;
 	}
-	new pendChar = gPlayer[playerid][PLAYER_DATA_312], pendAt = gPlayer[playerid][PLAYER_DATA_313];
+	new pendChar = gPlayer[playerid][pBankPendCharId], pendAt = gPlayer[playerid][pBankPendTick];
 	Bank_ClearPending(playerid, 0);
-	if (gPlayer[playerid][PLAYER_DATA_265] != 0)
+	if (gPlayer[playerid][pBankOpBusy] != 0)
 	{
 		return 1;
 	}
@@ -1072,7 +1024,7 @@ public UI_OnBankTransferConfirm(playerid, targetId, amount)
 		Bank_ConfirmFailed(playerid);
 		return 1;
 	}
-	if (targetId < 0 || targetId >= 1000 || !Util_IsPlaying(targetId) || gPlayer[targetId][PLAYER_DATA_3] != pendChar)
+	if (targetId < 0 || targetId >= 1000 || !Util_IsPlaying(targetId) || gPlayer[targetId][pCharId] != pendChar)
 	{
 		Util_Send(playerid, -10270721, "Il destinatario non e' piu' disponibile: bonifico annullato.");
 		Bank_ConfirmFailed(playerid);
@@ -1088,20 +1040,20 @@ public UI_OnBankTransferConfirm(playerid, targetId, amount)
 	GetPlayerName(playerid, sName, 25);
 	GetPlayerName(targetId, tName, 25);
 	Bank_BeginWrite(playerid, 3, amount, point);
-	gPlayer[playerid][PLAYER_DATA_269] = targetId + 1;
-	gPlayer[playerid][PLAYER_DATA_314] = Bank_Tick();
+	gPlayer[playerid][pBankOpTarget] = targetId + 1;
+	gPlayer[playerid][pBankLastXferTick] = Bank_Tick();
 	if (amount >= 10000 || sameIp)
 	{
 		new reason[176];
-		format(reason, 176, "%s -> %s $%d (+$%d comm.) op %.8s%s", sName, tName, amount, fee, gPlayer[playerid][PLAYER_DATA_273], sameIp ? " STESSO IP" : "");
-		DB_AdminLog(0, gPlayer[playerid][PLAYER_DATA_2], sameIp ? "bank_xfer_ip" : "bank_xfer", reason);
+		format(reason, 176, "%s -> %s $%d (+$%d comm.) op %.8s%s", sName, tName, amount, fee, gPlayer[playerid][pBankOpId], sameIp ? " STESSO IP" : "");
+		DB_AdminLog(0, gPlayer[playerid][pAccountId], sameIp ? "bank_xfer_ip" : "bank_xfer", reason);
 		if (sameIp)
 		{
 			Log_Write("BANK", reason);
 		}
 	}
 	Char_Save(playerid);
-	DB_BankTransfer(playerid, targetId, amount, gPlayer[playerid][PLAYER_DATA_273], sameIp ? 1 : 0);
+	DB_BankTransfer(playerid, targetId, amount, gPlayer[playerid][pBankOpId], sameIp ? 1 : 0);
 	return 1;
 }
 
@@ -1109,11 +1061,11 @@ public Bank_OnDBTransfer(playerid, targetid, amount, fee, result, balance)
 {
 	if (Bank_Valid(playerid))
 	{
-		new bool:mine = Bank_OpIs(playerid, 3) && gPlayer[playerid][PLAYER_DATA_267] == amount;
+		new bool:mine = Bank_OpIs(playerid, 3) && gPlayer[playerid][pBankOpAmount] == amount;
 		new tName[25];
-		if (mine && gPlayer[playerid][PLAYER_DATA_269] > 0 && Bank_Valid(gPlayer[playerid][PLAYER_DATA_269] - 1))
+		if (mine && gPlayer[playerid][pBankOpTarget] > 0 && Bank_Valid(gPlayer[playerid][pBankOpTarget] - 1))
 		{
-			GetPlayerName(gPlayer[playerid][PLAYER_DATA_269] - 1, tName, 25);
+			GetPlayerName(gPlayer[playerid][pBankOpTarget] - 1, tName, 25);
 		}
 		if (result == 1)
 		{
@@ -1121,39 +1073,36 @@ public Bank_OnDBTransfer(playerid, targetid, amount, fee, result, balance)
 			{
 				Bank_EndOp(playerid);
 			}
-			gPlayer[playerid][PLAYER_DATA_316] = 0;
-			if (gPlayer[playerid][PLAYER_DATA_318])
+			gPlayer[playerid][pBankConfirmFails] = 0;
+			if (gPlayer[playerid][pBankLimitsLoaded])
 			{
-				gPlayer[playerid][PLAYER_DATA_320] += amount;
+				gPlayer[playerid][pBankXferOutToday] += amount;
 			}
 			Char_RefreshHud(playerid);
-			SendClientMessage(playerid, 0x66DD66FF, "Bonifico di $%d%s%s eseguito. Commissione: $%d. Saldo: $%d.", amount, tName[0] != 0 ? " a " : "", tName, fee, gPlayer[playerid][PLAYER_DATA_89]);
+			SendClientMessage(playerid, 0x66DD66FF, "Bonifico di $%d%s%s eseguito. Commissione: $%d. Saldo: $%d.", amount, tName[0] != 0 ? " a " : "", tName, fee, gPlayer[playerid][pBank]);
+		}
+		else if (result == -1)
+		{
+			Util_Send(playerid, -10270721, "Errore del sistema bancario: esito del bonifico incerto. Verifico il saldo, attendi.");
+			if (mine)
+			{
+				Bank_StartResync(playerid);
+			}
 		}
 		else
 		{
-			if (result == -1)
+			if (mine)
 			{
-				Util_Send(playerid, -10270721, "Errore del sistema bancario: esito del bonifico incerto. Verifico il saldo, attendi.");
-				if (mine)
-				{
-					Bank_StartResync(playerid);
-				}
+				Bank_EndOp(playerid);
 			}
-			else
-			{
-				if (mine)
-				{
-					Bank_EndOp(playerid);
-				}
-				gPlayer[playerid][PLAYER_DATA_314] = 0;
-				new text[176];
-				Bank_ResultText(3, result, text, 176);
-				Util_Send(playerid, -10270721, text);
-				Bank_ConfirmFailed(playerid);
-			}
+			gPlayer[playerid][pBankLastXferTick] = 0;
+			new text[176];
+			Bank_ResultText(3, result, text, 176);
+			Util_Send(playerid, -10270721, text);
+			Bank_ConfirmFailed(playerid);
 		}
 	}
-	if (targetid >= 0 && targetid < 1000 && result == 1 && Bank_Valid(targetid))
+	if (targetid >= 0 && targetid < MAX_PLAYERS && result == 1 && Bank_Valid(targetid))
 	{
 		new sName[25];
 		if (Bank_Valid(playerid))
@@ -1161,7 +1110,7 @@ public Bank_OnDBTransfer(playerid, targetid, amount, fee, result, balance)
 			GetPlayerName(playerid, sName, 25);
 		}
 		Char_RefreshHud(targetid);
-		SendClientMessage(targetid, 0x66DD66FF, "Hai ricevuto un bonifico di $%d%s%s. Saldo: $%d.", amount, sName[0] != 0 ? " da " : "", sName, gPlayer[targetid][PLAYER_DATA_89]);
+		SendClientMessage(targetid, 0x66DD66FF, "Hai ricevuto un bonifico di $%d%s%s. Saldo: $%d.", amount, sName[0] != 0 ? " da " : "", sName, gPlayer[targetid][pBank]);
 	}
 	return 1;
 }
@@ -1178,9 +1127,9 @@ Bank_Statement(playerid, page, bool:ui)
 		page = 0;
 	}
 	Bank_BeginOp(playerid, 5, 0, point);
-	gPlayer[playerid][PLAYER_DATA_268] = page;
-	gPlayer[playerid][PLAYER_DATA_269] = ui ? 1 : 0;
-	DB_BankStatement(playerid, gPlayer[playerid][PLAYER_DATA_3], page);
+	gPlayer[playerid][pBankOpAux] = page;
+	gPlayer[playerid][pBankOpTarget] = ui ? 1 : 0;
+	DB_BankStatement(playerid, gPlayer[playerid][pCharId], page);
 }
 
 public UI_OnBankStatement(playerid, page)
@@ -1198,7 +1147,7 @@ public Bank_OnDBStatement(playerid, result, page, count, bool:more)
 	{
 		return 1;
 	}
-	new bool:ui = gPlayer[playerid][PLAYER_DATA_269] != 0;
+	new bool:ui = gPlayer[playerid][pBankOpTarget] != 0;
 	Bank_EndOp(playerid);
 	if (result != 1)
 	{
@@ -1209,17 +1158,17 @@ public Bank_OnDBStatement(playerid, result, page, count, bool:more)
 	for (new i = 0; i < count; i++)
 	{
 		new when[16], kind[24], other[25];
-		Bank_FormatWhen(g_BankStmt[i][BANK_STMT_0], when, 16);
-		Bank_KindLabel(g_BankStmt[i][BANK_STMT_1], kind, 24);
-		if (g_BankStmt[i][BANK_STMT_16][0] != 0)
+		Bank_FormatWhen(g_BankStmt[i][bsTimestamp], when, 16);
+		Bank_KindLabel(g_BankStmt[i][bsKind], kind, 24);
+		if (g_BankStmt[i][bsOther][0] != 0)
 		{
-			strcopy(other, g_BankStmt[i][BANK_STMT_16], 25);
+			strcopy(other, g_BankStmt[i][bsOther], 25);
 		}
 		else
 		{
-			strcopy(other, g_BankStmt[i][BANK_STMT_41], 25);
+			strcopy(other, g_BankStmt[i][bsRef], 25);
 		}
-		UI_BankStatementAdd(playerid, when, kind, other, g_BankStmt[i][BANK_STMT_14], g_BankStmt[i][BANK_STMT_15]);
+		UI_BankStatementAdd(playerid, when, kind, other, g_BankStmt[i][bsDelta], g_BankStmt[i][bsBalance]);
 	}
 	UI_BankStatementShow(playerid);
 	return 1;
@@ -1282,7 +1231,7 @@ Bank_OnInit()
 	{
 		new bool:counter = Bank_IsCounter(i);
 		g_BankPickup[i] = CreatePickup(1274, 1, s_BankPoints[i][0], s_BankPoints[i][1], s_BankPoints[i][2], 0);
-		g_BankLabel[i] = Lang_Create3DTextLabel(counter ? "Banca - Sportello\nUsa /atm" : "ATM\nUsa /atm", 0x66DD66FF, s_BankPoints[i][0], s_BankPoints[i][1], (1.0 + Float:(s_BankPoints[i][2])), 12.0, 0, 0);
+		g_BankLabel[i] = Lang_Create3DTextLabel(counter ? "Banca - Sportello\nUsa /atm" : "ATM\nUsa /atm", 0x66DD66FF, s_BankPoints[i][0], s_BankPoints[i][1], (1.0 + s_BankPoints[i][2]), 12.0, 0, 0);
 	}
 }
 
@@ -1302,25 +1251,25 @@ Bank_OnExit()
 
 Bank_OnPlayerConnect(playerid)
 {
-	if (playerid < 0 || playerid >= 1000)
+	if (playerid < 0 || playerid >= MAX_PLAYERS)
 	{
 		return 0;
 	}
-	gPlayer[playerid][PLAYER_DATA_265] = 0;
+	gPlayer[playerid][pBankOpBusy] = 0;
 }
 
 Bank_OnPlayerDisconnect(playerid)
 {
-	if (playerid < 0 || playerid >= 1000)
+	if (playerid < 0 || playerid >= MAX_PLAYERS)
 	{
 		return 0;
 	}
-	if (gPlayer[playerid][PLAYER_DATA_265] != 0 && gPlayer[playerid][PLAYER_DATA_266] >= 1 && gPlayer[playerid][PLAYER_DATA_266] <= 3)
+	if (gPlayer[playerid][pBankOpBusy] != 0 && gPlayer[playerid][pBankOp] >= 1 && gPlayer[playerid][pBankOp] <= 3)
 	{
 		new msg[176], name[25];
 		GetPlayerName(playerid, name, 25);
-		format(msg, 176, "%s esce con operazione bancaria %d in volo (importo %d, op %s)", name, gPlayer[playerid][PLAYER_DATA_266], gPlayer[playerid][PLAYER_DATA_267], gPlayer[playerid][PLAYER_DATA_273]);
+		format(msg, 176, "%s esce con operazione bancaria %d in volo (importo %d, op %s)", name, gPlayer[playerid][pBankOp], gPlayer[playerid][pBankOpAmount], gPlayer[playerid][pBankOpId]);
 		Log_Write("BANK", msg);
 	}
-	gPlayer[playerid][PLAYER_DATA_310] = 0;
+	gPlayer[playerid][pBankPendTarget] = 0;
 }

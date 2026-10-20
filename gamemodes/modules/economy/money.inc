@@ -1,18 +1,18 @@
 
 Money_BankLog(playerid, kind[], delta, ref[])
 {
-	if (playerid < 0 || playerid >= 1000 || !IsPlayerConnected(playerid))
+	if (playerid < 0 || playerid >= MAX_PLAYERS || !IsPlayerConnected(playerid))
 	{
 		return 0;
 	}
-	new charId = gPlayer[playerid][PLAYER_DATA_3];
+	new charId = gPlayer[playerid][pCharId];
 	if (charId <= 0 || delta == 0 || kind[0] == 0)
 	{
 		return 0;
 	}
 	new opId[37];
 	DB_BankMakeOpId(opId, 37, charId);
-	DB_BankLog(opId, charId, 0, kind, delta, gPlayer[playerid][PLAYER_DATA_89], 2, ref);
+	DB_BankLog(opId, charId, 0, kind, delta, gPlayer[playerid][pBank], 2, ref);
 }
 
 Money_Refresh(playerid)
@@ -23,7 +23,7 @@ Money_Refresh(playerid)
 
 bool:Money_ValidPlayer(playerid)
 {
-	return playerid >= 0 && playerid < 1000 && IsPlayerConnected(playerid);
+	return playerid >= 0 && playerid < MAX_PLAYERS && IsPlayerConnected(playerid);
 }
 
 bool:Money_Can(playerid, amount)
@@ -32,7 +32,7 @@ bool:Money_Can(playerid, amount)
 	{
 		return 0;
 	}
-	return gPlayer[playerid][PLAYER_DATA_88] >= amount;
+	return gPlayer[playerid][pMoney] >= amount;
 }
 
 bool:Money_CanReceive(playerid, amount)
@@ -41,7 +41,7 @@ bool:Money_CanReceive(playerid, amount)
 	{
 		return 0;
 	}
-	return amount <= 0x3B9ACA00 - gPlayer[playerid][PLAYER_DATA_88];
+	return amount <= 0x3B9ACA00 - gPlayer[playerid][pMoney];
 }
 
 bool:Money_Give(playerid, amount)
@@ -50,7 +50,7 @@ bool:Money_Give(playerid, amount)
 	{
 		return 0;
 	}
-	gPlayer[playerid][PLAYER_DATA_88] += amount;
+	gPlayer[playerid][pMoney] += amount;
 	Money_Refresh(playerid);
 	return 1;
 }
@@ -61,7 +61,7 @@ bool:Money_Take(playerid, amount)
 	{
 		return 0;
 	}
-	gPlayer[playerid][PLAYER_DATA_88] -= amount;
+	gPlayer[playerid][pMoney] -= amount;
 	Money_Refresh(playerid);
 	return 1;
 }
@@ -72,7 +72,7 @@ bool:Money_Set(playerid, amount)
 	{
 		return 0;
 	}
-	gPlayer[playerid][PLAYER_DATA_88] = amount;
+	gPlayer[playerid][pMoney] = amount;
 	Money_Refresh(playerid);
 	return 1;
 }
@@ -83,7 +83,7 @@ Money_BankRoom(playerid)
 	{
 		return 0;
 	}
-	return 0x3B9ACA00 - gPlayer[playerid][PLAYER_DATA_89];
+	return 0x3B9ACA00 - gPlayer[playerid][pBank];
 }
 
 bool:Money_GiveBank(playerid, amount, kind[], ref[])
@@ -92,7 +92,7 @@ bool:Money_GiveBank(playerid, amount, kind[], ref[])
 	{
 		return 0;
 	}
-	gPlayer[playerid][PLAYER_DATA_89] += amount;
+	gPlayer[playerid][pBank] += amount;
 	Char_RefreshHud(playerid);
 	if (kind[0] != 0)
 	{
@@ -107,11 +107,11 @@ bool:Money_CanBank(playerid, amount)
 	{
 		return 0;
 	}
-	if (gPlayer[playerid][PLAYER_DATA_265] != 0)
+	if (gPlayer[playerid][pBankOpBusy] != 0)
 	{
 		return 0;
 	}
-	return gPlayer[playerid][PLAYER_DATA_89] >= amount;
+	return gPlayer[playerid][pBank] >= amount;
 }
 
 bool:Money_TakeBank(playerid, amount, kind[], ref[])
@@ -120,7 +120,7 @@ bool:Money_TakeBank(playerid, amount, kind[], ref[])
 	{
 		return 0;
 	}
-	gPlayer[playerid][PLAYER_DATA_89] -= amount;
+	gPlayer[playerid][pBank] -= amount;
 	Char_RefreshHud(playerid);
 	if (kind[0] != 0)
 	{

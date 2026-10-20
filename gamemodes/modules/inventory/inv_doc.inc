@@ -7,19 +7,19 @@ public Inv_ShowDocument(playerid, viewerid)
 	}
 	new name[25], job[24], fac[24], rank[24];
 	GetPlayerName(playerid, name, 25);
-	Job_NameOf(gPlayer[playerid][PLAYER_DATA_101], job, 24);
-	Fac_ShortName(gPlayer[playerid][PLAYER_DATA_102], fac, 24);
-	Fac_RankName(gPlayer[playerid][PLAYER_DATA_102], gPlayer[playerid][PLAYER_DATA_103], rank, 24);
-	new total = gPlayer[playerid][PLAYER_DATA_113];
+	Job_NameOf(gPlayer[playerid][pJob], job, 24);
+	Fac_ShortName(gPlayer[playerid][pFaction], fac, 24);
+	Fac_RankName(gPlayer[playerid][pFaction], gPlayer[playerid][pFactionRank], rank, 24);
+	new total = gPlayer[playerid][pPlayedMs];
 	SendClientMessage(viewerid, -2994689, "--- Documento d'identita' di San Andreas ---");
-	SendClientMessage(viewerid, -1, "Nome: %s  Livello: %d  Ore di gioco: %dh %02dm", name, gPlayer[playerid][PLAYER_DATA_90], total / 3600000, total % 3600000 / 60000);
+	SendClientMessage(viewerid, -1, "Nome: %s  Livello: %d  Ore di gioco: %dh %02dm", name, gPlayer[playerid][pLevel], total / 3600000, total % 3600000 / 60000);
 	new origin[24];
-	UI_StoryOriginName(gPlayer[playerid][PLAYER_DATA_322], origin, 24);
+	UI_StoryOriginName(gPlayer[playerid][pStoryOrigin], origin, 24);
 	if (origin[0] != 0)
 	{
 		SendClientMessage(viewerid, -1, "Origine: %s", origin);
 	}
-	if (gPlayer[playerid][PLAYER_DATA_102] > 0)
+	if (gPlayer[playerid][pFaction] > 0)
 	{
 		SendClientMessage(viewerid, -1, "Lavoro: %s  Fazione: %s (%s)", job, fac, rank);
 	}

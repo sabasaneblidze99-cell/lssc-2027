@@ -1,11 +1,11 @@
-new g_BankDb[1000];
-new g_BankFly[1000];
-new g_BankFlyChar[1000];
-new g_BankGen[1000];
+new g_BankDb[MAX_PLAYERS];
+new g_BankFly[MAX_PLAYERS];
+new g_BankFlyChar[MAX_PLAYERS];
+new g_BankGen[MAX_PLAYERS];
 
 DB_BankSessionReset(playerid, charId)
 {
-	g_BankDb[playerid] = gPlayer[playerid][PLAYER_DATA_89];
+	g_BankDb[playerid] = gPlayer[playerid][pBank];
 	g_BankFly[playerid] = 0;
 	g_BankFlyChar[playerid] = charId;
 	g_BankGen[playerid]++;
@@ -13,20 +13,20 @@ DB_BankSessionReset(playerid, charId)
 
 DB_BankDeltaTake(playerid)
 {
-	new charId = gPlayer[playerid][PLAYER_DATA_3];
+	new charId = gPlayer[playerid][pCharId];
 	if (g_BankFlyChar[playerid] != charId)
 	{
 		g_BankFly[playerid] = 0;
 		g_BankFlyChar[playerid] = charId;
 	}
-	new d = gPlayer[playerid][PLAYER_DATA_89] - g_BankDb[playerid] - g_BankFly[playerid];
+	new d = gPlayer[playerid][pBank] - g_BankDb[playerid] - g_BankFly[playerid];
 	g_BankFly[playerid] += d;
 	return d;
 }
 
 public DB_OnBankDeltaSaved(playerid, name[], charId, gen, delta)
 {
-	if (!DB_PlayerMatches(playerid, name) || gPlayer[playerid][PLAYER_DATA_3] != charId || g_BankGen[playerid] != gen || g_BankFlyChar[playerid] != charId)
+	if (!DB_PlayerMatches(playerid, name) || gPlayer[playerid][pCharId] != charId || g_BankGen[playerid] != gen || g_BankFlyChar[playerid] != charId)
 	{
 		return 1;
 	}
@@ -37,7 +37,7 @@ public DB_OnBankDeltaSaved(playerid, name[], charId, gen, delta)
 
 public DB_BankDeltaFailed()
 {
-	for (new i = 0; i < 1000; i++)
+	for (new i = 0; i < MAX_PLAYERS; i++)
 	{
 		g_BankFly[i] = 0;
 	}
@@ -47,7 +47,7 @@ public DB_BankDeltaFailed()
 
 DB_LoadCharacter(playerid, accountId)
 {
-	if (playerid < 0 || playerid >= 1000 || !IsPlayerConnected(playerid))
+	if (playerid < 0 || playerid >= MAX_PLAYERS || !IsPlayerConnected(playerid))
 	{
 		return 0;
 	}
@@ -71,7 +71,7 @@ public DB_OnCharLoaded(playerid, name[], accountId)
 		return 1;
 	}
 	DB_PendingClear(playerid, 4);
-	if (gPlayer[playerid][PLAYER_DATA_106] != 4 || gPlayer[playerid][PLAYER_DATA_2] != accountId)
+	if (gPlayer[playerid][pAuthState] != 4 || gPlayer[playerid][pAccountId] != accountId)
 	{
 		return 1;
 	}
@@ -82,33 +82,33 @@ public DB_OnCharLoaded(playerid, name[], accountId)
 		Char_OnDBLoaded(playerid, 0);
 		return 1;
 	}
-	cache_get_value_name_int(0, "id", gPlayer[playerid][PLAYER_DATA_3]);
-	cache_get_value_name_int(0, "money", gPlayer[playerid][PLAYER_DATA_88]);
-	cache_get_value_name_int(0, "bank", gPlayer[playerid][PLAYER_DATA_89]);
-	cache_get_value_name_int(0, "level", gPlayer[playerid][PLAYER_DATA_90]);
-	cache_get_value_name_int(0, "exp", gPlayer[playerid][PLAYER_DATA_91]);
-	cache_get_value_name_float(0, "health", gPlayer[playerid][PLAYER_DATA_92]);
-	cache_get_value_name_float(0, "armor", gPlayer[playerid][PLAYER_DATA_93]);
-	cache_get_value_name_float(0, "pos_x", gPlayer[playerid][PLAYER_DATA_94]);
-	cache_get_value_name_float(0, "pos_y", gPlayer[playerid][PLAYER_DATA_95]);
-	cache_get_value_name_float(0, "pos_z", gPlayer[playerid][PLAYER_DATA_96]);
-	cache_get_value_name_float(0, "angle", gPlayer[playerid][PLAYER_DATA_97]);
-	cache_get_value_name_int(0, "interior", gPlayer[playerid][PLAYER_DATA_98]);
-	cache_get_value_name_int(0, "world", gPlayer[playerid][PLAYER_DATA_99]);
-	cache_get_value_name_int(0, "skin", gPlayer[playerid][PLAYER_DATA_100]);
-	cache_get_value_name_int(0, "played_ms", gPlayer[playerid][PLAYER_DATA_113]);
-	DB_BankSessionReset(playerid, gPlayer[playerid][PLAYER_DATA_3]);
-	cache_get_value_name_int(0, "job", gPlayer[playerid][PLAYER_DATA_101]);
-	cache_get_value_name_int(0, "faction", gPlayer[playerid][PLAYER_DATA_102]);
-	cache_get_value_name_int(0, "faction_rank", gPlayer[playerid][PLAYER_DATA_103]);
-	gPlayer[playerid][PLAYER_DATA_104] = gPlayer[playerid][PLAYER_DATA_100];
+	cache_get_value_name_int(0, "id", gPlayer[playerid][pCharId]);
+	cache_get_value_name_int(0, "money", gPlayer[playerid][pMoney]);
+	cache_get_value_name_int(0, "bank", gPlayer[playerid][pBank]);
+	cache_get_value_name_int(0, "level", gPlayer[playerid][pLevel]);
+	cache_get_value_name_int(0, "exp", gPlayer[playerid][pExp]);
+	cache_get_value_name_float(0, "health", gPlayer[playerid][pHealth]);
+	cache_get_value_name_float(0, "armor", gPlayer[playerid][pArmor]);
+	cache_get_value_name_float(0, "pos_x", gPlayer[playerid][pPosX]);
+	cache_get_value_name_float(0, "pos_y", gPlayer[playerid][pPosY]);
+	cache_get_value_name_float(0, "pos_z", gPlayer[playerid][pPosZ]);
+	cache_get_value_name_float(0, "angle", gPlayer[playerid][pAngle]);
+	cache_get_value_name_int(0, "interior", gPlayer[playerid][pInterior]);
+	cache_get_value_name_int(0, "world", gPlayer[playerid][pWorld]);
+	cache_get_value_name_int(0, "skin", gPlayer[playerid][pSkin]);
+	cache_get_value_name_int(0, "played_ms", gPlayer[playerid][pPlayedMs]);
+	DB_BankSessionReset(playerid, gPlayer[playerid][pCharId]);
+	cache_get_value_name_int(0, "job", gPlayer[playerid][pJob]);
+	cache_get_value_name_int(0, "faction", gPlayer[playerid][pFaction]);
+	cache_get_value_name_int(0, "faction_rank", gPlayer[playerid][pFactionRank]);
+	gPlayer[playerid][pCivilSkin] = gPlayer[playerid][pSkin];
 	Char_OnDBLoaded(playerid, 1);
 	return 1;
 }
 
 DB_CreateCharacter(playerid, accountId)
 {
-	if (playerid < 0 || playerid >= 1000 || !IsPlayerConnected(playerid))
+	if (playerid < 0 || playerid >= MAX_PLAYERS || !IsPlayerConnected(playerid))
 	{
 		return 0;
 	}
@@ -119,8 +119,8 @@ DB_CreateCharacter(playerid, accountId)
 	}
 	new name[25], query[512];
 	GetPlayerName(playerid, name, 25);
-	mysql_format(g_DB, query, 512, "INSERT IGNORE INTO characters (account_id, slot, money, bank, level, exp, health, armor, pos_x, pos_y, pos_z, angle, interior, world, skin, played_ms) VALUES (%d, %d, %d, %d, %d, %d, %f, %f, %f, %f, %f, %f, %d, %d, %d, %d)", accountId, 0, gPlayer[playerid][PLAYER_DATA_88], gPlayer[playerid][PLAYER_DATA_89], gPlayer[playerid][PLAYER_DATA_90], gPlayer[playerid][PLAYER_DATA_91], gPlayer[playerid][PLAYER_DATA_92], gPlayer[playerid][PLAYER_DATA_93], gPlayer[playerid][PLAYER_DATA_94], gPlayer[playerid][PLAYER_DATA_95], gPlayer[playerid][PLAYER_DATA_96], gPlayer[playerid][PLAYER_DATA_97], gPlayer[playerid][PLAYER_DATA_98], gPlayer[playerid][PLAYER_DATA_99], gPlayer[playerid][PLAYER_DATA_100], max(gPlayer[playerid][PLAYER_DATA_113], 0));
-	g_BankDb[playerid] = gPlayer[playerid][PLAYER_DATA_89];
+	mysql_format(g_DB, query, 512, "INSERT IGNORE INTO characters (account_id, slot, money, bank, level, exp, health, armor, pos_x, pos_y, pos_z, angle, interior, world, skin, played_ms) VALUES (%d, %d, %d, %d, %d, %d, %f, %f, %f, %f, %f, %f, %d, %d, %d, %d)", accountId, 0, gPlayer[playerid][pMoney], gPlayer[playerid][pBank], gPlayer[playerid][pLevel], gPlayer[playerid][pExp], gPlayer[playerid][pHealth], gPlayer[playerid][pArmor], gPlayer[playerid][pPosX], gPlayer[playerid][pPosY], gPlayer[playerid][pPosZ], gPlayer[playerid][pAngle], gPlayer[playerid][pInterior], gPlayer[playerid][pWorld], gPlayer[playerid][pSkin], max(gPlayer[playerid][pPlayedMs], 0));
+	g_BankDb[playerid] = gPlayer[playerid][pBank];
 	DB_PendingSet(playerid, 8);
 	mysql_tquery(g_DB, query, "DB_OnCharCreated", "ds", playerid, name);
 }
@@ -132,7 +132,7 @@ public DB_OnCharCreated(playerid, name[])
 		return 1;
 	}
 	DB_PendingClear(playerid, 8);
-	if (gPlayer[playerid][PLAYER_DATA_106] != 7)
+	if (gPlayer[playerid][pAuthState] != 7)
 	{
 		return 1;
 	}
@@ -141,14 +141,14 @@ public DB_OnCharCreated(playerid, name[])
 	{
 		charId = cache_insert_id();
 	}
-	gPlayer[playerid][PLAYER_DATA_3] = charId;
+	gPlayer[playerid][pCharId] = charId;
 	if (charId > 0)
 	{
 		DB_BankSessionReset(playerid, charId);
 	}
 	if (charId > 0)
 	{
-		gPlayer[playerid][PLAYER_DATA_104] = gPlayer[playerid][PLAYER_DATA_100];
+		gPlayer[playerid][pCivilSkin] = gPlayer[playerid][pSkin];
 	}
 	Char_OnDBCreated(playerid, charId);
 	return 1;
@@ -156,18 +156,18 @@ public DB_OnCharCreated(playerid, name[])
 
 DB_SaveCharacter(playerid)
 {
-	if (playerid < 0 || playerid >= 1000 || !DB_IsReady())
+	if (playerid < 0 || playerid >= MAX_PLAYERS || !DB_IsReady())
 	{
 		return 0;
 	}
-	if (gPlayer[playerid][PLAYER_DATA_3] <= 0)
+	if (gPlayer[playerid][pCharId] <= 0)
 	{
 		return 0;
 	}
-	new query[768], skin = gPlayer[playerid][PLAYER_DATA_100], name[25];
+	new query[768], skin = gPlayer[playerid][pSkin], name[25];
 	GetPlayerName(playerid, name, 25);
 	new bankDelta = DB_BankDeltaTake(playerid);
-	skin = gPlayer[playerid][PLAYER_DATA_104];
-	mysql_format(g_DB, query, 768, "UPDATE characters SET money = %d, bank = GREATEST(0, LEAST(%d, CAST(bank AS SIGNED) + (%d))), level = %d, exp = %d, health = %f, armor = %f, pos_x = %f, pos_y = %f, pos_z = %f, angle = %f, interior = %d, world = %d, skin = %d, played_ms = %d, last_save = NOW() WHERE id = %d", gPlayer[playerid][PLAYER_DATA_88], 0x3B9ACA00, bankDelta, gPlayer[playerid][PLAYER_DATA_90], gPlayer[playerid][PLAYER_DATA_91], gPlayer[playerid][PLAYER_DATA_92], gPlayer[playerid][PLAYER_DATA_93], gPlayer[playerid][PLAYER_DATA_94], gPlayer[playerid][PLAYER_DATA_95], gPlayer[playerid][PLAYER_DATA_96], gPlayer[playerid][PLAYER_DATA_97], gPlayer[playerid][PLAYER_DATA_98], gPlayer[playerid][PLAYER_DATA_99], skin, max(gPlayer[playerid][PLAYER_DATA_113], 0), gPlayer[playerid][PLAYER_DATA_3]);
-	mysql_tquery(g_DB, query, "DB_OnBankDeltaSaved", "dsddd", playerid, name, gPlayer[playerid][PLAYER_DATA_3], g_BankGen[playerid], bankDelta);
+	skin = gPlayer[playerid][pCivilSkin];
+	mysql_format(g_DB, query, 768, "UPDATE characters SET money = %d, bank = GREATEST(0, LEAST(%d, CAST(bank AS SIGNED) + (%d))), level = %d, exp = %d, health = %f, armor = %f, pos_x = %f, pos_y = %f, pos_z = %f, angle = %f, interior = %d, world = %d, skin = %d, played_ms = %d, last_save = NOW() WHERE id = %d", gPlayer[playerid][pMoney], 0x3B9ACA00, bankDelta, gPlayer[playerid][pLevel], gPlayer[playerid][pExp], gPlayer[playerid][pHealth], gPlayer[playerid][pArmor], gPlayer[playerid][pPosX], gPlayer[playerid][pPosY], gPlayer[playerid][pPosZ], gPlayer[playerid][pAngle], gPlayer[playerid][pInterior], gPlayer[playerid][pWorld], skin, max(gPlayer[playerid][pPlayedMs], 0), gPlayer[playerid][pCharId]);
+	mysql_tquery(g_DB, query, "DB_OnBankDeltaSaved", "dsddd", playerid, name, gPlayer[playerid][pCharId], g_BankGen[playerid], bankDelta);
 }

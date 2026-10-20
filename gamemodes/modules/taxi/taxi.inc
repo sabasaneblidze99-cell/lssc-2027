@@ -3,45 +3,45 @@ new Float:g_TxNpcY[6] = {0xC4DD4000, 0xC4E74000, 0xC4D34000, 0xC4D98000, -1215.0
 new Float:g_TxNpcZ[6] = {13.5, 13.6, 13.5, 13.5, 24.0, 24.0};
 new g_TxNpcD[6] = {1, 1, 2, 2, 3, 3};
 new g_TxTimer;
-new g_TxPhase[1000];
-new g_TxOfferCall[1000];
-new g_TxOfferUntil[1000];
-new g_TxOfferFromPt[1000];
-new g_TxOfferToPt[1000];
-new g_TxPickPt[1000];
-new g_TxDestPt[1000];
-new g_TxDwellTick[1000];
-new g_TxOffTick[1000];
-new g_TxStartHealth[1000];
-new g_TxStraightM[1000];
-new g_TxPeerChar[1000];
-new Float:g_TxMeterF[1000];
-new Float:g_TxStartX[1000];
-new Float:g_TxStartY[1000];
-new bool:g_TxMeterStarted[1000];
-new g_TxBoardUntil[1000];
-new g_TxPayPrompts[1000];
-new g_TxPayMeters[1000];
-new g_TxPayToD[1000];
-new g_TxPayFare[1000];
-new bool:g_TxPayAccept[1000];
-new g_TxPayRating[1000];
-new g_TxStartKind[1000];
-new g_TxStartPeer[1000];
-new g_TxStartFromD[1000];
-new g_TxCancelRide[1000];
-new bool:g_TxAbort[1000];
-new g_TxCdUntil[1000];
-new g_TxRetry[1000];
-new g_TxRetryAt[1000];
-new g_TxCallUntil[1000];
-new g_TxRateRide[1000];
-new g_TxRateStars[1000];
-new g_TxRateDriverChar[1000];
+new g_TxPhase[MAX_PLAYERS];
+new g_TxOfferCall[MAX_PLAYERS];
+new g_TxOfferUntil[MAX_PLAYERS];
+new g_TxOfferFromPt[MAX_PLAYERS];
+new g_TxOfferToPt[MAX_PLAYERS];
+new g_TxPickPt[MAX_PLAYERS];
+new g_TxDestPt[MAX_PLAYERS];
+new g_TxDwellTick[MAX_PLAYERS];
+new g_TxOffTick[MAX_PLAYERS];
+new g_TxStartHealth[MAX_PLAYERS];
+new g_TxStraightM[MAX_PLAYERS];
+new g_TxPeerChar[MAX_PLAYERS];
+new Float:g_TxMeterF[MAX_PLAYERS];
+new Float:g_TxStartX[MAX_PLAYERS];
+new Float:g_TxStartY[MAX_PLAYERS];
+new bool:g_TxMeterStarted[MAX_PLAYERS];
+new g_TxBoardUntil[MAX_PLAYERS];
+new g_TxPayPrompts[MAX_PLAYERS];
+new g_TxPayMeters[MAX_PLAYERS];
+new g_TxPayToD[MAX_PLAYERS];
+new g_TxPayFare[MAX_PLAYERS];
+new bool:g_TxPayAccept[MAX_PLAYERS];
+new g_TxPayRating[MAX_PLAYERS];
+new g_TxStartKind[MAX_PLAYERS];
+new g_TxStartPeer[MAX_PLAYERS];
+new g_TxStartFromD[MAX_PLAYERS];
+new g_TxCancelRide[MAX_PLAYERS];
+new bool:g_TxAbort[MAX_PLAYERS];
+new g_TxCdUntil[MAX_PLAYERS];
+new g_TxRetry[MAX_PLAYERS];
+new g_TxRetryAt[MAX_PLAYERS];
+new g_TxCallUntil[MAX_PLAYERS];
+new g_TxRateRide[MAX_PLAYERS];
+new g_TxRateStars[MAX_PLAYERS];
+new g_TxRateDriverChar[MAX_PLAYERS];
 
 bool:Taxi_Valid(playerid)
 {
-	return playerid >= 0 && playerid < 1000;
+	return playerid >= 0 && playerid < MAX_PLAYERS;
 }
 
 Taxi_TickAfter(ms)
@@ -57,8 +57,8 @@ bool:Taxi_TickReached(tick)
 
 Taxi_Dist2D(Float:x1, Float:y1, Float:x2, Float:y2)
 {
-	new Float:dx = (Float:(x2) - Float:(x1)), Float:dy = (Float:(y2) - Float:(y1));
-	return floatround(floatsqroot((Float:((Float:(dx) * Float:(dx))) + Float:((Float:(dy) * Float:(dy))))), 1);
+	new Float:dx = (x2 - x1), Float:dy = (y2 - y1);
+	return floatround(floatsqroot(((dx * dx) + (dy * dy))), 1);
 }
 
 Taxi_MaxLocalRep(playerid)
@@ -88,12 +88,12 @@ Taxi_VehHealth(vehicleid)
 
 Taxi_PassengerOf(driverid)
 {
-	if (gPlayer[driverid][PLAYER_DATA_453] != 2)
+	if (gPlayer[driverid][pTaxiRideKind] != 2)
 	{
 		return 65535;
 	}
-	new p = gPlayer[driverid][PLAYER_DATA_459] - 1;
-	if (p < 0 || p >= 1000 || !IsPlayerConnected(p) || gPlayer[p][PLAYER_DATA_3] != g_TxPeerChar[driverid] || g_TxPeerChar[driverid] <= 0)
+	new p = gPlayer[driverid][pTaxiPeer] - 1;
+	if (p < 0 || p >= MAX_PLAYERS || !IsPlayerConnected(p) || gPlayer[p][pCharId] != g_TxPeerChar[driverid] || g_TxPeerChar[driverid] <= 0)
 	{
 		return 65535;
 	}
@@ -102,12 +102,12 @@ Taxi_PassengerOf(driverid)
 
 Taxi_DriverOf(passengerid)
 {
-	new d = gPlayer[passengerid][PLAYER_DATA_459] - 1;
-	if (d < 0 || d >= 1000 || !IsPlayerConnected(d) || gPlayer[d][PLAYER_DATA_451] == 0)
+	new d = gPlayer[passengerid][pTaxiPeer] - 1;
+	if (d < 0 || d >= 1000 || !IsPlayerConnected(d) || gPlayer[d][pTaxiOnDuty] == 0)
 	{
 		return 65535;
 	}
-	if (gPlayer[d][PLAYER_DATA_459] - 1 != passengerid || g_TxPeerChar[d] != gPlayer[passengerid][PLAYER_DATA_3])
+	if (gPlayer[d][pTaxiPeer] - 1 != passengerid || g_TxPeerChar[d] != gPlayer[passengerid][pCharId])
 	{
 		return 65535;
 	}
@@ -183,32 +183,32 @@ Taxi_ClearOffer(driverid)
 Taxi_ScheduleNpc(driverid)
 {
 	new span = 45001;
-	new h = LD_Hash32(gPlayer[driverid][PLAYER_DATA_3], gPlayer[driverid][PLAYER_DATA_464] + 1, LD_Bucket(gettime()) ^ 11);
-	gPlayer[driverid][PLAYER_DATA_463] = Taxi_TickAfter(LD_HashMod(h, span) + 45000);
+	new h = LD_Hash32(gPlayer[driverid][pCharId], gPlayer[driverid][pTaxiOpSeq] + 1, LD_Bucket(gettime()) ^ 11);
+	gPlayer[driverid][pTaxiNpcOfferAt] = Taxi_TickAfter(LD_HashMod(h, span) + 45000);
 }
 
 Taxi_ResetRide(driverid)
 {
 	new p = Taxi_PassengerOf(driverid);
-	if (p != 65535)
+	if (p != INVALID_PLAYER_ID)
 	{
 		UI_LivingTaxiMeterHide(p);
 		UI_LivingTaxiPayClose(p);
-		gPlayer[p][PLAYER_DATA_459] = 0;
+		gPlayer[p][pTaxiPeer] = 0;
 	}
 	if (IsPlayerConnected(driverid))
 	{
 		DisablePlayerCheckpoint(driverid);
 		UI_LivingTaxiMeterHide(driverid);
 	}
-	gPlayer[driverid][PLAYER_DATA_452] = 0;
-	gPlayer[driverid][PLAYER_DATA_453] = 0;
-	gPlayer[driverid][PLAYER_DATA_454] = 0;
-	gPlayer[driverid][PLAYER_DATA_455] = 0;
-	gPlayer[driverid][PLAYER_DATA_456] = 0;
-	gPlayer[driverid][PLAYER_DATA_459] = 0;
-	gPlayer[driverid][PLAYER_DATA_460] = 0;
-	gPlayer[driverid][PLAYER_DATA_461] = 0;
+	gPlayer[driverid][pTaxiRideId] = 0;
+	gPlayer[driverid][pTaxiRideKind] = 0;
+	gPlayer[driverid][pTaxiRideState] = 0;
+	gPlayer[driverid][pTaxiMeterM] = 0;
+	gPlayer[driverid][pTaxiMeterOn] = 0;
+	gPlayer[driverid][pTaxiPeer] = 0;
+	gPlayer[driverid][pTaxiFromDistrict] = 0;
+	gPlayer[driverid][pTaxiToDistrict] = 0;
 	g_TxPhase[driverid] = 0;
 	g_TxDwellTick[driverid] = 0;
 	g_TxOffTick[driverid] = 0;
@@ -218,7 +218,7 @@ Taxi_ResetRide(driverid)
 	g_TxBoardUntil[driverid] = 0;
 	g_TxPayPrompts[driverid] = 0;
 	g_TxCdUntil[driverid] = Taxi_TickAfter(10000);
-	if (gPlayer[driverid][PLAYER_DATA_451] != 0)
+	if (gPlayer[driverid][pTaxiOnDuty] != 0)
 	{
 		Taxi_ScheduleNpc(driverid);
 	}
@@ -226,24 +226,24 @@ Taxi_ResetRide(driverid)
 
 Taxi_CancelRide(driverid, driverMsg[], passengerMsg[])
 {
-	if (g_TxPhase[driverid] == 0 && gPlayer[driverid][PLAYER_DATA_452] == 0)
+	if (g_TxPhase[driverid] == 0 && gPlayer[driverid][pTaxiRideId] == 0)
 	{
 		return 0;
 	}
-	if (gPlayer[driverid][PLAYER_DATA_465] == 7)
+	if (gPlayer[driverid][pTaxiPendOp] == 7)
 	{
 		return 0;
 	}
 	new p = Taxi_PassengerOf(driverid);
-	if (p == 65535 && g_TxPhase[driverid] == 1 && g_TxStartKind[driverid] == 2)
+	if (p == INVALID_PLAYER_ID && g_TxPhase[driverid] == 1 && g_TxStartKind[driverid] == 2)
 	{
 		new sp = g_TxStartPeer[driverid];
-		if (sp >= 0 && sp < 1000 && IsPlayerConnected(sp) && gPlayer[sp][PLAYER_DATA_459] - 1 == driverid)
+		if (sp >= 0 && sp < 1000 && IsPlayerConnected(sp) && gPlayer[sp][pTaxiPeer] - 1 == driverid)
 		{
 			p = sp;
 		}
 	}
-	if (p != 65535 && passengerMsg[0] != 0)
+	if (p != INVALID_PLAYER_ID && passengerMsg[0] != 0)
 	{
 		Util_Send(p, -10270721, passengerMsg);
 	}
@@ -254,20 +254,20 @@ Taxi_CancelRide(driverid, driverMsg[], passengerMsg[])
 	if (g_TxPhase[driverid] == 1)
 	{
 		g_TxAbort[driverid] = 1;
-		if (p != 65535)
+		if (p != INVALID_PLAYER_ID)
 		{
-			gPlayer[p][PLAYER_DATA_459] = 0;
+			gPlayer[p][pTaxiPeer] = 0;
 		}
 		return 0;
 	}
-	new ride = gPlayer[driverid][PLAYER_DATA_452];
-	if (ride > 0 && gPlayer[driverid][PLAYER_DATA_465] == 0)
+	new ride = gPlayer[driverid][pTaxiRideId];
+	if (ride > 0 && gPlayer[driverid][pTaxiPendOp] == 0)
 	{
 		g_TxCancelRide[driverid] = ride;
 		g_TxRetry[driverid] = 0;
-		gPlayer[driverid][PLAYER_DATA_465] = 4;
-		DB_LivingMakeOpId(gPlayer[driverid][PLAYER_DATA_466], 41, "tx", ride, gPlayer[driverid][PLAYER_DATA_3]);
-		DB_LivingTaxiCancel(driverid, ride, gPlayer[driverid][PLAYER_DATA_466]);
+		gPlayer[driverid][pTaxiPendOp] = 4;
+		DB_LivingMakeOpId(gPlayer[driverid][pTaxiOpId], 41, "tx", ride, gPlayer[driverid][pCharId]);
+		DB_LivingTaxiCancel(driverid, ride, gPlayer[driverid][pTaxiOpId]);
 	}
 	Taxi_ResetRide(driverid);
 }
@@ -276,12 +276,12 @@ Taxi_EndDuty(driverid, reason, bool:closeRental)
 {
 	Taxi_CancelRide(driverid, "", "La corsa e' stata annullata: il taxi non e' piu' in servizio.");
 	Taxi_ClearOffer(driverid);
-	if (gPlayer[driverid][PLAYER_DATA_451] != 0)
+	if (gPlayer[driverid][pTaxiOnDuty] != 0)
 	{
-		gPlayer[driverid][PLAYER_DATA_451] = 0;
-		LD_Emit(107, 0, gPlayer[driverid][PLAYER_DATA_3], 0, "-");
+		gPlayer[driverid][pTaxiOnDuty] = 0;
+		LD_Emit(107, 0, gPlayer[driverid][pCharId], 0, "-");
 	}
-	gPlayer[driverid][PLAYER_DATA_463] = 0;
+	gPlayer[driverid][pTaxiNpcOfferAt] = 0;
 	if (closeRental)
 	{
 		Rental_ClosePro(driverid, reason);
@@ -357,8 +357,8 @@ Taxi_PickPoint(h, districtId)
 
 Taxi_NpcOffer(driverid)
 {
-	new charId = gPlayer[driverid][PLAYER_DATA_3];
-	new seq = ++gPlayer[driverid][PLAYER_DATA_464];
+	new charId = gPlayer[driverid][pCharId];
+	new seq = ++gPlayer[driverid][pTaxiOpSeq];
 	new h = LD_Hash32(charId, seq, LD_Bucket(gettime()));
 	new fromD = Taxi_PickDistrict(h, 0);
 	new h2 = LD_Hash32(h, seq, 12);
@@ -384,7 +384,7 @@ Taxi_NpcOffer(driverid)
 
 bool:Taxi_CanAccept(driverid, bool:verbose)
 {
-	if (gPlayer[driverid][PLAYER_DATA_451] == 0)
+	if (gPlayer[driverid][pTaxiOnDuty] == 0)
 	{
 		if (verbose)
 		{
@@ -392,7 +392,7 @@ bool:Taxi_CanAccept(driverid, bool:verbose)
 		}
 		return 0;
 	}
-	if (g_TxPhase[driverid] != 0 || gPlayer[driverid][PLAYER_DATA_452] != 0)
+	if (g_TxPhase[driverid] != 0 || gPlayer[driverid][pTaxiRideId] != 0)
 	{
 		if (verbose)
 		{
@@ -400,7 +400,7 @@ bool:Taxi_CanAccept(driverid, bool:verbose)
 		}
 		return 0;
 	}
-	if (gPlayer[driverid][PLAYER_DATA_465] != 0)
+	if (gPlayer[driverid][pTaxiPendOp] != 0)
 	{
 		if (verbose)
 		{
@@ -429,7 +429,7 @@ bool:Taxi_CanAccept(driverid, bool:verbose)
 
 Taxi_SendStart(driverid)
 {
-	DB_LivingTaxiStart(driverid, g_TxStartKind[driverid], g_TxStartPeer[driverid], g_TxStartFromD[driverid], gPlayer[driverid][PLAYER_DATA_466]);
+	DB_LivingTaxiStart(driverid, g_TxStartKind[driverid], g_TxStartPeer[driverid], g_TxStartFromD[driverid], gPlayer[driverid][pTaxiOpId]);
 }
 
 Taxi_AcceptNpc(driverid)
@@ -445,9 +445,9 @@ Taxi_AcceptNpc(driverid)
 	}
 	new fromPt = g_TxOfferFromPt[driverid], toPt = g_TxOfferToPt[driverid];
 	Taxi_ClearOffer(driverid);
-	gPlayer[driverid][PLAYER_DATA_453] = 1;
-	gPlayer[driverid][PLAYER_DATA_460] = g_TxNpcD[fromPt];
-	gPlayer[driverid][PLAYER_DATA_461] = g_TxNpcD[toPt];
+	gPlayer[driverid][pTaxiRideKind] = 1;
+	gPlayer[driverid][pTaxiFromDistrict] = g_TxNpcD[fromPt];
+	gPlayer[driverid][pTaxiToDistrict] = g_TxNpcD[toPt];
 	g_TxPickPt[driverid] = fromPt;
 	g_TxDestPt[driverid] = toPt;
 	g_TxStraightM[driverid] = Taxi_Dist2D(g_TxNpcX[fromPt], g_TxNpcY[fromPt], g_TxNpcX[toPt], g_TxNpcY[toPt]);
@@ -457,8 +457,8 @@ Taxi_AcceptNpc(driverid)
 	g_TxStartPeer[driverid] = 65535;
 	g_TxStartFromD[driverid] = g_TxNpcD[fromPt];
 	g_TxRetry[driverid] = 0;
-	gPlayer[driverid][PLAYER_DATA_465] = 1;
-	DB_LivingMakeOpId(gPlayer[driverid][PLAYER_DATA_466], 41, "ts", gPlayer[driverid][PLAYER_DATA_464], gPlayer[driverid][PLAYER_DATA_3]);
+	gPlayer[driverid][pTaxiPendOp] = 1;
+	DB_LivingMakeOpId(gPlayer[driverid][pTaxiOpId], 41, "ts", gPlayer[driverid][pTaxiOpSeq], gPlayer[driverid][pCharId]);
 	Taxi_SendStart(driverid);
 }
 
@@ -473,7 +473,7 @@ Taxi_AcceptPlayer(driverid, passengerid)
 		Util_Send(driverid, -10270721, "Quella chiamata non e' piu' attiva.");
 		return 0;
 	}
-	if (gPlayer[passengerid][PLAYER_DATA_459] != 0)
+	if (gPlayer[passengerid][pTaxiPeer] != 0)
 	{
 		Util_Send(driverid, -10270721, "La chiamata e' gia' stata presa da un altro taxi.");
 		return 0;
@@ -486,8 +486,8 @@ Taxi_AcceptPlayer(driverid, passengerid)
 	new Float:px, Float:py, Float:pz;
 	GetPlayerPos(passengerid, px, py, pz);
 	g_TxCallUntil[passengerid] = 0;
-	gPlayer[passengerid][PLAYER_DATA_459] = driverid + 1;
-	for (new i = 0; i < 1000; i++)
+	gPlayer[passengerid][pTaxiPeer] = driverid + 1;
+	for (new i = 0; i < MAX_PLAYERS; i++)
 	{
 		if (i != driverid && g_TxOfferCall[i] == passengerid + 1)
 		{
@@ -495,25 +495,25 @@ Taxi_AcceptPlayer(driverid, passengerid)
 		}
 	}
 	Taxi_ClearOffer(driverid);
-	gPlayer[driverid][PLAYER_DATA_453] = 2;
-	gPlayer[driverid][PLAYER_DATA_460] = District_At(px, py);
-	gPlayer[driverid][PLAYER_DATA_461] = 0;
-	gPlayer[driverid][PLAYER_DATA_459] = passengerid + 1;
-	g_TxPeerChar[driverid] = gPlayer[passengerid][PLAYER_DATA_3];
+	gPlayer[driverid][pTaxiRideKind] = 2;
+	gPlayer[driverid][pTaxiFromDistrict] = District_At(px, py);
+	gPlayer[driverid][pTaxiToDistrict] = 0;
+	gPlayer[driverid][pTaxiPeer] = passengerid + 1;
+	g_TxPeerChar[driverid] = gPlayer[passengerid][pCharId];
 	g_TxPhase[driverid] = 1;
 	g_TxAbort[driverid] = 0;
 	g_TxStartKind[driverid] = 2;
 	g_TxStartPeer[driverid] = passengerid;
-	g_TxStartFromD[driverid] = gPlayer[driverid][PLAYER_DATA_460];
+	g_TxStartFromD[driverid] = gPlayer[driverid][pTaxiFromDistrict];
 	g_TxRetry[driverid] = 0;
-	gPlayer[driverid][PLAYER_DATA_465] = 1;
-	DB_LivingMakeOpId(gPlayer[driverid][PLAYER_DATA_466], 41, "ts", gPlayer[passengerid][PLAYER_DATA_3], gPlayer[driverid][PLAYER_DATA_3]);
+	gPlayer[driverid][pTaxiPendOp] = 1;
+	DB_LivingMakeOpId(gPlayer[driverid][pTaxiOpId], 41, "ts", gPlayer[passengerid][pCharId], gPlayer[driverid][pCharId]);
 	Taxi_SendStart(driverid);
 }
 
 Taxi_OnStartResult(driverid, result, rideId)
 {
-	if (gPlayer[driverid][PLAYER_DATA_465] != 1)
+	if (gPlayer[driverid][pTaxiPendOp] != 1)
 	{
 		return 0;
 	}
@@ -522,19 +522,19 @@ Taxi_OnStartResult(driverid, result, rideId)
 		Taxi_ScheduleRetry(driverid);
 		return 0;
 	}
-	gPlayer[driverid][PLAYER_DATA_465] = 0;
+	gPlayer[driverid][pTaxiPendOp] = 0;
 	g_TxRetry[driverid] = 0;
 	g_TxRetryAt[driverid] = 0;
-	new bool:npc = gPlayer[driverid][PLAYER_DATA_453] == 1;
+	new bool:npc = gPlayer[driverid][pTaxiRideKind] == 1;
 	new p = Taxi_PassengerOf(driverid);
 	if (result == 1 && rideId > 0)
 	{
-		gPlayer[driverid][PLAYER_DATA_452] = rideId;
-		gPlayer[driverid][PLAYER_DATA_454] = 1;
+		gPlayer[driverid][pTaxiRideId] = rideId;
+		gPlayer[driverid][pTaxiRideState] = 1;
 		g_TxPhase[driverid] = 2;
 		g_TxDwellTick[driverid] = 0;
 		g_TxOffTick[driverid] = 0;
-		if (g_TxAbort[driverid] || gPlayer[driverid][PLAYER_DATA_451] == 0 || (!npc && p == 65535))
+		if (g_TxAbort[driverid] || gPlayer[driverid][pTaxiOnDuty] == 0 || (!npc && p == INVALID_PLAYER_ID))
 		{
 			g_TxAbort[driverid] = 0;
 			Taxi_CancelRide(driverid, "", "");
@@ -557,7 +557,7 @@ Taxi_OnStartResult(driverid, result, rideId)
 		return 0;
 	}
 	g_TxAbort[driverid] = 0;
-	if (p != 65535)
+	if (p != INVALID_PLAYER_ID)
 	{
 		Util_Send(p, -10270721, "Il taxi non ha potuto accettare la corsa: puoi chiamarne un altro.");
 	}
@@ -567,7 +567,7 @@ Taxi_OnStartResult(driverid, result, rideId)
 		{
 			Util_Send(driverid, -10270721, "Hai raggiunto il massimo di corse con clienti della citta' per quest'ora.");
 			Taxi_ResetRide(driverid);
-			gPlayer[driverid][PLAYER_DATA_463] = Taxi_TickAfter(300000);
+			gPlayer[driverid][pTaxiNpcOfferAt] = Taxi_TickAfter(300000);
 			return 0;
 		}
 		case 7:
@@ -592,29 +592,29 @@ Taxi_MeterSample(driverid, vehicleid, bool:count)
 	GetVehiclePos(vehicleid, x, y, z);
 	if (count)
 	{
-		new Float:dx = (Float:(x) - Float:(gPlayer[driverid][PLAYER_DATA_457])), Float:dy = (Float:(y) - Float:(gPlayer[driverid][PLAYER_DATA_458]));
-		new Float:step = floatsqroot((Float:((Float:(dx) * Float:(dx))) + Float:((Float:(dy) * Float:(dy)))));
-		if ((Float:(step) <= Float:(0x428C0000)))
+		new Float:dx = (x - gPlayer[driverid][pTaxiLastX]), Float:dy = (y - gPlayer[driverid][pTaxiLastY]);
+		new Float:step = floatsqroot(((dx * dx) + (dy * dy)));
+		if ((step <= Float:0x428C0000))
 		{
 			g_TxMeterF[driverid] += step;
 		}
-		gPlayer[driverid][PLAYER_DATA_455] = floatround(g_TxMeterF[driverid], 1);
+		gPlayer[driverid][pTaxiMeterM] = floatround(g_TxMeterF[driverid], 1);
 	}
-	gPlayer[driverid][PLAYER_DATA_457] = x;
-	gPlayer[driverid][PLAYER_DATA_458] = y;
+	gPlayer[driverid][pTaxiLastX] = x;
+	gPlayer[driverid][pTaxiLastY] = y;
 }
 
 Taxi_MeterShow(driverid, bool:running)
 {
-	new meters = gPlayer[driverid][PLAYER_DATA_455], p = Taxi_PassengerOf(driverid);
-	if (gPlayer[driverid][PLAYER_DATA_453] == 1)
+	new meters = gPlayer[driverid][pTaxiMeterM], p = Taxi_PassengerOf(driverid);
+	if (gPlayer[driverid][pTaxiRideKind] == 1)
 	{
 		UI_LivingTaxiMeter(driverid, LD_TaxiFare(meters), meters, running);
 		return 0;
 	}
-	new fare = p != 65535 ? LD_TaxiFareFor(meters, Taxi_MaxLocalRep(p)) : LD_TaxiFare(meters);
+	new fare = p != INVALID_PLAYER_ID ? LD_TaxiFareFor(meters, Taxi_MaxLocalRep(p)) : LD_TaxiFare(meters);
 	UI_LivingTaxiMeter(driverid, fare, meters, running);
-	if (p != 65535)
+	if (p != INVALID_PLAYER_ID)
 	{
 		UI_LivingTaxiMeter(p, fare, meters, running);
 	}
@@ -626,18 +626,18 @@ Taxi_MeterBegin(driverid, vehicleid)
 	if (!g_TxMeterStarted[driverid])
 	{
 		g_TxMeterStarted[driverid] = 1;
-		g_TxStartX[driverid] = Float:gPlayer[driverid][PLAYER_DATA_457];
-		g_TxStartY[driverid] = Float:gPlayer[driverid][PLAYER_DATA_458];
+		g_TxStartX[driverid] = gPlayer[driverid][pTaxiLastX];
+		g_TxStartY[driverid] = gPlayer[driverid][pTaxiLastY];
 	}
-	gPlayer[driverid][PLAYER_DATA_456] = 1;
+	gPlayer[driverid][pTaxiMeterOn] = 1;
 	Taxi_MeterShow(driverid, 1);
 }
 
 Taxi_NpcPay(driverid, vehicleid)
 {
-	gPlayer[driverid][PLAYER_DATA_456] = 0;
+	gPlayer[driverid][pTaxiMeterOn] = 0;
 	new maxM = g_TxStraightM[driverid] * 250 / 100 + 300;
-	new meters = gPlayer[driverid][PLAYER_DATA_455];
+	new meters = gPlayer[driverid][pTaxiMeterM];
 	if (meters > maxM)
 	{
 		meters = maxM;
@@ -654,25 +654,25 @@ Taxi_NpcPay(driverid, vehicleid)
 	g_TxPayFare[driverid] = LD_TaxiFare(meters);
 	g_TxPhase[driverid] = 5;
 	g_TxRetry[driverid] = 0;
-	gPlayer[driverid][PLAYER_DATA_461] = g_TxPayToD[driverid];
-	gPlayer[driverid][PLAYER_DATA_465] = 7;
-	DB_LivingMakeOpId(gPlayer[driverid][PLAYER_DATA_466], 41, "tp", gPlayer[driverid][PLAYER_DATA_452], gPlayer[driverid][PLAYER_DATA_3]);
+	gPlayer[driverid][pTaxiToDistrict] = g_TxPayToD[driverid];
+	gPlayer[driverid][pTaxiPendOp] = 7;
+	DB_LivingMakeOpId(gPlayer[driverid][pTaxiOpId], 41, "tp", gPlayer[driverid][pTaxiRideId], gPlayer[driverid][pCharId]);
 	DisablePlayerCheckpoint(driverid);
 	Taxi_MeterShow(driverid, 0);
-	DB_LivingTaxiPay(driverid, gPlayer[driverid][PLAYER_DATA_452], 65535, meters, g_TxPayToD[driverid], 1, rating, gPlayer[driverid][PLAYER_DATA_466]);
+	DB_LivingTaxiPay(driverid, gPlayer[driverid][pTaxiRideId], 65535, meters, g_TxPayToD[driverid], 1, rating, gPlayer[driverid][pTaxiOpId]);
 }
 
 Taxi_PayPrompt(driverid)
 {
 	new p = Taxi_PassengerOf(driverid), veh = Rental_GetVehicle(driverid);
-	if (p == 65535 || veh == 0)
+	if (p == INVALID_PLAYER_ID || veh == 0)
 	{
 		Taxi_CancelRide(driverid, "Corsa annullata: cliente o taxi non piu' disponibili.", "");
 		return 0;
 	}
 	new Float:x, Float:y, Float:z;
 	GetVehiclePos(veh, x, y, z);
-	new meters = gPlayer[driverid][PLAYER_DATA_455];
+	new meters = gPlayer[driverid][pTaxiMeterM];
 	if (meters < 200 || Taxi_Dist2D(g_TxStartX[driverid], g_TxStartY[driverid], x, y) < 150)
 	{
 		Taxi_CancelRide(driverid, "Corsa troppo breve: annullata senza addebito.", "Corsa troppo breve: annullata senza addebito.");
@@ -684,16 +684,16 @@ Taxi_PayPrompt(driverid)
 	g_TxPayToD[driverid] = District_At(x, y);
 	g_TxPayFare[driverid] = LD_TaxiFareFor(meters, rep);
 	g_TxPayRating[driverid] = 0;
-	gPlayer[driverid][PLAYER_DATA_461] = g_TxPayToD[driverid];
+	gPlayer[driverid][pTaxiToDistrict] = g_TxPayToD[driverid];
 	g_TxPhase[driverid] = 4;
 	Taxi_MeterShow(driverid, 0);
-	UI_LivingTaxiPayConfirm(p, gPlayer[driverid][PLAYER_DATA_452], name, meters, g_TxPayFare[driverid], LD_DiscountPct(rep), 60);
+	UI_LivingTaxiPayConfirm(p, gPlayer[driverid][pTaxiRideId], name, meters, g_TxPayFare[driverid], LD_DiscountPct(rep), 60);
 	SendClientMessage(driverid, -1, "Tassametro fermo: $%d per %d m. In attesa della conferma del cliente.", g_TxPayFare[driverid], meters);
 }
 
 Taxi_MeterStop(driverid)
 {
-	if (gPlayer[driverid][PLAYER_DATA_456] == 0)
+	if (gPlayer[driverid][pTaxiMeterOn] == 0)
 	{
 		return 0;
 	}
@@ -702,13 +702,13 @@ Taxi_MeterStop(driverid)
 	{
 		Taxi_MeterSample(driverid, veh, Taxi_InTaxi(driverid, veh));
 	}
-	gPlayer[driverid][PLAYER_DATA_456] = 0;
+	gPlayer[driverid][pTaxiMeterOn] = 0;
 	Taxi_PayPrompt(driverid);
 }
 
 Taxi_OnPayResult(driverid, result, rideId, net, points, tax)
 {
-	if (gPlayer[driverid][PLAYER_DATA_465] != 7)
+	if (gPlayer[driverid][pTaxiPendOp] != 7)
 	{
 		return 0;
 	}
@@ -717,12 +717,12 @@ Taxi_OnPayResult(driverid, result, rideId, net, points, tax)
 		Taxi_ScheduleRetry(driverid);
 		return 0;
 	}
-	gPlayer[driverid][PLAYER_DATA_465] = 0;
+	gPlayer[driverid][pTaxiPendOp] = 0;
 	g_TxRetry[driverid] = 0;
 	g_TxRetryAt[driverid] = 0;
-	new bool:npc = gPlayer[driverid][PLAYER_DATA_453] == 1;
+	new bool:npc = gPlayer[driverid][pTaxiRideKind] == 1;
 	new p = Taxi_PassengerOf(driverid), other[25];
-	if (npc || p == 65535)
+	if (npc || p == INVALID_PLAYER_ID)
 	{
 		format(other, 25, "%s", "Cliente");
 	}
@@ -734,7 +734,7 @@ Taxi_OnPayResult(driverid, result, rideId, net, points, tax)
 	{
 		case 1, 6:
 		{
-			gPlayer[driverid][PLAYER_DATA_454] = 2;
+			gPlayer[driverid][pTaxiRideState] = 2;
 			if (points > 0)
 			{
 				LD_SetProPoints(driverid, 2, points);
@@ -744,11 +744,11 @@ Taxi_OnPayResult(driverid, result, rideId, net, points, tax)
 			{
 				Util_Send(driverid, -2994689, "Tetto orario del lavoro dinamico raggiunto: e' stato pagato solo il residuo.");
 			}
-			LD_Emit(3, g_TxPayToD[driverid], gPlayer[driverid][PLAYER_DATA_3], net, gPlayer[driverid][PLAYER_DATA_466]);
+			LD_Emit(3, g_TxPayToD[driverid], gPlayer[driverid][pCharId], net, gPlayer[driverid][pTaxiOpId]);
 		}
 		case 8:
 		{
-			gPlayer[driverid][PLAYER_DATA_454] = 3;
+			gPlayer[driverid][pTaxiRideState] = 3;
 			Util_Send(driverid, -10270721, "Il cliente ha contestato la corsa: nessun pagamento, la verifichera' lo staff.");
 		}
 		case 3:
@@ -775,7 +775,7 @@ Taxi_OnPayResult(driverid, result, rideId, net, points, tax)
 Taxi_RetrySend(playerid)
 {
 	g_TxRetryAt[playerid] = 0;
-	switch (gPlayer[playerid][PLAYER_DATA_465])
+	switch (gPlayer[playerid][pTaxiPendOp])
 	{
 		case 1:
 		{
@@ -789,15 +789,15 @@ Taxi_RetrySend(playerid)
 		case 7:
 		{
 			new p = Taxi_PassengerOf(playerid);
-			DB_LivingTaxiPay(playerid, gPlayer[playerid][PLAYER_DATA_452], p, g_TxPayMeters[playerid], g_TxPayToD[playerid], g_TxPayAccept[playerid], g_TxPayRating[playerid], gPlayer[playerid][PLAYER_DATA_466]);
+			DB_LivingTaxiPay(playerid, gPlayer[playerid][pTaxiRideId], p, g_TxPayMeters[playerid], g_TxPayToD[playerid], g_TxPayAccept[playerid], g_TxPayRating[playerid], gPlayer[playerid][pTaxiOpId]);
 		}
 		case 4:
 		{
-			DB_LivingTaxiCancel(playerid, g_TxCancelRide[playerid], gPlayer[playerid][PLAYER_DATA_466]);
+			DB_LivingTaxiCancel(playerid, g_TxCancelRide[playerid], gPlayer[playerid][pTaxiOpId]);
 		}
 		case 8:
 		{
-			DB_LivingTaxiRate(playerid, g_TxRateRide[playerid], g_TxRateStars[playerid], gPlayer[playerid][PLAYER_DATA_466]);
+			DB_LivingTaxiRate(playerid, g_TxRateRide[playerid], g_TxRateStars[playerid], gPlayer[playerid][pTaxiOpId]);
 		}
 	}
 }
@@ -820,7 +820,7 @@ public Living_OnDBTaxi(playerid, action, result, rideId, amount, balance, v1, v2
 		}
 		case 9:
 		{
-			if (gPlayer[playerid][PLAYER_DATA_465] != 4)
+			if (gPlayer[playerid][pTaxiPendOp] != 4)
 			{
 				return 1;
 			}
@@ -833,14 +833,14 @@ public Living_OnDBTaxi(playerid, action, result, rideId, amount, balance, v1, v2
 			{
 				Log_Write("TAXI", "annullo corsa senza esito: la chiude il cleanup del DB (logout/avvio)");
 			}
-			gPlayer[playerid][PLAYER_DATA_465] = 0;
+			gPlayer[playerid][pTaxiPendOp] = 0;
 			g_TxCancelRide[playerid] = 0;
 			g_TxRetry[playerid] = 0;
 			g_TxRetryAt[playerid] = 0;
 		}
 		case 10:
 		{
-			if (gPlayer[playerid][PLAYER_DATA_465] != 8)
+			if (gPlayer[playerid][pTaxiPendOp] != 8)
 			{
 				return 1;
 			}
@@ -849,7 +849,7 @@ public Living_OnDBTaxi(playerid, action, result, rideId, amount, balance, v1, v2
 				Taxi_ScheduleRetry(playerid);
 				return 1;
 			}
-			gPlayer[playerid][PLAYER_DATA_465] = 0;
+			gPlayer[playerid][pTaxiPendOp] = 0;
 			g_TxRetry[playerid] = 0;
 			g_TxRetryAt[playerid] = 0;
 			if (result == 1)
@@ -861,12 +861,9 @@ public Living_OnDBTaxi(playerid, action, result, rideId, amount, balance, v1, v2
 					SendClientMessage(d, -1, "[Taxi] Nuovo voto: %d stelle (media %d.%02d).", v1, v2 / 100, v2 % 100);
 				}
 			}
-			else
+			else if (result == 2)
 			{
-				if (result == 2)
-				{
-					Util_Send(playerid, -1, "Hai gia' votato questa corsa.");
-				}
+				Util_Send(playerid, -1, "Hai gia' votato questa corsa.");
 			}
 			g_TxRateRide[playerid] = 0;
 			g_TxRateStars[playerid] = 0;
@@ -893,11 +890,11 @@ public Living_OnDBTaxiCharged(playerid, rideId, result, charged, balance)
 			{
 				GetPlayerName(d, name, 25);
 				meters = g_TxPayMeters[d];
-				g_TxRateDriverChar[playerid] = gPlayer[d][PLAYER_DATA_3];
+				g_TxRateDriverChar[playerid] = gPlayer[d][pCharId];
 			}
 			UI_LivingTaxiMeterHide(playerid);
 			UI_LivingTaxiReceipt(playerid, 0, rideId, name, meters, charged, 0, 0);
-			if (g_TxRateDriverChar[playerid] > 0 && gPlayer[playerid][PLAYER_DATA_465] == 0)
+			if (g_TxRateDriverChar[playerid] > 0 && gPlayer[playerid][pTaxiPendOp] == 0)
 			{
 				g_TxRateRide[playerid] = rideId;
 				UI_LivingTaxiRate(playerid, rideId, name);
@@ -925,16 +922,13 @@ public UI_OnTaxiCallAccept(playerid, callId)
 	{
 		Taxi_AcceptPlayer(playerid, callId - 1);
 	}
+	else if (callId == g_TxOfferCall[playerid])
+	{
+		Taxi_AcceptNpc(playerid);
+	}
 	else
 	{
-		if (callId == g_TxOfferCall[playerid])
-		{
-			Taxi_AcceptNpc(playerid);
-		}
-		else
-		{
-			Util_Send(playerid, -10270721, "Quella chiamata non e' piu' attiva.");
-		}
+		Util_Send(playerid, -10270721, "Quella chiamata non e' piu' attiva.");
 	}
 	return 1;
 }
@@ -942,7 +936,7 @@ public UI_OnTaxiCallAccept(playerid, callId)
 public UI_OnTaxiPayConfirm(playerid, rideId, accept)
 {
 	new d = Taxi_DriverOf(playerid);
-	if (d == 65535 || rideId <= 0 || gPlayer[d][PLAYER_DATA_452] != rideId || g_TxPhase[d] != 4 || gPlayer[d][PLAYER_DATA_465] != 0)
+	if (d == 65535 || rideId <= 0 || gPlayer[d][pTaxiRideId] != rideId || g_TxPhase[d] != 4 || gPlayer[d][pTaxiPendOp] != 0)
 	{
 		UI_LivingReject(playerid, "Questa corsa non e' piu' in attesa di pagamento.");
 		return 1;
@@ -950,17 +944,17 @@ public UI_OnTaxiPayConfirm(playerid, rideId, accept)
 	g_TxPhase[d] = 5;
 	g_TxPayAccept[d] = accept != 0;
 	g_TxRetry[d] = 0;
-	gPlayer[d][PLAYER_DATA_465] = 7;
-	DB_LivingMakeOpId(gPlayer[d][PLAYER_DATA_466], 41, "tp", rideId, gPlayer[d][PLAYER_DATA_3]);
+	gPlayer[d][pTaxiPendOp] = 7;
+	DB_LivingMakeOpId(gPlayer[d][pTaxiOpId], 41, "tp", rideId, gPlayer[d][pCharId]);
 	Util_Send(playerid, -1, accept != 0 ? "Pagamento in corso..." : "Contestazione registrata: la corsa restera' in sospeso per lo staff.");
-	DB_LivingTaxiPay(d, rideId, playerid, g_TxPayMeters[d], g_TxPayToD[d], g_TxPayAccept[d], 0, gPlayer[d][PLAYER_DATA_466]);
+	DB_LivingTaxiPay(d, rideId, playerid, g_TxPayMeters[d], g_TxPayToD[d], g_TxPayAccept[d], 0, gPlayer[d][pTaxiOpId]);
 	return 1;
 }
 
 public UI_OnTaxiPayExpired(playerid, rideId)
 {
 	new d = Taxi_DriverOf(playerid);
-	if (d == 65535 || gPlayer[d][PLAYER_DATA_452] != rideId || g_TxPhase[d] != 4)
+	if (d == 65535 || gPlayer[d][pTaxiRideId] != rideId || g_TxPhase[d] != 4)
 	{
 		return 1;
 	}
@@ -977,15 +971,15 @@ public UI_OnTaxiPayExpired(playerid, rideId)
 
 public UI_OnTaxiRate(playerid, rideId, stars)
 {
-	if (rideId <= 0 || rideId != g_TxRateRide[playerid] || stars < 1 || stars > 5 || gPlayer[playerid][PLAYER_DATA_465] != 0)
+	if (rideId <= 0 || rideId != g_TxRateRide[playerid] || stars < 1 || stars > 5 || gPlayer[playerid][pTaxiPendOp] != 0)
 	{
 		return 1;
 	}
 	g_TxRateStars[playerid] = stars;
 	g_TxRetry[playerid] = 0;
-	gPlayer[playerid][PLAYER_DATA_465] = 8;
-	DB_LivingMakeOpId(gPlayer[playerid][PLAYER_DATA_466], 41, "tr", rideId, gPlayer[playerid][PLAYER_DATA_3]);
-	DB_LivingTaxiRate(playerid, rideId, stars, gPlayer[playerid][PLAYER_DATA_466]);
+	gPlayer[playerid][pTaxiPendOp] = 8;
+	DB_LivingMakeOpId(gPlayer[playerid][pTaxiOpId], 41, "tr", rideId, gPlayer[playerid][pCharId]);
+	DB_LivingTaxiRate(playerid, rideId, stars, gPlayer[playerid][pTaxiOpId]);
 	return 1;
 }
 
@@ -995,12 +989,12 @@ Taxi_CmdTaxi(playerid, params[])
 	Util_NextToken(params, pos, tok, 16);
 	if (!strcmp(tok, "on", 1, 0x7FFFFFFF) && tok[0] != 0)
 	{
-		if (gPlayer[playerid][PLAYER_DATA_451] != 0)
+		if (gPlayer[playerid][pTaxiOnDuty] != 0)
 		{
 			Util_Send(playerid, -10270721, "Sei gia' in servizio.");
 			return 1;
 		}
-		if (gPlayer[playerid][PLAYER_DATA_409] != 0 || gPlayer[playerid][PLAYER_DATA_465] != 0)
+		if (gPlayer[playerid][pRentalPendOp] != 0 || gPlayer[playerid][pTaxiPendOp] != 0)
 		{
 			Util_Send(playerid, -10270721, "Pratica in corso: attendi.");
 			return 1;
@@ -1011,7 +1005,7 @@ Taxi_CmdTaxi(playerid, params[])
 			LD_SendBlock(playerid, block);
 			return 1;
 		}
-		if (gPlayer[playerid][PLAYER_DATA_90] < 2)
+		if (gPlayer[playerid][pLevel] < 2)
 		{
 			SendClientMessage(playerid, -10270721, "Serve almeno il livello %d per guidare un taxi.", 2);
 			return 1;
@@ -1022,7 +1016,7 @@ Taxi_CmdTaxi(playerid, params[])
 			return 1;
 		}
 		new total = 360;
-		if ((gPlayer[playerid][PLAYER_DATA_89] > 0 ? gPlayer[playerid][PLAYER_DATA_89] : 0) + (gPlayer[playerid][PLAYER_DATA_88] > 0 ? gPlayer[playerid][PLAYER_DATA_88] : 0) < total)
+		if ((gPlayer[playerid][pBank] > 0 ? gPlayer[playerid][pBank] : 0) + (gPlayer[playerid][pMoney] > 0 ? gPlayer[playerid][pMoney] : 0) < total)
 		{
 			SendClientMessage(playerid, -10270721, "Servono $%d (canone $%d/h + cauzione $%d) tra banca e contanti.", total, 60, 300);
 			return 1;
@@ -1037,12 +1031,12 @@ Taxi_CmdTaxi(playerid, params[])
 	}
 	if (!strcmp(tok, "off", 1, 0x7FFFFFFF) && tok[0] != 0)
 	{
-		if (gPlayer[playerid][PLAYER_DATA_451] == 0)
+		if (gPlayer[playerid][pTaxiOnDuty] == 0)
 		{
 			Util_Send(playerid, -10270721, "Non sei in servizio.");
 			return 1;
 		}
-		if (g_TxPhase[playerid] != 0 || gPlayer[playerid][PLAYER_DATA_452] != 0 || gPlayer[playerid][PLAYER_DATA_465] != 0)
+		if (g_TxPhase[playerid] != 0 || gPlayer[playerid][pTaxiRideId] != 0 || gPlayer[playerid][pTaxiPendOp] != 0)
 		{
 			Util_Send(playerid, -10270721, "Concludi o annulla prima la corsa in corso (/tassametro annulla).");
 			return 1;
@@ -1056,7 +1050,7 @@ Taxi_CmdTaxi(playerid, params[])
 		Util_Send(playerid, -1, "Fine turno: riconsegna del taxi in corso...");
 		return 1;
 	}
-	if (gPlayer[playerid][PLAYER_DATA_451] != 0)
+	if (gPlayer[playerid][pTaxiOnDuty] != 0)
 	{
 		SendClientMessage(playerid, -1, "In servizio. Punti taxi: %d. Comandi: /accettacorsa [id] · /tassametro start|stop|annulla · /taxi off (al deposito).", LD_GetProPoints(playerid, 2));
 	}
@@ -1069,24 +1063,24 @@ Taxi_CmdTaxi(playerid, params[])
 
 Taxi_CmdChiamataxi(playerid, params[])
 {
-	if (!Util_IsPlaying(playerid) || gPlayer[playerid][PLAYER_DATA_338] == 0)
+	if (!Util_IsPlaying(playerid) || gPlayer[playerid][pLivingReady] == 0)
 	{
 		LD_SendBlock(playerid, 1);
 		return 1;
 	}
-	if (gPlayer[playerid][PLAYER_DATA_451] != 0)
+	if (gPlayer[playerid][pTaxiOnDuty] != 0)
 	{
 		Util_Send(playerid, -10270721, "Sei in servizio come tassista.");
 		return 1;
 	}
-	if (gPlayer[playerid][PLAYER_DATA_459] != 0)
+	if (gPlayer[playerid][pTaxiPeer] != 0)
 	{
 		Util_Send(playerid, -10270721, "Un taxi ha gia' accettato la tua chiamata.");
 		return 1;
 	}
-	if (gPlayer[playerid][PLAYER_DATA_462] != 0 && GetTickCount() - gPlayer[playerid][PLAYER_DATA_462] < 60000)
+	if (gPlayer[playerid][pTaxiCallTick] != 0 && GetTickCount() - gPlayer[playerid][pTaxiCallTick] < 60000)
 	{
-		SendClientMessage(playerid, -10270721, "Hai gia' chiamato un taxi: attendi %d secondi.", (60000 - (GetTickCount() - gPlayer[playerid][PLAYER_DATA_462])) / 1000 + 1);
+		SendClientMessage(playerid, -10270721, "Hai gia' chiamato un taxi: attendi %d secondi.", (60000 - (GetTickCount() - gPlayer[playerid][pTaxiCallTick])) / 1000 + 1);
 		return 1;
 	}
 	if (GetPlayerInterior(playerid) != 0 || GetPlayerVirtualWorld(playerid) != 0)
@@ -1094,10 +1088,10 @@ Taxi_CmdChiamataxi(playerid, params[])
 		Util_Send(playerid, -10270721, "Devi trovarti all'aperto per chiamare un taxi.");
 		return 1;
 	}
-	gPlayer[playerid][PLAYER_DATA_462] = GetTickCount();
-	if (gPlayer[playerid][PLAYER_DATA_462] == 0)
+	gPlayer[playerid][pTaxiCallTick] = GetTickCount();
+	if (gPlayer[playerid][pTaxiCallTick] == 0)
 	{
-		gPlayer[playerid][PLAYER_DATA_462] = 1;
+		gPlayer[playerid][pTaxiCallTick] = 1;
 	}
 	g_TxCallUntil[playerid] = Taxi_TickAfter(60000);
 	new name[25], Float:px, Float:py, Float:pz, sent = 0, area[16];
@@ -1107,11 +1101,11 @@ Taxi_CmdChiamataxi(playerid, params[])
 	LD_DistrictName(fromD, area, 16);
 	for (new d = 0; d < 1000; d++)
 	{
-		if (d == playerid || !IsPlayerConnected(d) || gPlayer[d][PLAYER_DATA_451] == 0)
+		if (d == playerid || !IsPlayerConnected(d) || gPlayer[d][pTaxiOnDuty] == 0)
 		{
 			continue;
 		}
-		if (g_TxPhase[d] != 0 || gPlayer[d][PLAYER_DATA_452] != 0 || gPlayer[d][PLAYER_DATA_465] != 0)
+		if (g_TxPhase[d] != 0 || gPlayer[d][pTaxiRideId] != 0 || gPlayer[d][pTaxiPendOp] != 0)
 		{
 			continue;
 		}
@@ -1176,17 +1170,17 @@ Taxi_CmdTassametro(playerid, params[])
 {
 	new pos = 0, tok[16];
 	Util_NextToken(params, pos, tok, 16);
-	if (gPlayer[playerid][PLAYER_DATA_451] == 0 || gPlayer[playerid][PLAYER_DATA_452] == 0)
+	if (gPlayer[playerid][pTaxiOnDuty] == 0 || gPlayer[playerid][pTaxiRideId] == 0)
 	{
 		Util_Send(playerid, -10270721, "Non hai una corsa in corso.");
 		return 1;
 	}
-	if (gPlayer[playerid][PLAYER_DATA_453] != 2)
+	if (gPlayer[playerid][pTaxiRideKind] != 2)
 	{
 		Util_Send(playerid, -1, "Con i clienti della citta' il tassametro e' automatico (prelievo -> arrivo).");
 		return 1;
 	}
-	if (gPlayer[playerid][PLAYER_DATA_465] != 0)
+	if (gPlayer[playerid][pTaxiPendOp] != 0)
 	{
 		Util_Send(playerid, -10270721, "Operazione taxi in corso: attendi.");
 		return 1;
@@ -1199,12 +1193,12 @@ Taxi_CmdTassametro(playerid, params[])
 			Util_Send(playerid, -10270721, "In attesa della conferma di pagamento del cliente.");
 			return 1;
 		}
-		if (gPlayer[playerid][PLAYER_DATA_456] != 0)
+		if (gPlayer[playerid][pTaxiMeterOn] != 0)
 		{
 			Util_Send(playerid, -10270721, "Il tassametro e' gia' acceso.");
 			return 1;
 		}
-		if (!Taxi_InTaxi(playerid, veh) || p == 65535 || GetPlayerVehicleID(p) != veh || GetPlayerState(p) != 3)
+		if (!Taxi_InTaxi(playerid, veh) || p == INVALID_PLAYER_ID || GetPlayerVehicleID(p) != veh || GetPlayerState(p) != 3)
 		{
 			Util_Send(playerid, -10270721, "Devi essere al volante del taxi con il cliente a bordo.");
 			return 1;
@@ -1218,7 +1212,7 @@ Taxi_CmdTassametro(playerid, params[])
 	}
 	if (!strcmp(tok, "stop", 1, 0x7FFFFFFF) && tok[0] != 0)
 	{
-		if (gPlayer[playerid][PLAYER_DATA_456] != 0)
+		if (gPlayer[playerid][pTaxiMeterOn] != 0)
 		{
 			Taxi_MeterStop(playerid);
 			return 1;
@@ -1266,10 +1260,10 @@ Taxi_OnProRental(playerid, result, vehicleid)
 		return 0;
 	}
 	Taxi_ResetPlayer(playerid);
-	gPlayer[playerid][PLAYER_DATA_451] = 1;
-	gPlayer[playerid][PLAYER_DATA_452] = 0;
+	gPlayer[playerid][pTaxiOnDuty] = 1;
+	gPlayer[playerid][pTaxiRideId] = 0;
 	Taxi_ScheduleNpc(playerid);
-	LD_Emit(107, 0, gPlayer[playerid][PLAYER_DATA_3], 1, "-");
+	LD_Emit(107, 0, gPlayer[playerid][pCharId], 1, "-");
 	SendClientMessage(playerid, 0x66DD66FF, "Sei in servizio (canone $%d/h, cauzione $%d). Le chiamate arrivano da sole: /accettacorsa. Fine turno: /taxi off al deposito.", 60, 300);
 	return 1;
 }
@@ -1280,7 +1274,7 @@ Taxi_OnProRentalClosed(playerid, result, refund)
 	{
 		return 0;
 	}
-	if (gPlayer[playerid][PLAYER_DATA_451] != 0 || g_TxPhase[playerid] != 0)
+	if (gPlayer[playerid][pTaxiOnDuty] != 0 || g_TxPhase[playerid] != 0)
 	{
 		Taxi_EndDuty(playerid, 5, 0);
 	}
@@ -1318,7 +1312,7 @@ public Taxi_OnDistrictEvent(type, districtId, charId, value, opId[])
 Taxi_TickNpc(driverid, vehicleid, bool:inVeh)
 {
 	new pt = g_TxPhase[driverid] == 2 ? g_TxPickPt[driverid] : g_TxDestPt[driverid];
-	if (!inVeh || (Float:(GetVehicleDistanceFromPoint(vehicleid, g_TxNpcX[pt], g_TxNpcY[pt], g_TxNpcZ[pt])) > 6.0) || (Float:(float(Veh_SpeedKmh(vehicleid))) > 12.0))
+	if (!inVeh || (GetVehicleDistanceFromPoint(vehicleid, g_TxNpcX[pt], g_TxNpcY[pt], g_TxNpcZ[pt]) > 6.0) || (float(Veh_SpeedKmh(vehicleid)) > 12.0))
 	{
 		g_TxDwellTick[driverid] = 0;
 		return 0;
@@ -1357,17 +1351,14 @@ Taxi_TickDriver(driverid)
 	}
 	if (veh == 0)
 	{
-		if (gPlayer[driverid][PLAYER_DATA_403] == 0 && gPlayer[driverid][PLAYER_DATA_409] == 0)
+		if (gPlayer[driverid][pRentalId] == 0 && gPlayer[driverid][pRentalPendOp] == 0)
 		{
 			Util_Send(driverid, -10270721, "Il tuo taxi non e' piu' disponibile: fuori servizio.");
 			Taxi_EndDuty(driverid, 4, 0);
 		}
-		else
+		else if (g_TxPhase[driverid] >= 2 && g_TxPhase[driverid] <= 4)
 		{
-			if (g_TxPhase[driverid] >= 2 && g_TxPhase[driverid] <= 4)
-			{
-				Taxi_CancelRide(driverid, "Taxi non disponibile: corsa annullata.", "Il taxi non e' piu' disponibile: corsa annullata.");
-			}
+			Taxi_CancelRide(driverid, "Taxi non disponibile: corsa annullata.", "Il taxi non e' piu' disponibile: corsa annullata.");
 		}
 		return 0;
 	}
@@ -1379,37 +1370,31 @@ Taxi_TickDriver(driverid)
 		{
 			g_TxOffTick[driverid] = 0;
 		}
-		else
+		else if (g_TxOffTick[driverid] == 0)
 		{
-			if (g_TxOffTick[driverid] == 0)
-			{
-				g_TxOffTick[driverid] = Taxi_TickAfter(45000);
-				SendClientMessage(driverid, -10270721, "Torna sul taxi entro %d secondi o la corsa sara' annullata.", 45);
-			}
-			else
-			{
-				if (Taxi_TickReached(g_TxOffTick[driverid]))
-				{
-					Taxi_CancelRide(driverid, "Hai lasciato il taxi: corsa annullata.", "Il tassista ha lasciato il taxi: corsa annullata.");
-					return 0;
-				}
-			}
+			g_TxOffTick[driverid] = Taxi_TickAfter(45000);
+			SendClientMessage(driverid, -10270721, "Torna sul taxi entro %d secondi o la corsa sara' annullata.", 45);
+		}
+		else if (Taxi_TickReached(g_TxOffTick[driverid]))
+		{
+			Taxi_CancelRide(driverid, "Hai lasciato il taxi: corsa annullata.", "Il tassista ha lasciato il taxi: corsa annullata.");
+			return 0;
 		}
 	}
-	if (gPlayer[driverid][PLAYER_DATA_456] != 0)
+	if (gPlayer[driverid][pTaxiMeterOn] != 0)
 	{
 		Taxi_MeterSample(driverid, veh, inVeh);
 		Taxi_MeterShow(driverid, 1);
 	}
 	if (phase == 0)
 	{
-		if (gPlayer[driverid][PLAYER_DATA_465] == 0 && g_TxOfferCall[driverid] == 0 && gPlayer[driverid][PLAYER_DATA_463] != 0 && Taxi_TickReached(gPlayer[driverid][PLAYER_DATA_463]) && gPlayer[driverid][PLAYER_DATA_409] == 0)
+		if (gPlayer[driverid][pTaxiPendOp] == 0 && g_TxOfferCall[driverid] == 0 && gPlayer[driverid][pTaxiNpcOfferAt] != 0 && Taxi_TickReached(gPlayer[driverid][pTaxiNpcOfferAt]) && gPlayer[driverid][pRentalPendOp] == 0)
 		{
 			Taxi_NpcOffer(driverid);
 		}
 		return 0;
 	}
-	if (gPlayer[driverid][PLAYER_DATA_453] == 1)
+	if (gPlayer[driverid][pTaxiRideKind] == 1)
 	{
 		if (phase == 2 || phase == 3)
 		{
@@ -1422,7 +1407,7 @@ Taxi_TickDriver(driverid)
 		return 0;
 	}
 	new p = Taxi_PassengerOf(driverid);
-	if (p == 65535)
+	if (p == INVALID_PLAYER_ID)
 	{
 		Taxi_CancelRide(driverid, "Il cliente non e' piu' disponibile: corsa annullata.", "");
 		return 0;
@@ -1432,7 +1417,7 @@ Taxi_TickDriver(driverid)
 		Taxi_CancelRide(driverid, "Il cliente non e' salito in tempo: corsa annullata.", "Non sei salito sul taxi in tempo: corsa annullata.");
 		return 0;
 	}
-	if (gPlayer[driverid][PLAYER_DATA_456] != 0 && GetPlayerVehicleID(p) != veh)
+	if (gPlayer[driverid][pTaxiMeterOn] != 0 && GetPlayerVehicleID(p) != veh)
 	{
 		Taxi_MeterStop(driverid);
 	}
@@ -1440,7 +1425,7 @@ Taxi_TickDriver(driverid)
 
 public Taxi_OnTick()
 {
-	for (new i = 0; i < 1000; i++)
+	for (new i = 0; i < MAX_PLAYERS; i++)
 	{
 		if (!IsPlayerConnected(i))
 		{
@@ -1454,12 +1439,12 @@ public Taxi_OnTick()
 		if (g_TxCallUntil[i] != 0 && Taxi_TickReached(g_TxCallUntil[i]))
 		{
 			g_TxCallUntil[i] = 0;
-			if (gPlayer[i][PLAYER_DATA_459] == 0)
+			if (gPlayer[i][pTaxiPeer] == 0)
 			{
 				Util_Send(i, -1, "Nessun taxi ha risposto alla tua chiamata.");
 			}
 		}
-		if (gPlayer[i][PLAYER_DATA_451] != 0)
+		if (gPlayer[i][pTaxiOnDuty] != 0)
 		{
 			Taxi_TickDriver(i);
 		}
@@ -1469,7 +1454,7 @@ public Taxi_OnTick()
 
 Taxi_OnInit()
 {
-	for (new i = 0; i < 1000; i++)
+	for (new i = 0; i < MAX_PLAYERS; i++)
 	{
 		Taxi_ResetPlayer(i);
 	}
@@ -1507,7 +1492,7 @@ Taxi_OnPlayerDisconnect(playerid, reason)
 	{
 		return 0;
 	}
-	if (gPlayer[playerid][PLAYER_DATA_451] != 0 || g_TxPhase[playerid] != 0)
+	if (gPlayer[playerid][pTaxiOnDuty] != 0 || g_TxPhase[playerid] != 0)
 	{
 		Taxi_EndDuty(playerid, 2, 1);
 	}
@@ -1516,7 +1501,7 @@ Taxi_OnPlayerDisconnect(playerid, reason)
 	{
 		Taxi_CancelRide(d, "Il cliente si e' disconnesso: corsa annullata.", "");
 	}
-	for (new i = 0; i < 1000; i++)
+	for (new i = 0; i < MAX_PLAYERS; i++)
 	{
 		if (i != playerid && g_TxOfferCall[i] == playerid + 1)
 		{
@@ -1532,7 +1517,7 @@ Taxi_OnPlayerDeath(playerid)
 	{
 		return 0;
 	}
-	if (gPlayer[playerid][PLAYER_DATA_451] != 0)
+	if (gPlayer[playerid][pTaxiOnDuty] != 0)
 	{
 		Util_Send(playerid, -10270721, "Turno di taxi interrotto.");
 		Taxi_EndDuty(playerid, 3, 1);
@@ -1570,7 +1555,7 @@ Taxi_OnPlayerStateChange(playerid, t_PLAYER_STATE:newstate, t_PLAYER_STATE:oldst
 		Util_Send(d, 0x66DD66FF, "Il cliente e' a bordo: /tassametro start.");
 		return 0;
 	}
-	if (oldstate == 3 && gPlayer[d][PLAYER_DATA_456] != 0)
+	if (oldstate == 3 && gPlayer[d][pTaxiMeterOn] != 0)
 	{
 		Taxi_MeterStop(d);
 	}
@@ -1583,7 +1568,7 @@ Taxi_OnVehicleDeath(vehicleid, killerid)
 		return 0;
 	}
 	new d = LD_VehOwner(vehicleid);
-	if (d == 65535 || !Taxi_Valid(d) || gPlayer[d][PLAYER_DATA_451] == 0)
+	if (d == 65535 || !Taxi_Valid(d) || gPlayer[d][pTaxiOnDuty] == 0)
 	{
 		return 0;
 	}

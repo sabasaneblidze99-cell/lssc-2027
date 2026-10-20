@@ -132,7 +132,7 @@ Cmd_Dispatch(playerid, cmdtext[])
 	}
 	if (!Util_IsPlaying(playerid))
 	{
-		if (!strcmp(name, "salta", 0, 0x7FFFFFFF) && gPlayer[playerid][PLAYER_DATA_0] && gPlayer[playerid][PLAYER_DATA_106] == 14)
+		if (!strcmp(name, "salta", 0, 0x7FFFFFFF) && gPlayer[playerid][pLoggedIn] && gPlayer[playerid][pAuthState] == 14)
 		{
 			Intro_CmdSalta(playerid);
 			return 1;
@@ -239,7 +239,7 @@ public Cmd_pay(playerid, params[])
 		Util_Send(playerid, 0x99CCFFFF, "Uso: /pay id importo");
 		return 1;
 	}
-	if (gPlayer[playerid][PLAYER_DATA_90] < 2)
+	if (gPlayer[playerid][pLevel] < 2)
 	{
 		SendClientMessage(playerid, -10270721, "Devi essere almeno al livello %d per usare /pay.", 2);
 		return 1;
@@ -259,7 +259,7 @@ public Cmd_pay(playerid, params[])
 		Util_Send(playerid, -10270721, "Sei troppo lontano.");
 		return 1;
 	}
-	new payResult = Valid_PayAmount(amount, gPlayer[playerid][PLAYER_DATA_88], gPlayer[targetid][PLAYER_DATA_88]);
+	new payResult = Valid_PayAmount(amount, gPlayer[playerid][pMoney], gPlayer[targetid][pMoney]);
 	if (payResult == 2)
 	{
 		Util_Send(playerid, -10270721, "Non hai abbastanza contanti.");
@@ -402,7 +402,7 @@ public Cmd_setfazione(playerid, params[])
 
 public Cmd_stats(playerid, params[])
 {
-	new name[25], level = gPlayer[playerid][PLAYER_DATA_90], exp = gPlayer[playerid][PLAYER_DATA_91];
+	new name[25], level = gPlayer[playerid][pLevel], exp = gPlayer[playerid][pExp];
 	GetPlayerName(playerid, name, 25);
 	SendClientMessage(playerid, -2994689, "--- Statistiche di %s ---", name);
 	if (level >= 50)
@@ -413,11 +413,11 @@ public Cmd_stats(playerid, params[])
 	{
 		SendClientMessage(playerid, -1, "Livello: %d  Exp: %d/%d", level, exp - Level_ExpForLevel(level), Level_StepExp(level));
 	}
-	SendClientMessage(playerid, -1, "Contanti: $%d  Banca: $%d", gPlayer[playerid][PLAYER_DATA_88], gPlayer[playerid][PLAYER_DATA_89]);
-	new played = gPlayer[playerid][PLAYER_DATA_112];
-	new total = gPlayer[playerid][PLAYER_DATA_113];
+	SendClientMessage(playerid, -1, "Contanti: $%d  Banca: $%d", gPlayer[playerid][pMoney], gPlayer[playerid][pBank]);
+	new played = gPlayer[playerid][pSessionMs];
+	new total = gPlayer[playerid][pPlayedMs];
 	SendClientMessage(playerid, -1, "Ore di gioco: sessione %dh %02dm, totali %dh %02dm", played / 3600000, played % 3600000 / 60000, total / 3600000, total % 3600000 / 60000);
-	new remainSec = (900000 - gPlayer[playerid][PLAYER_DATA_111]) / 1000;
+	new remainSec = (900000 - gPlayer[playerid][pPaycheckMs]) / 1000;
 	if (remainSec < 0)
 	{
 		remainSec = 0;
@@ -429,7 +429,7 @@ public Cmd_stats(playerid, params[])
 public Cmd_who(playerid, params[])
 {
 	new total = 0;
-	for (new i = 0; i < 1000; i++)
+	for (new i = 0; i < MAX_PLAYERS; i++)
 	{
 		if (Util_IsPlaying(i))
 		{
@@ -438,7 +438,7 @@ public Cmd_who(playerid, params[])
 	}
 	SendClientMessage(playerid, -2994689, "--- Giocatori online (%d) ---", total);
 	new shown = 0, name[25];
-	for (new i = 0; i < 1000 && shown < 50; i++)
+	for (new i = 0; i < MAX_PLAYERS && shown < 50; i++)
 	{
 		if (!Util_IsPlaying(i))
 		{
@@ -496,7 +496,7 @@ public Cmd_report(playerid, params[])
 		Util_Send(playerid, 0x99CCFFFF, "Uso: /report testo");
 		return 1;
 	}
-	new now = GetTickCount(), elapsed = now - gPlayer[playerid][PLAYER_DATA_115];
+	new now = GetTickCount(), elapsed = now - gPlayer[playerid][pLastReportTick];
 	if (elapsed < 30000)
 	{
 		SendClientMessage(playerid, -10270721, "Attendi ancora %d secondi prima di un nuovo report.", (30000 - elapsed + 1000 - 1) / 1000);
@@ -505,7 +505,7 @@ public Cmd_report(playerid, params[])
 	new name[25], msg[256], staff = 0;
 	GetPlayerName(playerid, name, 25);
 	format(msg, 256, "[REPORT] %s [%d]: %s", name, playerid, text);
-	for (new i = 0; i < 1000; i++)
+	for (new i = 0; i < MAX_PLAYERS; i++)
 	{
 		if (!IsPlayerConnected(i) || Util_GetAdmin(i) < 1)
 		{
@@ -519,7 +519,7 @@ public Cmd_report(playerid, params[])
 		Util_Send(playerid, -10270721, "Nessun membro dello staff e' online: il report non e' stato inviato.");
 		return 1;
 	}
-	gPlayer[playerid][PLAYER_DATA_115] = now;
+	gPlayer[playerid][pLastReportTick] = now;
 	Admin_StoreReport(playerid, text);
 	Util_Send(playerid, 0x66DD66FF, "Report inviato allo staff.");
 	return 1;

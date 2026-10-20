@@ -47,68 +47,27 @@ new s_InvAliasName[16][24] = {
 	"zaino"
 };
 new s_InvAliasId[16] = {1, 1, 2, 3, 3, 4, 5, 6, 6, 7, 7, 8, 9, 9, 10, 11};
-new g_InvGround[40][E_INV_GROUND] = {
-	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
-};
+new g_InvGround[40][E_INV_GROUND];
 new g_InvTickTimer;
 new g_InvGiveSeq;
 
 bool:Inv_ValidPlayer(playerid)
 {
-	return playerid >= 0 && playerid < 1000 && IsPlayerConnected(playerid);
+	return playerid >= 0 && playerid < MAX_PLAYERS && IsPlayerConnected(playerid);
 }
 
 Inv_Count(playerid, itemId)
 {
-	if (playerid < 0 || playerid >= 1000 || itemId < 1 || itemId >= 11)
+	if (playerid < 0 || playerid >= MAX_PLAYERS || itemId < 1 || itemId >= 11)
 	{
 		return 0;
 	}
 	new total = 0;
 	for (new s = 0; s < 20; s++)
 	{
-		if (gPlayer[playerid][PLAYER_DATA_126][s] == itemId)
+		if (gPlayer[playerid][pInvItem][s] == itemId)
 		{
-			total += gPlayer[playerid][PLAYER_DATA_146][s];
+			total += gPlayer[playerid][pInvQty][s];
 		}
 	}
 	return total;
@@ -116,12 +75,12 @@ Inv_Count(playerid, itemId)
 
 Inv_Capacity(playerid)
 {
-	return DB_InvCapacity(gPlayer[playerid][PLAYER_DATA_125] != 0);
+	return DB_InvCapacity(gPlayer[playerid][pInvHasBag] != 0);
 }
 
 bool:Inv_Ready(playerid)
 {
-	return playerid >= 0 && playerid < 1000 && gPlayer[playerid][PLAYER_DATA_124] == 2;
+	return playerid >= 0 && playerid < MAX_PLAYERS && gPlayer[playerid][pInvState] == 2;
 }
 
 Inv_ParseItem(token[])
@@ -156,33 +115,33 @@ Inv_PushUi(playerid)
 	UI_InvClear(playerid);
 	for (new s = 0; s < cap && s < 20; s++)
 	{
-		UI_InvSet(playerid, s, gPlayer[playerid][PLAYER_DATA_126][s], gPlayer[playerid][PLAYER_DATA_146][s]);
+		UI_InvSet(playerid, s, gPlayer[playerid][pInvItem][s], gPlayer[playerid][pInvQty][s]);
 	}
-	UI_InvMeta(playerid, gPlayer[playerid][PLAYER_DATA_166], cap, gPlayer[playerid][PLAYER_DATA_125] != 0);
+	UI_InvMeta(playerid, gPlayer[playerid][pInvCount], cap, gPlayer[playerid][pInvHasBag] != 0);
 }
 
 Inv_ClearCache(playerid)
 {
 	for (new s = 0; s < 20; s++)
 	{
-		gPlayer[playerid][PLAYER_DATA_126][s] = 0;
-		gPlayer[playerid][PLAYER_DATA_146][s] = 0;
+		gPlayer[playerid][pInvItem][s] = 0;
+		gPlayer[playerid][pInvQty][s] = 0;
 	}
-	gPlayer[playerid][PLAYER_DATA_166] = 0;
+	gPlayer[playerid][pInvCount] = 0;
 }
 
 Inv_Load(playerid)
 {
-	if (!Inv_ValidPlayer(playerid) || gPlayer[playerid][PLAYER_DATA_3] <= 0)
+	if (!Inv_ValidPlayer(playerid) || gPlayer[playerid][pCharId] <= 0)
 	{
 		return 0;
 	}
-	if (gPlayer[playerid][PLAYER_DATA_124] == 1)
+	if (gPlayer[playerid][pInvState] == 1)
 	{
 		return 0;
 	}
-	gPlayer[playerid][PLAYER_DATA_124] = 1;
-	DB_InvLoad(playerid, gPlayer[playerid][PLAYER_DATA_3]);
+	gPlayer[playerid][pInvState] = 1;
+	DB_InvLoad(playerid, gPlayer[playerid][pCharId]);
 }
 
 Inv_Reload(playerid)
@@ -191,9 +150,9 @@ Inv_Reload(playerid)
 	{
 		return 0;
 	}
-	if (gPlayer[playerid][PLAYER_DATA_124] == 1)
+	if (gPlayer[playerid][pInvState] == 1)
 	{
-		gPlayer[playerid][PLAYER_DATA_168] = 1;
+		gPlayer[playerid][pInvReloadQueued] = 1;
 		return 0;
 	}
 	Inv_Load(playerid);
@@ -207,42 +166,42 @@ public Inv_OnDBLoaded(playerid, count)
 	}
 	if (count == -1 || count < 0)
 	{
-		gPlayer[playerid][PLAYER_DATA_124] = 3;
-		gPlayer[playerid][PLAYER_DATA_168] = 0;
-		if (gPlayer[playerid][PLAYER_DATA_262] > 0)
+		gPlayer[playerid][pInvState] = 3;
+		gPlayer[playerid][pInvReloadQueued] = 0;
+		if (gPlayer[playerid][pFridgeHouse] > 0)
 		{
-			House_InvFridgeResult(playerid, gPlayer[playerid][PLAYER_DATA_262], gPlayer[playerid][PLAYER_DATA_263], 0, -1);
+			House_InvFridgeResult(playerid, gPlayer[playerid][pFridgeHouse], gPlayer[playerid][pFridgeDir], 0, -1);
 			Log_Write("INV", "esito frigo incerto non riconciliato (reload fallito): verificare house_utilities.fridge_units");
-			gPlayer[playerid][PLAYER_DATA_262] = 0;
+			gPlayer[playerid][pFridgeHouse] = 0;
 		}
-		if (gPlayer[playerid][PLAYER_DATA_1])
+		if (gPlayer[playerid][pSpawned])
 		{
 			Inv_Say(playerid, -10270721, "Inventario non disponibile (errore database): riprova con /inventario.");
 		}
 		return 1;
 	}
 	Inv_ClearCache(playerid);
-	gPlayer[playerid][PLAYER_DATA_125] = g_InvBag[playerid] != 0 ? 1 : 0;
+	gPlayer[playerid][pInvHasBag] = g_InvBag[playerid] != 0 ? 1 : 0;
 	new cap = Inv_Capacity(playerid);
 	for (new r = 0; r < count && r < 20; r++)
 	{
-		new slot = g_InvRows[playerid][r][INV_ROW_0], item = g_InvRows[playerid][r][INV_ROW_1], qty = g_InvRows[playerid][r][INV_ROW_2];
-		if (slot < 0 || slot >= cap || !DB_InvItemOk(item) || qty < 1 || qty > DB_InvStackMax(item) || gPlayer[playerid][PLAYER_DATA_126][slot] != 0)
+		new slot = g_InvRows[playerid][r][irSlot], item = g_InvRows[playerid][r][irItem], qty = g_InvRows[playerid][r][irQty];
+		if (slot < 0 || slot >= cap || !DB_InvItemOk(item) || qty < 1 || qty > DB_InvStackMax(item) || gPlayer[playerid][pInvItem][slot] != 0)
 		{
 			Log_Write("INV", "riga inventario anomala scartata dalla cache");
 			continue;
 		}
-		gPlayer[playerid][PLAYER_DATA_126][slot] = item;
-		gPlayer[playerid][PLAYER_DATA_146][slot] = qty;
-		gPlayer[playerid][PLAYER_DATA_166]++;
+		gPlayer[playerid][pInvItem][slot] = item;
+		gPlayer[playerid][pInvQty][slot] = qty;
+		gPlayer[playerid][pInvCount]++;
 	}
-	gPlayer[playerid][PLAYER_DATA_124] = 2;
-	if (gPlayer[playerid][PLAYER_DATA_262] > 0)
+	gPlayer[playerid][pInvState] = 2;
+	if (gPlayer[playerid][pFridgeHouse] > 0)
 	{
-		new before = gPlayer[playerid][PLAYER_DATA_264], after = Inv_Count(playerid, 1);
-		new moved = gPlayer[playerid][PLAYER_DATA_263] == 1 ? before - after : after - before;
-		new house = gPlayer[playerid][PLAYER_DATA_262], dir = gPlayer[playerid][PLAYER_DATA_263];
-		gPlayer[playerid][PLAYER_DATA_262] = 0;
+		new before = gPlayer[playerid][pFridgeFoodBefore], after = Inv_Count(playerid, 1);
+		new moved = gPlayer[playerid][pFridgeDir] == 1 ? before - after : after - before;
+		new house = gPlayer[playerid][pFridgeHouse], dir = gPlayer[playerid][pFridgeDir];
+		gPlayer[playerid][pFridgeHouse] = 0;
 		if (moved > 0)
 		{
 			House_InvFridgeResult(playerid, house, dir, moved, 1);
@@ -252,13 +211,13 @@ public Inv_OnDBLoaded(playerid, count)
 			House_InvFridgeResult(playerid, house, dir, 0, 0);
 		}
 	}
-	if (gPlayer[playerid][PLAYER_DATA_168])
+	if (gPlayer[playerid][pInvReloadQueued])
 	{
-		gPlayer[playerid][PLAYER_DATA_168] = 0;
+		gPlayer[playerid][pInvReloadQueued] = 0;
 		Inv_Load(playerid);
 		return 1;
 	}
-	if (count == 0 && Inv_Count(playerid, 10) == 0 && !gPlayer[playerid][PLAYER_DATA_167])
+	if (count == 0 && Inv_Count(playerid, 10) == 0 && !gPlayer[playerid][pInvOpBusy])
 	{
 		Inv_StartDoc(playerid, 1);
 	}
@@ -268,28 +227,28 @@ public Inv_OnDBLoaded(playerid, count)
 
 Inv_BeginOp(playerid, op, itemId, qty, aux)
 {
-	gPlayer[playerid][PLAYER_DATA_167] = 1;
-	gPlayer[playerid][PLAYER_DATA_169] = op;
-	gPlayer[playerid][PLAYER_DATA_170] = itemId;
-	gPlayer[playerid][PLAYER_DATA_171] = qty;
-	gPlayer[playerid][PLAYER_DATA_172] = aux;
-	gPlayer[playerid][PLAYER_DATA_173] = 0;
-	DB_InvMakeOpId(gPlayer[playerid][PLAYER_DATA_174], 33, gPlayer[playerid][PLAYER_DATA_3]);
+	gPlayer[playerid][pInvOpBusy] = 1;
+	gPlayer[playerid][pInvOp] = op;
+	gPlayer[playerid][pInvOpItem] = itemId;
+	gPlayer[playerid][pInvOpQty] = qty;
+	gPlayer[playerid][pInvOpAux] = aux;
+	gPlayer[playerid][pInvOpPeer] = 0;
+	DB_InvMakeOpId(gPlayer[playerid][pInvOpId], 33, gPlayer[playerid][pCharId]);
 }
 
 Inv_EndOp(playerid)
 {
-	gPlayer[playerid][PLAYER_DATA_167] = 0;
-	gPlayer[playerid][PLAYER_DATA_169] = 0;
-	gPlayer[playerid][PLAYER_DATA_170] = 0;
-	gPlayer[playerid][PLAYER_DATA_171] = 0;
-	gPlayer[playerid][PLAYER_DATA_172] = 0;
-	gPlayer[playerid][PLAYER_DATA_173] = 0;
+	gPlayer[playerid][pInvOpBusy] = 0;
+	gPlayer[playerid][pInvOp] = 0;
+	gPlayer[playerid][pInvOpItem] = 0;
+	gPlayer[playerid][pInvOpQty] = 0;
+	gPlayer[playerid][pInvOpAux] = 0;
+	gPlayer[playerid][pInvOpPeer] = 0;
 }
 
 bool:Inv_OpIs(playerid, op)
 {
-	return Inv_ValidPlayer(playerid) && gPlayer[playerid][PLAYER_DATA_167] != 0 && gPlayer[playerid][PLAYER_DATA_169] == op;
+	return Inv_ValidPlayer(playerid) && gPlayer[playerid][pInvOpBusy] != 0 && gPlayer[playerid][pInvOp] == op;
 }
 
 bool:Inv_StateOk(playerid)
@@ -298,7 +257,7 @@ bool:Inv_StateOk(playerid)
 	{
 		return 0;
 	}
-	return gPlayer[playerid][PLAYER_DATA_124] == 2 && !gPlayer[playerid][PLAYER_DATA_167] && !gPlayer[playerid][PLAYER_DATA_123] && !gPlayer[playerid][PLAYER_DATA_122];
+	return gPlayer[playerid][pInvState] == 2 && !gPlayer[playerid][pInvOpBusy] && !gPlayer[playerid][pWounded] && !gPlayer[playerid][pCuffed];
 }
 
 bool:Inv_Guard(playerid)
@@ -307,7 +266,7 @@ bool:Inv_Guard(playerid)
 	{
 		return 0;
 	}
-	switch (gPlayer[playerid][PLAYER_DATA_124])
+	switch (gPlayer[playerid][pInvState])
 	{
 		case 2:
 		{
@@ -324,34 +283,34 @@ bool:Inv_Guard(playerid)
 			return 0;
 		}
 	}
-	if (gPlayer[playerid][PLAYER_DATA_167])
+	if (gPlayer[playerid][pInvOpBusy])
 	{
 		Inv_Say(playerid, -10270721, "Hai un'operazione di inventario in corso: attendi.");
 		return 0;
 	}
-	if (gPlayer[playerid][PLAYER_DATA_123] || gPlayer[playerid][PLAYER_DATA_122])
+	if (gPlayer[playerid][pWounded] || gPlayer[playerid][pCuffed])
 	{
 		Inv_Say(playerid, -10270721, "Non puoi farlo da ferito o ammanettato.");
 		return 0;
 	}
 	new now = GetTickCount();
-	if (gPlayer[playerid][PLAYER_DATA_251] != 0 && now - gPlayer[playerid][PLAYER_DATA_251] < 1500)
+	if (gPlayer[playerid][pInvLastActionTick] != 0 && now - gPlayer[playerid][pInvLastActionTick] < 1500)
 	{
 		Inv_Say(playerid, -10270721, "Attendi un attimo prima di un'altra azione con l'inventario.");
 		return 0;
 	}
-	gPlayer[playerid][PLAYER_DATA_251] = now != 0 ? now : 1;
+	gPlayer[playerid][pInvLastActionTick] = now != 0 ? now : 1;
 	return 1;
 }
 
 Inv_CmdInventario(playerid)
 {
-	if (gPlayer[playerid][PLAYER_DATA_124] == 1)
+	if (gPlayer[playerid][pInvState] == 1)
 	{
 		Inv_Say(playerid, -10270721, "L'inventario si sta caricando: riprova tra un attimo.");
 		return 0;
 	}
-	if (gPlayer[playerid][PLAYER_DATA_124] != 2)
+	if (gPlayer[playerid][pInvState] != 2)
 	{
 		Inv_Say(playerid, -10270721, "Inventario non disponibile: provo a ricaricarlo, riprova tra poco.");
 		Inv_Load(playerid);
@@ -363,7 +322,7 @@ Inv_CmdInventario(playerid)
 
 Inv_CdLeftSec(playerid, itemId)
 {
-	new until = gPlayer[playerid][PLAYER_DATA_240][itemId];
+	new until = gPlayer[playerid][pInvItemCdUntil][itemId];
 	if (until == 0)
 	{
 		return 0;
@@ -406,7 +365,7 @@ Inv_UseStart(playerid, itemId)
 		}
 		case 9:
 		{
-			SendClientMessage(playerid, -1, "Telefono: il tuo numero e' %d.", gPlayer[playerid][PLAYER_DATA_3] + 555000);
+			SendClientMessage(playerid, -1, "Telefono: il tuo numero e' %d.", gPlayer[playerid][pCharId] + 555000);
 			return 0;
 		}
 		case 10:
@@ -441,7 +400,7 @@ Inv_UseStart(playerid, itemId)
 		}
 		case 5:
 		{
-			if ((Float:(hp) >= Float:(float(90))))
+			if ((hp >= float(90)))
 			{
 				Inv_Say(playerid, -10270721, "Non ti serve un kit di pronto soccorso: sei in buona salute.");
 				return 0;
@@ -449,7 +408,7 @@ Inv_UseStart(playerid, itemId)
 		}
 		case 6:
 		{
-			if ((Float:(hp) >= Float:(float(95))))
+			if ((hp >= float(95)))
 			{
 				Inv_Say(playerid, -10270721, "Non hai ferite che richiedano una benda.");
 				return 0;
@@ -465,7 +424,7 @@ Inv_UseStart(playerid, itemId)
 		}
 	}
 	Inv_BeginOp(playerid, 1, itemId, 1, 0);
-	DB_InvUse(playerid, gPlayer[playerid][PLAYER_DATA_3], itemId, gPlayer[playerid][PLAYER_DATA_174]);
+	DB_InvUse(playerid, gPlayer[playerid][pCharId], itemId, gPlayer[playerid][pInvOpId]);
 }
 
 Inv_RpUse(playerid, action[])
@@ -495,7 +454,7 @@ Inv_ApplyUse(playerid, itemId)
 		{
 			GetPlayerHealth(playerid, hp);
 			hp += float(itemId == 5 ? 25 : 8);
-			if ((Float:(hp) > Float:(0x42C80000)))
+			if ((hp > Float:0x42C80000))
 			{
 				hp = Float:0x42C80000;
 			}
@@ -512,7 +471,7 @@ Inv_ApplyUse(playerid, itemId)
 	if (cd > 0)
 	{
 		new until = GetTickCount() + cd;
-		gPlayer[playerid][PLAYER_DATA_240][itemId] = until != 0 ? until : 1;
+		gPlayer[playerid][pInvItemCdUntil][itemId] = until != 0 ? until : 1;
 	}
 }
 
@@ -529,7 +488,7 @@ public Inv_OnDBUsed(playerid, itemId, result)
 		{
 			Inv_Reload(playerid);
 			UI_InvToast(playerid, itemId, -1);
-			if (Util_IsPlaying(playerid) && !gPlayer[playerid][PLAYER_DATA_123])
+			if (Util_IsPlaying(playerid) && !gPlayer[playerid][pWounded])
 			{
 				Inv_ApplyUse(playerid, itemId);
 			}
@@ -562,7 +521,7 @@ public UI_OnInvUse(playerid, slot)
 	{
 		return 1;
 	}
-	new itemId = gPlayer[playerid][PLAYER_DATA_126][slot];
+	new itemId = gPlayer[playerid][pInvItem][slot];
 	if (itemId > 0)
 	{
 		Inv_UseStart(playerid, itemId);
@@ -575,11 +534,11 @@ Inv_GroundCount(charId)
 	new n = 0;
 	for (new i = 0; i < 40; i++)
 	{
-		if (g_InvGround[i][INV_GROUND_0] == 0)
+		if (g_InvGround[i][igState] == 0)
 		{
 			continue;
 		}
-		if (charId == 0 || g_InvGround[i][INV_GROUND_9] == charId)
+		if (charId == 0 || g_InvGround[i][igDropperChar] == charId)
 		{
 			n++;
 		}
@@ -593,25 +552,25 @@ Inv_GroundFree(idx)
 	{
 		return 0;
 	}
-	if (g_InvGround[idx][INV_GROUND_3] != 65535)
+	if (g_InvGround[idx][igObject] != 65535)
 	{
-		DestroyObject(g_InvGround[idx][INV_GROUND_3]);
+		DestroyObject(g_InvGround[idx][igObject]);
 	}
-	g_InvGround[idx][INV_GROUND_0] = 0;
-	g_InvGround[idx][INV_GROUND_1] = 0;
-	g_InvGround[idx][INV_GROUND_2] = 0;
-	g_InvGround[idx][INV_GROUND_3] = 65535;
-	g_InvGround[idx][INV_GROUND_7] = 0;
-	g_InvGround[idx][INV_GROUND_8] = 0;
-	g_InvGround[idx][INV_GROUND_9] = 0;
-	g_InvGround[idx][INV_GROUND_10] = 0;
+	g_InvGround[idx][igState] = 0;
+	g_InvGround[idx][igItemId] = 0;
+	g_InvGround[idx][igQty] = 0;
+	g_InvGround[idx][igObject] = 65535;
+	g_InvGround[idx][igExpireTick] = 0;
+	g_InvGround[idx][igDropper] = 0;
+	g_InvGround[idx][igDropperChar] = 0;
+	g_InvGround[idx][igPicker] = 0;
 }
 
 Inv_GroundSlot()
 {
 	for (new i = 0; i < 40; i++)
 	{
-		if (g_InvGround[i][INV_GROUND_0] == 0)
+		if (g_InvGround[i][igState] == 0)
 		{
 			return i;
 		}
@@ -623,16 +582,13 @@ Inv_GroundRelease(playerid)
 {
 	for (new i = 0; i < 40; i++)
 	{
-		if (g_InvGround[i][INV_GROUND_0] == 1 && g_InvGround[i][INV_GROUND_8] == playerid + 1)
+		if (g_InvGround[i][igState] == 1 && g_InvGround[i][igDropper] == playerid + 1)
 		{
 			Inv_GroundFree(i);
 		}
-		else
+		else if (g_InvGround[i][igPicker] == playerid + 1)
 		{
-			if (g_InvGround[i][INV_GROUND_10] == playerid + 1)
-			{
-				g_InvGround[i][INV_GROUND_10] = 0;
-			}
+			g_InvGround[i][igPicker] = 0;
 		}
 	}
 }
@@ -677,7 +633,7 @@ Inv_DropStart(playerid, itemId, qty)
 		Inv_Say(playerid, -10270721, "Puoi gettare oggetti solo a piedi, all'aperto.");
 		return 0;
 	}
-	new charId = gPlayer[playerid][PLAYER_DATA_3];
+	new charId = gPlayer[playerid][pCharId];
 	if (Inv_GroundCount(0) >= 40)
 	{
 		Inv_Say(playerid, -10270721, "Ci sono troppi oggetti a terra in giro: riprova piu' tardi.");
@@ -696,18 +652,18 @@ Inv_DropStart(playerid, itemId, qty)
 	}
 	new Float:x, Float:y, Float:z;
 	GetPlayerPos(playerid, x, y, z);
-	g_InvGround[idx][INV_GROUND_0] = 1;
-	g_InvGround[idx][INV_GROUND_1] = itemId;
-	g_InvGround[idx][INV_GROUND_2] = qty;
-	g_InvGround[idx][INV_GROUND_3] = 65535;
-	g_InvGround[idx][INV_GROUND_4] = x;
-	g_InvGround[idx][INV_GROUND_5] = y;
-	g_InvGround[idx][INV_GROUND_6] = (Float:(z) - Float:(0x3F666666));
-	g_InvGround[idx][INV_GROUND_8] = playerid + 1;
-	g_InvGround[idx][INV_GROUND_9] = charId;
-	g_InvGround[idx][INV_GROUND_10] = 0;
+	g_InvGround[idx][igState] = 1;
+	g_InvGround[idx][igItemId] = itemId;
+	g_InvGround[idx][igQty] = qty;
+	g_InvGround[idx][igObject] = 65535;
+	g_InvGround[idx][igPosX] = x;
+	g_InvGround[idx][igPosY] = y;
+	g_InvGround[idx][igPosZ] = (z - 0.9);
+	g_InvGround[idx][igDropper] = playerid + 1;
+	g_InvGround[idx][igDropperChar] = charId;
+	g_InvGround[idx][igPicker] = 0;
 	Inv_BeginOp(playerid, 3, itemId, qty, idx);
-	DB_InvDrop(playerid, charId, itemId, qty, gPlayer[playerid][PLAYER_DATA_174]);
+	DB_InvDrop(playerid, charId, itemId, qty, gPlayer[playerid][pInvOpId]);
 }
 
 public Inv_OnDBDropped(playerid, itemId, qty, result)
@@ -716,11 +672,11 @@ public Inv_OnDBDropped(playerid, itemId, qty, result)
 	{
 		return 1;
 	}
-	new idx = gPlayer[playerid][PLAYER_DATA_172];
+	new idx = gPlayer[playerid][pInvOpAux];
 	new opId[33];
-	strcat(opId, gPlayer[playerid][PLAYER_DATA_174], 33);
+	strcat(opId, gPlayer[playerid][pInvOpId], 33);
 	Inv_EndOp(playerid);
-	new bool:mine = idx >= 0 && idx < 40 && g_InvGround[idx][INV_GROUND_0] == 1 && g_InvGround[idx][INV_GROUND_8] == playerid + 1;
+	new bool:mine = idx >= 0 && idx < 40 && g_InvGround[idx][igState] == 1 && g_InvGround[idx][igDropper] == playerid + 1;
 	if (result != 1)
 	{
 		if (mine)
@@ -759,10 +715,10 @@ public Inv_OnDBDropped(playerid, itemId, qty, result)
 		return 1;
 	}
 	new model = itemId == 5 ? 11736 : 1264;
-	g_InvGround[idx][INV_GROUND_3] = CreateObject(model, Float:g_InvGround[idx][INV_GROUND_4], Float:g_InvGround[idx][INV_GROUND_5], Float:g_InvGround[idx][INV_GROUND_6], 0.0, 0.0, 0.0, Float:0x42200000);
-	g_InvGround[idx][INV_GROUND_0] = 2;
-	g_InvGround[idx][INV_GROUND_7] = GetTickCount() + 600000;
-	g_InvGround[idx][INV_GROUND_8] = 0;
+	g_InvGround[idx][igObject] = CreateObject(model, g_InvGround[idx][igPosX], g_InvGround[idx][igPosY], g_InvGround[idx][igPosZ], 0.0, 0.0, 0.0, Float:0x42200000);
+	g_InvGround[idx][igState] = 2;
+	g_InvGround[idx][igExpireTick] = GetTickCount() + 600000;
+	g_InvGround[idx][igDropper] = 0;
 	Inv_Reload(playerid);
 	UI_InvToast(playerid, itemId, -qty);
 	new text[144];
@@ -777,7 +733,7 @@ public UI_OnInvDrop(playerid, slot, qty)
 	{
 		return 1;
 	}
-	new itemId = gPlayer[playerid][PLAYER_DATA_126][slot];
+	new itemId = gPlayer[playerid][pInvItem][slot];
 	if (itemId > 0)
 	{
 		Inv_DropStart(playerid, itemId, qty);
@@ -799,12 +755,12 @@ Inv_CmdPrendi(playerid)
 	new best = -1, Float:bestDist = (2.0 + 1.0);
 	for (new i = 0; i < 40; i++)
 	{
-		if (g_InvGround[i][INV_GROUND_0] != 2 || g_InvGround[i][INV_GROUND_10] != 0)
+		if (g_InvGround[i][igState] != 2 || g_InvGround[i][igPicker] != 0)
 		{
 			continue;
 		}
-		new Float:d = GetPlayerDistanceFromPoint(playerid, Float:g_InvGround[i][INV_GROUND_4], Float:g_InvGround[i][INV_GROUND_5], (0.9 + Float:(g_InvGround[i][INV_GROUND_6])));
-		if ((Float:(d) <= 2.0) && (Float:(d) < Float:(bestDist)))
+		new Float:d = GetPlayerDistanceFromPoint(playerid, g_InvGround[i][igPosX], g_InvGround[i][igPosY], (0.9 + g_InvGround[i][igPosZ]));
+		if ((d <= 2.0) && (d < bestDist))
 		{
 			best = i;
 			bestDist = d;
@@ -815,18 +771,18 @@ Inv_CmdPrendi(playerid)
 		Inv_Say(playerid, -10270721, "Non c'e' nessun oggetto a terra vicino a te.");
 		return 0;
 	}
-	g_InvGround[best][INV_GROUND_10] = playerid + 1;
-	Inv_BeginOp(playerid, 4, g_InvGround[best][INV_GROUND_1], g_InvGround[best][INV_GROUND_2], best);
-	DB_InvAdd(playerid, gPlayer[playerid][PLAYER_DATA_3], g_InvGround[best][INV_GROUND_1], g_InvGround[best][INV_GROUND_2], gPlayer[playerid][PLAYER_DATA_174], "pickup", 0);
+	g_InvGround[best][igPicker] = playerid + 1;
+	Inv_BeginOp(playerid, 4, g_InvGround[best][igItemId], g_InvGround[best][igQty], best);
+	DB_InvAdd(playerid, gPlayer[playerid][pCharId], g_InvGround[best][igItemId], g_InvGround[best][igQty], gPlayer[playerid][pInvOpId], "pickup", 0);
 }
 
 public Inv_OnDBAdded(playerid, itemId, qty, result)
 {
 	if (Inv_OpIs(playerid, 4))
 	{
-		new idx = gPlayer[playerid][PLAYER_DATA_172];
+		new idx = gPlayer[playerid][pInvOpAux];
 		Inv_EndOp(playerid);
-		new bool:mine = idx >= 0 && idx < 40 && g_InvGround[idx][INV_GROUND_10] == playerid + 1 && g_InvGround[idx][INV_GROUND_0] == 2;
+		new bool:mine = idx >= 0 && idx < 40 && g_InvGround[idx][igPicker] == playerid + 1 && g_InvGround[idx][igState] == 2;
 		if (result == 1)
 		{
 			if (mine)
@@ -840,7 +796,7 @@ public Inv_OnDBAdded(playerid, itemId, qty, result)
 		}
 		if (mine)
 		{
-			g_InvGround[idx][INV_GROUND_10] = 0;
+			g_InvGround[idx][igPicker] = 0;
 		}
 		switch (result)
 		{
@@ -861,7 +817,7 @@ public Inv_OnDBAdded(playerid, itemId, qty, result)
 	}
 	if (Inv_OpIs(playerid, 8))
 	{
-		new bool:starter = gPlayer[playerid][PLAYER_DATA_172] == 1;
+		new bool:starter = gPlayer[playerid][pInvOpAux] == 1;
 		Inv_EndOp(playerid);
 		if (starter)
 		{
@@ -884,7 +840,7 @@ public Inv_OnDBAdded(playerid, itemId, qty, result)
 		}
 		else
 		{
-			gPlayer[playerid][PLAYER_DATA_261] = 0;
+			gPlayer[playerid][pDocRequestTick] = 0;
 			Inv_Say(playerid, -10270721, result == 2 ? "Non hai spazio nell'inventario per il documento." : "Impossibile rilasciare il documento.");
 		}
 	}
@@ -898,16 +854,16 @@ public Inv_IssueStartDoc(playerid)
 
 Inv_StartDoc(playerid, bool:retry)
 {
-	if (!Inv_ValidPlayer(playerid) || gPlayer[playerid][PLAYER_DATA_3] <= 0 || gPlayer[playerid][PLAYER_DATA_167])
+	if (!Inv_ValidPlayer(playerid) || gPlayer[playerid][pCharId] <= 0 || gPlayer[playerid][pInvOpBusy])
 	{
 		return 0;
 	}
 	Inv_BeginOp(playerid, 8, 10, 1, 1);
 	if (!retry)
 	{
-		format(gPlayer[playerid][PLAYER_DATA_174], 33, "startdoc%d", gPlayer[playerid][PLAYER_DATA_3]);
+		format(gPlayer[playerid][pInvOpId], 33, "startdoc%d", gPlayer[playerid][pCharId]);
 	}
-	DB_InvAdd(playerid, gPlayer[playerid][PLAYER_DATA_3], 10, 1, gPlayer[playerid][PLAYER_DATA_174], "add", 1);
+	DB_InvAdd(playerid, gPlayer[playerid][pCharId], 10, 1, gPlayer[playerid][pInvOpId], "add", 1);
 	return 1;
 }
 
@@ -923,30 +879,30 @@ Inv_DocRequest(playerid)
 		return 0;
 	}
 	new now = GetTickCount();
-	if (gPlayer[playerid][PLAYER_DATA_261] != 0 && now - gPlayer[playerid][PLAYER_DATA_261] < 3600000)
+	if (gPlayer[playerid][pDocRequestTick] != 0 && now - gPlayer[playerid][pDocRequestTick] < 3600000)
 	{
 		Inv_Say(playerid, -10270721, "Hai gia' richiesto un documento di recente: attendi.");
 		return 0;
 	}
-	gPlayer[playerid][PLAYER_DATA_261] = now != 0 ? now : 1;
+	gPlayer[playerid][pDocRequestTick] = now != 0 ? now : 1;
 	Inv_BeginOp(playerid, 8, 10, 1, 0);
-	DB_InvAdd(playerid, gPlayer[playerid][PLAYER_DATA_3], 10, 1, gPlayer[playerid][PLAYER_DATA_174], "add", 1);
+	DB_InvAdd(playerid, gPlayer[playerid][pCharId], 10, 1, gPlayer[playerid][pInvOpId], "add", 1);
 }
 
 Inv_GiveCancel(giver, reason[])
 {
-	if (!Inv_ValidPlayer(giver) || gPlayer[giver][PLAYER_DATA_252] == 0)
+	if (!Inv_ValidPlayer(giver) || gPlayer[giver][pInvGiveTo] == 0)
 	{
 		return 0;
 	}
-	new recv = gPlayer[giver][PLAYER_DATA_252] - 1;
-	gPlayer[giver][PLAYER_DATA_252] = 0;
-	gPlayer[giver][PLAYER_DATA_254] = 0;
-	gPlayer[giver][PLAYER_DATA_255] = 0;
+	new recv = gPlayer[giver][pInvGiveTo] - 1;
+	gPlayer[giver][pInvGiveTo] = 0;
+	gPlayer[giver][pInvGiveItem] = 0;
+	gPlayer[giver][pInvGiveQty] = 0;
 	Inv_Say(giver, -10270721, reason);
-	if (Inv_ValidPlayer(recv) && gPlayer[recv][PLAYER_DATA_253] == giver + 1)
+	if (Inv_ValidPlayer(recv) && gPlayer[recv][pInvGiveFrom] == giver + 1)
 	{
-		gPlayer[recv][PLAYER_DATA_253] = 0;
+		gPlayer[recv][pInvGiveFrom] = 0;
 		UI_InvGiveConfirmClose(recv);
 		Inv_Say(recv, -10270721, reason);
 	}
@@ -955,12 +911,12 @@ Inv_GiveCancel(giver, reason[])
 bool:Inv_GiveRateOk(playerid)
 {
 	new now = GetTickCount();
-	if (gPlayer[playerid][PLAYER_DATA_259] == 0 || now - gPlayer[playerid][PLAYER_DATA_259] >= 3600000)
+	if (gPlayer[playerid][pInvGiveHourStart] == 0 || now - gPlayer[playerid][pInvGiveHourStart] >= 3600000)
 	{
-		gPlayer[playerid][PLAYER_DATA_259] = now != 0 ? now : 1;
-		gPlayer[playerid][PLAYER_DATA_260] = 0;
+		gPlayer[playerid][pInvGiveHourStart] = now != 0 ? now : 1;
+		gPlayer[playerid][pInvGiveHourCount] = 0;
 	}
-	return gPlayer[playerid][PLAYER_DATA_260] < 20;
+	return gPlayer[playerid][pInvGiveHourCount] < 20;
 }
 
 Inv_CmdDai(playerid, params[])
@@ -1004,7 +960,7 @@ Inv_GiveStart(playerid, target, itemId, qty)
 		Inv_Say(playerid, -10270721, "Non puoi dare oggetti a te stesso.");
 		return 0;
 	}
-	if (!Util_IsPlaying(target) || gPlayer[target][PLAYER_DATA_124] != 2)
+	if (!Util_IsPlaying(target) || gPlayer[target][pInvState] != 2)
 	{
 		Inv_Say(playerid, -10270721, "Giocatore non valido o non ancora pronto.");
 		return 0;
@@ -1019,18 +975,18 @@ Inv_GiveStart(playerid, target, itemId, qty)
 		SendClientMessage(playerid, -10270721, "Non hai abbastanza: %s.", s_InvName[itemId]);
 		return 0;
 	}
-	if (gPlayer[playerid][PLAYER_DATA_252] != 0 || gPlayer[playerid][PLAYER_DATA_253] != 0)
+	if (gPlayer[playerid][pInvGiveTo] != 0 || gPlayer[playerid][pInvGiveFrom] != 0)
 	{
 		Inv_Say(playerid, -10270721, "Hai gia' uno scambio in sospeso.");
 		return 0;
 	}
-	if (gPlayer[target][PLAYER_DATA_252] != 0 || gPlayer[target][PLAYER_DATA_253] != 0)
+	if (gPlayer[target][pInvGiveTo] != 0 || gPlayer[target][pInvGiveFrom] != 0)
 	{
 		Inv_Say(playerid, -10270721, "Quel giocatore ha gia' uno scambio in sospeso.");
 		return 0;
 	}
 	new now = GetTickCount();
-	if (gPlayer[playerid][PLAYER_DATA_258] != 0 && now - gPlayer[playerid][PLAYER_DATA_258] < 5000)
+	if (gPlayer[playerid][pInvLastGiveTick] != 0 && now - gPlayer[playerid][pInvLastGiveTick] < 5000)
 	{
 		Inv_Say(playerid, -10270721, "Attendi qualche secondo prima di un nuovo scambio.");
 		return 0;
@@ -1041,15 +997,15 @@ Inv_GiveStart(playerid, target, itemId, qty)
 		return 0;
 	}
 	g_InvGiveSeq++;
-	gPlayer[playerid][PLAYER_DATA_258] = now != 0 ? now : 1;
-	gPlayer[playerid][PLAYER_DATA_257] = now;
-	gPlayer[playerid][PLAYER_DATA_256] = g_InvGiveSeq;
-	gPlayer[playerid][PLAYER_DATA_252] = target + 1;
-	gPlayer[playerid][PLAYER_DATA_254] = itemId;
-	gPlayer[playerid][PLAYER_DATA_255] = qty;
-	gPlayer[target][PLAYER_DATA_253] = playerid + 1;
-	gPlayer[target][PLAYER_DATA_256] = g_InvGiveSeq;
-	gPlayer[target][PLAYER_DATA_257] = now;
+	gPlayer[playerid][pInvLastGiveTick] = now != 0 ? now : 1;
+	gPlayer[playerid][pInvGiveStartTick] = now;
+	gPlayer[playerid][pInvGiveSeq] = g_InvGiveSeq;
+	gPlayer[playerid][pInvGiveTo] = target + 1;
+	gPlayer[playerid][pInvGiveItem] = itemId;
+	gPlayer[playerid][pInvGiveQty] = qty;
+	gPlayer[target][pInvGiveFrom] = playerid + 1;
+	gPlayer[target][pInvGiveSeq] = g_InvGiveSeq;
+	gPlayer[target][pInvGiveStartTick] = now;
 	new name[25], tname[25];
 	GetPlayerName(playerid, name, 25);
 	GetPlayerName(target, tname, 25);
@@ -1063,7 +1019,7 @@ public UI_OnInvGive(playerid, slot, targetId, qty)
 	{
 		return 1;
 	}
-	new itemId = gPlayer[playerid][PLAYER_DATA_126][slot];
+	new itemId = gPlayer[playerid][pInvItem][slot];
 	if (itemId > 0)
 	{
 		Inv_GiveStart(playerid, targetId, itemId, qty);
@@ -1083,14 +1039,14 @@ public UI_OnInvGiveExpired(playerid)
 
 Inv_GiveReply(playerid, accept, bool:expired)
 {
-	if (!Inv_ValidPlayer(playerid) || gPlayer[playerid][PLAYER_DATA_253] == 0)
+	if (!Inv_ValidPlayer(playerid) || gPlayer[playerid][pInvGiveFrom] == 0)
 	{
 		return 1;
 	}
-	new giver = gPlayer[playerid][PLAYER_DATA_253] - 1, seq = gPlayer[playerid][PLAYER_DATA_256], start = gPlayer[playerid][PLAYER_DATA_257];
-	gPlayer[playerid][PLAYER_DATA_253] = 0;
+	new giver = gPlayer[playerid][pInvGiveFrom] - 1, seq = gPlayer[playerid][pInvGiveSeq], start = gPlayer[playerid][pInvGiveStartTick];
+	gPlayer[playerid][pInvGiveFrom] = 0;
 	UI_InvGiveConfirmClose(playerid);
-	if (!Inv_ValidPlayer(giver) || gPlayer[giver][PLAYER_DATA_252] != playerid + 1 || gPlayer[giver][PLAYER_DATA_256] != seq || gPlayer[giver][PLAYER_DATA_169] == 2)
+	if (!Inv_ValidPlayer(giver) || gPlayer[giver][pInvGiveTo] != playerid + 1 || gPlayer[giver][pInvGiveSeq] != seq || gPlayer[giver][pInvOp] == 2)
 	{
 		Inv_Say(playerid, -10270721, "Lo scambio non e' piu' valido.");
 		return 1;
@@ -1100,7 +1056,7 @@ Inv_GiveReply(playerid, accept, bool:expired)
 		Inv_GiveCancel(giver, expired ? "Scambio scaduto." : "Scambio rifiutato.");
 		return 1;
 	}
-	new itemId = gPlayer[giver][PLAYER_DATA_254], qty = gPlayer[giver][PLAYER_DATA_255];
+	new itemId = gPlayer[giver][pInvGiveItem], qty = gPlayer[giver][pInvGiveQty];
 	if (GetTickCount() - start > 15000)
 	{
 		Inv_GiveCancel(giver, "Scambio scaduto.");
@@ -1126,8 +1082,8 @@ Inv_GiveReply(playerid, accept, bool:expired)
 		return 1;
 	}
 	Inv_BeginOp(giver, 2, itemId, qty, 0);
-	gPlayer[giver][PLAYER_DATA_173] = playerid + 1;
-	DB_InvTransfer(giver, playerid, itemId, qty, gPlayer[giver][PLAYER_DATA_174]);
+	gPlayer[giver][pInvOpPeer] = playerid + 1;
+	DB_InvTransfer(giver, playerid, itemId, qty, gPlayer[giver][pInvOpId]);
 	return 1;
 }
 
@@ -1136,14 +1092,14 @@ public Inv_OnDBTransferred(giverid, receiverid, itemId, qty, result)
 	if (Inv_OpIs(giverid, 2))
 	{
 		Inv_EndOp(giverid);
-		gPlayer[giverid][PLAYER_DATA_252] = 0;
-		gPlayer[giverid][PLAYER_DATA_254] = 0;
-		gPlayer[giverid][PLAYER_DATA_255] = 0;
+		gPlayer[giverid][pInvGiveTo] = 0;
+		gPlayer[giverid][pInvGiveItem] = 0;
+		gPlayer[giverid][pInvGiveQty] = 0;
 		switch (result)
 		{
 			case 1:
 			{
-				gPlayer[giverid][PLAYER_DATA_260]++;
+				gPlayer[giverid][pInvGiveHourCount]++;
 				Inv_Reload(giverid);
 				UI_InvToast(giverid, itemId, -qty);
 				SendClientMessage(giverid, 0x66DD66FF, "Hai dato %s x%d.", s_InvName[itemId], qty);
@@ -1230,12 +1186,9 @@ Inv_Buy(playerid, itemId, qty)
 	{
 		maxTotal = 12;
 	}
-	else
+	else if (itemId == 9)
 	{
-		if (itemId == 9)
-		{
-			maxTotal = 1;
-		}
+		maxTotal = 1;
 	}
 	if (maxTotal > 0 && Inv_Count(playerid, itemId) + qty > maxTotal)
 	{
@@ -1249,12 +1202,12 @@ Inv_Buy(playerid, itemId, qty)
 		return 0;
 	}
 	Inv_BeginOp(playerid, 5, itemId, qty, cost);
-	DB_InvBuy(playerid, gPlayer[playerid][PLAYER_DATA_3], itemId, qty, gPlayer[playerid][PLAYER_DATA_174], maxTotal);
+	DB_InvBuy(playerid, gPlayer[playerid][pCharId], itemId, qty, gPlayer[playerid][pInvOpId], maxTotal);
 }
 
 Inv_BuyBag(playerid)
 {
-	if (gPlayer[playerid][PLAYER_DATA_125] != 0)
+	if (gPlayer[playerid][pInvHasBag] != 0)
 	{
 		Inv_Say(playerid, -10270721, "Hai gia' uno zaino.");
 		return 0;
@@ -1265,15 +1218,15 @@ Inv_BuyBag(playerid)
 		return 0;
 	}
 	Inv_BeginOp(playerid, 6, 11, 1, 350);
-	DB_InvSetBag(playerid, gPlayer[playerid][PLAYER_DATA_3], gPlayer[playerid][PLAYER_DATA_174]);
+	DB_InvSetBag(playerid, gPlayer[playerid][pCharId], gPlayer[playerid][pInvOpId]);
 }
 
 Inv_UndoPurchase(playerid)
 {
-	gPlayer[playerid][PLAYER_DATA_207][0] = 0;
-	strcat(gPlayer[playerid][PLAYER_DATA_207], gPlayer[playerid][PLAYER_DATA_174], 33);
+	gPlayer[playerid][pInvUndoOpId][0] = 0;
+	strcat(gPlayer[playerid][pInvUndoOpId], gPlayer[playerid][pInvOpId], 33);
 	Inv_Say(playerid, -10270721, "Contanti insufficienti: acquisto annullato.");
-	DB_InvUndo(gPlayer[playerid][PLAYER_DATA_207]);
+	DB_InvUndo(gPlayer[playerid][pInvUndoOpId]);
 }
 
 public Inv_OnDBBought(playerid, itemId, qty, result)
@@ -1282,7 +1235,7 @@ public Inv_OnDBBought(playerid, itemId, qty, result)
 	{
 		return 1;
 	}
-	new cost = gPlayer[playerid][PLAYER_DATA_172];
+	new cost = gPlayer[playerid][pInvOpAux];
 	if (result == 1)
 	{
 		if (!Money_Take(playerid, cost))
@@ -1357,14 +1310,14 @@ public Inv_OnDBBag(playerid, result)
 
 public Inv_OnDBUndone(opId[], result)
 {
-	for (new p = 0; p < 1000; p++)
+	for (new p = 0; p < MAX_PLAYERS; p++)
 	{
-		if (!IsPlayerConnected(p) || gPlayer[p][PLAYER_DATA_207][0] == 0 || strcmp(gPlayer[p][PLAYER_DATA_207], opId, 0, 0x7FFFFFFF))
+		if (!IsPlayerConnected(p) || gPlayer[p][pInvUndoOpId][0] == 0 || strcmp(gPlayer[p][pInvUndoOpId], opId, 0, 0x7FFFFFFF))
 		{
 			continue;
 		}
-		gPlayer[p][PLAYER_DATA_207][0] = 0;
-		if (gPlayer[p][PLAYER_DATA_167])
+		gPlayer[p][pInvUndoOpId][0] = 0;
+		if (gPlayer[p][pInvOpBusy])
 		{
 			Inv_EndOp(p);
 		}
@@ -1399,7 +1352,7 @@ bool:Inv_FridgeMove(playerid, houseId, direction, qty, fridgeCap)
 		return 0;
 	}
 	Inv_BeginOp(playerid, 7, 1, qty, houseId);
-	DB_FridgeMove(playerid, gPlayer[playerid][PLAYER_DATA_3], houseId, 1, qty, direction, gPlayer[playerid][PLAYER_DATA_174], fridgeCap, direction == 2 ? 12 : 0);
+	DB_FridgeMove(playerid, gPlayer[playerid][pCharId], houseId, 1, qty, direction, gPlayer[playerid][pInvOpId], fridgeCap, direction == 2 ? 12 : 0);
 	return 1;
 }
 
@@ -1412,9 +1365,9 @@ public Inv_OnDBFridge(playerid, houseId, direction, qty, result)
 	Inv_EndOp(playerid);
 	if (result == -1)
 	{
-		gPlayer[playerid][PLAYER_DATA_262] = houseId;
-		gPlayer[playerid][PLAYER_DATA_263] = direction;
-		gPlayer[playerid][PLAYER_DATA_264] = Inv_Count(playerid, 1);
+		gPlayer[playerid][pFridgeHouse] = houseId;
+		gPlayer[playerid][pFridgeDir] = direction;
+		gPlayer[playerid][pFridgeFoodBefore] = Inv_Count(playerid, 1);
 		Inv_Say(playerid, -10270721, "Errore database: verifico lo stato del frigo...");
 		Inv_Reload(playerid);
 		return 1;
@@ -1433,22 +1386,22 @@ public Inv_OnTick()
 	new now = GetTickCount();
 	for (new i = 0; i < 40; i++)
 	{
-		if (g_InvGround[i][INV_GROUND_0] != 2 || g_InvGround[i][INV_GROUND_10] != 0)
+		if (g_InvGround[i][igState] != 2 || g_InvGround[i][igPicker] != 0)
 		{
 			continue;
 		}
-		if (now - g_InvGround[i][INV_GROUND_7] >= 0)
+		if (now - g_InvGround[i][igExpireTick] >= 0)
 		{
 			Inv_GroundFree(i);
 		}
 	}
-	for (new p = 0; p < 1000; p++)
+	for (new p = 0; p < MAX_PLAYERS; p++)
 	{
-		if (!IsPlayerConnected(p) || gPlayer[p][PLAYER_DATA_252] == 0 || gPlayer[p][PLAYER_DATA_169] == 2)
+		if (!IsPlayerConnected(p) || gPlayer[p][pInvGiveTo] == 0 || gPlayer[p][pInvOp] == 2)
 		{
 			continue;
 		}
-		if (now - gPlayer[p][PLAYER_DATA_257] >= 15000)
+		if (now - gPlayer[p][pInvGiveStartTick] >= 15000)
 		{
 			Inv_GiveCancel(p, "Scambio scaduto.");
 		}
@@ -1460,8 +1413,8 @@ Inv_OnInit()
 {
 	for (new i = 0; i < 40; i++)
 	{
-		g_InvGround[i][INV_GROUND_3] = 65535;
-		g_InvGround[i][INV_GROUND_0] = 0;
+		g_InvGround[i][igObject] = 65535;
+		g_InvGround[i][igState] = 0;
 	}
 	g_InvTickTimer = SetTimer("Inv_OnTick", 1000, 1);
 }
@@ -1481,11 +1434,11 @@ Inv_OnExit()
 
 Inv_OnPlayerSpawn(playerid)
 {
-	if (!Inv_ValidPlayer(playerid) || !gPlayer[playerid][PLAYER_DATA_0] || gPlayer[playerid][PLAYER_DATA_3] <= 0)
+	if (!Inv_ValidPlayer(playerid) || !gPlayer[playerid][pLoggedIn] || gPlayer[playerid][pCharId] <= 0)
 	{
 		return 0;
 	}
-	if (gPlayer[playerid][PLAYER_DATA_124] == 0 || gPlayer[playerid][PLAYER_DATA_124] == 3)
+	if (gPlayer[playerid][pInvState] == 0 || gPlayer[playerid][pInvState] == 3)
 	{
 		Inv_Load(playerid);
 	}
@@ -1493,37 +1446,34 @@ Inv_OnPlayerSpawn(playerid)
 
 Inv_OnPlayerDisconnect(playerid)
 {
-	if (playerid < 0 || playerid >= 1000)
+	if (playerid < 0 || playerid >= MAX_PLAYERS)
 	{
 		return 0;
 	}
-	if (gPlayer[playerid][PLAYER_DATA_252] != 0 && gPlayer[playerid][PLAYER_DATA_169] != 2)
+	if (gPlayer[playerid][pInvGiveTo] != 0 && gPlayer[playerid][pInvOp] != 2)
 	{
 		Inv_GiveCancel(playerid, "Scambio annullato: il giocatore si e' scollegato.");
 	}
-	else
+	else if (gPlayer[playerid][pInvGiveTo] != 0)
 	{
-		if (gPlayer[playerid][PLAYER_DATA_252] != 0)
-		{
-			gPlayer[playerid][PLAYER_DATA_252] = 0;
-		}
+		gPlayer[playerid][pInvGiveTo] = 0;
 	}
-	if (gPlayer[playerid][PLAYER_DATA_253] != 0)
+	if (gPlayer[playerid][pInvGiveFrom] != 0)
 	{
-		new giver = gPlayer[playerid][PLAYER_DATA_253] - 1;
-		gPlayer[playerid][PLAYER_DATA_253] = 0;
-		if (Inv_ValidPlayer(giver) && gPlayer[giver][PLAYER_DATA_252] == playerid + 1 && gPlayer[giver][PLAYER_DATA_169] != 2)
+		new giver = gPlayer[playerid][pInvGiveFrom] - 1;
+		gPlayer[playerid][pInvGiveFrom] = 0;
+		if (Inv_ValidPlayer(giver) && gPlayer[giver][pInvGiveTo] == playerid + 1 && gPlayer[giver][pInvOp] != 2)
 		{
 			Inv_GiveCancel(giver, "Scambio annullato: il giocatore si e' scollegato.");
 		}
 	}
-	if (gPlayer[playerid][PLAYER_DATA_167] && gPlayer[playerid][PLAYER_DATA_169] == 7)
+	if (gPlayer[playerid][pInvOpBusy] && gPlayer[playerid][pInvOp] == 7)
 	{
-		House_InvFridgeAbort(gPlayer[playerid][PLAYER_DATA_172]);
+		House_InvFridgeAbort(gPlayer[playerid][pInvOpAux]);
 	}
-	if (gPlayer[playerid][PLAYER_DATA_262] > 0)
+	if (gPlayer[playerid][pFridgeHouse] > 0)
 	{
-		House_InvFridgeAbort(gPlayer[playerid][PLAYER_DATA_262]);
+		House_InvFridgeAbort(gPlayer[playerid][pFridgeHouse]);
 	}
 	Inv_GroundRelease(playerid);
 }

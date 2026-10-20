@@ -9,7 +9,7 @@ Util_Send(playerid, color, text[])
 
 bool:Util_IsPlaying(playerid)
 {
-	if (playerid < 0 || playerid >= 1000)
+	if (playerid < 0 || playerid >= MAX_PLAYERS)
 	{
 		return 0;
 	}
@@ -17,16 +17,16 @@ bool:Util_IsPlaying(playerid)
 	{
 		return 0;
 	}
-	return gPlayer[playerid][PLAYER_DATA_0] && gPlayer[playerid][PLAYER_DATA_1];
+	return gPlayer[playerid][pLoggedIn] && gPlayer[playerid][pSpawned];
 }
 
 Util_GetAdmin(playerid)
 {
-	if (playerid < 0 || playerid >= 1000 || !gPlayer[playerid][PLAYER_DATA_0])
+	if (playerid < 0 || playerid >= MAX_PLAYERS || !gPlayer[playerid][pLoggedIn])
 	{
 		return 0;
 	}
-	return gPlayer[playerid][PLAYER_DATA_86];
+	return gPlayer[playerid][pAdminLevel];
 }
 
 Util_Trim(str[])
@@ -232,9 +232,9 @@ Util_SendNear(sourceid, color, Float:radius, text[])
 	new Float:x, Float:y, Float:z;
 	GetPlayerPos(sourceid, x, y, z);
 	new interior = GetPlayerInterior(sourceid), world = GetPlayerVirtualWorld(sourceid);
-	for (new i = 0; i < 1000; i++)
+	for (new i = 0; i < MAX_PLAYERS; i++)
 	{
-		if (!gPlayer[i][PLAYER_DATA_1] || !Util_IsPlaying(i))
+		if (!gPlayer[i][pSpawned] || !Util_IsPlaying(i))
 		{
 			continue;
 		}
@@ -242,7 +242,7 @@ Util_SendNear(sourceid, color, Float:radius, text[])
 		{
 			continue;
 		}
-		if ((Float:(GetPlayerDistanceFromPoint(i, x, y, z)) > Float:(radius)))
+		if ((GetPlayerDistanceFromPoint(i, x, y, z) > radius))
 		{
 			continue;
 		}
@@ -265,5 +265,5 @@ bool:Util_InRange(playerid, targetid, Float:radius)
 	}
 	new Float:x, Float:y, Float:z;
 	GetPlayerPos(targetid, x, y, z);
-	return (Float:(GetPlayerDistanceFromPoint(playerid, x, y, z)) <= Float:(radius));
+	return (GetPlayerDistanceFromPoint(playerid, x, y, z) <= radius);
 }

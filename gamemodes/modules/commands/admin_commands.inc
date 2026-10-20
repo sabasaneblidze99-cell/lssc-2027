@@ -35,14 +35,14 @@ public Cmd_goto(playerid, params[])
 	GetPlayerPos(targetid, x, y, z);
 	SetPlayerInterior(playerid, GetPlayerInterior(targetid));
 	SetPlayerVirtualWorld(playerid, GetPlayerVirtualWorld(targetid));
-	SetPlayerPos(playerid, (1.0 + Float:(x)), y, z);
+	SetPlayerPos(playerid, (1.0 + x), y, z);
 	new an[25], tn[25], msg[128];
 	GetPlayerName(playerid, an, 25);
 	GetPlayerName(targetid, tn, 25);
 	SendClientMessage(playerid, -5963521, "Teletrasportato presso %s.", tn);
 	format(msg, 128, "%s /goto %s", an, tn);
 	Log_Write("ADMIN", msg);
-	DB_AdminLog(gPlayer[playerid][PLAYER_DATA_2], gPlayer[targetid][PLAYER_DATA_2], "goto", "");
+	DB_AdminLog(gPlayer[playerid][pAccountId], gPlayer[targetid][pAccountId], "goto", "");
 	Admin_AdmCmd(an, "raggiunto", tn, "", "");
 	return 1;
 }
@@ -86,7 +86,7 @@ public Cmd_setlevel(playerid, params[])
 	format(msg, 128, "%s /setlevel %s %d", an, tn, level);
 	Log_Write("ADMIN", msg);
 	format(msg, 128, "livello %d", level);
-	DB_AdminLog(gPlayer[playerid][PLAYER_DATA_2], gPlayer[targetid][PLAYER_DATA_2], "setlevel", msg);
+	DB_AdminLog(gPlayer[playerid][pAccountId], gPlayer[targetid][pAccountId], "setlevel", msg);
 	Admin_AdmCmd(an, "impostato il livello di", tn, msg, "");
 	return 1;
 }
@@ -126,7 +126,7 @@ public Cmd_setmoney(playerid, params[])
 	format(msg, 128, "%s /setmoney %s %d", an, tn, amount);
 	Log_Write("ADMIN", msg);
 	format(msg, 128, "contanti %d", amount);
-	DB_AdminLog(gPlayer[playerid][PLAYER_DATA_2], gPlayer[targetid][PLAYER_DATA_2], "setmoney", msg);
+	DB_AdminLog(gPlayer[playerid][pAccountId], gPlayer[targetid][pAccountId], "setmoney", msg);
 	Admin_AdmCmd(an, "impostato i contanti di", tn, msg, "");
 	return 1;
 }
@@ -242,12 +242,12 @@ public Cmd_gethere(playerid, params[])
 	GetPlayerPos(playerid, x, y, z);
 	SetPlayerInterior(targetid, GetPlayerInterior(playerid));
 	SetPlayerVirtualWorld(targetid, GetPlayerVirtualWorld(playerid));
-	SetPlayerPos(targetid, (1.0 + Float:(x)), y, z);
+	SetPlayerPos(targetid, (1.0 + x), y, z);
 	GetPlayerName(playerid, an, 25);
 	GetPlayerName(targetid, tn, 25);
 	SendClientMessage(targetid, -5963521, "Sei stato teletrasportato da %s.", an);
 	Admin_AdmCmd(an, "portato qui", tn, "", "");
-	Admin_Log(playerid, gPlayer[targetid][PLAYER_DATA_2], "gethere", "");
+	Admin_Log(playerid, gPlayer[targetid][pAccountId], "gethere", "");
 	return 1;
 }
 
@@ -273,14 +273,14 @@ public Cmd_freeze(playerid, params[])
 	{
 		reason[0] = 0;
 	}
-	gPlayer[targetid][PLAYER_DATA_119] = 1;
+	gPlayer[targetid][pFrozen] = 1;
 	TogglePlayerControllable(targetid, 0);
 	new an[25], tn[25];
 	GetPlayerName(playerid, an, 25);
 	GetPlayerName(targetid, tn, 25);
 	SendClientMessage(targetid, -10270721, "Sei stato congelato da %s%s%s.", an, reason[0] != 0 ? ": " : "", reason);
 	Admin_AdmCmd(an, "congelato", tn, reason, "");
-	Admin_Log(playerid, gPlayer[targetid][PLAYER_DATA_2], "freeze", reason);
+	Admin_Log(playerid, gPlayer[targetid][pAccountId], "freeze", reason);
 	return 1;
 }
 
@@ -301,14 +301,14 @@ public Cmd_unfreeze(playerid, params[])
 	{
 		return 1;
 	}
-	gPlayer[targetid][PLAYER_DATA_119] = 0;
+	gPlayer[targetid][pFrozen] = 0;
 	Faction_UpdateControl(targetid);
 	new an[25], tn[25];
 	GetPlayerName(playerid, an, 25);
 	GetPlayerName(targetid, tn, 25);
 	SendClientMessage(targetid, 0x66DD66FF, "Sei stato scongelato da %s.", an);
 	Admin_AdmCmd(an, "scongelato", tn, "", "");
-	Admin_Log(playerid, gPlayer[targetid][PLAYER_DATA_2], "unfreeze", "");
+	Admin_Log(playerid, gPlayer[targetid][pAccountId], "unfreeze", "");
 	return 1;
 }
 
@@ -346,7 +346,7 @@ public Cmd_sethp(playerid, params[])
 	GetPlayerName(targetid, tn, 25);
 	format(msg, 128, "vita %d", hp);
 	Admin_AdmCmd(an, "impostato la vita di", tn, msg, "");
-	Admin_Log(playerid, gPlayer[targetid][PLAYER_DATA_2], "sethp", msg);
+	Admin_Log(playerid, gPlayer[targetid][pAccountId], "sethp", msg);
 	return 1;
 }
 
@@ -371,7 +371,7 @@ public Cmd_kick(playerid, params[])
 	GetPlayerName(playerid, an, 25);
 	GetPlayerName(targetid, tn, 25);
 	Admin_AdmCmd(an, "kickato", tn, reason, "kickato");
-	Admin_Log(playerid, gPlayer[targetid][PLAYER_DATA_2], "kick", reason);
+	Admin_Log(playerid, gPlayer[targetid][pAccountId], "kick", reason);
 	format(msg, 256, "Sei stato espulso da %s: %s", an, reason);
 	Account_Kick(targetid, msg);
 	return 1;
@@ -410,15 +410,15 @@ public Cmd_mute(playerid, params[])
 	{
 		return 1;
 	}
-	gPlayer[targetid][PLAYER_DATA_118] = gettime() + minutes * 60;
-	DB_SetMute(gPlayer[targetid][PLAYER_DATA_2], gPlayer[targetid][PLAYER_DATA_118]);
+	gPlayer[targetid][pMutedUntil] = gettime() + minutes * 60;
+	DB_SetMute(gPlayer[targetid][pAccountId], gPlayer[targetid][pMutedUntil]);
 	new an[25], tn[25], msg[256];
 	GetPlayerName(playerid, an, 25);
 	GetPlayerName(targetid, tn, 25);
 	format(msg, 256, "%s (%d min)", reason, minutes);
 	SendClientMessage(targetid, -10270721, "Sei stato mutato da %s per %d minuti: %s", an, minutes, reason);
 	Admin_AdmCmd(an, "mutato", tn, msg, "mutato");
-	Admin_Log(playerid, gPlayer[targetid][PLAYER_DATA_2], "mute", msg);
+	Admin_Log(playerid, gPlayer[targetid][pAccountId], "mute", msg);
 	return 1;
 }
 
@@ -444,14 +444,14 @@ public Cmd_unmute(playerid, params[])
 		Util_Send(playerid, -10270721, "Il giocatore non e' mutato.");
 		return 1;
 	}
-	gPlayer[targetid][PLAYER_DATA_118] = 0;
-	DB_SetMute(gPlayer[targetid][PLAYER_DATA_2], 0);
+	gPlayer[targetid][pMutedUntil] = 0;
+	DB_SetMute(gPlayer[targetid][pAccountId], 0);
 	new an[25], tn[25];
 	GetPlayerName(playerid, an, 25);
 	GetPlayerName(targetid, tn, 25);
 	SendClientMessage(targetid, 0x66DD66FF, "Il tuo mute e' stato rimosso da %s.", an);
 	Admin_AdmCmd(an, "smutato", tn, "", "");
-	Admin_Log(playerid, gPlayer[targetid][PLAYER_DATA_2], "unmute", "");
+	Admin_Log(playerid, gPlayer[targetid][pAccountId], "unmute", "");
 	return 1;
 }
 
@@ -479,8 +479,8 @@ public Cmd_warn(playerid, params[])
 	}
 	new tn[25];
 	GetPlayerName(targetid, tn, 25);
-	Admin_PendSet(playerid, 1, gPlayer[targetid][PLAYER_DATA_2], tn, 0, reason);
-	DB_AddWarn(playerid, gPlayer[targetid][PLAYER_DATA_2], gPlayer[playerid][PLAYER_DATA_2], reason);
+	Admin_PendSet(playerid, 1, gPlayer[targetid][pAccountId], tn, 0, reason);
+	DB_AddWarn(playerid, gPlayer[targetid][pAccountId], gPlayer[playerid][pAccountId], reason);
 	return 1;
 }
 
@@ -517,7 +517,7 @@ public Cmd_setadmin(playerid, params[])
 	{
 		targetid = Admin_FindByName(who);
 	}
-	if (targetid != 65535 && gPlayer[targetid][PLAYER_DATA_0])
+	if (targetid != INVALID_PLAYER_ID && gPlayer[targetid][pLoggedIn])
 	{
 		if (!Admin_CanTarget(playerid, targetid, 0))
 		{
@@ -525,12 +525,12 @@ public Cmd_setadmin(playerid, params[])
 			return 1;
 		}
 		GetPlayerName(targetid, tn, 25);
-		gPlayer[targetid][PLAYER_DATA_86] = level;
-		DB_SetAdminLevel(gPlayer[targetid][PLAYER_DATA_2], level);
+		gPlayer[targetid][pAdminLevel] = level;
+		DB_SetAdminLevel(gPlayer[targetid][pAccountId], level);
 		SendClientMessage(targetid, -5963521, "Il tuo livello staff e' stato impostato a %d da %s.", level, an);
 		format(msg, 128, "livello %d", level);
 		Admin_AdmCmd(an, "impostato il livello staff di", tn, msg, "");
-		Admin_Log(playerid, gPlayer[targetid][PLAYER_DATA_2], "setadmin", msg);
+		Admin_Log(playerid, gPlayer[targetid][pAccountId], "setadmin", msg);
 		return 1;
 	}
 	if (strlen(who) < 2 || (who[0] >= 48 && who[0] <= 57))
@@ -571,7 +571,7 @@ public Cmd_givemoney(playerid, params[])
 		SendClientMessage(playerid, -10270721, "Importo non valido (1-%d).", 100000);
 		return 1;
 	}
-	new now = GetTickCount(), elapsed = now - gPlayer[playerid][PLAYER_DATA_120];
+	new now = GetTickCount(), elapsed = now - gPlayer[playerid][pLastGiveMoneyTick];
 	if (elapsed < 10000)
 	{
 		SendClientMessage(playerid, -10270721, "Attendi ancora %d secondi.", (10000 - elapsed + 1000 - 1) / 1000);
@@ -582,7 +582,7 @@ public Cmd_givemoney(playerid, params[])
 		Util_Send(playerid, -10270721, "Il destinatario non puo' ricevere questa somma.");
 		return 1;
 	}
-	gPlayer[playerid][PLAYER_DATA_120] = now;
+	gPlayer[playerid][pLastGiveMoneyTick] = now;
 	Char_Save(targetid);
 	new an[25], tn[25], msg[128];
 	GetPlayerName(playerid, an, 25);
@@ -590,7 +590,7 @@ public Cmd_givemoney(playerid, params[])
 	SendClientMessage(targetid, 0x66DD66FF, "Hai ricevuto $%d dallo staff.", amount);
 	format(msg, 128, "$%d", amount);
 	Admin_AdmCmd(an, "dato contanti a", tn, msg, "");
-	Admin_Log(playerid, gPlayer[targetid][PLAYER_DATA_2], "givemoney", msg);
+	Admin_Log(playerid, gPlayer[targetid][pAccountId], "givemoney", msg);
 	return 1;
 }
 
@@ -625,8 +625,8 @@ public Cmd_ban(playerid, params[])
 	new tn[25], ip[16];
 	GetPlayerName(targetid, tn, 25);
 	GetPlayerIp(targetid, ip, 16);
-	Admin_PendSet(playerid, 2, gPlayer[targetid][PLAYER_DATA_2], tn, minutes, reason);
-	DB_AddBan(playerid, gPlayer[targetid][PLAYER_DATA_2], tn, ip, gPlayer[playerid][PLAYER_DATA_2], reason, minutes);
+	Admin_PendSet(playerid, 2, gPlayer[targetid][pAccountId], tn, minutes, reason);
+	DB_AddBan(playerid, gPlayer[targetid][pAccountId], tn, ip, gPlayer[playerid][pAccountId], reason, minutes);
 	return 1;
 }
 

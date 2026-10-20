@@ -1,10 +1,10 @@
 new MySQL:g_DB;
-new g_DBPending[1000];
+new g_DBPending[MAX_PLAYERS];
 new g_DBAdminPending[1001];
 new g_DBFindTag[1001];
-new g_DBHashAlgo[1000];
-new g_DBMutedUntil[1000];
-new g_DBLockedUntil[1000];
+new g_DBHashAlgo[MAX_PLAYERS];
+new g_DBMutedUntil[MAX_PLAYERS];
+new g_DBLockedUntil[MAX_PLAYERS];
 
 bool:DB_IsReady()
 {
@@ -49,12 +49,9 @@ bool:DB_IniRead(path[], host[], user[], pass[], dbname[], &port, &mask, size)
 			{
 				strdel(line, 0, 3);
 			}
-			else
+			else if (line[0] == 65279)
 			{
-				if (line[0] == 65279)
-				{
-					strdel(line, 0, 1);
-				}
+				strdel(line, 0, 1);
 			}
 		}
 		new eq = strfind(line, "=", 0, 0);
@@ -75,38 +72,26 @@ bool:DB_IniRead(path[], host[], user[], pass[], dbname[], &port, &mask, size)
 			strcopy(host, val, size);
 			mask |= 1;
 		}
-		else
+		else if (!strcmp(key, "username", 1, 0x7FFFFFFF))
 		{
-			if (!strcmp(key, "username", 1, 0x7FFFFFFF))
+			strcopy(user, val, size);
+			mask |= 2;
+		}
+		else if (!strcmp(key, "password", 1, 0x7FFFFFFF))
+		{
+			strcopy(pass, val, size);
+		}
+		else if (!strcmp(key, "database", 1, 0x7FFFFFFF))
+		{
+			strcopy(dbname, val, size);
+			mask |= 4;
+		}
+		else if (!strcmp(key, "server_port", 1, 0x7FFFFFFF) || !strcmp(key, "port", 1, 0x7FFFFFFF))
+		{
+			new p = strval(val);
+			if (p > 0 && p < 65536)
 			{
-				strcopy(user, val, size);
-				mask |= 2;
-			}
-			else
-			{
-				if (!strcmp(key, "password", 1, 0x7FFFFFFF))
-				{
-					strcopy(pass, val, size);
-				}
-				else
-				{
-					if (!strcmp(key, "database", 1, 0x7FFFFFFF))
-					{
-						strcopy(dbname, val, size);
-						mask |= 4;
-					}
-					else
-					{
-						if (!strcmp(key, "server_port", 1, 0x7FFFFFFF) || !strcmp(key, "port", 1, 0x7FFFFFFF))
-						{
-							new p = strval(val);
-							if (p > 0 && p < 65536)
-							{
-								port = p;
-							}
-						}
-					}
-				}
+				port = p;
 			}
 		}
 	}
@@ -140,12 +125,9 @@ DB_ConnectHint(errno, errtxt[])
 			{
 				print("[DB] suggerimento: possibile problema di autenticazione MySQL 8: ALTER USER 'utente'@'host' IDENTIFIED WITH mysql_native_password BY 'password'; FLUSH PRIVILEGES;");
 			}
-			else
+			else if (errno == 0)
 			{
-				if (errno == 0)
-				{
-					print("[DB] suggerimento: nessun errore dal plugin. Verifica che mysql.ini sia nella cartella di omp-server (non 'mysql.ini.txt': Windows nasconde le estensioni) e che il plugin mysql sia caricato.");
-				}
+				print("[DB] suggerimento: nessun errore dal plugin. Verifica che mysql.ini sia nella cartella di omp-server (non 'mysql.ini.txt': Windows nasconde le estensioni) e che il plugin mysql sia caricato.");
 			}
 		}
 	}
@@ -237,7 +219,7 @@ DB_Shutdown()
 
 bool:DB_PlayerMatches(playerid, name[])
 {
-	if (playerid < 0 || playerid >= 1000 || !IsPlayerConnected(playerid))
+	if (playerid < 0 || playerid >= MAX_PLAYERS || !IsPlayerConnected(playerid))
 	{
 		return 0;
 	}
@@ -258,7 +240,7 @@ DB_PendingClear(playerid, op)
 
 DB_DeliverFailure(playerid, op)
 {
-	if (playerid < 0 || playerid >= 1000)
+	if (playerid < 0 || playerid >= MAX_PLAYERS)
 	{
 		return 0;
 	}
@@ -373,7 +355,7 @@ DB_DeliverAdminFailure(slot, op)
 	}
 	g_DBAdminPending[slot] &= ~op;
 	new req = slot == 1000 ? 65535 : slot;
-	if (req != 65535 && !IsPlayerConnected(req))
+	if (req != INVALID_PLAYER_ID && !IsPlayerConnected(req))
 	{
 		return 0;
 	}
@@ -423,7 +405,7 @@ DB_FailAllAdminPending(op)
 
 DB_FailAllPending(op)
 {
-	for (new i = 0; i < 1000; i++)
+	for (new i = 0; i < MAX_PLAYERS; i++)
 	{
 		if (g_DBPending[i] & op)
 		{
@@ -439,204 +421,120 @@ public OnQueryError(errorid, const error[], const callback[], const query[], MyS
 	{
 		DB_FailAllPending(1);
 	}
-	else
+	else if (!strcmp(callback, "DB_OnAccountCreated", 0, 0x7FFFFFFF))
 	{
-		if (!strcmp(callback, "DB_OnAccountCreated", 0, 0x7FFFFFFF))
+		DB_FailAllPending(2);
+	}
+	else if (!strcmp(callback, "DB_OnCharLoaded", 0, 0x7FFFFFFF))
+	{
+		DB_FailAllPending(4);
+	}
+	else if (!strcmp(callback, "DB_OnCharCreated", 0, 0x7FFFFFFF))
+	{
+		DB_FailAllPending(8);
+	}
+	else if (!strcmp(callback, "DB_OnBanChecked", 0, 0x7FFFFFFF))
+	{
+		DB_FailAllPending(16);
+	}
+	else if (!strcmp(callback, "DB_OnVehiclesLoaded", 0, 0x7FFFFFFF))
+	{
+		DB_FailAllPending(32);
+	}
+	else if (!strcmp(callback, "DB_OnVehiclesCounted", 0, 0x7FFFFFFF))
+	{
+		DB_FailAllPending(256);
+	}
+	else if (!strcmp(callback, "DB_OnVehicleCreated", 0, 0x7FFFFFFF))
+	{
+		DB_FailAllPending(64);
+	}
+	else if (!strcmp(callback, "DB_OnVehicleDeleted", 0, 0x7FFFFFFF))
+	{
+		DB_FailAllPending(128);
+	}
+	else if (!strcmp(callback, "DB_OnHouseBought", 0, 0x7FFFFFFF))
+	{
+		DB_FailAllPending(512);
+	}
+	else if (!strcmp(callback, "DB_OnHouseSold", 0, 0x7FFFFFFF))
+	{
+		DB_FailAllPending(1024);
+	}
+	else if (!strcmp(callback, "DB_OnHouseKeyAdded", 0, 0x7FFFFFFF))
+	{
+		DB_FailAllPending(2048);
+	}
+	else if (!strcmp(callback, "DB_OnHouseKeyRemoved", 0, 0x7FFFFFFF))
+	{
+		DB_FailAllPending(4096);
+	}
+	else if (!strcmp(callback, "DB_OnHouseKeysLoaded", 0, 0x7FFFFFFF))
+	{
+		DB_FailAllPending(8192);
+	}
+	else if (!strcmp(callback, "DB_OnHouseBillsLoaded", 0, 0x7FFFFFFF))
+	{
+		DB_FailAllPending(16384);
+	}
+	else if (!strcmp(callback, "DB_OnHouseBillsPaid", 0, 0x7FFFFFFF) || !strcmp(callback, "DB_OnHouseRestored", 0, 0x7FFFFFFF))
+	{
+		DB_FailAllPending(32768);
+	}
+	else if (!strcmp(callback, "DB_OnHouseFoodLoaded", 0, 0x7FFFFFFF))
+	{
+		DB_FailAllPending(65536);
+	}
+	else if (!strcmp(callback, "DB_OnHouseStored", 0, 0x7FFFFFFF))
+	{
+		DB_FailAllPending(131072);
+	}
+	else if (!strcmp(callback, "DB_OnHouse", 0, 10) && funcidx("DB_HouseGlobalFailure") != -1)
+	{
+		CallLocalFunction("DB_HouseGlobalFailure", "s", callback);
+	}
+	else if (!strcmp(callback, "DB_OnJF", 0, 7) && funcidx("DB_JobFacQueryError") != -1)
+	{
+		CallLocalFunction("DB_JobFacQueryError", "s", callback);
+	}
+	else if (!strcmp(callback, "DB_OnInv", 0, 8) && funcidx("DB_InvQueryError") != -1)
+	{
+		CallLocalFunction("DB_InvQueryError", "s", callback);
+	}
+	else if (!strcmp(callback, "DB_OnBankDeltaSaved", 0, 0x7FFFFFFF))
+	{
+		if (funcidx("DB_BankDeltaFailed") != -1)
 		{
-			DB_FailAllPending(2);
+			CallLocalFunction("DB_BankDeltaFailed", "");
 		}
-		else
-		{
-			if (!strcmp(callback, "DB_OnCharLoaded", 0, 0x7FFFFFFF))
-			{
-				DB_FailAllPending(4);
-			}
-			else
-			{
-				if (!strcmp(callback, "DB_OnCharCreated", 0, 0x7FFFFFFF))
-				{
-					DB_FailAllPending(8);
-				}
-				else
-				{
-					if (!strcmp(callback, "DB_OnBanChecked", 0, 0x7FFFFFFF))
-					{
-						DB_FailAllPending(16);
-					}
-					else
-					{
-						if (!strcmp(callback, "DB_OnVehiclesLoaded", 0, 0x7FFFFFFF))
-						{
-							DB_FailAllPending(32);
-						}
-						else
-						{
-							if (!strcmp(callback, "DB_OnVehiclesCounted", 0, 0x7FFFFFFF))
-							{
-								DB_FailAllPending(256);
-							}
-							else
-							{
-								if (!strcmp(callback, "DB_OnVehicleCreated", 0, 0x7FFFFFFF))
-								{
-									DB_FailAllPending(64);
-								}
-								else
-								{
-									if (!strcmp(callback, "DB_OnVehicleDeleted", 0, 0x7FFFFFFF))
-									{
-										DB_FailAllPending(128);
-									}
-									else
-									{
-										if (!strcmp(callback, "DB_OnHouseBought", 0, 0x7FFFFFFF))
-										{
-											DB_FailAllPending(512);
-										}
-										else
-										{
-											if (!strcmp(callback, "DB_OnHouseSold", 0, 0x7FFFFFFF))
-											{
-												DB_FailAllPending(1024);
-											}
-											else
-											{
-												if (!strcmp(callback, "DB_OnHouseKeyAdded", 0, 0x7FFFFFFF))
-												{
-													DB_FailAllPending(2048);
-												}
-												else
-												{
-													if (!strcmp(callback, "DB_OnHouseKeyRemoved", 0, 0x7FFFFFFF))
-													{
-														DB_FailAllPending(4096);
-													}
-													else
-													{
-														if (!strcmp(callback, "DB_OnHouseKeysLoaded", 0, 0x7FFFFFFF))
-														{
-															DB_FailAllPending(8192);
-														}
-														else
-														{
-															if (!strcmp(callback, "DB_OnHouseBillsLoaded", 0, 0x7FFFFFFF))
-															{
-																DB_FailAllPending(16384);
-															}
-															else
-															{
-																if (!strcmp(callback, "DB_OnHouseBillsPaid", 0, 0x7FFFFFFF) || !strcmp(callback, "DB_OnHouseRestored", 0, 0x7FFFFFFF))
-																{
-																	DB_FailAllPending(32768);
-																}
-																else
-																{
-																	if (!strcmp(callback, "DB_OnHouseFoodLoaded", 0, 0x7FFFFFFF))
-																	{
-																		DB_FailAllPending(65536);
-																	}
-																	else
-																	{
-																		if (!strcmp(callback, "DB_OnHouseStored", 0, 0x7FFFFFFF))
-																		{
-																			DB_FailAllPending(131072);
-																		}
-																		else
-																		{
-																			if (!strcmp(callback, "DB_OnHouse", 0, 10) && funcidx("DB_HouseGlobalFailure") != -1)
-																			{
-																				CallLocalFunction("DB_HouseGlobalFailure", "s", callback);
-																			}
-																			else
-																			{
-																				if (!strcmp(callback, "DB_OnJF", 0, 7) && funcidx("DB_JobFacQueryError") != -1)
-																				{
-																					CallLocalFunction("DB_JobFacQueryError", "s", callback);
-																				}
-																				else
-																				{
-																					if (!strcmp(callback, "DB_OnInv", 0, 8) && funcidx("DB_InvQueryError") != -1)
-																					{
-																						CallLocalFunction("DB_InvQueryError", "s", callback);
-																					}
-																					else
-																					{
-																						if (!strcmp(callback, "DB_OnBankDeltaSaved", 0, 0x7FFFFFFF))
-																						{
-																							if (funcidx("DB_BankDeltaFailed") != -1)
-																							{
-																								CallLocalFunction("DB_BankDeltaFailed", "");
-																							}
-																						}
-																						else
-																						{
-																							if (!strcmp(callback, "DB_OnBank", 0, 9) && funcidx("DB_BankQueryError") != -1)
-																							{
-																								CallLocalFunction("DB_BankQueryError", "s", callback);
-																							}
-																							else
-																							{
-																								if (!strcmp(callback, "DB_OnStory", 0, 10) && funcidx("DB_StoryQueryError") != -1)
-																								{
-																									CallLocalFunction("DB_StoryQueryError", "s", callback);
-																								}
-																								else
-																								{
-																									if (!strcmp(callback, "DB_OnLd", 0, 7) && funcidx("DB_LivingQueryError") != -1)
-																									{
-																										CallLocalFunction("DB_LivingQueryError", "s", callback);
-																									}
-																									else
-																									{
-																										if (!strcmp(callback, "DB_OnWarnInserted", 0, 0x7FFFFFFF) || !strcmp(callback, "DB_OnWarnCounted", 0, 0x7FFFFFFF))
-																										{
-																											DB_FailAllAdminPending(1);
-																										}
-																										else
-																										{
-																											if (!strcmp(callback, "DB_OnBanInserted", 0, 0x7FFFFFFF))
-																											{
-																												DB_FailAllAdminPending(2);
-																											}
-																											else
-																											{
-																												if (!strcmp(callback, "DB_OnUnbanDone", 0, 0x7FFFFFFF))
-																												{
-																													DB_FailAllAdminPending(4);
-																												}
-																												else
-																												{
-																													if (!strcmp(callback, "DB_OnAccountFound", 0, 0x7FFFFFFF))
-																													{
-																														DB_FailAllAdminPending(8);
-																													}
-																												}
-																											}
-																										}
-																									}
-																								}
-																							}
-																						}
-																					}
-																				}
-																			}
-																		}
-																	}
-																}
-															}
-														}
-													}
-												}
-											}
-										}
-									}
-								}
-							}
-						}
-					}
-				}
-			}
-		}
+	}
+	else if (!strcmp(callback, "DB_OnBank", 0, 9) && funcidx("DB_BankQueryError") != -1)
+	{
+		CallLocalFunction("DB_BankQueryError", "s", callback);
+	}
+	else if (!strcmp(callback, "DB_OnStory", 0, 10) && funcidx("DB_StoryQueryError") != -1)
+	{
+		CallLocalFunction("DB_StoryQueryError", "s", callback);
+	}
+	else if (!strcmp(callback, "DB_OnLd", 0, 7) && funcidx("DB_LivingQueryError") != -1)
+	{
+		CallLocalFunction("DB_LivingQueryError", "s", callback);
+	}
+	else if (!strcmp(callback, "DB_OnWarnInserted", 0, 0x7FFFFFFF) || !strcmp(callback, "DB_OnWarnCounted", 0, 0x7FFFFFFF))
+	{
+		DB_FailAllAdminPending(1);
+	}
+	else if (!strcmp(callback, "DB_OnBanInserted", 0, 0x7FFFFFFF))
+	{
+		DB_FailAllAdminPending(2);
+	}
+	else if (!strcmp(callback, "DB_OnUnbanDone", 0, 0x7FFFFFFF))
+	{
+		DB_FailAllAdminPending(4);
+	}
+	else if (!strcmp(callback, "DB_OnAccountFound", 0, 0x7FFFFFFF))
+	{
+		DB_FailAllAdminPending(8);
 	}
 	return 1;
 }

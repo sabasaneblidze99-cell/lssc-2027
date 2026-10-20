@@ -8,21 +8,21 @@ bool:Char_IsSkinAllowed(gender, skin)
 Char_SyncMoney(playerid)
 {
 	ResetPlayerMoney(playerid);
-	GivePlayerMoney(playerid, gPlayer[playerid][PLAYER_DATA_88]);
+	GivePlayerMoney(playerid, gPlayer[playerid][pMoney]);
 }
 
 Char_RefreshHud(playerid)
 {
-	if (playerid < 0 || playerid >= 1000 || !gPlayer[playerid][PLAYER_DATA_108])
+	if (playerid < 0 || playerid >= MAX_PLAYERS || !gPlayer[playerid][pHudCreated])
 	{
 		return 0;
 	}
-	UI_HudUpdate(playerid, gPlayer[playerid][PLAYER_DATA_88], gPlayer[playerid][PLAYER_DATA_89], gPlayer[playerid][PLAYER_DATA_90], gPlayer[playerid][PLAYER_DATA_91]);
+	UI_HudUpdate(playerid, gPlayer[playerid][pMoney], gPlayer[playerid][pBank], gPlayer[playerid][pLevel], gPlayer[playerid][pExp]);
 }
 
 Char_RefreshState(playerid)
 {
-	if (!gPlayer[playerid][PLAYER_DATA_1] || !IsPlayerConnected(playerid))
+	if (!gPlayer[playerid][pSpawned] || !IsPlayerConnected(playerid))
 	{
 		return 0;
 	}
@@ -31,24 +31,24 @@ Char_RefreshState(playerid)
 	GetPlayerFacingAngle(playerid, a);
 	GetPlayerHealth(playerid, hp);
 	GetPlayerArmour(playerid, ar);
-	gPlayer[playerid][PLAYER_DATA_94] = x;
-	gPlayer[playerid][PLAYER_DATA_95] = y;
-	gPlayer[playerid][PLAYER_DATA_96] = z;
-	gPlayer[playerid][PLAYER_DATA_97] = a;
-	gPlayer[playerid][PLAYER_DATA_92] = hp;
-	gPlayer[playerid][PLAYER_DATA_93] = ar;
-	gPlayer[playerid][PLAYER_DATA_98] = GetPlayerInterior(playerid);
-	gPlayer[playerid][PLAYER_DATA_99] = GetPlayerVirtualWorld(playerid);
-	gPlayer[playerid][PLAYER_DATA_100] = GetPlayerSkin(playerid);
+	gPlayer[playerid][pPosX] = x;
+	gPlayer[playerid][pPosY] = y;
+	gPlayer[playerid][pPosZ] = z;
+	gPlayer[playerid][pAngle] = a;
+	gPlayer[playerid][pHealth] = hp;
+	gPlayer[playerid][pArmor] = ar;
+	gPlayer[playerid][pInterior] = GetPlayerInterior(playerid);
+	gPlayer[playerid][pWorld] = GetPlayerVirtualWorld(playerid);
+	gPlayer[playerid][pSkin] = GetPlayerSkin(playerid);
 }
 
 Char_Save(playerid)
 {
-	if (playerid < 0 || playerid >= 1000)
+	if (playerid < 0 || playerid >= MAX_PLAYERS)
 	{
 		return 0;
 	}
-	if (!gPlayer[playerid][PLAYER_DATA_0] || gPlayer[playerid][PLAYER_DATA_3] <= 0)
+	if (!gPlayer[playerid][pLoggedIn] || gPlayer[playerid][pCharId] <= 0)
 	{
 		return 0;
 	}
@@ -58,7 +58,7 @@ Char_Save(playerid)
 
 Char_SaveAll()
 {
-	for (new i = 0; i < 1000; i++)
+	for (new i = 0; i < MAX_PLAYERS; i++)
 	{
 		if (IsPlayerConnected(i))
 		{
@@ -75,45 +75,42 @@ public Char_OnAutosave()
 
 Char_SanitizeLoaded(playerid)
 {
-	gPlayer[playerid][PLAYER_DATA_88] = clamp(gPlayer[playerid][PLAYER_DATA_88], 0, 0x3B9ACA00);
-	gPlayer[playerid][PLAYER_DATA_89] = clamp(gPlayer[playerid][PLAYER_DATA_89], 0, 0x3B9ACA00);
-	gPlayer[playerid][PLAYER_DATA_90] = clamp(gPlayer[playerid][PLAYER_DATA_90], 1, 50);
-	if (gPlayer[playerid][PLAYER_DATA_91] < 0)
+	gPlayer[playerid][pMoney] = clamp(gPlayer[playerid][pMoney], 0, 0x3B9ACA00);
+	gPlayer[playerid][pBank] = clamp(gPlayer[playerid][pBank], 0, 0x3B9ACA00);
+	gPlayer[playerid][pLevel] = clamp(gPlayer[playerid][pLevel], 1, 50);
+	if (gPlayer[playerid][pExp] < 0)
 	{
-		gPlayer[playerid][PLAYER_DATA_91] = 0;
+		gPlayer[playerid][pExp] = 0;
 	}
-	gPlayer[playerid][PLAYER_DATA_90] = Level_FromExp(gPlayer[playerid][PLAYER_DATA_91]);
-	if (gPlayer[playerid][PLAYER_DATA_100] < 0 || gPlayer[playerid][PLAYER_DATA_100] > 311)
+	gPlayer[playerid][pLevel] = Level_FromExp(gPlayer[playerid][pExp]);
+	if (gPlayer[playerid][pSkin] < 0 || gPlayer[playerid][pSkin] > 311)
 	{
-		gPlayer[playerid][PLAYER_DATA_100] = 7;
+		gPlayer[playerid][pSkin] = 7;
 	}
-	gPlayer[playerid][PLAYER_DATA_104] = gPlayer[playerid][PLAYER_DATA_100];
-	gPlayer[playerid][PLAYER_DATA_101] = clamp(gPlayer[playerid][PLAYER_DATA_101], 0, 3);
-	gPlayer[playerid][PLAYER_DATA_102] = clamp(gPlayer[playerid][PLAYER_DATA_102], 0, 2);
-	gPlayer[playerid][PLAYER_DATA_103] = clamp(gPlayer[playerid][PLAYER_DATA_103], 0, 6);
-	if (gPlayer[playerid][PLAYER_DATA_102] == 0)
+	gPlayer[playerid][pCivilSkin] = gPlayer[playerid][pSkin];
+	gPlayer[playerid][pJob] = clamp(gPlayer[playerid][pJob], 0, 3);
+	gPlayer[playerid][pFaction] = clamp(gPlayer[playerid][pFaction], 0, 2);
+	gPlayer[playerid][pFactionRank] = clamp(gPlayer[playerid][pFactionRank], 0, 6);
+	if (gPlayer[playerid][pFaction] == 0)
 	{
-		gPlayer[playerid][PLAYER_DATA_103] = 0;
+		gPlayer[playerid][pFactionRank] = 0;
 	}
-	else
+	else if (gPlayer[playerid][pFactionRank] < 1)
 	{
-		if (gPlayer[playerid][PLAYER_DATA_103] < 1)
-		{
-			gPlayer[playerid][PLAYER_DATA_103] = 1;
-		}
+		gPlayer[playerid][pFactionRank] = 1;
 	}
-	gPlayer[playerid][PLAYER_DATA_121] = 0;
-	gPlayer[playerid][PLAYER_DATA_122] = 0;
-	gPlayer[playerid][PLAYER_DATA_123] = 0;
-	if (gPlayer[playerid][PLAYER_DATA_98] < 0)
+	gPlayer[playerid][pOnDuty] = 0;
+	gPlayer[playerid][pCuffed] = 0;
+	gPlayer[playerid][pWounded] = 0;
+	if (gPlayer[playerid][pInterior] < 0)
 	{
-		gPlayer[playerid][PLAYER_DATA_98] = 0;
+		gPlayer[playerid][pInterior] = 0;
 	}
-	if (gPlayer[playerid][PLAYER_DATA_99] < 0)
+	if (gPlayer[playerid][pWorld] < 0)
 	{
-		gPlayer[playerid][PLAYER_DATA_99] = 0;
+		gPlayer[playerid][pWorld] = 0;
 	}
-	if ((Float:(0) == Float:(gPlayer[playerid][PLAYER_DATA_94])) && (Float:(0) == Float:(gPlayer[playerid][PLAYER_DATA_95])) && (Float:(0) == Float:(gPlayer[playerid][PLAYER_DATA_96])))
+	if ((0.0 == gPlayer[playerid][pPosX]) && (0.0 == gPlayer[playerid][pPosY]) && (0.0 == gPlayer[playerid][pPosZ]))
 	{
 		Char_PickSpawn(playerid);
 	}
@@ -121,7 +118,7 @@ Char_SanitizeLoaded(playerid)
 
 public Char_OnDBError(playerid)
 {
-	if (!IsPlayerConnected(playerid) || gPlayer[playerid][PLAYER_DATA_106] != 4)
+	if (!IsPlayerConnected(playerid) || gPlayer[playerid][pAuthState] != 4)
 	{
 		return 1;
 	}
@@ -131,7 +128,7 @@ public Char_OnDBError(playerid)
 
 public Char_OnDBLoaded(playerid, bool:found)
 {
-	if (!IsPlayerConnected(playerid) || gPlayer[playerid][PLAYER_DATA_106] != 4)
+	if (!IsPlayerConnected(playerid) || gPlayer[playerid][pAuthState] != 4)
 	{
 		return 1;
 	}
@@ -148,14 +145,14 @@ public Char_OnDBLoaded(playerid, bool:found)
 		return 1;
 	}
 	Intro_OnNoCharacter(playerid);
-	gPlayer[playerid][PLAYER_DATA_106] = 5;
+	gPlayer[playerid][pAuthState] = 5;
 	Account_ShowPrompt(playerid);
 	return 1;
 }
 
 public UI_OnGenderChosen(playerid, gender)
 {
-	if (!IsPlayerConnected(playerid) || gPlayer[playerid][PLAYER_DATA_106] != 5)
+	if (!IsPlayerConnected(playerid) || gPlayer[playerid][pAuthState] != 5)
 	{
 		return 1;
 	}
@@ -164,51 +161,51 @@ public UI_OnGenderChosen(playerid, gender)
 		UI_ShowGenderSelect(playerid);
 		return 1;
 	}
-	gPlayer[playerid][PLAYER_DATA_105] = gender;
-	gPlayer[playerid][PLAYER_DATA_106] = 6;
+	gPlayer[playerid][pGender] = gender;
+	gPlayer[playerid][pAuthState] = 6;
 	UI_ShowSkinSelect(playerid, gender);
 	return 1;
 }
 
 public UI_OnSkinChosen(playerid, skin)
 {
-	if (!IsPlayerConnected(playerid) || gPlayer[playerid][PLAYER_DATA_106] != 6)
+	if (!IsPlayerConnected(playerid) || gPlayer[playerid][pAuthState] != 6)
 	{
 		return 1;
 	}
-	if (!Char_IsSkinAllowed(gPlayer[playerid][PLAYER_DATA_105], skin))
+	if (!Char_IsSkinAllowed(gPlayer[playerid][pGender], skin))
 	{
-		skin = gPlayer[playerid][PLAYER_DATA_105] == 1 ? 12 : 7;
+		skin = gPlayer[playerid][pGender] == 1 ? 12 : 7;
 	}
-	gPlayer[playerid][PLAYER_DATA_88] = 2500;
-	gPlayer[playerid][PLAYER_DATA_89] = 5000;
-	gPlayer[playerid][PLAYER_DATA_90] = 1;
-	gPlayer[playerid][PLAYER_DATA_91] = 0;
-	gPlayer[playerid][PLAYER_DATA_92] = 0x42C80000;
-	gPlayer[playerid][PLAYER_DATA_93] = 0;
-	gPlayer[playerid][PLAYER_DATA_100] = skin;
+	gPlayer[playerid][pMoney] = 2500;
+	gPlayer[playerid][pBank] = 5000;
+	gPlayer[playerid][pLevel] = 1;
+	gPlayer[playerid][pExp] = 0;
+	gPlayer[playerid][pHealth] = Float:0x42C80000;
+	gPlayer[playerid][pArmor] = 0.0;
+	gPlayer[playerid][pSkin] = skin;
 	Char_PickSpawn(playerid);
-	gPlayer[playerid][PLAYER_DATA_332] = 0;
-	gPlayer[playerid][PLAYER_DATA_333] = 0;
+	gPlayer[playerid][pStoryDraftOrigin] = 0;
+	gPlayer[playerid][pStoryDraftMotive] = 0;
 	if (Intro_TestSkip())
 	{
 		Char_BeginCreate(playerid);
 		return 1;
 	}
-	gPlayer[playerid][PLAYER_DATA_106] = 15;
+	gPlayer[playerid][pAuthState] = 15;
 	Intro_StoryBegin(playerid);
 	return 1;
 }
 
 Char_BeginCreate(playerid)
 {
-	gPlayer[playerid][PLAYER_DATA_106] = 7;
-	DB_CreateCharacter(playerid, gPlayer[playerid][PLAYER_DATA_2]);
+	gPlayer[playerid][pAuthState] = 7;
+	DB_CreateCharacter(playerid, gPlayer[playerid][pAccountId]);
 }
 
 public Char_OnDBCreated(playerid, charId)
 {
-	if (!IsPlayerConnected(playerid) || gPlayer[playerid][PLAYER_DATA_106] != 7)
+	if (!IsPlayerConnected(playerid) || gPlayer[playerid][pAuthState] != 7)
 	{
 		return 1;
 	}
@@ -245,18 +242,18 @@ Char_OnExit()
 
 Char_OnRequestClass(playerid)
 {
-	gPlayer[playerid][PLAYER_DATA_107] = 1;
-	if (gPlayer[playerid][PLAYER_DATA_106] == 14)
+	gPlayer[playerid][pClassRequested] = 1;
+	if (gPlayer[playerid][pAuthState] == 14)
 	{
 		return 1;
 	}
-	if (gPlayer[playerid][PLAYER_DATA_106] == 15)
+	if (gPlayer[playerid][pAuthState] == 15)
 	{
 		Char_SetLoginCamera(playerid);
 		Intro_StoryBegin(playerid);
 		return 1;
 	}
-	if (gPlayer[playerid][PLAYER_DATA_106] == 9)
+	if (gPlayer[playerid][pAuthState] == 9)
 	{
 		Char_Spawn(playerid);
 		return 1;
@@ -273,35 +270,35 @@ Char_OnRequestSpawn(playerid)
 
 Char_OnSpawn(playerid)
 {
-	new authState = gPlayer[playerid][PLAYER_DATA_106];
-	if (!gPlayer[playerid][PLAYER_DATA_0] || (authState != 8 && authState != 9))
+	new authState = gPlayer[playerid][pAuthState];
+	if (!gPlayer[playerid][pLoggedIn] || (authState != 8 && authState != 9))
 	{
 		return 1;
 	}
-	gPlayer[playerid][PLAYER_DATA_106] = 9;
-	gPlayer[playerid][PLAYER_DATA_1] = 1;
-	gPlayer[playerid][PLAYER_DATA_114] = GetTickCount();
-	gPlayer[playerid][PLAYER_DATA_100] = gPlayer[playerid][PLAYER_DATA_104];
-	SetPlayerSkin(playerid, gPlayer[playerid][PLAYER_DATA_100]);
-	SetPlayerInterior(playerid, gPlayer[playerid][PLAYER_DATA_98]);
-	SetPlayerVirtualWorld(playerid, gPlayer[playerid][PLAYER_DATA_99]);
+	gPlayer[playerid][pAuthState] = 9;
+	gPlayer[playerid][pSpawned] = 1;
+	gPlayer[playerid][pLastActiveTick] = GetTickCount();
+	gPlayer[playerid][pSkin] = gPlayer[playerid][pCivilSkin];
+	SetPlayerSkin(playerid, gPlayer[playerid][pSkin]);
+	SetPlayerInterior(playerid, gPlayer[playerid][pInterior]);
+	SetPlayerVirtualWorld(playerid, gPlayer[playerid][pWorld]);
 	SetPlayerHealth(playerid, Float:0x42C80000);
 	SetPlayerArmour(playerid, 0.0);
 	SetCameraBehindPlayer(playerid);
 	UI_CloseDialogs(playerid);
 	Char_SyncMoney(playerid);
-	if (gPlayer[playerid][PLAYER_DATA_119])
+	if (gPlayer[playerid][pFrozen])
 	{
 		TogglePlayerControllable(playerid, 0);
 	}
-	if (!gPlayer[playerid][PLAYER_DATA_108])
+	if (!gPlayer[playerid][pHudCreated])
 	{
 		UI_HudCreate(playerid);
-		gPlayer[playerid][PLAYER_DATA_108] = 1;
+		gPlayer[playerid][pHudCreated] = 1;
 	}
 	Char_RefreshHud(playerid);
 	Intro_OnSpawn(playerid);
-	if (gPlayer[playerid][PLAYER_DATA_109] == 0)
+	if (gPlayer[playerid][pSpawnCount] == 0)
 	{
 		new name[25];
 		GetPlayerName(playerid, name, 25);
@@ -309,40 +306,40 @@ Char_OnSpawn(playerid)
 		format(msg, 512, "კეთილი იყოს შენი მობრძანება ლოს-სანტოსში, %s. ბრძანებების სია: /help", name);
 		Util_Send(playerid, -1, msg);
 	}
-	gPlayer[playerid][PLAYER_DATA_109]++;
+	gPlayer[playerid][pSpawnCount]++;
 	return 1;
 }
 
 Char_OnDeath(playerid)
 {
-	if (!gPlayer[playerid][PLAYER_DATA_1])
+	if (!gPlayer[playerid][pSpawned])
 	{
 		return 0;
 	}
 	Char_RefreshState(playerid);
-	gPlayer[playerid][PLAYER_DATA_1] = 0;
-	gPlayer[playerid][PLAYER_DATA_92] = 0x42C80000;
-	gPlayer[playerid][PLAYER_DATA_93] = 0;
+	gPlayer[playerid][pSpawned] = 0;
+	gPlayer[playerid][pHealth] = Float:0x42C80000;
+	gPlayer[playerid][pArmor] = 0.0;
 	Char_ApplySpawnInfo(playerid);
 }
 
 Char_OnDisconnect(playerid)
 {
 	Char_Save(playerid);
-	if (gPlayer[playerid][PLAYER_DATA_108])
+	if (gPlayer[playerid][pHudCreated])
 	{
 		UI_HudDestroy(playerid);
 	}
-	gPlayer[playerid][PLAYER_DATA_108] = 0;
+	gPlayer[playerid][pHudCreated] = 0;
 }
 
 Char_OnUpdate(playerid)
 {
-	gPlayer[playerid][PLAYER_DATA_114] = GetTickCount();
+	gPlayer[playerid][pLastActiveTick] = GetTickCount();
 	return 1;
 }
 
 Char_OnText(playerid)
 {
-	return gPlayer[playerid][PLAYER_DATA_0] && gPlayer[playerid][PLAYER_DATA_1] ? 1 : 0;
+	return gPlayer[playerid][pLoggedIn] && gPlayer[playerid][pSpawned] ? 1 : 0;
 }

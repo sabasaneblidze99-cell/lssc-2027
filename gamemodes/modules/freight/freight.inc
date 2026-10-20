@@ -1,33 +1,33 @@
 new g_FrtTimer;
-new bool:g_FrtActive[1000];
-new bool:g_FrtWelcome[1000];
-new g_FrtCt[1000];
-new g_FrtFrom[1000];
-new g_FrtTo[1000];
-new g_FrtCargo[1000];
-new g_FrtDist[1000];
-new g_FrtPhase[1000];
-new g_FrtVeh[1000];
-new g_FrtSerial[1000];
-new bool:g_FrtBoarded[1000];
-new bool:g_FrtDwell[1000];
-new bool:g_FrtOff[1000];
-new g_FrtStartTick[1000];
-new g_FrtWaitTick[1000];
-new g_FrtDefer[1000];
-new g_FrtInteg[1000];
-new Float:g_FrtPath[1000];
-new Float:g_FrtLastX[1000];
-new Float:g_FrtLastY[1000];
-new Float:g_FrtLastZ[1000];
-new g_FrtLastTick[1000];
-new g_FrtRetryTick[1000];
-new g_FrtStateRetry[1000];
-new g_FrtNoteTick[1000];
+new bool:g_FrtActive[MAX_PLAYERS];
+new bool:g_FrtWelcome[MAX_PLAYERS];
+new g_FrtCt[MAX_PLAYERS];
+new g_FrtFrom[MAX_PLAYERS];
+new g_FrtTo[MAX_PLAYERS];
+new g_FrtCargo[MAX_PLAYERS];
+new g_FrtDist[MAX_PLAYERS];
+new g_FrtPhase[MAX_PLAYERS];
+new g_FrtVeh[MAX_PLAYERS];
+new g_FrtSerial[MAX_PLAYERS];
+new bool:g_FrtBoarded[MAX_PLAYERS];
+new bool:g_FrtDwell[MAX_PLAYERS];
+new bool:g_FrtOff[MAX_PLAYERS];
+new g_FrtStartTick[MAX_PLAYERS];
+new g_FrtWaitTick[MAX_PLAYERS];
+new g_FrtDefer[MAX_PLAYERS];
+new g_FrtInteg[MAX_PLAYERS];
+new Float:g_FrtPath[MAX_PLAYERS];
+new Float:g_FrtLastX[MAX_PLAYERS];
+new Float:g_FrtLastY[MAX_PLAYERS];
+new Float:g_FrtLastZ[MAX_PLAYERS];
+new g_FrtLastTick[MAX_PLAYERS];
+new g_FrtRetryTick[MAX_PLAYERS];
+new g_FrtStateRetry[MAX_PLAYERS];
+new g_FrtNoteTick[MAX_PLAYERS];
 
 bool:Freight_ValidId(playerid)
 {
-	return playerid >= 0 && playerid < 1000;
+	return playerid >= 0 && playerid < MAX_PLAYERS;
 }
 
 Freight_ResetPlayer(playerid)
@@ -126,8 +126,8 @@ Freight_PairDistance(fromD, toD)
 	{
 		return 0;
 	}
-	new Float:dx = (Float:(bx) - Float:(ax)), Float:dy = (Float:(by) - Float:(ay));
-	return floatround(floatsqroot((Float:((Float:(dx) * Float:(dx))) + Float:((Float:(dy) * Float:(dy))))), 1);
+	new Float:dx = (bx - ax), Float:dy = (by - ay);
+	return floatround(floatsqroot(((dx * dx) + (dy * dy))), 1);
 }
 
 Freight_CargoName(cargo, dest[], size)
@@ -173,7 +173,7 @@ Freight_IntegrityOf(vehicleid)
 {
 	new Float:hp;
 	GetVehicleHealth(vehicleid, hp);
-	return LD_Clamp(floatround((Float:(hp) / Float:(0x41200000)), 1), 0, 100);
+	return LD_Clamp(floatround((hp / Float:0x41200000), 1), 0, 100);
 }
 
 bool:Freight_VehOk(playerid)
@@ -211,7 +211,7 @@ Freight_RemoveVehicle(playerid)
 	}
 	g_FrtVeh[playerid] = 65535;
 	g_FrtSerial[playerid] = 0;
-	gPlayer[playerid][PLAYER_DATA_349] = 0;
+	gPlayer[playerid][pFreightVehicle] = 0;
 }
 
 Freight_ShowCheckpoint(playerid)
@@ -236,7 +236,7 @@ Freight_TimeLeft(playerid)
 	{
 		return -1;
 	}
-	new left = LD_FreightTimeLimit(g_FrtDist[playerid]) - (GetTickCount() - gPlayer[playerid][PLAYER_DATA_356]) / 1000;
+	new left = LD_FreightTimeLimit(g_FrtDist[playerid]) - (GetTickCount() - gPlayer[playerid][pFreightLegTick]) / 1000;
 	return left > 0 ? left : 0;
 }
 
@@ -266,16 +266,13 @@ Freight_Hud(playerid, distM, dwellSec)
 			{
 				format(goal, 96, "Scarico: resta fermo %d s", dwellSec);
 			}
+			else if (g_FrtOff[playerid])
+			{
+				strcopy(goal, "Torna alla guida del Mule!", 96);
+			}
 			else
 			{
-				if (g_FrtOff[playerid])
-				{
-					strcopy(goal, "Torna alla guida del Mule!", 96);
-				}
-				else
-				{
-					strcopy(goal, "Consegna la merce al negozio", 96);
-				}
+				strcopy(goal, "Consegna la merce al negozio", 96);
 			}
 		}
 		default:
@@ -284,23 +281,17 @@ Freight_Hud(playerid, distM, dwellSec)
 			{
 				format(goal, 96, "Carico: resta fermo %d s", dwellSec);
 			}
+			else if (!g_FrtBoarded[playerid])
+			{
+				strcopy(goal, "Sali sul Mule al magazzino", 96);
+			}
+			else if (g_FrtOff[playerid])
+			{
+				strcopy(goal, "Torna alla guida del Mule!", 96);
+			}
 			else
 			{
-				if (!g_FrtBoarded[playerid])
-				{
-					strcopy(goal, "Sali sul Mule al magazzino", 96);
-				}
-				else
-				{
-					if (g_FrtOff[playerid])
-					{
-						strcopy(goal, "Torna alla guida del Mule!", 96);
-					}
-					else
-					{
-						strcopy(goal, "Entra nel checkpoint del magazzino", 96);
-					}
-				}
+				strcopy(goal, "Entra nel checkpoint del magazzino", 96);
 			}
 		}
 	}
@@ -339,12 +330,12 @@ Freight_End(playerid, reason)
 			}
 		}
 	}
-	gPlayer[playerid][PLAYER_DATA_356] = 0;
-	gPlayer[playerid][PLAYER_DATA_357] = 0;
-	gPlayer[playerid][PLAYER_DATA_358] = 0;
+	gPlayer[playerid][pFreightLegTick] = 0;
+	gPlayer[playerid][pFreightDwellTick] = 0;
+	gPlayer[playerid][pFreightLeftVehTick] = 0;
 	if (welcome)
 	{
-		gPlayer[playerid][PLAYER_DATA_360] = 0;
+		gPlayer[playerid][pFreightWelcome] = 0;
 	}
 	Freight_ResetPlayer(playerid);
 	if (welcome && online && reason != 0 && reason != 2 && reason != 6)
@@ -405,11 +396,11 @@ Freight_Picked(playerid)
 	g_FrtPhase[playerid] = 3;
 	g_FrtDwell[playerid] = 0;
 	g_FrtStateRetry[playerid] = 0;
-	gPlayer[playerid][PLAYER_DATA_356] = now;
-	gPlayer[playerid][PLAYER_DATA_357] = 0;
+	gPlayer[playerid][pFreightLegTick] = now;
+	gPlayer[playerid][pFreightDwellTick] = 0;
 	if (!g_FrtWelcome[playerid])
 	{
-		gPlayer[playerid][PLAYER_DATA_348] = 2;
+		gPlayer[playerid][pContractPhase] = 2;
 	}
 	g_FrtInteg[playerid] = Freight_IntegrityOf(g_FrtVeh[playerid]);
 	g_FrtPath[playerid] = 0.0;
@@ -452,12 +443,12 @@ Freight_DoPickup(playerid)
 Freight_DoDeliver(playerid)
 {
 	new now = GetTickCount();
-	new seconds = (now - gPlayer[playerid][PLAYER_DATA_356]) / 1000;
+	new seconds = (now - gPlayer[playerid][pFreightLegTick]) / 1000;
 	new minSec = LD_FreightMinSeconds(g_FrtDist[playerid]);
 	if (seconds < minSec)
 	{
 		new msg[256];
-		format(msg, 256, "consegna troppo rapida: pers. %d contratto %d dopo %d s (minimo %d s)", gPlayer[playerid][PLAYER_DATA_3], g_FrtCt[playerid], seconds, minSec);
+		format(msg, 256, "consegna troppo rapida: pers. %d contratto %d dopo %d s (minimo %d s)", gPlayer[playerid][pCharId], g_FrtCt[playerid], seconds, minSec);
 		Log_Write("FREIGHT", msg);
 		format(msg, 256, "Consegna non valida: troppo rapida (ancora %d s). Resta nel checkpoint.", minSec - seconds);
 		Freight_Note(playerid, msg);
@@ -470,10 +461,10 @@ Freight_DoDeliver(playerid)
 		return 0;
 	}
 	new Float:minPath = float(g_FrtDist[playerid] * 80 / 100);
-	if ((Float:(g_FrtPath[playerid]) < Float:(minPath)))
+	if ((g_FrtPath[playerid] < minPath))
 	{
 		new msg[256];
-		format(msg, 256, "percorso insufficiente: pers. %d contratto %d percorso %.0f m su %d m", gPlayer[playerid][PLAYER_DATA_3], g_FrtCt[playerid], g_FrtPath[playerid], g_FrtDist[playerid]);
+		format(msg, 256, "percorso insufficiente: pers. %d contratto %d percorso %.0f m su %d m", gPlayer[playerid][pCharId], g_FrtCt[playerid], g_FrtPath[playerid], g_FrtDist[playerid]);
 		Log_Write("FREIGHT", msg);
 		Freight_Note(playerid, "Consegna non valida: la merce deve essere portata dal magazzino con il Mule.");
 		g_FrtRetryTick[playerid] = now + 5000;
@@ -515,21 +506,21 @@ bool:Freight_Begin(playerid, contractId, fromD, toD, cargo, distanceM, bool:welc
 	{
 		return 0;
 	}
-	if (!LD_IsReady() || gPlayer[playerid][PLAYER_DATA_338] == 0 || gPlayer[playerid][PLAYER_DATA_3] <= 0)
+	if (!LD_IsReady() || gPlayer[playerid][pLivingReady] == 0 || gPlayer[playerid][pCharId] <= 0)
 	{
 		return 0;
 	}
-	if (gPlayer[playerid][PLAYER_DATA_123] || gPlayer[playerid][PLAYER_DATA_122])
+	if (gPlayer[playerid][pWounded] || gPlayer[playerid][pCuffed])
 	{
 		return 0;
 	}
-	if (Job_IsOnShift(playerid) || gPlayer[playerid][PLAYER_DATA_451] != 0 || gPlayer[playerid][PLAYER_DATA_403] != 0)
+	if (Job_IsOnShift(playerid) || gPlayer[playerid][pTaxiOnDuty] != 0 || gPlayer[playerid][pRentalId] != 0)
 	{
 		return 0;
 	}
 	if (welcome)
 	{
-		if (contractId != 0 || gPlayer[playerid][PLAYER_DATA_347] != 0)
+		if (contractId != 0 || gPlayer[playerid][pContractId] != 0)
 		{
 			return 0;
 		}
@@ -542,11 +533,11 @@ bool:Freight_Begin(playerid, contractId, fromD, toD, cargo, distanceM, bool:welc
 	}
 	else
 	{
-		if (contractId <= 0 || gPlayer[playerid][PLAYER_DATA_360] != 0)
+		if (contractId <= 0 || gPlayer[playerid][pFreightWelcome] != 0)
 		{
 			return 0;
 		}
-		if (gPlayer[playerid][PLAYER_DATA_347] != 0 && gPlayer[playerid][PLAYER_DATA_347] != contractId)
+		if (gPlayer[playerid][pContractId] != 0 && gPlayer[playerid][pContractId] != contractId)
 		{
 			return 0;
 		}
@@ -554,7 +545,7 @@ bool:Freight_Begin(playerid, contractId, fromD, toD, cargo, distanceM, bool:welc
 		{
 			return 0;
 		}
-		if (gPlayer[playerid][PLAYER_DATA_90] < 2)
+		if (gPlayer[playerid][pLevel] < 2)
 		{
 			return 0;
 		}
@@ -576,14 +567,14 @@ bool:Freight_Begin(playerid, contractId, fromD, toD, cargo, distanceM, bool:welc
 	}
 	new Float:x, Float:y, Float:z, slot = 0;
 	Freight_Point(fromD, 0, x, y, z);
-	for (new i = 0; i < 1000; i++)
+	for (new i = 0; i < MAX_PLAYERS; i++)
 	{
 		if (g_FrtActive[i] && g_FrtFrom[i] == fromD && g_FrtPhase[i] == 1)
 		{
 			slot++;
 		}
 	}
-	x += (5.0 * Float:(float(slot % 4)));
+	x += (5.0 * float(slot % 4));
 	new veh = CreateVehicle(414, x, y, z, 0.0, 1, 1, -1, 0);
 	if (veh == 65535 || veh <= 0 || veh >= 2000)
 	{
@@ -613,25 +604,25 @@ bool:Freight_Begin(playerid, contractId, fromD, toD, cargo, distanceM, bool:welc
 	g_FrtVeh[playerid] = veh;
 	g_FrtSerial[playerid] = serial;
 	g_FrtStartTick[playerid] = now;
-	gPlayer[playerid][PLAYER_DATA_349] = veh;
-	gPlayer[playerid][PLAYER_DATA_356] = 0;
-	gPlayer[playerid][PLAYER_DATA_357] = 0;
-	gPlayer[playerid][PLAYER_DATA_358] = 0;
+	gPlayer[playerid][pFreightVehicle] = veh;
+	gPlayer[playerid][pFreightLegTick] = 0;
+	gPlayer[playerid][pFreightDwellTick] = 0;
+	gPlayer[playerid][pFreightLeftVehTick] = 0;
 	if (welcome)
 	{
-		gPlayer[playerid][PLAYER_DATA_360] = 1;
+		gPlayer[playerid][pFreightWelcome] = 1;
 	}
 	else
 	{
-		gPlayer[playerid][PLAYER_DATA_347] = contractId;
-		gPlayer[playerid][PLAYER_DATA_348] = 1;
-		gPlayer[playerid][PLAYER_DATA_350] = fromD;
-		gPlayer[playerid][PLAYER_DATA_351] = toD;
-		gPlayer[playerid][PLAYER_DATA_352] = cargo;
-		gPlayer[playerid][PLAYER_DATA_353] = distanceM;
-		if (gPlayer[playerid][PLAYER_DATA_355] == 0)
+		gPlayer[playerid][pContractId] = contractId;
+		gPlayer[playerid][pContractPhase] = 1;
+		gPlayer[playerid][pContractFromDistrict] = fromD;
+		gPlayer[playerid][pContractToDistrict] = toD;
+		gPlayer[playerid][pContractCargo] = cargo;
+		gPlayer[playerid][pContractDistance] = distanceM;
+		if (gPlayer[playerid][pContractStartTick] == 0)
 		{
-			gPlayer[playerid][PLAYER_DATA_355] = now;
+			gPlayer[playerid][pContractStartTick] = now;
 		}
 	}
 	Freight_ShowCheckpoint(playerid);
@@ -705,16 +696,13 @@ Freight_OnCompleteResult(playerid, result, paid, balance)
 			{
 				SendClientMessage(playerid, -1, "Consegna del contratto #%d gia' registrata: nessun nuovo pagamento.", ct);
 			}
+			else if (result == 6)
+			{
+				SendClientMessage(playerid, 0x66DD66FF, "Consegna #%d completata: $%d accreditati in banca (tetto orario raggiunto). Saldo: $%d.", ct, paid, balance);
+			}
 			else
 			{
-				if (result == 6)
-				{
-					SendClientMessage(playerid, 0x66DD66FF, "Consegna #%d completata: $%d accreditati in banca (tetto orario raggiunto). Saldo: $%d.", ct, paid, balance);
-				}
-				else
-				{
-					SendClientMessage(playerid, 0x66DD66FF, "Consegna #%d completata: $%d accreditati in banca. Saldo: $%d.", ct, paid, balance);
-				}
+				SendClientMessage(playerid, 0x66DD66FF, "Consegna #%d completata: $%d accreditati in banca. Saldo: $%d.", ct, paid, balance);
 			}
 		}
 		case 8:
@@ -758,7 +746,7 @@ Freight_OnCompleteResult(playerid, result, paid, balance)
 Freight_WaitTimeout(playerid)
 {
 	new msg[256];
-	format(msg, 256, "esito DB non ricevuto: pers. %d contratto %d fase %d", gPlayer[playerid][PLAYER_DATA_3], g_FrtCt[playerid], g_FrtPhase[playerid]);
+	format(msg, 256, "esito DB non ricevuto: pers. %d contratto %d fase %d", gPlayer[playerid][pCharId], g_FrtCt[playerid], g_FrtPhase[playerid]);
 	Log_Write("FREIGHT", msg);
 	if (g_FrtDefer[playerid] != 0)
 	{
@@ -774,8 +762,8 @@ bool:Freight_SamplePath(playerid, now)
 {
 	new Float:x, Float:y, Float:z;
 	GetVehiclePos(g_FrtVeh[playerid], x, y, z);
-	new Float:dx = (Float:(x) - Float:(g_FrtLastX[playerid])), Float:dy = (Float:(y) - Float:(g_FrtLastY[playerid])), Float:dz = (Float:(z) - Float:(g_FrtLastZ[playerid]));
-	new Float:seg = floatsqroot((Float:((Float:((Float:(dx) * Float:(dx))) + Float:((Float:(dy) * Float:(dy))))) + Float:((Float:(dz) * Float:(dz)))));
+	new Float:dx = (x - g_FrtLastX[playerid]), Float:dy = (y - g_FrtLastY[playerid]), Float:dz = (z - g_FrtLastZ[playerid]);
+	new Float:seg = floatsqroot((((dx * dx) + (dy * dy)) + (dz * dz)));
 	new dt = now - g_FrtLastTick[playerid];
 	if (dt < 0)
 	{
@@ -785,10 +773,10 @@ bool:Freight_SamplePath(playerid, now)
 	g_FrtLastY[playerid] = y;
 	g_FrtLastZ[playerid] = z;
 	g_FrtLastTick[playerid] = now;
-	if ((Float:(seg) > Float:((15.0 + Float:((Float:((Float:(0x428C0000) * Float:(float(dt)))) / Float:(float(1000))))))))
+	if ((seg > (15.0 + ((Float:0x428C0000 * float(dt)) / float(1000)))))
 	{
 		new msg[256];
-		format(msg, 256, "salto del Mule: pers. %d contratto %d %.0f m in %d ms", gPlayer[playerid][PLAYER_DATA_3], g_FrtCt[playerid], seg, dt);
+		format(msg, 256, "salto del Mule: pers. %d contratto %d %.0f m in %d ms", gPlayer[playerid][pCharId], g_FrtCt[playerid], seg, dt);
 		Log_Write("FREIGHT", msg);
 		return 0;
 	}
@@ -805,12 +793,9 @@ Freight_TickPlayer(playerid, now)
 		{
 			Freight_WaitTimeout(playerid);
 		}
-		else
+		else if (g_FrtDefer[playerid] == 0 && Freight_VehOk(playerid))
 		{
-			if (g_FrtDefer[playerid] == 0 && Freight_VehOk(playerid))
-			{
-				Freight_Hud(playerid, -1, -1);
-			}
+			Freight_Hud(playerid, -1, -1);
 		}
 		return 0;
 	}
@@ -819,7 +804,7 @@ Freight_TickPlayer(playerid, now)
 		Freight_Stop(playerid, 1, "Hai iniziato un turno di lavoro: il contratto di trasporto e' stato chiuso.");
 		return 0;
 	}
-	if (gPlayer[playerid][PLAYER_DATA_123] || gPlayer[playerid][PLAYER_DATA_122])
+	if (gPlayer[playerid][pWounded] || gPlayer[playerid][pCuffed])
 	{
 		Freight_Stop(playerid, 3, "Non sei in condizione di guidare: contratto di trasporto interrotto.");
 		return 0;
@@ -832,7 +817,7 @@ Freight_TickPlayer(playerid, now)
 	new veh = g_FrtVeh[playerid];
 	new Float:hp;
 	GetVehicleHealth(veh, hp);
-	if ((Float:(hp) < Float:(0x43960000)))
+	if ((hp < Float:0x43960000))
 	{
 		Freight_Stop(playerid, 4, "Mule distrutto: il carico e' perso e il contratto e' interrotto.");
 		return 0;
@@ -842,33 +827,27 @@ Freight_TickPlayer(playerid, now)
 	{
 		g_FrtBoarded[playerid] = 1;
 		g_FrtOff[playerid] = 0;
-		gPlayer[playerid][PLAYER_DATA_358] = 0;
+		gPlayer[playerid][pFreightLeftVehTick] = 0;
 	}
-	else
+	else if (g_FrtBoarded[playerid])
 	{
-		if (g_FrtBoarded[playerid])
+		if (!g_FrtOff[playerid])
 		{
-			if (!g_FrtOff[playerid])
-			{
-				g_FrtOff[playerid] = 1;
-				gPlayer[playerid][PLAYER_DATA_358] = now;
-			}
-			new Float:px, Float:py, Float:pz;
-			GetPlayerPos(playerid, px, py, pz);
-			if (now - gPlayer[playerid][PLAYER_DATA_358] >= 45000 || (Float:(GetVehicleDistanceFromPoint(veh, px, py, pz)) > Float:(0x43160000)))
-			{
-				Freight_Stop(playerid, 4, "Mule abbandonato: contratto di trasporto rilasciato.");
-				return 0;
-			}
+			g_FrtOff[playerid] = 1;
+			gPlayer[playerid][pFreightLeftVehTick] = now;
 		}
-		else
+		new Float:px, Float:py, Float:pz;
+		GetPlayerPos(playerid, px, py, pz);
+		if (now - gPlayer[playerid][pFreightLeftVehTick] >= 45000 || (GetVehicleDistanceFromPoint(veh, px, py, pz) > Float:0x43160000))
 		{
-			if (now - g_FrtStartTick[playerid] >= 600000)
-			{
-				Freight_Stop(playerid, 4, "Non hai preso in consegna il Mule in tempo: contratto di trasporto rilasciato.");
-				return 0;
-			}
+			Freight_Stop(playerid, 4, "Mule abbandonato: contratto di trasporto rilasciato.");
+			return 0;
 		}
+	}
+	else if (now - g_FrtStartTick[playerid] >= 600000)
+	{
+		Freight_Stop(playerid, 4, "Non hai preso in consegna il Mule in tempo: contratto di trasporto rilasciato.");
+		return 0;
 	}
 	if (ph == 3)
 	{
@@ -877,7 +856,7 @@ Freight_TickPlayer(playerid, now)
 			Freight_Stop(playerid, 4, "Spostamento anomalo del Mule: contratto di trasporto annullato.");
 			return 0;
 		}
-		new integ = LD_Clamp(floatround((Float:(hp) / Float:(0x41200000)), 1), 0, 100);
+		new integ = LD_Clamp(floatround((hp / Float:0x41200000), 1), 0, 100);
 		if (integ < g_FrtInteg[playerid])
 		{
 			g_FrtInteg[playerid] = integ;
@@ -889,23 +868,23 @@ Freight_TickPlayer(playerid, now)
 	new Float:dist = (driving ? GetVehicleDistanceFromPoint(veh, tx, ty, tz) : GetPlayerDistanceFromPoint(playerid, tx, ty, tz));
 	new dwellSec = -1;
 	new bool:retryOk = g_FrtRetryTick[playerid] == 0 || now - g_FrtRetryTick[playerid] >= 0;
-	if (driving && retryOk && (Float:(dist) <= 6.0) && (Float:(float(Veh_SpeedKmh(veh))) <= Float:(0x41200000)) && GetVehicleVirtualWorld(veh) == 0)
+	if (driving && retryOk && (dist <= 6.0) && (float(Veh_SpeedKmh(veh)) <= Float:0x41200000) && GetVehicleVirtualWorld(veh) == 0)
 	{
 		if (!g_FrtDwell[playerid])
 		{
 			g_FrtDwell[playerid] = 1;
-			gPlayer[playerid][PLAYER_DATA_357] = now;
+			gPlayer[playerid][pFreightDwellTick] = now;
 			if (g_FrtWelcome[playerid])
 			{
 				UI_LivingToast(playerid, shop ? "Scarico in corso: resta fermo." : "Carico in corso: resta fermo.", 0);
 			}
 		}
 		new need = shop ? 5000 : 6000;
-		new waited = now - gPlayer[playerid][PLAYER_DATA_357];
+		new waited = now - gPlayer[playerid][pFreightDwellTick];
 		if (waited >= need)
 		{
 			g_FrtDwell[playerid] = 0;
-			gPlayer[playerid][PLAYER_DATA_357] = 0;
+			gPlayer[playerid][pFreightDwellTick] = 0;
 			if (shop)
 			{
 				Freight_DoDeliver(playerid);
@@ -927,7 +906,7 @@ Freight_TickPlayer(playerid, now)
 	else
 	{
 		g_FrtDwell[playerid] = 0;
-		gPlayer[playerid][PLAYER_DATA_357] = 0;
+		gPlayer[playerid][pFreightDwellTick] = 0;
 	}
 	Freight_Hud(playerid, floatround(dist, 1), dwellSec);
 }
@@ -935,7 +914,7 @@ Freight_TickPlayer(playerid, now)
 public Freight_OnTick()
 {
 	new now = GetTickCount();
-	for (new i = 0; i < 1000; i++)
+	for (new i = 0; i < MAX_PLAYERS; i++)
 	{
 		if (!g_FrtActive[i])
 		{
@@ -953,7 +932,7 @@ public Freight_OnTick()
 
 Freight_OnInit()
 {
-	for (new i = 0; i < 1000; i++)
+	for (new i = 0; i < MAX_PLAYERS; i++)
 	{
 		Freight_ResetPlayer(i);
 	}
@@ -971,7 +950,7 @@ Freight_OnExit()
 		KillTimer(g_FrtTimer);
 	}
 	g_FrtTimer = 0;
-	for (new i = 0; i < 1000; i++)
+	for (new i = 0; i < MAX_PLAYERS; i++)
 	{
 		if (g_FrtActive[i])
 		{
@@ -1039,7 +1018,7 @@ Freight_OnPlayerExitVehicle(playerid, vehicleid)
 	if (!g_FrtOff[playerid])
 	{
 		g_FrtOff[playerid] = 1;
-		gPlayer[playerid][PLAYER_DATA_358] = GetTickCount();
+		gPlayer[playerid][pFreightLeftVehTick] = GetTickCount();
 		SendClientMessage(playerid, -10270721, "Torna alla guida del Mule entro %d secondi (e resta entro %.0f m) o il contratto sara' rilasciato.", 45, 0x43160000);
 	}
 }
@@ -1065,7 +1044,7 @@ Freight_OnPlayerStateChange(playerid, t_PLAYER_STATE:newstate, t_PLAYER_STATE:ol
 	{
 		g_FrtBoarded[playerid] = 1;
 		g_FrtOff[playerid] = 0;
-		gPlayer[playerid][PLAYER_DATA_358] = 0;
+		gPlayer[playerid][pFreightLeftVehTick] = 0;
 	}
 }
 

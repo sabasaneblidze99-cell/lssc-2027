@@ -10,7 +10,7 @@ new Float:g_IntroCam[6][12] = {
 
 bool:Intro_ValidId(playerid)
 {
-	return playerid >= 0 && playerid < 1000 && IsPlayerConnected(playerid);
+	return playerid >= 0 && playerid < MAX_PLAYERS && IsPlayerConnected(playerid);
 }
 
 public Intro_TestSkip()
@@ -20,10 +20,10 @@ public Intro_TestSkip()
 
 Intro_StopTimer(playerid)
 {
-	if (gPlayer[playerid][PLAYER_DATA_325] != 0)
+	if (gPlayer[playerid][pIntroTimer] != 0)
 	{
-		KillTimer(gPlayer[playerid][PLAYER_DATA_325]);
-		gPlayer[playerid][PLAYER_DATA_325] = 0;
+		KillTimer(gPlayer[playerid][pIntroTimer]);
+		gPlayer[playerid][pIntroTimer] = 0;
 	}
 }
 
@@ -34,9 +34,9 @@ Intro_Schedule(playerid, ev, ms)
 	{
 		ms = 1;
 	}
-	if (gPlayer[playerid][PLAYER_DATA_106] == 14)
+	if (gPlayer[playerid][pAuthState] == 14)
 	{
-		new remaining = 60000 - (GetTickCount() - gPlayer[playerid][PLAYER_DATA_330]);
+		new remaining = 60000 - (GetTickCount() - gPlayer[playerid][pIntroStartTick]);
 		if (remaining < 1)
 		{
 			remaining = 1;
@@ -46,7 +46,7 @@ Intro_Schedule(playerid, ev, ms)
 			ms = remaining;
 		}
 	}
-	gPlayer[playerid][PLAYER_DATA_325] = SetTimerEx("Intro_OnTimer", ms, 0, "dddd", playerid, ev, gPlayer[playerid][PLAYER_DATA_326], gPlayer[playerid][PLAYER_DATA_329]);
+	gPlayer[playerid][pIntroTimer] = SetTimerEx("Intro_OnTimer", ms, 0, "dddd", playerid, ev, gPlayer[playerid][pIntroScene], gPlayer[playerid][pIntroSeq]);
 }
 
 Intro_SceneMs(scene, flags)
@@ -131,9 +131,9 @@ Intro_Camera(playerid, scene, flags)
 Intro_ObjectCount()
 {
 	new count = 0;
-	for (new i = 0; i < 1000; i++)
+	for (new i = 0; i < MAX_PLAYERS; i++)
 	{
-		if (IsPlayerConnected(i) && gPlayer[i][PLAYER_DATA_327] != 0)
+		if (IsPlayerConnected(i) && gPlayer[i][pIntroVehicle] != 0)
 		{
 			count++;
 		}
@@ -143,15 +143,15 @@ Intro_ObjectCount()
 
 Intro_DestroyObjects(playerid)
 {
-	if (gPlayer[playerid][PLAYER_DATA_327] != 0)
+	if (gPlayer[playerid][pIntroVehicle] != 0)
 	{
-		DestroyVehicle(gPlayer[playerid][PLAYER_DATA_327]);
-		gPlayer[playerid][PLAYER_DATA_327] = 0;
+		DestroyVehicle(gPlayer[playerid][pIntroVehicle]);
+		gPlayer[playerid][pIntroVehicle] = 0;
 	}
-	if (gPlayer[playerid][PLAYER_DATA_328] != 0)
+	if (gPlayer[playerid][pIntroActor] != 0)
 	{
-		DestroyActor(gPlayer[playerid][PLAYER_DATA_328] - 1);
-		gPlayer[playerid][PLAYER_DATA_328] = 0;
+		DestroyActor(gPlayer[playerid][pIntroActor] - 1);
+		gPlayer[playerid][pIntroActor] = 0;
 	}
 }
 
@@ -164,7 +164,7 @@ bool:Intro_CreateObjects(playerid)
 		return 0;
 	}
 	SetVehicleVirtualWorld(veh, world);
-	new actor = CreateActor(gPlayer[playerid][PLAYER_DATA_100], 1753.5, -1884.5, 13.55, Float:0x43340000);
+	new actor = CreateActor(gPlayer[playerid][pSkin], 1753.5, -1884.5, 13.55, Float:0x43340000);
 	if (actor == 65535)
 	{
 		DestroyVehicle(veh);
@@ -173,8 +173,8 @@ bool:Intro_CreateObjects(playerid)
 	SetActorVirtualWorld(actor, world);
 	SetActorFacingAngle(actor, Float:0x43340000);
 	ApplyActorAnimation(actor, "PED", "IDLE_stance", 4.1, 1, 0, 0, 0, 0);
-	gPlayer[playerid][PLAYER_DATA_327] = veh;
-	gPlayer[playerid][PLAYER_DATA_328] = actor + 1;
+	gPlayer[playerid][pIntroVehicle] = veh;
+	gPlayer[playerid][pIntroActor] = actor + 1;
 	return 1;
 }
 
@@ -198,8 +198,8 @@ Intro_AudioStop(playerid)
 
 Intro_BeginScene(playerid, scene)
 {
-	new flags = gPlayer[playerid][PLAYER_DATA_331];
-	gPlayer[playerid][PLAYER_DATA_326] = scene;
+	new flags = gPlayer[playerid][pIntroFlags];
+	gPlayer[playerid][pIntroScene] = scene;
 	Intro_Camera(playerid, scene, flags);
 	if (scene == 5)
 	{
@@ -217,7 +217,7 @@ Intro_BeginScene(playerid, scene)
 
 public Intro_Begin(playerid)
 {
-	if (!Intro_ValidId(playerid) || gPlayer[playerid][PLAYER_DATA_106] != 7)
+	if (!Intro_ValidId(playerid) || gPlayer[playerid][pAuthState] != 7)
 	{
 		return 0;
 	}
@@ -227,7 +227,7 @@ public Intro_Begin(playerid)
 		return 1;
 	}
 	new flags = 0;
-	if (gPlayer[playerid][PLAYER_DATA_324] != 0)
+	if (gPlayer[playerid][pIntroSeen] != 0)
 	{
 		flags |= 1;
 	}
@@ -248,11 +248,11 @@ public Intro_Begin(playerid)
 	{
 		g_IntroSeq = 1;
 	}
-	gPlayer[playerid][PLAYER_DATA_329] = g_IntroSeq;
-	gPlayer[playerid][PLAYER_DATA_331] = flags;
-	gPlayer[playerid][PLAYER_DATA_330] = GetTickCount();
-	gPlayer[playerid][PLAYER_DATA_326] = 0;
-	gPlayer[playerid][PLAYER_DATA_106] = 14;
+	gPlayer[playerid][pIntroSeq] = g_IntroSeq;
+	gPlayer[playerid][pIntroFlags] = flags;
+	gPlayer[playerid][pIntroStartTick] = GetTickCount();
+	gPlayer[playerid][pIntroScene] = 0;
+	gPlayer[playerid][pAuthState] = 14;
 	SetPlayerInterior(playerid, 0);
 	SetPlayerVirtualWorld(playerid, playerid + 20000);
 	UI_IntroCreate(playerid);
@@ -265,7 +265,7 @@ public Intro_Begin(playerid)
 
 public Intro_Finish(playerid, reason)
 {
-	if (!Intro_ValidId(playerid) || gPlayer[playerid][PLAYER_DATA_106] != 14)
+	if (!Intro_ValidId(playerid) || gPlayer[playerid][pAuthState] != 14)
 	{
 		return 0;
 	}
@@ -277,8 +277,8 @@ public Intro_Finish(playerid, reason)
 	UI_IntroSkipHintHide(playerid);
 	UI_IntroLetterbox(playerid, 0);
 	UI_IntroFade(playerid, 255);
-	gPlayer[playerid][PLAYER_DATA_326] = 0;
-	gPlayer[playerid][PLAYER_DATA_331] |= 8;
+	gPlayer[playerid][pIntroScene] = 0;
+	gPlayer[playerid][pIntroFlags] |= 8;
 	if (reason != 0)
 	{
 		new name[25], msg[128];
@@ -286,20 +286,20 @@ public Intro_Finish(playerid, reason)
 		format(msg, 128, "intro terminata (%s) per %s", reason == 1 ? "skip" : "watchdog", name);
 		Log_Write("INTRO", msg);
 	}
-	if (gPlayer[playerid][PLAYER_DATA_2] > 0)
+	if (gPlayer[playerid][pAccountId] > 0)
 	{
-		DB_StoryIntroSeen(gPlayer[playerid][PLAYER_DATA_2], playerid);
+		DB_StoryIntroSeen(gPlayer[playerid][pAccountId], playerid);
 	}
 	new Float:x, Float:y, Float:z, Float:a;
 	Char_GetSpawnPoint(0, x, y, z, a);
-	gPlayer[playerid][PLAYER_DATA_94] = x;
-	gPlayer[playerid][PLAYER_DATA_95] = y;
-	gPlayer[playerid][PLAYER_DATA_96] = z;
-	gPlayer[playerid][PLAYER_DATA_97] = a;
-	gPlayer[playerid][PLAYER_DATA_98] = 0;
-	gPlayer[playerid][PLAYER_DATA_99] = 0;
+	gPlayer[playerid][pPosX] = x;
+	gPlayer[playerid][pPosY] = y;
+	gPlayer[playerid][pPosZ] = z;
+	gPlayer[playerid][pAngle] = a;
+	gPlayer[playerid][pInterior] = 0;
+	gPlayer[playerid][pWorld] = 0;
 	Char_Spawn(playerid);
-	if (gPlayer[playerid][PLAYER_DATA_325] == 0)
+	if (gPlayer[playerid][pIntroTimer] == 0)
 	{
 		Intro_Schedule(playerid, 3, 4000);
 	}
@@ -308,7 +308,7 @@ public Intro_Finish(playerid, reason)
 
 public Intro_OnSpawn(playerid)
 {
-	if (!Intro_ValidId(playerid) || (gPlayer[playerid][PLAYER_DATA_331] & 8) == 0)
+	if (!Intro_ValidId(playerid) || (gPlayer[playerid][pIntroFlags] & 8) == 0)
 	{
 		return 0;
 	}
@@ -320,26 +320,26 @@ public Intro_OnSpawn(playerid)
 Intro_EndOutro(playerid)
 {
 	UI_IntroUiDestroy(playerid);
-	gPlayer[playerid][PLAYER_DATA_331] = 0;
+	gPlayer[playerid][pIntroFlags] = 0;
 }
 
 public Intro_OnTimer(playerid, ev, scene, seq)
 {
-	if (!Intro_ValidId(playerid) || seq == 0 || gPlayer[playerid][PLAYER_DATA_329] != seq)
+	if (!Intro_ValidId(playerid) || seq == 0 || gPlayer[playerid][pIntroSeq] != seq)
 	{
 		return 1;
 	}
-	gPlayer[playerid][PLAYER_DATA_325] = 0;
+	gPlayer[playerid][pIntroTimer] = 0;
 	if (ev == 3)
 	{
 		Intro_EndOutro(playerid);
 		return 1;
 	}
-	if (gPlayer[playerid][PLAYER_DATA_106] != 14 || gPlayer[playerid][PLAYER_DATA_326] != scene)
+	if (gPlayer[playerid][pAuthState] != 14 || gPlayer[playerid][pIntroScene] != scene)
 	{
 		return 1;
 	}
-	if (GetTickCount() - gPlayer[playerid][PLAYER_DATA_330] >= 59950)
+	if (GetTickCount() - gPlayer[playerid][pIntroStartTick] >= 59950)
 	{
 		Intro_Finish(playerid, 2);
 		return 1;
@@ -353,7 +353,7 @@ public Intro_OnTimer(playerid, ev, scene, seq)
 		}
 		case 2:
 		{
-			new next = Intro_NextScene(scene, gPlayer[playerid][PLAYER_DATA_331]);
+			new next = Intro_NextScene(scene, gPlayer[playerid][pIntroFlags]);
 			if (next == 0)
 			{
 				Intro_Finish(playerid, 0);
@@ -369,13 +369,13 @@ public Intro_OnTimer(playerid, ev, scene, seq)
 
 public Intro_Skip(playerid)
 {
-	if (!Intro_ValidId(playerid) || gPlayer[playerid][PLAYER_DATA_106] != 14)
+	if (!Intro_ValidId(playerid) || gPlayer[playerid][pAuthState] != 14)
 	{
 		return -1;
 	}
-	if ((gPlayer[playerid][PLAYER_DATA_331] & 4) != 0)
+	if ((gPlayer[playerid][pIntroFlags] & 4) != 0)
 	{
-		new elapsed = GetTickCount() - gPlayer[playerid][PLAYER_DATA_330];
+		new elapsed = GetTickCount() - gPlayer[playerid][pIntroStartTick];
 		if (elapsed < 8000)
 		{
 			return (8000 - elapsed + 1000 - 1) / 1000;
@@ -392,7 +392,7 @@ public UI_OnIntroFadeDone(playerid, alpha)
 
 Intro_OnKeyStateChange(playerid, t_KEY:newkeys)
 {
-	if (!Intro_ValidId(playerid) || gPlayer[playerid][PLAYER_DATA_106] != 14)
+	if (!Intro_ValidId(playerid) || gPlayer[playerid][pAuthState] != 14)
 	{
 		return 0;
 	}
@@ -404,7 +404,7 @@ Intro_OnKeyStateChange(playerid, t_KEY:newkeys)
 
 public Intro_OnPlayerConnect(playerid)
 {
-	if (playerid < 0 || playerid >= 1000)
+	if (playerid < 0 || playerid >= MAX_PLAYERS)
 	{
 		return 1;
 	}
@@ -414,13 +414,13 @@ public Intro_OnPlayerConnect(playerid)
 
 public Intro_OnPlayerDisconnect(playerid)
 {
-	if (playerid < 0 || playerid >= 1000)
+	if (playerid < 0 || playerid >= MAX_PLAYERS)
 	{
 		return 1;
 	}
 	Intro_StopTimer(playerid);
 	Intro_DestroyObjects(playerid);
-	if (gPlayer[playerid][PLAYER_DATA_106] == 14)
+	if (gPlayer[playerid][pAuthState] == 14)
 	{
 		Intro_AudioStop(playerid);
 	}
@@ -430,7 +430,7 @@ public Intro_OnPlayerDisconnect(playerid)
 
 Intro_OnExit()
 {
-	for (new i = 0; i < 1000; i++)
+	for (new i = 0; i < MAX_PLAYERS; i++)
 	{
 		Intro_DestroyObjects(i);
 	}
@@ -446,7 +446,7 @@ public Intro_OnNoCharacter(playerid)
 	{
 		return 0;
 	}
-	DB_StoryLoad(playerid, gPlayer[playerid][PLAYER_DATA_2], 0);
+	DB_StoryLoad(playerid, gPlayer[playerid][pAccountId], 0);
 	return 1;
 }
 
@@ -456,7 +456,7 @@ public Intro_OnCharLoaded(playerid)
 	{
 		return 0;
 	}
-	DB_StoryLoad(playerid, gPlayer[playerid][PLAYER_DATA_2], gPlayer[playerid][PLAYER_DATA_3]);
+	DB_StoryLoad(playerid, gPlayer[playerid][pAccountId], gPlayer[playerid][pCharId]);
 	return 1;
 }
 
@@ -474,22 +474,22 @@ Intro_ApplyStartMoney(playerid, motive)
 {
 	if (motive >= 1 && motive <= 4)
 	{
-		gPlayer[playerid][PLAYER_DATA_88] = DB_StoryCash(motive);
-		gPlayer[playerid][PLAYER_DATA_89] = DB_StoryBankStart(motive);
+		gPlayer[playerid][pMoney] = DB_StoryCash(motive);
+		gPlayer[playerid][pBank] = DB_StoryBankStart(motive);
 	}
 	else
 	{
-		gPlayer[playerid][PLAYER_DATA_88] = 2500;
-		gPlayer[playerid][PLAYER_DATA_89] = 5000;
+		gPlayer[playerid][pMoney] = 2500;
+		gPlayer[playerid][pBank] = 5000;
 	}
 }
 
 Intro_SaveStory(playerid, bool:creation)
 {
 	new opId[37];
-	DB_StoryMakeOpId(opId, 37, gPlayer[playerid][PLAYER_DATA_3]);
-	gPlayer[playerid][PLAYER_DATA_335] = 0;
-	DB_StorySave(playerid, gPlayer[playerid][PLAYER_DATA_3], gPlayer[playerid][PLAYER_DATA_332], gPlayer[playerid][PLAYER_DATA_333], opId, creation);
+	DB_StoryMakeOpId(opId, 37, gPlayer[playerid][pCharId]);
+	gPlayer[playerid][pStorySaveRetries] = 0;
+	DB_StorySave(playerid, gPlayer[playerid][pCharId], gPlayer[playerid][pStoryDraftOrigin], gPlayer[playerid][pStoryDraftMotive], opId, creation);
 }
 
 public UI_OnStoryChosen(playerid, origin, reason)
@@ -504,30 +504,30 @@ public UI_OnStoryChosen(playerid, origin, reason)
 	{
 		reason = 0;
 	}
-	if (gPlayer[playerid][PLAYER_DATA_106] == 15)
+	if (gPlayer[playerid][pAuthState] == 15)
 	{
-		gPlayer[playerid][PLAYER_DATA_332] = origin;
-		gPlayer[playerid][PLAYER_DATA_333] = reason;
+		gPlayer[playerid][pStoryDraftOrigin] = origin;
+		gPlayer[playerid][pStoryDraftMotive] = reason;
 		Intro_ApplyStartMoney(playerid, reason);
 		Char_BeginCreate(playerid);
 		return 1;
 	}
-	if (gPlayer[playerid][PLAYER_DATA_334] != 0 && Util_IsPlaying(playerid))
+	if (gPlayer[playerid][pStorySetMode] != 0 && Util_IsPlaying(playerid))
 	{
-		if (gPlayer[playerid][PLAYER_DATA_322] != 0 || gPlayer[playerid][PLAYER_DATA_323] != 0)
+		if (gPlayer[playerid][pStoryOrigin] != 0 || gPlayer[playerid][pStoryMotive] != 0)
 		{
-			gPlayer[playerid][PLAYER_DATA_334] = 0;
+			gPlayer[playerid][pStorySetMode] = 0;
 			Util_Send(playerid, -10270721, "უკვე გაქვს ისტორია: მისი შეცვლა შეუძლებელია.");
 			return 1;
 		}
 		if (origin == 0)
 		{
-			gPlayer[playerid][PLAYER_DATA_334] = 0;
+			gPlayer[playerid][pStorySetMode] = 0;
 			Util_Send(playerid, -1, "ისტორია არ არის არჩეული: შეგიძლია მოგვიანებით აირჩიო - /storia imposta.");
 			return 1;
 		}
-		gPlayer[playerid][PLAYER_DATA_332] = origin;
-		gPlayer[playerid][PLAYER_DATA_333] = reason;
+		gPlayer[playerid][pStoryDraftOrigin] = origin;
+		gPlayer[playerid][pStoryDraftMotive] = reason;
 		Intro_SaveStory(playerid, 0);
 	}
 	return 1;
@@ -539,10 +539,10 @@ public Intro_OnCharCreated(playerid, charId)
 	{
 		return 0;
 	}
-	if (gPlayer[playerid][PLAYER_DATA_332] != 0 || gPlayer[playerid][PLAYER_DATA_333] != 0)
+	if (gPlayer[playerid][pStoryDraftOrigin] != 0 || gPlayer[playerid][pStoryDraftMotive] != 0)
 	{
-		gPlayer[playerid][PLAYER_DATA_322] = gPlayer[playerid][PLAYER_DATA_332];
-		gPlayer[playerid][PLAYER_DATA_323] = gPlayer[playerid][PLAYER_DATA_333];
+		gPlayer[playerid][pStoryOrigin] = gPlayer[playerid][pStoryDraftOrigin];
+		gPlayer[playerid][pStoryMotive] = gPlayer[playerid][pStoryDraftMotive];
 		if (charId > 0)
 		{
 			Intro_SaveStory(playerid, 1);
@@ -566,16 +566,16 @@ public Story_OnDBSaved(playerid, result, origin, motive, moneyDelta)
 	{
 		return 1;
 	}
-	new bool:setMode = gPlayer[playerid][PLAYER_DATA_334] != 0;
-	if (result == -1 && gPlayer[playerid][PLAYER_DATA_335] < 1)
+	new bool:setMode = gPlayer[playerid][pStorySetMode] != 0;
+	if (result == -1 && gPlayer[playerid][pStorySaveRetries] < 1)
 	{
 		new opId[37];
-		gPlayer[playerid][PLAYER_DATA_335]++;
+		gPlayer[playerid][pStorySaveRetries]++;
 		DB_StoryLastOpId(playerid, opId, 37);
-		DB_StorySave(playerid, gPlayer[playerid][PLAYER_DATA_3], gPlayer[playerid][PLAYER_DATA_332], gPlayer[playerid][PLAYER_DATA_333], opId, !setMode);
+		DB_StorySave(playerid, gPlayer[playerid][pCharId], gPlayer[playerid][pStoryDraftOrigin], gPlayer[playerid][pStoryDraftMotive], opId, !setMode);
 		return 1;
 	}
-	if (moneyDelta != 0 && gPlayer[playerid][PLAYER_DATA_1])
+	if (moneyDelta != 0 && gPlayer[playerid][pSpawned])
 	{
 		Char_SyncMoney(playerid);
 		Char_RefreshHud(playerid);
@@ -588,21 +588,18 @@ public Story_OnDBSaved(playerid, result, origin, motive, moneyDelta)
 	}
 	if (setMode)
 	{
-		gPlayer[playerid][PLAYER_DATA_334] = 0;
+		gPlayer[playerid][pStorySetMode] = 0;
 		if (result == 1 || result == 4 || result == 3)
 		{
 			Util_Send(playerid, 0x66DD66FF, "შენი ისტორია შენახულია (/storia - ხელახლა წასაკითხად).");
 		}
+		else if (result == 2)
+		{
+			Util_Send(playerid, -10270721, "უკვე გაქვს ისტორია: მისი შეცვლა შეუძლებელია.");
+		}
 		else
 		{
-			if (result == 2)
-			{
-				Util_Send(playerid, -10270721, "უკვე გაქვს ისტორია: მისი შეცვლა შეუძლებელია.");
-			}
-			else
-			{
-				Util_Send(playerid, -10270721, "ისტორიის შენახვა ახლა ვერ ხერხდება. სცადე მოგვიანებით - /storia imposta.");
-			}
+			Util_Send(playerid, -10270721, "ისტორიის შენახვა ახლა ვერ ხერხდება. სცადე მოგვიანებით - /storia imposta.");
 		}
 	}
 	return 1;
@@ -615,35 +612,32 @@ Intro_CmdSalta(playerid)
 	{
 		Util_Send(playerid, -10270721, "ამჟამად არცერთ ინტროს არ უყურებ.");
 	}
-	else
+	else if (left > 0)
 	{
-		if (left > 0)
-		{
-			new msg[512];
-			format(msg, 512, "ინტროს გამოტოვება შეგეძლება %d წამში.", left);
-			Util_Send(playerid, -10270721, msg);
-		}
+		new msg[512];
+		format(msg, 512, "ინტროს გამოტოვება შეგეძლება %d წამში.", left);
+		Util_Send(playerid, -10270721, msg);
 	}
 }
 
 Intro_CmdStoria(playerid, params[])
 {
-	new pos = 0, tok[16], name[25], target = 65535;
+	new pos = 0, tok[16], name[25], target = INVALID_PLAYER_ID;
 	Util_NextToken(params, pos, tok, 16);
 	if (tok[0] == 0)
 	{
 		GetPlayerName(playerid, name, 25);
-		UI_StoryShowOwn(playerid, name, gPlayer[playerid][PLAYER_DATA_322], gPlayer[playerid][PLAYER_DATA_323]);
+		UI_StoryShowOwn(playerid, name, gPlayer[playerid][pStoryOrigin], gPlayer[playerid][pStoryMotive]);
 		return 0;
 	}
 	if (!strcmp(tok, "imposta", 1, 0x7FFFFFFF))
 	{
-		if (gPlayer[playerid][PLAYER_DATA_322] != 0 || gPlayer[playerid][PLAYER_DATA_323] != 0)
+		if (gPlayer[playerid][pStoryOrigin] != 0 || gPlayer[playerid][pStoryMotive] != 0)
 		{
 			Util_Send(playerid, -10270721, "უკვე გაქვს ისტორია: მისი შეცვლა შეუძლებელია.");
 			return 0;
 		}
-		gPlayer[playerid][PLAYER_DATA_334] = 1;
+		gPlayer[playerid][pStorySetMode] = 1;
 		UI_StoryBegin(playerid);
 		return 0;
 	}
@@ -664,7 +658,7 @@ Intro_CmdStoria(playerid, params[])
 
 Intro_CmdMostra(playerid, params[])
 {
-	new pos = 0, tok[16], target = 65535;
+	new pos = 0, tok[16], target = INVALID_PLAYER_ID;
 	Util_NextToken(params, pos, tok, 16);
 	if (!Util_ParsePlayerId(tok, target) || target == playerid || !Util_IsPlaying(target))
 	{
@@ -676,14 +670,14 @@ Intro_CmdMostra(playerid, params[])
 		Util_Send(playerid, -10270721, "Il giocatore e' troppo lontano.");
 		return 0;
 	}
-	new now = GetTickCount(), last = gPlayer[playerid][PLAYER_DATA_337];
-	if (gPlayer[playerid][PLAYER_DATA_336] != 0 || (last != 0 && now - last < 10000))
+	new now = GetTickCount(), last = gPlayer[playerid][pStoryLastShowTick];
+	if (gPlayer[playerid][pStoryShowTarget] != 0 || (last != 0 && now - last < 10000))
 	{
 		Util_Send(playerid, -10270721, "Attendi qualche secondo prima di mostrare di nuovo la tua storia.");
 		return 0;
 	}
-	gPlayer[playerid][PLAYER_DATA_337] = now != 0 ? now : 1;
-	gPlayer[playerid][PLAYER_DATA_336] = target + 1;
+	gPlayer[playerid][pStoryLastShowTick] = now != 0 ? now : 1;
+	gPlayer[playerid][pStoryShowTarget] = target + 1;
 	DB_StoryRead(playerid, playerid, 1);
 }
 
@@ -695,8 +689,8 @@ public Story_OnDBRead(playerid, targetid, purpose, result, origin, motive, bool:
 	}
 	if (purpose == 1)
 	{
-		new to = gPlayer[playerid][PLAYER_DATA_336] - 1;
-		gPlayer[playerid][PLAYER_DATA_336] = 0;
+		new to = gPlayer[playerid][pStoryShowTarget] - 1;
+		gPlayer[playerid][pStoryShowTarget] = 0;
 		if (!Util_IsPlaying(playerid))
 		{
 			return 1;
@@ -735,14 +729,14 @@ public Story_OnDBRead(playerid, targetid, purpose, result, origin, motive, bool:
 			Util_Send(playerid, -10270721, "Impossibile leggere la storia del giocatore.");
 			return 1;
 		}
-		if (targetid < 0 || targetid >= 1000 || !IsPlayerConnected(targetid))
+		if (targetid < 0 || targetid >= MAX_PLAYERS || !IsPlayerConnected(targetid))
 		{
 			return 1;
 		}
 		new tname[25], reason[64];
 		GetPlayerName(targetid, tname, 25);
-		format(reason, 64, "letta la storia di %s (pg %d)", tname, gPlayer[targetid][PLAYER_DATA_3]);
-		Admin_Log(playerid, gPlayer[targetid][PLAYER_DATA_2], "storia", reason);
+		format(reason, 64, "letta la storia di %s (pg %d)", tname, gPlayer[targetid][pCharId]);
+		Admin_Log(playerid, gPlayer[targetid][pAccountId], "storia", reason);
 		UI_StoryShowOther(playerid, tname, origin, motive);
 	}
 	return 1;

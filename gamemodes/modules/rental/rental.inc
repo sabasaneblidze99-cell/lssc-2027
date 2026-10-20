@@ -1,14 +1,14 @@
 new g_RtTimer;
-new g_RtFee[1000];
-new g_RtDeposit[1000];
-new g_RtOpenTs[1000];
-new g_RtBlocks[1000];
-new bool:g_RtAbortOpen[1000];
-new g_RtCloseMode[1000];
-new g_RtCloseHealth[1000];
-new g_RtCloseReason[1000];
-new g_RtRetry[1000];
-new g_RtRetryAt[1000];
+new g_RtFee[MAX_PLAYERS];
+new g_RtDeposit[MAX_PLAYERS];
+new g_RtOpenTs[MAX_PLAYERS];
+new g_RtBlocks[MAX_PLAYERS];
+new bool:g_RtAbortOpen[MAX_PLAYERS];
+new g_RtCloseMode[MAX_PLAYERS];
+new g_RtCloseHealth[MAX_PLAYERS];
+new g_RtCloseReason[MAX_PLAYERS];
+new g_RtRetry[MAX_PLAYERS];
+new g_RtRetryAt[MAX_PLAYERS];
 
 Rental_KindName(vkind, dest[], size)
 {
@@ -40,7 +40,7 @@ Rental_KindName(vkind, dest[], size)
 
 bool:Rental_ValidPlayer(playerid)
 {
-	return playerid >= 0 && playerid < 1000;
+	return playerid >= 0 && playerid < MAX_PLAYERS;
 }
 
 Rental_MaxLocalRep(playerid)
@@ -88,8 +88,8 @@ Rental_ResetPlayer(playerid)
 
 Rental_VehDestroy(playerid)
 {
-	new veh = gPlayer[playerid][PLAYER_DATA_404];
-	gPlayer[playerid][PLAYER_DATA_404] = 0;
+	new veh = gPlayer[playerid][pRentalVehicle];
+	gPlayer[playerid][pRentalVehicle] = 0;
 	if (veh <= 0 || veh >= 2000)
 	{
 		return 0;
@@ -111,13 +111,13 @@ Rental_VehDestroy(playerid)
 Rental_ClearLocal(playerid)
 {
 	Rental_VehDestroy(playerid);
-	gPlayer[playerid][PLAYER_DATA_403] = 0;
-	gPlayer[playerid][PLAYER_DATA_405] = 0;
-	gPlayer[playerid][PLAYER_DATA_406] = 0;
-	gPlayer[playerid][PLAYER_DATA_407] = 0;
-	gPlayer[playerid][PLAYER_DATA_408] = 0;
-	gPlayer[playerid][PLAYER_DATA_409] = 0;
-	gPlayer[playerid][PLAYER_DATA_410][0] = 0;
+	gPlayer[playerid][pRentalId] = 0;
+	gPlayer[playerid][pRentalClass] = 0;
+	gPlayer[playerid][pRentalKind] = 0;
+	gPlayer[playerid][pRentalDueAt] = 0;
+	gPlayer[playerid][pRentalWarnFlags] = 0;
+	gPlayer[playerid][pRentalPendOp] = 0;
+	gPlayer[playerid][pRentalOpId][0] = 0;
 	Rental_ResetPlayer(playerid);
 }
 
@@ -134,7 +134,7 @@ Rental_ScheduleRetry(playerid)
 bool:Rental_BeginOpen(playerid, vkind, blocks, rentClass)
 {
 	new model = LD_RentalModel(vkind);
-	if (model <= 0 || gPlayer[playerid][PLAYER_DATA_403] != 0 || gPlayer[playerid][PLAYER_DATA_409] != 0)
+	if (model <= 0 || gPlayer[playerid][pRentalId] != 0 || gPlayer[playerid][pRentalPendOp] != 0)
 	{
 		return 0;
 	}
@@ -143,19 +143,19 @@ bool:Rental_BeginOpen(playerid, vkind, blocks, rentClass)
 		return 0;
 	}
 	Rental_ResetPlayer(playerid);
-	gPlayer[playerid][PLAYER_DATA_405] = rentClass;
-	gPlayer[playerid][PLAYER_DATA_406] = vkind;
-	gPlayer[playerid][PLAYER_DATA_409] = 5;
+	gPlayer[playerid][pRentalClass] = rentClass;
+	gPlayer[playerid][pRentalKind] = vkind;
+	gPlayer[playerid][pRentalPendOp] = 5;
 	g_RtBlocks[playerid] = blocks;
-	DB_LivingMakeOpId(gPlayer[playerid][PLAYER_DATA_410], 41, "ro", vkind, gPlayer[playerid][PLAYER_DATA_3]);
-	DB_LivingRentOpen(playerid, vkind, model, blocks, gPlayer[playerid][PLAYER_DATA_410]);
+	DB_LivingMakeOpId(gPlayer[playerid][pRentalOpId], 41, "ro", vkind, gPlayer[playerid][pCharId]);
+	DB_LivingRentOpen(playerid, vkind, model, blocks, gPlayer[playerid][pRentalOpId]);
 	return 1;
 }
 
 bool:Rental_SpawnVehicle(playerid)
 {
-	new vkind = gPlayer[playerid][PLAYER_DATA_406], model = LD_RentalModel(vkind);
-	new bool:pro = gPlayer[playerid][PLAYER_DATA_405] == 2;
+	new vkind = gPlayer[playerid][pRentalKind], model = LD_RentalModel(vkind);
+	new bool:pro = gPlayer[playerid][pRentalClass] == 2;
 	new Float:x = 1512.0, Float:y = -1708.0, Float:z = 13.5, Float:a = Float:0x43340000;
 	if (pro)
 	{
@@ -178,14 +178,14 @@ bool:Rental_SpawnVehicle(playerid)
 	}
 	SetVehicleHealth(veh, float(1000));
 	SetVehicleParamsEx(veh, 1, 0, 0, 0, 0, 0, 0);
-	gPlayer[playerid][PLAYER_DATA_404] = veh;
+	gPlayer[playerid][pRentalVehicle] = veh;
 	PutPlayerInVehicle(playerid, veh, 0);
 	return 1;
 }
 
 bool:Rental_SendClose(playerid, mode, health, reason)
 {
-	if (gPlayer[playerid][PLAYER_DATA_403] == 0 || gPlayer[playerid][PLAYER_DATA_409] != 0)
+	if (gPlayer[playerid][pRentalId] == 0 || gPlayer[playerid][pRentalPendOp] != 0)
 	{
 		return 0;
 	}
@@ -195,15 +195,15 @@ bool:Rental_SendClose(playerid, mode, health, reason)
 	g_RtCloseReason[playerid] = reason;
 	g_RtRetry[playerid] = 0;
 	g_RtRetryAt[playerid] = 0;
-	gPlayer[playerid][PLAYER_DATA_409] = 6;
-	DB_LivingMakeOpId(gPlayer[playerid][PLAYER_DATA_410], 41, "rc", gPlayer[playerid][PLAYER_DATA_403], gPlayer[playerid][PLAYER_DATA_3]);
-	DB_LivingRentClose(playerid, gPlayer[playerid][PLAYER_DATA_403], mode, g_RtCloseHealth[playerid], gPlayer[playerid][PLAYER_DATA_410]);
+	gPlayer[playerid][pRentalPendOp] = 6;
+	DB_LivingMakeOpId(gPlayer[playerid][pRentalOpId], 41, "rc", gPlayer[playerid][pRentalId], gPlayer[playerid][pCharId]);
+	DB_LivingRentClose(playerid, gPlayer[playerid][pRentalId], mode, g_RtCloseHealth[playerid], gPlayer[playerid][pRentalOpId]);
 	return 1;
 }
 
 bool:Rental_CloseInterrupted(playerid, reason)
 {
-	new veh = gPlayer[playerid][PLAYER_DATA_404];
+	new veh = gPlayer[playerid][pRentalVehicle];
 	if (veh > 0 && IsValidVehicle(veh))
 	{
 		return Rental_SendClose(playerid, 1, Rental_VehHealth(veh), reason);
@@ -214,8 +214,8 @@ bool:Rental_CloseInterrupted(playerid, reason)
 Rental_NotifyClosed(playerid, result, refund, newState)
 {
 	new name[16];
-	Rental_KindName(gPlayer[playerid][PLAYER_DATA_406], name, 16);
-	new bool:pro = gPlayer[playerid][PLAYER_DATA_405] == 2;
+	Rental_KindName(gPlayer[playerid][pRentalKind], name, 16);
+	new bool:pro = gPlayer[playerid][pRentalClass] == 2;
 	new reason = g_RtCloseReason[playerid];
 	if (pro)
 	{
@@ -276,7 +276,7 @@ Rental_NotifyClosed(playerid, result, refund, newState)
 
 Rental_OnOpenResult(playerid, result, rentalId, amount, dueAt)
 {
-	if (gPlayer[playerid][PLAYER_DATA_409] != 5)
+	if (gPlayer[playerid][pRentalPendOp] != 5)
 	{
 		if (result == 1)
 		{
@@ -284,13 +284,13 @@ Rental_OnOpenResult(playerid, result, rentalId, amount, dueAt)
 		}
 		return 0;
 	}
-	gPlayer[playerid][PLAYER_DATA_409] = 0;
-	new bool:pro = gPlayer[playerid][PLAYER_DATA_405] == 2;
+	gPlayer[playerid][pRentalPendOp] = 0;
+	new bool:pro = gPlayer[playerid][pRentalClass] == 2;
 	if (result != 1)
 	{
-		gPlayer[playerid][PLAYER_DATA_405] = 0;
-		gPlayer[playerid][PLAYER_DATA_406] = 0;
-		gPlayer[playerid][PLAYER_DATA_410][0] = 0;
+		gPlayer[playerid][pRentalClass] = 0;
+		gPlayer[playerid][pRentalKind] = 0;
+		gPlayer[playerid][pRentalOpId][0] = 0;
 		g_RtAbortOpen[playerid] = 0;
 		if (pro)
 		{
@@ -322,10 +322,10 @@ Rental_OnOpenResult(playerid, result, rentalId, amount, dueAt)
 		}
 		return 0;
 	}
-	gPlayer[playerid][PLAYER_DATA_403] = rentalId;
-	gPlayer[playerid][PLAYER_DATA_407] = dueAt;
-	gPlayer[playerid][PLAYER_DATA_408] = 0;
-	g_RtDeposit[playerid] = LD_RentalDeposit(gPlayer[playerid][PLAYER_DATA_406]);
+	gPlayer[playerid][pRentalId] = rentalId;
+	gPlayer[playerid][pRentalDueAt] = dueAt;
+	gPlayer[playerid][pRentalWarnFlags] = 0;
+	g_RtDeposit[playerid] = LD_RentalDeposit(gPlayer[playerid][pRentalKind]);
 	g_RtFee[playerid] = amount > g_RtDeposit[playerid] ? amount - g_RtDeposit[playerid] : 0;
 	g_RtOpenTs[playerid] = gettime();
 	if (g_RtAbortOpen[playerid] || !Util_IsPlaying(playerid))
@@ -346,17 +346,17 @@ Rental_OnOpenResult(playerid, result, rentalId, amount, dueAt)
 	}
 	if (pro)
 	{
-		Taxi_OnProRental(playerid, 1, gPlayer[playerid][PLAYER_DATA_404]);
+		Taxi_OnProRental(playerid, 1, gPlayer[playerid][pRentalVehicle]);
 		return 0;
 	}
 	new name[16], minutes = (dueAt - gettime() + 60 - 1) / 60;
-	Rental_KindName(gPlayer[playerid][PLAYER_DATA_406], name, 16);
+	Rental_KindName(gPlayer[playerid][pRentalKind], name, 16);
 	SendClientMessage(playerid, 0x66DD66FF, "Noleggio attivo: %s per %d minuti (canone $%d, cauzione $%d). Riportalo qui con /riconsegna.", name, minutes > 0 ? minutes : 0, g_RtFee[playerid], g_RtDeposit[playerid]);
 }
 
 Rental_OnCloseResult(playerid, result, amount, newState)
 {
-	if (gPlayer[playerid][PLAYER_DATA_409] != 6)
+	if (gPlayer[playerid][pRentalPendOp] != 6)
 	{
 		return 0;
 	}
@@ -369,7 +369,7 @@ Rental_OnCloseResult(playerid, result, amount, newState)
 		}
 		Log_Write("RENTAL", "chiusura noleggio senza esito dopo i tentativi: la sistema il cleanup del DB (login/avvio)");
 	}
-	gPlayer[playerid][PLAYER_DATA_409] = 0;
+	gPlayer[playerid][pRentalPendOp] = 0;
 	Rental_NotifyClosed(playerid, result, amount > 0 ? amount : 0, newState);
 	Rental_ClearLocal(playerid);
 }
@@ -405,7 +405,7 @@ bool:Rental_CanStart(playerid)
 	{
 		return 0;
 	}
-	if (gPlayer[playerid][PLAYER_DATA_409] != 0)
+	if (gPlayer[playerid][pRentalPendOp] != 0)
 	{
 		Util_Send(playerid, -10270721, "Pratica di noleggio gia' in corso: attendi.");
 		return 0;
@@ -426,7 +426,7 @@ bool:Rental_CanStart(playerid)
 		Util_Send(playerid, -10270721, "Scendi dal veicolo per noleggiare.");
 		return 0;
 	}
-	if (gPlayer[playerid][PLAYER_DATA_90] < 1)
+	if (gPlayer[playerid][pLevel] < 1)
 	{
 		SendClientMessage(playerid, -10270721, "Serve almeno il livello %d per noleggiare.", 1);
 		return 0;
@@ -446,7 +446,7 @@ Rental_CmdNoleggio(playerid, params[])
 	for (new k = 1; k <= 3; k++)
 	{
 		Rental_KindName(k, name, 16);
-		UI_LivingRentalAddModel(playerid, k, name, LD_RentalFeeFor(k, 1, rep), LD_RentalDeposit(k), 1, room && gPlayer[playerid][PLAYER_DATA_90] >= 1);
+		UI_LivingRentalAddModel(playerid, k, name, LD_RentalFeeFor(k, 1, rep), LD_RentalDeposit(k), 1, room && gPlayer[playerid][pLevel] >= 1);
 	}
 	UI_LivingRentalShow(playerid);
 	if (!room)
@@ -473,7 +473,7 @@ public UI_OnRentalConfirm(playerid, modelIdx, blocks)
 		return 1;
 	}
 	new total = LD_RentalFeeFor(modelIdx, blocks, Rental_MaxLocalRep(playerid)) + LD_RentalDeposit(modelIdx);
-	new have = (gPlayer[playerid][PLAYER_DATA_89] > 0 ? gPlayer[playerid][PLAYER_DATA_89] : 0) + (gPlayer[playerid][PLAYER_DATA_88] > 0 ? gPlayer[playerid][PLAYER_DATA_88] : 0);
+	new have = (gPlayer[playerid][pBank] > 0 ? gPlayer[playerid][pBank] : 0) + (gPlayer[playerid][pMoney] > 0 ? gPlayer[playerid][pMoney] : 0);
 	if (have < total)
 	{
 		new msg[160];
@@ -496,7 +496,7 @@ bool:Rental_CanReturn(playerid, bool:verbose)
 	{
 		return 0;
 	}
-	if (gPlayer[playerid][PLAYER_DATA_403] == 0)
+	if (gPlayer[playerid][pRentalId] == 0)
 	{
 		if (verbose)
 		{
@@ -504,7 +504,7 @@ bool:Rental_CanReturn(playerid, bool:verbose)
 		}
 		return 0;
 	}
-	if (gPlayer[playerid][PLAYER_DATA_405] == 2)
+	if (gPlayer[playerid][pRentalClass] == 2)
 	{
 		if (verbose)
 		{
@@ -512,7 +512,7 @@ bool:Rental_CanReturn(playerid, bool:verbose)
 		}
 		return 0;
 	}
-	if (gPlayer[playerid][PLAYER_DATA_409] != 0)
+	if (gPlayer[playerid][pRentalPendOp] != 0)
 	{
 		if (verbose)
 		{
@@ -520,7 +520,7 @@ bool:Rental_CanReturn(playerid, bool:verbose)
 		}
 		return 0;
 	}
-	new veh = gPlayer[playerid][PLAYER_DATA_404];
+	new veh = gPlayer[playerid][pRentalVehicle];
 	if (veh <= 0 || GetPlayerVehicleID(playerid) != veh || GetPlayerState(playerid) != 2)
 	{
 		if (verbose)
@@ -546,21 +546,21 @@ Rental_CmdRiconsegna(playerid, params[])
 	{
 		return 1;
 	}
-	new name[16], health = Rental_VehHealth(gPlayer[playerid][PLAYER_DATA_404]);
-	Rental_KindName(gPlayer[playerid][PLAYER_DATA_406], name, 16);
+	new name[16], health = Rental_VehHealth(gPlayer[playerid][pRentalVehicle]);
+	Rental_KindName(gPlayer[playerid][pRentalKind], name, 16);
 	new deposit = g_RtDeposit[playerid];
 	new refund = LD_RentalRefund(deposit, health);
-	if (gPlayer[playerid][PLAYER_DATA_407] > 0 && gettime() > gPlayer[playerid][PLAYER_DATA_407] + 300)
+	if (gPlayer[playerid][pRentalDueAt] > 0 && gettime() > gPlayer[playerid][pRentalDueAt] + 300)
 	{
 		refund = 0;
 	}
-	UI_LivingRentalReturnConfirm(playerid, gPlayer[playerid][PLAYER_DATA_403], name, health / 10, deposit, refund);
+	UI_LivingRentalReturnConfirm(playerid, gPlayer[playerid][pRentalId], name, health / 10, deposit, refund);
 	return 1;
 }
 
 public UI_OnRentalReturnConfirm(playerid, rentalId)
 {
-	if (rentalId <= 0 || rentalId != gPlayer[playerid][PLAYER_DATA_403])
+	if (rentalId <= 0 || rentalId != gPlayer[playerid][pRentalId])
 	{
 		UI_LivingReject(playerid, "Questo noleggio non e' piu' attivo.");
 		return 1;
@@ -569,7 +569,7 @@ public UI_OnRentalReturnConfirm(playerid, rentalId)
 	{
 		return 1;
 	}
-	Rental_SendClose(playerid, 1, Rental_VehHealth(gPlayer[playerid][PLAYER_DATA_404]), 1);
+	Rental_SendClose(playerid, 1, Rental_VehHealth(gPlayer[playerid][pRentalVehicle]), 1);
 	Util_Send(playerid, -1, "Riconsegna in corso...");
 	return 1;
 }
@@ -580,7 +580,7 @@ Rental_GetVehicle(playerid)
 	{
 		return 0;
 	}
-	new veh = gPlayer[playerid][PLAYER_DATA_404];
+	new veh = gPlayer[playerid][pRentalVehicle];
 	if (veh <= 0 || !IsValidVehicle(veh))
 	{
 		return 0;
@@ -603,20 +603,20 @@ bool:Rental_OpenPro(playerid, vkind)
 
 bool:Rental_ClosePro(playerid, reason)
 {
-	if (!Rental_ValidPlayer(playerid) || gPlayer[playerid][PLAYER_DATA_405] != 2)
+	if (!Rental_ValidPlayer(playerid) || gPlayer[playerid][pRentalClass] != 2)
 	{
 		return 0;
 	}
-	if (gPlayer[playerid][PLAYER_DATA_409] == 5)
+	if (gPlayer[playerid][pRentalPendOp] == 5)
 	{
 		g_RtAbortOpen[playerid] = 1;
 		return 1;
 	}
-	if (gPlayer[playerid][PLAYER_DATA_403] == 0)
+	if (gPlayer[playerid][pRentalId] == 0)
 	{
 		return 0;
 	}
-	new veh = gPlayer[playerid][PLAYER_DATA_404];
+	new veh = gPlayer[playerid][pRentalVehicle];
 	switch (reason)
 	{
 		case 1, 4, 5:
@@ -634,11 +634,11 @@ bool:Rental_ClosePro(playerid, reason)
 Rental_RetrySend(playerid)
 {
 	g_RtRetryAt[playerid] = 0;
-	if (gPlayer[playerid][PLAYER_DATA_409] != 6 || gPlayer[playerid][PLAYER_DATA_403] == 0)
+	if (gPlayer[playerid][pRentalPendOp] != 6 || gPlayer[playerid][pRentalId] == 0)
 	{
 		return 0;
 	}
-	DB_LivingRentClose(playerid, gPlayer[playerid][PLAYER_DATA_403], g_RtCloseMode[playerid], g_RtCloseHealth[playerid], gPlayer[playerid][PLAYER_DATA_410]);
+	DB_LivingRentClose(playerid, gPlayer[playerid][pRentalId], g_RtCloseMode[playerid], g_RtCloseHealth[playerid], gPlayer[playerid][pRentalOpId]);
 }
 
 Rental_TickPlayer(playerid, now, nowTick)
@@ -648,12 +648,12 @@ Rental_TickPlayer(playerid, now, nowTick)
 		Rental_RetrySend(playerid);
 		return 0;
 	}
-	if (gPlayer[playerid][PLAYER_DATA_403] == 0 || gPlayer[playerid][PLAYER_DATA_409] != 0)
+	if (gPlayer[playerid][pRentalId] == 0 || gPlayer[playerid][pRentalPendOp] != 0)
 	{
 		return 0;
 	}
-	new bool:pro = gPlayer[playerid][PLAYER_DATA_405] == 2;
-	new veh = gPlayer[playerid][PLAYER_DATA_404];
+	new bool:pro = gPlayer[playerid][pRentalClass] == 2;
+	new veh = gPlayer[playerid][pRentalVehicle];
 	if (veh <= 0 || !IsValidVehicle(veh))
 	{
 		Log_Write("RENTAL", "veicolo a noleggio scomparso senza OnVehicleDeath: noleggio interrotto (cauzione 100%)");
@@ -667,25 +667,25 @@ Rental_TickPlayer(playerid, now, nowTick)
 		}
 		return 0;
 	}
-	new due = gPlayer[playerid][PLAYER_DATA_407];
+	new due = gPlayer[playerid][pRentalDueAt];
 	if (due <= 0)
 	{
 		return 0;
 	}
 	new left = due - now;
-	if (left <= 300 && !(gPlayer[playerid][PLAYER_DATA_408] & 1))
+	if (left <= 300 && !(gPlayer[playerid][pRentalWarnFlags] & 1))
 	{
-		gPlayer[playerid][PLAYER_DATA_408] |= 1;
+		gPlayer[playerid][pRentalWarnFlags] |= 1;
 		SendClientMessage(playerid, -2994689, "Il tuo noleggio scade tra %d minuti.", (left + 60 - 1) / 60);
 	}
-	if (left <= 60 && !(gPlayer[playerid][PLAYER_DATA_408] & 2))
+	if (left <= 60 && !(gPlayer[playerid][pRentalWarnFlags] & 2))
 	{
-		gPlayer[playerid][PLAYER_DATA_408] |= 2;
+		gPlayer[playerid][pRentalWarnFlags] |= 2;
 		Util_Send(playerid, -2994689, pro ? "Il turno di noleggio del taxi scade tra un minuto." : "Il tuo noleggio scade tra un minuto: riportalo all'agenzia (/riconsegna).");
 	}
-	if (left <= 0 && !(gPlayer[playerid][PLAYER_DATA_408] & 4))
+	if (left <= 0 && !(gPlayer[playerid][pRentalWarnFlags] & 4))
 	{
-		gPlayer[playerid][PLAYER_DATA_408] |= 4;
+		gPlayer[playerid][pRentalWarnFlags] |= 4;
 		if (!pro)
 		{
 			SendClientMessage(playerid, -10270721, "Noleggio scaduto: hai %d minuti di tolleranza per la riconsegna, poi la cauzione resta all'agenzia.", 5);
@@ -693,7 +693,7 @@ Rental_TickPlayer(playerid, now, nowTick)
 	}
 	if (pro)
 	{
-		if (left <= 0 && (gPlayer[playerid][PLAYER_DATA_452] == 0 || -left >= 150))
+		if (left <= 0 && (gPlayer[playerid][pTaxiRideId] == 0 || -left >= 150))
 		{
 			Util_Send(playerid, -1, "Il noleggio del taxi e' scaduto: il turno si conclude.");
 			Rental_ClosePro(playerid, 5);
@@ -710,13 +710,13 @@ Rental_TickPlayer(playerid, now, nowTick)
 public Rental_OnTick()
 {
 	new now = gettime(), nowTick = GetTickCount();
-	for (new i = 0; i < 1000; i++)
+	for (new i = 0; i < MAX_PLAYERS; i++)
 	{
 		if (!IsPlayerConnected(i))
 		{
 			continue;
 		}
-		if (gPlayer[i][PLAYER_DATA_403] == 0 && g_RtRetryAt[i] == 0)
+		if (gPlayer[i][pRentalId] == 0 && g_RtRetryAt[i] == 0)
 		{
 			continue;
 		}
@@ -727,7 +727,7 @@ public Rental_OnTick()
 
 Rental_OnInit()
 {
-	for (new i = 0; i < 1000; i++)
+	for (new i = 0; i < MAX_PLAYERS; i++)
 	{
 		Rental_ResetPlayer(i);
 	}
@@ -747,9 +747,9 @@ Rental_OnExit()
 		KillTimer(g_RtTimer);
 	}
 	g_RtTimer = 0;
-	for (new i = 0; i < 1000; i++)
+	for (new i = 0; i < MAX_PLAYERS; i++)
 	{
-		if (gPlayer[i][PLAYER_DATA_404] != 0)
+		if (gPlayer[i][pRentalVehicle] != 0)
 		{
 			Rental_VehDestroy(i);
 		}
@@ -771,9 +771,9 @@ Rental_OnPlayerDisconnect(playerid, reason)
 	{
 		return 0;
 	}
-	if (gPlayer[playerid][PLAYER_DATA_409] == 0 && gPlayer[playerid][PLAYER_DATA_403] != 0)
+	if (gPlayer[playerid][pRentalPendOp] == 0 && gPlayer[playerid][pRentalId] != 0)
 	{
-		if (gPlayer[playerid][PLAYER_DATA_405] == 2)
+		if (gPlayer[playerid][pRentalClass] == 2)
 		{
 			Rental_ClosePro(playerid, 2);
 		}
@@ -792,16 +792,16 @@ Rental_OnPlayerDeath(playerid)
 	{
 		return 0;
 	}
-	if (gPlayer[playerid][PLAYER_DATA_409] == 5)
+	if (gPlayer[playerid][pRentalPendOp] == 5)
 	{
 		g_RtAbortOpen[playerid] = 1;
 		return 0;
 	}
-	if (gPlayer[playerid][PLAYER_DATA_403] == 0 || gPlayer[playerid][PLAYER_DATA_409] != 0)
+	if (gPlayer[playerid][pRentalId] == 0 || gPlayer[playerid][pRentalPendOp] != 0)
 	{
 		return 0;
 	}
-	if (gPlayer[playerid][PLAYER_DATA_405] == 2)
+	if (gPlayer[playerid][pRentalClass] == 2)
 	{
 		return 0;
 	}
@@ -859,13 +859,13 @@ Rental_OnVehicleDeath(vehicleid, killerid)
 		return 0;
 	}
 	new owner = LD_VehOwner(vehicleid);
-	if (owner == 65535 || !Rental_ValidPlayer(owner) || gPlayer[owner][PLAYER_DATA_404] != vehicleid)
+	if (owner == 65535 || !Rental_ValidPlayer(owner) || gPlayer[owner][pRentalVehicle] != vehicleid)
 	{
 		LD_VehRelease(vehicleid);
 		DestroyVehicle(vehicleid);
 		return 0;
 	}
-	if (gPlayer[owner][PLAYER_DATA_405] == 2)
+	if (gPlayer[owner][pRentalClass] == 2)
 	{
 		Rental_ClosePro(owner, 4);
 		return 0;

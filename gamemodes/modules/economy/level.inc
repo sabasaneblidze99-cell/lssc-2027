@@ -22,22 +22,22 @@ Level_FromExp(exp)
 
 Level_Announce(playerid)
 {
-	SendClientMessage(playerid, -2994689, "Complimenti! Hai raggiunto il livello %d.", gPlayer[playerid][PLAYER_DATA_90]);
+	SendClientMessage(playerid, -2994689, "Complimenti! Hai raggiunto il livello %d.", gPlayer[playerid][pLevel]);
 }
 
 bool:Level_AddExp(playerid, amount)
 {
-	if (playerid < 0 || playerid >= 1000 || !IsPlayerConnected(playerid) || amount <= 0)
+	if (playerid < 0 || playerid >= MAX_PLAYERS || !IsPlayerConnected(playerid) || amount <= 0)
 	{
 		return 0;
 	}
-	new maxExp = Level_ExpForLevel(50), exp = gPlayer[playerid][PLAYER_DATA_91];
+	new maxExp = Level_ExpForLevel(50), exp = gPlayer[playerid][pExp];
 	exp = amount > maxExp - exp ? maxExp : exp + amount;
-	gPlayer[playerid][PLAYER_DATA_91] = exp;
-	new newLevel = Level_FromExp(exp), bool:up = newLevel > gPlayer[playerid][PLAYER_DATA_90];
+	gPlayer[playerid][pExp] = exp;
+	new newLevel = Level_FromExp(exp), bool:up = newLevel > gPlayer[playerid][pLevel];
 	if (up)
 	{
-		gPlayer[playerid][PLAYER_DATA_90] = newLevel;
+		gPlayer[playerid][pLevel] = newLevel;
 		Level_Announce(playerid);
 	}
 	Char_RefreshHud(playerid);
@@ -46,7 +46,7 @@ bool:Level_AddExp(playerid, amount)
 
 bool:Level_Set(playerid, level)
 {
-	if (playerid < 0 || playerid >= 1000 || !IsPlayerConnected(playerid))
+	if (playerid < 0 || playerid >= MAX_PLAYERS || !IsPlayerConnected(playerid))
 	{
 		return 0;
 	}
@@ -54,8 +54,8 @@ bool:Level_Set(playerid, level)
 	{
 		return 0;
 	}
-	gPlayer[playerid][PLAYER_DATA_90] = level;
-	gPlayer[playerid][PLAYER_DATA_91] = Level_ExpForLevel(level);
+	gPlayer[playerid][pLevel] = level;
+	gPlayer[playerid][pExp] = Level_ExpForLevel(level);
 	Char_RefreshHud(playerid);
 	return 1;
 }

@@ -1,8 +1,8 @@
 *.amx
-mysql.ini
-logs/
 *.log
-scriptfiles/
-image.bin
 *.lst
 __pycache__/
+image.bin
+logs/
+mysql.ini
+scriptfiles/
