@@ -1,4 +1,4 @@
-new g_CmdNames[95][16] = {
+new g_CmdNames[97][16] = {
 	"me",
 	"do",
 	"try",
@@ -93,7 +93,9 @@ new g_CmdNames[95][16] = {
 	"ban",
 	"unban",
 	"setfazione",
-	"ldset"
+	"ldset",
+	"chatsamp",
+	"chatcef"
 };
 
 Cmd_Dispatch(playerid, cmdtext[])
@@ -118,7 +120,7 @@ Cmd_Dispatch(playerid, cmdtext[])
 		pos++;
 	}
 	new index = -1;
-	for (new i = 0; i < 95; i++)
+	for (new i = 0; i < sizeof g_CmdNames; i++)
 	{
 		if (!strcmp(name, g_CmdNames[i], 0, 0x7FFFFFFF))
 		{
@@ -863,4 +865,16 @@ public Cmd_aiuto(playerid, params[])
 public Cmd_ldset(playerid, params[])
 {
 	return District_CmdLdset(playerid, params) ? 1 : 0;
+}
+
+public Cmd_chatsamp(playerid, params[])
+{
+	HudCef_CmdChat(playerid, false);
+	return 1;
+}
+
+public Cmd_chatcef(playerid, params[])
+{
+	HudCef_CmdChat(playerid, true);
+	return 1;
 }

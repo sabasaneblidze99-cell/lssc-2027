@@ -147,6 +147,7 @@ CefUI_HudData(playerid, money, bank, level, expIn, expStep)
 	g_CefHud[playerid][3] = expIn;
 	g_CefHud[playerid][4] = expStep;
 	g_CefHudHas[playerid] = 1;
+	HudCef_OnHudData(playerid, money, bank, level);
 	if (CefUI_Active(playerid) && g_CefHudOn[playerid])
 	{
 		CefUI_HudSend(playerid);
@@ -181,6 +182,7 @@ CefUI_HudShow(playerid, bool:show)
 		CefUI_AuthClose(playerid);
 		CefUI_HudSend(playerid);
 	}
+	HudCef_OnVisible(playerid, show);
 }
 
 bool:CefUI_HudIsOn(playerid)

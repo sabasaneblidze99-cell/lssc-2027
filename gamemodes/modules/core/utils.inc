@@ -1,10 +1,9 @@
 new g_UtilSaltChars[63];
 
-Util_Send(playerid, color, text[])
+Util_Send(playerid, color, const text[])
 {
-	static out[512];
-	Lang_Translit(text, out, 512);
-	return SendClientMessage(playerid, color, "%s", out);
+	// traslitterazione (giocatori senza chat CEF) e invio: core/chat.inc
+	return Chat_Line(playerid, color, text);
 }
 
 bool:Util_IsPlaying(playerid)
@@ -93,7 +92,13 @@ bool:Util_SanitizeText(src[], dest[], maxLen)
 	Util_Trim(tmp);
 	if (strlen(tmp) > maxLen)
 	{
-		tmp[maxLen] = 0;
+		// non spezzare un carattere UTF-8 (georgiano = 3 byte): si torna all'inizio del carattere
+		new cut = maxLen;
+		while (cut > 0 && (tmp[cut] & 0xC0) == 0x80)
+		{
+			cut--;
+		}
+		tmp[cut] = 0;
 		Util_Trim(tmp);
 	}
 	strmid(dest, tmp, 0, maxLen, maxLen + 1);
@@ -232,6 +237,7 @@ Util_SendNear(sourceid, color, Float:radius, text[])
 	new Float:x, Float:y, Float:z;
 	GetPlayerPos(sourceid, x, y, z);
 	new interior = GetPlayerInterior(sourceid), world = GetPlayerVirtualWorld(sourceid);
+	Chat_SetCategory(color == 0xAAAAAAFF ? CHAT_CAT_OOC : CHAT_CAT_IC);
 	for (new i = 0; i < MAX_PLAYERS; i++)
 	{
 		if (!gPlayer[i][pSpawned] || !Util_IsPlaying(i))
@@ -251,6 +257,7 @@ Util_SendNear(sourceid, color, Float:radius, text[])
 			SendClientMessage(i, color, "%s%s%s", l > 0 ? "... " : "", lines[l], l < count - 1 ? " ..." : "");
 		}
 	}
+	Chat_SetCategory(CHAT_CAT_AUTO);
 }
 
 bool:Util_InRange(playerid, targetid, Float:radius)

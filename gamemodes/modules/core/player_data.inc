@@ -6,7 +6,7 @@ Player_Reset(playerid)
 	{
 		return 0;
 	}
-	for (new i = 0; i < 511; i++)
+	for (new i = 0; i < _:E_PLAYER_DATA; i++)
 	{
 		gPlayer[playerid][i] = 0;
 	}

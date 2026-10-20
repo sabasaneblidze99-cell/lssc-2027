@@ -101,3 +101,38 @@ Esempio Pawn: `cef_subscribe("lssc:accept", "Cef_OnAccept");` e
 `fonts/` Barlow e Barlow Condensed (woff2 latin da @fontsource 5.3.0, licenza SIL OFL 1.1 in `fonts/OFL.txt`).
 Solo anteprima/test (non servono in gioco): `preview.html`, `preview-server.js`, `_screenshots/`.
 Anteprima in un browser normale: aprire `preview.html` (parametri `?res=720|1080&scene=...`).
+
+## HUD Glass UI (cef/assets/hud) - eventi aggiunti
+
+Server (`gamemodes/modules/ui/hud_cef.inc`) → pagina. Tutti inviati **solo quando il valore cambia**; timer unico 250 ms
+(tachimetro 4 Hz solo per chi guida, il resto 1 Hz).
+
+| Evento | Argomenti | Note |
+|---|---|---|
+| `lssc:identity` | name(s), playerid | all'apertura dell'HUD |
+| `lssc:clock` | hour, minute, day, month, year | ora del server, al cambio di minuto |
+| `lssc:status` | health, armor, hunger, thirst | 0-100; `thirst` -1 = il gamemode non ha la sete (indicatore nascosto) |
+| `lssc:veh_show` | show, modelName(s) | 1 quando il giocatore guida, 0 quando scende/muore |
+| `lssc:veh` | speedKmh, fuelPct, engine, lights, healthPct, locked | `fuelPct` -1 = veicolo senza carburante gestito (non personale). Niente marcia: il gamemode non simula un cambio |
+| `lssc:zone` | districtId, danger, indoor | `districtId` 0 = fuori dai quartieri Living; `danger` -1 ignoto, 0 sicura (sicurezza >= 60), 1 normale, 2 pericolosa (crimine >= 70) |
+| `lssc:voice` | state, key(s) | 0 SampVoice assente, 1 nessun microfono, 2 pronto |
+| `lssc:interact` | show, key(s), label(s), progress | punto interattivo vicino; `progress` -1 = nessuna barra |
+| `lssc:chat_mode` | on | 1 = la chat CEF sostituisce quella di SA-MP per questo giocatore |
+| `lssc:chat` | category, text(s) | 0 sistema, 1 IC, 2 OOC, 3 fazione, 4 lavoro, 5 annunci, 6 emergenze, 7 admin; testo UTF-8 con colori `{RRGGBB}` |
+| `lssc:chat_open` | prefill(s) | apre l'input della chat |
+| `lssc:notify` | kind, title(s), text(s), ms | 0 successo, 1 info, 2 avviso, 3 errore, 4 soldi ricevuti, 5 soldi spesi, 6 missione, 7 lavoro, 8 RP |
+| `lssc:money_delta` | delta, isBank | dopo un cambio reale di `lssc:hud` |
+| `lssc:levelup` | level | |
+| `lssc:quick_open` | mask | bit 0 inventario, 1 telefono, 2 mappa, 3 animazioni, 4 veicoli (impostazioni sempre). Chiede il focus |
+| `lssc:quick_close` | - | |
+
+Pagina → server:
+
+| Evento | Argomenti | Equivalente |
+|---|---|---|
+| `lssc:chat_send` | testo UTF-8 in esadecimale | `/...` = `OnPlayerCommandText` (Cmd_Dispatch), altrimenti `OnPlayerText` (stesse verifiche, anti-flood 700 ms) |
+| `lssc:quick` | inventory / phone / vehicles | `/inventario`, `/telefono`, `/v list` |
+| `lssc:quick_close` | - | menu chiuso con Esc |
+
+Tasti: **Y** (lato server, `KEY_YES`) esegue il comando del punto interattivo; **N** (`KEY_NO`, a piedi) apre le azioni rapide;
+**F6** (lato pagina, grazie a `cef_always_listen_keys`) apre l'input della chat CEF. `/chatsamp` e `/chatcef` scelgono la chat.

@@ -722,6 +722,10 @@ UI_HungerHudUpdate(playerid, hunger)
 	{
 		return 0;
 	}
+	if (CefUI_Active(playerid))
+	{
+		return 0;    // la fame e' nel pannello CEF (ui/hud_cef.inc)
+	}
 	UI_HhCreate(playerid);
 	if (hunger < 0)
 	{

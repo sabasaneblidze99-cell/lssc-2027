@@ -34,7 +34,7 @@ new g_LangKa[33][3] = {
 	"h"
 };
 
-Lang_Utf8Next(src[], &i)
+Lang_Utf8Next(const src[], &i)
 {
 	new c = src[i] & 255;
 	if (c < 128)
@@ -77,7 +77,7 @@ Lang_Utf8Next(src[], &i)
 	return cp;
 }
 
-Lang_Translit(src[], dest[], size)
+Lang_Translit(const src[], dest[], size)
 {
 	new i = 0, o = 0;
 	while (src[i] != 0 && o < size - 1)

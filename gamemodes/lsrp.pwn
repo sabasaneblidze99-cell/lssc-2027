@@ -6,6 +6,7 @@
 #include <open.mp>
 #include <a_mysql>
 #include <samp_bcrypt>
+// chat vocale SampVoice: compilare con LSRP_VOICE=1 (server con plugin SampVoice)
 #if defined LSRP_CEF
 	#include <cef>
 #endif
@@ -14,6 +15,8 @@
 
 #include "modules/core/enums.inc"
 #include "modules/core/forwards.inc"
+#include "modules/core/chat.inc"
+#include "modules/core/vehicle_names.inc"
 #include "modules/core/lang.inc"
 #include "modules/core/player_data.inc"
 #include "modules/core/utils.inc"
@@ -66,6 +69,8 @@
 #include "modules/cityos/cityos.inc"
 #include "modules/hub/hub.inc"
 #include "modules/cef/cef_bridge.inc"
+#include "modules/ui/hud_cef.inc"
+#include "modules/voice/voice.inc"
 #include "modules/commands/admin_commands.inc"
 #include "modules/commands/rp_commands.inc"
 
@@ -92,6 +97,8 @@ public OnGameModeInit()
 	Inv_OnInit();
 	Bank_OnInit();
 	Living_OnInit();
+	HudCef_OnInit();
+	Voice_OnInit();
 	CefBridge_OnInit();
 	return 1;
 }
@@ -103,6 +110,8 @@ public OnGameModeExit()
 	Bank_OnExit();
 	Intro_OnExit();
 	Job_OnExit();
+	HudCef_OnExit();
+	Voice_OnExit();
 	Living_OnExit();
 	Faction_OnExit();
 	Veh_OnExit();
@@ -123,6 +132,7 @@ public OnPlayerConnect(playerid)
 	Job_OnPlayerConnect(playerid);
 	Faction_OnPlayerConnect(playerid);
 	Living_OnPlayerConnect(playerid);
+	HudCef_OnPlayerConnect(playerid);
 	Account_OnConnect(playerid);
 	return 1;
 }
@@ -133,6 +143,8 @@ public OnPlayerDisconnect(playerid, reason)
 	Inv_OnPlayerDisconnect(playerid);
 	Job_OnPlayerDisconnect(playerid);
 	Living_OnPlayerDisconnect(playerid, reason);
+	Voice_OnPlayerDisconnect(playerid);
+	HudCef_OnPlayerDisconnect(playerid);
 	Veh_OnPlayerDisconnect(playerid);
 	UI_VehicleUiDestroy(playerid);
 	House_OnPlayerDisconnect(playerid);
@@ -187,6 +199,7 @@ public OnPlayerSpawn(playerid)
 	Veh_OnPlayerSpawn(playerid);
 	House_OnPlayerSpawn(playerid);
 	Faction_OnPlayerSpawn(playerid);
+	Voice_OnPlayerSpawn(playerid);
 	Inv_OnPlayerSpawn(playerid);
 	Living_OnPlayerSpawn(playerid);
 	return 1;
@@ -208,11 +221,13 @@ public OnPlayerUpdate(playerid)
 
 public OnPlayerText(playerid, text[])
 {
-	if (!Char_OnText(playerid))
+	if (!Char_OnText(playerid) || !Admin_OnText(playerid))
 	{
 		return 0;
 	}
-	return Admin_OnText(playerid);
+	// stessa chat di SA-MP ("Nome: testo" a tutti) ma attraverso l'adapter: chi ha la chat CEF la riceve li'
+	Chat_Broadcast(playerid, text);
+	return 0;
 }
 
 public OnRconCommand(cmd[])
@@ -301,6 +316,7 @@ public OnVehicleDeath(vehicleid, killerid)
 public OnPlayerKeyStateChange(playerid, KEY:newkeys, KEY:oldkeys)
 {
 	Intro_OnKeyStateChange(playerid, newkeys);
+	HudCef_OnKeyStateChange(playerid, newkeys, oldkeys);
 	return 1;
 }
 

@@ -394,6 +394,10 @@ UI_VehicleHudShow(playerid)
 	{
 		return 0;
 	}
+	if (CefUI_Active(playerid))
+	{
+		return 0;    // tachimetro CEF (ui/hud_cef.inc)
+	}
 	UI_VHudCreate(playerid);
 	g_UiVHudShown[playerid] = 1;
 	UI_VHudSetVisible(playerid, 1);

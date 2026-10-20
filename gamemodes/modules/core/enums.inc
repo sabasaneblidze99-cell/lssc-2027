@@ -157,7 +157,8 @@ enum E_PLAYER_DATA
 	pOnboardStep,
 	pHintsOff,
 	pLastHintTick,
-	pDonationPending
+	pDonationPending,
+	bool:pChatSamp	// preferenza: chat SA-MP invece della chat CEF (HUD Glass UI)
 }
 
 enum E_VEH_ROW

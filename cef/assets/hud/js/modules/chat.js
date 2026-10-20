@@ -12,7 +12,11 @@
     var el = document.createElement("section");
     el.className = "ch";
     el.hidden = true;
-    var tabs = T.chatTabs.map(function (t) { return '<span class="ch-tab' + (t[0] === "all" ? " on" : "") + '" data-f="' + t[0] + '">' + t[1] + "</span>"; }).join("");
+    // le schede compaiono quando arriva il primo messaggio di quella categoria (solo sistemi reali del server)
+    var ALWAYS = { all: 1, ic: 1, ooc: 1, system: 1 };
+    var tabs = T.chatTabs.map(function (t) {
+      return '<span class="ch-tab' + (t[0] === "all" ? " on" : "") + '" data-f="' + t[0] + '"' + (ALWAYS[t[0]] ? "" : " hidden") + ">" + t[1] + "</span>";
+    }).join("");
     el.innerHTML =
       '<div class="ch-box"><div class="ch-tabs">' + tabs + '</div><div class="ch-lines" id="ch-lines" aria-live="polite"></div></div>' +
       '<div class="ch-input"><span class="g-ico">' + I("send") + '</span><input id="ch-in" maxlength="' + MAX_INPUT + '" autocomplete="off" spellcheck="false"><span class="cnt" id="ch-cnt"></span></div>' +
@@ -51,6 +55,8 @@
 
     HUD.chat = {
       add: function (cat, text) {
+        var tab = el.querySelector('.ch-tab[data-f="' + cat + '"]');
+        if (tab) tab.hidden = false;
         var line = document.createElement("div");
         line.className = "ch-line c-" + cat;
         line.dataset.cat = cat;

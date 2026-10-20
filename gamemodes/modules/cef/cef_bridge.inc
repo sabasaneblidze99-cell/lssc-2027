@@ -20,6 +20,9 @@ CefBridge_OnInit()
 	cef_subscribe("lssc:skin", "Cef_OnSkin");
 	cef_subscribe("lssc:story", "Cef_OnStory");
 	cef_subscribe("lssc:quit", "Cef_OnQuit");
+	cef_subscribe("lssc:chat_send", "Cef_OnChatSend");
+	cef_subscribe("lssc:quick", "Cef_OnQuick");
+	cef_subscribe("lssc:quick_close", "Cef_OnQuickClose");
 	SetTimer("CefBridge_ClockTick", 30000, 1);
 	Log_Write("CEF", "interfaccia CEF attiva: pagine da <GTA>/cef/assets/index.html");
 #endif
