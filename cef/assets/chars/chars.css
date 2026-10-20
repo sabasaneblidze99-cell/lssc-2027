@@ -1,0 +1,40 @@
+/* chars.css - selezione e creazione dei personaggi (vista "chars"). Token da hud/css/variables.css. */
+#view-chars { position: fixed; inset: 0; z-index: 30; display: flex; align-items: center; justify-content: center;
+  font-family: var(--sc-text); color: var(--sc-white);
+  background: radial-gradient(120% 90% at 50% 100%, rgba(10, 9, 24, 0.94) 0%, rgba(17, 17, 38, 0.72) 55%, rgba(17, 17, 38, 0.35) 100%); }
+#view-chars[hidden] { display: none; }
+.cs-wrap { width: min(66rem, calc(100vw - 2rem)); }
+.cs-title { font-family: var(--sc-cond); font-weight: 700; font-size: clamp(1.6rem, 2.6vw, 2.4rem); line-height: 1.05; margin-bottom: 0.3rem; }
+.cs-lead { color: var(--sc-text2); margin-bottom: 1.2rem; }
+.cs-slots { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.9rem; }
+.cs-slot { position: relative; text-align: left; cursor: pointer; min-height: 13rem; padding: 1.2rem; display: flex; flex-direction: column;
+  border-radius: var(--sc-radius); background: var(--sc-panel); border: 1px solid var(--sc-glass-border);
+  box-shadow: var(--sc-shadow), var(--sc-highlight); color: inherit; font: inherit; transition: transform .14s ease, border-color .14s ease; }
+.cs-slot:hover, .cs-slot:focus-visible { transform: translateY(-3px); border-color: rgba(255, 54, 116, 0.65); outline: none; }
+.cs-slot.empty { background: rgba(255, 255, 255, 0.03); border-style: dashed; align-items: center; justify-content: center; text-align: center; color: var(--sc-text2); }
+.cs-slot.empty .cs-plus { width: 3rem; height: 3rem; border-radius: 50%; display: grid; place-items: center; margin-bottom: 0.6rem;
+  background: rgba(168, 85, 247, 0.16); border: 1px solid rgba(168, 85, 247, 0.4); font-family: var(--sc-num); font-size: 1.8rem; color: var(--sc-white); }
+.cs-num { position: absolute; top: 0.9rem; right: 1rem; font-family: var(--sc-num); font-weight: 700; color: var(--sc-text3); }
+.cs-name { font-family: var(--sc-cond); font-weight: 700; font-size: 1.45rem; line-height: 1.1; margin-top: auto; word-break: break-word; }
+.cs-meta { display: flex; gap: 1rem; margin-top: 0.6rem; font-family: var(--sc-num); font-weight: 600; font-size: 1.05rem; }
+.cs-meta span { color: var(--sc-text2); font-family: var(--sc-text); font-weight: 500; font-size: 0.85rem; display: block; }
+.cs-last { margin-top: 0.5rem; color: var(--sc-text3); font-size: 0.88rem; }
+.cs-badge { width: 2.6rem; height: 2.6rem; border-radius: 0.7rem; display: grid; place-items: center; background: rgba(168, 85, 247, 0.16); border: 1px solid rgba(168, 85, 247, 0.35); }
+.cs-badge svg, .cs-form svg { width: 1.4rem; height: 1.4rem; fill: none; stroke: var(--sc-white); stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.cs-form { max-width: 34rem; padding: 1.5rem; border-radius: var(--sc-radius); background: var(--sc-panel); border: 1px solid var(--sc-glass-border); box-shadow: var(--sc-shadow), var(--sc-highlight); }
+.cs-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; margin-bottom: 1rem; }
+.cs-row.date { grid-template-columns: 1fr 1fr 1.4fr; }
+.cs-field label { display: block; font-size: 0.85rem; color: var(--sc-text2); margin-bottom: 0.35rem; }
+.cs-field input { width: 100%; height: 2.7rem; padding: 0 0.8rem; border-radius: var(--sc-radius-sm); border: 1px solid var(--sc-glass-border);
+  background: rgba(8, 7, 20, 0.55); color: var(--sc-white); font: 600 1.05rem var(--sc-text); }
+.cs-field input:focus { outline: none; border-color: var(--sc-pink); }
+.cs-preview { font-family: var(--sc-num); font-weight: 600; color: var(--sc-text2); margin-bottom: 1rem; min-height: 1.4em; }
+.cs-err { min-height: 1.3em; color: #FF8A9B; font-size: 0.92rem; margin-bottom: 0.8rem; }
+.cs-actions { display: flex; gap: 0.7rem; justify-content: flex-end; }
+.cs-btn { height: 2.7rem; padding: 0 1.3rem; border-radius: var(--sc-radius-sm); border: 1px solid var(--sc-glass-border); background: rgba(255, 255, 255, 0.06);
+  color: var(--sc-white); font: 600 1rem var(--sc-text); cursor: pointer; }
+.cs-btn.go { border: 0; background: var(--sc-grad); }
+.cs-btn[disabled] { opacity: .5; cursor: default; }
+.cs-hint { margin-top: 1rem; color: var(--sc-text3); font-size: 0.86rem; }
+@media (max-width: 760px) { .cs-slots { grid-template-columns: 1fr; } .cs-slot { min-height: 8rem; } }
+@media (prefers-reduced-motion: reduce) { .cs-slot { transition: none; } }

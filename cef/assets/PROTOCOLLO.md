@@ -136,3 +136,20 @@ Pagina → server:
 
 Tasti: **Y** (lato server, `KEY_YES`) esegue il comando del punto interattivo; **N** (`KEY_NO`, a piedi) apre le azioni rapide;
 **F6** (lato pagina, grazie a `cef_always_listen_keys`) apre l'input della chat CEF. `/chatsamp` e `/chatcef` scelgono la chat.
+
+## Personaggi (M15) e scelta dello spawn
+
+| Verso | Evento | Argomenti | Note |
+|---|---|---|---|
+| server → pagina | `lssc:chars_begin` | slots(i) | inizio lista (3) |
+| server → pagina | `lssc:chars_add` | slot(i) used(i) name(s) level(i) cash(i) skin(i) last(s) | una per slot |
+| server → pagina | `lssc:chars_new` | slot(i) | mostra il modulo di creazione |
+| server → pagina | `lssc:chars_err` | code(i) | 1 nome non valido, 2 occupato, 3 data non valida, 4 riprova |
+| pagina → server | `lssc:char_pick` | slot | personaggio esistente → caricamento |
+| pagina → server | `lssc:char_create` | slot Nome Cognome giorno mese anno | nomi solo latini (nessuno spazio) |
+| pagina → server | `lssc:char_back` | - | dal modulo alla lista |
+| server → pagina | `lssc:spawn_begin` | forced(i) seconds(i) | forced 1 = uscito in combattimento |
+| server → pagina | `lssc:spawn_add` | idx(i) icon(s) title(s) sub(s) | icone: pin home badge medic briefcase city |
+| pagina → server | `lssc:spawn_pick` | idx | |
+
+Viste: `lssc:open chars`, `lssc:open spawn` (chiedono il focus; ESC non le chiude).

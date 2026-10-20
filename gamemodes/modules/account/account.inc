@@ -186,7 +186,7 @@ Account_CompleteLogin(playerid, accountId, adminLevel)
 	format(msg, 128, "login account %d (%s)", accountId, name);
 	Log_Write("ACCOUNT", msg);
 	Util_Send(playerid, 0x66DD66FF, "შესვლა წარმატებულია.");
-	DB_LoadCharacter(playerid, accountId);
+	CharSel_Begin(playerid);       // M15: selezione dei 3 personaggi (character/char_select.inc)
 }
 
 Account_SetPendingEmail(playerid, email[])

@@ -1,6 +1,8 @@
 # Sistema account e personaggi (multi-character) — progetto
 
-Stato: **PROGETTO**, nessun codice modificato. Livelli di verifica: niente oltre `[SCRITTO]` finché non è implementato.
+Stato (ottobre 2026): **M15 implementato** in `character/char_select.inc` + vista CEF `cef/assets/chars/` (selezione 3 slot, nome/cognome, data di nascita,
+`SetPlayerName`), compilato e provato nella pagina; **da provare in gioco**. Cambio personaggio (`/cambiapg`, M21) e archetipi (M16) non ancora fatti.
+Dopo la selezione: scelta dello spawn (`character/spawn_select.inc`, vista `cef/assets/spawn/`).
 
 ## 1. Cosa esiste oggi (analisi)
 

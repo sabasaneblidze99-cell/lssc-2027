@@ -74,6 +74,7 @@
 #include "modules/voice/voice.inc"
 #include "modules/world/mapicons.inc"
 #include "modules/character/spawn_select.inc"
+#include "modules/character/char_select.inc"
 #include "modules/commands/admin_commands.inc"
 #include "modules/commands/rp_commands.inc"
 
@@ -140,6 +141,7 @@ public OnPlayerConnect(playerid)
 	HudCef_OnPlayerConnect(playerid);
 	StreetRental_OnPlayerConnect(playerid);
 	SpawnSel_OnPlayerConnect(playerid);
+	CharSel_OnPlayerConnect(playerid);
 	Account_OnConnect(playerid);
 	return 1;
 }
@@ -147,6 +149,7 @@ public OnPlayerConnect(playerid)
 public OnPlayerDisconnect(playerid, reason)
 {
 	SpawnSel_OnPlayerDisconnect(playerid);   // prima di Faction (manette)
+	CharSel_OnPlayerDisconnect(playerid);
 	Bank_OnPlayerDisconnect(playerid);
 	Inv_OnPlayerDisconnect(playerid);
 	Job_OnPlayerDisconnect(playerid);
@@ -258,6 +261,10 @@ public OnPlayerCommandText(playerid, cmdtext[])
 
 public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 {
+	if (CharSel_OnDialogResponse(playerid, dialogid, response, listitem, inputtext))
+	{
+		return 1;
+	}
 	if (SpawnSel_OnDialogResponse(playerid, dialogid, listitem))
 	{
 		return 1;

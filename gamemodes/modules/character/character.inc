@@ -135,6 +135,11 @@ public Char_OnDBLoaded(playerid, bool:found)
 	if (found)
 	{
 		Char_SanitizeLoaded(playerid);
+		if (!CharSel_ApplyLoadedName(playerid))
+		{
+			Account_Kick(playerid, "პერსონაჟის სახელი ახლა დაკავებულია (სხვა მოთამაშე სერვერზეა). სცადე მოგვიანებით.");
+			return 1;
+		}
 		Intro_OnCharLoaded(playerid);
 		SpawnSel_Begin(playerid);      // scelta dello spawn (character/spawn_select.inc)
 		return 1;
@@ -243,7 +248,7 @@ Char_OnExit()
 Char_OnRequestClass(playerid)
 {
 	gPlayer[playerid][pClassRequested] = 1;
-	if (SpawnSel_Active(playerid))
+	if (SpawnSel_Active(playerid) || CharSel_Active(playerid))
 	{
 		Char_SetLoginCamera(playerid);
 		return 1;

@@ -170,6 +170,17 @@ bool:Util_ParsePlayerId(token[], &id)
 	return id >= 0 && id < 1000;
 }
 
+bool:Util_IsValidRPNameC(const name[])
+{
+	new tmp[25];
+	if (strlen(name) >= sizeof tmp)
+	{
+		return false;
+	}
+	strcat(tmp, name);
+	return Util_IsValidRPName(tmp);
+}
+
 bool:Util_IsValidRPName(name[])
 {
 	new us = -1, len = strlen(name);
