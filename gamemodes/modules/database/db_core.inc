@@ -187,7 +187,7 @@ bool:DB_Connect()
 			print("[DB] connesso (utf8mb4, via mysql_connect_file)");
 			return 1;
 		}
-		printf("[DB] file '%s' non trovato/non leggibile (atteso nella stessa cartella di omp-server, cioe' la radice del server).", "mysql.ini");
+		printf("[DB] connessione con '%s' fallita: il file va nella radice del server (accanto a omp-server) oppure in scriptfiles/.", "mysql.ini");
 		print("[DB] attenzione: su Windows controlla che non si chiami 'mysql.ini.txt' (estensioni nascoste) e che le chiavi siano hostname, username, password, database, server_port.");
 		DB_ConnectFinish(h, "mysql_connect_file");
 		return 0;

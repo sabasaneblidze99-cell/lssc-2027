@@ -309,7 +309,7 @@ SpawnSel_Texts(playerid, idx, icon[], isize, title[], tsize, sub[], ssize)
 		{
 			strcat(icon, "pin", isize);
 			strcat(title, "ბოლო ადგილი", tsize);
-			new away[48], zone[40];
+			new away[96], zone[64];
 			SpawnSel_Away(playerid, away, sizeof away);
 			SpawnSel_Zone(g_SsPos[playerid][idx][0], g_SsPos[playerid][idx][1], zone, sizeof zone);
 			if (g_SsInt[playerid][idx] != 0)
@@ -357,7 +357,7 @@ SpawnSel_Show(playerid)
 		SpawnSel_Pick(playerid, 0);      // personaggio nuovo: niente da scegliere
 		return 1;
 	}
-	new icon[16], title[64], sub[96];
+	new icon[16], title[96], sub[192];
 	if (CefUI_Active(playerid))
 	{
 		cef_emit_event(playerid, "lssc:spawn_begin", 1, g_SsForced[playerid] ? 1 : 0, 1, SPAWN_CHOICE_MS / 1000);
@@ -370,7 +370,7 @@ SpawnSel_Show(playerid)
 	}
 	else
 	{
-		new body[640], line[180];
+		new body[1400], line[320];
 		for (new i = 0; i < g_SsCount[playerid]; i++)
 		{
 			SpawnSel_Texts(playerid, i, icon, sizeof icon, title, sizeof title, sub, sizeof sub);

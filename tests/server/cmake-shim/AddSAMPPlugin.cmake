@@ -1,0 +1,8 @@
+function(add_samp_plugin name)
+  add_library(${name} MODULE ${ARGN})
+  set_target_properties(${name} PROPERTIES PREFIX "")
+  if(UNIX)
+    set_property(TARGET ${name} APPEND_STRING PROPERTY COMPILE_FLAGS " -m32")
+    set_property(TARGET ${name} APPEND_STRING PROPERTY LINK_FLAGS " -m32")
+  endif()
+endfunction()

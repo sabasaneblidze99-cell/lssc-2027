@@ -183,7 +183,7 @@ CharSel_ShowList(playerid)
 {
 	gPlayer[playerid][pAuthState] = CS_STATE_LIST;
 	Char_SetLoginCamera(playerid);
-	new away[24];
+	new away[48];
 	if (CefUI_Active(playerid))
 	{
 		cef_emit_event(playerid, "lssc:chars_begin", 1, CS_SLOTS);
@@ -196,7 +196,7 @@ CharSel_ShowList(playerid)
 		CefUI_Open(playerid, "chars", "");
 		return 1;
 	}
-	new body[512], line[128];
+	new body[1024], line[256];
 	strcat(body, "სლოტი\tპერსონაჟი\tდონე\n");
 	for (new s = 0; s < CS_SLOTS; s++)
 	{
@@ -281,14 +281,14 @@ CharSel_CountChars(playerid)
 
 CharSel_ShowNameDialog(playerid, const err[])
 {
-	new body[400], launcher[25];
+	new body[1024], launcher[25];
 	GetPlayerName(playerid, launcher, sizeof launcher);
 	format(body, sizeof body,
 		"%s%s{FFFFFF}შეიყვანე პერსონაჟის სახელი და გვარი ფორმატში {66DD66}Saxeli_Gvari{FFFFFF} (მაგ. Giorgi_Beridze).\n\n{AAAAAA}მხოლოდ ლათინური ასოები, ორივე დიდი ასოთი იწყება.",
 		err, err[0] ? "\n\n" : "");
 	if (CharSel_CountChars(playerid) == 0)
 	{
-		new extra[96];
+		new extra[160];
 		format(extra, sizeof extra, "\n{AAAAAA}ცარიელი ველი = %s", launcher);
 		strcat(body, extra);
 	}
@@ -297,7 +297,7 @@ CharSel_ShowNameDialog(playerid, const err[])
 
 CharSel_ShowBirthDialog(playerid, const err[])
 {
-	new body[320];
+	new body[768];
 	format(body, sizeof body, "%s%s{FFFFFF}დაბადების თარიღი ფორმატში {66DD66}DD/MM/YYYY{FFFFFF} (მაგ. 14/05/1998).\n\n{AAAAAA}ასაკი: %d-დან %d წლამდე.",
 		err, err[0] ? "\n\n" : "", CS_AGE_MIN, CS_AGE_MAX);
 	Lang_ShowPlayerDialog(playerid, CS_DIALOG_BIRTH, DIALOG_STYLE_INPUT, "ახალი პერსონაჟი - დაბადება", body, "შემდეგი", "უკან");
