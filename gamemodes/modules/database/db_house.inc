@@ -39,6 +39,7 @@ DB_HouseStaleRelease(playerid, op)
 	{
 		DB_PendingClear(playerid, op);
 	}
+	return 0;
 }
 
 DB_HouseOpSlot(op)
@@ -232,6 +233,7 @@ DB_HouseCompensate(what, ownerId, houseId, kind, token, bool:recut)
 		}
 	}
 	mysql_tquery(g_DB, query, "DB_OnHouseCompensated", "ddd", what, ownerId, houseId);
+	return 0;
 }
 
 public DB_OnHouseCompensated(what, ownerId, houseId)
@@ -259,6 +261,7 @@ DB_HouseResetState(houseId)
 	mysql_tquery(g_DB, query, "", "");
 	mysql_format(g_DB, query, 768, "DELETE FROM house_bills WHERE house_id = %d AND paid = 0", houseId);
 	mysql_tquery(g_DB, query, "", "");
+	return 0;
 }
 
 DB_SeedHouses()
@@ -288,6 +291,7 @@ DB_SeedHouses()
 	}
 	strcat(query, " ON DUPLICATE KEY UPDATE tier = IF(owner_id IS NULL, VALUES(tier), tier), interior_idx = IF(owner_id IS NULL, VALUES(interior_idx), interior_idx), ext_x = IF(owner_id IS NULL, VALUES(ext_x), ext_x), ext_y = IF(owner_id IS NULL, VALUES(ext_y), ext_y), ext_z = IF(owner_id IS NULL, VALUES(ext_z), ext_z), ext_a = IF(owner_id IS NULL, VALUES(ext_a), ext_a), price = IF(owner_id IS NULL, VALUES(price), price)", 2304);
 	mysql_tquery(g_DB, query, "DB_OnHouseSeeded", "");
+	return 0;
 }
 
 public DB_OnHouseSeeded()
@@ -328,6 +332,7 @@ DB_LoadHouses()
 		return 0;
 	}
 	mysql_tquery(g_DB, "INSERT IGNORE INTO house_utilities (house_id) SELECT id FROM houses", "DB_OnHouseLoadUtil", "");
+	return 0;
 }
 
 public DB_OnHouseLoadUtil()
@@ -422,6 +427,7 @@ DB_BuyHouse(playerid, houseId, ownerCharId, pricePaid, maxHouses)
 	GetPlayerName(playerid, name, 25);
 	mysql_format(g_DB, query, 768, "UPDATE houses SET owner_id = %d, price_paid = %d, locked = 1 WHERE id = %d AND owner_id IS NULL AND (%d <= 0 OR (SELECT n FROM (SELECT COUNT(*) AS n FROM houses WHERE owner_id = %d) t) < %d)", ownerCharId, max(pricePaid, 0), houseId, maxHouses, ownerCharId, maxHouses);
 	mysql_tquery(g_DB, query, "DB_OnHouseBought", "dsddd", playerid, name, ownerCharId, houseId, max(pricePaid, 0));
+	return 0;
 }
 
 public DB_OnHouseBought(playerid, const name[], ownerId, houseId, pricePaid)
@@ -462,6 +468,7 @@ DB_SellHouse(playerid, houseId, ownerCharId)
 	GetPlayerName(playerid, name, 25);
 	mysql_format(g_DB, query, 768, "UPDATE houses SET owner_id = NULL WHERE id = %d AND owner_id = %d", houseId, ownerCharId);
 	mysql_tquery(g_DB, query, "DB_OnHouseSold", "dsdd", playerid, name, ownerCharId, houseId);
+	return 0;
 }
 
 public DB_OnHouseSold(playerid, const name[], ownerId, houseId)
@@ -504,6 +511,7 @@ DB_SetHouseLock(houseId, ownerCharId, bool:locked)
 	new query[512];
 	mysql_format(g_DB, query, 512, "UPDATE houses SET locked = %d WHERE id = %d AND owner_id = %d", locked ? 1 : 0, houseId, ownerCharId);
 	mysql_tquery(g_DB, query, "", "");
+	return 0;
 }
 
 DB_SetUtility(houseId, actorCharId, utility, bool:on)
@@ -526,6 +534,7 @@ DB_SetUtility(houseId, actorCharId, utility, bool:on)
 		return 0;
 	}
 	mysql_tquery(g_DB, query, "", "");
+	return 0;
 }
 
 DB_FridgeAdd(houseId, actorCharId, delta)
@@ -537,6 +546,7 @@ DB_FridgeAdd(houseId, actorCharId, delta)
 	new query[768];
 	mysql_format(g_DB, query, 768, "UPDATE house_utilities u JOIN houses h ON h.id = u.house_id SET u.fridge_units = LEAST(65535, GREATEST(0, CAST(u.fridge_units AS SIGNED) + %d)) WHERE u.house_id = %d AND (h.owner_id = %d OR EXISTS (SELECT 1 FROM house_keys k WHERE k.house_id = h.id AND k.char_id = %d))", delta, houseId, actorCharId, actorCharId);
 	mysql_tquery(g_DB, query, "", "");
+	return 0;
 }
 
 DB_FridgeAddSys(houseId, delta)
@@ -548,6 +558,7 @@ DB_FridgeAddSys(houseId, delta)
 	new query[768];
 	mysql_format(g_DB, query, 768, "UPDATE house_utilities SET fridge_units = LEAST(65535, GREATEST(0, CAST(fridge_units AS SIGNED) + %d)) WHERE house_id = %d", delta, houseId);
 	mysql_tquery(g_DB, query, "", "");
+	return 0;
 }
 
 DB_ReloadFridge(houseId)
@@ -563,6 +574,7 @@ DB_ReloadFridge(houseId)
 	new query[768];
 	mysql_format(g_DB, query, 768, "SELECT fridge_units FROM house_utilities WHERE house_id = %d", houseId);
 	mysql_tquery(g_DB, query, "DB_OnFridgeReloaded", "d", houseId);
+	return 0;
 }
 
 public DB_OnFridgeReloaded(houseId)
@@ -588,6 +600,7 @@ DB_SaveHouseTick(houseId, ownerCharId, luceMin, gasMin, cycleMin, fridgeOffMin)
 	new query[768];
 	mysql_format(g_DB, query, 768, "UPDATE house_utilities u JOIN houses h ON h.id = u.house_id SET u.luce_min = %d, u.gas_min = %d, u.cycle_min = %d, u.fridge_off_min = %d WHERE u.house_id = %d AND h.owner_id = %d", clamp(luceMin, 0, 65535), clamp(gasMin, 0, 65535), clamp(cycleMin, 0, 65535), clamp(fridgeOffMin, 0, 65535), houseId, ownerCharId);
 	mysql_tquery(g_DB, query, "", "");
+	return 0;
 }
 
 DB_HouseSetCut(houseId, utility, bool:cut)
@@ -610,6 +623,7 @@ DB_HouseSetCut(houseId, utility, bool:cut)
 		return 0;
 	}
 	mysql_tquery(g_DB, query, "", "");
+	return 0;
 }
 
 DB_CutUtility(houseId, utility)
@@ -627,6 +641,7 @@ DB_LoadFood(playerid, charId)
 	GetPlayerName(playerid, name, 25);
 	mysql_format(g_DB, query, 512, "SELECT hunger, groceries FROM characters WHERE id = %d", charId);
 	mysql_tquery(g_DB, query, "DB_OnHouseFoodLoaded", "dsd", playerid, name, charId);
+	return 0;
 }
 
 public DB_OnHouseFoodLoaded(playerid, const name[], charId)
@@ -660,6 +675,7 @@ DB_SaveHunger(charId, hunger)
 	new query[512];
 	mysql_format(g_DB, query, 512, "UPDATE characters SET hunger = %d WHERE id = %d", clamp(hunger, 0, 100), charId);
 	mysql_tquery(g_DB, query, "", "");
+	return 0;
 }
 
 public DB_OnHouseStored(playerid, const name[], ownerId, houseId, n)
@@ -687,6 +703,7 @@ DB_AddKey(playerid, houseId, ownerCharId, targetCharId)
 	GetPlayerName(playerid, name, 25);
 	mysql_format(g_DB, query, 768, "INSERT IGNORE INTO house_keys (house_id, char_id) SELECT h.id, %d FROM houses h WHERE h.id = %d AND h.owner_id = %d AND h.owner_id <> %d AND (SELECT COUNT(*) FROM house_keys k WHERE k.house_id = h.id) < %d", targetCharId, houseId, ownerCharId, targetCharId, 3);
 	mysql_tquery(g_DB, query, "DB_OnHouseKeyAdded", "dsddd", playerid, name, ownerCharId, houseId, targetCharId);
+	return 0;
 }
 
 public DB_OnHouseKeyAdded(playerid, const name[], ownerId, houseId, targetId)
@@ -714,6 +731,7 @@ DB_RemoveKey(playerid, houseId, ownerCharId, targetCharId)
 	GetPlayerName(playerid, name, 25);
 	mysql_format(g_DB, query, 768, "DELETE k FROM house_keys k JOIN houses h ON h.id = k.house_id WHERE k.house_id = %d AND k.char_id = %d AND h.owner_id = %d", houseId, targetCharId, ownerCharId);
 	mysql_tquery(g_DB, query, "DB_OnHouseKeyRemoved", "dsddd", playerid, name, ownerCharId, houseId, targetCharId);
+	return 0;
 }
 
 public DB_OnHouseKeyRemoved(playerid, const name[], ownerId, houseId, targetId)
@@ -741,6 +759,7 @@ DB_LoadKeys(playerid, houseId, ownerCharId)
 	GetPlayerName(playerid, name, 25);
 	mysql_format(g_DB, query, 768, "SELECT k.char_id, IFNULL(a.name, '') AS name FROM house_keys k JOIN houses h ON h.id = k.house_id JOIN characters c ON c.id = k.char_id JOIN accounts a ON a.id = c.account_id WHERE k.house_id = %d AND h.owner_id = %d ORDER BY k.created_at, k.char_id LIMIT %d", houseId, ownerCharId, 3);
 	mysql_tquery(g_DB, query, "DB_OnHouseKeysLoaded", "dsdd", playerid, name, ownerCharId, houseId);
+	return 0;
 }
 
 public DB_OnHouseKeysLoaded(playerid, const name[], ownerId, houseId)
@@ -779,6 +798,7 @@ DB_AddBill(houseId, kind, amount, maxPending)
 	new query[768];
 	mysql_format(g_DB, query, 768, "INSERT INTO house_bills (house_id, kind, amount) SELECT h.id, %d, %d FROM houses h WHERE h.id = %d AND h.owner_id IS NOT NULL AND (SELECT COUNT(*) FROM house_bills b WHERE b.house_id = h.id AND b.kind = %d AND b.paid = 0) < %d", kind, max(amount, 0), houseId, kind, maxPending);
 	mysql_tquery(g_DB, query, "DB_OnHouseBillAdded", "ddd", houseId, kind, max(amount, 0));
+	return 0;
 }
 
 public DB_OnHouseBillAdded(houseId, kind, amount)
@@ -804,6 +824,7 @@ DB_AgeBills(houseId, dueCycles)
 	new query[512];
 	mysql_format(g_DB, query, 512, "UPDATE house_bills SET cycles_age = LEAST(cycles_age + 1, 255) WHERE house_id = %d AND paid = 0", houseId);
 	mysql_tquery(g_DB, query, "DB_OnHouseBillsAgedStep", "dd", houseId, dueCycles);
+	return 0;
 }
 
 public DB_OnHouseBillsAgedStep(houseId, dueCycles)
@@ -844,6 +865,7 @@ DB_LoadBills(playerid, houseId, ownerCharId)
 	GetPlayerName(playerid, name, 25);
 	mysql_format(g_DB, query, 768, "SELECT b.id, b.kind, b.amount, b.cycles_age FROM house_bills b JOIN houses h ON h.id = b.house_id WHERE b.house_id = %d AND h.owner_id = %d AND b.paid = 0 ORDER BY b.kind, b.id LIMIT %d", houseId, ownerCharId, 8);
 	mysql_tquery(g_DB, query, "DB_OnHouseBillsLoaded", "dsdd", playerid, name, ownerCharId, houseId);
+	return 0;
 }
 
 public DB_OnHouseBillsLoaded(playerid, const name[], ownerId, houseId)
@@ -901,6 +923,7 @@ DB_PayBills(playerid, houseId, ownerCharId, kind, expectedTotal, bool:restoreCut
 		mysql_format(g_DB, query, 1536, "UPDATE house_bills b JOIN houses h ON h.id = b.house_id SET b.paid = 1, b.paid_at = FROM_UNIXTIME(%d), b.pay_id = (SELECT m FROM (SELECT MIN(id) AS m FROM house_bills WHERE house_id = %d AND kind = %d AND paid = 0) pm) WHERE b.house_id = %d AND b.kind = %d AND b.paid = 0 AND h.owner_id = %d AND (SELECT s FROM (SELECT COALESCE(SUM(amount), 0) AS s FROM house_bills WHERE house_id = %d AND kind = %d AND paid = 0) t) = %d", token, houseId, kind, houseId, kind, ownerCharId, houseId, kind, expectedTotal);
 	}
 	mysql_tquery(g_DB, query, "DB_OnHouseBillsPaid", "dsdddddd", playerid, name, ownerCharId, houseId, kind, expectedTotal, token, restoreCut ? 1 : 0);
+	return 0;
 }
 
 public DB_OnHouseBillsPaid(playerid, const name[], ownerId, houseId, kind, total, token, restore)
@@ -971,6 +994,7 @@ DB_RevertBillPayment(houseId, ownerCharId, kind, bool:recut)
 	{
 		DB_HouseSetCut(houseId, kind, 1);
 	}
+	return 0;
 }
 
 DB_RestoreSoldHouse(houseId, ownerCharId, pricePaid)
@@ -983,4 +1007,5 @@ DB_RestoreSoldHouse(houseId, ownerCharId, pricePaid)
 	new query[768];
 	mysql_format(g_DB, query, 768, "UPDATE houses SET owner_id = %d, price_paid = IF(%d > 0, %d, price_paid) WHERE id = %d AND owner_id IS NULL", ownerCharId, pricePaid, pricePaid, houseId);
 	mysql_tquery(g_DB, query, "DB_OnHouseCompensated", "ddd", 2, ownerCharId, houseId);
+	return 0;
 }

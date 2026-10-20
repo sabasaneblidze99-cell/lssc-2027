@@ -87,6 +87,7 @@ CefBridge_OnInitialize(playerid, success)
 	CefUI_SetState(playerid, 1);
 	cef_create_browser(playerid, 1, "index.html", 0, 0);
 #endif
+	return 0;
 }
 
 CefBridge_Arg(const arguments[], idx, def)
@@ -119,6 +120,7 @@ CefBridge_SendProfile(playerid)
 	GetPlayerName(playerid, name, 25);
 	Job_NameOf(gPlayer[playerid][pJob], job, 32);
 	cef_emit_event(playerid, "lssc:profile", 0, name, 0, job);
+	return 0;
 }
 
 CefBridge_CmdTelefono(playerid)
@@ -131,6 +133,7 @@ CefBridge_CmdTelefono(playerid)
 	CefBridge_SendProfile(playerid);
 	CefUI_HudSend(playerid);
 	CefUI_Open(playerid, "phone", "home");
+	return 0;
 }
 
 public CefBridge_ClockTick()

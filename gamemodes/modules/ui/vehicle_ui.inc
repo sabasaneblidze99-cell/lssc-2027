@@ -97,6 +97,7 @@ UI_VehicleShopShow(playerid, level, money, bank)
 		strcat(body, line, 1536);
 	}
 	Lang_ShowPlayerDialog(playerid, 9100, 4, "Concessionario di Los Santos", body, "Scegli", "Chiudi");
+	return 0;
 }
 
 UI_VehPayShow(playerid)
@@ -121,6 +122,7 @@ UI_VehicleListClear(playerid)
 		return 0;
 	}
 	g_UiVehCount[playerid] = 0;
+	return 0;
 }
 
 UI_VehicleListAdd(playerid, slot, model, const plate[], fuelPct, vstate)
@@ -148,6 +150,7 @@ UI_VehicleListAdd(playerid, slot, model, const plate[], fuelPct, vstate)
 	g_UiVehFuel[playerid][n] = fuelPct;
 	g_UiVehState[playerid][n] = vstate;
 	g_UiVehCount[playerid] = n + 1;
+	return 0;
 }
 
 UI_VehicleListShow(playerid)
@@ -185,6 +188,7 @@ UI_VehicleListShow(playerid)
 		strcat(body, line, 1536);
 	}
 	Lang_ShowPlayerDialog(playerid, 9102, 5, "I miei veicoli", body, "Seleziona", "Chiudi");
+	return 0;
 }
 
 UI_VehActionShow(playerid)
@@ -371,6 +375,7 @@ UI_VHudCreate(playerid)
 	g_UiVHud[playerid][4] = UI_VHudBox(playerid, (5.0 + left), (398.0 + 35.0), 140.0, 6.0, 0x66DD66FF);
 	g_UiVHud[playerid][5] = UI_VHudText(playerid, (5.0 + left), (398.0 + 43.0), "MOTORE SPENTO", 0.2, 0.9, -10066177, 1);
 	g_UiVHudCreated[playerid] = 1;
+	return 0;
 }
 
 UI_VHudSetVisible(playerid, bool:visible)
@@ -401,6 +406,7 @@ UI_VehicleHudShow(playerid)
 	UI_VHudCreate(playerid);
 	g_UiVHudShown[playerid] = 1;
 	UI_VHudSetVisible(playerid, 1);
+	return 0;
 }
 
 UI_VehicleHudHide(playerid)
@@ -411,6 +417,7 @@ UI_VehicleHudHide(playerid)
 	}
 	g_UiVHudShown[playerid] = 0;
 	UI_VHudSetVisible(playerid, 0);
+	return 0;
 }
 
 UI_VehicleHudUpdate(playerid, Float:fuel, Float:fuelMax, speedKmh, bool:engineOn)
@@ -451,6 +458,7 @@ UI_VehicleHudUpdate(playerid, Float:fuel, Float:fuelMax, speedKmh, bool:engineOn
 	Lang_PlayerTextDrawSetString(playerid, g_UiVHud[playerid][5], engineOn ? "MOTORE ACCESO" : "MOTORE SPENTO");
 	PlayerTextDrawColour(playerid, g_UiVHud[playerid][5], engineOn ? 0x66DD66FF : -10066177);
 	PlayerTextDrawShow(playerid, g_UiVHud[playerid][5]);
+	return 0;
 }
 
 UI_VehicleUiDestroy(playerid)
@@ -471,4 +479,5 @@ UI_VehicleUiDestroy(playerid)
 	g_UiVHudShown[playerid] = 0;
 	g_UiVehCount[playerid] = 0;
 	g_UiVehSel[playerid] = 0;
+	return 0;
 }

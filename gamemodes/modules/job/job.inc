@@ -166,6 +166,7 @@ Job_ResetPlayer(playerid)
 	g_JcHourExp[playerid] = 0;
 	g_JcSessRuns[playerid] = 0;
 	g_JcSessEarned[playerid] = 0;
+	return 0;
 }
 
 Job_RollHour(playerid)
@@ -181,6 +182,7 @@ Job_RollHour(playerid)
 		g_JcHourEarned[playerid][j] = 0;
 	}
 	g_JcHourExp[playerid] = 0;
+	return 0;
 }
 
 bool:Job_NearCenter(playerid)
@@ -274,6 +276,7 @@ Job_TargetPos(playerid, &Float:x, &Float:y, &Float:z)
 			z = g_JobBinPts[idx][2];
 		}
 	}
+	return 0;
 }
 
 Job_ShowCheckpoint(playerid)
@@ -307,6 +310,7 @@ Job_BuildRoute(playerid, job)
 	{
 		g_JsRoute[playerid][i] = i;
 	}
+	return 0;
 }
 
 Job_VehRemove(playerid)
@@ -379,6 +383,7 @@ Job_Cancel(playerid, const reason[])
 			SendClientMessage(playerid, -10270721, "Il compenso maturato ($%d) e' andato perso.", lost);
 		}
 	}
+	return 0;
 }
 
 Job_Accrue(playerid, amount)
@@ -428,6 +433,7 @@ Job_Finish(playerid, bool:completed)
 	g_JpCompleted[playerid] = completed;
 	SendClientMessage(playerid, -1, "Turno terminato: registrazione del compenso ($%d) in corso...", amount);
 	DB_JobPayout(playerid, gPlayer[playerid][pCharId], job, amount);
+	return 0;
 }
 
 public Job_OnDBPayout(playerid, jobId, amount, result)
@@ -528,6 +534,7 @@ Job_StepDone(playerid, now)
 		SendClientMessage(playerid, 0x99CCFFFF, "Ultima tappa fatta: rientra al deposito per il bonus (checkpoint sulla mappa).");
 	}
 	Job_ShowCheckpoint(playerid);
+	return 0;
 }
 
 public Job_OnTick()
@@ -708,6 +715,7 @@ Job_Start(playerid)
 	Job_ShowCheckpoint(playerid);
 	UI_JobHudShow(playerid, job);
 	SendClientMessage(playerid, 0x66DD66FF, "Turno iniziato (%s). Segui i checkpoint sulla mappa: fermati nel cerchio (max %.0f km/h) per %d secondi. /fine per terminare.", g_JobName[job], 12.0, g_JobDwellMs[job] / 1000);
+	return 0;
 }
 
 Job_CmdInizia(playerid)
@@ -723,6 +731,7 @@ Job_CmdFine(playerid)
 		return 0;
 	}
 	Job_Finish(playerid, 0);
+	return 0;
 }
 
 Job_CmdLavoro(playerid, const params[])
@@ -757,6 +766,7 @@ Job_CmdLavoro(playerid, const params[])
 	}
 	new left = Job_CdLeftMs(g_JcChgSet[playerid], g_JcChgLast[playerid], 600000);
 	UI_JobCenterShow(playerid, gPlayer[playerid][pLevel], gPlayer[playerid][pJob], Job_SecCeil(left));
+	return 0;
 }
 
 public UI_OnJobSelect(playerid, jobIndex)
@@ -912,6 +922,7 @@ Job_OnPlayerDisconnect(playerid)
 		Job_Cancel(playerid, "");
 	}
 	Job_ResetPlayer(playerid);
+	return 0;
 }
 
 Job_OnPlayerDeath(playerid)
@@ -921,6 +932,7 @@ Job_OnPlayerDeath(playerid)
 		return 0;
 	}
 	Job_Cancel(playerid, "sei morto o ferito.");
+	return 0;
 }
 
 Job_OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
@@ -935,6 +947,7 @@ Job_OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
 		ClearAnimations(playerid, 0);
 		Util_Send(playerid, -10270721, "Questo veicolo di lavoro e' in uso da un altro lavoratore.");
 	}
+	return 0;
 }
 
 Job_OnPlayerExitVehicle(playerid, vehicleid)
@@ -949,6 +962,7 @@ Job_OnPlayerExitVehicle(playerid, vehicleid)
 		g_JsOffTick[playerid] = GetTickCount();
 		SendClientMessage(playerid, -10270721, "Torna sul veicolo di lavoro entro %d secondi o il turno sara' annullato.", 45);
 	}
+	return 0;
 }
 
 Job_OnPlayerStateChange(playerid, t_PLAYER_STATE:newstate)
@@ -969,6 +983,7 @@ Job_OnPlayerStateChange(playerid, t_PLAYER_STATE:newstate)
 		return 0;
 	}
 	g_JsOff[playerid] = 0;
+	return 0;
 }
 
 Job_OnVehicleDeath(vehicleid)

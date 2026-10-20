@@ -18,6 +18,7 @@ Char_RefreshHud(playerid)
 		return 0;
 	}
 	UI_HudUpdate(playerid, gPlayer[playerid][pMoney], gPlayer[playerid][pBank], gPlayer[playerid][pLevel], gPlayer[playerid][pExp]);
+	return 0;
 }
 
 Char_RefreshState(playerid)
@@ -40,6 +41,7 @@ Char_RefreshState(playerid)
 	gPlayer[playerid][pInterior] = GetPlayerInterior(playerid);
 	gPlayer[playerid][pWorld] = GetPlayerVirtualWorld(playerid);
 	gPlayer[playerid][pSkin] = GetPlayerSkin(playerid);
+	return 0;
 }
 
 Char_Save(playerid)
@@ -54,6 +56,7 @@ Char_Save(playerid)
 	}
 	Char_RefreshState(playerid);
 	DB_SaveCharacter(playerid);
+	return 0;
 }
 
 Char_SaveAll()
@@ -332,6 +335,7 @@ Char_OnDeath(playerid)
 	gPlayer[playerid][pHealth] = 100.0;
 	gPlayer[playerid][pArmor] = 0.0;
 	Char_ApplySpawnInfo(playerid);
+	return 0;
 }
 
 Char_OnDisconnect(playerid)

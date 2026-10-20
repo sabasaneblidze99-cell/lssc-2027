@@ -172,6 +172,7 @@ Faction_ResetPlayer(playerid)
 	g_FcSetRank[playerid] = 0;
 	g_FcSetName[playerid][0] = 0;
 	g_FcSetStaffName[playerid][0] = 0;
+	return 0;
 }
 
 Fac_ShortName(faction, out[], size)
@@ -192,6 +193,7 @@ Fac_RankName(faction, rank, out[], size)
 		return 0;
 	}
 	format(out, size, "%s", g_FacRankName[faction][rank]);
+	return 0;
 }
 
 Faction_UpdateControl(playerid)
@@ -202,6 +204,7 @@ Faction_UpdateControl(playerid)
 	}
 	new bool:lock = gPlayer[playerid][pFrozen] || gPlayer[playerid][pCuffed] || gPlayer[playerid][pWounded];
 	TogglePlayerControllable(playerid, !lock);
+	return 0;
 }
 
 Fac_FindByChar(charId)
@@ -374,6 +377,7 @@ Fac_GiveKit(playerid)
 		g_FcKit[playerid] = 8;
 		g_FcKitRefillLast[playerid] = GetTickCount();
 	}
+	return 0;
 }
 
 Fac_ReleaseCuffedBy(agentid)
@@ -409,6 +413,7 @@ Faction_ForceOff(playerid, bool:applyWorld)
 	}
 	gPlayer[playerid][pSkin] = gPlayer[playerid][pCivilSkin];
 	Fac_ReleaseCuffedBy(playerid);
+	return 0;
 }
 
 Fac_DutyOn(playerid)
@@ -470,6 +475,7 @@ Faction_CmdDuty(playerid)
 	{
 		Fac_DutyOn(playerid);
 	}
+	return 0;
 }
 
 Fac_PayTick(playerid, now)
@@ -513,6 +519,7 @@ Fac_PayTick(playerid, now)
 	{
 		Util_Send(playerid, -10270721, "Il conto bancario e' al limite: stipendio di fazione non versato.");
 	}
+	return 0;
 }
 
 Fac_Uncuff(targetid)
@@ -531,6 +538,7 @@ Fac_Uncuff(targetid)
 		Faction_UpdateControl(targetid);
 		Util_Send(targetid, 0x66DD66FF, "Sei stato liberato dalle manette.");
 	}
+	return 0;
 }
 
 Faction_CmdAmmanetta(playerid, const params[], bool:cuff)
@@ -593,6 +601,7 @@ Faction_CmdAmmanetta(playerid, const params[], bool:cuff)
 	format(msg, 128, "toglie le manette a %s", tn);
 	Fac_Emote(playerid, msg);
 	DB_FactionLogAdd(1, gPlayer[playerid][pCharId], gPlayer[target][pCharId], "uncuff", "");
+	return 0;
 }
 
 Faction_CmdRadio(playerid, const params[], bool:interdept)
@@ -632,6 +641,7 @@ Faction_CmdRadio(playerid, const params[], bool:interdept)
 		format(msg, 256, "[RADIO] %s %s: %s", rn, name, text);
 		Fac_Radio(f, 0, 0x8D8DFFFF, msg);
 	}
+	return 0;
 }
 
 Faction_CmdMulta(playerid, const params[])
@@ -712,6 +722,7 @@ Faction_CmdMulta(playerid, const params[])
 	g_FcFinePend[target] = 1;
 	strmid(g_FcFineReason[playerid], reason, 0, strlen(reason), 65);
 	DB_AddFine(playerid, gPlayer[playerid][pCharId], gPlayer[target][pCharId], 1, amount, reason);
+	return 0;
 }
 
 Fac_Debit(playerid, amount)
@@ -816,6 +827,7 @@ Faction_CmdMulte(playerid)
 		return 0;
 	}
 	DB_LoadFines(playerid, gPlayer[playerid][pCharId]);
+	return 0;
 }
 
 public Fine_OnDBLoaded(playerid, count)
@@ -921,6 +933,7 @@ Faction_CmdCura(playerid, const params[])
 	Fac_Emote(playerid, msg);
 	SendClientMessage(target, 0x66DD66FF, "Sei stato curato (salute %.0f).", hp);
 	DB_FactionLogAdd(2, gPlayer[playerid][pCharId], gPlayer[target][pCharId], "heal", "");
+	return 0;
 }
 
 Fac_ReviveCancel(medic, const reason[])
@@ -983,6 +996,7 @@ Faction_CmdRianima(playerid, const params[])
 	format(msg, 128, "inizia a rianimare %s", tn);
 	Fac_Emote(playerid, msg);
 	SendClientMessage(playerid, -1, "Rianimazione in corso (%d secondi): non allontanarti.", 8);
+	return 0;
 }
 
 Fac_ReviveDone(medic, target)
@@ -1106,6 +1120,7 @@ Fac_DoInvite(playerid, target)
 	UI_FactionInviteShow(target, f, an, 60);
 	SendClientMessage(target, -1, "%s ti invita in %s. Accetta dal pannello o con /accetta (valido %d secondi).", an, g_FacShort[f], 60);
 	SendClientMessage(playerid, 0x66DD66FF, "Invito inviato a %s.", tn);
+	return 0;
 }
 
 Faction_CmdInvita(playerid, const params[])
@@ -1126,6 +1141,7 @@ Faction_CmdInvita(playerid, const params[])
 		return 0;
 	}
 	Fac_DoInvite(playerid, target);
+	return 0;
 }
 
 public UI_OnFactionInviteTarget(playerid, targetId)
@@ -1178,6 +1194,7 @@ Fac_InviteReply(playerid, bool:accept)
 	g_FcJoinPending[playerid] = 1;
 	GetPlayerName(playerid, g_FcOpName[from], 25);
 	DB_FactionJoin(from, fromChar, gPlayer[playerid][pCharId], f);
+	return 0;
 }
 
 public UI_OnFactionInviteReply(playerid, accept)
@@ -1195,6 +1212,7 @@ Faction_CmdAccetta(playerid)
 	}
 	UI_FactionInviteClose(playerid);
 	Fac_InviteReply(playerid, 1);
+	return 0;
 }
 
 Fac_DoRankOp(playerid, action, targetChar, targetRank, const targetName[])
@@ -1245,6 +1263,7 @@ Fac_DoRankOp(playerid, action, targetChar, targetRank, const targetName[])
 			DB_FactionFire(playerid, gPlayer[playerid][pCharId], targetChar, f);
 		}
 	}
+	return 0;
 }
 
 Faction_CmdRankOp(playerid, const params[], action)
@@ -1272,6 +1291,7 @@ Faction_CmdRankOp(playerid, const params[], action)
 	new tn[25];
 	GetPlayerName(target, tn, 25);
 	Fac_DoRankOp(playerid, action, gPlayer[target][pCharId], gPlayer[target][pFactionRank], tn);
+	return 0;
 }
 
 public UI_OnFactionMemberAction(playerid, action, memberId)
@@ -1497,6 +1517,7 @@ Fac_RequestMembers(playerid, mode)
 	g_FcMemBusyTick[playerid] = GetTickCount();
 	g_FcMemMode[playerid] = mode;
 	DB_FactionMembers(playerid, f);
+	return 0;
 }
 
 Faction_CmdFazione(playerid, const params[])
@@ -1529,6 +1550,7 @@ Faction_CmdFazione(playerid, const params[])
 		return 0;
 	}
 	Util_Send(playerid, 0x99CCFFFF, "Uso: /fazione [info|membri|lascia]");
+	return 0;
 }
 
 public UI_OnFactionMenuAction(playerid, action)
@@ -1846,6 +1868,7 @@ Faction_OnPlayerDisconnect(playerid)
 	}
 	gPlayer[playerid][pSkin] = gPlayer[playerid][pCivilSkin];
 	Faction_ResetPlayer(playerid);
+	return 0;
 }
 
 Faction_OnPlayerDeath(playerid)
@@ -1881,6 +1904,7 @@ Faction_OnPlayerDeath(playerid)
 	g_FcInjLeftMs[playerid] = 180000;
 	g_FcInjSec[playerid] = -1;
 	UI_InjuryHudHide(playerid);
+	return 0;
 }
 
 Faction_OnPlayerSpawn(playerid)
@@ -1909,6 +1933,7 @@ Faction_OnPlayerSpawn(playerid)
 	g_FcInjSec[playerid] = 180;
 	UI_InjuryHudShow(playerid, 180);
 	SendClientMessage(playerid, -10270721, "Sei ferito. Attendi i soccorsi (EMS): senza aiuto verrai ricoverato tra %d secondi ($%d).", 180, 200);
+	return 0;
 }
 
 Faction_SendHelp(playerid)
@@ -1936,4 +1961,5 @@ Faction_SendHelp(playerid)
 	{
 		Util_Send(playerid, 0x99CCFFFF, "/invita id · /promuovi id · /degrada id · /licenzia id");
 	}
+	return 0;
 }

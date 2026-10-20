@@ -242,6 +242,7 @@ UI_LvFmtTime(seconds, dest[], size)
 		return 0;
 	}
 	format(dest, size, "%02d:%02d", seconds / 60, seconds % 60);
+	return 0;
 }
 
 UI_LvFmtDist(meters, dest[], size)
@@ -471,6 +472,7 @@ UI_LvTdEnsure(playerid)
 	PlayerTextDrawTextSize(playerid, g_UiLvTd[playerid][9], ((14.0 + 220.0) - 4.0), 0.0);
 	g_UiLvTd[playerid][10] = UI_LvText(playerid, 320.0, 318.0, "_", 0.24, 1.1, -2994689, 2);
 	g_UiLvTdMade[playerid] = 1;
+	return 0;
 }
 
 UI_LvTdShow(playerid, first, last, bool:show)
@@ -490,6 +492,7 @@ UI_LvTdShow(playerid, first, last, bool:show)
 			PlayerTextDrawHide(playerid, g_UiLvTd[playerid][i]);
 		}
 	}
+	return 0;
 }
 
 bool:UI_LvNeedTimer(playerid)
@@ -622,6 +625,7 @@ UI_LivingToast(playerid, const text[], kind)
 	PlayerTextDrawShow(playerid, g_UiLvTd[playerid][10]);
 	g_UiLvToastTtl[playerid] = 4;
 	UI_LvTimerSync(playerid);
+	return 0;
 }
 
 UI_LivingNotify(playerid, const text[], kind)
@@ -632,6 +636,7 @@ UI_LivingNotify(playerid, const text[], kind)
 	}
 	SendClientMessage(playerid, UI_LvToastColor(kind), text);
 	UI_LivingToast(playerid, text, kind);
+	return 0;
 }
 
 UI_CityBoardBegin(playerid)
@@ -642,6 +647,7 @@ UI_CityBoardBegin(playerid)
 	}
 	g_UiLvBdCount[playerid] = 0;
 	g_UiLvBdRows[playerid] = 0;
+	return 0;
 }
 
 UI_CityBoardAdd(playerid, contractId, kind, fromDistrict, toDistrict, cargo, reward, distanceM, secondsLeft, bool:premium, minLevel, minRep, minLocalRep, blockCode)
@@ -669,6 +675,7 @@ UI_CityBoardAdd(playerid, contractId, kind, fromDistrict, toDistrict, cargo, rew
 	g_UiLvBdMinLRep[playerid][n] = minLocalRep;
 	g_UiLvBdBlock[playerid][n] = blockCode >= 0 && blockCode < 11 ? blockCode : 10;
 	g_UiLvBdCount[playerid] = n + 1;
+	return 0;
 }
 
 bool:UI_LvBoardMatch(playerid, i)
@@ -755,6 +762,7 @@ UI_CityBoardShow(playerid, bool:atBoard)
 		return 0;
 	}
 	UI_LvBoardRender(playerid);
+	return 0;
 }
 
 UI_LvFilterShow(playerid)
@@ -871,6 +879,7 @@ UI_CityContractStatus(playerid, contractId, ctState, fromDistrict, toDistrict, c
 	format(body, 1024, "{FFFFFF}Stato: {FFD24D}%s\n{FFFFFF}Prossimo passo: {FFD24D}%s\n{FFFFFF}Distanza: {FFD24D}%s\n{FFFFFF}Tempo rimasto: {FFD24D}%s\n{FFFFFF}Merce: {FFD24D}%s{FFFFFF}, integrita' {FFD24D}%s\n{FFFFFF}Compenso indicativo: {66DD66}$%s\n\n{AAAAAA}Se lasci il contratto non perdi denaro, ma perdi %d punti di reputazione nei trasporti.", ctState == 2 ? "in consegna" : "accettato", step, sDist, sTime, g_UiLvCargoName[cargo >= 1 && cargo <= 3 ? cargo : 0], sInteg, sReward, repPenalty < 0 ? -repPenalty : repPenalty);
 	format(title, 64, "Il tuo contratto #%d", contractId);
 	Lang_ShowPlayerDialog(playerid, 9704, 0, title, body, "Lascia", "Chiudi");
+	return 0;
 }
 
 UI_CityContractNone(playerid)
@@ -887,6 +896,7 @@ UI_CityContractNone(playerid)
 		return 0;
 	}
 	Lang_ShowPlayerDialog(playerid, 9704, 0, "Nessun contratto", "{FFFFFF}Al momento non stai seguendo nessun contratto.\n\n{AAAAAA}La bacheca della Casa del Quartiere di Idlewood ha sempre qualcosa da fare.", "Bacheca", "Chiudi");
+	return 0;
 }
 
 UI_LvHudRender(playerid)
@@ -953,6 +963,7 @@ UI_CityContractHud(playerid, contractId, ctState, const objective[], const desti
 	}
 	g_UiLvHudOn[playerid] = 1;
 	UI_LvTimerSync(playerid);
+	return 0;
 }
 
 UI_CityContractHudHide(playerid)
@@ -976,6 +987,7 @@ UI_CityContractHudHide(playerid)
 	{
 		UI_LvTimerSync(playerid);
 	}
+	return 0;
 }
 
 UI_CityDistrictPick(playerid)
@@ -987,6 +999,7 @@ UI_CityDistrictPick(playerid)
 	new body[128];
 	format(body, 128, "%s\n%s\n%s", g_UiLvDistrictName[1], g_UiLvDistrictName[2], g_UiLvDistrictName[3]);
 	Lang_ShowPlayerDialog(playerid, 9706, 2, "Quale quartiere?", body, "Apri", "Chiudi");
+	return 0;
 }
 
 UI_CityDistrictBegin(playerid, districtId, activity, security, crime, localRep, festivalHours)
@@ -1003,6 +1016,7 @@ UI_CityDistrictBegin(playerid, districtId, activity, security, crime, localRep, 
 	g_UiLvDsFest[playerid] = festivalHours < 0 ? 0 : festivalHours;
 	g_UiLvDsRumor[playerid][0] = 0;
 	g_UiLvDsEvCount[playerid] = 0;
+	return 0;
 }
 
 UI_CityDistrictRumor(playerid, const text[])
@@ -1012,6 +1026,7 @@ UI_CityDistrictRumor(playerid, const text[])
 		return 0;
 	}
 	strcopy(g_UiLvDsRumor[playerid], text, 96);
+	return 0;
 }
 
 UI_CityDistrictEvent(playerid, type, secondsAgo, value)
@@ -1029,6 +1044,7 @@ UI_CityDistrictEvent(playerid, type, secondsAgo, value)
 	g_UiLvDsEvAgo[playerid][n] = secondsAgo < 0 ? 0 : secondsAgo;
 	g_UiLvDsEvValue[playerid][n] = value;
 	g_UiLvDsEvCount[playerid] = n + 1;
+	return 0;
 }
 
 UI_CityDistrictShow(playerid)
@@ -1102,6 +1118,7 @@ UI_CityDistrictShow(playerid)
 	}
 	format(title, 64, "Quartiere: %s", g_UiLvDistrictName[d]);
 	Lang_ShowPlayerDialog(playerid, 9707, 0, title, body, "Progetto", "Chiudi");
+	return 0;
 }
 
 UI_CityRepBegin(playerid)
@@ -1118,6 +1135,7 @@ UI_CityRepBegin(playerid)
 	{
 		g_UiLvRpLHas[playerid][d] = 0;
 	}
+	return 0;
 }
 
 UI_CityRepTrack(playerid, track, points, completed, failed, ratingSum, ratingCnt, dayGain)
@@ -1133,6 +1151,7 @@ UI_CityRepTrack(playerid, track, points, completed, failed, ratingSum, ratingCnt
 	g_UiLvRpRSum[playerid][track] = ratingSum < 0 ? 0 : ratingSum;
 	g_UiLvRpRCnt[playerid][track] = ratingCnt < 0 ? 0 : ratingCnt;
 	g_UiLvRpDay[playerid][track] = dayGain;
+	return 0;
 }
 
 UI_CityRepLocal(playerid, districtId, rep)
@@ -1144,6 +1163,7 @@ UI_CityRepLocal(playerid, districtId, rep)
 	}
 	g_UiLvRpLHas[playerid][d] = 1;
 	g_UiLvRpLocal[playerid][d] = rep;
+	return 0;
 }
 
 UI_CityRepShow(playerid)
@@ -1201,6 +1221,7 @@ UI_CityRepShow(playerid)
 	}
 	strcat(body, "\n{AAAAAA}La reputazione non si compra: cresce con il lavoro, ogni giorno un passo alla volta.", 1280);
 	Lang_ShowPlayerDialog(playerid, 9708, 0, "Reputazione", body, "Chiudi", "");
+	return 0;
 }
 
 UI_LivingRentalBegin(playerid, blockMinutes, maxBlocks, discountPct)
@@ -1215,6 +1236,7 @@ UI_LivingRentalBegin(playerid, blockMinutes, maxBlocks, discountPct)
 	g_UiLvRnCount[playerid] = 0;
 	g_UiLvRnSel[playerid] = -1;
 	g_UiLvRnBlocks[playerid] = 0;
+	return 0;
 }
 
 UI_LivingRentalAddModel(playerid, modelIdx, const name[], feePerBlock, deposit, minLevel, bool:available)
@@ -1235,6 +1257,7 @@ UI_LivingRentalAddModel(playerid, modelIdx, const name[], feePerBlock, deposit, 
 	g_UiLvRnLevel[playerid][n] = minLevel;
 	g_UiLvRnAvail[playerid][n] = available;
 	g_UiLvRnCount[playerid] = n + 1;
+	return 0;
 }
 
 UI_LvRentModelShow(playerid)
@@ -1272,6 +1295,7 @@ UI_LivingRentalShow(playerid)
 		return 0;
 	}
 	UI_LvRentModelShow(playerid);
+	return 0;
 }
 
 UI_LvRentBlocksShow(playerid)
@@ -1319,6 +1343,7 @@ UI_LivingRentalReturnConfirm(playerid, rentalId, const modelName[], healthPct, d
 	UI_LvFmt(refund < 0 ? 0 : refund, sRef, 16);
 	format(body, 512, "{FFFFFF}Riconsegni la {FFD24D}%s{FFFFFF}?\n\nCondizioni del mezzo: {FFD24D}%d%%\n{FFFFFF}Cauzione versata: {FFD24D}$%s\n{FFFFFF}Ti restituiamo: {66DD66}$%s\n\n{AAAAAA}Il canone non si rimborsa. Grazie per averci scelto.", modelName, UI_LvClamp(healthPct, 0, 100), sDep, sRef);
 	Lang_ShowPlayerDialog(playerid, 9712, 0, "Riconsegna", body, "Riconsegna", "Annulla");
+	return 0;
 }
 
 UI_LivingRentalReceipt(playerid, const modelName[], fee, deposit, refund, minutesUsed)
@@ -1334,6 +1359,7 @@ UI_LivingRentalReceipt(playerid, const modelName[], fee, deposit, refund, minute
 	UI_LvFmt(deposit - refund < 0 ? 0 : deposit - refund, sKept, 16);
 	format(body, 512, "{FFFFFF}Veicolo: {FFD24D}%s\n{FFFFFF}Utilizzo: {FFD24D}%d minuti\n{FFFFFF}Canone pagato: {FFD24D}$%s\n{FFFFFF}Cauzione: {FFD24D}$%s\n{FFFFFF}Rimborsata: {66DD66}$%s\n{FFFFFF}Trattenuta per danni o ritardo: {FF8866}$%s\n\n{AAAAAA}Buona strada, e a presto.", modelName, minutesUsed < 0 ? 0 : minutesUsed, sFee, sDep, sRef, sKept);
 	Lang_ShowPlayerDialog(playerid, 9713, 0, "Ricevuta noleggio", body, "Chiudi", "");
+	return 0;
 }
 
 UI_LivingTaxiOffer(playerid, callId, bool:npc, const passenger[], fromDistrict, toDistrict, distanceM, fareEstimate, ttlSec)
@@ -1354,6 +1380,7 @@ UI_LivingTaxiOffer(playerid, callId, bool:npc, const passenger[], fromDistrict, 
 	format(body, 512, "{FFFFFF}%s {FFD24D}%s{FFFFFF} cerca un taxi.\n\nDa: {FFD24D}%s\n{FFFFFF}A: {FFD24D}%s\n{FFFFFF}Percorso stimato: {FFD24D}%s\n{FFFFFF}Tariffa stimata: {66DD66}$%s\n\n{AAAAAA}Hai %d secondi per rispondere (anche con /accettacorsa).", npc ? "Un cliente," : "Il giocatore", passenger[0] != 0 ? passenger : "-", g_UiLvDistrictName[UI_LvClampDistrict(fromDistrict)], g_UiLvDistrictName[UI_LvClampDistrict(toDistrict)], sDist, sFare, ttlSec);
 	Lang_ShowPlayerDialog(playerid, 9714, 0, "Chiamata taxi", body, "Accetta corsa", "Ignora");
 	UI_LvTimerSync(playerid);
+	return 0;
 }
 
 UI_LivingTaxiOfferClose(playerid)
@@ -1373,6 +1400,7 @@ UI_LivingTaxiOfferClose(playerid)
 		HidePlayerDialog(playerid);
 	}
 	UI_LvTimerSync(playerid);
+	return 0;
 }
 
 UI_LivingTaxiMeter(playerid, fare, distanceM, bool:running)
@@ -1391,6 +1419,7 @@ UI_LivingTaxiMeter(playerid, fare, distanceM, bool:running)
 	PlayerTextDrawColour(playerid, g_UiLvTd[playerid][7], running ? 0x66DD66FF : 0xC8C8C8FF);
 	UI_LvTdShow(playerid, 5, 7, 1);
 	g_UiLvMeterOn[playerid] = 1;
+	return 0;
 }
 
 UI_LivingTaxiMeterHide(playerid)
@@ -1404,6 +1433,7 @@ UI_LivingTaxiMeterHide(playerid)
 		UI_LvTdShow(playerid, 5, 7, 0);
 	}
 	g_UiLvMeterOn[playerid] = 0;
+	return 0;
 }
 
 UI_LvTaxiPayShow(playerid)
@@ -1441,6 +1471,7 @@ UI_LivingTaxiPayConfirm(playerid, rideId, const driver[], distanceM, fare, disco
 	strcopy(g_UiLvTxPayDriver[playerid], driver[0] != 0 ? driver : "-", 25);
 	UI_LvTaxiPayShow(playerid);
 	UI_LvTimerSync(playerid);
+	return 0;
 }
 
 UI_LvTaxiPayReset(playerid)
@@ -1466,6 +1497,7 @@ UI_LivingTaxiPayClose(playerid)
 		HidePlayerDialog(playerid);
 	}
 	UI_LvTimerSync(playerid);
+	return 0;
 }
 
 UI_LivingTaxiRate(playerid, rideId, const driver[])
@@ -1478,6 +1510,7 @@ UI_LivingTaxiRate(playerid, rideId, const driver[])
 	g_UiLvTxRateId[playerid] = rideId;
 	format(title, 64, "Com'e' andata con %s?", driver[0] != 0 ? driver : "il tassista");
 	Lang_ShowPlayerDialog(playerid, 9717, 2, title, "{66DD66}***** Ottima\n{66DD66}**** Buona\n{FFD24D}*** Nella norma\n{FFAA33}** Da migliorare\n{FF8866}* Deludente", "Vota", "Salta");
+	return 0;
 }
 
 UI_LivingTaxiReceipt(playerid, bool:asDriver, rideId, const other[], distanceM, fare, tax, net)
@@ -1501,6 +1534,7 @@ UI_LivingTaxiReceipt(playerid, bool:asDriver, rideId, const other[], distanceM, 
 	}
 	format(title, 64, "Ricevuta corsa #%d", rideId);
 	Lang_ShowPlayerDialog(playerid, 9718, 0, title, body, "Chiudi", "");
+	return 0;
 }
 
 UI_LivingProjectSet(playerid, projectId, districtId, const name[], goal, fund, hoursLeft, donMin, donMax, dayLeft, blockCode)
@@ -1520,6 +1554,7 @@ UI_LivingProjectSet(playerid, projectId, districtId, const name[], goal, fund, h
 	g_UiLvPjDayLeft[playerid] = dayLeft < 0 ? 0 : dayLeft;
 	g_UiLvPjBlock[playerid] = blockCode >= 0 && blockCode < 5 ? blockCode : 3;
 	g_UiLvPjAmount[playerid] = 0;
+	return 0;
 }
 
 bool:UI_LvPrjRange(playerid, &lo, &hi)
@@ -1582,6 +1617,7 @@ UI_LivingProjectShow(playerid)
 	{
 		Lang_ShowPlayerDialog(playerid, 9719, 0, title, body, "Chiudi", "");
 	}
+	return 0;
 }
 
 UI_LvPrjAmountShow(playerid, const err[])
@@ -1596,6 +1632,7 @@ UI_LvPrjAmountShow(playerid, const err[])
 	UI_LvFmt(hi, sHi, 16);
 	format(body, 512, "%s{FFFFFF}Quanto vuoi donare a {FFD24D}%s{FFFFFF}?\nImporto ammesso: da {FFD24D}$%s{FFFFFF} a {FFD24D}$%s{FFFFFF}. Inserisci un numero intero:", err, g_UiLvPjName[playerid], sLo, sHi);
 	Lang_ShowPlayerDialog(playerid, 9720, 1, "Contribuisci", body, "Avanti", "Indietro");
+	return 0;
 }
 
 UI_LvPrjConfirmShow(playerid)
@@ -1648,6 +1685,7 @@ UI_LivingProjectContribute(playerid, amount)
 	}
 	g_UiLvPjAmount[playerid] = amount;
 	UI_LvPrjConfirmShow(playerid);
+	return 0;
 }
 
 UI_LivingHelpSet(playerid, step, bool:hintsOff)
@@ -1658,6 +1696,7 @@ UI_LivingHelpSet(playerid, step, bool:hintsOff)
 	}
 	g_UiLvHpStep[playerid] = UI_LvClamp(step, 1, 6);
 	g_UiLvHpOff[playerid] = hintsOff;
+	return 0;
 }
 
 UI_LivingHelpShow(playerid)
@@ -1703,6 +1742,7 @@ UI_LivingHelpShow(playerid)
 		format(title, 64, "Primo giorno - passo %d di %d", cur, 5);
 	}
 	Lang_ShowPlayerDialog(playerid, 9722, 2, title, body, "Apri", "Chiudi");
+	return 0;
 }
 
 UI_LvHelpStepShow(playerid, step)
@@ -1734,6 +1774,7 @@ UI_LivingHint(playerid, step)
 	UI_LvTdShow(playerid, 8, 9, 1);
 	g_UiLvHintTtl[playerid] = 10;
 	UI_LvTimerSync(playerid);
+	return 0;
 }
 
 UI_LivingHintHide(playerid)
@@ -1751,6 +1792,7 @@ UI_LivingHintHide(playerid)
 	{
 		UI_LvTimerSync(playerid);
 	}
+	return 0;
 }
 
 UI_LivingHelpComplete(playerid, bool:rewarded)
@@ -1769,6 +1811,7 @@ UI_LivingHelpComplete(playerid, bool:rewarded)
 	{
 		UI_LvInfo(playerid, "Suggerimenti spenti", "{FFFFFF}Va bene, niente piu' suggerimenti.\n\n{AAAAAA}Se ti serve una mano, la Casa del Quartiere di Idlewood e' sempre aperta.");
 	}
+	return 0;
 }
 
 UI_LvConfirmsReset(playerid)
@@ -1796,6 +1839,7 @@ UI_LivingClose(playerid)
 		HidePlayerDialog(playerid);
 	}
 	UI_LvTimerSync(playerid);
+	return 0;
 }
 
 UI_LivingReject(playerid, const msg[])
@@ -1818,6 +1862,7 @@ UI_LivingReject(playerid, const msg[])
 	{
 		UI_LivingNotify(playerid, msg, 3);
 	}
+	return 0;
 }
 
 UI_LivingUiDestroy(playerid)
@@ -1865,6 +1910,7 @@ UI_LivingUiDestroy(playerid)
 	g_UiLvHpOff[playerid] = 0;
 	g_UiLvHpView[playerid] = 0;
 	g_UiLvHpOffRow[playerid] = -1;
+	return 0;
 }
 
 public UI_LivingOnTimer(playerid)

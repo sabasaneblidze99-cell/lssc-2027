@@ -142,6 +142,7 @@ Inv_Load(playerid)
 	}
 	gPlayer[playerid][pInvState] = 1;
 	DB_InvLoad(playerid, gPlayer[playerid][pCharId]);
+	return 0;
 }
 
 Inv_Reload(playerid)
@@ -156,6 +157,7 @@ Inv_Reload(playerid)
 		return 0;
 	}
 	Inv_Load(playerid);
+	return 0;
 }
 
 public Inv_OnDBLoaded(playerid, count)
@@ -318,6 +320,7 @@ Inv_CmdInventario(playerid)
 	}
 	Inv_PushUi(playerid);
 	UI_InvShow(playerid);
+	return 0;
 }
 
 Inv_CdLeftSec(playerid, itemId)
@@ -425,6 +428,7 @@ Inv_UseStart(playerid, itemId)
 	}
 	Inv_BeginOp(playerid, 1, itemId, 1, 0);
 	DB_InvUse(playerid, gPlayer[playerid][pCharId], itemId, gPlayer[playerid][pInvOpId]);
+	return 0;
 }
 
 Inv_RpUse(playerid, const action[])
@@ -564,6 +568,7 @@ Inv_GroundFree(idx)
 	g_InvGround[idx][igDropper] = 0;
 	g_InvGround[idx][igDropperChar] = 0;
 	g_InvGround[idx][igPicker] = 0;
+	return 0;
 }
 
 Inv_GroundSlot()
@@ -610,6 +615,7 @@ Inv_CmdGetta(playerid, const params[])
 		return 0;
 	}
 	Inv_DropStart(playerid, itemId, qty);
+	return 0;
 }
 
 Inv_DropStart(playerid, itemId, qty)
@@ -664,6 +670,7 @@ Inv_DropStart(playerid, itemId, qty)
 	g_InvGround[idx][igPicker] = 0;
 	Inv_BeginOp(playerid, 3, itemId, qty, idx);
 	DB_InvDrop(playerid, charId, itemId, qty, gPlayer[playerid][pInvOpId]);
+	return 0;
 }
 
 public Inv_OnDBDropped(playerid, itemId, qty, result)
@@ -774,6 +781,7 @@ Inv_CmdPrendi(playerid)
 	g_InvGround[best][igPicker] = playerid + 1;
 	Inv_BeginOp(playerid, 4, g_InvGround[best][igItemId], g_InvGround[best][igQty], best);
 	DB_InvAdd(playerid, gPlayer[playerid][pCharId], g_InvGround[best][igItemId], g_InvGround[best][igQty], gPlayer[playerid][pInvOpId], "pickup", 0);
+	return 0;
 }
 
 public Inv_OnDBAdded(playerid, itemId, qty, result)
@@ -887,6 +895,7 @@ Inv_DocRequest(playerid)
 	gPlayer[playerid][pDocRequestTick] = now != 0 ? now : 1;
 	Inv_BeginOp(playerid, 8, 10, 1, 0);
 	DB_InvAdd(playerid, gPlayer[playerid][pCharId], 10, 1, gPlayer[playerid][pInvOpId], "add", 1);
+	return 0;
 }
 
 Inv_GiveCancel(giver, const reason[])
@@ -906,6 +915,7 @@ Inv_GiveCancel(giver, const reason[])
 		UI_InvGiveConfirmClose(recv);
 		Inv_Say(recv, -10270721, reason);
 	}
+	return 0;
 }
 
 bool:Inv_GiveRateOk(playerid)
@@ -942,6 +952,7 @@ Inv_CmdDai(playerid, const params[])
 		return 0;
 	}
 	Inv_GiveStart(playerid, target, itemId, qty);
+	return 0;
 }
 
 Inv_GiveStart(playerid, target, itemId, qty)
@@ -1011,6 +1022,7 @@ Inv_GiveStart(playerid, target, itemId, qty)
 	GetPlayerName(target, tname, 25);
 	UI_InvGiveConfirmShow(target, name, itemId, qty, 15);
 	SendClientMessage(playerid, -1, "Hai offerto %s x%d a %s: attendi la risposta (%d secondi).", s_InvName[itemId], qty, tname, 15);
+	return 0;
 }
 
 public UI_OnInvGive(playerid, slot, targetId, qty)
@@ -1203,6 +1215,7 @@ Inv_Buy(playerid, itemId, qty)
 	}
 	Inv_BeginOp(playerid, 5, itemId, qty, cost);
 	DB_InvBuy(playerid, gPlayer[playerid][pCharId], itemId, qty, gPlayer[playerid][pInvOpId], maxTotal);
+	return 0;
 }
 
 Inv_BuyBag(playerid)
@@ -1219,6 +1232,7 @@ Inv_BuyBag(playerid)
 	}
 	Inv_BeginOp(playerid, 6, 11, 1, 350);
 	DB_InvSetBag(playerid, gPlayer[playerid][pCharId], gPlayer[playerid][pInvOpId]);
+	return 0;
 }
 
 Inv_UndoPurchase(playerid)
@@ -1442,6 +1456,7 @@ Inv_OnPlayerSpawn(playerid)
 	{
 		Inv_Load(playerid);
 	}
+	return 0;
 }
 
 Inv_OnPlayerDisconnect(playerid)
@@ -1476,4 +1491,5 @@ Inv_OnPlayerDisconnect(playerid)
 		House_InvFridgeAbort(gPlayer[playerid][pFridgeHouse]);
 	}
 	Inv_GroundRelease(playerid);
+	return 0;
 }

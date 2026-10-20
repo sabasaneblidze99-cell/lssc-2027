@@ -167,6 +167,7 @@ Freight_Note(playerid, const text[])
 	}
 	g_FrtNoteTick[playerid] = now;
 	Util_Send(playerid, -10270721, text);
+	return 0;
 }
 
 Freight_IntegrityOf(vehicleid)
@@ -228,6 +229,7 @@ Freight_ShowCheckpoint(playerid)
 	}
 	DisablePlayerCheckpoint(playerid);
 	SetPlayerCheckpoint(playerid, x, y, z, 6.0);
+	return 0;
 }
 
 Freight_TimeLeft(playerid)
@@ -296,6 +298,7 @@ Freight_Hud(playerid, distM, dwellSec)
 		}
 	}
 	UI_CityContractHud(playerid, g_FrtCt[playerid], shop ? 2 : 1, goal, dest, distM, Freight_TimeLeft(playerid), shop ? g_FrtInteg[playerid] : -1);
+	return 0;
 }
 
 Freight_End(playerid, reason)
@@ -361,6 +364,7 @@ Freight_Release(playerid, reason)
 	{
 		Freight_End(playerid, reason);
 	}
+	return 0;
 }
 
 Freight_Stop(playerid, reason, const text[])
@@ -388,6 +392,7 @@ Freight_Stop(playerid, reason, const text[])
 		return 0;
 	}
 	Freight_Release(playerid, reason);
+	return 0;
 }
 
 Freight_Picked(playerid)
@@ -438,6 +443,7 @@ Freight_DoPickup(playerid)
 			Util_Send(playerid, -10270721, "Carico non registrato al momento: resta nel checkpoint e riprova tra qualche secondo.");
 		}
 	}
+	return 0;
 }
 
 Freight_DoDeliver(playerid)
@@ -498,6 +504,7 @@ Freight_DoDeliver(playerid)
 			Util_Send(playerid, -10270721, "Consegna non registrata al momento: resta nel checkpoint e riprova tra qualche secondo.");
 		}
 	}
+	return 0;
 }
 
 bool:Freight_Begin(playerid, contractId, fromD, toD, cargo, distanceM, bool:welcome)
@@ -756,6 +763,7 @@ Freight_WaitTimeout(playerid)
 	g_FrtPhase[playerid] = g_FrtPhase[playerid] == 2 ? 1 : 3;
 	g_FrtDwell[playerid] = 0;
 	g_FrtRetryTick[playerid] = GetTickCount() + 5000;
+	return 0;
 }
 
 bool:Freight_SamplePath(playerid, now)
@@ -909,6 +917,7 @@ Freight_TickPlayer(playerid, now)
 		gPlayer[playerid][pFreightDwellTick] = 0;
 	}
 	Freight_Hud(playerid, floatround(dist, 1), dwellSec);
+	return 0;
 }
 
 public Freight_OnTick()
@@ -966,6 +975,7 @@ Freight_OnPlayerConnect(playerid)
 		return 0;
 	}
 	Freight_ResetPlayer(playerid);
+	return 0;
 }
 
 Freight_OnCharReady(playerid)
@@ -985,6 +995,7 @@ Freight_OnPlayerDisconnect(playerid, reason)
 		Freight_End(playerid, 2);
 	}
 	Freight_ResetPlayer(playerid);
+	return 0;
 }
 
 Freight_OnPlayerDeath(playerid)
@@ -994,6 +1005,7 @@ Freight_OnPlayerDeath(playerid)
 		return 0;
 	}
 	Freight_Stop(playerid, 3, "Sei stato ferito: il contratto di trasporto e' interrotto e il Mule ritirato.");
+	return 0;
 }
 
 Freight_OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
@@ -1009,6 +1021,7 @@ Freight_OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
 	}
 	ClearAnimations(playerid, 0);
 	Util_Send(playerid, -10270721, "Questo veicolo da carico e' assegnato a un altro trasportatore.");
+	return 0;
 }
 
 Freight_OnPlayerExitVehicle(playerid, vehicleid)
@@ -1023,6 +1036,7 @@ Freight_OnPlayerExitVehicle(playerid, vehicleid)
 		gPlayer[playerid][pFreightLeftVehTick] = GetTickCount();
 		SendClientMessage(playerid, -10270721, "Torna alla guida del Mule entro %d secondi (e resta entro %.0f m) o il contratto sara' rilasciato.", 45, 0x43160000);
 	}
+	return 0;
 }
 
 Freight_OnPlayerStateChange(playerid, t_PLAYER_STATE:newstate, t_PLAYER_STATE:oldstate)
@@ -1049,6 +1063,7 @@ Freight_OnPlayerStateChange(playerid, t_PLAYER_STATE:newstate, t_PLAYER_STATE:ol
 		g_FrtOff[playerid] = 0;
 		gPlayer[playerid][pFreightLeftVehTick] = 0;
 	}
+	return 0;
 }
 
 Freight_OnVehicleDeath(vehicleid, killerid)
@@ -1064,4 +1079,5 @@ Freight_OnVehicleDeath(vehicleid, killerid)
 		return 0;
 	}
 	Freight_Stop(owner, 4, "Mule distrutto: il carico e' perso e il contratto e' interrotto.");
+	return 0;
 }

@@ -10,6 +10,7 @@ UI_ShowRegisterEx(playerid, const error[])
 	new body[1024];
 	format(body, 1024, "{FFFFFF}მოგესალმებით {33AA33}Los Santos Street Crime's{FFFFFF}-ზე!\nეს სახელი ჯერ არ არის რეგისტრირებული.\n\n%sაირჩიე პაროლი (%d-%d სიმბოლო):", error, 6, 32);
 	Lang_ShowPlayerDialog(playerid, 9001, 3, "რეგისტრაცია", body, "რეგისტრაცია", "გასვლა");
+	return 0;
 }
 
 UI_ShowRegister(playerid)
@@ -28,6 +29,7 @@ UI_ShowLogin(playerid, bool:wrongPassword)
 	new body[1024];
 	format(body, 1024, "{FFFFFF}კეთილი იყოს შენი დაბრუნება {33AA33}Los Santos Street Crime's{FFFFFF}-ზე!\n\n%sშეიყვანე პაროლი:", wrongPassword ? "{FF4444}პაროლი არასწორია.\n{FFFFFF}" : "");
 	Lang_ShowPlayerDialog(playerid, 9002, 3, "შესვლა", body, "შესვლა", "გასვლა");
+	return 0;
 }
 
 UI_ShowGenderSelect(playerid)
@@ -38,6 +40,7 @@ UI_ShowGenderSelect(playerid)
 		return 0;
 	}
 	Lang_ShowPlayerDialog(playerid, 9003, 2, "პერსონაჟის შექმნა - სქესი", "მამაკაცი\nქალი", "შემდეგი", "");
+	return 0;
 }
 
 UI_ShowSkinSelect(playerid, gender)
@@ -64,6 +67,7 @@ UI_ShowSkinSelect(playerid, gender)
 		strcat(body, line, 1024);
 	}
 	Lang_ShowPlayerDialog(playerid, 9004, 2, "პერსონაჟის შექმნა - გარეგნობა", body, "დადასტურება", "");
+	return 0;
 }
 
 UI_CloseDialogs(playerid)
@@ -147,6 +151,7 @@ UI_CefRegisterSubmit(playerid, const password[])
 		return 0;
 	}
 	UI_OnRegisterSubmit(playerid, password);
+	return 0;
 }
 
 UI_CefLoginSubmit(playerid, const password[])
@@ -157,6 +162,7 @@ UI_CefLoginSubmit(playerid, const password[])
 		return 0;
 	}
 	UI_OnLoginSubmit(playerid, password);
+	return 0;
 }
 
 UI_CefSkinPick(playerid, idx)
@@ -173,4 +179,5 @@ UI_CefSkinPick(playerid, idx)
 		return 0;
 	}
 	UI_OnSkinChosen(playerid, skin);
+	return 0;
 }

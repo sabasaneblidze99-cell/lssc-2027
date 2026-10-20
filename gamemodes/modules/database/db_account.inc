@@ -33,6 +33,7 @@ DB_LoadAccount(playerid)
 	mysql_format(g_DB, query, 512, "SELECT id, password_hash, salt, hash_algo, muted_until, admin_level, locked_until FROM accounts WHERE name = '%e' LIMIT 1", name);
 	DB_PendingSet(playerid, 1);
 	mysql_tquery(g_DB, query, "DB_OnAccountLoaded", "ds", playerid, name);
+	return 0;
 }
 
 public DB_OnAccountLoaded(playerid, const name[])
@@ -95,6 +96,7 @@ DB_CreateAccountEx(playerid, const hash[], const salt[], algo)
 	mysql_format(g_DB, query, 512, "INSERT IGNORE INTO accounts (name, password_hash, salt, hash_algo) VALUES ('%e', '%e', '%e', %d)", name, hash, salt, algo);
 	DB_PendingSet(playerid, 2);
 	mysql_tquery(g_DB, query, "DB_OnAccountCreated", "ds", playerid, name);
+	return 0;
 }
 
 public DB_OnAccountCreated(playerid, const name[])
@@ -126,6 +128,7 @@ DB_UpdateLogin(accountId, const ip[])
 	new query[512];
 	mysql_format(g_DB, query, 512, "UPDATE accounts SET last_login = NOW(), last_ip = '%e', failed_logins = 0 WHERE id = %d", ip, accountId);
 	mysql_tquery(g_DB, query, "", "");
+	return 0;
 }
 
 DB_UpdatePasswordHash(accountId, const hash[], algo)
@@ -142,6 +145,7 @@ DB_UpdatePasswordHash(accountId, const hash[], algo)
 	new query[512];
 	mysql_format(g_DB, query, 512, "UPDATE accounts SET password_hash = '%e', hash_algo = %d WHERE id = %d", hash, algo, accountId);
 	mysql_tquery(g_DB, query, "", "");
+	return 0;
 }
 
 DB_AccountLoginFailed(accountId)
@@ -153,6 +157,7 @@ DB_AccountLoginFailed(accountId)
 	new query[512];
 	mysql_format(g_DB, query, 512, "UPDATE accounts SET locked_until = IF(failed_logins + 1 >= %d, UNIX_TIMESTAMP() + %d, locked_until), failed_logins = IF(failed_logins + 1 >= %d, 0, failed_logins + 1) WHERE id = %d", 9, 600, 9, accountId);
 	mysql_tquery(g_DB, query, "", "");
+	return 0;
 }
 
 DB_AccountSetEmail(playerid, accountId, const email[])
@@ -169,6 +174,7 @@ DB_AccountSetEmail(playerid, accountId, const email[])
 	new query[512];
 	mysql_format(g_DB, query, 512, "UPDATE IGNORE accounts SET email = '%e', email_verified = 0, email_token_hash = NULL WHERE id = %d", email, accountId);
 	mysql_tquery(g_DB, query, "DB_OnAccountEmailSet", "dds", playerid, accountId, email);
+	return 0;
 }
 
 public DB_OnAccountEmailSet(playerid, accountId, const email[])

@@ -107,6 +107,7 @@ District_ResetPlayer(playerid)
 	g_DistQuietLoad[playerid] = 0;
 	g_DistAdminOp[playerid][0] = 0;
 	DB_LivingPlayerReset(playerid);
+	return 0;
 }
 
 District_StartBoot()
@@ -118,6 +119,7 @@ District_StartBoot()
 	g_DistBootInFlight = 1;
 	DB_LivingPushConfig();
 	DB_LivingBoot();
+	return 0;
 }
 
 District_OnInit()
@@ -188,6 +190,7 @@ District_ReloadPlayer(playerid)
 	}
 	g_DistQuietLoad[playerid] = 1;
 	DB_LivingLoadPlayer(playerid, 0);
+	return 0;
 }
 
 public District_OnTick()

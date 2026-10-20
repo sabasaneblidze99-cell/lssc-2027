@@ -126,6 +126,7 @@ Intro_Camera(playerid, scene, flags)
 	SetPlayerCameraLookAt(playerid, g_IntroCam[row][6], g_IntroCam[row][7], g_IntroCam[row][8], 2);
 	InterpolateCameraPos(playerid, g_IntroCam[row][0], g_IntroCam[row][1], g_IntroCam[row][2], g_IntroCam[row][3], g_IntroCam[row][4], g_IntroCam[row][5], ms, 1);
 	InterpolateCameraLookAt(playerid, g_IntroCam[row][6], g_IntroCam[row][7], g_IntroCam[row][8], g_IntroCam[row][9], g_IntroCam[row][10], g_IntroCam[row][11], ms, 1);
+	return 0;
 }
 
 Intro_ObjectCount()
@@ -400,6 +401,7 @@ Intro_OnKeyStateChange(playerid, t_KEY:newkeys)
 	{
 		Intro_Skip(playerid);
 	}
+	return 0;
 }
 
 public Intro_OnPlayerConnect(playerid)
@@ -654,6 +656,7 @@ Intro_CmdStoria(playerid, const params[])
 	{
 		Util_Send(playerid, 0x99CCFFFF, "Uso: /storia · /storia imposta (una sola volta, solo se non hai una storia)");
 	}
+	return 0;
 }
 
 Intro_CmdMostra(playerid, const params[])
@@ -679,6 +682,7 @@ Intro_CmdMostra(playerid, const params[])
 	gPlayer[playerid][pStoryLastShowTick] = now != 0 ? now : 1;
 	gPlayer[playerid][pStoryShowTarget] = target + 1;
 	DB_StoryRead(playerid, playerid, 1);
+	return 0;
 }
 
 public Story_OnDBRead(playerid, targetid, purpose, result, origin, motive, bool:hasStory)

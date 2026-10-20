@@ -274,6 +274,7 @@ Veh_HudStop(playerid)
 	g_VPl[playerid][vpLastVehicle] = 0;
 	UI_VehicleHudHide(playerid);
 	Veh_SyncTimers();
+	return 0;
 }
 
 Veh_HudRefresh(playerid)
@@ -290,6 +291,7 @@ Veh_HudRefresh(playerid)
 	}
 	new cap = Veh_CapacityCl(g_VSlot[playerid][slot][vsModel]);
 	UI_VehicleHudUpdate(playerid, (float(g_VSlot[playerid][slot][vsFuelCl]) / float(100)), (float(cap) / float(100)), Veh_SpeedKmh(vid), g_VSlot[playerid][slot][vsEngineOn]);
+	return 0;
 }
 
 Veh_HudStart(playerid, vehicleid)
@@ -371,6 +373,7 @@ Veh_Despawn(playerid, slot)
 		g_VPool--;
 	}
 	Veh_SyncTimers();
+	return 0;
 }
 
 Veh_SaveSlot(playerid, slot)
@@ -400,6 +403,7 @@ Veh_SaveSlot(playerid, slot)
 		return 0;
 	}
 	DB_SaveVehicle(g_VSlot[playerid][slot][vsDbId], g_VSlot[playerid][slot][vsPosX], g_VSlot[playerid][slot][vsPosY], g_VSlot[playerid][slot][vsPosZ], g_VSlot[playerid][slot][vsPosA], 0, 0, g_VSlot[playerid][slot][vsHealth], g_VSlot[playerid][slot][vsFuelCl], g_VSlot[playerid][slot][vsLocked], g_VSlot[playerid][slot][vsDestroyed]);
+	return 0;
 }
 
 Veh_SaveAll()
@@ -430,6 +434,7 @@ Veh_SetEngine(playerid, slot, bool:on)
 	g_VSlot[playerid][slot][vsEngineOn] = on;
 	Veh_SetParams(vid, on ? 1 : 0, -1, -1);
 	Veh_SyncTimers();
+	return 0;
 }
 
 Veh_ResetPlayer(playerid)
@@ -512,6 +517,7 @@ public Veh_OnFindExpire(playerid, session)
 	}
 	g_VPl[playerid][vpFindTimer] = 0;
 	DisablePlayerCheckpoint(playerid);
+	return 0;
 }
 
 public Veh_OnWreckRemove(vehicleid, owner, session)
@@ -526,6 +532,7 @@ public Veh_OnWreckRemove(vehicleid, owner, session)
 		return 0;
 	}
 	Veh_Despawn(o, s);
+	return 0;
 }
 
 Veh_BeginLoad(playerid)
@@ -644,6 +651,7 @@ Veh_CmdDealer(playerid)
 		return 0;
 	}
 	UI_VehicleShopShow(playerid, gPlayer[playerid][pLevel], gPlayer[playerid][pMoney], gPlayer[playerid][pBank]);
+	return 0;
 }
 
 public UI_OnVehicleBuyConfirm(playerid, catalogIndex, payWithBank)
@@ -839,6 +847,7 @@ Veh_DoSell(playerid, slot, bool:confirmed)
 	g_VSlot[playerid][slot][vsSelling] = 1;
 	Util_Send(playerid, -1, "Vendita in corso...");
 	DB_DeleteVehicle(playerid, gPlayer[playerid][pCharId], g_VSlot[playerid][slot][vsDbId]);
+	return 0;
 }
 
 public Veh_OnDBDeleted(playerid, vehDbId, affected)
@@ -1003,6 +1012,7 @@ Veh_DoLock(playerid)
 	Veh_SetParams(g_VSlot[playerid][slot][vsVehicleId], -1, -1, lock ? 1 : 0);
 	Veh_Emote(playerid, lock ? "blocca le porte del proprio veicolo." : "sblocca le porte del proprio veicolo.");
 	Veh_SaveSlot(playerid, slot);
+	return 0;
 }
 
 // motore dei veicoli che non sono personali: noleggio, auto di strada, lavoro, merci
@@ -1064,6 +1074,7 @@ Veh_DoEngine(playerid)
 	}
 	Veh_SetEngine(playerid, slot, 1);
 	Veh_Emote(playerid, "avvia il motore.");
+	return 0;
 }
 
 Veh_DoLights(playerid)
@@ -1078,6 +1089,7 @@ Veh_DoLights(playerid)
 	GetVehicleParamsEx(vid, e, l, a, d, b, bt, o);
 	Veh_SetParams(vid, -1, l == 1 ? 0 : 1, -1);
 	Util_Send(playerid, -1, l == 1 ? "Fari spenti." : "Fari accesi.");
+	return 0;
 }
 
 Veh_DoPark(playerid)
@@ -1109,6 +1121,7 @@ Veh_DoPark(playerid)
 	DB_SetVehiclePark(g_VSlot[playerid][slot][vsDbId], gPlayer[playerid][pCharId], x, y, z, a);
 	Veh_SaveSlot(playerid, slot);
 	Util_Send(playerid, 0x66DD66FF, "Posizione di parcheggio salvata.");
+	return 0;
 }
 
 Veh_DoFind(playerid, slot)
@@ -1134,6 +1147,7 @@ Veh_DoFind(playerid, slot)
 	SetPlayerCheckpoint(playerid, x, y, z, 4.0);
 	g_VPl[playerid][vpFindTimer] = SetTimerEx("Veh_OnFindExpire", 60000, 0, "dd", playerid, g_VPl[playerid][vpSession]);
 	SendClientMessage(playerid, -1, "Veicolo %d segnato sulla mappa per %d secondi (distanza: %.0f m).", slot + 1, 60, GetVehicleDistanceFromPoint(vid, px, py, pz));
+	return 0;
 }
 
 Veh_DoList(playerid)
@@ -1166,6 +1180,7 @@ Veh_DoList(playerid)
 		UI_VehicleListAdd(playerid, s + 1, g_VSlot[playerid][s][vsModel], g_VSlot[playerid][s][vsPlate], Veh_FuelPct(playerid, s), st);
 	}
 	UI_VehicleListShow(playerid);
+	return 0;
 }
 
 Veh_DoRecover(playerid, slot)
@@ -1229,6 +1244,7 @@ Veh_DoRecover(playerid, slot)
 	GetPlayerName(playerid, pname, 25);
 	format(msg, 256, "RECUPERO %s: %s dbId %d costo $%d", pname, mname, g_VSlot[playerid][slot][vsDbId], cost);
 	Log_Write("VEH", msg);
+	return 0;
 }
 
 Veh_CmdV(playerid, const params[])
@@ -1356,6 +1372,7 @@ Veh_CmdV(playerid, const params[])
 		return 0;
 	}
 	Util_Send(playerid, 0x99CCFFFF, "Uso: /v lock | engine | lights | park | find [slot] | list | sell [slot] | recover [slot]");
+	return 0;
 }
 
 Veh_CmdRefuel(playerid, const params[])
@@ -1431,6 +1448,7 @@ Veh_CmdRefuel(playerid, const params[])
 	Veh_SaveSlot(playerid, slot);
 	Veh_HudRefresh(playerid);
 	SendClientMessage(playerid, 0x66DD66FF, "Rifornimento: +%.1f L per $%d. Serbatoio: %.1f/%.0f L.", (float(add) / float(100)), cost, (float(g_VSlot[playerid][slot][vsFuelCl]) / float(100)), (float(cap) / float(100)));
+	return 0;
 }
 
 Veh_OnInit()
@@ -1493,6 +1511,7 @@ Veh_OnPlayerSpawn(playerid)
 	{
 		Veh_BeginLoad(playerid);
 	}
+	return 0;
 }
 
 Veh_OnPlayerDisconnect(playerid)
@@ -1524,6 +1543,7 @@ Veh_OnPlayerDisconnect(playerid)
 	}
 	Veh_ResetPlayer(playerid);
 	Veh_SyncTimers();
+	return 0;
 }
 
 Veh_OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
@@ -1538,6 +1558,7 @@ Veh_OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
 		ClearAnimations(playerid, 0);
 		Util_Send(playerid, -10270721, "Non hai le chiavi di questo veicolo.");
 	}
+	return 0;
 }
 
 Veh_OnPlayerExitVehicle(playerid, vehicleid)
@@ -1585,6 +1606,7 @@ Veh_OnPlayerStateChange(playerid, t_PLAYER_STATE:newstate, t_PLAYER_STATE:oldsta
 			Util_Send(playerid, 0x99CCFFFF, "ძრავი გამორთულია: დააჭირე N ან დაწერე /v engine.");
 		}
 	}
+	return 0;
 }
 
 Veh_OnVehicleDeath(vehicleid, killerid)
@@ -1609,4 +1631,5 @@ Veh_OnVehicleDeath(vehicleid, killerid)
 	GetPlayerName(o, pname, 25);
 	format(msg, 256, "DISTRUTTO %s: %s dbId %d", pname, mname, g_VSlot[o][s][vsDbId]);
 	Log_Write("VEH", msg);
+	return 0;
 }

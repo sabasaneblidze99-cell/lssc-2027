@@ -19,6 +19,7 @@ DB_BankLastOpId(playerid, dest[], size)
 		return 0;
 	}
 	strcat(dest, g_BankReq[playerid][bqOpId], size);
+	return 0;
 }
 
 DB_BankXferFee(amount)
@@ -91,6 +92,7 @@ DB_BankStaleRelease(playerid, bit)
 	{
 		DB_PendingClear(playerid, bit);
 	}
+	return 0;
 }
 
 DB_BankDeliver(playerid, op, result, amount, fee, balance, recv)
@@ -140,6 +142,7 @@ DB_BankFlush(playerid)
 	GetPlayerName(playerid, name, 25);
 	mysql_format(g_DB, query, 512, "UPDATE characters SET bank = GREATEST(0, LEAST(%d, CAST(bank AS SIGNED) + (%d))) WHERE id = %d", 0x3B9ACA00, d, gPlayer[playerid][pCharId]);
 	mysql_tquery(g_DB, query, "DB_OnBankDeltaSaved", "dsddd", playerid, name, gPlayer[playerid][pCharId], g_BankGen[playerid], d);
+	return 0;
 }
 
 bool:DB_BankBegin(playerid, op, bool:valid, charId, amount, const opId[])
@@ -188,6 +191,7 @@ DB_BankCompensate(const opId[], op)
 	new query[512];
 	mysql_format(g_DB, query, 512, "CALL bank_undo('%e', %d)", opId, 0x3B9ACA00);
 	mysql_tquery(g_DB, query, "DB_OnBankUndoCalled", "sd", opId, 0);
+	return 0;
 }
 
 DB_BankInfoDeliver(playerid, infoOp, result, page, a, b, c, d, bool:more)
@@ -256,6 +260,7 @@ DB_BankLimits(playerid, charId)
 	GetPlayerName(playerid, name, 25);
 	mysql_format(g_DB, query, 512, "SELECT LEAST(bank_day_withdrawn(c.id, %d), 2147483647) AS wd, LEAST(bank_day_xfer_out(c.id, %d), 2147483647) AS xo, LEAST(bank_day_xfer_in(c.id, %d), 2147483647) AS xi, COALESCE(TIMESTAMPDIFF(SECOND, (SELECT MAX(ts) FROM bank_ledger WHERE character_id = c.id AND kind = 'xfer_out'), NOW()), -1) AS since FROM characters c WHERE c.id = %d", 24, 24, 24, charId);
 	mysql_tquery(g_DB, query, "DB_OnBankLimits", "dsdd", playerid, name, charId, g_BankInfo[playerid][biToken]);
+	return 0;
 }
 
 public DB_OnBankLimits(playerid, const name[], charId, token)
@@ -298,6 +303,7 @@ DB_BankStatement(playerid, charId, page)
 	GetPlayerName(playerid, name, 25);
 	mysql_format(g_DB, query, 512, "SELECT UNIX_TIMESTAMP(l.ts) AS ts, l.kind AS kind, l.delta AS delta, l.balance_after AS balance, COALESCE(a.name, '') AS other, COALESCE(l.ref, '') AS ref FROM bank_ledger l LEFT JOIN characters oc ON oc.id = l.other_character_id LEFT JOIN accounts a ON a.id = oc.account_id WHERE l.character_id = %d ORDER BY l.id DESC LIMIT %d OFFSET %d", charId, 16, page * 15);
 	mysql_tquery(g_DB, query, "DB_OnBankStatement", "dsdd", playerid, name, charId, g_BankInfo[playerid][biToken]);
+	return 0;
 }
 
 public DB_OnBankStatement(playerid, const name[], charId, token)
@@ -338,6 +344,7 @@ DB_BankResync(playerid, charId)
 	GetPlayerName(playerid, name, 25);
 	mysql_format(g_DB, query, 512, "SELECT bank FROM characters WHERE id = %d", charId);
 	mysql_tquery(g_DB, query, "DB_OnBankSynced", "dsdd", playerid, name, charId, g_BankInfo[playerid][biToken]);
+	return 0;
 }
 
 public DB_OnBankSynced(playerid, const name[], charId, token)
@@ -372,6 +379,7 @@ DB_BankDeposit(playerid, charId, amount, channel, const opId[])
 	GetPlayerName(playerid, name, 25);
 	mysql_format(g_DB, query, 512, "CALL bank_deposit('%e', %d, %d, %d, %d, %d)", opId, charId, amount, channel, channel == 0 ? 20000 : 0, 0x3B9ACA00);
 	mysql_tquery(g_DB, query, "DB_OnBankCalled", "dsddds", playerid, name, charId, g_BankReq[playerid][bqToken], 1, opId);
+	return 0;
 }
 
 DB_BankWithdraw(playerid, charId, amount, channel, const opId[])
@@ -386,6 +394,7 @@ DB_BankWithdraw(playerid, charId, amount, channel, const opId[])
 	GetPlayerName(playerid, name, 25);
 	mysql_format(g_DB, query, 512, "CALL bank_withdraw('%e', %d, %d, %d, %d, %d, %d)", opId, charId, amount, channel, atm ? 5000 : 50000, atm ? 15000 : 100000, 24);
 	mysql_tquery(g_DB, query, "DB_OnBankCalled", "dsddds", playerid, name, charId, g_BankReq[playerid][bqToken], 2, opId);
+	return 0;
 }
 
 public DB_OnBankCalled(playerid, const name[], charId, token, op, const opId[])
@@ -455,6 +464,7 @@ DB_BankTransfer(playerid, toPlayerid, amount, const opId[], flag)
 	GetPlayerName(toPlayerid, rname, 25);
 	mysql_format(g_DB, query, 512, "CALL bank_transfer('%e', %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d)", opId, fromChar, toChar, amount, 2, 5, 10, 25000, 50000, 100000, 0x3B9ACA00, 24, flag != 0 ? 1 : 0);
 	mysql_tquery(g_DB, query, "DB_OnBankXferCalled", "dsdddsddds", playerid, name, fromChar, g_BankReq[playerid][bqToken], toPlayerid, rname, toChar, g_BankGen[toPlayerid], amount, opId);
+	return 0;
 }
 
 public DB_OnBankXferCalled(playerid, const name[], charId, token, recv, const rname[], rchar, rgen, amount, const opId[])
@@ -522,6 +532,7 @@ DB_BankUndo(const opId[])
 	g_BankUndoNotify++;
 	mysql_format(g_DB, query, 512, "CALL bank_undo('%e', %d)", opId, 0x3B9ACA00);
 	mysql_tquery(g_DB, query, "DB_OnBankUndoCalled", "sd", opId, 1);
+	return 0;
 }
 
 public DB_OnBankUndoCalled(const opId[], notify)
@@ -603,6 +614,7 @@ DB_BankLog(const opId[], charId, otherCharId, const kind[], delta, balAfter, cha
 	new query[512];
 	mysql_format(g_DB, query, 512, "INSERT IGNORE INTO bank_ledger (op_id, character_id, other_character_id, kind, delta, balance_after, channel, ref) VALUES ('%e', %d, NULLIF(%d, 0), '%e', %d, %d, %d, NULLIF('%e', ''))", opId, charId, otherCharId > 0 ? otherCharId : 0, kind, delta, balAfter, channel, ref);
 	mysql_tquery(g_DB, query, "", "");
+	return 0;
 }
 
 public DB_BankFailure(playerid, op)

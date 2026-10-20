@@ -116,6 +116,7 @@ Hub_ResetPlayer(playerid)
 	g_HubPrjOpProject[playerid] = 0;
 	g_HubPrjOpAmount[playerid] = 0;
 	g_HubPrjDistrict[playerid] = 0;
+	return 0;
 }
 
 Hub_NearBoard(playerid)
@@ -188,6 +189,7 @@ Hub_ClearTarget(playerid)
 	}
 	g_HubCpOn[playerid] = 0;
 	g_HubTarget[playerid] = 0;
+	return 0;
 }
 
 Hub_SetTarget(playerid, target, bool:withCheckpoint)
@@ -206,6 +208,7 @@ Hub_SetTarget(playerid, target, bool:withCheckpoint)
 		SetPlayerCheckpoint(playerid, x, y, z, 3.0);
 		g_HubCpOn[playerid] = 1;
 	}
+	return 0;
 }
 
 Hub_StepTarget(step)
@@ -300,6 +303,7 @@ Hub_OnPlayerConnect(playerid)
 		return 0;
 	}
 	Hub_ResetPlayer(playerid);
+	return 0;
 }
 
 Hub_OnCharReady(playerid)
@@ -314,6 +318,7 @@ Hub_OnCharReady(playerid)
 		GangZoneShowForPlayer(playerid, g_HubZone, -2994880);
 	}
 	Hub_TryLoad(playerid);
+	return 0;
 }
 
 Hub_OnPlayerDisconnect(playerid, reason)
@@ -324,6 +329,7 @@ Hub_OnPlayerDisconnect(playerid, reason)
 		return 0;
 	}
 	Hub_ResetPlayer(playerid);
+	return 0;
 }
 
 Hub_TryLoad(playerid)
@@ -366,6 +372,7 @@ Hub_TryLoad(playerid)
 	{
 		Hub_SetTarget(playerid, target, 0);
 	}
+	return 0;
 }
 
 Hub_SendStep(playerid, step, bool:fresh)
@@ -384,6 +391,7 @@ Hub_SendStep(playerid, step, bool:fresh)
 		return 0;
 	}
 	DB_LivingOnboardStep(playerid, step, g_HubOpId[playerid]);
+	return 0;
 }
 
 Hub_Advance(playerid, step)
@@ -403,6 +411,7 @@ Hub_Advance(playerid, step)
 		return 0;
 	}
 	Hub_SendStep(playerid, step, 1);
+	return 0;
 }
 
 Hub_StepBegin(playerid)
@@ -429,6 +438,7 @@ Hub_StepBegin(playerid)
 	{
 		Hub_SetTarget(playerid, target, 0);
 	}
+	return 0;
 }
 
 Hub_Finish(playerid, bool:rewarded)
@@ -520,6 +530,7 @@ Hub_KitTick(playerid, now)
 	{
 		g_HubKitReload[playerid] = 1;
 	}
+	return 0;
 }
 
 public Living_OnDBOnboard(playerid, result, step, paid, balance, giveKit, exp)
@@ -627,6 +638,7 @@ Hub_HintsOff(playerid)
 			Hub_SendStep(playerid, 0, 1);
 		}
 	}
+	return 0;
 }
 
 Hub_StartWelcome(playerid)
@@ -667,6 +679,7 @@ Hub_StartWelcome(playerid)
 		return 0;
 	}
 	Util_Send(playerid, 0x99CCFFFF, "Un carico di merci dal magazzino al negozio di Idlewood: strada breve, nessuna fretta. Il quartiere ti ringrazia gia'.");
+	return 0;
 }
 
 Hub_OnWelcomeDelivered(playerid, bool:success)
@@ -1114,6 +1127,7 @@ Hub_RequestRefresh(bool:force)
 	g_HubRefreshed = 1;
 	g_HubLastRefresh = now;
 	DB_LivingLoadDistricts();
+	return 0;
 }
 
 Hub_Broadcast(color, const text[])
@@ -1221,6 +1235,7 @@ Hub_GreetBoard(playerid, board)
 	LD_DistrictName(s_HubBoardDistrict[board], dname, 16);
 	format(msg, 256, "Bacheca di quartiere di %s: qui accetti i contratti (/contratti) e sostieni il progetto della zona (/contribuisci).", dname);
 	Util_Send(playerid, 0x99CCFFFF, msg);
+	return 0;
 }
 
 Hub_PlayerTick(playerid, now)

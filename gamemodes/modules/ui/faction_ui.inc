@@ -46,6 +46,7 @@ UI_FcRankText(faction, rank, out[], size)
 		return 0;
 	}
 	format(out, size, "%s", g_UiFcRankName[faction][rank]);
+	return 0;
 }
 
 UI_FcMoney(value, out[], size)
@@ -149,6 +150,7 @@ UI_FactionMenuShow(playerid, faction, rank, bool:onDuty, membersOnline, membersT
 	UI_FcRankText(faction, rank, rankName, 24);
 	format(title, 64, "%s - %s%s", g_UiFcShort[faction], rankName, onDuty ? " (in servizio)" : "");
 	Lang_ShowPlayerDialog(playerid, 9320, 2, title, body, "Seleziona", "Chiudi");
+	return 0;
 }
 
 UI_FcInfoShow(playerid)
@@ -174,6 +176,7 @@ UI_FcInfoShow(playerid)
 		strcat(body, line, 1536);
 	}
 	Lang_ShowPlayerDialog(playerid, 9321, 0, "Informazioni fazione", body, "Menu", "Chiudi");
+	return 0;
 }
 
 UI_FcInviteTargetShow(playerid, const error[])
@@ -191,6 +194,7 @@ UI_FactionMemberListClear(playerid)
 	}
 	g_UiFcCount[playerid] = 0;
 	g_UiFcSel[playerid] = -1;
+	return 0;
 }
 
 bool:UI_FactionMemberListAdd(playerid, memberId, const name[], rank, status)
@@ -323,6 +327,7 @@ UI_FcMembersPage(playerid, page)
 		format(title, 64, "%s membro - %s (pag. %d/%d)", verb, g_UiFcShort[faction], page + 1, pages);
 	}
 	Lang_ShowPlayerDialog(playerid, 9322, 5, title, body, mode == 2 ? "Dettagli" : "Seleziona", "Chiudi");
+	return 0;
 }
 
 UI_FactionMembersShow(playerid, faction, ownRank, mode)
@@ -348,6 +353,7 @@ UI_FactionMembersShow(playerid, faction, ownRank, mode)
 	g_UiFcRank[playerid] = ownRank;
 	g_UiFcMode[playerid] = mode;
 	UI_FcMembersPage(playerid, 0);
+	return 0;
 }
 
 UI_FcMemberInfoShow(playerid, idx)
@@ -407,6 +413,7 @@ UI_FactionInviteShow(playerid, faction, const inviterName[], ttlSec)
 	UI_FcRankText(faction, 1, rank1, 24);
 	format(body, 512, "{FFD24D}%s{FFFFFF} ti invita a entrare in {FFD24D}%s{FFFFFF}.\n\nEntrerai con il grado {FFD24D}%s{FFFFFF}.\nL'invito scade tra {FF6666}%d{FFFFFF} secondi.", inviterName, g_UiFcFull[faction], rank1, ttlSec > 0 ? ttlSec : 60);
 	Lang_ShowPlayerDialog(playerid, 9326, 0, "Invito in fazione", body, "Accetta", "Rifiuta");
+	return 0;
 }
 
 UI_FactionInviteClose(playerid)
@@ -419,6 +426,7 @@ UI_FactionInviteClose(playerid)
 	{
 		HidePlayerDialog(playerid);
 	}
+	return 0;
 }
 
 bool:UI_FactionOnDialogResponse(playerid, dialogid, response, listitem, const inputtext[])
@@ -650,6 +658,7 @@ UI_FhCreate(playerid)
 	g_UiFHud[playerid][1] = UI_FhText(playerid, (5.0 + left), (356.0 + 2.0), "IN SERVIZIO", 0.2, 0.9, -1, 1);
 	g_UiFHud[playerid][2] = UI_FhText(playerid, (5.0 + left), (356.0 + 12.0), "Kit medico: 0", 0.2, 0.9, -1, 1);
 	g_UiFHudCreated[playerid] = 1;
+	return 0;
 }
 
 UI_FhApply(playerid, faction, rank, kitCharges)
@@ -691,6 +700,7 @@ UI_FactionHudShow(playerid, faction, rank)
 	PlayerTextDrawShow(playerid, g_UiFHud[playerid][0]);
 	PlayerTextDrawHide(playerid, g_UiFHud[playerid][2]);
 	UI_FhApply(playerid, faction, rank, -1);
+	return 0;
 }
 
 UI_FactionHudUpdate(playerid, faction, rank, kitCharges)
@@ -704,6 +714,7 @@ UI_FactionHudUpdate(playerid, faction, rank, kitCharges)
 		return 0;
 	}
 	UI_FhApply(playerid, faction, rank, kitCharges);
+	return 0;
 }
 
 UI_FactionHudHide(playerid)
@@ -718,6 +729,7 @@ UI_FactionHudHide(playerid)
 	{
 		PlayerTextDrawHide(playerid, g_UiFHud[playerid][i]);
 	}
+	return 0;
 }
 new g_UiIHud[MAX_PLAYERS][6];
 new bool:g_UiIHudCreated[MAX_PLAYERS];
@@ -736,6 +748,7 @@ UI_IhCreate(playerid)
 	g_UiIHud[playerid][4] = UI_FhBox(playerid, (210.0 + 6.0), (60.0 + 35.0), 208.0, 5.0, -12303105);
 	g_UiIHud[playerid][5] = UI_FhText(playerid, (210.0 + 6.0), (60.0 + 43.0), "Attendi un medico EMS. Non puoi muoverti.", 0.18, 0.85, -0.005729198, 1);
 	g_UiIHudCreated[playerid] = 1;
+	return 0;
 }
 
 UI_InjuryHudUpdate(playerid, secondsLeft)
@@ -762,6 +775,7 @@ UI_InjuryHudUpdate(playerid, secondsLeft)
 	new Float:fraction = (float(secondsLeft) / float(180));
 	PlayerTextDrawTextSize(playerid, g_UiIHud[playerid][4], (0.1 + ((210.0 + 6.0) + (208.0 * fraction))), 0.0);
 	PlayerTextDrawShow(playerid, g_UiIHud[playerid][4]);
+	return 0;
 }
 
 UI_InjuryHudShow(playerid, secondsLeft)
@@ -777,6 +791,7 @@ UI_InjuryHudShow(playerid, secondsLeft)
 		PlayerTextDrawShow(playerid, g_UiIHud[playerid][i]);
 	}
 	UI_InjuryHudUpdate(playerid, secondsLeft);
+	return 0;
 }
 
 UI_InjuryHudHide(playerid)
@@ -790,6 +805,7 @@ UI_InjuryHudHide(playerid)
 	{
 		PlayerTextDrawHide(playerid, g_UiIHud[playerid][i]);
 	}
+	return 0;
 }
 
 UI_InjuryEndShow(playerid, reason, fee)
@@ -818,6 +834,7 @@ UI_InjuryEndShow(playerid, reason, fee)
 		format(body, 384, "{FFFFFF}Un medico EMS ti ha soccorso: sei di nuovo in piedi.\nRiprendi il gioco con prudenza.");
 		Lang_ShowPlayerDialog(playerid, 9327, 0, "Soccorso", body, "OK", "");
 	}
+	return 0;
 }
 
 UI_FactionUiDestroy(playerid)
@@ -860,4 +877,5 @@ UI_FactionUiDestroy(playerid)
 	{
 		g_UiFcMenuAct[playerid][i] = 0;
 	}
+	return 0;
 }

@@ -187,6 +187,7 @@ Bank_FormatWhen(ts, dest[], size)
 	new doy = doe - (yoe * 365 + yoe / 4 - yoe / 100), mp = (doy * 5 + 2) / 153;
 	new day = doy - (mp * 153 + 2) / 5 + 1, month = mp < 10 ? mp + 3 : mp - 9;
 	format(dest, size, "%02d/%02d %02d:%02d", day, month, secs / 3600, secs % 3600 / 60);
+	return 0;
 }
 
 Bank_KindLabel(const kind[], dest[], size)
@@ -458,6 +459,7 @@ Bank_RefreshLimits(playerid)
 	Bank_BeginOp(playerid, 4, 0, gPlayer[playerid][pBankOpPoint]);
 	gPlayer[playerid][pBankOpAux] = 0;
 	DB_BankLimits(playerid, gPlayer[playerid][pCharId]);
+	return 0;
 }
 
 Bank_CmdSaldo(playerid)
@@ -476,6 +478,7 @@ Bank_CmdAtm(playerid, bool:counterOnly)
 	Bank_PushUi(playerid);
 	UI_BankMenu(playerid, Bank_IsCounter(point));
 	Bank_RefreshLimits(playerid);
+	return 0;
 }
 
 public UI_OnBankBalanceRefresh(playerid)
@@ -521,6 +524,7 @@ Bank_Deposit(playerid, amount, bool:ui)
 	Bank_BeginWrite(playerid, 1, amount, point);
 	gPlayer[playerid][pBankOpAux] = ui ? 1 : 0;
 	DB_BankDeposit(playerid, gPlayer[playerid][pCharId], amount, Bank_IsCounter(point) ? 1 : 0, gPlayer[playerid][pBankOpId]);
+	return 0;
 }
 
 public UI_OnBankDeposit(playerid, amount)
@@ -666,6 +670,7 @@ Bank_Withdraw(playerid, amount, bool:ui)
 	Bank_BeginWrite(playerid, 2, amount, point);
 	gPlayer[playerid][pBankOpAux] = ui ? 1 : 0;
 	DB_BankWithdraw(playerid, gPlayer[playerid][pCharId], amount, counter ? 1 : 0, gPlayer[playerid][pBankOpId]);
+	return 0;
 }
 
 public UI_OnBankWithdraw(playerid, amount)
@@ -892,6 +897,7 @@ Bank_Transfer(playerid, target, amount, bool:ui)
 	gPlayer[playerid][pBankOpAux] = ui ? 2 : 1;
 	gPlayer[playerid][pBankOpTarget] = target + 1;
 	DB_BankLimits(playerid, gPlayer[playerid][pCharId]);
+	return 0;
 }
 
 public UI_OnBankTransfer(playerid, targetId, amount)
@@ -1130,6 +1136,7 @@ Bank_Statement(playerid, page, bool:ui)
 	gPlayer[playerid][pBankOpAux] = page;
 	gPlayer[playerid][pBankOpTarget] = ui ? 1 : 0;
 	DB_BankStatement(playerid, gPlayer[playerid][pCharId], page);
+	return 0;
 }
 
 public UI_OnBankStatement(playerid, page)
@@ -1183,6 +1190,7 @@ Bank_CmdDeposita(playerid, const params[])
 		return 0;
 	}
 	Bank_Deposit(playerid, amount, 0);
+	return 0;
 }
 
 Bank_CmdPreleva(playerid, const params[])
@@ -1194,6 +1202,7 @@ Bank_CmdPreleva(playerid, const params[])
 		return 0;
 	}
 	Bank_Withdraw(playerid, amount, 0);
+	return 0;
 }
 
 Bank_CmdBonifico(playerid, const params[])
@@ -1218,6 +1227,7 @@ Bank_CmdBonifico(playerid, const params[])
 		return 0;
 	}
 	Bank_Transfer(playerid, target, amount, 0);
+	return 0;
 }
 
 Bank_CmdEstratto(playerid)
@@ -1256,6 +1266,7 @@ Bank_OnPlayerConnect(playerid)
 		return 0;
 	}
 	gPlayer[playerid][pBankOpBusy] = 0;
+	return 0;
 }
 
 Bank_OnPlayerDisconnect(playerid)
@@ -1272,4 +1283,5 @@ Bank_OnPlayerDisconnect(playerid)
 		Log_Write("BANK", msg);
 	}
 	gPlayer[playerid][pBankPendTarget] = 0;
+	return 0;
 }

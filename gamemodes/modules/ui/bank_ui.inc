@@ -188,6 +188,7 @@ UI_BankSetBalance(playerid, cash, bank)
 	}
 	g_UiBkCash[playerid] = cash < 0 ? 0 : cash;
 	g_UiBkBank[playerid] = bank < 0 ? 0 : bank;
+	return 0;
 }
 
 UI_BankSetLimits(playerid, depositMax, withdrawMax, withdrawLeft, xferMin, xferMax, sendLeft)
@@ -202,6 +203,7 @@ UI_BankSetLimits(playerid, depositMax, withdrawMax, withdrawLeft, xferMin, xferM
 	g_UiBkXferMin[playerid] = xferMin < 1 ? 1 : xferMin;
 	g_UiBkXferMax[playerid] = xferMax < 0 ? 0 : xferMax;
 	g_UiBkSendLeft[playerid] = sendLeft;
+	return 0;
 }
 
 UI_BankToastCreate(playerid)
@@ -221,6 +223,7 @@ UI_BankToastCreate(playerid)
 	PlayerTextDrawBackgroundColour(playerid, td, 255);
 	g_UiBkToastTd[playerid] = td;
 	g_UiBkToastCreated[playerid] = 1;
+	return 0;
 }
 
 UI_BankToast(playerid, const text[], bool:ok)
@@ -236,6 +239,7 @@ UI_BankToast(playerid, const text[], bool:ok)
 	PlayerTextDrawShow(playerid, td);
 	g_UiBkToastTtl[playerid] = 4;
 	UI_BankTimerEnsure(playerid);
+	return 0;
 }
 
 UI_BankMenuShow(playerid)
@@ -259,6 +263,7 @@ UI_BankMenu(playerid, bool:counter)
 	}
 	g_UiBkCounter[playerid] = counter;
 	UI_BankMenuShow(playerid);
+	return 0;
 }
 
 UI_BankBalanceShow(playerid)
@@ -392,6 +397,7 @@ UI_BankAmountShow(playerid, op, const err[])
 	}
 	format(body, 512, "%s{FFFFFF}%s\nImporto ammesso: da {FFD24D}$%s{FFFFFF} a {FFD24D}$%s{FFFFFF}.\nInserisci un numero intero:", err, sub, sLo, sHi);
 	Lang_ShowPlayerDialog(playerid, 9501, 1, title, body, "Avanti", "Indietro");
+	return 0;
 }
 
 UI_BankTargetShow(playerid, const err[])
@@ -428,6 +434,7 @@ UI_BankTransferConfirm(playerid, targetId, amount, fee, balanceAfter, ttlSec)
 	UI_BankFmt(balanceAfter, sAfter, 16);
 	format(body, 512, "{FFFFFF}Destinatario: {FFD24D}%s (ID %d)\n{FFFFFF}Importo: {66DD66}$%s\n{FFFFFF}Commissione: {FF6666}$%s\n{FFFFFF}Totale addebitato: {FF6666}$%s\n{FFFFFF}Saldo dopo l'operazione: {66DD66}$%s\n\n{AAAAAA}La conferma scade tra %d secondi.", g_UiBkConfName[playerid], targetId, sAmount, sFee, sTotal, sAfter, ttlSec);
 	Lang_ShowPlayerDialog(playerid, 9503, 0, "Conferma bonifico", body, "Conferma", "Annulla");
+	return 0;
 }
 
 UI_BankTransferConfirmClose(playerid)
@@ -445,6 +452,7 @@ UI_BankTransferConfirmClose(playerid)
 	{
 		UI_BankTimerStop(playerid);
 	}
+	return 0;
 }
 
 UI_BankStatementBegin(playerid, page, bool:hasNext)
@@ -464,6 +472,7 @@ UI_BankStatementBegin(playerid, page, bool:hasNext)
 	g_UiBkStPage[playerid] = page;
 	g_UiBkStNext[playerid] = hasNext && page < 4;
 	g_UiBkStCount[playerid] = 0;
+	return 0;
 }
 
 UI_BankStatementAdd(playerid, const when[], const kind[], const other[], amount, balanceAfter)
@@ -483,6 +492,7 @@ UI_BankStatementAdd(playerid, const when[], const kind[], const other[], amount,
 	g_UiBkStAmount[playerid][n] = amount;
 	g_UiBkStBalance[playerid][n] = balanceAfter;
 	g_UiBkStCount[playerid] = n + 1;
+	return 0;
 }
 
 UI_BankStatementShow(playerid)
@@ -535,6 +545,7 @@ UI_BankStatementShow(playerid)
 	}
 	format(title, 64, "Estratto conto - pag. %d/%d", page + 1, 5);
 	Lang_ShowPlayerDialog(playerid, 9504, 5, title, body, "Vai", "Menu");
+	return 0;
 }
 
 UI_BankReject(playerid, const msg[])
@@ -550,6 +561,7 @@ UI_BankReject(playerid, const msg[])
 		UI_BankToast(playerid, msg, 0);
 	}
 	UI_BankMenuShow(playerid);
+	return 0;
 }
 
 UI_BankClose(playerid)
@@ -567,6 +579,7 @@ UI_BankClose(playerid)
 	{
 		UI_BankTimerStop(playerid);
 	}
+	return 0;
 }
 
 UI_BankUiDestroy(playerid)
@@ -600,6 +613,7 @@ UI_BankUiDestroy(playerid)
 	g_UiBkStCount[playerid] = 0;
 	g_UiBkStNavNext[playerid] = -1;
 	g_UiBkStNavPrev[playerid] = -1;
+	return 0;
 }
 
 public UI_BankOnTimer(playerid)

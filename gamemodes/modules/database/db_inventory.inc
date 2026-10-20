@@ -74,6 +74,7 @@ DB_InvStaleRelease(playerid)
 	{
 		DB_PendingClear(playerid, 0x04000000);
 	}
+	return 0;
 }
 
 DB_InvDeliver(playerid, op, result, itemId, qty, dir, houseId, recv)
@@ -141,6 +142,7 @@ DB_InvDeliver(playerid, op, result, itemId, qty, dir, houseId, recv)
 			}
 		}
 	}
+	return 0;
 }
 
 bool:DB_InvBegin(playerid, op, bool:valid, charId, itemId, qty, const opId[], dir, houseId, recv, recvChar)
@@ -204,6 +206,7 @@ DB_InvCompensate(const opId[], op)
 	new query[512];
 	mysql_format(g_DB, query, 512, "CALL inv_undo('%e')", opId);
 	mysql_tquery(g_DB, query, "DB_OnInvUndoCalled", "sd", opId, 0);
+	return 0;
 }
 
 DB_InvLoad(playerid, charId)
@@ -226,6 +229,7 @@ DB_InvLoad(playerid, charId)
 	mysql_format(g_DB, query, 512, "SELECT c.inv_bag, COALESCE(i.slot, 0) AS slot, COALESCE(i.item_id, 0) AS item_id, COALESCE(i.quantity, 0) AS quantity FROM characters c LEFT JOIN inventory_items i ON i.character_id = c.id WHERE c.id = %d ORDER BY i.slot", charId);
 	DB_PendingSet(playerid, 0x02000000);
 	mysql_tquery(g_DB, query, "DB_OnInvLoaded", "dsd", playerid, name, charId);
+	return 0;
 }
 
 public DB_OnInvLoaded(playerid, const name[], charId)
@@ -290,6 +294,7 @@ DB_InvAddCommon(playerid, op, charId, itemId, qty, const opId[], const kind[], m
 	new query[512];
 	mysql_format(g_DB, query, 512, "CALL inv_add('%e', %d, %d, %d, %d, %d, %d, %d, '%e')", opId, charId, itemId, qty, DB_InvStackMax(itemId), 12, 8, maxTotal, kind);
 	DB_InvRun(playerid, op, query);
+	return 0;
 }
 
 DB_InvAdd(playerid, charId, itemId, qty, const opId[], const kind[], maxTotal)
@@ -300,6 +305,7 @@ DB_InvAdd(playerid, charId, itemId, qty, const opId[], const kind[], maxTotal)
 		return 0;
 	}
 	DB_InvAddCommon(playerid, 1, charId, itemId, qty, opId, kind, maxTotal);
+	return 0;
 }
 
 DB_InvBuy(playerid, charId, itemId, qty, const opId[], maxTotal)
@@ -317,6 +323,7 @@ DB_InvRemoveCommon(playerid, op, charId, itemId, qty, const opId[], const kind[]
 	new query[512];
 	mysql_format(g_DB, query, 512, "CALL inv_remove('%e', %d, %d, %d, %d, %d, %d, '%e')", opId, charId, itemId, qty, DB_InvStackMax(itemId), 12, 8, kind);
 	DB_InvRun(playerid, op, query);
+	return 0;
 }
 
 DB_InvUse(playerid, charId, itemId, const opId[])
@@ -332,6 +339,7 @@ DB_InvDrop(playerid, charId, itemId, qty, const opId[])
 		return 0;
 	}
 	DB_InvRemoveCommon(playerid, 5, charId, itemId, qty, opId, "drop");
+	return 0;
 }
 
 DB_InvSetBag(playerid, charId, const opId[])
@@ -343,6 +351,7 @@ DB_InvSetBag(playerid, charId, const opId[])
 	new query[512];
 	mysql_format(g_DB, query, 512, "CALL inv_set_bag('%e', %d, %d, %d)", opId, charId, 12, 8);
 	DB_InvRun(playerid, 7, query);
+	return 0;
 }
 
 DB_FridgeMove(playerid, charId, houseId, itemId, qty, direction, const opId[], fridgeCap, carryMax)
@@ -355,6 +364,7 @@ DB_FridgeMove(playerid, charId, houseId, itemId, qty, direction, const opId[], f
 	new query[512];
 	mysql_format(g_DB, query, 512, "CALL inv_fridge('%e', %d, %d, %d, %d, %d, %d, %d, %d, %d, %d)", opId, charId, houseId, itemId, qty, direction, DB_InvStackMax(itemId), 12, 8, fridgeCap, carryMax);
 	DB_InvRun(playerid, 8, query);
+	return 0;
 }
 
 public DB_OnInvCalled(playerid, const name[], charId, token, op, const opId[])
@@ -416,6 +426,7 @@ DB_InvTransfer(giverId, receiverId, itemId, qty, const opId[])
 	GetPlayerName(giverId, gname, 25);
 	mysql_format(g_DB, query, 512, "CALL inv_transfer('%e', %d, %d, %d, %d, %d, %d, %d)", opId, giverChar, recvChar, itemId, qty, DB_InvStackMax(itemId), 12, 8);
 	mysql_tquery(g_DB, query, "DB_OnInvGiveCalled", "dsdddsddds", giverId, gname, giverChar, g_InvReq[giverId][iqToken], receiverId, g_InvReq[giverId][iqRecvName], recvChar, itemId, qty, opId);
+	return 0;
 }
 
 public DB_OnInvGiveCalled(playerid, const name[], charId, token, recv, const rname[], rchar, itemId, qty, const opId[])
@@ -466,6 +477,7 @@ DB_InvUndo(const opId[])
 	g_InvUndoNotify++;
 	mysql_format(g_DB, query, 512, "CALL inv_undo('%e')", opId);
 	mysql_tquery(g_DB, query, "DB_OnInvUndoCalled", "sd", opId, 1);
+	return 0;
 }
 
 public DB_OnInvUndoCalled(const opId[], notify)

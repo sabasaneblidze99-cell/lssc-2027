@@ -215,6 +215,7 @@ DB_Shutdown()
 	mysql_close(g_DB);
 	g_DB = 0;
 	print("[DB] connessione chiusa");
+	return 0;
 }
 
 bool:DB_PlayerMatches(playerid, const name[])
@@ -345,6 +346,7 @@ DB_DeliverFailure(playerid, op)
 			}
 		}
 	}
+	return 0;
 }
 
 DB_DeliverAdminFailure(slot, op)
@@ -390,6 +392,7 @@ DB_DeliverAdminFailure(slot, op)
 			}
 		}
 	}
+	return 0;
 }
 
 DB_FailAllAdminPending(op)

@@ -133,6 +133,7 @@ UI_HouseDataSet(playerid, houseId, role, tier, interiorIdx, bool:locked, lightSt
 	g_UiHsLevel[playerid] = level;
 	g_UiHsMoney[playerid] = money;
 	g_UiHsBank[playerid] = bank;
+	return 0;
 }
 
 UI_HouseBillsSet(playerid, lightDue, lightCount, gasDue, gasCount)
@@ -145,6 +146,7 @@ UI_HouseBillsSet(playerid, lightDue, lightCount, gasDue, gasCount)
 	g_UiHsLightCnt[playerid] = lightCount < 0 ? 0 : lightCount;
 	g_UiHsGasDue[playerid] = gasDue < 0 ? 0 : gasDue;
 	g_UiHsGasCnt[playerid] = gasCount < 0 ? 0 : gasCount;
+	return 0;
 }
 
 UI_HsBillsTotal(playerid)
@@ -169,6 +171,7 @@ UI_HsMenuRow(playerid, &n, act, const line[], body[], size)
 	}
 	g_UiHsItemAct[playerid][n++] = act;
 	strcat(body, line, size);
+	return 0;
 }
 
 UI_HouseMenuShow(playerid)
@@ -229,6 +232,7 @@ UI_HouseMenuShow(playerid)
 		}
 	}
 	Lang_ShowPlayerDialog(playerid, 9200, 2, title, body, "Scegli", "Chiudi");
+	return 0;
 }
 
 UI_HsBuyPayShow(playerid)
@@ -306,6 +310,7 @@ UI_HouseUtilityShow(playerid)
 	strcat(body, line, 512);
 	UI_HsTitle(playerid, "Utenze", title, 64);
 	Lang_ShowPlayerDialog(playerid, 9203, 5, title, body, "Cambia", "Indietro");
+	return 0;
 }
 
 UI_HouseFridgeShow(playerid)
@@ -340,6 +345,7 @@ UI_HouseFridgeShow(playerid)
 	}
 	UI_HsTitle(playerid, "Frigo", title, 64);
 	Lang_ShowPlayerDialog(playerid, 9204, 2, title, body, "Scegli", "Indietro");
+	return 0;
 }
 
 UI_HsAmountShow(playerid, action, maxAmount)
@@ -381,6 +387,7 @@ UI_HouseBillsShow(playerid)
 	strcat(body, line, 512);
 	UI_HsTitle(playerid, "Bollette", title, 64);
 	Lang_ShowPlayerDialog(playerid, 9206, 5, title, body, "Paga tutte", "Indietro");
+	return 0;
 }
 
 UI_HsBillsPayShow(playerid)
@@ -693,6 +700,7 @@ UI_HhCreate(playerid)
 	g_UiHh[playerid][5] = UI_HhBox(playerid, homeLeft, 458.0, 150.0, 18.0, 153);
 	g_UiHh[playerid][6] = UI_HhText(playerid, (4.0 + homeLeft), (458.0 + 3.0), "Luce ON | Gas ON | Frigo 0/0", 0.2, 0.9, -1, 1);
 	g_UiHhCreated[playerid] = 1;
+	return 0;
 }
 
 UI_HouseDarkShow(playerid)
@@ -704,6 +712,7 @@ UI_HouseDarkShow(playerid)
 	UI_HhCreate(playerid);
 	g_UiHhDark[playerid] = 1;
 	PlayerTextDrawShow(playerid, g_UiHh[playerid][0]);
+	return 0;
 }
 
 UI_HouseDarkHide(playerid)
@@ -714,6 +723,7 @@ UI_HouseDarkHide(playerid)
 	}
 	g_UiHhDark[playerid] = 0;
 	PlayerTextDrawHide(playerid, g_UiHh[playerid][0]);
+	return 0;
 }
 
 UI_HungerHudUpdate(playerid, hunger)
@@ -761,6 +771,7 @@ UI_HungerHudUpdate(playerid, hunger)
 	}
 	PlayerTextDrawShow(playerid, g_UiHh[playerid][2]);
 	PlayerTextDrawShow(playerid, g_UiHh[playerid][4]);
+	return 0;
 }
 
 UI_HouseHudUpdate(playerid, bool:lightOn, bool:gasOn, fridgeUnits, fridgeCap)
@@ -779,6 +790,7 @@ UI_HouseHudUpdate(playerid, bool:lightOn, bool:gasOn, fridgeUnits, fridgeCap)
 		PlayerTextDrawShow(playerid, g_UiHh[playerid][5]);
 	}
 	PlayerTextDrawShow(playerid, g_UiHh[playerid][6]);
+	return 0;
 }
 
 UI_HouseHudHide(playerid)
@@ -790,6 +802,7 @@ UI_HouseHudHide(playerid)
 	g_UiHhHome[playerid] = 0;
 	PlayerTextDrawHide(playerid, g_UiHh[playerid][5]);
 	PlayerTextDrawHide(playerid, g_UiHh[playerid][6]);
+	return 0;
 }
 
 UI_HouseUiDestroy(playerid)
@@ -820,4 +833,5 @@ UI_HouseUiDestroy(playerid)
 	{
 		g_UiHsItemAct[playerid][i] = 0;
 	}
+	return 0;
 }

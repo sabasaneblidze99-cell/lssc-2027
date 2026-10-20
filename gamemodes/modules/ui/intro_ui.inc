@@ -101,6 +101,7 @@ UI_StoryCompose(const name[], origin, motive, dest[], size)
 	{
 		format(dest, size, "%s. %s %s", nm, g_UiStoryOriginText[origin], g_UiStoryMotiveText[motive]);
 	}
+	return 0;
 }
 
 UI_ShowOriginSelect(playerid)
@@ -119,6 +120,7 @@ UI_ShowOriginSelect(playerid)
 	}
 	strcat(body, "{AAAAAA}არ მინდა თქმა", 1600);
 	Lang_ShowPlayerDialog(playerid, 9600, 2, "შენი ისტორია: წარმოშობა", body, "არჩევა", "");
+	return 0;
 }
 
 UI_ShowMotiveSelect(playerid)
@@ -137,6 +139,7 @@ UI_ShowMotiveSelect(playerid)
 	}
 	strcat(body, "{AAAAAA}არ მინდა თქმა", 1600);
 	Lang_ShowPlayerDialog(playerid, 9601, 2, "შენი ისტორია: რატომ ლოს-სანტოსი", body, "არჩევა", "უკან");
+	return 0;
 }
 
 UI_StoryConfirmShow(playerid)
@@ -170,6 +173,7 @@ UI_StoryBegin(playerid)
 		return 0;
 	}
 	UI_ShowOriginSelect(playerid);
+	return 0;
 }
 
 UI_StoryViewShow(playerid, const name[], origin, motive, const title[])
@@ -187,6 +191,7 @@ UI_StoryShowOwn(playerid, const name[], origin, motive)
 		return 0;
 	}
 	UI_StoryViewShow(playerid, name, origin, motive, "შენი ისტორია");
+	return 0;
 }
 
 UI_StoryShowOther(playerid, const name[], origin, motive)
@@ -196,6 +201,7 @@ UI_StoryShowOther(playerid, const name[], origin, motive)
 		return 0;
 	}
 	UI_StoryViewShow(playerid, name, origin, motive, "პერსონაჟის ისტორია");
+	return 0;
 }
 
 bool:UI_IntroOnDialogResponse(playerid, dialogid, response, listitem, const inputtext[])
@@ -347,6 +353,7 @@ UI_IntroApplyAlpha(playerid)
 	}
 	PlayerTextDrawBoxColour(playerid, g_UiIntroTd[playerid][0], g_UiIntroAlpha[playerid] & 255);
 	PlayerTextDrawShow(playerid, g_UiIntroTd[playerid][0]);
+	return 0;
 }
 
 UI_IntroResetState(playerid)
@@ -388,6 +395,7 @@ UI_IntroUiDestroy(playerid)
 	g_UiStoryActive[playerid] = 0;
 	g_UiStoryOrigin[playerid] = 0;
 	g_UiStoryMotive[playerid] = 0;
+	return 0;
 }
 
 UI_IntroCreate(playerid)
@@ -409,6 +417,7 @@ UI_IntroCreate(playerid)
 	UI_IntroApplyAlpha(playerid);
 	PlayerTextDrawShow(playerid, g_UiIntroTd[playerid][1]);
 	PlayerTextDrawShow(playerid, g_UiIntroTd[playerid][2]);
+	return 0;
 }
 
 UI_IntroLetterbox(playerid, bool:on)
@@ -427,6 +436,7 @@ UI_IntroLetterbox(playerid, bool:on)
 		PlayerTextDrawHide(playerid, g_UiIntroTd[playerid][1]);
 		PlayerTextDrawHide(playerid, g_UiIntroTd[playerid][2]);
 	}
+	return 0;
 }
 
 UI_IntroFade(playerid, alpha)
@@ -450,6 +460,7 @@ UI_IntroFade(playerid, alpha)
 	{
 		UI_IntroTimerStop(playerid);
 	}
+	return 0;
 }
 
 UI_IntroFadeTo(playerid, alpha, steps, stepMs)
@@ -495,6 +506,7 @@ UI_IntroFadeTo(playerid, alpha, steps, stepMs)
 	g_UiIntroFadeTick[playerid] = stepMs;
 	g_UiIntroFadeNext[playerid] = GetTickCount() + stepMs;
 	UI_IntroTimerEnsure(playerid);
+	return 0;
 }
 
 UI_IntroSubtitle(playerid, const text[])
@@ -513,6 +525,7 @@ UI_IntroSubtitle(playerid, const text[])
 	strcopy(buf, tl, 71);
 	Lang_PlayerTextDrawSetString(playerid, g_UiIntroTd[playerid][3], buf);
 	PlayerTextDrawShow(playerid, g_UiIntroTd[playerid][3]);
+	return 0;
 }
 
 UI_IntroNarrate(playerid, phase)
@@ -543,6 +556,7 @@ UI_IntroTitle(playerid, bool:show)
 		PlayerTextDrawHide(playerid, g_UiIntroTd[playerid][4]);
 		PlayerTextDrawHide(playerid, g_UiIntroTd[playerid][5]);
 	}
+	return 0;
 }
 
 UI_IntroHintRender(playerid, secondsLeft)
@@ -587,6 +601,7 @@ UI_IntroSkipHint(playerid, lockSeconds)
 			UI_IntroTimerStop(playerid);
 		}
 	}
+	return 0;
 }
 
 UI_IntroSkipHintHide(playerid)
@@ -603,6 +618,7 @@ UI_IntroSkipHintHide(playerid)
 	{
 		UI_IntroTimerStop(playerid);
 	}
+	return 0;
 }
 
 public UI_IntroOnTimer(playerid)

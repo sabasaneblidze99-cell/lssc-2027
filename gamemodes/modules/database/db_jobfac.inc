@@ -23,6 +23,7 @@ DB_JFStaleRelease(playerid, op)
 	{
 		DB_PendingClear(playerid, op);
 	}
+	return 0;
 }
 
 bool:DB_JFCanStart(playerid, op)
@@ -47,6 +48,7 @@ DB_JFCompensate(kind, charId, id, amount)
 		mysql_format(g_DB, query, 512, "DELETE FROM fines WHERE id = %d AND issuer_char = %d", id, charId);
 	}
 	mysql_tquery(g_DB, query, "DB_OnJFComp", "ddd", kind, charId, id);
+	return 0;
 }
 
 public DB_OnJFComp(kind, charId, id)
@@ -179,6 +181,7 @@ DB_JobPayout(playerid, charId, jobId, amount)
 	{
 		CallLocalFunction("Job_OnDBPayout", "dddd", playerid, jobId, amount, result);
 	}
+	return 0;
 }
 
 public DB_OnJFPayout(playerid, const name[], charId, jobId, amount)
@@ -230,6 +233,7 @@ DB_SetJob(playerid, charId, jobId)
 	{
 		CallLocalFunction("Job_OnDBSet", "ddd", playerid, jobId, result);
 	}
+	return 0;
 }
 
 public DB_OnJFJobSet(playerid, const name[], charId, jobId)
@@ -334,6 +338,7 @@ DB_AddFine(playerid, issuerChar, targetChar, faction, amount, const reason[])
 	mysql_format(g_DB, query, 1024, "INSERT IGNORE INTO fines (faction, issuer_char, target_char, amount, reason) SELECT i.faction, i.id, t.id, %d, LEFT('%e', %d) FROM characters i JOIN characters t ON t.id = %d WHERE i.id = %d AND i.faction = %d AND i.id <> t.id AND i.faction_rank >= %d AND %d <= CASE i.faction_rank WHEN 2 THEN %d WHEN 3 THEN %d WHEN 4 THEN %d ELSE %d END", amount, rsn, 64, targetChar, issuerChar, faction, 2, amount, 500, 1000, 2500, 5000);
 	DB_PendingSet(playerid, 1048576);
 	mysql_tquery(g_DB, query, "DB_OnJFFineAdded", "dd", idx, g_FineInfl[idx][fiToken]);
+	return 0;
 }
 
 public DB_OnJFFineAdded(idx, token)
@@ -376,6 +381,7 @@ DB_LoadFines(playerid, charId)
 	mysql_format(g_DB, query, 1024, "SELECT f.id, f.faction, f.amount, UNIX_TIMESTAMP(f.created_at) AS ts, f.reason, a.name AS issuer FROM fines f JOIN characters c ON c.id = f.issuer_char JOIN accounts a ON a.id = c.account_id WHERE f.target_char = %d ORDER BY f.id DESC LIMIT %d", charId, 5);
 	DB_PendingSet(playerid, 2097152);
 	mysql_tquery(g_DB, query, "DB_OnJFFinesLoaded", "dsd", playerid, name, charId);
+	return 0;
 }
 
 public DB_OnJFFinesLoaded(playerid, const name[], charId)
@@ -483,6 +489,7 @@ DB_JFFacExec(playerid, actorChar, targetChar, cmd, faction, newRank)
 	{
 		CallLocalFunction("Faction_OnDBChanged", "dddddd", playerid, targetChar, cmd, faction, newRank, result);
 	}
+	return 0;
 }
 
 public DB_OnJFFacChanged(playerid, const name[], actorChar, targetChar, cmd, faction, rank)
@@ -553,6 +560,7 @@ DB_FactionSet(playerid, charId, faction, rank)
 		return 0;
 	}
 	DB_JFFacExec(playerid, gPlayer[playerid][pCharId], charId, 6, faction, rank);
+	return 0;
 }
 
 DB_FactionLogAdd(faction, actorChar, targetChar, const action[], const detail[])
@@ -564,6 +572,7 @@ DB_FactionLogAdd(faction, actorChar, targetChar, const action[], const detail[])
 	new query[1024];
 	mysql_format(g_DB, query, 1024, "INSERT INTO faction_log (faction, actor_char, target_char, action, detail) VALUES (%d, (SELECT id FROM characters WHERE id = %d), (SELECT id FROM characters WHERE id = %d), LEFT('%e', %d), LEFT('%e', %d))", clamp(faction, 0, 255), max(actorChar, 0), max(targetChar, 0), action, 24, detail, 64);
 	mysql_tquery(g_DB, query, "", "");
+	return 0;
 }
 
 DB_FactionMembers(playerid, faction)
@@ -594,6 +603,7 @@ DB_FactionMembers(playerid, faction)
 	mysql_format(g_DB, query, 1024, "SELECT c.id, a.name, c.faction_rank, c.level, COALESCE(UNIX_TIMESTAMP(a.last_login), 0) AS last_login FROM characters c JOIN accounts a ON a.id = c.account_id WHERE c.faction = %d ORDER BY c.faction_rank DESC, a.name LIMIT %d", faction, 100);
 	DB_PendingSet(playerid, 8388608);
 	mysql_tquery(g_DB, query, "DB_OnJFFacMembers", "dsdd", playerid, name, gPlayer[playerid][pCharId], faction);
+	return 0;
 }
 
 public DB_OnJFFacMembers(playerid, const name[], charId, faction)
@@ -650,6 +660,7 @@ DB_FactionFindByName(playerid, const name[], tag)
 	mysql_format(g_DB, query, 1024, "SELECT c.id, a.name, c.faction, c.faction_rank, c.level FROM characters c JOIN accounts a ON a.id = c.account_id WHERE a.name = '%e' AND c.slot = %d LIMIT 1", name, 0);
 	DB_PendingSet(playerid, 0x01000000);
 	mysql_tquery(g_DB, query, "DB_OnJFFacFound", "dsdd", playerid, me, gPlayer[playerid][pCharId], tag);
+	return 0;
 }
 
 public DB_OnJFFacFound(playerid, const name[], charId, tag)

@@ -53,6 +53,7 @@ DB_AdminLog(staffAccountId, targetAccountId, const action[], const reason[])
 	}
 	mysql_format(g_DB, query, 1024, "INSERT INTO admin_log (staff_account_id, target_account_id, action, reason) VALUES (%d, %s, LEFT('%e', %d), LEFT('%e', %d))", max(staffAccountId, 0), target, action, 24, reason, 128);
 	mysql_tquery(g_DB, query, "", "");
+	return 0;
 }
 
 DB_SetMute(accountId, untilTimestamp)
@@ -64,6 +65,7 @@ DB_SetMute(accountId, untilTimestamp)
 	new query[512];
 	mysql_format(g_DB, query, 512, "UPDATE accounts SET muted_until = %d WHERE id = %d", max(untilTimestamp, 0), accountId);
 	mysql_tquery(g_DB, query, "", "");
+	return 0;
 }
 
 DB_SetAdminLevel(accountId, level)
@@ -75,6 +77,7 @@ DB_SetAdminLevel(accountId, level)
 	new query[512];
 	mysql_format(g_DB, query, 512, "UPDATE accounts SET admin_level = %d WHERE id = %d", level, accountId);
 	mysql_tquery(g_DB, query, "", "");
+	return 0;
 }
 
 DB_AddWarn(requesterid, targetAccountId, staffAccountId, const reason[])
@@ -90,6 +93,7 @@ DB_AddWarn(requesterid, targetAccountId, staffAccountId, const reason[])
 	mysql_format(g_DB, query, 1024, "INSERT INTO warns (account_id, staff_account_id, reason) VALUES (%d, %d, LEFT('%e', %d))", targetAccountId, max(staffAccountId, 0), reason, 64);
 	DB_ReqBegin(requesterid, 1);
 	mysql_tquery(g_DB, query, "DB_OnWarnInserted", "dsd", requesterid, reqName, targetAccountId);
+	return 0;
 }
 
 public DB_OnWarnInserted(requesterid, const reqName[], targetAccountId)
@@ -141,6 +145,7 @@ DB_AddBan(requesterid, accountId, const name[], const ip[], staffAccountId, cons
 	mysql_format(g_DB, query, 1024, "INSERT INTO bans (account_id, account_name, ip, staff_account_id, reason, expires_at) VALUES (%s, LEFT('%e', 24), LEFT('%e', 15), %d, LEFT('%e', %d), %s)", accStr, name, ip, max(staffAccountId, 0), reason, 64, expStr);
 	DB_ReqBegin(requesterid, 2);
 	mysql_tquery(g_DB, query, "DB_OnBanInserted", "dss", requesterid, reqName, name);
+	return 0;
 }
 
 public DB_OnBanInserted(requesterid, const reqName[], const name[])
@@ -171,6 +176,7 @@ DB_Unban(requesterid, const accountName[])
 	mysql_format(g_DB, query, 512, "UPDATE bans SET active = 0 WHERE active = 1 AND account_name = '%e'", accountName);
 	DB_ReqBegin(requesterid, 4);
 	mysql_tquery(g_DB, query, "DB_OnUnbanDone", "dss", requesterid, reqName, accountName);
+	return 0;
 }
 
 public DB_OnUnbanDone(requesterid, const reqName[], const name[])
@@ -202,6 +208,7 @@ DB_CheckBan(playerid, const name[], const ip[])
 	mysql_format(g_DB, query, 512, "SELECT reason, IFNULL(expires_at, 0) AS expires_at FROM bans WHERE active = 1 AND (expires_at IS NULL OR expires_at > UNIX_TIMESTAMP()) AND account_name = '%e' ORDER BY (expires_at IS NULL) DESC, expires_at DESC LIMIT 1", name);
 	DB_PendingSet(playerid, 16);
 	mysql_tquery(g_DB, query, "DB_OnBanChecked", "ds", playerid, pname);
+	return 0;
 }
 
 public DB_OnBanChecked(playerid, const name[])
@@ -240,6 +247,7 @@ DB_FindAccountByName(requesterid, const name[], tag)
 	mysql_format(g_DB, query, 512, "SELECT id, name, admin_level, IFNULL(last_ip, '') AS last_ip FROM accounts WHERE name = '%e' LIMIT 1", name);
 	DB_ReqBegin(requesterid, 8);
 	mysql_tquery(g_DB, query, "DB_OnAccountFound", "dsds", requesterid, reqName, tag, name);
+	return 0;
 }
 
 public DB_OnAccountFound(requesterid, const reqName[], tag, const name[])

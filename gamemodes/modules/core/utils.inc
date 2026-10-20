@@ -268,6 +268,7 @@ Util_SendNear(sourceid, color, Float:radius, const text[])
 		}
 	}
 	Chat_SetCategory(CHAT_CAT_AUTO);
+	return 0;
 }
 
 bool:Util_InRange(playerid, targetid, Float:radius)

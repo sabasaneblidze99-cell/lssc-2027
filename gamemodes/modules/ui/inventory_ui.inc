@@ -116,6 +116,7 @@ UI_InvClear(playerid)
 		g_UiInvQty[playerid][i] = 0;
 	}
 	g_UiInvUsed[playerid] = 0;
+	return 0;
 }
 
 UI_InvSet(playerid, slot, itemId, qty)
@@ -132,6 +133,7 @@ UI_InvSet(playerid, slot, itemId, qty)
 	}
 	g_UiInvItem[playerid][slot] = itemId;
 	g_UiInvQty[playerid][slot] = qty;
+	return 0;
 }
 
 UI_InvMeta(playerid, slotsUsed, slotsMax, bool:bag)
@@ -159,6 +161,7 @@ UI_InvMeta(playerid, slotsUsed, slotsMax, bool:bag)
 	g_UiInvUsed[playerid] = slotsUsed;
 	g_UiInvMax[playerid] = slotsMax;
 	g_UiInvBag[playerid] = bag;
+	return 0;
 }
 
 UI_InvListPage(playerid, page)
@@ -232,6 +235,7 @@ UI_InvListPage(playerid, page)
 		format(title, 64, "Inventario %d/%d - zaino %s - pag. %d/%d", used, limit, g_UiInvBag[playerid] ? "si" : "no", page + 1, pages);
 	}
 	Lang_ShowPlayerDialog(playerid, 9400, 5, title, body, "Apri", "Chiudi");
+	return 0;
 }
 
 UI_InvShow(playerid)
@@ -242,6 +246,7 @@ UI_InvShow(playerid)
 	}
 	UI_InvSelReset(playerid);
 	UI_InvListPage(playerid, 0);
+	return 0;
 }
 
 UI_InvActionShow(playerid)
@@ -275,6 +280,7 @@ UI_InvActionShow(playerid)
 	}
 	strcat(body, "Descrizione", 256);
 	Lang_ShowPlayerDialog(playerid, 9401, 2, title, body, "Scegli", "Indietro");
+	return 0;
 }
 
 UI_InvItemShow(playerid, slot)
@@ -292,6 +298,7 @@ UI_InvItemShow(playerid, slot)
 	g_UiInvSelItem[playerid] = g_UiInvItem[playerid][slot];
 	g_UiInvSelQty[playerid] = 0;
 	UI_InvActionShow(playerid);
+	return 0;
 }
 
 UI_InvInfoShow(playerid)
@@ -465,6 +472,7 @@ UI_InvGiveConfirmShow(playerid, const giverName[], itemId, qty, ttlSec)
 	strcopy(giver, giverName, 25);
 	format(body, 320, "{FFD24D}%s{FFFFFF} vuole darti {FFD24D}%s x%d{FFFFFF}.\n\nLa richiesta scade tra {FF6666}%d{FFFFFF} secondi.\nSe non c'e' posto nel tuo inventario lo scambio fallira'.", giver, name, qty, ttlSec);
 	Lang_ShowPlayerDialog(playerid, 9406, 0, "Oggetto in arrivo", body, "Accetta", "Rifiuta");
+	return 0;
 }
 
 UI_InvGiveConfirmClose(playerid)
@@ -485,6 +493,7 @@ UI_InvGiveConfirmClose(playerid)
 	{
 		UI_InvTimerStop(playerid);
 	}
+	return 0;
 }
 
 UI_InvToastCreate(playerid)
@@ -501,6 +510,7 @@ UI_InvToastCreate(playerid)
 		g_UiInvToastDelta[playerid][i] = 0;
 	}
 	g_UiInvToastCreated[playerid] = 1;
+	return 0;
 }
 
 UI_InvToastRedraw(playerid)
@@ -523,6 +533,7 @@ UI_InvToastRedraw(playerid)
 		PlayerTextDrawColour(playerid, g_UiInvToastTd[playerid][i], delta > 0 ? 0x66DD66FF : -10066177);
 		PlayerTextDrawShow(playerid, g_UiInvToastTd[playerid][i]);
 	}
+	return 0;
 }
 
 UI_InvToast(playerid, itemId, delta)
@@ -551,6 +562,7 @@ UI_InvToast(playerid, itemId, delta)
 	}
 	UI_InvToastRedraw(playerid);
 	UI_InvTimerEnsure(playerid);
+	return 0;
 }
 
 public UI_InvOnTimer(playerid)
@@ -846,4 +858,5 @@ UI_InvUiDestroy(playerid)
 	g_UiInvNavNext[playerid] = -1;
 	g_UiInvNavPrev[playerid] = -1;
 	UI_InvSelReset(playerid);
+	return 0;
 }

@@ -10,4 +10,5 @@ Player_Reset(playerid)
 	{
 		gPlayer[playerid][i] = 0;
 	}
+	return 0;
 }

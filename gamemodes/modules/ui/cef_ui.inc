@@ -40,6 +40,7 @@ CefUI_Reset(playerid)
 	{
 		g_CefHud[playerid][i] = 0;
 	}
+	return 0;
 }
 
 CefUI_Active(playerid)
@@ -67,6 +68,7 @@ CefUI_SetState(playerid, st)
 		return 0;
 	}
 	g_CefState[playerid] = st;
+	return 0;
 }
 
 CefUI_Open(playerid, const view[], const arg[])
@@ -84,6 +86,7 @@ CefUI_Open(playerid, const view[], const arg[])
 	cef_focus_browser(playerid, 1, 1);
 	g_CefFocus[playerid] = 1;
 	g_CefView[playerid] = v;
+	return 0;
 }
 
 CefUI_OnPageClosed(playerid)
@@ -94,6 +97,7 @@ CefUI_OnPageClosed(playerid)
 	}
 	g_CefView[playerid] = 0;
 	CefUI_ReleaseFocus(playerid);
+	return 0;
 }
 
 CefUI_Close(playerid, const view[])
@@ -105,6 +109,7 @@ CefUI_Close(playerid, const view[])
 	cef_emit_event(playerid, "lssc:close", 0, view);
 	g_CefView[playerid] = 0;
 	CefUI_ReleaseFocus(playerid);
+	return 0;
 }
 
 CefUI_ReleaseFocus(playerid)
@@ -115,6 +120,7 @@ CefUI_ReleaseFocus(playerid)
 	}
 	cef_focus_browser(playerid, 1, 0);
 	g_CefFocus[playerid] = 0;
+	return 0;
 }
 
 CefUI_Toast(playerid, const text[], kind)
@@ -124,6 +130,7 @@ CefUI_Toast(playerid, const text[], kind)
 		return 0;
 	}
 	cef_emit_event(playerid, "lssc:toast", 0, text, 1, kind);
+	return 0;
 }
 
 CefUI_Reject(playerid, const text[])
@@ -133,6 +140,7 @@ CefUI_Reject(playerid, const text[])
 		return 0;
 	}
 	cef_emit_event(playerid, "lssc:reject", 0, text);
+	return 0;
 }
 
 CefUI_HudData(playerid, money, bank, level, expIn, expStep)
@@ -152,6 +160,7 @@ CefUI_HudData(playerid, money, bank, level, expIn, expStep)
 	{
 		CefUI_HudSend(playerid);
 	}
+	return 0;
 }
 
 CefUI_HudSend(playerid)
@@ -163,6 +172,7 @@ CefUI_HudSend(playerid)
 	new hour = 0, minute = 0;
 	gettime(hour, minute);
 	cef_emit_event(playerid, "lssc:hud", 1, g_CefHud[playerid], 1, g_CefHud[playerid][1], 1, g_CefHud[playerid][2], 1, g_CefHud[playerid][3], 1, g_CefHud[playerid][4], 1, hour, 1, minute);
+	return 0;
 }
 
 CefUI_HudShow(playerid, bool:show)
@@ -183,6 +193,7 @@ CefUI_HudShow(playerid, bool:show)
 		CefUI_HudSend(playerid);
 	}
 	HudCef_OnVisible(playerid, show);
+	return 0;
 }
 
 bool:CefUI_HudIsOn(playerid)
@@ -243,6 +254,7 @@ CefUI_AuthStep(playerid, const step[], const err[], n)
 	GetPlayerName(playerid, name, 25);
 	cef_emit_event(playerid, "lssc:auth", 0, step, 0, name, 0, err, 1, n, 1, 6, 1, 32);
 	CefUI_Open(playerid, "auth", step);
+	return 0;
 }
 
 CefUI_AuthSkin(playerid, idx, skin)
@@ -252,6 +264,7 @@ CefUI_AuthSkin(playerid, idx, skin)
 		return 0;
 	}
 	cef_emit_event(playerid, "lssc:auth_skin", 1, idx, 1, skin);
+	return 0;
 }
 
 CefUI_AuthStoryOpt(playerid, kind, idx, const shortText[], const longText[])
@@ -261,6 +274,7 @@ CefUI_AuthStoryOpt(playerid, kind, idx, const shortText[], const longText[])
 		return 0;
 	}
 	cef_emit_event(playerid, "lssc:auth_story", 1, kind, 1, idx, 0, shortText, 0, longText);
+	return 0;
 }
 
 CefUI_AuthClose(playerid)
@@ -270,4 +284,5 @@ CefUI_AuthClose(playerid)
 		return 0;
 	}
 	CefUI_Close(playerid, "auth");
+	return 0;
 }

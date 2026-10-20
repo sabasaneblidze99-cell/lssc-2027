@@ -77,6 +77,7 @@ CityOS_ShowBoard(playerid)
 		rows++;
 	}
 	UI_CityBoardShow(playerid, Hub_NearBoard(playerid) >= 0);
+	return 0;
 }
 
 CityOS_ShowDistrict(playerid, districtId)
@@ -91,6 +92,7 @@ CityOS_ShowDistrict(playerid, districtId)
 		return 0;
 	}
 	DB_LivingHistory(playerid, districtId);
+	return 0;
 }
 
 CityOS_RenderDistrict(playerid, districtId, count)

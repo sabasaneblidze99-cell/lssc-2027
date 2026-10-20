@@ -64,6 +64,7 @@ UI_HudDestroy(playerid)
 		g_UiHud[playerid][i] = 65535;
 	}
 	g_UiHudActive[playerid] = 0;
+	return 0;
 }
 
 UI_HudCreate(playerid)
@@ -101,6 +102,7 @@ UI_HudCreate(playerid)
 	}
 	g_UiHudActive[playerid] = 1;
 	UI_HudSetBar(playerid, 0.0);
+	return 0;
 }
 
 UI_HudCefData(playerid, money, bank, level, exp)
@@ -125,6 +127,7 @@ UI_HudCefData(playerid, money, bank, level, exp)
 		inLevel = step;
 	}
 	CefUI_HudData(playerid, money, bank, level, inLevel, step);
+	return 0;
 }
 
 bool:UI_HudIsActive(playerid)
@@ -177,4 +180,5 @@ UI_HudUpdate(playerid, money, bank, level, exp)
 	format(str, 48, "Liv. %d  Exp %d/%d", level, inLevel, step);
 	Lang_PlayerTextDrawSetString(playerid, g_UiHud[playerid][3], str);
 	UI_HudSetBar(playerid, (float(inLevel) / float(step)));
+	return 0;
 }

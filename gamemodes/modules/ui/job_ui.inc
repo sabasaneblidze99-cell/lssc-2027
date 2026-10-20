@@ -119,6 +119,7 @@ UI_JobCenterShow(playerid, level, currentJob, cooldownSec)
 		strcat(body, "{FF6666}Lascia il lavoro attuale\t\t\t\n", 1024);
 	}
 	Lang_ShowPlayerDialog(playerid, 9300, 5, "Job Center", body, "Dettagli", "Chiudi");
+	return 0;
 }
 
 UI_JbDetailShow(playerid, job)
@@ -171,6 +172,7 @@ UI_JbDetailShow(playerid, job)
 	}
 	format(title, 64, "Job Center - %s", g_UiJbName[job]);
 	Lang_ShowPlayerDialog(playerid, 9301, 0, title, body, ok ? "Prendi lavoro" : "Indietro", ok ? "Indietro" : "");
+	return 0;
 }
 
 UI_JbQuitShow(playerid)
@@ -182,6 +184,7 @@ UI_JbQuitShow(playerid)
 	}
 	format(body, 256, "{FFFFFF}Vuoi davvero lasciare il lavoro di {FFD24D}%s{FFFFFF}?\n\nSe poi scegli un altro lavoro dovrai rispettare il cooldown di %d minuti.", g_UiJbName[cur], 10);
 	Lang_ShowPlayerDialog(playerid, 9302, 0, "Lascia il lavoro", body, "Lascia", "Annulla");
+	return 0;
 }
 
 UI_JobInfoShow(playerid, jobId, level, runs, earned)
@@ -219,6 +222,7 @@ UI_JobInfoShow(playerid, jobId, level, runs, earned)
 		strcat(body, "Comandi: /inizia (avvia il turno), /fine (chiude e paga il maturato), /lavoro lascia (al Job Center).", 1024);
 	}
 	Lang_ShowPlayerDialog(playerid, 9303, 0, "Il tuo lavoro", body, "Chiudi", "");
+	return 0;
 }
 
 bool:UI_JobOnDialogResponse(playerid, dialogid, response, listitem, const inputtext[])
@@ -326,6 +330,7 @@ UI_JhCreate(playerid)
 	g_UiJHud[playerid][4] = UI_JhText(playerid, (5.0 + left), (384.0 + 38.0), "Tempo 00:00", 0.22, 1.0, -1, 1);
 	g_UiJHud[playerid][5] = UI_JhText(playerid, (5.0 + left), (384.0 + 51.0), "TORNA AL VEICOLO: 45s", 0.2, 0.9, -12303105, 1);
 	g_UiJHudCreated[playerid] = 1;
+	return 0;
 }
 
 UI_JhSetVisible(playerid, bool:visible)
@@ -374,6 +379,7 @@ UI_JobHudShow(playerid, jobId)
 	Lang_PlayerTextDrawSetString(playerid, g_UiJHud[playerid][3], "Maturato: $0");
 	Lang_PlayerTextDrawSetString(playerid, g_UiJHud[playerid][4], "Tempo 00:00");
 	UI_JhSetVisible(playerid, 1);
+	return 0;
 }
 
 UI_JobHudHide(playerid)
@@ -384,6 +390,7 @@ UI_JobHudHide(playerid)
 	}
 	g_UiJHudShown[playerid] = 0;
 	UI_JhSetVisible(playerid, 0);
+	return 0;
 }
 
 UI_JobHudUpdate(playerid, step, stepTotal, earned, elapsedSec, dwellSec, offVehicleSec)
@@ -444,6 +451,7 @@ UI_JobHudUpdate(playerid, step, stepTotal, earned, elapsedSec, dwellSec, offVehi
 	PlayerTextDrawShow(playerid, g_UiJHud[playerid][2]);
 	PlayerTextDrawShow(playerid, g_UiJHud[playerid][3]);
 	PlayerTextDrawShow(playerid, g_UiJHud[playerid][4]);
+	return 0;
 }
 
 UI_JobUiDestroy(playerid)
@@ -468,4 +476,5 @@ UI_JobUiDestroy(playerid)
 	g_UiJbCurrent[playerid] = 0;
 	g_UiJbCooldown[playerid] = 0;
 	g_UiJbSel[playerid] = 0;
+	return 0;
 }

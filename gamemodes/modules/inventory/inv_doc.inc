@@ -71,4 +71,5 @@ Inv_CmdDocumento(playerid, const params[])
 	{
 		SendClientMessage(playerid, 0x66DD66FF, "Hai mostrato il documento a %s.", tname);
 	}
+	return 0;
 }

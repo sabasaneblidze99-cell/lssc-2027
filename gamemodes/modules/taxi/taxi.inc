@@ -178,6 +178,7 @@ Taxi_ClearOffer(driverid)
 	g_TxOfferCall[driverid] = 0;
 	g_TxOfferUntil[driverid] = 0;
 	UI_LivingTaxiOfferClose(driverid);
+	return 0;
 }
 
 Taxi_ScheduleNpc(driverid)
@@ -270,6 +271,7 @@ Taxi_CancelRide(driverid, const driverMsg[], const passengerMsg[])
 		DB_LivingTaxiCancel(driverid, ride, gPlayer[driverid][pTaxiOpId]);
 	}
 	Taxi_ResetRide(driverid);
+	return 0;
 }
 
 Taxi_EndDuty(driverid, reason, bool:closeRental)
@@ -380,6 +382,7 @@ Taxi_NpcOffer(driverid)
 	LD_DistrictName(fromD, a, 16);
 	LD_DistrictName(toD, b, 16);
 	SendClientMessage(driverid, -2994689, "[Taxi] Chiamata: cliente a %s diretto a %s (~$%d). /accettacorsa entro %d s.", a, b, est, 30);
+	return 0;
 }
 
 bool:Taxi_CanAccept(driverid, bool:verbose)
@@ -460,6 +463,7 @@ Taxi_AcceptNpc(driverid)
 	gPlayer[driverid][pTaxiPendOp] = 1;
 	DB_LivingMakeOpId(gPlayer[driverid][pTaxiOpId], 41, "ts", gPlayer[driverid][pTaxiOpSeq], gPlayer[driverid][pCharId]);
 	Taxi_SendStart(driverid);
+	return 0;
 }
 
 Taxi_AcceptPlayer(driverid, passengerid)
@@ -509,6 +513,7 @@ Taxi_AcceptPlayer(driverid, passengerid)
 	gPlayer[driverid][pTaxiPendOp] = 1;
 	DB_LivingMakeOpId(gPlayer[driverid][pTaxiOpId], 41, "ts", gPlayer[passengerid][pCharId], gPlayer[driverid][pCharId]);
 	Taxi_SendStart(driverid);
+	return 0;
 }
 
 Taxi_OnStartResult(driverid, result, rideId)
@@ -584,6 +589,7 @@ Taxi_OnStartResult(driverid, result, rideId)
 		}
 	}
 	Taxi_ResetRide(driverid);
+	return 0;
 }
 
 Taxi_MeterSample(driverid, vehicleid, bool:count)
@@ -618,6 +624,7 @@ Taxi_MeterShow(driverid, bool:running)
 	{
 		UI_LivingTaxiMeter(p, fare, meters, running);
 	}
+	return 0;
 }
 
 Taxi_MeterBegin(driverid, vehicleid)
@@ -689,6 +696,7 @@ Taxi_PayPrompt(driverid)
 	Taxi_MeterShow(driverid, 0);
 	UI_LivingTaxiPayConfirm(p, gPlayer[driverid][pTaxiRideId], name, meters, g_TxPayFare[driverid], LD_DiscountPct(rep), 60);
 	SendClientMessage(driverid, -1, "Tassametro fermo: $%d per %d m. In attesa della conferma del cliente.", g_TxPayFare[driverid], meters);
+	return 0;
 }
 
 Taxi_MeterStop(driverid)
@@ -704,6 +712,7 @@ Taxi_MeterStop(driverid)
 	}
 	gPlayer[driverid][pTaxiMeterOn] = 0;
 	Taxi_PayPrompt(driverid);
+	return 0;
 }
 
 Taxi_OnPayResult(driverid, result, rideId, net, points, tax)
@@ -770,6 +779,7 @@ Taxi_OnPayResult(driverid, result, rideId, net, points, tax)
 		}
 	}
 	Taxi_ResetRide(driverid);
+	return 0;
 }
 
 Taxi_RetrySend(playerid)
@@ -1340,6 +1350,7 @@ Taxi_TickNpc(driverid, vehicleid, bool:inVeh)
 		return 0;
 	}
 	Taxi_NpcPay(driverid, vehicleid);
+	return 0;
 }
 
 Taxi_TickDriver(driverid)
@@ -1422,6 +1433,7 @@ Taxi_TickDriver(driverid)
 	{
 		Taxi_MeterStop(driverid);
 	}
+	return 0;
 }
 
 public Taxi_OnTick()
@@ -1512,6 +1524,7 @@ Taxi_OnPlayerDisconnect(playerid, reason)
 		}
 	}
 	Taxi_ResetPlayer(playerid);
+	return 0;
 }
 
 Taxi_OnPlayerDeath(playerid)
@@ -1531,6 +1544,7 @@ Taxi_OnPlayerDeath(playerid)
 		Taxi_CancelRide(d, "Il cliente non e' in condizione di proseguire: corsa annullata.", "");
 	}
 	g_TxCallUntil[playerid] = 0;
+	return 0;
 }
 
 Taxi_OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
@@ -1564,6 +1578,7 @@ Taxi_OnPlayerStateChange(playerid, t_PLAYER_STATE:newstate, t_PLAYER_STATE:oldst
 	{
 		Taxi_MeterStop(d);
 	}
+	return 0;
 }
 
 Taxi_OnVehicleDeath(vehicleid, killerid)
@@ -1580,4 +1595,5 @@ Taxi_OnVehicleDeath(vehicleid, killerid)
 	}
 	Util_Send(d, -10270721, "Il taxi e' stato distrutto: fine del turno.");
 	Taxi_EndDuty(d, 4, 1);
+	return 0;
 }

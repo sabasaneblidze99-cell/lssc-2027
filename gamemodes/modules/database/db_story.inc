@@ -17,6 +17,7 @@ DB_StoryLastOpId(playerid, dest[], size)
 		return 0;
 	}
 	strcat(dest, g_StoryReq[playerid][sqOpId], size);
+	return 0;
 }
 
 DB_StoryCash(motive)
@@ -96,6 +97,7 @@ DB_StoryStaleRelease(playerid, bit)
 	{
 		DB_PendingClear(playerid, bit);
 	}
+	return 0;
 }
 
 DB_StoryDeliverLoad(playerid, result, introSeen, origin, motive, bool:hasStory)
@@ -197,6 +199,7 @@ DB_StoryLoad(playerid, accountId, charId)
 	GetPlayerName(playerid, name, 25);
 	mysql_format(g_DB, query, 512, "SELECT a.intro_seen AS intro_seen, COALESCE(s.origin, 0) AS origin, COALESCE(s.motive, 0) AS motive, (s.character_id IS NOT NULL) AS has_story FROM accounts a LEFT JOIN character_story s ON s.character_id = %d WHERE a.id = %d", charId, accountId);
 	mysql_tquery(g_DB, query, "DB_OnStoryLoaded", "dsddd", playerid, name, accountId, charId, g_StoryInfo[playerid][siToken]);
+	return 0;
 }
 
 public DB_OnStoryLoaded(playerid, const name[], accountId, charId, token)
@@ -247,6 +250,7 @@ DB_StoryRead(playerid, targetid, purpose)
 	GetPlayerName(playerid, name, 25);
 	mysql_format(g_DB, query, 512, "SELECT COALESCE(s.origin, 0) AS origin, COALESCE(s.motive, 0) AS motive, (s.character_id IS NOT NULL) AS has_story FROM characters c LEFT JOIN character_story s ON s.character_id = c.id WHERE c.id = %d", g_StoryInfo[playerid][siTargetChar]);
 	mysql_tquery(g_DB, query, "DB_OnStoryRead", "dsd", playerid, name, g_StoryInfo[playerid][siToken]);
+	return 0;
 }
 
 public DB_OnStoryRead(playerid, const name[], token)
@@ -312,6 +316,7 @@ DB_StorySave(playerid, charId, origin, motive, const opId[], bool:creation)
 	GetPlayerName(playerid, name, 25);
 	mysql_format(g_DB, query, 512, "CALL story_save('%e', %d, %d, %d, %d)", opId, charId, origin, motive, creation ? 0 : 1);
 	mysql_tquery(g_DB, query, "DB_OnStoryCalled", "dsdds", playerid, name, charId, g_StoryReq[playerid][sqToken], opId);
+	return 0;
 }
 
 public DB_OnStoryCalled(playerid, const name[], charId, token, const opId[])
@@ -388,6 +393,7 @@ DB_StoryIntroSeen(accountId, playerid)
 	new query[512];
 	mysql_format(g_DB, query, 512, "UPDATE accounts SET intro_seen = 1 WHERE id = %d", accountId);
 	mysql_tquery(g_DB, query, "DB_OnStoryIntroSet", "d", accountId);
+	return 0;
 }
 
 public DB_OnStoryIntroSet(accountId)

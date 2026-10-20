@@ -35,6 +35,7 @@ Account_Kick(playerid, const reason[])
 	gPlayer[playerid][pAuthState] = 10;
 	UI_CloseDialogs(playerid);
 	gPlayer[playerid][pKickTimer] = SetTimerEx("Account_OnKickTimer", 750, 0, "d", playerid);
+	return 0;
 }
 
 public Account_OnKickTimer(playerid)
@@ -77,6 +78,7 @@ Account_ShowPrompt(playerid)
 			UI_ShowSkinSelect(playerid, gPlayer[playerid][pGender]);
 		}
 	}
+	return 0;
 }
 
 Account_OnConnect(playerid)
@@ -102,6 +104,7 @@ Account_OnConnect(playerid)
 	GetPlayerIp(playerid, ip, 16);
 	gPlayer[playerid][pAuthState] = 11;
 	DB_CheckBan(playerid, name, ip);
+	return 0;
 }
 
 Account_ContinueConnect(playerid)
@@ -116,6 +119,7 @@ Account_ContinueConnect(playerid)
 	}
 	gPlayer[playerid][pAuthState] = 0;
 	DB_LoadAccount(playerid);
+	return 0;
 }
 
 Account_OnDisconnect(playerid)
@@ -130,6 +134,7 @@ Account_OnDisconnect(playerid)
 		KillTimer(gPlayer[playerid][pKickTimer]);
 	}
 	g_DBPending[playerid] = 0;
+	return 0;
 }
 
 public Account_OnDBLoaded(playerid, accountId, const hash[], const salt[], adminLevel)
@@ -200,6 +205,7 @@ Account_SetPendingEmail(playerid, const email[])
 	{
 		strcopy(g_AccPendingEmail[playerid], email, 255);
 	}
+	return 0;
 }
 
 public UI_OnRegisterSubmit(playerid, const password[])
@@ -282,6 +288,7 @@ Account_LoginFailed(playerid)
 	format(err, 512, "პაროლი არასწორია. დარჩენილი მცდელობა: %d.", 3 - gPlayer[playerid][pLoginAttempts]);
 	Util_Send(playerid, -10270721, err);
 	UI_ShowLogin(playerid, 1);
+	return 0;
 }
 
 public UI_OnLoginSubmit(playerid, const password[])
@@ -412,4 +419,5 @@ Account_CmdEmail(playerid, const params[])
 		return 0;
 	}
 	DB_AccountSetEmail(playerid, gPlayer[playerid][pAccountId], email);
+	return 0;
 }

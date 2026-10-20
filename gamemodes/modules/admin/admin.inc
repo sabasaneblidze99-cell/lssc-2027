@@ -86,6 +86,7 @@ Admin_Reply(playerid, color, const text[])
 		return 0;
 	}
 	Util_Send(playerid, color, text);
+	return 0;
 }
 
 Admin_Notify(const text[], color)
@@ -282,6 +283,7 @@ Admin_SendHelp(playerid)
 		format(out, 256, "[%s] %s", name, line);
 		Admin_Notify_One(playerid, out);
 	}
+	return 0;
 }
 
 bool:Admin_IsMuted(playerid)

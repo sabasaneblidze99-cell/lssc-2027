@@ -197,6 +197,7 @@ Director_ResetPlayer(playerid)
 	g_DirLockAt[playerid] = 0;
 	g_DirCompInteg[playerid] = 0;
 	g_DirCompSec[playerid] = 0;
+	return 0;
 }
 
 Director_SetOp(playerid, pend, const tag[], ref)
@@ -721,6 +722,7 @@ Director_OnAccept(playerid, result, contractId, v2)
 		}
 	}
 	DB_LivingBoard(65535);
+	return 0;
 }
 
 Director_AfterFreight(playerid, contractId, bool:terminal, relReason)
@@ -737,6 +739,7 @@ Director_AfterFreight(playerid, contractId, bool:terminal, relReason)
 	{
 		Director_RunDeferred(playerid);
 	}
+	return 0;
 }
 
 Director_OnPickup(playerid, result)
@@ -762,6 +765,7 @@ Director_OnPickup(playerid, result)
 	new bool:terminal = result != -1 && result != 10;
 	Freight_OnPickupResult(playerid, result);
 	Director_AfterFreight(playerid, ct, terminal, 5);
+	return 0;
 }
 
 Director_OnComplete(playerid, result, amount, balance, v1, v2)
@@ -814,6 +818,7 @@ Director_OnComplete(playerid, result, amount, balance, v1, v2)
 	g_DirCompCt[playerid] = 0;
 	Freight_OnCompleteResult(playerid, result, 0, balance);
 	Director_AfterFreight(playerid, ct, 1, 5);
+	return 0;
 }
 
 Director_OnReleased(playerid, result, v2)
@@ -843,6 +848,7 @@ Director_OnReleased(playerid, result, v2)
 		}
 	}
 	Director_EndLocal(playerid, reason, 1, reason);
+	return 0;
 }
 
 public Living_OnDBContract(playerid, action, result, contractId, amount, balance, v1, v2, v3)

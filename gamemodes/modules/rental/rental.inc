@@ -84,6 +84,7 @@ Rental_ResetPlayer(playerid)
 	g_RtCloseReason[playerid] = 0;
 	g_RtRetry[playerid] = 0;
 	g_RtRetryAt[playerid] = 0;
+	return 0;
 }
 
 Rental_VehDestroy(playerid)
@@ -106,6 +107,7 @@ Rental_VehDestroy(playerid)
 		}
 		DestroyVehicle(veh);
 	}
+	return 0;
 }
 
 Rental_ClearLocal(playerid)
@@ -276,6 +278,7 @@ Rental_NotifyClosed(playerid, result, refund, newState)
 			Util_Send(playerid, -10270721, "Chiusura del noleggio non riuscita: verra' sistemata automaticamente al prossimo accesso.");
 		}
 	}
+	return 0;
 }
 
 Rental_OnOpenResult(playerid, result, rentalId, amount, dueAt)
@@ -362,6 +365,7 @@ Rental_OnOpenResult(playerid, result, rentalId, amount, dueAt)
 	}
 	Rental_KindName(gPlayer[playerid][pRentalKind], name, 16);
 	SendClientMessage(playerid, 0x66DD66FF, "Noleggio attivo: %s per %d minuti (canone $%d, cauzione $%d). Riportalo qui con /riconsegna.", name, minutes > 0 ? minutes : 0, g_RtFee[playerid], g_RtDeposit[playerid]);
+	return 0;
 }
 
 Rental_OnCloseResult(playerid, result, amount, newState)
@@ -382,6 +386,7 @@ Rental_OnCloseResult(playerid, result, amount, newState)
 	gPlayer[playerid][pRentalPendOp] = 0;
 	Rental_NotifyClosed(playerid, result, amount > 0 ? amount : 0, newState);
 	Rental_ClearLocal(playerid);
+	return 0;
 }
 
 public Living_OnDBRental(playerid, action, result, rentalId, amount, balance, cashUsed, dueAt)
@@ -651,6 +656,7 @@ Rental_RetrySend(playerid)
 		return 0;
 	}
 	DB_LivingRentClose(playerid, gPlayer[playerid][pRentalId], g_RtCloseMode[playerid], g_RtCloseHealth[playerid], gPlayer[playerid][pRentalOpId]);
+	return 0;
 }
 
 Rental_TickPlayer(playerid, now, nowTick)
@@ -717,6 +723,7 @@ Rental_TickPlayer(playerid, now, nowTick)
 		Util_Send(playerid, -10270721, "Tolleranza scaduta: il mezzo torna all'agenzia.");
 		Rental_SendClose(playerid, 2, 0, 5);
 	}
+	return 0;
 }
 
 public Rental_OnTick()
@@ -798,6 +805,7 @@ Rental_OnPlayerDisconnect(playerid, reason)
 	}
 	Rental_VehDestroy(playerid);
 	Rental_ResetPlayer(playerid);
+	return 0;
 }
 
 Rental_OnPlayerDeath(playerid)
@@ -823,6 +831,7 @@ Rental_OnPlayerDeath(playerid)
 	{
 		Util_Send(playerid, -1, "Noleggio interrotto: il mezzo torna all'agenzia.");
 	}
+	return 0;
 }
 
 Rental_OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
@@ -839,6 +848,7 @@ Rental_OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
 	}
 	ClearAnimations(playerid, 0);
 	Util_Send(playerid, -10270721, mod == 2 ? "Questo taxi e' in servizio: puoi salire solo come passeggero." : "Questo mezzo e' a noleggio di un altro cliente.");
+	return 0;
 }
 
 Rental_OnPlayerExitVehicle(playerid, vehicleid)
@@ -865,6 +875,7 @@ Rental_OnPlayerStateChange(playerid, t_PLAYER_STATE:newstate, t_PLAYER_STATE:old
 	}
 	RemovePlayerFromVehicle(playerid, 0);
 	Util_Send(playerid, -10270721, "Solo chi ha noleggiato questo mezzo puo' guidarlo.");
+	return 0;
 }
 
 Rental_OnVehicleDeath(vehicleid, killerid)
@@ -891,4 +902,5 @@ Rental_OnVehicleDeath(vehicleid, killerid)
 	{
 		Util_Send(owner, -10270721, "Il mezzo a noleggio e' stato distrutto: la cauzione copre i danni.");
 	}
+	return 0;
 }

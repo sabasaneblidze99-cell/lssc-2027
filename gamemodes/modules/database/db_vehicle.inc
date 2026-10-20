@@ -11,6 +11,7 @@ DB_VehStaleRelease(playerid, op)
 	{
 		DB_PendingClear(playerid, op);
 	}
+	return 0;
 }
 
 DB_VehCompensate(kind, ownerId, vehDbId)
@@ -30,6 +31,7 @@ DB_VehCompensate(kind, ownerId, vehDbId)
 		mysql_format(g_DB, query, 512, "UPDATE vehicles SET deleted = 0 WHERE id = %d AND owner_id = %d AND deleted = 1", vehDbId, ownerId);
 	}
 	mysql_tquery(g_DB, query, "DB_OnVehicleCompensated", "ddd", kind, ownerId, vehDbId);
+	return 0;
 }
 
 public DB_OnVehicleCompensated(kind, ownerId, vehDbId)
@@ -65,6 +67,7 @@ DB_LoadVehicles(playerid, ownerId)
 	mysql_format(g_DB, query, 768, "SELECT id, model, plate, color1, color2, price_paid, pos_x, pos_y, pos_z, pos_a, park_x, park_y, park_z, park_a, interior, world, health, fuel_cl, locked, destroyed FROM vehicles WHERE owner_id = %d AND deleted = 0 ORDER BY id LIMIT %d", ownerId, 4);
 	DB_PendingSet(playerid, 32);
 	mysql_tquery(g_DB, query, "DB_OnVehiclesLoaded", "dsd", playerid, name, ownerId);
+	return 0;
 }
 
 public DB_OnVehiclesLoaded(playerid, const name[], ownerId)
@@ -171,6 +174,7 @@ DB_CreateVehicle(playerid, ownerId, model, color1, color2, pricePaid, Float:x, F
 	GetPlayerName(playerid, name, 25);
 	DB_PendingSet(playerid, 64);
 	DB_VehInsertAttempt(playerid, name, 1);
+	return 0;
 }
 
 public DB_OnVehicleCreated(playerid, const name[], ownerId, attempt, const plate[])
@@ -223,6 +227,7 @@ DB_DeleteVehicle(playerid, ownerId, vehDbId)
 	mysql_format(g_DB, query, 512, "UPDATE vehicles SET deleted = 1 WHERE id = %d AND owner_id = %d AND deleted = 0", vehDbId, ownerId);
 	DB_PendingSet(playerid, 128);
 	mysql_tquery(g_DB, query, "DB_OnVehicleDeleted", "dsdd", playerid, name, ownerId, vehDbId);
+	return 0;
 }
 
 public DB_OnVehicleDeleted(playerid, const name[], ownerId, vehDbId)
@@ -253,6 +258,7 @@ DB_SaveVehicle(vehDbId, Float:x, Float:y, Float:z, Float:a, interior, world, Flo
 	new query[768];
 	mysql_format(g_DB, query, 768, "UPDATE vehicles SET pos_x = %f, pos_y = %f, pos_z = %f, pos_a = %f, interior = %d, world = %d, health = %f, fuel_cl = %d, locked = %d, destroyed = %d WHERE id = %d AND deleted = 0", x, y, z, a, clamp(interior, -32768, 32767), clamp(world, -32768, 32767), health, max(fuelCl, 0), locked ? 1 : 0, destroyed ? 1 : 0, vehDbId);
 	mysql_tquery(g_DB, query, "", "");
+	return 0;
 }
 
 DB_SetVehiclePark(vehDbId, ownerId, Float:x, Float:y, Float:z, Float:a)
@@ -264,6 +270,7 @@ DB_SetVehiclePark(vehDbId, ownerId, Float:x, Float:y, Float:z, Float:a)
 	new query[768];
 	mysql_format(g_DB, query, 768, "UPDATE vehicles SET park_x = %f, park_y = %f, park_z = %f, park_a = %f WHERE id = %d AND owner_id = %d AND deleted = 0", x, y, z, a, vehDbId, ownerId);
 	mysql_tquery(g_DB, query, "", "");
+	return 0;
 }
 
 DB_RecoverVehicle(vehDbId, ownerId, Float:health, minFuelCl)
@@ -275,4 +282,5 @@ DB_RecoverVehicle(vehDbId, ownerId, Float:health, minFuelCl)
 	new query[768];
 	mysql_format(g_DB, query, 768, "UPDATE vehicles SET destroyed = 0, health = %f, fuel_cl = GREATEST(fuel_cl, %d), pos_x = park_x, pos_y = park_y, pos_z = park_z, pos_a = park_a WHERE id = %d AND owner_id = %d AND deleted = 0 AND destroyed = 1", health, max(minFuelCl, 0), vehDbId, ownerId);
 	mysql_tquery(g_DB, query, "", "");
+	return 0;
 }

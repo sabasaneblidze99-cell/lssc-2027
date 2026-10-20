@@ -25,6 +25,7 @@ LD_SetReady(bool:ready)
 	{
 		Living_TryCharReady(i);
 	}
+	return 0;
 }
 
 bool:LD_LsnBefore(prio, const fn[], idx)
@@ -99,6 +100,7 @@ LD_OnboardAction(playerid, step)
 		return 0;
 	}
 	LD_Emit(106, 0, gPlayer[playerid][pCharId], step, "-");
+	return 0;
 }
 
 LD_GetLocalRep(playerid, districtId)
@@ -126,6 +128,7 @@ LD_SetProPoints(playerid, track, points)
 		return 0;
 	}
 	gPlayer[playerid][pProPoints][track] = points > 0 ? points : 0;
+	return 0;
 }
 
 LD_ActiveFlow(playerid)
@@ -260,6 +263,7 @@ LD_VehRelease(vehicleid)
 	{
 		g_LdPool--;
 	}
+	return 0;
 }
 
 LD_VehModule(vehicleid)
@@ -380,6 +384,7 @@ Living_TryCharReady(playerid)
 	Taxi_OnCharReady(playerid);
 	Freight_OnCharReady(playerid);
 	Hub_OnCharReady(playerid);
+	return 0;
 }
 
 Living_OnPlayerSpawn(playerid)

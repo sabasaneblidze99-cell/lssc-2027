@@ -45,6 +45,7 @@ DB_LivingProjectName(districtId, dest[], size)
 		return 0;
 	}
 	strcat(dest, g_LdDistrict[districtId][ldProjectName], size);
+	return 0;
 }
 
 DB_LivingBucketSlots()
@@ -72,6 +73,7 @@ DB_LivingPlayerReset(playerid)
 		g_LdPlayer[playerid][i] = 0;
 	}
 	g_LdPlayer[playerid][lpSecsSincePayout] = -1;
+	return 0;
 }
 
 DB_LdIdx(playerid, cat)
@@ -157,6 +159,7 @@ DB_LdStaleRelease(playerid, cat)
 	{
 		g_LdPending[playerid] &= ~(1 << cat);
 	}
+	return 0;
 }
 
 DB_LdDeliver(playerid, action, result, ref, amount, balance, a, b, c)
@@ -295,6 +298,7 @@ DB_LdCompensate(action, charId, aux, const opId[], bool:stale)
 		mysql_format(g_DB, query, 1024, "CALL sp_ld_char_cleanup(%d, NULL)", charId);
 		mysql_tquery(g_DB, query, "DB_OnLdCleanup", "d", charId);
 	}
+	return 0;
 }
 
 public DB_OnLdCleanup(charId)
@@ -457,6 +461,7 @@ DB_LivingRentUndo(playerid, charId, cash, const opId[])
 	GetPlayerName(playerid, name, 25);
 	mysql_format(g_DB, query, 1024, "CALL sp_rental_undo('%e', %d, %d)", opId, charId, cash > 0 ? cash : 0);
 	mysql_tquery(g_DB, query, "DB_OnLdUndoCalled", "dsdds", playerid, name, g_BankGen[playerid], charId, opId);
+	return 0;
 }
 
 public DB_OnLdUndoCalled(playerid, const name[], gen, charId, const opId[])
@@ -495,6 +500,7 @@ DB_LivingCtAccept(playerid, contractId, const opId[])
 	new query[1024];
 	mysql_format(g_DB, query, 1024, "CALL sp_ct_accept(%d, %d, '%e', %d)", contractId, gPlayer[playerid][pCharId], opId, gPlayer[playerid][pLevel]);
 	DB_LdSend(playerid, 1, query, 65535);
+	return 0;
 }
 
 DB_LivingCtPickup(playerid, contractId, const opId[])
@@ -506,6 +512,7 @@ DB_LivingCtPickup(playerid, contractId, const opId[])
 	new query[1024];
 	mysql_format(g_DB, query, 1024, "CALL sp_ct_pickup(%d, %d, '%e')", contractId, gPlayer[playerid][pCharId], opId);
 	DB_LdSend(playerid, 2, query, 65535);
+	return 0;
 }
 
 DB_LivingCtRelease(playerid, contractId, const opId[], reason)
@@ -517,6 +524,7 @@ DB_LivingCtRelease(playerid, contractId, const opId[], reason)
 	new query[1024];
 	mysql_format(g_DB, query, 1024, "CALL sp_ct_release(%d, %d, '%e', %d)", contractId, gPlayer[playerid][pCharId], opId, reason);
 	DB_LdSend(playerid, 3, query, 65535);
+	return 0;
 }
 
 DB_LivingCtComplete(playerid, contractId, const opId[], integrityPct, seconds)
@@ -528,6 +536,7 @@ DB_LivingCtComplete(playerid, contractId, const opId[], integrityPct, seconds)
 	new query[1024];
 	mysql_format(g_DB, query, 1024, "CALL sp_ct_complete(%d, %d, '%e', %d, %d)", contractId, gPlayer[playerid][pCharId], opId, integrityPct, seconds);
 	DB_LdSend(playerid, 4, query, 65535);
+	return 0;
 }
 
 DB_LdRentTotal(vkind, blocks)
@@ -578,6 +587,7 @@ DB_LivingRentOpen(playerid, vkind, model, blocks, const opId[])
 	new query[1024];
 	mysql_format(g_DB, query, 1024, "CALL sp_rental_open('%e', %d, %d, %d, %d, %d, %d)", opId, gPlayer[playerid][pCharId], vkind, model, blocks, cash, gPlayer[playerid][pLevel]);
 	DB_LdSend(playerid, 5, query, 65535);
+	return 0;
 }
 
 DB_LivingRentClose(playerid, rentalId, mode, health, const opId[])
@@ -589,6 +599,7 @@ DB_LivingRentClose(playerid, rentalId, mode, health, const opId[])
 	new query[1024];
 	mysql_format(g_DB, query, 1024, "CALL sp_rental_close('%e', %d, %d, %d, %d)", opId, rentalId, gPlayer[playerid][pCharId], mode, health > 0 ? health : 0);
 	DB_LdSend(playerid, 6, query, 65535);
+	return 0;
 }
 
 DB_LivingTaxiStart(playerid, kind, passengerid, fromDistrict, const opId[])
@@ -606,6 +617,7 @@ DB_LivingTaxiStart(playerid, kind, passengerid, fromDistrict, const opId[])
 	new query[1024];
 	mysql_format(g_DB, query, 1024, "CALL sp_taxi_start('%e', %d, %d, %d, %d, %d)", opId, kind, gPlayer[playerid][pCharId], pchar, fromDistrict, gPlayer[playerid][pLevel]);
 	DB_LdSend(playerid, 7, query, 65535);
+	return 0;
 }
 
 DB_LivingTaxiPay(playerid, rideId, passengerid, meters, toDistrict, bool:accept, rating, const opId[])
@@ -622,6 +634,7 @@ DB_LivingTaxiPay(playerid, rideId, passengerid, meters, toDistrict, bool:accept,
 	}
 	mysql_format(g_DB, query, 1024, "CALL sp_taxi_pay('%e', %d, %d, %d, %d, %d, %d)", opId, rideId, gPlayer[playerid][pCharId], meters, toDistrict, accept ? 1 : 0, rating);
 	DB_LdSend(playerid, 8, query, other);
+	return 0;
 }
 
 DB_LivingTaxiCancel(playerid, rideId, const opId[])
@@ -633,6 +646,7 @@ DB_LivingTaxiCancel(playerid, rideId, const opId[])
 	new query[1024];
 	mysql_format(g_DB, query, 1024, "CALL sp_taxi_cancel('%e', %d, %d)", opId, rideId, gPlayer[playerid][pCharId]);
 	DB_LdSend(playerid, 9, query, 65535);
+	return 0;
 }
 
 DB_LivingTaxiRate(passengerid, rideId, stars, const opId[])
@@ -644,6 +658,7 @@ DB_LivingTaxiRate(passengerid, rideId, stars, const opId[])
 	new query[1024];
 	mysql_format(g_DB, query, 1024, "CALL sp_taxi_rate('%e', %d, %d, %d)", opId, rideId, gPlayer[passengerid][pCharId], stars);
 	DB_LdSend(passengerid, 10, query, 65535);
+	return 0;
 }
 
 DB_LivingProjectContrib(playerid, projectId, amount, const opId[])
@@ -655,6 +670,7 @@ DB_LivingProjectContrib(playerid, projectId, amount, const opId[])
 	new query[1024], played = gPlayer[playerid][pPlayedMs] / 60000;
 	mysql_format(g_DB, query, 1024, "CALL sp_project_contrib('%e', %d, %d, %d, %d)", opId, gPlayer[playerid][pCharId], projectId, amount, played > 0 ? played : 0);
 	DB_LdSend(playerid, 11, query, 65535);
+	return 0;
 }
 
 DB_LivingOnboardStep(playerid, step, const opId[])
@@ -666,6 +682,7 @@ DB_LivingOnboardStep(playerid, step, const opId[])
 	new query[1024];
 	mysql_format(g_DB, query, 1024, "CALL sp_onboard_step('%e', %d, %d)", opId, gPlayer[playerid][pCharId], step);
 	DB_LdSend(playerid, 12, query, 65535);
+	return 0;
 }
 
 DB_LivingOnboardHints(playerid, bool:off)
@@ -679,6 +696,7 @@ DB_LivingOnboardHints(playerid, bool:off)
 	new query[1024];
 	mysql_format(g_DB, query, 1024, "CALL sp_onboard_hints(%d, %d)", gPlayer[playerid][pCharId], off ? 1 : 0);
 	mysql_tquery(g_DB, query, "DB_OnLdFire", "");
+	return 0;
 }
 
 public DB_OnLdFire()
@@ -709,6 +727,7 @@ DB_LivingLoadPlayer(playerid, bool:cleanup)
 	{
 		DB_OnLdPlayerCalled(playerid, name, g_LdReq[idx][lqToken], charId, "");
 	}
+	return 0;
 }
 
 public DB_OnLdPlayerCalled(playerid, const name[], token, charId, const opId[])
@@ -793,6 +812,7 @@ DB_LivingBoard(playerid)
 	}
 	mysql_format(g_DB, query, 1024, "SELECT id, from_district, to_district, from_pt, to_pt, cargo, distance_m, reward, UNIX_TIMESTAMP(expires_at) AS exp, min_level, min_rep, min_local_rep, premium, state FROM ct_contracts WHERE state IN (0, 7) AND expires_at > NOW() ORDER BY expires_at, id LIMIT %d", 24);
 	mysql_tquery(g_DB, query, "DB_OnLdBoard", "dsd", playerid, name, token);
+	return 0;
 }
 
 public DB_OnLdBoard(playerid, const name[], token)
@@ -850,6 +870,7 @@ DB_LivingHistory(playerid, districtId)
 	GetPlayerName(playerid, name, 25);
 	mysql_format(g_DB, query, 1024, "SELECT type, UNIX_TIMESTAMP(created_at) AS ts, value, act_delta, (actor_char <=> %d) AS mine FROM ld_events WHERE district_id = %d ORDER BY id DESC LIMIT %d", gPlayer[playerid][pCharId], districtId, 8);
 	mysql_tquery(g_DB, query, "DB_OnLdHist", "dsdd", playerid, name, g_LdReq[DB_LdIdx(playerid, 5)], districtId);
+	return 0;
 }
 
 public DB_OnLdHist(playerid, const name[], token, districtId)
@@ -886,6 +907,7 @@ DB_LivingLoadDistricts()
 		return 0;
 	}
 	mysql_tquery(g_DB, "SELECT d.id, d.activity, d.security, d.crime, COALESCE(UNIX_TIMESTAMP(d.fest_until), 0) AS fest, UNIX_TIMESTAMP(d.last_tick_at) AS lt, COALESCE(p.id, 0) AS pid, COALESCE(p.name, '') AS pname, COALESCE(p.goal, 0) AS goal, COALESCE(FLOOR(p.fund), 0) AS fund, COALESCE(UNIX_TIMESTAMP(p.ends_at), 0) AS pend, ct_bucket_slots() AS slots FROM ld_districts d LEFT JOIN ld_projects p ON p.active_district = d.id ORDER BY d.id", "DB_OnLdDistricts", "");
+	return 0;
 }
 
 public DB_OnLdDistricts()
@@ -931,6 +953,7 @@ DB_LivingBoot()
 		return 0;
 	}
 	mysql_tquery(g_DB, "CALL sp_ld_boot()", "DB_OnLdBoot", "");
+	return 0;
 }
 
 public DB_OnLdBoot()
@@ -951,6 +974,7 @@ DB_LivingTick()
 	}
 	mysql_tquery(g_DB, "CALL sp_ld_tick_all()", "DB_OnLdFire", "");
 	mysql_tquery(g_DB, "CALL sp_ct_sweep()", "DB_OnLdTicked", "");
+	return 0;
 }
 
 public DB_OnLdTicked()
@@ -968,6 +992,7 @@ DB_LivingGenerate(bucket, slot, fromPt, toPt, fromD, toD, cargo, meters, minLeve
 	new query[1024];
 	mysql_format(g_DB, query, 1024, "CALL sp_ct_generate(%d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d)", bucket, slot, 1, fromPt, toPt, fromD, toD, cargo, meters, minLevel, minRep, minLocalRep, premium ? 1 : 0);
 	mysql_tquery(g_DB, query, "DB_OnLdFire", "");
+	return 0;
 }
 
 DB_LivingEmit(const opId[], districtId, type, actorChar, value)
@@ -983,6 +1008,7 @@ DB_LivingEmit(const opId[], districtId, type, actorChar, value)
 	new query[1024];
 	mysql_format(g_DB, query, 1024, "CALL sp_ld_emit('%e', %d, %d, %d, %d)", opId, districtId, type, actorChar > 0 ? actorChar : 0, value);
 	mysql_tquery(g_DB, query, "DB_OnLdGlobalCalled", "ddss", 1, 65535, "", opId);
+	return 0;
 }
 
 DB_LivingAdminSet(playerid, const opId[], districtId, activity, security, crime)
@@ -999,6 +1025,7 @@ DB_LivingAdminSet(playerid, const opId[], districtId, activity, security, crime)
 	GetPlayerName(playerid, name, 25);
 	mysql_format(g_DB, query, 1024, "CALL sp_ld_admin_set('%e', %d, %d, %d, %d, %d)", opId, districtId, activity, security, crime, gPlayer[playerid][pCharId]);
 	mysql_tquery(g_DB, query, "DB_OnLdGlobalCalled", "ddss", 2, playerid, name, opId);
+	return 0;
 }
 
 public DB_OnLdGlobalCalled(kind, playerid, const name[], const opId[])
@@ -1064,6 +1091,7 @@ DB_LdCfgFlush(query[], size)
 	format(full, 1088, "INSERT INTO ld_config (k, v) VALUES %s ON DUPLICATE KEY UPDATE v = VALUES(v)", query);
 	mysql_tquery(g_DB, full, "DB_OnLdFire", "");
 	query[0] = 0;
+	return 0;
 }
 
 DB_LivingPushConfig()
@@ -1194,6 +1222,7 @@ DB_LivingPushConfig()
 	DB_LdCfgAdd(q, 1024, "ONB_REWARD", 120);
 	DB_LdCfgAdd(q, 1024, "ONB_EXP", 1);
 	DB_LdCfgFlush(q, 1024);
+	return 0;
 }
 
 public DB_LivingQueryError(const callback[])

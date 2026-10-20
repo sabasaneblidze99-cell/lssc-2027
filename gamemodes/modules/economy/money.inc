@@ -13,6 +13,7 @@ Money_BankLog(playerid, const kind[], delta, const ref[])
 	new opId[37];
 	DB_BankMakeOpId(opId, 37, charId);
 	DB_BankLog(opId, charId, 0, kind, delta, gPlayer[playerid][pBank], 2, ref);
+	return 0;
 }
 
 Money_Refresh(playerid)

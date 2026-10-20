@@ -221,6 +221,7 @@ House_ResetPlayer(playerid)
 	{
 		g_HPl[playerid][i] = 0;
 	}
+	return 0;
 }
 
 bool:House_OpMatches(playerid, &houseId, result)
@@ -376,6 +377,7 @@ House_RefreshWorld(idx)
 		DestroyPickup(g_HsPickup[idx]);
 	}
 	g_HsPickup[idx] = CreatePickup(free ? 1273 : 1272, 1, g_HouseRows[idx][hrExtX], g_HouseRows[idx][hrExtY], g_HouseRows[idx][hrExtZ], 0);
+	return 0;
 }
 
 House_ResetRowState(idx)
@@ -405,6 +407,7 @@ House_SaveTick(idx)
 		return 0;
 	}
 	DB_SaveHouseTick(g_HouseRows[idx][hrId], g_HouseRows[idx][hrOwnerId], g_HouseRows[idx][hrLuceMin], g_HouseRows[idx][hrGasMin], g_HouseRows[idx][hrCycleMin], g_HouseRows[idx][hrFridgeOffMin]);
+	return 0;
 }
 
 House_ApplyInsideUi(playerid, idx)
@@ -504,6 +507,7 @@ House_CapHealthIfWeak(playerid)
 	{
 		SetPlayerHealth(playerid, float(70));
 	}
+	return 0;
 }
 
 House_BeginFoodLoad(playerid)
@@ -514,6 +518,7 @@ House_BeginFoodLoad(playerid)
 	}
 	g_HPl[playerid][hpHungerState] = 1;
 	DB_LoadFood(playerid, gPlayer[playerid][pCharId]);
+	return 0;
 }
 
 bool:House_FoodReady(playerid)
@@ -631,6 +636,7 @@ House_OpenMenu(playerid, idx)
 	g_HPl[playerid][hpBillsHouseId] = 0;
 	House_PushUi(playerid, idx);
 	UI_HouseMenuShow(playerid);
+	return 0;
 }
 
 House_OpenBills(playerid, idx)
@@ -725,6 +731,7 @@ House_DoBuy(playerid, idx, payWithBank)
 	g_HPl[playerid][hpOpAmount] = price;
 	Util_Send(playerid, -1, "Pratica di acquisto in corso...");
 	DB_BuyHouse(playerid, g_HouseRows[idx][hrId], charId, price, maxHouses);
+	return 0;
 }
 
 public House_OnDBBought(playerid, houseId, affected)
@@ -833,6 +840,7 @@ House_DoSell(playerid, idx, bool:confirmed)
 	g_HPl[playerid][hpOpAmount] = refund;
 	Util_Send(playerid, -1, "Vendita in corso...");
 	DB_SellHouse(playerid, g_HouseRows[idx][hrId], gPlayer[playerid][pCharId]);
+	return 0;
 }
 
 public House_OnDBSold(playerid, houseId, affected)
@@ -919,6 +927,7 @@ House_ToggleLock(playerid, idx)
 	DB_SetHouseLock(g_HouseRows[idx][hrId], g_HouseRows[idx][hrOwnerId], g_HouseRows[idx][hrLocked]);
 	House_RefreshWorld(idx);
 	SendClientMessage(playerid, 0x66DD66FF, "Porta della casa %d: %s.", g_HouseRows[idx][hrId], g_HouseRows[idx][hrLocked] ? "chiusa a chiave" : "aperta");
+	return 0;
 }
 
 bool:House_SetUtility(playerid, idx, utility, bool:on)
@@ -968,6 +977,7 @@ House_CmdToggleUtility(playerid, utility)
 	}
 	new bool:cur = utility == 1 ? g_HouseRows[idx][hrGasOn] : g_HouseRows[idx][hrLuceOn];
 	House_SetUtility(playerid, idx, utility, !cur);
+	return 0;
 }
 
 House_ReopenFridge(playerid)
@@ -979,6 +989,7 @@ House_ReopenFridge(playerid)
 	}
 	House_PushUi(playerid, idx);
 	UI_HouseFridgeShow(playerid);
+	return 0;
 }
 
 House_FridgeChanged(playerid, idx, delta)
@@ -1029,6 +1040,7 @@ House_EatCold(playerid)
 	House_FridgeChanged(playerid, idx, -1);
 	House_HungerSet(playerid, g_HPl[playerid][hpHunger] + 25, 1);
 	SendClientMessage(playerid, 0x66DD66FF, "Mangi qualcosa di freddo dal frigo. Sazieta': %d%%.", g_HPl[playerid][hpHunger]);
+	return 0;
 }
 
 House_StartCook(playerid)
@@ -1062,6 +1074,7 @@ House_StartCook(playerid)
 	g_HPl[playerid][hpCookHouseId] = g_HouseRows[idx][hrId];
 	SetTimerEx("House_OnCookDone", 6000, 0, "dd", playerid, g_HPl[playerid][hpSession]);
 	Util_Send(playerid, -1, "Inizi a cucinare...");
+	return 0;
 }
 
 public House_OnCookDone(playerid, session)
@@ -1120,6 +1133,7 @@ House_EatPlate(playerid)
 	}
 	SetPlayerHealth(playerid, hp);
 	SendClientMessage(playerid, 0x66DD66FF, "Mangi il piatto caldo. Sazieta': %d%%.", g_HPl[playerid][hpHunger]);
+	return 0;
 }
 
 House_Store(playerid, n)
@@ -1151,6 +1165,7 @@ House_Store(playerid, n)
 	{
 		g_HsFridgeBusy[idx] = 0;
 	}
+	return 0;
 }
 
 House_Take(playerid, n)
@@ -1180,6 +1195,7 @@ House_Take(playerid, n)
 	{
 		g_HsFridgeBusy[idx] = 0;
 	}
+	return 0;
 }
 
 public House_InvFridgeResult(playerid, houseId, direction, qty, result)
@@ -1345,6 +1361,7 @@ House_CmdFrigo(playerid, const params[])
 	{
 		House_Take(playerid, n);
 	}
+	return 0;
 }
 
 House_CmdMangia(playerid, const params[])
@@ -1366,6 +1383,7 @@ House_CmdMangia(playerid, const params[])
 		return 0;
 	}
 	Util_Send(playerid, 0x99CCFFFF, "Uso: /mangia (piatto caldo dopo /cucina) · /mangia freddo");
+	return 0;
 }
 
 House_CmdCucina(playerid)
@@ -1375,6 +1393,7 @@ House_CmdCucina(playerid)
 		return 0;
 	}
 	House_StartCook(playerid);
+	return 0;
 }
 
 House_CmdCompra(playerid, const params[])
@@ -1417,6 +1436,7 @@ House_CmdCompra(playerid, const params[])
 		return 0;
 	}
 	Inv_Buy(playerid, itemId, n);
+	return 0;
 }
 
 House_BillAmount(tariff, minutesOn)
@@ -1447,6 +1467,7 @@ House_CloseCycle(idx)
 	DB_AgeBills(id, 2);
 	DB_AddBill(id, 0, luceAmt, 4);
 	DB_AddBill(id, 1, gasAmt, 4);
+	return 0;
 }
 
 public House_OnDBBillAdded(houseId, kind, billId, amount)
@@ -1501,6 +1522,7 @@ House_CutUtil(idx, kind)
 	new msg[256];
 	format(msg, 256, "DISTACCO casa %d: %s", id, kind == 1 ? "gas" : "luce");
 	Log_Write("HOUSE", msg);
+	return 0;
 }
 
 public House_OnDBBillsAged(houseId, overdueMask)
@@ -1539,6 +1561,7 @@ House_PayNext(playerid)
 	new bool:cut = kind == 1 ? g_HouseRows[idx][hrGasCut] : g_HouseRows[idx][hrLuceCut];
 	g_HPl[playerid][hpBillKind] = kind;
 	DB_PayBills(playerid, g_HouseRows[idx][hrId], gPlayer[playerid][pCharId], kind, sum, cut);
+	return 0;
 }
 
 public UI_OnHouseBillsPayAll(playerid, houseId, payWithBank)
@@ -1706,6 +1729,7 @@ House_CmdBollette(playerid)
 		idx = found;
 	}
 	House_OpenBills(playerid, idx);
+	return 0;
 }
 
 House_KeyContext(playerid)
@@ -1750,6 +1774,7 @@ House_GiveKey(playerid, const token[])
 	g_HPl[playerid][hpOpHouseId] = g_HouseRows[idx][hrId];
 	g_HPl[playerid][hpKeyTargetChar] = gPlayer[target][pCharId];
 	DB_AddKey(playerid, g_HouseRows[idx][hrId], gPlayer[playerid][pCharId], gPlayer[target][pCharId]);
+	return 0;
 }
 
 public House_OnDBKeyAdded(playerid, houseId, targetId, affected)
@@ -1802,6 +1827,7 @@ House_LoadKeys(playerid, intent, const token[])
 	g_HPl[playerid][hpBillIntent] = intent;
 	strmid(g_HPl[playerid][hpKeyToken], token, 0, strlen(token), 32);
 	DB_LoadKeys(playerid, g_HouseRows[idx][hrId], gPlayer[playerid][pCharId]);
+	return 0;
 }
 
 public House_OnDBKeysLoaded(playerid, houseId, count)
@@ -1948,6 +1974,7 @@ House_Info(playerid, idx)
 	{
 		SendClientMessage(playerid, -1, "Bollette non pagate: %d - Chiavi consegnate: %d/%d", g_HouseRows[idx][hrBills], g_HouseRows[idx][hrKeyCount], 3);
 	}
+	return 0;
 }
 
 House_CmdCasa(playerid, const params[])
@@ -2044,6 +2071,7 @@ House_CmdCasa(playerid, const params[])
 		return 0;
 	}
 	Util_Send(playerid, 0x99CCFFFF, "Uso: /casa [info|compra|vendi|serratura|chiave|chiavi|revoca]");
+	return 0;
 }
 
 House_CmdEntra(playerid)
@@ -2080,6 +2108,7 @@ House_CmdEntra(playerid)
 	}
 	House_DoEnter(playerid, idx);
 	SendClientMessage(playerid, -1, "Sei entrato nella casa %d. Usa /esci per uscire.", g_HouseRows[idx][hrId]);
+	return 0;
 }
 
 House_CmdEsci(playerid)
@@ -2100,6 +2129,7 @@ House_CmdEsci(playerid)
 		return 0;
 	}
 	House_PlaceOutside(playerid, idx);
+	return 0;
 }
 
 House_CmdBussa(playerid)
@@ -2142,6 +2172,7 @@ House_CmdBussa(playerid)
 	{
 		Util_Send(playerid, -1, "Non sembra esserci nessuno in casa.");
 	}
+	return 0;
 }
 
 House_UiGuard(playerid, houseId)
@@ -2453,6 +2484,7 @@ House_SavePlayerFood(playerid)
 		return 0;
 	}
 	DB_SaveHunger(gPlayer[playerid][pCharId], g_HPl[playerid][hpHunger]);
+	return 0;
 }
 
 House_OnExit()
@@ -2506,6 +2538,7 @@ House_OnPlayerDisconnect(playerid)
 	}
 	House_SavePlayerFood(playerid);
 	House_ResetPlayer(playerid);
+	return 0;
 }
 
 House_OnPlayerSpawn(playerid)
@@ -2552,6 +2585,7 @@ House_OnPlayerSpawn(playerid)
 		g_HPl[playerid][hpCapHealthOnLoad] = 1;
 		House_BeginFoodLoad(playerid);
 	}
+	return 0;
 }
 
 House_OnPlayerPickUpPickup(playerid, pickupid)
@@ -2592,4 +2626,5 @@ House_OnPlayerPickUpPickup(playerid, pickupid)
 	{
 		SendClientMessage(playerid, -1, "Casa %d di %s: porta chiusa a chiave. Usa /bussa.", g_HouseRows[idx][hrId], g_HouseRows[idx][hrOwnerName]);
 	}
+	return 0;
 }
