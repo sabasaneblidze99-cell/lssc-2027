@@ -455,7 +455,7 @@ House_PlaceOutside(playerid, idx)
 	House_ClearInside(playerid);
 }
 
-House_EvictAll(idx, reason[])
+House_EvictAll(idx, const reason[])
 {
 	new id = g_HouseRows[idx][hrId];
 	for (new p = 0; p < MAX_PLAYERS; p++)
@@ -1719,7 +1719,7 @@ House_KeyContext(playerid)
 	return idx;
 }
 
-House_GiveKey(playerid, token[])
+House_GiveKey(playerid, const token[])
 {
 	new idx = House_KeyContext(playerid), target = 0;
 	if (idx == -1)
@@ -1790,7 +1790,7 @@ public House_OnDBKeyAdded(playerid, houseId, targetId, affected)
 	return 1;
 }
 
-House_LoadKeys(playerid, intent, token[])
+House_LoadKeys(playerid, intent, const token[])
 {
 	new idx = House_KeyContext(playerid);
 	if (idx == -1)

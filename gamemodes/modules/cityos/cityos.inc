@@ -139,7 +139,7 @@ CityOS_OnPlayerDisconnect(playerid, reason)
 	g_CosWaitBoard[playerid] = 0;
 }
 
-public CityOS_OnDistrictEvent(type, districtId, charId, value, opId[])
+public CityOS_OnDistrictEvent(type, districtId, charId, value, const opId[])
 {
 	if (type != 104)
 	{
@@ -227,7 +227,7 @@ CityOS_CmdContratto(playerid, params[])
 	return 1;
 }
 
-CityOS_CmdReputazione(playerid, params[])
+CityOS_CmdReputazione(playerid, const params[])
 {
 	if (!CityOS_Playing(playerid))
 	{

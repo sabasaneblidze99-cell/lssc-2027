@@ -269,7 +269,7 @@ bool:Fac_NeedDuty(playerid)
 	return 1;
 }
 
-bool:Fac_ParseTarget(playerid, token[], &targetid)
+bool:Fac_ParseTarget(playerid, const token[], &targetid)
 {
 	if (!Util_ParsePlayerId(token, targetid) || !Util_IsPlaying(targetid))
 	{
@@ -279,7 +279,7 @@ bool:Fac_ParseTarget(playerid, token[], &targetid)
 	return 1;
 }
 
-Fac_Emote(playerid, text[])
+Fac_Emote(playerid, const text[])
 {
 	new name[25], msg[256];
 	GetPlayerName(playerid, name, 25);
@@ -320,7 +320,7 @@ Fac_KitHudValue(playerid)
 	return gPlayer[playerid][pFaction] == 2 ? g_FcKit[playerid] : -1;
 }
 
-Fac_Radio(faction, bool:both, color, text[])
+Fac_Radio(faction, bool:both, color, const text[])
 {
 	for (new i = 0; i < MAX_PLAYERS; i++)
 	{
@@ -923,7 +923,7 @@ Faction_CmdCura(playerid, params[])
 	DB_FactionLogAdd(2, gPlayer[playerid][pCharId], gPlayer[target][pCharId], "heal", "");
 }
 
-Fac_ReviveCancel(medic, reason[])
+Fac_ReviveCancel(medic, const reason[])
 {
 	g_FcRevTarget[medic] = 65535;
 	g_FcRevTargetChar[medic] = 0;
@@ -1197,7 +1197,7 @@ Faction_CmdAccetta(playerid)
 	Fac_InviteReply(playerid, 1);
 }
 
-Fac_DoRankOp(playerid, action, targetChar, targetRank, targetName[])
+Fac_DoRankOp(playerid, action, targetChar, targetRank, const targetName[])
 {
 	new f = gPlayer[playerid][pFaction], own = gPlayer[playerid][pFactionRank];
 	if (f < 1 || own < 5)
@@ -1601,7 +1601,7 @@ public Faction_OnDBMembers(playerid, faction, count)
 	return 1;
 }
 
-Fac_SetStart(staff, targetChar, targetAcc, targetName[], faction, rank)
+Fac_SetStart(staff, targetChar, targetAcc, const targetName[], faction, rank)
 {
 	g_FcSetActive[staff] = 1;
 	g_FcSetTargetChar[staff] = targetChar;
@@ -1675,7 +1675,7 @@ bool:Faction_CmdSetfazione(playerid, params[])
 	return 1;
 }
 
-public Faction_OnDBFound(playerid, tag, charId, name[], faction, rank, level)
+public Faction_OnDBFound(playerid, tag, charId, const name[], faction, rank, level)
 {
 	if (tag != 1 || !Fac_ValidPlayer(playerid) || !g_FcSetActive[playerid] || g_FcSetTargetChar[playerid] != 0)
 	{

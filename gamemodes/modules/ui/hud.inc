@@ -6,7 +6,7 @@ UI_ExpForLevel(level)
 	return (level - 1) * 2 * level / 2 + (level - 1) * 2;
 }
 
-PlayerText:UI_HudText(playerid, Float:x, Float:y, text[], Float:lw, Float:lh, color, t_TEXT_DRAW_ALIGN:align)
+PlayerText:UI_HudText(playerid, Float:x, Float:y, const text[], Float:lw, Float:lh, color, t_TEXT_DRAW_ALIGN:align)
 {
 	new PlayerText:td = Lang_CreatePlayerTextDraw(playerid, x, y, text);
 	PlayerTextDrawLetterSize(playerid, td, lw, lh);

@@ -1,6 +1,6 @@
 new g_UiSkinGender[MAX_PLAYERS];
 
-UI_ShowRegisterEx(playerid, error[])
+UI_ShowRegisterEx(playerid, const error[])
 {
 	if (CefUI_Active(playerid))
 	{
@@ -71,7 +71,7 @@ UI_CloseDialogs(playerid)
 	HidePlayerDialog(playerid);
 }
 
-bool:UI_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
+bool:UI_OnDialogResponse(playerid, dialogid, response, listitem, const inputtext[])
 {
 	switch (dialogid)
 	{
@@ -138,7 +138,7 @@ bool:UI_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	return 0;
 }
 
-UI_CefRegisterSubmit(playerid, password[])
+UI_CefRegisterSubmit(playerid, const password[])
 {
 	new len = strlen(password);
 	if (len < 6 || len > 32)
@@ -149,7 +149,7 @@ UI_CefRegisterSubmit(playerid, password[])
 	UI_OnRegisterSubmit(playerid, password);
 }
 
-UI_CefLoginSubmit(playerid, password[])
+UI_CefLoginSubmit(playerid, const password[])
 {
 	if (password[0] == 0)
 	{

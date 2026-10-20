@@ -1,5 +1,5 @@
 
-Money_BankLog(playerid, kind[], delta, ref[])
+Money_BankLog(playerid, const kind[], delta, const ref[])
 {
 	if (playerid < 0 || playerid >= MAX_PLAYERS || !IsPlayerConnected(playerid))
 	{
@@ -86,7 +86,7 @@ Money_BankRoom(playerid)
 	return 0x3B9ACA00 - gPlayer[playerid][pBank];
 }
 
-bool:Money_GiveBank(playerid, amount, kind[], ref[])
+bool:Money_GiveBank(playerid, amount, const kind[], const ref[])
 {
 	if (!Money_ValidPlayer(playerid) || amount <= 0 || amount > Money_BankRoom(playerid))
 	{
@@ -114,7 +114,7 @@ bool:Money_CanBank(playerid, amount)
 	return gPlayer[playerid][pBank] >= amount;
 }
 
-bool:Money_TakeBank(playerid, amount, kind[], ref[])
+bool:Money_TakeBank(playerid, amount, const kind[], const ref[])
 {
 	if (!Money_CanBank(playerid, amount))
 	{

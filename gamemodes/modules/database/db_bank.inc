@@ -35,7 +35,7 @@ DB_BankXferFee(amount)
 	return fee < 5 ? 5 : fee;
 }
 
-bool:DB_BankOpIdOk(opId[])
+bool:DB_BankOpIdOk(const opId[])
 {
 	new len = strlen(opId);
 	return len >= 1 && len <= 36;
@@ -47,7 +47,7 @@ DB_BankMirror(playerid, delta)
 	g_BankDb[playerid] += delta;
 }
 
-bool:DB_BankLive(playerid, name[], charId, token, op)
+bool:DB_BankLive(playerid, const name[], charId, token, op)
 {
 	if (!DB_PlayerMatches(playerid, name))
 	{
@@ -64,7 +64,7 @@ bool:DB_BankLive(playerid, name[], charId, token, op)
 	return g_BankReq[playerid][bqToken] == token && g_BankReq[playerid][bqOp] == op && g_BankReq[playerid][bqGen] == g_BankGen[playerid];
 }
 
-bool:DB_BankInfoLive(playerid, name[], charId, token, infoOp)
+bool:DB_BankInfoLive(playerid, const name[], charId, token, infoOp)
 {
 	if (!DB_PlayerMatches(playerid, name))
 	{
@@ -142,7 +142,7 @@ DB_BankFlush(playerid)
 	mysql_tquery(g_DB, query, "DB_OnBankDeltaSaved", "dsddd", playerid, name, gPlayer[playerid][pCharId], g_BankGen[playerid], d);
 }
 
-bool:DB_BankBegin(playerid, op, bool:valid, charId, amount, opId[])
+bool:DB_BankBegin(playerid, op, bool:valid, charId, amount, const opId[])
 {
 	if (playerid < 0 || playerid >= MAX_PLAYERS || !IsPlayerConnected(playerid))
 	{
@@ -174,7 +174,7 @@ bool:DB_BankBegin(playerid, op, bool:valid, charId, amount, opId[])
 	return 1;
 }
 
-DB_BankCompensate(opId[], op)
+DB_BankCompensate(const opId[], op)
 {
 	if (op != 1 && op != 2)
 	{
@@ -258,7 +258,7 @@ DB_BankLimits(playerid, charId)
 	mysql_tquery(g_DB, query, "DB_OnBankLimits", "dsdd", playerid, name, charId, g_BankInfo[playerid][biToken]);
 }
 
-public DB_OnBankLimits(playerid, name[], charId, token)
+public DB_OnBankLimits(playerid, const name[], charId, token)
 {
 	if (!DB_BankInfoLive(playerid, name, charId, token, 1))
 	{
@@ -300,7 +300,7 @@ DB_BankStatement(playerid, charId, page)
 	mysql_tquery(g_DB, query, "DB_OnBankStatement", "dsdd", playerid, name, charId, g_BankInfo[playerid][biToken]);
 }
 
-public DB_OnBankStatement(playerid, name[], charId, token)
+public DB_OnBankStatement(playerid, const name[], charId, token)
 {
 	if (!DB_BankInfoLive(playerid, name, charId, token, 2))
 	{
@@ -340,7 +340,7 @@ DB_BankResync(playerid, charId)
 	mysql_tquery(g_DB, query, "DB_OnBankSynced", "dsdd", playerid, name, charId, g_BankInfo[playerid][biToken]);
 }
 
-public DB_OnBankSynced(playerid, name[], charId, token)
+public DB_OnBankSynced(playerid, const name[], charId, token)
 {
 	if (!DB_BankInfoLive(playerid, name, charId, token, 3))
 	{
@@ -360,7 +360,7 @@ public DB_OnBankSynced(playerid, name[], charId, token)
 	return 1;
 }
 
-DB_BankDeposit(playerid, charId, amount, channel, opId[])
+DB_BankDeposit(playerid, charId, amount, channel, const opId[])
 {
 	new bool:ok = amount >= 1 && amount <= 0x3B9ACA00 && (channel == 0 || channel == 1);
 	if (!DB_BankBegin(playerid, 1, ok, charId, amount, opId))
@@ -374,7 +374,7 @@ DB_BankDeposit(playerid, charId, amount, channel, opId[])
 	mysql_tquery(g_DB, query, "DB_OnBankCalled", "dsddds", playerid, name, charId, g_BankReq[playerid][bqToken], 1, opId);
 }
 
-DB_BankWithdraw(playerid, charId, amount, channel, opId[])
+DB_BankWithdraw(playerid, charId, amount, channel, const opId[])
 {
 	new bool:ok = amount >= 1 && amount <= 0x3B9ACA00 && (channel == 0 || channel == 1);
 	if (!DB_BankBegin(playerid, 2, ok, charId, amount, opId))
@@ -388,7 +388,7 @@ DB_BankWithdraw(playerid, charId, amount, channel, opId[])
 	mysql_tquery(g_DB, query, "DB_OnBankCalled", "dsddds", playerid, name, charId, g_BankReq[playerid][bqToken], 2, opId);
 }
 
-public DB_OnBankCalled(playerid, name[], charId, token, op, opId[])
+public DB_OnBankCalled(playerid, const name[], charId, token, op, const opId[])
 {
 	if (!DB_BankLive(playerid, name, charId, token, op))
 	{
@@ -402,7 +402,7 @@ public DB_OnBankCalled(playerid, name[], charId, token, op, opId[])
 	return 1;
 }
 
-public DB_OnBankResult(playerid, name[], charId, token, op, opId[])
+public DB_OnBankResult(playerid, const name[], charId, token, op, const opId[])
 {
 	new rows = 0, result = -1, balance = 0;
 	cache_get_row_count(rows);
@@ -432,7 +432,7 @@ public DB_OnBankResult(playerid, name[], charId, token, op, opId[])
 	return 1;
 }
 
-DB_BankTransfer(playerid, toPlayerid, amount, opId[], flag)
+DB_BankTransfer(playerid, toPlayerid, amount, const opId[], flag)
 {
 	if (playerid < 0 || playerid >= MAX_PLAYERS || !IsPlayerConnected(playerid))
 	{
@@ -457,7 +457,7 @@ DB_BankTransfer(playerid, toPlayerid, amount, opId[], flag)
 	mysql_tquery(g_DB, query, "DB_OnBankXferCalled", "dsdddsddds", playerid, name, fromChar, g_BankReq[playerid][bqToken], toPlayerid, rname, toChar, g_BankGen[toPlayerid], amount, opId);
 }
 
-public DB_OnBankXferCalled(playerid, name[], charId, token, recv, rname[], rchar, rgen, amount, opId[])
+public DB_OnBankXferCalled(playerid, const name[], charId, token, recv, const rname[], rchar, rgen, amount, const opId[])
 {
 	new query[512];
 	mysql_format(g_DB, query, 512, "SELECT result, fee, balance_after FROM bank_ops WHERE op_id = '%e'", opId);
@@ -465,7 +465,7 @@ public DB_OnBankXferCalled(playerid, name[], charId, token, recv, rname[], rchar
 	return 1;
 }
 
-public DB_OnBankXferResult(playerid, name[], charId, token, recv, rname[], rchar, rgen, amount, opId[])
+public DB_OnBankXferResult(playerid, const name[], charId, token, recv, const rname[], rchar, rgen, amount, const opId[])
 {
 	new rows = 0, result = -1, fee = 0, balance = 0;
 	cache_get_row_count(rows);
@@ -508,7 +508,7 @@ public DB_OnBankXferResult(playerid, name[], charId, token, recv, rname[], rchar
 	return 1;
 }
 
-DB_BankUndo(opId[])
+DB_BankUndo(const opId[])
 {
 	if (!DB_IsReady() || !DB_BankOpIdOk(opId))
 	{
@@ -524,7 +524,7 @@ DB_BankUndo(opId[])
 	mysql_tquery(g_DB, query, "DB_OnBankUndoCalled", "sd", opId, 1);
 }
 
-public DB_OnBankUndoCalled(opId[], notify)
+public DB_OnBankUndoCalled(const opId[], notify)
 {
 	new query[512];
 	mysql_format(g_DB, query, 512, "SELECT undo_result, kind, amount FROM bank_ops WHERE op_id = '%e'", opId);
@@ -532,7 +532,7 @@ public DB_OnBankUndoCalled(opId[], notify)
 	return 1;
 }
 
-public DB_OnBankUndoResult(opId[], notify)
+public DB_OnBankUndoResult(const opId[], notify)
 {
 	new rows = 0, result = 8, msg[126], kind[13], amount = 0, owner = 65535;
 	cache_get_row_count(rows);
@@ -585,12 +585,12 @@ public DB_OnBankUndoResult(opId[], notify)
 	return 1;
 }
 
-bool:DB_BankSystemKindOk(kind[])
+bool:DB_BankSystemKindOk(const kind[])
 {
 	return !strcmp(kind, "paycheck", 0, 0x7FFFFFFF) || !strcmp(kind, "job", 0, 0x7FFFFFFF) || !strcmp(kind, "faction", 0, 0x7FFFFFFF) || !strcmp(kind, "bill", 0, 0x7FFFFFFF) || !strcmp(kind, "house", 0, 0x7FFFFFFF) || !strcmp(kind, "vehicle", 0, 0x7FFFFFFF) || !strcmp(kind, "fine", 0, 0x7FFFFFFF) || !strcmp(kind, "refund", 0, 0x7FFFFFFF) || !strcmp(kind, "admin", 0, 0x7FFFFFFF);
 }
 
-DB_BankLog(opId[], charId, otherCharId, kind[], delta, balAfter, channel, ref[])
+DB_BankLog(const opId[], charId, otherCharId, const kind[], delta, balAfter, channel, const ref[])
 {
 	if (!DB_IsReady() || charId <= 0 || delta == 0 || !DB_BankOpIdOk(opId) || !DB_BankSystemKindOk(kind) || channel < 0 || channel > 2)
 	{
@@ -630,7 +630,7 @@ public DB_BankFailure(playerid, op)
 	return 1;
 }
 
-public DB_BankQueryError(callback[])
+public DB_BankQueryError(const callback[])
 {
 	if (!strcmp(callback, "DB_OnBankLimits", 0, 0x7FFFFFFF) || !strcmp(callback, "DB_OnBankStatement", 0, 0x7FFFFFFF) || !strcmp(callback, "DB_OnBankSynced", 0, 0x7FFFFFFF))
 	{

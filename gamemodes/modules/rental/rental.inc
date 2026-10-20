@@ -444,7 +444,7 @@ bool:Rental_CanStart(playerid)
 	return 1;
 }
 
-Rental_CmdNoleggio(playerid, params[])
+Rental_CmdNoleggio(playerid, const params[])
 {
 	if (!Rental_CanStart(playerid))
 	{
@@ -550,7 +550,7 @@ bool:Rental_CanReturn(playerid, bool:verbose)
 	return 1;
 }
 
-Rental_CmdRiconsegna(playerid, params[])
+Rental_CmdRiconsegna(playerid, const params[])
 {
 	if (!Rental_CanReturn(playerid, 1))
 	{

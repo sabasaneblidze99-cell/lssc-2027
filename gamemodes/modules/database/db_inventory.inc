@@ -31,7 +31,7 @@ DB_InvMakeOpId(dest[], size, charId)
 	format(dest, size, "%08x%08x%08x%08x", charId, g_InvOpSeq, gettime(), GetTickCount());
 }
 
-bool:DB_InvOpIdOk(opId[])
+bool:DB_InvOpIdOk(const opId[])
 {
 	new len = strlen(opId);
 	return len >= 1 && len <= 32;
@@ -42,12 +42,12 @@ bool:DB_InvItemOk(itemId)
 	return itemId >= 1 && itemId <= 10;
 }
 
-bool:DB_InvAddKindOk(kind[])
+bool:DB_InvAddKindOk(const kind[])
 {
 	return !strcmp(kind, "add", 0, 0x7FFFFFFF) || !strcmp(kind, "pickup", 0, 0x7FFFFFFF);
 }
 
-bool:DB_InvLive(playerid, name[], charId, token, op)
+bool:DB_InvLive(playerid, const name[], charId, token, op)
 {
 	if (!DB_PlayerMatches(playerid, name))
 	{
@@ -143,7 +143,7 @@ DB_InvDeliver(playerid, op, result, itemId, qty, dir, houseId, recv)
 	}
 }
 
-bool:DB_InvBegin(playerid, op, bool:valid, charId, itemId, qty, opId[], dir, houseId, recv, recvChar)
+bool:DB_InvBegin(playerid, op, bool:valid, charId, itemId, qty, const opId[], dir, houseId, recv, recvChar)
 {
 	if (playerid < 0 || playerid >= MAX_PLAYERS || !IsPlayerConnected(playerid))
 	{
@@ -183,14 +183,14 @@ bool:DB_InvBegin(playerid, op, bool:valid, charId, itemId, qty, opId[], dir, hou
 	return 1;
 }
 
-DB_InvRun(playerid, op, query[])
+DB_InvRun(playerid, op, const query[])
 {
 	new name[25];
 	GetPlayerName(playerid, name, 25);
 	mysql_tquery(g_DB, query, "DB_OnInvCalled", "dsddds", playerid, name, gPlayer[playerid][pCharId], g_InvReq[playerid][iqToken], op, g_InvReq[playerid][iqOpId]);
 }
 
-DB_InvCompensate(opId[], op)
+DB_InvCompensate(const opId[], op)
 {
 	if (op != 1 && op != 2 && op != 3 && op != 5 && op != 7)
 	{
@@ -228,7 +228,7 @@ DB_InvLoad(playerid, charId)
 	mysql_tquery(g_DB, query, "DB_OnInvLoaded", "dsd", playerid, name, charId);
 }
 
-public DB_OnInvLoaded(playerid, name[], charId)
+public DB_OnInvLoaded(playerid, const name[], charId)
 {
 	if (!DB_PlayerMatches(playerid, name) || charId <= 0 || gPlayer[playerid][pCharId] != charId)
 	{
@@ -280,7 +280,7 @@ public DB_OnInvLoaded(playerid, name[], charId)
 	return 1;
 }
 
-DB_InvAddCommon(playerid, op, charId, itemId, qty, opId[], kind[], maxTotal)
+DB_InvAddCommon(playerid, op, charId, itemId, qty, const opId[], const kind[], maxTotal)
 {
 	new bool:ok = DB_InvItemOk(itemId) && qty >= 1 && qty <= 1000 && maxTotal >= 0;
 	if (!DB_InvBegin(playerid, op, ok, charId, itemId, qty, opId, 0, 0, 65535, 0))
@@ -292,7 +292,7 @@ DB_InvAddCommon(playerid, op, charId, itemId, qty, opId[], kind[], maxTotal)
 	DB_InvRun(playerid, op, query);
 }
 
-DB_InvAdd(playerid, charId, itemId, qty, opId[], kind[], maxTotal)
+DB_InvAdd(playerid, charId, itemId, qty, const opId[], const kind[], maxTotal)
 {
 	if (!DB_InvAddKindOk(kind))
 	{
@@ -302,12 +302,12 @@ DB_InvAdd(playerid, charId, itemId, qty, opId[], kind[], maxTotal)
 	DB_InvAddCommon(playerid, 1, charId, itemId, qty, opId, kind, maxTotal);
 }
 
-DB_InvBuy(playerid, charId, itemId, qty, opId[], maxTotal)
+DB_InvBuy(playerid, charId, itemId, qty, const opId[], maxTotal)
 {
 	DB_InvAddCommon(playerid, 2, charId, itemId, qty, opId, "buy", maxTotal);
 }
 
-DB_InvRemoveCommon(playerid, op, charId, itemId, qty, opId[], kind[])
+DB_InvRemoveCommon(playerid, op, charId, itemId, qty, const opId[], const kind[])
 {
 	new bool:ok = DB_InvItemOk(itemId) && qty >= 1 && qty <= 1000;
 	if (!DB_InvBegin(playerid, op, ok, charId, itemId, qty, opId, 0, 0, 65535, 0))
@@ -319,12 +319,12 @@ DB_InvRemoveCommon(playerid, op, charId, itemId, qty, opId[], kind[])
 	DB_InvRun(playerid, op, query);
 }
 
-DB_InvUse(playerid, charId, itemId, opId[])
+DB_InvUse(playerid, charId, itemId, const opId[])
 {
 	DB_InvRemoveCommon(playerid, 4, charId, itemId, 1, opId, "use");
 }
 
-DB_InvDrop(playerid, charId, itemId, qty, opId[])
+DB_InvDrop(playerid, charId, itemId, qty, const opId[])
 {
 	if (DB_InvItemOk(itemId) && !DB_InvItemMovable(itemId))
 	{
@@ -334,7 +334,7 @@ DB_InvDrop(playerid, charId, itemId, qty, opId[])
 	DB_InvRemoveCommon(playerid, 5, charId, itemId, qty, opId, "drop");
 }
 
-DB_InvSetBag(playerid, charId, opId[])
+DB_InvSetBag(playerid, charId, const opId[])
 {
 	if (!DB_InvBegin(playerid, 7, 1, charId, 0, 1, opId, 0, 0, 65535, 0))
 	{
@@ -345,7 +345,7 @@ DB_InvSetBag(playerid, charId, opId[])
 	DB_InvRun(playerid, 7, query);
 }
 
-DB_FridgeMove(playerid, charId, houseId, itemId, qty, direction, opId[], fridgeCap, carryMax)
+DB_FridgeMove(playerid, charId, houseId, itemId, qty, direction, const opId[], fridgeCap, carryMax)
 {
 	new bool:ok = houseId > 0 && itemId == 1 && qty >= 1 && qty <= 1000 && (direction == 1 || direction == 2) && fridgeCap >= 1 && fridgeCap <= 65535 && carryMax >= 0;
 	if (!DB_InvBegin(playerid, 8, ok, charId, itemId, qty, opId, direction, houseId, 65535, 0))
@@ -357,7 +357,7 @@ DB_FridgeMove(playerid, charId, houseId, itemId, qty, direction, opId[], fridgeC
 	DB_InvRun(playerid, 8, query);
 }
 
-public DB_OnInvCalled(playerid, name[], charId, token, op, opId[])
+public DB_OnInvCalled(playerid, const name[], charId, token, op, const opId[])
 {
 	if (!DB_InvLive(playerid, name, charId, token, op))
 	{
@@ -371,7 +371,7 @@ public DB_OnInvCalled(playerid, name[], charId, token, op, opId[])
 	return 1;
 }
 
-public DB_OnInvResult(playerid, name[], charId, token, op, opId[])
+public DB_OnInvResult(playerid, const name[], charId, token, op, const opId[])
 {
 	new rows = 0, result = -1;
 	cache_get_row_count(rows);
@@ -390,7 +390,7 @@ public DB_OnInvResult(playerid, name[], charId, token, op, opId[])
 	return 1;
 }
 
-DB_InvTransfer(giverId, receiverId, itemId, qty, opId[])
+DB_InvTransfer(giverId, receiverId, itemId, qty, const opId[])
 {
 	if (giverId < 0 || giverId >= 1000 || !IsPlayerConnected(giverId))
 	{
@@ -418,7 +418,7 @@ DB_InvTransfer(giverId, receiverId, itemId, qty, opId[])
 	mysql_tquery(g_DB, query, "DB_OnInvGiveCalled", "dsdddsddds", giverId, gname, giverChar, g_InvReq[giverId][iqToken], receiverId, g_InvReq[giverId][iqRecvName], recvChar, itemId, qty, opId);
 }
 
-public DB_OnInvGiveCalled(playerid, name[], charId, token, recv, rname[], rchar, itemId, qty, opId[])
+public DB_OnInvGiveCalled(playerid, const name[], charId, token, recv, const rname[], rchar, itemId, qty, const opId[])
 {
 	new query[512];
 	mysql_format(g_DB, query, 512, "SELECT result FROM inventory_log WHERE op_id = '%e'", opId);
@@ -426,7 +426,7 @@ public DB_OnInvGiveCalled(playerid, name[], charId, token, recv, rname[], rchar,
 	return 1;
 }
 
-public DB_OnInvGiveResult(playerid, name[], charId, token, recv, rname[], rchar, itemId, qty, opId[])
+public DB_OnInvGiveResult(playerid, const name[], charId, token, recv, const rname[], rchar, itemId, qty, const opId[])
 {
 	new rows = 0, result = -1;
 	cache_get_row_count(rows);
@@ -452,7 +452,7 @@ public DB_OnInvGiveResult(playerid, name[], charId, token, recv, rname[], rchar,
 	return 1;
 }
 
-DB_InvUndo(opId[])
+DB_InvUndo(const opId[])
 {
 	new query[512];
 	if (!DB_IsReady() || !DB_InvOpIdOk(opId))
@@ -468,7 +468,7 @@ DB_InvUndo(opId[])
 	mysql_tquery(g_DB, query, "DB_OnInvUndoCalled", "sd", opId, 1);
 }
 
-public DB_OnInvUndoCalled(opId[], notify)
+public DB_OnInvUndoCalled(const opId[], notify)
 {
 	new query[512];
 	mysql_format(g_DB, query, 512, "SELECT undo_result FROM inventory_log WHERE op_id = '%e'", opId);
@@ -476,7 +476,7 @@ public DB_OnInvUndoCalled(opId[], notify)
 	return 1;
 }
 
-public DB_OnInvUndoResult(opId[], notify)
+public DB_OnInvUndoResult(const opId[], notify)
 {
 	new rows = 0, result = 8, msg[112];
 	cache_get_row_count(rows);
@@ -528,7 +528,7 @@ public DB_InvFailure(playerid, op)
 	return 1;
 }
 
-public DB_InvQueryError(callback[])
+public DB_InvQueryError(const callback[])
 {
 	if (!strcmp(callback, "DB_OnInvLoaded", 0, 0x7FFFFFFF))
 	{

@@ -4,7 +4,7 @@ new g_JFReq[MAX_PLAYERS][E_JF_REQ];
 new g_FineInfl[32][E_FINE_INFL];
 new g_FineToken;
 
-bool:DB_JFSessionOk(playerid, name[], charId)
+bool:DB_JFSessionOk(playerid, const name[], charId)
 {
 	if (!DB_PlayerMatches(playerid, name))
 	{
@@ -112,7 +112,7 @@ public DB_JobFacFailure(playerid, op)
 	return 1;
 }
 
-public DB_JobFacQueryError(callback[])
+public DB_JobFacQueryError(const callback[])
 {
 	if (!strcmp(callback, "DB_OnJFPayout", 0, 0x7FFFFFFF))
 	{
@@ -181,7 +181,7 @@ DB_JobPayout(playerid, charId, jobId, amount)
 	}
 }
 
-public DB_OnJFPayout(playerid, name[], charId, jobId, amount)
+public DB_OnJFPayout(playerid, const name[], charId, jobId, amount)
 {
 	new affected = cache_affected_rows();
 	if (!DB_JFSessionOk(playerid, name, charId))
@@ -232,7 +232,7 @@ DB_SetJob(playerid, charId, jobId)
 	}
 }
 
-public DB_OnJFJobSet(playerid, name[], charId, jobId)
+public DB_OnJFJobSet(playerid, const name[], charId, jobId)
 {
 	if (!DB_JFSessionOk(playerid, name, charId))
 	{
@@ -290,7 +290,7 @@ DB_JFFailAllFines()
 	}
 }
 
-DB_AddFine(playerid, issuerChar, targetChar, faction, amount, reason[])
+DB_AddFine(playerid, issuerChar, targetChar, faction, amount, const reason[])
 {
 	if (playerid < 0 || playerid >= MAX_PLAYERS || !IsPlayerConnected(playerid))
 	{
@@ -378,7 +378,7 @@ DB_LoadFines(playerid, charId)
 	mysql_tquery(g_DB, query, "DB_OnJFFinesLoaded", "dsd", playerid, name, charId);
 }
 
-public DB_OnJFFinesLoaded(playerid, name[], charId)
+public DB_OnJFFinesLoaded(playerid, const name[], charId)
 {
 	if (!DB_JFSessionOk(playerid, name, charId))
 	{
@@ -485,7 +485,7 @@ DB_JFFacExec(playerid, actorChar, targetChar, cmd, faction, newRank)
 	}
 }
 
-public DB_OnJFFacChanged(playerid, name[], actorChar, targetChar, cmd, faction, rank)
+public DB_OnJFFacChanged(playerid, const name[], actorChar, targetChar, cmd, faction, rank)
 {
 	new affected = cache_affected_rows();
 	if (affected > 0)
@@ -555,7 +555,7 @@ DB_FactionSet(playerid, charId, faction, rank)
 	DB_JFFacExec(playerid, gPlayer[playerid][pCharId], charId, 6, faction, rank);
 }
 
-DB_FactionLogAdd(faction, actorChar, targetChar, action[], detail[])
+DB_FactionLogAdd(faction, actorChar, targetChar, const action[], const detail[])
 {
 	if (!DB_IsReady() || action[0] == 0)
 	{
@@ -596,7 +596,7 @@ DB_FactionMembers(playerid, faction)
 	mysql_tquery(g_DB, query, "DB_OnJFFacMembers", "dsdd", playerid, name, gPlayer[playerid][pCharId], faction);
 }
 
-public DB_OnJFFacMembers(playerid, name[], charId, faction)
+public DB_OnJFFacMembers(playerid, const name[], charId, faction)
 {
 	if (!DB_JFSessionOk(playerid, name, charId))
 	{
@@ -622,7 +622,7 @@ public DB_OnJFFacMembers(playerid, name[], charId, faction)
 	return 1;
 }
 
-DB_FactionFindByName(playerid, name[], tag)
+DB_FactionFindByName(playerid, const name[], tag)
 {
 	if (playerid < 0 || playerid >= MAX_PLAYERS || !IsPlayerConnected(playerid))
 	{
@@ -652,7 +652,7 @@ DB_FactionFindByName(playerid, name[], tag)
 	mysql_tquery(g_DB, query, "DB_OnJFFacFound", "dsdd", playerid, me, gPlayer[playerid][pCharId], tag);
 }
 
-public DB_OnJFFacFound(playerid, name[], charId, tag)
+public DB_OnJFFacFound(playerid, const name[], charId, tag)
 {
 	if (!DB_JFSessionOk(playerid, name, charId))
 	{

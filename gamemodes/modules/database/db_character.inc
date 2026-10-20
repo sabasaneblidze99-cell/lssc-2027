@@ -24,7 +24,7 @@ DB_BankDeltaTake(playerid)
 	return d;
 }
 
-public DB_OnBankDeltaSaved(playerid, name[], charId, gen, delta)
+public DB_OnBankDeltaSaved(playerid, const name[], charId, gen, delta)
 {
 	if (!DB_PlayerMatches(playerid, name) || gPlayer[playerid][pCharId] != charId || g_BankGen[playerid] != gen || g_BankFlyChar[playerid] != charId)
 	{
@@ -64,7 +64,7 @@ DB_LoadCharacter(playerid, accountId)
 	mysql_tquery(g_DB, query, "DB_OnCharLoaded", "dsd", playerid, name, accountId);
 }
 
-public DB_OnCharLoaded(playerid, name[], accountId)
+public DB_OnCharLoaded(playerid, const name[], accountId)
 {
 	if (!DB_PlayerMatches(playerid, name))
 	{
@@ -129,7 +129,7 @@ DB_CreateCharacter(playerid, accountId)
 	mysql_tquery(g_DB, query, "DB_OnCharCreated", "ds", playerid, name);
 }
 
-public DB_OnCharCreated(playerid, name[])
+public DB_OnCharCreated(playerid, const name[])
 {
 	if (!DB_PlayerMatches(playerid, name))
 	{

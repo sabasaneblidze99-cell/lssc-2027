@@ -40,7 +40,7 @@ public DB_OnVehicleCompensated(kind, ownerId, vehDbId)
 	return 1;
 }
 
-bool:DB_VehSessionOk(playerid, name[], ownerId)
+bool:DB_VehSessionOk(playerid, const name[], ownerId)
 {
 	if (!DB_PlayerMatches(playerid, name))
 	{
@@ -67,7 +67,7 @@ DB_LoadVehicles(playerid, ownerId)
 	mysql_tquery(g_DB, query, "DB_OnVehiclesLoaded", "dsd", playerid, name, ownerId);
 }
 
-public DB_OnVehiclesLoaded(playerid, name[], ownerId)
+public DB_OnVehiclesLoaded(playerid, const name[], ownerId)
 {
 	if (!DB_VehSessionOk(playerid, name, ownerId))
 	{
@@ -109,7 +109,7 @@ public DB_OnVehiclesLoaded(playerid, name[], ownerId)
 	return 1;
 }
 
-public DB_OnVehiclesCounted(playerid, name[], ownerId)
+public DB_OnVehiclesCounted(playerid, const name[], ownerId)
 {
 	if (!DB_VehSessionOk(playerid, name, ownerId))
 	{
@@ -130,7 +130,7 @@ DB_VehGeneratePlate(plate[], size)
 	format(plate, size, "%d%c%c%c%03d", random(10), random(26) + 65, random(26) + 65, random(26) + 65, random(1000));
 }
 
-DB_VehInsertAttempt(playerid, name[], attempt)
+DB_VehInsertAttempt(playerid, const name[], attempt)
 {
 	new plate[8], query[768];
 	DB_VehGeneratePlate(plate, 8);
@@ -173,7 +173,7 @@ DB_CreateVehicle(playerid, ownerId, model, color1, color2, pricePaid, Float:x, F
 	DB_VehInsertAttempt(playerid, name, 1);
 }
 
-public DB_OnVehicleCreated(playerid, name[], ownerId, attempt, plate[])
+public DB_OnVehicleCreated(playerid, const name[], ownerId, attempt, const plate[])
 {
 	if (!DB_VehSessionOk(playerid, name, ownerId))
 	{
@@ -225,7 +225,7 @@ DB_DeleteVehicle(playerid, ownerId, vehDbId)
 	mysql_tquery(g_DB, query, "DB_OnVehicleDeleted", "dsdd", playerid, name, ownerId, vehDbId);
 }
 
-public DB_OnVehicleDeleted(playerid, name[], ownerId, vehDbId)
+public DB_OnVehicleDeleted(playerid, const name[], ownerId, vehDbId)
 {
 	if (!DB_VehSessionOk(playerid, name, ownerId))
 	{

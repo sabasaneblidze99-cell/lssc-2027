@@ -154,28 +154,28 @@ bool:Lang_ShowPlayerDialog(playerid, dialogid, t_DIALOG_STYLE:style, const title
 	return ShowPlayerDialog(playerid, dialogid, style, cap, out, b1, b2);
 }
 
-PlayerText:Lang_CreatePlayerTextDraw(playerid, Float:x, Float:y, text[])
+PlayerText:Lang_CreatePlayerTextDraw(playerid, Float:x, Float:y, const text[])
 {
 	static out[1024];
 	Lang_Translit(text, out, 1024);
 	return CreatePlayerTextDraw(playerid, x, y, "%s", out);
 }
 
-bool:Lang_PlayerTextDrawSetString(playerid, PlayerText:textid, text[])
+bool:Lang_PlayerTextDrawSetString(playerid, PlayerText:textid, const text[])
 {
 	static out[1024];
 	Lang_Translit(text, out, 1024);
 	return PlayerTextDrawSetString(playerid, textid, "%s", out);
 }
 
-Text3D:Lang_Create3DTextLabel(text[], colour, Float:x, Float:y, Float:z, Float:drawDistance, virtualWorld, bool:testLOS)
+Text3D:Lang_Create3DTextLabel(const text[], colour, Float:x, Float:y, Float:z, Float:drawDistance, virtualWorld, bool:testLOS)
 {
 	static out[512];
 	Lang_Translit(text, out, 512);
 	return Create3DTextLabel(out, colour, x, y, z, drawDistance, virtualWorld, testLOS);
 }
 
-bool:Lang_Update3DTextLabelText(Text3D:textid, colour, text[])
+bool:Lang_Update3DTextLabelText(Text3D:textid, colour, const text[])
 {
 	static out[512];
 	Lang_Translit(text, out, 512);

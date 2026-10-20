@@ -145,7 +145,7 @@ public CefBridge_ClockTick()
 	return 1;
 }
 
-public Cef_OnReady(playerid, arguments[])
+public Cef_OnReady(playerid, const arguments[])
 {
 	if (!IsPlayerConnected(playerid) || CefUI_State(playerid) == 0)
 	{
@@ -185,7 +185,7 @@ public Cef_OnReady(playerid, arguments[])
 	return 1;
 }
 
-public Cef_OnClose(playerid, arguments[])
+public Cef_OnClose(playerid, const arguments[])
 {
 	if (IsPlayerConnected(playerid))
 	{
@@ -222,7 +222,7 @@ public Cef_OnAbandon(playerid, arguments[])
 	return 1;
 }
 
-public Cef_OnBoardRefresh(playerid, arguments[])
+public Cef_OnBoardRefresh(playerid, const arguments[])
 {
 	if (!CefBridge_Ok(playerid))
 	{
@@ -292,7 +292,7 @@ public Cef_OnContribute(playerid, arguments[])
 	return 1;
 }
 
-public Cef_OnBankReq(playerid, arguments[])
+public Cef_OnBankReq(playerid, const arguments[])
 {
 	if (!CefBridge_Ok(playerid))
 	{
@@ -304,7 +304,7 @@ public Cef_OnBankReq(playerid, arguments[])
 	return 1;
 }
 
-public Cef_OnRepReq(playerid, arguments[])
+public Cef_OnRepReq(playerid, const arguments[])
 {
 	if (!CefBridge_Ok(playerid) || !LD_IsReady())
 	{
@@ -316,7 +316,7 @@ public Cef_OnRepReq(playerid, arguments[])
 	return 1;
 }
 
-public Cef_OnJobWaypoint(playerid, arguments[])
+public Cef_OnJobWaypoint(playerid, const arguments[])
 {
 	if (!CefBridge_Ok(playerid) || !LD_IsReady())
 	{
@@ -452,7 +452,7 @@ public Cef_OnStory(playerid, arguments[])
 	return 1;
 }
 
-public Cef_OnQuit(playerid, arguments[])
+public Cef_OnQuit(playerid, const arguments[])
 {
 	// "გასვლა": in qualunque momento prima dello spawn (login, registrazione, personaggio, storia)
 	if (!IsPlayerConnected(playerid) || !CefUI_Active(playerid) || gPlayer[playerid][pSpawned])

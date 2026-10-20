@@ -712,7 +712,7 @@ Veh_RollbackCreate(playerid, vehDbId)
 	DB_DeleteVehicle(playerid, gPlayer[playerid][pCharId], vehDbId);
 }
 
-public Veh_OnDBCreated(playerid, vehDbId, plate[])
+public Veh_OnDBCreated(playerid, vehDbId, const plate[])
 {
 	if (playerid < 0 || playerid >= MAX_PLAYERS || !IsPlayerConnected(playerid))
 	{
@@ -966,7 +966,7 @@ Veh_DrivenSlot(playerid)
 	return s;
 }
 
-bool:Veh_ParseSlot(token[], &slot)
+bool:Veh_ParseSlot(const token[], &slot)
 {
 	new v = 0;
 	if (!Util_ParseInt(token, v) || v < 1 || v > 4)
@@ -977,7 +977,7 @@ bool:Veh_ParseSlot(token[], &slot)
 	return 1;
 }
 
-Veh_Emote(playerid, action[])
+Veh_Emote(playerid, const action[])
 {
 	new name[25], msg[256];
 	GetPlayerName(playerid, name, 25);

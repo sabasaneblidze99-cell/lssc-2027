@@ -63,7 +63,7 @@ Bank_NearPoint(playerid, bool:counterOnly)
 	return best;
 }
 
-bool:Bank_ParseAmount(s[], &value)
+bool:Bank_ParseAmount(const s[], &value)
 {
 	new i = 0, len = strlen(s), digits = 0;
 	value = 0;
@@ -88,7 +88,7 @@ bool:Bank_ParseAmount(s[], &value)
 	return digits > 0 && i == len && value >= 1;
 }
 
-Bank_FindPlayer(input[])
+Bank_FindPlayer(const input[])
 {
 	new text[25], len = strlen(input), start = 0, end = len;
 	while (start < len && input[start] == 32)
@@ -329,7 +329,7 @@ Bank_ConfirmFailed(playerid)
 	}
 }
 
-Bank_Reply(playerid, bool:ui, text[])
+Bank_Reply(playerid, bool:ui, const text[])
 {
 	if (ui)
 	{
@@ -341,7 +341,7 @@ Bank_Reply(playerid, bool:ui, text[])
 	}
 }
 
-Bank_Deny(playerid, bool:ui, text[])
+Bank_Deny(playerid, bool:ui, const text[])
 {
 	Util_Send(playerid, -10270721, text);
 	if (ui)
@@ -571,7 +571,7 @@ Bank_ResultText(op, result, dest[], size)
 	}
 }
 
-Bank_StartUndo(playerid, reason[])
+Bank_StartUndo(playerid, const reason[])
 {
 	new opId[37];
 	strcopy(opId, gPlayer[playerid][pBankOpId], 37);
@@ -736,7 +736,7 @@ public Bank_OnDBWithdraw(playerid, amount, result, balance)
 	return 1;
 }
 
-public Bank_OnDBUndone(playerid, opId[], result)
+public Bank_OnDBUndone(playerid, const opId[], result)
 {
 	for (new i = 0; i < MAX_PLAYERS; i++)
 	{
@@ -1174,7 +1174,7 @@ public Bank_OnDBStatement(playerid, result, page, count, bool:more)
 	return 1;
 }
 
-Bank_CmdDeposita(playerid, params[])
+Bank_CmdDeposita(playerid, const params[])
 {
 	new amount = 0;
 	if (!Bank_ParseAmount(params, amount))
@@ -1185,7 +1185,7 @@ Bank_CmdDeposita(playerid, params[])
 	Bank_Deposit(playerid, amount, 0);
 }
 
-Bank_CmdPreleva(playerid, params[])
+Bank_CmdPreleva(playerid, const params[])
 {
 	new amount = 0;
 	if (!Bank_ParseAmount(params, amount))

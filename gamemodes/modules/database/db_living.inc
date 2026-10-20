@@ -79,7 +79,7 @@ DB_LdIdx(playerid, cat)
 	return playerid * 6 + cat;
 }
 
-bool:DB_LdOpIdOk(opId[])
+bool:DB_LdOpIdOk(const opId[])
 {
 	new len = strlen(opId);
 	return len >= 1 && len <= 36;
@@ -129,7 +129,7 @@ DB_LdCharOnline(charId)
 	return 65535;
 }
 
-bool:DB_LdLive(playerid, name[], cat, token, charId)
+bool:DB_LdLive(playerid, const name[], cat, token, charId)
 {
 	if (!DB_PlayerMatches(playerid, name))
 	{
@@ -228,7 +228,7 @@ DB_LdDeliver(playerid, action, result, ref, amount, balance, a, b, c)
 	}
 }
 
-bool:DB_LdBegin(playerid, action, bool:valid, ref, aux, opId[], bool:needOp)
+bool:DB_LdBegin(playerid, action, bool:valid, ref, aux, const opId[], bool:needOp)
 {
 	if (playerid < 0 || playerid >= MAX_PLAYERS || !IsPlayerConnected(playerid))
 	{
@@ -265,7 +265,7 @@ bool:DB_LdBegin(playerid, action, bool:valid, ref, aux, opId[], bool:needOp)
 	return 1;
 }
 
-DB_LdSend(playerid, action, query[], other)
+DB_LdSend(playerid, action, const query[], other)
 {
 	new cat = DB_LdCatOf(action), idx = DB_LdIdx(playerid, cat), name[25], ogen = 0;
 	GetPlayerName(playerid, name, 25);
@@ -277,7 +277,7 @@ DB_LdSend(playerid, action, query[], other)
 	mysql_tquery(g_DB, query, "DB_OnLdCalled", "dsddddddds", playerid, name, cat, g_LdReq[idx][lqToken], action, g_LdReq[idx][lqCharId], g_LdReq[idx][lqAux], other, ogen, g_LdReq[idx][lqOpId]);
 }
 
-DB_LdCompensate(action, charId, aux, opId[], bool:stale)
+DB_LdCompensate(action, charId, aux, const opId[], bool:stale)
 {
 	if (!DB_IsReady() || charId <= 0)
 	{
@@ -302,7 +302,7 @@ public DB_OnLdCleanup(charId)
 	return 1;
 }
 
-public DB_OnLdCalled(playerid, name[], cat, token, action, charId, aux, other, otherGen, opId[])
+public DB_OnLdCalled(playerid, const name[], cat, token, action, charId, aux, other, otherGen, const opId[])
 {
 	new query[1024];
 	mysql_format(g_DB, query, 1024, "SELECT result, ref, amount, balance_after, other_character_id, other_amount, other_balance_after, v1, v2, v3 FROM ld_ops WHERE op_id = '%e'", opId);
@@ -310,7 +310,7 @@ public DB_OnLdCalled(playerid, name[], cat, token, action, charId, aux, other, o
 	return 1;
 }
 
-public DB_OnLdResult(playerid, name[], cat, token, action, charId, aux, other, otherGen, opId[])
+public DB_OnLdResult(playerid, const name[], cat, token, action, charId, aux, other, otherGen, const opId[])
 {
 	new rows = 0, result = -1, ref = 0, amount = 0, balance = 0, ochar = 0, oamount = 0, obalance = 0, v1 = 0, v2 = 0, v3 = 0;
 	cache_get_row_count(rows);
@@ -446,7 +446,7 @@ public DB_OnLdResult(playerid, name[], cat, token, action, charId, aux, other, o
 	return 1;
 }
 
-DB_LivingRentUndo(playerid, charId, cash, opId[])
+DB_LivingRentUndo(playerid, charId, cash, const opId[])
 {
 	if (!DB_IsReady() || !DB_LdOpIdOk(opId))
 	{
@@ -459,7 +459,7 @@ DB_LivingRentUndo(playerid, charId, cash, opId[])
 	mysql_tquery(g_DB, query, "DB_OnLdUndoCalled", "dsdds", playerid, name, g_BankGen[playerid], charId, opId);
 }
 
-public DB_OnLdUndoCalled(playerid, name[], gen, charId, opId[])
+public DB_OnLdUndoCalled(playerid, const name[], gen, charId, const opId[])
 {
 	new query[1024];
 	mysql_format(g_DB, query, 1024, "SELECT amount FROM ld_ops WHERE op_id = CONCAT('%e', '-x')", opId);
@@ -467,7 +467,7 @@ public DB_OnLdUndoCalled(playerid, name[], gen, charId, opId[])
 	return 1;
 }
 
-public DB_OnLdUndoResult(playerid, name[], gen, charId, opId[])
+public DB_OnLdUndoResult(playerid, const name[], gen, charId, const opId[])
 {
 	new rows = 0, amount = 0;
 	cache_get_row_count(rows);
@@ -486,7 +486,7 @@ public DB_OnLdUndoResult(playerid, name[], gen, charId, opId[])
 	return 1;
 }
 
-DB_LivingCtAccept(playerid, contractId, opId[])
+DB_LivingCtAccept(playerid, contractId, const opId[])
 {
 	if (!DB_LdBegin(playerid, 1, contractId > 0, contractId, 0, opId, 1))
 	{
@@ -497,7 +497,7 @@ DB_LivingCtAccept(playerid, contractId, opId[])
 	DB_LdSend(playerid, 1, query, 65535);
 }
 
-DB_LivingCtPickup(playerid, contractId, opId[])
+DB_LivingCtPickup(playerid, contractId, const opId[])
 {
 	if (!DB_LdBegin(playerid, 2, contractId > 0, contractId, 0, opId, 1))
 	{
@@ -508,7 +508,7 @@ DB_LivingCtPickup(playerid, contractId, opId[])
 	DB_LdSend(playerid, 2, query, 65535);
 }
 
-DB_LivingCtRelease(playerid, contractId, opId[], reason)
+DB_LivingCtRelease(playerid, contractId, const opId[], reason)
 {
 	if (!DB_LdBegin(playerid, 3, contractId > 0 && (reason == 0 || reason == 1), contractId, 0, opId, 1))
 	{
@@ -519,7 +519,7 @@ DB_LivingCtRelease(playerid, contractId, opId[], reason)
 	DB_LdSend(playerid, 3, query, 65535);
 }
 
-DB_LivingCtComplete(playerid, contractId, opId[], integrityPct, seconds)
+DB_LivingCtComplete(playerid, contractId, const opId[], integrityPct, seconds)
 {
 	if (!DB_LdBegin(playerid, 4, contractId > 0 && integrityPct >= 0 && integrityPct <= 100 && seconds >= 0, contractId, 0, opId, 1))
 	{
@@ -554,7 +554,7 @@ DB_LdRentTotal(vkind, blocks)
 	return 0;
 }
 
-DB_LivingRentOpen(playerid, vkind, model, blocks, opId[])
+DB_LivingRentOpen(playerid, vkind, model, blocks, const opId[])
 {
 	if (playerid < 0 || playerid >= MAX_PLAYERS || !IsPlayerConnected(playerid))
 	{
@@ -580,7 +580,7 @@ DB_LivingRentOpen(playerid, vkind, model, blocks, opId[])
 	DB_LdSend(playerid, 5, query, 65535);
 }
 
-DB_LivingRentClose(playerid, rentalId, mode, health, opId[])
+DB_LivingRentClose(playerid, rentalId, mode, health, const opId[])
 {
 	if (!DB_LdBegin(playerid, 6, rentalId > 0 && (mode == 1 || mode == 2 || mode == 3 || mode == 5), rentalId, 0, opId, 1))
 	{
@@ -591,7 +591,7 @@ DB_LivingRentClose(playerid, rentalId, mode, health, opId[])
 	DB_LdSend(playerid, 6, query, 65535);
 }
 
-DB_LivingTaxiStart(playerid, kind, passengerid, fromDistrict, opId[])
+DB_LivingTaxiStart(playerid, kind, passengerid, fromDistrict, const opId[])
 {
 	new pchar = 0;
 	if (kind == 2 && passengerid >= 0 && passengerid < MAX_PLAYERS && IsPlayerConnected(passengerid))
@@ -608,7 +608,7 @@ DB_LivingTaxiStart(playerid, kind, passengerid, fromDistrict, opId[])
 	DB_LdSend(playerid, 7, query, 65535);
 }
 
-DB_LivingTaxiPay(playerid, rideId, passengerid, meters, toDistrict, bool:accept, rating, opId[])
+DB_LivingTaxiPay(playerid, rideId, passengerid, meters, toDistrict, bool:accept, rating, const opId[])
 {
 	new bool:ok = rideId > 0 && meters >= 0 && toDistrict >= 0 && toDistrict <= 3 && rating >= 0 && rating <= 5;
 	if (!DB_LdBegin(playerid, 8, ok, rideId, 0, opId, 1))
@@ -624,7 +624,7 @@ DB_LivingTaxiPay(playerid, rideId, passengerid, meters, toDistrict, bool:accept,
 	DB_LdSend(playerid, 8, query, other);
 }
 
-DB_LivingTaxiCancel(playerid, rideId, opId[])
+DB_LivingTaxiCancel(playerid, rideId, const opId[])
 {
 	if (!DB_LdBegin(playerid, 9, rideId > 0, rideId, 0, opId, 1))
 	{
@@ -635,7 +635,7 @@ DB_LivingTaxiCancel(playerid, rideId, opId[])
 	DB_LdSend(playerid, 9, query, 65535);
 }
 
-DB_LivingTaxiRate(passengerid, rideId, stars, opId[])
+DB_LivingTaxiRate(passengerid, rideId, stars, const opId[])
 {
 	if (!DB_LdBegin(passengerid, 10, rideId > 0 && stars >= 1 && stars <= 5, rideId, 0, opId, 1))
 	{
@@ -646,7 +646,7 @@ DB_LivingTaxiRate(passengerid, rideId, stars, opId[])
 	DB_LdSend(passengerid, 10, query, 65535);
 }
 
-DB_LivingProjectContrib(playerid, projectId, amount, opId[])
+DB_LivingProjectContrib(playerid, projectId, amount, const opId[])
 {
 	if (!DB_LdBegin(playerid, 11, projectId > 0 && amount > 0, projectId, 0, opId, 1))
 	{
@@ -657,7 +657,7 @@ DB_LivingProjectContrib(playerid, projectId, amount, opId[])
 	DB_LdSend(playerid, 11, query, 65535);
 }
 
-DB_LivingOnboardStep(playerid, step, opId[])
+DB_LivingOnboardStep(playerid, step, const opId[])
 {
 	if (!DB_LdBegin(playerid, 12, step >= 0 && step <= 5, 0, 0, opId, 1))
 	{
@@ -711,7 +711,7 @@ DB_LivingLoadPlayer(playerid, bool:cleanup)
 	}
 }
 
-public DB_OnLdPlayerCalled(playerid, name[], token, charId, opId[])
+public DB_OnLdPlayerCalled(playerid, const name[], token, charId, const opId[])
 {
 	new query[1024];
 	mysql_format(g_DB, query, 1024, "SELECT COALESCE((SELECT amount FROM ld_ops WHERE op_id = '%e'), 0) AS refund, ld_pro_points(c.id, 1) AS p1, ld_pro_points(c.id, 2) AS p2, ld_local_rep(c.id, 1) AS r1, ld_local_rep(c.id, 2) AS r2, ld_local_rep(c.id, 3) AS r3, COALESCE(o.step, 0) AS step, COALESCE(o.hints_off, 0) AS hoff, (o.done_at IS NOT NULL) AS odone, ld_work_earned(c.id) AS earned, (SELECT COUNT(*) FROM ct_payouts WHERE character_id = c.id AND paid_at > NOW() - INTERVAL 1 HOUR) AS ctn, COALESCE(TIMESTAMPDIFF(SECOND, (SELECT MAX(paid_at) FROM ct_payouts WHERE character_id = c.id), NOW()), -1) AS since, COALESCE((SELECT ROUND(AVG(z.rating) * 100) FROM (SELECT rating FROM taxi_rides WHERE driver_char = c.id AND rating IS NOT NULL ORDER BY id DESC LIMIT %d) z), 0) AS rating FROM characters c LEFT JOIN ld_onboarding o ON o.character_id = c.id WHERE c.id = %d", opId, 20, charId);
@@ -719,7 +719,7 @@ public DB_OnLdPlayerCalled(playerid, name[], token, charId, opId[])
 	return 1;
 }
 
-public DB_OnLdPlayer(playerid, name[], token, charId)
+public DB_OnLdPlayer(playerid, const name[], token, charId)
 {
 	if (!DB_LdLive(playerid, name, 5, token, charId))
 	{
@@ -795,7 +795,7 @@ DB_LivingBoard(playerid)
 	mysql_tquery(g_DB, query, "DB_OnLdBoard", "dsd", playerid, name, token);
 }
 
-public DB_OnLdBoard(playerid, name[], token)
+public DB_OnLdBoard(playerid, const name[], token)
 {
 	if (playerid == INVALID_PLAYER_ID)
 	{
@@ -852,7 +852,7 @@ DB_LivingHistory(playerid, districtId)
 	mysql_tquery(g_DB, query, "DB_OnLdHist", "dsdd", playerid, name, g_LdReq[DB_LdIdx(playerid, 5)], districtId);
 }
 
-public DB_OnLdHist(playerid, name[], token, districtId)
+public DB_OnLdHist(playerid, const name[], token, districtId)
 {
 	if (!DB_LdLive(playerid, name, 5, token, gPlayer[playerid][pCharId]))
 	{
@@ -970,7 +970,7 @@ DB_LivingGenerate(bucket, slot, fromPt, toPt, fromD, toD, cargo, meters, minLeve
 	mysql_tquery(g_DB, query, "DB_OnLdFire", "");
 }
 
-DB_LivingEmit(opId[], districtId, type, actorChar, value)
+DB_LivingEmit(const opId[], districtId, type, actorChar, value)
 {
 	if (!DB_IsReady() || !DB_LdOpIdOk(opId))
 	{
@@ -985,7 +985,7 @@ DB_LivingEmit(opId[], districtId, type, actorChar, value)
 	mysql_tquery(g_DB, query, "DB_OnLdGlobalCalled", "ddss", 1, 65535, "", opId);
 }
 
-DB_LivingAdminSet(playerid, opId[], districtId, activity, security, crime)
+DB_LivingAdminSet(playerid, const opId[], districtId, activity, security, crime)
 {
 	if (!DB_IsReady() || !DB_LdOpIdOk(opId) || playerid < 0 || playerid >= MAX_PLAYERS || !IsPlayerConnected(playerid))
 	{
@@ -1001,7 +1001,7 @@ DB_LivingAdminSet(playerid, opId[], districtId, activity, security, crime)
 	mysql_tquery(g_DB, query, "DB_OnLdGlobalCalled", "ddss", 2, playerid, name, opId);
 }
 
-public DB_OnLdGlobalCalled(kind, playerid, name[], opId[])
+public DB_OnLdGlobalCalled(kind, playerid, const name[], const opId[])
 {
 	new query[1024];
 	mysql_format(g_DB, query, 1024, "SELECT result, ref, v1, v2, v3 FROM ld_ops WHERE op_id = '%e'", opId);
@@ -1009,7 +1009,7 @@ public DB_OnLdGlobalCalled(kind, playerid, name[], opId[])
 	return 1;
 }
 
-public DB_OnLdGlobalResult(kind, playerid, name[], opId[])
+public DB_OnLdGlobalResult(kind, playerid, const name[], const opId[])
 {
 	new rows = 0, result = -1, ref = 0, v1 = 0, v2 = 0, v3 = 0;
 	cache_get_row_count(rows);
@@ -1195,7 +1195,7 @@ DB_LivingPushConfig()
 	DB_LdCfgFlush(q, 1024);
 }
 
-public DB_LivingQueryError(callback[])
+public DB_LivingQueryError(const callback[])
 {
 	if (!strcmp(callback, "DB_OnLdDistricts", 0, 0x7FFFFFFF) || !strcmp(callback, "DB_OnLdTicked", 0, 0x7FFFFFFF))
 	{

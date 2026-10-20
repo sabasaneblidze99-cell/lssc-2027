@@ -397,7 +397,7 @@ UI_HsBillsPayShow(playerid)
 	Lang_ShowPlayerDialog(playerid, 9207, 4, title, body, "Paga", "Indietro");
 }
 
-bool:UI_HsParseAmount(text[], &value)
+bool:UI_HsParseAmount(const text[], &value)
 {
 	new len = strlen(text);
 	if (len < 1 || len > 4)
@@ -416,7 +416,7 @@ bool:UI_HsParseAmount(text[], &value)
 	return 1;
 }
 
-bool:UI_HouseOnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
+bool:UI_HouseOnDialogResponse(playerid, dialogid, response, listitem, const inputtext[])
 {
 	if (!UI_HsValid(playerid))
 	{
@@ -650,7 +650,7 @@ new bool:g_UiHhDark[MAX_PLAYERS];
 new bool:g_UiHhHunger[MAX_PLAYERS];
 new bool:g_UiHhHome[MAX_PLAYERS];
 
-PlayerText:UI_HhText(playerid, Float:x, Float:y, text[], Float:lw, Float:lh, color, t_TEXT_DRAW_ALIGN:align)
+PlayerText:UI_HhText(playerid, Float:x, Float:y, const text[], Float:lw, Float:lh, color, t_TEXT_DRAW_ALIGN:align)
 {
 	new PlayerText:td = Lang_CreatePlayerTextDraw(playerid, x, y, text);
 	PlayerTextDrawLetterSize(playerid, td, lw, lh);

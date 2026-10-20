@@ -224,7 +224,7 @@ Taxi_ResetRide(driverid)
 	}
 }
 
-Taxi_CancelRide(driverid, driverMsg[], passengerMsg[])
+Taxi_CancelRide(driverid, const driverMsg[], const passengerMsg[])
 {
 	if (g_TxPhase[driverid] == 0 && gPlayer[driverid][pTaxiRideId] == 0)
 	{
@@ -1061,7 +1061,7 @@ Taxi_CmdTaxi(playerid, params[])
 	return 1;
 }
 
-Taxi_CmdChiamataxi(playerid, params[])
+Taxi_CmdChiamataxi(playerid, const params[])
 {
 	if (!Util_IsPlaying(playerid) || gPlayer[playerid][pLivingReady] == 0)
 	{
@@ -1304,7 +1304,7 @@ Taxi_OnProRentalClosed(playerid, result, refund)
 	return 1;
 }
 
-public Taxi_OnDistrictEvent(type, districtId, charId, value, opId[])
+public Taxi_OnDistrictEvent(type, districtId, charId, value, const opId[])
 {
 	return 1;
 }

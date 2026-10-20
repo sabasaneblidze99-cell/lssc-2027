@@ -20,7 +20,7 @@ new s_HouseIntIdx[10] = {3, 5, 2, 0, 1, 3, 4, 6, 7, 7};
 new s_HouseIntTier[8] = {0, 0, 1, 1, 2, 2, 2, 3};
 new s_HouseTierPrice[4] = {14000, 24000, 45000, 130000};
 
-bool:DB_HouseSessionOk(playerid, name[], ownerId)
+bool:DB_HouseSessionOk(playerid, const name[], ownerId)
 {
 	if (!DB_PlayerMatches(playerid, name))
 	{
@@ -164,7 +164,7 @@ public DB_HouseFailure(playerid, op, result)
 	return 1;
 }
 
-public DB_HouseGlobalFailure(callback[])
+public DB_HouseGlobalFailure(const callback[])
 {
 	if (!strcmp(callback, "DB_OnHouseSeeded", 0, 0x7FFFFFFF) || !strcmp(callback, "DB_OnHouseSeedUtil", 0, 0x7FFFFFFF))
 	{
@@ -424,7 +424,7 @@ DB_BuyHouse(playerid, houseId, ownerCharId, pricePaid, maxHouses)
 	mysql_tquery(g_DB, query, "DB_OnHouseBought", "dsddd", playerid, name, ownerCharId, houseId, max(pricePaid, 0));
 }
 
-public DB_OnHouseBought(playerid, name[], ownerId, houseId, pricePaid)
+public DB_OnHouseBought(playerid, const name[], ownerId, houseId, pricePaid)
 {
 	new affected = cache_affected_rows();
 	if (affected == 1)
@@ -464,7 +464,7 @@ DB_SellHouse(playerid, houseId, ownerCharId)
 	mysql_tquery(g_DB, query, "DB_OnHouseSold", "dsdd", playerid, name, ownerCharId, houseId);
 }
 
-public DB_OnHouseSold(playerid, name[], ownerId, houseId)
+public DB_OnHouseSold(playerid, const name[], ownerId, houseId)
 {
 	new affected = cache_affected_rows();
 	if (!DB_HouseSessionOk(playerid, name, ownerId))
@@ -629,7 +629,7 @@ DB_LoadFood(playerid, charId)
 	mysql_tquery(g_DB, query, "DB_OnHouseFoodLoaded", "dsd", playerid, name, charId);
 }
 
-public DB_OnHouseFoodLoaded(playerid, name[], charId)
+public DB_OnHouseFoodLoaded(playerid, const name[], charId)
 {
 	if (!DB_HouseSessionOk(playerid, name, charId))
 	{
@@ -662,7 +662,7 @@ DB_SaveHunger(charId, hunger)
 	mysql_tquery(g_DB, query, "", "");
 }
 
-public DB_OnHouseStored(playerid, name[], ownerId, houseId, n)
+public DB_OnHouseStored(playerid, const name[], ownerId, houseId, n)
 {
 	if (!DB_HouseSessionOk(playerid, name, ownerId))
 	{
@@ -689,7 +689,7 @@ DB_AddKey(playerid, houseId, ownerCharId, targetCharId)
 	mysql_tquery(g_DB, query, "DB_OnHouseKeyAdded", "dsddd", playerid, name, ownerCharId, houseId, targetCharId);
 }
 
-public DB_OnHouseKeyAdded(playerid, name[], ownerId, houseId, targetId)
+public DB_OnHouseKeyAdded(playerid, const name[], ownerId, houseId, targetId)
 {
 	if (!DB_HouseSessionOk(playerid, name, ownerId))
 	{
@@ -716,7 +716,7 @@ DB_RemoveKey(playerid, houseId, ownerCharId, targetCharId)
 	mysql_tquery(g_DB, query, "DB_OnHouseKeyRemoved", "dsddd", playerid, name, ownerCharId, houseId, targetCharId);
 }
 
-public DB_OnHouseKeyRemoved(playerid, name[], ownerId, houseId, targetId)
+public DB_OnHouseKeyRemoved(playerid, const name[], ownerId, houseId, targetId)
 {
 	if (!DB_HouseSessionOk(playerid, name, ownerId))
 	{
@@ -743,7 +743,7 @@ DB_LoadKeys(playerid, houseId, ownerCharId)
 	mysql_tquery(g_DB, query, "DB_OnHouseKeysLoaded", "dsdd", playerid, name, ownerCharId, houseId);
 }
 
-public DB_OnHouseKeysLoaded(playerid, name[], ownerId, houseId)
+public DB_OnHouseKeysLoaded(playerid, const name[], ownerId, houseId)
 {
 	if (!DB_HouseSessionOk(playerid, name, ownerId))
 	{
@@ -846,7 +846,7 @@ DB_LoadBills(playerid, houseId, ownerCharId)
 	mysql_tquery(g_DB, query, "DB_OnHouseBillsLoaded", "dsdd", playerid, name, ownerCharId, houseId);
 }
 
-public DB_OnHouseBillsLoaded(playerid, name[], ownerId, houseId)
+public DB_OnHouseBillsLoaded(playerid, const name[], ownerId, houseId)
 {
 	if (!DB_HouseSessionOk(playerid, name, ownerId))
 	{
@@ -903,7 +903,7 @@ DB_PayBills(playerid, houseId, ownerCharId, kind, expectedTotal, bool:restoreCut
 	mysql_tquery(g_DB, query, "DB_OnHouseBillsPaid", "dsdddddd", playerid, name, ownerCharId, houseId, kind, expectedTotal, token, restoreCut ? 1 : 0);
 }
 
-public DB_OnHouseBillsPaid(playerid, name[], ownerId, houseId, kind, total, token, restore)
+public DB_OnHouseBillsPaid(playerid, const name[], ownerId, houseId, kind, total, token, restore)
 {
 	new affected = cache_affected_rows();
 	if (!DB_HouseSessionOk(playerid, name, ownerId))
@@ -931,14 +931,14 @@ public DB_OnHouseBillsPaid(playerid, name[], ownerId, houseId, kind, total, toke
 	return 1;
 }
 
-DB_HouseRestoreStep(playerid, name[], ownerId, houseId, kind, total, token)
+DB_HouseRestoreStep(playerid, const name[], ownerId, houseId, kind, total, token)
 {
 	new query[768];
 	mysql_format(g_DB, query, 768, "UPDATE house_utilities u JOIN houses h ON h.id = u.house_id SET u.%s_cut = 0, u.%s_on = 1 WHERE u.house_id = %d AND h.owner_id = %d AND u.%s_cut = 1", kind == 1 ? "gas" : "luce", kind == 1 ? "gas" : "luce", houseId, ownerId, kind == 1 ? "gas" : "luce");
 	mysql_tquery(g_DB, query, "DB_OnHouseRestored", "dsddddd", playerid, name, ownerId, houseId, kind, total, token);
 }
 
-public DB_OnHouseRestored(playerid, name[], ownerId, houseId, kind, total, token)
+public DB_OnHouseRestored(playerid, const name[], ownerId, houseId, kind, total, token)
 {
 	new restored = cache_affected_rows() == 1 ? 1 : 0;
 	if (!DB_HouseSessionOk(playerid, name, ownerId))

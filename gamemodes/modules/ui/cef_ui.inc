@@ -1,6 +1,6 @@
 #if !defined LSRP_CEF
 
-cef_emit_event(player_id, event[], {Float,_}:...)
+cef_emit_event(player_id, const event[], {Float,_}:...)
 {
 	return 0;
 }
@@ -69,7 +69,7 @@ CefUI_SetState(playerid, st)
 	g_CefState[playerid] = st;
 }
 
-CefUI_Open(playerid, view[], arg[])
+CefUI_Open(playerid, const view[], const arg[])
 {
 	if (!CefUI_Active(playerid))
 	{
@@ -96,7 +96,7 @@ CefUI_OnPageClosed(playerid)
 	CefUI_ReleaseFocus(playerid);
 }
 
-CefUI_Close(playerid, view[])
+CefUI_Close(playerid, const view[])
 {
 	if (!CefUI_Active(playerid))
 	{
@@ -117,7 +117,7 @@ CefUI_ReleaseFocus(playerid)
 	g_CefFocus[playerid] = 0;
 }
 
-CefUI_Toast(playerid, text[], kind)
+CefUI_Toast(playerid, const text[], kind)
 {
 	if (!CefUI_Active(playerid) || text[0] == 0)
 	{
@@ -126,7 +126,7 @@ CefUI_Toast(playerid, text[], kind)
 	cef_emit_event(playerid, "lssc:toast", 0, text, 1, kind);
 }
 
-CefUI_Reject(playerid, text[])
+CefUI_Reject(playerid, const text[])
 {
 	if (!CefUI_Active(playerid))
 	{
@@ -233,7 +233,7 @@ bool:CefUI_IsDecided(playerid)
 	return g_CefDecided[playerid];
 }
 
-CefUI_AuthStep(playerid, step[], err[], n)
+CefUI_AuthStep(playerid, const step[], const err[], n)
 {
 	if (!CefUI_Active(playerid))
 	{
@@ -254,7 +254,7 @@ CefUI_AuthSkin(playerid, idx, skin)
 	cef_emit_event(playerid, "lssc:auth_skin", 1, idx, 1, skin);
 }
 
-CefUI_AuthStoryOpt(playerid, kind, idx, shortText[], longText[])
+CefUI_AuthStoryOpt(playerid, kind, idx, const shortText[], const longText[])
 {
 	if (!CefUI_Active(playerid))
 	{

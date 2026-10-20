@@ -46,7 +46,7 @@ CefViews_Open(playerid, which, const view[])
 	g_CvTimer[playerid] = SetTimerEx("CefViews_OnTimeout", CEFV_ACK_MS, false, "dd", playerid, which);
 }
 
-public Cef_OnViewOk(playerid, arguments[])
+public Cef_OnViewOk(playerid, const arguments[])
 {
 	if (IsPlayerConnected(playerid))
 	{

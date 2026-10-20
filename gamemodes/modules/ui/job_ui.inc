@@ -221,7 +221,7 @@ UI_JobInfoShow(playerid, jobId, level, runs, earned)
 	Lang_ShowPlayerDialog(playerid, 9303, 0, "Il tuo lavoro", body, "Chiudi", "");
 }
 
-bool:UI_JobOnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
+bool:UI_JobOnDialogResponse(playerid, dialogid, response, listitem, const inputtext[])
 {
 	if (!UI_JbValid(playerid))
 	{
@@ -284,7 +284,7 @@ new bool:g_UiJHudShown[MAX_PLAYERS];
 new bool:g_UiJHudWarn[MAX_PLAYERS];
 new g_UiJHudJob[MAX_PLAYERS];
 
-PlayerText:UI_JhText(playerid, Float:x, Float:y, text[], Float:lw, Float:lh, color, t_TEXT_DRAW_ALIGN:align)
+PlayerText:UI_JhText(playerid, Float:x, Float:y, const text[], Float:lw, Float:lh, color, t_TEXT_DRAW_ALIGN:align)
 {
 	new PlayerText:td = Lang_CreatePlayerTextDraw(playerid, x, y, text);
 	PlayerTextDrawLetterSize(playerid, td, lw, lh);

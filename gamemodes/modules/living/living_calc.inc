@@ -308,7 +308,7 @@ District_At(Float:x, Float:y)
 	return 0;
 }
 
-bool:LD_StrEqI(a[], b[])
+bool:LD_StrEqI(const a[], const b[])
 {
 	new i = 0;
 	while (a[i] != 0 && b[i] != 0)
@@ -322,7 +322,7 @@ bool:LD_StrEqI(a[], b[])
 	return a[i] == 0 && b[i] == 0;
 }
 
-LD_ParseDistrict(name[])
+LD_ParseDistrict(const name[])
 {
 	if (name[0] >= 49 && name[0] < 52 && name[1] == 0)
 	{

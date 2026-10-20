@@ -176,7 +176,7 @@ UI_FcInfoShow(playerid)
 	Lang_ShowPlayerDialog(playerid, 9321, 0, "Informazioni fazione", body, "Menu", "Chiudi");
 }
 
-UI_FcInviteTargetShow(playerid, error[])
+UI_FcInviteTargetShow(playerid, const error[])
 {
 	new body[384];
 	format(body, 384, "{FFFFFF}Inserisci l'ID del giocatore da invitare in {FFD24D}%s{FFFFFF}.\nDeve essere senza fazione, di livello %d o superiore e a meno di %.0f metri.\nL'invito resta valido %d secondi.\n\n%s", g_UiFcShort[g_UiFcFaction[playerid]], 3, 5.0, 60, error);
@@ -193,7 +193,7 @@ UI_FactionMemberListClear(playerid)
 	g_UiFcSel[playerid] = -1;
 }
 
-bool:UI_FactionMemberListAdd(playerid, memberId, name[], rank, status)
+bool:UI_FactionMemberListAdd(playerid, memberId, const name[], rank, status)
 {
 	if (!UI_FcValid(playerid))
 	{
@@ -393,7 +393,7 @@ UI_FcConfirmShow(playerid, idx)
 	Lang_ShowPlayerDialog(playerid, 9324, 0, verb, body, "Conferma", "Annulla");
 }
 
-UI_FactionInviteShow(playerid, faction, inviterName[], ttlSec)
+UI_FactionInviteShow(playerid, faction, const inviterName[], ttlSec)
 {
 	if (!UI_FcValid(playerid))
 	{
@@ -421,7 +421,7 @@ UI_FactionInviteClose(playerid)
 	}
 }
 
-bool:UI_FactionOnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
+bool:UI_FactionOnDialogResponse(playerid, dialogid, response, listitem, const inputtext[])
 {
 	if (!UI_FcValid(playerid))
 	{
@@ -608,7 +608,7 @@ bool:UI_FactionOnDialogResponse(playerid, dialogid, response, listitem, inputtex
 	return 0;
 }
 
-PlayerText:UI_FhText(playerid, Float:x, Float:y, text[], Float:lw, Float:lh, color, t_TEXT_DRAW_ALIGN:align)
+PlayerText:UI_FhText(playerid, Float:x, Float:y, const text[], Float:lw, Float:lh, color, t_TEXT_DRAW_ALIGN:align)
 {
 	new PlayerText:td = Lang_CreatePlayerTextDraw(playerid, x, y, text);
 	PlayerTextDrawLetterSize(playerid, td, lw, lh);

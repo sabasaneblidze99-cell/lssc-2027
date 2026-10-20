@@ -298,7 +298,7 @@ UI_LvBar(value, maxValue, color[], dest[], size)
 	}
 }
 
-bool:UI_LvParseAmount(s[], &value)
+bool:UI_LvParseAmount(const s[], &value)
 {
 	new i = 0, len = strlen(s), digits = 0;
 	value = 0;
@@ -420,12 +420,12 @@ UI_LvToastColor(kind)
 	return -2994689;
 }
 
-UI_LvInfo(playerid, title[], body[])
+UI_LvInfo(playerid, const title[], const body[])
 {
 	Lang_ShowPlayerDialog(playerid, 9725, 0, title, body, "Chiudi", "");
 }
 
-PlayerText:UI_LvText(playerid, Float:x, Float:y, text[], Float:lw, Float:lh, color, t_TEXT_DRAW_ALIGN:align)
+PlayerText:UI_LvText(playerid, Float:x, Float:y, const text[], Float:lw, Float:lh, color, t_TEXT_DRAW_ALIGN:align)
 {
 	new PlayerText:td = Lang_CreatePlayerTextDraw(playerid, x, y, text);
 	PlayerTextDrawLetterSize(playerid, td, lw, lh);
@@ -605,7 +605,7 @@ UI_LvCefProject(playerid)
 	CefUI_Open(playerid, "phone", "project");
 }
 
-UI_LivingToast(playerid, text[], kind)
+UI_LivingToast(playerid, const text[], kind)
 {
 	if (!UI_LvReady(playerid) || text[0] == 0)
 	{
@@ -624,7 +624,7 @@ UI_LivingToast(playerid, text[], kind)
 	UI_LvTimerSync(playerid);
 }
 
-UI_LivingNotify(playerid, text[], kind)
+UI_LivingNotify(playerid, const text[], kind)
 {
 	if (!UI_LvReady(playerid) || text[0] == 0)
 	{
@@ -922,7 +922,7 @@ UI_LvHudRender(playerid)
 	Lang_PlayerTextDrawSetString(playerid, g_UiLvTd[playerid][4], line);
 }
 
-UI_CityContractHud(playerid, contractId, ctState, objective[], destination[], distanceM, secondsLeft, integrityPct)
+UI_CityContractHud(playerid, contractId, ctState, const objective[], const destination[], distanceM, secondsLeft, integrityPct)
 {
 	if (!UI_LvReady(playerid) || contractId <= 0)
 	{
@@ -1005,7 +1005,7 @@ UI_CityDistrictBegin(playerid, districtId, activity, security, crime, localRep, 
 	g_UiLvDsEvCount[playerid] = 0;
 }
 
-UI_CityDistrictRumor(playerid, text[])
+UI_CityDistrictRumor(playerid, const text[])
 {
 	if (!UI_LvValid(playerid))
 	{
@@ -1217,7 +1217,7 @@ UI_LivingRentalBegin(playerid, blockMinutes, maxBlocks, discountPct)
 	g_UiLvRnBlocks[playerid] = 0;
 }
 
-UI_LivingRentalAddModel(playerid, modelIdx, name[], feePerBlock, deposit, minLevel, bool:available)
+UI_LivingRentalAddModel(playerid, modelIdx, const name[], feePerBlock, deposit, minLevel, bool:available)
 {
 	if (!UI_LvValid(playerid))
 	{
@@ -1307,7 +1307,7 @@ UI_LvRentSummaryShow(playerid)
 	Lang_ShowPlayerDialog(playerid, 9711, 0, "Riepilogo noleggio", body, "Noleggia", "Indietro");
 }
 
-UI_LivingRentalReturnConfirm(playerid, rentalId, modelName[], healthPct, deposit, refund)
+UI_LivingRentalReturnConfirm(playerid, rentalId, const modelName[], healthPct, deposit, refund)
 {
 	if (!UI_LvReady(playerid) || rentalId <= 0)
 	{
@@ -1321,7 +1321,7 @@ UI_LivingRentalReturnConfirm(playerid, rentalId, modelName[], healthPct, deposit
 	Lang_ShowPlayerDialog(playerid, 9712, 0, "Riconsegna", body, "Riconsegna", "Annulla");
 }
 
-UI_LivingRentalReceipt(playerid, modelName[], fee, deposit, refund, minutesUsed)
+UI_LivingRentalReceipt(playerid, const modelName[], fee, deposit, refund, minutesUsed)
 {
 	if (!UI_LvReady(playerid))
 	{
@@ -1336,7 +1336,7 @@ UI_LivingRentalReceipt(playerid, modelName[], fee, deposit, refund, minutesUsed)
 	Lang_ShowPlayerDialog(playerid, 9713, 0, "Ricevuta noleggio", body, "Chiudi", "");
 }
 
-UI_LivingTaxiOffer(playerid, callId, bool:npc, passenger[], fromDistrict, toDistrict, distanceM, fareEstimate, ttlSec)
+UI_LivingTaxiOffer(playerid, callId, bool:npc, const passenger[], fromDistrict, toDistrict, distanceM, fareEstimate, ttlSec)
 {
 	if (!UI_LvReady(playerid) || callId <= 0)
 	{
@@ -1423,7 +1423,7 @@ UI_LvTaxiPayShow(playerid)
 	Lang_ShowPlayerDialog(playerid, 9715, 0, "Pagamento corsa", body, "Paga", "Contesta");
 }
 
-UI_LivingTaxiPayConfirm(playerid, rideId, driver[], distanceM, fare, discountPct, ttlSec)
+UI_LivingTaxiPayConfirm(playerid, rideId, const driver[], distanceM, fare, discountPct, ttlSec)
 {
 	if (!UI_LvReady(playerid) || rideId <= 0)
 	{
@@ -1468,7 +1468,7 @@ UI_LivingTaxiPayClose(playerid)
 	UI_LvTimerSync(playerid);
 }
 
-UI_LivingTaxiRate(playerid, rideId, driver[])
+UI_LivingTaxiRate(playerid, rideId, const driver[])
 {
 	if (!UI_LvReady(playerid) || rideId <= 0)
 	{
@@ -1480,7 +1480,7 @@ UI_LivingTaxiRate(playerid, rideId, driver[])
 	Lang_ShowPlayerDialog(playerid, 9717, 2, title, "{66DD66}***** Ottima\n{66DD66}**** Buona\n{FFD24D}*** Nella norma\n{FFAA33}** Da migliorare\n{FF8866}* Deludente", "Vota", "Salta");
 }
 
-UI_LivingTaxiReceipt(playerid, bool:asDriver, rideId, other[], distanceM, fare, tax, net)
+UI_LivingTaxiReceipt(playerid, bool:asDriver, rideId, const other[], distanceM, fare, tax, net)
 {
 	if (!UI_LvReady(playerid))
 	{
@@ -1503,7 +1503,7 @@ UI_LivingTaxiReceipt(playerid, bool:asDriver, rideId, other[], distanceM, fare, 
 	Lang_ShowPlayerDialog(playerid, 9718, 0, title, body, "Chiudi", "");
 }
 
-UI_LivingProjectSet(playerid, projectId, districtId, name[], goal, fund, hoursLeft, donMin, donMax, dayLeft, blockCode)
+UI_LivingProjectSet(playerid, projectId, districtId, const name[], goal, fund, hoursLeft, donMin, donMax, dayLeft, blockCode)
 {
 	if (!UI_LvValid(playerid))
 	{
@@ -1584,7 +1584,7 @@ UI_LivingProjectShow(playerid)
 	}
 }
 
-UI_LvPrjAmountShow(playerid, err[])
+UI_LvPrjAmountShow(playerid, const err[])
 {
 	new lo = 0, hi = 0, body[512], sLo[16], sHi[16];
 	if (!UI_LvPrjRange(playerid, lo, hi))
@@ -1798,7 +1798,7 @@ UI_LivingClose(playerid)
 	UI_LvTimerSync(playerid);
 }
 
-UI_LivingReject(playerid, msg[])
+UI_LivingReject(playerid, const msg[])
 {
 	if (!UI_LvReady(playerid))
 	{
@@ -1932,7 +1932,7 @@ public UI_LivingOnTimer(playerid)
 	return 1;
 }
 
-bool:UI_LivingOnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
+bool:UI_LivingOnDialogResponse(playerid, dialogid, response, listitem, const inputtext[])
 {
 	if (!UI_LvValid(playerid) || !UI_LvIsLivingDialog(dialogid))
 	{

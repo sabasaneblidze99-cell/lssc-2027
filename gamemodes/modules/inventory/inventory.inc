@@ -83,7 +83,7 @@ bool:Inv_Ready(playerid)
 	return playerid >= 0 && playerid < MAX_PLAYERS && gPlayer[playerid][pInvState] == 2;
 }
 
-Inv_ParseItem(token[])
+Inv_ParseItem(const token[])
 {
 	new value = 0;
 	if (token[0] == 0)
@@ -104,7 +104,7 @@ Inv_ParseItem(token[])
 	return 0;
 }
 
-Inv_Say(playerid, color, text[])
+Inv_Say(playerid, color, const text[])
 {
 	Util_Send(playerid, color, text);
 }
@@ -427,7 +427,7 @@ Inv_UseStart(playerid, itemId)
 	DB_InvUse(playerid, gPlayer[playerid][pCharId], itemId, gPlayer[playerid][pInvOpId]);
 }
 
-Inv_RpUse(playerid, action[])
+Inv_RpUse(playerid, const action[])
 {
 	new name[25], msg[256];
 	GetPlayerName(playerid, name, 25);
@@ -889,7 +889,7 @@ Inv_DocRequest(playerid)
 	DB_InvAdd(playerid, gPlayer[playerid][pCharId], 10, 1, gPlayer[playerid][pInvOpId], "add", 1);
 }
 
-Inv_GiveCancel(giver, reason[])
+Inv_GiveCancel(giver, const reason[])
 {
 	if (!Inv_ValidPlayer(giver) || gPlayer[giver][pInvGiveTo] == 0)
 	{
@@ -1308,7 +1308,7 @@ public Inv_OnDBBag(playerid, result)
 	return 1;
 }
 
-public Inv_OnDBUndone(opId[], result)
+public Inv_OnDBUndone(const opId[], result)
 {
 	for (new p = 0; p < MAX_PLAYERS; p++)
 	{

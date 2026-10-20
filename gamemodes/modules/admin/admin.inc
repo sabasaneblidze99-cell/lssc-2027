@@ -79,7 +79,7 @@ Admin_ActorAccount(playerid)
 	return gPlayer[playerid][pAccountId];
 }
 
-Admin_Reply(playerid, color, text[])
+Admin_Reply(playerid, color, const text[])
 {
 	if (playerid < 0 || playerid >= MAX_PLAYERS || !IsPlayerConnected(playerid))
 	{
@@ -88,7 +88,7 @@ Admin_Reply(playerid, color, text[])
 	Util_Send(playerid, color, text);
 }
 
-Admin_Notify(text[], color)
+Admin_Notify(const text[], color)
 {
 	new lines[3][128];
 	new count = Util_SplitText(text, lines, 3);
@@ -105,7 +105,7 @@ Admin_Notify(text[], color)
 	}
 }
 
-Admin_PublicNotice(text[])
+Admin_PublicNotice(const text[])
 {
 	new lines[3][128];
 	new count = Util_SplitText(text, lines, 3);
@@ -122,7 +122,7 @@ Admin_PublicNotice(text[])
 	}
 }
 
-Admin_AdmCmd(staffName[], action[], targetName[], reason[], participle[])
+Admin_AdmCmd(const staffName[], const action[], const targetName[], const reason[], const participle[])
 {
 	new msg[256];
 	if (reason[0] != 0)
@@ -148,7 +148,7 @@ Admin_AdmCmd(staffName[], action[], targetName[], reason[], participle[])
 	}
 }
 
-Admin_LogRaw(staffAcc, staffName[], targetAcc, action[], reason[])
+Admin_LogRaw(staffAcc, const staffName[], targetAcc, const action[], const reason[])
 {
 	new line[320];
 	DB_AdminLog(staffAcc, targetAcc, action, reason);
@@ -156,7 +156,7 @@ Admin_LogRaw(staffAcc, staffName[], targetAcc, action[], reason[])
 	Log_Write("ADMIN", line);
 }
 
-Admin_Log(staffid, targetAcc, action[], reason[])
+Admin_Log(staffid, targetAcc, const action[], const reason[])
 {
 	new name[25];
 	Admin_ActorName(staffid, name, 25);
@@ -200,7 +200,7 @@ Admin_FindByAccount(accountId)
 	return 65535;
 }
 
-Admin_FindByName(name[])
+Admin_FindByName(const name[])
 {
 	new cur[25];
 	for (new i = 0; i < MAX_PLAYERS; i++)
@@ -239,7 +239,7 @@ Admin_FormatDuration(seconds, dest[], size)
 	}
 }
 
-Admin_Notify_One(playerid, text[])
+Admin_Notify_One(playerid, const text[])
 {
 	new lines[3][128];
 	new count = Util_SplitText(text, lines, 3);
@@ -324,7 +324,7 @@ Admin_OnText(playerid)
 	return Admin_CheckMuted(playerid) ? 0 : 1;
 }
 
-Admin_PendSet(requesterid, op, targetAcc, targetName[], val, reason[])
+Admin_PendSet(requesterid, op, targetAcc, const targetName[], val, const reason[])
 {
 	new slot = DB_ReqSlot(requesterid);
 	g_AdmPend[slot][apActive] = 1;
@@ -342,7 +342,7 @@ bool:Admin_Busy(requesterid)
 	return g_DBAdminPending[DB_ReqSlot(requesterid)] != 0;
 }
 
-Admin_PendTake(op, accountKey, nameKey[])
+Admin_PendTake(op, accountKey, const nameKey[])
 {
 	for (new i = 0; i <= 1000; i++)
 	{
@@ -383,7 +383,7 @@ Admin_ApplyLevel(accountId, level)
 	return online;
 }
 
-public Admin_OnBanChecked(playerid, bool:banned, reason[], expiresAt)
+public Admin_OnBanChecked(playerid, bool:banned, const reason[], expiresAt)
 {
 	if (playerid < 0 || playerid >= MAX_PLAYERS || !IsPlayerConnected(playerid))
 	{
@@ -456,7 +456,7 @@ public Admin_OnWarnAdded(requesterid, targetAccountId, activeCount)
 	return 1;
 }
 
-public Admin_OnBanAdded(requesterid, name[], banId)
+public Admin_OnBanAdded(requesterid, const name[], banId)
 {
 	new e = Admin_PendTake(2, 0, name);
 	if (e < 0)
@@ -493,7 +493,7 @@ public Admin_OnBanAdded(requesterid, name[], banId)
 	return 1;
 }
 
-public Admin_OnUnbanned(requesterid, name[], affected)
+public Admin_OnUnbanned(requesterid, const name[], affected)
 {
 	new e = Admin_PendTake(3, 0, name);
 	if (e < 0)
@@ -518,7 +518,7 @@ public Admin_OnUnbanned(requesterid, name[], affected)
 	return 1;
 }
 
-public Admin_OnAccountFound(requesterid, tag, accountId, name[], adminLevel, lastIp[])
+public Admin_OnAccountFound(requesterid, tag, accountId, const name[], adminLevel, const lastIp[])
 {
 	new e = Admin_PendTake(tag, 0, name);
 	if (e < 0)
@@ -607,7 +607,7 @@ public Admin_OnAccountFound(requesterid, tag, accountId, name[], adminLevel, las
 	return 1;
 }
 
-Admin_StoreReport(playerid, text[])
+Admin_StoreReport(playerid, const text[])
 {
 	g_RepSeq++;
 	new slot = g_RepSeq % 10;
@@ -642,7 +642,7 @@ Admin_ListReports(playerid)
 	}
 }
 
-Admin_ReplyReport(playerid, reportId, text[])
+Admin_ReplyReport(playerid, reportId, const text[])
 {
 	if (reportId < 1 || reportId > g_RepSeq)
 	{

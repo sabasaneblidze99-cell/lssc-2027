@@ -98,7 +98,7 @@ new g_CmdNames[97][16] = {
 	"chatcef"
 };
 
-Cmd_Dispatch(playerid, cmdtext[])
+Cmd_Dispatch(playerid, const cmdtext[])
 {
 	if (cmdtext[0] != 47)
 	{
@@ -295,13 +295,13 @@ public Cmd_lavoro(playerid, params[])
 	return 1;
 }
 
-public Cmd_inizia(playerid, params[])
+public Cmd_inizia(playerid, const params[])
 {
 	Job_CmdInizia(playerid);
 	return 1;
 }
 
-public Cmd_fine(playerid, params[])
+public Cmd_fine(playerid, const params[])
 {
 	Job_CmdFine(playerid);
 	return 1;
@@ -319,7 +319,7 @@ public Cmd_invita(playerid, params[])
 	return 1;
 }
 
-public Cmd_accetta(playerid, params[])
+public Cmd_accetta(playerid, const params[])
 {
 	Faction_CmdAccetta(playerid);
 	return 1;
@@ -343,7 +343,7 @@ public Cmd_licenzia(playerid, params[])
 	return 1;
 }
 
-public Cmd_duty(playerid, params[])
+public Cmd_duty(playerid, const params[])
 {
 	Faction_CmdDuty(playerid);
 	return 1;
@@ -379,7 +379,7 @@ public Cmd_multa(playerid, params[])
 	return 1;
 }
 
-public Cmd_multe(playerid, params[])
+public Cmd_multe(playerid, const params[])
 {
 	Faction_CmdMulte(playerid);
 	return 1;
@@ -402,7 +402,7 @@ public Cmd_setfazione(playerid, params[])
 	return Faction_CmdSetfazione(playerid, params) ? 1 : 0;
 }
 
-public Cmd_stats(playerid, params[])
+public Cmd_stats(playerid, const params[])
 {
 	new name[25], level = gPlayer[playerid][pLevel], exp = gPlayer[playerid][pExp];
 	GetPlayerName(playerid, name, 25);
@@ -428,7 +428,7 @@ public Cmd_stats(playerid, params[])
 	return 1;
 }
 
-public Cmd_who(playerid, params[])
+public Cmd_who(playerid, const params[])
 {
 	new total = 0;
 	for (new i = 0; i < MAX_PLAYERS; i++)
@@ -457,7 +457,7 @@ public Cmd_who(playerid, params[])
 	return 1;
 }
 
-public Cmd_help(playerid, params[])
+public Cmd_help(playerid, const params[])
 {
 	SendClientMessage(playerid, -2994689, "--- Comandi ---");
 	Util_Send(playerid, 0x99CCFFFF, "/me azione · /do descrizione · /try azione · /ame azione");
@@ -539,7 +539,7 @@ public Cmd_refuel(playerid, params[])
 	return 1;
 }
 
-public Cmd_concessionario(playerid, params[])
+public Cmd_concessionario(playerid, const params[])
 {
 	Veh_CmdDealer(playerid);
 	return 1;
@@ -551,25 +551,25 @@ public Cmd_casa(playerid, params[])
 	return 1;
 }
 
-public Cmd_entra(playerid, params[])
+public Cmd_entra(playerid, const params[])
 {
 	House_CmdEntra(playerid);
 	return 1;
 }
 
-public Cmd_esci(playerid, params[])
+public Cmd_esci(playerid, const params[])
 {
 	House_CmdEsci(playerid);
 	return 1;
 }
 
-public Cmd_luce(playerid, params[])
+public Cmd_luce(playerid, const params[])
 {
 	House_CmdToggleUtility(playerid, 0);
 	return 1;
 }
 
-public Cmd_gas(playerid, params[])
+public Cmd_gas(playerid, const params[])
 {
 	House_CmdToggleUtility(playerid, 1);
 	return 1;
@@ -581,19 +581,19 @@ public Cmd_frigo(playerid, params[])
 	return 1;
 }
 
-public Cmd_bollette(playerid, params[])
+public Cmd_bollette(playerid, const params[])
 {
 	House_CmdBollette(playerid);
 	return 1;
 }
 
-public Cmd_bussa(playerid, params[])
+public Cmd_bussa(playerid, const params[])
 {
 	House_CmdBussa(playerid);
 	return 1;
 }
 
-public Cmd_cucina(playerid, params[])
+public Cmd_cucina(playerid, const params[])
 {
 	House_CmdCucina(playerid);
 	return 1;
@@ -611,13 +611,13 @@ public Cmd_compra(playerid, params[])
 	return 1;
 }
 
-public Cmd_inventario(playerid, params[])
+public Cmd_inventario(playerid, const params[])
 {
 	Inv_CmdInventario(playerid);
 	return 1;
 }
 
-public Cmd_inv(playerid, params[])
+public Cmd_inv(playerid, const params[])
 {
 	Inv_CmdInventario(playerid);
 	return 1;
@@ -649,7 +649,7 @@ public Cmd_getta(playerid, params[])
 	return 1;
 }
 
-public Cmd_prendi(playerid, params[])
+public Cmd_prendi(playerid, const params[])
 {
 	Inv_CmdPrendi(playerid);
 	return 1;
@@ -661,7 +661,7 @@ public Cmd_documento(playerid, params[])
 	return 1;
 }
 
-public Cmd_salta(playerid, params[])
+public Cmd_salta(playerid, const params[])
 {
 	Intro_CmdSalta(playerid);
 	return 1;
@@ -679,31 +679,31 @@ public Cmd_mostrastoria(playerid, params[])
 	return 1;
 }
 
-public Cmd_atm(playerid, params[])
+public Cmd_atm(playerid, const params[])
 {
 	Bank_CmdAtm(playerid, 0);
 	return 1;
 }
 
-public Cmd_banca(playerid, params[])
+public Cmd_banca(playerid, const params[])
 {
 	Bank_CmdAtm(playerid, 1);
 	return 1;
 }
 
-public Cmd_saldo(playerid, params[])
+public Cmd_saldo(playerid, const params[])
 {
 	Bank_CmdSaldo(playerid);
 	return 1;
 }
 
-public Cmd_deposita(playerid, params[])
+public Cmd_deposita(playerid, const params[])
 {
 	Bank_CmdDeposita(playerid, params);
 	return 1;
 }
 
-public Cmd_preleva(playerid, params[])
+public Cmd_preleva(playerid, const params[])
 {
 	Bank_CmdPreleva(playerid, params);
 	return 1;
@@ -715,7 +715,7 @@ public Cmd_bonifico(playerid, params[])
 	return 1;
 }
 
-public Cmd_estratto(playerid, params[])
+public Cmd_estratto(playerid, const params[])
 {
 	Bank_CmdEstratto(playerid);
 	return 1;
@@ -731,7 +731,7 @@ bool:Cmd_LivingGate(playerid)
 	return 0;
 }
 
-public Cmd_noleggio(playerid, params[])
+public Cmd_noleggio(playerid, const params[])
 {
 	if (!Cmd_LivingGate(playerid))
 	{
@@ -742,12 +742,12 @@ public Cmd_noleggio(playerid, params[])
 	return 1;
 }
 
-public Cmd_noleggia(playerid, params[])
+public Cmd_noleggia(playerid, const params[])
 {
 	return Cmd_noleggio(playerid, params);
 }
 
-public Cmd_riconsegna(playerid, params[])
+public Cmd_riconsegna(playerid, const params[])
 {
 	if (Cmd_LivingGate(playerid))
 	{
@@ -765,7 +765,7 @@ public Cmd_taxi(playerid, params[])
 	return 1;
 }
 
-public Cmd_chiamataxi(playerid, params[])
+public Cmd_chiamataxi(playerid, const params[])
 {
 	if (Cmd_LivingGate(playerid))
 	{
@@ -810,7 +810,7 @@ public Cmd_contratto(playerid, params[])
 	return 1;
 }
 
-public Cmd_reputazione(playerid, params[])
+public Cmd_reputazione(playerid, const params[])
 {
 	if (!Cmd_LivingGate(playerid))
 	{
@@ -847,7 +847,7 @@ public Cmd_email(playerid, params[])
 	return 1;
 }
 
-public Cmd_telefono(playerid, params[])
+public Cmd_telefono(playerid, const params[])
 {
 	CefBridge_CmdTelefono(playerid);
 	return 1;
@@ -867,13 +867,13 @@ public Cmd_ldset(playerid, params[])
 	return District_CmdLdset(playerid, params) ? 1 : 0;
 }
 
-public Cmd_chatsamp(playerid, params[])
+public Cmd_chatsamp(playerid, const params[])
 {
 	HudCef_CmdChat(playerid, false);
 	return 1;
 }
 
-public Cmd_chatcef(playerid, params[])
+public Cmd_chatcef(playerid, const params[])
 {
 	HudCef_CmdChat(playerid, true);
 	return 1;

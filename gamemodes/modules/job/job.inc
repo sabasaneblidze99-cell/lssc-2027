@@ -356,7 +356,7 @@ Job_Teardown(playerid, bool:startCooldown)
 	}
 }
 
-Job_Cancel(playerid, reason[])
+Job_Cancel(playerid, const reason[])
 {
 	if (playerid < 0 || playerid >= MAX_PLAYERS || !g_JsActive[playerid])
 	{

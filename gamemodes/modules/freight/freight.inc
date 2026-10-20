@@ -158,7 +158,7 @@ Freight_SecCeil(ms)
 	return (ms + 1000 - 1) / 1000;
 }
 
-Freight_Note(playerid, text[])
+Freight_Note(playerid, const text[])
 {
 	new now = GetTickCount();
 	if (g_FrtNoteTick[playerid] != 0 && now - g_FrtNoteTick[playerid] < 4000)
@@ -363,7 +363,7 @@ Freight_Release(playerid, reason)
 	}
 }
 
-Freight_Stop(playerid, reason, text[])
+Freight_Stop(playerid, reason, const text[])
 {
 	if (!g_FrtActive[playerid])
 	{

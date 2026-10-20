@@ -24,7 +24,7 @@ bool:Valid_SkinAllowed(gender, skin)
 	return 0;
 }
 
-bool:Valid_PasswordLength(pw[])
+bool:Valid_PasswordLength(const pw[])
 {
 	new len = strlen(pw);
 	return len >= 6 && len <= 32;
@@ -51,7 +51,7 @@ Valid_PayAmount(amount, senderMoney, receiverMoney)
 	return 0;
 }
 
-bool:Valid_Email(s[])
+bool:Valid_Email(const s[])
 {
 	new len = strlen(s);
 	if (len < 6 || len > 254)

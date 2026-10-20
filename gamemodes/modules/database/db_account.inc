@@ -35,7 +35,7 @@ DB_LoadAccount(playerid)
 	mysql_tquery(g_DB, query, "DB_OnAccountLoaded", "ds", playerid, name);
 }
 
-public DB_OnAccountLoaded(playerid, name[])
+public DB_OnAccountLoaded(playerid, const name[])
 {
 	if (!DB_PlayerMatches(playerid, name))
 	{
@@ -66,7 +66,7 @@ public DB_OnAccountLoaded(playerid, name[])
 	return 1;
 }
 
-bool:DB_HashFormatOk(hash[], salt[], algo)
+bool:DB_HashFormatOk(const hash[], const salt[], algo)
 {
 	if (algo == 0)
 	{
@@ -79,7 +79,7 @@ bool:DB_HashFormatOk(hash[], salt[], algo)
 	return 0;
 }
 
-DB_CreateAccountEx(playerid, hash[], salt[], algo)
+DB_CreateAccountEx(playerid, const hash[], const salt[], algo)
 {
 	if (playerid < 0 || playerid >= MAX_PLAYERS || !IsPlayerConnected(playerid))
 	{
@@ -97,7 +97,7 @@ DB_CreateAccountEx(playerid, hash[], salt[], algo)
 	mysql_tquery(g_DB, query, "DB_OnAccountCreated", "ds", playerid, name);
 }
 
-public DB_OnAccountCreated(playerid, name[])
+public DB_OnAccountCreated(playerid, const name[])
 {
 	if (!DB_PlayerMatches(playerid, name))
 	{
@@ -117,7 +117,7 @@ public DB_OnAccountCreated(playerid, name[])
 	return 1;
 }
 
-DB_UpdateLogin(accountId, ip[])
+DB_UpdateLogin(accountId, const ip[])
 {
 	if (!DB_IsReady() || accountId <= 0)
 	{
@@ -128,7 +128,7 @@ DB_UpdateLogin(accountId, ip[])
 	mysql_tquery(g_DB, query, "", "");
 }
 
-DB_UpdatePasswordHash(accountId, hash[], algo)
+DB_UpdatePasswordHash(accountId, const hash[], algo)
 {
 	if (!DB_IsReady() || accountId <= 0)
 	{
@@ -155,7 +155,7 @@ DB_AccountLoginFailed(accountId)
 	mysql_tquery(g_DB, query, "", "");
 }
 
-DB_AccountSetEmail(playerid, accountId, email[])
+DB_AccountSetEmail(playerid, accountId, const email[])
 {
 	if (playerid < 0 || playerid >= MAX_PLAYERS)
 	{
@@ -171,7 +171,7 @@ DB_AccountSetEmail(playerid, accountId, email[])
 	mysql_tquery(g_DB, query, "DB_OnAccountEmailSet", "dds", playerid, accountId, email);
 }
 
-public DB_OnAccountEmailSet(playerid, accountId, email[])
+public DB_OnAccountEmailSet(playerid, accountId, const email[])
 {
 	if (!IsPlayerConnected(playerid) || gPlayer[playerid][pAccountId] != accountId)
 	{

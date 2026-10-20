@@ -13,7 +13,7 @@ DB_ReqName(requesterid, name[], size)
 	}
 }
 
-DB_ReqResolve(requesterid, reqName[])
+DB_ReqResolve(requesterid, const reqName[])
 {
 	if (requesterid < 0 || requesterid >= 1000 || reqName[0] == 0)
 	{
@@ -36,7 +36,7 @@ DB_ReqEnd(requesterid, op)
 	g_DBAdminPending[DB_ReqSlot(requesterid)] &= ~op;
 }
 
-DB_AdminLog(staffAccountId, targetAccountId, action[], reason[])
+DB_AdminLog(staffAccountId, targetAccountId, const action[], const reason[])
 {
 	if (!DB_IsReady() || action[0] == 0)
 	{
@@ -77,7 +77,7 @@ DB_SetAdminLevel(accountId, level)
 	mysql_tquery(g_DB, query, "", "");
 }
 
-DB_AddWarn(requesterid, targetAccountId, staffAccountId, reason[])
+DB_AddWarn(requesterid, targetAccountId, staffAccountId, const reason[])
 {
 	if (!DB_IsReady() || targetAccountId <= 0)
 	{
@@ -92,7 +92,7 @@ DB_AddWarn(requesterid, targetAccountId, staffAccountId, reason[])
 	mysql_tquery(g_DB, query, "DB_OnWarnInserted", "dsd", requesterid, reqName, targetAccountId);
 }
 
-public DB_OnWarnInserted(requesterid, reqName[], targetAccountId)
+public DB_OnWarnInserted(requesterid, const reqName[], targetAccountId)
 {
 	new query[512];
 	mysql_format(g_DB, query, 512, "SELECT COUNT(*) AS cnt FROM warns WHERE account_id = %d AND active = 1", targetAccountId);
@@ -100,7 +100,7 @@ public DB_OnWarnInserted(requesterid, reqName[], targetAccountId)
 	return 1;
 }
 
-public DB_OnWarnCounted(requesterid, reqName[], targetAccountId)
+public DB_OnWarnCounted(requesterid, const reqName[], targetAccountId)
 {
 	DB_ReqEnd(requesterid, 1);
 	new cnt = 0;
@@ -112,7 +112,7 @@ public DB_OnWarnCounted(requesterid, reqName[], targetAccountId)
 	return 1;
 }
 
-DB_AddBan(requesterid, accountId, name[], ip[], staffAccountId, reason[], minutes)
+DB_AddBan(requesterid, accountId, const name[], const ip[], staffAccountId, const reason[], minutes)
 {
 	if (!DB_IsReady() || name[0] == 0)
 	{
@@ -143,7 +143,7 @@ DB_AddBan(requesterid, accountId, name[], ip[], staffAccountId, reason[], minute
 	mysql_tquery(g_DB, query, "DB_OnBanInserted", "dss", requesterid, reqName, name);
 }
 
-public DB_OnBanInserted(requesterid, reqName[], name[])
+public DB_OnBanInserted(requesterid, const reqName[], const name[])
 {
 	DB_ReqEnd(requesterid, 2);
 	new banId = 0;
@@ -158,7 +158,7 @@ public DB_OnBanInserted(requesterid, reqName[], name[])
 	return 1;
 }
 
-DB_Unban(requesterid, accountName[])
+DB_Unban(requesterid, const accountName[])
 {
 	if (!DB_IsReady() || accountName[0] == 0)
 	{
@@ -173,7 +173,7 @@ DB_Unban(requesterid, accountName[])
 	mysql_tquery(g_DB, query, "DB_OnUnbanDone", "dss", requesterid, reqName, accountName);
 }
 
-public DB_OnUnbanDone(requesterid, reqName[], name[])
+public DB_OnUnbanDone(requesterid, const reqName[], const name[])
 {
 	DB_ReqEnd(requesterid, 4);
 	if (funcidx("Admin_OnUnbanned") != -1)
@@ -183,7 +183,7 @@ public DB_OnUnbanDone(requesterid, reqName[], name[])
 	return 1;
 }
 
-DB_CheckBan(playerid, name[], ip[])
+DB_CheckBan(playerid, const name[], const ip[])
 {
 	if (playerid < 0 || playerid >= MAX_PLAYERS || !IsPlayerConnected(playerid))
 	{
@@ -203,7 +203,7 @@ DB_CheckBan(playerid, name[], ip[])
 	mysql_tquery(g_DB, query, "DB_OnBanChecked", "ds", playerid, pname);
 }
 
-public DB_OnBanChecked(playerid, name[])
+public DB_OnBanChecked(playerid, const name[])
 {
 	if (!DB_PlayerMatches(playerid, name))
 	{
@@ -224,7 +224,7 @@ public DB_OnBanChecked(playerid, name[])
 	return 1;
 }
 
-DB_FindAccountByName(requesterid, name[], tag)
+DB_FindAccountByName(requesterid, const name[], tag)
 {
 	new slot = DB_ReqSlot(requesterid);
 	g_DBFindTag[slot] = tag;
@@ -241,7 +241,7 @@ DB_FindAccountByName(requesterid, name[], tag)
 	mysql_tquery(g_DB, query, "DB_OnAccountFound", "dsds", requesterid, reqName, tag, name);
 }
 
-public DB_OnAccountFound(requesterid, reqName[], tag, name[])
+public DB_OnAccountFound(requesterid, const reqName[], tag, const name[])
 {
 	DB_ReqEnd(requesterid, 8);
 	new rows = 0, accountId = 0, adminLevel = 0, canon[25], lastIp[16];

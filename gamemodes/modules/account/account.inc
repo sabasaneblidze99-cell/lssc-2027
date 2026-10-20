@@ -21,7 +21,7 @@ bool:Account_SeqValid(playerid, seq, phase)
 }
 new g_AccPendingEmail[MAX_PLAYERS][255];
 
-Account_Kick(playerid, reason[])
+Account_Kick(playerid, const reason[])
 {
 	if (playerid < 0 || playerid >= MAX_PLAYERS || !IsPlayerConnected(playerid))
 	{
@@ -132,7 +132,7 @@ Account_OnDisconnect(playerid)
 	g_DBPending[playerid] = 0;
 }
 
-public Account_OnDBLoaded(playerid, accountId, hash[], salt[], adminLevel)
+public Account_OnDBLoaded(playerid, accountId, const hash[], const salt[], adminLevel)
 {
 	if (!IsPlayerConnected(playerid) || gPlayer[playerid][pAuthState] != 0)
 	{
@@ -189,7 +189,7 @@ Account_CompleteLogin(playerid, accountId, adminLevel)
 	CharSel_Begin(playerid);       // M15: selezione dei 3 personaggi (character/char_select.inc)
 }
 
-Account_SetPendingEmail(playerid, email[])
+Account_SetPendingEmail(playerid, const email[])
 {
 	if (playerid < 0 || playerid >= MAX_PLAYERS)
 	{
@@ -202,7 +202,7 @@ Account_SetPendingEmail(playerid, email[])
 	}
 }
 
-public UI_OnRegisterSubmit(playerid, password[])
+public UI_OnRegisterSubmit(playerid, const password[])
 {
 	if (!IsPlayerConnected(playerid) || gPlayer[playerid][pAuthState] != 1)
 	{
@@ -284,7 +284,7 @@ Account_LoginFailed(playerid)
 	UI_ShowLogin(playerid, 1);
 }
 
-public UI_OnLoginSubmit(playerid, password[])
+public UI_OnLoginSubmit(playerid, const password[])
 {
 	if (!IsPlayerConnected(playerid) || gPlayer[playerid][pAuthState] != 3)
 	{

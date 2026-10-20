@@ -123,7 +123,7 @@ UI_VehicleListClear(playerid)
 	g_UiVehCount[playerid] = 0;
 }
 
-UI_VehicleListAdd(playerid, slot, model, plate[], fuelPct, vstate)
+UI_VehicleListAdd(playerid, slot, model, const plate[], fuelPct, vstate)
 {
 	if (playerid < 0 || playerid >= MAX_PLAYERS)
 	{
@@ -330,7 +330,7 @@ new g_UiVHud[MAX_PLAYERS][6];
 new bool:g_UiVHudCreated[MAX_PLAYERS];
 new bool:g_UiVHudShown[MAX_PLAYERS];
 
-PlayerText:UI_VHudText(playerid, Float:x, Float:y, text[], Float:lw, Float:lh, color, t_TEXT_DRAW_ALIGN:align)
+PlayerText:UI_VHudText(playerid, Float:x, Float:y, const text[], Float:lw, Float:lh, color, t_TEXT_DRAW_ALIGN:align)
 {
 	new PlayerText:td = Lang_CreatePlayerTextDraw(playerid, x, y, text);
 	PlayerTextDrawLetterSize(playerid, td, lw, lh);

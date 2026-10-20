@@ -1,5 +1,5 @@
 
-bool:Admin_ParseTarget(playerid, token[], &targetid)
+bool:Admin_ParseTarget(playerid, const token[], &targetid)
 {
 	if (!Util_ParsePlayerId(token, targetid) || !Util_IsPlaying(targetid))
 	{
@@ -131,7 +131,7 @@ public Cmd_setmoney(playerid, params[])
 	return 1;
 }
 
-bool:Admin_ParseSanctionTarget(playerid, token[], &targetid)
+bool:Admin_ParseSanctionTarget(playerid, const token[], &targetid)
 {
 	if (!Admin_ParseTarget(playerid, token, targetid))
 	{
@@ -150,7 +150,7 @@ bool:Admin_ParseSanctionTarget(playerid, token[], &targetid)
 	return 1;
 }
 
-public Cmd_ah(playerid, params[])
+public Cmd_ah(playerid, const params[])
 {
 	if (Util_GetAdmin(playerid) < 1)
 	{
@@ -180,7 +180,7 @@ public Cmd_a(playerid, params[])
 	return 1;
 }
 
-public Cmd_reports(playerid, params[])
+public Cmd_reports(playerid, const params[])
 {
 	if (Util_GetAdmin(playerid) < 1)
 	{

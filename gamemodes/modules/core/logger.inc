@@ -1,5 +1,5 @@
 
-Log_Write(category[], text[])
+Log_Write(const category[], const text[])
 {
 	new h = 0, mi = 0, s = 0, y = 0, mo = 0, d = 0;
 	new clean[320], line[320];

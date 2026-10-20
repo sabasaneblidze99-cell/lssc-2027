@@ -61,7 +61,7 @@ bool:UI_InvItemOk(itemId)
 	return itemId >= 1 && itemId < 11;
 }
 
-bool:UI_InvParseNum(s[], &value)
+bool:UI_InvParseNum(const s[], &value)
 {
 	new i = 0, len = strlen(s), digits = 0;
 	value = 0;
@@ -306,7 +306,7 @@ UI_InvInfoShow(playerid)
 	Lang_ShowPlayerDialog(playerid, 9402, 0, title, body, "Indietro", "Chiudi");
 }
 
-UI_InvQtyShow(playerid, err[])
+UI_InvQtyShow(playerid, const err[])
 {
 	new slot = g_UiInvSel[playerid], itemId = g_UiInvItem[playerid][slot], maxQ = g_UiInvQty[playerid][slot];
 	new body[320], title[64], name[24];
@@ -316,7 +316,7 @@ UI_InvQtyShow(playerid, err[])
 	Lang_ShowPlayerDialog(playerid, 9403, 1, title, body, "Avanti", "Indietro");
 }
 
-UI_InvTargetShow(playerid, err[])
+UI_InvTargetShow(playerid, const err[])
 {
 	new body[320], title[64], name[24], itemId = g_UiInvSelItem[playerid];
 	strcopy(name, g_UiInvName[itemId], 24);
@@ -350,7 +350,7 @@ UI_InvTimerEnsure(playerid)
 	}
 }
 
-PlayerText:UI_InvText(playerid, Float:x, Float:y, text[], Float:lw, Float:lh, color, t_TEXT_DRAW_ALIGN:align)
+PlayerText:UI_InvText(playerid, Float:x, Float:y, const text[], Float:lw, Float:lh, color, t_TEXT_DRAW_ALIGN:align)
 {
 	new PlayerText:td = Lang_CreatePlayerTextDraw(playerid, x, y, text);
 	PlayerTextDrawLetterSize(playerid, td, lw, lh);
@@ -431,7 +431,7 @@ bool:UI_InvNeedTimer(playerid)
 	return 0;
 }
 
-UI_InvGiveConfirmShow(playerid, giverName[], itemId, qty, ttlSec)
+UI_InvGiveConfirmShow(playerid, const giverName[], itemId, qty, ttlSec)
 {
 	if (!UI_InvValid(playerid) || !UI_InvItemOk(itemId) || qty <= 0)
 	{
@@ -597,7 +597,7 @@ public UI_InvOnTimer(playerid)
 	return 1;
 }
 
-bool:UI_InvOnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
+bool:UI_InvOnDialogResponse(playerid, dialogid, response, listitem, const inputtext[])
 {
 	if (!UI_InvValid(playerid) || dialogid < 9400 || dialogid > 9406)
 	{

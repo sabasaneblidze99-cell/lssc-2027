@@ -61,7 +61,7 @@ UI_BankFmt(value, dest[], size)
 	}
 }
 
-bool:UI_BankParseAmount(s[], &value)
+bool:UI_BankParseAmount(const s[], &value)
 {
 	new i = 0, len = strlen(s), digits = 0;
 	value = 0;
@@ -86,7 +86,7 @@ bool:UI_BankParseAmount(s[], &value)
 	return digits > 0 && i == len && value >= 1;
 }
 
-UI_BankFindTarget(input[])
+UI_BankFindTarget(const input[])
 {
 	new text[25], len = strlen(input), start = 0, end = len;
 	while (start < len && input[start] == 32)
@@ -223,7 +223,7 @@ UI_BankToastCreate(playerid)
 	g_UiBkToastCreated[playerid] = 1;
 }
 
-UI_BankToast(playerid, text[], bool:ok)
+UI_BankToast(playerid, const text[], bool:ok)
 {
 	if (!UI_BankValid(playerid) || !IsPlayerConnected(playerid) || text[0] == 0)
 	{
@@ -340,7 +340,7 @@ bool:UI_BankRange(playerid, op, &lo, &hi)
 	return hi >= lo;
 }
 
-UI_BankAmountShow(playerid, op, err[])
+UI_BankAmountShow(playerid, op, const err[])
 {
 	new lo = 0, hi = 0;
 	if (!UI_BankRange(playerid, op, lo, hi))
@@ -394,7 +394,7 @@ UI_BankAmountShow(playerid, op, err[])
 	Lang_ShowPlayerDialog(playerid, 9501, 1, title, body, "Avanti", "Indietro");
 }
 
-UI_BankTargetShow(playerid, err[])
+UI_BankTargetShow(playerid, const err[])
 {
 	new body[320];
 	format(body, 320, "%s{FFFFFF}Inserisci l'{FFD24D}ID{FFFFFF} o parte del {FFD24D}nome{FFFFFF} del giocatore online che riceve il bonifico.\nIl destinatario non deve confermare: il credito e' immediato.", err);
@@ -466,7 +466,7 @@ UI_BankStatementBegin(playerid, page, bool:hasNext)
 	g_UiBkStCount[playerid] = 0;
 }
 
-UI_BankStatementAdd(playerid, when[], kind[], other[], amount, balanceAfter)
+UI_BankStatementAdd(playerid, const when[], const kind[], const other[], amount, balanceAfter)
 {
 	if (!UI_BankValid(playerid))
 	{
@@ -537,7 +537,7 @@ UI_BankStatementShow(playerid)
 	Lang_ShowPlayerDialog(playerid, 9504, 5, title, body, "Vai", "Menu");
 }
 
-UI_BankReject(playerid, msg[])
+UI_BankReject(playerid, const msg[])
 {
 	if (!UI_BankValid(playerid) || !IsPlayerConnected(playerid))
 	{
@@ -639,7 +639,7 @@ public UI_BankOnTimer(playerid)
 	return 1;
 }
 
-bool:UI_BankOnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
+bool:UI_BankOnDialogResponse(playerid, dialogid, response, listitem, const inputtext[])
 {
 	if (!UI_BankValid(playerid) || !UI_BankIsBankDialog(dialogid))
 	{

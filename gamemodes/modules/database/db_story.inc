@@ -44,7 +44,7 @@ DB_StoryBankStart(motive)
 	return 7500 - DB_StoryCash(motive);
 }
 
-bool:DB_StoryOpIdOk(opId[])
+bool:DB_StoryOpIdOk(const opId[])
 {
 	new len = strlen(opId);
 	return len >= 1 && len <= 36;
@@ -56,7 +56,7 @@ DB_StoryApply(playerid, origin, motive)
 	gPlayer[playerid][pStoryMotive] = motive;
 }
 
-bool:DB_StoryInfoLive(playerid, name[], token, kind)
+bool:DB_StoryInfoLive(playerid, const name[], token, kind)
 {
 	if (!DB_PlayerMatches(playerid, name))
 	{
@@ -69,7 +69,7 @@ bool:DB_StoryInfoLive(playerid, name[], token, kind)
 	return g_StoryInfo[playerid][siToken] == token && g_StoryInfo[playerid][siKind] == kind;
 }
 
-bool:DB_StoryOpLive(playerid, name[], charId, token)
+bool:DB_StoryOpLive(playerid, const name[], charId, token)
 {
 	if (!DB_PlayerMatches(playerid, name))
 	{
@@ -199,7 +199,7 @@ DB_StoryLoad(playerid, accountId, charId)
 	mysql_tquery(g_DB, query, "DB_OnStoryLoaded", "dsddd", playerid, name, accountId, charId, g_StoryInfo[playerid][siToken]);
 }
 
-public DB_OnStoryLoaded(playerid, name[], accountId, charId, token)
+public DB_OnStoryLoaded(playerid, const name[], accountId, charId, token)
 {
 	if (!DB_StoryInfoLive(playerid, name, token, 1))
 	{
@@ -249,7 +249,7 @@ DB_StoryRead(playerid, targetid, purpose)
 	mysql_tquery(g_DB, query, "DB_OnStoryRead", "dsd", playerid, name, g_StoryInfo[playerid][siToken]);
 }
 
-public DB_OnStoryRead(playerid, name[], token)
+public DB_OnStoryRead(playerid, const name[], token)
 {
 	if (!DB_StoryInfoLive(playerid, name, token, 2))
 	{
@@ -280,7 +280,7 @@ public DB_OnStoryRead(playerid, name[], token)
 	return 1;
 }
 
-DB_StorySave(playerid, charId, origin, motive, opId[], bool:creation)
+DB_StorySave(playerid, charId, origin, motive, const opId[], bool:creation)
 {
 	if (playerid < 0 || playerid >= MAX_PLAYERS || !IsPlayerConnected(playerid))
 	{
@@ -314,7 +314,7 @@ DB_StorySave(playerid, charId, origin, motive, opId[], bool:creation)
 	mysql_tquery(g_DB, query, "DB_OnStoryCalled", "dsdds", playerid, name, charId, g_StoryReq[playerid][sqToken], opId);
 }
 
-public DB_OnStoryCalled(playerid, name[], charId, token, opId[])
+public DB_OnStoryCalled(playerid, const name[], charId, token, const opId[])
 {
 	if (!DB_StoryOpLive(playerid, name, charId, token))
 	{
@@ -327,7 +327,7 @@ public DB_OnStoryCalled(playerid, name[], charId, token, opId[])
 	return 1;
 }
 
-public DB_OnStoryResult(playerid, name[], charId, token, opId[])
+public DB_OnStoryResult(playerid, const name[], charId, token, const opId[])
 {
 	new rows = 0, result = -1, delta = 0, origin = 0, motive = 0;
 	cache_get_row_count(rows);
@@ -418,7 +418,7 @@ public DB_StoryFailure(playerid, op)
 	return 1;
 }
 
-public DB_StoryQueryError(callback[])
+public DB_StoryQueryError(const callback[])
 {
 	if (!strcmp(callback, "DB_OnStoryLoaded", 0, 0x7FFFFFFF) || !strcmp(callback, "DB_OnStoryRead", 0, 0x7FFFFFFF))
 	{

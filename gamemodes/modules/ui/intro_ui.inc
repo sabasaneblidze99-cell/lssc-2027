@@ -198,7 +198,7 @@ UI_StoryShowOther(playerid, name[], origin, motive)
 	UI_StoryViewShow(playerid, name, origin, motive, "პერსონაჟის ისტორია");
 }
 
-bool:UI_IntroOnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
+bool:UI_IntroOnDialogResponse(playerid, dialogid, response, listitem, const inputtext[])
 {
 	if (!UI_IntroValid(playerid) || dialogid < 9600 || dialogid > 9603)
 	{
@@ -301,7 +301,7 @@ PlayerText:UI_IntroBox(playerid, Float:x, Float:y, Float:w, Float:h, color)
 	return td;
 }
 
-PlayerText:UI_IntroText(playerid, Float:x, Float:y, text[], Float:lw, Float:lh, color, t_TEXT_DRAW_FONT:font)
+PlayerText:UI_IntroText(playerid, Float:x, Float:y, const text[], Float:lw, Float:lh, color, t_TEXT_DRAW_FONT:font)
 {
 	new PlayerText:td = Lang_CreatePlayerTextDraw(playerid, x, y, text);
 	PlayerTextDrawLetterSize(playerid, td, lw, lh);
@@ -496,7 +496,7 @@ UI_IntroFadeTo(playerid, alpha, steps, stepMs)
 	UI_IntroTimerEnsure(playerid);
 }
 
-UI_IntroSubtitle(playerid, text[])
+UI_IntroSubtitle(playerid, const text[])
 {
 	if (!UI_IntroValid(playerid) || !g_UiIntroActive[playerid])
 	{

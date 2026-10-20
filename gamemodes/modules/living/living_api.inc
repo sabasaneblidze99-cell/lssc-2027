@@ -27,7 +27,7 @@ LD_SetReady(bool:ready)
 	}
 }
 
-bool:LD_LsnBefore(prio, fn[], idx)
+bool:LD_LsnBefore(prio, const fn[], idx)
 {
 	if (prio != g_LdLsnPrio[idx])
 	{
@@ -36,7 +36,7 @@ bool:LD_LsnBefore(prio, fn[], idx)
 	return strcmp(fn, g_LdLsnName[idx], 0, 0x7FFFFFFF) < 0;
 }
 
-bool:LD_Listen(fn[], prio)
+bool:LD_Listen(const fn[], prio)
 {
 	if (strlen(fn) >= 32 || funcidx(fn) == -1)
 	{
@@ -66,7 +66,7 @@ bool:LD_Listen(fn[], prio)
 	return 1;
 }
 
-LD_Emit(type, districtId, charId, value, opId[])
+LD_Emit(type, districtId, charId, value, const opId[])
 {
 	if (g_LdEmitDepth >= 2)
 	{

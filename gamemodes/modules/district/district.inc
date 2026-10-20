@@ -45,7 +45,7 @@ District_CopyCache()
 	}
 }
 
-bool:District_SeenOp(opId[])
+bool:District_SeenOp(const opId[])
 {
 	if (opId[0] == 0 || !strcmp(opId, "-", 0, 0x7FFFFFFF))
 	{
@@ -285,7 +285,7 @@ District_SetCache(districtId, activity, security, crime)
 	return 1;
 }
 
-District_Emit(type, districtId, charId, value, opId[])
+District_Emit(type, districtId, charId, value, const opId[])
 {
 	if (type >= 100)
 	{
@@ -412,7 +412,7 @@ public District_OnLoadRetry(playerid, charId)
 	return 1;
 }
 
-bool:District_ParseOpt(tok[], &value)
+bool:District_ParseOpt(const tok[], &value)
 {
 	value = -1;
 	if (tok[0] == 0 || !strcmp(tok, "-", 0, 0x7FFFFFFF))

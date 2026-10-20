@@ -326,7 +326,7 @@ Director_OnPlayerDisconnect(playerid, reason)
 	Director_ResetPlayer(playerid);
 }
 
-public Director_OnDistrictEvent(type, districtId, charId, value, opId[])
+public Director_OnDistrictEvent(type, districtId, charId, value, const opId[])
 {
 	if (type == 9 || type == 8)
 	{

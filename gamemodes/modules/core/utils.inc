@@ -51,7 +51,7 @@ bool:Util_IsHexChar(c)
 	return (c >= 48 && c <= 57) || (c >= 97 && c <= 102) || (c >= 65 && c <= 70);
 }
 
-bool:Util_IsColorCodeAt(str[], pos)
+bool:Util_IsColorCodeAt(const str[], pos)
 {
 	if (str[pos] != 123)
 	{
@@ -105,7 +105,7 @@ bool:Util_SanitizeText(src[], dest[], maxLen)
 	return dest[0] != 0;
 }
 
-bool:Util_ParseInt(str[], &value)
+bool:Util_ParseInt(const str[], &value)
 {
 	new i = 0, digits = 0, bool:neg = 0;
 	value = 0;
@@ -161,7 +161,7 @@ Util_NextToken(src[], &pos, dest[], size)
 	return n;
 }
 
-bool:Util_ParsePlayerId(token[], &id)
+bool:Util_ParsePlayerId(const token[], &id)
 {
 	if (!Util_ParseInt(token, id))
 	{
@@ -181,7 +181,7 @@ bool:Util_IsValidRPNameC(const name[])
 	return Util_IsValidRPName(tmp);
 }
 
-bool:Util_IsValidRPName(name[])
+bool:Util_IsValidRPName(const name[])
 {
 	new us = -1, len = strlen(name);
 	for (new i = 0; i < len; i++)
@@ -208,7 +208,7 @@ bool:Util_IsValidRPName(name[])
 	return name[0] >= 65 && name[0] <= 90 && name[us + 1] >= 65 && name[us + 1] <= 90;
 }
 
-Util_SplitText(text[], out[][], maxLines)
+Util_SplitText(const text[], const out[][], maxLines)
 {
 	new len = strlen(text), start = 0, count = 0;
 	while (start < len && count < maxLines)
@@ -237,7 +237,7 @@ Util_SplitText(text[], out[][], maxLines)
 	return count;
 }
 
-Util_SendNear(sourceid, color, Float:radius, text[])
+Util_SendNear(sourceid, color, Float:radius, const text[])
 {
 	new lines[3][128];
 	new count = Util_SplitText(text, lines, 3);

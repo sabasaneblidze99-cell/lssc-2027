@@ -393,7 +393,7 @@ HudCef_OnKeyStateChange(playerid, KEY:newkeys, KEY:oldkeys)
 }
 
 // pagina -> server: azione rapida scelta (stessi comandi del gioco: il server rivalida tutto)
-public Cef_OnQuick(playerid, arguments[])
+public Cef_OnQuick(playerid, const arguments[])
 {
 	if (!g_HcOn[playerid])
 	{
@@ -414,7 +414,7 @@ public Cef_OnQuick(playerid, arguments[])
 	return 1;
 }
 
-public Cef_OnQuickClose(playerid, arguments[])
+public Cef_OnQuickClose(playerid, const arguments[])
 {
 	return 1;
 }

@@ -99,7 +99,7 @@ bool:DB_IniRead(path[], host[], user[], pass[], dbname[], &port, &mask, size)
 	return 1;
 }
 
-DB_ConnectHint(errno, errtxt[])
+DB_ConnectHint(errno, const errtxt[])
 {
 	switch (errno)
 	{
@@ -133,7 +133,7 @@ DB_ConnectHint(errno, errtxt[])
 	}
 }
 
-bool:DB_ConnectFinish(MySQL:h, where[])
+bool:DB_ConnectFinish(MySQL:h, const where[])
 {
 	new errbuf[128], errno = 0;
 	if (h != 0)
@@ -217,7 +217,7 @@ DB_Shutdown()
 	print("[DB] connessione chiusa");
 }
 
-bool:DB_PlayerMatches(playerid, name[])
+bool:DB_PlayerMatches(playerid, const name[])
 {
 	if (playerid < 0 || playerid >= MAX_PLAYERS || !IsPlayerConnected(playerid))
 	{

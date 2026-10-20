@@ -549,7 +549,7 @@ CharSel_Identity(playerid, name[], first[], last[], birth[], size = sizeof name)
 }
 
 // ---------------------------------------------------------------- dialog e pagina
-bool:CharSel_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
+bool:CharSel_OnDialogResponse(playerid, dialogid, response, listitem, const inputtext[])
 {
 	if (dialogid != CS_DIALOG_LIST && dialogid != CS_DIALOG_NAME && dialogid != CS_DIALOG_BIRTH)
 	{
@@ -670,7 +670,7 @@ public Cef_OnCharCreate(playerid, arguments[])
 	return 1;
 }
 
-public Cef_OnCharBack(playerid, arguments[])
+public Cef_OnCharBack(playerid, const arguments[])
 {
 	if (!IsPlayerConnected(playerid) || gPlayer[playerid][pAuthState] != CS_STATE_NEW || g_CsBusy[playerid])
 	{

@@ -1115,7 +1115,7 @@ Hub_RequestRefresh(bool:force)
 	DB_LivingLoadDistricts();
 }
 
-Hub_Broadcast(color, text[])
+Hub_Broadcast(color, const text[])
 {
 	for (new i = 0; i < MAX_PLAYERS; i++)
 	{
@@ -1171,7 +1171,7 @@ Hub_CheckFestivals()
 	}
 }
 
-public Hub_OnDistrictEvent(type, districtId, charId, value, opId[])
+public Hub_OnDistrictEvent(type, districtId, charId, value, const opId[])
 {
 	switch (type)
 	{
