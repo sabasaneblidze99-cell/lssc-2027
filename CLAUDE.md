@@ -23,6 +23,7 @@ all'utente deve includere anche il sorgente.
 - `recovery/tools/` — strumenti che hanno ricostruito il sorgente dalla v8.
 
 ## Compilazione
+- `gamemodes/lsrp_completo.pwn` = tutto in un file (per Qawno), rigenerato da `scripts/build.sh`: va committato **a ogni aggiornamento** e messo in ogni pacchetto (l'utente lo vuole sempre).
 - Linux: `PAWNCC=/percorso/pawncc scripts/build.sh` (CEF) e `scripts/build.sh --nocef`.
 - Windows: `compila.bat`.
 - Compiler: pawncc 3.10.10, sempre con `-d3`. `LSRP_CEF=1` attiva il CEF; senza, gli

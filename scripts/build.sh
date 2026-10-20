@@ -10,6 +10,8 @@ DEFS=""; OUT="lsrp.amx"
 if [ "$1" == "--nocef" ]; then DEFS="LSRP_NO_CEF=1"; OUT="lsrp_senza_cef.amx"; fi
 if [ "$1" == "--voice" ]; then DEFS="LSRP_VOICE=1"; OUT="lsrp_voce.amx"; fi
 cd "$ROOT/gamemodes" || exit 1
+# file unico per Qawno, sempre allineato ai moduli
+python3 "$ROOT/scripts/flatten.py" lsrp.pwn lsrp_completo.pwn && sed -i '1i // lsrp_completo.pwn - GENERATO da scripts/flatten.py (lsrp.pwn + modules/) in un solo file per Qawno.\n// Non modificare qui: modificare lsrp.pwn/modules e rigenerare.' lsrp_completo.pwn
 "$PAWNCC" lsrp.pwn -d3 $DEFS \
   -i"$ROOT/toolchain/include/omp-stdlib" \
   -i"$ROOT/toolchain/include/mysql" \
