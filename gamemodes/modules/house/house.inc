@@ -376,7 +376,6 @@ House_RefreshWorld(idx)
 		DestroyPickup(g_HsPickup[idx]);
 	}
 	g_HsPickup[idx] = CreatePickup(free ? 1273 : 1272, 1, g_HouseRows[idx][hrExtX], g_HouseRows[idx][hrExtY], g_HouseRows[idx][hrExtZ], 0);
-	MapIcons_OnHouseChanged(idx);
 }
 
 House_ResetRowState(idx)

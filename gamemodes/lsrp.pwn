@@ -73,7 +73,6 @@
 #include "modules/cef/cef_bridge.inc"
 #include "modules/ui/hud_cef.inc"
 #include "modules/voice/voice.inc"
-#include "modules/world/mapicons.inc"
 #include "modules/ui/cef_views.inc"
 #include "modules/character/spawn_select.inc"
 #include "modules/character/char_select.inc"
@@ -215,7 +214,6 @@ public OnPlayerSpawn(playerid)
 	House_OnPlayerSpawn(playerid);
 	Faction_OnPlayerSpawn(playerid);
 	Voice_OnPlayerSpawn(playerid);
-	MapIcons_Apply(playerid);
 	Inv_OnPlayerSpawn(playerid);
 	Living_OnPlayerSpawn(playerid);
 	return 1;
