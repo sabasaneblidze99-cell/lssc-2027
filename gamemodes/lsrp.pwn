@@ -63,6 +63,7 @@
 #include "modules/living/living_api.inc"
 #include "modules/district/district.inc"
 #include "modules/director/director.inc"
+#include "modules/rental/street_rental.inc"
 #include "modules/rental/rental.inc"
 #include "modules/taxi/taxi.inc"
 #include "modules/freight/freight.inc"
@@ -71,6 +72,7 @@
 #include "modules/cef/cef_bridge.inc"
 #include "modules/ui/hud_cef.inc"
 #include "modules/voice/voice.inc"
+#include "modules/world/mapicons.inc"
 #include "modules/commands/admin_commands.inc"
 #include "modules/commands/rp_commands.inc"
 
@@ -98,6 +100,7 @@ public OnGameModeInit()
 	Bank_OnInit();
 	Living_OnInit();
 	HudCef_OnInit();
+	StreetRental_OnInit();
 	Voice_OnInit();
 	CefBridge_OnInit();
 	return 1;
@@ -111,6 +114,7 @@ public OnGameModeExit()
 	Intro_OnExit();
 	Job_OnExit();
 	HudCef_OnExit();
+	StreetRental_OnExit();
 	Voice_OnExit();
 	Living_OnExit();
 	Faction_OnExit();
@@ -133,6 +137,7 @@ public OnPlayerConnect(playerid)
 	Faction_OnPlayerConnect(playerid);
 	Living_OnPlayerConnect(playerid);
 	HudCef_OnPlayerConnect(playerid);
+	StreetRental_OnPlayerConnect(playerid);
 	Account_OnConnect(playerid);
 	return 1;
 }
@@ -145,6 +150,7 @@ public OnPlayerDisconnect(playerid, reason)
 	Living_OnPlayerDisconnect(playerid, reason);
 	Voice_OnPlayerDisconnect(playerid);
 	HudCef_OnPlayerDisconnect(playerid);
+	StreetRental_OnPlayerDisconnect(playerid);
 	Veh_OnPlayerDisconnect(playerid);
 	UI_VehicleUiDestroy(playerid);
 	House_OnPlayerDisconnect(playerid);
@@ -200,6 +206,7 @@ public OnPlayerSpawn(playerid)
 	House_OnPlayerSpawn(playerid);
 	Faction_OnPlayerSpawn(playerid);
 	Voice_OnPlayerSpawn(playerid);
+	MapIcons_Apply(playerid);
 	Inv_OnPlayerSpawn(playerid);
 	Living_OnPlayerSpawn(playerid);
 	return 1;
@@ -242,6 +249,10 @@ public OnPlayerCommandText(playerid, cmdtext[])
 
 public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 {
+	if (StreetRental_OnDialogResponse(playerid, dialogid, response))
+	{
+		return 1;
+	}
 	if (UI_OnDialogResponse(playerid, dialogid, response, listitem, inputtext))
 	{
 		return 1;
@@ -302,6 +313,7 @@ public OnPlayerStateChange(playerid, PLAYER_STATE:newstate, PLAYER_STATE:oldstat
 	Veh_OnPlayerStateChange(playerid, newstate, oldstate);
 	Job_OnPlayerStateChange(playerid, newstate);
 	Living_OnPlayerStateChange(playerid, newstate, oldstate);
+	StreetRental_OnStateChange(playerid, newstate);
 	return 1;
 }
 
@@ -310,6 +322,7 @@ public OnVehicleDeath(vehicleid, killerid)
 	Veh_OnVehicleDeath(vehicleid, killerid);
 	Job_OnVehicleDeath(vehicleid);
 	Living_OnVehicleDeath(vehicleid, killerid);
+	StreetRental_OnVehicleDeath(vehicleid);
 	return 1;
 }
 

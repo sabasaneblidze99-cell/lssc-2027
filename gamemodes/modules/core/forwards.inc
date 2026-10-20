@@ -379,4 +379,5 @@ forward Cef_OnQuickClose(playerid, arguments[]);
 forward Cef_OnChatSend(playerid, arguments[]);
 forward Cmd_chatsamp(playerid, params[]);
 forward Cmd_chatcef(playerid, params[]);
+forward StreetRental_OnTick();
 forward Voice_OnTick();

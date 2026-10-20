@@ -144,7 +144,7 @@ Lang_Translit(const src[], dest[], size)
 	dest[o] = 0;
 }
 
-bool:Lang_ShowPlayerDialog(playerid, dialogid, t_DIALOG_STYLE:style, title[], body[], button1[], button2[])
+bool:Lang_ShowPlayerDialog(playerid, dialogid, t_DIALOG_STYLE:style, const title[], const body[], const button1[], const button2[])
 {
 	static cap[128], b1[64], b2[64], out[4096];
 	Lang_Translit(title, cap, 128);

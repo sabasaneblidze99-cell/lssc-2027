@@ -131,9 +131,9 @@ Rental_ScheduleRetry(playerid)
 	}
 }
 
-bool:Rental_BeginOpen(playerid, vkind, blocks, rentClass)
+bool:Rental_BeginOpen(playerid, vkind, blocks, rentClass, streetModel = 0)
 {
-	new model = LD_RentalModel(vkind);
+	new model = vkind == SRENT_VKIND ? streetModel : LD_RentalModel(vkind);
 	if (model <= 0 || gPlayer[playerid][pRentalId] != 0 || gPlayer[playerid][pRentalPendOp] != 0)
 	{
 		return 0;
@@ -154,6 +154,10 @@ bool:Rental_BeginOpen(playerid, vkind, blocks, rentClass)
 
 bool:Rental_SpawnVehicle(playerid)
 {
+	if (gPlayer[playerid][pRentalKind] == SRENT_VKIND)
+	{
+		return StreetRental_Take(playerid);   // auto di strada: si consegna quella parcheggiata
+	}
 	new vkind = gPlayer[playerid][pRentalKind], model = LD_RentalModel(vkind);
 	new bool:pro = gPlayer[playerid][pRentalClass] == 2;
 	new Float:x = 1512.0, Float:y = -1708.0, Float:z = 13.5, Float:a = 180.0;
@@ -349,7 +353,13 @@ Rental_OnOpenResult(playerid, result, rentalId, amount, dueAt)
 		Taxi_OnProRental(playerid, 1, gPlayer[playerid][pRentalVehicle]);
 		return 0;
 	}
-	new name[16], minutes = (dueAt - gettime() + 60 - 1) / 60;
+	new name[24], minutes = (dueAt - gettime() + 60 - 1) / 60;
+	if (gPlayer[playerid][pRentalKind] == SRENT_VKIND)
+	{
+		Veh_StdModelName(GetVehicleModel(gPlayer[playerid][pRentalVehicle]), name);
+		SendClientMessage(playerid, 0x66DD66FF, "ქირაობა აქტიურია: %s - %d წუთი ($%d). დაბრუნება ნებისმიერ ადგილას: /riconsegna", name, minutes > 0 ? minutes : 0, g_RtFee[playerid]);
+		return 1;
+	}
 	Rental_KindName(gPlayer[playerid][pRentalKind], name, 16);
 	SendClientMessage(playerid, 0x66DD66FF, "Noleggio attivo: %s per %d minuti (canone $%d, cauzione $%d). Riportalo qui con /riconsegna.", name, minutes > 0 ? minutes : 0, g_RtFee[playerid], g_RtDeposit[playerid]);
 }
@@ -529,7 +539,7 @@ bool:Rental_CanReturn(playerid, bool:verbose)
 		}
 		return 0;
 	}
-	if (!Rental_AtOffice(playerid, 12.0))
+	if (gPlayer[playerid][pRentalKind] != SRENT_VKIND && !Rental_AtOffice(playerid, 12.0))
 	{
 		if (verbose)
 		{

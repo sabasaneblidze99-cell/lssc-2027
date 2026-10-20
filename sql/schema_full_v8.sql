@@ -1259,7 +1259,7 @@ CREATE TABLE IF NOT EXISTS `ct_payouts` (
   CONSTRAINT `ck_ctpayouts_amount` CHECK (`amount` >= 0 AND `amount` <= `reward`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Noleggi. class 1 personale, 2 professionale (taxi). vkind 1 Faggio, 2 Previon, 3 Manana, 4 Taxi. state: 1 aperto, 2 chiuso (riconsegna),
+-- Noleggi. class 1 personale, 2 professionale (taxi). vkind 1 Faggio, 2 Previon, 3 Manana, 4 Taxi, 5 auto di strada (013). state: 1 aperto, 2 chiuso (riconsegna),
 -- 3 interrotto (disconnessione/morte/riavvio: cauzione 100%), 4 scaduto (cauzione persa), 5 annullato (rimborso totale: compensazione).
 -- fee/deposit = addebitati; cash_paid = parte pagata in contanti (il resto in banca). open_char (generata) UNIQUE = un solo noleggio aperto per personaggio.
 CREATE TABLE IF NOT EXISTS `rentals` (
@@ -2298,15 +2298,16 @@ main: BEGIN
     WHEN 2 THEN SET v_feeb = ld_cfg('RENT_FEE_PREVION'); SET v_dep = ld_cfg('RENT_DEP_PREVION');
     WHEN 3 THEN SET v_feeb = ld_cfg('RENT_FEE_MANANA');  SET v_dep = ld_cfg('RENT_DEP_MANANA');
     WHEN 4 THEN SET v_feeb = ld_cfg('TAXI_RENT_HOUR');   SET v_dep = ld_cfg('TAXI_DEP');
+    WHEN 5 THEN SET v_feeb = ld_cfg('RENT_FEE_STREET');  SET v_dep = ld_cfg('RENT_DEP_STREET');
     ELSE SET v_feeb = 0;
   END CASE;
   SET v_class = IF(p_vkind = 4, 2, 1);
-  SET v_min = IF(v_class = 2, 60, ld_cfg('RENT_BLOCK_MIN'));
+  SET v_min = IF(v_class = 2, 60, IF(p_vkind = 5, ld_cfg('RENT_STREET_MIN'), ld_cfg('RENT_BLOCK_MIN')));
   SET v_lvl = IF(v_class = 2, ld_cfg('TAXI_MIN_LEVEL'), ld_cfg('RENT_MIN_LEVEL'));
-  IF v_class = 1 AND v_bank IS NOT NULL THEN SET v_disc = ld_disc_pct(p_char); END IF;
+  IF v_class = 1 AND p_vkind <> 5 AND v_bank IS NOT NULL THEN SET v_disc = ld_disc_pct(p_char); END IF;
   SET v_fee = (v_feeb * COALESCE(p_blocks, 0) * (100 - v_disc) + 99) DIV 100;
   SET v_tot = v_fee + v_dep;
-  IF v_bank IS NULL OR v_feeb = 0 OR p_blocks IS NULL OR p_blocks NOT BETWEEN 1 AND ld_cfg('RENT_BLOCKS_MAX') OR p_cash IS NULL OR p_cash < 0
+  IF v_bank IS NULL OR v_feeb = 0 OR p_blocks IS NULL OR p_blocks NOT BETWEEN 1 AND IF(p_vkind = 5, 1, ld_cfg('RENT_BLOCKS_MAX')) OR p_cash IS NULL OR p_cash < 0
      OR p_level IS NULL OR p_model IS NULL OR p_model NOT BETWEEN 0 AND 65535 THEN
     SET v_res = 9;
   ELSEIF EXISTS (SELECT 1 FROM `rentals` WHERE `open_char` = p_char) OR EXISTS (SELECT 1 FROM `ct_participants` WHERE `active_char` = p_char) OR p_level < v_lvl THEN
@@ -2847,7 +2848,7 @@ INSERT IGNORE INTO `ld_config` (`k`, `v`) VALUES
   ('FRT_INTEG_OK', 70), ('FRT_INTEG_PENALTY_PCT', 25), ('FRT_INTEG_FAIL', 30), ('FRT_ABANDON_REP', -5),
   ('PRO_REP_DELIVERY', 12), ('PRO_REP_ONTIME', 4), ('PRO_REP_FAIL', -15), ('PRO_REP_RIDE', 8), ('PRO_REP_DAY_CAP', 60),
   ('PRO_TIER1', 100), ('PRO_TIER2', 300), ('PRO_TIER3', 600), ('PRO_BONUS1_PCT', 5), ('PRO_BONUS2_PCT', 10), ('PRO_BONUS3_PCT', 15),
-  ('RENT_MIN_LEVEL', 1), ('RENT_BLOCK_MIN', 20), ('RENT_BLOCKS_MAX', 3), ('RENT_GRACE_MS', 300000), ('RENT_HEALTH_ZERO', 300), ('RENT_HEALTH_FULL', 1000),
+  ('RENT_FEE_STREET', 179), ('RENT_DEP_STREET', 0), ('RENT_STREET_MIN', 60), ('RENT_MIN_LEVEL', 1), ('RENT_BLOCK_MIN', 20), ('RENT_BLOCKS_MAX', 3), ('RENT_GRACE_MS', 300000), ('RENT_HEALTH_ZERO', 300), ('RENT_HEALTH_FULL', 1000),
   ('RENT_FEE_FAGGIO', 30), ('RENT_FEE_PREVION', 60), ('RENT_FEE_MANANA', 70), ('RENT_DEP_FAGGIO', 200), ('RENT_DEP_PREVION', 400), ('RENT_DEP_MANANA', 450),
   ('TAXI_MIN_LEVEL', 2), ('TAXI_DEP', 300), ('TAXI_RENT_HOUR', 60), ('TAXI_BASE', 15), ('TAXI_PER_M_X100', 12), ('TAXI_TAX_PCT', 10),
   ('TAXI_NPC_HOURLY', 10), ('TAXI_PAIR_HOURLY', 3), ('TAXI_RATING_WINDOW', 20),
