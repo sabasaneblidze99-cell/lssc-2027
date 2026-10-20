@@ -184,7 +184,7 @@ CharSel_ShowList(playerid)
 	gPlayer[playerid][pAuthState] = CS_STATE_LIST;
 	Char_SetLoginCamera(playerid);
 	new away[48];
-	if (CefUI_Active(playerid))
+	if (CefViews_Use(playerid))
 	{
 		cef_emit_event(playerid, "lssc:chars_begin", 1, CS_SLOTS);
 		for (new s = 0; s < CS_SLOTS; s++)
@@ -193,7 +193,7 @@ CharSel_ShowList(playerid)
 			cef_emit_event(playerid, "lssc:chars_add", 1, s, 1, g_CsId[playerid][s] > 0 ? 1 : 0, 0, g_CsName[playerid][s],
 				1, g_CsLevel[playerid][s], 1, g_CsCash[playerid][s], 1, g_CsSkin[playerid][s], 0, away);
 		}
-		CefUI_Open(playerid, "chars", "");
+		CefViews_Open(playerid, CEFV_CHARS, "chars");
 		return 1;
 	}
 	new body[1024], line[256];
@@ -229,7 +229,7 @@ CharSel_Pick(playerid, slot)
 	g_CsSlot[playerid] = slot;
 	g_CsNewName[playerid][0] = 0;
 	gPlayer[playerid][pAuthState] = 4;
-	if (CefUI_Active(playerid))
+	if (CefViews_Use(playerid))
 	{
 		CefUI_Close(playerid, "chars");
 	}
@@ -245,7 +245,7 @@ CharSel_StartNew(playerid, slot)
 	g_CsBirth[playerid][0] = 0;
 	g_CsBusy[playerid] = false;
 	gPlayer[playerid][pAuthState] = CS_STATE_NEW;
-	if (CefUI_Active(playerid))
+	if (CefViews_Use(playerid))
 	{
 		g_CsCef[playerid] = true;
 		if (CharSel_CountChars(playerid) == 0)
@@ -256,7 +256,7 @@ CharSel_StartNew(playerid, slot)
 			{
 				cef_emit_event(playerid, "lssc:chars_add", 1, s, 1, 0, 0, "", 1, 0, 1, 0, 1, 0, 0, "");
 			}
-			CefUI_Open(playerid, "chars", "");
+			CefViews_Open(playerid, CEFV_CHARS, "chars");
 		}
 		cef_emit_event(playerid, "lssc:chars_new", 1, slot);   // la pagina mostra il modulo nome + nascita
 		return 1;
@@ -495,6 +495,20 @@ bool:CharSel_ApplyLoadedName(playerid)
 		return true;
 	}
 	return SetPlayerName(playerid, g_CsLoadedName[playerid]) == 1;
+}
+
+// pagina CEF senza la vista chars: si continua con i dialog (ui/cef_views.inc)
+CharSel_OnCefFallback(playerid)
+{
+	g_CsCef[playerid] = false;
+	if (gPlayer[playerid][pAuthState] == CS_STATE_LIST)
+	{
+		CharSel_ShowList(playerid);
+	}
+	else if (gPlayer[playerid][pAuthState] == CS_STATE_NEW)
+	{
+		CharSel_ShowNameDialog(playerid, "");
+	}
 }
 
 // usate da database/db_character.inc (incluso prima di questo file)

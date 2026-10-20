@@ -119,7 +119,7 @@
   }
 
   LSSC.registerView("chars", {
-    show: function () { busy = false; render(); root.hidden = false; },
+    show: function () { busy = false; render(); root.hidden = false; LSSC.emit("lssc:view_ok", "chars"); },
     hide: function () { root.hidden = true; },
     onEscape: function () { if (mode === "new" && slots.some(function (c) { return c.used; }) && !busy) { mode = "list"; err = ""; LSSC.emit("lssc:char_back"); render(); } return true; }
   });

@@ -952,6 +952,8 @@ forward SpawnSel_OnInfo(playerid, charId, token);
 forward SpawnSel_OnTimeout(playerid, token);
 forward Cef_OnSpawnPick(playerid, arguments[]);
 forward LSRP_VoiceInfo(playerid);
+forward Cef_OnViewOk(playerid, arguments[]);
+forward CefViews_OnTimeout(playerid, which);
 
 // ===== modules/core/chat.inc =====
 // =============================================================================
@@ -36279,6 +36281,7 @@ CefBridge_OnInit()
 	cef_subscribe("lssc:quick_close", "Cef_OnQuickClose");
 	cef_subscribe("lssc:spawn_pick", "Cef_OnSpawnPick");
 	cef_subscribe("lssc:char_pick", "Cef_OnCharPick");
+	cef_subscribe("lssc:view_ok", "Cef_OnViewOk");
 	cef_subscribe("lssc:char_create", "Cef_OnCharCreate");
 	cef_subscribe("lssc:char_back", "Cef_OnCharBack");
 	SetTimer("CefBridge_ClockTick", 30000, 1);
@@ -36707,15 +36710,14 @@ public Cef_OnStory(playerid, arguments[])
 
 public Cef_OnQuit(playerid, arguments[])
 {
-	if (!CefBridge_AuthOk(playerid))
+	// "გასვლა": in qualunque momento prima dello spawn (login, registrazione, personaggio, storia)
+	if (!IsPlayerConnected(playerid) || !CefUI_Active(playerid) || gPlayer[playerid][pSpawned])
 	{
 		return 1;
 	}
-	new st = gPlayer[playerid][pAuthState];
-	if (st == 3 || st == 1)
-	{
-		Account_Kick(playerid, "Accesso annullato.");
-	}
+	cef_emit_event(playerid, "lssc:close", 0, "");   // via la pagina: si vede la disconnessione
+	CefUI_OnPageClosed(playerid);
+	Account_Kick(playerid, "ნახვამდის! თამაშიდან გასასვლელად დაწერე /q");
 	return 1;
 }
 
@@ -37354,6 +37356,89 @@ MapIcons_OnHouseChanged(idx)
 	}
 }
 
+// ===== modules/ui/cef_views.inc =====
+// =============================================================================
+// ui/cef_views.inc - viste CEF nuove (chars, spawn) con conferma dalla pagina.
+//
+// Se il giocatore ha una pagina CEF vecchia (cef/assets non aggiornati) la vista nuova non esiste:
+// la pagina non conferma entro 3 s -> si chiude il CEF e si usano i dialog. Cosi' il login non si blocca mai.
+// La pagina conferma con lssc:view_ok <nome> (chars.js, spawn.js).
+// =============================================================================
+
+#define CEFV_ACK_MS   (3000)
+#define CEFV_CHARS    (1)
+#define CEFV_SPAWN    (2)
+
+new bool:g_CvOld[MAX_PLAYERS];      // pagina senza le viste nuove: solo dialog
+new g_CvTimer[MAX_PLAYERS];
+new g_CvWaiting[MAX_PLAYERS];       // vista in attesa di conferma (0 nessuna)
+
+CefViews_OnPlayerConnect(playerid)
+{
+	g_CvOld[playerid] = false;
+	g_CvWaiting[playerid] = 0;
+	CefViews_StopTimer(playerid);
+}
+
+CefViews_StopTimer(playerid)
+{
+	if (g_CvTimer[playerid] != 0)
+	{
+		KillTimer(g_CvTimer[playerid]);
+		g_CvTimer[playerid] = 0;
+	}
+}
+
+// la vista nuova si puo' usare?
+stock bool:CefViews_Use(playerid)
+{
+	return CefUI_Active(playerid) && !g_CvOld[playerid];
+}
+
+CefViews_Open(playerid, which, const view[])
+{
+	new v[16];
+	strcat(v, view);
+	CefUI_Open(playerid, v, "");
+	g_CvWaiting[playerid] = which;
+	CefViews_StopTimer(playerid);
+	g_CvTimer[playerid] = SetTimerEx("CefViews_OnTimeout", CEFV_ACK_MS, false, "dd", playerid, which);
+}
+
+public Cef_OnViewOk(playerid, arguments[])
+{
+	if (IsPlayerConnected(playerid))
+	{
+		g_CvWaiting[playerid] = 0;
+		CefViews_StopTimer(playerid);
+	}
+	return 1;
+}
+
+public CefViews_OnTimeout(playerid, which)
+{
+	g_CvTimer[playerid] = 0;
+	if (!IsPlayerConnected(playerid) || g_CvWaiting[playerid] != which)
+	{
+		return 1;
+	}
+	g_CvWaiting[playerid] = 0;
+	g_CvOld[playerid] = true;
+	printf("[CEF] giocatore %d: pagina CEF senza la vista %d (cef/assets da aggiornare): uso i dialog", playerid, which);
+	cef_emit_event(playerid, "lssc:close", 0, "");     // chiude qualunque vista (anche il login rimasto a meta')
+	CefUI_OnPageClosed(playerid);
+	Util_Send(playerid, 0xFFB547FF, "CEF ინტერფეისი მოძველებულია: განაახლე cef/assets. ახლა გამოიყენება ფანჯრები.");
+	if (which == CEFV_CHARS)
+	{
+		CharSel_OnCefFallback(playerid);
+	}
+	else if (which == CEFV_SPAWN)
+	{
+		SpawnSel_OnCefFallback(playerid);
+	}
+	return 1;
+}
+
 // ===== modules/character/spawn_select.inc =====
 // =============================================================================
 // character/spawn_select.inc - scelta del punto di spawn dopo il login.
@@ -37715,7 +37800,7 @@ SpawnSel_Show(playerid)
 		return 1;
 	}
 	new icon[16], title[96], sub[192];
-	if (CefUI_Active(playerid))
+	if (CefViews_Use(playerid))
 	{
 		cef_emit_event(playerid, "lssc:spawn_begin", 1, g_SsForced[playerid] ? 1 : 0, 1, SPAWN_CHOICE_MS / 1000);
 		for (new i = 0; i < g_SsCount[playerid]; i++)
@@ -37723,7 +37808,7 @@ SpawnSel_Show(playerid)
 			SpawnSel_Texts(playerid, i, icon, sizeof icon, title, sizeof title, sub, sizeof sub);
 			cef_emit_event(playerid, "lssc:spawn_add", 1, i, 0, icon, 0, title, 0, sub);
 		}
-		CefUI_Open(playerid, "spawn", "");
+		CefViews_Open(playerid, CEFV_SPAWN, "spawn");
 	}
 	else
 	{
@@ -37744,6 +37829,15 @@ SpawnSel_Show(playerid)
 	SpawnSel_StopTimer(playerid);
 	g_SsTimer[playerid] = SetTimerEx("SpawnSel_OnTimeout", SPAWN_CHOICE_MS, false, "dd", playerid, g_SsToken[playerid]);
 	return 1;
+}
+
+// pagina CEF senza la vista spawn: stessa scelta con il dialog
+SpawnSel_OnCefFallback(playerid)
+{
+	if (gPlayer[playerid][pAuthState] == SPAWN_AUTH_STATE)
+	{
+		SpawnSel_Show(playerid);
+	}
 }
 
 SpawnSel_Pick(playerid, idx)
@@ -38001,7 +38095,7 @@ CharSel_ShowList(playerid)
 	gPlayer[playerid][pAuthState] = CS_STATE_LIST;
 	Char_SetLoginCamera(playerid);
 	new away[48];
-	if (CefUI_Active(playerid))
+	if (CefViews_Use(playerid))
 	{
 		cef_emit_event(playerid, "lssc:chars_begin", 1, CS_SLOTS);
 		for (new s = 0; s < CS_SLOTS; s++)
@@ -38010,7 +38104,7 @@ CharSel_ShowList(playerid)
 			cef_emit_event(playerid, "lssc:chars_add", 1, s, 1, g_CsId[playerid][s] > 0 ? 1 : 0, 0, g_CsName[playerid][s],
 				1, g_CsLevel[playerid][s], 1, g_CsCash[playerid][s], 1, g_CsSkin[playerid][s], 0, away);
 		}
-		CefUI_Open(playerid, "chars", "");
+		CefViews_Open(playerid, CEFV_CHARS, "chars");
 		return 1;
 	}
 	new body[1024], line[256];
@@ -38046,7 +38140,7 @@ CharSel_Pick(playerid, slot)
 	g_CsSlot[playerid] = slot;
 	g_CsNewName[playerid][0] = 0;
 	gPlayer[playerid][pAuthState] = 4;
-	if (CefUI_Active(playerid))
+	if (CefViews_Use(playerid))
 	{
 		CefUI_Close(playerid, "chars");
 	}
@@ -38062,7 +38156,7 @@ CharSel_StartNew(playerid, slot)
 	g_CsBirth[playerid][0] = 0;
 	g_CsBusy[playerid] = false;
 	gPlayer[playerid][pAuthState] = CS_STATE_NEW;
-	if (CefUI_Active(playerid))
+	if (CefViews_Use(playerid))
 	{
 		g_CsCef[playerid] = true;
 		if (CharSel_CountChars(playerid) == 0)
@@ -38073,7 +38167,7 @@ CharSel_StartNew(playerid, slot)
 			{
 				cef_emit_event(playerid, "lssc:chars_add", 1, s, 1, 0, 0, "", 1, 0, 1, 0, 1, 0, 0, "");
 			}
-			CefUI_Open(playerid, "chars", "");
+			CefViews_Open(playerid, CEFV_CHARS, "chars");
 		}
 		cef_emit_event(playerid, "lssc:chars_new", 1, slot);   // la pagina mostra il modulo nome + nascita
 		return 1;
@@ -38312,6 +38406,20 @@ bool:CharSel_ApplyLoadedName(playerid)
 		return true;
 	}
 	return SetPlayerName(playerid, g_CsLoadedName[playerid]) == 1;
+}
+
+// pagina CEF senza la vista chars: si continua con i dialog (ui/cef_views.inc)
+CharSel_OnCefFallback(playerid)
+{
+	g_CsCef[playerid] = false;
+	if (gPlayer[playerid][pAuthState] == CS_STATE_LIST)
+	{
+		CharSel_ShowList(playerid);
+	}
+	else if (gPlayer[playerid][pAuthState] == CS_STATE_NEW)
+	{
+		CharSel_ShowNameDialog(playerid, "");
+	}
 }
 
 // usate da database/db_character.inc (incluso prima di questo file)
@@ -40087,6 +40195,7 @@ public OnPlayerConnect(playerid)
 	StreetRental_OnPlayerConnect(playerid);
 	SpawnSel_OnPlayerConnect(playerid);
 	CharSel_OnPlayerConnect(playerid);
+	CefViews_OnPlayerConnect(playerid);
 	Account_OnConnect(playerid);
 	return 1;
 }

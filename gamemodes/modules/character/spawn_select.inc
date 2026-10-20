@@ -358,7 +358,7 @@ SpawnSel_Show(playerid)
 		return 1;
 	}
 	new icon[16], title[96], sub[192];
-	if (CefUI_Active(playerid))
+	if (CefViews_Use(playerid))
 	{
 		cef_emit_event(playerid, "lssc:spawn_begin", 1, g_SsForced[playerid] ? 1 : 0, 1, SPAWN_CHOICE_MS / 1000);
 		for (new i = 0; i < g_SsCount[playerid]; i++)
@@ -366,7 +366,7 @@ SpawnSel_Show(playerid)
 			SpawnSel_Texts(playerid, i, icon, sizeof icon, title, sizeof title, sub, sizeof sub);
 			cef_emit_event(playerid, "lssc:spawn_add", 1, i, 0, icon, 0, title, 0, sub);
 		}
-		CefUI_Open(playerid, "spawn", "");
+		CefViews_Open(playerid, CEFV_SPAWN, "spawn");
 	}
 	else
 	{
@@ -387,6 +387,15 @@ SpawnSel_Show(playerid)
 	SpawnSel_StopTimer(playerid);
 	g_SsTimer[playerid] = SetTimerEx("SpawnSel_OnTimeout", SPAWN_CHOICE_MS, false, "dd", playerid, g_SsToken[playerid]);
 	return 1;
+}
+
+// pagina CEF senza la vista spawn: stessa scelta con il dialog
+SpawnSel_OnCefFallback(playerid)
+{
+	if (gPlayer[playerid][pAuthState] == SPAWN_AUTH_STATE)
+	{
+		SpawnSel_Show(playerid);
+	}
 }
 
 SpawnSel_Pick(playerid, idx)

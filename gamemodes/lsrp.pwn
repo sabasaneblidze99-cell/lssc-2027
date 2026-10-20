@@ -74,6 +74,7 @@
 #include "modules/ui/hud_cef.inc"
 #include "modules/voice/voice.inc"
 #include "modules/world/mapicons.inc"
+#include "modules/ui/cef_views.inc"
 #include "modules/character/spawn_select.inc"
 #include "modules/character/char_select.inc"
 #include "modules/commands/admin_commands.inc"
@@ -143,6 +144,7 @@ public OnPlayerConnect(playerid)
 	StreetRental_OnPlayerConnect(playerid);
 	SpawnSel_OnPlayerConnect(playerid);
 	CharSel_OnPlayerConnect(playerid);
+	CefViews_OnPlayerConnect(playerid);
 	Account_OnConnect(playerid);
 	return 1;
 }

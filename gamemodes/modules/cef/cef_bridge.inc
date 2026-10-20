@@ -25,6 +25,7 @@ CefBridge_OnInit()
 	cef_subscribe("lssc:quick_close", "Cef_OnQuickClose");
 	cef_subscribe("lssc:spawn_pick", "Cef_OnSpawnPick");
 	cef_subscribe("lssc:char_pick", "Cef_OnCharPick");
+	cef_subscribe("lssc:view_ok", "Cef_OnViewOk");
 	cef_subscribe("lssc:char_create", "Cef_OnCharCreate");
 	cef_subscribe("lssc:char_back", "Cef_OnCharBack");
 	SetTimer("CefBridge_ClockTick", 30000, 1);
@@ -453,14 +454,13 @@ public Cef_OnStory(playerid, arguments[])
 
 public Cef_OnQuit(playerid, arguments[])
 {
-	if (!CefBridge_AuthOk(playerid))
+	// "გასვლა": in qualunque momento prima dello spawn (login, registrazione, personaggio, storia)
+	if (!IsPlayerConnected(playerid) || !CefUI_Active(playerid) || gPlayer[playerid][pSpawned])
 	{
 		return 1;
 	}
-	new st = gPlayer[playerid][pAuthState];
-	if (st == 3 || st == 1)
-	{
-		Account_Kick(playerid, "Accesso annullato.");
-	}
+	cef_emit_event(playerid, "lssc:close", 0, "");   // via la pagina: si vede la disconnessione
+	CefUI_OnPageClosed(playerid);
+	Account_Kick(playerid, "ნახვამდის! თამაშიდან გასასვლელად დაწერე /q");
 	return 1;
 }

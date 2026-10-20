@@ -86,6 +86,7 @@
       sel = 0; sent = false; left = seconds;
       render();
       root.hidden = false;
+      LSSC.emit("lssc:view_ok", "spawn");
       if (tick) clearInterval(tick);
       tick = setInterval(function () { if (left > 0) { left--; upTimer(); } }, 1000);
     },
