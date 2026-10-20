@@ -29,8 +29,8 @@ new g_JobDwellMs[4] = {0, 4000, 5000, 4000};
 new Float:g_JobBusStops[6][3] = {
 	{1135.0, -1455.0, 15.5},
 	{1534.0, -1664.0, 13.4},
-	{1967.0, 0xC4960000, 25.0},
-	{0x45066000, 0xC49C4000, 23.9},
+	{1967.0, -1200.0, 25.0},
+	{2150.0, -1250.0, 23.9},
 	{2465.0, -1698.0, 13.5},
 	{2065.0, -1703.5, 13.6}
 };
@@ -38,21 +38,21 @@ new Float:g_JobCourierPts[8][3] = {
 	{2465.0, -1698.0, 13.5},
 	{2065.0, -1703.5, 14.1},
 	{2032.0, -1665.0, 14.0},
-	{0x45048000, 0xC4F00000, 13.6},
-	{0x45066000, 0xC49C4000, 23.9},
-	{2306.0, 0xC494C000, 27.0},
-	{2654.0, 0xC4B7C000, 30.4},
-	{0x452A0000, 0xC4A14000, 59.6}
+	{2120.0, -1920.0, 13.6},
+	{2150.0, -1250.0, 23.9},
+	{2306.0, -1190.0, 27.0},
+	{2654.0, -1470.0, 30.4},
+	{2720.0, -1290.0, 59.6}
 };
 new Float:g_JobBinPts[8][3] = {
-	{0x45048000, 0xC4F00000, 13.6},
-	{2065.0, 0xC4DFC000, 13.6},
-	{0x44F3C000, -1815.0, 13.6},
-	{2032.0, 0xC4D48000, 14.0},
-	{0x45070000, 0xC4DC0000, 13.6},
-	{0x450FC000, 0xC4E10000, 13.6},
+	{2120.0, -1920.0, 13.6},
+	{2065.0, -1790.0, 13.6},
+	{1950.0, -1815.0, 13.6},
+	{2032.0, -1700.0, 14.0},
+	{2160.0, -1760.0, 13.6},
+	{2300.0, -1800.0, 13.6},
 	{2465.0, -1698.0, 13.5},
-	{0x45160000, 0xC4ED8000, 13.6}
+	{2400.0, -1900.0, 13.6}
 };
 new bool:g_JsActive[MAX_PLAYERS];
 new g_JsJob[MAX_PLAYERS];
@@ -224,7 +224,7 @@ Job_SpawnPos(job, &Float:x, &Float:y, &Float:z, &Float:a)
 			x = 1796.0;
 			y = -1872.0;
 			z = 13.6;
-			a = Float:0x42B40000;
+			a = 90.0;
 		}
 		case 3:
 		{
@@ -499,7 +499,7 @@ Job_StepDone(playerid, now)
 	Job_TargetPos(playerid, tx, ty, tz);
 	new Float:dx = (tx - g_JsLastPos[playerid][0]), Float:dy = (ty - g_JsLastPos[playerid][1]), Float:dz = (tz - g_JsLastPos[playerid][2]);
 	new Float:dist = floatsqroot((((dx * dx) + (dy * dy)) + (dz * dz))), elapsedMs = now - g_JsLastCpTick[playerid];
-	if (elapsedMs < 400 || ((dist * float(1000)) > (Float:0x42200000 * float(elapsedMs))))
+	if (elapsedMs < 400 || ((dist * float(1000)) > (40.0 * float(elapsedMs))))
 	{
 		new name[25], msg[128];
 		GetPlayerName(playerid, name, 25);
@@ -557,7 +557,7 @@ public Job_OnTick()
 		}
 		new Float:hp;
 		GetVehicleHealth(veh, hp);
-		if ((hp < Float:0x43960000))
+		if ((hp < 300.0))
 		{
 			Job_Cancel(i, "veicolo di lavoro distrutto.");
 			continue;
@@ -576,7 +576,7 @@ public Job_OnTick()
 			}
 			new offMs = now - g_JsOffTick[i], Float:px, Float:py, Float:pz;
 			GetPlayerPos(i, px, py, pz);
-			if (offMs >= 45000 || (GetVehicleDistanceFromPoint(veh, px, py, pz) > Float:0x43160000))
+			if (offMs >= 45000 || (GetVehicleDistanceFromPoint(veh, px, py, pz) > 150.0))
 			{
 				Job_Cancel(i, "veicolo di lavoro abbandonato.");
 				continue;
@@ -661,7 +661,7 @@ Job_Start(playerid)
 	}
 	new Float:x, Float:y, Float:z, Float:a;
 	Job_SpawnPos(job, x, y, z, a);
-	if (!IsPlayerInRangeOfPoint(playerid, Float:0x42200000, x, y, z))
+	if (!IsPlayerInRangeOfPoint(playerid, 40.0, x, y, z))
 	{
 		Util_Send(playerid, -10270721, "Devi trovarti al deposito del tuo lavoro per iniziare il turno.");
 		return 0;
@@ -677,7 +677,7 @@ Job_Start(playerid)
 		Util_Send(playerid, -10270721, "Impossibile creare il veicolo di lavoro. Riprova.");
 		return 0;
 	}
-	SetVehicleHealth(veh, Float:0x447A0000);
+	SetVehicleHealth(veh, 1000.0);
 	SetVehicleParamsEx(veh, 1, 0, 0, 0, 0, 0, 0);
 	g_JSerialSeq++;
 	g_JVehOwner[veh] = playerid;

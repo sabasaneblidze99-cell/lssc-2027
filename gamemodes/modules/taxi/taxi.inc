@@ -1,5 +1,5 @@
-new Float:g_TxNpcX[6] = {0x44F3C000, 0x44E60000, 0x451BA000, 0x45174000, 2145.0, 0x45098000};
-new Float:g_TxNpcY[6] = {0xC4DD4000, 0xC4E74000, 0xC4D34000, 0xC4D98000, -1215.0, 0xC4910000};
+new Float:g_TxNpcX[6] = {1950.0, 1840.0, 2490.0, 2420.0, 2145.0, 2200.0};
+new Float:g_TxNpcY[6] = {-1770.0, -1850.0, -1690.0, -1740.0, -1215.0, -1160.0};
 new Float:g_TxNpcZ[6] = {13.5, 13.6, 13.5, 13.5, 24.0, 24.0};
 new g_TxNpcD[6] = {1, 1, 2, 2, 3, 3};
 new g_TxTimer;
@@ -478,7 +478,7 @@ Taxi_AcceptPlayer(driverid, passengerid)
 		Util_Send(driverid, -10270721, "La chiamata e' gia' stata presa da un altro taxi.");
 		return 0;
 	}
-	if (!Util_InRange(driverid, passengerid, Float:0x44160000))
+	if (!Util_InRange(driverid, passengerid, 600.0))
 	{
 		Util_Send(driverid, -10270721, "Il cliente e' troppo lontano.");
 		return 0;
@@ -594,7 +594,7 @@ Taxi_MeterSample(driverid, vehicleid, bool:count)
 	{
 		new Float:dx = (x - gPlayer[driverid][pTaxiLastX]), Float:dy = (y - gPlayer[driverid][pTaxiLastY]);
 		new Float:step = floatsqroot(((dx * dx) + (dy * dy)));
-		if ((step <= Float:0x428C0000))
+		if ((step <= 70.0))
 		{
 			g_TxMeterF[driverid] += step;
 		}
@@ -1109,7 +1109,7 @@ Taxi_CmdChiamataxi(playerid, params[])
 		{
 			continue;
 		}
-		if (!Util_InRange(d, playerid, Float:0x44160000))
+		if (!Util_InRange(d, playerid, 600.0))
 		{
 			continue;
 		}
@@ -1465,7 +1465,7 @@ Taxi_OnInit()
 	g_TxTimer = SetTimer("Taxi_OnTick", 1000, 1);
 	LD_Listen("Taxi_OnDistrictEvent", 20);
 	CreatePickup(1239, 1, 1771.0, -1895.0, 13.6, 0);
-	Lang_Create3DTextLabel("Deposito taxi\n/taxi on  ·  /taxi off", -2994689, 1771.0, -1895.0, (13.6 + 0.8), Float:0x41A00000, 0, 0);
+	Lang_Create3DTextLabel("Deposito taxi\n/taxi on  ·  /taxi off", -2994689, 1771.0, -1895.0, (13.6 + 0.8), 20.0, 0, 0);
 }
 
 Taxi_OnExit()

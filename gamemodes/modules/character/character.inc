@@ -181,7 +181,7 @@ public UI_OnSkinChosen(playerid, skin)
 	gPlayer[playerid][pBank] = 5000;
 	gPlayer[playerid][pLevel] = 1;
 	gPlayer[playerid][pExp] = 0;
-	gPlayer[playerid][pHealth] = Float:0x42C80000;
+	gPlayer[playerid][pHealth] = 100.0;
 	gPlayer[playerid][pArmor] = 0.0;
 	gPlayer[playerid][pSkin] = skin;
 	Char_PickSpawn(playerid);
@@ -282,7 +282,7 @@ Char_OnSpawn(playerid)
 	SetPlayerSkin(playerid, gPlayer[playerid][pSkin]);
 	SetPlayerInterior(playerid, gPlayer[playerid][pInterior]);
 	SetPlayerVirtualWorld(playerid, gPlayer[playerid][pWorld]);
-	SetPlayerHealth(playerid, Float:0x42C80000);
+	SetPlayerHealth(playerid, 100.0);
 	SetPlayerArmour(playerid, 0.0);
 	SetCameraBehindPlayer(playerid);
 	UI_CloseDialogs(playerid);
@@ -318,7 +318,7 @@ Char_OnDeath(playerid)
 	}
 	Char_RefreshState(playerid);
 	gPlayer[playerid][pSpawned] = 0;
-	gPlayer[playerid][pHealth] = Float:0x42C80000;
+	gPlayer[playerid][pHealth] = 100.0;
 	gPlayer[playerid][pArmor] = 0.0;
 	Char_ApplySpawnInfo(playerid);
 }

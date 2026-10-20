@@ -683,14 +683,14 @@ UI_HhCreate(playerid)
 	{
 		return 0;
 	}
-	new Float:left = (632.0 - Float:0x43160000);
-	new Float:homeLeft = ((left - Float:0x43160000) - 4.0);
-	g_UiHh[playerid][0] = UI_HhBox(playerid, 0.0, 0.0, Float:0x44200000, Float:0x43F50000, 176);
-	g_UiHh[playerid][1] = UI_HhBox(playerid, left, 458.0, Float:0x43160000, 18.0, 153);
+	new Float:left = (632.0 - 150.0);
+	new Float:homeLeft = ((left - 150.0) - 4.0);
+	g_UiHh[playerid][0] = UI_HhBox(playerid, 0.0, 0.0, 640.0, 490.0, 176);
+	g_UiHh[playerid][1] = UI_HhBox(playerid, left, 458.0, 150.0, 18.0, 153);
 	g_UiHh[playerid][2] = UI_HhText(playerid, (4.0 + left), (458.0 + 1.0), "Sazieta' 0%", 0.2, 0.9, -1, 1);
 	g_UiHh[playerid][3] = UI_HhBox(playerid, (4.0 + left), (458.0 + 12.0), 142.0, 4.0, 0x444444FF);
 	g_UiHh[playerid][4] = UI_HhBox(playerid, (4.0 + left), (458.0 + 12.0), 142.0, 4.0, 0x66DD66FF);
-	g_UiHh[playerid][5] = UI_HhBox(playerid, homeLeft, 458.0, Float:0x43160000, 18.0, 153);
+	g_UiHh[playerid][5] = UI_HhBox(playerid, homeLeft, 458.0, 150.0, 18.0, 153);
 	g_UiHh[playerid][6] = UI_HhText(playerid, (4.0 + homeLeft), (458.0 + 3.0), "Luce ON | Gas ON | Frigo 0/0", 0.2, 0.9, -1, 1);
 	g_UiHhCreated[playerid] = 1;
 }
@@ -752,7 +752,7 @@ UI_HungerHudUpdate(playerid, hunger)
 	PlayerTextDrawColor(playerid, g_UiHh[playerid][2], color);
 	PlayerTextDrawBoxColor(playerid, g_UiHh[playerid][4], barColor);
 	new Float:fraction = (float(hunger) / float(100));
-	PlayerTextDrawTextSize(playerid, g_UiHh[playerid][4], (0.1 + ((4.0 + (632.0 - Float:0x43160000)) + (142.0 * fraction))), 0.0);
+	PlayerTextDrawTextSize(playerid, g_UiHh[playerid][4], (0.1 + ((4.0 + (632.0 - 150.0)) + (142.0 * fraction))), 0.0);
 	if (!g_UiHhHunger[playerid])
 	{
 		g_UiHhHunger[playerid] = 1;

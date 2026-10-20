@@ -312,7 +312,7 @@ PlayerText:UI_IntroText(playerid, Float:x, Float:y, text[], Float:lw, Float:lh, 
 	PlayerTextDrawSetOutline(playerid, td, 1);
 	PlayerTextDrawSetShadow(playerid, td, 0);
 	PlayerTextDrawBackgroundColor(playerid, td, 255);
-	PlayerTextDrawTextSize(playerid, td, 0.0, Float:0x44160000);
+	PlayerTextDrawTextSize(playerid, td, 0.0, 600.0);
 	return td;
 }
 
@@ -398,13 +398,13 @@ UI_IntroCreate(playerid)
 	UI_IntroUiDestroy(playerid);
 	CefUI_AuthClose(playerid);
 	g_UiIntroActive[playerid] = 1;
-	g_UiIntroTd[playerid][0] = UI_IntroBox(playerid, 0.0, 0.0, Float:0x44200000, 482.0, 0);
-	g_UiIntroTd[playerid][1] = UI_IntroBox(playerid, 0.0, 0.0, Float:0x44200000, 56.0, 255);
-	g_UiIntroTd[playerid][2] = UI_IntroBox(playerid, 0.0, (Float:0x43F00000 - 56.0), Float:0x44200000, (56.0 + 2.0), 255);
-	g_UiIntroTd[playerid][3] = UI_IntroText(playerid, Float:0x43A00000, (8.0 + (Float:0x43F00000 - 56.0)), "_", 0.3, 1.4, 0xF2F2F2FF, 1);
-	g_UiIntroTd[playerid][4] = UI_IntroText(playerid, Float:0x43A00000, Float:0x432A0000, "LOS SANTOS", 0.9, 3.6, -1, 3);
-	g_UiIntroTd[playerid][5] = UI_IntroText(playerid, Float:0x43A00000, 232.0, "ყველას ისტორია აქ იწყება.", 0.34, 1.5, 0xF2F2F2FF, 1);
-	g_UiIntroTd[playerid][6] = UI_IntroText(playerid, Float:0x43A00000, (Float:0x43F00000 - Float:0x41A00000), "_", 0.22, 1.0, 0xB8B8B8FF, 1);
+	g_UiIntroTd[playerid][0] = UI_IntroBox(playerid, 0.0, 0.0, 640.0, 482.0, 0);
+	g_UiIntroTd[playerid][1] = UI_IntroBox(playerid, 0.0, 0.0, 640.0, 56.0, 255);
+	g_UiIntroTd[playerid][2] = UI_IntroBox(playerid, 0.0, (480.0 - 56.0), 640.0, (56.0 + 2.0), 255);
+	g_UiIntroTd[playerid][3] = UI_IntroText(playerid, 320.0, (8.0 + (480.0 - 56.0)), "_", 0.3, 1.4, 0xF2F2F2FF, 1);
+	g_UiIntroTd[playerid][4] = UI_IntroText(playerid, 320.0, 170.0, "LOS SANTOS", 0.9, 3.6, -1, 3);
+	g_UiIntroTd[playerid][5] = UI_IntroText(playerid, 320.0, 232.0, "ყველას ისტორია აქ იწყება.", 0.34, 1.5, 0xF2F2F2FF, 1);
+	g_UiIntroTd[playerid][6] = UI_IntroText(playerid, 320.0, (480.0 - 20.0), "_", 0.22, 1.0, 0xB8B8B8FF, 1);
 	UI_IntroApplyAlpha(playerid);
 	PlayerTextDrawShow(playerid, g_UiIntroTd[playerid][1]);
 	PlayerTextDrawShow(playerid, g_UiIntroTd[playerid][2]);

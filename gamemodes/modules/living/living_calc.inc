@@ -293,7 +293,7 @@ bool:LD_InBox(kx, ky, Float:x1, Float:y1, Float:x2, Float:y2)
 District_At(Float:x, Float:y)
 {
 	new kx = LD_FloatKey(x), ky = LD_FloatKey(y);
-	if (LD_InBox(kx, ky, 1812.0, Float:0xC4EB0000, 1971.0, -1742.0))
+	if (LD_InBox(kx, ky, 1812.0, -1880.0, 1971.0, -1742.0))
 	{
 		return 1;
 	}

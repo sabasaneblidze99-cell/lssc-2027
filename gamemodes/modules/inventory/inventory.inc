@@ -432,7 +432,7 @@ Inv_RpUse(playerid, action[])
 	new name[25], msg[256];
 	GetPlayerName(playerid, name, 25);
 	format(msg, 256, "* %s %s", name, action);
-	Util_SendNear(playerid, -81.42773, Float:0x41A00000, msg);
+	Util_SendNear(playerid, 0xC2A2DAFF, 20.0, msg);
 }
 
 Inv_ApplyUse(playerid, itemId)
@@ -454,9 +454,9 @@ Inv_ApplyUse(playerid, itemId)
 		{
 			GetPlayerHealth(playerid, hp);
 			hp += float(itemId == 5 ? 25 : 8);
-			if ((hp > Float:0x42C80000))
+			if ((hp > 100.0))
 			{
-				hp = Float:0x42C80000;
+				hp = 100.0;
 			}
 			SetPlayerHealth(playerid, hp);
 			Inv_RpUse(playerid, itemId == 5 ? "usa un kit di pronto soccorso." : "si medica con una benda.");
@@ -715,7 +715,7 @@ public Inv_OnDBDropped(playerid, itemId, qty, result)
 		return 1;
 	}
 	new model = itemId == 5 ? 11736 : 1264;
-	g_InvGround[idx][igObject] = CreateObject(model, g_InvGround[idx][igPosX], g_InvGround[idx][igPosY], g_InvGround[idx][igPosZ], 0.0, 0.0, 0.0, Float:0x42200000);
+	g_InvGround[idx][igObject] = CreateObject(model, g_InvGround[idx][igPosX], g_InvGround[idx][igPosY], g_InvGround[idx][igPosZ], 0.0, 0.0, 0.0, 40.0);
 	g_InvGround[idx][igState] = 2;
 	g_InvGround[idx][igExpireTick] = GetTickCount() + 600000;
 	g_InvGround[idx][igDropper] = 0;

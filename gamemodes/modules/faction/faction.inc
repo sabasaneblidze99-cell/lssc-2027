@@ -284,7 +284,7 @@ Fac_Emote(playerid, text[])
 	new name[25], msg[256];
 	GetPlayerName(playerid, name, 25);
 	format(msg, 256, "* %s %s", name, text);
-	Util_SendNear(playerid, -81.42773, Float:0x41A00000, msg);
+	Util_SendNear(playerid, 0xC2A2DAFF, 20.0, msg);
 }
 
 Fac_FineCap(rank)
@@ -365,7 +365,7 @@ Fac_GiveKit(playerid)
 		GivePlayerWeapon(playerid, 3, 1);
 		GivePlayerWeapon(playerid, 22, 51);
 		GivePlayerWeapon(playerid, 41, 100);
-		SetPlayerArmour(playerid, Float:0x42480000);
+		SetPlayerArmour(playerid, 50.0);
 		return 0;
 	}
 	if (!g_FcKitSet[playerid] || Fac_CdLeftMs(1, g_FcKitRefillLast[playerid], 900000) == 0)
@@ -899,15 +899,15 @@ Faction_CmdCura(playerid, params[])
 	}
 	new Float:hp;
 	GetPlayerHealth(target, hp);
-	if ((hp >= Float:0x42C80000))
+	if ((hp >= 100.0))
 	{
 		Util_Send(playerid, -10270721, "Il bersaglio e' in piena salute.");
 		return 0;
 	}
-	hp = (Float:0x42200000 + hp);
-	if ((hp > Float:0x42C80000))
+	hp = (40.0 + hp);
+	if ((hp > 100.0))
 	{
-		hp = Float:0x42C80000;
+		hp = 100.0;
 	}
 	SetPlayerHealth(target, hp);
 	g_FcHealSet[playerid] = 1;
@@ -992,7 +992,7 @@ Fac_ReviveDone(medic, target)
 	ClearAnimations(medic, 0);
 	gPlayer[target][pWounded] = 0;
 	g_FcInjLeftMs[target] = 0;
-	SetPlayerHealth(target, Float:0x42700000);
+	SetPlayerHealth(target, 60.0);
 	ClearAnimations(target, 0);
 	Faction_UpdateControl(target);
 	UI_InjuryEndShow(target, 2, 0);
@@ -1031,11 +1031,11 @@ Faction_Hospitalize(playerid)
 	g_FcHospPending[playerid] = 0;
 	SetPlayerInterior(playerid, 0);
 	SetPlayerVirtualWorld(playerid, 0);
-	SetPlayerPos(playerid, 1182.0, Float:0xC4A64000, 13.9);
-	SetPlayerFacingAngle(playerid, Float:0x43870000);
+	SetPlayerPos(playerid, 1182.0, -1330.0, 13.9);
+	SetPlayerFacingAngle(playerid, 270.0);
 	SetCameraBehindPlayer(playerid);
 	ClearAnimations(playerid, 0);
-	SetPlayerHealth(playerid, Float:0x42C80000);
+	SetPlayerHealth(playerid, 100.0);
 	Faction_UpdateControl(playerid);
 	UI_InjuryEndShow(playerid, 1, fee);
 	Char_Save(playerid);
@@ -1835,12 +1835,12 @@ Faction_OnPlayerDisconnect(playerid)
 	{
 		gPlayer[playerid][pWounded] = 0;
 		gPlayer[playerid][pPosX] = 1182.0;
-		gPlayer[playerid][pPosY] = Float:0xC4A64000;
+		gPlayer[playerid][pPosY] = -1330.0;
 		gPlayer[playerid][pPosZ] = 13.9;
-		gPlayer[playerid][pAngle] = Float:0x43870000;
+		gPlayer[playerid][pAngle] = 270.0;
 		gPlayer[playerid][pInterior] = 0;
 		gPlayer[playerid][pWorld] = 0;
-		gPlayer[playerid][pHealth] = Float:0x42C80000;
+		gPlayer[playerid][pHealth] = 100.0;
 		gPlayer[playerid][pArmor] = 0.0;
 		gPlayer[playerid][pSpawned] = 0;
 	}

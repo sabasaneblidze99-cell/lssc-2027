@@ -403,7 +403,7 @@ UI_InvRecvRefresh(playerid)
 	{
 		fraction = 1.0;
 	}
-	PlayerTextDrawTextSize(playerid, g_UiInvRecvTd[playerid][3], (0.1 + ((Float:0x43520000 + 6.0) + (208.0 * fraction))), 0.0);
+	PlayerTextDrawTextSize(playerid, g_UiInvRecvTd[playerid][3], (0.1 + ((210.0 + 6.0) + (208.0 * fraction))), 0.0);
 	PlayerTextDrawShow(playerid, g_UiInvRecvTd[playerid][1]);
 	PlayerTextDrawShow(playerid, g_UiInvRecvTd[playerid][3]);
 }
@@ -449,10 +449,10 @@ UI_InvGiveConfirmShow(playerid, giverName[], itemId, qty, ttlSec)
 	{
 		g_UiInvRecvTd[playerid][i] = 65535;
 	}
-	g_UiInvRecvTd[playerid][0] = UI_InvBox(playerid, Float:0x43520000, 124.0, Float:0x435C0000, 26.0, 170);
-	g_UiInvRecvTd[playerid][1] = UI_InvText(playerid, (Float:0x43520000 + 6.0), (124.0 + 2.0), "Scambio in attesa", 0.24, 1.1, -2994689, 1);
-	g_UiInvRecvTd[playerid][2] = UI_InvBox(playerid, (Float:0x43520000 + 6.0), (124.0 + 17.0), 208.0, 5.0, 0x444444FF);
-	g_UiInvRecvTd[playerid][3] = UI_InvBox(playerid, (Float:0x43520000 + 6.0), (124.0 + 17.0), 208.0, 5.0, -2994689);
+	g_UiInvRecvTd[playerid][0] = UI_InvBox(playerid, 210.0, 124.0, 220.0, 26.0, 170);
+	g_UiInvRecvTd[playerid][1] = UI_InvText(playerid, (210.0 + 6.0), (124.0 + 2.0), "Scambio in attesa", 0.24, 1.1, -2994689, 1);
+	g_UiInvRecvTd[playerid][2] = UI_InvBox(playerid, (210.0 + 6.0), (124.0 + 17.0), 208.0, 5.0, 0x444444FF);
+	g_UiInvRecvTd[playerid][3] = UI_InvBox(playerid, (210.0 + 6.0), (124.0 + 17.0), 208.0, 5.0, -2994689);
 	g_UiInvRecvActive[playerid] = 1;
 	g_UiInvRecvTotal[playerid] = ttlSec;
 	g_UiInvRecvLeft[playerid] = ttlSec;
@@ -495,7 +495,7 @@ UI_InvToastCreate(playerid)
 	}
 	for (new i = 0; i < 3; i++)
 	{
-		g_UiInvToastTd[playerid][i] = UI_InvText(playerid, Float:0x43020000, (404.0 + (12.0 * _:(i))), "_", 0.22, 1.0, 0x66DD66FF, 1);
+		g_UiInvToastTd[playerid][i] = UI_InvText(playerid, 130.0, (404.0 + (12.0 * _:(i))), "_", 0.22, 1.0, 0x66DD66FF, 1);
 		g_UiInvToastTtl[playerid][i] = 0;
 		g_UiInvToastItem[playerid][i] = 0;
 		g_UiInvToastDelta[playerid][i] = 0;

@@ -43,8 +43,8 @@ UI_HudSetBar(playerid, Float:fraction)
 	{
 		fraction = 1.0;
 	}
-	new Float:x = (5.0 + (632.0 - Float:0x43160000));
-	PlayerTextDrawTextSize(playerid, g_UiHud[playerid][5], (0.1 + (x + (Float:0x430C0000 * fraction))), 0.0);
+	new Float:x = (5.0 + (632.0 - 150.0));
+	PlayerTextDrawTextSize(playerid, g_UiHud[playerid][5], (0.1 + (x + (140.0 * fraction))), 0.0);
 	PlayerTextDrawShow(playerid, g_UiHud[playerid][5]);
 }
 
@@ -85,13 +85,13 @@ UI_HudCreate(playerid)
 	{
 		g_UiHud[playerid][i] = 65535;
 	}
-	new Float:left = (632.0 - Float:0x43160000);
-	g_UiHud[playerid][0] = UI_HudBox(playerid, left, Float:0x43A50000, Float:0x43160000, 62.0, 153);
-	g_UiHud[playerid][1] = UI_HudText(playerid, (632.0 - 5.0), (Float:0x43A50000 + 3.0), "$0", 0.3, 1.2, 0x66DD66FF, 3);
-	g_UiHud[playerid][2] = UI_HudText(playerid, (632.0 - 5.0), (Float:0x43A50000 + Float:0x41A00000), "Banca: $0", 0.22, 1.0, -1, 3);
-	g_UiHud[playerid][3] = UI_HudText(playerid, (5.0 + left), (Float:0x43A50000 + 36.0), "Liv. 1  Exp 0", 0.22, 1.0, -2994689, 1);
-	g_UiHud[playerid][4] = UI_HudBox(playerid, (5.0 + left), (Float:0x43A50000 + 51.0), Float:0x430C0000, 6.0, 0x444444FF);
-	g_UiHud[playerid][5] = UI_HudBox(playerid, (5.0 + left), (Float:0x43A50000 + 51.0), Float:0x430C0000, 6.0, -2994689);
+	new Float:left = (632.0 - 150.0);
+	g_UiHud[playerid][0] = UI_HudBox(playerid, left, 330.0, 150.0, 62.0, 153);
+	g_UiHud[playerid][1] = UI_HudText(playerid, (632.0 - 5.0), (330.0 + 3.0), "$0", 0.3, 1.2, 0x66DD66FF, 3);
+	g_UiHud[playerid][2] = UI_HudText(playerid, (632.0 - 5.0), (330.0 + 20.0), "Banca: $0", 0.22, 1.0, -1, 3);
+	g_UiHud[playerid][3] = UI_HudText(playerid, (5.0 + left), (330.0 + 36.0), "Liv. 1  Exp 0", 0.22, 1.0, -2994689, 1);
+	g_UiHud[playerid][4] = UI_HudBox(playerid, (5.0 + left), (330.0 + 51.0), 140.0, 6.0, 0x444444FF);
+	g_UiHud[playerid][5] = UI_HudBox(playerid, (5.0 + left), (330.0 + 51.0), 140.0, 6.0, -2994689);
 	for (new i = 0; i < 6; i++)
 	{
 		if (i != 5)

@@ -20,13 +20,13 @@ Director_WarehousePos(districtId, &Float:x, &Float:y)
 	{
 		case 1:
 		{
-			x = Float:0x44EB0000;
-			y = Float:0xC4DE8000;
+			x = 1880.0;
+			y = -1780.0;
 		}
 		case 2:
 		{
-			x = Float:0x45160000;
-			y = Float:0xC4D98000;
+			x = 2400.0;
+			y = -1740.0;
 		}
 		case 3:
 		{
@@ -48,16 +48,16 @@ Director_ShopPos(districtId, &Float:x, &Float:y)
 		case 1:
 		{
 			x = 1927.0;
-			y = Float:0xC4DFC000;
+			y = -1790.0;
 		}
 		case 2:
 		{
-			x = Float:0x451BA000;
-			y = Float:0xC4D34000;
+			x = 2490.0;
+			y = -1690.0;
 		}
 		case 3:
 		{
-			x = Float:0x4508E000;
+			x = 2190.0;
 			y = -1155.0;
 		}
 		default:

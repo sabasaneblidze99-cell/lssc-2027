@@ -19,12 +19,12 @@ new s_HsBillLuce[4] = {45, 70, 110, 220};
 new s_HsBillGas[4] = {30, 45, 70, 140};
 new s_HsIntId[8] = {1, 2, 2, 1, 5, 3, 8, 5};
 new Float:s_HsIntPos[8][4] = {
-	{244.41, 305.03, 999.15, 0x43340000},
-	{267.23, 305.0, 999.15, 0x43870000},
-	{2468.84, -1698.3, 1013.5, 0x42B40000},
-	{2525.0, -1679.1, 1015.5, 0x43870000},
+	{244.41, 305.03, 999.15, 180.0},
+	{267.23, 305.0, 999.15, 270.0},
+	{2468.84, -1698.3, 1013.5, 90.0},
+	{2525.0, -1679.1, 1015.5, 270.0},
 	{2233.7, -1112.8, 1050.9},
-	{2496.0, -1692.1, 1014.74, 0x43340000},
+	{2496.0, -1692.1, 1014.74, 180.0},
 	{2365.1, -1135.6, 1050.9},
 	{1299.1, -794.8, 1084.0}
 };
@@ -1114,9 +1114,9 @@ House_EatPlate(playerid)
 	new Float:hp;
 	GetPlayerHealth(playerid, hp);
 	hp += float(5);
-	if ((hp > Float:0x42C80000))
+	if ((hp > 100.0))
 	{
-		hp = Float:0x42C80000;
+		hp = 100.0;
 	}
 	SetPlayerHealth(playerid, hp);
 	SendClientMessage(playerid, 0x66DD66FF, "Mangi il piatto caldo. Sazieta': %d%%.", g_HPl[playerid][hpHunger]);
@@ -2134,10 +2134,10 @@ House_CmdBussa(playerid)
 		{
 			continue;
 		}
-		SendClientMessage(p, -81.42773, "* Qualcuno bussa alla porta (%s).", name);
+		SendClientMessage(p, 0xC2A2DAFF, "* Qualcuno bussa alla porta (%s).", name);
 		inside++;
 	}
-	Util_Send(playerid, -81.42773, "* Bussi alla porta.");
+	Util_Send(playerid, 0xC2A2DAFF, "* Bussi alla porta.");
 	if (inside == 0)
 	{
 		Util_Send(playerid, -1, "Non sembra esserci nessuno in casa.");

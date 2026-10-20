@@ -68,13 +68,13 @@ bool:Freight_Point(d, bool:shop, &Float:x, &Float:y, &Float:z)
 			if (shop)
 			{
 				x = 1927.0;
-				y = Float:0xC4DFC000;
+				y = -1790.0;
 				z = 13.5;
 			}
 			else
 			{
-				x = Float:0x44EB0000;
-				y = Float:0xC4DE8000;
+				x = 1880.0;
+				y = -1780.0;
 				z = 13.5;
 			}
 		}
@@ -82,14 +82,14 @@ bool:Freight_Point(d, bool:shop, &Float:x, &Float:y, &Float:z)
 		{
 			if (shop)
 			{
-				x = Float:0x451BA000;
-				y = Float:0xC4D34000;
+				x = 2490.0;
+				y = -1690.0;
 				z = 13.5;
 			}
 			else
 			{
-				x = Float:0x45160000;
-				y = Float:0xC4D98000;
+				x = 2400.0;
+				y = -1740.0;
 				z = 13.5;
 			}
 		}
@@ -97,7 +97,7 @@ bool:Freight_Point(d, bool:shop, &Float:x, &Float:y, &Float:z)
 		{
 			if (shop)
 			{
-				x = Float:0x4508E000;
+				x = 2190.0;
 				y = -1155.0;
 				z = 24.0;
 			}
@@ -173,7 +173,7 @@ Freight_IntegrityOf(vehicleid)
 {
 	new Float:hp;
 	GetVehicleHealth(vehicleid, hp);
-	return LD_Clamp(floatround((hp / Float:0x41200000), 1), 0, 100);
+	return LD_Clamp(floatround((hp / 10.0), 1), 0, 100);
 }
 
 bool:Freight_VehOk(playerid)
@@ -589,7 +589,7 @@ bool:Freight_Begin(playerid, contractId, fromD, toD, cargo, distanceM, bool:welc
 		return 0;
 	}
 	SetVehicleVirtualWorld(veh, 0);
-	SetVehicleHealth(veh, Float:0x447A0000);
+	SetVehicleHealth(veh, 1000.0);
 	SetVehicleParamsEx(veh, 1, 0, 0, 0, 0, 0, 0);
 	new now = GetTickCount();
 	Freight_ResetPlayer(playerid);
@@ -773,7 +773,7 @@ bool:Freight_SamplePath(playerid, now)
 	g_FrtLastY[playerid] = y;
 	g_FrtLastZ[playerid] = z;
 	g_FrtLastTick[playerid] = now;
-	if ((seg > (15.0 + ((Float:0x428C0000 * float(dt)) / float(1000)))))
+	if ((seg > (15.0 + ((70.0 * float(dt)) / float(1000)))))
 	{
 		new msg[256];
 		format(msg, 256, "salto del Mule: pers. %d contratto %d %.0f m in %d ms", gPlayer[playerid][pCharId], g_FrtCt[playerid], seg, dt);
@@ -817,7 +817,7 @@ Freight_TickPlayer(playerid, now)
 	new veh = g_FrtVeh[playerid];
 	new Float:hp;
 	GetVehicleHealth(veh, hp);
-	if ((hp < Float:0x43960000))
+	if ((hp < 300.0))
 	{
 		Freight_Stop(playerid, 4, "Mule distrutto: il carico e' perso e il contratto e' interrotto.");
 		return 0;
@@ -838,7 +838,7 @@ Freight_TickPlayer(playerid, now)
 		}
 		new Float:px, Float:py, Float:pz;
 		GetPlayerPos(playerid, px, py, pz);
-		if (now - gPlayer[playerid][pFreightLeftVehTick] >= 45000 || (GetVehicleDistanceFromPoint(veh, px, py, pz) > Float:0x43160000))
+		if (now - gPlayer[playerid][pFreightLeftVehTick] >= 45000 || (GetVehicleDistanceFromPoint(veh, px, py, pz) > 150.0))
 		{
 			Freight_Stop(playerid, 4, "Mule abbandonato: contratto di trasporto rilasciato.");
 			return 0;
@@ -856,7 +856,7 @@ Freight_TickPlayer(playerid, now)
 			Freight_Stop(playerid, 4, "Spostamento anomalo del Mule: contratto di trasporto annullato.");
 			return 0;
 		}
-		new integ = LD_Clamp(floatround((hp / Float:0x41200000), 1), 0, 100);
+		new integ = LD_Clamp(floatround((hp / 10.0), 1), 0, 100);
 		if (integ < g_FrtInteg[playerid])
 		{
 			g_FrtInteg[playerid] = integ;
@@ -868,7 +868,7 @@ Freight_TickPlayer(playerid, now)
 	new Float:dist = (driving ? GetVehicleDistanceFromPoint(veh, tx, ty, tz) : GetPlayerDistanceFromPoint(playerid, tx, ty, tz));
 	new dwellSec = -1;
 	new bool:retryOk = g_FrtRetryTick[playerid] == 0 || now - g_FrtRetryTick[playerid] >= 0;
-	if (driving && retryOk && (dist <= 6.0) && (float(Veh_SpeedKmh(veh)) <= Float:0x41200000) && GetVehicleVirtualWorld(veh) == 0)
+	if (driving && retryOk && (dist <= 6.0) && (float(Veh_SpeedKmh(veh)) <= 10.0) && GetVehicleVirtualWorld(veh) == 0)
 	{
 		if (!g_FrtDwell[playerid])
 		{

@@ -124,7 +124,7 @@ Veh_SpeedKmh(vehicleid)
 {
 	new Float:vx, Float:vy, Float:vz;
 	GetVehicleVelocity(vehicleid, vx, vy, vz);
-	return floatround((Float:0x43340000 * floatsqroot((((vx * vx) + (vy * vy)) + (vz * vz)))), 0);
+	return floatround((180.0 * floatsqroot((((vx * vx) + (vy * vy)) + (vz * vz)))), 0);
 }
 
 Veh_FuelPct(playerid, slot)
@@ -328,9 +328,9 @@ bool:Veh_Spawn(playerid, slot, Float:x, Float:y, Float:z, Float:a)
 	}
 	SetVehicleNumberPlate(vid, g_VSlot[playerid][slot][vsPlate]);
 	new Float:hp = g_VSlot[playerid][slot][vsHealth];
-	if ((hp < Float:0x43AF0000))
+	if ((hp < 350.0))
 	{
-		hp = Float:0x43AF0000;
+		hp = 350.0;
 	}
 	SetVehicleHealth(vid, hp);
 	g_VSlot[playerid][slot][vsHealth] = hp;
@@ -698,7 +698,7 @@ public UI_OnVehicleBuyConfirm(playerid, catalogIndex, payWithBank)
 	g_VPl[playerid][vpBuyWithBank] = payWithBank;
 	g_VPl[playerid][vpBuyPrice] = price;
 	Util_Send(playerid, -1, "Pratica di acquisto in corso...");
-	DB_CreateVehicle(playerid, gPlayer[playerid][pCharId], g_VehCatModel[catalogIndex], 1, 1, price, 1655.0, Float:0xC4D34000, 22.5, Float:0x43870000, Veh_CapacityCl(g_VehCatModel[catalogIndex]) * 50 / 100);
+	DB_CreateVehicle(playerid, gPlayer[playerid][pCharId], g_VehCatModel[catalogIndex], 1, 1, price, 1655.0, -1690.0, 22.5, 270.0, Veh_CapacityCl(g_VehCatModel[catalogIndex]) * 50 / 100);
 	return 1;
 }
 
@@ -754,17 +754,17 @@ public Veh_OnDBCreated(playerid, vehDbId, plate[])
 	g_VSlot[playerid][slot][vsColor2] = 1;
 	g_VSlot[playerid][slot][vsPricePaid] = price;
 	g_VSlot[playerid][slot][vsPosX] = 1655.0;
-	g_VSlot[playerid][slot][vsPosY] = Float:0xC4D34000;
+	g_VSlot[playerid][slot][vsPosY] = -1690.0;
 	g_VSlot[playerid][slot][vsPosZ] = 22.5;
-	g_VSlot[playerid][slot][vsPosA] = Float:0x43870000;
+	g_VSlot[playerid][slot][vsPosA] = 270.0;
 	g_VSlot[playerid][slot][vsParkX] = 1655.0;
-	g_VSlot[playerid][slot][vsParkY] = Float:0xC4D34000;
+	g_VSlot[playerid][slot][vsParkY] = -1690.0;
 	g_VSlot[playerid][slot][vsParkZ] = 22.5;
-	g_VSlot[playerid][slot][vsParkA] = Float:0x43870000;
-	g_VSlot[playerid][slot][vsHealth] = Float:0x447A0000;
+	g_VSlot[playerid][slot][vsParkA] = 270.0;
+	g_VSlot[playerid][slot][vsHealth] = 1000.0;
 	g_VSlot[playerid][slot][vsFuelCl] = Veh_CapacityCl(g_VehCatModel[idx]) * 50 / 100;
 	g_VSlot[playerid][slot][vsLocked] = 1;
-	if (!Veh_Spawn(playerid, slot, 1655.0, Float:0xC4D34000, 22.5, Float:0x43870000))
+	if (!Veh_Spawn(playerid, slot, 1655.0, -1690.0, 22.5, 270.0))
 	{
 		g_VSlot[playerid][slot][vsUsed] = 0;
 		Veh_RollbackCreate(playerid, vehDbId);
@@ -982,7 +982,7 @@ Veh_Emote(playerid, action[])
 	new name[25], msg[256];
 	GetPlayerName(playerid, name, 25);
 	format(msg, 256, "* %s %s", name, action);
-	Util_SendNear(playerid, -81.42773, Float:0x41A00000, msg);
+	Util_SendNear(playerid, 0xC2A2DAFF, 20.0, msg);
 }
 
 Veh_DoLock(playerid)
@@ -1177,7 +1177,7 @@ Veh_DoRecover(playerid, slot)
 	}
 	new minFuel = Veh_CapacityCl(g_VSlot[playerid][slot][vsModel]) * 10 / 100;
 	g_VSlot[playerid][slot][vsDestroyed] = 0;
-	g_VSlot[playerid][slot][vsHealth] = Float:0x43AF0000;
+	g_VSlot[playerid][slot][vsHealth] = 350.0;
 	g_VSlot[playerid][slot][vsFuelCl] = max(g_VSlot[playerid][slot][vsFuelCl], minFuel);
 	g_VSlot[playerid][slot][vsLocked] = 1;
 	if (!Veh_Spawn(playerid, slot, g_VSlot[playerid][slot][vsParkX], g_VSlot[playerid][slot][vsParkY], g_VSlot[playerid][slot][vsParkZ], g_VSlot[playerid][slot][vsParkA]))
@@ -1570,7 +1570,7 @@ Veh_OnVehicleDeath(vehicleid, killerid)
 		Veh_SetEngine(o, s, 0);
 	}
 	g_VSlot[o][s][vsDestroyed] = 1;
-	g_VSlot[o][s][vsHealth] = Float:0x43AF0000;
+	g_VSlot[o][s][vsHealth] = 350.0;
 	Veh_SaveSlot(o, s);
 	SetTimerEx("Veh_OnWreckRemove", 10000, 0, "ddd", vehicleid, o, g_VMapSession[vehicleid]);
 	new mname[12], pname[25], msg[256];

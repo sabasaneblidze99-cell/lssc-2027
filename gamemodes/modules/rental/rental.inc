@@ -156,7 +156,7 @@ bool:Rental_SpawnVehicle(playerid)
 {
 	new vkind = gPlayer[playerid][pRentalKind], model = LD_RentalModel(vkind);
 	new bool:pro = gPlayer[playerid][pRentalClass] == 2;
-	new Float:x = 1512.0, Float:y = -1708.0, Float:z = 13.5, Float:a = Float:0x43340000;
+	new Float:x = 1512.0, Float:y = -1708.0, Float:z = 13.5, Float:a = 180.0;
 	if (pro)
 	{
 		GetPlayerPos(playerid, x, y, z);
@@ -396,7 +396,7 @@ public Living_OnDBRental(playerid, action, result, rentalId, amount, balance, ca
 
 bool:Rental_AtOffice(playerid, Float:radius)
 {
-	return GetPlayerInterior(playerid) == 0 && GetPlayerVirtualWorld(playerid) == 0 && IsPlayerInRangeOfPoint(playerid, radius, 1505.0, Float:0xC4D48000, 13.5);
+	return GetPlayerInterior(playerid) == 0 && GetPlayerVirtualWorld(playerid) == 0 && IsPlayerInRangeOfPoint(playerid, radius, 1505.0, -1700.0, 13.5);
 }
 
 bool:Rental_CanStart(playerid)
@@ -736,8 +736,8 @@ Rental_OnInit()
 		KillTimer(g_RtTimer);
 	}
 	g_RtTimer = SetTimer("Rental_OnTick", 1000, 1);
-	CreatePickup(1239, 1, 1505.0, Float:0xC4D48000, 13.5, 0);
-	Lang_Create3DTextLabel("Noleggio veicoli\n/noleggio  ·  /riconsegna", -2994689, 1505.0, Float:0xC4D48000, (13.5 + 0.8), Float:0x41A00000, 0, 0);
+	CreatePickup(1239, 1, 1505.0, -1700.0, 13.5, 0);
+	Lang_Create3DTextLabel("Noleggio veicoli\n/noleggio  ·  /riconsegna", -2994689, 1505.0, -1700.0, (13.5 + 0.8), 20.0, 0, 0);
 }
 
 Rental_OnExit()

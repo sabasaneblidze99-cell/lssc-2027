@@ -166,7 +166,7 @@ public Cmd_me(playerid, params[])
 	new name[25], msg[256];
 	GetPlayerName(playerid, name, 25);
 	format(msg, 256, "* %s %s", name, text);
-	Util_SendNear(playerid, -81.42773, Float:0x41A00000, msg);
+	Util_SendNear(playerid, 0xC2A2DAFF, 20.0, msg);
 	return 1;
 }
 
@@ -181,7 +181,7 @@ public Cmd_do(playerid, params[])
 	new name[25], msg[256];
 	GetPlayerName(playerid, name, 25);
 	format(msg, 256, "* %s (( %s ))", text, name);
-	Util_SendNear(playerid, -81.42773, Float:0x41A00000, msg);
+	Util_SendNear(playerid, 0xC2A2DAFF, 20.0, msg);
 	return 1;
 }
 
@@ -196,7 +196,7 @@ public Cmd_try(playerid, params[])
 	new name[25], msg[256];
 	GetPlayerName(playerid, name, 25);
 	format(msg, 256, "* %s prova a %s e %s", name, text, random(100) < 50 ? "ha successo" : "fallisce");
-	Util_SendNear(playerid, -81.42773, Float:0x41A00000, msg);
+	Util_SendNear(playerid, 0xC2A2DAFF, 20.0, msg);
 	return 1;
 }
 
@@ -225,9 +225,9 @@ public Cmd_ame(playerid, params[])
 	}
 	new name[25], msg[256];
 	GetPlayerName(playerid, name, 25);
-	SetPlayerChatBubble(playerid, "* %s", -81.42773, Float:0x41A00000, 6000, text);
+	SetPlayerChatBubble(playerid, "* %s", -81.42773, 20.0, 6000, text);
 	format(msg, 256, "> %s %s", name, text);
-	Util_SendNear(playerid, -81.42773, Float:0x41A00000, msg);
+	Util_SendNear(playerid, 0xC2A2DAFF, 20.0, msg);
 	return 1;
 }
 
@@ -280,7 +280,7 @@ public Cmd_pay(playerid, params[])
 	SendClientMessage(playerid, 0x66DD66FF, "Hai consegnato $%d a %s.", amount, tn);
 	SendClientMessage(targetid, 0x66DD66FF, "Hai ricevuto $%d da %s.", amount, sn);
 	format(msg, 256, "* %s consegna del denaro a %s", sn, tn);
-	Util_SendNear(playerid, -81.42773, Float:0x41A00000, msg);
+	Util_SendNear(playerid, 0xC2A2DAFF, 20.0, msg);
 	Char_Save(playerid);
 	Char_Save(targetid);
 	format(msg, 256, "%s -> %s: $%d", sn, tn, amount);

@@ -458,18 +458,18 @@ UI_LvTdEnsure(playerid)
 	{
 		return 0;
 	}
-	g_UiLvTd[playerid][0] = UI_LvBox(playerid, 14.0, Float:0x43160000, Float:0x43480000, 56.0, 153);
-	g_UiLvTd[playerid][1] = UI_LvText(playerid, (14.0 + 5.0), (Float:0x43160000 + 2.0), "CONTRATTO", 0.22, 1.0, -2994689, 1);
-	g_UiLvTd[playerid][2] = UI_LvText(playerid, (14.0 + 5.0), (Float:0x43160000 + 15.0), "_", 0.2, 0.9, -1, 1);
-	g_UiLvTd[playerid][3] = UI_LvText(playerid, (14.0 + 5.0), (Float:0x43160000 + 27.0), "_", 0.2, 0.9, -1, 1);
-	g_UiLvTd[playerid][4] = UI_LvText(playerid, (14.0 + 5.0), (Float:0x43160000 + 39.0), "_", 0.2, 0.9, 0xC8C8C8FF, 1);
-	g_UiLvTd[playerid][5] = UI_LvBox(playerid, 14.0, 212.0, Float:0x43160000, 32.0, 153);
+	g_UiLvTd[playerid][0] = UI_LvBox(playerid, 14.0, 150.0, 200.0, 56.0, 153);
+	g_UiLvTd[playerid][1] = UI_LvText(playerid, (14.0 + 5.0), (150.0 + 2.0), "CONTRATTO", 0.22, 1.0, -2994689, 1);
+	g_UiLvTd[playerid][2] = UI_LvText(playerid, (14.0 + 5.0), (150.0 + 15.0), "_", 0.2, 0.9, -1, 1);
+	g_UiLvTd[playerid][3] = UI_LvText(playerid, (14.0 + 5.0), (150.0 + 27.0), "_", 0.2, 0.9, -1, 1);
+	g_UiLvTd[playerid][4] = UI_LvText(playerid, (14.0 + 5.0), (150.0 + 39.0), "_", 0.2, 0.9, 0xC8C8C8FF, 1);
+	g_UiLvTd[playerid][5] = UI_LvBox(playerid, 14.0, 212.0, 150.0, 32.0, 153);
 	g_UiLvTd[playerid][6] = UI_LvText(playerid, (14.0 + 5.0), (212.0 + 2.0), "TASSAMETRO", 0.22, 1.0, -2994689, 1);
 	g_UiLvTd[playerid][7] = UI_LvText(playerid, (14.0 + 5.0), (212.0 + 15.0), "_", 0.26, 1.1, 0x66DD66FF, 1);
-	g_UiLvTd[playerid][8] = UI_LvBox(playerid, 14.0, 252.0, Float:0x435C0000, Float:0x42200000, 153);
+	g_UiLvTd[playerid][8] = UI_LvBox(playerid, 14.0, 252.0, 220.0, 40.0, 153);
 	g_UiLvTd[playerid][9] = UI_LvText(playerid, (14.0 + 5.0), (252.0 + 2.0), "_", 0.2, 0.9, -1, 1);
-	PlayerTextDrawTextSize(playerid, g_UiLvTd[playerid][9], ((14.0 + Float:0x435C0000) - 4.0), 0.0);
-	g_UiLvTd[playerid][10] = UI_LvText(playerid, Float:0x43A00000, 318.0, "_", 0.24, 1.1, -2994689, 2);
+	PlayerTextDrawTextSize(playerid, g_UiLvTd[playerid][9], ((14.0 + 220.0) - 4.0), 0.0);
+	g_UiLvTd[playerid][10] = UI_LvText(playerid, 320.0, 318.0, "_", 0.24, 1.1, -2994689, 2);
 	g_UiLvTdMade[playerid] = 1;
 }
 

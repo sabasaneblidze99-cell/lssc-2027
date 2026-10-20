@@ -1,6 +1,6 @@
 new Float:s_HubBoard[3][3] = {
-	{0x44E74000, 0xC4E10000, 13.6},
-	{0x451BA000, -1678.0, 13.5},
+	{1850.0, -1800.0, 13.6},
+	{2490.0, -1678.0, 13.5},
 	{2133.0, -1215.0, 24.0}
 };
 new s_HubBoardDistrict[3] = {1, 2, 3};
@@ -148,8 +148,8 @@ bool:Hub_TargetPos(target, &Float:x, &Float:y, &Float:z)
 	{
 		case 1:
 		{
-			x = Float:0x44E74000;
-			y = Float:0xC4E10000;
+			x = 1850.0;
+			y = -1800.0;
 			z = 13.6;
 		}
 		case 2:
@@ -161,7 +161,7 @@ bool:Hub_TargetPos(target, &Float:x, &Float:y, &Float:z)
 		case 3:
 		{
 			x = 1505.0;
-			y = Float:0xC4D48000;
+			y = -1700.0;
 			z = 13.5;
 		}
 		default:
@@ -241,7 +241,7 @@ Hub_OnInit()
 			g_HubLabel[b] = Lang_Create3DTextLabel(text, 0x99CCFFFF, s_HubBoard[b][0], s_HubBoard[b][1], (0.8 + s_HubBoard[b][2]), 15.0, 0, 0);
 		}
 	}
-	g_HubZone = GangZoneCreate((Float:0x44E74000 - 22.0), (Float:0xC4E10000 - 22.0), (Float:0x44E74000 + 22.0), (Float:0xC4E10000 + 22.0));
+	g_HubZone = GangZoneCreate((1850.0 - 22.0), (-1800.0 - 22.0), (1850.0 + 22.0), (-1800.0 + 22.0));
 	g_HubTickCount = 0;
 	g_HubLastRefresh = 0;
 	g_HubRefreshed = 0;

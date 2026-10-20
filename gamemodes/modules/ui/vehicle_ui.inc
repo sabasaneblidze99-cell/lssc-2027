@@ -363,12 +363,12 @@ UI_VHudCreate(playerid)
 	{
 		return 0;
 	}
-	new Float:left = (632.0 - Float:0x43160000);
-	g_UiVHud[playerid][0] = UI_VHudBox(playerid, left, 398.0, Float:0x43160000, 56.0, 153);
+	new Float:left = (632.0 - 150.0);
+	g_UiVHud[playerid][0] = UI_VHudBox(playerid, left, 398.0, 150.0, 56.0, 153);
 	g_UiVHud[playerid][1] = UI_VHudText(playerid, (632.0 - 5.0), (398.0 + 2.0), "0 km/h", 0.3, 1.2, -1, 3);
 	g_UiVHud[playerid][2] = UI_VHudText(playerid, (5.0 + left), (398.0 + 22.0), "Benzina 0.0/0 L", 0.22, 1.0, -1, 1);
-	g_UiVHud[playerid][3] = UI_VHudBox(playerid, (5.0 + left), (398.0 + 35.0), Float:0x430C0000, 6.0, 0x444444FF);
-	g_UiVHud[playerid][4] = UI_VHudBox(playerid, (5.0 + left), (398.0 + 35.0), Float:0x430C0000, 6.0, 0x66DD66FF);
+	g_UiVHud[playerid][3] = UI_VHudBox(playerid, (5.0 + left), (398.0 + 35.0), 140.0, 6.0, 0x444444FF);
+	g_UiVHud[playerid][4] = UI_VHudBox(playerid, (5.0 + left), (398.0 + 35.0), 140.0, 6.0, 0x66DD66FF);
 	g_UiVHud[playerid][5] = UI_VHudText(playerid, (5.0 + left), (398.0 + 43.0), "MOTORE SPENTO", 0.2, 0.9, -10066177, 1);
 	g_UiVHudCreated[playerid] = 1;
 }
@@ -436,7 +436,7 @@ UI_VehicleHudUpdate(playerid, Float:fuel, Float:fuelMax, speedKmh, bool:engineOn
 		speedKmh = 0;
 	}
 	new Float:fraction = (fuel / fuelMax);
-	new bool:low = ((Float:0x42C80000 * fraction) < float(15));
+	new bool:low = ((100.0 * fraction) < float(15));
 	new str[48];
 	format(str, 48, "%d km/h", speedKmh);
 	Lang_PlayerTextDrawSetString(playerid, g_UiVHud[playerid][1], str);
@@ -446,7 +446,7 @@ UI_VehicleHudUpdate(playerid, Float:fuel, Float:fuelMax, speedKmh, bool:engineOn
 	PlayerTextDrawColor(playerid, g_UiVHud[playerid][2], low ? (blinkOff ? -10066364 : -10066177) : -1);
 	PlayerTextDrawShow(playerid, g_UiVHud[playerid][2]);
 	PlayerTextDrawBoxColor(playerid, g_UiVHud[playerid][4], low ? -12303105 : 0x66DD66FF);
-	PlayerTextDrawTextSize(playerid, g_UiVHud[playerid][4], (0.1 + ((5.0 + (632.0 - Float:0x43160000)) + (Float:0x430C0000 * fraction))), 0.0);
+	PlayerTextDrawTextSize(playerid, g_UiVHud[playerid][4], (0.1 + ((5.0 + (632.0 - 150.0)) + (140.0 * fraction))), 0.0);
 	PlayerTextDrawShow(playerid, g_UiVHud[playerid][4]);
 	Lang_PlayerTextDrawSetString(playerid, g_UiVHud[playerid][5], engineOn ? "MOTORE ACCESO" : "MOTORE SPENTO");
 	PlayerTextDrawColor(playerid, g_UiVHud[playerid][5], engineOn ? 0x66DD66FF : -10066177);

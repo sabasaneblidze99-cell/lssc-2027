@@ -210,7 +210,7 @@ UI_BankToastCreate(playerid)
 	{
 		return 0;
 	}
-	new PlayerText:td = Lang_CreatePlayerTextDraw(playerid, Float:0x43020000, Float:0x43BE0000, "_");
+	new PlayerText:td = Lang_CreatePlayerTextDraw(playerid, 130.0, 380.0, "_");
 	PlayerTextDrawLetterSize(playerid, td, 0.22, 1.0);
 	PlayerTextDrawAlignment(playerid, td, 1);
 	PlayerTextDrawColor(playerid, td, 0x66DD66FF);

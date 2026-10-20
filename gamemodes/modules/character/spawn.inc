@@ -13,21 +13,21 @@ Char_GetSpawnPoint(index, &Float:x, &Float:y, &Float:z, &Float:a)
 		case 2:
 		{
 			x = 1967.0;
-			y = Float:0xC4960000;
+			y = -1200.0;
 			z = 25.6;
-			a = Float:0x43340000;
+			a = 180.0;
 		}
 		case 3:
 		{
 			x = 369.0;
-			y = Float:0xC4FDC000;
+			y = -2030.0;
 			z = 7.67;
-			a = Float:0x42B40000;
+			a = 90.0;
 		}
 		default:
 		{
 			x = 1742.6;
-			y = Float:0xC4E88000;
+			y = -1860.0;
 			z = 13.5;
 			a = 0.0;
 		}
@@ -64,6 +64,6 @@ Char_SetLoginCamera(playerid)
 {
 	SetPlayerInterior(playerid, 0);
 	SetPlayerVirtualWorld(playerid, 0);
-	SetPlayerCameraPos(playerid, (1481.0 + Float:0x42700000), (-1749.5 + Float:0x42480000), (15.45 + 25.0));
+	SetPlayerCameraPos(playerid, (1481.0 + 60.0), (-1749.5 + 50.0), (15.45 + 25.0));
 	SetPlayerCameraLookAt(playerid, 1481.0, -1749.5, 15.45, 2);
 }

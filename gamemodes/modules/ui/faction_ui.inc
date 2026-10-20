@@ -645,8 +645,8 @@ UI_FhCreate(playerid)
 	{
 		return 0;
 	}
-	new Float:left = (476.0 - Float:0x43160000);
-	g_UiFHud[playerid][0] = UI_FhBox(playerid, left, 356.0, Float:0x43160000, 24.0, 153);
+	new Float:left = (476.0 - 150.0);
+	g_UiFHud[playerid][0] = UI_FhBox(playerid, left, 356.0, 150.0, 24.0, 153);
 	g_UiFHud[playerid][1] = UI_FhText(playerid, (5.0 + left), (356.0 + 2.0), "IN SERVIZIO", 0.2, 0.9, -1, 1);
 	g_UiFHud[playerid][2] = UI_FhText(playerid, (5.0 + left), (356.0 + 12.0), "Kit medico: 0", 0.2, 0.9, -1, 1);
 	g_UiFHudCreated[playerid] = 1;
@@ -729,12 +729,12 @@ UI_IhCreate(playerid)
 	{
 		return 0;
 	}
-	g_UiIHud[playerid][0] = UI_FhBox(playerid, Float:0x43520000, Float:0x42700000, Float:0x435C0000, 58.0, 170);
-	g_UiIHud[playerid][1] = UI_FhText(playerid, (Float:0x43520000 + 6.0), (Float:0x42700000 + 2.0), "SEI FERITO", 0.3, 1.3, -12303105, 1);
-	g_UiIHud[playerid][2] = UI_FhText(playerid, (Float:0x43520000 + 6.0), (Float:0x42700000 + 21.0), "Ricovero automatico tra 3:00", 0.22, 1.0, -1, 1);
-	g_UiIHud[playerid][3] = UI_FhBox(playerid, (Float:0x43520000 + 6.0), (Float:0x42700000 + 35.0), 208.0, 5.0, 0x444444FF);
-	g_UiIHud[playerid][4] = UI_FhBox(playerid, (Float:0x43520000 + 6.0), (Float:0x42700000 + 35.0), 208.0, 5.0, -12303105);
-	g_UiIHud[playerid][5] = UI_FhText(playerid, (Float:0x43520000 + 6.0), (Float:0x42700000 + 43.0), "Attendi un medico EMS. Non puoi muoverti.", 0.18, 0.85, -0.005729198, 1);
+	g_UiIHud[playerid][0] = UI_FhBox(playerid, 210.0, 60.0, 220.0, 58.0, 170);
+	g_UiIHud[playerid][1] = UI_FhText(playerid, (210.0 + 6.0), (60.0 + 2.0), "SEI FERITO", 0.3, 1.3, -12303105, 1);
+	g_UiIHud[playerid][2] = UI_FhText(playerid, (210.0 + 6.0), (60.0 + 21.0), "Ricovero automatico tra 3:00", 0.22, 1.0, -1, 1);
+	g_UiIHud[playerid][3] = UI_FhBox(playerid, (210.0 + 6.0), (60.0 + 35.0), 208.0, 5.0, 0x444444FF);
+	g_UiIHud[playerid][4] = UI_FhBox(playerid, (210.0 + 6.0), (60.0 + 35.0), 208.0, 5.0, -12303105);
+	g_UiIHud[playerid][5] = UI_FhText(playerid, (210.0 + 6.0), (60.0 + 43.0), "Attendi un medico EMS. Non puoi muoverti.", 0.18, 0.85, -0.005729198, 1);
 	g_UiIHudCreated[playerid] = 1;
 }
 
@@ -760,7 +760,7 @@ UI_InjuryHudUpdate(playerid, secondsLeft)
 	PlayerTextDrawColor(playerid, g_UiIHud[playerid][2], warn ? (blinkOff ? -12303292 : -12303105) : -1);
 	PlayerTextDrawShow(playerid, g_UiIHud[playerid][2]);
 	new Float:fraction = (float(secondsLeft) / float(180));
-	PlayerTextDrawTextSize(playerid, g_UiIHud[playerid][4], (0.1 + ((Float:0x43520000 + 6.0) + (208.0 * fraction))), 0.0);
+	PlayerTextDrawTextSize(playerid, g_UiIHud[playerid][4], (0.1 + ((210.0 + 6.0) + (208.0 * fraction))), 0.0);
 	PlayerTextDrawShow(playerid, g_UiIHud[playerid][4]);
 }
 

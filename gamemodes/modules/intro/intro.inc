@@ -1,10 +1,10 @@
 new g_IntroSeq;
 new Float:g_IntroCam[6][12] = {
 	{0},
-	{0xC3960000, 0xC4AF0000, 25.0, 0xC3820000, 0xC4A64000, 22.0, 0xC3660000, 0xC49C4000, 18.0, 0xC3660000, 0xC49C4000, 18.0},
-	{0x44938000, 0xC4430000, 0x42DC0000, 0x449D8000, 0xC4480000, 108.0, 0x44BB8000, 0xC4898000, 0x42700000, 0x44BB8000, 0xC4898000, 0x42700000},
-	{0x44AC8000, 0xC44F8000, 112.0, 0x44A64000, 0xC45C0000, 0x42C80000, 0x44BB8000, 0xC4BB8000, 0x42200000, 0x44B90000, 0xC4DAC000, 0x42200000},
-	{1752.0, 0xC4EB0000, 16.0, 1747.0, -1873.0, 15.0, 1758.0, -1888.0, 14.0, 1758.0, -1888.0, 14.0},
+	{-300.0, -1400.0, 25.0, -260.0, -1330.0, 22.0, -230.0, -1250.0, 18.0, -230.0, -1250.0, 18.0},
+	{1180.0, -780.0, 110.0, 1260.0, -800.0, 108.0, 1500.0, -1100.0, 60.0, 1500.0, -1100.0, 60.0},
+	{1380.0, -830.0, 112.0, 1330.0, -880.0, 100.0, 1500.0, -1500.0, 40.0, 1480.0, -1750.0, 40.0},
+	{1752.0, -1880.0, 16.0, 1747.0, -1873.0, 15.0, 1758.0, -1888.0, 14.0, 1758.0, -1888.0, 14.0},
 	{0}
 };
 
@@ -164,14 +164,14 @@ bool:Intro_CreateObjects(playerid)
 		return 0;
 	}
 	SetVehicleVirtualWorld(veh, world);
-	new actor = CreateActor(gPlayer[playerid][pSkin], 1753.5, -1884.5, 13.55, Float:0x43340000);
+	new actor = CreateActor(gPlayer[playerid][pSkin], 1753.5, -1884.5, 13.55, 180.0);
 	if (actor == 65535)
 	{
 		DestroyVehicle(veh);
 		return 0;
 	}
 	SetActorVirtualWorld(actor, world);
-	SetActorFacingAngle(actor, Float:0x43340000);
+	SetActorFacingAngle(actor, 180.0);
 	ApplyActorAnimation(actor, "PED", "IDLE_stance", 4.1, 1, 0, 0, 0, 0);
 	gPlayer[playerid][pIntroVehicle] = veh;
 	gPlayer[playerid][pIntroActor] = actor + 1;
@@ -183,7 +183,7 @@ Intro_AudioStart(playerid)
 	new url[1];
 	if (url[0] != 0)
 	{
-		PlayAudioStreamForPlayer(playerid, url, 0.0, 0.0, 0.0, Float:0x42480000, 0);
+		PlayAudioStreamForPlayer(playerid, url, 0.0, 0.0, 0.0, 50.0, 0);
 	}
 }
 
