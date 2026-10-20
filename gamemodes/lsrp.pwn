@@ -1,4 +1,8 @@
 // LSSC 2027 - Los Santos Street Crime's - gamemode (sorgente ricostruito dalla v8)
+// Di default si compila la versione con CEF (anche da Qawno). Per la versione senza CEF: LSRP_NO_CEF=1
+#if !defined LSRP_NO_CEF && !defined LSRP_CEF
+	#define LSRP_CEF
+#endif
 #include <open.mp>
 #include <a_mysql>
 #include <samp_bcrypt>
