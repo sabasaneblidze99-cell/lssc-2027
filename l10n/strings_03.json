@@ -1341,7 +1341,7 @@
   "line": 176,
   "it": "PED",
   "ctx": "ApplyActorAnimation(actor, \"PED\", \"IDLE_stance\", 4.1, true, false, false, false, 0);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 1647,
@@ -1349,7 +1349,7 @@
   "line": 176,
   "it": "IDLE_stance",
   "ctx": "ApplyActorAnimation(actor, \"PED\", \"IDLE_stance\", 4.1, true, false, false, false, 0);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 1648,
@@ -1357,7 +1357,7 @@
   "line": 287,
   "it": "intro terminata (%s) per %s",
   "ctx": "format(msg, 128, \"intro terminata (%s) per %s\", reason == 1 ? \"skip\" : \"watchdog\", name);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 1649,
@@ -1365,7 +1365,7 @@
   "line": 588,
   "it": "salvataggio storia non riuscito (esito %d, set %d)",
   "ctx": "format(msg, 128, \"salvataggio storia non riuscito (esito %d, set %d)\", result, setMode);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 1650,
@@ -1373,7 +1373,7 @@
   "line": 653,
   "it": "Uso: /storia · /storia imposta · /storia [id giocatore in gioco] (staff)",
   "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Uso: /storia · /storia imposta · /storia [id giocatore in gioco] (staff)\");",
-  "ka": ""
+  "ka": "გამოყენება: /storia · /storia imposta · /storia [მოთამაშის id] (ადმინისტრაცია)"
  },
  {
   "id": 1651,
@@ -1381,7 +1381,7 @@
   "line": 657,
   "it": "Uso: /storia · /storia imposta (una sola volta, solo se non hai una storia)",
   "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Uso: /storia · /storia imposta (una sola volta, solo se non hai una storia)\");",
-  "ka": ""
+  "ka": "გამოყენება: /storia · /storia imposta (მხოლოდ ერთხელ, თუ ისტორია არ გაქვს)"
  },
  {
   "id": 1652,
@@ -1389,7 +1389,7 @@
   "line": 668,
   "it": "Uso: /mostrastoria [id] (a un giocatore vicino a te)",
   "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Uso: /mostrastoria [id] (a un giocatore vicino a te)\");",
-  "ka": ""
+  "ka": "გამოყენება: /mostrastoria [id] (ახლოს მყოფ მოთამაშეს)"
  },
  {
   "id": 1653,
@@ -1397,7 +1397,7 @@
   "line": 673,
   "it": "Il giocatore e' troppo lontano.",
   "ctx": "Util_Send(playerid, -10270721, \"Il giocatore e' troppo lontano.\");",
-  "ka": ""
+  "ka": "მოთამაშე ძალიან შორსაა."
  },
  {
   "id": 1654,
@@ -1405,7 +1405,7 @@
   "line": 679,
   "it": "Attendi qualche secondo prima di mostrare di nuovo la tua storia.",
   "ctx": "Util_Send(playerid, -10270721, \"Attendi qualche secondo prima di mostrare di nuovo la tua storia.\");",
-  "ka": ""
+  "ka": "ისტორიის ხელახლა საჩვენებლად რამდენიმე წამი დაელოდე."
  },
  {
   "id": 1655,
@@ -1413,7 +1413,7 @@
   "line": 704,
   "it": "Impossibile leggere la tua storia ora. Riprova tra poco.",
   "ctx": "Util_Send(playerid, -10270721, \"Impossibile leggere la tua storia ora. Riprova tra poco.\");",
-  "ka": ""
+  "ka": "შენი ისტორიის წაკითხვა ახლა ვერ ხერხდება. ცოტა ხანში სცადე."
  },
  {
   "id": 1656,
@@ -1421,7 +1421,7 @@
   "line": 709,
   "it": "Non hai una storia da mostrare (/storia imposta).",
   "ctx": "Util_Send(playerid, -10270721, \"Non hai una storia da mostrare (/storia imposta).\");",
-  "ka": ""
+  "ka": "საჩვენებელი ისტორია არ გაქვს (/storia imposta)."
  },
  {
   "id": 1657,
@@ -1429,7 +1429,7 @@
   "line": 714,
   "it": "Il giocatore non e' piu' abbastanza vicino.",
   "ctx": "Util_Send(playerid, -10270721, \"Il giocatore non e' piu' abbastanza vicino.\");",
-  "ka": ""
+  "ka": "მოთამაშე საკმარისად ახლოს აღარ არის."
  },
  {
   "id": 1658,
@@ -1437,7 +1437,7 @@
   "line": 721,
   "it": "%s ti mostra la propria storia.",
   "ctx": "SendClientMessage(to, -1, \"%s ti mostra la propria storia.\", name);",
-  "ka": ""
+  "ka": "%s გაჩვენებს თავის ისტორიას."
  },
  {
   "id": 1659,
@@ -1445,7 +1445,7 @@
   "line": 722,
   "it": "Hai mostrato la tua storia a %s.",
   "ctx": "SendClientMessage(playerid, 0x66DD66FF, \"Hai mostrato la tua storia a %s.\", tname);",
-  "ka": ""
+  "ka": "შენი ისტორია აჩვენე %s-ს."
  },
  {
   "id": 1660,
@@ -1453,7 +1453,7 @@
   "line": 733,
   "it": "Impossibile leggere la storia del giocatore.",
   "ctx": "Util_Send(playerid, -10270721, \"Impossibile leggere la storia del giocatore.\");",
-  "ka": ""
+  "ka": "მოთამაშის ისტორიის წაკითხვა ვერ მოხერხდა."
  },
  {
   "id": 1661,
@@ -1461,7 +1461,7 @@
   "line": 742,
   "it": "letta la storia di %s (pg %d)",
   "ctx": "format(reason, 64, \"letta la storia di %s (pg %d)\", tname, gPlayer[targetid][pCharId]);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 1329,
@@ -1469,7 +1469,7 @@
   "line": 14,
   "it": "--- Documento d'identita' di San Andreas ---",
   "ctx": "SendClientMessage(viewerid, -2994689, \"--- Documento d'identita' di San Andreas ---\");",
-  "ka": ""
+  "ka": "--- სან-ანდრეასის პირადობის მოწმობა ---"
  },
  {
   "id": 1330,
@@ -1477,7 +1477,7 @@
   "line": 15,
   "it": "Nome: %s  Livello: %d  Ore di gioco: %dh %02dm",
   "ctx": "SendClientMessage(viewerid, -1, \"Nome: %s  Livello: %d  Ore di gioco: %dh %02dm\", name, gPlayer[playerid][pLevel], total / 3600000, total % 3600000 / 60000);",
-  "ka": ""
+  "ka": "სახელი: %s  დონე: %d  ნათამაშები: %dსთ %02dწთ"
  },
  {
   "id": 1331,
@@ -1485,7 +1485,7 @@
   "line": 20,
   "it": "Origine: %s",
   "ctx": "SendClientMessage(viewerid, -1, \"Origine: %s\", origin);",
-  "ka": ""
+  "ka": "წარმომავლობა: %s"
  },
  {
   "id": 1332,
@@ -1493,7 +1493,7 @@
   "line": 24,
   "it": "Lavoro: %s  Fazione: %s (%s)",
   "ctx": "SendClientMessage(viewerid, -1, \"Lavoro: %s  Fazione: %s (%s)\", job, fac, rank);",
-  "ka": ""
+  "ka": "სამსახური: %s  ფრაქცია: %s (%s)"
  },
  {
   "id": 1333,
@@ -1501,7 +1501,7 @@
   "line": 28,
   "it": "Lavoro: %s  Fazione: nessuna",
   "ctx": "SendClientMessage(viewerid, -1, \"Lavoro: %s  Fazione: nessuna\", job);",
-  "ka": ""
+  "ka": "სამსახური: %s  ფრაქცია: არა"
  },
  {
   "id": 1334,
@@ -1509,7 +1509,7 @@
   "line": 44,
   "it": "Inventario non disponibile: riprova tra poco (/inventario).",
   "ctx": "Util_Send(playerid, -10270721, \"Inventario non disponibile: riprova tra poco (/inventario).\");",
-  "ka": ""
+  "ka": "ინვენტარი მიუწვდომელია: ცოტა ხანში სცადე (/inventario)."
  },
  {
   "id": 1335,
@@ -1517,7 +1517,7 @@
   "line": 49,
   "it": "Non hai il documento d'identita': usa /documento richiedi.",
   "ctx": "Util_Send(playerid, -10270721, \"Non hai il documento d'identita': usa /documento richiedi.\");",
-  "ka": ""
+  "ka": "პირადობის მოწმობა არ გაქვს: გამოიყენე /documento richiedi."
  },
  {
   "id": 1336,
@@ -1525,7 +1525,7 @@
   "line": 59,
   "it": "Uso: /documento · /documento [id] · /documento richiedi",
   "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Uso: /documento · /documento [id] · /documento richiedi\");",
-  "ka": ""
+  "ka": "გამოყენება: /documento · /documento [id] · /documento richiedi"
  },
  {
   "id": 1337,
@@ -1533,7 +1533,7 @@
   "line": 64,
   "it": "Il giocatore e' troppo lontano.",
   "ctx": "Util_Send(playerid, -10270721, \"Il giocatore e' troppo lontano.\");",
-  "ka": ""
+  "ka": "მოთამაშე ძალიან შორსაა."
  },
  {
   "id": 1338,
@@ -1541,7 +1541,7 @@
   "line": 72,
   "it": "Hai mostrato il documento a %s.",
   "ctx": "SendClientMessage(playerid, 0x66DD66FF, \"Hai mostrato il documento a %s.\", tname);",
-  "ka": ""
+  "ka": "დოკუმენტი აჩვენე %s-ს."
  },
  {
   "id": 1339,
@@ -1549,7 +1549,7 @@
   "line": 3,
   "it": "Porzione di cibo",
   "ctx": "\"Porzione di cibo\",",
-  "ka": ""
+  "ka": "საკვების ულუფა"
  },
  {
   "id": 1340,
@@ -1557,7 +1557,7 @@
   "line": 4,
   "it": "Pasto pronto",
   "ctx": "\"Pasto pronto\",",
-  "ka": ""
+  "ka": "მზა კერძი"
  },
  {
   "id": 1341,
@@ -1565,7 +1565,7 @@
   "line": 5,
   "it": "Bottiglia d'acqua",
   "ctx": "\"Bottiglia d'acqua\",",
-  "ka": ""
+  "ka": "წყლის ბოთლი"
  },
  {
   "id": 1342,
@@ -1573,7 +1573,7 @@
   "line": 6,
   "it": "Snack",
   "ctx": "\"Snack\",",
-  "ka": ""
+  "ka": "სნექი"
  },
  {
   "id": 1343,
@@ -1581,7 +1581,7 @@
   "line": 7,
   "it": "Kit di pronto soccorso",
   "ctx": "\"Kit di pronto soccorso\",",
-  "ka": ""
+  "ka": "პირველადი დახმარების ნაკრები"
  },
  {
   "id": 1344,
@@ -1589,7 +1589,7 @@
   "line": 8,
   "it": "Benda",
   "ctx": "\"Benda\",",
-  "ka": ""
+  "ka": "ბინტი"
  },
  {
   "id": 1345,
@@ -1597,7 +1597,7 @@
   "line": 9,
   "it": "Sigarette",
   "ctx": "\"Sigarette\",",
-  "ka": ""
+  "ka": "სიგარეტი"
  },
  {
   "id": 1346,
@@ -1605,7 +1605,7 @@
   "line": 10,
   "it": "Accendino",
   "ctx": "\"Accendino\",",
-  "ka": ""
+  "ka": "სანთებელა"
  },
  {
   "id": 1347,
@@ -1613,7 +1613,7 @@
   "line": 11,
   "it": "Telefono",
   "ctx": "\"Telefono\",",
-  "ka": ""
+  "ka": "ტელეფონი"
  },
  {
   "id": 1348,
@@ -1621,7 +1621,7 @@
   "line": 12,
   "it": "Documento",
   "ctx": "\"Documento\",",
-  "ka": ""
+  "ka": "დოკუმენტი"
  },
  {
   "id": 1349,
@@ -1629,7 +1629,7 @@
   "line": 13,
   "it": "Zaino",
   "ctx": "\"Zaino\"",
-  "ka": ""
+  "ka": "ზურგჩანთა"
  },
  {
   "id": 1350,
@@ -1637,7 +1637,7 @@
   "line": 181,
   "it": "Inventario non disponibile (errore database): riprova con /inventario.",
   "ctx": "Inv_Say(playerid, -10270721, \"Inventario non disponibile (errore database): riprova con /inventario.\");",
-  "ka": ""
+  "ka": "ინვენტარი მიუწვდომელია (ბაზის შეცდომა): სცადე /inventario-ით."
  },
  {
   "id": 1351,
@@ -1645,7 +1645,7 @@
   "line": 278,
   "it": "L'inventario si sta caricando: riprova tra un attimo.",
   "ctx": "Inv_Say(playerid, -10270721, \"L'inventario si sta caricando: riprova tra un attimo.\");",
-  "ka": ""
+  "ka": "ინვენტარი იტვირთება: ერთ წამში სცადე."
  },
  {
   "id": 1352,
@@ -1653,7 +1653,7 @@
   "line": 283,
   "it": "Inventario non disponibile: provo a ricaricarlo, riprova tra poco.",
   "ctx": "Inv_Say(playerid, -10270721, \"Inventario non disponibile: provo a ricaricarlo, riprova tra poco.\");",
-  "ka": ""
+  "ka": "ინვენტარი მიუწვდომელია: ვცდილობ ხელახლა ჩატვირთვას, ცოტა ხანში სცადე."
  },
  {
   "id": 1353,
@@ -1661,7 +1661,7 @@
   "line": 290,
   "it": "Hai un'operazione di inventario in corso: attendi.",
   "ctx": "Inv_Say(playerid, -10270721, \"Hai un'operazione di inventario in corso: attendi.\");",
-  "ka": ""
+  "ka": "ინვენტარის ოპერაცია მიმდინარეობს: დაელოდე."
  },
  {
   "id": 1354,
@@ -1669,7 +1669,7 @@
   "line": 295,
   "it": "Non puoi farlo da ferito o ammanettato.",
   "ctx": "Inv_Say(playerid, -10270721, \"Non puoi farlo da ferito o ammanettato.\");",
-  "ka": ""
+  "ka": "დაჭრილს ან ბორკილდადებულს ეს არ შეგიძლია."
  },
  {
   "id": 1355,
@@ -1677,7 +1677,7 @@
   "line": 301,
   "it": "Attendi un attimo prima di un'altra azione con l'inventario.",
   "ctx": "Inv_Say(playerid, -10270721, \"Attendi un attimo prima di un'altra azione con l'inventario.\");",
-  "ka": ""
+  "ka": "ინვენტარით შემდეგ მოქმედებამდე ცოტა დაელოდე."
  },
  {
   "id": 1356,
@@ -1685,7 +1685,7 @@
   "line": 312,
   "it": "L'inventario si sta caricando: riprova tra un attimo.",
   "ctx": "Inv_Say(playerid, -10270721, \"L'inventario si sta caricando: riprova tra un attimo.\");",
-  "ka": ""
+  "ka": "ინვენტარი იტვირთება: ერთ წამში სცადე."
  },
  {
   "id": 1357,
@@ -1693,7 +1693,7 @@
   "line": 317,
   "it": "Inventario non disponibile: provo a ricaricarlo, riprova tra poco.",
   "ctx": "Inv_Say(playerid, -10270721, \"Inventario non disponibile: provo a ricaricarlo, riprova tra poco.\");",
-  "ka": ""
+  "ka": "ინვენტარი მიუწვდომელია: ვცდილობ ხელახლა ჩატვირთვას, ცოტა ხანში სცადე."
  },
  {
   "id": 1358,
@@ -1701,7 +1701,7 @@
   "line": 349,
   "it": "Oggetto sconosciuto.",
   "ctx": "Inv_Say(playerid, -10270721, \"Oggetto sconosciuto.\");",
-  "ka": ""
+  "ka": "უცნობი ნივთი."
  },
  {
   "id": 1359,
@@ -1709,7 +1709,7 @@
   "line": 354,
   "it": "Non hai: %s.",
   "ctx": "SendClientMessage(playerid, -10270721, \"Non hai: %s.\", s_InvName[itemId]);",
-  "ka": ""
+  "ka": "არ გაქვს: %s."
  },
  {
   "id": 1360,
@@ -1717,7 +1717,7 @@
   "line": 361,
   "it": "Le porzioni di cibo non si usano: riponile nel frigo (/frigo metti) e cucina o mangia freddo.",
   "ctx": "Inv_Say(playerid, -10270721, \"Le porzioni di cibo non si usano: riponile nel frigo (/frigo metti) e cucina o mangia freddo.\");",
-  "ka": ""
+  "ka": "საკვების ულუფა პირდაპირ არ გამოიყენება: ჩადე მაცივარში (/frigo metti) და მოამზადე ან ცივად ჭამე."
  },
  {
   "id": 1361,
@@ -1725,7 +1725,7 @@
   "line": 366,
   "it": "L'accendino serve per fumare: usa /usa sigarette.",
   "ctx": "Inv_Say(playerid, -10270721, \"L'accendino serve per fumare: usa /usa sigarette.\");",
-  "ka": ""
+  "ka": "სანთებელა მოსაწევადაა: გამოიყენე /usa sigarette."
  },
  {
   "id": 1362,
@@ -1733,7 +1733,7 @@
   "line": 371,
   "it": "Telefono: il tuo numero e' %d.",
   "ctx": "SendClientMessage(playerid, -1, \"Telefono: il tuo numero e' %d.\", gPlayer[playerid][pCharId] + 555000);",
-  "ka": ""
+  "ka": "ტელეფონი: შენი ნომერია %d."
  },
  {
   "id": 1363,
@@ -1741,7 +1741,7 @@
   "line": 383,
   "it": "Devi attendere ancora %d secondi per usare di nuovo: %s.",
   "ctx": "SendClientMessage(playerid, -10270721, \"Devi attendere ancora %d secondi per usare di nuovo: %s.\", left, s_InvName[itemId]);",
-  "ka": ""
+  "ka": "ხელახლა გამოსაყენებლად კიდევ %d წამი დაელოდე: %s."
  },
  {
   "id": 1364,
@@ -1749,7 +1749,7 @@
   "line": 395,
   "it": "I tuoi dati sul cibo non sono ancora stati caricati: riprova tra poco.",
   "ctx": "Inv_Say(playerid, -10270721, \"I tuoi dati sul cibo non sono ancora stati caricati: riprova tra poco.\");",
-  "ka": ""
+  "ka": "საკვების მონაცემები ჯერ არ ჩატვირთულა: სცადე ცოტა ხანში."
  },
  {
   "id": 1365,
@@ -1757,7 +1757,7 @@
   "line": 400,
   "it": "Non hai fame.",
   "ctx": "Inv_Say(playerid, -10270721, \"Non hai fame.\");",
-  "ka": ""
+  "ka": "არ გშია."
  },
  {
   "id": 1366,
@@ -1765,7 +1765,7 @@
   "line": 408,
   "it": "Non ti serve un kit di pronto soccorso: sei in buona salute.",
   "ctx": "Inv_Say(playerid, -10270721, \"Non ti serve un kit di pronto soccorso: sei in buona salute.\");",
-  "ka": ""
+  "ka": "პირველადი დახმარების ნაკრები არ გჭირდება: ჯანმრთელად ხარ."
  },
  {
   "id": 1367,
@@ -1773,7 +1773,7 @@
   "line": 416,
   "it": "Non hai ferite che richiedano una benda.",
   "ctx": "Inv_Say(playerid, -10270721, \"Non hai ferite che richiedano una benda.\");",
-  "ka": ""
+  "ka": "ბინტის საჭირო ჭრილობა არ გაქვს."
  },
  {
   "id": 1368,
@@ -1781,7 +1781,7 @@
   "line": 424,
   "it": "Ti serve un accendino per fumare.",
   "ctx": "Inv_Say(playerid, -10270721, \"Ti serve un accendino per fumare.\");",
-  "ka": ""
+  "ka": "მოსაწევად სანთებელა გჭირდება."
  },
  {
   "id": 1369,
@@ -1789,7 +1789,7 @@
   "line": 451,
   "it": "consuma un pasto pronto.",
   "ctx": "Inv_RpUse(playerid, itemId == 2 ? \"consuma un pasto pronto.\" : (itemId == 3 ? \"beve dell'acqua.\" : \"mangia uno snack.\"));",
-  "ka": ""
+  "ka": "მზა კერძს მიირთმევს."
  },
  {
   "id": 1370,
@@ -1797,7 +1797,7 @@
   "line": 451,
   "it": "beve dell'acqua.",
   "ctx": "Inv_RpUse(playerid, itemId == 2 ? \"consuma un pasto pronto.\" : (itemId == 3 ? \"beve dell'acqua.\" : \"mangia uno snack.\"));",
-  "ka": ""
+  "ka": "წყალს სვამს."
  },
  {
   "id": 1371,
@@ -1805,7 +1805,7 @@
   "line": 451,
   "it": "mangia uno snack.",
   "ctx": "Inv_RpUse(playerid, itemId == 2 ? \"consuma un pasto pronto.\" : (itemId == 3 ? \"beve dell'acqua.\" : \"mangia uno snack.\"));",
-  "ka": ""
+  "ka": "სნექს ჭამს."
  },
  {
   "id": 1372,
@@ -1813,7 +1813,7 @@
   "line": 454,
   "it": "Sazieta': %d%%.",
   "ctx": "SendClientMessage(playerid, 0x66DD66FF, \"Sazieta': %d%%.\", value);",
-  "ka": ""
+  "ka": "სიმაძღრე: %d%%."
  },
  {
   "id": 1373,
@@ -1821,7 +1821,7 @@
   "line": 466,
   "it": "usa un kit di pronto soccorso.",
   "ctx": "Inv_RpUse(playerid, itemId == 5 ? \"usa un kit di pronto soccorso.\" : \"si medica con una benda.\");",
-  "ka": ""
+  "ka": "პირველადი დახმარების ნაკრებს იყენებს."
  },
  {
   "id": 1374,
@@ -1829,7 +1829,7 @@
   "line": 466,
   "it": "si medica con una benda.",
   "ctx": "Inv_RpUse(playerid, itemId == 5 ? \"usa un kit di pronto soccorso.\" : \"si medica con una benda.\");",
-  "ka": ""
+  "ka": "ჭრილობას ბინტით იხვევს."
  },
  {
   "id": 1375,
@@ -1837,7 +1837,7 @@
   "line": 467,
   "it": "Salute: %d.",
   "ctx": "SendClientMessage(playerid, 0x66DD66FF, \"Salute: %d.\", floatround(hp, floatround_method:0));",
-  "ka": ""
+  "ka": "ჯანმრთელობა: %d."
  },
  {
   "id": 1376,
@@ -1845,7 +1845,7 @@
   "line": 471,
   "it": "accende una sigaretta.",
   "ctx": "Inv_RpUse(playerid, \"accende una sigaretta.\");",
-  "ka": ""
+  "ka": "სიგარეტს უკიდებს."
  },
  {
   "id": 1377,
@@ -1853,7 +1853,7 @@
   "line": 501,
   "it": "Hai perso l'oggetto: non eri in condizione di usarlo.",
   "ctx": "Inv_Say(playerid, -10270721, \"Hai perso l'oggetto: non eri in condizione di usarlo.\");",
-  "ka": ""
+  "ka": "ნივთი დაკარგე: მისი გამოყენების მდგომარეობაში არ იყავი."
  },
  {
   "id": 1378,
@@ -1861,7 +1861,7 @@
   "line": 506,
   "it": "Non hai piu' quell'oggetto.",
   "ctx": "Inv_Say(playerid, -10270721, \"Non hai piu' quell'oggetto.\");",
-  "ka": ""
+  "ka": "ეს ნივთი აღარ გაქვს."
  },
  {
   "id": 1379,
@@ -1869,7 +1869,7 @@
   "line": 511,
   "it": "Errore database: l'oggetto non e' stato usato. Controlla l'inventario e riprova.",
   "ctx": "Inv_Say(playerid, -10270721, \"Errore database: l'oggetto non e' stato usato. Controlla l'inventario e riprova.\");",
-  "ka": ""
+  "ka": "ბაზის შეცდომა: ნივთი არ გამოყენებულა. შეამოწმე ინვენტარი და სცადე თავიდან."
  },
  {
   "id": 1380,
@@ -1877,7 +1877,7 @@
   "line": 516,
   "it": "Impossibile usare l'oggetto.",
   "ctx": "Inv_Say(playerid, -10270721, \"Impossibile usare l'oggetto.\");",
-  "ka": ""
+  "ka": "ნივთის გამოყენება ვერ მოხერხდა."
  },
  {
   "id": 1381,
@@ -1885,7 +1885,7 @@
   "line": 608,
   "it": "Uso: /getta [oggetto] [quantita'] (cibo, pasto, acqua, snack, kit, benda, sigarette, accendino)",
   "ctx": "Inv_Say(playerid, 0x99CCFFFF, \"Uso: /getta [oggetto] [quantita'] (cibo, pasto, acqua, snack, kit, benda, sigarette, accendino)\");",
-  "ka": ""
+  "ka": "გამოყენება: /getta [ნივთი] [რაოდენობა] (cibo, pasto, acqua, snack, kit, benda, sigarette, accendino)"
  },
  {
   "id": 1382,
@@ -1893,7 +1893,7 @@
   "line": 614,
   "it": "Quantita' non valida.",
   "ctx": "Inv_Say(playerid, -10270721, \"Quantita' non valida.\");",
-  "ka": ""
+  "ka": "არასწორი რაოდენობა."
  },
  {
   "id": 1383,
@@ -1901,7 +1901,7 @@
   "line": 629,
   "it": "Questo oggetto non si puo' gettare.",
   "ctx": "Inv_Say(playerid, -10270721, \"Questo oggetto non si puo' gettare.\");",
-  "ka": ""
+  "ka": "ამ ნივთის გადაგდება არ შეიძლება."
  },
  {
   "id": 1384,
@@ -1909,7 +1909,7 @@
   "line": 634,
   "it": "Non hai abbastanza: %s.",
   "ctx": "SendClientMessage(playerid, -10270721, \"Non hai abbastanza: %s.\", s_InvName[itemId]);",
-  "ka": ""
+  "ka": "საკმარისად არ გაქვს: %s."
  },
  {
   "id": 1385,
@@ -1917,7 +1917,7 @@
   "line": 639,
   "it": "Puoi gettare oggetti solo a piedi, all'aperto.",
   "ctx": "Inv_Say(playerid, -10270721, \"Puoi gettare oggetti solo a piedi, all'aperto.\");",
-  "ka": ""
+  "ka": "ნივთების გადაგდება მხოლოდ ფეხით, გარეთ შეგიძლია."
  },
  {
   "id": 1386,
@@ -1925,7 +1925,7 @@
   "line": 645,
   "it": "Ci sono troppi oggetti a terra in giro: riprova piu' tardi.",
   "ctx": "Inv_Say(playerid, -10270721, \"Ci sono troppi oggetti a terra in giro: riprova piu' tardi.\");",
-  "ka": ""
+  "ka": "გარშემო ძალიან ბევრი ნივთი ყრია მიწაზე: მოგვიანებით სცადე."
  },
  {
   "id": 1387,
@@ -1933,7 +1933,7 @@
   "line": 650,
   "it": "Hai gia' %d oggetti a terra: raccoglili o attendi che spariscano.",
   "ctx": "SendClientMessage(playerid, -10270721, \"Hai gia' %d oggetti a terra: raccoglili o attendi che spariscano.\", 3);",
-  "ka": ""
+  "ka": "მიწაზე უკვე %d ნივთი გიყრია: აკრიფე ან დაელოდე, სანამ გაქრება."
  },
  {
   "id": 1388,
@@ -1941,7 +1941,7 @@
   "line": 656,
   "it": "Ci sono troppi oggetti a terra in giro: riprova piu' tardi.",
   "ctx": "Inv_Say(playerid, -10270721, \"Ci sono troppi oggetti a terra in giro: riprova piu' tardi.\");",
-  "ka": ""
+  "ka": "გარშემო ძალიან ბევრი ნივთი ყრია მიწაზე: მოგვიანებით სცადე."
  },
  {
   "id": 1389,
@@ -1949,7 +1949,7 @@
   "line": 697,
   "it": "Non hai piu' quell'oggetto.",
   "ctx": "Inv_Say(playerid, -10270721, \"Non hai piu' quell'oggetto.\");",
-  "ka": ""
+  "ka": "ეს ნივთი აღარ გაქვს."
  },
  {
   "id": 1390,
@@ -1957,7 +1957,7 @@
   "line": 702,
   "it": "Questo oggetto non si puo' gettare.",
   "ctx": "Inv_Say(playerid, -10270721, \"Questo oggetto non si puo' gettare.\");",
-  "ka": ""
+  "ka": "ამ ნივთის გადაგდება არ შეიძლება."
  },
  {
   "id": 1391,
@@ -1965,7 +1965,7 @@
   "line": 706,
   "it": "Errore database: l'oggetto non e' stato gettato.",
   "ctx": "Inv_Say(playerid, -10270721, \"Errore database: l'oggetto non e' stato gettato.\");",
-  "ka": ""
+  "ka": "ბაზის შეცდომა: ნივთი არ გადაგდებულა."
  },
  {
   "id": 1392,
@@ -1973,7 +1973,7 @@
   "line": 711,
   "it": "Impossibile gettare l'oggetto.",
   "ctx": "Inv_Say(playerid, -10270721, \"Impossibile gettare l'oggetto.\");",
-  "ka": ""
+  "ka": "ნივთის გადაგდება ვერ მოხერხდა."
  },
  {
   "id": 1393,
@@ -1981,7 +1981,7 @@
   "line": 720,
   "it": "Impossibile gettare l'oggetto.",
   "ctx": "Inv_Say(playerid, -10270721, \"Impossibile gettare l'oggetto.\");",
-  "ka": ""
+  "ka": "ნივთის გადაგდება ვერ მოხერხდა."
  },
  {
   "id": 1394,
@@ -1989,7 +1989,7 @@
   "line": 732,
   "it": "getta a terra: %s x%d.",
   "ctx": "format(text, 144, \"getta a terra: %s x%d.\", s_InvName[itemId], qty);",
-  "ka": ""
+  "ka": "მიწაზე აგდებს: %s x%d."
  },
  {
   "id": 1395,
@@ -1997,7 +1997,7 @@
   "line": 759,
   "it": "Puoi raccogliere oggetti solo a piedi, all'aperto.",
   "ctx": "Inv_Say(playerid, -10270721, \"Puoi raccogliere oggetti solo a piedi, all'aperto.\");",
-  "ka": ""
+  "ka": "ნივთების აკრეფა მხოლოდ ფეხით, გარეთ შეგიძლია."
  },
  {
   "id": 1396,
@@ -2005,7 +2005,7 @@
   "line": 778,
   "it": "Non c'e' nessun oggetto a terra vicino a te.",
   "ctx": "Inv_Say(playerid, -10270721, \"Non c'e' nessun oggetto a terra vicino a te.\");",
-  "ka": ""
+  "ka": "ახლოს მიწაზე ნივთი არ არის."
  },
  {
   "id": 1397,
@@ -2013,7 +2013,7 @@
   "line": 802,
   "it": "Hai raccolto: %s x%d.",
   "ctx": "SendClientMessage(playerid, 0x66DD66FF, \"Hai raccolto: %s x%d.\", s_InvName[itemId], qty);",
-  "ka": ""
+  "ka": "აკრიფე: %s x%d."
  },
  {
   "id": 1398,
@@ -2021,7 +2021,7 @@
   "line": 813,
   "it": "Non hai abbastanza spazio nell'inventario.",
   "ctx": "Inv_Say(playerid, -10270721, \"Non hai abbastanza spazio nell'inventario.\");",
-  "ka": ""
+  "ka": "ინვენტარში საკმარისი ადგილი არ გაქვს."
  },
  {
   "id": 1399,
@@ -2029,7 +2029,7 @@
   "line": 817,
   "it": "Errore database: oggetto non raccolto.",
   "ctx": "Inv_Say(playerid, -10270721, \"Errore database: oggetto non raccolto.\");",
-  "ka": ""
+  "ka": "ბაზის შეცდომა: ნივთი ვერ აიკრიფა."
  },
  {
   "id": 1400,
@@ -2037,7 +2037,7 @@
   "line": 821,
   "it": "Impossibile raccogliere l'oggetto.",
   "ctx": "Inv_Say(playerid, -10270721, \"Impossibile raccogliere l'oggetto.\");",
-  "ka": ""
+  "ka": "ნივთის აკრეფა ვერ მოხერხდა."
  },
  {
   "id": 1401,
@@ -2045,7 +2045,7 @@
   "line": 847,
   "it": "Hai richiesto un nuovo documento d'identita'.",
   "ctx": "Inv_Say(playerid, 0x66DD66FF, \"Hai richiesto un nuovo documento d'identita'.\");",
-  "ka": ""
+  "ka": "ახალი პირადობის მოწმობა მოითხოვე."
  },
  {
   "id": 1402,
@@ -2053,7 +2053,7 @@
   "line": 852,
   "it": "Non hai spazio nell'inventario per il documento.",
   "ctx": "Inv_Say(playerid, -10270721, result == 2 ? \"Non hai spazio nell'inventario per il documento.\" : \"Impossibile rilasciare il documento.\");",
-  "ka": ""
+  "ka": "დოკუმენტისთვის ინვენტარში ადგილი არ გაქვს."
  },
  {
   "id": 1403,
@@ -2061,7 +2061,7 @@
   "line": 852,
   "it": "Impossibile rilasciare il documento.",
   "ctx": "Inv_Say(playerid, -10270721, result == 2 ? \"Non hai spazio nell'inventario per il documento.\" : \"Impossibile rilasciare il documento.\");",
-  "ka": ""
+  "ka": "დოკუმენტის გაცემა ვერ მოხერხდა."
  },
  {
   "id": 1404,
@@ -2069,7 +2069,7 @@
   "line": 872,
   "it": "startdoc%d",
   "ctx": "format(gPlayer[playerid][pInvOpId], 33, \"startdoc%d\", gPlayer[playerid][pCharId]);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 1405,
@@ -2077,6 +2077,6 @@
   "line": 886,
   "it": "Hai gia' il documento d'identita'.",
   "ctx": "Inv_Say(playerid, -10270721, \"Hai gia' il documento d'identita'.\");",
-  "ka": ""
+  "ka": "პირადობის მოწმობა უკვე გაქვს."
  }
 ]
