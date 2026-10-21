@@ -1074,6 +1074,11 @@ static AzMap_Part0()
 	SetDynamicObjectMaterial(o, 3, 19962, "samproadsigns", "materialtext1", 0);
 	SetDynamicObjectMaterial(o, 1, 1842, "shop_shelf1", "shelf3", 0);
 	SetDynamicObjectMaterial(o, 0, 14784, "genintwarehsint3", "lasjmflood2", 0);
+}
+
+static AzMap_Part1()
+{
+	new STREAMER_TAG_OBJECT:o;
 	o = CreateDynamicObject(1990, 2566.536133, 1426.855835, 1800.061279, 0.0, 0.0, 90.0, -1, -1, -1, 100.0, 100.0);
 	SetDynamicObjectMaterial(o, 0, 14582, "casmafbar", "beerfridge128", 0);
 	CreateDynamicObject(2356, 2579.938721, 1416.129395, 1799.958496, 0.0, 0.0, -177.759598, -1, -1, -1, 100.0, 100.0);
@@ -2075,6 +2080,11 @@ static AzMap_Part0()
 	CreateDynamicObject(3785, 465.487762, 875.48468, 1501.936523, 0.0, 0.0, 630.0, -1, -1, -1, 100.0, 100.0);
 	o = CreateDynamicObject(16732, 469.258057, 863.836243, 1502.662964, 0.0, 0.0, 270.0, -1, -1, -1, 100.0, 100.0);
 	SetDynamicObjectMaterial(o, 0, 11145, "carrierint_sfs", "noodpot_64", 0xFFFFFFFF);
+}
+
+static AzMap_Part2()
+{
+	new STREAMER_TAG_OBJECT:o;
 	CreateDynamicObject(3633, 448.987549, 856.968201, 1501.894531, 0.0, 0.0, 0.0, -1, -1, -1, 100.0, 100.0);
 	o = CreateDynamicObject(19428, 469.437622, 868.49823, 1501.699829, 0.0, 0.0, 90.0, -1, -1, -1, 100.0, 100.0);
 	SetDynamicObjectMaterial(o, 0, 16639, "a51_labs", "studiowall4_law", 0);
@@ -3167,6 +3177,11 @@ static AzMap_Part0()
 	o = CreateDynamicObject(19940, -727.507263, 2243.113037, 1500.633423, 0.000022, 89.900024, 89.999969, -1, -1, -1, 100.0, 100.0);
 	SetDynamicObjectMaterial(o, 0, 12946, "ce_bankalley1", "sw_stairs1", 0xFFFFFFFF);
 	CreateDynamicObject(2675, -717.912964, 2246.300293, 1500.037476, 0.0, 0.0, 43.5, -1, -1, -1, 100.0, 100.0);
+}
+
+static AzMap_Part3()
+{
+	new STREAMER_TAG_OBJECT:o;
 	o = CreateDynamicObject(19940, -727.507263, 2243.112549, 1500.200684, -0.000005, 270.0, 270.0, -1, -1, -1, 100.0, 100.0);
 	SetDynamicObjectMaterial(o, 0, 12946, "ce_bankalley1", "sw_stairs1", 0xFFFFFFFF);
 	o = CreateDynamicObject(19843, -728.004395, 2242.625732, 1500.809448, 0.099971, 0.00001, 360.0, -1, -1, -1, 100.0, 100.0);
@@ -4069,7 +4084,7 @@ static AzMap_Part0()
 	CreateDynamicObject(1487, -733.142883, 2421.794434, 1500.65625, 0.0, 0.0, -3.24, -1, -1, -1, 100.0, 100.0);
 }
 
-static AzMap_Part1()
+static AzMap_Part4()
 {
 	new STREAMER_TAG_OBJECT:o;
 	CreateDynamicObject(2675, -735.938171, 2420.333984, 1500.03125, 0.0, 0.0, 382.620117, -1, -1, -1, 100.0, 100.0);
@@ -5116,6 +5131,11 @@ static AzMap_Part1()
 	SetDynamicObjectMaterial(o, 0, 14789, "ab_sfgymmain", "gun_ceiling2_128", 0);
 	o = CreateDynamicObject(19377, -746.769287, 2375.858887, 1405.281494, 0.0, -0.000022, -90.000099, -1, -1, -1, 100.0, 100.0);
 	SetDynamicObjectMaterial(o, 0, 13461, "ce_nitelite", "ws_boxhouse_wins6nite", 0);
+}
+
+static AzMap_Part5()
+{
+	new STREAMER_TAG_OBJECT:o;
 	o = CreateDynamicObject(19998, -736.041687, 2366.018555, 1400.865234, -0.000003, 0.0, 360.0, -1, -1, -1, 100.0, 100.0);
 	SetDynamicObjectMaterial(o, 0, 14652, "ab_trukstpa", "CJ_WOOD6", 0);
 	o = CreateDynamicObject(19447, -748.148376, 2376.578125, 1405.211792, 0.0, 0.000007, 180.0, -1, -1, -1, 100.0, 100.0);
@@ -6015,6 +6035,11 @@ static AzMap_Part1()
 	SetDynamicObjectMaterial(o, 2, 14392, "dr_gsstudio", "la_flair2", 0);
 	SetDynamicObjectMaterial(o, 1, 14392, "dr_gsstudio", "la_flair2", 0);
 	SetDynamicObjectMaterial(o, 0, 14392, "dr_gsstudio", "la_flair2", 0);
+}
+
+static AzMap_Part6()
+{
+	new STREAMER_TAG_OBJECT:o;
 	CreateDynamicObject(19818, -656.778076, -2179.721924, 1500.946899, 0.0, 0.0, 0.0, -1, -1, -1, 100.0, 100.0);
 	o = CreateDynamicObject(19325, -648.240967, -2170.466553, 1501.660156, 0.0, 0.0, 90.0, -1, -1, -1, 100.0, 100.0);
 	SetDynamicObjectMaterial(o, 0, 15041, "bigsfsave", "windo_blinds", 0xFFFFFFFF);
@@ -6945,6 +6970,11 @@ static AzMap_Part1()
 	SetDynamicObjectMaterial(o, 0, 19598, "sfbuilding1", "darkwood1", 0);
 	o = CreateDynamicObject(19442, 2181.270752, -571.62677, 1499.555176, 0.0, 0.0, 0.0, -1, -1, -1, 100.0, 100.0);
 	SetDynamicObjectMaterial(o, 0, 14652, "ab_trukstpa", "CJ_WOOD6", 0);
+}
+
+static AzMap_Part7()
+{
+	new STREAMER_TAG_OBJECT:o;
 	o = CreateDynamicObject(2701, 2172.796631, -575.159424, 1504.237915, 0.0, 0.000014, 0.0, -1, -1, -1, 100.0, 100.0);
 	SetDynamicObjectMaterial(o, 0, 16639, "a51_labs", "ws_trainstationwin1", 0);
 	o = CreateDynamicObject(19443, 2184.320801, -570.911621, 1504.708984, 0.0, 90.0, 90.0, -1, -1, -1, 100.0, 100.0);
@@ -7873,7 +7903,7 @@ static AzMap_Part1()
 	SetDynamicObjectMaterial(o, 0, 14674, "civic02cj", "ab_hosWallUpr", 0);
 }
 
-static AzMap_Part2()
+static AzMap_Part8()
 {
 	new STREAMER_TAG_OBJECT:o;
 	o = CreateDynamicObject(19455, 2213.137451, -408.116302, 1499.555176, 0.0, 0.0, 90.0, -1, -1, -1, 100.0, 100.0);
@@ -8952,6 +8982,11 @@ static AzMap_Part2()
 	SetDynamicObjectMaterial(o, 0, 5848, "mainlcawn", "striplight01_128", 0);
 	o = CreateDynamicObject(19430, -456.853577, 2190.606689, 1605.335571, 0.0, 0.0, -90.000038, -1, -1, -1, 100.0, 100.0);
 	SetDynamicObjectMaterial(o, 0, 3629, "arprtxxref_las", "ws_corrugateddoor1", 0);
+}
+
+static AzMap_Part9()
+{
+	new STREAMER_TAG_OBJECT:o;
 	CreateDynamicObject(1721, -478.038086, 2208.424072, 1600.09375, 0.0, 0.0, 0.0, -1, -1, -1, 100.0, 100.0);
 	o = CreateDynamicObject(1714, -453.598816, 2190.0896, 1600.045166, -0.0, -0.000014, -173.799881, -1, -1, -1, 100.0, 100.0);
 	SetDynamicObjectMaterial(o, 0, 2896, "law_coffintxd", "metleg_32_law", 0);
@@ -10002,6 +10037,11 @@ static AzMap_Part2()
 	SetDynamicObjectMaterial(o, 2, 14570, "traidaqua", "ab_aqua_tubeweed", 0);
 	SetDynamicObjectMaterial(o, 1, 19480, "signsurf", "sign", 0);
 	SetDynamicObjectMaterial(o, 0, 19480, "signsurf", "sign", 0);
+}
+
+static AzMap_Part10()
+{
+	new STREAMER_TAG_OBJECT:o;
 	o = CreateDynamicObject(19866, 1548.255127, 1091.911133, 1040.48645, 89.999992, 269.149353, -89.14933, -1, -1, -1, 100.0, 100.0);
 	SetDynamicObjectMaterial(o, 0, 14846, "genintintpoliceb", "p_floor3", 0);
 	o = CreateDynamicObject(950, 1548.557251, 1092.431274, 1034.775513, 0.0, 0.000051, 0.0, -1, -1, -1, 100.0, 100.0);
@@ -11124,6 +11164,11 @@ static AzMap_Part2()
 	o = CreateDynamicObject(1973, 1501.699707, -1248.900513, 113.744652, 0.000007, -0.000007, 179.999908, -1, -1, -1, 100.0, 100.0);
 	SetDynamicObjectMaterial(o, 1, 4829, "airport_las", "liftdoorsac256", 0xFFFFFFFF);
 	SetDynamicObjectMaterial(o, 0, 19480, "signsurf", "sign", 0);
+}
+
+static AzMap_Part11()
+{
+	new STREAMER_TAG_OBJECT:o;
 	o = CreateDynamicObject(2831, 1501.856201, -1248.994995, 114.160057, -0.00001, 0.000002, -32.499985, -1, -1, -1, 100.0, 100.0);
 	SetDynamicObjectMaterial(o, 2, 14651, "ab_trukstpd", "Bow_bar_metal_cabinet", 0);
 	SetDynamicObjectMaterial(o, 1, 19480, "signsurf", "sign", 0);
@@ -12224,7 +12269,7 @@ static AzMap_Part2()
 	SetDynamicObjectMaterial(o, 0, 17566, "contachou1_lae2", "woodwarewall1", 0xFFFFFFFF);
 }
 
-static AzMap_Part3()
+static AzMap_Part12()
 {
 	new STREAMER_TAG_OBJECT:o;
 	o = CreateDynamicObject(19843, 1089.84729, 947.551392, 1600.892822, 0.0, 0.0, 0.0, -1, -1, -1, 100.0, 100.0);
@@ -13162,6 +13207,11 @@ static AzMap_Part3()
 	CreateDynamicObject(2174, -204.619781, 1296.411987, 1506.639526, 0.0, 0.0, 180.0, -1, -1, -1, 100.0, 100.0);
 	o = CreateDynamicObject(19379, -203.119415, 1295.851074, 1505.015991, 0.000007, -0.000014, 269.999878, -1, -1, -1, 100.0, 100.0);
 	SetDynamicObjectMaterial(o, 0, 6873, "vgnshambild1", "fitzwallvgn6_256", 0);
+}
+
+static AzMap_Part13()
+{
+	new STREAMER_TAG_OBJECT:o;
 	CreateDynamicObject(2256, -207.275986, 1297.45752, 1508.835205, 0.0, 0.0, 810.0, -1, -1, -1, 100.0, 100.0);
 	CreateDynamicObject(2202, -206.847504, 1296.962158, 1506.642822, 0.0, 0.0, 90.0, -1, -1, -1, 100.0, 100.0);
 	CreateDynamicObject(3812, -201.354965, 1295.85144, 1509.357422, 0.0, 0.0, 90.0, -1, -1, -1, 100.0, 100.0);
@@ -14144,6 +14194,11 @@ static AzMap_Part3()
 	o = CreateDynamicObject(2063, 1091.236938, 1526.256958, 1708.954224, 0.0, 0.0, 180.0, -1, -1, -1, 100.0, 100.0);
 	SetDynamicObjectMaterial(o, 1, 2669, "cj_chris", "Bow_Fence_Metal", 0);
 	SetDynamicObjectMaterial(o, 0, 960, "cj_crate_will", "CJ_FLIGHT_CASE", 0xFFFFFFFF);
+}
+
+static AzMap_Part14()
+{
+	new STREAMER_TAG_OBJECT:o;
 	o = CreateDynamicObject(18663, 1088.590698, 1530.465942, 1713.077881, 0.100002, -0.000012, 179.999832, -1, -1, -1, 100.0, 100.0);
 	SetDynamicObjectMaterialText(o, 0, "Store", 140, "Segoe Print", 110, 1, 0xFFFFFFFF, 0, 1);
 	o = CreateDynamicObject(19442, 1095.55542, 1525.094971, 1713.329712, 0.0, 0.0, 180.0, -1, -1, -1, 100.0, 100.0);
@@ -15084,6 +15139,11 @@ static AzMap_Part3()
 	SetDynamicObjectMaterial(o, 0, 13078, "cewrehse", "sw_wind13", 0);
 	o = CreateDynamicObject(19446, 669.235474, -581.98407, 1704.973389, 0.0, 0.0, 90.0, -1, -1, -1, 100.0, 100.0);
 	SetDynamicObjectMaterial(o, 0, 13012, "sw_apartflat5", "sjmfad1", 0);
+}
+
+static AzMap_Part15()
+{
+	new STREAMER_TAG_OBJECT:o;
 	o = CreateDynamicObject(3503, 676.393311, -576.012207, 1699.726196, 0.0, 0.0, 0.0, -1, -1, -1, 100.0, 100.0);
 	SetDynamicObjectMaterial(o, 2, 10226, "sfeship1", "sf_ship_generic8", 0);
 	SetDynamicObjectMaterial(o, 1, 10226, "sfeship1", "sf_ship_generic8", 0);
@@ -16209,7 +16269,7 @@ static AzMap_Part3()
 	SetDynamicObjectMaterial(o, 0, 8396, "sphinx01", "luxorceiling02_128", 0xFFFFFFFF);
 }
 
-static AzMap_Part4()
+static AzMap_Part16()
 {
 	new STREAMER_TAG_OBJECT:o;
 	o = CreateDynamicObject(18766, 1143.855469, -1304.783203, 1015.922607, 0.0, 0.0, 90.0, -1, -1, -1, 100.0, 100.0);
@@ -17343,6 +17403,11 @@ static AzMap_Part4()
 	SetDynamicObjectMaterial(o, 0, 17511, "stadium_lae2", "forum1", 0);
 	o = CreateDynamicObject(19427, 642.746887, -1253.11853, 1024.446899, 0.000007, 0.0, 89.999977, -1, -1, -1, 100.0, 100.0);
 	SetDynamicObjectMaterial(o, 0, 16640, "a51", "ws_metalpanel1", 0);
+}
+
+static AzMap_Part17()
+{
+	new STREAMER_TAG_OBJECT:o;
 	o = CreateDynamicObject(19456, 642.455627, -1253.138306, 1026.311035, -0.000007, 179.999985, 90.000023, -1, -1, -1, 100.0, 100.0);
 	SetDynamicObjectMaterial(o, 0, 4887, "downtown_las", "snpedwar4", 0);
 	o = CreateDynamicObject(18766, 641.776672, -1253.026123, 1020.906494, 0.0, 0.0, 360.0, -1, -1, -1, 100.0, 100.0);
@@ -18422,6 +18487,11 @@ static AzMap_Part4()
 	SetDynamicObjectMaterial(o, 0, 8618, "ceasersign", "ceaserspillar01_128", 0);
 	o = CreateDynamicObject(2714, 674.639587, -1266.115967, 1026.82373, 89.999992, 180.0, -89.999977, -1, -1, -1, 100.0, 100.0);
 	SetDynamicObjectMaterial(o, 0, 14888, "gf6", "mp_vicgrill", 0);
+}
+
+static AzMap_Part18()
+{
+	new STREAMER_TAG_OBJECT:o;
 	o = CreateDynamicObject(19866, 677.055542, -1262.81958, 1023.738831, -89.999992, -62.665455, 27.334467, -1, -1, -1, 100.0, 100.0);
 	SetDynamicObjectMaterial(o, 0, 7416, "vgnbball", "vgngewall2_256", 0xFFFFFFFF);
 	o = CreateDynamicObject(2265, 672.26001, -1269.487671, 1024.379272, 5.550155, 90.314316, -145.507492, -1, -1, -1, 100.0, 100.0);
@@ -19452,6 +19522,11 @@ static AzMap_Part4()
 	SetDynamicObjectMaterial(o, 0, 14383, "burg_1", "burglry_wall3", 0);
 	CreateDynamicObject(2891, -597.903992, 130.973007, 1500.802979, 0.0, 0.0, -24.84, -1, -1, -1, 100.0, 100.0);
 	CreateDynamicObject(1931, -598.026978, 130.572998, 1500.796021, 0.0, 0.0, 0.0, -1, -1, -1, 100.0, 100.0);
+}
+
+static AzMap_Part19()
+{
+	new STREAMER_TAG_OBJECT:o;
 	o = CreateDynamicObject(19450, -598.182007, 127.416, 1498.500977, 0.0, 0.0, 90.0, -1, -1, -1, 100.0, 100.0);
 	SetDynamicObjectMaterial(o, 0, 11631, "mp_ranchcut", "mpCJ_WOOD_DARK", 0);
 	o = CreateDynamicObject(19456, -593.135986, 114.928001, 1505.281982, 0.0, 0.0, 90.0, -1, -1, -1, 100.0, 100.0);
@@ -20374,7 +20449,7 @@ static AzMap_Part4()
 	CreateDynamicObject(5154, 2838.169922, -2466.040039, 15.75, 360.0, 0.0, 90.0, 300, 300, -1, 300.0, 300.0);
 }
 
-static AzMap_Part5()
+static AzMap_Part20()
 {
 	new STREAMER_TAG_OBJECT:o;
 	CreateDynamicObject(1567, 2841.600098, -2523.530029, 16.76, 360.0, 0.0, 359.940002, 300, 300, -1, 300.0, 300.0);
@@ -21190,6 +21265,11 @@ static AzMap_Part5()
 	o = CreateDynamicObject(2714, 1110.248169, -1450.431519, 16.474352, 0.000007, -18.400003, 89.999977, -1, -1, -1, 300.0, 300.0);
 	SetDynamicObjectMaterial(o, 0, 18878, "ferriswheel", "bunting", 0);
 	CreateDynamicObject(1341, 1128.709473, -1433.424194, 15.77213, 0.0, 0.0, 90.0, -1, -1, -1, 300.0, 300.0);
+}
+
+static AzMap_Part21()
+{
+	new STREAMER_TAG_OBJECT:o;
 	o = CreateDynamicObject(1280, 1118.066284, -1442.296997, 15.105199, 0.0, -0.000015, 179.999908, -1, -1, -1, 300.0, 300.0);
 	SetDynamicObjectMaterial(o, 0, 16640, "a51", "Alumox64", 0);
 	o = CreateDynamicObject(18066, 1110.08252, -1449.433716, 15.551792, 0.000038, 0.0, 89.999886, -1, -1, -1, 300.0, 300.0);
@@ -22143,6 +22223,11 @@ static AzMap_Part5()
 	SetDynamicObjectMaterial(o, 0, 10765, "airportgnd_sfse", "black64", 0);
 	o = CreateDynamicObject(19993, 1789.184326, -1726.827515, 12.68774, 0.000007, -0.000024, -172.799759, -1, -1, -1, 300.0, 300.0);
 	SetDynamicObjectMaterial(o, 0, 10765, "airportgnd_sfse", "black64", 0);
+}
+
+static AzMap_Part22()
+{
+	new STREAMER_TAG_OBJECT:o;
 	CreateDynamicObject(19320, 1789.212891, -1726.553711, 12.837739, 0.000007, -0.000024, -172.799759, -1, -1, -1, 300.0, 300.0);
 	o = CreateDynamicObject(19326, 1789.157471, -1726.838013, 12.917746, 0.000007, -111.000031, -172.799759, -1, -1, -1, 300.0, 300.0);
 	SetDynamicObjectMaterialText(o, 0, "4", 140, "Webdings", 80, 0, 0xFF000000, 0, 1);
@@ -23100,6 +23185,11 @@ static AzMap_Part5()
 	o = CreateDynamicObject(2350, 1084.421021, 998.998474, 1600.334717, 0.000022, 0.000007, 89.999901, -1, -1, -1, 300.0, 300.0);
 	SetDynamicObjectMaterial(o, 1, 14652, "ab_trukstpa", "CJ_CORD", 0);
 	SetDynamicObjectMaterial(o, 0, 14652, "ab_trukstpa", "CJ_WOOD6", 0);
+}
+
+static AzMap_Part23()
+{
+	new STREAMER_TAG_OBJECT:o;
 	CreateDynamicObject(2639, 1081.582764, 1000.578186, 1600.447998, -0.000014, 0.000007, 0.000014, -1, -1, -1, 300.0, 300.0);
 	o = CreateDynamicObject(19466, 1079.990845, 1002.07135, 1602.149292, 0.0, 0.0, 0.0, -1, -1, -1, 300.0, 300.0);
 	SetDynamicObjectMaterial(o, 0, 2718, "cj_ff_acc2", "GRATE", 0xFFFFFFFF);
@@ -23950,7 +24040,7 @@ static AzMap_Part5()
 	SetDynamicObjectMaterial(o, 0, 3063, "col_wall1x", "ab_wood1", 0xFFFFFFFFFF9D9D9D);
 }
 
-static AzMap_Part6()
+static AzMap_Part24()
 {
 	new STREAMER_TAG_OBJECT:o;
 	o = CreateDynamicObject(19354, -721.946228, 2240.605469, 1498.524902, 0.0, 0.0, 0.0, -1, -1, -1, 300.0, 300.0);
@@ -24866,6 +24956,11 @@ static AzMap_Part6()
 	o = CreateDynamicObject(2272, -728.619263, 2411.142578, 1501.942749, 0.0, 2.0, -90.0, -1, -1, -1, 300.0, 300.0);
 	SetDynamicObjectMaterial(o, 1, 18081, "cj_barb", "barberspic3", 0);
 	SetDynamicObjectMaterial(o, 0, 18028, "cj_bar2", "GB_nastybar04", 0);
+}
+
+static AzMap_Part25()
+{
+	new STREAMER_TAG_OBJECT:o;
 	CreateDynamicObject(2057, -732.388184, 2408.207031, 1501.013428, 0.0, 0.0, -2.88, -1, -1, -1, 300.0, 300.0);
 	o = CreateDynamicObject(19427, -732.211792, 2407.836914, 1498.524902, 0.0, 0.0, 90.0, -1, -1, -1, 300.0, 300.0);
 	SetDynamicObjectMaterial(o, 0, 18056, "mp_diner1", "mp_diner_wall", 0xFFFFFFFFFFFFFFFF);
@@ -25745,6 +25840,11 @@ static AzMap_Part6()
 	o = CreateDynamicObject(19448, -417.320129, 2404.112549, 1499.889038, 0.0, 90.0, 180.0, -1, -1, -1, 300.0, 300.0);
 	SetDynamicObjectMaterial(o, 0, 14443, "ganghoos", "motel_bathfloor", 0);
 	CreateDynamicObject(2675, -420.815704, 2422.419434, 1500.066406, 0.0, 0.0, 101.459976, -1, -1, -1, 300.0, 300.0);
+}
+
+static AzMap_Part26()
+{
+	new STREAMER_TAG_OBJECT:o;
 	o = CreateDynamicObject(19448, -420.630005, 2408.763672, 1501.709351, 0.0, 0.0, 0.0, -1, -1, -1, 300.0, 300.0);
 	SetDynamicObjectMaterial(o, 0, 4593, "buildblk55", "GB_nastybar03", 0);
 	o = CreateDynamicObject(2335, -420.0401, 2407.481689, 1499.940674, 0.0, 0.0, 90.0, -1, -1, -1, 300.0, 300.0);
@@ -26637,6 +26737,11 @@ static AzMap_Part6()
 	SetDynamicObjectMaterial(o, 0, 3098, "col_wall2x", "mp_burn_wall2", 0);
 	o = CreateDynamicObject(1579, -589.421021, 129.570007, 1500.637939, -60.238998, -16.26, -83.040001, -1, -1, -1, 300.0, 300.0);
 	SetDynamicObjectMaterial(o, 0, 1746, "cj_sofa", "cj_fab3", 0xFFFFFFFFFFFFFFFF);
+}
+
+static AzMap_Part27()
+{
+	new STREAMER_TAG_OBJECT:o;
 	o = CreateDynamicObject(19328, -589.29303, 124.553001, 1501.938965, 0.0, 6.0, 180.0, -1, -1, -1, 300.0, 300.0);
 	SetDynamicObjectMaterial(o, 0, 14802, "lee_bdupsflat", "Bdup_Poster", 0);
 	o = CreateDynamicObject(19453, -587.236023, 122.982002, 1506.291016, 34.0, 90.0, 90.0, -1, -1, -1, 300.0, 300.0);
@@ -27537,7 +27642,7 @@ static AzMap_Part6()
 	CreateDynamicObject(2102, -551.352295, 2249.104736, 1501.848145, 0.0, 0.0, -359.280121, -1, -1, -1, 300.0, 300.0);
 }
 
-static AzMap_Part7()
+static AzMap_Part28()
 {
 	new STREAMER_TAG_OBJECT:o;
 	o = CreateDynamicObject(2718, -547.816223, 2260.477295, 1502.882935, 0.0, 0.0, 180.0, -1, -1, -1, 300.0, 300.0);
@@ -28634,6 +28739,11 @@ static AzMap_Part7()
 	SetDynamicObjectMaterialText(o, 0, "GT 63 AMG", 140, "Impact", 60, 0, 0xFFFFFFFF, 0, 1);
 	o = CreateDynamicObject(18664, 1104.861694, -1497.126953, 15.829071, -0.000074, -0.00001, -179.999741, -1, -1, -1, 300.0, 300.0);
 	SetDynamicObjectMaterialText(o, 0, "14000 AZ", 140, "Impact", 60, 0, 0xFFFFFFFF, 0, 1);
+}
+
+static AzMap_Part29()
+{
+	new STREAMER_TAG_OBJECT:o;
 	o = CreateDynamicObject(19353, 1105.832397, -1494.425781, 13.373202, -0.000043, 359.999969, 134.99971, -1, -1, -1, 300.0, 300.0);
 	SetDynamicObjectMaterial(o, 0, 6048, "mall_law", "stonemall_law", 0);
 	o = CreateDynamicObject(18664, 1104.861572, -1497.127563, 16.399069, -0.000074, -0.00001, -179.999741, -1, -1, -1, 300.0, 300.0);
@@ -29622,18 +29732,52 @@ static AzMap_Part7()
 	SetDynamicObjectMaterial(o, 0, 6094, "canalsg_law", "ws_sheetwood_clean", 0);
 }
 
-AzMap_Create()
+#define AZMAP_PARTS (30)
+
+// crea il pezzo p (0 .. AZMAP_PARTS-1) del mapping; chiamata a tappe dall'avvio
+AzMap_CreatePart(p)
 {
-	Streamer_SetVisibleItems(STREAMER_TYPE_OBJECT, 900);
-	AzMap_Part0();
-	AzMap_Part1();
-	AzMap_Part2();
-	AzMap_Part3();
-	AzMap_Part4();
-	AzMap_Part5();
-	AzMap_Part6();
-	AzMap_Part7();
-	printf("[MAPPA] Arizona Los Santos: %d oggetti", AZMAP_OBJECTS);
+	switch (p)
+	{
+		case 0: AzMap_Part0();
+		case 1: AzMap_Part1();
+		case 2: AzMap_Part2();
+		case 3: AzMap_Part3();
+		case 4: AzMap_Part4();
+		case 5: AzMap_Part5();
+		case 6: AzMap_Part6();
+		case 7: AzMap_Part7();
+		case 8: AzMap_Part8();
+		case 9: AzMap_Part9();
+		case 10: AzMap_Part10();
+		case 11: AzMap_Part11();
+		case 12: AzMap_Part12();
+		case 13: AzMap_Part13();
+		case 14: AzMap_Part14();
+		case 15: AzMap_Part15();
+		case 16: AzMap_Part16();
+		case 17: AzMap_Part17();
+		case 18: AzMap_Part18();
+		case 19: AzMap_Part19();
+		case 20: AzMap_Part20();
+		case 21: AzMap_Part21();
+		case 22: AzMap_Part22();
+		case 23: AzMap_Part23();
+		case 24: AzMap_Part24();
+		case 25: AzMap_Part25();
+		case 26: AzMap_Part26();
+		case 27: AzMap_Part27();
+		case 28: AzMap_Part28();
+		case 29: AzMap_Part29();
+	}
+	if (p == 0)
+	{
+		Streamer_SetVisibleItems(STREAMER_TYPE_OBJECT, 600);   // 0.3.7 + CEF nello stesso processo: memoria del client limitata
+	}
+	if (p == AZMAP_PARTS - 1)
+	{
+		printf("[MAPPA] Arizona Los Santos: %d oggetti", AZMAP_OBJECTS);
+	}
 }
 
 // edifici originali di GTA da togliere dove c'e' il mapping (va chiamata a ogni connessione)

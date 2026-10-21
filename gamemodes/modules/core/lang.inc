@@ -189,10 +189,46 @@ bool:Lang_ShowPlayerDialog(playerid, dialogid, t_DIALOG_STYLE:style, const title
 	return ShowPlayerDialog(playerid, dialogid, style, cap, out, b1, b2);
 }
 
+// testo di TextDraw sicuro per il client: mai vuoto ("_"), niente "~" spaiati (codici GTA rotti), al massimo 800 caratteri
+Lang_TdSafe(out[], size)
+{
+	new tildes = 0, len = 0;
+	for (; out[len] != 0 && len < size; len++)
+	{
+		if (out[len] == 126)
+		{
+			tildes++;
+		}
+	}
+	if (tildes % 2 != 0)
+	{
+		new o = 0;
+		for (new i = 0; i < len; i++)
+		{
+			if (out[i] != 126)
+			{
+				out[o++] = out[i];
+			}
+		}
+		out[o] = 0;
+		len = o;
+	}
+	if (len > 800)
+	{
+		out[800] = 0;
+	}
+	if (out[0] == 0)
+	{
+		out[0] = 95;
+		out[1] = 0;
+	}
+}
+
 PlayerText:Lang_CreatePlayerTextDraw(playerid, Float:x, Float:y, const text[])
 {
 	static out[1024];
 	Lang_Translit(text, out, 1024);
+	Lang_TdSafe(out, 1024);
 	return CreatePlayerTextDraw(playerid, x, y, "%s", out);
 }
 
@@ -200,6 +236,7 @@ bool:Lang_PlayerTextDrawSetString(playerid, PlayerText:textid, const text[])
 {
 	static out[1024];
 	Lang_Translit(text, out, 1024);
+	Lang_TdSafe(out, 1024);
 	return PlayerTextDrawSetString(playerid, textid, "%s", out);
 }
 

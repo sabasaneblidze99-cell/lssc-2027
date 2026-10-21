@@ -24,9 +24,14 @@ new g_AzVeh[AZ_VEH];
 new g_AzVehOf[2001];                 // vehicleid -> indice + 1 (0 = non e' un veicolo Arizona)
 new g_AzTpTick[MAX_PLAYERS];
 
-AzWorld_OnInit()
+#define AZ_VEH_PER_STEP (40)
+new g_AzBizClosed;
+// prova di diagnosi: con scriptfiles/lsrp_test_senza_mappa.flag il mondo Arizona (oggetti + edifici rimossi) non viene creato
+new bool:g_AzNoMap;
+
+// porte e business (pickup + etichette)
+AzWorld_InitPickups()
 {
-	AzMap_Create();
 	new label[480];
 	for (new i = 0; i < AZ_DOORS; i++)
 	{
@@ -51,7 +56,13 @@ AzWorld_OnInit()
 		format(label, sizeof label, "{FFB547}%s", s_AzBizName[i]);
 		Lang_Create3DTextLabel(label, 0xFFFFFFFF, s_AzBizPos[i][0], s_AzBizPos[i][1], s_AzBizPos[i][2] + 0.7, 15.0, 0, false);
 	}
-	for (new i = 0; i < AZ_VEH; i++)
+	g_AzBizClosed = bizClosed;
+}
+
+// veicoli da "from" in poi (AZ_VEH_PER_STEP per volta)
+AzWorld_InitVehicles(from)
+{
+	for (new i = from; i < AZ_VEH && i < from + AZ_VEH_PER_STEP; i++)
 	{
 		new veh = CreateVehicle(s_AzVehInfo[i][0], s_AzVehPos[i][0], s_AzVehPos[i][1], s_AzVehPos[i][2], s_AzVehPos[i][3],
 			s_AzVehInfo[i][1], s_AzVehInfo[i][2], 300, false);
@@ -63,7 +74,38 @@ AzWorld_OnInit()
 			SetVehicleParamsEx(veh, false, false, false, s_AzVehInfo[i][3] == 4, false, false, false);
 		}
 	}
+}
+
+// avvio a tappe (core/boot.inc): 0 = porte/business, 1..AZMAP_PARTS = mapping, poi i veicoli. false = finito
+bool:AzWorld_BootStep(k)
+{
+	if (k == 0)
+	{
+		g_AzNoMap = fexist("lsrp_test_senza_mappa.flag") ? true : false;
+		if (g_AzNoMap)
+		{
+			print("[MONDO] PROVA: lsrp_test_senza_mappa.flag presente -> mapping Arizona e rimozione edifici DISATTIVATI");
+		}
+		AzWorld_InitPickups();
+		return true;
+	}
+	if (k <= AZMAP_PARTS)
+	{
+		if (!g_AzNoMap)
+		{
+			AzMap_CreatePart(k - 1);
+		}
+		return true;
+	}
+	new from = (k - AZMAP_PARTS - 1) * AZ_VEH_PER_STEP;
+	if (from < AZ_VEH)
+	{
+		AzWorld_InitVehicles(from);
+		return true;
+	}
+	new bizClosed = g_AzBizClosed;
 	printf("[MONDO] Arizona Los Santos: %d oggetti, %d porte, %d business (%d senza interno), %d veicoli", AZMAP_OBJECTS, AZ_DOORS, AZ_BIZ, bizClosed, AZ_VEH);
+	return false;
 }
 
 // l'interno del business esiste nei dati di origine (uscita diversa da 0,0,0)
@@ -87,7 +129,10 @@ AzWorld_OnExit()
 AzWorld_OnPlayerConnect(playerid)
 {
 	g_AzTpTick[playerid] = 0;
-	AzMap_RemoveBuildings(playerid);
+	if (!g_AzNoMap)
+	{
+		AzMap_RemoveBuildings(playerid);
+	}
 }
 
 static AzWorld_Teleport(playerid, Float:x, Float:y, Float:z, Float:a, interior, world)

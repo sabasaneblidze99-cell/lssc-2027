@@ -1,3 +1,6 @@
+#define HOUSE_REFRESH_BATCH (40)
+new g_HsRefreshCount, g_HsRefreshNext, g_HsRefreshTimer;
+forward House_OnRefreshBatch();
 new g_HPl[MAX_PLAYERS][E_HPLAYER];
 new g_HSessionSeq;
 new g_HsPickup[HOUSE_MAX];
@@ -2456,14 +2459,37 @@ public House_OnDBLoaded(count)
 		Log_Write("HOUSE", "caricamento case fallito: sistema case disabilitato");
 		return 1;
 	}
-	for (new i = 0; i < count && i < HOUSE_MAX; i++)
+	// pickup ed etichette a gruppi di HOUSE_REFRESH_BATCH per tick: nessuna callback lunga con centinaia di case
+	g_HsRefreshCount = count < HOUSE_MAX ? count : HOUSE_MAX;
+	g_HsRefreshNext = 0;
+	for (new i = 0; i < g_HsRefreshCount; i++)
 	{
 		g_HsBusy[i] = false;
-		House_RefreshWorld(i);
 	}
+	if (g_HsRefreshTimer != 0)
+	{
+		KillTimer(g_HsRefreshTimer);
+	}
+	g_HsRefreshTimer = SetTimer("House_OnRefreshBatch", 20, true);
+	return 1;
+}
+
+public House_OnRefreshBatch()
+{
+	new last = g_HsRefreshNext + HOUSE_REFRESH_BATCH;
+	for (; g_HsRefreshNext < g_HsRefreshCount && g_HsRefreshNext < last; g_HsRefreshNext++)
+	{
+		House_RefreshWorld(g_HsRefreshNext);
+	}
+	if (g_HsRefreshNext < g_HsRefreshCount)
+	{
+		return 1;
+	}
+	KillTimer(g_HsRefreshTimer);
+	g_HsRefreshTimer = 0;
 	g_HsReady = true;
 	new msg[384];
-	format(msg, 384, "caricate %d case", count);
+	format(msg, 384, "caricate %d case", g_HsRefreshCount);
 	Log_Write("HOUSE", msg);
 	return 1;
 }

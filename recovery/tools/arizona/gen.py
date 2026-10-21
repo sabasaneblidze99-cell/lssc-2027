@@ -65,7 +65,7 @@ L = ['// GENERATO da recovery/tools/arizona/gen.py - non modificare a mano.',
      '// Mapping del mondo Arizona Prime (v2), solo Los Santos e interni degli edifici di Los Santos.',
      '// %d oggetti (%d copie identiche del server di origine tolte), %d edifici GTA rimossi. Richiede il plugin streamer.' % (len(mapping), MAP_DUP, len(removed)), '',
      '#define AZMAP_OBJECTS (%d)' % len(mapping), '']
-CH = 2000   # funzioni da max 2000 oggetti (compilazione piu' leggera)
+CH = 500    # pezzi da 500 oggetti: uno per tick di avvio (core/boot.inc), nessuna callback lunga
 parts = [mapping[i:i + CH] for i in range(0, len(mapping), CH)]
 for pi, part in enumerate(parts):
     L.append('static AzMap_Part%d()' % pi)
@@ -92,12 +92,24 @@ for pi, part in enumerate(parts):
             L.append('\t' + call + ';')
     L.append('}')
     L.append('')
-L.append('AzMap_Create()')
+L.append('#define AZMAP_PARTS (%d)' % len(parts))
+L.append('')
+L.append('// crea il pezzo p (0 .. AZMAP_PARTS-1) del mapping; chiamata a tappe dall\'avvio')
+L.append('AzMap_CreatePart(p)')
 L.append('{')
-L.append('\tStreamer_SetVisibleItems(STREAMER_TYPE_OBJECT, 900);')
+L.append('\tswitch (p)')
+L.append('\t{')
 for pi in range(len(parts)):
-    L.append('\tAzMap_Part%d();' % pi)
-L.append('\tprintf("[MAPPA] Arizona Los Santos: %d oggetti", AZMAP_OBJECTS);')
+    L.append('\t\tcase %d: AzMap_Part%d();' % (pi, pi))
+L.append('\t}')
+L.append('\tif (p == 0)')
+L.append('\t{')
+L.append('\t\tStreamer_SetVisibleItems(STREAMER_TYPE_OBJECT, 600);   // 0.3.7 + CEF nello stesso processo: memoria del client limitata')
+L.append('\t}')
+L.append('\tif (p == AZMAP_PARTS - 1)')
+L.append('\t{')
+L.append('\t\tprintf("[MAPPA] Arizona Los Santos: %d oggetti", AZMAP_OBJECTS);')
+L.append('\t}')
 L.append('}')
 L.append('')
 L.append('// edifici originali di GTA da togliere dove c\'e\' il mapping (va chiamata a ogni connessione)')

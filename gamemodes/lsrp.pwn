@@ -6,6 +6,14 @@
 	#define LSRP_CEF
 #endif
 #include <open.mp>
+// Posti giocatore: open.mp prevede 1000, il server ne usa al massimo LSRP_MAX_PLAYERS (config.json "max_players" non deve
+// superarlo: all'avvio il gamemode lo controlla). Array e cicli per giocatore 3 volte piu' piccoli: meno memoria e
+// callback piu' brevi (crashdetect "Long callback execution").
+#if !defined LSRP_MAX_PLAYERS
+	#define LSRP_MAX_PLAYERS (300)
+#endif
+#undef MAX_PLAYERS
+#define MAX_PLAYERS (LSRP_MAX_PLAYERS)
 #include <a_mysql>
 #include <samp_bcrypt>
 #include <streamer>
@@ -84,6 +92,7 @@
 #include "modules/ui/cef_views.inc"
 #include "modules/character/spawn_select.inc"
 #include "modules/character/char_select.inc"
+#include "modules/core/boot.inc"
 #include "modules/economy/econ_admin.inc"
 #include "modules/commands/admin_commands.inc"
 #include "modules/commands/rp_commands.inc"
@@ -91,7 +100,7 @@
 
 main()
 {
-	printf("LSRP %s", "0.1.0-proto");
+	print("LS Crime's RP - Los Santos Street Crime's 2027");
 }
 
 public OnGameModeInit()
@@ -101,21 +110,14 @@ public OnGameModeInit()
 	{
 		Player_Reset(i);
 	}
-	DB_Connect();
-	Char_OnInit();
-	Economy_OnInit();
-	Veh_OnInit();
-	House_OnInit();
-	Job_OnInit();
-	Faction_OnInit();
-	Inv_OnInit();
-	Bank_OnInit();
-	Living_OnInit();
-	HudCef_OnInit();
-	StreetRental_OnInit();
-	AzWorld_OnInit();
-	Voice_OnInit();
-	CefBridge_OnInit();
+	if (GetMaxPlayers() > MAX_PLAYERS)
+	{
+		printf("[AVVIO] ERRORE: config.json \"max_players\" = %d, ma il gamemode gestisce al massimo %d giocatori (LSRP_MAX_PLAYERS). Abbassa max_players.", GetMaxPlayers(), MAX_PLAYERS);
+		SendRconCommand("exit");
+		return 1;
+	}
+	// database, moduli e mondo: a tappe (core/boot.inc), una per tick, per non bloccare il server
+	Boot_Start();
 	return 1;
 }
 
@@ -156,7 +158,10 @@ public OnPlayerConnect(playerid)
 	CharSel_OnPlayerConnect(playerid);
 	CefViews_OnPlayerConnect(playerid);
 	AzWorld_OnPlayerConnect(playerid);
-	Account_OnConnect(playerid);
+	if (!Boot_DeferLogin(playerid))
+	{
+		Account_OnConnect(playerid);
+	}
 	return 1;
 }
 
@@ -172,6 +177,7 @@ public OnPlayerDisconnect(playerid, reason)
 	HudCef_OnPlayerDisconnect(playerid);
 	StreetRental_OnPlayerDisconnect(playerid);
 	Gps_OnPlayerDisconnect(playerid);
+	Boot_OnPlayerDisconnect(playerid);
 	Veh_OnPlayerDisconnect(playerid);
 	UI_VehicleUiDestroy(playerid);
 	House_OnPlayerDisconnect(playerid);

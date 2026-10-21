@@ -106,7 +106,13 @@ StreetRental_SpotOf(vehicleid)
 
 bool:StreetRental_Watched(spot)
 {
-	for (new p = 0; p < MAX_PLAYERS; p++)
+	// solo i giocatori connessi (prima: 1000 posti x ogni punto = 186 ms all'avvio)
+	new top = GetMaxPlayers();
+	if (top > MAX_PLAYERS)
+	{
+		top = MAX_PLAYERS;
+	}
+	for (new p = 0; p < top; p++)
 	{
 		if (IsPlayerConnected(p) && GetPlayerInterior(p) == 0 &&
 			GetPlayerDistanceFromPoint(p, s_SrSpots[spot][0], s_SrSpots[spot][1], s_SrSpots[spot][2]) < 25.0)
