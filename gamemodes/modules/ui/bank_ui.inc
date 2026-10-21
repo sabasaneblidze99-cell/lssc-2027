@@ -36,7 +36,7 @@ bool:UI_BankValid(playerid)
 
 UI_BankFmt(value, dest[], size)
 {
-	new s[16], len = 0, bool:neg = value < 0;
+	new s[48], len = 0, bool:neg = value < 0;
 	if (neg)
 	{
 		value = -value;
@@ -88,7 +88,7 @@ bool:UI_BankParseAmount(const s[], &value)
 
 UI_BankFindTarget(const input[])
 {
-	new text[25], len = strlen(input), start = 0, end = len;
+	new text[75], len = strlen(input), start = 0, end = len;
 	while (start < len && input[start] == 32)
 	{
 		start++;
@@ -101,7 +101,7 @@ UI_BankFindTarget(const input[])
 	{
 		return -1;
 	}
-	strmid(text, input, start, end, 25);
+	strmid(text, input, start, end, 75);
 	new bool:numeric = true;
 	for (new i = 0; text[i] != 0; i++)
 	{
@@ -120,14 +120,14 @@ UI_BankFindTarget(const input[])
 		}
 		return id;
 	}
-	new found = -1, name[25];
+	new found = -1, name[75];
 	for (new p = 0; p < MAX_PLAYERS; p++)
 	{
 		if (!IsPlayerConnected(p) || IsPlayerNPC(p))
 		{
 			continue;
 		}
-		GetPlayerName(p, name, 25);
+		GetPlayerName(p, name, 75);
 		if (!strcmp(name, text, true, 0x7FFFFFFF))
 		{
 			return p;
@@ -244,15 +244,15 @@ UI_BankToast(playerid, const text[], bool:ok)
 
 UI_BankMenuShow(playerid)
 {
-	new title[64], body[320], a[16], b[16], c[16];
-	UI_BankFmt(g_UiBkBank[playerid], a, 16);
-	UI_BankFmt(g_UiBkCash[playerid], b, 16);
-	UI_BankFmt(g_UiBkBank[playerid], c, 16);
-	format(title, 64, "%s - Los Santos Bank", g_UiBkCounter[playerid] ? "Sportello" : "ATM");
-	format(body, 320, "Operazione\tDettaglio\nSaldo\t{66DD66}$%s\nDeposita\tContanti: $%s\nPrelievo\tBanca: $%s\nBonifico\t{FFD24D}commissione inclusa\nEstratto conto\tultime %d righe", a, b, c, 15);
+	new title[576], body[320], a[48], b[48], c[48];
+	UI_BankFmt(g_UiBkBank[playerid], a, 48);
+	UI_BankFmt(g_UiBkCash[playerid], b, 48);
+	UI_BankFmt(g_UiBkBank[playerid], c, 48);
+	format(title, 576, "%s - Los Santos Bank", g_UiBkCounter[playerid] ? "სალარო" : "ATM");
+	format(body, 320, "ოპერაცია\tდეტალი\nბალანსი\t{66DD66}$%s\nშეტანა\tნაღდი: $%s\nგამოტანა\tბანკი: $%s\nგადარიცხვა\t{FFD24D}საკომისიოს ჩათვლით\nამონაწერი\tბოლო %d ჩანაწერი", a, b, c, 15);
 	g_UiBkOp[playerid] = 0;
 	g_UiBkTarget[playerid] = -1;
-	Lang_ShowPlayerDialog(playerid, 9500, DIALOG_STYLE_TABLIST_HEADERS, title, body, "Scegli", "Chiudi");
+	Lang_ShowPlayerDialog(playerid, 9500, DIALOG_STYLE_TABLIST_HEADERS, title, body, "არჩევა", "დახურვა");
 }
 
 UI_BankMenu(playerid, bool:counter)
@@ -268,30 +268,30 @@ UI_BankMenu(playerid, bool:counter)
 
 UI_BankBalanceShow(playerid)
 {
-	new body[512], cash[16], bank[16], total[16], wd[48], snd[48], tmp[16];
-	UI_BankFmt(g_UiBkCash[playerid], cash, 16);
-	UI_BankFmt(g_UiBkBank[playerid], bank, 16);
-	UI_BankFmt(g_UiBkCash[playerid] + g_UiBkBank[playerid], total, 16);
+	new body[1024], cash[48], bank[48], total[48], wd[144], snd[144], tmp[48];
+	UI_BankFmt(g_UiBkCash[playerid], cash, 48);
+	UI_BankFmt(g_UiBkBank[playerid], bank, 48);
+	UI_BankFmt(g_UiBkCash[playerid] + g_UiBkBank[playerid], total, 48);
 	if (g_UiBkWdLeft[playerid] >= 0)
 	{
-		UI_BankFmt(g_UiBkWdLeft[playerid], tmp, 16);
-		format(wd, 48, "{FFD24D}$%s", tmp);
+		UI_BankFmt(g_UiBkWdLeft[playerid], tmp, 48);
+		format(wd, 144, "{FFD24D}$%s", tmp);
 	}
 	else
 	{
-		strcopy(wd, "{AAAAAA}n/d", 48);
+		strcopy(wd, "{AAAAAA}n/d", 144);
 	}
 	if (g_UiBkSendLeft[playerid] >= 0)
 	{
-		UI_BankFmt(g_UiBkSendLeft[playerid], tmp, 16);
-		format(snd, 48, "{FFD24D}$%s", tmp);
+		UI_BankFmt(g_UiBkSendLeft[playerid], tmp, 48);
+		format(snd, 144, "{FFD24D}$%s", tmp);
 	}
 	else
 	{
-		strcopy(snd, "{AAAAAA}n/d", 48);
+		strcopy(snd, "{AAAAAA}n/d", 144);
 	}
-	format(body, 512, "{FFFFFF}Contanti: {66DD66}$%s\n{FFFFFF}Conto bancario: {66DD66}$%s\n{FFFFFF}Totale: {66DD66}$%s\n\n{FFFFFF}Prelevabile oggi: %s\n{FFFFFF}Inviabile oggi: %s", cash, bank, total, wd, snd);
-	Lang_ShowPlayerDialog(playerid, 9505, DIALOG_STYLE_MSGBOX, "Saldo", body, "Menu", "Chiudi");
+	format(body, 1024, "{FFFFFF}ნაღდი ფული: {66DD66}$%s\n{FFFFFF}საბანკო ანგარიში: {66DD66}$%s\n{FFFFFF}სულ: {66DD66}$%s\n\n{FFFFFF}დღეს გამოსატანი: %s\n{FFFFFF}დღეს გადასარიცხი: %s", cash, bank, total, wd, snd);
+	Lang_ShowPlayerDialog(playerid, 9505, DIALOG_STYLE_MSGBOX, "ბალანსი", body, "მენიუ", "დახურვა");
 }
 
 bool:UI_BankRange(playerid, op, &lo, &hi)
@@ -350,61 +350,61 @@ UI_BankAmountShow(playerid, op, const err[])
 	new lo = 0, hi = 0;
 	if (!UI_BankRange(playerid, op, lo, hi))
 	{
-		new msg[160];
+		new msg[480];
 		switch (op)
 		{
 			case 0:
 			{
-				strcopy(msg, "Non hai contanti da depositare (o limite per operazione raggiunto).", 160);
+				strcopy(msg, "შესატანი ნაღდი ფული არ გაქვს (ან ოპერაციის ლიმიტი ამოიწურა).", 160);
 			}
 			case 1:
 			{
-				strcopy(msg, "Non puoi prelevare ora: saldo o limite giornaliero esauriti.", 160);
+				strcopy(msg, "ახლა ვერ გამოიტან: ბალანსი ან დღიური ლიმიტი ამოწურულია.", 160);
 			}
 			default:
 			{
-				strcopy(msg, "Non puoi inviare bonifici ora: saldo insufficiente o limite giornaliero raggiunto.", 160);
+				strcopy(msg, "ახლა ვერ გადარიცხავ: ბალანსი არ გყოფნის ან დღიური ლიმიტი ამოიწურა.", 160);
 			}
 		}
 		SendClientMessage(playerid, -10066177, msg);
-		UI_BankToast(playerid, "Operazione non disponibile", false);
+		UI_BankToast(playerid, "ოპერაცია მიუწვდომელია", false);
 		UI_BankMenuShow(playerid);
 		return 0;
 	}
 	g_UiBkOp[playerid] = op;
-	new title[64], body[512], sLo[16], sHi[16], sCash[16], sBank[16], sub[96];
-	UI_BankFmt(lo, sLo, 16);
-	UI_BankFmt(hi, sHi, 16);
-	UI_BankFmt(g_UiBkCash[playerid], sCash, 16);
-	UI_BankFmt(g_UiBkBank[playerid], sBank, 16);
+	new title[576], body[1024], sLo[48], sHi[48], sCash[48], sBank[48], sub[288];
+	UI_BankFmt(lo, sLo, 48);
+	UI_BankFmt(hi, sHi, 48);
+	UI_BankFmt(g_UiBkCash[playerid], sCash, 48);
+	UI_BankFmt(g_UiBkBank[playerid], sBank, 48);
 	switch (op)
 	{
 		case 0:
 		{
-			strcopy(title, "Deposita contanti", 64);
-			format(sub, 96, "Contanti disponibili: {66DD66}$%s", sCash);
+			strcopy(title, "ნაღდი ფულის შეტანა", 64);
+			format(sub, 288, "ხელმისაწვდომი ნაღდი: {66DD66}$%s", sCash);
 		}
 		case 1:
 		{
-			strcopy(title, "Preleva dal conto", 64);
-			format(sub, 96, "Saldo bancario: {66DD66}$%s", sBank);
+			strcopy(title, "ანგარიშიდან გამოტანა", 64);
+			format(sub, 288, "საბანკო ბალანსი: {66DD66}$%s", sBank);
 		}
 		default:
 		{
-			strcopy(title, "Bonifico: importo", 64);
-			format(sub, 96, "Saldo bancario: {66DD66}$%s{FFFFFF} (la commissione si aggiunge)", sBank);
+			strcopy(title, "გადარიცხვა: თანხა", 64);
+			format(sub, 288, "საბანკო ბალანსი: {66DD66}$%s{FFFFFF} (საკომისიო ემატება)", sBank);
 		}
 	}
-	format(body, 512, "%s{FFFFFF}%s\nImporto ammesso: da {FFD24D}$%s{FFFFFF} a {FFD24D}$%s{FFFFFF}.\nInserisci un numero intero:", err, sub, sLo, sHi);
-	Lang_ShowPlayerDialog(playerid, 9501, DIALOG_STYLE_INPUT, title, body, "Avanti", "Indietro");
+	format(body, 1024, "%s{FFFFFF}%s\nდასაშვები თანხა: {FFD24D}$%s{FFFFFF}-დან {FFD24D}$%s{FFFFFF}-მდე.\nშეიყვანე მთელი რიცხვი:", err, sub, sLo, sHi);
+	Lang_ShowPlayerDialog(playerid, 9501, DIALOG_STYLE_INPUT, title, body, "შემდეგი", "უკან");
 	return 0;
 }
 
 UI_BankTargetShow(playerid, const err[])
 {
-	new body[320];
-	format(body, 320, "%s{FFFFFF}Inserisci l'{FFD24D}ID{FFFFFF} o parte del {FFD24D}nome{FFFFFF} del giocatore online che riceve il bonifico.\nIl destinatario non deve confermare: il credito e' immediato.", err);
-	Lang_ShowPlayerDialog(playerid, 9502, DIALOG_STYLE_INPUT, "Bonifico: destinatario", body, "Avanti", "Indietro");
+	new body[640];
+	format(body, 640, "%s{FFFFFF}შეიყვანე იმ ონლაინ მოთამაშის {FFD24D}ID{FFFFFF} ან {FFD24D}სახელის{FFFFFF} ნაწილი, ვინც გადარიცხვას იღებს.\nმიმღებმა არ უნდა დაადასტუროს: თანხა მაშინვე ჩაირიცხება.", err);
+	Lang_ShowPlayerDialog(playerid, 9502, DIALOG_STYLE_INPUT, "გადარიცხვა: მიმღები", body, "შემდეგი", "უკან");
 }
 
 UI_BankTransferConfirm(playerid, targetId, amount, fee, balanceAfter, ttlSec)
@@ -427,13 +427,13 @@ UI_BankTransferConfirm(playerid, targetId, amount, fee, balanceAfter, ttlSec)
 	g_UiBkConfLeft[playerid] = ttlSec;
 	GetPlayerName(targetId, g_UiBkConfName[playerid], 25);
 	UI_BankTimerEnsure(playerid);
-	new body[512], sAmount[16], sFee[16], sTotal[16], sAfter[16];
-	UI_BankFmt(amount, sAmount, 16);
-	UI_BankFmt(fee, sFee, 16);
-	UI_BankFmt(amount + fee, sTotal, 16);
-	UI_BankFmt(balanceAfter, sAfter, 16);
-	format(body, 512, "{FFFFFF}Destinatario: {FFD24D}%s (ID %d)\n{FFFFFF}Importo: {66DD66}$%s\n{FFFFFF}Commissione: {FF6666}$%s\n{FFFFFF}Totale addebitato: {FF6666}$%s\n{FFFFFF}Saldo dopo l'operazione: {66DD66}$%s\n\n{AAAAAA}La conferma scade tra %d secondi.", g_UiBkConfName[playerid], targetId, sAmount, sFee, sTotal, sAfter, ttlSec);
-	Lang_ShowPlayerDialog(playerid, 9503, DIALOG_STYLE_MSGBOX, "Conferma bonifico", body, "Conferma", "Annulla");
+	new body[1024], sAmount[48], sFee[48], sTotal[48], sAfter[48];
+	UI_BankFmt(amount, sAmount, 48);
+	UI_BankFmt(fee, sFee, 48);
+	UI_BankFmt(amount + fee, sTotal, 48);
+	UI_BankFmt(balanceAfter, sAfter, 48);
+	format(body, 1024, "{FFFFFF}მიმღები: {FFD24D}%s (ID %d)\n{FFFFFF}თანხა: {66DD66}$%s\n{FFFFFF}საკომისიო: {FF6666}$%s\n{FFFFFF}სულ ჩამოგეჭრება: {FF6666}$%s\n{FFFFFF}ბალანსი ოპერაციის შემდეგ: {66DD66}$%s\n\n{AAAAAA}დადასტურების ვადა %d წამში იწურება.", g_UiBkConfName[playerid], targetId, sAmount, sFee, sTotal, sAfter, ttlSec);
+	Lang_ShowPlayerDialog(playerid, 9503, DIALOG_STYLE_MSGBOX, "გადარიცხვის დადასტურება", body, "დადასტურება", "გაუქმება");
 	return 0;
 }
 
@@ -501,50 +501,50 @@ UI_BankStatementShow(playerid)
 	{
 		return 0;
 	}
-	new body[2048], line[160], title[64], n = g_UiBkStCount[playerid];
+	new body[4096], line[480], title[576], n = g_UiBkStCount[playerid];
 	new page = g_UiBkStPage[playerid];
 	g_UiBkStNavNext[playerid] = -1;
 	g_UiBkStNavPrev[playerid] = -1;
 	if (n == 0)
 	{
-		format(title, 64, "Estratto conto - pag. %d", page + 1);
-		Lang_ShowPlayerDialog(playerid, 9504, DIALOG_STYLE_MSGBOX, title, "{FFFFFF}Nessun movimento da mostrare.", page > 0 ? "Precedente" : "Menu", "Chiudi");
+		format(title, 576, "ამონაწერი - გვ. %d", page + 1);
+		Lang_ShowPlayerDialog(playerid, 9504, DIALOG_STYLE_MSGBOX, title, "{FFFFFF}საჩვენებელი ოპერაციები არ არის.", page > 0 ? "წინა" : "მენიუ", "დახურვა");
 		if (page == 0)
 		{
 			g_UiBkStNavPrev[playerid] = -1;
 		}
 		return 0;
 	}
-	strcopy(body, "Data\tOperazione\tImporto\tSaldo\n", 2048);
+	strcopy(body, "თარიღი\tოპერაცია\tთანხა\tბალანსი\n", 2048);
 	for (new i = 0; i < n; i++)
 	{
-		new sAmt[16], sBal[16], what[56];
-		UI_BankFmt(g_UiBkStAmount[playerid][i] < 0 ? -g_UiBkStAmount[playerid][i] : g_UiBkStAmount[playerid][i], sAmt, 16);
-		UI_BankFmt(g_UiBkStBalance[playerid][i], sBal, 16);
+		new sAmt[48], sBal[48], what[168];
+		UI_BankFmt(g_UiBkStAmount[playerid][i] < 0 ? -g_UiBkStAmount[playerid][i] : g_UiBkStAmount[playerid][i], sAmt, 48);
+		UI_BankFmt(g_UiBkStBalance[playerid][i], sBal, 48);
 		if (g_UiBkStOther[playerid][i][0] != 0)
 		{
-			format(what, 56, "%s %s", g_UiBkStKind[playerid][i], g_UiBkStOther[playerid][i]);
+			format(what, 168, "%s %s", g_UiBkStKind[playerid][i], g_UiBkStOther[playerid][i]);
 		}
 		else
 		{
-			strcopy(what, g_UiBkStKind[playerid][i], 56);
+			strcopy(what, g_UiBkStKind[playerid][i], 168);
 		}
-		format(line, 160, "%s\t%s\t%s$%s\t$%s\n", g_UiBkStWhen[playerid][i], what, g_UiBkStAmount[playerid][i] < 0 ? "{FF6666}-" : "{66DD66}+", sAmt, sBal);
-		strcat(body, line, 2048);
+		format(line, 480, "%s\t%s\t%s$%s\t$%s\n", g_UiBkStWhen[playerid][i], what, g_UiBkStAmount[playerid][i] < 0 ? "{FF6666}-" : "{66DD66}+", sAmt, sBal);
+		strcat(body, line, 4096);
 	}
 	new idx = n;
 	if (g_UiBkStNext[playerid])
 	{
-		strcat(body, "{FFD24D}>> Pagina successiva\t\t\t\n", 2048);
+		strcat(body, "{FFD24D}>> შემდეგი გვერდი\t\t\t\n", 4096);
 		g_UiBkStNavNext[playerid] = idx++;
 	}
 	if (page > 0)
 	{
-		strcat(body, "{FFD24D}<< Pagina precedente\t\t\t\n", 2048);
+		strcat(body, "{FFD24D}<< წინა გვერდი\t\t\t\n", 4096);
 		g_UiBkStNavPrev[playerid] = idx;
 	}
-	format(title, 64, "Estratto conto - pag. %d/%d", page + 1, 5);
-	Lang_ShowPlayerDialog(playerid, 9504, DIALOG_STYLE_TABLIST_HEADERS, title, body, "Vai", "Menu");
+	format(title, 576, "ამონაწერი - გვ. %d/%d", page + 1, 5);
+	Lang_ShowPlayerDialog(playerid, 9504, DIALOG_STYLE_TABLIST_HEADERS, title, body, "გადასვლა", "მენიუ");
 	return 0;
 }
 
@@ -641,8 +641,8 @@ public UI_BankOnTimer(playerid)
 			{
 				HidePlayerDialog(playerid);
 			}
-			SendClientMessage(playerid, -2994689, "La conferma del bonifico e' scaduta: nessun addebito.");
-			UI_BankToast(playerid, "Bonifico scaduto", false);
+			SendClientMessage(playerid, -2994689, "გადარიცხვის დადასტურების ვადა ამოიწურა: თანხა არ ჩამოგეჭრა.");
+			UI_BankToast(playerid, "გადარიცხვის ვადა ამოიწურა", false);
 			UI_OnBankTransferExpired(playerid, target, amount);
 		}
 	}
@@ -689,7 +689,7 @@ bool:UI_BankOnDialogResponse(playerid, dialogid, response, listitem, const input
 				}
 				case 4:
 				{
-					UI_BankToast(playerid, "Caricamento estratto conto...", true);
+					UI_BankToast(playerid, "ამონაწერი იტვირთება...", true);
 					UI_OnBankStatement(playerid, 0);
 				}
 				default:
@@ -717,17 +717,17 @@ bool:UI_BankOnDialogResponse(playerid, dialogid, response, listitem, const input
 			new target = UI_BankFindTarget(inputtext);
 			if (target == -2)
 			{
-				UI_BankTargetShow(playerid, "{FF6666}Piu' giocatori corrispondono: usa l'ID o un nome piu' preciso.\n\n");
+				UI_BankTargetShow(playerid, "{FF6666}რამდენიმე მოთამაშე ემთხვევა: გამოიყენე ID ან უფრო ზუსტი სახელი.\n\n");
 				return true;
 			}
 			if (target < 0)
 			{
-				UI_BankTargetShow(playerid, "{FF6666}Giocatore non trovato tra gli online.\n\n");
+				UI_BankTargetShow(playerid, "{FF6666}ონლაინ მოთამაშეებში ვერ მოიძებნა.\n\n");
 				return true;
 			}
 			if (target == playerid)
 			{
-				UI_BankTargetShow(playerid, "{FF6666}Non puoi inviare un bonifico a te stesso.\n\n");
+				UI_BankTargetShow(playerid, "{FF6666}საკუთარ თავს ვერ გადაურიცხავ.\n\n");
 				return true;
 			}
 			g_UiBkTarget[playerid] = target;
@@ -757,15 +757,15 @@ bool:UI_BankOnDialogResponse(playerid, dialogid, response, listitem, const input
 			}
 			if (!UI_BankParseAmount(inputtext, amount))
 			{
-				UI_BankAmountShow(playerid, op, "{FF6666}Importo non valido: solo cifre, intero positivo.\n\n");
+				UI_BankAmountShow(playerid, op, "{FF6666}არასწორი თანხა: მხოლოდ ციფრები, დადებითი მთელი რიცხვი.\n\n");
 				return true;
 			}
 			if (amount < lo || amount > hi)
 			{
-				new err[160], sLo[16], sHi[16];
-				UI_BankFmt(lo, sLo, 16);
-				UI_BankFmt(hi, sHi, 16);
-				format(err, 160, "{FF6666}Importo fuori limite: da $%s a $%s.\n\n", sLo, sHi);
+				new err[480], sLo[48], sHi[48];
+				UI_BankFmt(lo, sLo, 48);
+				UI_BankFmt(hi, sHi, 48);
+				format(err, 480, "{FF6666}თანხა ლიმიტს გარეთაა: $%s-დან $%s-მდე.\n\n", sLo, sHi);
 				UI_BankAmountShow(playerid, op, err);
 				return true;
 			}
@@ -785,7 +785,7 @@ bool:UI_BankOnDialogResponse(playerid, dialogid, response, listitem, const input
 					if (target < 0 || target >= MAX_PLAYERS || !IsPlayerConnected(target) || target == playerid)
 					{
 						g_UiBkTarget[playerid] = -1;
-						UI_BankTargetShow(playerid, "{FF6666}Il destinatario non e' piu' disponibile: sceglilo di nuovo.\n\n");
+						UI_BankTargetShow(playerid, "{FF6666}მიმღები აღარ არის ხელმისაწვდომი: აირჩიე ხელახლა.\n\n");
 						return true;
 					}
 					UI_OnBankTransfer(playerid, target, amount);
@@ -807,14 +807,14 @@ bool:UI_BankOnDialogResponse(playerid, dialogid, response, listitem, const input
 				{
 					UI_BankTimerStop(playerid);
 				}
-				UI_BankToast(playerid, "Bonifico annullato", false);
+				UI_BankToast(playerid, "გადარიცხვა გაუქმდა", false);
 				UI_OnBankTransferCancel(playerid, target, amount);
 				return true;
 			}
-			new name[25], bool:same = false;
+			new name[75], bool:same = false;
 			if (target >= 0 && target < MAX_PLAYERS && IsPlayerConnected(target))
 			{
-				GetPlayerName(target, name, 25);
+				GetPlayerName(target, name, 75);
 				same = !strcmp(name, g_UiBkConfName[playerid], false, 0x7FFFFFFF);
 			}
 			UI_BankConfReset(playerid);
@@ -824,8 +824,8 @@ bool:UI_BankOnDialogResponse(playerid, dialogid, response, listitem, const input
 			}
 			if (!same)
 			{
-				SendClientMessage(playerid, -10066177, "Il destinatario non e' piu' online: bonifico annullato.");
-				UI_BankToast(playerid, "Destinatario non disponibile", false);
+				SendClientMessage(playerid, -10066177, "მიმღები აღარ არის ონლაინ: გადარიცხვა გაუქმდა.");
+				UI_BankToast(playerid, "მიმღები მიუწვდომელია", false);
 				UI_OnBankTransferCancel(playerid, target, amount);
 				return true;
 			}
@@ -853,12 +853,12 @@ bool:UI_BankOnDialogResponse(playerid, dialogid, response, listitem, const input
 			}
 			if (listitem >= 0 && listitem == g_UiBkStNavNext[playerid] && g_UiBkStNext[playerid])
 			{
-				UI_BankToast(playerid, "Caricamento estratto conto...", true);
+				UI_BankToast(playerid, "ამონაწერი იტვირთება...", true);
 				UI_OnBankStatement(playerid, g_UiBkStPage[playerid] + 1);
 			}
 			else if (listitem >= 0 && listitem == g_UiBkStNavPrev[playerid] && g_UiBkStPage[playerid] > 0)
 			{
-				UI_BankToast(playerid, "Caricamento estratto conto...", true);
+				UI_BankToast(playerid, "ამონაწერი იტვირთება...", true);
 				UI_OnBankStatement(playerid, g_UiBkStPage[playerid] - 1);
 			}
 			else

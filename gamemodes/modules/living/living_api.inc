@@ -183,15 +183,15 @@ bool:LD_SendBlock(playerid, block)
 	{
 		case 1:
 		{
-			Util_Send(playerid, -10270721, "I servizi della citta' si stanno avviando: riprova tra poco.");
+			Util_Send(playerid, -10270721, "ქალაქის სერვისები ირთვება: სცადე ცოტა ხანში.");
 		}
 		case 2:
 		{
-			Util_Send(playerid, -10270721, "Sei ferito: non puoi farlo ora.");
+			Util_Send(playerid, -10270721, "დაჭრილი ხარ: ახლა ამას ვერ გააკეთებ.");
 		}
 		case 3:
 		{
-			Util_Send(playerid, -10270721, "Sei ammanettato: non puoi farlo ora.");
+			Util_Send(playerid, -10270721, "ბორკილები გადევს: ახლა ამას ვერ გააკეთებ.");
 		}
 		case 4:
 		{
@@ -199,19 +199,19 @@ bool:LD_SendBlock(playerid, block)
 			{
 				case 1:
 				{
-					Util_Send(playerid, -10270721, "Sei in turno di lavoro: termina prima il turno (/fine).");
+					Util_Send(playerid, -10270721, "სამუშაო ცვლაში ხარ: ჯერ დაასრულე ცვლა (/fine).");
 				}
 				case 2:
 				{
-					Util_Send(playerid, -10270721, "Hai gia' un contratto attivo (/contratto).");
+					Util_Send(playerid, -10270721, "უკვე გაქვს აქტიური კონტრაქტი (/contratto).");
 				}
 				case 3:
 				{
-					Util_Send(playerid, -10270721, "Sei in servizio taxi: prima /taxi off.");
+					Util_Send(playerid, -10270721, "ტაქსის სამსახურში ხარ: ჯერ /taxi off.");
 				}
 				default:
 				{
-					Util_Send(playerid, -10270721, "Hai un noleggio in corso: prima /riconsegna.");
+					Util_Send(playerid, -10270721, "ქირაობა მიმდინარეობს: ჯერ /riconsegna.");
 				}
 			}
 		}

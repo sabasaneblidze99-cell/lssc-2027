@@ -1,8 +1,8 @@
-new g_UiJbName[4][16] = {
-	"Disoccupato",
-	"Autista Bus",
-	"Corriere",
-	"Netturbino"
+new g_UiJbName[4][48] = {
+	"უმუშევარი",
+	"ავტობუსის მძღოლი",
+	"კურიერი",
+	"დამლაგებელი"
 };
 new g_UiJbVehicle[4][16] = {
 	"-",
@@ -10,11 +10,11 @@ new g_UiJbVehicle[4][16] = {
 	"Boxville",
 	"Trashmaster"
 };
-new g_UiJbStepWord[4][12] = {
-	"Tappa",
-	"Fermata",
-	"Consegna",
-	"Cassonetto"
+new g_UiJbStepWord[4][32] = {
+	"გაჩერება",
+	"გაჩერება",
+	"მიწოდება",
+	"ნაგვის ურნა"
 };
 new g_UiJbMinLevel[4] = {0, 1, 2, 1};
 new g_UiJbSteps[4] = {0, 6, 5, 8};
@@ -22,11 +22,11 @@ new g_UiJbPayStep[4] = {0, 28, 45, 24};
 new g_UiJbPayBonus[4] = {0, 40, 30, 40};
 new g_UiJbDwellMs[4] = {0, 4000, 5000, 4000};
 new g_UiJbEstMinutes[4] = {1, 7, 9, 8};
-new g_UiJbRoute[4][64] = {
+new g_UiJbRoute[4][176] = {
 	"-",
-	"6 fermate fisse in ordine, poi rientro al deposito",
-	"5 consegne a caso tra 8 punti, poi rientro al deposito",
-	"8 cassonetti in ordine fisso, poi scarico al deposito"
+	"6 ფიქსირებული გაჩერება თანმიმდევრობით, შემდეგ დეპოში დაბრუნება",
+	"5 მიწოდება 8 შემთხვევითი წერტილიდან, შემდეგ დეპოში დაბრუნება",
+	"8 ურნა ფიქსირებული თანმიმდევრობით, შემდეგ დეპოში დაცლა"
 };
 new g_UiJbLevel[MAX_PLAYERS];
 new g_UiJbCurrent[MAX_PLAYERS];
@@ -35,12 +35,12 @@ new g_UiJbSel[MAX_PLAYERS];
 
 UI_JbMoney(value, out[], size)
 {
-	new raw[16], len = 0, pos = 0;
+	new raw[48], len = 0, pos = 0;
 	if (value < 0)
 	{
 		value = 0;
 	}
-	format(raw, 16, "%d", value);
+	format(raw, 48, "%d", value);
 	len = strlen(raw);
 	out[0] = 0;
 	for (new i = 0; i < len && pos < size - 2; i++)
@@ -95,30 +95,30 @@ UI_JobCenterShow(playerid, level, currentJob, cooldownSec)
 	g_UiJbLevel[playerid] = level;
 	g_UiJbCurrent[playerid] = currentJob;
 	g_UiJbCooldown[playerid] = cooldownSec > 0 ? cooldownSec : 0;
-	new body[1024], line[192], pay[16];
-	strcat(body, "Lavoro\tLiv. min\tPaga/ora stimata\tVeicolo\n", 1024);
+	new body[2048], line[576], pay[48];
+	strcat(body, "სამსახური\tმინ. დონე\tსავარ. ხელფასი/სთ\tმანქანა\n", 2048);
 	for (new job = 1; job <= 3; job++)
 	{
-		UI_JbMoney(UI_JbHourly(job), pay, 16);
+		UI_JbMoney(UI_JbHourly(job), pay, 48);
 		if (level < g_UiJbMinLevel[job])
 		{
-			format(line, 192, "{888888}%s\t{FF6666}Liv. %d (bloccato)\t{888888}~$%s\t{888888}%s\n", g_UiJbName[job], g_UiJbMinLevel[job], pay, g_UiJbVehicle[job]);
+			format(line, 576, "{888888}%s\t{FF6666}დონე %d (დაბლოკილი)\t{888888}~$%s\t{888888}%s\n", g_UiJbName[job], g_UiJbMinLevel[job], pay, g_UiJbVehicle[job]);
 		}
 		else if (job == currentJob)
 		{
-			format(line, 192, "{FFD24D}%s (attuale)\t{FFFFFF}Liv. %d\t{66DD66}~$%s\t{FFFFFF}%s\n", g_UiJbName[job], g_UiJbMinLevel[job], pay, g_UiJbVehicle[job]);
+			format(line, 576, "{FFD24D}%s (მიმდინარე)\t{FFFFFF}დონე %d\t{66DD66}~$%s\t{FFFFFF}%s\n", g_UiJbName[job], g_UiJbMinLevel[job], pay, g_UiJbVehicle[job]);
 		}
 		else
 		{
-			format(line, 192, "{FFFFFF}%s\t{FFFFFF}Liv. %d\t{66DD66}~$%s\t{FFFFFF}%s\n", g_UiJbName[job], g_UiJbMinLevel[job], pay, g_UiJbVehicle[job]);
+			format(line, 576, "{FFFFFF}%s\t{FFFFFF}დონე %d\t{66DD66}~$%s\t{FFFFFF}%s\n", g_UiJbName[job], g_UiJbMinLevel[job], pay, g_UiJbVehicle[job]);
 		}
-		strcat(body, line, 1024);
+		strcat(body, line, 2048);
 	}
 	if (currentJob != 0)
 	{
-		strcat(body, "{FF6666}Lascia il lavoro attuale\t\t\t\n", 1024);
+		strcat(body, "{FF6666}მიმდინარე სამსახურის დატოვება\t\t\t\n", 2048);
 	}
-	Lang_ShowPlayerDialog(playerid, 9300, DIALOG_STYLE_TABLIST_HEADERS, "Job Center", body, "Dettagli", "Chiudi");
+	Lang_ShowPlayerDialog(playerid, 9300, DIALOG_STYLE_TABLIST_HEADERS, "დასაქმების ცენტრი", body, "დეტალები", "დახურვა");
 	return 0;
 }
 
@@ -129,61 +129,61 @@ UI_JbDetailShow(playerid, job)
 		return 0;
 	}
 	g_UiJbSel[playerid] = job;
-	new body[1024], line[192], title[64];
-	new runPay[16], hourly[16], cap[16], step[16], bonus[16];
-	UI_JbMoney(UI_JbRunPay(job), runPay, 16);
-	UI_JbMoney(UI_JbHourly(job), hourly, 16);
-	UI_JbMoney(2200, cap, 16);
-	UI_JbMoney(g_UiJbPayStep[job], step, 16);
-	UI_JbMoney(g_UiJbPayBonus[job], bonus, 16);
-	format(line, 192, "{FFD24D}%s{FFFFFF}\n\n", g_UiJbName[job]);
-	strcat(body, line, 1024);
-	format(line, 192, "Veicolo di servizio: {FFFFFF}%s{FFFFFF}\nPercorso: %s\n", g_UiJbVehicle[job], g_UiJbRoute[job]);
-	strcat(body, line, 1024);
-	format(line, 192, "Livello minimo: %d\nSosta richiesta: %d s a ogni %s\n\n", g_UiJbMinLevel[job], g_UiJbDwellMs[job] / 1000, g_UiJbStepWord[job]);
-	strcat(body, line, 1024);
-	format(line, 192, "Paga: {66DD66}$%s{FFFFFF} a %s + {66DD66}$%s{FFFFFF} di bonus a fine giro = {66DD66}$%s{FFFFFF} a giro\n", step, g_UiJbStepWord[job], bonus, runPay);
-	strcat(body, line, 1024);
-	format(line, 192, "Stima: circa {66DD66}$%s{FFFFFF}/ora (tetto $%s/ora). La paga e' accreditata in banca a fine turno.\n\n", hourly, cap);
-	strcat(body, line, 1024);
-	strcat(body, "Il turno inizia con /inizia e termina con /fine. Veicolo distrutto o abbandonato, morte o\ndisconnessione annullano il turno e il guadagno maturato va perso.", 1024);
+	new body[2048], line[576], title[192];
+	new runPay[48], hourly[48], cap[48], step[48], bonus[48];
+	UI_JbMoney(UI_JbRunPay(job), runPay, 48);
+	UI_JbMoney(UI_JbHourly(job), hourly, 48);
+	UI_JbMoney(2200, cap, 48);
+	UI_JbMoney(g_UiJbPayStep[job], step, 48);
+	UI_JbMoney(g_UiJbPayBonus[job], bonus, 48);
+	format(line, 576, "{FFD24D}%s{FFFFFF}\n\n", g_UiJbName[job]);
+	strcat(body, line, 2048);
+	format(line, 576, "სამსახურებრივი მანქანა: {FFFFFF}%s{FFFFFF}\nმარშრუტი: %s\n", g_UiJbVehicle[job], g_UiJbRoute[job]);
+	strcat(body, line, 2048);
+	format(line, 576, "მინიმალური დონე: %d\nსაჭირო გაჩერება: %d წმ ყოველ %s-ზე\n\n", g_UiJbMinLevel[job], g_UiJbDwellMs[job] / 1000, g_UiJbStepWord[job]);
+	strcat(body, line, 2048);
+	format(line, 576, "ხელფასი: {66DD66}$%s{FFFFFF} ყოველ %s-ზე + {66DD66}$%s{FFFFFF} ბონუსი წრის ბოლოს = {66DD66}$%s{FFFFFF} წრეზე\n", step, g_UiJbStepWord[job], bonus, runPay);
+	strcat(body, line, 2048);
+	format(line, 576, "სავარაუდოდ: დაახლ. {66DD66}$%s{FFFFFF}/სთ (ლიმიტი $%s/სთ). ხელფასი ბანკში ჩაირიცხება ცვლის ბოლოს.\n\n", hourly, cap);
+	strcat(body, line, 2048);
+	strcat(body, "ცვლა იწყება /inizia-თი და მთავრდება /fine-ით. მანქანის განადგურება ან მიტოვება, სიკვდილი ან\nგათიშვა ცვლას აუქმებს და დაგროვილი შემოსავალი იკარგება.", 2048);
 	new bool:ok = true;
 	if (g_UiJbLevel[playerid] < g_UiJbMinLevel[job])
 	{
-		format(line, 192, "\n\n{FF6666}Richiede il livello %d (tu sei livello %d).", g_UiJbMinLevel[job], g_UiJbLevel[playerid]);
-		strcat(body, line, 1024);
+		format(line, 576, "\n\n{FF6666}საჭიროა დონე %d (შენ ხარ დონე %d).", g_UiJbMinLevel[job], g_UiJbLevel[playerid]);
+		strcat(body, line, 2048);
 		ok = false;
 	}
 	else if (job == g_UiJbCurrent[playerid])
 	{
-		strcat(body, "\n\n{FFD24D}Questo e' gia' il tuo lavoro attuale.", 1024);
+		strcat(body, "\n\n{FFD24D}ეს უკვე შენი მიმდინარე სამსახურია.", 2048);
 		ok = false;
 	}
 	else if (g_UiJbCooldown[playerid] > 0)
 	{
-		format(line, 192, "\n\n{FF6666}Potrai cambiare lavoro tra %d min %02d s.", g_UiJbCooldown[playerid] / 60, g_UiJbCooldown[playerid] % 60);
-		strcat(body, line, 1024);
+		format(line, 576, "\n\n{FF6666}სამსახურს შეცვლი %d წთ %02d წმ-ში.", g_UiJbCooldown[playerid] / 60, g_UiJbCooldown[playerid] % 60);
+		strcat(body, line, 2048);
 		ok = false;
 	}
 	else
 	{
-		format(line, 192, "\n\n{FFD24D}Dopo la scelta dovrai attendere %d minuti prima di cambiare lavoro.", 10);
-		strcat(body, line, 1024);
+		format(line, 576, "\n\n{FFD24D}არჩევის შემდეგ სამსახურის შესაცვლელად %d წუთი მოგიწევს ლოდინი.", 10);
+		strcat(body, line, 2048);
 	}
-	format(title, 64, "Job Center - %s", g_UiJbName[job]);
-	Lang_ShowPlayerDialog(playerid, 9301, DIALOG_STYLE_MSGBOX, title, body, ok ? "Prendi lavoro" : "Indietro", ok ? "Indietro" : "");
+	format(title, 192, "დასაქმების ცენტრი - %s", g_UiJbName[job]);
+	Lang_ShowPlayerDialog(playerid, 9301, DIALOG_STYLE_MSGBOX, title, body, ok ? "აყვანა" : "უკან", ok ? "უკან" : "");
 	return 0;
 }
 
 UI_JbQuitShow(playerid)
 {
-	new body[256], cur = g_UiJbCurrent[playerid];
+	new body[768], cur = g_UiJbCurrent[playerid];
 	if (cur < 1 || cur > 3)
 	{
 		return 0;
 	}
-	format(body, 256, "{FFFFFF}Vuoi davvero lasciare il lavoro di {FFD24D}%s{FFFFFF}?\n\nSe poi scegli un altro lavoro dovrai rispettare il cooldown di %d minuti.", g_UiJbName[cur], 10);
-	Lang_ShowPlayerDialog(playerid, 9302, DIALOG_STYLE_MSGBOX, "Lascia il lavoro", body, "Lascia", "Annulla");
+	format(body, 768, "{FFFFFF}ნამდვილად გინდა {FFD24D}%s{FFFFFF}-ის სამსახურის დატოვება?\n\nსხვა სამსახურის არჩევისას %d წუთი მოგიწევს ლოდინი.", g_UiJbName[cur], 10);
+	Lang_ShowPlayerDialog(playerid, 9302, DIALOG_STYLE_MSGBOX, "სამსახურის დატოვება", body, "დატოვება", "გაუქმება");
 	return 0;
 }
 
@@ -197,31 +197,31 @@ UI_JobInfoShow(playerid, jobId, level, runs, earned)
 	{
 		jobId = 0;
 	}
-	new body[1024], line[192], money[16], hourly[16];
+	new body[2048], line[576], money[48], hourly[48];
 	if (jobId == 0)
 	{
-		strcat(body, "{FFFFFF}Al momento sei {FFD24D}disoccupato{FFFFFF}.\nRecati al Job Center (piazza City Hall) e usa /lavoro prendi.\n\nLavori disponibili:\n", 1024);
+		strcat(body, "{FFFFFF}ამჟამად {FFD24D}უმუშევარი{FFFFFF} ხარ.\nმიდი Job Center-ში (City Hall-ის მოედანი) და გამოიყენე /lavoro prendi.\n\nხელმისაწვდომი სამსახურები:\n", 2048);
 		for (new job = 1; job <= 3; job++)
 		{
-			UI_JbMoney(UI_JbHourly(job), hourly, 16);
-			format(line, 192, "{FFFFFF}- %s: livello %d, ~{66DD66}$%s{FFFFFF}/ora%s\n", g_UiJbName[job], g_UiJbMinLevel[job], hourly, level < g_UiJbMinLevel[job] ? " {FF6666}(bloccato){FFFFFF}" : "");
-			strcat(body, line, 1024);
+			UI_JbMoney(UI_JbHourly(job), hourly, 48);
+			format(line, 576, "{FFFFFF}- %s: დონე %d, ~{66DD66}$%s{FFFFFF}/სთ%s\n", g_UiJbName[job], g_UiJbMinLevel[job], hourly, level < g_UiJbMinLevel[job] ? " {FF6666}(დაბლოკილი){FFFFFF}" : "");
+			strcat(body, line, 2048);
 		}
 	}
 	else
 	{
-		UI_JbMoney(UI_JbRunPay(jobId), money, 16);
-		UI_JbMoney(UI_JbHourly(jobId), hourly, 16);
-		format(line, 192, "{FFFFFF}Lavoro attuale: {FFD24D}%s{FFFFFF}\nVeicolo: %s\nPercorso: %s\n", g_UiJbName[jobId], g_UiJbVehicle[jobId], g_UiJbRoute[jobId]);
-		strcat(body, line, 1024);
-		format(line, 192, "Paga a giro: {66DD66}$%s{FFFFFF}  |  stima ~{66DD66}$%s{FFFFFF}/ora (tetto $%d/ora)\n\n", money, hourly, 2200);
-		strcat(body, line, 1024);
-		UI_JbMoney(earned, money, 16);
-		format(line, 192, "Turni completati: %d\nTotale guadagnato: {66DD66}$%s{FFFFFF}\n\n", runs, money);
-		strcat(body, line, 1024);
-		strcat(body, "Comandi: /inizia (avvia il turno), /fine (chiude e paga il maturato), /lavoro lascia (al Job Center).", 1024);
+		UI_JbMoney(UI_JbRunPay(jobId), money, 48);
+		UI_JbMoney(UI_JbHourly(jobId), hourly, 48);
+		format(line, 576, "{FFFFFF}მიმდინარე სამსახური: {FFD24D}%s{FFFFFF}\nმანქანა: %s\nმარშრუტი: %s\n", g_UiJbName[jobId], g_UiJbVehicle[jobId], g_UiJbRoute[jobId]);
+		strcat(body, line, 2048);
+		format(line, 576, "ხელფასი წრეზე: {66DD66}$%s{FFFFFF}  |  სავარაუდოდ ~{66DD66}$%s{FFFFFF}/სთ (ლიმიტი $%d/სთ)\n\n", money, hourly, 2200);
+		strcat(body, line, 2048);
+		UI_JbMoney(earned, money, 48);
+		format(line, 576, "დასრულებული ცვლები: %d\nსულ გამომუშავებული: {66DD66}$%s{FFFFFF}\n\n", runs, money);
+		strcat(body, line, 2048);
+		strcat(body, "ბრძანებები: /inizia (ცვლის დაწყება), /fine (დასრულება და დაგროვილის გადახდა), /lavoro lascia (Job Center-ში).", 2048);
 	}
-	Lang_ShowPlayerDialog(playerid, 9303, DIALOG_STYLE_MSGBOX, "Il tuo lavoro", body, "Chiudi", "");
+	Lang_ShowPlayerDialog(playerid, 9303, DIALOG_STYLE_MSGBOX, "შენი სამსახური", body, "დახურვა", "");
 	return 0;
 }
 
@@ -324,11 +324,11 @@ UI_JhCreate(playerid)
 	}
 	new Float:left = (476.0 - 150.0);
 	g_UiJHud[playerid][0] = UI_JhBox(playerid, left, 384.0, 150.0, 66.0, 153);
-	g_UiJHud[playerid][1] = UI_JhText(playerid, (5.0 + left), (384.0 + 2.0), "LAVORO", 0.22, 1.0, -2994689, t_TEXT_DRAW_ALIGN:1);
-	g_UiJHud[playerid][2] = UI_JhText(playerid, (5.0 + left), (384.0 + 14.0), "Tappa 0/0", 0.22, 1.0, -1, t_TEXT_DRAW_ALIGN:1);
-	g_UiJHud[playerid][3] = UI_JhText(playerid, (5.0 + left), (384.0 + 26.0), "Maturato: $0", 0.22, 1.0, 0x66DD66FF, t_TEXT_DRAW_ALIGN:1);
-	g_UiJHud[playerid][4] = UI_JhText(playerid, (5.0 + left), (384.0 + 38.0), "Tempo 00:00", 0.22, 1.0, -1, t_TEXT_DRAW_ALIGN:1);
-	g_UiJHud[playerid][5] = UI_JhText(playerid, (5.0 + left), (384.0 + 51.0), "TORNA AL VEICOLO: 45s", 0.2, 0.9, -12303105, t_TEXT_DRAW_ALIGN:1);
+	g_UiJHud[playerid][1] = UI_JhText(playerid, (5.0 + left), (384.0 + 2.0), "სამსახური", 0.22, 1.0, -2994689, t_TEXT_DRAW_ALIGN:1);
+	g_UiJHud[playerid][2] = UI_JhText(playerid, (5.0 + left), (384.0 + 14.0), "გაჩერება 0/0", 0.22, 1.0, -1, t_TEXT_DRAW_ALIGN:1);
+	g_UiJHud[playerid][3] = UI_JhText(playerid, (5.0 + left), (384.0 + 26.0), "დაგროვდა: $0", 0.22, 1.0, 0x66DD66FF, t_TEXT_DRAW_ALIGN:1);
+	g_UiJHud[playerid][4] = UI_JhText(playerid, (5.0 + left), (384.0 + 38.0), "დრო 00:00", 0.22, 1.0, -1, t_TEXT_DRAW_ALIGN:1);
+	g_UiJHud[playerid][5] = UI_JhText(playerid, (5.0 + left), (384.0 + 51.0), "დაბრუნდი მანქანაში: 45s", 0.2, 0.9, -12303105, t_TEXT_DRAW_ALIGN:1);
 	g_UiJHudCreated[playerid] = true;
 	return 0;
 }
@@ -371,13 +371,13 @@ UI_JobHudShow(playerid, jobId)
 	g_UiJHudJob[playerid] = jobId;
 	g_UiJHudShown[playerid] = true;
 	g_UiJHudWarn[playerid] = false;
-	new str[48];
-	format(str, 48, "LAVORO: %s", g_UiJbName[jobId]);
+	new str[432];
+	format(str, 432, "სამსახური: %s", g_UiJbName[jobId]);
 	Lang_PlayerTextDrawSetString(playerid, g_UiJHud[playerid][1], str);
-	format(str, 48, "%s 0/%d", g_UiJbStepWord[jobId], g_UiJbSteps[jobId]);
+	format(str, 432, "%s 0/%d", g_UiJbStepWord[jobId], g_UiJbSteps[jobId]);
 	Lang_PlayerTextDrawSetString(playerid, g_UiJHud[playerid][2], str);
-	Lang_PlayerTextDrawSetString(playerid, g_UiJHud[playerid][3], "Maturato: $0");
-	Lang_PlayerTextDrawSetString(playerid, g_UiJHud[playerid][4], "Tempo 00:00");
+	Lang_PlayerTextDrawSetString(playerid, g_UiJHud[playerid][3], "დაგროვდა: $0");
+	Lang_PlayerTextDrawSetString(playerid, g_UiJHud[playerid][4], "დრო 00:00");
 	UI_JhSetVisible(playerid, true);
 	return 0;
 }
@@ -400,7 +400,7 @@ UI_JobHudUpdate(playerid, step, stepTotal, earned, elapsedSec, dwellSec, offVehi
 		return 0;
 	}
 	new job = g_UiJHudJob[playerid];
-	new str[64], money[16];
+	new str[576], money[48];
 	if (stepTotal < 0)
 	{
 		stepTotal = 0;
@@ -415,28 +415,28 @@ UI_JobHudUpdate(playerid, step, stepTotal, earned, elapsedSec, dwellSec, offVehi
 	}
 	if (step > stepTotal)
 	{
-		format(str, 64, "Rientro al deposito");
+		format(str, 576, "დეპოში დაბრუნება");
 	}
 	else
 	{
-		format(str, 64, "%s %d/%d", g_UiJbStepWord[job], step, stepTotal);
+		format(str, 576, "%s %d/%d", g_UiJbStepWord[job], step, stepTotal);
 	}
 	Lang_PlayerTextDrawSetString(playerid, g_UiJHud[playerid][2], str);
-	UI_JbMoney(earned, money, 16);
-	format(str, 64, "Maturato: $%s", money);
+	UI_JbMoney(earned, money, 48);
+	format(str, 576, "დაგროვდა: $%s", money);
 	Lang_PlayerTextDrawSetString(playerid, g_UiJHud[playerid][3], str);
 	if (dwellSec >= 0)
 	{
-		format(str, 64, "Tempo %02d:%02d  Sosta %ds", elapsedSec / 60, elapsedSec % 60, dwellSec);
+		format(str, 576, "დრო %02d:%02d  გაჩერება %ds", elapsedSec / 60, elapsedSec % 60, dwellSec);
 	}
 	else
 	{
-		format(str, 64, "Tempo %02d:%02d", elapsedSec / 60, elapsedSec % 60);
+		format(str, 576, "დრო %02d:%02d", elapsedSec / 60, elapsedSec % 60);
 	}
 	Lang_PlayerTextDrawSetString(playerid, g_UiJHud[playerid][4], str);
 	if (offVehicleSec >= 0)
 	{
-		format(str, 64, "TORNA AL VEICOLO: %ds", offVehicleSec);
+		format(str, 576, "დაბრუნდი მანქანაში: %ds", offVehicleSec);
 		Lang_PlayerTextDrawSetString(playerid, g_UiJHud[playerid][5], str);
 		new bool:blinkOff = GetTickCount() / 500 % 2 == 1;
 		PlayerTextDrawColour(playerid, PlayerText:g_UiJHud[playerid][5], blinkOff ? -12303292 : -12303105);

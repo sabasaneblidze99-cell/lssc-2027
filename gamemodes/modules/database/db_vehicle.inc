@@ -36,8 +36,8 @@ DB_VehCompensate(kind, ownerId, vehDbId)
 
 public DB_OnVehicleCompensated(kind, ownerId, vehDbId)
 {
-	new msg[128];
-	format(msg, 128, "%s veicolo %d (owner %d) a sessione scaduta: righe=%d%s", kind == 1 ? "rollback creazione" : "ripristino vendita", vehDbId, ownerId, cache_affected_rows(), cache_affected_rows() == 1 ? "" : " ANOMALIA: verificare a mano");
+	new msg[384];
+	format(msg, 384, "%s veicolo %d (owner %d) a sessione scaduta: righe=%d%s", kind == 1 ? "rollback creazione" : "ripristino vendita", vehDbId, ownerId, cache_affected_rows(), cache_affected_rows() == 1 ? "" : " ANOMALIA: verificare a mano");
 	Log_Write("DBVEH", msg);
 	return 1;
 }
@@ -62,8 +62,8 @@ DB_LoadVehicles(playerid, ownerId)
 		DB_DeliverFailure(playerid, 32);
 		return 0;
 	}
-	new name[25], query[768];
-	GetPlayerName(playerid, name, 25);
+	new name[75], query[768];
+	GetPlayerName(playerid, name, 75);
 	mysql_format(g_DB, query, 768, "SELECT id, model, plate, color1, color2, price_paid, pos_x, pos_y, pos_z, pos_a, park_x, park_y, park_z, park_a, interior, world, health, fuel_cl, locked, destroyed FROM vehicles WHERE owner_id = %d AND deleted = 0 ORDER BY id LIMIT %d", ownerId, 4);
 	DB_PendingSet(playerid, 32);
 	mysql_tquery(g_DB, query, "DB_OnVehiclesLoaded", "dsd", playerid, name, ownerId);
@@ -135,8 +135,8 @@ DB_VehGeneratePlate(plate[], size)
 
 DB_VehInsertAttempt(playerid, const name[], attempt)
 {
-	new plate[8], query[768];
-	DB_VehGeneratePlate(plate, 8);
+	new plate[24], query[768];
+	DB_VehGeneratePlate(plate, 24);
 	mysql_format(g_DB, query, 768, "INSERT IGNORE INTO vehicles (owner_id, model, plate, color1, color2, price_paid, pos_x, pos_y, pos_z, pos_a, park_x, park_y, park_z, park_a, fuel_cl) VALUES (%d, %d, '%e', %d, %d, %d, %f, %f, %f, %f, %f, %f, %f, %f, %d)", g_VehNew[playerid][vnOwnerId], g_VehNew[playerid][vnModel], plate, g_VehNew[playerid][vnColor1], g_VehNew[playerid][vnColor2], g_VehNew[playerid][vnPricePaid], g_VehNew[playerid][vnPosX], g_VehNew[playerid][vnPosY], g_VehNew[playerid][vnPosZ], g_VehNew[playerid][vnPosA], g_VehNew[playerid][vnPosX], g_VehNew[playerid][vnPosY], g_VehNew[playerid][vnPosZ], g_VehNew[playerid][vnPosA], g_VehNew[playerid][vnFuelCl]);
 	mysql_tquery(g_DB, query, "DB_OnVehicleCreated", "dsdds", playerid, name, g_VehNew[playerid][vnOwnerId], attempt, plate);
 }
@@ -170,8 +170,8 @@ DB_CreateVehicle(playerid, ownerId, model, color1, color2, pricePaid, Float:x, F
 	g_VehNew[playerid][vnPosY] = y;
 	g_VehNew[playerid][vnPosZ] = z;
 	g_VehNew[playerid][vnPosA] = a;
-	new name[25];
-	GetPlayerName(playerid, name, 25);
+	new name[75];
+	GetPlayerName(playerid, name, 75);
 	DB_PendingSet(playerid, 64);
 	DB_VehInsertAttempt(playerid, name, 1);
 	return 0;
@@ -222,8 +222,8 @@ DB_DeleteVehicle(playerid, ownerId, vehDbId)
 		DB_DeliverFailure(playerid, 128);
 		return 0;
 	}
-	new name[25], query[512];
-	GetPlayerName(playerid, name, 25);
+	new name[75], query[512];
+	GetPlayerName(playerid, name, 75);
 	mysql_format(g_DB, query, 512, "UPDATE vehicles SET deleted = 1 WHERE id = %d AND owner_id = %d AND deleted = 0", vehDbId, ownerId);
 	DB_PendingSet(playerid, 128);
 	mysql_tquery(g_DB, query, "DB_OnVehicleDeleted", "dsdd", playerid, name, ownerId, vehDbId);

@@ -87,8 +87,8 @@ Account_OnConnect(playerid)
 	gPlayer[playerid][pAuthState] = 0;
 	gPlayer[playerid][pLastReportTick] = GetTickCount() - 30000;
 	gPlayer[playerid][pLastGiveMoneyTick] = GetTickCount() - 10000;
-	new name[25];
-	GetPlayerName(playerid, name, 25);
+	new name[75];
+	GetPlayerName(playerid, name, 75);
 	if (1 && !Util_IsValidRPName(name))
 	{
 		Account_Kick(playerid, "სახელი უნდა იყოს ფორმატში სახელი_გვარი (მაგ. Giorgi_Beridze).");
@@ -100,8 +100,8 @@ Account_OnConnect(playerid)
 		Account_Kick(playerid, "სერვისი დროებით მიუწვდომელია. სცადე მოგვიანებით.");
 		return 0;
 	}
-	new ip[16];
-	GetPlayerIp(playerid, ip, 16);
+	new ip[48];
+	GetPlayerIp(playerid, ip, 48);
 	gPlayer[playerid][pAuthState] = 11;
 	DB_CheckBan(playerid, name, ip);
 	return 0;
@@ -164,8 +164,8 @@ public Account_OnDBLoaded(playerid, accountId, const hash[], const salt[], admin
 		new locked = DB_GetLockedUntil(playerid) - gettime();
 		if (locked > 0)
 		{
-			new msg[512];
-			format(msg, 512, "ანგარიში დროებით დაბლოკილია: ძალიან ბევრი არასწორი პაროლი. სცადე %d წუთში.", (locked + 59) / 60);
+			new msg[1024];
+			format(msg, 1024, "ანგარიში დროებით დაბლოკილია: ძალიან ბევრი არასწორი პაროლი. სცადე %d წუთში.", (locked + 59) / 60);
 			Account_Kick(playerid, msg);
 			return 1;
 		}
@@ -177,9 +177,9 @@ public Account_OnDBLoaded(playerid, accountId, const hash[], const salt[], admin
 
 Account_CompleteLogin(playerid, accountId, adminLevel)
 {
-	new name[25], ip[16], msg[128];
-	GetPlayerName(playerid, name, 25);
-	GetPlayerIp(playerid, ip, 16);
+	new name[75], ip[48], msg[384];
+	GetPlayerName(playerid, name, 75);
+	GetPlayerIp(playerid, ip, 48);
 	gPlayer[playerid][pAccountId] = accountId;
 	gPlayer[playerid][pAdminLevel] = adminLevel;
 	gPlayer[playerid][pLoggedIn] = 1;
@@ -188,7 +188,7 @@ Account_CompleteLogin(playerid, accountId, adminLevel)
 	gPlayer[playerid][pPassSalt][0] = 0;
 	gPlayer[playerid][pAuthState] = 4;
 	DB_UpdateLogin(accountId, ip);
-	format(msg, 128, "login account %d (%s)", accountId, name);
+	format(msg, 384, "login account %d (%s)", accountId, name);
 	Log_Write("ACCOUNT", msg);
 	Util_Send(playerid, 0x66DD66FF, "შესვლა წარმატებულია.");
 	CharSel_Begin(playerid);       // M15: selezione dei 3 personaggi (character/char_select.inc)
@@ -216,8 +216,8 @@ public UI_OnRegisterSubmit(playerid, const password[])
 	}
 	if (!Valid_PasswordLength(password))
 	{
-		new err[512];
-		format(err, 512, "პაროლი უნდა შეიცავდეს %d-დან %d-მდე სიმბოლოს.", 6, 32);
+		new err[1024];
+		format(err, 1024, "პაროლი უნდა შეიცავდეს %d-დან %d-მდე სიმბოლოს.", 6, 32);
 		Util_Send(playerid, -10270721, err);
 		UI_ShowRegister(playerid);
 		return 1;
@@ -234,8 +234,8 @@ public Account_OnRegisterHashed(playerid, seq)
 		return 1;
 	}
 	gPlayer[playerid][pAuthSeq] = 0;
-	new hash[61];
-	bcrypt_get_hash(hash, 61);
+	new hash[183];
+	bcrypt_get_hash(hash, 183);
 	if (strlen(hash) != 60)
 	{
 		Log_Write("ACCOUNT", "registrazione fallita: hash bcrypt non valido");
@@ -274,9 +274,9 @@ Account_LoginFailed(playerid)
 	gPlayer[playerid][pAuthState] = 3;
 	gPlayer[playerid][pAuthSeq] = 0;
 	gPlayer[playerid][pLoginAttempts]++;
-	new name[25], msg[128];
-	GetPlayerName(playerid, name, 25);
-	format(msg, 128, "login fallito %s (tentativo %d/%d)", name, gPlayer[playerid][pLoginAttempts], 3);
+	new name[75], msg[384];
+	GetPlayerName(playerid, name, 75);
+	format(msg, 384, "login fallito %s (tentativo %d/%d)", name, gPlayer[playerid][pLoginAttempts], 3);
 	Log_Write("ACCOUNT", msg);
 	DB_AccountLoginFailed(gPlayer[playerid][pAccountId]);
 	if (gPlayer[playerid][pLoginAttempts] >= 3)
@@ -284,8 +284,8 @@ Account_LoginFailed(playerid)
 		Account_Kick(playerid, "შესვლის ძალიან ბევრი წარუმატებელი მცდელობა.");
 		return 0;
 	}
-	new err[512];
-	format(err, 512, "პაროლი არასწორია. დარჩენილი მცდელობა: %d.", 3 - gPlayer[playerid][pLoginAttempts]);
+	new err[1024];
+	format(err, 1024, "პაროლი არასწორია. დარჩენილი მცდელობა: %d.", 3 - gPlayer[playerid][pLoginAttempts]);
 	Util_Send(playerid, -10270721, err);
 	UI_ShowLogin(playerid, true);
 	return 0;
@@ -308,8 +308,8 @@ public UI_OnLoginSubmit(playerid, const password[])
 		bcrypt_verify(playerid, "Account_OnLoginVerified", password, gPlayer[playerid][pPassHash], "dd", Account_NextSeq(playerid), gPlayer[playerid][pAccountId]);
 		return 1;
 	}
-	new hash[65];
-	SHA256_Hash(password, gPlayer[playerid][pPassSalt], hash, 65);
+	new hash[195];
+	SHA256_Hash(password, gPlayer[playerid][pPassSalt], hash, 195);
 	if (strcmp(hash, gPlayer[playerid][pPassHash], true, 0x7FFFFFFF) != 0)
 	{
 		Account_LoginFailed(playerid);
@@ -343,8 +343,8 @@ public Account_OnMigrateHashed(playerid, seq, accountId)
 		return 1;
 	}
 	gPlayer[playerid][pAuthSeq] = 0;
-	new hash[61];
-	bcrypt_get_hash(hash, 61);
+	new hash[183];
+	bcrypt_get_hash(hash, 183);
 	if (strlen(hash) == 60)
 	{
 		DB_UpdatePasswordHash(accountId, hash, 1);

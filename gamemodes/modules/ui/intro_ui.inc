@@ -80,8 +80,8 @@ UI_StoryCompose(const name[], origin, motive, dest[], size)
 		strcopy(dest, "წარსული უცნობია.", size);
 		return 0;
 	}
-	new nm[32];
-	strcopy(nm, name, 32);
+	new nm[96];
+	strcopy(nm, name, 96);
 	for (new i = 0; nm[i] != 0; i++)
 	{
 		if (nm[i] == 95)
@@ -111,14 +111,14 @@ UI_ShowOriginSelect(playerid)
 		return 0;
 	}
 	g_UiStoryActive[playerid] = true;
-	new body[1600], line[128];
+	new body[3200], line[384];
 	body[0] = 0;
 	for (new i = 1; i <= 5; i++)
 	{
-		format(line, 128, "{FFD24D}%s\n", g_UiStoryOriginShort[i]);
-		strcat(body, line, 1600);
+		format(line, 384, "{FFD24D}%s\n", g_UiStoryOriginShort[i]);
+		strcat(body, line, 3200);
 	}
-	strcat(body, "{AAAAAA}არ მინდა თქმა", 1600);
+	strcat(body, "{AAAAAA}არ მინდა თქმა", 3200);
 	Lang_ShowPlayerDialog(playerid, 9600, DIALOG_STYLE_LIST, "შენი ისტორია: წარმოშობა", body, "არჩევა", "");
 	return 0;
 }
@@ -130,24 +130,24 @@ UI_ShowMotiveSelect(playerid)
 		return 0;
 	}
 	g_UiStoryActive[playerid] = true;
-	new body[1600], line[128];
+	new body[3200], line[384];
 	body[0] = 0;
 	for (new i = 1; i <= 4; i++)
 	{
-		format(line, 128, "{FFD24D}%s\n", g_UiStoryMotiveShort[i]);
-		strcat(body, line, 1600);
+		format(line, 384, "{FFD24D}%s\n", g_UiStoryMotiveShort[i]);
+		strcat(body, line, 3200);
 	}
-	strcat(body, "{AAAAAA}არ მინდა თქმა", 1600);
+	strcat(body, "{AAAAAA}არ მინდა თქმა", 3200);
 	Lang_ShowPlayerDialog(playerid, 9601, DIALOG_STYLE_LIST, "შენი ისტორია: რატომ ლოს-სანტოსი", body, "არჩევა", "უკან");
 	return 0;
 }
 
 UI_StoryConfirmShow(playerid)
 {
-	new text[768], body[1600], name[32];
-	GetPlayerName(playerid, name, 32);
+	new text[768], body[3200], name[96];
+	GetPlayerName(playerid, name, 96);
 	UI_StoryCompose(name, g_UiStoryOrigin[playerid], g_UiStoryMotive[playerid], text, 768);
-	format(body, 1600, "{FFFFFF}შენი პერსონაჟის წარსული:\n\n{FFD24D}%s\n\n{FFFFFF}ეს მხოლოდ ისტორიაა: თამაშში შესაძლებლობებს არ ცვლის.\nირჩევა მხოლოდ ერთხელ.", text);
+	format(body, 3200, "{FFFFFF}შენი პერსონაჟის წარსული:\n\n{FFD24D}%s\n\n{FFFFFF}ეს მხოლოდ ისტორიაა: თამაშში შესაძლებლობებს არ ცვლის.\nირჩევა მხოლოდ ერთხელ.", text);
 	Lang_ShowPlayerDialog(playerid, 9602, DIALOG_STYLE_MSGBOX, "დაადასტურე შენი ისტორია", body, "დადასტურება", "უკან");
 }
 
@@ -411,7 +411,7 @@ UI_IntroCreate(playerid)
 	g_UiIntroTd[playerid][1] = UI_IntroBox(playerid, 0.0, 0.0, 640.0, 56.0, 255);
 	g_UiIntroTd[playerid][2] = UI_IntroBox(playerid, 0.0, (480.0 - 56.0), 640.0, (56.0 + 2.0), 255);
 	g_UiIntroTd[playerid][3] = UI_IntroText(playerid, 320.0, (8.0 + (480.0 - 56.0)), "_", 0.3, 1.4, 0xF2F2F2FF, t_TEXT_DRAW_FONT:1);
-	g_UiIntroTd[playerid][4] = UI_IntroText(playerid, 320.0, 170.0, "LOS SANTOS", 0.9, 3.6, -1, t_TEXT_DRAW_FONT:3);
+	g_UiIntroTd[playerid][4] = UI_IntroText(playerid, 320.0, 170.0, "ლოს-სანტოსი", 0.9, 3.6, -1, t_TEXT_DRAW_FONT:3);
 	g_UiIntroTd[playerid][5] = UI_IntroText(playerid, 320.0, 232.0, "ყველას ისტორია აქ იწყება.", 0.34, 1.5, 0xF2F2F2FF, t_TEXT_DRAW_FONT:1);
 	g_UiIntroTd[playerid][6] = UI_IntroText(playerid, 320.0, (480.0 - 20.0), "_", 0.22, 1.0, 0xB8B8B8FF, t_TEXT_DRAW_FONT:1);
 	UI_IntroApplyAlpha(playerid);
@@ -520,9 +520,9 @@ UI_IntroSubtitle(playerid, const text[])
 		PlayerTextDrawHide(playerid, PlayerText:g_UiIntroTd[playerid][3]);
 		return 0;
 	}
-	new tl[256], buf[71];
+	new tl[256], buf[213];
 	Lang_Translit(text, tl, 256);
-	strcopy(buf, tl, 71);
+	strcopy(buf, tl, 213);
 	Lang_PlayerTextDrawSetString(playerid, g_UiIntroTd[playerid][3], buf);
 	PlayerTextDrawShow(playerid, PlayerText:g_UiIntroTd[playerid][3]);
 	return 0;
@@ -561,10 +561,10 @@ UI_IntroTitle(playerid, bool:show)
 
 UI_IntroHintRender(playerid, secondsLeft)
 {
-	new text[96];
+	new text[288];
 	if (secondsLeft > 0)
 	{
-		format(text, 96, "გამოტოვება შეგეძლება %d წამში", secondsLeft);
+		format(text, 288, "გამოტოვება შეგეძლება %d წამში", secondsLeft);
 	}
 	else
 	{

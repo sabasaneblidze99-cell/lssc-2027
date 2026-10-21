@@ -28,8 +28,8 @@ DB_LoadAccount(playerid)
 		DB_DeliverFailure(playerid, 1);
 		return 0;
 	}
-	new name[25], query[512];
-	GetPlayerName(playerid, name, 25);
+	new name[75], query[512];
+	GetPlayerName(playerid, name, 75);
 	mysql_format(g_DB, query, 512, "SELECT id, password_hash, salt, hash_algo, muted_until, admin_level, locked_until FROM accounts WHERE name = '%e' LIMIT 1", name);
 	DB_PendingSet(playerid, 1);
 	mysql_tquery(g_DB, query, "DB_OnAccountLoaded", "ds", playerid, name);
@@ -55,10 +55,10 @@ public DB_OnAccountLoaded(playerid, const name[])
 		return 1;
 	}
 	new accountId = 0, adminLevel = 0;
-	new hash[65], salt[17];
+	new hash[195], salt[51];
 	cache_get_value_name_int(0, "id", accountId);
-	cache_get_value_name(0, "password_hash", hash, 65);
-	cache_get_value_name(0, "salt", salt, 17);
+	cache_get_value_name(0, "password_hash", hash, 195);
+	cache_get_value_name(0, "salt", salt, 51);
 	cache_get_value_name_int(0, "admin_level", adminLevel);
 	cache_get_value_name_int(0, "hash_algo", g_DBHashAlgo[playerid]);
 	cache_get_value_name_int(0, "muted_until", g_DBMutedUntil[playerid]);
@@ -91,8 +91,8 @@ DB_CreateAccountEx(playerid, const hash[], const salt[], algo)
 		DB_DeliverFailure(playerid, 2);
 		return 0;
 	}
-	new name[25], query[512];
-	GetPlayerName(playerid, name, 25);
+	new name[75], query[512];
+	GetPlayerName(playerid, name, 75);
 	mysql_format(g_DB, query, 512, "INSERT IGNORE INTO accounts (name, password_hash, salt, hash_algo) VALUES ('%e', '%e', '%e', %d)", name, hash, salt, algo);
 	DB_PendingSet(playerid, 2);
 	mysql_tquery(g_DB, query, "DB_OnAccountCreated", "ds", playerid, name);

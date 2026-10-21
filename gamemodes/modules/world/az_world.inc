@@ -27,7 +27,7 @@ new g_AzTpTick[MAX_PLAYERS];
 AzWorld_OnInit()
 {
 	AzMap_Create();
-	new label[160];
+	new label[480];
 	for (new i = 0; i < AZ_DOORS; i++)
 	{
 		g_AzDoorPick[i] = CreatePickup(1318, 1, s_AzDoorPos[i][0], s_AzDoorPos[i][1], s_AzDoorPos[i][2], s_AzDoorWI[i][0]);

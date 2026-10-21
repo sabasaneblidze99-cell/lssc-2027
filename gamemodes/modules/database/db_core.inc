@@ -36,7 +36,7 @@ bool:DB_IniRead(const path[], host[], user[], pass[], dbname[], &port, &mask, si
 	{
 		return false;
 	}
-	new line[320], key[32], val[128], bool:first = true;
+	new line[320], key[96], val[384], bool:first = true;
 	host[0] = user[0] = pass[0] = dbname[0] = 0;
 	port = 3306;
 	mask = 0;
@@ -59,8 +59,8 @@ bool:DB_IniRead(const path[], host[], user[], pass[], dbname[], &port, &mask, si
 		{
 			continue;
 		}
-		strmid(key, line, 0, eq, 32);
-		strmid(val, line, eq + 1, strlen(line), 128);
+		strmid(key, line, 0, eq, 96);
+		strmid(val, line, eq + 1, strlen(line), 384);
 		DB_IniTrim(key);
 		DB_IniTrim(val);
 		if (!key[0] || key[0] == 59 || key[0] == 35)
@@ -135,7 +135,7 @@ DB_ConnectHint(errno, const errtxt[])
 
 bool:DB_ConnectFinish(MySQL:h, const where[])
 {
-	new errbuf[128], errno = 0;
+	new errbuf[384], errno = 0;
 	if (h != MYSQL_INVALID_HANDLE)
 	{
 		errno = mysql_errno(h);
@@ -143,7 +143,7 @@ bool:DB_ConnectFinish(MySQL:h, const where[])
 	if (h == MYSQL_INVALID_HANDLE || errno != 0)
 	{
 		errbuf[0] = 0;
-		mysql_error(errbuf, 128, h);
+		mysql_error(errbuf, 384, h);
 		printf("[DB] connessione fallita (%s): errno %d, %s", where, errno, errbuf[0] ? errbuf : "(nessun messaggio dal plugin)");
 		DB_ConnectHint(errno, errbuf);
 		if (h != MYSQL_INVALID_HANDLE)
@@ -201,8 +201,8 @@ bool:DB_Connect()
 	mysql_set_option(opts, E_MYSQL_OPTION:3, port);
 	new MySQL:h2 = mysql_connect(host, user, pass, dbname, opts);
 	pass[0] = 0;
-	new where[96];
-	format(where, 96, "%s@%s:%d db=%s", user, host, port, dbname);
+	new where[288];
+	format(where, 288, "%s@%s:%d db=%s", user, host, port, dbname);
 	return DB_ConnectFinish(h2, where);
 }
 
@@ -224,8 +224,8 @@ bool:DB_PlayerMatches(playerid, const name[])
 	{
 		return false;
 	}
-	new cur[25];
-	GetPlayerName(playerid, cur, 25);
+	new cur[75];
+	GetPlayerName(playerid, cur, 75);
 	return strcmp(cur, name, false, 0x7FFFFFFF) == 0;
 }
 

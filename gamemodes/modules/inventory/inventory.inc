@@ -1,16 +1,16 @@
-new s_InvName[12][24] = {
+new s_InvName[12][88] = {
 	{0},
-	"Porzione di cibo",
-	"Pasto pronto",
-	"Bottiglia d'acqua",
-	"Snack",
-	"Kit di pronto soccorso",
-	"Benda",
-	"Sigarette",
-	"Accendino",
-	"Telefono",
-	"Documento",
-	"Zaino"
+	"საკვების ულუფა",
+	"მზა კერძი",
+	"წყლის ბოთლი",
+	"სნექი",
+	"პირველადი დახმარების ნაკრები",
+	"ბინტი",
+	"სიგარეტი",
+	"სანთებელა",
+	"ტელეფონი",
+	"დოკუმენტი",
+	"ზურგჩანთა"
 };
 new s_InvPrice[12] = {0, 9, 14, 3, 4, 60, 12, 8, 5, 250, 0, 350};
 new s_InvCooldown[11] = {0, 0, 10000, 5000, 5000, 45000, 15000, 20000};
@@ -178,7 +178,7 @@ public Inv_OnDBLoaded(playerid, count)
 		}
 		if (gPlayer[playerid][pSpawned])
 		{
-			Inv_Say(playerid, -10270721, "Inventario non disponibile (errore database): riprova con /inventario.");
+			Inv_Say(playerid, -10270721, "ინვენტარი მიუწვდომელია (ბაზის შეცდომა): სცადე /inventario-ით.");
 		}
 		return 1;
 	}
@@ -275,30 +275,30 @@ bool:Inv_Guard(playerid)
 		}
 		case 1:
 		{
-			Inv_Say(playerid, -10270721, "L'inventario si sta caricando: riprova tra un attimo.");
+			Inv_Say(playerid, -10270721, "ინვენტარი იტვირთება: ერთ წამში სცადე.");
 			return false;
 		}
 		default:
 		{
-			Inv_Say(playerid, -10270721, "Inventario non disponibile: provo a ricaricarlo, riprova tra poco.");
+			Inv_Say(playerid, -10270721, "ინვენტარი მიუწვდომელია: ვცდილობ ხელახლა ჩატვირთვას, ცოტა ხანში სცადე.");
 			Inv_Load(playerid);
 			return false;
 		}
 	}
 	if (gPlayer[playerid][pInvOpBusy])
 	{
-		Inv_Say(playerid, -10270721, "Hai un'operazione di inventario in corso: attendi.");
+		Inv_Say(playerid, -10270721, "ინვენტარის ოპერაცია მიმდინარეობს: დაელოდე.");
 		return false;
 	}
 	if (gPlayer[playerid][pWounded] || gPlayer[playerid][pCuffed])
 	{
-		Inv_Say(playerid, -10270721, "Non puoi farlo da ferito o ammanettato.");
+		Inv_Say(playerid, -10270721, "დაჭრილს ან ბორკილდადებულს ეს არ შეგიძლია.");
 		return false;
 	}
 	new now = GetTickCount();
 	if (gPlayer[playerid][pInvLastActionTick] != 0 && now - gPlayer[playerid][pInvLastActionTick] < 1500)
 	{
-		Inv_Say(playerid, -10270721, "Attendi un attimo prima di un'altra azione con l'inventario.");
+		Inv_Say(playerid, -10270721, "ინვენტარით შემდეგ მოქმედებამდე ცოტა დაელოდე.");
 		return false;
 	}
 	gPlayer[playerid][pInvLastActionTick] = now != 0 ? now : 1;
@@ -309,12 +309,12 @@ Inv_CmdInventario(playerid)
 {
 	if (gPlayer[playerid][pInvState] == 1)
 	{
-		Inv_Say(playerid, -10270721, "L'inventario si sta caricando: riprova tra un attimo.");
+		Inv_Say(playerid, -10270721, "ინვენტარი იტვირთება: ერთ წამში სცადე.");
 		return 0;
 	}
 	if (gPlayer[playerid][pInvState] != 2)
 	{
-		Inv_Say(playerid, -10270721, "Inventario non disponibile: provo a ricaricarlo, riprova tra poco.");
+		Inv_Say(playerid, -10270721, "ინვენტარი მიუწვდომელია: ვცდილობ ხელახლა ჩატვირთვას, ცოტა ხანში სცადე.");
 		Inv_Load(playerid);
 		return 0;
 	}
@@ -346,29 +346,29 @@ Inv_UseStart(playerid, itemId)
 	}
 	if (itemId < 1 || itemId > 10)
 	{
-		Inv_Say(playerid, -10270721, "Oggetto sconosciuto.");
+		Inv_Say(playerid, -10270721, "უცნობი ნივთი.");
 		return 0;
 	}
 	if (Inv_Count(playerid, itemId) < 1)
 	{
-		SendClientMessage(playerid, -10270721, "Non hai: %s.", s_InvName[itemId]);
+		SendClientMessage(playerid, -10270721, "არ გაქვს: %s.", s_InvName[itemId]);
 		return 0;
 	}
 	switch (itemId)
 	{
 		case 1:
 		{
-			Inv_Say(playerid, -10270721, "Le porzioni di cibo non si usano: riponile nel frigo (/frigo metti) e cucina o mangia freddo.");
+			Inv_Say(playerid, -10270721, "საკვების ულუფა პირდაპირ არ გამოიყენება: ჩადე მაცივარში (/frigo metti) და მოამზადე ან ცივად ჭამე.");
 			return 0;
 		}
 		case 8:
 		{
-			Inv_Say(playerid, -10270721, "L'accendino serve per fumare: usa /usa sigarette.");
+			Inv_Say(playerid, -10270721, "სანთებელა მოსაწევადაა: გამოიყენე /usa sigarette.");
 			return 0;
 		}
 		case 9:
 		{
-			SendClientMessage(playerid, -1, "Telefono: il tuo numero e' %d.", gPlayer[playerid][pCharId] + 555000);
+			SendClientMessage(playerid, -1, "ტელეფონი: შენი ნომერია %d.", gPlayer[playerid][pCharId] + 555000);
 			return 0;
 		}
 		case 10:
@@ -380,7 +380,7 @@ Inv_UseStart(playerid, itemId)
 	new left = Inv_CdLeftSec(playerid, itemId);
 	if (left > 0)
 	{
-		SendClientMessage(playerid, -10270721, "Devi attendere ancora %d secondi per usare di nuovo: %s.", left, s_InvName[itemId]);
+		SendClientMessage(playerid, -10270721, "ხელახლა გამოსაყენებლად კიდევ %d წამი დაელოდე: %s.", left, s_InvName[itemId]);
 		return 0;
 	}
 	new Float:hp;
@@ -392,12 +392,12 @@ Inv_UseStart(playerid, itemId)
 			new hunger = House_InvHunger(playerid);
 			if (hunger < 0)
 			{
-				Inv_Say(playerid, -10270721, "I tuoi dati sul cibo non sono ancora stati caricati: riprova tra poco.");
+				Inv_Say(playerid, -10270721, "საკვების მონაცემები ჯერ არ ჩატვირთულა: სცადე ცოტა ხანში.");
 				return 0;
 			}
 			if (hunger >= 100)
 			{
-				Inv_Say(playerid, -10270721, "Non hai fame.");
+				Inv_Say(playerid, -10270721, "არ გშია.");
 				return 0;
 			}
 		}
@@ -405,7 +405,7 @@ Inv_UseStart(playerid, itemId)
 		{
 			if ((hp >= float(90)))
 			{
-				Inv_Say(playerid, -10270721, "Non ti serve un kit di pronto soccorso: sei in buona salute.");
+				Inv_Say(playerid, -10270721, "პირველადი დახმარების ნაკრები არ გჭირდება: ჯანმრთელად ხარ.");
 				return 0;
 			}
 		}
@@ -413,7 +413,7 @@ Inv_UseStart(playerid, itemId)
 		{
 			if ((hp >= float(95)))
 			{
-				Inv_Say(playerid, -10270721, "Non hai ferite che richiedano una benda.");
+				Inv_Say(playerid, -10270721, "ბინტის საჭირო ჭრილობა არ გაქვს.");
 				return 0;
 			}
 		}
@@ -421,7 +421,7 @@ Inv_UseStart(playerid, itemId)
 		{
 			if (Inv_Count(playerid, 8) < 1)
 			{
-				Inv_Say(playerid, -10270721, "Ti serve un accendino per fumare.");
+				Inv_Say(playerid, -10270721, "მოსაწევად სანთებელა გჭირდება.");
 				return 0;
 			}
 		}
@@ -433,8 +433,8 @@ Inv_UseStart(playerid, itemId)
 
 Inv_RpUse(playerid, const action[])
 {
-	new name[25], msg[256];
-	GetPlayerName(playerid, name, 25);
+	new name[75], msg[256];
+	GetPlayerName(playerid, name, 75);
 	format(msg, 256, "* %s %s", name, action);
 	Util_SendNear(playerid, 0xC2A2DAFF, 20.0, msg);
 }
@@ -448,10 +448,10 @@ Inv_ApplyUse(playerid, itemId)
 		{
 			new gain = itemId == 2 ? 30 : (itemId == 3 ? 8 : 10);
 			new value = House_InvHungerAdd(playerid, gain);
-			Inv_RpUse(playerid, itemId == 2 ? "consuma un pasto pronto." : (itemId == 3 ? "beve dell'acqua." : "mangia uno snack."));
+			Inv_RpUse(playerid, itemId == 2 ? "მზა კერძს მიირთმევს." : (itemId == 3 ? "წყალს სვამს." : "სნექს ჭამს."));
 			if (value >= 0)
 			{
-				SendClientMessage(playerid, 0x66DD66FF, "Sazieta': %d%%.", value);
+				SendClientMessage(playerid, 0x66DD66FF, "სიმაძღრე: %d%%.", value);
 			}
 		}
 		case 5, 6:
@@ -463,12 +463,12 @@ Inv_ApplyUse(playerid, itemId)
 				hp = 100.0;
 			}
 			SetPlayerHealth(playerid, hp);
-			Inv_RpUse(playerid, itemId == 5 ? "usa un kit di pronto soccorso." : "si medica con una benda.");
-			SendClientMessage(playerid, 0x66DD66FF, "Salute: %d.", floatround(hp, floatround_method:0));
+			Inv_RpUse(playerid, itemId == 5 ? "პირველადი დახმარების ნაკრებს იყენებს." : "ჭრილობას ბინტით იხვევს.");
+			SendClientMessage(playerid, 0x66DD66FF, "ჯანმრთელობა: %d.", floatround(hp, floatround_method:0));
 		}
 		case 7:
 		{
-			Inv_RpUse(playerid, "accende una sigaretta.");
+			Inv_RpUse(playerid, "სიგარეტს უკიდებს.");
 		}
 	}
 	new cd = s_InvCooldown[itemId];
@@ -498,22 +498,22 @@ public Inv_OnDBUsed(playerid, itemId, result)
 			}
 			else
 			{
-				Inv_Say(playerid, -10270721, "Hai perso l'oggetto: non eri in condizione di usarlo.");
+				Inv_Say(playerid, -10270721, "ნივთი დაკარგე: მისი გამოყენების მდგომარეობაში არ იყავი.");
 			}
 		}
 		case 3:
 		{
-			Inv_Say(playerid, -10270721, "Non hai piu' quell'oggetto.");
+			Inv_Say(playerid, -10270721, "ეს ნივთი აღარ გაქვს.");
 			Inv_Reload(playerid);
 		}
 		case -1:
 		{
-			Inv_Say(playerid, -10270721, "Errore database: l'oggetto non e' stato usato. Controlla l'inventario e riprova.");
+			Inv_Say(playerid, -10270721, "ბაზის შეცდომა: ნივთი არ გამოყენებულა. შეამოწმე ინვენტარი და სცადე თავიდან.");
 			Inv_Reload(playerid);
 		}
 		default:
 		{
-			Inv_Say(playerid, -10270721, "Impossibile usare l'oggetto.");
+			Inv_Say(playerid, -10270721, "ნივთის გამოყენება ვერ მოხერხდა.");
 		}
 	}
 	return 1;
@@ -600,18 +600,18 @@ Inv_GroundRelease(playerid)
 
 Inv_CmdGetta(playerid, const params[])
 {
-	new pos = 0, tok[24], itemId = 0, qty = 1;
-	Util_NextToken(params, pos, tok, 24);
+	new pos = 0, tok[72], itemId = 0, qty = 1;
+	Util_NextToken(params, pos, tok, 72);
 	itemId = Inv_ParseItem(tok);
 	if (itemId < 1)
 	{
-		Inv_Say(playerid, 0x99CCFFFF, "Uso: /getta [oggetto] [quantita'] (cibo, pasto, acqua, snack, kit, benda, sigarette, accendino)");
+		Inv_Say(playerid, 0x99CCFFFF, "გამოყენება: /getta [ნივთი] [რაოდენობა] (cibo, pasto, acqua, snack, kit, benda, sigarette, accendino)");
 		return 0;
 	}
-	Util_NextToken(params, pos, tok, 24);
+	Util_NextToken(params, pos, tok, 72);
 	if (tok[0] != 0 && (!Util_ParseInt(tok, qty) || qty < 1 || qty > 1000))
 	{
-		Inv_Say(playerid, -10270721, "Quantita' non valida.");
+		Inv_Say(playerid, -10270721, "არასწორი რაოდენობა.");
 		return 0;
 	}
 	Inv_DropStart(playerid, itemId, qty);
@@ -626,34 +626,34 @@ Inv_DropStart(playerid, itemId, qty)
 	}
 	if (!DB_InvItemMovable(itemId))
 	{
-		Inv_Say(playerid, -10270721, "Questo oggetto non si puo' gettare.");
+		Inv_Say(playerid, -10270721, "ამ ნივთის გადაგდება არ შეიძლება.");
 		return 0;
 	}
 	if (qty < 1 || Inv_Count(playerid, itemId) < qty)
 	{
-		SendClientMessage(playerid, -10270721, "Non hai abbastanza: %s.", s_InvName[itemId]);
+		SendClientMessage(playerid, -10270721, "საკმარისად არ გაქვს: %s.", s_InvName[itemId]);
 		return 0;
 	}
 	if (GetPlayerState(playerid) != PLAYER_STATE_ONFOOT || GetPlayerInterior(playerid) != 0 || GetPlayerVirtualWorld(playerid) != 0)
 	{
-		Inv_Say(playerid, -10270721, "Puoi gettare oggetti solo a piedi, all'aperto.");
+		Inv_Say(playerid, -10270721, "ნივთების გადაგდება მხოლოდ ფეხით, გარეთ შეგიძლია.");
 		return 0;
 	}
 	new charId = gPlayer[playerid][pCharId];
 	if (Inv_GroundCount(0) >= 40)
 	{
-		Inv_Say(playerid, -10270721, "Ci sono troppi oggetti a terra in giro: riprova piu' tardi.");
+		Inv_Say(playerid, -10270721, "გარშემო ძალიან ბევრი ნივთი ყრია მიწაზე: მოგვიანებით სცადე.");
 		return 0;
 	}
 	if (Inv_GroundCount(charId) >= 3)
 	{
-		SendClientMessage(playerid, -10270721, "Hai gia' %d oggetti a terra: raccoglili o attendi che spariscano.", 3);
+		SendClientMessage(playerid, -10270721, "მიწაზე უკვე %d ნივთი გიყრია: აკრიფე ან დაელოდე, სანამ გაქრება.", 3);
 		return 0;
 	}
 	new idx = Inv_GroundSlot();
 	if (idx == -1)
 	{
-		Inv_Say(playerid, -10270721, "Ci sono troppi oggetti a terra in giro: riprova piu' tardi.");
+		Inv_Say(playerid, -10270721, "გარშემო ძალიან ბევრი ნივთი ყრია მიწაზე: მოგვიანებით სცადე.");
 		return 0;
 	}
 	new Float:x, Float:y, Float:z;
@@ -680,8 +680,8 @@ public Inv_OnDBDropped(playerid, itemId, qty, result)
 		return 1;
 	}
 	new idx = gPlayer[playerid][pInvOpAux];
-	new opId[33];
-	strcat(opId, gPlayer[playerid][pInvOpId], 33);
+	new opId[99];
+	strcat(opId, gPlayer[playerid][pInvOpId], 99);
 	Inv_EndOp(playerid);
 	new bool:mine = idx >= 0 && idx < 40 && g_InvGround[idx][igState] == 1 && g_InvGround[idx][igDropper] == playerid + 1;
 	if (result != 1)
@@ -694,21 +694,21 @@ public Inv_OnDBDropped(playerid, itemId, qty, result)
 		{
 			case 3:
 			{
-				Inv_Say(playerid, -10270721, "Non hai piu' quell'oggetto.");
+				Inv_Say(playerid, -10270721, "ეს ნივთი აღარ გაქვს.");
 				Inv_Reload(playerid);
 			}
 			case 4:
 			{
-				Inv_Say(playerid, -10270721, "Questo oggetto non si puo' gettare.");
+				Inv_Say(playerid, -10270721, "ამ ნივთის გადაგდება არ შეიძლება.");
 			}
 			case -1:
 			{
-				Inv_Say(playerid, -10270721, "Errore database: l'oggetto non e' stato gettato.");
+				Inv_Say(playerid, -10270721, "ბაზის შეცდომა: ნივთი არ გადაგდებულა.");
 				Inv_Reload(playerid);
 			}
 			default:
 			{
-				Inv_Say(playerid, -10270721, "Impossibile gettare l'oggetto.");
+				Inv_Say(playerid, -10270721, "ნივთის გადაგდება ვერ მოხერხდა.");
 			}
 		}
 		return 1;
@@ -717,7 +717,7 @@ public Inv_OnDBDropped(playerid, itemId, qty, result)
 	{
 		Log_Write("INV", "drop riuscito senza riserva a terra: annullo");
 		DB_InvUndo(opId);
-		Inv_Say(playerid, -10270721, "Impossibile gettare l'oggetto.");
+		Inv_Say(playerid, -10270721, "ნივთის გადაგდება ვერ მოხერხდა.");
 		Inv_Reload(playerid);
 		return 1;
 	}
@@ -728,8 +728,8 @@ public Inv_OnDBDropped(playerid, itemId, qty, result)
 	g_InvGround[idx][igDropper] = 0;
 	Inv_Reload(playerid);
 	UI_InvToast(playerid, itemId, -qty);
-	new text[144];
-	format(text, 144, "getta a terra: %s x%d.", s_InvName[itemId], qty);
+	new text[432];
+	format(text, 432, "მიწაზე აგდებს: %s x%d.", s_InvName[itemId], qty);
 	Inv_RpUse(playerid, text);
 	return 1;
 }
@@ -756,7 +756,7 @@ Inv_CmdPrendi(playerid)
 	}
 	if (GetPlayerState(playerid) != PLAYER_STATE_ONFOOT || GetPlayerInterior(playerid) != 0 || GetPlayerVirtualWorld(playerid) != 0)
 	{
-		Inv_Say(playerid, -10270721, "Puoi raccogliere oggetti solo a piedi, all'aperto.");
+		Inv_Say(playerid, -10270721, "ნივთების აკრეფა მხოლოდ ფეხით, გარეთ შეგიძლია.");
 		return 0;
 	}
 	new best = -1, Float:bestDist = (2.0 + 1.0);
@@ -775,7 +775,7 @@ Inv_CmdPrendi(playerid)
 	}
 	if (best == -1)
 	{
-		Inv_Say(playerid, -10270721, "Non c'e' nessun oggetto a terra vicino a te.");
+		Inv_Say(playerid, -10270721, "ახლოს მიწაზე ნივთი არ არის.");
 		return 0;
 	}
 	g_InvGround[best][igPicker] = playerid + 1;
@@ -799,7 +799,7 @@ public Inv_OnDBAdded(playerid, itemId, qty, result)
 			}
 			Inv_Reload(playerid);
 			UI_InvToast(playerid, itemId, qty);
-			SendClientMessage(playerid, 0x66DD66FF, "Hai raccolto: %s x%d.", s_InvName[itemId], qty);
+			SendClientMessage(playerid, 0x66DD66FF, "აკრიფე: %s x%d.", s_InvName[itemId], qty);
 			return 1;
 		}
 		if (mine)
@@ -810,15 +810,15 @@ public Inv_OnDBAdded(playerid, itemId, qty, result)
 		{
 			case 2:
 			{
-				Inv_Say(playerid, -10270721, "Non hai abbastanza spazio nell'inventario.");
+				Inv_Say(playerid, -10270721, "ინვენტარში საკმარისი ადგილი არ გაქვს.");
 			}
 			case -1:
 			{
-				Inv_Say(playerid, -10270721, "Errore database: oggetto non raccolto.");
+				Inv_Say(playerid, -10270721, "ბაზის შეცდომა: ნივთი ვერ აიკრიფა.");
 			}
 			default:
 			{
-				Inv_Say(playerid, -10270721, "Impossibile raccogliere l'oggetto.");
+				Inv_Say(playerid, -10270721, "ნივთის აკრეფა ვერ მოხერხდა.");
 			}
 		}
 		return 1;
@@ -844,12 +844,12 @@ public Inv_OnDBAdded(playerid, itemId, qty, result)
 		{
 			Inv_Reload(playerid);
 			UI_InvToast(playerid, itemId, qty);
-			Inv_Say(playerid, 0x66DD66FF, "Hai richiesto un nuovo documento d'identita'.");
+			Inv_Say(playerid, 0x66DD66FF, "ახალი პირადობის მოწმობა მოითხოვე.");
 		}
 		else
 		{
 			gPlayer[playerid][pDocRequestTick] = 0;
-			Inv_Say(playerid, -10270721, result == 2 ? "Non hai spazio nell'inventario per il documento." : "Impossibile rilasciare il documento.");
+			Inv_Say(playerid, -10270721, result == 2 ? "დოკუმენტისთვის ინვენტარში ადგილი არ გაქვს." : "დოკუმენტის გაცემა ვერ მოხერხდა.");
 		}
 	}
 	return 1;
@@ -883,13 +883,13 @@ Inv_DocRequest(playerid)
 	}
 	if (Inv_Count(playerid, 10) > 0)
 	{
-		Inv_Say(playerid, -10270721, "Hai gia' il documento d'identita'.");
+		Inv_Say(playerid, -10270721, "პირადობის მოწმობა უკვე გაქვს.");
 		return 0;
 	}
 	new now = GetTickCount();
 	if (gPlayer[playerid][pDocRequestTick] != 0 && now - gPlayer[playerid][pDocRequestTick] < 3600000)
 	{
-		Inv_Say(playerid, -10270721, "Hai gia' richiesto un documento di recente: attendi.");
+		Inv_Say(playerid, -10270721, "დოკუმენტი უკვე მოითხოვე ახლახან: მოიცადე.");
 		return 0;
 	}
 	gPlayer[playerid][pDocRequestTick] = now != 0 ? now : 1;
@@ -931,24 +931,24 @@ bool:Inv_GiveRateOk(playerid)
 
 Inv_CmdDai(playerid, const params[])
 {
-	new pos = 0, tok[24], target = 0, itemId = 0, qty = 1;
-	Util_NextToken(params, pos, tok, 24);
+	new pos = 0, tok[72], target = 0, itemId = 0, qty = 1;
+	Util_NextToken(params, pos, tok, 72);
 	if (!Util_ParsePlayerId(tok, target))
 	{
-		Inv_Say(playerid, 0x99CCFFFF, "Uso: /dai [id giocatore] [oggetto] [quantita']");
+		Inv_Say(playerid, 0x99CCFFFF, "გამოყენება: /dai [მოთამაშის id] [ნივთი] [რაოდენობა]");
 		return 0;
 	}
-	Util_NextToken(params, pos, tok, 24);
+	Util_NextToken(params, pos, tok, 72);
 	itemId = Inv_ParseItem(tok);
 	if (itemId < 1)
 	{
-		Inv_Say(playerid, 0x99CCFFFF, "Uso: /dai [id giocatore] [oggetto] [quantita'] (cibo, pasto, acqua, snack, kit, benda, sigarette, accendino)");
+		Inv_Say(playerid, 0x99CCFFFF, "გამოყენება: /dai [მოთამაშის id] [ნივთი] [რაოდენობა] (cibo, pasto, acqua, snack, kit, benda, sigarette, accendino)");
 		return 0;
 	}
-	Util_NextToken(params, pos, tok, 24);
+	Util_NextToken(params, pos, tok, 72);
 	if (tok[0] != 0 && (!Util_ParseInt(tok, qty) || qty < 1 || qty > 1000))
 	{
-		Inv_Say(playerid, -10270721, "Quantita' non valida.");
+		Inv_Say(playerid, -10270721, "არასწორი რაოდენობა.");
 		return 0;
 	}
 	Inv_GiveStart(playerid, target, itemId, qty);
@@ -963,48 +963,48 @@ Inv_GiveStart(playerid, target, itemId, qty)
 	}
 	if (!DB_InvItemMovable(itemId))
 	{
-		Inv_Say(playerid, -10270721, "Questo oggetto non si puo' dare.");
+		Inv_Say(playerid, -10270721, "ამ ნივთის გადაცემა შეუძლებელია.");
 		return 0;
 	}
 	if (target == playerid)
 	{
-		Inv_Say(playerid, -10270721, "Non puoi dare oggetti a te stesso.");
+		Inv_Say(playerid, -10270721, "საკუთარ თავს ნივთს ვერ გადასცემ.");
 		return 0;
 	}
 	if (!Util_IsPlaying(target) || gPlayer[target][pInvState] != 2)
 	{
-		Inv_Say(playerid, -10270721, "Giocatore non valido o non ancora pronto.");
+		Inv_Say(playerid, -10270721, "მოთამაშე არასწორია ან ჯერ მზად არ არის.");
 		return 0;
 	}
 	if (!Util_InRange(playerid, target, 3.0))
 	{
-		Inv_Say(playerid, -10270721, "Il giocatore e' troppo lontano.");
+		Inv_Say(playerid, -10270721, "მოთამაშე ძალიან შორსაა.");
 		return 0;
 	}
 	if (qty < 1 || Inv_Count(playerid, itemId) < qty)
 	{
-		SendClientMessage(playerid, -10270721, "Non hai abbastanza: %s.", s_InvName[itemId]);
+		SendClientMessage(playerid, -10270721, "საკმარისი არ გაქვს: %s.", s_InvName[itemId]);
 		return 0;
 	}
 	if (gPlayer[playerid][pInvGiveTo] != 0 || gPlayer[playerid][pInvGiveFrom] != 0)
 	{
-		Inv_Say(playerid, -10270721, "Hai gia' uno scambio in sospeso.");
+		Inv_Say(playerid, -10270721, "უკვე გაქვს მოლოდინში მყოფი გაცვლა.");
 		return 0;
 	}
 	if (gPlayer[target][pInvGiveTo] != 0 || gPlayer[target][pInvGiveFrom] != 0)
 	{
-		Inv_Say(playerid, -10270721, "Quel giocatore ha gia' uno scambio in sospeso.");
+		Inv_Say(playerid, -10270721, "ამ მოთამაშეს უკვე აქვს მოლოდინში მყოფი გაცვლა.");
 		return 0;
 	}
 	new now = GetTickCount();
 	if (gPlayer[playerid][pInvLastGiveTick] != 0 && now - gPlayer[playerid][pInvLastGiveTick] < 5000)
 	{
-		Inv_Say(playerid, -10270721, "Attendi qualche secondo prima di un nuovo scambio.");
+		Inv_Say(playerid, -10270721, "ახალ გაცვლამდე რამდენიმე წამი მოიცადე.");
 		return 0;
 	}
 	if (!Inv_GiveRateOk(playerid))
 	{
-		SendClientMessage(playerid, -10270721, "Hai raggiunto il limite di %d scambi all'ora.", 20);
+		SendClientMessage(playerid, -10270721, "მიაღწიე საათში %d გაცვლის ლიმიტს.", 20);
 		return 0;
 	}
 	g_InvGiveSeq++;
@@ -1017,11 +1017,11 @@ Inv_GiveStart(playerid, target, itemId, qty)
 	gPlayer[target][pInvGiveFrom] = playerid + 1;
 	gPlayer[target][pInvGiveSeq] = g_InvGiveSeq;
 	gPlayer[target][pInvGiveStartTick] = now;
-	new name[25], tname[25];
-	GetPlayerName(playerid, name, 25);
-	GetPlayerName(target, tname, 25);
+	new name[75], tname[75];
+	GetPlayerName(playerid, name, 75);
+	GetPlayerName(target, tname, 75);
 	UI_InvGiveConfirmShow(target, name, itemId, qty, 15);
-	SendClientMessage(playerid, -1, "Hai offerto %s x%d a %s: attendi la risposta (%d secondi).", s_InvName[itemId], qty, tname, 15);
+	SendClientMessage(playerid, -1, "შესთავაზე %s x%d მოთამაშეს %s: დაელოდე პასუხს (%d წამი).", s_InvName[itemId], qty, tname, 15);
 	return 0;
 }
 
@@ -1060,37 +1060,37 @@ Inv_GiveReply(playerid, accept, bool:expired)
 	UI_InvGiveConfirmClose(playerid);
 	if (!Inv_ValidPlayer(giver) || gPlayer[giver][pInvGiveTo] != playerid + 1 || gPlayer[giver][pInvGiveSeq] != seq || gPlayer[giver][pInvOp] == 2)
 	{
-		Inv_Say(playerid, -10270721, "Lo scambio non e' piu' valido.");
+		Inv_Say(playerid, -10270721, "გაცვლა აღარ არის მოქმედი.");
 		return 1;
 	}
 	if (!accept)
 	{
-		Inv_GiveCancel(giver, expired ? "Scambio scaduto." : "Scambio rifiutato.");
+		Inv_GiveCancel(giver, expired ? "გაცვლის დრო ამოიწურა." : "გაცვლა უარყოფილია.");
 		return 1;
 	}
 	new itemId = gPlayer[giver][pInvGiveItem], qty = gPlayer[giver][pInvGiveQty];
 	if (GetTickCount() - start > 15000)
 	{
-		Inv_GiveCancel(giver, "Scambio scaduto.");
-		Inv_Say(playerid, -10270721, "Scambio non completato.");
+		Inv_GiveCancel(giver, "გაცვლის დრო ამოიწურა.");
+		Inv_Say(playerid, -10270721, "გაცვლა არ დასრულდა.");
 		return 1;
 	}
 	if (!Inv_StateOk(giver) || !Inv_StateOk(playerid))
 	{
-		Inv_GiveCancel(giver, "Scambio annullato: uno dei due non puo' farlo adesso.");
-		Inv_Say(playerid, -10270721, "Scambio non completato.");
+		Inv_GiveCancel(giver, "გაცვლა გაუქმდა: ერთ-ერთს ახლა ეს არ შეუძლია.");
+		Inv_Say(playerid, -10270721, "გაცვლა არ დასრულდა.");
 		return 1;
 	}
 	if (!Util_InRange(giver, playerid, 3.0))
 	{
-		Inv_GiveCancel(giver, "Scambio annullato: troppo lontani.");
-		Inv_Say(playerid, -10270721, "Scambio non completato.");
+		Inv_GiveCancel(giver, "გაცვლა გაუქმდა: ძალიან შორს ხართ.");
+		Inv_Say(playerid, -10270721, "გაცვლა არ დასრულდა.");
 		return 1;
 	}
 	if (Inv_Count(giver, itemId) < qty)
 	{
-		Inv_GiveCancel(giver, "Scambio annullato: l'oggetto non e' piu' disponibile.");
-		Inv_Say(playerid, -10270721, "Scambio non completato.");
+		Inv_GiveCancel(giver, "გაცვლა გაუქმდა: ნივთი აღარ არის ხელმისაწვდომი.");
+		Inv_Say(playerid, -10270721, "გაცვლა არ დასრულდა.");
 		return 1;
 	}
 	Inv_BeginOp(giver, 2, itemId, qty, 0);
@@ -1114,24 +1114,24 @@ public Inv_OnDBTransferred(giverid, receiverid, itemId, qty, result)
 				gPlayer[giverid][pInvGiveHourCount]++;
 				Inv_Reload(giverid);
 				UI_InvToast(giverid, itemId, -qty);
-				SendClientMessage(giverid, 0x66DD66FF, "Hai dato %s x%d.", s_InvName[itemId], qty);
+				SendClientMessage(giverid, 0x66DD66FF, "გადაეცი %s x%d.", s_InvName[itemId], qty);
 			}
 			case 2:
 			{
-				Inv_Say(giverid, -10270721, "Scambio fallito: il destinatario non ha spazio.");
+				Inv_Say(giverid, -10270721, "გაცვლა ვერ მოხერხდა: მიმღებს ადგილი არ აქვს.");
 			}
 			case 3:
 			{
-				Inv_Say(giverid, -10270721, "Scambio fallito: non hai piu' abbastanza oggetti.");
+				Inv_Say(giverid, -10270721, "გაცვლა ვერ მოხერხდა: საკმარისი ნივთი აღარ გაქვს.");
 				Inv_Reload(giverid);
 			}
 			case 4:
 			{
-				Inv_Say(giverid, -10270721, "Questo oggetto non si puo' dare.");
+				Inv_Say(giverid, -10270721, "ამ ნივთის გადაცემა შეუძლებელია.");
 			}
 			case -1:
 			{
-				Inv_Say(giverid, -10270721, "Errore database durante lo scambio: ricontrolla l'inventario.");
+				Inv_Say(giverid, -10270721, "ბაზის შეცდომა გაცვლისას: გადაამოწმე ინვენტარი.");
 				Inv_Reload(giverid);
 				if (Inv_ValidPlayer(receiverid))
 				{
@@ -1140,7 +1140,7 @@ public Inv_OnDBTransferred(giverid, receiverid, itemId, qty, result)
 			}
 			default:
 			{
-				Inv_Say(giverid, -10270721, "Scambio non riuscito.");
+				Inv_Say(giverid, -10270721, "გაცვლა ვერ მოხერხდა.");
 			}
 		}
 	}
@@ -1148,15 +1148,15 @@ public Inv_OnDBTransferred(giverid, receiverid, itemId, qty, result)
 	{
 		Inv_Reload(receiverid);
 		UI_InvToast(receiverid, itemId, qty);
-		SendClientMessage(receiverid, 0x66DD66FF, "Hai ricevuto %s x%d.", s_InvName[itemId], qty);
+		SendClientMessage(receiverid, 0x66DD66FF, "მიიღე %s x%d.", s_InvName[itemId], qty);
 	}
 	return 1;
 }
 
 Inv_ShopList(playerid)
 {
-	SendClientMessage(playerid, -2994689, "--- Supermercato: /compra [articolo] [quantita'] ---");
-	new line[256], part[64];
+	SendClientMessage(playerid, -2994689, "--- სუპერმარკეტი: /compra [პროდუქტი] [რაოდენობა] ---");
+	new line[256], part[192];
 	line[0] = 0;
 	for (new i = 1; i <= 11; i++)
 	{
@@ -1164,11 +1164,11 @@ Inv_ShopList(playerid)
 		{
 			continue;
 		}
-		format(part, 64, "%s $%d  ", s_InvShopKey[i], s_InvPrice[i]);
+		format(part, 192, "%s $%d  ", s_InvShopKey[i], s_InvPrice[i]);
 		strcat(line, part, 256);
 	}
 	Util_Send(playerid, 0x99CCFFFF, line);
-	Util_Send(playerid, 0x99CCFFFF, "Il cibo si compra a porzioni (max 12 con te) e si ripone nel frigo; il pasto si consuma con /usa pasto.");
+	Util_Send(playerid, 0x99CCFFFF, "საკვები იყიდება პორციებად (მაქს. 12 თან) და ინახება მაცივარში; კერძი მიირთვი /usa pasto-თი.");
 }
 
 Inv_Buy(playerid, itemId, qty)
@@ -1184,13 +1184,13 @@ Inv_Buy(playerid, itemId, qty)
 	}
 	if (itemId < 1 || itemId > 10 || s_InvPrice[itemId] <= 0)
 	{
-		Inv_Say(playerid, -10270721, "Questo articolo non e' in vendita.");
+		Inv_Say(playerid, -10270721, "ეს პროდუქტი არ იყიდება.");
 		return 0;
 	}
 	new stack = DB_InvStackMax(itemId);
 	if (qty < 1 || qty > stack)
 	{
-		SendClientMessage(playerid, -10270721, "Quantita' non valida (1-%d).", stack);
+		SendClientMessage(playerid, -10270721, "არასწორი რაოდენობა (1-%d).", stack);
 		return 0;
 	}
 	new maxTotal = 0;
@@ -1204,13 +1204,13 @@ Inv_Buy(playerid, itemId, qty)
 	}
 	if (maxTotal > 0 && Inv_Count(playerid, itemId) + qty > maxTotal)
 	{
-		SendClientMessage(playerid, -10270721, "Puoi averne al massimo %d con te.", maxTotal);
+		SendClientMessage(playerid, -10270721, "თან მაქსიმუმ %d შეიძლება გქონდეს.", maxTotal);
 		return 0;
 	}
 	new cost = s_InvPrice[itemId] * qty;
 	if (!Money_Can(playerid, cost))
 	{
-		SendClientMessage(playerid, -10270721, "Servono $%d in contanti.", cost);
+		SendClientMessage(playerid, -10270721, "საჭიროა $%d ნაღდი ფული.", cost);
 		return 0;
 	}
 	Inv_BeginOp(playerid, 5, itemId, qty, cost);
@@ -1222,12 +1222,12 @@ Inv_BuyBag(playerid)
 {
 	if (gPlayer[playerid][pInvHasBag] != 0)
 	{
-		Inv_Say(playerid, -10270721, "Hai gia' uno zaino.");
+		Inv_Say(playerid, -10270721, "ზურგჩანთა უკვე გაქვს.");
 		return 0;
 	}
 	if (!Money_Can(playerid, 350))
 	{
-		SendClientMessage(playerid, -10270721, "Servono $%d in contanti.", 350);
+		SendClientMessage(playerid, -10270721, "საჭიროა $%d ნაღდი ფული.", 350);
 		return 0;
 	}
 	Inv_BeginOp(playerid, 6, 11, 1, 350);
@@ -1239,7 +1239,7 @@ Inv_UndoPurchase(playerid)
 {
 	gPlayer[playerid][pInvUndoOpId][0] = 0;
 	strcat(gPlayer[playerid][pInvUndoOpId], gPlayer[playerid][pInvOpId], 33);
-	Inv_Say(playerid, -10270721, "Contanti insufficienti: acquisto annullato.");
+	Inv_Say(playerid, -10270721, "ნაღდი ფული არ გყოფნის: ყიდვა გაუქმდა.");
 	DB_InvUndo(gPlayer[playerid][pInvUndoOpId]);
 }
 
@@ -1261,7 +1261,7 @@ public Inv_OnDBBought(playerid, itemId, qty, result)
 		Inv_EndOp(playerid);
 		Inv_Reload(playerid);
 		UI_InvToast(playerid, itemId, qty);
-		SendClientMessage(playerid, 0x66DD66FF, "Hai comprato %s x%d per $%d.", s_InvName[itemId], qty, cost);
+		SendClientMessage(playerid, 0x66DD66FF, "იყიდე %s x%d $%d-ად.", s_InvName[itemId], qty, cost);
 		return 1;
 	}
 	Inv_EndOp(playerid);
@@ -1269,15 +1269,15 @@ public Inv_OnDBBought(playerid, itemId, qty, result)
 	{
 		case 2:
 		{
-			Inv_Say(playerid, -10270721, "Non hai abbastanza spazio nell'inventario (o ne hai gia' il massimo).");
+			Inv_Say(playerid, -10270721, "ინვენტარში ადგილი არ გაქვს (ან უკვე მაქსიმუმი გაქვს).");
 		}
 		case -1:
 		{
-			Inv_Say(playerid, -10270721, "Errore database: nessun addebito, riprova.");
+			Inv_Say(playerid, -10270721, "ბაზის შეცდომა: თანხა არ ჩამოგეჭრა, სცადე ხელახლა.");
 		}
 		default:
 		{
-			Inv_Say(playerid, -10270721, "Acquisto non riuscito.");
+			Inv_Say(playerid, -10270721, "ყიდვა ვერ მოხერხდა.");
 		}
 	}
 	return 1;
@@ -1299,7 +1299,7 @@ public Inv_OnDBBag(playerid, result)
 		Char_Save(playerid);
 		Inv_EndOp(playerid);
 		Inv_Reload(playerid);
-		SendClientMessage(playerid, 0x66DD66FF, "Hai comprato lo zaino per $%d: capienza %d slot.", 350, 20);
+		SendClientMessage(playerid, 0x66DD66FF, "იყიდე ზურგჩანთა $%d-ად: ტევადობა %d სლოტი.", 350, 20);
 		return 1;
 	}
 	Inv_EndOp(playerid);
@@ -1307,16 +1307,16 @@ public Inv_OnDBBag(playerid, result)
 	{
 		case 5:
 		{
-			Inv_Say(playerid, -10270721, "Hai gia' uno zaino.");
+			Inv_Say(playerid, -10270721, "ზურგჩანთა უკვე გაქვს.");
 			Inv_Reload(playerid);
 		}
 		case -1:
 		{
-			Inv_Say(playerid, -10270721, "Errore database: nessun addebito, riprova.");
+			Inv_Say(playerid, -10270721, "ბაზის შეცდომა: თანხა არ ჩამოგეჭრა, სცადე ხელახლა.");
 		}
 		default:
 		{
-			Inv_Say(playerid, -10270721, "Acquisto non riuscito.");
+			Inv_Say(playerid, -10270721, "ყიდვა ვერ მოხერხდა.");
 		}
 	}
 	return 1;
@@ -1337,7 +1337,7 @@ public Inv_OnDBUndone(const opId[], result)
 		}
 		if (result != 1)
 		{
-			Inv_Say(p, -10270721, "Annullamento acquisto non riuscito: segnala il problema a un admin.");
+			Inv_Say(p, -10270721, "ყიდვის გაუქმება ვერ მოხერხდა: აცნობე ადმინისტრატორს.");
 		}
 		Inv_Reload(p);
 	}
@@ -1352,17 +1352,17 @@ bool:Inv_FridgeMove(playerid, houseId, direction, qty, fridgeCap)
 	}
 	if (qty < 1 || qty > 40)
 	{
-		Inv_Say(playerid, -10270721, "Quantita' non valida.");
+		Inv_Say(playerid, -10270721, "არასწორი რაოდენობა.");
 		return false;
 	}
 	if (direction == 1 && Inv_Count(playerid, 1) < qty)
 	{
-		Inv_Say(playerid, -10270721, "Non hai tutta quella spesa con te.");
+		Inv_Say(playerid, -10270721, "ამდენი პროდუქტი თან არ გაქვს.");
 		return false;
 	}
 	if (direction == 2 && Inv_Count(playerid, 1) + qty > 12)
 	{
-		SendClientMessage(playerid, -10270721, "Puoi portare al massimo %d porzioni.", 12);
+		SendClientMessage(playerid, -10270721, "მაქსიმუმ %d პორციის ტარება შეგიძლია.", 12);
 		return false;
 	}
 	Inv_BeginOp(playerid, 7, 1, qty, houseId);
@@ -1382,7 +1382,7 @@ public Inv_OnDBFridge(playerid, houseId, direction, qty, result)
 		gPlayer[playerid][pFridgeHouse] = houseId;
 		gPlayer[playerid][pFridgeDir] = direction;
 		gPlayer[playerid][pFridgeFoodBefore] = Inv_Count(playerid, 1);
-		Inv_Say(playerid, -10270721, "Errore database: verifico lo stato del frigo...");
+		Inv_Say(playerid, -10270721, "ბაზის შეცდომა: ვამოწმებ მაცივრის მდგომარეობას...");
 		Inv_Reload(playerid);
 		return 1;
 	}
@@ -1417,7 +1417,7 @@ public Inv_OnTick()
 		}
 		if (now - gPlayer[p][pInvGiveStartTick] >= 15000)
 		{
-			Inv_GiveCancel(p, "Scambio scaduto.");
+			Inv_GiveCancel(p, "გაცვლის დრო ამოიწურა.");
 		}
 	}
 	return 1;
@@ -1467,7 +1467,7 @@ Inv_OnPlayerDisconnect(playerid)
 	}
 	if (gPlayer[playerid][pInvGiveTo] != 0 && gPlayer[playerid][pInvOp] != 2)
 	{
-		Inv_GiveCancel(playerid, "Scambio annullato: il giocatore si e' scollegato.");
+		Inv_GiveCancel(playerid, "გაცვლა გაუქმდა: მოთამაშე გავიდა სერვერიდან.");
 	}
 	else if (gPlayer[playerid][pInvGiveTo] != 0)
 	{
@@ -1479,7 +1479,7 @@ Inv_OnPlayerDisconnect(playerid)
 		gPlayer[playerid][pInvGiveFrom] = 0;
 		if (Inv_ValidPlayer(giver) && gPlayer[giver][pInvGiveTo] == playerid + 1 && gPlayer[giver][pInvOp] != 2)
 		{
-			Inv_GiveCancel(giver, "Scambio annullato: il giocatore si e' scollegato.");
+			Inv_GiveCancel(giver, "გაცვლა გაუქმდა: მოთამაშე გავიდა სერვერიდან.");
 		}
 	}
 	if (gPlayer[playerid][pInvOpBusy] && gPlayer[playerid][pInvOp] == 7)

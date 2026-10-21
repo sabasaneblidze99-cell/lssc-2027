@@ -7,11 +7,11 @@ new bool:g_HsBusy[HOUSE_MAX];
 new bool:g_HsReady;
 new g_HsTickTimer;
 new g_HsSaveTimer;
-new s_HsTierName[4][12] = {
-	"Monolocale",
-	"Bilocale",
-	"Casa media",
-	"Villa"
+new s_HsTierName[4][40] = {
+	"ერთოთახიანი",
+	"ოროთახიანი",
+	"საშუალო სახლი",
+	"ვილა"
 };
 new s_HsFridgeCap[4] = {10, 16, 24, 40};
 new s_HsTierLevel[4] = {1, 2, 5, 10};
@@ -243,7 +243,7 @@ bool:House_CooldownBlocked(playerid)
 	new now = GetTickCount();
 	if (now - g_HPl[playerid][hpCmdTick] < 1500)
 	{
-		Util_Send(playerid, -10270721, "Attendi un attimo prima di usare un altro comando della casa.");
+		Util_Send(playerid, -10270721, "დაელოდე ცოტა, სანამ სახლის სხვა ბრძანებას გამოიყენებ.");
 		return true;
 	}
 	g_HPl[playerid][hpCmdTick] = now;
@@ -258,7 +258,7 @@ bool:House_CmdGuard(playerid, bool:needIdle)
 	}
 	if (!g_HsReady)
 	{
-		Util_Send(playerid, -10270721, "Il sistema case non e' disponibile al momento.");
+		Util_Send(playerid, -10270721, "სახლების სისტემა ახლა მიუწვდომელია.");
 		return false;
 	}
 	if (House_CooldownBlocked(playerid))
@@ -267,7 +267,7 @@ bool:House_CmdGuard(playerid, bool:needIdle)
 	}
 	if (needIdle && g_HPl[playerid][hpPendingOp] != 0)
 	{
-		Util_Send(playerid, -10270721, "Hai un'operazione della casa in corso: attendi.");
+		Util_Send(playerid, -10270721, "სახლის ოპერაცია მიმდინარეობს: დაელოდე.");
 		return false;
 	}
 	return true;
@@ -358,14 +358,14 @@ House_RefreshWorld(idx)
 	{
 		return 0;
 	}
-	new text[160], tier = House_Tier(idx), bool:free = g_HouseRows[idx][hrOwnerId] <= 0;
+	new text[480], tier = House_Tier(idx), bool:free = g_HouseRows[idx][hrOwnerId] <= 0;
 	if (free)
 	{
-		format(text, 160, "Casa %d - %s\nIn vendita: $%d (liv. %d)\nUsa /casa per info", g_HouseRows[idx][hrId], s_HsTierName[tier], g_HouseRows[idx][hrPrice], s_HsTierLevel[tier]);
+		format(text, 480, "სახლი %d - %s\nიყიდება: $%d (დონე %d)\nინფო: /casa", g_HouseRows[idx][hrId], s_HsTierName[tier], g_HouseRows[idx][hrPrice], s_HsTierLevel[tier]);
 	}
 	else
 	{
-		format(text, 160, "Casa %d - %s\nProprieta' di %s\n%s", g_HouseRows[idx][hrId], s_HsTierName[tier], g_HouseRows[idx][hrOwnerName], g_HouseRows[idx][hrLocked] ? "Chiusa a chiave (/bussa)" : "Aperta (/entra)");
+		format(text, 480, "სახლი %d - %s\nმფლობელი: %s\n%s", g_HouseRows[idx][hrId], s_HsTierName[tier], g_HouseRows[idx][hrOwnerName], g_HouseRows[idx][hrLocked] ? "ჩაკეტილია (/bussa)" : "ღიაა (/entra)");
 	}
 	new color = free ? 0x66DD66FF : -2994689;
 	if (g_HsLabel[idx] != INVALID_3DTEXT_ID)
@@ -495,11 +495,11 @@ House_HungerSet(playerid, value, bool:save)
 	{
 		if (old > 10 && value <= 10)
 		{
-			Util_Send(playerid, -10270721, "Sei debole per la fame: mangia qualcosa (/mangia, /usa, /compra).");
+			Util_Send(playerid, -10270721, "შიმშილისგან დასუსტდი: რამე ჭამე (/mangia, /usa, /compra).");
 		}
 		else if (old > 20 && value <= 20)
 		{
-			Util_Send(playerid, -2994689, "Hai fame: pensa a mangiare qualcosa.");
+			Util_Send(playerid, -2994689, "გშია: რამე ჭამე.");
 		}
 	}
 	if (save && g_HPl[playerid][hpHungerState] == 2 && gPlayer[playerid][pCharId] > 0)
@@ -538,7 +538,7 @@ bool:House_FoodReady(playerid)
 {
 	if (g_HPl[playerid][hpHungerState] != 2)
 	{
-		Util_Send(playerid, -10270721, "I tuoi dati sul cibo non sono ancora stati caricati: riprova tra poco.");
+		Util_Send(playerid, -10270721, "საკვების მონაცემები ჯერ არ ჩატვირთულა: სცადე ცოტა ხანში.");
 		return false;
 	}
 	return true;
@@ -555,15 +555,15 @@ House_NotifyBills(playerid)
 		}
 		if (g_HouseRows[i][hrBills] > 0)
 		{
-			SendClientMessage(playerid, -10270721, "Casa %d: hai %d bollette non pagate (/bollette).", g_HouseRows[i][hrId], g_HouseRows[i][hrBills]);
+			SendClientMessage(playerid, -10270721, "სახლი %d: %d გადაუხდელი კომუნალური გადასახადი გაქვს (/bollette).", g_HouseRows[i][hrId], g_HouseRows[i][hrBills]);
 		}
 		if (g_HouseRows[i][hrLuceCut])
 		{
-			SendClientMessage(playerid, -10270721, "Casa %d: la luce e' stata staccata per morosita'.", g_HouseRows[i][hrId]);
+			SendClientMessage(playerid, -10270721, "სახლი %d: ელექტროენერგია გადაუხდელობის გამო გაითიშა.", g_HouseRows[i][hrId]);
 		}
 		if (g_HouseRows[i][hrGasCut])
 		{
-			SendClientMessage(playerid, -10270721, "Casa %d: il gas e' stato staccato per morosita'.", g_HouseRows[i][hrId]);
+			SendClientMessage(playerid, -10270721, "სახლი %d: გაზი გადაუხდელობის გამო გაითიშა.", g_HouseRows[i][hrId]);
 		}
 	}
 }
@@ -599,11 +599,11 @@ House_UtilText(bool:on, bool:cut, out[], size)
 {
 	if (cut)
 	{
-		format(out, size, "STACCATA");
+		format(out, size, "გათიშულია");
 	}
 	else
 	{
-		format(out, size, "%s", on ? "ON" : "OFF");
+		format(out, size, "%s", on ? "ON" : "გამორთ.");
 	}
 }
 
@@ -676,7 +676,7 @@ public House_OnDBBillsLoaded(playerid, houseId, count)
 	if (count == -1 || idx == -1 || !House_PlayerOk(playerid))
 	{
 		g_HPl[playerid][hpBillsHouseId] = 0;
-		Util_Send(playerid, -10270721, "Impossibile leggere le bollette (errore database). Riprova piu' tardi.");
+		Util_Send(playerid, -10270721, "კომუნალურების წაკითხვა ვერ მოხერხდა (ბაზის შეცდომა). სცადე მოგვიანებით.");
 		return 1;
 	}
 	g_HPl[playerid][hpBillsHouseId] = houseId;
@@ -697,44 +697,44 @@ House_DoBuy(playerid, idx, payWithBank)
 {
 	if (g_HPl[playerid][hpPendingOp] != 0 || g_HsBusy[idx])
 	{
-		Util_Send(playerid, -10270721, "Operazione in corso: attendi.");
+		Util_Send(playerid, -10270721, "ოპერაცია მიმდინარეობს: დაელოდე.");
 		return 0;
 	}
 	if (House_FindNear(playerid) != idx || GetPlayerState(playerid) != PLAYER_STATE_ONFOOT)
 	{
-		Util_Send(playerid, -10270721, "Devi essere a piedi davanti alla porta della casa.");
+		Util_Send(playerid, -10270721, "ფეხით უნდა იდგე სახლის კართან.");
 		return 0;
 	}
 	if (g_HouseRows[idx][hrOwnerId] > 0)
 	{
-		Util_Send(playerid, -10270721, "Questa casa non e' in vendita.");
+		Util_Send(playerid, -10270721, "ეს სახლი არ იყიდება.");
 		return 0;
 	}
 	if (payWithBank != 0 && payWithBank != 1)
 	{
-		Util_Send(playerid, -10270721, "Metodo di pagamento non valido.");
+		Util_Send(playerid, -10270721, "გადახდის არასწორი მეთოდი.");
 		return 0;
 	}
 	new tier = House_Tier(idx), price = g_HouseRows[idx][hrPrice], level = gPlayer[playerid][pLevel], charId = gPlayer[playerid][pCharId];
 	if (price <= 0 || charId <= 0)
 	{
-		Util_Send(playerid, -10270721, "Acquisto non disponibile.");
+		Util_Send(playerid, -10270721, "შეძენა მიუწვდომელია.");
 		return 0;
 	}
 	if (level < s_HsTierLevel[tier])
 	{
-		SendClientMessage(playerid, -10270721, "Questa casa richiede il livello %d.", s_HsTierLevel[tier]);
+		SendClientMessage(playerid, -10270721, "ამ სახლისთვის საჭიროა %d დონე.", s_HsTierLevel[tier]);
 		return 0;
 	}
 	new maxHouses = House_MaxForLevel(level);
 	if (House_OwnedCount(charId) >= maxHouses)
 	{
-		SendClientMessage(playerid, -10270721, "Hai raggiunto il limite di case per il tuo livello (%d).", maxHouses);
+		SendClientMessage(playerid, -10270721, "შენი დონისთვის სახლების ლიმიტს მიაღწიე (%d).", maxHouses);
 		return 0;
 	}
 	if (payWithBank == 1 ? !Money_CanBank(playerid, price) : !Money_Can(playerid, price))
 	{
-		Util_Send(playerid, -10270721, "Fondi insufficienti con questo metodo di pagamento.");
+		Util_Send(playerid, -10270721, "ამ მეთოდით საკმარისი თანხა არ გაქვს.");
 		return 0;
 	}
 	g_HsBusy[idx] = true;
@@ -742,7 +742,7 @@ House_DoBuy(playerid, idx, payWithBank)
 	g_HPl[playerid][hpOpHouseId] = g_HouseRows[idx][hrId];
 	g_HPl[playerid][hpPayWithBank] = payWithBank;
 	g_HPl[playerid][hpOpAmount] = price;
-	Util_Send(playerid, -1, "Pratica di acquisto in corso...");
+	Util_Send(playerid, -1, "შეძენა ფორმდება...");
 	DB_BuyHouse(playerid, g_HouseRows[idx][hrId], charId, price, maxHouses);
 	return 0;
 }
@@ -771,12 +771,12 @@ public House_OnDBBought(playerid, houseId, affected)
 	}
 	if (affected == -1)
 	{
-		Util_Send(playerid, -10270721, "Acquisto non riuscito (errore database). Nessun addebito.");
+		Util_Send(playerid, -10270721, "შეძენა ვერ მოხერხდა (ბაზის შეცდომა). თანხა არ ჩამოიჭრა.");
 		return 1;
 	}
 	if (affected != 1 || idx == -1)
 	{
-		Util_Send(playerid, -10270721, "Acquisto non possibile: la casa non e' piu' disponibile o hai raggiunto il limite. Nessun addebito.");
+		Util_Send(playerid, -10270721, "შეძენა შეუძლებელია: სახლი აღარ არის ხელმისაწვდომი ან ლიმიტს მიაღწიე. თანხა არ ჩამოიჭრა.");
 		return 1;
 	}
 	new bool:ok = House_PlayerOk(playerid) && gPlayer[playerid][pLevel] >= s_HsTierLevel[House_Tier(idx)];
@@ -790,18 +790,18 @@ public House_OnDBBought(playerid, houseId, affected)
 		g_HPl[playerid][hpPendingOp] = 3;
 		g_HPl[playerid][hpOpHouseId] = houseId;
 		DB_SellHouse(playerid, houseId, charId);
-		Util_Send(playerid, -10270721, "Acquisto annullato: requisiti o fondi non piu' validi. Nessun addebito.");
+		Util_Send(playerid, -10270721, "შეძენა გაუქმდა: მოთხოვნები ან თანხა აღარ შეესაბამება. თანხა არ ჩამოიჭრა.");
 		return 1;
 	}
-	new name[25], msg[256];
-	GetPlayerName(playerid, name, 25);
+	new name[75], msg[256];
+	GetPlayerName(playerid, name, 75);
 	g_HouseRows[idx][hrOwnerId] = charId;
 	strmid(g_HouseRows[idx][hrOwnerName], name, 0, strlen(name), 25);
 	g_HouseRows[idx][hrPricePaid] = price;
 	House_ResetRowState(idx);
 	House_RefreshWorld(idx);
 	Char_Save(playerid);
-	SendClientMessage(playerid, 0x66DD66FF, "Hai acquistato la casa %d per $%d (%s). Usa /entra per entrare, /casa per gestirla.", houseId, price, bank == 1 ? "banca" : "contanti");
+	SendClientMessage(playerid, 0x66DD66FF, "იყიდე სახლი %d $%d-ად (%s). შესასვლელად /entra, სამართავად /casa.", houseId, price, bank == 1 ? "ბანკიდან" : "ნაღდით");
 	format(msg, 256, "ACQUISTO %s: casa %d $%d (%s)", name, houseId, price, bank == 1 ? "banca" : "contanti");
 	Log_Write("HOUSE", msg);
 	return 1;
@@ -817,41 +817,41 @@ House_DoSell(playerid, idx, bool:confirmed)
 {
 	if (g_HPl[playerid][hpPendingOp] != 0 || g_HsBusy[idx])
 	{
-		Util_Send(playerid, -10270721, "Operazione in corso: attendi.");
+		Util_Send(playerid, -10270721, "ოპერაცია მიმდინარეობს: დაელოდე.");
 		return 0;
 	}
 	if (g_HouseRows[idx][hrOwnerId] != gPlayer[playerid][pCharId])
 	{
-		Util_Send(playerid, -10270721, "Solo il proprietario puo' vendere la casa.");
+		Util_Send(playerid, -10270721, "სახლის გაყიდვა მხოლოდ მფლობელს შეუძლია.");
 		return 0;
 	}
 	if (House_Context(playerid) != idx)
 	{
-		Util_Send(playerid, -10270721, "Devi essere dentro la casa o davanti alla sua porta.");
+		Util_Send(playerid, -10270721, "სახლში ან მის კართან უნდა იყო.");
 		return 0;
 	}
 	if (g_HouseRows[idx][hrBills] > 0)
 	{
-		Util_Send(playerid, -10270721, "Non puoi vendere la casa con bollette non pagate (/bollette).");
+		Util_Send(playerid, -10270721, "გადაუხდელი კომუნალურებით სახლს ვერ გაყიდი (/bollette).");
 		return 0;
 	}
 	new refund = House_SellRefund(idx);
 	if (refund <= 0 || refund > Money_BankRoom(playerid))
 	{
-		Util_Send(playerid, -10270721, "Il tuo conto bancario non puo' ricevere l'importo: vendita rifiutata.");
+		Util_Send(playerid, -10270721, "შენი საბანკო ანგარიში თანხას ვერ მიიღებს: გაყიდვა უარყოფილია.");
 		return 0;
 	}
 	if (!confirmed)
 	{
-		SendClientMessage(playerid, -2994689, "Vendita casa %d: ricevi $%d (%d%%) in banca. Utenze, chiavi e frigo vengono azzerati.", g_HouseRows[idx][hrId], refund, 70);
-		Util_Send(playerid, 0x99CCFFFF, "Per confermare: /casa vendi conferma");
+		SendClientMessage(playerid, -2994689, "სახლის %d გაყიდვა: ბანკში მიიღებ $%d-ს (%d%%). კომუნალურები, გასაღებები და მაცივარი განულდება.", g_HouseRows[idx][hrId], refund, 70);
+		Util_Send(playerid, 0x99CCFFFF, "დასადასტურებლად: /casa vendi conferma");
 		return 0;
 	}
 	g_HsBusy[idx] = true;
 	g_HPl[playerid][hpPendingOp] = 2;
 	g_HPl[playerid][hpOpHouseId] = g_HouseRows[idx][hrId];
 	g_HPl[playerid][hpOpAmount] = refund;
-	Util_Send(playerid, -1, "Vendita in corso...");
+	Util_Send(playerid, -1, "მიმდინარეობს გაყიდვა...");
 	DB_SellHouse(playerid, g_HouseRows[idx][hrId], gPlayer[playerid][pCharId]);
 	return 0;
 }
@@ -894,31 +894,31 @@ public House_OnDBSold(playerid, houseId, affected)
 	}
 	if (affected == -1)
 	{
-		Util_Send(playerid, -10270721, "Vendita non riuscita (errore database). Nessun accredito.");
+		Util_Send(playerid, -10270721, "გაყიდვა ვერ მოხერხდა (ბაზის შეცდომა). თანხა არ ჩაირიცხა.");
 		return 1;
 	}
 	if (affected != 1 || idx == -1)
 	{
-		Util_Send(playerid, -10270721, "Vendita non eseguita: la casa non risulta piu' di tua proprieta'. Nessun accredito.");
+		Util_Send(playerid, -10270721, "გაყიდვა არ შესრულდა: სახლი აღარ არის შენი. თანხა არ ჩაირიცხა.");
 		return 1;
 	}
 	if (!Money_GiveBank(playerid, refund, "refund", ""))
 	{
 		DB_RestoreSoldHouse(houseId, charId, g_HouseRows[idx][hrPricePaid]);
-		Util_Send(playerid, -10270721, "Vendita annullata: il conto bancario non puo' ricevere l'importo. Nessun accredito.");
+		Util_Send(playerid, -10270721, "გაყიდვა გაუქმდა: საბანკო ანგარიში თანხას ვერ მიიღებს. თანხა არ ჩაირიცხა.");
 		Log_Write("HOUSE", "vendita annullata: accredito impossibile, proprieta' ripristinata");
 		return 1;
 	}
-	House_EvictAll(idx, "La casa e' stata venduta: sei stato portato fuori.");
+	House_EvictAll(idx, "სახლი გაიყიდა: გარეთ გაგიყვანეს.");
 	g_HouseRows[idx][hrOwnerId] = 0;
 	g_HouseRows[idx][hrOwnerName][0] = 0;
 	g_HouseRows[idx][hrPricePaid] = 0;
 	House_ResetRowState(idx);
 	House_RefreshWorld(idx);
 	Char_Save(playerid);
-	new name[25], msg[256];
-	GetPlayerName(playerid, name, 25);
-	SendClientMessage(playerid, 0x66DD66FF, "Hai venduto la casa %d: $%d accreditati in banca.", houseId, refund);
+	new name[75], msg[256];
+	GetPlayerName(playerid, name, 75);
+	SendClientMessage(playerid, 0x66DD66FF, "გაყიდე სახლი %d: $%d ჩაირიცხა ბანკში.", houseId, refund);
 	format(msg, 256, "VENDITA %s: casa %d rimborso $%d", name, houseId, refund);
 	Log_Write("HOUSE", msg);
 	return 1;
@@ -928,18 +928,18 @@ House_ToggleLock(playerid, idx)
 {
 	if (g_HouseRows[idx][hrOwnerId] != gPlayer[playerid][pCharId])
 	{
-		Util_Send(playerid, -10270721, "Solo il proprietario puo' usare la serratura.");
+		Util_Send(playerid, -10270721, "საკეტის გამოყენება მხოლოდ მფლობელს შეუძლია.");
 		return 0;
 	}
 	if (House_Context(playerid) != idx)
 	{
-		Util_Send(playerid, -10270721, "Devi essere dentro la casa o davanti alla sua porta.");
+		Util_Send(playerid, -10270721, "სახლში ან მის კართან უნდა იყო.");
 		return 0;
 	}
 	g_HouseRows[idx][hrLocked] = !g_HouseRows[idx][hrLocked];
 	DB_SetHouseLock(g_HouseRows[idx][hrId], g_HouseRows[idx][hrOwnerId], bool:g_HouseRows[idx][hrLocked]);
 	House_RefreshWorld(idx);
-	SendClientMessage(playerid, 0x66DD66FF, "Porta della casa %d: %s.", g_HouseRows[idx][hrId], g_HouseRows[idx][hrLocked] ? "chiusa a chiave" : "aperta");
+	SendClientMessage(playerid, 0x66DD66FF, "სახლის %d კარი: %s.", g_HouseRows[idx][hrId], g_HouseRows[idx][hrLocked] ? "ჩაკეტილია" : "ღიაა");
 	return 0;
 }
 
@@ -947,19 +947,19 @@ bool:House_SetUtility(playerid, idx, utility, bool:on)
 {
 	if (House_FindInside(playerid) != idx)
 	{
-		Util_Send(playerid, -10270721, "Devi essere dentro la casa.");
+		Util_Send(playerid, -10270721, "სახლში უნდა იყო.");
 		return false;
 	}
 	new role = House_Role(idx, playerid);
 	if (role != 1 && !(utility == 0 && role == 2))
 	{
-		Util_Send(playerid, -10270721, utility == 1 ? "Solo il proprietario puo' gestire il gas." : "Non hai accesso alle utenze di questa casa.");
+		Util_Send(playerid, -10270721, utility == 1 ? "გაზს მხოლოდ მფლობელი მართავს." : "ამ სახლის კომუნალურებზე წვდომა არ გაქვს.");
 		return false;
 	}
 	new bool:cut = bool:(utility == 1 ? g_HouseRows[idx][hrGasCut] : g_HouseRows[idx][hrLuceCut]);
 	if (cut)
 	{
-		Util_Send(playerid, -10270721, "Utenza staccata per morosita': paga le bollette (/bollette).");
+		Util_Send(playerid, -10270721, "გადაუხდელობის გამო გათიშულია: გადაიხადე კომუნალური (/bollette).");
 		return false;
 	}
 	if (utility == 1)
@@ -972,7 +972,7 @@ bool:House_SetUtility(playerid, idx, utility, bool:on)
 	}
 	DB_SetUtility(g_HouseRows[idx][hrId], gPlayer[playerid][pCharId], utility, on);
 	House_RefreshInside(idx);
-	SendClientMessage(playerid, 0x66DD66FF, "%s %s.", utility == 1 ? "Gas" : "Luce", utility == 1 ? (on ? "acceso" : "spento") : (on ? "accesa" : "spenta"));
+	SendClientMessage(playerid, 0x66DD66FF, "%s %s.", utility == 1 ? "გაზი" : "შუქი", on ? "ჩართულია" : "გამორთულია");
 	return true;
 }
 
@@ -985,7 +985,7 @@ House_CmdToggleUtility(playerid, utility)
 	new idx = House_FindInside(playerid);
 	if (idx == -1)
 	{
-		Util_Send(playerid, -10270721, "Devi essere dentro una casa.");
+		Util_Send(playerid, -10270721, "სახლში უნდა იყო.");
 		return 0;
 	}
 	new bool:cur = bool:(utility == 1 ? g_HouseRows[idx][hrGasOn] : g_HouseRows[idx][hrLuceOn]);
@@ -1016,12 +1016,12 @@ House_FoodContext(playerid)
 	new idx = House_FindInside(playerid);
 	if (idx == -1)
 	{
-		Util_Send(playerid, -10270721, "Devi essere dentro la tua casa (o di un amico che ti ha dato la chiave).");
+		Util_Send(playerid, -10270721, "შენს სახლში უნდა იყო (ან მეგობრისაში, რომელმაც გასაღები მოგცა).");
 		return -1;
 	}
 	if (!House_HasAccess(idx, playerid))
 	{
-		Util_Send(playerid, -10270721, "Non puoi usare il frigo di questa casa.");
+		Util_Send(playerid, -10270721, "ამ სახლის მაცივარს ვერ გამოიყენებ.");
 		return -1;
 	}
 	return idx;
@@ -1036,23 +1036,23 @@ House_EatCold(playerid)
 	}
 	if (g_HsFridgeBusy[idx])
 	{
-		Util_Send(playerid, -10270721, "Qualcuno sta usando il frigo: attendi un attimo.");
+		Util_Send(playerid, -10270721, "მაცივარს ვიღაც იყენებს: ცოტა დაელოდე.");
 		return 0;
 	}
 	if (g_HouseRows[idx][hrFridgeUnits] <= 0)
 	{
-		Util_Send(playerid, -10270721, "Il frigo e' vuoto.");
+		Util_Send(playerid, -10270721, "მაცივარი ცარიელია.");
 		return 0;
 	}
 	if (g_HPl[playerid][hpHunger] >= 100)
 	{
-		Util_Send(playerid, -10270721, "Non hai fame.");
+		Util_Send(playerid, -10270721, "არ გშია.");
 		return 0;
 	}
 	g_HouseRows[idx][hrFridgeUnits]--;
 	House_FridgeChanged(playerid, idx, -1);
 	House_HungerSet(playerid, g_HPl[playerid][hpHunger] + 25, true);
-	SendClientMessage(playerid, 0x66DD66FF, "Mangi qualcosa di freddo dal frigo. Sazieta': %d%%.", g_HPl[playerid][hpHunger]);
+	SendClientMessage(playerid, 0x66DD66FF, "მაცივრიდან რაღაც ცივს ჭამ. სიმაძღრე: %d%%.", g_HPl[playerid][hpHunger]);
 	return 0;
 }
 
@@ -1065,28 +1065,28 @@ House_StartCook(playerid)
 	}
 	if (g_HPl[playerid][hpCooking])
 	{
-		Util_Send(playerid, -10270721, "Stai gia' cucinando.");
+		Util_Send(playerid, -10270721, "უკვე ამზადებ საჭმელს.");
 		return 0;
 	}
 	if (g_HPl[playerid][hpCookCooldown] != 0 && g_HPl[playerid][hpCookCooldown] - GetTickCount() > 0)
 	{
-		Util_Send(playerid, -10270721, "Hai gia' un piatto caldo pronto: usa /mangia.");
+		Util_Send(playerid, -10270721, "ცხელი კერძი უკვე მზადაა: გამოიყენე /mangia.");
 		return 0;
 	}
 	if (!House_GasOn(idx))
 	{
-		Util_Send(playerid, -10270721, "Il gas non e' attivo: non puoi cucinare.");
+		Util_Send(playerid, -10270721, "გაზი არ მუშაობს: საჭმელს ვერ მოამზადებ.");
 		return 0;
 	}
 	if (g_HouseRows[idx][hrFridgeUnits] <= 0)
 	{
-		Util_Send(playerid, -10270721, "Il frigo e' vuoto.");
+		Util_Send(playerid, -10270721, "მაცივარი ცარიელია.");
 		return 0;
 	}
 	g_HPl[playerid][hpCooking] = 1;
 	g_HPl[playerid][hpCookHouseId] = g_HouseRows[idx][hrId];
 	SetTimerEx("House_OnCookDone", 6000, false, "dd", playerid, g_HPl[playerid][hpSession]);
-	Util_Send(playerid, -1, "Inizi a cucinare...");
+	Util_Send(playerid, -1, "საჭმლის მომზადებას იწყებ...");
 	return 0;
 }
 
@@ -1104,7 +1104,7 @@ public House_OnCookDone(playerid, session)
 	new idx = House_FindInside(playerid);
 	if (idx == -1 || g_HouseRows[idx][hrId] != g_HPl[playerid][hpCookHouseId] || !House_PlayerOk(playerid) || !House_GasOn(idx) || g_HouseRows[idx][hrFridgeUnits] <= 0 || g_HsFridgeBusy[idx])
 	{
-		Util_Send(playerid, -10270721, "Cottura annullata.");
+		Util_Send(playerid, -10270721, "მომზადება გაუქმდა.");
 		return 1;
 	}
 	g_HouseRows[idx][hrFridgeUnits]--;
@@ -1114,7 +1114,7 @@ public House_OnCookDone(playerid, session)
 	{
 		g_HPl[playerid][hpCookCooldown] = 1;
 	}
-	SendClientMessage(playerid, 0x66DD66FF, "Il piatto e' pronto: usa /mangia entro %d minuti.", 5);
+	SendClientMessage(playerid, 0x66DD66FF, "კერძი მზადაა: გამოიყენე /mangia %d წუთში.", 5);
 	return 1;
 }
 
@@ -1127,12 +1127,12 @@ House_EatPlate(playerid)
 	if (g_HPl[playerid][hpCookCooldown] == 0 || g_HPl[playerid][hpCookCooldown] - GetTickCount() <= 0)
 	{
 		g_HPl[playerid][hpCookCooldown] = 0;
-		Util_Send(playerid, -10270721, "Non hai un piatto caldo pronto. Usa /cucina in casa oppure /mangia freddo.");
+		Util_Send(playerid, -10270721, "ცხელი კერძი არ გაქვს. გამოიყენე /cucina სახლში ან /mangia freddo.");
 		return 0;
 	}
 	if (g_HPl[playerid][hpHunger] >= 100)
 	{
-		Util_Send(playerid, -10270721, "Non hai fame.");
+		Util_Send(playerid, -10270721, "არ გშია.");
 		return 0;
 	}
 	g_HPl[playerid][hpCookCooldown] = 0;
@@ -1145,7 +1145,7 @@ House_EatPlate(playerid)
 		hp = 100.0;
 	}
 	SetPlayerHealth(playerid, hp);
-	SendClientMessage(playerid, 0x66DD66FF, "Mangi il piatto caldo. Sazieta': %d%%.", g_HPl[playerid][hpHunger]);
+	SendClientMessage(playerid, 0x66DD66FF, "ცხელ კერძს ჭამ. სიმაძღრე: %d%%.", g_HPl[playerid][hpHunger]);
 	return 0;
 }
 
@@ -1154,23 +1154,23 @@ House_Store(playerid, n)
 	new idx = House_FindInside(playerid);
 	if (idx == -1 || g_HouseRows[idx][hrOwnerId] != gPlayer[playerid][pCharId])
 	{
-		Util_Send(playerid, -10270721, "Puoi riporre la spesa solo nel frigo di casa tua.");
+		Util_Send(playerid, -10270721, "პროდუქტების შენახვა მხოლოდ შენი სახლის მაცივარში შეგიძლია.");
 		return 0;
 	}
 	if (g_HsFridgeBusy[idx])
 	{
-		Util_Send(playerid, -10270721, "Qualcuno sta usando il frigo: attendi un attimo.");
+		Util_Send(playerid, -10270721, "მაცივარს ვიღაც იყენებს: ცოტა დაელოდე.");
 		return 0;
 	}
 	if (n < 1 || n > Inv_Count(playerid, 1))
 	{
-		Util_Send(playerid, -10270721, "Non hai tutta quella spesa con te.");
+		Util_Send(playerid, -10270721, "ამდენი პროდუქტი თან არ გაქვს.");
 		return 0;
 	}
 	new cap = House_FridgeCap(idx);
 	if (g_HouseRows[idx][hrFridgeUnits] + n > cap)
 	{
-		SendClientMessage(playerid, -10270721, "Nel frigo c'e' posto solo per altre %d porzioni.", cap - g_HouseRows[idx][hrFridgeUnits]);
+		SendClientMessage(playerid, -10270721, "მაცივარში კიდევ მხოლოდ %d ულუფის ადგილია.", cap - g_HouseRows[idx][hrFridgeUnits]);
 		return 0;
 	}
 	g_HsFridgeBusy[idx] = true;
@@ -1190,17 +1190,17 @@ House_Take(playerid, n)
 	}
 	if (g_HsFridgeBusy[idx])
 	{
-		Util_Send(playerid, -10270721, "Qualcuno sta usando il frigo: attendi un attimo.");
+		Util_Send(playerid, -10270721, "მაცივარს ვიღაც იყენებს: ცოტა დაელოდე.");
 		return 0;
 	}
 	if (n < 1 || n > g_HouseRows[idx][hrFridgeUnits])
 	{
-		Util_Send(playerid, -10270721, "Non ci sono tante porzioni nel frigo.");
+		Util_Send(playerid, -10270721, "მაცივარში ამდენი ულუფა არ არის.");
 		return 0;
 	}
 	if (Inv_Count(playerid, 1) + n > 12)
 	{
-		SendClientMessage(playerid, -10270721, "Puoi portare al massimo %d porzioni.", 12);
+		SendClientMessage(playerid, -10270721, "თან მაქსიმუმ %d ულუფის ტარება შეგიძლია.", 12);
 		return 0;
 	}
 	g_HsFridgeBusy[idx] = true;
@@ -1238,11 +1238,11 @@ public House_InvFridgeResult(playerid, houseId, direction, qty, result)
 			House_RefreshInside(idx);
 			if (direction == 1)
 			{
-				SendClientMessage(playerid, 0x66DD66FF, "Hai riposto %d porzioni nel frigo (%d/%d).", qty, g_HouseRows[idx][hrFridgeUnits], House_FridgeCap(idx));
+				SendClientMessage(playerid, 0x66DD66FF, "მაცივარში ჩადე %d ულუფა (%d/%d).", qty, g_HouseRows[idx][hrFridgeUnits], House_FridgeCap(idx));
 			}
 			else
 			{
-				SendClientMessage(playerid, 0x66DD66FF, "Hai preso %d porzioni dal frigo (max %d con te).", qty, 12);
+				SendClientMessage(playerid, 0x66DD66FF, "მაცივრიდან აიღე %d ულუფა (თან მაქს. %d).", qty, 12);
 			}
 			if (House_FindInside(playerid) == idx)
 			{
@@ -1251,27 +1251,27 @@ public House_InvFridgeResult(playerid, houseId, direction, qty, result)
 		}
 		case 2:
 		{
-			Util_Send(playerid, -10270721, "Non hai abbastanza spazio nell'inventario (o hai gia' il massimo di porzioni).");
+			Util_Send(playerid, -10270721, "ინვენტარში ადგილი არ გაქვს (ან ულუფების მაქსიმუმი უკვე გაქვს).");
 		}
 		case 3:
 		{
-			Util_Send(playerid, -10270721, direction == 1 ? "Non hai tutta quella spesa con te." : "Non ci sono tante porzioni nel frigo.");
+			Util_Send(playerid, -10270721, direction == 1 ? "ამდენი პროდუქტი თან არ გაქვს." : "მაცივარში ამდენი ულუფა არ არის.");
 		}
 		case 6:
 		{
-			Util_Send(playerid, -10270721, "Il frigo non ha abbastanza posto.");
+			Util_Send(playerid, -10270721, "მაცივარში საკმარისი ადგილი არ არის.");
 		}
 		case 4:
 		{
-			Util_Send(playerid, -10270721, "Non puoi usare il frigo di questa casa.");
+			Util_Send(playerid, -10270721, "ამ სახლის მაცივარს ვერ გამოიყენებ.");
 		}
 		case -1:
 		{
-			Util_Send(playerid, -10270721, "Errore database: stato del frigo non verificabile, riprova piu' tardi.");
+			Util_Send(playerid, -10270721, "ბაზის შეცდომა: მაცივრის მდგომარეობა ვერ შემოწმდა, სცადე მოგვიანებით.");
 		}
 		default:
 		{
-			Util_Send(playerid, -10270721, "Impossibile spostare le porzioni.");
+			Util_Send(playerid, -10270721, "ულუფების გადატანა ვერ მოხერხდა.");
 		}
 	}
 	return 1;
@@ -1341,29 +1341,29 @@ House_CmdFrigo(playerid, const params[])
 	{
 		return 0;
 	}
-	new pos = 0, sub[32], arg[32], n = 0;
-	Util_NextToken(params, pos, sub, 32);
+	new pos = 0, sub[96], arg[96], n = 0;
+	Util_NextToken(params, pos, sub, 96);
 	if (sub[0] == 0)
 	{
-		SendClientMessage(playerid, -1, "Frigo: %d/%d porzioni (con te: %d/%d).", g_HouseRows[idx][hrFridgeUnits], House_FridgeCap(idx), Inv_Count(playerid, 1), 12);
+		SendClientMessage(playerid, -1, "მაცივარი: %d/%d ულუფა (თან: %d/%d).", g_HouseRows[idx][hrFridgeUnits], House_FridgeCap(idx), Inv_Count(playerid, 1), 12);
 		if (!House_LightOn(idx))
 		{
-			Util_Send(playerid, -10270721, "Luce spenta: il frigo non raffredda e le scorte si deteriorano.");
+			Util_Send(playerid, -10270721, "შუქი გამორთულია: მაცივარი არ აცივებს და მარაგი ფუჭდება.");
 		}
-		Util_Send(playerid, 0x99CCFFFF, "Uso: /frigo metti [n] (solo proprietario) · /frigo prendi [n] (proprietario o ospite)");
+		Util_Send(playerid, 0x99CCFFFF, "გამოყენება: /frigo metti [n] (მხოლოდ მფლობელი) · /frigo prendi [n] (მფლობელი ან სტუმარი)");
 		return 0;
 	}
 	new bool:store = !strcmp(sub, "metti", true, 0x7FFFFFFF);
 	if (!store && strcmp(sub, "prendi", true, 0x7FFFFFFF))
 	{
-		Util_Send(playerid, 0x99CCFFFF, "Uso: /frigo metti [n] · /frigo prendi [n]");
+		Util_Send(playerid, 0x99CCFFFF, "გამოყენება: /frigo metti [n] · /frigo prendi [n]");
 		return 0;
 	}
-	Util_NextToken(params, pos, arg, 32);
+	Util_NextToken(params, pos, arg, 96);
 	n = 1;
 	if (arg[0] != 0 && (!Util_ParseInt(arg, n) || n < 1 || n > 40))
 	{
-		Util_Send(playerid, -10270721, "Quantita' non valida.");
+		Util_Send(playerid, -10270721, "არასწორი რაოდენობა.");
 		return 0;
 	}
 	if (store)
@@ -1383,8 +1383,8 @@ House_CmdMangia(playerid, const params[])
 	{
 		return 0;
 	}
-	new pos = 0, sub[32];
-	Util_NextToken(params, pos, sub, 32);
+	new pos = 0, sub[96];
+	Util_NextToken(params, pos, sub, 96);
 	if (sub[0] == 0)
 	{
 		House_EatPlate(playerid);
@@ -1395,7 +1395,7 @@ House_CmdMangia(playerid, const params[])
 		House_EatCold(playerid);
 		return 0;
 	}
-	Util_Send(playerid, 0x99CCFFFF, "Uso: /mangia (piatto caldo dopo /cucina) · /mangia freddo");
+	Util_Send(playerid, 0x99CCFFFF, "გამოყენება: /mangia (ცხელი კერძი /cucina-ს შემდეგ) · /mangia freddo");
 	return 0;
 }
 
@@ -1417,16 +1417,16 @@ House_CmdCompra(playerid, const params[])
 	}
 	if (!House_NearShop(playerid))
 	{
-		Util_Send(playerid, -10270721, "Devi essere in un supermercato.");
+		Util_Send(playerid, -10270721, "სუპერმარკეტში უნდა იყო.");
 		return 0;
 	}
 	if (GetPlayerState(playerid) != PLAYER_STATE_ONFOOT)
 	{
-		Util_Send(playerid, -10270721, "Scendi dal veicolo.");
+		Util_Send(playerid, -10270721, "ჩამოდი მანქანიდან.");
 		return 0;
 	}
-	new pos = 0, sub[32], arg[32], n = 1;
-	Util_NextToken(params, pos, sub, 32);
+	new pos = 0, sub[96], arg[96], n = 1;
+	Util_NextToken(params, pos, sub, 96);
 	if (sub[0] == 0)
 	{
 		Inv_ShopList(playerid);
@@ -1442,10 +1442,10 @@ House_CmdCompra(playerid, const params[])
 		Inv_ShopList(playerid);
 		return 0;
 	}
-	Util_NextToken(params, pos, arg, 32);
+	Util_NextToken(params, pos, arg, 96);
 	if (arg[0] != 0 && (!Util_ParseInt(arg, n) || n < 1 || n > 12))
 	{
-		Util_Send(playerid, -10270721, "Quantita' non valida.");
+		Util_Send(playerid, -10270721, "არასწორი რაოდენობა.");
 		return 0;
 	}
 	Inv_Buy(playerid, itemId, n);
@@ -1499,7 +1499,7 @@ public House_OnDBBillAdded(houseId, kind, billId, amount)
 	new owner = House_OwnerPlayer(idx);
 	if (owner != 65535 && Util_IsPlaying(owner))
 	{
-		SendClientMessage(owner, -2994689, "Casa %d: nuova bolletta %s di $%d (/bollette).", houseId, kind == 1 ? "del gas" : "della luce", amount);
+		SendClientMessage(owner, -2994689, "სახლი %d: ახალი გადასახადი %s, $%d (/bollette).", houseId, kind == 1 ? "გაზის" : "შუქის", amount);
 	}
 	return 1;
 }
@@ -1530,7 +1530,7 @@ House_CutUtil(idx, kind)
 	new owner = House_OwnerPlayer(idx);
 	if (owner != 65535)
 	{
-		SendClientMessage(owner, -10270721, "Casa %d: %s staccat%s per bollette non pagate. Paga con /bollette (+$%d di riattivazione).", id, kind == 1 ? "il gas" : "la luce", kind == 1 ? "o" : "a", 40);
+		SendClientMessage(owner, -10270721, "სახლი %d: %s გაითიშა%s გადაუხდელი გადასახადების გამო. გადაიხადე /bollette (+$%d აღდგენა).", id, kind == 1 ? "გაზი" : "შუქი", "", 40);
 	}
 	new msg[256];
 	format(msg, 256, "DISTACCO casa %d: %s", id, kind == 1 ? "gas" : "luce");
@@ -1586,17 +1586,17 @@ public UI_OnHouseBillsPayAll(playerid, houseId, payWithBank)
 	new idx = House_Find(houseId);
 	if (idx == -1 || g_HouseRows[idx][hrOwnerId] != gPlayer[playerid][pCharId])
 	{
-		Util_Send(playerid, -10270721, "Solo il proprietario puo' pagare le bollette.");
+		Util_Send(playerid, -10270721, "კომუნალურის გადახდა მხოლოდ მფლობელს შეუძლია.");
 		return 1;
 	}
 	if (g_HPl[playerid][hpPendingOp] != 0)
 	{
-		Util_Send(playerid, -10270721, "Operazione in corso: attendi.");
+		Util_Send(playerid, -10270721, "ოპერაცია მიმდინარეობს: დაელოდე.");
 		return 1;
 	}
 	if (g_HPl[playerid][hpBillsHouseId] != houseId)
 	{
-		Util_Send(playerid, -10270721, "Riapri /bollette per aggiornare l'elenco.");
+		Util_Send(playerid, -10270721, "სიის გასაახლებლად ხელახლა გახსენი /bollette.");
 		return 1;
 	}
 	if (payWithBank != 0 && payWithBank != 1)
@@ -1617,19 +1617,19 @@ public UI_OnHouseBillsPayAll(playerid, houseId, payWithBank)
 	}
 	if (mask == 0 || total <= 0)
 	{
-		Util_Send(playerid, 0x66DD66FF, "Nessuna bolletta da pagare.");
+		Util_Send(playerid, 0x66DD66FF, "გადასახდელი არაფერია.");
 		return 1;
 	}
 	if (payWithBank == 1 ? !Money_CanBank(playerid, total) : !Money_Can(playerid, total))
 	{
-		Util_Send(playerid, -10270721, "Fondi insufficienti con questo metodo di pagamento.");
+		Util_Send(playerid, -10270721, "ამ მეთოდით საკმარისი თანხა არ გაქვს.");
 		return 1;
 	}
 	g_HPl[playerid][hpPendingOp] = 4;
 	g_HPl[playerid][hpPayWithBank] = payWithBank;
 	g_HPl[playerid][hpBillKindMask] = mask;
 	g_HPl[playerid][hpBillPaidTotal] = 0;
-	Util_Send(playerid, -1, "Pagamento in corso...");
+	Util_Send(playerid, -1, "მიმდინარეობს გადახდა...");
 	House_PayNext(playerid);
 	return 1;
 }
@@ -1650,7 +1650,7 @@ public House_OnDBBillsPaid(playerid, houseId, kind, paidAmount, restored)
 	{
 		g_HPl[playerid][hpPendingOp] = 0;
 		g_HPl[playerid][hpBillsHouseId] = 0;
-		Util_Send(playerid, -10270721, "Pagamento non riuscito (errore database). Verifica lo stato con /bollette.");
+		Util_Send(playerid, -10270721, "გადახდა ვერ მოხერხდა (ბაზის შეცდომა). შეამოწმე /bollette-ით.");
 		Log_Write("HOUSE", "pagamento bollette: errore database (verificare lo stato delle bollette della casa)");
 		return 1;
 	}
@@ -1658,7 +1658,7 @@ public House_OnDBBillsPaid(playerid, houseId, kind, paidAmount, restored)
 	{
 		g_HPl[playerid][hpPendingOp] = 0;
 		g_HPl[playerid][hpBillsHouseId] = 0;
-		Util_Send(playerid, -10270721, "Le bollette sono cambiate o non risultano piu' dovute: riapri /bollette. Nessun addebito per questa utenza.");
+		Util_Send(playerid, -10270721, "გადასახადები შეიცვალა ან აღარ არის გადასახდელი: ხელახლა გახსენი /bollette. ამ კომუნალურზე თანხა არ ჩამოიჭრა.");
 		return 1;
 	}
 	new fee = restored != 0 ? 40 : 0, amount = paidAmount + fee, cnt = 0;
@@ -1675,7 +1675,7 @@ public House_OnDBBillsPaid(playerid, houseId, kind, paidAmount, restored)
 		}
 		g_HPl[playerid][hpPendingOp] = 0;
 		g_HPl[playerid][hpBillsHouseId] = 0;
-		Util_Send(playerid, -10270721, "Fondi insufficienti: pagamento annullato per questa utenza.");
+		Util_Send(playerid, -10270721, "თანხა არ კმარა: ამ კომუნალურის გადახდა გაუქმდა.");
 		return 1;
 	}
 	g_HouseRows[idx][hrBills] = max(g_HouseRows[idx][hrBills] - cnt, 0);
@@ -1695,8 +1695,8 @@ public House_OnDBBillsPaid(playerid, houseId, kind, paidAmount, restored)
 	}
 	Char_Save(playerid);
 	g_HPl[playerid][hpBillPaidTotal] += amount;
-	new msg[256], name[25];
-	GetPlayerName(playerid, name, 25);
+	new msg[256], name[75];
+	GetPlayerName(playerid, name, 75);
 	format(msg, 256, "BOLLETTE %s: casa %d %s $%d%s (%s)", name, houseId, kind == 1 ? "gas" : "luce", amount, restored != 0 ? " con riattivazione" : "", bank == 1 ? "banca" : "contanti");
 	Log_Write("HOUSE", msg);
 	g_HPl[playerid][hpBillKindMask] &= ~(1 << kind);
@@ -1707,7 +1707,7 @@ public House_OnDBBillsPaid(playerid, houseId, kind, paidAmount, restored)
 	}
 	g_HPl[playerid][hpPendingOp] = 0;
 	g_HPl[playerid][hpBillsHouseId] = 0;
-	SendClientMessage(playerid, 0x66DD66FF, "Bollette pagate: $%d addebitati (%s).", g_HPl[playerid][hpBillPaidTotal], bank == 1 ? "banca" : "contanti");
+	SendClientMessage(playerid, 0x66DD66FF, "გადასახადები გადახდილია: ჩამოიჭრა $%d (%s).", g_HPl[playerid][hpBillPaidTotal], bank == 1 ? "ბანკიდან" : "ნაღდით");
 	return 1;
 }
 
@@ -1731,12 +1731,12 @@ House_CmdBollette(playerid)
 		}
 		if (n == 0)
 		{
-			Util_Send(playerid, -10270721, "Non possiedi nessuna casa.");
+			Util_Send(playerid, -10270721, "სახლი არ გაქვს.");
 			return 0;
 		}
 		if (n > 1)
 		{
-			Util_Send(playerid, -10270721, "Possiedi piu' case: entra o avvicinati alla porta di quella interessata.");
+			Util_Send(playerid, -10270721, "რამდენიმე სახლი გაქვს: შედი სასურველში ან მის კართან მიდი.");
 			return 0;
 		}
 		idx = found;
@@ -1750,7 +1750,7 @@ House_KeyContext(playerid)
 	new idx = House_Context(playerid);
 	if (idx == -1 || g_HouseRows[idx][hrOwnerId] != gPlayer[playerid][pCharId])
 	{
-		Util_Send(playerid, -10270721, "Devi essere il proprietario, dentro la casa o davanti alla sua porta.");
+		Util_Send(playerid, -10270721, "უნდა იყო მფლობელი და იმყოფებოდე სახლში ან მის კართან.");
 		return -1;
 	}
 	return idx;
@@ -1765,22 +1765,22 @@ House_GiveKey(playerid, const token[])
 	}
 	if (!Util_ParsePlayerId(token, target) || !Util_IsPlaying(target) || target == playerid || gPlayer[target][pCharId] <= 0)
 	{
-		Util_Send(playerid, -10270721, "Giocatore non valido.");
+		Util_Send(playerid, -10270721, "არასწორი მოთამაშე.");
 		return 0;
 	}
 	if (!Util_InRange(playerid, target, 3.0))
 	{
-		Util_Send(playerid, -10270721, "Il giocatore e' troppo lontano.");
+		Util_Send(playerid, -10270721, "მოთამაშე ძალიან შორსაა.");
 		return 0;
 	}
 	if (House_IsGuest(idx, gPlayer[target][pCharId]))
 	{
-		Util_Send(playerid, -10270721, "Quel giocatore ha gia' una chiave.");
+		Util_Send(playerid, -10270721, "ამ მოთამაშეს უკვე აქვს გასაღები.");
 		return 0;
 	}
 	if (g_HouseRows[idx][hrKeyCount] >= 3)
 	{
-		SendClientMessage(playerid, -10270721, "Hai gia' consegnato il massimo di chiavi (%d).", 3);
+		SendClientMessage(playerid, -10270721, "გასაღებების მაქსიმუმი უკვე გაეცი (%d).", 3);
 		return 0;
 	}
 	g_HPl[playerid][hpPendingOp] = 7;
@@ -1805,12 +1805,12 @@ public House_OnDBKeyAdded(playerid, houseId, targetId, affected)
 	new idx = House_Find(houseId);
 	if (affected == -1)
 	{
-		Util_Send(playerid, -10270721, "Chiave non consegnata (errore database).");
+		Util_Send(playerid, -10270721, "გასაღები ვერ გადაეცა (ბაზის შეცდომა).");
 		return 1;
 	}
 	if (affected != 1 || idx == -1)
 	{
-		Util_Send(playerid, -10270721, "Chiave non consegnata: limite raggiunto o gia' presente.");
+		Util_Send(playerid, -10270721, "გასაღები ვერ გადაეცა: ლიმიტი ამოწურულია ან უკვე აქვს.");
 		return 1;
 	}
 	if (g_HouseRows[idx][hrKeyCount] < 3)
@@ -1818,13 +1818,13 @@ public House_OnDBKeyAdded(playerid, houseId, targetId, affected)
 		g_HouseRows[idx][hrKeyChars][g_HouseRows[idx][hrKeyCount]] = targetId;
 		g_HouseRows[idx][hrKeyCount]++;
 	}
-	new target = House_PlayerByChar(targetId), tname[25] = "il giocatore";
+	new target = House_PlayerByChar(targetId), tname[75] = "il giocatore";
 	if (target != INVALID_PLAYER_ID)
 	{
-		GetPlayerName(target, tname, 25);
-		SendClientMessage(target, 0x66DD66FF, "Hai ricevuto la chiave della casa %d (%s).", houseId, g_HouseRows[idx][hrOwnerName]);
+		GetPlayerName(target, tname, 75);
+		SendClientMessage(target, 0x66DD66FF, "მიიღე სახლის %d გასაღები (%s).", houseId, g_HouseRows[idx][hrOwnerName]);
 	}
-	SendClientMessage(playerid, 0x66DD66FF, "Hai consegnato una chiave della casa %d a %s (%d/%d).", houseId, tname, g_HouseRows[idx][hrKeyCount], 3);
+	SendClientMessage(playerid, 0x66DD66FF, "სახლის %d გასაღები გადაეცი %s-ს (%d/%d).", houseId, tname, g_HouseRows[idx][hrKeyCount], 3);
 	return 1;
 }
 
@@ -1857,25 +1857,25 @@ public House_OnDBKeysLoaded(playerid, houseId, count)
 	g_HPl[playerid][hpPendingOp] = 0;
 	if (count == -1)
 	{
-		Util_Send(playerid, -10270721, "Impossibile leggere le chiavi (errore database).");
+		Util_Send(playerid, -10270721, "გასაღებების წაკითხვა ვერ მოხერხდა (ბაზის შეცდომა).");
 		return 1;
 	}
 	if (intent == 3)
 	{
-		SendClientMessage(playerid, -2994689, "--- Chiavi casa %d (%d/%d) ---", houseId, count, 3);
+		SendClientMessage(playerid, -2994689, "--- სახლის %d გასაღებები (%d/%d) ---", houseId, count, 3);
 		for (new i = 0; i < count; i++)
 		{
 			new online = House_PlayerByChar(g_HouseKeyList[playerid][i][hkCharId]);
 			if (online != 65535)
 			{
-				SendClientMessage(playerid, -1, "%d) %s (online, id %d)", i + 1, g_HouseKeyList[playerid][i][hkName], online);
+				SendClientMessage(playerid, -1, "%d) %s (ონლაინ, id %d)", i + 1, g_HouseKeyList[playerid][i][hkName], online);
 			}
 			else
 			{
 				SendClientMessage(playerid, -1, "%d) %s", i + 1, g_HouseKeyList[playerid][i][hkName]);
 			}
 		}
-		Util_Send(playerid, 0x99CCFFFF, "Uso: /casa chiave [id] · /casa revoca [id | Nome_Cognome | numero]");
+		Util_Send(playerid, 0x99CCFFFF, "გამოყენება: /casa chiave [id] · /casa revoca [id | სახელი_გვარი | ნომერი]");
 		return 1;
 	}
 	new target = 0, num = 0;
@@ -1905,7 +1905,7 @@ public House_OnDBKeysLoaded(playerid, houseId, count)
 	}
 	if (target <= 0)
 	{
-		Util_Send(playerid, -10270721, "Nessuna chiave corrisponde: usa /casa chiavi per l'elenco.");
+		Util_Send(playerid, -10270721, "ასეთი გასაღები ვერ მოიძებნა: სია ნახე /casa chiavi-ით.");
 		return 1;
 	}
 	g_HPl[playerid][hpPendingOp] = 8;
@@ -1930,12 +1930,12 @@ public House_OnDBKeyRemoved(playerid, houseId, targetId, affected)
 	new idx = House_Find(houseId);
 	if (affected == -1)
 	{
-		Util_Send(playerid, -10270721, "Chiave non revocata (errore database).");
+		Util_Send(playerid, -10270721, "გასაღები ვერ გაუქმდა (ბაზის შეცდომა).");
 		return 1;
 	}
 	if (affected != 1 || idx == -1)
 	{
-		Util_Send(playerid, -10270721, "Chiave non revocata: non risulta piu' presente.");
+		Util_Send(playerid, -10270721, "გასაღები ვერ გაუქმდა: აღარ არსებობს.");
 		return 1;
 	}
 	new w = 0;
@@ -1955,37 +1955,37 @@ public House_OnDBKeyRemoved(playerid, houseId, targetId, affected)
 	new target = House_PlayerByChar(targetId);
 	if (target != INVALID_PLAYER_ID)
 	{
-		SendClientMessage(target, -10270721, "La tua chiave della casa %d e' stata revocata.", houseId);
+		SendClientMessage(target, -10270721, "სახლის %d შენი გასაღები გაუქმდა.", houseId);
 		if (g_HPl[target][hpInsideHouse] == houseId && g_HouseRows[idx][hrLocked])
 		{
 			House_PlaceOutside(target, idx);
 		}
 	}
-	SendClientMessage(playerid, 0x66DD66FF, "Chiave revocata (%d/%d).", g_HouseRows[idx][hrKeyCount], 3);
+	SendClientMessage(playerid, 0x66DD66FF, "გასაღები გაუქმდა (%d/%d).", g_HouseRows[idx][hrKeyCount], 3);
 	return 1;
 }
 
 House_Info(playerid, idx)
 {
-	new tier = House_Tier(idx), role = House_Role(idx, playerid), st1[12], st2[12];
-	SendClientMessage(playerid, -2994689, "--- Casa %d - %s ---", g_HouseRows[idx][hrId], s_HsTierName[tier]);
+	new tier = House_Tier(idx), role = House_Role(idx, playerid), st1[36], st2[36];
+	SendClientMessage(playerid, -2994689, "--- სახლი %d - %s ---", g_HouseRows[idx][hrId], s_HsTierName[tier]);
 	if (role == 0)
 	{
-		SendClientMessage(playerid, -1, "In vendita: $%d, livello minimo %d, frigo %d porzioni. Limite case per il tuo livello: %d.", g_HouseRows[idx][hrPrice], s_HsTierLevel[tier], s_HsFridgeCap[tier], House_MaxForLevel(gPlayer[playerid][pLevel]));
-		Util_Send(playerid, 0x99CCFFFF, "Acquisto: /casa compra (menu) oppure /casa compra contanti|banca");
+		SendClientMessage(playerid, -1, "იყიდება: $%d, მინ. დონე %d, მაცივარი %d ულუფა. სახლების ლიმიტი შენი დონისთვის: %d.", g_HouseRows[idx][hrPrice], s_HsTierLevel[tier], s_HsFridgeCap[tier], House_MaxForLevel(gPlayer[playerid][pLevel]));
+		Util_Send(playerid, 0x99CCFFFF, "შეძენა: /casa compra (მენიუ) ან /casa compra contanti|banca");
 		return 0;
 	}
-	SendClientMessage(playerid, -1, "Proprietario: %s - porta %s.", g_HouseRows[idx][hrOwnerName], g_HouseRows[idx][hrLocked] ? "chiusa a chiave" : "aperta");
+	SendClientMessage(playerid, -1, "მფლობელი: %s - კარი %s.", g_HouseRows[idx][hrOwnerName], g_HouseRows[idx][hrLocked] ? "ჩაკეტილია" : "ღიაა");
 	if (role == 3)
 	{
 		return 0;
 	}
-	House_UtilText(bool:g_HouseRows[idx][hrLuceOn], bool:g_HouseRows[idx][hrLuceCut], st1, 12);
-	House_UtilText(bool:g_HouseRows[idx][hrGasOn], bool:g_HouseRows[idx][hrGasCut], st2, 12);
-	SendClientMessage(playerid, -1, "Luce: %s - Gas: %s - Frigo: %d/%d", st1, st2, g_HouseRows[idx][hrFridgeUnits], s_HsFridgeCap[tier]);
+	House_UtilText(bool:g_HouseRows[idx][hrLuceOn], bool:g_HouseRows[idx][hrLuceCut], st1, 36);
+	House_UtilText(bool:g_HouseRows[idx][hrGasOn], bool:g_HouseRows[idx][hrGasCut], st2, 36);
+	SendClientMessage(playerid, -1, "შუქი: %s - გაზი: %s - მაცივარი: %d/%d", st1, st2, g_HouseRows[idx][hrFridgeUnits], s_HsFridgeCap[tier]);
 	if (role == 1)
 	{
-		SendClientMessage(playerid, -1, "Bollette non pagate: %d - Chiavi consegnate: %d/%d", g_HouseRows[idx][hrBills], g_HouseRows[idx][hrKeyCount], 3);
+		SendClientMessage(playerid, -1, "გადაუხდელი გადასახადები: %d - გაცემული გასაღებები: %d/%d", g_HouseRows[idx][hrBills], g_HouseRows[idx][hrKeyCount], 3);
 	}
 	return 0;
 }
@@ -1996,17 +1996,17 @@ House_CmdCasa(playerid, const params[])
 	{
 		return 0;
 	}
-	new pos = 0, sub[32], arg[32];
-	Util_NextToken(params, pos, sub, 32);
+	new pos = 0, sub[96], arg[96];
+	Util_NextToken(params, pos, sub, 96);
 	new idx = House_Context(playerid);
 	if (idx == -1)
 	{
-		Util_Send(playerid, -10270721, "Devi essere dentro una casa o davanti alla sua porta.");
+		Util_Send(playerid, -10270721, "სახლში ან მის კართან უნდა იყო.");
 		return 0;
 	}
 	if (g_HPl[playerid][hpPendingOp] != 0)
 	{
-		Util_Send(playerid, -10270721, "Hai un'operazione della casa in corso: attendi.");
+		Util_Send(playerid, -10270721, "სახლის ოპერაცია მიმდინარეობს: დაელოდე.");
 		return 0;
 	}
 	if (sub[0] == 0)
@@ -2031,10 +2031,10 @@ House_CmdCasa(playerid, const params[])
 	}
 	if (!strcmp(sub, "chiave", true, 0x7FFFFFFF))
 	{
-		Util_NextToken(params, pos, arg, 32);
+		Util_NextToken(params, pos, arg, 96);
 		if (arg[0] == 0)
 		{
-			Util_Send(playerid, 0x99CCFFFF, "Uso: /casa chiave [id giocatore]");
+			Util_Send(playerid, 0x99CCFFFF, "გამოყენება: /casa chiave [მოთამაშის id]");
 			return 0;
 		}
 		House_GiveKey(playerid, arg);
@@ -2042,10 +2042,10 @@ House_CmdCasa(playerid, const params[])
 	}
 	if (!strcmp(sub, "revoca", true, 0x7FFFFFFF))
 	{
-		Util_NextToken(params, pos, arg, 32);
+		Util_NextToken(params, pos, arg, 96);
 		if (arg[0] == 0)
 		{
-			Util_Send(playerid, 0x99CCFFFF, "Uso: /casa revoca [id giocatore | Nome_Cognome | numero da /casa chiavi]");
+			Util_Send(playerid, 0x99CCFFFF, "გამოყენება: /casa revoca [მოთამაშის id | სახელი_გვარი | ნომერი /casa chiavi-დან]");
 			return 0;
 		}
 		House_LoadKeys(playerid, 4, arg);
@@ -2053,7 +2053,7 @@ House_CmdCasa(playerid, const params[])
 	}
 	if (!strcmp(sub, "vendi", true, 0x7FFFFFFF))
 	{
-		Util_NextToken(params, pos, arg, 32);
+		Util_NextToken(params, pos, arg, 96);
 		House_DoSell(playerid, idx, !strcmp(arg, "conferma", true, 0x7FFFFFFF));
 		return 0;
 	}
@@ -2061,10 +2061,10 @@ House_CmdCasa(playerid, const params[])
 	{
 		if (g_HouseRows[idx][hrOwnerId] > 0 || House_FindNear(playerid) != idx)
 		{
-			Util_Send(playerid, -10270721, "Devi essere davanti alla porta di una casa in vendita.");
+			Util_Send(playerid, -10270721, "გასაყიდი სახლის კართან უნდა იყო.");
 			return 0;
 		}
-		Util_NextToken(params, pos, arg, 32);
+		Util_NextToken(params, pos, arg, 96);
 		if (arg[0] == 0)
 		{
 			House_OpenMenu(playerid, idx);
@@ -2080,10 +2080,10 @@ House_CmdCasa(playerid, const params[])
 			House_DoBuy(playerid, idx, 1);
 			return 0;
 		}
-		Util_Send(playerid, 0x99CCFFFF, "Uso: /casa compra [contanti|banca]");
+		Util_Send(playerid, 0x99CCFFFF, "გამოყენება: /casa compra [contanti|banca]");
 		return 0;
 	}
-	Util_Send(playerid, 0x99CCFFFF, "Uso: /casa [info|compra|vendi|serratura|chiave|chiavi|revoca]");
+	Util_Send(playerid, 0x99CCFFFF, "გამოყენება: /casa [info|compra|vendi|serratura|chiave|chiavi|revoca]");
 	return 0;
 }
 
@@ -2095,32 +2095,32 @@ House_CmdEntra(playerid)
 	}
 	if (House_FindInside(playerid) != -1)
 	{
-		Util_Send(playerid, -10270721, "Sei gia' dentro una casa.");
+		Util_Send(playerid, -10270721, "უკვე სახლში ხარ.");
 		return 0;
 	}
 	new idx = House_FindNear(playerid);
 	if (idx == -1)
 	{
-		Util_Send(playerid, -10270721, "Non sei davanti alla porta di una casa.");
+		Util_Send(playerid, -10270721, "სახლის კართან არ ხარ.");
 		return 0;
 	}
 	if (GetPlayerState(playerid) != PLAYER_STATE_ONFOOT)
 	{
-		Util_Send(playerid, -10270721, "Scendi dal veicolo per entrare.");
+		Util_Send(playerid, -10270721, "შესასვლელად ჩამოდი მანქანიდან.");
 		return 0;
 	}
 	if (g_HouseRows[idx][hrOwnerId] <= 0)
 	{
-		Util_Send(playerid, -10270721, "La casa e' in vendita e non e' visitabile. Usa /casa per le informazioni.");
+		Util_Send(playerid, -10270721, "სახლი იყიდება და დათვალიერება არ შეიძლება. ინფორმაცია: /casa.");
 		return 0;
 	}
 	if (!House_CanEnterNow(idx, playerid))
 	{
-		Util_Send(playerid, -10270721, "La porta e' chiusa a chiave. Prova con /bussa.");
+		Util_Send(playerid, -10270721, "კარი ჩაკეტილია. სცადე /bussa.");
 		return 0;
 	}
 	House_DoEnter(playerid, idx);
-	SendClientMessage(playerid, -1, "Sei entrato nella casa %d. Usa /esci per uscire.", g_HouseRows[idx][hrId]);
+	SendClientMessage(playerid, -1, "შეხვედი სახლში %d. გასასვლელად: /esci.", g_HouseRows[idx][hrId]);
 	return 0;
 }
 
@@ -2133,12 +2133,12 @@ House_CmdEsci(playerid)
 	new idx = House_FindInside(playerid);
 	if (idx == -1)
 	{
-		Util_Send(playerid, -10270721, "Non sei dentro una casa.");
+		Util_Send(playerid, -10270721, "სახლში არ ხარ.");
 		return 0;
 	}
 	if (!House_NearExit(playerid, idx))
 	{
-		Util_Send(playerid, -10270721, "Avvicinati alla porta per uscire.");
+		Util_Send(playerid, -10270721, "გასასვლელად კართან მიდი.");
 		return 0;
 	}
 	House_PlaceOutside(playerid, idx);
@@ -2154,36 +2154,36 @@ House_CmdBussa(playerid)
 	new idx = House_FindNear(playerid);
 	if (idx == -1 || g_HouseRows[idx][hrOwnerId] <= 0)
 	{
-		Util_Send(playerid, -10270721, "Non sei davanti alla porta di una casa abitata.");
+		Util_Send(playerid, -10270721, "დასახლებული სახლის კართან არ ხარ.");
 		return 0;
 	}
 	if (!g_HouseRows[idx][hrLocked])
 	{
-		Util_Send(playerid, -1, "La porta e' aperta: usa /entra.");
+		Util_Send(playerid, -1, "კარი ღიაა: გამოიყენე /entra.");
 		return 0;
 	}
 	new now = GetTickCount();
 	if (now - g_HPl[playerid][hpKnockTick] < 5000)
 	{
-		Util_Send(playerid, -10270721, "Hai bussato da poco: attendi.");
+		Util_Send(playerid, -10270721, "ახლახან დააკაკუნე: დაელოდე.");
 		return 0;
 	}
 	g_HPl[playerid][hpKnockTick] = now;
-	new id = g_HouseRows[idx][hrId], name[25], inside = 0;
-	GetPlayerName(playerid, name, 25);
+	new id = g_HouseRows[idx][hrId], name[75], inside = 0;
+	GetPlayerName(playerid, name, 75);
 	for (new p = 0; p < MAX_PLAYERS; p++)
 	{
 		if (g_HPl[p][hpInsideHouse] != id || !Util_IsPlaying(p))
 		{
 			continue;
 		}
-		SendClientMessage(p, 0xC2A2DAFF, "* Qualcuno bussa alla porta (%s).", name);
+		SendClientMessage(p, 0xC2A2DAFF, "* ვიღაც კარზე აკაკუნებს (%s).", name);
 		inside++;
 	}
-	Util_Send(playerid, 0xC2A2DAFF, "* Bussi alla porta.");
+	Util_Send(playerid, 0xC2A2DAFF, "* კარზე აკაკუნებ.");
 	if (inside == 0)
 	{
-		Util_Send(playerid, -1, "Non sembra esserci nessuno in casa.");
+		Util_Send(playerid, -1, "სახლში არავინ ჩანს.");
 	}
 	return 0;
 }
@@ -2201,7 +2201,7 @@ House_UiGuard(playerid, houseId)
 		{
 			return idx;
 		}
-		Util_Send(playerid, -10270721, "Non sei piu' vicino a quella casa.");
+		Util_Send(playerid, -10270721, "ამ სახლთან ახლოს აღარ ხარ.");
 		return -1;
 	}
 	return idx;
@@ -2216,7 +2216,7 @@ public UI_OnHouseAction(playerid, houseId, action)
 	}
 	if (g_HPl[playerid][hpPendingOp] != 0)
 	{
-		Util_Send(playerid, -10270721, "Operazione in corso: attendi.");
+		Util_Send(playerid, -10270721, "ოპერაცია მიმდინარეობს: დაელოდე.");
 		return 1;
 	}
 	switch (action)
@@ -2230,7 +2230,7 @@ public UI_OnHouseAction(playerid, houseId, action)
 		{
 			if (!House_HasAccess(idx, playerid))
 			{
-				Util_Send(playerid, -10270721, "Non hai accesso alle utenze.");
+				Util_Send(playerid, -10270721, "კომუნალურებზე წვდომა არ გაქვს.");
 				return 1;
 			}
 			House_PushUi(playerid, idx);
@@ -2240,7 +2240,7 @@ public UI_OnHouseAction(playerid, houseId, action)
 		{
 			if (House_FindInside(playerid) != idx || !House_HasAccess(idx, playerid))
 			{
-				Util_Send(playerid, -10270721, "Devi essere dentro la casa per usare il frigo.");
+				Util_Send(playerid, -10270721, "მაცივრის გამოსაყენებლად სახლში უნდა იყო.");
 				return 1;
 			}
 			House_PushUi(playerid, idx);
@@ -2250,7 +2250,7 @@ public UI_OnHouseAction(playerid, houseId, action)
 		{
 			if (House_Role(idx, playerid) != 1)
 			{
-				Util_Send(playerid, -10270721, "Solo il proprietario gestisce le bollette.");
+				Util_Send(playerid, -10270721, "გადასახადებს მხოლოდ მფლობელი მართავს.");
 				return 1;
 			}
 			House_OpenBills(playerid, idx);
@@ -2259,7 +2259,7 @@ public UI_OnHouseAction(playerid, houseId, action)
 		{
 			if (House_Role(idx, playerid) != 1)
 			{
-				Util_Send(playerid, -10270721, "Solo il proprietario gestisce le chiavi.");
+				Util_Send(playerid, -10270721, "გასაღებებს მხოლოდ მფლობელი მართავს.");
 				return 1;
 			}
 			House_LoadKeys(playerid, 3, "");
@@ -2359,7 +2359,7 @@ House_TickRow(idx)
 				new owner = House_OwnerPlayer(idx);
 				if (owner != 65535)
 				{
-					SendClientMessage(owner, -10270721, "Casa %d: senza corrente il frigo ha perso %d porzioni.", g_HouseRows[idx][hrId], lost);
+					SendClientMessage(owner, -10270721, "სახლი %d: შუქის გარეშე მაცივარმა %d ულუფა დაკარგა.", g_HouseRows[idx][hrId], lost);
 				}
 			}
 			House_SaveTick(idx);
@@ -2461,8 +2461,8 @@ public House_OnDBLoaded(count)
 		House_RefreshWorld(i);
 	}
 	g_HsReady = true;
-	new msg[128];
-	format(msg, 128, "caricate %d case", count);
+	new msg[384];
+	format(msg, 384, "caricate %d case", count);
 	Log_Write("HOUSE", msg);
 	return 1;
 }
@@ -2483,7 +2483,7 @@ House_OnInit()
 	g_HsReady = false;
 	for (new s = 0; s < 2; s++)
 	{
-		Lang_Create3DTextLabel("Supermercato\n/compra - cibo, pasto, acqua, snack, kit, benda, zaino...", 0x66DD66FF, s_HsShops[s][0], s_HsShops[s][1], (0.9 + s_HsShops[s][2]), 12.0, 0, false);
+		Lang_Create3DTextLabel("სუპერმარკეტი\n/compra - cibo, pasto, acqua, snack, kit, benda, zaino...", 0x66DD66FF, s_HsShops[s][0], s_HsShops[s][1], (0.9 + s_HsShops[s][2]), 12.0, 0, false);
 	}
 	g_HsTickTimer = SetTimer("House_OnTick", 60000, true);
 	g_HsSaveTimer = SetTimer("House_OnSaveTick", 300000, true);
@@ -2629,15 +2629,15 @@ House_OnPlayerPickUpPickup(playerid, pickupid)
 	new tier = House_Tier(idx);
 	if (g_HouseRows[idx][hrOwnerId] <= 0)
 	{
-		SendClientMessage(playerid, -1, "Casa %d (%s) in vendita: $%d, livello minimo %d. Usa /casa per le info e l'acquisto.", g_HouseRows[idx][hrId], s_HsTierName[tier], g_HouseRows[idx][hrPrice], s_HsTierLevel[tier]);
+		SendClientMessage(playerid, -1, "სახლი %d (%s) იყიდება: $%d, მინ. დონე %d. ინფო და შეძენა: /casa.", g_HouseRows[idx][hrId], s_HsTierName[tier], g_HouseRows[idx][hrPrice], s_HsTierLevel[tier]);
 	}
 	else if (House_CanEnterNow(idx, playerid))
 	{
-		SendClientMessage(playerid, -1, "Casa %d di %s. Usa /entra per entrare.", g_HouseRows[idx][hrId], g_HouseRows[idx][hrOwnerName]);
+		SendClientMessage(playerid, -1, "სახლი %d, მფლობელი %s. შესასვლელად: /entra.", g_HouseRows[idx][hrId], g_HouseRows[idx][hrOwnerName]);
 	}
 	else
 	{
-		SendClientMessage(playerid, -1, "Casa %d di %s: porta chiusa a chiave. Usa /bussa.", g_HouseRows[idx][hrId], g_HouseRows[idx][hrOwnerName]);
+		SendClientMessage(playerid, -1, "სახლი %d, მფლობელი %s: კარი ჩაკეტილია. გამოიყენე /bussa.", g_HouseRows[idx][hrId], g_HouseRows[idx][hrOwnerName]);
 	}
 	return 0;
 }

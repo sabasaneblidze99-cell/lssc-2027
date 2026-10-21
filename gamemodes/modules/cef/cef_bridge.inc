@@ -92,11 +92,11 @@ CefBridge_OnInitialize(playerid, success)
 
 CefBridge_Arg(const arguments[], idx, def)
 {
-	new pos = 0, tok[16];
+	new pos = 0, tok[48];
 	for (new i = 0; i <= idx; i++)
 	{
 		tok[0] = 0;
-		Util_NextToken(arguments, pos, tok, 16);
+		Util_NextToken(arguments, pos, tok, 48);
 		if (tok[0] == 0)
 		{
 			return def;
@@ -116,9 +116,9 @@ CefBridge_SendProfile(playerid)
 	{
 		return 0;
 	}
-	new name[25], job[32];
-	GetPlayerName(playerid, name, 25);
-	Job_NameOf(gPlayer[playerid][pJob], job, 32);
+	new name[75], job[96];
+	GetPlayerName(playerid, name, 75);
+	Job_NameOf(gPlayer[playerid][pJob], job, 96);
 	cef_emit_event(playerid, "lssc:profile", 0, name, 0, job);
 	return 0;
 }
@@ -127,7 +127,7 @@ CefBridge_CmdTelefono(playerid)
 {
 	if (!CefUI_Active(playerid))
 	{
-		Util_Send(playerid, 0x99CCFFFF, "Il telefono CityOS richiede il client CEF. Comandi: /contratti · /contratto · /quartiere · /reputazione · /saldo");
+		Util_Send(playerid, 0x99CCFFFF, "CityOS ტელეფონს CEF კლიენტი სჭირდება. ბრძანებები: /contratti · /contratto · /quartiere · /reputazione · /saldo");
 		return 0;
 	}
 	CefBridge_SendProfile(playerid);
@@ -172,8 +172,8 @@ public Cef_OnReady(playerid, const arguments[])
 			}
 		}
 	}
-	new msg[64];
-	format(msg, 64, "pagina pronta per il giocatore %d", playerid);
+	new msg[192];
+	format(msg, 192, "pagina pronta per il giocatore %d", playerid);
 	Log_Write("CEF", msg);
 	if (UI_HudIsActive(playerid))
 	{
@@ -326,7 +326,7 @@ public Cef_OnJobWaypoint(playerid, const arguments[])
 		return 1;
 	}
 	Hub_CmdAiuto(playerid, "lavoro");
-	CefUI_Toast(playerid, "Job Center segnato sulla mappa", 1);
+	CefUI_Toast(playerid, "Job Center რუკაზე მოინიშნა", 1);
 	return 1;
 }
 
@@ -380,9 +380,9 @@ public Cef_OnLogin(playerid, const arguments[])
 	{
 		return 1;
 	}
-	new hex[68], pw[34], pos = 0;
-	Util_NextToken(arguments, pos, hex, 68);
-	if (!CefBridge_HexDecode(hex, pw, 34))
+	new hex[204], pw[102], pos = 0;
+	Util_NextToken(arguments, pos, hex, 204);
+	if (!CefBridge_HexDecode(hex, pw, 102))
 	{
 		pw[0] = 0;
 	}
@@ -404,9 +404,9 @@ public Cef_OnRegister(playerid, const arguments[])
 	{
 		return 1;
 	}
-	new hex[68], pw[34], pos = 0;
-	Util_NextToken(arguments, pos, hex, 68);
-	if (!CefBridge_HexDecode(hex, pw, 34))
+	new hex[204], pw[102], pos = 0;
+	Util_NextToken(arguments, pos, hex, 204);
+	if (!CefBridge_HexDecode(hex, pw, 102))
 	{
 		pw[0] = 0;
 	}

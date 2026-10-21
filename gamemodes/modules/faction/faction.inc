@@ -3,10 +3,10 @@ new g_FacShort[3][8] = {
 	"LSPD",
 	"EMS"
 };
-new g_FacRankName[3][7][24] = {
+new g_FacRankName[3][7][64] = {
 	{"-", "-", "-", "-", "-", "-", "-"},
-	{"-", "Cadetto", "Agente", "Agente Scelto", "Sergente", "Tenente", "Capo del Dipartimento"},
-	{"-", "Volontario", "Soccorritore", "Paramedico", "Caposquadra", "Medico", "Direttore Sanitario"}
+	{"-", "კადეტი", "ოფიცერი", "უფროსი ოფიცერი", "სერჟანტი", "ლეიტენანტი", "დეპარტამენტის უფროსი"},
+	{"-", "მოხალისე", "მაშველი", "პარამედიკი", "ბრიგადირი", "ექიმი", "მთავარი ექიმი"}
 };
 new g_FacRankPay[3][7] = {
 	{0},
@@ -233,7 +233,7 @@ bool:Fac_CmdBlocked(playerid)
 	new left = Fac_CdLeftMs(g_FcCmdSet[playerid], g_FcCmdLast[playerid], 1500);
 	if (left > 0)
 	{
-		SendClientMessage(playerid, -10270721, "Attendi %d secondi prima di un altro comando di fazione.", Fac_SecCeil(left));
+		SendClientMessage(playerid, -10270721, "ფრაქციის შემდეგ ბრძანებამდე მოიცადე %d წამი.", Fac_SecCeil(left));
 		return true;
 	}
 	g_FcCmdSet[playerid] = true;
@@ -246,7 +246,7 @@ bool:Fac_NeedMember(playerid, faction)
 	new f = gPlayer[playerid][pFaction];
 	if (f < 1 || f > 2 || gPlayer[playerid][pFactionRank] < 1 || (faction != 0 && f != faction))
 	{
-		Util_Send(playerid, -10270721, "Non sei autorizzato a usare questo comando.");
+		Util_Send(playerid, -10270721, "ამ ბრძანების გამოყენების უფლება არ გაქვს.");
 		return false;
 	}
 	return true;
@@ -256,7 +256,7 @@ bool:Fac_NeedActive(playerid)
 {
 	if (gPlayer[playerid][pWounded] || gPlayer[playerid][pCuffed])
 	{
-		Util_Send(playerid, -10270721, "Non puoi farlo nelle tue condizioni.");
+		Util_Send(playerid, -10270721, "ამ მდგომარეობაში ამას ვერ გააკეთებ.");
 		return false;
 	}
 	return true;
@@ -266,7 +266,7 @@ bool:Fac_NeedDuty(playerid)
 {
 	if (!gPlayer[playerid][pOnDuty])
 	{
-		Util_Send(playerid, -10270721, "Devi essere in servizio (/duty vicino alla sede).");
+		Util_Send(playerid, -10270721, "სამსახურში უნდა იყო (/duty შტაბთან).");
 		return false;
 	}
 	return true;
@@ -276,7 +276,7 @@ bool:Fac_ParseTarget(playerid, const token[], &targetid)
 {
 	if (!Util_ParsePlayerId(token, targetid) || !Util_IsPlaying(targetid))
 	{
-		Util_Send(playerid, -10270721, "Giocatore non valido.");
+		Util_Send(playerid, -10270721, "არასწორი მოთამაშე.");
 		return false;
 	}
 	return true;
@@ -284,8 +284,8 @@ bool:Fac_ParseTarget(playerid, const token[], &targetid)
 
 Fac_Emote(playerid, const text[])
 {
-	new name[25], msg[256];
-	GetPlayerName(playerid, name, 25);
+	new name[75], msg[256];
+	GetPlayerName(playerid, name, 75);
 	format(msg, 256, "* %s %s", name, text);
 	Util_SendNear(playerid, 0xC2A2DAFF, 20.0, msg);
 }
@@ -430,10 +430,10 @@ Fac_DutyOn(playerid)
 	Fac_GiveKit(playerid);
 	UI_FactionHudShow(playerid, f, gPlayer[playerid][pFactionRank]);
 	UI_FactionHudUpdate(playerid, f, gPlayer[playerid][pFactionRank], Fac_KitHudValue(playerid));
-	new rn[24];
-	Fac_RankName(f, gPlayer[playerid][pFactionRank], rn, 24);
-	SendClientMessage(playerid, 0x66DD66FF, "Sei in servizio (%s - %s).", g_FacShort[f], rn);
-	Fac_Emote(playerid, "indossa la divisa ed entra in servizio");
+	new rn[72];
+	Fac_RankName(f, gPlayer[playerid][pFactionRank], rn, 72);
+	SendClientMessage(playerid, 0x66DD66FF, "სამსახურში ხარ (%s - %s).", g_FacShort[f], rn);
+	Fac_Emote(playerid, "იცვამს ფორმას და სამსახურს იწყებს");
 }
 
 Faction_CmdDuty(playerid)
@@ -444,19 +444,19 @@ Faction_CmdDuty(playerid)
 	}
 	if (gPlayer[playerid][pWounded] || gPlayer[playerid][pCuffed] || Job_IsOnShift(playerid))
 	{
-		Util_Send(playerid, -10270721, "Non puoi cambiare servizio adesso (ferito, ammanettato o turno di lavoro in corso).");
+		Util_Send(playerid, -10270721, "სამსახურის შეცვლა ახლა არ შეგიძლია (დაჭრილი, ბორკილდადებული ან ცვლაზე ხარ).");
 		return 0;
 	}
 	new f = gPlayer[playerid][pFaction];
 	if (GetPlayerInterior(playerid) != 0 || GetPlayerVirtualWorld(playerid) != 0 || (GetPlayerDistanceFromPoint(playerid, g_FacHq[f][0], g_FacHq[f][1], g_FacHq[f][2]) > 15.0))
 	{
-		Util_Send(playerid, -10270721, "Devi essere vicino alla sede della tua fazione.");
+		Util_Send(playerid, -10270721, "შენი ფრაქციის შტაბთან უნდა იყო.");
 		return 0;
 	}
 	new left = Fac_CdLeftMs(g_FcDutySet[playerid], g_FcDutyLast[playerid], 120000);
 	if (left > 0)
 	{
-		SendClientMessage(playerid, -10270721, "Attendi ancora %d secondi prima di cambiare servizio.", Fac_SecCeil(left));
+		SendClientMessage(playerid, -10270721, "სამსახურის შეცვლამდე მოიცადე კიდევ %d წამი.", Fac_SecCeil(left));
 		return 0;
 	}
 	if (!gPlayer[playerid][pOnDuty] && Admin_CheckMuted(playerid))
@@ -468,8 +468,8 @@ Faction_CmdDuty(playerid)
 	if (gPlayer[playerid][pOnDuty])
 	{
 		Faction_ForceOff(playerid, true);
-		Util_Send(playerid, 0x66DD66FF, "Sei fuori servizio.");
-		Fac_Emote(playerid, "si toglie la divisa ed esce dal servizio");
+		Util_Send(playerid, 0x66DD66FF, "სამსახურიდან გამოხვედი.");
+		Fac_Emote(playerid, "იხდის ფორმას და სამსახურს ასრულებს");
 	}
 	else
 	{
@@ -512,12 +512,12 @@ Fac_PayTick(playerid, now)
 	new paid = Economy_PaycheckPaid(amount, Money_BankRoom(playerid));
 	if (paid > 0 && Money_GiveBank(playerid, paid, "faction", ""))
 	{
-		SendClientMessage(playerid, 0x66DD66FF, "Stipendio %s: $%d versati in banca (in aggiunta al paycheck). Saldo: $%d.", g_FacShort[f], paid, gPlayer[playerid][pBank]);
+		SendClientMessage(playerid, 0x66DD66FF, "%s ხელფასი: $%d ჩაირიცხა ბანკში (paycheck-ის გარდა). ბალანსი: $%d.", g_FacShort[f], paid, gPlayer[playerid][pBank]);
 		Char_Save(playerid);
 	}
 	else
 	{
-		Util_Send(playerid, -10270721, "Il conto bancario e' al limite: stipendio di fazione non versato.");
+		Util_Send(playerid, -10270721, "საბანკო ანგარიში ლიმიტზეა: ფრაქციის ხელფასი არ ჩაირიცხა.");
 	}
 	return 0;
 }
@@ -536,7 +536,7 @@ Fac_Uncuff(targetid)
 		SetPlayerSpecialAction(targetid, SPECIAL_ACTION_NONE);
 		ClearAnimations(targetid, SYNC_NONE);
 		Faction_UpdateControl(targetid);
-		Util_Send(targetid, 0x66DD66FF, "Sei stato liberato dalle manette.");
+		Util_Send(targetid, 0x66DD66FF, "ბორკილები მოგხსნეს.");
 	}
 	return 0;
 }
@@ -547,11 +547,11 @@ Faction_CmdAmmanetta(playerid, const params[], bool:cuff)
 	{
 		return 0;
 	}
-	new pos = 0, tok[12], target = 0;
-	Util_NextToken(params, pos, tok, 12);
+	new pos = 0, tok[36], target = 0;
+	Util_NextToken(params, pos, tok, 36);
 	if (tok[0] == 0)
 	{
-		Util_Send(playerid, 0x99CCFFFF, cuff ? "Uso: /ammanetta id" : "Uso: /smanetta id");
+		Util_Send(playerid, 0x99CCFFFF, cuff ? "გამოყენება: /ammanetta id" : "გამოყენება: /smanetta id");
 		return 0;
 	}
 	if (!Fac_ParseTarget(playerid, tok, target))
@@ -560,23 +560,23 @@ Faction_CmdAmmanetta(playerid, const params[], bool:cuff)
 	}
 	if (target == playerid || !Util_InRange(playerid, target, 2.0))
 	{
-		Util_Send(playerid, -10270721, "Bersaglio non valido o troppo lontano.");
+		Util_Send(playerid, -10270721, "სამიზნე არასწორია ან ძალიან შორსაა.");
 		return 0;
 	}
-	new tn[25], an[25], msg[128];
-	GetPlayerName(playerid, an, 25);
-	GetPlayerName(target, tn, 25);
+	new tn[75], an[75], msg[384];
+	GetPlayerName(playerid, an, 75);
+	GetPlayerName(target, tn, 75);
 	if (cuff)
 	{
 		new left = Fac_CdLeftMs(g_FcCuffSet[playerid], g_FcCuffLast[playerid], 10000);
 		if (left > 0)
 		{
-			SendClientMessage(playerid, -10270721, "Attendi ancora %d secondi.", Fac_SecCeil(left));
+			SendClientMessage(playerid, -10270721, "დაელოდე კიდევ %d წამი.", Fac_SecCeil(left));
 			return 0;
 		}
 		if (gPlayer[target][pCuffed] || gPlayer[target][pWounded] || GetPlayerState(target) != PLAYER_STATE_ONFOOT)
 		{
-			Util_Send(playerid, -10270721, "Il bersaglio non puo' essere ammanettato (gia' ammanettato, ferito o non a piedi).");
+			Util_Send(playerid, -10270721, "სამიზნეს ბორკილს ვერ დაადებ (უკვე ბორკილდადებულია, დაჭრილია ან ფეხით არ არის).");
 			return 0;
 		}
 		g_FcCuffSet[playerid] = true;
@@ -584,21 +584,21 @@ Faction_CmdAmmanetta(playerid, const params[], bool:cuff)
 		gPlayer[target][pCuffed] = 1;
 		g_FcCuffBy[target] = playerid;
 		g_FcCuffTick[target] = GetTickCount();
-		Job_Cancel(target, "sei stato ammanettato.");
+		Job_Cancel(target, "ბორკილი დაგადეს.");
 		Faction_UpdateControl(target);
 		SetPlayerSpecialAction(target, SPECIAL_ACTION_CUFFED);
-		format(msg, 128, "ammanetta %s", tn);
+		format(msg, 384, "%s-ს ბორკილს ადებს", tn);
 		Fac_Emote(playerid, msg);
 		DB_FactionLogAdd(1, gPlayer[playerid][pCharId], gPlayer[target][pCharId], "cuff", "");
 		return 0;
 	}
 	if (!gPlayer[target][pCuffed])
 	{
-		Util_Send(playerid, -10270721, "Il bersaglio non e' ammanettato.");
+		Util_Send(playerid, -10270721, "სამიზნე ბორკილდადებული არ არის.");
 		return 0;
 	}
 	Fac_Uncuff(target);
-	format(msg, 128, "toglie le manette a %s", tn);
+	format(msg, 384, "%s-ს ბორკილს ხსნის", tn);
 	Fac_Emote(playerid, msg);
 	DB_FactionLogAdd(1, gPlayer[playerid][pCharId], gPlayer[target][pCharId], "uncuff", "");
 	return 0;
@@ -617,20 +617,20 @@ Faction_CmdRadio(playerid, const params[], bool:interdept)
 	new text[97];
 	if (!Util_SanitizeText(params, text, 96))
 	{
-		Util_Send(playerid, 0x99CCFFFF, interdept ? "Uso: /dep testo" : "Uso: /r testo");
+		Util_Send(playerid, 0x99CCFFFF, interdept ? "გამოყენება: /dep ტექსტი" : "გამოყენება: /r ტექსტი");
 		return 0;
 	}
 	new left = Fac_CdLeftMs(g_FcRadioSet[playerid], g_FcRadioLast[playerid], 1000);
 	if (left > 0)
 	{
-		Util_Send(playerid, -10270721, "Rallenta con la radio.");
+		Util_Send(playerid, -10270721, "რაციით ცოტა ნელა.");
 		return 0;
 	}
 	g_FcRadioSet[playerid] = true;
 	g_FcRadioLast[playerid] = GetTickCount();
-	new f = gPlayer[playerid][pFaction], rn[24], name[25], msg[256];
-	Fac_RankName(f, gPlayer[playerid][pFactionRank], rn, 24);
-	GetPlayerName(playerid, name, 25);
+	new f = gPlayer[playerid][pFaction], rn[72], name[75], msg[256];
+	Fac_RankName(f, gPlayer[playerid][pFactionRank], rn, 72);
+	GetPlayerName(playerid, name, 75);
 	if (interdept)
 	{
 		format(msg, 256, "[DIP] %s %s %s: %s", g_FacShort[f], rn, name, text);
@@ -638,7 +638,7 @@ Faction_CmdRadio(playerid, const params[], bool:interdept)
 	}
 	else
 	{
-		format(msg, 256, "[RADIO] %s %s: %s", rn, name, text);
+		format(msg, 256, "[რაცია] %s %s: %s", rn, name, text);
 		Fac_Radio(f, false, 0x8D8DFFFF, msg);
 	}
 	return 0;
@@ -653,20 +653,20 @@ Faction_CmdMulta(playerid, const params[])
 	new rank = gPlayer[playerid][pFactionRank], cap = Fac_FineCap(rank);
 	if (cap <= 0)
 	{
-		SendClientMessage(playerid, -10270721, "Il tuo grado non consente di emettere multe (minimo grado 2).");
+		SendClientMessage(playerid, -10270721, "შენი წოდებით ჯარიმის დაწერა არ შეგიძლია (მინიმუმ მე-2 წოდება).");
 		return 0;
 	}
-	new pos = 0, tid[12], tam[12], target = 0, amount = 0, reason[65];
-	Util_NextToken(params, pos, tid, 12);
-	Util_NextToken(params, pos, tam, 12);
+	new pos = 0, tid[36], tam[36], target = 0, amount = 0, reason[65];
+	Util_NextToken(params, pos, tid, 36);
+	Util_NextToken(params, pos, tam, 36);
 	if (tid[0] == 0 || tam[0] == 0 || !Util_ParseInt(tam, amount) || !Util_SanitizeText(params[pos], reason, 64))
 	{
-		Util_Send(playerid, 0x99CCFFFF, "Uso: /multa id importo motivo");
+		Util_Send(playerid, 0x99CCFFFF, "გამოყენება: /multa id თანხა მიზეზი");
 		return 0;
 	}
 	if (strlen(reason) < 3)
 	{
-		SendClientMessage(playerid, -10270721, "Motivo troppo corto (minimo %d caratteri).", 3);
+		SendClientMessage(playerid, -10270721, "მიზეზი ძალიან მოკლეა (მინიმუმ %d სიმბოლო).", 3);
 		return 0;
 	}
 	for (new i = 0; reason[i] != 0; i++)
@@ -678,7 +678,7 @@ Faction_CmdMulta(playerid, const params[])
 	}
 	if (amount < 50 || amount > cap)
 	{
-		SendClientMessage(playerid, -10270721, "Importo non valido: da $%d a $%d per il tuo grado.", 50, cap);
+		SendClientMessage(playerid, -10270721, "არასწორი თანხა: შენი წოდებისთვის $%d-დან $%d-მდე.", 50, cap);
 		return 0;
 	}
 	if (!Fac_ParseTarget(playerid, tid, target))
@@ -687,18 +687,18 @@ Faction_CmdMulta(playerid, const params[])
 	}
 	if (target == playerid || !Util_InRange(playerid, target, 5.0))
 	{
-		Util_Send(playerid, -10270721, "Bersaglio non valido o troppo lontano.");
+		Util_Send(playerid, -10270721, "სამიზნე არასწორია ან ძალიან შორსაა.");
 		return 0;
 	}
 	if (g_FcFineBusy[playerid] || g_FcFinePend[target])
 	{
-		Util_Send(playerid, -10270721, "Una multa e' gia' in corso di registrazione: attendi.");
+		Util_Send(playerid, -10270721, "ჯარიმა უკვე ფორმდება: დაელოდე.");
 		return 0;
 	}
 	new left = Fac_CdLeftMs(g_FcFineTgtSet[target], g_FcFineTgtLast[target], 600000);
 	if (left > 0)
 	{
-		SendClientMessage(playerid, -10270721, "Questo cittadino e' stato multato da poco: riprova tra %d minuti.", (Fac_SecCeil(left) + 60 - 1) / 60);
+		SendClientMessage(playerid, -10270721, "ეს მოქალაქე ახლახან დაჯარიმდა: სცადე %d წუთში.", (Fac_SecCeil(left) + 60 - 1) / 60);
 		return 0;
 	}
 	new bucket = gPlayer[playerid][pSessionMs] / 3600000;
@@ -709,12 +709,12 @@ Faction_CmdMulta(playerid, const params[])
 	}
 	if (g_FcFineSum[playerid] + amount > 10000)
 	{
-		SendClientMessage(playerid, -10270721, "Hai raggiunto il limite orario di multe ($%d).", 10000);
+		SendClientMessage(playerid, -10270721, "ჯარიმების საათობრივ ლიმიტს მიაღწიე ($%d).", 10000);
 		return 0;
 	}
 	if (gPlayer[target][pMoney] + gPlayer[target][pBank] < amount)
 	{
-		Util_Send(playerid, -10270721, "Il cittadino non ha fondi sufficienti: multa rifiutata.");
+		Util_Send(playerid, -10270721, "მოქალაქეს საკმარისი თანხა არ აქვს: ჯარიმა უარყოფილია.");
 		return 0;
 	}
 	g_FcFineBusy[playerid] = true;
@@ -747,13 +747,13 @@ Fac_Debit(playerid, amount)
 public Fine_OnDBAdded(playerid, targetChar, fineId, amount)
 {
 	new target = Fac_FindByChar(targetChar), issuer = Fac_ValidPlayer(playerid) ? playerid : 65535;
-	new reason[65], bool:hasReason = false;
+	new reason[195], bool:hasReason = false;
 	if (issuer != INVALID_PLAYER_ID)
 	{
 		if (g_FcFineBusy[issuer] && g_FcFineTarget[issuer] == targetChar)
 		{
 			g_FcFineBusy[issuer] = false;
-			strmid(reason, g_FcFineReason[issuer], 0, strlen(g_FcFineReason[issuer]), 65);
+			strmid(reason, g_FcFineReason[issuer], 0, strlen(g_FcFineReason[issuer]), 195);
 			hasReason = true;
 		}
 		else
@@ -765,43 +765,43 @@ public Fine_OnDBAdded(playerid, targetChar, fineId, amount)
 	{
 		g_FcFinePend[target] = false;
 	}
-	new an[25], msg[128];
+	new an[75], msg[384];
 	if (issuer != INVALID_PLAYER_ID)
 	{
-		GetPlayerName(issuer, an, 25);
+		GetPlayerName(issuer, an, 75);
 	}
 	else
 	{
-		format(an, 25, "un agente");
+		format(an, 75, "un agente");
 	}
 	if (fineId <= 0)
 	{
 		if (issuer != INVALID_PLAYER_ID)
 		{
-			Util_Send(issuer, -10270721, fineId < 0 ? "Errore del servizio: multa non registrata, nessun addebito." : "Multa rifiutata dal sistema: nessun addebito.");
+			Util_Send(issuer, -10270721, fineId < 0 ? "სერვისის შეცდომა: ჯარიმა არ გაფორმდა, თანხა არ ჩამოიჭრა." : "სისტემამ ჯარიმა უარყო: თანხა არ ჩამოიჭრა.");
 		}
 		return 1;
 	}
 	if (target == INVALID_PLAYER_ID)
 	{
-		format(msg, 128, "multa %d ($%d) registrata ma bersaglio char %d non piu' online: nessun addebito", fineId, amount, targetChar);
+		format(msg, 384, "multa %d ($%d) registrata ma bersaglio char %d non piu' online: nessun addebito", fineId, amount, targetChar);
 		Log_Write("FINE", msg);
 		if (issuer != INVALID_PLAYER_ID)
 		{
-			Util_Send(issuer, -10270721, "Il cittadino si e' disconnesso: la multa e' registrata ma non e' stato possibile addebitarla.");
+			Util_Send(issuer, -10270721, "მოქალაქე გავიდა: ჯარიმა გაფორმდა, მაგრამ თანხის ჩამოჭრა ვერ მოხერხდა.");
 		}
 		return 1;
 	}
 	new taken = Fac_Debit(target, amount);
 	if (taken < amount)
 	{
-		format(msg, 128, "multa %d: addebitati $%d su $%d (fondi cambiati durante la registrazione)", fineId, taken, amount);
+		format(msg, 384, "multa %d: addebitati $%d su $%d (fondi cambiati durante la registrazione)", fineId, taken, amount);
 		Log_Write("FINE", msg);
 	}
 	g_FcFineTgtSet[target] = true;
 	g_FcFineTgtLast[target] = GetTickCount();
 	Char_Save(target);
-	SendClientMessage(target, -10270721, "Hai ricevuto una multa di $%d da %s%s%s.", taken, an, hasReason ? ": " : "", reason);
+	SendClientMessage(target, -10270721, "მიიღე $%d-ის ჯარიმა %s-სგან%s%s.", taken, an, hasReason ? ": " : "", reason);
 	if (issuer != INVALID_PLAYER_ID)
 	{
 		new bucket = gPlayer[issuer][pSessionMs] / 3600000;
@@ -811,10 +811,10 @@ public Fine_OnDBAdded(playerid, targetChar, fineId, amount)
 			g_FcFineSum[issuer] = 0;
 		}
 		g_FcFineSum[issuer] += amount;
-		new tn[25];
-		GetPlayerName(target, tn, 25);
-		SendClientMessage(issuer, 0x66DD66FF, "Multa #%d di $%d a %s registrata.", fineId, taken, tn);
-		format(msg, 128, "consegna una multa a %s", tn);
+		new tn[75];
+		GetPlayerName(target, tn, 75);
+		SendClientMessage(issuer, 0x66DD66FF, "ჯარიმა #%d, $%d, %s-ზე გაფორმდა.", fineId, taken, tn);
+		format(msg, 384, "%s-ს ჯარიმას გადასცემს", tn);
 		Fac_Emote(issuer, msg);
 	}
 	return 1;
@@ -838,19 +838,19 @@ public Fine_OnDBLoaded(playerid, count)
 	}
 	if (count < 0)
 	{
-		Util_Send(playerid, -10270721, "Servizio temporaneamente non disponibile: riprova piu' tardi.");
+		Util_Send(playerid, -10270721, "სერვისი დროებით მიუწვდომელია: სცადე მოგვიანებით.");
 		return 1;
 	}
 	if (count == 0)
 	{
-		Util_Send(playerid, -1, "Non hai multe registrate.");
+		Util_Send(playerid, -1, "გაფორმებული ჯარიმები არ გაქვს.");
 		return 1;
 	}
-	SendClientMessage(playerid, -2994689, "--- Ultime multe ricevute ---");
-	new now = gettime(), ago[24];
+	SendClientMessage(playerid, -2994689, "--- ბოლო მიღებული ჯარიმები ---");
+	new now = gettime(), ago[72];
 	for (new i = 0; i < count && i < 5; i++)
 	{
-		Admin_FormatDuration(now - g_FineRows[i][frTimestamp], ago, 24);
+		Admin_FormatDuration(now - g_FineRows[i][frTimestamp], ago, 72);
 		SendClientMessage(playerid, -1, "#%d  $%d  %s  (%s)  %s fa", g_FineRows[i][frId], g_FineRows[i][frAmount], g_FineRows[i][frReason], g_FineRows[i][frIssuer], ago);
 	}
 	return 1;
@@ -871,11 +871,11 @@ Faction_CmdCura(playerid, const params[])
 	{
 		return 0;
 	}
-	new pos = 0, tok[12], target = 0;
-	Util_NextToken(params, pos, tok, 12);
+	new pos = 0, tok[36], target = 0;
+	Util_NextToken(params, pos, tok, 36);
 	if (tok[0] == 0)
 	{
-		Util_Send(playerid, 0x99CCFFFF, "Uso: /cura id");
+		Util_Send(playerid, 0x99CCFFFF, "გამოყენება: /cura id");
 		return 0;
 	}
 	if (!Fac_ParseTarget(playerid, tok, target))
@@ -884,36 +884,36 @@ Faction_CmdCura(playerid, const params[])
 	}
 	if (target == playerid || !Util_InRange(playerid, target, 3.0))
 	{
-		Util_Send(playerid, -10270721, "Bersaglio non valido o troppo lontano.");
+		Util_Send(playerid, -10270721, "სამიზნე არასწორია ან ძალიან შორსაა.");
 		return 0;
 	}
 	if (gPlayer[target][pWounded])
 	{
-		Util_Send(playerid, -10270721, "Il bersaglio e' ferito: usa /rianima.");
+		Util_Send(playerid, -10270721, "სამიზნე დაჭრილია: გამოიყენე /rianima.");
 		return 0;
 	}
 	if (g_FcKit[playerid] <= 0)
 	{
-		Util_Send(playerid, -10270721, "Il kit medico e' esaurito (si ricarica a /duty on).");
+		Util_Send(playerid, -10270721, "სამედიცინო ნაკრები ამოიწურა (ივსება /duty on-ით).");
 		return 0;
 	}
 	new left = Fac_CdLeftMs(g_FcHealSet[playerid], g_FcHealLast[playerid], 20000);
 	if (left > 0)
 	{
-		SendClientMessage(playerid, -10270721, "Attendi ancora %d secondi.", Fac_SecCeil(left));
+		SendClientMessage(playerid, -10270721, "დაელოდე კიდევ %d წამი.", Fac_SecCeil(left));
 		return 0;
 	}
 	left = Fac_CdLeftMs(g_FcHealTgtSet[target], g_FcHealTgtLast[target], 60000);
 	if (left > 0)
 	{
-		SendClientMessage(playerid, -10270721, "Il paziente e' stato curato da poco: attendi %d secondi.", Fac_SecCeil(left));
+		SendClientMessage(playerid, -10270721, "პაციენტს ახლახან უმკურნალეს: დაელოდე %d წამი.", Fac_SecCeil(left));
 		return 0;
 	}
 	new Float:hp;
 	GetPlayerHealth(target, hp);
 	if ((hp >= 100.0))
 	{
-		Util_Send(playerid, -10270721, "Il bersaglio e' in piena salute.");
+		Util_Send(playerid, -10270721, "სამიზნე სრულად ჯანმრთელია.");
 		return 0;
 	}
 	hp = (40.0 + hp);
@@ -927,11 +927,11 @@ Faction_CmdCura(playerid, const params[])
 	g_FcHealTgtSet[target] = true;
 	g_FcHealTgtLast[target] = GetTickCount();
 	Fac_UseCharge(playerid);
-	new tn[25], msg[128];
-	GetPlayerName(target, tn, 25);
-	format(msg, 128, "presta le prime cure a %s", tn);
+	new tn[75], msg[384];
+	GetPlayerName(target, tn, 75);
+	format(msg, 384, "%s-ს პირველ დახმარებას უწევს", tn);
 	Fac_Emote(playerid, msg);
-	SendClientMessage(target, 0x66DD66FF, "Sei stato curato (salute %.0f).", hp);
+	SendClientMessage(target, 0x66DD66FF, "გიმკურნალეს (ჯანმრთელობა %.0f).", hp);
 	DB_FactionLogAdd(2, gPlayer[playerid][pCharId], gPlayer[target][pCharId], "heal", "");
 	return 0;
 }
@@ -956,11 +956,11 @@ Faction_CmdRianima(playerid, const params[])
 	{
 		return 0;
 	}
-	new pos = 0, tok[12], target = 0;
-	Util_NextToken(params, pos, tok, 12);
+	new pos = 0, tok[36], target = 0;
+	Util_NextToken(params, pos, tok, 36);
 	if (tok[0] == 0)
 	{
-		Util_Send(playerid, 0x99CCFFFF, "Uso: /rianima id");
+		Util_Send(playerid, 0x99CCFFFF, "გამოყენება: /rianima id");
 		return 0;
 	}
 	if (!Fac_ParseTarget(playerid, tok, target))
@@ -969,33 +969,33 @@ Faction_CmdRianima(playerid, const params[])
 	}
 	if (target == playerid || !Util_InRange(playerid, target, 3.0))
 	{
-		Util_Send(playerid, -10270721, "Bersaglio non valido o troppo lontano.");
+		Util_Send(playerid, -10270721, "სამიზნე არასწორია ან ძალიან შორსაა.");
 		return 0;
 	}
 	if (!gPlayer[target][pWounded])
 	{
-		Util_Send(playerid, -10270721, "Il bersaglio non e' ferito.");
+		Util_Send(playerid, -10270721, "სამიზნე დაჭრილი არ არის.");
 		return 0;
 	}
 	if (g_FcKit[playerid] <= 0)
 	{
-		Util_Send(playerid, -10270721, "Il kit medico e' esaurito (si ricarica a /duty on).");
+		Util_Send(playerid, -10270721, "სამედიცინო ნაკრები ამოიწურა (ივსება /duty on-ით).");
 		return 0;
 	}
 	if (g_FcRevTarget[playerid] != 65535)
 	{
-		Util_Send(playerid, -10270721, "Stai gia' rianimando qualcuno.");
+		Util_Send(playerid, -10270721, "უკვე ვიღაცას აცოცხლებ.");
 		return 0;
 	}
 	g_FcRevTarget[playerid] = target;
 	g_FcRevTargetChar[playerid] = gPlayer[target][pCharId];
 	g_FcRevStart[playerid] = GetTickCount();
 	ApplyAnimation(playerid, "MEDIC", "CPR", 4.1, true, false, false, false, 0, SYNC_NONE);
-	new tn[25], msg[128];
-	GetPlayerName(target, tn, 25);
-	format(msg, 128, "inizia a rianimare %s", tn);
+	new tn[75], msg[384];
+	GetPlayerName(target, tn, 75);
+	format(msg, 384, "%s-ს გაცოცხლებას იწყებს", tn);
 	Fac_Emote(playerid, msg);
-	SendClientMessage(playerid, -1, "Rianimazione in corso (%d secondi): non allontanarti.", 8);
+	SendClientMessage(playerid, -1, "მიმდინარეობს გაცოცხლება (%d წამი): არ გაშორდე.", 8);
 	return 0;
 }
 
@@ -1011,11 +1011,11 @@ Fac_ReviveDone(medic, target)
 	Faction_UpdateControl(target);
 	UI_InjuryEndShow(target, 2, 0);
 	Fac_UseCharge(medic);
-	new mn[25], tn[25], msg[128];
-	GetPlayerName(medic, mn, 25);
-	GetPlayerName(target, tn, 25);
-	SendClientMessage(target, 0x66DD66FF, "%s ti ha rianimato.", mn);
-	format(msg, 128, "rianima %s", tn);
+	new mn[75], tn[75], msg[384];
+	GetPlayerName(medic, mn, 75);
+	GetPlayerName(target, tn, 75);
+	SendClientMessage(target, 0x66DD66FF, "%s-მ გაგაცოცხლა.", mn);
+	format(msg, 384, "%s-ს აცოცხლებს", tn);
 	Fac_Emote(medic, msg);
 	DB_FactionLogAdd(2, gPlayer[medic][pCharId], gPlayer[target][pCharId], "revive", "");
 	new bucket = gPlayer[medic][pSessionMs] / 3600000;
@@ -1027,7 +1027,7 @@ Fac_ReviveDone(medic, target)
 	if (g_FcReviveCount[medic] < 6 && Money_GiveBank(medic, 100, "faction", ""))
 	{
 		g_FcReviveCount[medic]++;
-		SendClientMessage(medic, 0x66DD66FF, "Bonus rianimazione: $%d versati in banca.", 100);
+		SendClientMessage(medic, 0x66DD66FF, "გაცოცხლების ბონუსი: $%d ჩაირიცხა ბანკში.", 100);
 		Char_Save(medic);
 	}
 }
@@ -1053,9 +1053,9 @@ Faction_Hospitalize(playerid)
 	Faction_UpdateControl(playerid);
 	UI_InjuryEndShow(playerid, 1, fee);
 	Char_Save(playerid);
-	new name[25], msg[128];
-	GetPlayerName(playerid, name, 25);
-	format(msg, 128, "ricovero %s: addebitati $%d", name, fee);
+	new name[75], msg[384];
+	GetPlayerName(playerid, name, 75);
+	format(msg, 384, "ricovero %s: addebitati $%d", name, fee);
 	Log_Write("INJURY", msg);
 }
 
@@ -1077,7 +1077,7 @@ Fac_DoInvite(playerid, target)
 	new f = gPlayer[playerid][pFaction];
 	if (f < 1 || gPlayer[playerid][pFactionRank] < 5)
 	{
-		Util_Send(playerid, -10270721, "Non sei autorizzato a invitare.");
+		Util_Send(playerid, -10270721, "მოწვევის უფლება არ გაქვს.");
 		return 0;
 	}
 	if (!Fac_NeedActive(playerid))
@@ -1086,27 +1086,27 @@ Fac_DoInvite(playerid, target)
 	}
 	if (!Util_IsPlaying(target) || target == playerid)
 	{
-		Util_Send(playerid, -10270721, "Giocatore non valido.");
+		Util_Send(playerid, -10270721, "არასწორი მოთამაშე.");
 		return 0;
 	}
 	if (!Util_InRange(playerid, target, 5.0))
 	{
-		Util_Send(playerid, -10270721, "Il giocatore e' troppo lontano.");
+		Util_Send(playerid, -10270721, "მოთამაშე ძალიან შორსაა.");
 		return 0;
 	}
 	if (gPlayer[target][pFaction] != 0)
 	{
-		Util_Send(playerid, -10270721, "Il giocatore appartiene gia' a una fazione.");
+		Util_Send(playerid, -10270721, "მოთამაშე უკვე ფრაქციის წევრია.");
 		return 0;
 	}
 	if (gPlayer[target][pLevel] < 3)
 	{
-		SendClientMessage(playerid, -10270721, "Il giocatore deve essere almeno livello %d.", 3);
+		SendClientMessage(playerid, -10270721, "მოთამაშე მინიმუმ %d დონის უნდა იყოს.", 3);
 		return 0;
 	}
 	if ((g_FcInvActive[target] && Fac_CdLeftMs(true, g_FcInvStart[target], 60000) > 0) || g_FcJoinPending[target])
 	{
-		Util_Send(playerid, -10270721, "Il giocatore ha gia' un invito in sospeso.");
+		Util_Send(playerid, -10270721, "მოთამაშეს უკვე აქვს მოლოდინში მყოფი მოწვევა.");
 		return 0;
 	}
 	g_FcInvActive[target] = true;
@@ -1114,12 +1114,12 @@ Fac_DoInvite(playerid, target)
 	g_FcInvFromChar[target] = gPlayer[playerid][pCharId];
 	g_FcInvFac[target] = f;
 	g_FcInvStart[target] = GetTickCount();
-	new an[25], tn[25];
-	GetPlayerName(playerid, an, 25);
-	GetPlayerName(target, tn, 25);
+	new an[75], tn[75];
+	GetPlayerName(playerid, an, 75);
+	GetPlayerName(target, tn, 75);
 	UI_FactionInviteShow(target, f, an, 60);
-	SendClientMessage(target, -1, "%s ti invita in %s. Accetta dal pannello o con /accetta (valido %d secondi).", an, g_FacShort[f], 60);
-	SendClientMessage(playerid, 0x66DD66FF, "Invito inviato a %s.", tn);
+	SendClientMessage(target, -1, "%s გიწვევს %s-ში. დაეთანხმე პანელიდან ან /accetta-თი (მოქმედებს %d წამი).", an, g_FacShort[f], 60);
+	SendClientMessage(playerid, 0x66DD66FF, "მოწვევა გაეგზავნა: %s.", tn);
 	return 0;
 }
 
@@ -1129,11 +1129,11 @@ Faction_CmdInvita(playerid, const params[])
 	{
 		return 0;
 	}
-	new pos = 0, tok[12], target = 0;
-	Util_NextToken(params, pos, tok, 12);
+	new pos = 0, tok[36], target = 0;
+	Util_NextToken(params, pos, tok, 36);
 	if (tok[0] == 0)
 	{
-		Util_Send(playerid, 0x99CCFFFF, "Uso: /invita id");
+		Util_Send(playerid, 0x99CCFFFF, "გამოყენება: /invita id");
 		return 0;
 	}
 	if (!Fac_ParseTarget(playerid, tok, target))
@@ -1169,26 +1169,26 @@ Fac_InviteReply(playerid, bool:accept)
 	}
 	if (expired)
 	{
-		Util_Send(playerid, -10270721, "L'invito e' scaduto.");
+		Util_Send(playerid, -10270721, "მოწვევის ვადა ამოიწურა.");
 		return 0;
 	}
 	if (!accept)
 	{
-		Util_Send(playerid, -1, "Hai rifiutato l'invito.");
+		Util_Send(playerid, -1, "მოწვევაზე უარი თქვი.");
 		if (Fac_ValidPlayer(from) && gPlayer[from][pCharId] == fromChar)
 		{
-			Util_Send(from, -1, "L'invito e' stato rifiutato.");
+			Util_Send(from, -1, "მოწვევაზე უარი თქვეს.");
 		}
 		return 0;
 	}
 	if (!Util_IsPlaying(from) || gPlayer[from][pCharId] != fromChar || gPlayer[from][pFaction] != f || gPlayer[from][pFactionRank] < 5)
 	{
-		Util_Send(playerid, -10270721, "Chi ti ha invitato non e' piu' disponibile.");
+		Util_Send(playerid, -10270721, "ვინც მოგიწვია, აღარ არის ხელმისაწვდომი.");
 		return 0;
 	}
 	if (gPlayer[playerid][pFaction] != 0 || gPlayer[playerid][pLevel] < 3 || g_FcJoinPending[playerid])
 	{
-		Util_Send(playerid, -10270721, "Non puoi entrare in una fazione adesso.");
+		Util_Send(playerid, -10270721, "ახლა ფრაქციაში ვერ გაწევრიანდები.");
 		return 0;
 	}
 	g_FcJoinPending[playerid] = true;
@@ -1207,7 +1207,7 @@ Faction_CmdAccetta(playerid)
 {
 	if (!g_FcInvActive[playerid])
 	{
-		Util_Send(playerid, -10270721, "Non hai inviti in sospeso.");
+		Util_Send(playerid, -10270721, "მოლოდინში მყოფი მოწვევა არ გაქვს.");
 		return 0;
 	}
 	UI_FactionInviteClose(playerid);
@@ -1220,7 +1220,7 @@ Fac_DoRankOp(playerid, action, targetChar, targetRank, const targetName[])
 	new f = gPlayer[playerid][pFaction], own = gPlayer[playerid][pFactionRank];
 	if (f < 1 || own < 5)
 	{
-		Util_Send(playerid, -10270721, "Non sei autorizzato.");
+		Util_Send(playerid, -10270721, "ამის უფლება არ გაქვს.");
 		return 0;
 	}
 	if (!Fac_NeedActive(playerid))
@@ -1229,12 +1229,12 @@ Fac_DoRankOp(playerid, action, targetChar, targetRank, const targetName[])
 	}
 	if (targetChar <= 0 || targetChar == gPlayer[playerid][pCharId])
 	{
-		Util_Send(playerid, -10270721, "Bersaglio non valido.");
+		Util_Send(playerid, -10270721, "არასწორი სამიზნე.");
 		return 0;
 	}
 	if (targetRank < 1 || targetRank >= own)
 	{
-		Util_Send(playerid, -10270721, "Puoi agire solo su membri di grado inferiore al tuo.");
+		Util_Send(playerid, -10270721, "მხოლოდ შენზე დაბალი წოდების წევრებზე შეგიძლია მოქმედება.");
 		return 0;
 	}
 	strmid(g_FcOpName[playerid], targetName, 0, strlen(targetName), 25);
@@ -1244,7 +1244,7 @@ Fac_DoRankOp(playerid, action, targetChar, targetRank, const targetName[])
 		{
 			if (targetRank + 1 >= own)
 			{
-				Util_Send(playerid, -10270721, "Il nuovo grado deve restare inferiore al tuo.");
+				Util_Send(playerid, -10270721, "ახალი წოდება შენსაზე დაბალი უნდა იყოს.");
 				return 0;
 			}
 			DB_FactionPromote(playerid, gPlayer[playerid][pCharId], targetChar, f, targetRank + 1);
@@ -1253,7 +1253,7 @@ Fac_DoRankOp(playerid, action, targetChar, targetRank, const targetName[])
 		{
 			if (targetRank <= 1)
 			{
-				Util_Send(playerid, -10270721, "Il membro e' gia' al grado minimo.");
+				Util_Send(playerid, -10270721, "წევრი უკვე მინიმალურ წოდებაზეა.");
 				return 0;
 			}
 			DB_FactionDemote(playerid, gPlayer[playerid][pCharId], targetChar, f, targetRank - 1);
@@ -1272,11 +1272,11 @@ Faction_CmdRankOp(playerid, const params[], action)
 	{
 		return 0;
 	}
-	new pos = 0, tok[12], target = 0;
-	Util_NextToken(params, pos, tok, 12);
+	new pos = 0, tok[36], target = 0;
+	Util_NextToken(params, pos, tok, 36);
 	if (tok[0] == 0)
 	{
-		Util_Send(playerid, 0x99CCFFFF, action == 4 ? "Uso: /promuovi id" : (action == 5 ? "Uso: /degrada id" : "Uso: /licenzia id"));
+		Util_Send(playerid, 0x99CCFFFF, action == 4 ? "გამოყენება: /promuovi id" : (action == 5 ? "გამოყენება: /degrada id" : "გამოყენება: /licenzia id"));
 		return 0;
 	}
 	if (!Fac_ParseTarget(playerid, tok, target))
@@ -1285,11 +1285,11 @@ Faction_CmdRankOp(playerid, const params[], action)
 	}
 	if (gPlayer[target][pFaction] != gPlayer[playerid][pFaction])
 	{
-		Util_Send(playerid, -10270721, "Il giocatore non appartiene alla tua fazione.");
+		Util_Send(playerid, -10270721, "მოთამაშე შენი ფრაქციის წევრი არ არის.");
 		return 0;
 	}
-	new tn[25];
-	GetPlayerName(target, tn, 25);
+	new tn[75];
+	GetPlayerName(target, tn, 75);
 	Fac_DoRankOp(playerid, action, gPlayer[target][pCharId], gPlayer[target][pFactionRank], tn);
 	return 0;
 }
@@ -1311,13 +1311,13 @@ public UI_OnFactionMemberAction(playerid, action, memberId)
 		Fac_DoRankOp(playerid, action, memberId, g_FcMemRank[playerid][i], name);
 		return 1;
 	}
-	Util_Send(playerid, -10270721, "Membro non piu' in lista: riapri il menu.");
+	Util_Send(playerid, -10270721, "წევრი სიაში აღარ არის: თავიდან გახსენი მენიუ.");
 	return 1;
 }
 
 Fac_ApplyChange(target, cmd, faction, rank)
 {
-	new oldFac = gPlayer[target][pFaction], rn[24];
+	new oldFac = gPlayer[target][pFaction], rn[72];
 	switch (cmd)
 	{
 		case 1:
@@ -1346,7 +1346,7 @@ Fac_ApplyChange(target, cmd, faction, rank)
 		if (nf != oldFac || nf == 0)
 		{
 			Faction_ForceOff(target, Util_IsPlaying(target));
-			Util_Send(target, -1, "Sei stato messo fuori servizio.");
+			Util_Send(target, -1, "სამსახურიდან გაგიყვანეს.");
 		}
 		else
 		{
@@ -1355,38 +1355,38 @@ Fac_ApplyChange(target, cmd, faction, rank)
 			UI_FactionHudUpdate(target, nf, nr, Fac_KitHudValue(target));
 		}
 	}
-	Fac_RankName(nf, nr, rn, 24);
+	Fac_RankName(nf, nr, rn, 72);
 	switch (cmd)
 	{
 		case 1:
 		{
-			SendClientMessage(target, 0x66DD66FF, "Sei entrato in %s con il grado %s.", g_FacShort[nf], rn);
+			SendClientMessage(target, 0x66DD66FF, "შეხვედი %s-ში, წოდება: %s.", g_FacShort[nf], rn);
 		}
 		case 2:
 		{
-			SendClientMessage(target, 0x66DD66FF, "Sei stato promosso a %s (%s).", rn, g_FacShort[nf]);
+			SendClientMessage(target, 0x66DD66FF, "დაგაწინაურეს: %s (%s).", rn, g_FacShort[nf]);
 		}
 		case 3:
 		{
-			SendClientMessage(target, -10270721, "Sei stato degradato a %s (%s).", rn, g_FacShort[nf]);
+			SendClientMessage(target, -10270721, "ჩამოგაქვეითეს: %s (%s).", rn, g_FacShort[nf]);
 		}
 		case 4:
 		{
-			SendClientMessage(target, -10270721, "Sei stato licenziato da %s.", g_FacShort[faction]);
+			SendClientMessage(target, -10270721, "გაგათავისუფლეს: %s.", g_FacShort[faction]);
 		}
 		case 5:
 		{
-			SendClientMessage(target, -1, "Hai lasciato %s.", g_FacShort[faction]);
+			SendClientMessage(target, -1, "დატოვე %s.", g_FacShort[faction]);
 		}
 		case 6:
 		{
 			if (nf == 0)
 			{
-				Util_Send(target, -5963521, "Sei stato rimosso dalla fazione da uno staff.");
+				Util_Send(target, -5963521, "ადმინისტრატორმა ფრაქციიდან ამოგშალა.");
 			}
 			else
 			{
-				SendClientMessage(target, -5963521, "Uno staff ti ha assegnato a %s con il grado %s.", g_FacShort[nf], rn);
+				SendClientMessage(target, -5963521, "ადმინისტრატორმა მიგაკუთვნა %s-ს, წოდება: %s.", g_FacShort[nf], rn);
 			}
 		}
 	}
@@ -1419,34 +1419,34 @@ public Faction_OnDBChanged(playerid, targetChar, cmd, faction, rank, result)
 		{
 			Fac_ApplyChange(target, cmd, faction, rank);
 		}
-		new rn[24], tn[25];
+		new rn[72], tn[75];
 		if (target != INVALID_PLAYER_ID)
 		{
-			GetPlayerName(target, tn, 25);
+			GetPlayerName(target, tn, 75);
 		}
 		else if (req != INVALID_PLAYER_ID)
 		{
-			strmid(tn, g_FcOpName[req], 0, strlen(g_FcOpName[req]), 25);
+			strmid(tn, g_FcOpName[req], 0, strlen(g_FcOpName[req]), 75);
 		}
 		if (ctx != 65535)
 		{
-			strmid(tn, g_FcSetName[ctx], 0, strlen(g_FcSetName[ctx]), 25);
+			strmid(tn, g_FcSetName[ctx], 0, strlen(g_FcSetName[ctx]), 75);
 		}
-		Fac_RankName(faction, rank, rn, 24);
+		Fac_RankName(faction, rank, rn, 72);
 		if (cmd == 6 && ctx != 65535)
 		{
-			new detail[128], logDetail[128];
+			new detail[384], logDetail[384];
 			if (faction == 0)
 			{
-				format(detail, 128, "rimosso dalla fazione");
+				format(detail, 384, "ფრაქციიდან ამოშლილია");
 			}
 			else
 			{
-				format(detail, 128, "%s grado %d", g_FacShort[faction], rank);
+				format(detail, 384, "%s, წოდება %d", g_FacShort[faction], rank);
 			}
-			format(logDetail, 128, "%s: %s", tn, detail);
+			format(logDetail, 384, "%s: %s", tn, detail);
 			Admin_LogRaw(g_FcSetStaffAcc[ctx], g_FcSetStaffName[ctx], g_FcSetTargetAcc[ctx], "setfazione", logDetail);
-			Admin_AdmCmd(g_FcSetStaffName[ctx], "impostato la fazione di", tn, detail, "");
+			Admin_AdmCmd(g_FcSetStaffName[ctx], "დაუყენა ფრაქცია", tn, detail, "");
 		}
 		else if (req != INVALID_PLAYER_ID)
 		{
@@ -1454,24 +1454,24 @@ public Faction_OnDBChanged(playerid, targetChar, cmd, faction, rank, result)
 			{
 				case 1:
 				{
-					SendClientMessage(req, 0x66DD66FF, "%s e' entrato in %s.", tn, g_FacShort[faction]);
+					SendClientMessage(req, 0x66DD66FF, "%s შემოუერთდა %s-ს.", tn, g_FacShort[faction]);
 				}
 				case 2:
 				{
-					SendClientMessage(req, 0x66DD66FF, "%s promosso a %s.", tn, rn);
+					SendClientMessage(req, 0x66DD66FF, "%s დაწინაურდა: %s.", tn, rn);
 				}
 				case 3:
 				{
-					SendClientMessage(req, 0x66DD66FF, "%s degradato a %s.", tn, rn);
+					SendClientMessage(req, 0x66DD66FF, "%s ჩამოქვეითდა: %s.", tn, rn);
 				}
 				case 4:
 				{
-					SendClientMessage(req, 0x66DD66FF, "%s licenziato.", tn);
+					SendClientMessage(req, 0x66DD66FF, "%s გათავისუფლდა.", tn);
 				}
 			}
 		}
-		new msg[128];
-		format(msg, 128, "cmd %d char %d fazione %d grado %d", cmd, targetChar, faction, rank);
+		new msg[384];
+		format(msg, 384, "cmd %d char %d fazione %d grado %d", cmd, targetChar, faction, rank);
 		Log_Write("FACTION", msg);
 	}
 	else
@@ -1481,16 +1481,16 @@ public Faction_OnDBChanged(playerid, targetChar, cmd, faction, rank, result)
 		{
 			if (result < 0)
 			{
-				Util_Send(notify, -10270721, "Servizio temporaneamente non disponibile: operazione non eseguita.");
+				Util_Send(notify, -10270721, "სერვისი დროებით მიუწვდომელია: ოპერაცია არ შესრულდა.");
 			}
 			else
 			{
-				Util_Send(notify, -10270721, "Operazione rifiutata (gradi, fazione o livello non idonei, o un'altra operazione e' in corso).");
+				Util_Send(notify, -10270721, "ოპერაცია უარყოფილია (წოდება, ფრაქცია ან დონე არ შეესაბამება, ან სხვა ოპერაცია მიმდინარეობს).");
 			}
 		}
 		if (target != INVALID_PLAYER_ID && cmd == 1)
 		{
-			Util_Send(target, -10270721, "Non e' stato possibile completare l'ingresso in fazione.");
+			Util_Send(target, -10270721, "ფრაქციაში გაწევრიანება ვერ დასრულდა.");
 		}
 	}
 	if (ctx != 65535)
@@ -1505,12 +1505,12 @@ Fac_RequestMembers(playerid, mode)
 	new f = gPlayer[playerid][pFaction];
 	if (f < 1)
 	{
-		Util_Send(playerid, -10270721, "Non appartieni a nessuna fazione.");
+		Util_Send(playerid, -10270721, "არცერთი ფრაქციის წევრი არ ხარ.");
 		return 0;
 	}
 	if (g_FcMemBusy[playerid] && Fac_CdLeftMs(true, g_FcMemBusyTick[playerid], 10000) > 0)
 	{
-		Util_Send(playerid, -10270721, "Richiesta gia' in corso: attendi.");
+		Util_Send(playerid, -10270721, "მოთხოვნა უკვე მუშავდება: დაელოდე.");
 		return 0;
 	}
 	g_FcMemBusy[playerid] = true;
@@ -1524,11 +1524,11 @@ Faction_CmdFazione(playerid, const params[])
 {
 	if (gPlayer[playerid][pFaction] < 1 || gPlayer[playerid][pFactionRank] < 1)
 	{
-		Util_Send(playerid, -10270721, "Non appartieni a nessuna fazione.");
+		Util_Send(playerid, -10270721, "არცერთი ფრაქციის წევრი არ ხარ.");
 		return 0;
 	}
-	new pos = 0, sub[16];
-	Util_NextToken(params, pos, sub, 16);
+	new pos = 0, sub[48];
+	Util_NextToken(params, pos, sub, 48);
 	if (sub[0] == 0 || !strcmp(sub, "info", true, 0x7FFFFFFF))
 	{
 		Fac_RequestMembers(playerid, 0);
@@ -1549,7 +1549,7 @@ Faction_CmdFazione(playerid, const params[])
 		DB_FactionLeave(playerid, gPlayer[playerid][pCharId], gPlayer[playerid][pFaction]);
 		return 0;
 	}
-	Util_Send(playerid, 0x99CCFFFF, "Uso: /fazione [info|membri|lascia]");
+	Util_Send(playerid, 0x99CCFFFF, "გამოყენება: /fazione [info|membri|lascia]");
 	return 0;
 }
 
@@ -1576,7 +1576,7 @@ public Faction_OnDBMembers(playerid, faction, count)
 	g_FcMemBusy[playerid] = false;
 	if (count < 0)
 	{
-		Util_Send(playerid, -10270721, "Servizio temporaneamente non disponibile: riprova piu' tardi.");
+		Util_Send(playerid, -10270721, "სერვისი დროებით მიუწვდომელია: სცადე მოგვიანებით.");
 		return 1;
 	}
 	if (gPlayer[playerid][pFaction] != faction || faction < 1)
@@ -1642,13 +1642,13 @@ bool:Faction_CmdSetfazione(playerid, const params[])
 	{
 		return false;
 	}
-	new pos = 0, who[25], tf[12], tr[12], faction = 0, rank = 0;
-	Util_NextToken(params, pos, who, 25);
-	Util_NextToken(params, pos, tf, 12);
-	Util_NextToken(params, pos, tr, 12);
+	new pos = 0, who[75], tf[36], tr[36], faction = 0, rank = 0;
+	Util_NextToken(params, pos, who, 75);
+	Util_NextToken(params, pos, tf, 36);
+	Util_NextToken(params, pos, tr, 36);
 	if (who[0] == 0 || !Util_ParseInt(tf, faction) || faction < 0 || faction > 2 || (faction != 0 && (!Util_ParseInt(tr, rank) || rank < 1 || rank > 6)))
 	{
-		SendClientMessage(playerid, 0x99CCFFFF, "Uso: /setfazione id|Nome_Cognome fazione(%d-%d, 0 = rimuovi) grado(1-%d)", 0, 2, 6);
+		SendClientMessage(playerid, 0x99CCFFFF, "გამოყენება: /setfazione id|სახელი_გვარი ფრაქცია(%d-%d, 0 = ამოშლა) წოდება(1-%d)", 0, 2, 6);
 		return true;
 	}
 	if (faction == 0)
@@ -1657,7 +1657,7 @@ bool:Faction_CmdSetfazione(playerid, const params[])
 	}
 	if (g_FcSetActive[playerid])
 	{
-		Util_Send(playerid, -10270721, "Hai gia' un'operazione /setfazione in corso.");
+		Util_Send(playerid, -10270721, "უკვე გაქვს მიმდინარე /setfazione ოპერაცია.");
 		return true;
 	}
 	new targetid = INVALID_PLAYER_ID;
@@ -1665,7 +1665,7 @@ bool:Faction_CmdSetfazione(playerid, const params[])
 	{
 		if (!Util_IsPlaying(targetid) || gPlayer[targetid][pCharId] <= 0)
 		{
-			Util_Send(playerid, -10270721, "Giocatore non valido.");
+			Util_Send(playerid, -10270721, "არასწორი მოთამაშე.");
 			return true;
 		}
 	}
@@ -1675,14 +1675,14 @@ bool:Faction_CmdSetfazione(playerid, const params[])
 	}
 	if (targetid != INVALID_PLAYER_ID && gPlayer[targetid][pLoggedIn] && gPlayer[targetid][pCharId] > 0)
 	{
-		new tn[25];
-		GetPlayerName(targetid, tn, 25);
+		new tn[75];
+		GetPlayerName(targetid, tn, 75);
 		Fac_SetStart(playerid, gPlayer[targetid][pCharId], gPlayer[targetid][pAccountId], tn, faction, rank);
 		return true;
 	}
 	if (!Util_IsValidRPName(who))
 	{
-		Util_Send(playerid, -10270721, "Giocatore non valido (usa id oppure Nome_Cognome).");
+		Util_Send(playerid, -10270721, "არასწორი მოთამაშე (მიუთითე id ან სახელი_გვარი).");
 		return true;
 	}
 	g_FcSetActive[playerid] = true;
@@ -1706,7 +1706,7 @@ public Faction_OnDBFound(playerid, tag, charId, const name[], faction, rank, lev
 	if (charId <= 0)
 	{
 		g_FcSetActive[playerid] = false;
-		Util_Send(playerid, -10270721, charId < 0 ? "Servizio temporaneamente non disponibile: riprova piu' tardi." : "Personaggio non trovato.");
+		Util_Send(playerid, -10270721, charId < 0 ? "სერვისი დროებით მიუწვდომელია: სცადე მოგვიანებით." : "პერსონაჟი ვერ მოიძებნა.");
 		return 1;
 	}
 	new f = g_FcSetFac[playerid], r = g_FcSetRank[playerid];
@@ -1727,10 +1727,10 @@ public Faction_OnTick()
 		{
 			new from = g_FcInvFrom[i], fromChar = g_FcInvFromChar[i];
 			Fac_ClearInvite(i, true);
-			Util_Send(i, -1, "L'invito in fazione e' scaduto.");
+			Util_Send(i, -1, "ფრაქციის მოწვევის ვადა ამოიწურა.");
 			if (Fac_ValidPlayer(from) && gPlayer[from][pCharId] == fromChar)
 			{
-				Util_Send(from, -1, "Il tuo invito e' scaduto.");
+				Util_Send(from, -1, "შენი მოწვევის ვადა ამოიწურა.");
 			}
 		}
 		if (!gPlayer[i][pSpawned] || !Util_IsPlaying(i))
@@ -1750,7 +1750,7 @@ public Faction_OnTick()
 			if (gPlayer[i][pFaction] < 1 || Admin_IsMuted(i))
 			{
 				Faction_ForceOff(i, true);
-				Util_Send(i, -10270721, "Sei stato messo fuori servizio.");
+				Util_Send(i, -10270721, "სამსახურიდან გაგიყვანეს.");
 			}
 			else
 			{
@@ -1762,15 +1762,15 @@ public Faction_OnTick()
 			new t = g_FcRevTarget[i];
 			if (!gPlayer[i][pOnDuty] || gPlayer[i][pWounded] || gPlayer[i][pCuffed])
 			{
-				Fac_ReviveCancel(i, "Rianimazione interrotta.");
+				Fac_ReviveCancel(i, "გაცოცხლება შეწყდა.");
 			}
 			else if (!Util_IsPlaying(t) || gPlayer[t][pCharId] != g_FcRevTargetChar[i] || !gPlayer[t][pWounded])
 			{
-				Fac_ReviveCancel(i, "Rianimazione interrotta: il paziente non e' piu' ferito.");
+				Fac_ReviveCancel(i, "გაცოცხლება შეწყდა: პაციენტი აღარ არის დაჭრილი.");
 			}
 			else if (!Util_InRange(i, t, (3.0 + 1.0)))
 			{
-				Fac_ReviveCancel(i, "Rianimazione interrotta: ti sei allontanato.");
+				Fac_ReviveCancel(i, "გაცოცხლება შეწყდა: დაშორდი.");
 			}
 			else if (now - g_FcRevStart[i] >= 8000)
 			{
@@ -1780,7 +1780,7 @@ public Faction_OnTick()
 				}
 				else
 				{
-					Fac_ReviveCancel(i, "Kit medico esaurito.");
+					Fac_ReviveCancel(i, "სამედიცინო ნაკრები ამოიწურა.");
 				}
 			}
 		}
@@ -1850,7 +1850,7 @@ Faction_OnPlayerDisconnect(playerid)
 		}
 		if (g_FcRevTarget[i] == playerid)
 		{
-			Fac_ReviveCancel(i, "Rianimazione interrotta: il paziente si e' scollegato.");
+			Fac_ReviveCancel(i, "გაცოცხლება შეწყდა: პაციენტი გავიდა.");
 		}
 	}
 	if (gPlayer[playerid][pWounded])
@@ -1892,7 +1892,7 @@ Faction_OnPlayerDeath(playerid)
 	{
 		if (g_FcRevTarget[i] == playerid)
 		{
-			Fac_ReviveCancel(i, "Rianimazione interrotta.");
+			Fac_ReviveCancel(i, "გაცოცხლება შეწყდა.");
 		}
 	}
 	if (gPlayer[playerid][pWounded])
@@ -1932,7 +1932,7 @@ Faction_OnPlayerSpawn(playerid)
 	g_FcInjLeftMs[playerid] = 180000;
 	g_FcInjSec[playerid] = 180;
 	UI_InjuryHudShow(playerid, 180);
-	SendClientMessage(playerid, -10270721, "Sei ferito. Attendi i soccorsi (EMS): senza aiuto verrai ricoverato tra %d secondi ($%d).", 180, 200);
+	SendClientMessage(playerid, -10270721, "დაჭრილი ხარ. დაელოდე დახმარებას (EMS): დახმარების გარეშე %d წამში ჰოსპიტალიზდები ($%d).", 180, 200);
 	return 0;
 }
 
@@ -1943,14 +1943,14 @@ Faction_SendHelp(playerid)
 	{
 		return 0;
 	}
-	SendClientMessage(playerid, -2994689, "--- Fazione %s ---", g_FacShort[f]);
-	Util_Send(playerid, 0x99CCFFFF, "/fazione [info|membri|lascia] · /duty (vicino alla sede) · /r testo · /dep testo");
+	SendClientMessage(playerid, -2994689, "--- ფრაქცია %s ---", g_FacShort[f]);
+	Util_Send(playerid, 0x99CCFFFF, "/fazione [info|membri|lascia] · /duty (შტაბთან) · /r ტექსტი · /dep ტექსტი");
 	if (f == 1)
 	{
 		Util_Send(playerid, 0x99CCFFFF, "/ammanetta id · /smanetta id");
 		if (rank >= 2)
 		{
-			Util_Send(playerid, 0x99CCFFFF, "/multa id importo motivo");
+			Util_Send(playerid, 0x99CCFFFF, "/multa id თანხა მიზეზი");
 		}
 	}
 	else

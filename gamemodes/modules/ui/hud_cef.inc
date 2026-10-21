@@ -377,7 +377,7 @@ HudCef_OnKeyStateChange(playerid, KEY:newkeys, KEY:oldkeys)
 		new ia = HudCef_FindInteract(playerid);
 		if (ia != HUDC_IA_NONE)
 		{
-			new cmd[16];
+			new cmd[48];
 			strcat(cmd, s_HcIaCmd[ia]);      // copia: Cmd_Dispatch vuole un array modificabile (errore con pawncc 3.10.11)
 			Cmd_Dispatch(playerid, cmd);
 			return 1;

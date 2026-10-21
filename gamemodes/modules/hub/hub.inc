@@ -229,18 +229,18 @@ Hub_StepTarget(step)
 
 Hub_OnInit()
 {
-	new text[256], name[16];
+	new text[768], name[48];
 	for (new b = 0; b < 3; b++)
 	{
 		g_HubPickup[b] = CreatePickup(1239, 1, s_HubBoard[b][0], s_HubBoard[b][1], s_HubBoard[b][2], 0);
 		if (b == 0)
 		{
-			g_HubLabel[b] = Lang_Create3DTextLabel("Casa del Quartiere di Idlewood\nBacheca contratti - Progetto del quartiere\n/contratti  /contribuisci  /aiuto servizi", -2994689, s_HubBoard[b][0], s_HubBoard[b][1], (0.8 + s_HubBoard[b][2]), 15.0, 0, false);
+			g_HubLabel[b] = Lang_Create3DTextLabel("Idlewood-ის უბნის სახლი\nკონტრაქტების დაფა - უბნის პროექტი\n/contratti  /contribuisci  /aiuto servizi", -2994689, s_HubBoard[b][0], s_HubBoard[b][1], (0.8 + s_HubBoard[b][2]), 15.0, 0, false);
 		}
 		else
 		{
-			LD_DistrictName(s_HubBoardDistrict[b], name, 16);
-			format(text, 256, "Bacheca di quartiere - %s\nUn pezzo di Casa del Quartiere anche qui\n/contratti  /contribuisci", name);
+			LD_DistrictName(s_HubBoardDistrict[b], name, 48);
+			format(text, 768, "უბნის დაფა - %s\nუბნის სახლის ნაწილი აქაც\n/contratti  /contribuisci", name);
 			g_HubLabel[b] = Lang_Create3DTextLabel(text, 0x99CCFFFF, s_HubBoard[b][0], s_HubBoard[b][1], (0.8 + s_HubBoard[b][2]), 15.0, 0, false);
 		}
 	}
@@ -357,13 +357,13 @@ Hub_TryLoad(playerid)
 	}
 	if (step == 0)
 	{
-		Util_Send(playerid, 0x99CCFFFF, "Benvenuto a Los Santos. Qui nessuno arriva da solo: a due passi da Unity Station c'e' la Casa del Quartiere di Idlewood.");
-		Util_Send(playerid, 0x99CCFFFF, "Se ti va, /aiuto ti accompagna nel primo giorno. Preferisci fare da te? /aiuto off, nessun problema.");
+		Util_Send(playerid, 0x99CCFFFF, "კეთილი იყოს შენი მობრძანება ლოს-სანტოსში. აქ მარტო არავინ რჩება: Unity Station-თან ახლოს Idlewood-ის უბნის სახლია.");
+		Util_Send(playerid, 0x99CCFFFF, "თუ გინდა, /aiuto პირველ დღეს გაგიძღვება. საკუთარი თავით გირჩევნია? /aiuto off, არაა პრობლემა.");
 	}
 	else
 	{
-		new msg[256];
-		format(msg, 256, "Bentornato. Il tuo primo giorno riprende dal passo %d di %d: /aiuto per rivederlo.", Hub_CurStep(playerid), 5);
+		new msg[768];
+		format(msg, 768, "კეთილი იყოს დაბრუნება. შენი პირველი დღე გრძელდება %d/%d ნაბიჯიდან: გასამეორებლად /aiuto.", Hub_CurStep(playerid), 5);
 		Util_Send(playerid, 0x99CCFFFF, msg);
 	}
 	g_HubHintDue[playerid] = GetTickCount() + 8000;
@@ -453,32 +453,32 @@ Hub_Finish(playerid, bool:rewarded)
 
 Hub_StepMessage(playerid, step, paid)
 {
-	new msg[256];
+	new msg[768];
 	switch (step)
 	{
 		case 1:
 		{
-			UI_LivingNotify(playerid, "Sei alla Casa del Quartiere: qui la citta' ti chiama per nome. Bacheca, notizie, una mano quando serve.", 1);
+			UI_LivingNotify(playerid, "უბნის სახლში ხარ: აქ ქალაქი სახელით გიცნობს. დაფა, სიახლეები, დახმარება, როცა დაგჭირდება.", 1);
 		}
 		case 2:
 		{
-			UI_LivingNotify(playerid, "Ora sai come respira Idlewood. Quello che facciamo, lo cambia per tutti.", 1);
+			UI_LivingNotify(playerid, "ახლა იცი, როგორ სუნთქავს Idlewood. რასაც ვაკეთებთ, ყველასთვის ცვლის მას.", 1);
 		}
 		case 3:
 		{
 			if (paid > 0)
 			{
-				format(msg, 256, "Consegna di benvenuto fatta: il negozio ringrazia. La Casa del Quartiere ti ha versato $%d sul conto.", paid);
+				format(msg, 768, "მისასალმებელი მიწოდება შესრულდა: მაღაზია გიხდის მადლობას. უბნის სახლმა ანგარიშზე $%d ჩაგირიცხა.", paid);
 			}
 			else
 			{
-				format(msg, 256, "Consegna di benvenuto fatta: il negozio ringrazia.");
+				format(msg, 768, "მისასალმებელი მიწოდება შესრულდა: მაღაზია გიხდის მადლობას.");
 			}
 			UI_LivingNotify(playerid, msg, 1);
 		}
 		case 4:
 		{
-			UI_LivingNotify(playerid, "La citta' comincia a conoscerti. Ogni lavoro fatto bene lascia un segno.", 1);
+			UI_LivingNotify(playerid, "ქალაქი გიცნობს უკვე. კარგად შესრულებული ყოველი საქმე კვალს ტოვებს.", 1);
 		}
 	}
 }
@@ -521,8 +521,8 @@ Hub_KitTick(playerid, now)
 		{
 			continue;
 		}
-		new opId[33];
-		format(opId, 33, "obkit%d-%d", gPlayer[playerid][pCharId], i);
+		new opId[99];
+		format(opId, 99, "obkit%d-%d", gPlayer[playerid][pCharId], i);
 		DB_InvAdd(playerid, gPlayer[playerid][pCharId], s_HubKitItem[i], s_HubKitQty[i], opId, "add", 0);
 		break;
 	}
@@ -612,7 +612,7 @@ Hub_HintsOff(playerid)
 	{
 		case 0:
 		{
-			Util_Send(playerid, -10270721, "Sto ancora recuperando il tuo percorso: riprova tra un attimo.");
+			Util_Send(playerid, -10270721, "შენს პროგრესს ჯერ ვტვირთავ: ცოტა ხანში სცადე.");
 		}
 		case 2:
 		{
@@ -622,13 +622,13 @@ Hub_HintsOff(playerid)
 			}
 			gPlayer[playerid][pHintsOff] = 1;
 			UI_LivingHintHide(playerid);
-			Util_Send(playerid, 0x99CCFFFF, "Suggerimenti spenti. La Casa del Quartiere di Idlewood resta aperta, se ti serve.");
+			Util_Send(playerid, 0x99CCFFFF, "მინიშნებები გამორთულია. Idlewood-ის უბნის სახლი ღიაა, თუ დაგჭირდება.");
 		}
 		default:
 		{
 			if (g_HubOpBusy[playerid])
 			{
-				Util_Send(playerid, -10270721, "Un attimo: sto registrando il tuo ultimo passo. Riprova tra poco.");
+				Util_Send(playerid, -10270721, "ერთი წამით: ბოლო ნაბიჯს ვარეგისტრირებ. ცოტა ხანში სცადე.");
 				return 0;
 			}
 			gPlayer[playerid][pHintsOff] = 1;
@@ -647,22 +647,22 @@ Hub_StartWelcome(playerid)
 	{
 		if (g_HubOnb[playerid] == 1 && Hub_CurStep(playerid) < 3)
 		{
-			Util_Send(playerid, 0x99CCFFFF, "La consegna di benvenuto arriva tra poco: prima finisci il passo in corso (/aiuto).");
+			Util_Send(playerid, 0x99CCFFFF, "მისასალმებელი მიწოდება მალე იქნება: ჯერ მიმდინარე ნაბიჯი დაასრულე (/aiuto).");
 		}
 		else
 		{
-			Util_Send(playerid, 0x99CCFFFF, "La consegna di benvenuto e' per il primo giorno. Per altri incarichi c'e' la bacheca: /contratti.");
+			Util_Send(playerid, 0x99CCFFFF, "მისასალმებელი მიწოდება პირველი დღისთვისაა. სხვა დავალებებისთვის დაფაა: /contratti.");
 		}
 		return 0;
 	}
 	if (gPlayer[playerid][pFreightWelcome] != 0)
 	{
-		Util_Send(playerid, 0x99CCFFFF, "La consegna di benvenuto e' gia' in corso: il magazzino di Idlewood ti aspetta.");
+		Util_Send(playerid, 0x99CCFFFF, "მისასალმებელი მიწოდება უკვე მიმდინარეობს: Idlewood-ის საწყობი გელოდება.");
 		return 0;
 	}
 	if (Hub_NearBoard(playerid) == -1)
 	{
-		Util_Send(playerid, 0x99CCFFFF, "La consegna si prende a una bacheca: ti ho segnato la Casa del Quartiere di Idlewood sulla mappa.");
+		Util_Send(playerid, 0x99CCFFFF, "მიწოდებას დაფასთან იღებენ: Idlewood-ის უბნის სახლი რუკაზე მოგინიშნე.");
 		Hub_SetTarget(playerid, 1, true);
 		return 0;
 	}
@@ -675,10 +675,10 @@ Hub_StartWelcome(playerid)
 	Hub_ClearTarget(playerid);
 	if (!Freight_Begin(playerid, 0, 1, 1, 1, 0, true))
 	{
-		Util_Send(playerid, -10270721, "Il furgone della consegna di benvenuto non e' disponibile proprio ora: riprova tra poco.");
+		Util_Send(playerid, -10270721, "მისასალმებელი მიწოდების ფურგონი ახლა თავისუფალი არ არის: ცოტა ხანში სცადე.");
 		return 0;
 	}
-	Util_Send(playerid, 0x99CCFFFF, "Un carico di merci dal magazzino al negozio di Idlewood: strada breve, nessuna fretta. Il quartiere ti ringrazia gia'.");
+	Util_Send(playerid, 0x99CCFFFF, "ტვირთი საწყობიდან Idlewood-ის მაღაზიამდე: მოკლე გზა, აჩქარება არ სჭირდება. უბანი უკვე გიხდის მადლობას.");
 	return 0;
 }
 
@@ -693,21 +693,21 @@ Hub_OnWelcomeDelivered(playerid, bool:success)
 		Hub_Advance(playerid, 3);
 		return 1;
 	}
-	Util_Send(playerid, 0x99CCFFFF, "Pazienza, capita a tutti. La consegna di benvenuto resta li': quando vuoi, /aiuto consegna a una bacheca.");
+	Util_Send(playerid, 0x99CCFFFF, "არაუშავს, ყველას ემართება. მისასალმებელი მიწოდება გელოდება: როცა გინდა, /aiuto consegna დაფასთან.");
 	Hub_StepBegin(playerid);
 	return 1;
 }
 
 Hub_ShowServices(playerid)
 {
-	new msg[256];
-	Util_Send(playerid, 0x99CCFFFF, "Casa del Quartiere di Idlewood - cosa trovi qui (e alle bacheche di Ganton e Jefferson):");
-	Util_Send(playerid, -1, " /contratti - la bacheca: si consulta ovunque, si accetta qui o a una bacheca di quartiere");
-	Util_Send(playerid, -1, " /quartiere [nome] - come sta il quartiere e cosa si dice in strada");
-	format(msg, 256, " /contribuisci [importo] [quartiere] - il progetto della comunita': da $%d a $%d, max $%d al giorno, dal conto", 50, 500, 1000);
+	new msg[768];
+	Util_Send(playerid, 0x99CCFFFF, "Idlewood-ის უბნის სახლი - რას იპოვი აქ (და Ganton-ისა და Jefferson-ის დაფებთან):");
+	Util_Send(playerid, -1, " /contratti - დაფა: ნახვა ყველგან შეიძლება, მიღება აქ ან უბნის დაფასთან");
+	Util_Send(playerid, -1, " /quartiere [სახელი] - როგორაა უბანი და რას ამბობენ ქუჩაში");
+	format(msg, 768, " /contribuisci [თანხა] [უბანი] - საზოგადოების პროექტი: $%d-დან $%d-მდე, დღეში მაქს. $%d, ანგარიშიდან", 50, 500, 1000);
 	Util_Send(playerid, -1, msg);
-	Util_Send(playerid, -1, " /documento richiedi - lo sportello documenti");
-	Util_Send(playerid, -1, " /aiuto lavoro - la strada per il Job Center di Pershing Square  |  /aiuto noleggio - il noleggio mezzi");
+	Util_Send(playerid, -1, " /documento richiedi - დოკუმენტების სარკმელი");
+	Util_Send(playerid, -1, " /aiuto lavoro - გზა Pershing Square-ის Job Center-მდე  |  /aiuto noleggio - ტრანსპორტის ქირაობა");
 }
 
 Hub_CmdAiuto(playerid, const params[])
@@ -716,13 +716,13 @@ Hub_CmdAiuto(playerid, const params[])
 	{
 		return 1;
 	}
-	new pos = 0, sub[24];
-	Util_NextToken(params, pos, sub, 24);
+	new pos = 0, sub[72];
+	Util_NextToken(params, pos, sub, 72);
 	if (sub[0] == 0)
 	{
 		if (g_HubOnb[playerid] == 0)
 		{
-			Util_Send(playerid, 0x99CCFFFF, "Sto recuperando il tuo percorso: riprova tra un attimo. Intanto: /aiuto servizi.");
+			Util_Send(playerid, 0x99CCFFFF, "შენს პროგრესს ვტვირთავ: ცოტა ხანში სცადე. მანამდე: /aiuto servizi.");
 			return 1;
 		}
 		UI_LivingHelpSet(playerid, g_HubOnb[playerid] == 2 ? 6 : Hub_CurStep(playerid), !Hub_HintsOn(playerid));
@@ -752,29 +752,29 @@ Hub_CmdAiuto(playerid, const params[])
 		}
 		else
 		{
-			Util_Send(playerid, 0x99CCFFFF, "Nessun passo da segnare. Per la Casa del Quartiere: /aiuto casa.");
+			Util_Send(playerid, 0x99CCFFFF, "მოსანიშნი ნაბიჯი არ არის. უბნის სახლისთვის: /aiuto casa.");
 		}
 		return 1;
 	}
 	if (!strcmp(sub, "casa", true, 0x7FFFFFFF))
 	{
 		Hub_SetTarget(playerid, 1, true);
-		Util_Send(playerid, 0x99CCFFFF, "Ti ho segnato la Casa del Quartiere di Idlewood sulla mappa.");
+		Util_Send(playerid, 0x99CCFFFF, "Idlewood-ის უბნის სახლი რუკაზე მოგინიშნე.");
 		return 1;
 	}
 	if (!strcmp(sub, "lavoro", true, 0x7FFFFFFF))
 	{
 		Hub_SetTarget(playerid, 2, true);
-		Util_Send(playerid, 0x99CCFFFF, "Il Job Center e' a Pershing Square, vicino al municipio: te l'ho segnato sulla mappa. Li', /lavoro prendi.");
+		Util_Send(playerid, 0x99CCFFFF, "Job Center Pershing Square-ზეა, მერიასთან: რუკაზე მოგინიშნე. იქ: /lavoro prendi.");
 		return 1;
 	}
 	if (!strcmp(sub, "noleggio", true, 0x7FFFFFFF))
 	{
 		Hub_SetTarget(playerid, 3, true);
-		Util_Send(playerid, 0x99CCFFFF, "Il noleggio mezzi e' a Pershing Square: te l'ho segnato sulla mappa. Li', /noleggio.");
+		Util_Send(playerid, 0x99CCFFFF, "ტრანსპორტის ქირაობა Pershing Square-ზეა: რუკაზე მოგინიშნე. იქ: /noleggio.");
 		return 1;
 	}
-	Util_Send(playerid, 0x99CCFFFF, "Uso: /aiuto [servizi|mappa|consegna|casa|lavoro|noleggio|off]");
+	Util_Send(playerid, 0x99CCFFFF, "გამოყენება: /aiuto [servizi|mappa|consegna|casa|lavoro|noleggio|off]");
 	return 1;
 }
 
@@ -786,7 +786,7 @@ public UI_OnHelpWaypoint(playerid, step)
 	}
 	if (g_HubOnb[playerid] != 1 || step != Hub_CurStep(playerid))
 	{
-		Util_Send(playerid, 0x99CCFFFF, "Questo passo non e' quello in corso: /aiuto per vedere a che punto sei.");
+		Util_Send(playerid, 0x99CCFFFF, "ეს ნაბიჯი მიმდინარე არ არის: სად ხარ, ნახე /aiuto-ით.");
 		return 1;
 	}
 	switch (step)
@@ -794,28 +794,28 @@ public UI_OnHelpWaypoint(playerid, step)
 		case 1:
 		{
 			Hub_SetTarget(playerid, 1, true);
-			Util_Send(playerid, 0x99CCFFFF, "Segui il segnale: la Casa del Quartiere e' a due passi da Unity Station.");
+			Util_Send(playerid, 0x99CCFFFF, "მიჰყევი ნიშანს: უბნის სახლი Unity Station-თან ახლოსაა.");
 		}
 		case 3:
 		{
 			if (Hub_NearBoard(playerid) != -1)
 			{
-				Util_Send(playerid, 0x99CCFFFF, "Sei gia' a una bacheca: /aiuto consegna e si parte.");
+				Util_Send(playerid, 0x99CCFFFF, "უკვე დაფასთან ხარ: /aiuto consegna და დავიწყოთ.");
 			}
 			else
 			{
 				Hub_SetTarget(playerid, 1, true);
-				Util_Send(playerid, 0x99CCFFFF, "Ti ho segnato la Casa del Quartiere: li', /aiuto consegna.");
+				Util_Send(playerid, 0x99CCFFFF, "უბნის სახლი მოგინიშნე: იქ /aiuto consegna.");
 			}
 		}
 		case 5:
 		{
 			Hub_SetTarget(playerid, 2, true);
-			Util_Send(playerid, 0x99CCFFFF, "Ti ho segnato il Job Center di Pershing Square. Puoi anche solo scrivere /lavoro o /noleggio da qui.");
+			Util_Send(playerid, 0x99CCFFFF, "Pershing Square-ის Job Center მოგინიშნე. შეგიძლია აქედანაც დაწერო /lavoro ან /noleggio.");
 		}
 		default:
 		{
-			Util_Send(playerid, 0x99CCFFFF, "Non serve andare lontano: il comando funziona ovunque tu sia (/aiuto per i dettagli).");
+			Util_Send(playerid, 0x99CCFFFF, "შორს წასვლა არ გჭირდება: ბრძანება ყველგან მუშაობს (დეტალები: /aiuto).");
 		}
 	}
 	return 1;
@@ -880,8 +880,8 @@ Hub_ProjectBlock(playerid, districtId)
 
 Hub_ProjectFill(playerid, districtId)
 {
-	new name[65], prj = DB_LivingDistrictGet(districtId, E_LD_DISTRICT:6), hours = 0;
-	DB_LivingProjectName(districtId, name, 65);
+	new name[195], prj = DB_LivingDistrictGet(districtId, E_LD_DISTRICT:6), hours = 0;
+	DB_LivingProjectName(districtId, name, 195);
 	new left = DB_LivingDistrictGet(districtId, E_LD_DISTRICT:9) - gettime();
 	if (left > 0)
 	{
@@ -912,18 +912,18 @@ Hub_CmdContribuisci(playerid, const params[])
 	{
 		return 1;
 	}
-	new pos = 0, tok[24], amount = 0, districtId = 0;
-	Util_NextToken(params, pos, tok, 24);
+	new pos = 0, tok[72], amount = 0, districtId = 0;
+	Util_NextToken(params, pos, tok, 72);
 	if (tok[0] != 0)
 	{
 		if (Util_ParseInt(tok, amount))
 		{
 			if (amount <= 0)
 			{
-				Util_Send(playerid, -10270721, "Importo non valido: scrivi un numero intero positivo (es. /contribuisci 100).");
+				Util_Send(playerid, -10270721, "არასწორი თანხა: დაწერე დადებითი მთელი რიცხვი (მაგ. /contribuisci 100).");
 				return 1;
 			}
-			Util_NextToken(params, pos, tok, 24);
+			Util_NextToken(params, pos, tok, 72);
 			if (tok[0] != 0)
 			{
 				districtId = LD_ParseDistrict(tok);
@@ -935,7 +935,7 @@ Hub_CmdContribuisci(playerid, const params[])
 		}
 		if (tok[0] != 0 && districtId == 0)
 		{
-			Util_Send(playerid, -10270721, "Quartiere sconosciuto: Idlewood, Ganton o Jefferson.");
+			Util_Send(playerid, -10270721, "უცნობი უბანი: Idlewood, Ganton ან Jefferson.");
 			return 1;
 		}
 	}
@@ -981,43 +981,43 @@ public UI_OnProjectContribute(playerid, projectId, amount)
 	new districtId = Hub_DistrictOfProject(projectId);
 	if (districtId == 0 || !Hub_ProjectOpen(districtId))
 	{
-		UI_LivingReject(playerid, "Questo progetto non raccoglie piu' fondi: ne partira' presto un altro.");
+		UI_LivingReject(playerid, "ეს პროექტი თანხას აღარ აგროვებს: მალე ახალი დაიწყება.");
 		return 1;
 	}
-	new msg[256];
+	new msg[768];
 	switch (Hub_ProjectBlock(playerid, districtId))
 	{
 		case 4:
 		{
-			UI_LivingReject(playerid, "Le donazioni si fanno alla Casa del Quartiere di Idlewood o a una bacheca di quartiere.");
+			UI_LivingReject(playerid, "შემოწირულობა მიიღება Idlewood-ის უბნის სახლში ან უბნის დაფასთან.");
 			return 1;
 		}
 		case 1:
 		{
-			format(msg, 256, "Potrai donare dopo almeno %d minuti trascorsi in citta'. Intanto, grazie del pensiero.", 60);
+			format(msg, 768, "შემოწირვას ქალაქში მინიმუმ %d წუთის შემდეგ შეძლებ. მანამდე, მადლობა ზრუნვისთვის.", 60);
 			UI_LivingReject(playerid, msg);
 			return 1;
 		}
 		case 2:
 		{
-			UI_LivingReject(playerid, "Per oggi hai gia' dato il massimo: grazie davvero.");
+			UI_LivingReject(playerid, "დღეისთვის მაქსიმუმი უკვე გაიღე: დიდი მადლობა.");
 			return 1;
 		}
 	}
 	if (!LD_DonationValid(amount, g_HubDonToday[playerid]))
 	{
-		format(msg, 256, "Importo non valido: da $%d a $%d, al massimo $%d al giorno.", 50, 500, 1000);
+		format(msg, 768, "არასწორი თანხა: $%d-დან $%d-მდე, დღეში მაქსიმუმ $%d.", 50, 500, 1000);
 		UI_LivingReject(playerid, msg);
 		return 1;
 	}
 	if (gPlayer[playerid][pDonationPending] != 0 || DB_LivingBusy(playerid, 3))
 	{
-		UI_LivingReject(playerid, "Un attimo: la tua donazione precedente e' ancora in registrazione.");
+		UI_LivingReject(playerid, "ერთი წამით: შენი წინა შემოწირულობა ჯერ კიდევ რეგისტრირდება.");
 		return 1;
 	}
 	if (gPlayer[playerid][pBank] < amount)
 	{
-		UI_LivingReject(playerid, "Le donazioni partono dal conto in banca e li' non c'e' abbastanza. Nessun problema: ogni contratto aiuta il fondo.");
+		UI_LivingReject(playerid, "შემოწირულობა საბანკო ანგარიშიდან ჩამოიჭრება და იქ საკმარისი თანხა არ არის. არაუშავს: ყოველი კონტრაქტი ფონდს ეხმარება.");
 		return 1;
 	}
 	if (g_HubPrjOpId[playerid][0] == 0 || g_HubPrjOpProject[playerid] != projectId || g_HubPrjOpAmount[playerid] != amount)
@@ -1039,7 +1039,7 @@ public Living_OnDBProject(playerid, result, projectId, donated, balance, points,
 		return 1;
 	}
 	gPlayer[playerid][pDonationPending] = 0;
-	new msg[256], name[65], dname[16], d = g_HubPrjDistrict[playerid];
+	new msg[768], name[195], dname[48], d = g_HubPrjDistrict[playerid];
 	if (d < 1 || d > 3)
 	{
 		d = Hub_DistrictOfProject(projectId);
@@ -1056,58 +1056,58 @@ public Living_OnDBProject(playerid, result, projectId, donated, balance, points,
 		{
 			Hub_DayLeft(playerid);
 			g_HubDonToday[playerid] += donated;
-			DB_LivingProjectName(d, name, 65);
-			LD_DistrictName(d, dname, 16);
+			DB_LivingProjectName(d, name, 195);
+			LD_DistrictName(d, dname, 48);
 			if (d >= 1 && d <= 3)
 			{
 				g_HubFundPrj[d] = projectId;
 				g_HubFund[d] = fund;
 			}
-			format(msg, 256, "Grazie! Hai donato $%d per \"%s\": raccolti $%d su $%d.", donated, name, fund, DB_LivingDistrictGet(d, E_LD_DISTRICT:7));
+			format(msg, 768, "მადლობა! $%d შესწირე პროექტს \"%s\": შეგროვდა $%d / $%d.", donated, name, fund, DB_LivingDistrictGet(d, E_LD_DISTRICT:7));
 			UI_LivingNotify(playerid, msg, 1);
 			if (points > 0)
 			{
-				format(msg, 256, "%s se ne ricordera': reputazione locale +%d.", dname, points);
+				format(msg, 768, "%s ამას არ დაივიწყებს: ადგილობრივი რეპუტაცია +%d.", dname, points);
 				Util_Send(playerid, 0x66DD66FF, msg);
 			}
 			if (projectState == 2)
 			{
-				Util_Send(playerid, 0x66DD66FF, "E' stata la tua donazione a completare il progetto. Il quartiere fa festa!");
+				Util_Send(playerid, 0x66DD66FF, "სწორედ შენმა შემოწირულობამ დაასრულა პროექტი. უბანი ზეიმობს!");
 				Hub_RequestRefresh(true);
 			}
-			format(msg, 256, "personaggio %d dona %d al progetto %d (fondo %d, stato %d)", gPlayer[playerid][pCharId], donated, projectId, fund, projectState);
+			format(msg, 768, "personaggio %d dona %d al progetto %d (fondo %d, stato %d)", gPlayer[playerid][pCharId], donated, projectId, fund, projectState);
 			Log_Write("HUB", msg);
 		}
 		case 2:
 		{
-			UI_LivingReject(playerid, "Questa donazione risulta gia' registrata.");
+			UI_LivingReject(playerid, "ეს შემოწირულობა უკვე დარეგისტრირებულია.");
 		}
 		case 3:
 		{
-			UI_LivingReject(playerid, "Le donazioni partono dal conto in banca e li' non c'e' abbastanza.");
+			UI_LivingReject(playerid, "შემოწირულობა საბანკო ანგარიშიდან ჩამოიჭრება და იქ საკმარისი თანხა არ არის.");
 		}
 		case 4, 5:
 		{
-			UI_LivingReject(playerid, "Questo progetto non raccoglie piu' fondi: ne partira' presto un altro.");
+			UI_LivingReject(playerid, "ეს პროექტი თანხას აღარ აგროვებს: მალე ახალი დაიწყება.");
 			Hub_RequestRefresh(true);
 		}
 		case 7:
 		{
-			format(msg, 256, "Per ora non si puo': servono almeno %d minuti in citta' e al massimo $%d donati al giorno.", 60, 1000);
+			format(msg, 768, "ჯერ არ შეიძლება: საჭიროა ქალაქში მინიმუმ %d წუთი და დღეში მაქსიმუმ $%d შემოწირულობა.", 60, 1000);
 			UI_LivingReject(playerid, msg);
 		}
 		case 9:
 		{
-			format(msg, 256, "Importo non valido: da $%d a $%d.", 50, 500);
+			format(msg, 768, "არასწორი თანხა: $%d-დან $%d-მდე.", 50, 500);
 			UI_LivingReject(playerid, msg);
 		}
 		case 10:
 		{
-			UI_LivingReject(playerid, "Un attimo: c'e' gia' una donazione in registrazione.");
+			UI_LivingReject(playerid, "ერთი წამით: შემოწირულობა უკვე რეგისტრირდება.");
 		}
 		default:
 		{
-			UI_LivingReject(playerid, "Il registro della Casa del Quartiere non ha risposto. Riprova con lo stesso importo: non verra' addebitato due volte.");
+			UI_LivingReject(playerid, "უბნის სახლის რეესტრმა არ უპასუხა. სცადე იგივე თანხით: ორჯერ არ ჩამოგეჭრება.");
 		}
 	}
 	return 1;
@@ -1143,7 +1143,7 @@ Hub_Broadcast(color, const text[])
 
 Hub_CheckFestivals()
 {
-	new msg[256], dname[16], opId[37];
+	new msg[768], dname[48], opId[111];
 	for (new d = 1; d <= 3; d++)
 	{
 		if (DB_LivingDistrictGet(d, E_LD_DISTRICT:0) == 0)
@@ -1164,19 +1164,19 @@ Hub_CheckFestivals()
 		{
 			continue;
 		}
-		LD_DistrictName(d, dname, 16);
+		LD_DistrictName(d, dname, 48);
 		if (fest > g_HubFestSeen[d] && g_HubPrjSeen[d] > 0)
 		{
-			format(msg, 256, "%s ce l'ha fatta: \"%s\" e' completato grazie a chi ci lavora e a chi ha donato. Festa di quartiere per %d ore!", dname, g_HubPrjNameSeen[d], 72);
+			format(msg, 768, "%s-მ შეძლო: \"%s\" დასრულდა მათი წყალობით, ვინც იმუშავა და შესწირა. უბნის ზეიმი %d საათი!", dname, g_HubPrjNameSeen[d], 72);
 			Hub_Broadcast(0x66DD66FF, msg);
-			format(opId, 37, "pj%d-done", g_HubPrjSeen[d]);
+			format(opId, 111, "pj%d-done", g_HubPrjSeen[d]);
 			LD_Emit(8, d, 0, g_HubGoalSeen[d], opId);
 		}
 		else if (prj > 0 && prj != g_HubPrjSeen[d])
 		{
-			new name[65];
-			DB_LivingProjectName(d, name, 65);
-			format(msg, 256, "A %s parte un nuovo progetto della comunita': \"%s\". Ogni contratto da e per il quartiere lo aiuta.", dname, name);
+			new name[195];
+			DB_LivingProjectName(d, name, 195);
+			format(msg, 768, "%s-ში იწყება საზოგადოების ახალი პროექტი: \"%s\". უბნიდან და უბანში ყოველი კონტრაქტი მას ეხმარება.", dname, name);
 			Hub_Broadcast(0x99CCFFFF, msg);
 		}
 		g_HubFestSeen[d] = fest;
@@ -1227,13 +1227,13 @@ Hub_GreetBoard(playerid, board)
 	g_HubGreeted[playerid] |= Hub_Bit(board);
 	if (board == 0)
 	{
-		Util_Send(playerid, 0x99CCFFFF, "Casa del Quartiere di Idlewood: bacheca (/contratti), progetto del quartiere (/contribuisci), notizie (/quartiere).");
-		Util_Send(playerid, 0x99CCFFFF, "Qui si ricomincia, si da' una mano, ci si conosce. Tutti i servizi: /aiuto servizi.");
+		Util_Send(playerid, 0x99CCFFFF, "Idlewood-ის უბნის სახლი: დაფა (/contratti), უბნის პროექტი (/contribuisci), სიახლეები (/quartiere).");
+		Util_Send(playerid, 0x99CCFFFF, "აქ თავიდან იწყებენ, ერთმანეთს ეხმარებიან, ეცნობიან. ყველა სერვისი: /aiuto servizi.");
 		return 0;
 	}
-	new msg[256], dname[16];
-	LD_DistrictName(s_HubBoardDistrict[board], dname, 16);
-	format(msg, 256, "Bacheca di quartiere di %s: qui accetti i contratti (/contratti) e sostieni il progetto della zona (/contribuisci).", dname);
+	new msg[768], dname[48];
+	LD_DistrictName(s_HubBoardDistrict[board], dname, 48);
+	format(msg, 768, "%s-ის უბნის დაფა: აქ იღებ კონტრაქტებს (/contratti) და მხარს უჭერ ზონის პროექტს (/contribuisci).", dname);
 	Util_Send(playerid, 0x99CCFFFF, msg);
 	return 0;
 }
@@ -1253,7 +1253,7 @@ Hub_PlayerTick(playerid, now)
 			Hub_GreetBoard(playerid, board);
 			if (g_HubOnb[playerid] == 1 && Hub_CurStep(playerid) == 3 && gPlayer[playerid][pFreightWelcome] == 0)
 			{
-				Util_Send(playerid, 0x99CCFFFF, "C'e' una consegna di benvenuto che ti aspetta: /aiuto consegna.");
+				Util_Send(playerid, 0x99CCFFFF, "მისასალმებელი მიწოდება გელოდება: /aiuto consegna.");
 			}
 		}
 	}
@@ -1270,11 +1270,11 @@ Hub_PlayerTick(playerid, now)
 			Hub_ClearTarget(playerid);
 			if (target == 2)
 			{
-				Util_Send(playerid, 0x99CCFFFF, "Eccoti al Job Center: /lavoro per vedere cosa offre la citta'.");
+				Util_Send(playerid, 0x99CCFFFF, "Job Center-ში ხარ: ნახე, რას გთავაზობს ქალაქი: /lavoro.");
 			}
 			else if (target == 3)
 			{
-				Util_Send(playerid, 0x99CCFFFF, "Eccoti al noleggio: /noleggio per scegliere un mezzo.");
+				Util_Send(playerid, 0x99CCFFFF, "ქირაობის პუნქტში ხარ: ტრანსპორტის ასარჩევად /noleggio.");
 			}
 		}
 	}

@@ -197,7 +197,7 @@ StreetRental_OnStateChange(playerid, PLAYER_STATE:newstate)
 		RemovePlayerFromVehicle(playerid);
 		return 1;
 	}
-	new name[24], body[1024];
+	new name[24], body[2048];
 	Veh_StdModelName(GetVehicleModel(veh), name);
 	format(body, sizeof body,
 		"{FFFFFF}%s\n\n{AAAAAA}ქირა: {66DD66}$%d{AAAAAA} - %d წუთი\nგირაო არ არის. გადახდა: ბანკიდან ან ნაღდით.\n\n{AAAAAA}დაბრუნება ნებისმიერ ადგილას: /riconsegna",

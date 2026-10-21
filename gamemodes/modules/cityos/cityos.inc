@@ -1,8 +1,8 @@
 new bool:g_CosWaitBoard[MAX_PLAYERS];
 new g_CosRumor[3][8][] = {
-	{"La panetteria di Idlewood ha riaperto dopo l'estate: il pane esce caldo alle sei.", "Alla Casa del Quartiere cercano volontari per il doposcuola del giovedi'.", "Il campetto dietro la stazione ha di nuovo le reti: qualcuno le ha ricucite a mano.", "Un vecchio meccanico ripara bici gratis ai ragazzi, basta portargli un caffe'.", "Le signore del palazzo giallo organizzano una cena di quartiere sabato sera.", "Il negozio all'angolo ha appeso una lavagna: chi ha bisogno lascia un biglietto.", "Dicono che il murale vicino alla fermata sara' restaurato dagli stessi artisti.", "Chi esce dal turno di notte trova sempre una luce accesa alla Casa del Quartiere."},
-	{"A Ganton il barbiere sotto i portici taglia i capelli ai ragazzi prima degli esami.", "Il negozio di Ganton aspetta un carico di frutta: chi consegna e' il benvenuto.", "Sulla Grove hanno ridipinto le panchine, ognuna con un colore diverso.", "Un gruppo di madri accompagna i bambini a scuola a turno, a piedi.", "Il torneo di basket del venerdi' quest'anno raccoglie fondi per il campetto.", "Un ex corriere ha aperto una piccola officina: assume chi vuole imparare.", "Le luci della via principale sono tornate: i commercianti hanno fatto colletta.", "Dicono che il vecchio cinema all'aperto potrebbe tornare per una sera d'estate."},
-	{"Al magazzino di Jefferson servono autisti puntuali: chi lavora bene viene ricordato.", "Il motel sulla collina offre la colazione a chi aiuta a scaricare le merci.", "Un coro di quartiere prova ogni martedi' nella sala della chiesa.", "La lavanderia a gettoni e' diventata il posto dove ci si scambia le notizie.", "I ragazzi del quartiere puliscono il parco ogni prima domenica del mese.", "Un fornaio di Jefferson regala le pagnotte invendute alla mensa la sera.", "La fermata dell'autobus ha una nuova pensilina: costruita da chi la usa.", "Dicono che chi consegna con cura a Jefferson trova sempre una porta aperta."}
+	{"Idlewood-ის საცხობი ზაფხულის შემდეგ ისევ გაიხსნა: ცხელი პური ექვს საათზე გამოდის.", "უბნის სახლში ხუთშაბათის სკოლისშემდგომი მეცადინეობისთვის მოხალისეებს ეძებენ.", "სადგურის უკან მოედანს ისევ აქვს ბადეები: ვიღაცამ ხელით შეკერა.", "ერთი ძველი ხელოსანი ბავშვებს ველოსიპედებს უფასოდ უკეთებს — საკმარისია ყავა მიუტანო.", "ყვითელი კორპუსის ქალბატონები შაბათ საღამოს უბნის ვახშამს აწყობენ.", "კუთხის მაღაზიამ დაფა ჩამოკიდა: ვისაც დახმარება სჭირდება, ბარათს ტოვებს.", "ამბობენ, გაჩერებასთან მურალს იგივე მხატვრები აღადგენენ.", "ღამის ცვლიდან დაბრუნებულს უბნის სახლში შუქი ყოველთვის ანთია."},
+	{"Ganton-ში თაღების ქვეშ დალაქი ბიჭებს გამოცდების წინ თმას კრეჭს.", "Ganton-ის მაღაზია ხილის ტვირთს ელოდება: ვინც მიიტანს, სასურველი სტუმარია.", "Grove-ზე სკამები თავიდან შეღებეს, თითოეული სხვადასხვა ფერად.", "დედების ჯგუფი ბავშვებს რიგრიგობით, ფეხით აცილებს სკოლაში.", "პარასკევის კალათბურთის ტურნირი წელს მოედნისთვის თანხას აგროვებს.", "ყოფილმა კურიერმა პატარა სახელოსნო გახსნა: ვისაც სწავლა სურს, სამსახურში იღებს.", "მთავარ ქუჩაზე შუქი დაბრუნდა: ვაჭრებმა ფული შეაგროვეს.", "ამბობენ, ძველი ღია კინოთეატრი ზაფხულის ერთი საღამოთი შეიძლება დაბრუნდეს."},
+	{"Jefferson-ის საწყობს პუნქტუალური მძღოლები სჭირდება: კარგ მუშაკს არ ივიწყებენ.", "გორაზე მდებარე მოტელი საუზმეს სთავაზობს მათ, ვინც ტვირთის გადმოტვირთვაში ეხმარება.", "უბნის გუნდი ყოველ სამშაბათს ეკლესიის დარბაზში რეპეტიციას ატარებს.", "ავტომატური სამრეცხაო ამბების გაცვლის ადგილად იქცა.", "უბნის ახალგაზრდები პარკს ყოველი თვის პირველ კვირას ასუფთავებენ.", "Jefferson-ელი მცხობელი გაუყიდავ პურს საღამოობით სასადილოს ჩუქნის.", "ავტობუსის გაჩერებას ახალი ფარდული აქვს: ის მისმა მგზავრებმა ააშენეს.", "ამბობენ, ვინც Jefferson-ში ფრთხილად აწვდის ტვირთს, ყველგან ღია კარს ხვდება."}
 };
 
 bool:CityOS_Playing(playerid)
@@ -170,15 +170,15 @@ CityOS_CmdContratti(playerid, const params[])
 		LD_SendBlock(playerid, 1);
 		return 1;
 	}
-	new pos = 0, tok[24], num[24];
-	Util_NextToken(params, pos, tok, 24);
+	new pos = 0, tok[72], num[72];
+	Util_NextToken(params, pos, tok, 72);
 	if (!strcmp(tok, "accetta", true, 0x7FFFFFFF) && tok[0] != 0)
 	{
 		new id = 0;
-		Util_NextToken(params, pos, num, 24);
+		Util_NextToken(params, pos, num, 72);
 		if (!Util_ParseInt(num, id) || id <= 0)
 		{
-			Util_Send(playerid, 0x99CCFFFF, "Uso: /contratti accetta <numero contratto>");
+			Util_Send(playerid, 0x99CCFFFF, "გამოყენება: /contratti accetta <კონტრაქტის ნომერი>");
 			return 1;
 		}
 		Director_Accept(playerid, id);
@@ -195,15 +195,15 @@ CityOS_CmdContratto(playerid, const params[])
 		LD_SendBlock(playerid, 1);
 		return 1;
 	}
-	new pos = 0, tok[24];
-	Util_NextToken(params, pos, tok, 24);
+	new pos = 0, tok[72];
+	Util_NextToken(params, pos, tok, 72);
 	new ct = gPlayer[playerid][pContractId];
 	new bool:active = ct != 0 && (gPlayer[playerid][pContractPhase] == 1 || gPlayer[playerid][pContractPhase] == 2);
 	if (tok[0] != 0 && !strcmp(tok, "abbandona", true, 0x7FFFFFFF))
 	{
 		if (!active)
 		{
-			Util_Send(playerid, -10270721, "Non hai un contratto da lasciare.");
+			Util_Send(playerid, -10270721, "დასატოვებელი კონტრაქტი არ გაქვს.");
 			return 1;
 		}
 		Director_Release(playerid, 1);
@@ -213,7 +213,7 @@ CityOS_CmdContratto(playerid, const params[])
 	{
 		if (ct != 0)
 		{
-			Util_Send(playerid, -1, "La tua richiesta di contratto e' in elaborazione: attendi un istante.");
+			Util_Send(playerid, -1, "შენი კონტრაქტის მოთხოვნა მუშავდება: წამით მოიცადე.");
 		}
 		else
 		{
@@ -257,14 +257,14 @@ CityOS_CmdQuartiere(playerid, const params[])
 		LD_SendBlock(playerid, 1);
 		return 1;
 	}
-	new pos = 0, tok[24], d = 0;
-	Util_NextToken(params, pos, tok, 24);
+	new pos = 0, tok[72], d = 0;
+	Util_NextToken(params, pos, tok, 72);
 	if (tok[0] != 0)
 	{
 		d = LD_ParseDistrict(tok);
 		if (d == 0)
 		{
-			Util_Send(playerid, 0x99CCFFFF, "Uso: /quartiere [idlewood|ganton|jefferson]");
+			Util_Send(playerid, 0x99CCFFFF, "გამოყენება: /quartiere [idlewood|ganton|jefferson]");
 			return 1;
 		}
 	}
@@ -286,7 +286,7 @@ public Living_OnDBHistory(playerid, result, districtId, count)
 	}
 	if (result == 10)
 	{
-		Util_Send(playerid, -10270721, "Sto ancora caricando i tuoi dati: riprova tra un istante.");
+		Util_Send(playerid, -10270721, "შენს მონაცემებს ჯერ კიდევ ვტვირთავ: წამში სცადე.");
 		return 1;
 	}
 	CityOS_RenderDistrict(playerid, districtId, result == 1 ? count : 0);
@@ -311,7 +311,7 @@ public UI_OnContractAbandon(playerid, contractId)
 	}
 	if (contractId <= 0 || gPlayer[playerid][pContractId] != contractId)
 	{
-		Util_Send(playerid, -10270721, "Questo contratto non e' piu' attivo.");
+		Util_Send(playerid, -10270721, "ეს კონტრაქტი აღარ არის აქტიური.");
 		return 1;
 	}
 	Director_Release(playerid, 1);

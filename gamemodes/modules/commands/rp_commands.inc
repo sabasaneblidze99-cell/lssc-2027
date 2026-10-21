@@ -143,15 +143,15 @@ Cmd_Dispatch(playerid, const cmdtext[])
 		{
 			return 0;
 		}
-		Util_Send(playerid, -10270721, "Devi aver effettuato l'accesso ed essere in gioco per usare i comandi.");
+		Util_Send(playerid, -10270721, "ბრძანებების გამოსაყენებლად ავტორიზებული და თამაშში უნდა იყო.");
 		return 1;
 	}
 	if (index < 5 && Admin_CheckMuted(playerid))
 	{
 		return 1;
 	}
-	new fn[24];
-	format(fn, 24, "Cmd_%s", name);
+	new fn[72];
+	format(fn, 72, "Cmd_%s", name);
 	return CallLocalFunction(fn, "ds", playerid, cmdtext[pos]);
 }
 
@@ -160,11 +160,11 @@ public Cmd_me(playerid, const params[])
 	new text[129];
 	if (!Util_SanitizeText(params, text, 128))
 	{
-		Util_Send(playerid, 0x99CCFFFF, "Uso: /me azione");
+		Util_Send(playerid, 0x99CCFFFF, "გამოყენება: /me მოქმედება");
 		return 1;
 	}
-	new name[25], msg[256];
-	GetPlayerName(playerid, name, 25);
+	new name[75], msg[256];
+	GetPlayerName(playerid, name, 75);
 	format(msg, 256, "* %s %s", name, text);
 	Util_SendNear(playerid, 0xC2A2DAFF, 20.0, msg);
 	return 1;
@@ -175,11 +175,11 @@ public Cmd_do(playerid, const params[])
 	new text[129];
 	if (!Util_SanitizeText(params, text, 128))
 	{
-		Util_Send(playerid, 0x99CCFFFF, "Uso: /do descrizione");
+		Util_Send(playerid, 0x99CCFFFF, "გამოყენება: /do აღწერა");
 		return 1;
 	}
-	new name[25], msg[256];
-	GetPlayerName(playerid, name, 25);
+	new name[75], msg[256];
+	GetPlayerName(playerid, name, 75);
 	format(msg, 256, "* %s (( %s ))", text, name);
 	Util_SendNear(playerid, 0xC2A2DAFF, 20.0, msg);
 	return 1;
@@ -190,12 +190,12 @@ public Cmd_try(playerid, const params[])
 	new text[129];
 	if (!Util_SanitizeText(params, text, 128))
 	{
-		Util_Send(playerid, 0x99CCFFFF, "Uso: /try azione");
+		Util_Send(playerid, 0x99CCFFFF, "გამოყენება: /try მოქმედება");
 		return 1;
 	}
-	new name[25], msg[256];
-	GetPlayerName(playerid, name, 25);
-	format(msg, 256, "* %s prova a %s e %s", name, text, random(100) < 50 ? "ha successo" : "fallisce");
+	new name[75], msg[768];
+	GetPlayerName(playerid, name, 75);
+	format(msg, 768, "* %s ცდილობს %s და %s", name, text, random(100) < 50 ? "წარმატებით" : "წარუმატებლად");
 	Util_SendNear(playerid, 0xC2A2DAFF, 20.0, msg);
 	return 1;
 }
@@ -205,11 +205,11 @@ public Cmd_b(playerid, const params[])
 	new text[129];
 	if (!Util_SanitizeText(params, text, 128))
 	{
-		Util_Send(playerid, 0x99CCFFFF, "Uso: /b testo");
+		Util_Send(playerid, 0x99CCFFFF, "გამოყენება: /b ტექსტი");
 		return 1;
 	}
-	new name[25], msg[256];
-	GetPlayerName(playerid, name, 25);
+	new name[75], msg[256];
+	GetPlayerName(playerid, name, 75);
 	format(msg, 256, "(( %s [%d]: %s ))", name, playerid, text);
 	Util_SendNear(playerid, 0xAAAAAAFF, 15.0, msg);
 	return 1;
@@ -220,11 +220,11 @@ public Cmd_ame(playerid, const params[])
 	new text[129];
 	if (!Util_SanitizeText(params, text, 128))
 	{
-		Util_Send(playerid, 0x99CCFFFF, "Uso: /ame azione");
+		Util_Send(playerid, 0x99CCFFFF, "გამოყენება: /ame მოქმედება");
 		return 1;
 	}
-	new name[25], msg[256];
-	GetPlayerName(playerid, name, 25);
+	new name[75], msg[256];
+	GetPlayerName(playerid, name, 75);
 	SetPlayerChatBubble(playerid, "* %s", _:-81.42773, 20.0, 6000, text);
 	format(msg, 256, "> %s %s", name, text);
 	Util_SendNear(playerid, 0xC2A2DAFF, 20.0, msg);
@@ -233,57 +233,57 @@ public Cmd_ame(playerid, const params[])
 
 public Cmd_pay(playerid, const params[])
 {
-	new pos = 0, tid[12], tam[12], targetid = 0, amount = 0;
-	Util_NextToken(params, pos, tid, 12);
-	Util_NextToken(params, pos, tam, 12);
+	new pos = 0, tid[36], tam[36], targetid = 0, amount = 0;
+	Util_NextToken(params, pos, tid, 36);
+	Util_NextToken(params, pos, tam, 36);
 	if (tid[0] == 0 || tam[0] == 0 || !Util_ParseInt(tam, amount) || !Util_ParsePlayerId(tid, targetid))
 	{
-		Util_Send(playerid, 0x99CCFFFF, "Uso: /pay id importo");
+		Util_Send(playerid, 0x99CCFFFF, "გამოყენება: /pay id თანხა");
 		return 1;
 	}
 	if (gPlayer[playerid][pLevel] < 2)
 	{
-		SendClientMessage(playerid, -10270721, "Devi essere almeno al livello %d per usare /pay.", 2);
+		SendClientMessage(playerid, -10270721, "/pay-ის გამოსაყენებლად მინიმუმ %d დონე გჭირდება.", 2);
 		return 1;
 	}
 	if (amount < 1 || amount > 50000)
 	{
-		SendClientMessage(playerid, -10270721, "Importo non valido (%d-%d).", 1, 50000);
+		SendClientMessage(playerid, -10270721, "არასწორი თანხა (%d-%d).", 1, 50000);
 		return 1;
 	}
 	if (targetid == playerid || !Util_IsPlaying(targetid))
 	{
-		Util_Send(playerid, -10270721, "Giocatore non valido.");
+		Util_Send(playerid, -10270721, "არასწორი მოთამაშე.");
 		return 1;
 	}
 	if (!Util_InRange(playerid, targetid, 3.0))
 	{
-		Util_Send(playerid, -10270721, "Sei troppo lontano.");
+		Util_Send(playerid, -10270721, "ძალიან შორს ხარ.");
 		return 1;
 	}
 	new payResult = Valid_PayAmount(amount, gPlayer[playerid][pMoney], gPlayer[targetid][pMoney]);
 	if (payResult == 2)
 	{
-		Util_Send(playerid, -10270721, "Non hai abbastanza contanti.");
+		Util_Send(playerid, -10270721, "საკმარისი ნაღდი ფული არ გაქვს.");
 		return 1;
 	}
 	if (payResult != 0)
 	{
-		Util_Send(playerid, -10270721, "Il destinatario non puo' ricevere questa somma.");
+		Util_Send(playerid, -10270721, "მიმღები ამ თანხას ვერ მიიღებს.");
 		return 1;
 	}
 	Money_Take(playerid, amount);
 	Money_Give(targetid, amount);
-	new sn[25], tn[25], msg[256];
-	GetPlayerName(playerid, sn, 25);
-	GetPlayerName(targetid, tn, 25);
-	SendClientMessage(playerid, 0x66DD66FF, "Hai consegnato $%d a %s.", amount, tn);
-	SendClientMessage(targetid, 0x66DD66FF, "Hai ricevuto $%d da %s.", amount, sn);
-	format(msg, 256, "* %s consegna del denaro a %s", sn, tn);
+	new sn[75], tn[75], msg[768];
+	GetPlayerName(playerid, sn, 75);
+	GetPlayerName(targetid, tn, 75);
+	SendClientMessage(playerid, 0x66DD66FF, "$%d გადაეცი %s-ს.", amount, tn);
+	SendClientMessage(targetid, 0x66DD66FF, "$%d მიიღე %s-სგან.", amount, sn);
+	format(msg, 768, "* %s ფულს აწვდის %s-ს", sn, tn);
 	Util_SendNear(playerid, 0xC2A2DAFF, 20.0, msg);
 	Char_Save(playerid);
 	Char_Save(targetid);
-	format(msg, 256, "%s -> %s: $%d", sn, tn, amount);
+	format(msg, 768, "%s -> %s: $%d", sn, tn, amount);
 	Log_Write("PAY", msg);
 	return 1;
 }
@@ -404,27 +404,27 @@ public Cmd_setfazione(playerid, const params[])
 
 public Cmd_stats(playerid, const params[])
 {
-	new name[25], level = gPlayer[playerid][pLevel], exp = gPlayer[playerid][pExp];
-	GetPlayerName(playerid, name, 25);
-	SendClientMessage(playerid, -2994689, "--- Statistiche di %s ---", name);
+	new name[75], level = gPlayer[playerid][pLevel], exp = gPlayer[playerid][pExp];
+	GetPlayerName(playerid, name, 75);
+	SendClientMessage(playerid, -2994689, "--- %s-ის სტატისტიკა ---", name);
 	if (level >= 50)
 	{
-		SendClientMessage(playerid, -1, "Livello: %d (massimo)  Exp totale: %d", level, exp);
+		SendClientMessage(playerid, -1, "დონე: %d (მაქსიმალური)  სულ Exp: %d", level, exp);
 	}
 	else
 	{
-		SendClientMessage(playerid, -1, "Livello: %d  Exp: %d/%d", level, exp - Level_ExpForLevel(level), Level_StepExp(level));
+		SendClientMessage(playerid, -1, "დონე: %d  Exp: %d/%d", level, exp - Level_ExpForLevel(level), Level_StepExp(level));
 	}
-	SendClientMessage(playerid, -1, "Contanti: $%d  Banca: $%d", gPlayer[playerid][pMoney], gPlayer[playerid][pBank]);
+	SendClientMessage(playerid, -1, "ნაღდი: $%d  ბანკი: $%d", gPlayer[playerid][pMoney], gPlayer[playerid][pBank]);
 	new played = gPlayer[playerid][pSessionMs];
 	new total = gPlayer[playerid][pPlayedMs];
-	SendClientMessage(playerid, -1, "Ore di gioco: sessione %dh %02dm, totali %dh %02dm", played / 3600000, played % 3600000 / 60000, total / 3600000, total % 3600000 / 60000);
+	SendClientMessage(playerid, -1, "ნათამაშები: სესია %dს %02dწ, სულ %dს %02dწ", played / 3600000, played % 3600000 / 60000, total / 3600000, total % 3600000 / 60000);
 	new remainSec = (900000 - gPlayer[playerid][pPaycheckMs]) / 1000;
 	if (remainSec < 0)
 	{
 		remainSec = 0;
 	}
-	SendClientMessage(playerid, -1, "Prossimo stipendio tra: %d min %02d s (%d $ in banca)", remainSec / 60, remainSec % 60, Economy_PaycheckAmount(level));
+	SendClientMessage(playerid, -1, "შემდეგი ხელფასი: %d წთ %02d წმ (%d $ ბანკში)", remainSec / 60, remainSec % 60, Economy_PaycheckAmount(level));
 	return 1;
 }
 
@@ -438,53 +438,53 @@ public Cmd_who(playerid, const params[])
 			total++;
 		}
 	}
-	SendClientMessage(playerid, -2994689, "--- Giocatori online (%d) ---", total);
-	new shown = 0, name[25];
+	SendClientMessage(playerid, -2994689, "--- ონლაინ მოთამაშეები (%d) ---", total);
+	new shown = 0, name[75];
 	for (new i = 0; i < MAX_PLAYERS && shown < 50; i++)
 	{
 		if (!Util_IsPlaying(i))
 		{
 			continue;
 		}
-		GetPlayerName(i, name, 25);
+		GetPlayerName(i, name, 75);
 		SendClientMessage(playerid, -1, "[%d] %s", i, name);
 		shown++;
 	}
 	if (total > shown)
 	{
-		SendClientMessage(playerid, -1, "... e altri %d giocatori.", total - shown);
+		SendClientMessage(playerid, -1, "... და კიდევ %d მოთამაშე.", total - shown);
 	}
 	return 1;
 }
 
 public Cmd_help(playerid, const params[])
 {
-	SendClientMessage(playerid, -2994689, "--- Comandi ---");
-	Util_Send(playerid, 0x99CCFFFF, "/me azione · /do descrizione · /try azione · /ame azione");
-	Util_Send(playerid, 0x99CCFFFF, "/b testo (chat OOC locale)");
-	Util_Send(playerid, 0x99CCFFFF, "/pay id importo · /stats · /who · /report testo");
-	Util_Send(playerid, 0x99CCFFFF, "/v lock|engine|lights|park|find|list|sell|recover · /refuel [litri] · /concessionario");
+	SendClientMessage(playerid, -2994689, "--- ბრძანებები ---");
+	Util_Send(playerid, 0x99CCFFFF, "/me მოქმედება · /do აღწერა · /try მოქმედება · /ame მოქმედება");
+	Util_Send(playerid, 0x99CCFFFF, "/b ტექსტი (ლოკალური OOC ჩატი)");
+	Util_Send(playerid, 0x99CCFFFF, "/pay id თანხა · /stats · /who · /report ტექსტი");
+	Util_Send(playerid, 0x99CCFFFF, "/v lock|engine|lights|park|find|list|sell|recover · /refuel [ლიტრი] · /concessionario");
 	Util_Send(playerid, 0x99CCFFFF, "/casa [info|compra|vendi|serratura|chiave|chiavi|revoca] · /entra · /esci · /bussa · /luce · /gas");
 	Util_Send(playerid, 0x99CCFFFF, "/frigo [metti|prendi n] · /cucina · /mangia [freddo] · /bollette");
-	Util_Send(playerid, 0x99CCFFFF, "Inventario: /inventario (/inv) · /usa oggetto · /dai id oggetto [q] · /getta oggetto [q] · /prendi · /documento [id|richiedi]");
-	Util_Send(playerid, 0x99CCFFFF, "Banca (vicino a un ATM o sportello): /atm (menu) · /banca (solo sportello) · /saldo (ovunque) · /deposita importo · /preleva importo · /bonifico id|nome importo · /estratto");
-	Util_Send(playerid, 0x99CCFFFF, "Storia: /storia (la tua) · /storia imposta (una volta, se non l'hai scelta) · /mostrastoria id (a chi ti sta vicino)");
+	Util_Send(playerid, 0x99CCFFFF, "ინვენტარი: /inventario (/inv) · /usa ნივთი · /dai id ნივთი [რ] · /getta ნივთი [რ] · /prendi · /documento [id|richiedi]");
+	Util_Send(playerid, 0x99CCFFFF, "ბანკი (ATM-თან ან სალაროსთან): /atm (მენიუ) · /banca (მხოლოდ სალარო) · /saldo (ყველგან) · /deposita თანხა · /preleva თანხა · /bonifico id|სახელი თანხა · /estratto");
+	Util_Send(playerid, 0x99CCFFFF, "ისტორია: /storia (შენი) · /storia imposta (ერთხელ, თუ ჯერ არ აგირჩევია) · /mostrastoria id (ახლოს მყოფს)");
 	if (Util_GetAdmin(playerid) >= 2)
 	{
-		Util_Send(playerid, -5963521, "Staff: /storia id (legge la storia di un giocatore, registrato in admin_log)");
+		Util_Send(playerid, -5963521, "ადმინისტრაცია: /storia id (მოთამაშის ისტორიის ნახვა, იწერება admin_log-ში)");
 	}
-	Util_Send(playerid, 0x99CCFFFF, "Supermercato: /compra [cibo|pasto|acqua|snack|kit|benda|sigarette|accendino|telefono|zaino] [n]");
-	Util_Send(playerid, 0x99CCFFFF, "Lavori: /lavoro [info|prendi|lascia] (Job Center, piazza City Hall) · /inizia · /fine · /multe");
-	Util_Send(playerid, 0x99CCFFFF, "Citta': /contratti (bacheca) · /contratto [abbandona] · /reputazione · /quartiere [nome] · /contribuisci importo · /aiuto [off] · /telefono");
-	Util_Send(playerid, 0x99CCFFFF, "Noleggio (Pershing Sq.): /noleggio · /riconsegna  ·  Taxi (deposito Unity): /taxi on|off · /accettacorsa [id] · /tassametro start|stop · /chiamataxi");
+	Util_Send(playerid, 0x99CCFFFF, "სუპერმარკეტი: /compra [cibo|pasto|acqua|snack|kit|benda|sigarette|accendino|telefono|zaino] [n]");
+	Util_Send(playerid, 0x99CCFFFF, "სამსახური: /lavoro [info|prendi|lascia] (Job Center, City Hall-ის მოედანი) · /inizia · /fine · /multe");
+	Util_Send(playerid, 0x99CCFFFF, "ქალაქი: /contratti (დაფა) · /contratto [abbandona] · /reputazione · /quartiere [სახელი] · /contribuisci თანხა · /aiuto [off] · /telefono");
+	Util_Send(playerid, 0x99CCFFFF, "ქირაობა (Pershing Sq.): /noleggio · /riconsegna  ·  ტაქსი (Unity-ის დეპო): /taxi on|off · /accettacorsa [id] · /tassametro start|stop · /chiamataxi");
 	if (Util_GetAdmin(playerid) >= 3)
 	{
-		Util_Send(playerid, -5963521, "Staff: /ldset (valori dei quartieri per test, registrato in admin_log)");
+		Util_Send(playerid, -5963521, "ადმინისტრაცია: /ldset (უბნების მნიშვნელობები ტესტისთვის, იწერება admin_log-ში)");
 	}
 	Faction_SendHelp(playerid);
 	if (Util_GetAdmin(playerid) >= 3)
 	{
-		Util_Send(playerid, -5963521, "Staff: /setfazione id|Nome_Cognome fazione(0-2) grado(1-6)");
+		Util_Send(playerid, -5963521, "ადმინისტრაცია: /setfazione id|სახელი_გვარი ფრაქცია(0-2) წოდება(1-6)");
 	}
 	Admin_SendHelp(playerid);
 	return 1;
@@ -495,17 +495,17 @@ public Cmd_report(playerid, const params[])
 	new text[97];
 	if (!Util_SanitizeText(params, text, 96))
 	{
-		Util_Send(playerid, 0x99CCFFFF, "Uso: /report testo");
+		Util_Send(playerid, 0x99CCFFFF, "გამოყენება: /report ტექსტი");
 		return 1;
 	}
 	new now = GetTickCount(), elapsed = now - gPlayer[playerid][pLastReportTick];
 	if (elapsed < 30000)
 	{
-		SendClientMessage(playerid, -10270721, "Attendi ancora %d secondi prima di un nuovo report.", (30000 - elapsed + 1000 - 1) / 1000);
+		SendClientMessage(playerid, -10270721, "ახალ რეპორტამდე მოიცადე კიდევ %d წამი.", (30000 - elapsed + 1000 - 1) / 1000);
 		return 1;
 	}
-	new name[25], msg[256], staff = 0;
-	GetPlayerName(playerid, name, 25);
+	new name[75], msg[256], staff = 0;
+	GetPlayerName(playerid, name, 75);
 	format(msg, 256, "[REPORT] %s [%d]: %s", name, playerid, text);
 	for (new i = 0; i < MAX_PLAYERS; i++)
 	{
@@ -518,12 +518,12 @@ public Cmd_report(playerid, const params[])
 	}
 	if (staff == 0)
 	{
-		Util_Send(playerid, -10270721, "Nessun membro dello staff e' online: il report non e' stato inviato.");
+		Util_Send(playerid, -10270721, "ადმინისტრაციიდან ონლაინ არავინაა: რეპორტი არ გაიგზავნა.");
 		return 1;
 	}
 	gPlayer[playerid][pLastReportTick] = now;
 	Admin_StoreReport(playerid, text);
-	Util_Send(playerid, 0x66DD66FF, "Report inviato allo staff.");
+	Util_Send(playerid, 0x66DD66FF, "რეპორტი ადმინისტრაციას გაეგზავნა.");
 	return 1;
 }
 
@@ -625,12 +625,12 @@ public Cmd_inv(playerid, const params[])
 
 public Cmd_usa(playerid, const params[])
 {
-	new pos = 0, tok[24];
-	Util_NextToken(params, pos, tok, 24);
+	new pos = 0, tok[72];
+	Util_NextToken(params, pos, tok, 72);
 	new itemId = Inv_ParseItem(tok);
 	if (itemId < 1 || itemId > 10)
 	{
-		Util_Send(playerid, 0x99CCFFFF, "Uso: /usa [oggetto] (pasto, acqua, snack, kit, benda, sigarette, telefono, documento)");
+		Util_Send(playerid, 0x99CCFFFF, "გამოყენება: /usa [ნივთი] (pasto, acqua, snack, kit, benda, sigarette, telefono, documento)");
 		return 1;
 	}
 	Inv_UseStart(playerid, itemId);

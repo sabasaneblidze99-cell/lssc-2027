@@ -270,8 +270,8 @@ bool:DB_LdBegin(playerid, action, bool:valid, ref, aux, const opId[], bool:needO
 
 DB_LdSend(playerid, action, const query[], other)
 {
-	new cat = DB_LdCatOf(action), idx = DB_LdIdx(playerid, cat), name[25], ogen = 0;
-	GetPlayerName(playerid, name, 25);
+	new cat = DB_LdCatOf(action), idx = DB_LdIdx(playerid, cat), name[75], ogen = 0;
+	GetPlayerName(playerid, name, 75);
 	if (other != INVALID_PLAYER_ID)
 	{
 		ogen = g_BankGen[other];
@@ -457,8 +457,8 @@ DB_LivingRentUndo(playerid, charId, cash, const opId[])
 		Log_Write("DBLIVING", "undo noleggio NON eseguito (db non pronto): verificare a mano");
 		return 0;
 	}
-	new query[1024], name[25];
-	GetPlayerName(playerid, name, 25);
+	new query[1024], name[75];
+	GetPlayerName(playerid, name, 75);
 	mysql_format(g_DB, query, 1024, "CALL sp_rental_undo('%e', %d, %d)", opId, charId, cash > 0 ? cash : 0);
 	mysql_tquery(g_DB, query, "DB_OnLdUndoCalled", "dsdds", playerid, name, g_BankGen[playerid], charId, opId);
 	return 0;
@@ -706,18 +706,18 @@ public DB_OnLdFire()
 
 DB_LivingLoadPlayer(playerid, bool:cleanup)
 {
-	new opId[37];
+	new opId[111];
 	opId[0] = 0;
 	if (playerid >= 0 && playerid < MAX_PLAYERS && IsPlayerConnected(playerid) && cleanup)
 	{
-		DB_LivingMakeOpId(opId, 37, "lc", 0, gPlayer[playerid][pCharId]);
+		DB_LivingMakeOpId(opId, 111, "lc", 0, gPlayer[playerid][pCharId]);
 	}
 	if (!DB_LdBegin(playerid, 13, true, 0, 0, opId, cleanup))
 	{
 		return 0;
 	}
-	new idx = DB_LdIdx(playerid, 5), name[25], query[1024], charId = gPlayer[playerid][pCharId];
-	GetPlayerName(playerid, name, 25);
+	new idx = DB_LdIdx(playerid, 5), name[75], query[1024], charId = gPlayer[playerid][pCharId];
+	GetPlayerName(playerid, name, 75);
 	if (cleanup)
 	{
 		mysql_format(g_DB, query, 1024, "CALL sp_ld_char_cleanup(%d, '%e')", charId, opId);
@@ -787,7 +787,7 @@ public DB_OnLdPlayer(playerid, const name[], token, charId)
 
 DB_LivingBoard(playerid)
 {
-	new query[1024], name[25], token = 0;
+	new query[1024], name[75], token = 0;
 	name[0] = 0;
 	if (playerid == INVALID_PLAYER_ID)
 	{
@@ -808,7 +808,7 @@ DB_LivingBoard(playerid)
 			return 0;
 		}
 		token = g_LdReq[DB_LdIdx(playerid, 5)][lqToken];
-		GetPlayerName(playerid, name, 25);
+		GetPlayerName(playerid, name, 75);
 	}
 	mysql_format(g_DB, query, 1024, "SELECT id, from_district, to_district, from_pt, to_pt, cargo, distance_m, reward, UNIX_TIMESTAMP(expires_at) AS exp, min_level, min_rep, min_local_rep, premium, state FROM ct_contracts WHERE state IN (0, 7) AND expires_at > NOW() ORDER BY expires_at, id LIMIT %d", 24);
 	mysql_tquery(g_DB, query, "DB_OnLdBoard", "dsd", playerid, name, token);
@@ -866,8 +866,8 @@ DB_LivingHistory(playerid, districtId)
 	{
 		return 0;
 	}
-	new query[1024], name[25];
-	GetPlayerName(playerid, name, 25);
+	new query[1024], name[75];
+	GetPlayerName(playerid, name, 75);
 	mysql_format(g_DB, query, 1024, "SELECT type, UNIX_TIMESTAMP(created_at) AS ts, value, act_delta, (actor_char <=> %d) AS mine FROM ld_events WHERE district_id = %d ORDER BY id DESC LIMIT %d", gPlayer[playerid][pCharId], districtId, 8);
 	mysql_tquery(g_DB, query, "DB_OnLdHist", "dsdd", playerid, name, g_LdReq[DB_LdIdx(playerid, 5)], districtId);
 	return 0;
@@ -1021,8 +1021,8 @@ DB_LivingAdminSet(playerid, const opId[], districtId, activity, security, crime)
 		}
 		return 0;
 	}
-	new query[1024], name[25];
-	GetPlayerName(playerid, name, 25);
+	new query[1024], name[75];
+	GetPlayerName(playerid, name, 75);
 	mysql_format(g_DB, query, 1024, "CALL sp_ld_admin_set('%e', %d, %d, %d, %d, %d)", opId, districtId, activity, security, crime, gPlayer[playerid][pCharId]);
 	mysql_tquery(g_DB, query, "DB_OnLdGlobalCalled", "ddss", 2, playerid, name, opId);
 	return 0;
@@ -1070,12 +1070,12 @@ public DB_OnLdGlobalResult(kind, playerid, const name[], const opId[])
 
 DB_LdCfgAdd(query[], size, const key[], value)
 {
-	new part[64];
-	mysql_format(g_DB, part, 64, "%s('%e', %d)", query[0] ? "," : "", key, value);
+	new part[192];
+	mysql_format(g_DB, part, 192, "%s('%e', %d)", query[0] ? "," : "", key, value);
 	if (strlen(query) + strlen(part) + 48 >= size)
 	{
 		DB_LdCfgFlush(query, size);
-		mysql_format(g_DB, part, 64, "('%e', %d)", key, value);
+		mysql_format(g_DB, part, 192, "('%e', %d)", key, value);
 	}
 	strcat(query, part, size);
 }

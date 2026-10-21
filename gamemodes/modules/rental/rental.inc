@@ -29,7 +29,7 @@ Rental_KindName(vkind, dest[], size)
 		}
 		case 4:
 		{
-			strcat(dest, "Taxi", size);
+			strcat(dest, "ტაქსი", size);
 		}
 		default:
 		{
@@ -219,8 +219,8 @@ bool:Rental_CloseInterrupted(playerid, reason)
 
 Rental_NotifyClosed(playerid, result, refund, newState)
 {
-	new name[16];
-	Rental_KindName(gPlayer[playerid][pRentalKind], name, 16);
+	new name[48];
+	Rental_KindName(gPlayer[playerid][pRentalKind], name, 48);
 	new bool:pro = gPlayer[playerid][pRentalClass] == 2;
 	new reason = g_RtCloseReason[playerid];
 	if (pro)
@@ -241,7 +241,7 @@ Rental_NotifyClosed(playerid, result, refund, newState)
 		{
 			if (reason == 100)
 			{
-				Util_Send(playerid, -10270721, "Nessun mezzo disponibile al momento: noleggio annullato e importo restituito sul conto.");
+				Util_Send(playerid, -10270721, "თავისუფალი მანქანა ახლა არ არის: ქირაობა გაუქმდა, თანხა ანგარიშზე დაგიბრუნდა.");
 				return 0;
 			}
 			new minutes = (gettime() - g_RtOpenTs[playerid]) / 60;
@@ -251,7 +251,7 @@ Rental_NotifyClosed(playerid, result, refund, newState)
 			}
 			if (newState == 3)
 			{
-				SendClientMessage(playerid, -1, "Noleggio interrotto: cauzione di $%d restituita sul conto.", refund);
+				SendClientMessage(playerid, -1, "ქირაობა შეწყდა: გირაო $%d ანგარიშზე დაგიბრუნდა.", refund);
 			}
 			else
 			{
@@ -262,20 +262,20 @@ Rental_NotifyClosed(playerid, result, refund, newState)
 		{
 			if (refund > 0)
 			{
-				SendClientMessage(playerid, -1, "Noleggio chiuso oltre la tolleranza: restituiti $%d.", refund);
+				SendClientMessage(playerid, -1, "ქირაობა დაიხურა დაშვებული დროის შემდეგ: დაგიბრუნდა $%d.", refund);
 			}
 			else
 			{
-				Util_Send(playerid, -10270721, "Noleggio scaduto oltre la tolleranza: il mezzo e' tornato all'agenzia e la cauzione e' stata trattenuta.");
+				Util_Send(playerid, -10270721, "ქირის ვადა და დაშვებული დრო ამოიწურა: მანქანა სააგენტოში დაბრუნდა, გირაო დაკავებულია.");
 			}
 		}
 		case 2:
 		{
-			Util_Send(playerid, -1, "Il noleggio risultava gia' chiuso.");
+			Util_Send(playerid, -1, "ქირაობა უკვე დახურული იყო.");
 		}
 		default:
 		{
-			Util_Send(playerid, -10270721, "Chiusura del noleggio non riuscita: verra' sistemata automaticamente al prossimo accesso.");
+			Util_Send(playerid, -10270721, "ქირაობის დახურვა ვერ მოხერხდა: შემდეგ შესვლისას ავტომატურად მოგვარდება.");
 		}
 	}
 	return 0;
@@ -308,23 +308,23 @@ Rental_OnOpenResult(playerid, result, rentalId, amount, dueAt)
 		{
 			case 3:
 			{
-				Util_Send(playerid, -10270721, "Fondi insufficienti (banca + contanti) per canone e cauzione.");
+				Util_Send(playerid, -10270721, "სახსრები არ გყოფნის (ბანკი + ნაღდი) ქირისა და გირაოსთვის.");
 			}
 			case 7:
 			{
-				Util_Send(playerid, -10270721, "Non puoi noleggiare ora: hai gia' un noleggio o un contratto attivo, oppure livello insufficiente.");
+				Util_Send(playerid, -10270721, "ახლა ვერ იქირავებ: უკვე გაქვს ქირაობა ან აქტიური კონტრაქტი, ან დონე არ გყოფნის.");
 			}
 			case 10:
 			{
-				Util_Send(playerid, -10270721, "Un'altra operazione di noleggio e' in corso: riprova tra poco.");
+				Util_Send(playerid, -10270721, "ქირაობის სხვა ოპერაცია მიმდინარეობს: სცადე ცოტა ხანში.");
 			}
 			case 9:
 			{
-				Util_Send(playerid, -10270721, "Richiesta di noleggio non valida.");
+				Util_Send(playerid, -10270721, "ქირაობის არასწორი მოთხოვნა.");
 			}
 			default:
 			{
-				Util_Send(playerid, -10270721, "Servizio noleggi momentaneamente non raggiungibile: nessun addebito, riprova tra poco.");
+				Util_Send(playerid, -10270721, "ქირაობის სერვისი დროებით მიუწვდომელია: თანხა არ ჩამოგეჭრა, სცადე ცოტა ხანში.");
 			}
 		}
 		return 0;
@@ -364,7 +364,7 @@ Rental_OnOpenResult(playerid, result, rentalId, amount, dueAt)
 		return 1;
 	}
 	Rental_KindName(gPlayer[playerid][pRentalKind], name, 16);
-	SendClientMessage(playerid, 0x66DD66FF, "Noleggio attivo: %s per %d minuti (canone $%d, cauzione $%d). Riportalo qui con /riconsegna.", name, minutes > 0 ? minutes : 0, g_RtFee[playerid], g_RtDeposit[playerid]);
+	SendClientMessage(playerid, 0x66DD66FF, "ქირაობა აქტიურია: %s %d წუთით (ქირა $%d, გირაო $%d). დააბრუნე აქ: /riconsegna.", name, minutes > 0 ? minutes : 0, g_RtFee[playerid], g_RtDeposit[playerid]);
 	return 0;
 }
 
@@ -422,7 +422,7 @@ bool:Rental_CanStart(playerid)
 	}
 	if (gPlayer[playerid][pRentalPendOp] != 0)
 	{
-		Util_Send(playerid, -10270721, "Pratica di noleggio gia' in corso: attendi.");
+		Util_Send(playerid, -10270721, "ქირაობის განაცხადი უკვე მუშავდება: მოიცადე.");
 		return false;
 	}
 	new block = LD_CheckStart(playerid);
@@ -433,17 +433,17 @@ bool:Rental_CanStart(playerid)
 	}
 	if (!Rental_AtOffice(playerid, 4.0))
 	{
-		Util_Send(playerid, -10270721, "Devi trovarti all'agenzia di noleggio di Pershing Square.");
+		Util_Send(playerid, -10270721, "უნდა იყო Pershing Square-ის ქირაობის სააგენტოში.");
 		return false;
 	}
 	if (GetPlayerState(playerid) != PLAYER_STATE_ONFOOT)
 	{
-		Util_Send(playerid, -10270721, "Scendi dal veicolo per noleggiare.");
+		Util_Send(playerid, -10270721, "ქირაობისთვის გადმოდი მანქანიდან.");
 		return false;
 	}
 	if (gPlayer[playerid][pLevel] < 1)
 	{
-		SendClientMessage(playerid, -10270721, "Serve almeno il livello %d per noleggiare.", 1);
+		SendClientMessage(playerid, -10270721, "ქირაობისთვის საჭიროა მინიმუმ %d დონე.", 1);
 		return false;
 	}
 	return true;
@@ -456,18 +456,18 @@ Rental_CmdNoleggio(playerid, const params[])
 	{
 		return 1;
 	}
-	new rep = Rental_MaxLocalRep(playerid), name[16];
+	new rep = Rental_MaxLocalRep(playerid), name[48];
 	new bool:room = LD_PoolHasRoom();
 	UI_LivingRentalBegin(playerid, 20, 3, LD_DiscountPct(rep));
 	for (new k = 1; k <= 3; k++)
 	{
-		Rental_KindName(k, name, 16);
+		Rental_KindName(k, name, 48);
 		UI_LivingRentalAddModel(playerid, k, name, LD_RentalFeeFor(k, 1, rep), LD_RentalDeposit(k), 1, room && gPlayer[playerid][pLevel] >= 1);
 	}
 	UI_LivingRentalShow(playerid);
 	if (!room)
 	{
-		Util_Send(playerid, -10270721, "Al momento non ci sono mezzi disponibili: riprova tra poco.");
+		Util_Send(playerid, -10270721, "თავისუფალი მანქანა ახლა არ არის: სცადე ცოტა ხანში.");
 	}
 	return 1;
 }
@@ -480,29 +480,29 @@ public UI_OnRentalConfirm(playerid, modelIdx, blocks)
 	}
 	if (modelIdx < 1 || modelIdx > 3 || blocks < 1 || blocks > 3)
 	{
-		UI_LivingReject(playerid, "Scelta di noleggio non valida.");
+		UI_LivingReject(playerid, "ქირაობის არასწორი არჩევანი.");
 		return 1;
 	}
 	if (!LD_PoolHasRoom())
 	{
-		UI_LivingReject(playerid, "Al momento non ci sono mezzi disponibili: riprova tra poco.");
+		UI_LivingReject(playerid, "თავისუფალი მანქანა ახლა არ არის: სცადე ცოტა ხანში.");
 		return 1;
 	}
 	new total = LD_RentalFeeFor(modelIdx, blocks, Rental_MaxLocalRep(playerid)) + LD_RentalDeposit(modelIdx);
 	new have = (gPlayer[playerid][pBank] > 0 ? gPlayer[playerid][pBank] : 0) + (gPlayer[playerid][pMoney] > 0 ? gPlayer[playerid][pMoney] : 0);
 	if (have < total)
 	{
-		new msg[160];
-		format(msg, 160, "Fondi insufficienti: servono $%d (canone + cauzione) tra banca e contanti.", total);
+		new msg[480];
+		format(msg, 480, "სახსრები არ გყოფნის: საჭიროა $%d (ქირა + გირაო) ბანკსა და ნაღდში.", total);
 		UI_LivingReject(playerid, msg);
 		return 1;
 	}
 	if (!Rental_BeginOpen(playerid, modelIdx, blocks, 1))
 	{
-		UI_LivingReject(playerid, "Pratica di noleggio gia' in corso: attendi.");
+		UI_LivingReject(playerid, "ქირაობის განაცხადი უკვე მუშავდება: მოიცადე.");
 		return 1;
 	}
-	Util_Send(playerid, -1, "Pratica di noleggio in corso...");
+	Util_Send(playerid, -1, "ქირაობის განაცხადი მუშავდება...");
 	return 1;
 }
 
@@ -516,7 +516,7 @@ bool:Rental_CanReturn(playerid, bool:verbose)
 	{
 		if (verbose)
 		{
-			Util_Send(playerid, -10270721, "Non hai un noleggio attivo.");
+			Util_Send(playerid, -10270721, "აქტიური ქირაობა არ გაქვს.");
 		}
 		return false;
 	}
@@ -524,7 +524,7 @@ bool:Rental_CanReturn(playerid, bool:verbose)
 	{
 		if (verbose)
 		{
-			Util_Send(playerid, -10270721, "Il taxi si restituisce al deposito con /taxi off.");
+			Util_Send(playerid, -10270721, "ტაქსი დეპოში ბრუნდება /taxi off-ით.");
 		}
 		return false;
 	}
@@ -532,7 +532,7 @@ bool:Rental_CanReturn(playerid, bool:verbose)
 	{
 		if (verbose)
 		{
-			Util_Send(playerid, -10270721, "Pratica di noleggio gia' in corso: attendi.");
+			Util_Send(playerid, -10270721, "ქირაობის განაცხადი უკვე მუშავდება: მოიცადე.");
 		}
 		return false;
 	}
@@ -541,7 +541,7 @@ bool:Rental_CanReturn(playerid, bool:verbose)
 	{
 		if (verbose)
 		{
-			Util_Send(playerid, -10270721, "Devi essere al volante del mezzo noleggiato.");
+			Util_Send(playerid, -10270721, "ნაქირავები მანქანის საჭესთან უნდა იჯდე.");
 		}
 		return false;
 	}
@@ -549,7 +549,7 @@ bool:Rental_CanReturn(playerid, bool:verbose)
 	{
 		if (verbose)
 		{
-			Util_Send(playerid, -10270721, "Riporta il mezzo all'agenzia di noleggio di Pershing Square.");
+			Util_Send(playerid, -10270721, "დააბრუნე მანქანა Pershing Square-ის ქირაობის სააგენტოში.");
 		}
 		return false;
 	}
@@ -563,8 +563,8 @@ Rental_CmdRiconsegna(playerid, const params[])
 	{
 		return 1;
 	}
-	new name[16], health = Rental_VehHealth(gPlayer[playerid][pRentalVehicle]);
-	Rental_KindName(gPlayer[playerid][pRentalKind], name, 16);
+	new name[48], health = Rental_VehHealth(gPlayer[playerid][pRentalVehicle]);
+	Rental_KindName(gPlayer[playerid][pRentalKind], name, 48);
 	new deposit = g_RtDeposit[playerid];
 	new refund = LD_RentalRefund(deposit, health);
 	if (gPlayer[playerid][pRentalDueAt] > 0 && gettime() > gPlayer[playerid][pRentalDueAt] + 300)
@@ -579,7 +579,7 @@ public UI_OnRentalReturnConfirm(playerid, rentalId)
 {
 	if (rentalId <= 0 || rentalId != gPlayer[playerid][pRentalId])
 	{
-		UI_LivingReject(playerid, "Questo noleggio non e' piu' attivo.");
+		UI_LivingReject(playerid, "ეს ქირაობა აღარ არის აქტიური.");
 		return 1;
 	}
 	if (!Rental_CanReturn(playerid, true))
@@ -587,7 +587,7 @@ public UI_OnRentalReturnConfirm(playerid, rentalId)
 		return 1;
 	}
 	Rental_SendClose(playerid, 1, Rental_VehHealth(gPlayer[playerid][pRentalVehicle]), 1);
-	Util_Send(playerid, -1, "Riconsegna in corso...");
+	Util_Send(playerid, -1, "მანქანის დაბრუნება მიმდინარეობს...");
 	return 1;
 }
 
@@ -694,33 +694,33 @@ Rental_TickPlayer(playerid, now, nowTick)
 	if (left <= 300 && !(gPlayer[playerid][pRentalWarnFlags] & 1))
 	{
 		gPlayer[playerid][pRentalWarnFlags] |= 1;
-		SendClientMessage(playerid, -2994689, "Il tuo noleggio scade tra %d minuti.", (left + 60 - 1) / 60);
+		SendClientMessage(playerid, -2994689, "შენი ქირის ვადა %d წუთში იწურება.", (left + 60 - 1) / 60);
 	}
 	if (left <= 60 && !(gPlayer[playerid][pRentalWarnFlags] & 2))
 	{
 		gPlayer[playerid][pRentalWarnFlags] |= 2;
-		Util_Send(playerid, -2994689, pro ? "Il turno di noleggio del taxi scade tra un minuto." : "Il tuo noleggio scade tra un minuto: riportalo all'agenzia (/riconsegna).");
+		Util_Send(playerid, -2994689, pro ? "ტაქსის ქირის ცვლა ერთ წუთში იწურება." : "შენი ქირის ვადა ერთ წუთში იწურება: დააბრუნე სააგენტოში (/riconsegna).");
 	}
 	if (left <= 0 && !(gPlayer[playerid][pRentalWarnFlags] & 4))
 	{
 		gPlayer[playerid][pRentalWarnFlags] |= 4;
 		if (!pro)
 		{
-			SendClientMessage(playerid, -10270721, "Noleggio scaduto: hai %d minuti di tolleranza per la riconsegna, poi la cauzione resta all'agenzia.", 5);
+			SendClientMessage(playerid, -10270721, "ქირის ვადა ამოიწურა: დასაბრუნებლად გაქვს %d წუთი, შემდეგ გირაო სააგენტოს რჩება.", 5);
 		}
 	}
 	if (pro)
 	{
 		if (left <= 0 && (gPlayer[playerid][pTaxiRideId] == 0 || -left >= 150))
 		{
-			Util_Send(playerid, -1, "Il noleggio del taxi e' scaduto: il turno si conclude.");
+			Util_Send(playerid, -1, "ტაქსის ქირის ვადა ამოიწურა: ცვლა სრულდება.");
 			Rental_ClosePro(playerid, 5);
 		}
 		return 0;
 	}
 	if (-left >= 300)
 	{
-		Util_Send(playerid, -10270721, "Tolleranza scaduta: il mezzo torna all'agenzia.");
+		Util_Send(playerid, -10270721, "დაშვებული დრო ამოიწურა: მანქანა სააგენტოში ბრუნდება.");
 		Rental_SendClose(playerid, 2, 0, 5);
 	}
 	return 0;
@@ -756,7 +756,7 @@ Rental_OnInit()
 	}
 	g_RtTimer = SetTimer("Rental_OnTick", 1000, true);
 	CreatePickup(1239, 1, 1505.0, -1700.0, 13.5, 0);
-	Lang_Create3DTextLabel("Noleggio veicoli\n/noleggio  ·  /riconsegna", -2994689, 1505.0, -1700.0, (13.5 + 0.8), 20.0, 0, false);
+	Lang_Create3DTextLabel("მანქანების ქირაობა\n/noleggio  ·  /riconsegna", -2994689, 1505.0, -1700.0, (13.5 + 0.8), 20.0, 0, false);
 }
 
 Rental_OnExit()
@@ -829,7 +829,7 @@ Rental_OnPlayerDeath(playerid)
 	}
 	if (Rental_CloseInterrupted(playerid, 3))
 	{
-		Util_Send(playerid, -1, "Noleggio interrotto: il mezzo torna all'agenzia.");
+		Util_Send(playerid, -1, "ქირაობა შეწყდა: მანქანა სააგენტოში ბრუნდება.");
 	}
 	return 0;
 }
@@ -847,7 +847,7 @@ Rental_OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
 		return 0;
 	}
 	ClearAnimations(playerid, SYNC_NONE);
-	Util_Send(playerid, -10270721, mod == 2 ? "Questo taxi e' in servizio: puoi salire solo come passeggero." : "Questo mezzo e' a noleggio di un altro cliente.");
+	Util_Send(playerid, -10270721, mod == 2 ? "ეს ტაქსი სამსახურშია: მხოლოდ მგზავრად შეგიძლია ჩაჯდე." : "ეს მანქანა სხვა კლიენტს აქვს ნაქირავები.");
 	return 0;
 }
 
@@ -874,7 +874,7 @@ Rental_OnPlayerStateChange(playerid, t_PLAYER_STATE:newstate, t_PLAYER_STATE:old
 		return 0;
 	}
 	RemovePlayerFromVehicle(playerid, false);
-	Util_Send(playerid, -10270721, "Solo chi ha noleggiato questo mezzo puo' guidarlo.");
+	Util_Send(playerid, -10270721, "ამ მანქანის მართვა მხოლოდ დამქირავებელს შეუძლია.");
 	return 0;
 }
 
@@ -900,7 +900,7 @@ Rental_OnVehicleDeath(vehicleid, killerid)
 	}
 	if (Rental_SendClose(owner, 1, 0, 4))
 	{
-		Util_Send(owner, -10270721, "Il mezzo a noleggio e' stato distrutto: la cauzione copre i danni.");
+		Util_Send(owner, -10270721, "ნაქირავები მანქანა განადგურდა: ზარალს გირაო ფარავს.");
 	}
 	return 0;
 }

@@ -237,8 +237,8 @@ public Living_OnDBDistricts(result, count)
 		g_DistBooted = true;
 		g_DistBootInFlight = false;
 		g_DistCycle = true;
-		new msg[160];
-		format(msg, 160, "boot living completato: %d quartieri, %d contratti per bucket", count, DB_LivingBucketSlots());
+		new msg[480];
+		format(msg, 480, "boot living completato: %d quartieri, %d contratti per bucket", count, DB_LivingBucketSlots());
 		Log_Write("DISTRICT", msg);
 		LD_SetReady(true);
 	}
@@ -309,14 +309,14 @@ District_Emit(type, districtId, charId, value, const opId[])
 		{
 			return 0;
 		}
-		new op[41];
+		new op[123];
 		if (opId[0] == 0 || !strcmp(opId, "-", false, 0x7FFFFFFF))
 		{
-			DB_LivingMakeOpId(op, 41, "le", districtId, charId > 0 ? charId : 0);
+			DB_LivingMakeOpId(op, 123, "le", districtId, charId > 0 ? charId : 0);
 		}
 		else
 		{
-			strcat(op, opId, 41);
+			strcat(op, opId, 123);
 		}
 		new slot = (g_DistQHead + g_DistQCount) % 16;
 		g_DistQType[slot] = type;
@@ -324,7 +324,7 @@ District_Emit(type, districtId, charId, value, const opId[])
 		g_DistQChar[slot] = charId;
 		g_DistQValue[slot] = value;
 		g_DistQOp[slot][0] = 0;
-		strcat(g_DistQOp[slot], op, 41);
+		strcat(g_DistQOp[slot], op, 123);
 		g_DistQCount++;
 		DB_LivingEmit(op, districtId, type, charId > 0 ? charId : 0, value);
 		return 1;
@@ -360,8 +360,8 @@ public Living_OnDBEmit(result, districtId, activity, security, crime)
 		}
 		return 1;
 	}
-	new msg[160];
-	format(msg, 160, "evento %d quartiere %d non registrato (esito %d, op %s)", g_DistQType[slot], g_DistQDist[slot], result, g_DistQOp[slot]);
+	new msg[480];
+	format(msg, 480, "evento %d quartiere %d non registrato (esito %d, op %s)", g_DistQType[slot], g_DistQDist[slot], result, g_DistQOp[slot]);
 	Log_Write("DISTRICT", msg);
 	return 1;
 }
@@ -379,8 +379,8 @@ public Living_OnDBPlayer(playerid, result, refund)
 		g_DistQuietLoad[playerid] = false;
 		if (refund > 0)
 		{
-			new msg[160];
-			format(msg, 160, "Un noleggio rimasto aperto e' stato chiuso: $%d di cauzione sono tornati sul tuo conto.", refund);
+			new msg[480];
+			format(msg, 480, "ღიად დარჩენილი ქირაობა დაიხურა: $%d გირაო შენს ანგარიშზე დაბრუნდა.", refund);
 			Util_Send(playerid, 0x66DD66FF, msg);
 		}
 		LD_Emit(108, 0, gPlayer[playerid][pCharId], refund, "-");
@@ -396,7 +396,7 @@ public Living_OnDBPlayer(playerid, result, refund)
 		g_DistQuietLoad[playerid] = false;
 		if (!quiet)
 		{
-			Util_Send(playerid, -10270721, "Non e' stato possibile caricare la tua reputazione: riprova a rientrare piu' tardi.");
+			Util_Send(playerid, -10270721, "შენი რეპუტაციის ჩატვირთვა ვერ მოხერხდა: მოგვიანებით შემოდი თავიდან.");
 		}
 		Log_Write("DISTRICT", "caricamento dati living del personaggio fallito dopo i tentativi");
 		return 1;
@@ -441,20 +441,20 @@ bool:District_CmdLdset(playerid, const params[])
 		LD_SendBlock(playerid, 1);
 		return true;
 	}
-	new pos = 0, tName[16], tAct[16], tSec[16], tCrime[16];
-	Util_NextToken(params, pos, tName, 16);
-	Util_NextToken(params, pos, tAct, 16);
-	Util_NextToken(params, pos, tSec, 16);
-	Util_NextToken(params, pos, tCrime, 16);
+	new pos = 0, tName[48], tAct[48], tSec[48], tCrime[48];
+	Util_NextToken(params, pos, tName, 48);
+	Util_NextToken(params, pos, tAct, 48);
+	Util_NextToken(params, pos, tSec, 48);
+	Util_NextToken(params, pos, tCrime, 48);
 	new d = LD_ParseDistrict(tName), act = 0, sec = 0, crime = 0;
 	if (d == 0 || tAct[0] == 0 || !District_ParseOpt(tAct, act) || !District_ParseOpt(tSec, sec) || !District_ParseOpt(tCrime, crime))
 	{
-		Util_Send(playerid, 0x99CCFFFF, "Uso: /ldset <idlewood|ganton|jefferson> <attivita' 0-1000> [sicurezza 0-100] [pressione 0-100]  (- = invariato)");
+		Util_Send(playerid, 0x99CCFFFF, "გამოყენება: /ldset <idlewood|ganton|jefferson> <აქტივობა 0-1000> [უსაფრთხოება 0-100] [წნეხი 0-100]  (- = უცვლელი)");
 		return true;
 	}
 	if (act > 1000 || sec > 100 || crime > 100)
 	{
-		Util_Send(playerid, -10270721, "Valori fuori range: attivita' 0-1000, sicurezza e pressione 0-100.");
+		Util_Send(playerid, -10270721, "მნიშვნელობები დიაპაზონს გარეთაა: აქტივობა 0-1000, უსაფრთხოება და წნეხი 0-100.");
 		return true;
 	}
 	DB_LivingMakeOpId(g_DistAdminOp[playerid], 41, "la", d, gPlayer[playerid][pCharId]);
@@ -468,16 +468,16 @@ public Living_OnDBAdminSet(playerid, result, districtId, activity, security, cri
 	{
 		return 1;
 	}
-	new msg[160], name[16];
+	new msg[480], name[48];
 	if (result != 1 && result != 2)
 	{
-		format(msg, 160, "/ldset non applicato (esito %d).", result);
+		format(msg, 480, "/ldset არ შესრულდა (შედეგი %d).", result);
 		Util_Send(playerid, -10270721, msg);
 		return 1;
 	}
 	District_SetCache(districtId, activity, security, crime);
-	LD_DistrictName(districtId, name, 16);
-	format(msg, 160, "%s: attivita' %d, sicurezza %d, pressione %d", name, activity, security, crime);
+	LD_DistrictName(districtId, name, 48);
+	format(msg, 480, "%s: აქტივობა %d, უსაფრთხოება %d, წნეხი %d", name, activity, security, crime);
 	DB_AdminLog(gPlayer[playerid][pAccountId], 0, "ldset", msg);
 	Util_Send(playerid, -5963521, msg);
 	if (!District_SeenOp(g_DistAdminOp[playerid]))

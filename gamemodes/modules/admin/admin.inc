@@ -4,26 +4,26 @@ new g_RepAuthor[10][25];
 new g_RepText[10][97];
 new g_RepSeq;
 new g_AdmHelpLevel[19] = {1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3};
-new g_AdmHelpText[19][32] = {
+new g_AdmHelpText[19][56] = {
 	"/a testo",
 	"/ah",
 	"/goto id",
 	"/reports",
 	"/rr id testo",
 	"/gethere id",
-	"/freeze id [motivo]",
+	"/freeze id [მიზეზი]",
 	"/unfreeze id",
 	"/sethp id hp",
-	"/kick id motivo",
-	"/mute id [min] motivo",
+	"/kick id მიზეზი",
+	"/mute id [წთ] მიზეზი",
 	"/unmute id",
-	"/warn id motivo",
-	"/setadmin id|nome 0-3",
-	"/setlevel id livello",
-	"/setmoney id importo",
-	"/givemoney id importo",
-	"/ban id min motivo",
-	"/unban nome_account"
+	"/warn id მიზეზი",
+	"/setadmin id|სახელი 0-3",
+	"/setlevel id დონე",
+	"/setmoney id თანხა",
+	"/givemoney id თანხა",
+	"/ban id წთ მიზეზი",
+	"/unban ანგარიშის_სახელი"
 };
 
 Admin_LevelName(level, name[], size)
@@ -32,15 +32,15 @@ Admin_LevelName(level, name[], size)
 	{
 		case 1:
 		{
-			strmid(name, "Helper", 0, strlen("Helper"), size);
+			strmid(name, "ჰელპერი", 0, strlen("ჰელპერი"), size);
 		}
 		case 2:
 		{
-			strmid(name, "Moderatore", 0, strlen("Moderatore"), size);
+			strmid(name, "მოდერატორი", 0, strlen("მოდერატორი"), size);
 		}
 		case 3:
 		{
-			strmid(name, "Admin", 0, strlen("Admin"), size);
+			strmid(name, "ადმინი", 0, strlen("ადმინი"), size);
 		}
 		default:
 		{
@@ -66,7 +66,7 @@ Admin_ActorName(playerid, name[], size)
 	}
 	else
 	{
-		strmid(name, "Console", 0, strlen("Console"), size);
+		strmid(name, "კონსოლი", 0, strlen("კონსოლი"), size);
 	}
 }
 
@@ -125,25 +125,25 @@ Admin_PublicNotice(const text[])
 
 Admin_AdmCmd(const staffName[], const action[], const targetName[], const reason[], const participle[])
 {
-	new msg[256];
+	new msg[768];
 	if (reason[0] != 0)
 	{
-		format(msg, 256, "AdmCmd: Staff %s ha %s %s: %s", staffName, action, targetName, reason);
+		format(msg, 768, "AdmCmd: ადმინისტრატორი %s: %s %s: %s", staffName, action, targetName, reason);
 	}
 	else
 	{
-		format(msg, 256, "AdmCmd: Staff %s ha %s %s", staffName, action, targetName);
+		format(msg, 768, "AdmCmd: ადმინისტრატორი %s: %s %s", staffName, action, targetName);
 	}
 	Admin_Notify(msg, -5963521);
 	if (participle[0] != 0)
 	{
 		if (reason[0] != 0)
 		{
-			format(msg, 256, "AdmCmd: %s e' stato %s da %s: %s", targetName, participle, staffName, reason);
+			format(msg, 768, "AdmCmd: %s — %s (ადმინისტრატორი %s): %s", targetName, participle, staffName, reason);
 		}
 		else
 		{
-			format(msg, 256, "AdmCmd: %s e' stato %s da %s", targetName, participle, staffName);
+			format(msg, 768, "AdmCmd: %s — %s (ადმინისტრატორი %s)", targetName, participle, staffName);
 		}
 		Admin_PublicNotice(msg);
 	}
@@ -159,8 +159,8 @@ Admin_LogRaw(staffAcc, const staffName[], targetAcc, const action[], const reaso
 
 Admin_Log(staffid, targetAcc, const action[], const reason[])
 {
-	new name[25];
-	Admin_ActorName(staffid, name, 25);
+	new name[75];
+	Admin_ActorName(staffid, name, 75);
 	Admin_LogRaw(Admin_ActorAccount(staffid), name, targetAcc, action, reason);
 }
 
@@ -203,14 +203,14 @@ Admin_FindByAccount(accountId)
 
 Admin_FindByName(const name[])
 {
-	new cur[25];
+	new cur[75];
 	for (new i = 0; i < MAX_PLAYERS; i++)
 	{
 		if (!IsPlayerConnected(i))
 		{
 			continue;
 		}
-		GetPlayerName(i, cur, 25);
+		GetPlayerName(i, cur, 75);
 		if (!strcmp(cur, name, true, 0x7FFFFFFF))
 		{
 			return i;
@@ -228,15 +228,15 @@ Admin_FormatDuration(seconds, dest[], size)
 	}
 	if (minutes >= 1440)
 	{
-		format(dest, size, "%d giorni", (minutes + 1440 - 1) / 1440);
+		format(dest, size, "%d დღე", (minutes + 1440 - 1) / 1440);
 	}
 	else if (minutes >= 60)
 	{
-		format(dest, size, "%d ore", (minutes + 60 - 1) / 60);
+		format(dest, size, "%d საათი", (minutes + 60 - 1) / 60);
 	}
 	else
 	{
-		format(dest, size, "%d minuti", minutes);
+		format(dest, size, "%d წუთი", minutes);
 	}
 }
 
@@ -257,8 +257,8 @@ Admin_SendHelp(playerid)
 	{
 		return 0;
 	}
-	SendClientMessage(playerid, -2994689, "--- Comandi staff ---");
-	new line[256], name[25];
+	SendClientMessage(playerid, -2994689, "--- ადმინისტრაციის ბრძანებები ---");
+	new line[256], name[75];
 	for (new lv = 1; lv <= level && lv <= 3; lv++)
 	{
 		line[0] = 0;
@@ -278,7 +278,7 @@ Admin_SendHelp(playerid)
 		{
 			continue;
 		}
-		Admin_LevelName(lv, name, 25);
+		Admin_LevelName(lv, name, 75);
 		new out[256];
 		format(out, 256, "[%s] %s", name, line);
 		Admin_Notify_One(playerid, out);
@@ -315,9 +315,9 @@ bool:Admin_CheckMuted(playerid)
 	{
 		return false;
 	}
-	new left[24];
-	Admin_FormatDuration(gPlayer[playerid][pMutedUntil] - gettime(), left, 24);
-	SendClientMessage(playerid, -10270721, "Sei mutato ancora %s.", left);
+	new left[72];
+	Admin_FormatDuration(gPlayer[playerid][pMutedUntil] - gettime(), left, 72);
+	SendClientMessage(playerid, -10270721, "მიუტი კიდევ %s გაქვს.", left);
 	return true;
 }
 
@@ -400,20 +400,20 @@ public Admin_OnBanChecked(playerid, bool:banned, const reason[], expiresAt)
 		Account_ContinueConnect(playerid);
 		return 1;
 	}
-	new msg[144], name[25], when[40];
-	GetPlayerName(playerid, name, 25);
+	new msg[432], name[75], when[360];
+	GetPlayerName(playerid, name, 75);
 	if (expiresAt > 0)
 	{
 		new left = expiresAt - gettime();
-		new dur[24];
-		Admin_FormatDuration(left, dur, 24);
-		format(when, 40, "scade tra %s", dur);
+		new dur[72];
+		Admin_FormatDuration(left, dur, 72);
+		format(when, 360, "ვადა: %s", dur);
 	}
 	else
 	{
 		strmid(when, "permanente", 0, 10, 40);
 	}
-	format(msg, 144, "Sei bannato (%s). Motivo: %s", when, reason);
+	format(msg, 432, "დაბლოკილი ხარ (%s). მიზეზი: %s", when, reason);
 	new line[320];
 	format(line, 320, "connessione rifiutata (ban) %s", name);
 	Log_Write("ADMIN", line);
@@ -430,30 +430,30 @@ public Admin_OnWarnAdded(requesterid, targetAccountId, activeCount)
 	}
 	if (activeCount < 0)
 	{
-		Admin_Reply(requesterid, -10270721, "Warn non registrato (errore database).");
+		Admin_Reply(requesterid, -10270721, "გაფრთხილება არ დარეგისტრირდა (ბაზის შეცდომა).");
 		return 1;
 	}
-	new reason[65], tname[25], sname[25], msg[256];
-	strmid(reason, g_AdmPend[e][apReason], 0, strlen(g_AdmPend[e][apReason]), 65);
-	strmid(tname, g_AdmPend[e][apTargetName], 0, strlen(g_AdmPend[e][apTargetName]), 25);
-	strmid(sname, g_AdmPend[e][apStaffName], 0, strlen(g_AdmPend[e][apStaffName]), 25);
+	new reason[195], tname[75], sname[75], msg[768];
+	strmid(reason, g_AdmPend[e][apReason], 0, strlen(g_AdmPend[e][apReason]), 195);
+	strmid(tname, g_AdmPend[e][apTargetName], 0, strlen(g_AdmPend[e][apTargetName]), 75);
+	strmid(sname, g_AdmPend[e][apStaffName], 0, strlen(g_AdmPend[e][apStaffName]), 75);
 	new staffAcc = g_AdmPend[e][apStaffAcc];
-	format(msg, 256, "%s (warn attivi %d/%d)", reason, activeCount, 3);
+	format(msg, 768, "%s (აქტიური გაფრთხილება %d/%d)", reason, activeCount, 3);
 	Admin_AdmCmd(sname, "warnato", tname, msg, "warnato");
-	format(msg, 256, "%s (%d/%d)", reason, activeCount, 3);
+	format(msg, 768, "%s (%d/%d)", reason, activeCount, 3);
 	Admin_LogRaw(staffAcc, sname, targetAccountId, "warn", msg);
 	new target = Admin_FindByAccount(targetAccountId);
 	if (target == INVALID_PLAYER_ID)
 	{
 		return 1;
 	}
-	SendClientMessage(target, -10270721, "Hai ricevuto un warn da %s: %s (%d/%d).", sname, reason, activeCount, 3);
+	SendClientMessage(target, -10270721, "გაფრთხილება მიიღე %s-სგან: %s (%d/%d).", sname, reason, activeCount, 3);
 	if (activeCount >= 3)
 	{
-		format(msg, 256, "%d warn attivi: kick automatico", activeCount);
+		format(msg, 768, "%d აქტიური გაფრთხილება: ავტომატური კიკი", activeCount);
 		Admin_AdmCmd(sname, "kickato", tname, msg, "kickato");
 		Admin_LogRaw(staffAcc, sname, targetAccountId, "kick", msg);
-		Account_Kick(target, "Hai raggiunto il numero massimo di warn: sei stato espulso.");
+		Account_Kick(target, "გაფრთხილებების ლიმიტს მიაღწიე: სერვერიდან გაგდებული ხარ.");
 	}
 	return 1;
 }
@@ -467,29 +467,29 @@ public Admin_OnBanAdded(requesterid, const name[], banId)
 	}
 	if (banId <= 0)
 	{
-		Admin_Reply(requesterid, -10270721, "Ban non registrato (errore database).");
+		Admin_Reply(requesterid, -10270721, "ბანი არ დარეგისტრირდა (ბაზის შეცდომა).");
 		return 1;
 	}
-	new reason[65], tname[25], sname[25], msg[256], dur[24];
-	strmid(reason, g_AdmPend[e][apReason], 0, strlen(g_AdmPend[e][apReason]), 65);
-	strmid(tname, g_AdmPend[e][apTargetName], 0, strlen(g_AdmPend[e][apTargetName]), 25);
-	strmid(sname, g_AdmPend[e][apStaffName], 0, strlen(g_AdmPend[e][apStaffName]), 25);
+	new reason[195], tname[75], sname[75], msg[768], dur[216];
+	strmid(reason, g_AdmPend[e][apReason], 0, strlen(g_AdmPend[e][apReason]), 195);
+	strmid(tname, g_AdmPend[e][apTargetName], 0, strlen(g_AdmPend[e][apTargetName]), 75);
+	strmid(sname, g_AdmPend[e][apStaffName], 0, strlen(g_AdmPend[e][apStaffName]), 75);
 	new minutes = g_AdmPend[e][apValue];
 	if (minutes > 0)
 	{
-		format(dur, 24, "%d min", minutes);
+		format(dur, 216, "%d წთ", minutes);
 	}
 	else
 	{
 		strmid(dur, "permanente", 0, 10, 24);
 	}
-	format(msg, 256, "%s (%s)", reason, dur);
+	format(msg, 768, "%s (%s)", reason, dur);
 	Admin_AdmCmd(sname, "bannato", tname, msg, "bannato");
 	Admin_LogRaw(g_AdmPend[e][apStaffAcc], sname, g_AdmPend[e][apTargetAcc], "ban", msg);
 	new target = Admin_FindByName(tname);
 	if (target != INVALID_PLAYER_ID)
 	{
-		format(msg, 256, "Sei stato bannato da %s (%s). Motivo: %s", sname, dur, reason);
+		format(msg, 768, "%s-მ დაგბლოკა (%s). მიზეზი: %s", sname, dur, reason);
 		Account_Kick(target, msg);
 	}
 	return 1;
@@ -504,17 +504,17 @@ public Admin_OnUnbanned(requesterid, const name[], affected)
 	}
 	if (affected < 0)
 	{
-		Admin_Reply(requesterid, -10270721, "Unban non riuscito (errore database).");
+		Admin_Reply(requesterid, -10270721, "განბლოკვა ვერ მოხერხდა (ბაზის შეცდომა).");
 		return 1;
 	}
 	if (affected == 0)
 	{
-		Admin_Reply(requesterid, -10270721, "Nessun ban attivo per questo account.");
+		Admin_Reply(requesterid, -10270721, "ამ ანგარიშზე აქტიური ბანი არ არის.");
 		return 1;
 	}
-	new tname[25], sname[25];
-	strmid(tname, g_AdmPend[e][apTargetName], 0, strlen(g_AdmPend[e][apTargetName]), 25);
-	strmid(sname, g_AdmPend[e][apStaffName], 0, strlen(g_AdmPend[e][apStaffName]), 25);
+	new tname[75], sname[75];
+	strmid(tname, g_AdmPend[e][apTargetName], 0, strlen(g_AdmPend[e][apTargetName]), 75);
+	strmid(sname, g_AdmPend[e][apStaffName], 0, strlen(g_AdmPend[e][apStaffName]), 75);
 	Admin_AdmCmd(sname, "sbannato", tname, "", "");
 	Admin_LogRaw(g_AdmPend[e][apStaffAcc], sname, g_AdmPend[e][apTargetAcc], "unban", tname);
 	return 1;
@@ -527,16 +527,16 @@ public Admin_OnAccountFound(requesterid, tag, accountId, const name[], adminLeve
 	{
 		return 1;
 	}
-	new tname[25], sname[25], msg[256];
-	strmid(sname, g_AdmPend[e][apStaffName], 0, strlen(g_AdmPend[e][apStaffName]), 25);
+	new tname[75], sname[75], msg[768];
+	strmid(sname, g_AdmPend[e][apStaffName], 0, strlen(g_AdmPend[e][apStaffName]), 75);
 	new level = g_AdmPend[e][apValue], staffAcc = g_AdmPend[e][apStaffAcc];
 	if (accountId > 0)
 	{
-		strmid(tname, name, 0, strlen(name), 25);
+		strmid(tname, name, 0, strlen(name), 75);
 	}
 	else
 	{
-		strmid(tname, g_AdmPend[e][apTargetName], 0, strlen(g_AdmPend[e][apTargetName]), 25);
+		strmid(tname, g_AdmPend[e][apTargetName], 0, strlen(g_AdmPend[e][apTargetName]), 75);
 	}
 	if (tag == 5)
 	{
@@ -551,13 +551,13 @@ public Admin_OnAccountFound(requesterid, tag, accountId, const name[], adminLeve
 			return 1;
 		}
 		Admin_ApplyLevel(accountId, level);
-		format(msg, 256, "rcon: livello %d", level);
+		format(msg, 768, "rcon: livello %d", level);
 		Admin_LogRaw(0, "Console", accountId, "setadmin", msg);
 		printf("[ADMIN] %s impostato a livello staff %d", tname, level);
 		new online = Admin_FindByAccount(accountId);
 		if (online != 65535)
 		{
-			SendClientMessage(online, -5963521, "Il tuo livello staff e' stato impostato a %d dalla console.", level);
+			SendClientMessage(online, -5963521, "შენი ადმინ-დონე კონსოლმა დააყენა: %d.", level);
 		}
 		return 1;
 	}
@@ -567,18 +567,18 @@ public Admin_OnAccountFound(requesterid, tag, accountId, const name[], adminLeve
 	}
 	if (accountId == -1)
 	{
-		Admin_Reply(requesterid, -10270721, "Errore database, riprova.");
+		Admin_Reply(requesterid, -10270721, "ბაზის შეცდომა, სცადე თავიდან.");
 		return 1;
 	}
 	if (accountId <= 0)
 	{
-		Admin_Reply(requesterid, -10270721, "Account non trovato.");
+		Admin_Reply(requesterid, -10270721, "ანგარიში ვერ მოიძებნა.");
 		return 1;
 	}
 	new myLevel = Util_GetAdmin(requesterid);
 	if (adminLevel >= myLevel || accountId == staffAcc)
 	{
-		Admin_Reply(requesterid, -10270721, "Non puoi agire su questo giocatore.");
+		Admin_Reply(requesterid, -10270721, "ამ მოთამაშეზე მოქმედება არ შეგიძლია.");
 		return 1;
 	}
 	if (tag == 4)
@@ -591,10 +591,10 @@ public Admin_OnAccountFound(requesterid, tag, accountId, const name[], adminLeve
 		new online = Admin_FindByAccount(accountId);
 		if (online != 65535)
 		{
-			SendClientMessage(online, -5963521, "Il tuo livello staff e' stato impostato a %d da %s.", level, sname);
+			SendClientMessage(online, -5963521, "შენი ადმინ-დონე დაყენდა: %d (%s).", level, sname);
 		}
-		format(msg, 256, "livello %d", level);
-		Admin_AdmCmd(sname, "impostato il livello staff di", tname, msg, "");
+		format(msg, 768, "დონე %d", level);
+		Admin_AdmCmd(sname, "შეცვალა ადმინ-დონე:", tname, msg, "");
 		Admin_LogRaw(staffAcc, sname, accountId, "setadmin", msg);
 	}
 	else if (tag == 6)
@@ -621,7 +621,7 @@ Admin_StoreReport(playerid, const text[])
 Admin_ListReports(playerid)
 {
 	new shown = 0, msg[256];
-	SendClientMessage(playerid, -2994689, "--- Ultimi report ---");
+	SendClientMessage(playerid, -2994689, "--- ბოლო რეპორტები ---");
 	for (new k = 0; k < 10; k++)
 	{
 		new id = g_RepSeq - k;
@@ -640,7 +640,7 @@ Admin_ListReports(playerid)
 	}
 	if (shown == 0)
 	{
-		Util_Send(playerid, -1, "Nessun report.");
+		Util_Send(playerid, -1, "რეპორტები არ არის.");
 	}
 }
 
@@ -660,22 +660,22 @@ Admin_ReplyReport(playerid, reportId, const text[])
 	{
 		return 2;
 	}
-	new name[25];
-	GetPlayerName(playerid, name, 25);
+	new name[75];
+	GetPlayerName(playerid, name, 75);
 	SendClientMessage(target, -5963521, "[STAFF] %s: %s", name, text);
 	return 1;
 }
 
 Admin_OnRconCommand(const cmd[])
 {
-	new pos = 0, word[16], name[25], tlv[12], level = 0;
-	Util_NextToken(cmd, pos, word, 16);
+	new pos = 0, word[48], name[75], tlv[36], level = 0;
+	Util_NextToken(cmd, pos, word, 48);
 	if (strcmp(word, "setadmin", true, 0x7FFFFFFF) != 0)
 	{
 		return 0;
 	}
-	Util_NextToken(cmd, pos, name, 25);
-	Util_NextToken(cmd, pos, tlv, 12);
+	Util_NextToken(cmd, pos, name, 75);
+	Util_NextToken(cmd, pos, tlv, 36);
 	for (new i = 0; tlv[i] != 0; i++)
 	{
 		if (tlv[i] < 48 || tlv[i] > 57)

@@ -171,7 +171,7 @@ bool:Util_ParsePlayerId(const token[], &id)
 
 bool:Util_IsValidRPNameC(const name[])
 {
-	new tmp[25];
+	new tmp[75];
 	if (strlen(name) >= sizeof tmp)
 	{
 		return false;

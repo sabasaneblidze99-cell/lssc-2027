@@ -187,8 +187,8 @@ bool:DB_InvBegin(playerid, op, bool:valid, charId, itemId, qty, const opId[], di
 
 DB_InvRun(playerid, op, const query[])
 {
-	new name[25];
-	GetPlayerName(playerid, name, 25);
+	new name[75];
+	GetPlayerName(playerid, name, 75);
 	mysql_tquery(g_DB, query, "DB_OnInvCalled", "dsddds", playerid, name, gPlayer[playerid][pCharId], g_InvReq[playerid][iqToken], op, g_InvReq[playerid][iqOpId]);
 }
 
@@ -224,8 +224,8 @@ DB_InvLoad(playerid, charId)
 		DB_DeliverFailure(playerid, 0x02000000);
 		return 0;
 	}
-	new name[25], query[512];
-	GetPlayerName(playerid, name, 25);
+	new name[75], query[512];
+	GetPlayerName(playerid, name, 75);
 	mysql_format(g_DB, query, 512, "SELECT c.inv_bag, COALESCE(i.slot, 0) AS slot, COALESCE(i.item_id, 0) AS item_id, COALESCE(i.quantity, 0) AS quantity FROM characters c LEFT JOIN inventory_items i ON i.character_id = c.id WHERE c.id = %d ORDER BY i.slot", charId);
 	DB_PendingSet(playerid, 0x02000000);
 	mysql_tquery(g_DB, query, "DB_OnInvLoaded", "dsd", playerid, name, charId);
@@ -422,8 +422,8 @@ DB_InvTransfer(giverId, receiverId, itemId, qty, const opId[])
 	{
 		return 0;
 	}
-	new query[512], gname[25];
-	GetPlayerName(giverId, gname, 25);
+	new query[512], gname[75];
+	GetPlayerName(giverId, gname, 75);
 	mysql_format(g_DB, query, 512, "CALL inv_transfer('%e', %d, %d, %d, %d, %d, %d, %d)", opId, giverChar, recvChar, itemId, qty, DB_InvStackMax(itemId), 12, 8);
 	mysql_tquery(g_DB, query, "DB_OnInvGiveCalled", "dsdddsddds", giverId, gname, giverChar, g_InvReq[giverId][iqToken], receiverId, g_InvReq[giverId][iqRecvName], recvChar, itemId, qty, opId);
 	return 0;
@@ -490,7 +490,7 @@ public DB_OnInvUndoCalled(const opId[], notify)
 
 public DB_OnInvUndoResult(const opId[], notify)
 {
-	new rows = 0, result = 8, msg[112];
+	new rows = 0, result = 8, msg[336];
 	cache_get_row_count(rows);
 	if (rows > 0)
 	{
@@ -502,7 +502,7 @@ public DB_OnInvUndoResult(const opId[], notify)
 			cache_get_value_name_int(0, "undo_result", result);
 		}
 	}
-	format(msg, 112, "undo inventario op %s%s: esito %d%s", opId, notify ? "" : " (compensazione a sessione scaduta)", result, result == 1 ? "" : " ANOMALIA: verificare a mano");
+	format(msg, 336, "undo inventario op %s%s: esito %d%s", opId, notify ? "" : " (compensazione a sessione scaduta)", result, result == 1 ? "" : " ANOMALIA: verificare a mano");
 	if (result != 1 || !notify)
 	{
 		Log_Write("DBINV", msg);

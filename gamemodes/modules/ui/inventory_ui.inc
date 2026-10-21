@@ -1,28 +1,28 @@
-new g_UiInvName[11][24] = {
+new g_UiInvName[11][88] = {
 	{0},
-	"Porzione di cibo",
-	"Pasto pronto",
-	"Bottiglia d'acqua",
-	"Snack",
-	"Kit di pronto soccorso",
-	"Benda",
-	"Sigarette",
-	"Accendino",
-	"Telefono",
-	"Documento d'identita'"
+	"საკვების ულუფა",
+	"მზა კერძი",
+	"წყლის ბოთლი",
+	"სნექი",
+	"პირველადი დახმარების ნაკრები",
+	"ბინტი",
+	"სიგარეტი",
+	"სანთებელა",
+	"ტელეფონი",
+	"პირადობის მოწმობა"
 };
-new g_UiInvDesc[11][80] = {
+new g_UiInvDesc[11][192] = {
 	{0},
-	"Scatolame e ingredienti per cucinare. Si ripone nel frigo.",
-	"Piatto da asporto. Sazia subito.",
-	"Acqua naturale da 0,5 l.",
-	"Barretta o patatine.",
-	"Kit civile di pronto soccorso. Cura e viene consumato.",
-	"Garza e cerotti per piccole ferite.",
-	"Pacchetto da 20. Serve un accendino.",
-	"Necessario per fumare.",
-	"Mostra il tuo numero di telefono.",
-	"Carta d'identita' di San Andreas."
+	"კონსერვები და ინგრედიენტები საჭმლის მოსამზადებლად. ინახება მაცივარში.",
+	"წასაღები კერძი. მაშინვე გაძღება.",
+	"0,5 ლ ბუნებრივი წყალი.",
+	"ბატონჩიკი ან ჩიფსი.",
+	"სამოქალაქო პირველადი დახმარების ნაკრები. გმკურნალობს და იხარჯება.",
+	"ბინტი და სალბუნი მცირე ჭრილობებისთვის.",
+	"20-ღერიანი კოლოფი. საჭიროა სანთებელა.",
+	"საჭიროა მოსაწევად.",
+	"აჩვენე შენი ტელეფონის ნომერი.",
+	"სან-ანდრეასის პირადობის მოწმობა."
 };
 new g_UiInvStack[11] = {0, 12, 3, 6, 10, 3, 10, 5, 1, 1, 1};
 new g_UiInvFlags[11] = {0, 2, 3, 3, 3, 3, 3, 3, 2, 1, 1};
@@ -183,16 +183,16 @@ UI_InvListPage(playerid, page)
 			slots[n++] = i;
 		}
 	}
-	new title[64], used = g_UiInvUsed[playerid];
-	format(title, 64, "Inventario - %d/%d slot - zaino %s", used, limit, g_UiInvBag[playerid] ? "si" : "no");
+	new title[576], used = g_UiInvUsed[playerid];
+	format(title, 576, "ინვენტარი - %d/%d სლოტი - ზურგჩანთა %s", used, limit, g_UiInvBag[playerid] ? "კი" : "არა");
 	if (n == 0)
 	{
-		new empty[160];
-		format(empty, 160, "{FFFFFF}Il tuo inventario e' vuoto.\n\nCapienza: {FFD24D}%d/%d{FFFFFF} slot. Zaino: {FFD24D}%s{FFFFFF}.", used, limit, g_UiInvBag[playerid] ? "si" : "no");
+		new empty[480];
+		format(empty, 480, "{FFFFFF}შენი ინვენტარი ცარიელია.\n\nტევადობა: {FFD24D}%d/%d{FFFFFF} სლოტი. ზურგჩანთა: {FFD24D}%s{FFFFFF}.", used, limit, g_UiInvBag[playerid] ? "კი" : "არა");
 		g_UiInvRowCount[playerid] = 0;
 		g_UiInvNavNext[playerid] = -1;
 		g_UiInvNavPrev[playerid] = -1;
-		Lang_ShowPlayerDialog(playerid, 9400, DIALOG_STYLE_MSGBOX, title, empty, "Chiudi", "");
+		Lang_ShowPlayerDialog(playerid, 9400, DIALOG_STYLE_MSGBOX, title, empty, "დახურვა", "");
 		return 0;
 	}
 	new pages = (n + 10 - 1) / 10;
@@ -205,15 +205,15 @@ UI_InvListPage(playerid, page)
 		page = pages - 1;
 	}
 	g_UiInvPage[playerid] = page;
-	new body[1024], line[96], name[24];
-	format(body, 1024, "Slot\tOggetto\tQuantita'\n");
+	new body[2048], line[288], name[72];
+	format(body, 2048, "სლოტი\tნივთი\tრაოდენობა\n");
 	new first = page * 10, rows = 0;
 	for (new k = first; k < n && rows < 10; k++)
 	{
 		new slot = slots[k], itemId = g_UiInvItem[playerid][slot];
-		strcopy(name, g_UiInvName[itemId], 24);
-		format(line, 96, "%d\t%s\t%d/%d\n", slot + 1, name, g_UiInvQty[playerid][slot], g_UiInvStack[itemId]);
-		strcat(body, line, 1024);
+		strcopy(name, g_UiInvName[itemId], 72);
+		format(line, 288, "%d\t%s\t%d/%d\n", slot + 1, name, g_UiInvQty[playerid][slot], g_UiInvStack[itemId]);
+		strcat(body, line, 2048);
 		g_UiInvRows[playerid][rows++] = slot;
 	}
 	g_UiInvRowCount[playerid] = rows;
@@ -222,19 +222,19 @@ UI_InvListPage(playerid, page)
 	new idx = rows;
 	if (page < pages - 1)
 	{
-		strcat(body, "{FFD24D}>> Pagina successiva\t\t\n", 1024);
+		strcat(body, "{FFD24D}>> შემდეგი გვერდი\t\t\n", 2048);
 		g_UiInvNavNext[playerid] = idx++;
 	}
 	if (page > 0)
 	{
-		strcat(body, "{FFD24D}<< Pagina precedente\t\t\n", 1024);
+		strcat(body, "{FFD24D}<< წინა გვერდი\t\t\n", 2048);
 		g_UiInvNavPrev[playerid] = idx;
 	}
 	if (pages > 1)
 	{
-		format(title, 64, "Inventario %d/%d - zaino %s - pag. %d/%d", used, limit, g_UiInvBag[playerid] ? "si" : "no", page + 1, pages);
+		format(title, 576, "ინვენტარი %d/%d - ზურგჩანთა %s - გვ. %d/%d", used, limit, g_UiInvBag[playerid] ? "კი" : "არა", page + 1, pages);
 	}
-	Lang_ShowPlayerDialog(playerid, 9400, DIALOG_STYLE_TABLIST_HEADERS, title, body, "Apri", "Chiudi");
+	Lang_ShowPlayerDialog(playerid, 9400, DIALOG_STYLE_TABLIST_HEADERS, title, body, "გახსნა", "დახურვა");
 	return 0;
 }
 
@@ -253,33 +253,33 @@ UI_InvActionShow(playerid)
 {
 	if (!UI_InvSelOk(playerid))
 	{
-		SendClientMessage(playerid, -10066177, "L'inventario e' cambiato: riapro la lista.");
+		SendClientMessage(playerid, -10066177, "ინვენტარი შეიცვალა: სია თავიდან იხსნება.");
 		UI_InvSelReset(playerid);
 		UI_InvListPage(playerid, g_UiInvPage[playerid]);
 		return 0;
 	}
 	new slot = g_UiInvSel[playerid], itemId = g_UiInvItem[playerid][slot], qty = g_UiInvQty[playerid][slot];
-	new title[64], body[256], flags = g_UiInvFlags[itemId], name[24];
-	strcopy(name, g_UiInvName[itemId], 24);
-	format(title, 64, "%s x%d (slot %d)", name, qty, slot + 1);
+	new title[576], body[768], flags = g_UiInvFlags[itemId], name[72];
+	strcopy(name, g_UiInvName[itemId], 72);
+	format(title, 576, "%s x%d (სლოტი %d)", name, qty, slot + 1);
 	if (flags & 1)
 	{
-		strcat(body, "Usa\n", 256);
+		strcat(body, "გამოყენება\n", 768);
 	}
 	else
 	{
-		strcat(body, "{888888}Usa (non utilizzabile){FFFFFF}\n", 256);
+		strcat(body, "{888888}გამოყენება (არ გამოიყენება){FFFFFF}\n", 768);
 	}
 	if (flags & 2)
 	{
-		strcat(body, "Dai a un giocatore\nGetta\n", 256);
+		strcat(body, "მოთამაშისთვის მიცემა\nგადაგდება\n", 768);
 	}
 	else
 	{
-		strcat(body, "{888888}Dai (non trasferibile){FFFFFF}\n{888888}Getta (non droppabile){FFFFFF}\n", 256);
+		strcat(body, "{888888}მიცემა (არ გადაეცემა){FFFFFF}\n{888888}გადაგდება (არ იყრება){FFFFFF}\n", 768);
 	}
-	strcat(body, "Descrizione", 256);
-	Lang_ShowPlayerDialog(playerid, 9401, DIALOG_STYLE_LIST, title, body, "Scegli", "Indietro");
+	strcat(body, "აღწერა", 768);
+	Lang_ShowPlayerDialog(playerid, 9401, DIALOG_STYLE_LIST, title, body, "არჩევა", "უკან");
 	return 0;
 }
 
@@ -291,7 +291,7 @@ UI_InvItemShow(playerid, slot)
 	}
 	if (slot < 0 || slot >= 20 || slot >= g_UiInvMax[playerid] || g_UiInvItem[playerid][slot] == 0)
 	{
-		SendClientMessage(playerid, -10066177, "Slot vuoto o non valido.");
+		SendClientMessage(playerid, -10066177, "სლოტი ცარიელია ან არასწორია.");
 		return 0;
 	}
 	g_UiInvSel[playerid] = slot;
@@ -304,40 +304,40 @@ UI_InvItemShow(playerid, slot)
 UI_InvInfoShow(playerid)
 {
 	new slot = g_UiInvSel[playerid], itemId = g_UiInvItem[playerid][slot];
-	new body[384], title[64], name[24], desc[80];
-	strcopy(name, g_UiInvName[itemId], 24);
-	strcopy(desc, g_UiInvDesc[itemId], 80);
+	new body[384], title[192], name[72], desc[240];
+	strcopy(name, g_UiInvName[itemId], 72);
+	strcopy(desc, g_UiInvDesc[itemId], 240);
 	new flags = g_UiInvFlags[itemId];
-	format(title, 64, "%s", name);
-	format(body, 384, "{FFFFFF}%s\n\nPosseduti: {FFD24D}%d{FFFFFF} (max %d per slot)\nUso: {FFD24D}%s{FFFFFF}\nDare/Gettare: {FFD24D}%s", desc, g_UiInvQty[playerid][slot], g_UiInvStack[itemId], flags & 1 ? "si" : "no", flags & 2 ? "si" : "no");
-	Lang_ShowPlayerDialog(playerid, 9402, DIALOG_STYLE_MSGBOX, title, body, "Indietro", "Chiudi");
+	format(title, 192, "%s", name);
+	format(body, 384, "{FFFFFF}%s\n\nგაქვს: {FFD24D}%d{FFFFFF} (მაქს. %d სლოტში)\nგამოყენება: {FFD24D}%s{FFFFFF}\nმიცემა/გადაგდება: {FFD24D}%s", desc, g_UiInvQty[playerid][slot], g_UiInvStack[itemId], flags & 1 ? "კი" : "არა", flags & 2 ? "კი" : "არა");
+	Lang_ShowPlayerDialog(playerid, 9402, DIALOG_STYLE_MSGBOX, title, body, "უკან", "დახურვა");
 }
 
 UI_InvQtyShow(playerid, const err[])
 {
 	new slot = g_UiInvSel[playerid], itemId = g_UiInvItem[playerid][slot], maxQ = g_UiInvQty[playerid][slot];
-	new body[320], title[64], name[24];
-	strcopy(name, g_UiInvName[itemId], 24);
-	format(title, 64, "%s: quantita'", name);
-	format(body, 320, "%s{FFFFFF}Quante unita' di {FFD24D}%s{FFFFFF} vuoi %s?\nInserisci un numero da {FFD24D}1{FFFFFF} a {FFD24D}%d{FFFFFF}.", err, name, g_UiInvPendAct[playerid] == 1 ? "dare" : "gettare", maxQ);
-	Lang_ShowPlayerDialog(playerid, 9403, DIALOG_STYLE_INPUT, title, body, "Avanti", "Indietro");
+	new body[320], title[576], name[72];
+	strcopy(name, g_UiInvName[itemId], 72);
+	format(title, 576, "%s: რაოდენობა", name);
+	format(body, 320, "%s{FFFFFF}რამდენი ერთეული {FFD24D}%s{FFFFFF} გინდა %s?\nშეიყვანე რიცხვი {FFD24D}1{FFFFFF}-დან {FFD24D}%d{FFFFFF}-მდე.", err, name, g_UiInvPendAct[playerid] == 1 ? "მისცე" : "გადააგდო", maxQ);
+	Lang_ShowPlayerDialog(playerid, 9403, DIALOG_STYLE_INPUT, title, body, "შემდეგი", "უკან");
 }
 
 UI_InvTargetShow(playerid, const err[])
 {
-	new body[320], title[64], name[24], itemId = g_UiInvSelItem[playerid];
-	strcopy(name, g_UiInvName[itemId], 24);
-	format(title, 64, "Dai %s x%d", name, g_UiInvSelQty[playerid]);
-	format(body, 320, "%s{FFFFFF}Inserisci l'{FFD24D}ID{FFFFFF} del giocatore vicino a cui dare l'oggetto.\nDeve trovarsi entro %.0f metri e accettare lo scambio.", err, 3.0);
-	Lang_ShowPlayerDialog(playerid, 9404, DIALOG_STYLE_INPUT, title, body, "Invia", "Indietro");
+	new body[320], title[576], name[72], itemId = g_UiInvSelItem[playerid];
+	strcopy(name, g_UiInvName[itemId], 72);
+	format(title, 576, "მიცემა: %s x%d", name, g_UiInvSelQty[playerid]);
+	format(body, 320, "%s{FFFFFF}შეიყვანე იმ ახლომდებარე მოთამაშის {FFD24D}ID{FFFFFF}, ვისაც ნივთს აძლევ.\nის %.0f მეტრის რადიუსში უნდა იყოს და გაცვლა უნდა დაადასტუროს.", err, 3.0);
+	Lang_ShowPlayerDialog(playerid, 9404, DIALOG_STYLE_INPUT, title, body, "გაგზავნა", "უკან");
 }
 
 UI_InvDropConfirmShow(playerid)
 {
-	new body[320], name[24], itemId = g_UiInvSelItem[playerid];
-	strcopy(name, g_UiInvName[itemId], 24);
-	format(body, 320, "{FFFFFF}Gettare {FFD24D}%s x%d{FFFFFF}?\n\n{FF6666}L'oggetto finira' a terra e scomparira' dopo %d minuti. Chiunque vicino potra' raccoglierlo.", name, g_UiInvSelQty[playerid], 10);
-	Lang_ShowPlayerDialog(playerid, 9405, DIALOG_STYLE_MSGBOX, "Conferma: getta", body, "Getta", "Annulla");
+	new body[640], name[72], itemId = g_UiInvSelItem[playerid];
+	strcopy(name, g_UiInvName[itemId], 72);
+	format(body, 640, "{FFFFFF}გადააგდებ {FFD24D}%s x%d{FFFFFF}?\n\n{FF6666}ნივთი მიწაზე დავარდება და %d წუთში გაქრება. ახლოს მყოფ ნებისმიერს შეეძლება მისი აღება.", name, g_UiInvSelQty[playerid], 10);
+	Lang_ShowPlayerDialog(playerid, 9405, DIALOG_STYLE_MSGBOX, "დადასტურება: გადაგდება", body, "გადაგდება", "გაუქმება");
 }
 
 UI_InvTimerStop(playerid)
@@ -398,8 +398,8 @@ UI_InvRecvDestroyTds(playerid)
 
 UI_InvRecvRefresh(playerid)
 {
-	new str[48], left = g_UiInvRecvLeft[playerid], total = g_UiInvRecvTotal[playerid];
-	format(str, 48, "Scambio in attesa: %d s", left);
+	new str[432], left = g_UiInvRecvLeft[playerid], total = g_UiInvRecvTotal[playerid];
+	format(str, 432, "გაცვლის მოლოდინი: %d წმ", left);
 	Lang_PlayerTextDrawSetString(playerid, g_UiInvRecvTd[playerid][1], str);
 	new Float:fraction = (total > 0 ? (float(left) / float(total)) : 0.0);
 	if ((fraction < 0.0))
@@ -457,7 +457,7 @@ UI_InvGiveConfirmShow(playerid, const giverName[], itemId, qty, ttlSec)
 		g_UiInvRecvTd[playerid][i] = INVALID_PLAYER_TEXT_DRAW;
 	}
 	g_UiInvRecvTd[playerid][0] = UI_InvBox(playerid, 210.0, 124.0, 220.0, 26.0, 170);
-	g_UiInvRecvTd[playerid][1] = UI_InvText(playerid, (210.0 + 6.0), (124.0 + 2.0), "Scambio in attesa", 0.24, 1.1, -2994689, t_TEXT_DRAW_ALIGN:1);
+	g_UiInvRecvTd[playerid][1] = UI_InvText(playerid, (210.0 + 6.0), (124.0 + 2.0), "გაცვლის მოლოდინი", 0.24, 1.1, -2994689, t_TEXT_DRAW_ALIGN:1);
 	g_UiInvRecvTd[playerid][2] = UI_InvBox(playerid, (210.0 + 6.0), (124.0 + 17.0), 208.0, 5.0, 0x444444FF);
 	g_UiInvRecvTd[playerid][3] = UI_InvBox(playerid, (210.0 + 6.0), (124.0 + 17.0), 208.0, 5.0, -2994689);
 	g_UiInvRecvActive[playerid] = true;
@@ -467,11 +467,11 @@ UI_InvGiveConfirmShow(playerid, const giverName[], itemId, qty, ttlSec)
 	PlayerTextDrawShow(playerid, PlayerText:g_UiInvRecvTd[playerid][2]);
 	UI_InvRecvRefresh(playerid);
 	UI_InvTimerEnsure(playerid);
-	new body[320], name[24], giver[25];
-	strcopy(name, g_UiInvName[itemId], 24);
-	strcopy(giver, giverName, 25);
-	format(body, 320, "{FFD24D}%s{FFFFFF} vuole darti {FFD24D}%s x%d{FFFFFF}.\n\nLa richiesta scade tra {FF6666}%d{FFFFFF} secondi.\nSe non c'e' posto nel tuo inventario lo scambio fallira'.", giver, name, qty, ttlSec);
-	Lang_ShowPlayerDialog(playerid, 9406, DIALOG_STYLE_MSGBOX, "Oggetto in arrivo", body, "Accetta", "Rifiuta");
+	new body[640], name[72], giver[75];
+	strcopy(name, g_UiInvName[itemId], 72);
+	strcopy(giver, giverName, 75);
+	format(body, 640, "{FFD24D}%s{FFFFFF}-ს სურს მოგცეს {FFD24D}%s x%d{FFFFFF}.\n\nმოთხოვნა ვადა გაუვა {FF6666}%d{FFFFFF} წამში.\nთუ ინვენტარში ადგილი არ გაქვს, გაცვლა ჩაიშლება.", giver, name, qty, ttlSec);
+	Lang_ShowPlayerDialog(playerid, 9406, DIALOG_STYLE_MSGBOX, "შემომავალი ნივთი", body, "მიღება", "უარყოფა");
 	return 0;
 }
 
@@ -519,7 +519,7 @@ UI_InvToastRedraw(playerid)
 	{
 		return 0;
 	}
-	new str[48];
+	new str[144];
 	for (new i = 0; i < 3; i++)
 	{
 		if (g_UiInvToastTtl[playerid][i] <= 0 || !UI_InvItemOk(g_UiInvToastItem[playerid][i]))
@@ -528,7 +528,7 @@ UI_InvToastRedraw(playerid)
 			continue;
 		}
 		new delta = g_UiInvToastDelta[playerid][i];
-		format(str, 48, "%s%d %s", delta > 0 ? "+" : "", delta, g_UiInvName[g_UiInvToastItem[playerid][i]]);
+		format(str, 144, "%s%d %s", delta > 0 ? "+" : "", delta, g_UiInvName[g_UiInvToastItem[playerid][i]]);
 		Lang_PlayerTextDrawSetString(playerid, g_UiInvToastTd[playerid][i], str);
 		PlayerTextDrawColour(playerid, PlayerText:g_UiInvToastTd[playerid][i], delta > 0 ? 0x66DD66FF : -10066177);
 		PlayerTextDrawShow(playerid, PlayerText:g_UiInvToastTd[playerid][i]);
@@ -594,7 +594,7 @@ public UI_InvOnTimer(playerid)
 			{
 				HidePlayerDialog(playerid);
 			}
-			SendClientMessage(playerid, -2994689, "La richiesta di scambio e' scaduta.");
+			SendClientMessage(playerid, -2994689, "გაცვლის მოთხოვნას ვადა გაუვიდა.");
 			UI_OnInvGiveExpired(playerid);
 		}
 		else
@@ -667,7 +667,7 @@ bool:UI_InvOnDialogResponse(playerid, dialogid, response, listitem, const inputt
 				{
 					if (!(flags & 1))
 					{
-						SendClientMessage(playerid, -10066177, "Questo oggetto non si puo' usare.");
+						SendClientMessage(playerid, -10066177, "ამ ნივთის გამოყენება შეუძლებელია.");
 						UI_InvActionShow(playerid);
 						return true;
 					}
@@ -678,7 +678,7 @@ bool:UI_InvOnDialogResponse(playerid, dialogid, response, listitem, const inputt
 				{
 					if (!(flags & 2))
 					{
-						SendClientMessage(playerid, -10066177, listitem == 1 ? "Questo oggetto non si puo' dare." : "Questo oggetto non si puo' gettare.");
+						SendClientMessage(playerid, -10066177, listitem == 1 ? "ამ ნივთის მიცემა შეუძლებელია." : "ამ ნივთის გადაგდება შეუძლებელია.");
 						UI_InvActionShow(playerid);
 						return true;
 					}
@@ -735,8 +735,8 @@ bool:UI_InvOnDialogResponse(playerid, dialogid, response, listitem, const inputt
 			new q = 0, maxQ = g_UiInvQty[playerid][g_UiInvSel[playerid]];
 			if (!UI_InvParseNum(inputtext, q) || q < 1 || q > maxQ)
 			{
-				new err[144];
-				format(err, 144, "{FF6666}Quantita' non valida: serve un numero da 1 a %d.\n\n", maxQ);
+				new err[432];
+				format(err, 432, "{FF6666}არასწორი რაოდენობა: საჭიროა რიცხვი 1-დან %d-მდე.\n\n", maxQ);
 				UI_InvQtyShow(playerid, err);
 				return true;
 			}
@@ -773,17 +773,17 @@ bool:UI_InvOnDialogResponse(playerid, dialogid, response, listitem, const inputt
 			new target = 0;
 			if (!UI_InvParseNum(inputtext, target))
 			{
-				UI_InvTargetShow(playerid, "{FF6666}Inserisci l'ID numerico del giocatore.\n\n");
+				UI_InvTargetShow(playerid, "{FF6666}შეიყვანე მოთამაშის რიცხვითი ID.\n\n");
 				return true;
 			}
 			if (target < 0 || target >= MAX_PLAYERS || !IsPlayerConnected(target))
 			{
-				UI_InvTargetShow(playerid, "{FF6666}ID non valido o giocatore non connesso.\n\n");
+				UI_InvTargetShow(playerid, "{FF6666}ID არასწორია ან მოთამაშე არ არის სერვერზე.\n\n");
 				return true;
 			}
 			if (target == playerid)
 			{
-				UI_InvTargetShow(playerid, "{FF6666}Non puoi dare oggetti a te stesso.\n\n");
+				UI_InvTargetShow(playerid, "{FF6666}საკუთარ თავს ნივთს ვერ მისცემ.\n\n");
 				return true;
 			}
 			new slot = g_UiInvSel[playerid], qty = g_UiInvSelQty[playerid];

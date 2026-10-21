@@ -29,12 +29,12 @@ new g_UiVehState[MAX_PLAYERS][4];
 
 UI_VehMoney(value, out[], size)
 {
-	new raw[16], len = 0, pos = 0;
+	new raw[48], len = 0, pos = 0;
 	if (value < 0)
 	{
 		value = 0;
 	}
-	format(raw, 16, "%d", value);
+	format(raw, 48, "%d", value);
 	len = strlen(raw);
 	out[0] = 0;
 	for (new i = 0; i < len && pos < size - 2; i++)
@@ -69,7 +69,7 @@ UI_VehModelName(model, out[], size)
 	}
 	else
 	{
-		format(out, size, "Modello %d", model);
+		format(out, size, "მოდელი %d", model);
 	}
 }
 
@@ -82,37 +82,37 @@ UI_VehicleShopShow(playerid, level, money, bank)
 	g_UiVehLevel[playerid] = level;
 	g_UiVehMoney[playerid] = money;
 	g_UiVehBank[playerid] = bank;
-	new body[1536], line[96], price[16];
+	new body[1536], line[288], price[48];
 	for (new i = 0; i < 13; i++)
 	{
-		UI_VehMoney(g_UiVehPrice[i], price, 16);
+		UI_VehMoney(g_UiVehPrice[i], price, 48);
 		if (level >= g_UiVehMinLevel[i])
 		{
-			format(line, 96, "{FFFFFF}%s\t{66DD66}$%s\t{AAAAAA}liv. %d\n", g_UiVehName[i], price, g_UiVehMinLevel[i]);
+			format(line, 288, "{FFFFFF}%s\t{66DD66}$%s\t{AAAAAA}დონე %d\n", g_UiVehName[i], price, g_UiVehMinLevel[i]);
 		}
 		else
 		{
-			format(line, 96, "{777777}%s\t$%s\t{FF6666}Bloccato: liv. %d\n", g_UiVehName[i], price, g_UiVehMinLevel[i]);
+			format(line, 288, "{777777}%s\t$%s\t{FF6666}დაბლოკილია: დონე %d\n", g_UiVehName[i], price, g_UiVehMinLevel[i]);
 		}
 		strcat(body, line, 1536);
 	}
-	Lang_ShowPlayerDialog(playerid, 9100, DIALOG_STYLE_TABLIST, "Concessionario di Los Santos", body, "Scegli", "Chiudi");
+	Lang_ShowPlayerDialog(playerid, 9100, DIALOG_STYLE_TABLIST, "ლოს-სანტოსის ავტოსალონი", body, "არჩევა", "დახურვა");
 	return 0;
 }
 
 UI_VehPayShow(playerid)
 {
 	new idx = g_UiVehSel[playerid];
-	new body[320], price[16], cash[16], bank[16], t[48];
-	UI_VehMoney(g_UiVehPrice[idx], price, 16);
-	UI_VehMoney(g_UiVehMoney[playerid], cash, 16);
-	UI_VehMoney(g_UiVehBank[playerid], bank, 16);
-	format(body, 320, "{FFFFFF}Contanti\t%s$%s\n", g_UiVehMoney[playerid] >= g_UiVehPrice[idx] ? "{66DD66}" : "{FF6666}", cash);
-	format(t, 48, "{FFFFFF}Banca\t%s$%s\n", g_UiVehBank[playerid] >= g_UiVehPrice[idx] ? "{66DD66}" : "{FF6666}", bank);
-	strcat(body, t, 320);
-	new title[64];
-	format(title, 64, "%s - $%s: pagamento", g_UiVehName[idx], price);
-	Lang_ShowPlayerDialog(playerid, 9101, DIALOG_STYLE_TABLIST, title, body, "Acquista", "Indietro");
+	new body[640], price[48], cash[48], bank[48], t[144];
+	UI_VehMoney(g_UiVehPrice[idx], price, 48);
+	UI_VehMoney(g_UiVehMoney[playerid], cash, 48);
+	UI_VehMoney(g_UiVehBank[playerid], bank, 48);
+	format(body, 640, "{FFFFFF}ნაღდი ფული\t%s$%s\n", g_UiVehMoney[playerid] >= g_UiVehPrice[idx] ? "{66DD66}" : "{FF6666}", cash);
+	format(t, 144, "{FFFFFF}ბანკი\t%s$%s\n", g_UiVehBank[playerid] >= g_UiVehPrice[idx] ? "{66DD66}" : "{FF6666}", bank);
+	strcat(body, t, 640);
+	new title[576];
+	format(title, 576, "%s - $%s: გადახდა", g_UiVehName[idx], price);
+	Lang_ShowPlayerDialog(playerid, 9101, DIALOG_STYLE_TABLIST, title, body, "ყიდვა", "უკან");
 }
 
 UI_VehicleListClear(playerid)
@@ -161,59 +161,59 @@ UI_VehicleListShow(playerid)
 	}
 	if (g_UiVehCount[playerid] <= 0)
 	{
-		Lang_ShowPlayerDialog(playerid, 9105, DIALOG_STYLE_MSGBOX, "I miei veicoli", "{FFFFFF}Non possiedi veicoli.\nAcquistane uno al concessionario di Los Santos.", "Ok", "");
+		Lang_ShowPlayerDialog(playerid, 9105, DIALOG_STYLE_MSGBOX, "ჩემი მანქანები", "{FFFFFF}მანქანა არ გაქვს.\nიყიდე ლოს-სანტოსის ავტოსალონში.", "კარგი", "");
 		return 0;
 	}
-	new body[1536], line[128], name[16], stxt[24];
-	strcat(body, "Slot\tModello\tTarga\tCarburante\tStato\n", 1536);
+	new body[3072], line[384], name[48], stxt[216];
+	strcat(body, "სლოტი\tმოდელი\tნომერი\tსაწვავი\tსტატუსი\n", 3072);
 	for (new i = 0; i < g_UiVehCount[playerid]; i++)
 	{
-		UI_VehModelName(g_UiVehLModel[playerid][i], name, 16);
+		UI_VehModelName(g_UiVehLModel[playerid][i], name, 48);
 		switch (g_UiVehState[playerid][i])
 		{
 			case 1:
 			{
-				format(stxt, 24, "{66AAFF}Parcheggiato");
+				format(stxt, 216, "{66AAFF}გაჩერებულია");
 			}
 			case 2:
 			{
-				format(stxt, 24, "{FF6666}Distrutto");
+				format(stxt, 216, "{FF6666}განადგურებულია");
 			}
 			default:
 			{
-				format(stxt, 24, "{66DD66}In giro");
+				format(stxt, 216, "{66DD66}გზაშია");
 			}
 		}
-		format(line, 128, "%d\t%s\t%s\t%d%%\t%s\n", g_UiVehSlot[playerid][i], name, g_UiVehLPlate[playerid][i], g_UiVehFuel[playerid][i], stxt);
-		strcat(body, line, 1536);
+		format(line, 384, "%d\t%s\t%s\t%d%%\t%s\n", g_UiVehSlot[playerid][i], name, g_UiVehLPlate[playerid][i], g_UiVehFuel[playerid][i], stxt);
+		strcat(body, line, 3072);
 	}
-	Lang_ShowPlayerDialog(playerid, 9102, DIALOG_STYLE_TABLIST_HEADERS, "I miei veicoli", body, "Seleziona", "Chiudi");
+	Lang_ShowPlayerDialog(playerid, 9102, DIALOG_STYLE_TABLIST_HEADERS, "ჩემი მანქანები", body, "არჩევა", "დახურვა");
 	return 0;
 }
 
 UI_VehActionShow(playerid)
 {
-	new i = g_UiVehSel[playerid], name[16], title[64];
-	UI_VehModelName(g_UiVehLModel[playerid][i], name, 16);
-	format(title, 64, "%s [%s]", name, g_UiVehLPlate[playerid][i]);
-	Lang_ShowPlayerDialog(playerid, 9103, DIALOG_STYLE_LIST, title, "Trova veicolo\nVendi veicolo", "Scegli", "Indietro");
+	new i = g_UiVehSel[playerid], name[48], title[192];
+	UI_VehModelName(g_UiVehLModel[playerid][i], name, 48);
+	format(title, 192, "%s [%s]", name, g_UiVehLPlate[playerid][i]);
+	Lang_ShowPlayerDialog(playerid, 9103, DIALOG_STYLE_LIST, title, "მანქანის პოვნა\nმანქანის გაყიდვა", "არჩევა", "უკან");
 }
 
 UI_VehSellConfirmShow(playerid)
 {
-	new i = g_UiVehSel[playerid], name[16], body[256], amount[16];
+	new i = g_UiVehSel[playerid], name[48], body[768], amount[48];
 	new idx = UI_VehCatalogIndexOf(g_UiVehLModel[playerid][i]);
-	UI_VehModelName(g_UiVehLModel[playerid][i], name, 16);
+	UI_VehModelName(g_UiVehLModel[playerid][i], name, 48);
 	if (idx >= 0)
 	{
-		UI_VehMoney(g_UiVehPrice[idx] * 60 / 100, amount, 16);
-		format(body, 256, "{FFFFFF}Vendere {FFD24D}%s{FFFFFF} (targa %s)?\n\nRiceverai circa {66DD66}$%s{FFFFFF} (%d%% del listino) in banca.\nL'operazione non e' reversibile.", name, g_UiVehLPlate[playerid][i], amount, 60);
+		UI_VehMoney(g_UiVehPrice[idx] * 60 / 100, amount, 48);
+		format(body, 768, "{FFFFFF}ყიდი {FFD24D}%s{FFFFFF}-ს (ნომერი %s)?\n\nბანკში მიიღებ დაახლ. {66DD66}$%s{FFFFFF}-ს (საბაზო ფასის %d%%).\nოპერაცია შეუქცევადია.", name, g_UiVehLPlate[playerid][i], amount, 60);
 	}
 	else
 	{
-		format(body, 256, "{FFFFFF}Vendere {FFD24D}%s{FFFFFF} (targa %s)?\n\nRiceverai il %d%% del prezzo di listino in banca.\nL'operazione non e' reversibile.", name, g_UiVehLPlate[playerid][i], 60);
+		format(body, 768, "{FFFFFF}ყიდი {FFD24D}%s{FFFFFF}-ს (ნომერი %s)?\n\nბანკში მიიღებ საბაზო ფასის %d%%-ს.\nოპერაცია შეუქცევადია.", name, g_UiVehLPlate[playerid][i], 60);
 	}
-	Lang_ShowPlayerDialog(playerid, 9104, DIALOG_STYLE_MSGBOX, "Conferma vendita", body, "Vendi", "Annulla");
+	Lang_ShowPlayerDialog(playerid, 9104, DIALOG_STYLE_MSGBOX, "გაყიდვის დადასტურება", body, "გაყიდვა", "გაუქმება");
 }
 
 bool:UI_VehicleOnDialogResponse(playerid, dialogid, response, listitem)
@@ -237,7 +237,7 @@ bool:UI_VehicleOnDialogResponse(playerid, dialogid, response, listitem)
 			}
 			if (g_UiVehLevel[playerid] < g_UiVehMinLevel[listitem])
 			{
-				SendClientMessage(playerid, -10066177, "Questo modello richiede un livello superiore.");
+				SendClientMessage(playerid, -10066177, "ეს მოდელი უფრო მაღალ დონეს მოითხოვს.");
 				UI_VehicleShopShow(playerid, g_UiVehLevel[playerid], g_UiVehMoney[playerid], g_UiVehBank[playerid]);
 				return true;
 			}
@@ -260,7 +260,7 @@ bool:UI_VehicleOnDialogResponse(playerid, dialogid, response, listitem)
 			}
 			if (funds < g_UiVehPrice[idx])
 			{
-				SendClientMessage(playerid, -10066177, "Fondi insufficienti con questo metodo di pagamento.");
+				SendClientMessage(playerid, -10066177, "ამ გადახდის მეთოდით საკმარისი თანხა არ გაქვს.");
 				UI_VehPayShow(playerid);
 				return true;
 			}
@@ -369,11 +369,11 @@ UI_VHudCreate(playerid)
 	}
 	new Float:left = (632.0 - 150.0);
 	g_UiVHud[playerid][0] = UI_VHudBox(playerid, left, 398.0, 150.0, 56.0, 153);
-	g_UiVHud[playerid][1] = UI_VHudText(playerid, (632.0 - 5.0), (398.0 + 2.0), "0 km/h", 0.3, 1.2, -1, t_TEXT_DRAW_ALIGN:3);
-	g_UiVHud[playerid][2] = UI_VHudText(playerid, (5.0 + left), (398.0 + 22.0), "Benzina 0.0/0 L", 0.22, 1.0, -1, t_TEXT_DRAW_ALIGN:1);
+	g_UiVHud[playerid][1] = UI_VHudText(playerid, (632.0 - 5.0), (398.0 + 2.0), "0 კმ/სთ", 0.3, 1.2, -1, t_TEXT_DRAW_ALIGN:3);
+	g_UiVHud[playerid][2] = UI_VHudText(playerid, (5.0 + left), (398.0 + 22.0), "საწვავი 0.0/0 ლ", 0.22, 1.0, -1, t_TEXT_DRAW_ALIGN:1);
 	g_UiVHud[playerid][3] = UI_VHudBox(playerid, (5.0 + left), (398.0 + 35.0), 140.0, 6.0, 0x444444FF);
 	g_UiVHud[playerid][4] = UI_VHudBox(playerid, (5.0 + left), (398.0 + 35.0), 140.0, 6.0, 0x66DD66FF);
-	g_UiVHud[playerid][5] = UI_VHudText(playerid, (5.0 + left), (398.0 + 43.0), "MOTORE SPENTO", 0.2, 0.9, -10066177, t_TEXT_DRAW_ALIGN:1);
+	g_UiVHud[playerid][5] = UI_VHudText(playerid, (5.0 + left), (398.0 + 43.0), "ძრავი გამორთულია", 0.2, 0.9, -10066177, t_TEXT_DRAW_ALIGN:1);
 	g_UiVHudCreated[playerid] = true;
 	return 0;
 }
@@ -444,10 +444,10 @@ UI_VehicleHudUpdate(playerid, Float:fuel, Float:fuelMax, speedKmh, bool:engineOn
 	}
 	new Float:fraction = (fuel / fuelMax);
 	new bool:low = ((100.0 * fraction) < float(15));
-	new str[48];
-	format(str, 48, "%d km/h", speedKmh);
+	new str[432];
+	format(str, 432, "%d კმ/სთ", speedKmh);
 	Lang_PlayerTextDrawSetString(playerid, g_UiVHud[playerid][1], str);
-	format(str, 48, "Benzina %.1f/%.0f L", fuel, fuelMax);
+	format(str, 432, "საწვავი %.1f/%.0f ლ", fuel, fuelMax);
 	Lang_PlayerTextDrawSetString(playerid, g_UiVHud[playerid][2], str);
 	new bool:blinkOff = low && GetTickCount() / 500 % 2 == 1;
 	PlayerTextDrawColour(playerid, PlayerText:g_UiVHud[playerid][2], low ? (blinkOff ? -10066364 : -10066177) : -1);
@@ -455,7 +455,7 @@ UI_VehicleHudUpdate(playerid, Float:fuel, Float:fuelMax, speedKmh, bool:engineOn
 	PlayerTextDrawBoxColour(playerid, PlayerText:g_UiVHud[playerid][4], low ? -12303105 : 0x66DD66FF);
 	PlayerTextDrawTextSize(playerid, PlayerText:g_UiVHud[playerid][4], (0.1 + ((5.0 + (632.0 - 150.0)) + (140.0 * fraction))), 0.0);
 	PlayerTextDrawShow(playerid, PlayerText:g_UiVHud[playerid][4]);
-	Lang_PlayerTextDrawSetString(playerid, g_UiVHud[playerid][5], engineOn ? "MOTORE ACCESO" : "MOTORE SPENTO");
+	Lang_PlayerTextDrawSetString(playerid, g_UiVHud[playerid][5], engineOn ? "ძრავი ჩართულია" : "ძრავი გამორთულია");
 	PlayerTextDrawColour(playerid, PlayerText:g_UiVHud[playerid][5], engineOn ? 0x66DD66FF : -10066177);
 	PlayerTextDrawShow(playerid, PlayerText:g_UiVHud[playerid][5]);
 	return 0;

@@ -56,8 +56,8 @@ DB_LoadCharacter(playerid, accountId)
 		DB_DeliverFailure(playerid, 4);
 		return 0;
 	}
-	new name[25], query[512];
-	GetPlayerName(playerid, name, 25);
+	new name[75], query[512];
+	GetPlayerName(playerid, name, 75);
 	new jfCols[64] = ", job, faction, faction_rank, COALESCE(char_name, '') AS cn";
 	mysql_format(g_DB, query, 512, "SELECT id, money, bank, level, exp, health, armor, pos_x, pos_y, pos_z, angle, interior, world, skin, LEAST(played_ms, %d) AS played_ms%s FROM characters WHERE account_id = %d AND slot = %d LIMIT 1", 0x7FFFFFFF, jfCols, accountId, CharSel_Slot(playerid));
 	DB_PendingSet(playerid, 4);
@@ -121,8 +121,8 @@ DB_CreateCharacter(playerid, accountId)
 		DB_DeliverFailure(playerid, 8);
 		return 0;
 	}
-	new name[25], query[768], cn[25], first[21], last[21], birth[11];
-	GetPlayerName(playerid, name, 25);
+	new name[75], query[768], cn[25], first[21], last[21], birth[11];
+	GetPlayerName(playerid, name, 75);
 	CharSel_Identity(playerid, cn, first, last, birth);
 	mysql_format(g_DB, query, 768, "INSERT IGNORE INTO characters (account_id, slot, char_name, first_name, last_name, birth_date, gender, money, bank, level, exp, health, armor, pos_x, pos_y, pos_z, angle, interior, world, skin, played_ms) VALUES (%d, %d, '%e', '%e', '%e', NULLIF('%e', ''), %d, %d, %d, %d, %d, %f, %f, %f, %f, %f, %f, %d, %d, %d, %d)", accountId, CharSel_Slot(playerid), cn, first, last, birth, gPlayer[playerid][pGender] == 1 ? 1 : 0, gPlayer[playerid][pMoney], gPlayer[playerid][pBank], gPlayer[playerid][pLevel], gPlayer[playerid][pExp], gPlayer[playerid][pHealth], gPlayer[playerid][pArmor], gPlayer[playerid][pPosX], gPlayer[playerid][pPosY], gPlayer[playerid][pPosZ], gPlayer[playerid][pAngle], gPlayer[playerid][pInterior], gPlayer[playerid][pWorld], gPlayer[playerid][pSkin], max(gPlayer[playerid][pPlayedMs], 0));
 	g_BankDb[playerid] = gPlayer[playerid][pBank];
@@ -173,8 +173,8 @@ DB_SaveCharacter(playerid)
 	{
 		return 0;
 	}
-	new query[768], skin, name[25];
-	GetPlayerName(playerid, name, 25);
+	new query[768], skin, name[75];
+	GetPlayerName(playerid, name, 75);
 	new bankDelta = DB_BankDeltaTake(playerid);
 	skin = gPlayer[playerid][pCivilSkin];
 	mysql_format(g_DB, query, 768, "UPDATE characters SET money = %d, bank = GREATEST(0, LEAST(%d, CAST(bank AS SIGNED) + (%d))), level = %d, exp = %d, health = %f, armor = %f, pos_x = %f, pos_y = %f, pos_z = %f, angle = %f, interior = %d, world = %d, skin = %d, played_ms = %d, last_save = NOW(), last_played_at = NOW() WHERE id = %d", gPlayer[playerid][pMoney], 0x3B9ACA00, bankDelta, gPlayer[playerid][pLevel], gPlayer[playerid][pExp], gPlayer[playerid][pHealth], gPlayer[playerid][pArmor], gPlayer[playerid][pPosX], gPlayer[playerid][pPosY], gPlayer[playerid][pPosZ], gPlayer[playerid][pAngle], gPlayer[playerid][pInterior], gPlayer[playerid][pWorld], skin, max(gPlayer[playerid][pPlayedMs], 0), gPlayer[playerid][pCharId]);

@@ -136,7 +136,7 @@ Freight_CargoName(cargo, dest[], size)
 	{
 		case 2:
 		{
-			strcopy(dest, "merci alimentari", size);
+			strcopy(dest, "სურსათი", size);
 		}
 		case 3:
 		{
@@ -144,7 +144,7 @@ Freight_CargoName(cargo, dest[], size)
 		}
 		default:
 		{
-			strcopy(dest, "merci generiche", size);
+			strcopy(dest, "სხვადასხვა ტვირთი", size);
 		}
 	}
 }
@@ -248,52 +248,52 @@ Freight_Hud(playerid, distM, dwellSec)
 	{
 		return 0;
 	}
-	new name[16], goal[96], dest[96];
+	new name[48], goal[288], dest[288];
 	new bool:shop = g_FrtPhase[playerid] >= 3;
-	LD_DistrictName(shop ? g_FrtTo[playerid] : g_FrtFrom[playerid], name, 16);
-	format(dest, 96, "%s %s", shop ? "Negozio" : "Magazzino", name);
+	LD_DistrictName(shop ? g_FrtTo[playerid] : g_FrtFrom[playerid], name, 48);
+	format(dest, 288, "%s %s", shop ? "მაღაზია" : "საწყობი", name);
 	switch (g_FrtPhase[playerid])
 	{
 		case 2:
 		{
-			strcopy(goal, "Registrazione del carico...", 96);
+			strcopy(goal, "ტვირთის რეგისტრაცია...", 96);
 		}
 		case 4:
 		{
-			strcopy(goal, "Registrazione della consegna...", 96);
+			strcopy(goal, "მიწოდების რეგისტრაცია...", 96);
 		}
 		case 3:
 		{
 			if (dwellSec >= 0)
 			{
-				format(goal, 96, "Scarico: resta fermo %d s", dwellSec);
+				format(goal, 288, "გადმოტვირთვა: იდექი %d წმ", dwellSec);
 			}
 			else if (g_FrtOff[playerid])
 			{
-				strcopy(goal, "Torna alla guida del Mule!", 96);
+				strcopy(goal, "დაბრუნდი Mule-ის საჭესთან!", 96);
 			}
 			else
 			{
-				strcopy(goal, "Consegna la merce al negozio", 96);
+				strcopy(goal, "მიიტანე ტვირთი მაღაზიაში", 96);
 			}
 		}
 		default:
 		{
 			if (dwellSec >= 0)
 			{
-				format(goal, 96, "Carico: resta fermo %d s", dwellSec);
+				format(goal, 288, "დატვირთვა: იდექი %d წმ", dwellSec);
 			}
 			else if (!g_FrtBoarded[playerid])
 			{
-				strcopy(goal, "Sali sul Mule al magazzino", 96);
+				strcopy(goal, "ჩაჯექი Mule-ში საწყობთან", 96);
 			}
 			else if (g_FrtOff[playerid])
 			{
-				strcopy(goal, "Torna alla guida del Mule!", 96);
+				strcopy(goal, "დაბრუნდი Mule-ის საჭესთან!", 96);
 			}
 			else
 			{
-				strcopy(goal, "Entra nel checkpoint del magazzino", 96);
+				strcopy(goal, "შედი საწყობის ჩექპოინტში", 96);
 			}
 		}
 	}
@@ -321,15 +321,15 @@ Freight_End(playerid, reason)
 		{
 			case 1:
 			{
-				Util_Send(playerid, -1, "Contratto di trasporto chiuso: il Mule e' stato ritirato.");
+				Util_Send(playerid, -1, "გადაზიდვის კონტრაქტი დაიხურა: Mule ჩამოგერთვა.");
 			}
 			case 5:
 			{
-				Util_Send(playerid, -10270721, "Contratto di trasporto scaduto o non piu' valido: il Mule e' stato ritirato.");
+				Util_Send(playerid, -10270721, "გადაზიდვის კონტრაქტს ვადა გაუვიდა ან აღარ მოქმედებს: Mule ჩამოგერთვა.");
 			}
 			case 7:
 			{
-				Util_Send(playerid, -10270721, "Contratto di trasporto annullato dallo staff.");
+				Util_Send(playerid, -10270721, "ადმინისტრაციამ გადაზიდვის კონტრაქტი გააუქმა.");
 			}
 		}
 	}
@@ -412,13 +412,13 @@ Freight_Picked(playerid)
 	GetVehiclePos(g_FrtVeh[playerid], g_FrtLastX[playerid], g_FrtLastY[playerid], g_FrtLastZ[playerid]);
 	g_FrtLastTick[playerid] = now;
 	Freight_ShowCheckpoint(playerid);
-	new name[16];
-	LD_DistrictName(g_FrtTo[playerid], name, 16);
+	new name[48];
+	LD_DistrictName(g_FrtTo[playerid], name, 48);
 	if (g_FrtWelcome[playerid])
 	{
-		UI_LivingToast(playerid, "Merce caricata: portala al negozio di Idlewood.", 1);
+		UI_LivingToast(playerid, "ტვირთი დატვირთულია: მიიტანე Idlewood-ის მაღაზიაში.", 1);
 	}
-	SendClientMessage(playerid, 0x66DD66FF, "Merce caricata. Consegnala al negozio di %s: guida con prudenza, i danni al Mule rovinano il carico.", name);
+	SendClientMessage(playerid, 0x66DD66FF, "ტვირთი დატვირთულია. მიიტანე %s-ის მაღაზიაში: ფრთხილად იარე, Mule-ის დაზიანება ტვირთს აფუჭებს.", name);
 }
 
 Freight_DoPickup(playerid)
@@ -440,7 +440,7 @@ Freight_DoPickup(playerid)
 		{
 			g_FrtPhase[playerid] = 1;
 			g_FrtRetryTick[playerid] = GetTickCount() + 5000;
-			Util_Send(playerid, -10270721, "Carico non registrato al momento: resta nel checkpoint e riprova tra qualche secondo.");
+			Util_Send(playerid, -10270721, "ტვირთი ჯერ ვერ დარეგისტრირდა: დარჩი ჩექპოინტში და რამდენიმე წამში სცადე.");
 		}
 	}
 	return 0;
@@ -453,26 +453,26 @@ Freight_DoDeliver(playerid)
 	new minSec = LD_FreightMinSeconds(g_FrtDist[playerid]);
 	if (seconds < minSec)
 	{
-		new msg[256];
-		format(msg, 256, "consegna troppo rapida: pers. %d contratto %d dopo %d s (minimo %d s)", gPlayer[playerid][pCharId], g_FrtCt[playerid], seconds, minSec);
+		new msg[768];
+		format(msg, 768, "consegna troppo rapida: pers. %d contratto %d dopo %d s (minimo %d s)", gPlayer[playerid][pCharId], g_FrtCt[playerid], seconds, minSec);
 		Log_Write("FREIGHT", msg);
-		format(msg, 256, "Consegna non valida: troppo rapida (ancora %d s). Resta nel checkpoint.", minSec - seconds);
+		format(msg, 768, "მიწოდება არასწორია: ძალიან სწრაფია (კიდევ %d წმ). დარჩი ჩექპოინტში.", minSec - seconds);
 		Freight_Note(playerid, msg);
 		g_FrtRetryTick[playerid] = now + 5000;
 		return 0;
 	}
 	if (!g_FrtWelcome[playerid] && g_FrtDist[playerid] < 300)
 	{
-		Freight_Stop(playerid, 5, "Contratto non valido (tratta troppo corta).");
+		Freight_Stop(playerid, 5, "კონტრაქტი არასწორია (მარშრუტი ძალიან მოკლეა).");
 		return 0;
 	}
 	new Float:minPath = float(g_FrtDist[playerid] * 80 / 100);
 	if ((g_FrtPath[playerid] < minPath))
 	{
-		new msg[256];
-		format(msg, 256, "percorso insufficiente: pers. %d contratto %d percorso %.0f m su %d m", gPlayer[playerid][pCharId], g_FrtCt[playerid], g_FrtPath[playerid], g_FrtDist[playerid]);
+		new msg[768];
+		format(msg, 768, "percorso insufficiente: pers. %d contratto %d percorso %.0f m su %d m", gPlayer[playerid][pCharId], g_FrtCt[playerid], g_FrtPath[playerid], g_FrtDist[playerid]);
 		Log_Write("FREIGHT", msg);
-		Freight_Note(playerid, "Consegna non valida: la merce deve essere portata dal magazzino con il Mule.");
+		Freight_Note(playerid, "მიწოდება არასწორია: ტვირთი საწყობიდან Mule-ით უნდა ჩამოიტანო.");
 		g_FrtRetryTick[playerid] = now + 5000;
 		return 0;
 	}
@@ -485,7 +485,7 @@ Freight_DoDeliver(playerid)
 	if (g_FrtWelcome[playerid])
 	{
 		Freight_End(playerid, 0);
-		Util_Send(playerid, 0x66DD66FF, "Consegna di benvenuto completata: il negozio di Idlewood ti ringrazia!");
+		Util_Send(playerid, 0x66DD66FF, "მისასალმებელი მიწოდება დასრულდა: Idlewood-ის მაღაზია გიხდის მადლობას!");
 		Hub_OnWelcomeDelivered(playerid, true);
 		return 0;
 	}
@@ -501,7 +501,7 @@ Freight_DoDeliver(playerid)
 		{
 			g_FrtPhase[playerid] = 3;
 			g_FrtRetryTick[playerid] = GetTickCount() + 5000;
-			Util_Send(playerid, -10270721, "Consegna non registrata al momento: resta nel checkpoint e riprova tra qualche secondo.");
+			Util_Send(playerid, -10270721, "მიწოდება ჯერ ვერ დარეგისტრირდა: დარჩი ჩექპოინტში და რამდენიმე წამში სცადე.");
 		}
 	}
 	return 0;
@@ -569,7 +569,7 @@ bool:Freight_Begin(playerid, contractId, fromD, toD, cargo, distanceM, bool:welc
 	}
 	if (!LD_PoolHasRoom())
 	{
-		Util_Send(playerid, -10270721, "Nessun veicolo da carico disponibile al momento. Riprova tra poco.");
+		Util_Send(playerid, -10270721, "სატვირთო მანქანა ახლა არ არის თავისუფალი. სცადე ცოტა ხანში.");
 		return false;
 	}
 	new Float:x, Float:y, Float:z, slot = 0;
@@ -585,14 +585,14 @@ bool:Freight_Begin(playerid, contractId, fromD, toD, cargo, distanceM, bool:welc
 	new veh = CreateVehicle(414, x, y, z, 0.0, 1, 1, -1, false);
 	if (veh == 65535 || veh <= 0 || veh >= 2000)
 	{
-		Util_Send(playerid, -10270721, "Impossibile preparare il veicolo da carico. Riprova.");
+		Util_Send(playerid, -10270721, "სატვირთო მანქანის მომზადება ვერ მოხერხდა. სცადე თავიდან.");
 		return false;
 	}
 	new serial = LD_VehRegister(veh, 3, playerid);
 	if (serial == 0)
 	{
 		DestroyVehicle(veh);
-		Util_Send(playerid, -10270721, "Nessun veicolo da carico disponibile al momento. Riprova tra poco.");
+		Util_Send(playerid, -10270721, "სატვირთო მანქანა ახლა არ არის თავისუფალი. სცადე ცოტა ხანში.");
 		return false;
 	}
 	SetVehicleVirtualWorld(veh, 0);
@@ -633,18 +633,18 @@ bool:Freight_Begin(playerid, contractId, fromD, toD, cargo, distanceM, bool:welc
 		}
 	}
 	Freight_ShowCheckpoint(playerid);
-	new fromName[16], toName[16], cargoName[96];
-	LD_DistrictName(fromD, fromName, 16);
-	LD_DistrictName(toD, toName, 16);
-	Freight_CargoName(cargo, cargoName, 96);
+	new fromName[48], toName[48], cargoName[288];
+	LD_DistrictName(fromD, fromName, 48);
+	LD_DistrictName(toD, toName, 48);
+	Freight_CargoName(cargo, cargoName, 288);
 	if (welcome)
 	{
-		SendClientMessage(playerid, 0x66DD66FF, "Consegna di benvenuto: sali sul Mule al magazzino di Idlewood, fermati nel checkpoint %d s per caricare %s, poi portali al negozio di Idlewood.", 6, cargoName);
-		UI_LivingToast(playerid, "Sali sul Mule al magazzino di Idlewood.", 0);
+		SendClientMessage(playerid, 0x66DD66FF, "მისასალმებელი მიწოდება: ჩაჯექი Mule-ში Idlewood-ის საწყობთან, ჩექპოინტში %d წმ იდექი, რომ დატვირთო %s, შემდეგ მიიტანე Idlewood-ის მაღაზიაში.", 6, cargoName);
+		UI_LivingToast(playerid, "ჩაჯექი Mule-ში Idlewood-ის საწყობთან.", 0);
 	}
 	else
 	{
-		SendClientMessage(playerid, 0x66DD66FF, "Contratto #%d: ritira il Mule al magazzino di %s, fermati nel checkpoint (max %.0f km/h) %d s per caricare %s, poi consegna al negozio di %s (%d m).", contractId, fromName, 0x41200000, 6, cargoName, toName, dist);
+		SendClientMessage(playerid, 0x66DD66FF, "კონტრაქტი #%d: აიყვანე Mule %s-ის საწყობიდან, ჩექპოინტში (მაქს. %.0f კმ/სთ) %d წმ იდექი, რომ დატვირთო %s, შემდეგ მიიტანე %s-ის მაღაზიაში (%d მ).", contractId, fromName, 0x41200000, 6, cargoName, toName, dist);
 		Freight_Hud(playerid, -1, -1);
 	}
 	return true;
@@ -677,7 +677,7 @@ Freight_OnPickupResult(playerid, result)
 			g_FrtPhase[playerid] = 1;
 			g_FrtDwell[playerid] = false;
 			g_FrtRetryTick[playerid] = GetTickCount() + 5000;
-			Util_Send(playerid, -10270721, "Registrazione del carico non riuscita: resta nel checkpoint per ritentare.");
+			Util_Send(playerid, -10270721, "ტვირთის რეგისტრაცია ვერ მოხერხდა: ხელახლა საცდელად დარჩი ჩექპოინტში.");
 		}
 		default:
 		{
@@ -701,21 +701,21 @@ Freight_OnCompleteResult(playerid, result, paid, balance)
 			Freight_End(playerid, 0);
 			if (result == 2)
 			{
-				SendClientMessage(playerid, -1, "Consegna del contratto #%d gia' registrata: nessun nuovo pagamento.", ct);
+				SendClientMessage(playerid, -1, "კონტრაქტის #%d მიწოდება უკვე დარეგისტრირებულია: ახალი გადახდა არ იქნება.", ct);
 			}
 			else if (result == 6)
 			{
-				SendClientMessage(playerid, 0x66DD66FF, "Consegna #%d completata: $%d accreditati in banca (tetto orario raggiunto). Saldo: $%d.", ct, paid, balance);
+				SendClientMessage(playerid, 0x66DD66FF, "მიწოდება #%d დასრულდა: $%d ჩაირიცხა ბანკში (საათობრივი ლიმიტი მიღწეულია). ბალანსი: $%d.", ct, paid, balance);
 			}
 			else
 			{
-				SendClientMessage(playerid, 0x66DD66FF, "Consegna #%d completata: $%d accreditati in banca. Saldo: $%d.", ct, paid, balance);
+				SendClientMessage(playerid, 0x66DD66FF, "მიწოდება #%d დასრულდა: $%d ჩაირიცხა ბანკში. ბალანსი: $%d.", ct, paid, balance);
 			}
 		}
 		case 8:
 		{
 			Freight_End(playerid, 0);
-			Util_Send(playerid, -10270721, "Contratto FALLITO: la merce e' arrivata troppo danneggiata. Nessun compenso.");
+			Util_Send(playerid, -10270721, "კონტრაქტი ჩაიშალა: ტვირთი ძალიან დაზიანებული ჩავიდა. ანაზღაურება არ არის.");
 		}
 		case -1, 10:
 		{
@@ -727,7 +727,7 @@ Freight_OnCompleteResult(playerid, result, paid, balance)
 			g_FrtPhase[playerid] = 3;
 			g_FrtDwell[playerid] = false;
 			g_FrtRetryTick[playerid] = GetTickCount() + 5000;
-			Util_Send(playerid, -10270721, "Registrazione della consegna non riuscita: resta nel checkpoint per ritentare.");
+			Util_Send(playerid, -10270721, "მიწოდების რეგისტრაცია ვერ მოხერხდა: ხელახლა საცდელად დარჩი ჩექპოინტში.");
 		}
 		case 4:
 		{
@@ -740,7 +740,7 @@ Freight_OnCompleteResult(playerid, result, paid, balance)
 			g_FrtPhase[playerid] = 3;
 			g_FrtDwell[playerid] = false;
 			g_FrtRetryTick[playerid] = GetTickCount() + 5000;
-			Util_Send(playerid, -10270721, "Consegna rifiutata dal registro (troppo rapida o stato non valido): attendi qualche secondo nel checkpoint.");
+			Util_Send(playerid, -10270721, "რეესტრმა მიწოდება უარყო (ძალიან სწრაფია ან სტატუსი არასწორია): ჩექპოინტში რამდენიმე წამი დაელოდე.");
 		}
 		default:
 		{
@@ -809,17 +809,17 @@ Freight_TickPlayer(playerid, now)
 	}
 	if (Job_IsOnShift(playerid))
 	{
-		Freight_Stop(playerid, 1, "Hai iniziato un turno di lavoro: il contratto di trasporto e' stato chiuso.");
+		Freight_Stop(playerid, 1, "სამსახურის ცვლა დაიწყე: გადაზიდვის კონტრაქტი დაიხურა.");
 		return 0;
 	}
 	if (gPlayer[playerid][pWounded] || gPlayer[playerid][pCuffed])
 	{
-		Freight_Stop(playerid, 3, "Non sei in condizione di guidare: contratto di trasporto interrotto.");
+		Freight_Stop(playerid, 3, "მართვის მდგომარეობაში არ ხარ: გადაზიდვის კონტრაქტი შეწყდა.");
 		return 0;
 	}
 	if (!Freight_VehOk(playerid))
 	{
-		Freight_Stop(playerid, 4, "Il Mule del contratto non esiste piu': contratto interrotto.");
+		Freight_Stop(playerid, 4, "კონტრაქტის Mule აღარ არსებობს: კონტრაქტი შეწყდა.");
 		return 0;
 	}
 	new veh = g_FrtVeh[playerid];
@@ -827,7 +827,7 @@ Freight_TickPlayer(playerid, now)
 	GetVehicleHealth(veh, hp);
 	if ((hp < 300.0))
 	{
-		Freight_Stop(playerid, 4, "Mule distrutto: il carico e' perso e il contratto e' interrotto.");
+		Freight_Stop(playerid, 4, "Mule განადგურდა: ტვირთი დაიკარგა, კონტრაქტი შეწყდა.");
 		return 0;
 	}
 	new bool:driving = Freight_IsDriving(playerid);
@@ -848,20 +848,20 @@ Freight_TickPlayer(playerid, now)
 		GetPlayerPos(playerid, px, py, pz);
 		if (now - gPlayer[playerid][pFreightLeftVehTick] >= 45000 || (GetVehicleDistanceFromPoint(veh, px, py, pz) > 150.0))
 		{
-			Freight_Stop(playerid, 4, "Mule abbandonato: contratto di trasporto rilasciato.");
+			Freight_Stop(playerid, 4, "Mule მიტოვებულია: გადაზიდვის კონტრაქტი გაუქმდა.");
 			return 0;
 		}
 	}
 	else if (now - g_FrtStartTick[playerid] >= 600000)
 	{
-		Freight_Stop(playerid, 4, "Non hai preso in consegna il Mule in tempo: contratto di trasporto rilasciato.");
+		Freight_Stop(playerid, 4, "Mule დროულად არ აიყვანე: გადაზიდვის კონტრაქტი გაუქმდა.");
 		return 0;
 	}
 	if (ph == 3)
 	{
 		if (!Freight_SamplePath(playerid, now))
 		{
-			Freight_Stop(playerid, 4, "Spostamento anomalo del Mule: contratto di trasporto annullato.");
+			Freight_Stop(playerid, 4, "Mule-ის საეჭვო გადაადგილება: გადაზიდვის კონტრაქტი გაუქმდა.");
 			return 0;
 		}
 		new integ = LD_Clamp(floatround((hp / 10.0), floatround_method:1), 0, 100);
@@ -884,7 +884,7 @@ Freight_TickPlayer(playerid, now)
 			gPlayer[playerid][pFreightDwellTick] = now;
 			if (g_FrtWelcome[playerid])
 			{
-				UI_LivingToast(playerid, shop ? "Scarico in corso: resta fermo." : "Carico in corso: resta fermo.", 0);
+				UI_LivingToast(playerid, shop ? "მიმდინარეობს გადმოტვირთვა: იდექი." : "მიმდინარეობს დატვირთვა: იდექი.", 0);
 			}
 		}
 		new need = shop ? 5000 : 6000;
@@ -1004,7 +1004,7 @@ Freight_OnPlayerDeath(playerid)
 	{
 		return 0;
 	}
-	Freight_Stop(playerid, 3, "Sei stato ferito: il contratto di trasporto e' interrotto e il Mule ritirato.");
+	Freight_Stop(playerid, 3, "დაჭრილი ხარ: გადაზიდვის კონტრაქტი შეწყდა, Mule ჩამოგერთვა.");
 	return 0;
 }
 
@@ -1020,7 +1020,7 @@ Freight_OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
 		return 0;
 	}
 	ClearAnimations(playerid, SYNC_NONE);
-	Util_Send(playerid, -10270721, "Questo veicolo da carico e' assegnato a un altro trasportatore.");
+	Util_Send(playerid, -10270721, "ეს სატვირთო მანქანა სხვა გადამზიდს ეკუთვნის.");
 	return 0;
 }
 
@@ -1034,7 +1034,7 @@ Freight_OnPlayerExitVehicle(playerid, vehicleid)
 	{
 		g_FrtOff[playerid] = true;
 		gPlayer[playerid][pFreightLeftVehTick] = GetTickCount();
-		SendClientMessage(playerid, -10270721, "Torna alla guida del Mule entro %d secondi (e resta entro %.0f m) o il contratto sara' rilasciato.", 45, 0x43160000);
+		SendClientMessage(playerid, -10270721, "დაბრუნდი Mule-ის საჭესთან %d წამში (და %.0f მ-ზე შორს არ წახვიდე), თორემ კონტრაქტი გაუქმდება.", 45, 0x43160000);
 	}
 	return 0;
 }
@@ -1054,7 +1054,7 @@ Freight_OnPlayerStateChange(playerid, t_PLAYER_STATE:newstate, t_PLAYER_STATE:ol
 	if (LD_VehOwner(veh) != playerid)
 	{
 		RemovePlayerFromVehicle(playerid, false);
-		Util_Send(playerid, -10270721, "Questo veicolo da carico e' assegnato a un altro trasportatore.");
+		Util_Send(playerid, -10270721, "ეს სატვირთო მანქანა სხვა გადამზიდს ეკუთვნის.");
 		return 0;
 	}
 	if (g_FrtActive[playerid] && g_FrtVeh[playerid] == veh)
@@ -1078,6 +1078,6 @@ Freight_OnVehicleDeath(vehicleid, killerid)
 	{
 		return 0;
 	}
-	Freight_Stop(owner, 4, "Mule distrutto: il carico e' perso e il contratto e' interrotto.");
+	Freight_Stop(owner, 4, "Mule განადგურდა: ტვირთი დაიკარგა, კონტრაქტი შეწყდა.");
 	return 0;
 }

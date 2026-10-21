@@ -219,7 +219,7 @@ CefUI_AuthGate(playerid)
 	}
 	if (!g_CefPromptWait[playerid])
 	{
-		SendClientMessage(playerid, 0xAAAAAAFF, "Caricamento dell'interfaccia...");
+		SendClientMessage(playerid, 0xAAAAAAFF, "ინტერფეისი იტვირთება...");
 	}
 	g_CefPromptWait[playerid] = true;
 	return 0;
@@ -252,8 +252,8 @@ CefUI_AuthStep(playerid, const step[], const err[], n)
 	{
 		return 0;
 	}
-	new name[25];
-	GetPlayerName(playerid, name, 25);
+	new name[75];
+	GetPlayerName(playerid, name, 75);
 	cef_emit_event(playerid, "lssc:auth", 0, step, 0, name, 0, err, 1, n, 1, 6, 1, 32);
 	CefUI_Open(playerid, "auth", step);
 	return 0;

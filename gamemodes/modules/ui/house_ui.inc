@@ -1,21 +1,21 @@
-new g_UiHsTierName[4][16] = {
-	"Monolocale",
-	"Bilocale",
-	"Casa media",
-	"Villa"
+new g_UiHsTierName[4][40] = {
+	"სტუდიო",
+	"ოროთახიანი",
+	"საშუალო სახლი",
+	"ვილა"
 };
 new g_UiHsTierPrice[4] = {14000, 24000, 45000, 130000};
 new g_UiHsTierLevel[4] = {1, 2, 5, 10};
 new g_UiHsTierFridge[4] = {10, 16, 24, 40};
-new g_UiHsIntName[8][20] = {
+new g_UiHsIntName[8][40] = {
 	"Denise",
 	"Katie",
-	"Casa di Ryder",
-	"Casa di Sweet",
-	"Casa media A",
-	"Casa Johnson",
-	"Casa media B",
-	"Villa di Madd Dogg"
+	"Ryder-ის სახლი",
+	"Sweet-ის სახლი",
+	"საშუალო სახლი A",
+	"Johnson-ების სახლი",
+	"საშუალო სახლი B",
+	"Madd Dogg-ის ვილა"
 };
 new g_UiHsHouse[MAX_PLAYERS];
 new g_UiHsRole[MAX_PLAYERS];
@@ -40,12 +40,12 @@ new g_UiHsAmtMax[MAX_PLAYERS];
 
 UI_HsMoney(value, out[], size)
 {
-	new raw[16], len = 0, pos = 0;
+	new raw[48], len = 0, pos = 0;
 	if (value < 0)
 	{
 		value = 0;
 	}
-	format(raw, 16, "%d", value);
+	format(raw, 48, "%d", value);
 	len = strlen(raw);
 	out[0] = 0;
 	for (new i = 0; i < len && pos < size - 2; i++)
@@ -80,18 +80,18 @@ UI_HsUtilText(ustate, out[], size)
 		}
 		case 2:
 		{
-			format(out, size, "{FF6666}STACCATA");
+			format(out, size, "{FF6666}გათიშული");
 		}
 		default:
 		{
-			format(out, size, "{FFD24D}OFF");
+			format(out, size, "{FFD24D}გამორთ.");
 		}
 	}
 }
 
 UI_HsTitle(playerid, const prefix[], out[], size)
 {
-	format(out, size, "%s - Casa %d", prefix, g_UiHsHouse[playerid]);
+	format(out, size, "%s - სახლი %d", prefix, g_UiHsHouse[playerid]);
 }
 
 UI_HouseDataSet(playerid, houseId, role, tier, interiorIdx, bool:locked, lightState, gasState, fridgeUnits, bagUnits, keysUsed, level, money, bank)
@@ -180,83 +180,83 @@ UI_HouseMenuShow(playerid)
 	{
 		return 0;
 	}
-	new body[1024], line[160], title[64], price[16], tmp[16], st[24];
+	new body[1024], line[480], title[576], price[48], tmp[48], st[72];
 	new n = 0, t = g_UiHsTier[playerid], role = g_UiHsRole[playerid];
 	for (new i = 0; i < 10; i++)
 	{
 		g_UiHsItemAct[playerid][i] = 0;
 	}
-	UI_HsMoney(g_UiHsTierPrice[t], price, 16);
-	format(title, 64, "Casa %d - %s", g_UiHsHouse[playerid], g_UiHsIntName[g_UiHsInt[playerid]]);
-	format(line, 160, "{AAAAAA}Interno: {FFFFFF}%s (%s)\n", g_UiHsIntName[g_UiHsInt[playerid]], g_UiHsTierName[t]);
+	UI_HsMoney(g_UiHsTierPrice[t], price, 48);
+	format(title, 576, "სახლი %d - %s", g_UiHsHouse[playerid], g_UiHsIntName[g_UiHsInt[playerid]]);
+	format(line, 480, "{AAAAAA}ინტერიერი: {FFFFFF}%s (%s)\n", g_UiHsIntName[g_UiHsInt[playerid]], g_UiHsTierName[t]);
 	UI_HsMenuRow(playerid, n, 0, line, body, 1024);
-	format(line, 160, "{AAAAAA}Prezzo: {66DD66}$%s{AAAAAA}  (liv. min %d)\n", price, g_UiHsTierLevel[t]);
+	format(line, 480, "{AAAAAA}ფასი: {66DD66}$%s{AAAAAA}  (მინ. დონე %d)\n", price, g_UiHsTierLevel[t]);
 	UI_HsMenuRow(playerid, n, 0, line, body, 1024);
 	if (role == 0)
 	{
-		UI_HsMenuRow(playerid, n, 0, "{AAAAAA}Stato: {FFD24D}in vendita\n", body, 1024);
-		UI_HsMenuRow(playerid, n, 100, "{66DD66}> Compra questa casa\n", body, 1024);
+		UI_HsMenuRow(playerid, n, 0, "{AAAAAA}სტატუსი: {FFD24D}იყიდება\n", body, 1024);
+		UI_HsMenuRow(playerid, n, 100, "{66DD66}> იყიდე ეს სახლი\n", body, 1024);
 	}
 	else if (role == 3)
 	{
-		UI_HsMenuRow(playerid, n, 0, "{AAAAAA}Stato: {FF6666}proprieta' privata\n", body, 1024);
+		UI_HsMenuRow(playerid, n, 0, "{AAAAAA}სტატუსი: {FF6666}კერძო საკუთრება\n", body, 1024);
 	}
 	else
 	{
-		UI_HsMenuRow(playerid, n, 0, role == 1 ? "{AAAAAA}Stato: {66DD66}tua proprieta'\n" : "{AAAAAA}Stato: {66AAFF}ospite con chiave\n", body, 1024);
-		UI_HsUtilText(g_UiHsLight[playerid], st, 24);
-		format(line, 160, "{AAAAAA}Luce: %s{AAAAAA}   Gas: ", st);
-		UI_HsUtilText(g_UiHsGas[playerid], st, 24);
-		strcat(line, st, 160);
-		strcat(line, "\n", 160);
+		UI_HsMenuRow(playerid, n, 0, role == 1 ? "{AAAAAA}სტატუსი: {66DD66}შენი საკუთრება\n" : "{AAAAAA}სტატუსი: {66AAFF}სტუმარი გასაღებით\n", body, 1024);
+		UI_HsUtilText(g_UiHsLight[playerid], st, 72);
+		format(line, 480, "{AAAAAA}შუქი: %s{AAAAAA}   გაზი: ", st);
+		UI_HsUtilText(g_UiHsGas[playerid], st, 72);
+		strcat(line, st, 480);
+		strcat(line, "\n", 480);
 		UI_HsMenuRow(playerid, n, 0, line, body, 1024);
 		new bills = g_UiHsLightCnt[playerid] + g_UiHsGasCnt[playerid];
 		new due = g_UiHsLightDue[playerid] + g_UiHsGasDue[playerid];
-		UI_HsMoney(due, tmp, 16);
+		UI_HsMoney(due, tmp, 48);
 		if (role == 1)
 		{
-			format(line, 160, "{AAAAAA}Bollette: %s%d da pagare ($%s)\n", bills > 0 ? "{FF6666}" : "{66DD66}", bills, tmp);
+			format(line, 480, "{AAAAAA}გადასახადები: %s%d გადასახდელი ($%s)\n", bills > 0 ? "{FF6666}" : "{66DD66}", bills, tmp);
 			UI_HsMenuRow(playerid, n, 0, line, body, 1024);
-			format(line, 160, "{FFFFFF}Serratura: %s{FFFFFF} (tocca per cambiare)\n", g_UiHsLocked[playerid] ? "{FF6666}chiusa" : "{66DD66}aperta");
+			format(line, 480, "{FFFFFF}საკეტი: %s{FFFFFF} (შესაცვლელად დააჭირე)\n", g_UiHsLocked[playerid] ? "{FF6666}ჩაკეტილი" : "{66DD66}ღია");
 			UI_HsMenuRow(playerid, n, 1, line, body, 1024);
 		}
-		UI_HsMenuRow(playerid, n, 2, "{FFFFFF}Utenze (luce / gas)\n", body, 1024);
-		format(line, 160, "{FFFFFF}Frigo ({FFD24D}%d/%d{FFFFFF} porzioni)\n", g_UiHsFridge[playerid], UI_HsFridgeCap(playerid));
+		UI_HsMenuRow(playerid, n, 2, "{FFFFFF}კომუნალური (შუქი / გაზი)\n", body, 1024);
+		format(line, 480, "{FFFFFF}მაცივარი ({FFD24D}%d/%d{FFFFFF} პორცია)\n", g_UiHsFridge[playerid], UI_HsFridgeCap(playerid));
 		UI_HsMenuRow(playerid, n, 3, line, body, 1024);
 		if (role == 1)
 		{
-			UI_HsMenuRow(playerid, n, 4, "{FFFFFF}Bollette\n", body, 1024);
-			format(line, 160, "{FFFFFF}Chiavi ospiti ({FFD24D}%d/%d{FFFFFF})\n", g_UiHsKeys[playerid], 3);
+			UI_HsMenuRow(playerid, n, 4, "{FFFFFF}გადასახადები\n", body, 1024);
+			format(line, 480, "{FFFFFF}სტუმრის გასაღებები ({FFD24D}%d/%d{FFFFFF})\n", g_UiHsKeys[playerid], 3);
 			UI_HsMenuRow(playerid, n, 5, line, body, 1024);
-			UI_HsMenuRow(playerid, n, 6, "{FF6666}Vendi la casa\n", body, 1024);
+			UI_HsMenuRow(playerid, n, 6, "{FF6666}სახლის გაყიდვა\n", body, 1024);
 		}
 	}
-	Lang_ShowPlayerDialog(playerid, 9200, DIALOG_STYLE_LIST, title, body, "Scegli", "Chiudi");
+	Lang_ShowPlayerDialog(playerid, 9200, DIALOG_STYLE_LIST, title, body, "არჩევა", "დახურვა");
 	return 0;
 }
 
 UI_HsBuyPayShow(playerid)
 {
 	new t = g_UiHsTier[playerid];
-	new body[320], price[16], cash[16], bank[16], tl[48], title[64];
+	new body[640], price[48], cash[48], bank[48], tl[144], title[576];
 	new p = g_UiHsTierPrice[t];
-	UI_HsMoney(p, price, 16);
-	UI_HsMoney(g_UiHsMoney[playerid], cash, 16);
-	UI_HsMoney(g_UiHsBank[playerid], bank, 16);
-	format(body, 320, "{FFFFFF}Contanti\t%s$%s\n", g_UiHsMoney[playerid] >= p ? "{66DD66}" : "{FF6666}", cash);
-	format(tl, 48, "{FFFFFF}Banca\t%s$%s\n", g_UiHsBank[playerid] >= p ? "{66DD66}" : "{FF6666}", bank);
-	strcat(body, tl, 320);
-	format(title, 64, "%s $%s - pagamento", g_UiHsTierName[t], price);
-	Lang_ShowPlayerDialog(playerid, 9201, DIALOG_STYLE_TABLIST, title, body, "Acquista", "Indietro");
+	UI_HsMoney(p, price, 48);
+	UI_HsMoney(g_UiHsMoney[playerid], cash, 48);
+	UI_HsMoney(g_UiHsBank[playerid], bank, 48);
+	format(body, 640, "{FFFFFF}ნაღდი ფული\t%s$%s\n", g_UiHsMoney[playerid] >= p ? "{66DD66}" : "{FF6666}", cash);
+	format(tl, 144, "{FFFFFF}ბანკი\t%s$%s\n", g_UiHsBank[playerid] >= p ? "{66DD66}" : "{FF6666}", bank);
+	strcat(body, tl, 640);
+	format(title, 576, "%s $%s - გადახდა", g_UiHsTierName[t], price);
+	Lang_ShowPlayerDialog(playerid, 9201, DIALOG_STYLE_TABLIST, title, body, "ყიდვა", "უკან");
 }
 
 UI_HsSellConfirmShow(playerid)
 {
-	new body[320], amount[16], title[64];
-	UI_HsMoney(g_UiHsTierPrice[g_UiHsTier[playerid]] * 70 / 100, amount, 16);
-	format(body, 320, "{FFFFFF}Vendere la casa {FFD24D}%d{FFFFFF} (%s)?\n\nRiceverai circa {66DD66}$%s{FFFFFF} (%d%% del prezzo) in banca.\nUtenze, chiavi e bollette verranno azzerate; l'operazione non e' reversibile.", g_UiHsHouse[playerid], g_UiHsIntName[g_UiHsInt[playerid]], amount, 70);
-	UI_HsTitle(playerid, "Conferma vendita", title, 64);
-	Lang_ShowPlayerDialog(playerid, 9202, DIALOG_STYLE_MSGBOX, title, body, "Vendi", "Annulla");
+	new body[640], amount[48], title[192];
+	UI_HsMoney(g_UiHsTierPrice[g_UiHsTier[playerid]] * 70 / 100, amount, 48);
+	format(body, 640, "{FFFFFF}გაყიდო სახლი {FFD24D}%d{FFFFFF} (%s)?\n\nბანკში მიიღებ დაახლოებით {66DD66}$%s{FFFFFF}-ს (ფასის %d%%).\nკომუნალური, გასაღებები და გადასახადები განულდება; ოპერაცია შეუქცევადია.", g_UiHsHouse[playerid], g_UiHsIntName[g_UiHsInt[playerid]], amount, 70);
+	UI_HsTitle(playerid, "გაყიდვის დადასტურება", title, 192);
+	Lang_ShowPlayerDialog(playerid, 9202, DIALOG_STYLE_MSGBOX, title, body, "გაყიდვა", "გაუქმება");
 }
 
 UI_HouseUtilityShow(playerid)
@@ -265,29 +265,29 @@ UI_HouseUtilityShow(playerid)
 	{
 		return 0;
 	}
-	new body[512], line[128], st[24], title[64];
-	strcat(body, "Utenza\tStato\tAzione\n", 512);
-	UI_HsUtilText(g_UiHsLight[playerid], st, 24);
+	new body[1024], line[384], st[72], title[192];
+	strcat(body, "კომუნალური\tსტატუსი\tმოქმედება\n", 1024);
+	UI_HsUtilText(g_UiHsLight[playerid], st, 72);
 	switch (g_UiHsLight[playerid])
 	{
 		case 2:
 		{
-			format(line, 128, "{FFFFFF}Luce\t%s\t{FF6666}Paga le bollette\n", st);
+			format(line, 384, "{FFFFFF}შუქი\t%s\t{FF6666}გადაიხადე გადასახადები\n", st);
 		}
 		case 1:
 		{
-			format(line, 128, "{FFFFFF}Luce\t%s\t{AAAAAA}Spegni\n", st);
+			format(line, 384, "{FFFFFF}შუქი\t%s\t{AAAAAA}გამორთვა\n", st);
 		}
 		default:
 		{
-			format(line, 128, "{FFFFFF}Luce\t%s\t{AAAAAA}Accendi\n", st);
+			format(line, 384, "{FFFFFF}შუქი\t%s\t{AAAAAA}ჩართვა\n", st);
 		}
 	}
-	strcat(body, line, 512);
-	UI_HsUtilText(g_UiHsGas[playerid], st, 24);
+	strcat(body, line, 1024);
+	UI_HsUtilText(g_UiHsGas[playerid], st, 72);
 	if (g_UiHsRole[playerid] != 1)
 	{
-		format(line, 128, "{777777}Gas\t%s\t{777777}Solo proprietario\n", st);
+		format(line, 384, "{777777}გაზი\t%s\t{777777}მხოლოდ მფლობელი\n", st);
 	}
 	else
 	{
@@ -295,21 +295,21 @@ UI_HouseUtilityShow(playerid)
 		{
 			case 2:
 			{
-				format(line, 128, "{FFFFFF}Gas\t%s\t{FF6666}Paga le bollette\n", st);
+				format(line, 384, "{FFFFFF}გაზი\t%s\t{FF6666}გადაიხადე გადასახადები\n", st);
 			}
 			case 1:
 			{
-				format(line, 128, "{FFFFFF}Gas\t%s\t{AAAAAA}Spegni\n", st);
+				format(line, 384, "{FFFFFF}გაზი\t%s\t{AAAAAA}გამორთვა\n", st);
 			}
 			default:
 			{
-				format(line, 128, "{FFFFFF}Gas\t%s\t{AAAAAA}Accendi\n", st);
+				format(line, 384, "{FFFFFF}გაზი\t%s\t{AAAAAA}ჩართვა\n", st);
 			}
 		}
 	}
-	strcat(body, line, 512);
-	UI_HsTitle(playerid, "Utenze", title, 64);
-	Lang_ShowPlayerDialog(playerid, 9203, DIALOG_STYLE_TABLIST_HEADERS, title, body, "Cambia", "Indietro");
+	strcat(body, line, 1024);
+	UI_HsTitle(playerid, "კომუნალური", title, 192);
+	Lang_ShowPlayerDialog(playerid, 9203, DIALOG_STYLE_TABLIST_HEADERS, title, body, "შეცვლა", "უკან");
 	return 0;
 }
 
@@ -319,43 +319,43 @@ UI_HouseFridgeShow(playerid)
 	{
 		return 0;
 	}
-	new body[512], line[128], title[64], n = 0;
+	new body[512], line[384], title[192], n = 0;
 	new cap = UI_HsFridgeCap(playerid), units = g_UiHsFridge[playerid];
 	new bool:owner = g_UiHsRole[playerid] == 1;
 	for (new i = 0; i < 10; i++)
 	{
 		g_UiHsItemAct[playerid][i] = 0;
 	}
-	format(line, 128, "{AAAAAA}Scorte: {FFD24D}%d/%d{AAAAAA} porzioni  -  con te: %d/%d\n", units, cap, g_UiHsBag[playerid], 12);
+	format(line, 384, "{AAAAAA}მარაგი: {FFD24D}%d/%d{AAAAAA} პორცია  -  თან: %d/%d\n", units, cap, g_UiHsBag[playerid], 12);
 	UI_HsMenuRow(playerid, n, 0, line, body, 512);
 	if (g_UiHsLight[playerid] != 1)
 	{
-		UI_HsMenuRow(playerid, n, 0, "{FF6666}Luce spenta: il frigo non raffredda, le scorte si deteriorano\n", body, 512);
+		UI_HsMenuRow(playerid, n, 0, "{FF6666}შუქი გამორთულია: მაცივარი არ აციებს, მარაგი ფუჭდება\n", body, 512);
 	}
-	format(line, 128, "%sMangia freddo (+%d sazieta')\n", units > 0 ? "{FFFFFF}" : "{777777}", 25);
+	format(line, 384, "%sცივად ჭამა (+%d სიმაძღრე)\n", units > 0 ? "{FFFFFF}" : "{777777}", 25);
 	UI_HsMenuRow(playerid, n, 1, line, body, 512);
-	format(line, 128, "%sCucina (+%d sazieta', +%d salute%s)\n", units > 0 && g_UiHsGas[playerid] == 1 ? "{FFFFFF}" : "{777777}", 45, 5, g_UiHsGas[playerid] == 1 ? "" : " - gas non attivo");
+	format(line, 384, "%sმომზადება (+%d სიმაძღრე, +%d ჯანმრთელობა%s)\n", units > 0 && g_UiHsGas[playerid] == 1 ? "{FFFFFF}" : "{777777}", 45, 5, g_UiHsGas[playerid] == 1 ? "" : " - გაზი არ მუშაობს");
 	UI_HsMenuRow(playerid, n, 2, line, body, 512);
 	if (owner)
 	{
-		format(line, 128, "%sRiponi spesa nel frigo\n", g_UiHsBag[playerid] > 0 && units < cap ? "{FFFFFF}" : "{777777}");
+		format(line, 384, "%sპროდუქტების ჩალაგება მაცივარში\n", g_UiHsBag[playerid] > 0 && units < cap ? "{FFFFFF}" : "{777777}");
 		UI_HsMenuRow(playerid, n, 3, line, body, 512);
-		format(line, 128, "%sPrendi porzioni dal frigo\n", units > 0 && g_UiHsBag[playerid] < 12 ? "{FFFFFF}" : "{777777}");
+		format(line, 384, "%sპორციების აღება მაცივრიდან\n", units > 0 && g_UiHsBag[playerid] < 12 ? "{FFFFFF}" : "{777777}");
 		UI_HsMenuRow(playerid, n, 4, line, body, 512);
 	}
-	UI_HsTitle(playerid, "Frigo", title, 64);
-	Lang_ShowPlayerDialog(playerid, 9204, DIALOG_STYLE_LIST, title, body, "Scegli", "Indietro");
+	UI_HsTitle(playerid, "მაცივარი", title, 192);
+	Lang_ShowPlayerDialog(playerid, 9204, DIALOG_STYLE_LIST, title, body, "არჩევა", "უკან");
 	return 0;
 }
 
 UI_HsAmountShow(playerid, action, maxAmount)
 {
-	new body[192], title[64];
+	new body[576], title[192];
 	g_UiHsAmtAction[playerid] = action;
 	g_UiHsAmtMax[playerid] = maxAmount;
-	format(body, 192, "{FFFFFF}%s\nQuantita' (1-%d):", action == 3 ? "Porzioni da riporre nel frigo." : "Porzioni da prendere dal frigo.", maxAmount);
-	UI_HsTitle(playerid, action == 3 ? "Riponi" : "Prendi", title, 64);
-	Lang_ShowPlayerDialog(playerid, 9205, DIALOG_STYLE_INPUT, title, body, "Conferma", "Indietro");
+	format(body, 576, "{FFFFFF}%s\nრაოდენობა (1-%d):", action == 3 ? "მაცივარში ჩასალაგებელი პორციები." : "მაცივრიდან ასაღები პორციები.", maxAmount);
+	UI_HsTitle(playerid, action == 3 ? "ჩალაგება" : "აღება", title, 192);
+	Lang_ShowPlayerDialog(playerid, 9205, DIALOG_STYLE_INPUT, title, body, "დადასტურება", "უკან");
 }
 
 UI_HouseBillsShow(playerid)
@@ -364,44 +364,44 @@ UI_HouseBillsShow(playerid)
 	{
 		return 0;
 	}
-	new body[512], line[160], a[16], b[16], title[64];
-	strcat(body, "Utenza\tDa pagare\tImporto\tNote\n", 512);
-	UI_HsMoney(g_UiHsLightDue[playerid], a, 16);
-	format(line, 160, "{FFFFFF}Luce\t%d\t$%s\t%s\n", g_UiHsLightCnt[playerid], a, g_UiHsLight[playerid] == 2 ? "{FF6666}staccata" : "{AAAAAA}-");
-	strcat(body, line, 512);
-	UI_HsMoney(g_UiHsGasDue[playerid], b, 16);
-	format(line, 160, "{FFFFFF}Gas\t%d\t$%s\t%s\n", g_UiHsGasCnt[playerid], b, g_UiHsGas[playerid] == 2 ? "{FF6666}staccata" : "{AAAAAA}-");
-	strcat(body, line, 512);
+	new body[1024], line[480], a[48], b[48], title[192];
+	strcat(body, "კომუნალური\tგადასახდელი\tთანხა\tშენიშვნა\n", 1024);
+	UI_HsMoney(g_UiHsLightDue[playerid], a, 48);
+	format(line, 480, "{FFFFFF}შუქი\t%d\t$%s\t%s\n", g_UiHsLightCnt[playerid], a, g_UiHsLight[playerid] == 2 ? "{FF6666}გათიშული" : "{AAAAAA}-");
+	strcat(body, line, 1024);
+	UI_HsMoney(g_UiHsGasDue[playerid], b, 48);
+	format(line, 480, "{FFFFFF}გაზი\t%d\t$%s\t%s\n", g_UiHsGasCnt[playerid], b, g_UiHsGas[playerid] == 2 ? "{FF6666}გათიშული" : "{AAAAAA}-");
+	strcat(body, line, 1024);
 	new total = UI_HsBillsTotal(playerid);
-	UI_HsMoney(total, a, 16);
+	UI_HsMoney(total, a, 48);
 	new fees = total - g_UiHsLightDue[playerid] - g_UiHsGasDue[playerid];
 	if (fees > 0)
 	{
-		UI_HsMoney(fees, b, 16);
-		format(line, 160, "{FFD24D}Totale\t%d\t$%s\t{AAAAAA}incl. $%s riattivazione\n", g_UiHsLightCnt[playerid] + g_UiHsGasCnt[playerid], a, b);
+		UI_HsMoney(fees, b, 48);
+		format(line, 480, "{FFD24D}სულ\t%d\t$%s\t{AAAAAA}მ.შ. $%s აღდგენა\n", g_UiHsLightCnt[playerid] + g_UiHsGasCnt[playerid], a, b);
 	}
 	else
 	{
-		format(line, 160, "{FFD24D}Totale\t%d\t$%s\t{AAAAAA}-\n", g_UiHsLightCnt[playerid] + g_UiHsGasCnt[playerid], a);
+		format(line, 480, "{FFD24D}სულ\t%d\t$%s\t{AAAAAA}-\n", g_UiHsLightCnt[playerid] + g_UiHsGasCnt[playerid], a);
 	}
-	strcat(body, line, 512);
-	UI_HsTitle(playerid, "Bollette", title, 64);
-	Lang_ShowPlayerDialog(playerid, 9206, DIALOG_STYLE_TABLIST_HEADERS, title, body, "Paga tutte", "Indietro");
+	strcat(body, line, 1024);
+	UI_HsTitle(playerid, "გადასახადები", title, 192);
+	Lang_ShowPlayerDialog(playerid, 9206, DIALOG_STYLE_TABLIST_HEADERS, title, body, "ყველას გადახდა", "უკან");
 	return 0;
 }
 
 UI_HsBillsPayShow(playerid)
 {
-	new body[320], total[16], cash[16], bank[16], tl[48], title[64];
+	new body[640], total[48], cash[48], bank[48], tl[144], title[576];
 	new p = UI_HsBillsTotal(playerid);
-	UI_HsMoney(p, total, 16);
-	UI_HsMoney(g_UiHsMoney[playerid], cash, 16);
-	UI_HsMoney(g_UiHsBank[playerid], bank, 16);
-	format(body, 320, "{FFFFFF}Banca\t%s$%s\n", g_UiHsBank[playerid] >= p ? "{66DD66}" : "{FF6666}", bank);
-	format(tl, 48, "{FFFFFF}Contanti\t%s$%s\n", g_UiHsMoney[playerid] >= p ? "{66DD66}" : "{FF6666}", cash);
-	strcat(body, tl, 320);
-	format(title, 64, "Paga bollette $%s", total);
-	Lang_ShowPlayerDialog(playerid, 9207, DIALOG_STYLE_TABLIST, title, body, "Paga", "Indietro");
+	UI_HsMoney(p, total, 48);
+	UI_HsMoney(g_UiHsMoney[playerid], cash, 48);
+	UI_HsMoney(g_UiHsBank[playerid], bank, 48);
+	format(body, 640, "{FFFFFF}ბანკი\t%s$%s\n", g_UiHsBank[playerid] >= p ? "{66DD66}" : "{FF6666}", bank);
+	format(tl, 144, "{FFFFFF}ნაღდი ფული\t%s$%s\n", g_UiHsMoney[playerid] >= p ? "{66DD66}" : "{FF6666}", cash);
+	strcat(body, tl, 640);
+	format(title, 576, "გადასახადების გადახდა $%s", total);
+	Lang_ShowPlayerDialog(playerid, 9207, DIALOG_STYLE_TABLIST, title, body, "გადახდა", "უკან");
 }
 
 bool:UI_HsParseAmount(const text[], &value)
@@ -448,7 +448,7 @@ bool:UI_HouseOnDialogResponse(playerid, dialogid, response, listitem, const inpu
 			{
 				if (g_UiHsLevel[playerid] < g_UiHsTierLevel[g_UiHsTier[playerid]])
 				{
-					SendClientMessage(playerid, -10066177, "Il tuo livello e' troppo basso per questa casa.");
+					SendClientMessage(playerid, -10066177, "ამ სახლისთვის შენი დონე ძალიან დაბალია.");
 					UI_HouseMenuShow(playerid);
 					return true;
 				}
@@ -474,7 +474,7 @@ bool:UI_HouseOnDialogResponse(playerid, dialogid, response, listitem, const inpu
 			new funds = listitem == 1 ? g_UiHsBank[playerid] : g_UiHsMoney[playerid];
 			if (funds < p)
 			{
-				SendClientMessage(playerid, -10066177, "Fondi insufficienti con questo metodo di pagamento.");
+				SendClientMessage(playerid, -10066177, "ამ გადახდის მეთოდით სახსრები არ გყოფნის.");
 				UI_HsBuyPayShow(playerid);
 				return true;
 			}
@@ -506,13 +506,13 @@ bool:UI_HouseOnDialogResponse(playerid, dialogid, response, listitem, const inpu
 			new st = listitem == 0 ? g_UiHsLight[playerid] : g_UiHsGas[playerid];
 			if (st == 2)
 			{
-				SendClientMessage(playerid, -10066177, "Utenza staccata per morosita': paga le bollette per riattivarla.");
+				SendClientMessage(playerid, -10066177, "კომუნალური გათიშულია დავალიანების გამო: გადაიხადე გადასახადები აღსადგენად.");
 				UI_HouseUtilityShow(playerid);
 				return true;
 			}
 			if (listitem == 1 && g_UiHsRole[playerid] != 1)
 			{
-				SendClientMessage(playerid, -10066177, "Solo il proprietario puo' gestire il gas.");
+				SendClientMessage(playerid, -10066177, "გაზის მართვა მხოლოდ მფლობელს შეუძლია.");
 				UI_HouseUtilityShow(playerid);
 				return true;
 			}
@@ -534,7 +534,7 @@ bool:UI_HouseOnDialogResponse(playerid, dialogid, response, listitem, const inpu
 				{
 					if (units <= 0)
 					{
-						SendClientMessage(playerid, -10066177, "Il frigo e' vuoto.");
+						SendClientMessage(playerid, -10066177, "მაცივარი ცარიელია.");
 						UI_HouseFridgeShow(playerid);
 						return true;
 					}
@@ -544,13 +544,13 @@ bool:UI_HouseOnDialogResponse(playerid, dialogid, response, listitem, const inpu
 				{
 					if (units <= 0)
 					{
-						SendClientMessage(playerid, -10066177, "Il frigo e' vuoto.");
+						SendClientMessage(playerid, -10066177, "მაცივარი ცარიელია.");
 						UI_HouseFridgeShow(playerid);
 						return true;
 					}
 					if (g_UiHsGas[playerid] != 1)
 					{
-						SendClientMessage(playerid, -10066177, "Il gas non e' attivo: non puoi cucinare.");
+						SendClientMessage(playerid, -10066177, "გაზი არ მუშაობს: მომზადება არ შეგიძლია.");
 						UI_HouseFridgeShow(playerid);
 						return true;
 					}
@@ -565,7 +565,7 @@ bool:UI_HouseOnDialogResponse(playerid, dialogid, response, listitem, const inpu
 					}
 					if (m <= 0)
 					{
-						SendClientMessage(playerid, -10066177, "Non hai spesa da riporre o il frigo e' pieno.");
+						SendClientMessage(playerid, -10066177, "ჩასალაგებელი პროდუქტები არ გაქვს ან მაცივარი სავსეა.");
 						UI_HouseFridgeShow(playerid);
 						return true;
 					}
@@ -580,7 +580,7 @@ bool:UI_HouseOnDialogResponse(playerid, dialogid, response, listitem, const inpu
 					}
 					if (m <= 0)
 					{
-						SendClientMessage(playerid, -10066177, "Frigo vuoto o borsa piena.");
+						SendClientMessage(playerid, -10066177, "მაცივარი ცარიელია ან ჩანთა სავსეა.");
 						UI_HouseFridgeShow(playerid);
 						return true;
 					}
@@ -603,7 +603,7 @@ bool:UI_HouseOnDialogResponse(playerid, dialogid, response, listitem, const inpu
 			new amount = 0;
 			if (!UI_HsParseAmount(inputtext, amount) || amount < 1 || amount > g_UiHsAmtMax[playerid])
 			{
-				SendClientMessage(playerid, -10066177, "Quantita' non valida.");
+				SendClientMessage(playerid, -10066177, "არასწორი რაოდენობა.");
 				UI_HsAmountShow(playerid, g_UiHsAmtAction[playerid], g_UiHsAmtMax[playerid]);
 				return true;
 			}
@@ -619,7 +619,7 @@ bool:UI_HouseOnDialogResponse(playerid, dialogid, response, listitem, const inpu
 			}
 			if (UI_HsBillsTotal(playerid) <= 0)
 			{
-				SendClientMessage(playerid, 0x66DD66FF, "Nessuna bolletta da pagare.");
+				SendClientMessage(playerid, 0x66DD66FF, "გადასახდელი კომუნალური გადასახადები არ გაქვს.");
 				UI_HouseBillsShow(playerid);
 				return true;
 			}
@@ -637,7 +637,7 @@ bool:UI_HouseOnDialogResponse(playerid, dialogid, response, listitem, const inpu
 			new funds = bank ? g_UiHsBank[playerid] : g_UiHsMoney[playerid];
 			if (funds < UI_HsBillsTotal(playerid))
 			{
-				SendClientMessage(playerid, -10066177, "Fondi insufficienti con questo metodo di pagamento.");
+				SendClientMessage(playerid, -10066177, "ამ გადახდის მეთოდით საკმარისი თანხა არ გაქვს.");
 				UI_HsBillsPayShow(playerid);
 				return true;
 			}
@@ -694,11 +694,11 @@ UI_HhCreate(playerid)
 	new Float:homeLeft = ((left - 150.0) - 4.0);
 	g_UiHh[playerid][0] = UI_HhBox(playerid, 0.0, 0.0, 640.0, 490.0, 176);
 	g_UiHh[playerid][1] = UI_HhBox(playerid, left, 458.0, 150.0, 18.0, 153);
-	g_UiHh[playerid][2] = UI_HhText(playerid, (4.0 + left), (458.0 + 1.0), "Sazieta' 0%", 0.2, 0.9, -1, t_TEXT_DRAW_ALIGN:1);
+	g_UiHh[playerid][2] = UI_HhText(playerid, (4.0 + left), (458.0 + 1.0), "სიმაძღრე 0%", 0.2, 0.9, -1, t_TEXT_DRAW_ALIGN:1);
 	g_UiHh[playerid][3] = UI_HhBox(playerid, (4.0 + left), (458.0 + 12.0), 142.0, 4.0, 0x444444FF);
 	g_UiHh[playerid][4] = UI_HhBox(playerid, (4.0 + left), (458.0 + 12.0), 142.0, 4.0, 0x66DD66FF);
 	g_UiHh[playerid][5] = UI_HhBox(playerid, homeLeft, 458.0, 150.0, 18.0, 153);
-	g_UiHh[playerid][6] = UI_HhText(playerid, (4.0 + homeLeft), (458.0 + 3.0), "Luce ON | Gas ON | Frigo 0/0", 0.2, 0.9, -1, t_TEXT_DRAW_ALIGN:1);
+	g_UiHh[playerid][6] = UI_HhText(playerid, (4.0 + homeLeft), (458.0 + 3.0), "შუქი ON | გაზი ON | მაცივარი 0/0", 0.2, 0.9, -1, t_TEXT_DRAW_ALIGN:1);
 	g_UiHhCreated[playerid] = true;
 	return 0;
 }
@@ -756,8 +756,8 @@ UI_HungerHudUpdate(playerid, hunger)
 		color = -2994689;
 		barColor = -2994689;
 	}
-	new str[32];
-	format(str, 32, "Sazieta' %d%%", hunger);
+	new str[288];
+	format(str, 288, "სიმაძღრე %d%%", hunger);
 	Lang_PlayerTextDrawSetString(playerid, g_UiHh[playerid][2], str);
 	PlayerTextDrawColour(playerid, PlayerText:g_UiHh[playerid][2], color);
 	PlayerTextDrawBoxColour(playerid, PlayerText:g_UiHh[playerid][4], barColor);
@@ -781,8 +781,8 @@ UI_HouseHudUpdate(playerid, bool:lightOn, bool:gasOn, fridgeUnits, fridgeCap)
 		return 0;
 	}
 	UI_HhCreate(playerid);
-	new str[64];
-	format(str, 64, "Luce %s | Gas %s | Frigo %d/%d", lightOn ? "ON" : "OFF", gasOn ? "ON" : "OFF", fridgeUnits, fridgeCap);
+	new str[576];
+	format(str, 576, "შუქი %s | გაზი %s | მაცივარი %d/%d", lightOn ? "ON" : "OFF", gasOn ? "ON" : "OFF", fridgeUnits, fridgeCap);
 	Lang_PlayerTextDrawSetString(playerid, g_UiHh[playerid][6], str);
 	if (!g_UiHhHome[playerid])
 	{

@@ -223,9 +223,9 @@ public Char_OnDBCreated(playerid, charId)
 		Account_Kick(playerid, "პერსონაჟის შექმნა ვერ მოხერხდა. სცადე მოგვიანებით.");
 		return 1;
 	}
-	new name[25], msg[128];
-	GetPlayerName(playerid, name, 25);
-	format(msg, 128, "nuovo personaggio %d (%s)", charId, name);
+	new name[75], msg[384];
+	GetPlayerName(playerid, name, 75);
+	format(msg, 384, "nuovo personaggio %d (%s)", charId, name);
 	Log_Write("CHAR", msg);
 	Inv_IssueStartDoc(playerid);
 	Intro_OnCharCreated(playerid, charId);
@@ -314,10 +314,10 @@ Char_OnSpawn(playerid)
 	Intro_OnSpawn(playerid);
 	if (gPlayer[playerid][pSpawnCount] == 0)
 	{
-		new name[25];
-		GetPlayerName(playerid, name, 25);
-		new msg[512];
-		format(msg, 512, "კეთილი იყოს შენი მობრძანება ლოს-სანტოსში, %s. ბრძანებების სია: /help", name);
+		new name[75];
+		GetPlayerName(playerid, name, 75);
+		new msg[1024];
+		format(msg, 1024, "კეთილი იყოს შენი მობრძანება ლოს-სანტოსში, %s. ბრძანებების სია: /help", name);
 		Util_Send(playerid, -1, msg);
 	}
 	gPlayer[playerid][pSpawnCount]++;

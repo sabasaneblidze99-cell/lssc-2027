@@ -58,7 +58,7 @@ Veh_ModelName(model, out[], size)
 	}
 	else
 	{
-		strmid(out, "Veicolo", 0, 7, size);
+		strmid(out, "მანქანა", 0, 7, size);
 	}
 }
 
@@ -168,7 +168,7 @@ bool:Veh_CooldownBlocked(playerid)
 	new now = GetTickCount();
 	if (now - g_VPl[playerid][vpCmdTick] < 2000)
 	{
-		Util_Send(playerid, -10270721, "Attendi un attimo prima di usare un altro comando veicolo.");
+		Util_Send(playerid, -10270721, "მოიცადე, სანამ მანქანის სხვა ბრძანებას გამოიყენებ.");
 		return true;
 	}
 	g_VPl[playerid][vpCmdTick] = now;
@@ -477,17 +477,17 @@ public Veh_OnFuelTick()
 				new driver = GetVehicleDriver(vid);
 				if (driver >= 0 && driver < 1000)
 				{
-					Util_Send(driver, -10270721, "Serbatoio vuoto: il motore si e' spento. Cerca un distributore (/refuel).");
+					Util_Send(driver, -10270721, "ავზი ცარიელია: ძრავი გაითიშა. მოძებნე ბენზინგასამართი სადგური (/refuel).");
 				}
 				if (driver != p)
 				{
-					Util_Send(p, -10270721, "Un tuo veicolo ha finito il carburante e si e' spento.");
+					Util_Send(p, -10270721, "შენს ერთ-ერთ მანქანას საწვავი გაუთავდა და გაითიშა.");
 				}
 			}
 			else if (!g_VSlot[p][s][vsLowFuelWarned] && Veh_FuelPct(p, s) <= 15)
 			{
 				g_VSlot[p][s][vsLowFuelWarned] = 1;
-				Util_Send(p, -10270721, "Carburante in riserva: raggiungi un distributore.");
+				Util_Send(p, -10270721, "საწვავი ცოტაა: მიდი ბენზინგასამართ სადგურზე.");
 			}
 		}
 	}
@@ -554,7 +554,7 @@ public Veh_OnDBLoaded(playerid, count)
 	if (count < 0)
 	{
 		g_VPl[playerid][vpLoadState] = 3;
-		Util_Send(playerid, -10270721, "Impossibile caricare i tuoi veicoli (errore database). Gli acquisti sono sospesi fino al prossimo accesso.");
+		Util_Send(playerid, -10270721, "შენი მანქანების ჩატვირთვა ვერ მოხერხდა (მონაცემთა ბაზის შეცდომა). ყიდვა შეჩერებულია შემდეგ შესვლამდე.");
 		return 1;
 	}
 	new needed = 0;
@@ -596,12 +596,12 @@ public Veh_OnDBLoaded(playerid, count)
 	}
 	if (g_VPool + needed > 300)
 	{
-		new name[25], msg[256];
-		GetPlayerName(playerid, name, 25);
-		format(msg, 256, "[VEICOLI] Tetto di %d veicoli personali raggiunto: i veicoli di %s [%d] non sono stati creati.", 300, name, playerid);
+		new name[75], msg[768];
+		GetPlayerName(playerid, name, 75);
+		format(msg, 768, "[მანქანები] მიღწეულია %d პირადი მანქანის ლიმიტი: %s-ის [%d] მანქანები არ შეიქმნა.", 300, name, playerid);
 		Admin_Notify(msg, -5963521);
 		Log_Write("VEH", msg);
-		Util_Send(playerid, -10270721, "Il server ha raggiunto il limite di veicoli personali: i tuoi veicoli non sono disponibili al momento.");
+		Util_Send(playerid, -10270721, "სერვერმა პირადი მანქანების ლიმიტს მიაღწია: შენი მანქანები ამჟამად მიუწვდომელია.");
 		return 1;
 	}
 	new spawned = 0;
@@ -616,7 +616,7 @@ public Veh_OnDBLoaded(playerid, count)
 			spawned++;
 		}
 	}
-	SendClientMessage(playerid, -1, "Hai %d veicolo/i (%d in strada). Usa /v list per i dettagli.", count, spawned);
+	SendClientMessage(playerid, -1, "გაქვს %d მანქანა (%d გზაზე). დეტალებისთვის გამოიყენე /v list.", count, spawned);
 	return 1;
 }
 
@@ -632,22 +632,22 @@ Veh_CmdDealer(playerid)
 	}
 	if (!Veh_NearDealer(playerid))
 	{
-		Util_Send(playerid, -10270721, "Devi essere al concessionario di Los Santos.");
+		Util_Send(playerid, -10270721, "ლოს-სანტოსის ავტოსალონში უნდა იყო.");
 		return 0;
 	}
 	if (GetPlayerState(playerid) != PLAYER_STATE_ONFOOT)
 	{
-		Util_Send(playerid, -10270721, "Scendi dal veicolo per usare il concessionario.");
+		Util_Send(playerid, -10270721, "ავტოსალონით სარგებლობისთვის მანქანიდან გადმოდი.");
 		return 0;
 	}
 	if (g_VPl[playerid][vpLoadState] != 2)
 	{
-		Util_Send(playerid, -10270721, "I tuoi veicoli non sono ancora stati caricati: riprova tra poco.");
+		Util_Send(playerid, -10270721, "შენი მანქანები ჯერ არ ჩატვირთულა: ცოტა ხანში სცადე.");
 		return 0;
 	}
 	if (Veh_Busy(playerid))
 	{
-		Util_Send(playerid, -10270721, "Hai un'operazione veicolo in corso: attendi.");
+		Util_Send(playerid, -10270721, "მანქანასთან დაკავშირებული ოპერაცია მიმდინარეობს: მოიცადე.");
 		return 0;
 	}
 	UI_VehicleShopShow(playerid, gPlayer[playerid][pLevel], gPlayer[playerid][pMoney], gPlayer[playerid][pBank]);
@@ -662,50 +662,50 @@ public UI_OnVehicleBuyConfirm(playerid, catalogIndex, payWithBank)
 	}
 	if (!Veh_NearDealer(playerid))
 	{
-		Util_Send(playerid, -10270721, "Devi essere al concessionario di Los Santos.");
+		Util_Send(playerid, -10270721, "ლოს-სანტოსის ავტოსალონში უნდა იყო.");
 		return 1;
 	}
 	if (Veh_Busy(playerid))
 	{
-		Util_Send(playerid, -10270721, "Hai un'operazione veicolo in corso: attendi.");
+		Util_Send(playerid, -10270721, "მანქანასთან დაკავშირებული ოპერაცია მიმდინარეობს: მოიცადე.");
 		return 1;
 	}
 	if (g_VPl[playerid][vpLoadState] != 2)
 	{
-		Util_Send(playerid, -10270721, "I tuoi veicoli non sono disponibili (caricamento non riuscito o in corso).");
+		Util_Send(playerid, -10270721, "შენი მანქანები მიუწვდომელია (ჩატვირთვა ვერ მოხერხდა ან მიმდინარეობს).");
 		return 1;
 	}
 	if (catalogIndex < 0 || catalogIndex >= 13 || (payWithBank != 0 && payWithBank != 1))
 	{
-		Util_Send(playerid, -10270721, "Richiesta di acquisto non valida.");
+		Util_Send(playerid, -10270721, "ყიდვის არასწორი მოთხოვნა.");
 		return 1;
 	}
 	if (gPlayer[playerid][pLevel] < g_VehCatLevel[catalogIndex])
 	{
-		SendClientMessage(playerid, -10270721, "Questo modello richiede il livello %d.", g_VehCatLevel[catalogIndex]);
+		SendClientMessage(playerid, -10270721, "ეს მოდელი მოითხოვს დონე %d-ს.", g_VehCatLevel[catalogIndex]);
 		return 1;
 	}
 	if (Veh_UsedCount(playerid) >= Veh_MaxForLevel(gPlayer[playerid][pLevel]) || Veh_FreeSlot(playerid) == -1)
 	{
-		SendClientMessage(playerid, -10270721, "Hai raggiunto il limite di veicoli per il tuo livello (%d).", Veh_MaxForLevel(gPlayer[playerid][pLevel]));
+		SendClientMessage(playerid, -10270721, "შენი დონისთვის მანქანების ლიმიტს მიაღწიე (%d).", Veh_MaxForLevel(gPlayer[playerid][pLevel]));
 		return 1;
 	}
 	if (g_VPool >= 300)
 	{
-		Util_Send(playerid, -10270721, "Il concessionario non puo' consegnare altri veicoli in questo momento.");
+		Util_Send(playerid, -10270721, "ავტოსალონს ამჟამად მეტი მანქანის მიწოდება არ შეუძლია.");
 		return 1;
 	}
 	new price = g_VehCatPrice[catalogIndex];
 	if (payWithBank == 1 ? !Money_CanBank(playerid, price) : !Money_Can(playerid, price))
 	{
-		Util_Send(playerid, -10270721, "Fondi insufficienti con questo metodo di pagamento.");
+		Util_Send(playerid, -10270721, "ამ გადახდის მეთოდით საკმარისი თანხა არ გაქვს.");
 		return 1;
 	}
 	g_VPl[playerid][vpBuyPending] = 1;
 	g_VPl[playerid][vpBuyCatalogIdx] = catalogIndex;
 	g_VPl[playerid][vpBuyWithBank] = payWithBank;
 	g_VPl[playerid][vpBuyPrice] = price;
-	Util_Send(playerid, -1, "Pratica di acquisto in corso...");
+	Util_Send(playerid, -1, "ყიდვა ფორმდება...");
 	DB_CreateVehicle(playerid, gPlayer[playerid][pCharId], g_VehCatModel[catalogIndex], 1, 1, price, 1655.0, -1690.0, 22.5, 270.0, Veh_CapacityCl(g_VehCatModel[catalogIndex]) * 50 / 100);
 	return 1;
 }
@@ -737,7 +737,7 @@ public Veh_OnDBCreated(playerid, vehDbId, const plate[])
 	g_VPl[playerid][vpBuyPending] = 0;
 	if (vehDbId <= 0)
 	{
-		Util_Send(playerid, -10270721, "Acquisto non riuscito (errore del concessionario). Nessun addebito.");
+		Util_Send(playerid, -10270721, "ყიდვა ვერ მოხერხდა (ავტოსალონის შეცდომა). თანხა არ ჩამოგეჭრა.");
 		return 1;
 	}
 	new idx = g_VPl[playerid][vpBuyCatalogIdx], price = g_VPl[playerid][vpBuyPrice], bool:bank = g_VPl[playerid][vpBuyWithBank] == 1;
@@ -746,7 +746,7 @@ public Veh_OnDBCreated(playerid, vehDbId, const plate[])
 	if (!ok)
 	{
 		Veh_RollbackCreate(playerid, vehDbId);
-		Util_Send(playerid, -10270721, "Acquisto annullato: requisiti o fondi non piu' validi. Nessun addebito.");
+		Util_Send(playerid, -10270721, "ყიდვა გაუქმდა: მოთხოვნები ან თანხა აღარ არის საკმარისი. თანხა არ ჩამოგეჭრა.");
 		return 1;
 	}
 	for (new f = 0; f < 30; f++)
@@ -776,7 +776,7 @@ public Veh_OnDBCreated(playerid, vehDbId, const plate[])
 	{
 		g_VSlot[playerid][slot][vsUsed] = 0;
 		Veh_RollbackCreate(playerid, vehDbId);
-		Util_Send(playerid, -10270721, "Consegna non riuscita (limite veicoli del server). Nessun addebito.");
+		Util_Send(playerid, -10270721, "მიწოდება ვერ მოხერხდა (სერვერის მანქანების ლიმიტი). თანხა არ ჩამოგეჭრა.");
 		return 1;
 	}
 	if (!(bank ? Money_TakeBank(playerid, price, "vehicle", "") : Money_Take(playerid, price)))
@@ -784,14 +784,14 @@ public Veh_OnDBCreated(playerid, vehDbId, const plate[])
 		Veh_Despawn(playerid, slot);
 		g_VSlot[playerid][slot][vsUsed] = 0;
 		Veh_RollbackCreate(playerid, vehDbId);
-		Util_Send(playerid, -10270721, "Pagamento non riuscito. Acquisto annullato.");
+		Util_Send(playerid, -10270721, "გადახდა ვერ მოხერხდა. ყიდვა გაუქმდა.");
 		return 1;
 	}
 	Char_Save(playerid);
-	new mname[12], pname[25], msg[256];
-	Veh_ModelName(g_VehCatModel[idx], mname, 12);
-	GetPlayerName(playerid, pname, 25);
-	SendClientMessage(playerid, 0x66DD66FF, "Hai acquistato una %s (targa %s) per $%d (%s). Ti aspetta all'uscita del concessionario.", mname, plate, price, bank ? "banca" : "contanti");
+	new mname[36], pname[75], msg[256];
+	Veh_ModelName(g_VehCatModel[idx], mname, 36);
+	GetPlayerName(playerid, pname, 75);
+	SendClientMessage(playerid, 0x66DD66FF, "შენ იყიდე %s (ნომერი %s) $%d-ად (%s). ავტოსალონის გასასვლელთან გელოდება.", mname, plate, price, bank ? "ბანკიდან" : "ნაღდით");
 	format(msg, 256, "ACQUISTO %s: %s targa %s $%d (%s) dbId %d", pname, mname, plate, price, bank ? "banca" : "contanti", vehDbId);
 	Log_Write("VEH", msg);
 	return 1;
@@ -801,17 +801,17 @@ Veh_DoSell(playerid, slot, bool:confirmed)
 {
 	if (slot < 0 || slot >= 4 || !g_VSlot[playerid][slot][vsUsed])
 	{
-		Util_Send(playerid, -10270721, "Slot veicolo non valido.");
+		Util_Send(playerid, -10270721, "მანქანის არასწორი სლოტი.");
 		return 0;
 	}
 	if (Veh_Busy(playerid) || g_VSlot[playerid][slot][vsSelling])
 	{
-		Util_Send(playerid, -10270721, "Hai un'operazione veicolo in corso: attendi.");
+		Util_Send(playerid, -10270721, "მანქანასთან დაკავშირებული ოპერაცია მიმდინარეობს: მოიცადე.");
 		return 0;
 	}
 	if (!Veh_NearDealer(playerid))
 	{
-		Util_Send(playerid, -10270721, "Puoi vendere solo presso il concessionario di Los Santos.");
+		Util_Send(playerid, -10270721, "გაყიდვა მხოლოდ ლოს-სანტოსის ავტოსალონში შეგიძლია.");
 		return 0;
 	}
 	new vid = g_VSlot[playerid][slot][vsVehicleId];
@@ -821,22 +821,22 @@ Veh_DoSell(playerid, slot, bool:confirmed)
 		GetPlayerPos(playerid, px, py, pz);
 		if ((GetVehicleDistanceFromPoint(vid, px, py, pz) > 5.0))
 		{
-			Util_Send(playerid, -10270721, "Il veicolo deve essere al concessionario con te (o devi essere al volante).");
+			Util_Send(playerid, -10270721, "მანქანა შენთან ერთად ავტოსალონში უნდა იყოს (ან საჭესთან უნდა იჯდე).");
 			return 0;
 		}
 	}
 	new refund = Veh_ListPrice(g_VSlot[playerid][slot][vsModel], g_VSlot[playerid][slot][vsPricePaid]) * 60 / 100;
 	if (refund <= 0 || refund > Money_BankRoom(playerid))
 	{
-		Util_Send(playerid, -10270721, "Il tuo conto bancario non puo' ricevere l'importo: vendita rifiutata.");
+		Util_Send(playerid, -10270721, "შენს საბანკო ანგარიშს თანხის მიღება არ შეუძლია: გაყიდვა უარყოფილია.");
 		return 0;
 	}
-	new mname[12];
-	Veh_ModelName(g_VSlot[playerid][slot][vsModel], mname, 12);
+	new mname[36];
+	Veh_ModelName(g_VSlot[playerid][slot][vsModel], mname, 36);
 	if (!confirmed)
 	{
-		SendClientMessage(playerid, -2994689, "Vendita %s (targa %s): ricevi $%d in banca.", mname, g_VSlot[playerid][slot][vsPlate], refund);
-		SendClientMessage(playerid, 0x99CCFFFF, "Per confermare: /v sell %d conferma", slot + 1);
+		SendClientMessage(playerid, -2994689, "გაყიდვა: %s (ნომერი %s): ბანკში მიიღებ $%d-ს.", mname, g_VSlot[playerid][slot][vsPlate], refund);
+		SendClientMessage(playerid, 0x99CCFFFF, "დასადასტურებლად: /v sell %d conferma", slot + 1);
 		return 0;
 	}
 	g_VPl[playerid][vpSellPending] = 1;
@@ -845,7 +845,7 @@ Veh_DoSell(playerid, slot, bool:confirmed)
 	g_VPl[playerid][vpSellDbId] = g_VSlot[playerid][slot][vsDbId];
 	g_VPl[playerid][vpSellRefund] = refund;
 	g_VSlot[playerid][slot][vsSelling] = 1;
-	Util_Send(playerid, -1, "Vendita in corso...");
+	Util_Send(playerid, -1, "მიმდინარეობს გაყიდვა...");
 	DB_DeleteVehicle(playerid, gPlayer[playerid][pCharId], g_VSlot[playerid][slot][vsDbId]);
 	return 0;
 }
@@ -881,17 +881,17 @@ public Veh_OnDBDeleted(playerid, vehDbId, affected)
 	}
 	if (affected == -1)
 	{
-		Util_Send(playerid, -10270721, "Vendita non riuscita (errore database). Nessun accredito.");
+		Util_Send(playerid, -10270721, "გაყიდვა ვერ მოხერხდა (მონაცემთა ბაზის შეცდომა). თანხა არ ჩაირიცხა.");
 		return 1;
 	}
 	if (affected != 1 || vehDbId != dbId || slot < 0 || slot >= 4 || g_VSlot[playerid][slot][vsDbId] != dbId)
 	{
-		Util_Send(playerid, -10270721, "Vendita non eseguita: il veicolo non risulta piu' di tua proprieta'. Nessun accredito.");
+		Util_Send(playerid, -10270721, "გაყიდვა არ შესრულდა: მანქანა აღარ არის შენს საკუთრებაში. თანხა არ ჩაირიცხა.");
 		return 1;
 	}
-	new mname[12], plate[8], pname[25], msg[256];
-	Veh_ModelName(g_VSlot[playerid][slot][vsModel], mname, 12);
-	strmid(plate, g_VSlot[playerid][slot][vsPlate], 0, strlen(g_VSlot[playerid][slot][vsPlate]), 8);
+	new mname[36], plate[24], pname[75], msg[256];
+	Veh_ModelName(g_VSlot[playerid][slot][vsModel], mname, 36);
+	strmid(plate, g_VSlot[playerid][slot][vsPlate], 0, strlen(g_VSlot[playerid][slot][vsPlate]), 24);
 	Veh_Despawn(playerid, slot);
 	g_VSlot[playerid][slot][vsUsed] = 0;
 	new paid = min(refund, Money_BankRoom(playerid));
@@ -900,12 +900,12 @@ public Veh_OnDBDeleted(playerid, vehDbId, affected)
 		Money_GiveBank(playerid, paid, "refund", "");
 	}
 	Char_Save(playerid);
-	SendClientMessage(playerid, 0x66DD66FF, "Hai venduto la %s (targa %s): $%d accreditati in banca.", mname, plate, paid);
+	SendClientMessage(playerid, 0x66DD66FF, "შენ გაყიდე %s (ნომერი %s): ბანკში ჩაგერიცხა $%d.", mname, plate, paid);
 	if (paid < refund)
 	{
-		Util_Send(playerid, -10270721, "Il conto ha raggiunto il limite: parte dell'importo non e' stata accreditata.");
+		Util_Send(playerid, -10270721, "ანგარიშმა ლიმიტს მიაღწია: თანხის ნაწილი არ ჩაირიცხა.");
 	}
-	GetPlayerName(playerid, pname, 25);
+	GetPlayerName(playerid, pname, 75);
 	format(msg, 256, "VENDITA %s: %s targa %s dbId %d accredito $%d", pname, mname, plate, dbId, paid);
 	Log_Write("VEH", msg);
 	return 1;
@@ -988,8 +988,8 @@ bool:Veh_ParseSlot(const token[], &slot)
 
 Veh_Emote(playerid, const action[])
 {
-	new name[25], msg[256];
-	GetPlayerName(playerid, name, 25);
+	new name[75], msg[256];
+	GetPlayerName(playerid, name, 75);
 	format(msg, 256, "* %s %s", name, action);
 	Util_SendNear(playerid, 0xC2A2DAFF, 20.0, msg);
 }
@@ -999,18 +999,18 @@ Veh_DoLock(playerid)
 	new slot = Veh_NearestOwnSlot(playerid);
 	if (slot == -1)
 	{
-		SendClientMessage(playerid, -10270721, "Nessun tuo veicolo entro %.0f metri.", 5.0);
+		SendClientMessage(playerid, -10270721, "%.0f მეტრის რადიუსში შენი მანქანა არ არის.", 5.0);
 		return 0;
 	}
 	if (g_VSlot[playerid][slot][vsSelling])
 	{
-		Util_Send(playerid, -10270721, "Veicolo non disponibile: operazione in corso.");
+		Util_Send(playerid, -10270721, "მანქანა მიუწვდომელია: მიმდინარეობს ოპერაცია.");
 		return 0;
 	}
 	new bool:lock = !g_VSlot[playerid][slot][vsLocked];
 	g_VSlot[playerid][slot][vsLocked] = lock;
 	Veh_SetParams(g_VSlot[playerid][slot][vsVehicleId], -1, -1, lock ? 1 : 0);
-	Veh_Emote(playerid, lock ? "blocca le porte del proprio veicolo." : "sblocca le porte del proprio veicolo.");
+	Veh_Emote(playerid, lock ? "კეტავს თავისი მანქანის კარებს." : "აღებს თავისი მანქანის კარებს.");
 	Veh_SaveSlot(playerid, slot);
 	return 0;
 }
@@ -1041,7 +1041,7 @@ Veh_DoEngineOther(playerid)
 	new e, l, a, d, b, bt, o;
 	GetVehicleParamsEx(veh, e, l, a, d, b, bt, o);
 	SetVehicleParamsEx(veh, e == 1 ? 0 : 1, l, a, d, b, bt, o);
-	Veh_Emote(playerid, e == 1 ? "spegne il motore." : "avvia il motore.");
+	Veh_Emote(playerid, e == 1 ? "თიშავს ძრავს." : "ქოქავს ძრავს.");
 	return 1;
 }
 
@@ -1054,27 +1054,27 @@ Veh_DoEngine(playerid)
 	}
 	if (g_VSlot[playerid][slot][vsSelling])
 	{
-		Util_Send(playerid, -10270721, "Veicolo non disponibile: operazione in corso.");
+		Util_Send(playerid, -10270721, "მანქანა მიუწვდომელია: მიმდინარეობს ოპერაცია.");
 		return 0;
 	}
 	if (g_VSlot[playerid][slot][vsEngineOn])
 	{
 		Veh_SetEngine(playerid, slot, false);
-		Veh_Emote(playerid, "spegne il motore.");
+		Veh_Emote(playerid, "თიშავს ძრავს.");
 		return 0;
 	}
 	if (g_VSlot[playerid][slot][vsDestroyed])
 	{
-		Util_Send(playerid, -10270721, "Il veicolo e' distrutto.");
+		Util_Send(playerid, -10270721, "მანქანა განადგურებულია.");
 		return 0;
 	}
 	if (g_VSlot[playerid][slot][vsFuelCl] <= 0)
 	{
-		Util_Send(playerid, -10270721, "Il serbatoio e' vuoto.");
+		Util_Send(playerid, -10270721, "ავზი ცარიელია.");
 		return 0;
 	}
 	Veh_SetEngine(playerid, slot, true);
-	Veh_Emote(playerid, "avvia il motore.");
+	Veh_Emote(playerid, "ქოქავს ძრავს.");
 	return 0;
 }
 
@@ -1083,13 +1083,13 @@ Veh_DoLights(playerid)
 	new slot = Veh_DrivenSlot(playerid);
 	if (slot == -1)
 	{
-		Util_Send(playerid, -10270721, "Devi essere al posto guida di un tuo veicolo.");
+		Util_Send(playerid, -10270721, "შენი მანქანის მძღოლის ადგილზე უნდა იჯდე.");
 		return 0;
 	}
 	new vid = g_VSlot[playerid][slot][vsVehicleId], e = 0, l = 0, a = 0, d = 0, b = 0, bt = 0, o = 0;
 	GetVehicleParamsEx(vid, e, l, a, d, b, bt, o);
 	Veh_SetParams(vid, -1, l == 1 ? 0 : 1, -1);
-	Util_Send(playerid, -1, l == 1 ? "Fari spenti." : "Fari accesi.");
+	Util_Send(playerid, -1, l == 1 ? "ფარები ჩაქრა." : "ფარები აინთო.");
 	return 0;
 }
 
@@ -1098,18 +1098,18 @@ Veh_DoPark(playerid)
 	new slot = Veh_DrivenSlot(playerid);
 	if (slot == -1)
 	{
-		Util_Send(playerid, -10270721, "Devi essere al volante di un tuo veicolo.");
+		Util_Send(playerid, -10270721, "შენი მანქანის საჭესთან უნდა იჯდე.");
 		return 0;
 	}
 	new vid = g_VSlot[playerid][slot][vsVehicleId];
 	if (g_VSlot[playerid][slot][vsSelling] || g_VSlot[playerid][slot][vsDestroyed])
 	{
-		Util_Send(playerid, -10270721, "Veicolo non disponibile.");
+		Util_Send(playerid, -10270721, "მანქანა მიუწვდომელია.");
 		return 0;
 	}
 	if (Veh_SpeedKmh(vid) >= 5)
 	{
-		Util_Send(playerid, -10270721, "Devi essere fermo per parcheggiare.");
+		Util_Send(playerid, -10270721, "დასაპარკინგებლად უნდა გაჩერდე.");
 		return 0;
 	}
 	new Float:x, Float:y, Float:z, Float:a;
@@ -1121,7 +1121,7 @@ Veh_DoPark(playerid)
 	g_VSlot[playerid][slot][vsParkA] = a;
 	DB_SetVehiclePark(g_VSlot[playerid][slot][vsDbId], gPlayer[playerid][pCharId], x, y, z, a);
 	Veh_SaveSlot(playerid, slot);
-	Util_Send(playerid, 0x66DD66FF, "Posizione di parcheggio salvata.");
+	Util_Send(playerid, 0x66DD66FF, "პარკინგის ადგილი შენახულია.");
 	return 0;
 }
 
@@ -1129,13 +1129,13 @@ Veh_DoFind(playerid, slot)
 {
 	if (slot < 0 || slot >= 4 || !g_VSlot[playerid][slot][vsUsed])
 	{
-		Util_Send(playerid, -10270721, "Slot veicolo non valido.");
+		Util_Send(playerid, -10270721, "მანქანის არასწორი სლოტი.");
 		return 0;
 	}
 	new vid = g_VSlot[playerid][slot][vsVehicleId];
 	if (vid == 65535)
 	{
-		Util_Send(playerid, -10270721, g_VSlot[playerid][slot][vsDestroyed] ? "Il veicolo e' distrutto: usa /v recover." : "Il veicolo non e' in strada al momento.");
+		Util_Send(playerid, -10270721, g_VSlot[playerid][slot][vsDestroyed] ? "მანქანა განადგურებულია: გამოიყენე /v recover." : "მანქანა ამჟამად გზაზე არ არის.");
 		return 0;
 	}
 	new Float:x, Float:y, Float:z, Float:px, Float:py, Float:pz;
@@ -1147,7 +1147,7 @@ Veh_DoFind(playerid, slot)
 	}
 	SetPlayerCheckpoint(playerid, x, y, z, 4.0);
 	g_VPl[playerid][vpFindTimer] = SetTimerEx("Veh_OnFindExpire", 60000, false, "dd", playerid, g_VPl[playerid][vpSession]);
-	SendClientMessage(playerid, -1, "Veicolo %d segnato sulla mappa per %d secondi (distanza: %.0f m).", slot + 1, 60, GetVehicleDistanceFromPoint(vid, px, py, pz));
+	SendClientMessage(playerid, -1, "მანქანა %d რუკაზე მონიშნულია %d წამით (მანძილი: %.0f მ).", slot + 1, 60, GetVehicleDistanceFromPoint(vid, px, py, pz));
 	return 0;
 }
 
@@ -1155,7 +1155,7 @@ Veh_DoList(playerid)
 {
 	if (g_VPl[playerid][vpLoadState] != 2)
 	{
-		Util_Send(playerid, -10270721, "I tuoi veicoli non sono disponibili (caricamento non riuscito o in corso).");
+		Util_Send(playerid, -10270721, "შენი მანქანები მიუწვდომელია (ჩატვირთვა ვერ მოხერხდა ან მიმდინარეობს).");
 		return 0;
 	}
 	UI_VehicleListClear(playerid);
@@ -1188,22 +1188,22 @@ Veh_DoRecover(playerid, slot)
 {
 	if (slot < 0 || slot >= 4 || !g_VSlot[playerid][slot][vsUsed])
 	{
-		Util_Send(playerid, -10270721, "Slot veicolo non valido.");
+		Util_Send(playerid, -10270721, "მანქანის არასწორი სლოტი.");
 		return 0;
 	}
 	if (Veh_Busy(playerid) || g_VSlot[playerid][slot][vsSelling])
 	{
-		Util_Send(playerid, -10270721, "Hai un'operazione veicolo in corso: attendi.");
+		Util_Send(playerid, -10270721, "მანქანასთან დაკავშირებული ოპერაცია მიმდინარეობს: მოიცადე.");
 		return 0;
 	}
 	if (!g_VSlot[playerid][slot][vsDestroyed])
 	{
-		Util_Send(playerid, -10270721, "Questo veicolo non e' distrutto.");
+		Util_Send(playerid, -10270721, "ეს მანქანა განადგურებული არ არის.");
 		return 0;
 	}
 	if (g_VPool >= 300)
 	{
-		Util_Send(playerid, -10270721, "Limite veicoli del server raggiunto: riprova piu' tardi.");
+		Util_Send(playerid, -10270721, "სერვერის მანქანების ლიმიტი ამოწურულია: მოგვიანებით სცადე.");
 		return 0;
 	}
 	new listPrice = Veh_ListPrice(g_VSlot[playerid][slot][vsModel], g_VSlot[playerid][slot][vsPricePaid]);
@@ -1211,7 +1211,7 @@ Veh_DoRecover(playerid, slot)
 	new bool:useCash = Money_Can(playerid, cost);
 	if (!useCash && !Money_CanBank(playerid, cost))
 	{
-		SendClientMessage(playerid, -10270721, "Assicurazione $%d: fondi insufficienti (contanti o banca).", cost);
+		SendClientMessage(playerid, -10270721, "დაზღვევა $%d: თანხა არ გყოფნის (ნაღდი ფული ან ბანკი).", cost);
 		return 0;
 	}
 	new vid = g_VSlot[playerid][slot][vsVehicleId];
@@ -1227,22 +1227,22 @@ Veh_DoRecover(playerid, slot)
 	if (!Veh_Spawn(playerid, slot, g_VSlot[playerid][slot][vsParkX], g_VSlot[playerid][slot][vsParkY], g_VSlot[playerid][slot][vsParkZ], g_VSlot[playerid][slot][vsParkA]))
 	{
 		g_VSlot[playerid][slot][vsDestroyed] = 1;
-		Util_Send(playerid, -10270721, "Recupero non riuscito (limite veicoli del server). Nessun addebito.");
+		Util_Send(playerid, -10270721, "აღდგენა ვერ მოხერხდა (სერვერის მანქანების ლიმიტი). თანხა არ ჩამოგეჭრა.");
 		return 0;
 	}
 	if (!(useCash ? Money_Take(playerid, cost) : Money_TakeBank(playerid, cost, "bill", "")))
 	{
 		Veh_Despawn(playerid, slot);
 		g_VSlot[playerid][slot][vsDestroyed] = 1;
-		Util_Send(playerid, -10270721, "Pagamento non riuscito. Recupero annullato.");
+		Util_Send(playerid, -10270721, "გადახდა ვერ მოხერხდა. აღდგენა გაუქმდა.");
 		return 0;
 	}
 	Char_Save(playerid);
 	DB_RecoverVehicle(g_VSlot[playerid][slot][vsDbId], gPlayer[playerid][pCharId], g_VSlot[playerid][slot][vsHealth], g_VSlot[playerid][slot][vsFuelCl]);
-	new mname[12], pname[25], msg[256];
-	Veh_ModelName(g_VSlot[playerid][slot][vsModel], mname, 12);
-	SendClientMessage(playerid, 0x66DD66FF, "Assicurazione pagata ($%d, %s): la tua %s ti aspetta al parcheggio.", cost, useCash ? "contanti" : "banca", mname);
-	GetPlayerName(playerid, pname, 25);
+	new mname[36], pname[75], msg[256];
+	Veh_ModelName(g_VSlot[playerid][slot][vsModel], mname, 36);
+	SendClientMessage(playerid, 0x66DD66FF, "დაზღვევა გადახდილია ($%d, %s): შენი %s პარკინგზე გელოდება.", cost, useCash ? "ნაღდით" : "ბანკიდან", mname);
+	GetPlayerName(playerid, pname, 75);
 	format(msg, 256, "RECUPERO %s: %s dbId %d costo $%d", pname, mname, g_VSlot[playerid][slot][vsDbId], cost);
 	Log_Write("VEH", msg);
 	return 0;
@@ -1254,17 +1254,17 @@ Veh_CmdV(playerid, const params[])
 	{
 		return 0;
 	}
-	new pos = 0, sub[16], a1[16], a2[16];
-	Util_NextToken(params, pos, sub, 16);
-	Util_NextToken(params, pos, a1, 16);
-	Util_NextToken(params, pos, a2, 16);
+	new pos = 0, sub[48], a1[48], a2[48];
+	Util_NextToken(params, pos, sub, 48);
+	Util_NextToken(params, pos, a1, 48);
+	Util_NextToken(params, pos, a2, 48);
 	for (new i = 0; sub[i] != 0; i++)
 	{
 		sub[i] = tolower(sub[i]);
 	}
 	if (sub[0] == 0)
 	{
-		Util_Send(playerid, 0x99CCFFFF, "Uso: /v lock | engine | lights | park | find [slot] | list | sell [slot] | recover [slot]");
+		Util_Send(playerid, 0x99CCFFFF, "გამოყენება: /v lock | engine | lights | park | find [slot] | list | sell [slot] | recover [slot]");
 		return 0;
 	}
 	if (Veh_CooldownBlocked(playerid))
@@ -1298,7 +1298,7 @@ Veh_CmdV(playerid, const params[])
 	}
 	if (!strcmp(sub, "tow", false, 0x7FFFFFFF))
 	{
-		Util_Send(playerid, -10270721, "Il carro attrezzi non e' ancora disponibile.");
+		Util_Send(playerid, -10270721, "ევაკუატორი ჯერ მიუწვდომელია.");
 		return 0;
 	}
 	new slot = -1;
@@ -1318,7 +1318,7 @@ Veh_CmdV(playerid, const params[])
 		{
 			if (!Veh_ParseSlot(a1, slot))
 			{
-				SendClientMessage(playerid, -10270721, "Slot non valido (1-%d).", 4);
+				SendClientMessage(playerid, -10270721, "არასწორი სლოტი (1-%d).", 4);
 				return 0;
 			}
 		}
@@ -1335,7 +1335,7 @@ Veh_CmdV(playerid, const params[])
 			}
 			if (destroyed != 1)
 			{
-				Util_Send(playerid, 0x99CCFFFF, "Uso: /v recover [slot] (/v list per vedere quali sono distrutti)");
+				Util_Send(playerid, 0x99CCFFFF, "გამოყენება: /v recover [slot] (/v list - ნახე, რომელია განადგურებული)");
 				return 0;
 			}
 		}
@@ -1354,7 +1354,7 @@ Veh_CmdV(playerid, const params[])
 			}
 			if (slot == -1)
 			{
-				Util_Send(playerid, 0x99CCFFFF, "Uso: /v find|sell [slot] (nessun tuo veicolo vicino)");
+				Util_Send(playerid, 0x99CCFFFF, "გამოყენება: /v find|sell [slot] (ახლოს შენი მანქანა არ არის)");
 				return 0;
 			}
 		}
@@ -1372,7 +1372,7 @@ Veh_CmdV(playerid, const params[])
 		}
 		return 0;
 	}
-	Util_Send(playerid, 0x99CCFFFF, "Uso: /v lock | engine | lights | park | find [slot] | list | sell [slot] | recover [slot]");
+	Util_Send(playerid, 0x99CCFFFF, "გამოყენება: /v lock | engine | lights | park | find [slot] | list | sell [slot] | recover [slot]");
 	return 0;
 }
 
@@ -1389,39 +1389,39 @@ Veh_CmdRefuel(playerid, const params[])
 	new slot = Veh_DrivenSlot(playerid);
 	if (slot == -1)
 	{
-		Util_Send(playerid, -10270721, "Devi essere al volante di un tuo veicolo.");
+		Util_Send(playerid, -10270721, "შენი მანქანის საჭესთან უნდა იჯდე.");
 		return 0;
 	}
 	if (!Veh_NearStation(playerid))
 	{
-		Util_Send(playerid, -10270721, "Non sei vicino a un distributore.");
+		Util_Send(playerid, -10270721, "ბენზინგასამართ სადგურთან არ ხარ.");
 		return 0;
 	}
 	if (Veh_Busy(playerid) || g_VSlot[playerid][slot][vsSelling])
 	{
-		Util_Send(playerid, -10270721, "Veicolo non disponibile: operazione in corso.");
+		Util_Send(playerid, -10270721, "მანქანა მიუწვდომელია: მიმდინარეობს ოპერაცია.");
 		return 0;
 	}
 	if (g_VSlot[playerid][slot][vsEngineOn])
 	{
-		Util_Send(playerid, -10270721, "Spegni il motore prima di fare rifornimento (/v engine).");
+		Util_Send(playerid, -10270721, "საწვავის ჩასხმამდე ძრავი გამორთე (/v engine).");
 		return 0;
 	}
 	new cap = Veh_CapacityCl(g_VSlot[playerid][slot][vsModel]);
 	new need = cap - g_VSlot[playerid][slot][vsFuelCl];
 	if (need <= 0)
 	{
-		Util_Send(playerid, -10270721, "Il serbatoio e' gia' pieno.");
+		Util_Send(playerid, -10270721, "ავზი უკვე სავსეა.");
 		return 0;
 	}
-	new want = need, pos = 0, tok[12];
-	Util_NextToken(params, pos, tok, 12);
+	new want = need, pos = 0, tok[36];
+	Util_NextToken(params, pos, tok, 36);
 	if (tok[0] != 0)
 	{
 		new liters = 0;
 		if (!Util_ParseInt(tok, liters) || liters < 1 || liters > cap / 100)
 		{
-			SendClientMessage(playerid, 0x99CCFFFF, "Uso: /refuel [litri 1-%d] (senza argomento: pieno)", cap / 100);
+			SendClientMessage(playerid, 0x99CCFFFF, "გამოყენება: /refuel [ლიტრი 1-%d] (არგუმენტის გარეშე: სავსე ავზი)", cap / 100);
 			return 0;
 		}
 		want = min(liters * 100, need);
@@ -1431,13 +1431,13 @@ Veh_CmdRefuel(playerid, const params[])
 	new add = min(want, affordable);
 	if (add <= 0)
 	{
-		Util_Send(playerid, -10270721, "Non hai abbastanza contanti per fare rifornimento.");
+		Util_Send(playerid, -10270721, "საწვავისთვის საკმარისი ნაღდი ფული არ გაქვს.");
 		return 0;
 	}
 	new cost = (add * 3 + 100 - 1) / 100;
 	if (!Money_Take(playerid, cost))
 	{
-		Util_Send(playerid, -10270721, "Non hai abbastanza contanti per fare rifornimento.");
+		Util_Send(playerid, -10270721, "საწვავისთვის საკმარისი ნაღდი ფული არ გაქვს.");
 		return 0;
 	}
 	g_VSlot[playerid][slot][vsFuelCl] += add;
@@ -1448,7 +1448,7 @@ Veh_CmdRefuel(playerid, const params[])
 	Char_Save(playerid);
 	Veh_SaveSlot(playerid, slot);
 	Veh_HudRefresh(playerid);
-	SendClientMessage(playerid, 0x66DD66FF, "Rifornimento: +%.1f L per $%d. Serbatoio: %.1f/%.0f L.", (float(add) / float(100)), cost, (float(g_VSlot[playerid][slot][vsFuelCl]) / float(100)), (float(cap) / float(100)));
+	SendClientMessage(playerid, 0x66DD66FF, "ჩასხმულია: +%.1f ლ $%d-ად. ავზი: %.1f/%.0f ლ.", (float(add) / float(100)), cost, (float(g_VSlot[playerid][slot][vsFuelCl]) / float(100)), (float(cap) / float(100)));
 	return 0;
 }
 
@@ -1467,10 +1467,10 @@ Veh_OnInit()
 	g_VPool = 0;
 	g_VSaveTimer = SetTimer("Veh_OnSaveTick", 120000, true);
 	CreatePickup(1239, 1, 1655.0, -1665.0, 22.5, 0);
-	Lang_Create3DTextLabel("Concessionario di Los Santos\nUsa /concessionario", -2994689, 1655.0, -1665.0, (22.5 + 1.0), 15.0, 0, false);
+	Lang_Create3DTextLabel("ლოს-სანტოსის ავტოსალონი\nგამოიყენე /concessionario", -2994689, 1655.0, -1665.0, (22.5 + 1.0), 15.0, 0, false);
 	for (new i = 0; i < 3; i++)
 	{
-		Lang_Create3DTextLabel("Distributore\nUsa /refuel [litri]", -2994689, g_VehStations[i][0], g_VehStations[i][1], (1.0 + g_VehStations[i][2]), 15.0, 0, false);
+		Lang_Create3DTextLabel("ბენზინგასამართი სადგური\nგამოიყენე /refuel [ლიტრი]", -2994689, g_VehStations[i][0], g_VehStations[i][1], (1.0 + g_VehStations[i][2]), 15.0, 0, false);
 	}
 }
 
@@ -1557,7 +1557,7 @@ Veh_OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
 	if (ispassenger == 0)
 	{
 		ClearAnimations(playerid, SYNC_NONE);
-		Util_Send(playerid, -10270721, "Non hai le chiavi di questo veicolo.");
+		Util_Send(playerid, -10270721, "ამ მანქანის გასაღები არ გაქვს.");
 	}
 	return 0;
 }
@@ -1596,7 +1596,7 @@ Veh_OnPlayerStateChange(playerid, t_PLAYER_STATE:newstate, t_PLAYER_STATE:oldsta
 		}
 		if (o != playerid)
 		{
-			Util_Send(playerid, -10270721, "Non hai le chiavi di questo veicolo.");
+			Util_Send(playerid, -10270721, "ამ მანქანის გასაღები არ გაქვს.");
 			RemovePlayerFromVehicle(playerid, false);
 			return 0;
 		}
@@ -1626,10 +1626,10 @@ Veh_OnVehicleDeath(vehicleid, killerid)
 	g_VSlot[o][s][vsHealth] = 350.0;
 	Veh_SaveSlot(o, s);
 	SetTimerEx("Veh_OnWreckRemove", 10000, false, "ddd", vehicleid, o, g_VMapSession[vehicleid]);
-	new mname[12], pname[25], msg[256];
-	Veh_ModelName(g_VSlot[o][s][vsModel], mname, 12);
-	SendClientMessage(o, -10270721, "La tua %s (slot %d) e' stata distrutta. Recuperala con /v recover %d.", mname, s + 1, s + 1);
-	GetPlayerName(o, pname, 25);
+	new mname[36], pname[75], msg[256];
+	Veh_ModelName(g_VSlot[o][s][vsModel], mname, 36);
+	SendClientMessage(o, -10270721, "შენი %s (სლოტი %d) განადგურდა. აღადგინე /v recover %d-ით.", mname, s + 1, s + 1);
+	GetPlayerName(o, pname, 75);
 	format(msg, 256, "DISTRUTTO %s: %s dbId %d", pname, mname, g_VSlot[o][s][vsDbId]);
 	Log_Write("VEH", msg);
 	return 0;

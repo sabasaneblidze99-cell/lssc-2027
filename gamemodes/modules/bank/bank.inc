@@ -90,7 +90,7 @@ bool:Bank_ParseAmount(const s[], &value)
 
 Bank_FindPlayer(const input[])
 {
-	new text[25], len = strlen(input), start = 0, end = len;
+	new text[75], len = strlen(input), start = 0, end = len;
 	while (start < len && input[start] == 32)
 	{
 		start++;
@@ -103,7 +103,7 @@ Bank_FindPlayer(const input[])
 	{
 		return -1;
 	}
-	strmid(text, input, start, end, 25);
+	strmid(text, input, start, end, 75);
 	new bool:numeric = true;
 	for (new i = 0; text[i] != 0; i++)
 	{
@@ -118,14 +118,14 @@ Bank_FindPlayer(const input[])
 		new id = strval(text);
 		return id >= 0 && id < 1000 && Util_IsPlaying(id) ? id : -1;
 	}
-	new found = -1, name[25];
+	new found = -1, name[75];
 	for (new p = 0; p < MAX_PLAYERS; p++)
 	{
 		if (!Util_IsPlaying(p))
 		{
 			continue;
 		}
-		GetPlayerName(p, name, 25);
+		GetPlayerName(p, name, 75);
 		if (!strcmp(name, text, true, 0x7FFFFFFF))
 		{
 			return p;
@@ -148,9 +148,9 @@ bool:Bank_SameIp(a, b)
 	{
 		return false;
 	}
-	new ipA[16], ipB[16];
-	GetPlayerIp(a, ipA, 16);
-	GetPlayerIp(b, ipB, 16);
+	new ipA[48], ipB[48];
+	GetPlayerIp(a, ipA, 48);
+	GetPlayerIp(b, ipB, 48);
 	return ipA[0] != 0 && !strcmp(ipA, ipB, false, 0x7FFFFFFF);
 }
 
@@ -194,63 +194,63 @@ Bank_KindLabel(const kind[], dest[], size)
 {
 	if (!strcmp(kind, "deposit", false, 0x7FFFFFFF))
 	{
-		strcopy(dest, "Deposito", size);
+		strcopy(dest, "შეტანა", size);
 	}
 	else if (!strcmp(kind, "withdraw", false, 0x7FFFFFFF))
 	{
-		strcopy(dest, "Prelievo", size);
+		strcopy(dest, "გატანა", size);
 	}
 	else if (!strcmp(kind, "xfer_out", false, 0x7FFFFFFF))
 	{
-		strcopy(dest, "Bonifico a", size);
+		strcopy(dest, "გადარიცხვა:", size);
 	}
 	else if (!strcmp(kind, "xfer_in", false, 0x7FFFFFFF))
 	{
-		strcopy(dest, "Bonifico da", size);
+		strcopy(dest, "გადმორიცხვა:", size);
 	}
 	else if (!strcmp(kind, "fee", false, 0x7FFFFFFF))
 	{
-		strcopy(dest, "Commissione", size);
+		strcopy(dest, "საკომისიო", size);
 	}
 	else if (!strcmp(kind, "paycheck", false, 0x7FFFFFFF))
 	{
-		strcopy(dest, "Stipendio", size);
+		strcopy(dest, "ხელფასი", size);
 	}
 	else if (!strcmp(kind, "job", false, 0x7FFFFFFF))
 	{
-		strcopy(dest, "Compenso lavoro", size);
+		strcopy(dest, "სამსახურის ანაზღაურება", size);
 	}
 	else if (!strcmp(kind, "faction", false, 0x7FFFFFFF))
 	{
-		strcopy(dest, "Stipendio fazione", size);
+		strcopy(dest, "ფრაქციის ხელფასი", size);
 	}
 	else if (!strcmp(kind, "bill", false, 0x7FFFFFFF))
 	{
-		strcopy(dest, "Bolletta", size);
+		strcopy(dest, "კომუნალური", size);
 	}
 	else if (!strcmp(kind, "house", false, 0x7FFFFFFF))
 	{
-		strcopy(dest, "Casa", size);
+		strcopy(dest, "სახლი", size);
 	}
 	else if (!strcmp(kind, "vehicle", false, 0x7FFFFFFF))
 	{
-		strcopy(dest, "Veicolo", size);
+		strcopy(dest, "მანქანა", size);
 	}
 	else if (!strcmp(kind, "fine", false, 0x7FFFFFFF))
 	{
-		strcopy(dest, "Multa", size);
+		strcopy(dest, "ჯარიმა", size);
 	}
 	else if (!strcmp(kind, "refund", false, 0x7FFFFFFF))
 	{
-		strcopy(dest, "Rimborso", size);
+		strcopy(dest, "დაბრუნება", size);
 	}
 	else if (!strcmp(kind, "admin", false, 0x7FFFFFFF))
 	{
-		strcopy(dest, "Staff", size);
+		strcopy(dest, "ადმინისტრაცია", size);
 	}
 	else if (!strcmp(kind, "undo", false, 4))
 	{
-		strcopy(dest, "Storno", size);
+		strcopy(dest, "სტორნო", size);
 	}
 	else
 	{
@@ -326,7 +326,7 @@ Bank_ConfirmFailed(playerid)
 	{
 		gPlayer[playerid][pBankConfirmFails] = 0;
 		gPlayer[playerid][pBankXferBlockUntil] = Bank_Tick() + 60000;
-		SendClientMessage(playerid, -10270721, "Troppe conferme di bonifico fallite o scadute: bonifici sospesi per %d secondi.", 60);
+		SendClientMessage(playerid, -10270721, "ბევრი ჩავარდნილი ან ვადაგასული დადასტურება: გადარიცხვები შეჩერებულია %d წამით.", 60);
 	}
 }
 
@@ -360,33 +360,33 @@ Bank_StateGuard(playerid, bool:ui, bool:counterOnly)
 	}
 	if (gPlayer[playerid][pWounded] || gPlayer[playerid][pCuffed])
 	{
-		Bank_Deny(playerid, ui, "Non puoi usare la banca da ferito o ammanettato.");
+		Bank_Deny(playerid, ui, "დაჭრილს ან ბორკილდადებულს ბანკით სარგებლობა არ შეგიძლია.");
 		return -1;
 	}
 	if (IsPlayerInAnyVehicle(playerid))
 	{
-		Bank_Deny(playerid, ui, "Scendi dal veicolo per usare la banca.");
+		Bank_Deny(playerid, ui, "ბანკით სარგებლობისთვის მანქანიდან გადმოდი.");
 		return -1;
 	}
 	if (Job_IsOnShift(playerid))
 	{
-		Bank_Deny(playerid, ui, "Non puoi usare la banca durante un turno di lavoro.");
+		Bank_Deny(playerid, ui, "სამსახურის ცვლის დროს ბანკით სარგებლობა არ შეგიძლია.");
 		return -1;
 	}
 	if (GetPlayerInterior(playerid) != 0 || GetPlayerVirtualWorld(playerid) != 0)
 	{
-		Bank_Deny(playerid, ui, "Non puoi usare la banca all'interno di un edificio: serve un ATM o uno sportello all'aperto.");
+		Bank_Deny(playerid, ui, "შენობაში ბანკით სარგებლობა არ შეგიძლია: გჭირდება ATM ან გარე სალარო.");
 		return -1;
 	}
 	new point = Bank_NearPoint(playerid, false);
 	if (point < 0)
 	{
-		Bank_Deny(playerid, ui, "Devi essere vicino a un ATM o a uno sportello bancario.");
+		Bank_Deny(playerid, ui, "ATM-თან ან ბანკის სალაროსთან უნდა იყო.");
 		return -1;
 	}
 	if (counterOnly && !Bank_IsCounter(point))
 	{
-		Bank_Deny(playerid, ui, "Questo e' un ATM: per /banca usa uno sportello.");
+		Bank_Deny(playerid, ui, "ეს ATM-ია: /banca-სთვის სალარო გამოიყენე.");
 		return -1;
 	}
 	gPlayer[playerid][pBankAtCounter] = Bank_IsCounter(point) ? 1 : 0;
@@ -410,7 +410,7 @@ Bank_Guard(playerid, bool:ui, bool:counterOnly)
 		}
 		else
 		{
-			Bank_Reply(playerid, ui, "Hai un'operazione bancaria in corso: attendi.");
+			Bank_Reply(playerid, ui, "საბანკო ოპერაცია უკვე მიმდინარეობს: მოიცადე.");
 			return -1;
 		}
 	}
@@ -422,13 +422,13 @@ Bank_Guard(playerid, bool:ui, bool:counterOnly)
 		}
 		else
 		{
-			Util_Send(playerid, -10270721, "Hai un bonifico in attesa di conferma.");
+			Util_Send(playerid, -10270721, "გადარიცხვა დადასტურებას ელოდება.");
 			return -1;
 		}
 	}
 	if (gPlayer[playerid][pBankLastOpTick] != 0 && now - gPlayer[playerid][pBankLastOpTick] < 2000)
 	{
-		Bank_Reply(playerid, ui, "Attendi un attimo prima di un'altra operazione bancaria.");
+		Bank_Reply(playerid, ui, "მოიცადე, სანამ ახალ საბანკო ოპერაციას გააკეთებ.");
 		return -1;
 	}
 	gPlayer[playerid][pBankLastOpTick] = now;
@@ -464,8 +464,8 @@ Bank_RefreshLimits(playerid)
 
 Bank_CmdSaldo(playerid)
 {
-	SendClientMessage(playerid, -2994689, "--- Saldo ---");
-	SendClientMessage(playerid, -1, "Contanti: $%d  Banca: $%d  Totale: $%d", gPlayer[playerid][pMoney], gPlayer[playerid][pBank], gPlayer[playerid][pMoney] + gPlayer[playerid][pBank]);
+	SendClientMessage(playerid, -2994689, "--- ბალანსი ---");
+	SendClientMessage(playerid, -1, "ნაღდი: $%d  ბანკი: $%d  სულ: $%d", gPlayer[playerid][pMoney], gPlayer[playerid][pBank], gPlayer[playerid][pMoney] + gPlayer[playerid][pBank]);
 }
 
 Bank_CmdAtm(playerid, bool:counterOnly)
@@ -501,24 +501,24 @@ Bank_Deposit(playerid, amount, bool:ui)
 	}
 	if (amount < 1)
 	{
-		Bank_Reply(playerid, ui, "Importo non valido.");
+		Bank_Reply(playerid, ui, "არასწორი თანხა.");
 		return 0;
 	}
 	if (amount > gPlayer[playerid][pMoney])
 	{
-		Bank_Reply(playerid, ui, "Non hai abbastanza contanti.");
+		Bank_Reply(playerid, ui, "საკმარისი ნაღდი ფული არ გაქვს.");
 		return 0;
 	}
 	if (!Bank_IsCounter(point) && amount > 20000)
 	{
-		new msg[176];
-		format(msg, 176, "Limite ATM per deposito: $%d per operazione. Usa uno sportello per importi maggiori.", 20000);
+		new msg[528];
+		format(msg, 528, "ATM-ის ლიმიტი შეტანაზე: $%d ერთ ოპერაციაზე. მეტი თანხისთვის სალარო გამოიყენე.", 20000);
 		Bank_Reply(playerid, ui, msg);
 		return 0;
 	}
 	if (amount > Money_BankRoom(playerid))
 	{
-		Bank_Reply(playerid, ui, "Il tuo conto raggiungerebbe il limite massimo consentito.");
+		Bank_Reply(playerid, ui, "შენი ანგარიში დასაშვებ ლიმიტს გადააჭარბებდა.");
 		return 0;
 	}
 	Bank_BeginWrite(playerid, 1, amount, point);
@@ -542,43 +542,43 @@ Bank_ResultText(op, result, dest[], size)
 	{
 		case 0:
 		{
-			strcopy(dest, "Operazione rifiutata.", size);
+			strcopy(dest, "ოპერაცია უარყოფილია.", size);
 		}
 		case 2:
 		{
-			strcopy(dest, op == 3 ? "Il conto del destinatario ha raggiunto il limite: bonifico rifiutato." : "Il tuo conto raggiungerebbe il limite massimo consentito.", size);
+			strcopy(dest, op == 3 ? "მიმღების ანგარიში ლიმიტზეა: გადარიცხვა უარყოფილია." : "შენი ანგარიში დასაშვებ ლიმიტს გადააჭარბებდა.", size);
 		}
 		case 3:
 		{
-			strcopy(dest, op == 3 ? "Fondi insufficienti: servono importo piu' commissione." : "Fondi insufficienti sul conto.", size);
+			strcopy(dest, op == 3 ? "არასაკმარისი თანხა: საჭიროა თანხა საკომისიოსთან ერთად." : "ანგარიშზე არასაკმარისი თანხაა.", size);
 		}
 		case 4:
 		{
-			strcopy(dest, op == 3 ? "Importo fuori dai limiti del bonifico." : "Importo oltre il limite per operazione di questo punto: usa uno sportello.", size);
+			strcopy(dest, op == 3 ? "თანხა გადარიცხვის ლიმიტებს სცდება." : "თანხა ამ წერტილის ოპერაციის ლიმიტს აჭარბებს: სალარო გამოიყენე.", size);
 		}
 		case 5:
 		{
-			strcopy(dest, op == 3 ? "Limite giornaliero di bonifici in uscita raggiunto." : "Limite giornaliero di prelievo raggiunto.", size);
+			strcopy(dest, op == 3 ? "გამავალი გადარიცხვების დღიური ლიმიტი ამოწურულია." : "გატანის დღიური ლიმიტი ამოწურულია.", size);
 		}
 		case 6:
 		{
-			strcopy(dest, "Il destinatario ha raggiunto il limite giornaliero di bonifici in entrata.", size);
+			strcopy(dest, "მიმღებმა შემომავალი გადარიცხვების დღიურ ლიმიტს მიაღწია.", size);
 		}
 		case 7:
 		{
-			strcopy(dest, "Sistema bancario occupato: riprova tra un attimo.", size);
+			strcopy(dest, "საბანკო სისტემა დატვირთულია: ცოტა ხანში სცადე.", size);
 		}
 		default:
 		{
-			strcopy(dest, "Operazione bancaria non riuscita.", size);
+			strcopy(dest, "საბანკო ოპერაცია ვერ შესრულდა.", size);
 		}
 	}
 }
 
 Bank_StartUndo(playerid, const reason[])
 {
-	new opId[37];
-	strcopy(opId, gPlayer[playerid][pBankOpId], 37);
+	new opId[111];
+	strcopy(opId, gPlayer[playerid][pBankOpId], 111);
 	gPlayer[playerid][pBankOp] = 6;
 	gPlayer[playerid][pBankOpAux] = 0;
 	gPlayer[playerid][pBankOpTick] = Bank_Tick();
@@ -596,8 +596,8 @@ public Bank_OnDBDeposit(playerid, amount, result, balance)
 	{
 		if (result == 1)
 		{
-			new opId[37];
-			DB_BankLastOpId(playerid, opId, 37);
+			new opId[111];
+			DB_BankLastOpId(playerid, opId, 111);
 			Log_Write("BANK", "deposito OK senza lock corrispondente: annullamento");
 			DB_BankUndo(opId);
 		}
@@ -608,31 +608,31 @@ public Bank_OnDBDeposit(playerid, amount, result, balance)
 	{
 		if (!Money_Take(playerid, amount))
 		{
-			Bank_StartUndo(playerid, "Contanti insufficienti al momento del deposito: operazione annullata.");
+			Bank_StartUndo(playerid, "შეტანისას ნაღდი ფული არ იყო საკმარისი: ოპერაცია გაუქმდა.");
 			Char_RefreshHud(playerid);
 			return 1;
 		}
 		Bank_EndOp(playerid);
 		Char_Save(playerid);
 		Char_RefreshHud(playerid);
-		new msg[176];
-		format(msg, 176, "Hai depositato $%d. Contanti: $%d  Banca: $%d.", amount, gPlayer[playerid][pMoney], gPlayer[playerid][pBank]);
+		new msg[528];
+		format(msg, 528, "შეიტანე $%d. ნაღდი: $%d  ბანკი: $%d.", amount, gPlayer[playerid][pMoney], gPlayer[playerid][pBank]);
 		Util_Send(playerid, 0x66DD66FF, msg);
 		if (ui)
 		{
-			UI_BankToast(playerid, "Deposito eseguito", true);
+			UI_BankToast(playerid, "თანხა შეტანილია", true);
 		}
 		return 1;
 	}
 	if (result == -1)
 	{
-		Util_Send(playerid, -10270721, "Errore del sistema bancario: nessun importo e' stato spostato. Verifico il saldo, attendi.");
+		Util_Send(playerid, -10270721, "საბანკო სისტემის შეცდომა: თანხა არ გადაადგილებულა. ბალანსს ვამოწმებ, მოიცადე.");
 		Bank_StartResync(playerid);
 		return 1;
 	}
 	Bank_EndOp(playerid);
-	new text[176];
-	Bank_ResultText(1, result, text, 176);
+	new text[528];
+	Bank_ResultText(1, result, text, 528);
 	Bank_Reply(playerid, ui, text);
 	return 1;
 }
@@ -646,25 +646,25 @@ Bank_Withdraw(playerid, amount, bool:ui)
 	}
 	if (amount < 1)
 	{
-		Bank_Reply(playerid, ui, "Importo non valido.");
+		Bank_Reply(playerid, ui, "არასწორი თანხა.");
 		return 0;
 	}
 	if (amount > gPlayer[playerid][pBank])
 	{
-		Bank_Reply(playerid, ui, "Fondi insufficienti sul conto.");
+		Bank_Reply(playerid, ui, "ანგარიშზე არასაკმარისი თანხაა.");
 		return 0;
 	}
 	new bool:counter = Bank_IsCounter(point), maxOp = counter ? 50000 : 5000;
 	if (amount > maxOp)
 	{
-		new msg[176];
-		format(msg, 176, "Limite %s per prelievo: $%d per operazione.%s", counter ? "dello sportello" : "ATM", maxOp, counter ? "" : " Usa uno sportello per importi maggiori.");
+		new msg[528];
+		format(msg, 528, "%s ლიმიტი გატანაზე: $%d ერთ ოპერაციაზე.%s", counter ? "სალაროს" : "ATM-ის", maxOp, counter ? "" : " მეტი თანხისთვის სალარო გამოიყენე.");
 		Bank_Reply(playerid, ui, msg);
 		return 0;
 	}
 	if (amount > 0x3B9ACA00 - gPlayer[playerid][pMoney])
 	{
-		Bank_Reply(playerid, ui, "Hai troppi contanti: non puoi prelevare questa somma.");
+		Bank_Reply(playerid, ui, "ძალიან ბევრი ნაღდი გაქვს: ამ თანხას ვერ გაიტან.");
 		return 0;
 	}
 	Bank_BeginWrite(playerid, 2, amount, point);
@@ -692,8 +692,8 @@ public Bank_OnDBWithdraw(playerid, amount, result, balance)
 	{
 		if (result == 1)
 		{
-			new opId[37];
-			DB_BankLastOpId(playerid, opId, 37);
+			new opId[111];
+			DB_BankLastOpId(playerid, opId, 111);
 			Log_Write("BANK", "prelievo OK senza lock corrispondente: annullamento");
 			DB_BankUndo(opId);
 		}
@@ -704,7 +704,7 @@ public Bank_OnDBWithdraw(playerid, amount, result, balance)
 	{
 		if (!Money_Give(playerid, amount))
 		{
-			Bank_StartUndo(playerid, "Non puoi ricevere i contanti (limite raggiunto): prelievo annullato.");
+			Bank_StartUndo(playerid, "ნაღდ ფულს ვეღარ მიიღებ (ლიმიტი): გატანა გაუქმდა.");
 			Char_RefreshHud(playerid);
 			return 1;
 		}
@@ -715,24 +715,24 @@ public Bank_OnDBWithdraw(playerid, amount, result, balance)
 		Bank_EndOp(playerid);
 		Char_Save(playerid);
 		Char_RefreshHud(playerid);
-		new msg[176];
-		format(msg, 176, "Hai prelevato $%d. Contanti: $%d  Banca: $%d.", amount, gPlayer[playerid][pMoney], gPlayer[playerid][pBank]);
+		new msg[528];
+		format(msg, 528, "გაიტანე $%d. ნაღდი: $%d  ბანკი: $%d.", amount, gPlayer[playerid][pMoney], gPlayer[playerid][pBank]);
 		Util_Send(playerid, 0x66DD66FF, msg);
 		if (ui)
 		{
-			UI_BankToast(playerid, "Prelievo eseguito", true);
+			UI_BankToast(playerid, "თანხა გატანილია", true);
 		}
 		return 1;
 	}
 	if (result == -1)
 	{
-		Util_Send(playerid, -10270721, "Errore del sistema bancario: nessun importo e' stato spostato. Verifico il saldo, attendi.");
+		Util_Send(playerid, -10270721, "საბანკო სისტემის შეცდომა: თანხა არ გადაადგილებულა. ბალანსს ვამოწმებ, მოიცადე.");
 		Bank_StartResync(playerid);
 		return 1;
 	}
 	Bank_EndOp(playerid);
-	new text[176];
-	Bank_ResultText(2, result, text, 176);
+	new text[528];
+	Bank_ResultText(2, result, text, 528);
 	if (result == 5 && gPlayer[playerid][pBankLimitsLoaded])
 	{
 		gPlayer[playerid][pBankLimitsLoaded] = 0;
@@ -757,23 +757,23 @@ public Bank_OnDBUndone(playerid, const opId[], result)
 		{
 			Bank_EndOp(i);
 			Char_RefreshHud(i);
-			SendClientMessage(i, -1, "Operazione annullata: nessun importo spostato. Contanti: $%d  Banca: $%d.", gPlayer[i][pMoney], gPlayer[i][pBank]);
+			SendClientMessage(i, -1, "ოპერაცია გაუქმდა, თანხა არ გადაადგილებულა. ნაღდი: $%d  ბანკი: $%d.", gPlayer[i][pMoney], gPlayer[i][pBank]);
 		}
 		else if (result == -1 && gPlayer[i][pBankOpAux] < 3)
 		{
-			new retryId[37];
-			strcopy(retryId, gPlayer[i][pBankOpId], 37);
+			new retryId[111];
+			strcopy(retryId, gPlayer[i][pBankOpId], 111);
 			gPlayer[i][pBankOpAux]++;
 			DB_BankUndo(retryId);
 		}
 		else
 		{
-			new msg[176], name[25];
-			GetPlayerName(i, name, 25);
-			format(msg, 176, "ANOMALIA annullamento banca %s op %s esito %d: verificare a mano (saldo e contanti)", name, gPlayer[i][pBankOpId], result);
+			new msg[528], name[75];
+			GetPlayerName(i, name, 75);
+			format(msg, 528, "ANOMALIA annullamento banca %s op %s esito %d: verificare a mano (saldo e contanti)", name, gPlayer[i][pBankOpId], result);
 			Log_Write("BANK", msg);
 			Bank_EndOp(i);
-			Util_Send(i, -10270721, "Errore bancario non risolto automaticamente: contatta lo staff (segnala data e ora).");
+			Util_Send(i, -10270721, "საბანკო შეცდომა ავტომატურად ვერ გამოსწორდა: მიმართე ადმინისტრაციას (მიუთითე თარიღი და დრო).");
 		}
 	}
 	return 1;
@@ -787,12 +787,12 @@ public Bank_OnResyncTimer(playerid, tok)
 	}
 	if (gPlayer[playerid][pBankOpAux] >= 3)
 	{
-		new msg[176], name[25];
-		GetPlayerName(playerid, name, 25);
-		format(msg, 176, "resync banca fallito per %s dopo %d tentativi: verificare a mano", name, 3);
+		new msg[528], name[75];
+		GetPlayerName(playerid, name, 75);
+		format(msg, 528, "resync banca fallito per %s dopo %d tentativi: verificare a mano", name, 3);
 		Log_Write("BANK", msg);
 		Bank_EndOp(playerid);
-		Util_Send(playerid, -10270721, "Impossibile verificare il saldo bancario ora: controlla con /saldo piu' tardi o contatta lo staff.");
+		Util_Send(playerid, -10270721, "ბალანსის შემოწმება ახლა ვერ ხერხდება: მოგვიანებით გამოიყენე /saldo ან მიმართე ადმინისტრაციას.");
 		return 1;
 	}
 	gPlayer[playerid][pBankOpAux]++;
@@ -817,7 +817,7 @@ public Bank_OnDBSynced(playerid, result, balance)
 	if (result == 1)
 	{
 		Bank_EndOp(playerid);
-		SendClientMessage(playerid, -1, "Saldo bancario verificato: $%d.", gPlayer[playerid][pBank]);
+		SendClientMessage(playerid, -1, "საბანკო ბალანსი შემოწმებულია: $%d.", gPlayer[playerid][pBank]);
 		return 1;
 	}
 	Bank_ScheduleResync(playerid);
@@ -826,13 +826,13 @@ public Bank_OnDBSynced(playerid, result, balance)
 
 bool:Bank_XferCheck(playerid, target, amount, bool:ui)
 {
-	new now = Bank_Tick(), msg[176];
+	new now = Bank_Tick(), msg[528];
 	if (gPlayer[playerid][pBankXferBlockUntil] != 0)
 	{
 		new left = gPlayer[playerid][pBankXferBlockUntil] - now;
 		if (left > 0)
 		{
-			format(msg, 176, "Bonifici sospesi per altri %d secondi (troppe conferme fallite).", (left + 1000 - 1) / 1000);
+			format(msg, 528, "გადარიცხვები შეჩერებულია კიდევ %d წამით (ბევრი ჩავარდნილი დადასტურება).", (left + 1000 - 1) / 1000);
 			Bank_Reply(playerid, ui, msg);
 			return false;
 		}
@@ -840,42 +840,42 @@ bool:Bank_XferCheck(playerid, target, amount, bool:ui)
 	}
 	if (gPlayer[playerid][pLevel] < 3)
 	{
-		format(msg, 176, "Servono almeno il livello %d per fare bonifici.", 3);
+		format(msg, 528, "გადარიცხვისთვის მინიმუმ %d დონე გჭირდება.", 3);
 		Bank_Reply(playerid, ui, msg);
 		return false;
 	}
 	if (gPlayer[playerid][pPlayedMs] < 3600000)
 	{
-		format(msg, 176, "Servono almeno %d minuti di gioco con questo personaggio per fare bonifici.", 60);
+		format(msg, 528, "გადარიცხვისთვის ამ პერსონაჟით მინიმუმ %d წუთი უნდა გქონდეს ნათამაშები.", 60);
 		Bank_Reply(playerid, ui, msg);
 		return false;
 	}
 	if (target < 0 || target >= MAX_PLAYERS || target == playerid || !Util_IsPlaying(target) || gPlayer[target][pCharId] <= 0)
 	{
-		Bank_Reply(playerid, ui, "Destinatario non valido: deve essere un altro giocatore online e in gioco.");
+		Bank_Reply(playerid, ui, "არასწორი მიმღები: უნდა იყოს სხვა მოთამაშე, ონლაინ და თამაშში.");
 		return false;
 	}
 	if (amount < 10 || amount > 25000)
 	{
-		format(msg, 176, "Importo del bonifico: da $%d a $%d.", 10, 25000);
+		format(msg, 528, "გადარიცხვის თანხა: $%d-დან $%d-მდე.", 10, 25000);
 		Bank_Reply(playerid, ui, msg);
 		return false;
 	}
 	new fee = DB_BankXferFee(amount), total = amount + fee;
 	if (gPlayer[playerid][pBank] < total)
 	{
-		format(msg, 176, "Fondi insufficienti: servono $%d (importo $%d + commissione $%d), hai $%d.", total, amount, fee, gPlayer[playerid][pBank]);
+		format(msg, 528, "არასაკმარისი თანხა: საჭიროა $%d (თანხა $%d + საკომისიო $%d), გაქვს $%d.", total, amount, fee, gPlayer[playerid][pBank]);
 		Bank_Reply(playerid, ui, msg);
 		return false;
 	}
 	if (amount > 0x3B9ACA00 - gPlayer[target][pBank])
 	{
-		Bank_Reply(playerid, ui, "Il destinatario non puo' ricevere questa somma (conto al limite).");
+		Bank_Reply(playerid, ui, "მიმღები ამ თანხას ვერ მიიღებს (ანგარიში ლიმიტზეა).");
 		return false;
 	}
 	if (gPlayer[playerid][pBankLastXferTick] != 0 && now - gPlayer[playerid][pBankLastXferTick] < 30000)
 	{
-		format(msg, 176, "Attendi ancora %d secondi prima di un nuovo bonifico.", (30000 - (now - gPlayer[playerid][pBankLastXferTick]) + 1000 - 1) / 1000);
+		format(msg, 528, "ახალ გადარიცხვამდე მოიცადე კიდევ %d წამი.", (30000 - (now - gPlayer[playerid][pBankLastXferTick]) + 1000 - 1) / 1000);
 		Bank_Reply(playerid, ui, msg);
 		return false;
 	}
@@ -945,7 +945,7 @@ public Bank_OnDBLimits(playerid, result, withdrawn, xferOut, xferIn, sinceXfer)
 	new bool:ui = aux == 2;
 	if (result != 1)
 	{
-		Bank_Reply(playerid, ui, result == 7 ? "Sistema bancario occupato: riprova tra un attimo." : "Servizio bancario non disponibile: riprova piu' tardi.");
+		Bank_Reply(playerid, ui, result == 7 ? "საბანკო სისტემა დატვირთულია: ცოტა ხანში სცადე." : "საბანკო სერვისი მიუწვდომელია: მოგვიანებით სცადე.");
 		return 1;
 	}
 	if (Bank_StateGuard(playerid, ui, false) < 0)
@@ -959,15 +959,15 @@ public Bank_OnDBLimits(playerid, result, withdrawn, xferOut, xferIn, sinceXfer)
 	if (sinceXfer >= 0 && sinceXfer * 1000 < 30000)
 	{
 		new left = (30000 - sinceXfer * 1000 + 1000 - 1) / 1000;
-		new msg[176];
-		format(msg, 176, "Attendi ancora %d secondi prima di un nuovo bonifico.", left);
+		new msg[528];
+		format(msg, 528, "ახალ გადარიცხვამდე მოიცადე კიდევ %d წამი.", left);
 		Bank_Reply(playerid, ui, msg);
 		return 1;
 	}
 	if (xferOut >= 50000 || amount > 50000 - xferOut)
 	{
-		new msg[176], room = xferOut >= 50000 ? 0 : 50000 - xferOut;
-		format(msg, 176, "Limite giornaliero di bonifici in uscita: puoi ancora inviare $%d nelle prossime %d ore.", room, 24);
+		new msg[528], room = xferOut >= 50000 ? 0 : 50000 - xferOut;
+		format(msg, 528, "გამავალი გადარიცხვების დღიური ლიმიტი: კიდევ $%d შეგიძლია გაგზავნო მომდევნო %d საათში.", room, 24);
 		Bank_Reply(playerid, ui, msg);
 		return 1;
 	}
@@ -1020,7 +1020,7 @@ public UI_OnBankTransferConfirm(playerid, targetId, amount)
 	}
 	if (Bank_Tick() - pendAt > 35000)
 	{
-		Util_Send(playerid, -10270721, "La conferma del bonifico e' scaduta: nessun addebito.");
+		Util_Send(playerid, -10270721, "გადარიცხვის დადასტურების ვადა ამოიწურა: თანხა არ ჩამოგეჭრა.");
 		Bank_ConfirmFailed(playerid);
 		return 1;
 	}
@@ -1032,7 +1032,7 @@ public UI_OnBankTransferConfirm(playerid, targetId, amount)
 	}
 	if (targetId < 0 || targetId >= 1000 || !Util_IsPlaying(targetId) || gPlayer[targetId][pCharId] != pendChar)
 	{
-		Util_Send(playerid, -10270721, "Il destinatario non e' piu' disponibile: bonifico annullato.");
+		Util_Send(playerid, -10270721, "მიმღები აღარ არის ხელმისაწვდომი: გადარიცხვა გაუქმდა.");
 		Bank_ConfirmFailed(playerid);
 		return 1;
 	}
@@ -1042,16 +1042,16 @@ public UI_OnBankTransferConfirm(playerid, targetId, amount)
 		return 1;
 	}
 	new bool:sameIp = Bank_SameIp(playerid, targetId);
-	new sName[25], tName[25], fee = DB_BankXferFee(amount);
-	GetPlayerName(playerid, sName, 25);
-	GetPlayerName(targetId, tName, 25);
+	new sName[75], tName[75], fee = DB_BankXferFee(amount);
+	GetPlayerName(playerid, sName, 75);
+	GetPlayerName(targetId, tName, 75);
 	Bank_BeginWrite(playerid, 3, amount, point);
 	gPlayer[playerid][pBankOpTarget] = targetId + 1;
 	gPlayer[playerid][pBankLastXferTick] = Bank_Tick();
 	if (amount >= 10000 || sameIp)
 	{
-		new reason[176];
-		format(reason, 176, "%s -> %s $%d (+$%d comm.) op %.8s%s", sName, tName, amount, fee, gPlayer[playerid][pBankOpId], sameIp ? " STESSO IP" : "");
+		new reason[528];
+		format(reason, 528, "%s -> %s $%d (+$%d comm.) op %.8s%s", sName, tName, amount, fee, gPlayer[playerid][pBankOpId], sameIp ? " STESSO IP" : "");
 		DB_AdminLog(0, gPlayer[playerid][pAccountId], sameIp ? "bank_xfer_ip" : "bank_xfer", reason);
 		if (sameIp)
 		{
@@ -1068,10 +1068,10 @@ public Bank_OnDBTransfer(playerid, targetid, amount, fee, result, balance)
 	if (Bank_Valid(playerid))
 	{
 		new bool:mine = Bank_OpIs(playerid, 3) && gPlayer[playerid][pBankOpAmount] == amount;
-		new tName[25];
+		new tName[75];
 		if (mine && gPlayer[playerid][pBankOpTarget] > 0 && Bank_Valid(gPlayer[playerid][pBankOpTarget] - 1))
 		{
-			GetPlayerName(gPlayer[playerid][pBankOpTarget] - 1, tName, 25);
+			GetPlayerName(gPlayer[playerid][pBankOpTarget] - 1, tName, 75);
 		}
 		if (result == 1)
 		{
@@ -1085,11 +1085,11 @@ public Bank_OnDBTransfer(playerid, targetid, amount, fee, result, balance)
 				gPlayer[playerid][pBankXferOutToday] += amount;
 			}
 			Char_RefreshHud(playerid);
-			SendClientMessage(playerid, 0x66DD66FF, "Bonifico di $%d%s%s eseguito. Commissione: $%d. Saldo: $%d.", amount, tName[0] != 0 ? " a " : "", tName, fee, gPlayer[playerid][pBank]);
+			SendClientMessage(playerid, 0x66DD66FF, "გადარიცხვა $%d%s%s შესრულდა. საკომისიო: $%d. ბალანსი: $%d.", amount, tName[0] != 0 ? " მიმღები: " : "", tName, fee, gPlayer[playerid][pBank]);
 		}
 		else if (result == -1)
 		{
-			Util_Send(playerid, -10270721, "Errore del sistema bancario: esito del bonifico incerto. Verifico il saldo, attendi.");
+			Util_Send(playerid, -10270721, "საბანკო სისტემის შეცდომა: გადარიცხვის შედეგი უცნობია. ბალანსს ვამოწმებ, მოიცადე.");
 			if (mine)
 			{
 				Bank_StartResync(playerid);
@@ -1102,21 +1102,21 @@ public Bank_OnDBTransfer(playerid, targetid, amount, fee, result, balance)
 				Bank_EndOp(playerid);
 			}
 			gPlayer[playerid][pBankLastXferTick] = 0;
-			new text[176];
-			Bank_ResultText(3, result, text, 176);
+			new text[528];
+			Bank_ResultText(3, result, text, 528);
 			Util_Send(playerid, -10270721, text);
 			Bank_ConfirmFailed(playerid);
 		}
 	}
 	if (targetid >= 0 && targetid < MAX_PLAYERS && result == 1 && Bank_Valid(targetid))
 	{
-		new sName[25];
+		new sName[75];
 		if (Bank_Valid(playerid))
 		{
-			GetPlayerName(playerid, sName, 25);
+			GetPlayerName(playerid, sName, 75);
 		}
 		Char_RefreshHud(targetid);
-		SendClientMessage(targetid, 0x66DD66FF, "Hai ricevuto un bonifico di $%d%s%s. Saldo: $%d.", amount, sName[0] != 0 ? " da " : "", sName, gPlayer[targetid][pBank]);
+		SendClientMessage(targetid, 0x66DD66FF, "მიიღე გადარიცხვა $%d%s%s. ბალანსი: $%d.", amount, sName[0] != 0 ? ", გამგზავნი: " : "", sName, gPlayer[targetid][pBank]);
 	}
 	return 1;
 }
@@ -1158,22 +1158,22 @@ public Bank_OnDBStatement(playerid, result, page, count, bool:more)
 	Bank_EndOp(playerid);
 	if (result != 1)
 	{
-		Bank_Reply(playerid, ui, result == 7 ? "Sistema bancario occupato: riprova tra un attimo." : "Estratto conto non disponibile: riprova piu' tardi.");
+		Bank_Reply(playerid, ui, result == 7 ? "საბანკო სისტემა დატვირთულია: ცოტა ხანში სცადე." : "ამონაწერი მიუწვდომელია: მოგვიანებით სცადე.");
 		return 1;
 	}
 	UI_BankStatementBegin(playerid, page, more);
 	for (new i = 0; i < count; i++)
 	{
-		new when[16], kind[24], other[25];
-		Bank_FormatWhen(g_BankStmt[i][bsTimestamp], when, 16);
-		Bank_KindLabel(g_BankStmt[i][bsKind], kind, 24);
+		new when[48], kind[72], other[75];
+		Bank_FormatWhen(g_BankStmt[i][bsTimestamp], when, 48);
+		Bank_KindLabel(g_BankStmt[i][bsKind], kind, 72);
 		if (g_BankStmt[i][bsOther][0] != 0)
 		{
-			strcopy(other, g_BankStmt[i][bsOther], 25);
+			strcopy(other, g_BankStmt[i][bsOther], 75);
 		}
 		else
 		{
-			strcopy(other, g_BankStmt[i][bsRef], 25);
+			strcopy(other, g_BankStmt[i][bsRef], 75);
 		}
 		UI_BankStatementAdd(playerid, when, kind, other, g_BankStmt[i][bsDelta], g_BankStmt[i][bsBalance]);
 	}
@@ -1186,7 +1186,7 @@ Bank_CmdDeposita(playerid, const params[])
 	new amount = 0;
 	if (!Bank_ParseAmount(params, amount))
 	{
-		Util_Send(playerid, 0x99CCFFFF, "Uso: /deposita importo (intero positivo, vicino a un ATM o sportello)");
+		Util_Send(playerid, 0x99CCFFFF, "გამოყენება: /deposita თანხა (მთელი დადებითი რიცხვი, ATM-თან ან სალაროსთან)");
 		return 0;
 	}
 	Bank_Deposit(playerid, amount, false);
@@ -1198,7 +1198,7 @@ Bank_CmdPreleva(playerid, const params[])
 	new amount = 0;
 	if (!Bank_ParseAmount(params, amount))
 	{
-		Util_Send(playerid, 0x99CCFFFF, "Uso: /preleva importo (intero positivo, vicino a un ATM o sportello)");
+		Util_Send(playerid, 0x99CCFFFF, "გამოყენება: /preleva თანხა (მთელი დადებითი რიცხვი, ATM-თან ან სალაროსთან)");
 		return 0;
 	}
 	Bank_Withdraw(playerid, amount, false);
@@ -1207,23 +1207,23 @@ Bank_CmdPreleva(playerid, const params[])
 
 Bank_CmdBonifico(playerid, const params[])
 {
-	new pos = 0, tTarget[25], tAmount[12], amount = 0;
-	Util_NextToken(params, pos, tTarget, 25);
-	Util_NextToken(params, pos, tAmount, 12);
+	new pos = 0, tTarget[75], tAmount[36], amount = 0;
+	Util_NextToken(params, pos, tTarget, 75);
+	Util_NextToken(params, pos, tAmount, 36);
 	if (tTarget[0] == 0 || !Bank_ParseAmount(tAmount, amount))
 	{
-		Util_Send(playerid, 0x99CCFFFF, "Uso: /bonifico id|nome importo (commissione 2%, serve un ATM o uno sportello)");
+		Util_Send(playerid, 0x99CCFFFF, "გამოყენება: /bonifico id|სახელი თანხა (საკომისიო 2%, საჭიროა ATM ან სალარო)");
 		return 0;
 	}
 	new target = Bank_FindPlayer(tTarget);
 	if (target == -2)
 	{
-		Util_Send(playerid, -10270721, "Piu' giocatori corrispondono: usa l'ID o un nome piu' preciso.");
+		Util_Send(playerid, -10270721, "რამდენიმე მოთამაშე ემთხვევა: გამოიყენე ID ან უფრო ზუსტი სახელი.");
 		return 0;
 	}
 	if (target < 0)
 	{
-		Util_Send(playerid, -10270721, "Giocatore non trovato tra quelli in gioco.");
+		Util_Send(playerid, -10270721, "მოთამაშე თამაშში ვერ მოიძებნა.");
 		return 0;
 	}
 	Bank_Transfer(playerid, target, amount, false);
@@ -1241,7 +1241,7 @@ Bank_OnInit()
 	{
 		new bool:counter = Bank_IsCounter(i);
 		g_BankPickup[i] = CreatePickup(1274, 1, s_BankPoints[i][0], s_BankPoints[i][1], s_BankPoints[i][2], 0);
-		g_BankLabel[i] = Lang_Create3DTextLabel(counter ? "Banca - Sportello\nUsa /atm" : "ATM\nUsa /atm", 0x66DD66FF, s_BankPoints[i][0], s_BankPoints[i][1], (1.0 + s_BankPoints[i][2]), 12.0, 0, false);
+		g_BankLabel[i] = Lang_Create3DTextLabel(counter ? "ბანკი - სალარო\nგამოიყენე /atm" : "ATM\nგამოიყენე /atm", 0x66DD66FF, s_BankPoints[i][0], s_BankPoints[i][1], (1.0 + s_BankPoints[i][2]), 12.0, 0, false);
 	}
 }
 
@@ -1277,9 +1277,9 @@ Bank_OnPlayerDisconnect(playerid)
 	}
 	if (gPlayer[playerid][pBankOpBusy] != 0 && gPlayer[playerid][pBankOp] >= 1 && gPlayer[playerid][pBankOp] <= 3)
 	{
-		new msg[176], name[25];
-		GetPlayerName(playerid, name, 25);
-		format(msg, 176, "%s esce con operazione bancaria %d in volo (importo %d, op %s)", name, gPlayer[playerid][pBankOp], gPlayer[playerid][pBankOpAmount], gPlayer[playerid][pBankOpId]);
+		new msg[528], name[75];
+		GetPlayerName(playerid, name, 75);
+		format(msg, 528, "%s esce con operazione bancaria %d in volo (importo %d, op %s)", name, gPlayer[playerid][pBankOp], gPlayer[playerid][pBankOpAmount], gPlayer[playerid][pBankOpId]);
 		Log_Write("BANK", msg);
 	}
 	gPlayer[playerid][pBankPendTarget] = 0;

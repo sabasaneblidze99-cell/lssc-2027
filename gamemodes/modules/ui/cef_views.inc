@@ -38,7 +38,7 @@ stock bool:CefViews_Use(playerid)
 
 CefViews_Open(playerid, which, const view[])
 {
-	new v[16];
+	new v[48];
 	strcat(v, view);
 	CefUI_Open(playerid, v, "");
 	g_CvWaiting[playerid] = which;

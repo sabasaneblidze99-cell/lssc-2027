@@ -322,8 +322,8 @@ Director_OnPlayerDisconnect(playerid, reason)
 	new ct = gPlayer[playerid][pContractId];
 	if (ct != 0 && gPlayer[playerid][pContractPendOp] == 0 && gPlayer[playerid][pContractPhase] != 0)
 	{
-		new op[41];
-		DB_LivingMakeOpId(op, 41, "cr", ct, gPlayer[playerid][pCharId]);
+		new op[123];
+		DB_LivingMakeOpId(op, 123, "cr", ct, gPlayer[playerid][pCharId]);
 		DB_LivingCtRelease(playerid, ct, op, 0);
 	}
 	Director_ResetPlayer(playerid);
@@ -489,19 +489,19 @@ Director_BlockMsg(playerid, code)
 	{
 		case 1:
 		{
-			Util_Send(playerid, -10270721, "Serve un livello piu' alto per questo contratto.");
+			Util_Send(playerid, -10270721, "ამ კონტრაქტისთვის უფრო მაღალი დონე გჭირდება.");
 		}
 		case 2:
 		{
-			Util_Send(playerid, -10270721, "La tua reputazione nei trasporti non basta ancora per questo contratto.");
+			Util_Send(playerid, -10270721, "ტრანსპორტში შენი რეპუტაცია ამ კონტრაქტისთვის ჯერ არ კმარა.");
 		}
 		case 3:
 		{
-			Util_Send(playerid, -10270721, "Il quartiere non ti conosce abbastanza per questo contratto.");
+			Util_Send(playerid, -10270721, "უბანი ამ კონტრაქტისთვის საკმარისად არ გიცნობს.");
 		}
 		case 4:
 		{
-			Util_Send(playerid, -10270721, "Hai gia' un contratto attivo (/contratto).");
+			Util_Send(playerid, -10270721, "უკვე გაქვს აქტიური კონტრაქტი (/contratto).");
 		}
 		case 5:
 		{
@@ -509,19 +509,19 @@ Director_BlockMsg(playerid, code)
 		}
 		case 6:
 		{
-			Util_Send(playerid, -10270721, "Prenditi un attimo: potrai accettare un nuovo contratto tra poco.");
+			Util_Send(playerid, -10270721, "ცოტა დაისვენე: ახალ კონტრაქტს მალე აიღებ.");
 		}
 		case 7:
 		{
-			Util_Send(playerid, -10270721, "Per quest'ora hai lavorato abbastanza: riprova piu' tardi.");
+			Util_Send(playerid, -10270721, "ამ საათში საკმარისად იმუშავე: მოგვიანებით სცადე.");
 		}
 		case 8:
 		{
-			Util_Send(playerid, -10270721, "Hai lasciato questo contratto da poco: scegline un altro.");
+			Util_Send(playerid, -10270721, "ეს კონტრაქტი ახლახან დატოვე: სხვა აირჩიე.");
 		}
 		default:
 		{
-			Util_Send(playerid, -10270721, "Questo contratto non e' piu' disponibile.");
+			Util_Send(playerid, -10270721, "ეს კონტრაქტი აღარ არის ხელმისაწვდომი.");
 		}
 	}
 }
@@ -539,12 +539,12 @@ bool:Director_Accept(playerid, contractId)
 	}
 	if (gPlayer[playerid][pContractPendOp] != 0 || DB_LivingBusy(playerid, 0))
 	{
-		Util_Send(playerid, -10270721, "Un'operazione sul contratto e' gia' in corso: attendi.");
+		Util_Send(playerid, -10270721, "კონტრაქტზე ოპერაცია უკვე მიმდინარეობს: მოიცადე.");
 		return false;
 	}
 	if (Hub_NearBoard(playerid) < 0)
 	{
-		Util_Send(playerid, -10270721, "I contratti si accettano a una bacheca: Casa del Quartiere di Idlewood, magazzino di Ganton o di Jefferson.");
+		Util_Send(playerid, -10270721, "კონტრაქტებს დაფაზე იღებ: Idlewood-ის უბნის სახლში, Ganton-ის ან Jefferson-ის საწყობში.");
 		return false;
 	}
 	new block = LD_CheckStart(playerid);
@@ -653,7 +653,7 @@ bool:Director_Release(playerid, reason)
 
 Director_OnAccept(playerid, result, contractId, v2)
 {
-	new charId = gPlayer[playerid][pCharId], msg[160];
+	new charId = gPlayer[playerid][pCharId], msg[480];
 	if (result == 1)
 	{
 		gPlayer[playerid][pContractPendOp] = 0;
@@ -666,7 +666,7 @@ Director_OnAccept(playerid, result, contractId, v2)
 		}
 		if (!Freight_Begin(playerid, contractId, gPlayer[playerid][pContractFromDistrict], gPlayer[playerid][pContractToDistrict], gPlayer[playerid][pContractCargo], gPlayer[playerid][pContractDistance], false))
 		{
-			Util_Send(playerid, -10270721, "Il magazzino non ha un mezzo disponibile adesso: contratto rimesso in bacheca senza penalita'.");
+			Util_Send(playerid, -10270721, "საწყობს ახლა თავისუფალი მანქანა არ აქვს: კონტრაქტი დაფას დაუბრუნდა, ჯარიმის გარეშე.");
 			Director_Release(playerid, 6);
 			return 0;
 		}
@@ -685,7 +685,7 @@ Director_OnAccept(playerid, result, contractId, v2)
 		g_DirRelReason[playerid] = 6;
 		Director_SetOp(playerid, 4, "cr", contractId);
 		Director_Send(playerid);
-		Util_Send(playerid, -10270721, "Il servizio contratti non risponde: riprova tra poco.");
+		Util_Send(playerid, -10270721, "კონტრაქტების სერვისი არ პასუხობს: ცოტა ხანში სცადე.");
 		return 0;
 	}
 	Director_ClearContract(playerid);
@@ -693,15 +693,15 @@ Director_OnAccept(playerid, result, contractId, v2)
 	{
 		case 2:
 		{
-			Util_Send(playerid, -10270721, "Hai gia' chiuso questo contratto.");
+			Util_Send(playerid, -10270721, "ეს კონტრაქტი უკვე დახურე.");
 		}
 		case 4:
 		{
-			Util_Send(playerid, -10270721, "Qualcun altro ha appena preso questo contratto.");
+			Util_Send(playerid, -10270721, "ეს კონტრაქტი ვიღაცამ ახლახან აიღო.");
 		}
 		case 5:
 		{
-			Util_Send(playerid, -10270721, "Questo contratto e' scaduto.");
+			Util_Send(playerid, -10270721, "ამ კონტრაქტს ვადა გაუვიდა.");
 		}
 		case 6:
 		{
@@ -709,15 +709,15 @@ Director_OnAccept(playerid, result, contractId, v2)
 		}
 		case 7:
 		{
-			Util_Send(playerid, -10270721, "Non soddisfi ancora i requisiti di questo contratto (livello, reputazione o attesa tra contratti).");
+			Util_Send(playerid, -10270721, "ამ კონტრაქტის მოთხოვნებს ჯერ არ აკმაყოფილებ (დონე, რეპუტაცია ან ლოდინი კონტრაქტებს შორის).");
 		}
 		case 10:
 		{
-			Util_Send(playerid, -10270721, "Un'operazione e' gia' in corso: attendi.");
+			Util_Send(playerid, -10270721, "ოპერაცია უკვე მიმდინარეობს: მოიცადე.");
 		}
 		default:
 		{
-			format(msg, 160, "Contratto non accettato (esito %d).", result);
+			format(msg, 480, "კონტრაქტი არ მიიღეს (შედეგი %d).", result);
 			Util_Send(playerid, -10270721, msg);
 		}
 	}
@@ -788,8 +788,8 @@ Director_OnComplete(playerid, result, amount, balance, v1, v2)
 		Director_AfterFreight(playerid, ct, false, 0);
 		return 0;
 	}
-	new op[41];
-	strcat(op, gPlayer[playerid][pContractOpId], 41);
+	new op[123];
+	strcat(op, gPlayer[playerid][pContractOpId], 123);
 	if (paid || result == 8)
 	{
 		LD_SetProPoints(playerid, 1, v1);
@@ -840,11 +840,11 @@ Director_OnReleased(playerid, result, v2)
 	{
 		if (reason == 1 || reason == 4)
 		{
-			Util_Send(playerid, -10270721, "Hai lasciato il contratto: nessuna perdita di denaro, ma la tua reputazione nei trasporti ne risente.");
+			Util_Send(playerid, -10270721, "კონტრაქტი დატოვე: ფულს არ კარგავ, მაგრამ ტრანსპორტში შენი რეპუტაცია ზარალდება.");
 		}
 		else if (reason != 5)
 		{
-			Util_Send(playerid, -1, "Contratto interrotto senza penalita': e' tornato in bacheca.");
+			Util_Send(playerid, -1, "კონტრაქტი ჯარიმის გარეშე შეწყდა: ის დაფას დაუბრუნდა.");
 		}
 	}
 	Director_EndLocal(playerid, reason, true, reason);
@@ -861,8 +861,8 @@ public Living_OnDBContract(playerid, action, result, contractId, amount, balance
 	{
 		if (result != 10)
 		{
-			new msg[160];
-			format(msg, 160, "esito contratto fuori sequenza: azione %d contratto %d esito %d", action, contractId, result);
+			new msg[480];
+			format(msg, 480, "esito contratto fuori sequenza: azione %d contratto %d esito %d", action, contractId, result);
 			Log_Write("DIRECTOR", msg);
 		}
 		return 1;

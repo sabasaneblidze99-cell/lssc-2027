@@ -138,8 +138,8 @@ DB_BankFlush(playerid)
 	{
 		return 0;
 	}
-	new query[512], name[25];
-	GetPlayerName(playerid, name, 25);
+	new query[512], name[75];
+	GetPlayerName(playerid, name, 75);
 	mysql_format(g_DB, query, 512, "UPDATE characters SET bank = GREATEST(0, LEAST(%d, CAST(bank AS SIGNED) + (%d))) WHERE id = %d", 0x3B9ACA00, d, gPlayer[playerid][pCharId]);
 	mysql_tquery(g_DB, query, "DB_OnBankDeltaSaved", "dsddd", playerid, name, gPlayer[playerid][pCharId], g_BankGen[playerid], d);
 	return 0;
@@ -256,8 +256,8 @@ DB_BankLimits(playerid, charId)
 	{
 		return 0;
 	}
-	new query[512], name[25];
-	GetPlayerName(playerid, name, 25);
+	new query[512], name[75];
+	GetPlayerName(playerid, name, 75);
 	mysql_format(g_DB, query, 512, "SELECT LEAST(bank_day_withdrawn(c.id, %d), 2147483647) AS wd, LEAST(bank_day_xfer_out(c.id, %d), 2147483647) AS xo, LEAST(bank_day_xfer_in(c.id, %d), 2147483647) AS xi, COALESCE(TIMESTAMPDIFF(SECOND, (SELECT MAX(ts) FROM bank_ledger WHERE character_id = c.id AND kind = 'xfer_out'), NOW()), -1) AS since FROM characters c WHERE c.id = %d", 24, 24, 24, charId);
 	mysql_tquery(g_DB, query, "DB_OnBankLimits", "dsdd", playerid, name, charId, g_BankInfo[playerid][biToken]);
 	return 0;
@@ -299,8 +299,8 @@ DB_BankStatement(playerid, charId, page)
 	{
 		return 0;
 	}
-	new query[512], name[25];
-	GetPlayerName(playerid, name, 25);
+	new query[512], name[75];
+	GetPlayerName(playerid, name, 75);
 	mysql_format(g_DB, query, 512, "SELECT UNIX_TIMESTAMP(l.ts) AS ts, l.kind AS kind, l.delta AS delta, l.balance_after AS balance, COALESCE(a.name, '') AS other, COALESCE(l.ref, '') AS ref FROM bank_ledger l LEFT JOIN characters oc ON oc.id = l.other_character_id LEFT JOIN accounts a ON a.id = oc.account_id WHERE l.character_id = %d ORDER BY l.id DESC LIMIT %d OFFSET %d", charId, 16, page * 15);
 	mysql_tquery(g_DB, query, "DB_OnBankStatement", "dsdd", playerid, name, charId, g_BankInfo[playerid][biToken]);
 	return 0;
@@ -340,8 +340,8 @@ DB_BankResync(playerid, charId)
 		return 0;
 	}
 	DB_BankFlush(playerid);
-	new query[512], name[25];
-	GetPlayerName(playerid, name, 25);
+	new query[512], name[75];
+	GetPlayerName(playerid, name, 75);
 	mysql_format(g_DB, query, 512, "SELECT bank FROM characters WHERE id = %d", charId);
 	mysql_tquery(g_DB, query, "DB_OnBankSynced", "dsdd", playerid, name, charId, g_BankInfo[playerid][biToken]);
 	return 0;
@@ -375,8 +375,8 @@ DB_BankDeposit(playerid, charId, amount, channel, const opId[])
 		return 0;
 	}
 	DB_BankFlush(playerid);
-	new query[512], name[25];
-	GetPlayerName(playerid, name, 25);
+	new query[512], name[75];
+	GetPlayerName(playerid, name, 75);
 	mysql_format(g_DB, query, 512, "CALL bank_deposit('%e', %d, %d, %d, %d, %d)", opId, charId, amount, channel, channel == 0 ? 20000 : 0, 0x3B9ACA00);
 	mysql_tquery(g_DB, query, "DB_OnBankCalled", "dsddds", playerid, name, charId, g_BankReq[playerid][bqToken], 1, opId);
 	return 0;
@@ -390,8 +390,8 @@ DB_BankWithdraw(playerid, charId, amount, channel, const opId[])
 		return 0;
 	}
 	DB_BankFlush(playerid);
-	new query[512], name[25], bool:atm = channel == 0;
-	GetPlayerName(playerid, name, 25);
+	new query[512], name[75], bool:atm = channel == 0;
+	GetPlayerName(playerid, name, 75);
 	mysql_format(g_DB, query, 512, "CALL bank_withdraw('%e', %d, %d, %d, %d, %d, %d)", opId, charId, amount, channel, atm ? 5000 : 50000, atm ? 15000 : 100000, 24);
 	mysql_tquery(g_DB, query, "DB_OnBankCalled", "dsddds", playerid, name, charId, g_BankReq[playerid][bqToken], 2, opId);
 	return 0;
@@ -459,9 +459,9 @@ DB_BankTransfer(playerid, toPlayerid, amount, const opId[], flag)
 		return 0;
 	}
 	DB_BankFlush(playerid);
-	new query[512], name[25], rname[25];
-	GetPlayerName(playerid, name, 25);
-	GetPlayerName(toPlayerid, rname, 25);
+	new query[512], name[75], rname[75];
+	GetPlayerName(playerid, name, 75);
+	GetPlayerName(toPlayerid, rname, 75);
 	mysql_format(g_DB, query, 512, "CALL bank_transfer('%e', %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d)", opId, fromChar, toChar, amount, 2, 5, 10, 25000, 50000, 100000, 0x3B9ACA00, 24, flag != 0 ? 1 : 0);
 	mysql_tquery(g_DB, query, "DB_OnBankXferCalled", "dsdddsddds", playerid, name, fromChar, g_BankReq[playerid][bqToken], toPlayerid, rname, toChar, g_BankGen[toPlayerid], amount, opId);
 	return 0;
@@ -545,7 +545,7 @@ public DB_OnBankUndoCalled(const opId[], notify)
 
 public DB_OnBankUndoResult(const opId[], notify)
 {
-	new rows = 0, result = 8, msg[126], kind[13], amount = 0, owner = 65535;
+	new rows = 0, result = 8, msg[378], kind[39], amount = 0, owner = 65535;
 	cache_get_row_count(rows);
 	if (rows > 0)
 	{
@@ -556,7 +556,7 @@ public DB_OnBankUndoResult(const opId[], notify)
 		{
 			cache_get_value_name_int(0, "undo_result", result);
 		}
-		cache_get_value_name(0, "kind", kind, 13);
+		cache_get_value_name(0, "kind", kind, 39);
 		cache_get_value_name_int(0, "amount", amount);
 	}
 	if (notify)
@@ -584,7 +584,7 @@ public DB_OnBankUndoResult(const opId[], notify)
 			}
 		}
 	}
-	format(msg, 126, "undo banca op %s%s: esito %d%s", opId, notify ? "" : " (compensazione a sessione scaduta)", result, result == 1 ? "" : " ANOMALIA: verificare a mano");
+	format(msg, 378, "undo banca op %s%s: esito %d%s", opId, notify ? "" : " (compensazione a sessione scaduta)", result, result == 1 ? "" : " ANOMALIA: verificare a mano");
 	if (result != 1 || !notify)
 	{
 		Log_Write("DBBANK", msg);

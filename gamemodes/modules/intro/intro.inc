@@ -282,9 +282,9 @@ public Intro_Finish(playerid, reason)
 	gPlayer[playerid][pIntroFlags] |= 8;
 	if (reason != 0)
 	{
-		new name[25], msg[128];
-		GetPlayerName(playerid, name, 25);
-		format(msg, 128, "intro terminata (%s) per %s", reason == 1 ? "skip" : "watchdog", name);
+		new name[75], msg[384];
+		GetPlayerName(playerid, name, 75);
+		format(msg, 384, "intro terminata (%s) per %s", reason == 1 ? "skip" : "watchdog", name);
 		Log_Write("INTRO", msg);
 	}
 	if (gPlayer[playerid][pAccountId] > 0)
@@ -488,8 +488,8 @@ Intro_ApplyStartMoney(playerid, motive)
 
 Intro_SaveStory(playerid, bool:creation)
 {
-	new opId[37];
-	DB_StoryMakeOpId(opId, 37, gPlayer[playerid][pCharId]);
+	new opId[111];
+	DB_StoryMakeOpId(opId, 111, gPlayer[playerid][pCharId]);
 	gPlayer[playerid][pStorySaveRetries] = 0;
 	DB_StorySave(playerid, gPlayer[playerid][pCharId], gPlayer[playerid][pStoryDraftOrigin], gPlayer[playerid][pStoryDraftMotive], opId, creation);
 }
@@ -571,9 +571,9 @@ public Story_OnDBSaved(playerid, result, origin, motive, moneyDelta)
 	new bool:setMode = gPlayer[playerid][pStorySetMode] != 0;
 	if (result == -1 && gPlayer[playerid][pStorySaveRetries] < 1)
 	{
-		new opId[37];
+		new opId[111];
 		gPlayer[playerid][pStorySaveRetries]++;
-		DB_StoryLastOpId(playerid, opId, 37);
+		DB_StoryLastOpId(playerid, opId, 111);
 		DB_StorySave(playerid, gPlayer[playerid][pCharId], gPlayer[playerid][pStoryDraftOrigin], gPlayer[playerid][pStoryDraftMotive], opId, !setMode);
 		return 1;
 	}
@@ -584,8 +584,8 @@ public Story_OnDBSaved(playerid, result, origin, motive, moneyDelta)
 	}
 	if (result != 1 && result != 3 && result != 4)
 	{
-		new msg[128];
-		format(msg, 128, "salvataggio storia non riuscito (esito %d, set %d)", result, setMode);
+		new msg[384];
+		format(msg, 384, "salvataggio storia non riuscito (esito %d, set %d)", result, setMode);
 		Log_Write("STORY", msg);
 	}
 	if (setMode)
@@ -616,19 +616,19 @@ Intro_CmdSalta(playerid)
 	}
 	else if (left > 0)
 	{
-		new msg[512];
-		format(msg, 512, "ინტროს გამოტოვება შეგეძლება %d წამში.", left);
+		new msg[1024];
+		format(msg, 1024, "ინტროს გამოტოვება შეგეძლება %d წამში.", left);
 		Util_Send(playerid, -10270721, msg);
 	}
 }
 
 Intro_CmdStoria(playerid, const params[])
 {
-	new pos = 0, tok[16], name[25], target = INVALID_PLAYER_ID;
-	Util_NextToken(params, pos, tok, 16);
+	new pos = 0, tok[48], name[75], target = INVALID_PLAYER_ID;
+	Util_NextToken(params, pos, tok, 48);
 	if (tok[0] == 0)
 	{
-		GetPlayerName(playerid, name, 25);
+		GetPlayerName(playerid, name, 75);
 		UI_StoryShowOwn(playerid, name, gPlayer[playerid][pStoryOrigin], gPlayer[playerid][pStoryMotive]);
 		return 0;
 	}
@@ -650,33 +650,33 @@ Intro_CmdStoria(playerid, const params[])
 	}
 	if (Util_GetAdmin(playerid) >= 2)
 	{
-		Util_Send(playerid, 0x99CCFFFF, "Uso: /storia · /storia imposta · /storia [id giocatore in gioco] (staff)");
+		Util_Send(playerid, 0x99CCFFFF, "გამოყენება: /storia · /storia imposta · /storia [მოთამაშის id] (ადმინისტრაცია)");
 	}
 	else
 	{
-		Util_Send(playerid, 0x99CCFFFF, "Uso: /storia · /storia imposta (una sola volta, solo se non hai una storia)");
+		Util_Send(playerid, 0x99CCFFFF, "გამოყენება: /storia · /storia imposta (მხოლოდ ერთხელ, თუ ისტორია არ გაქვს)");
 	}
 	return 0;
 }
 
 Intro_CmdMostra(playerid, const params[])
 {
-	new pos = 0, tok[16], target = INVALID_PLAYER_ID;
-	Util_NextToken(params, pos, tok, 16);
+	new pos = 0, tok[48], target = INVALID_PLAYER_ID;
+	Util_NextToken(params, pos, tok, 48);
 	if (!Util_ParsePlayerId(tok, target) || target == playerid || !Util_IsPlaying(target))
 	{
-		Util_Send(playerid, 0x99CCFFFF, "Uso: /mostrastoria [id] (a un giocatore vicino a te)");
+		Util_Send(playerid, 0x99CCFFFF, "გამოყენება: /mostrastoria [id] (ახლოს მყოფ მოთამაშეს)");
 		return 0;
 	}
 	if (!Util_InRange(playerid, target, 3.0))
 	{
-		Util_Send(playerid, -10270721, "Il giocatore e' troppo lontano.");
+		Util_Send(playerid, -10270721, "მოთამაშე ძალიან შორსაა.");
 		return 0;
 	}
 	new now = GetTickCount(), last = gPlayer[playerid][pStoryLastShowTick];
 	if (gPlayer[playerid][pStoryShowTarget] != 0 || (last != 0 && now - last < 10000))
 	{
-		Util_Send(playerid, -10270721, "Attendi qualche secondo prima di mostrare di nuovo la tua storia.");
+		Util_Send(playerid, -10270721, "ისტორიის ხელახლა საჩვენებლად რამდენიმე წამი დაელოდე.");
 		return 0;
 	}
 	gPlayer[playerid][pStoryLastShowTick] = now != 0 ? now : 1;
@@ -701,25 +701,25 @@ public Story_OnDBRead(playerid, targetid, purpose, result, origin, motive, bool:
 		}
 		if (result != 1)
 		{
-			Util_Send(playerid, -10270721, "Impossibile leggere la tua storia ora. Riprova tra poco.");
+			Util_Send(playerid, -10270721, "შენი ისტორიის წაკითხვა ახლა ვერ ხერხდება. ცოტა ხანში სცადე.");
 			return 1;
 		}
 		if (!hasStory || (origin == 0 && motive == 0))
 		{
-			Util_Send(playerid, -10270721, "Non hai una storia da mostrare (/storia imposta).");
+			Util_Send(playerid, -10270721, "საჩვენებელი ისტორია არ გაქვს (/storia imposta).");
 			return 1;
 		}
 		if (to < 0 || to >= 1000 || !Util_IsPlaying(to) || !Util_InRange(playerid, to, 3.0))
 		{
-			Util_Send(playerid, -10270721, "Il giocatore non e' piu' abbastanza vicino.");
+			Util_Send(playerid, -10270721, "მოთამაშე საკმარისად ახლოს აღარ არის.");
 			return 1;
 		}
-		new name[25], tname[25];
-		GetPlayerName(playerid, name, 25);
-		GetPlayerName(to, tname, 25);
+		new name[75], tname[75];
+		GetPlayerName(playerid, name, 75);
+		GetPlayerName(to, tname, 75);
 		UI_StoryShowOther(to, name, origin, motive);
-		SendClientMessage(to, -1, "%s ti mostra la propria storia.", name);
-		SendClientMessage(playerid, 0x66DD66FF, "Hai mostrato la tua storia a %s.", tname);
+		SendClientMessage(to, -1, "%s გაჩვენებს თავის ისტორიას.", name);
+		SendClientMessage(playerid, 0x66DD66FF, "შენი ისტორია აჩვენე %s-ს.", tname);
 		return 1;
 	}
 	if (purpose == 2)
@@ -730,16 +730,16 @@ public Story_OnDBRead(playerid, targetid, purpose, result, origin, motive, bool:
 		}
 		if (result != 1)
 		{
-			Util_Send(playerid, -10270721, "Impossibile leggere la storia del giocatore.");
+			Util_Send(playerid, -10270721, "მოთამაშის ისტორიის წაკითხვა ვერ მოხერხდა.");
 			return 1;
 		}
 		if (targetid < 0 || targetid >= MAX_PLAYERS || !IsPlayerConnected(targetid))
 		{
 			return 1;
 		}
-		new tname[25], reason[64];
-		GetPlayerName(targetid, tname, 25);
-		format(reason, 64, "letta la storia di %s (pg %d)", tname, gPlayer[targetid][pCharId]);
+		new tname[75], reason[192];
+		GetPlayerName(targetid, tname, 75);
+		format(reason, 192, "letta la storia di %s (pg %d)", tname, gPlayer[targetid][pCharId]);
 		Admin_Log(playerid, gPlayer[targetid][pAccountId], "storia", reason);
 		UI_StoryShowOther(playerid, tname, origin, motive);
 	}

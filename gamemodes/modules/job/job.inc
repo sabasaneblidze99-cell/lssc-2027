@@ -1,8 +1,8 @@
-new g_JobName[4][16] = {
-	"Disoccupato",
-	"Autista Bus",
-	"Corriere",
-	"Netturbino"
+new g_JobName[4][48] = {
+	"უმუშევარი",
+	"ავტობუსის მძღოლი",
+	"კურიერი",
+	"დამლაგებელი"
 };
 
 Job_NameOf(jobId, out[], size)
@@ -14,11 +14,11 @@ Job_NameOf(jobId, out[], size)
 	}
 	strcat(out, g_JobName[jobId], size);
 }
-new g_JobStepWord[4][16] = {
-	"Tappa",
-	"Fermata",
-	"Consegna",
-	"Cassonetto"
+new g_JobStepWord[4][32] = {
+	"გაჩერება",
+	"გაჩერება",
+	"მიწოდება",
+	"ნაგვის ურნა"
 };
 new g_JobMinLevel[4] = {0, 1, 2, 1};
 new g_JobModel[4] = {0, 431, 498, 408};
@@ -377,10 +377,10 @@ Job_Cancel(playerid, const reason[])
 	Job_Teardown(playerid, true);
 	if (reason[0] != 0 && IsPlayerConnected(playerid))
 	{
-		SendClientMessage(playerid, -10270721, "Turno annullato: %s", reason);
+		SendClientMessage(playerid, -10270721, "ცვლა გაუქმდა: %s", reason);
 		if (lost > 0)
 		{
-			SendClientMessage(playerid, -10270721, "Il compenso maturato ($%d) e' andato perso.", lost);
+			SendClientMessage(playerid, -10270721, "დაგროვებული ანაზღაურება ($%d) დაიკარგა.", lost);
 		}
 	}
 	return 0;
@@ -398,7 +398,7 @@ Job_Accrue(playerid, amount)
 	if (granted < amount && !g_JsCapWarned[playerid])
 	{
 		g_JsCapWarned[playerid] = true;
-		SendClientMessage(playerid, -10270721, "Tetto orario di $%d raggiunto: il turno prosegue ma non matura altro compenso.", 2200);
+		SendClientMessage(playerid, -10270721, "მიღწეულია საათობრივი ლიმიტი $%d: ცვლა გრძელდება, მაგრამ ანაზღაურება აღარ გროვდება.", 2200);
 	}
 	g_JcHourEarned[playerid][job] += granted;
 	g_JsCapUsed[playerid] += granted;
@@ -413,7 +413,7 @@ Job_Finish(playerid, bool:completed)
 	Job_Teardown(playerid, true);
 	if (amount <= 0)
 	{
-		SendClientMessage(playerid, -1, "Turno terminato: nessun compenso maturato.");
+		SendClientMessage(playerid, -1, "ცვლა დასრულდა: ანაზღაურება არ დაგროვდა.");
 		return 0;
 	}
 	if (busy || gPlayer[playerid][pCharId] <= 0)
@@ -423,7 +423,7 @@ Job_Finish(playerid, bool:completed)
 		{
 			g_JcHourEarned[playerid][job] = 0;
 		}
-		SendClientMessage(playerid, -10270721, "Un accredito precedente e' ancora in corso: compenso non registrato.");
+		SendClientMessage(playerid, -10270721, "წინა ჩარიცხვა ჯერ კიდევ მიმდინარეობს: ანაზღაურება არ დარეგისტრირდა.");
 		return 0;
 	}
 	g_JpPending[playerid] = true;
@@ -431,7 +431,7 @@ Job_Finish(playerid, bool:completed)
 	g_JpAmount[playerid] = amount;
 	g_JpCap[playerid] = cap;
 	g_JpCompleted[playerid] = completed;
-	SendClientMessage(playerid, -1, "Turno terminato: registrazione del compenso ($%d) in corso...", amount);
+	SendClientMessage(playerid, -1, "ცვლა დასრულდა: ანაზღაურების ($%d) რეგისტრაცია მიმდინარეობს...", amount);
 	DB_JobPayout(playerid, gPlayer[playerid][pCharId], job, amount);
 	return 0;
 }
@@ -459,24 +459,24 @@ public Job_OnDBPayout(playerid, jobId, amount, result)
 		{
 			g_JcHourEarned[playerid][jobId] = 0;
 		}
-		SendClientMessage(playerid, -10270721, result < 0 ? "Errore del servizio: compenso non accreditato." : "Compenso rifiutato: nulla accreditato.");
-		new msg[128];
-		format(msg, 128, "payout non accreditato job %d importo %d esito %d char %d", jobId, amount, result, gPlayer[playerid][pCharId]);
+		SendClientMessage(playerid, -10270721, result < 0 ? "სერვისის შეცდომა: ანაზღაურება არ ჩაირიცხა." : "ანაზღაურება უარყოფილია: არაფერი ჩაირიცხა.");
+		new msg[384];
+		format(msg, 384, "payout non accreditato job %d importo %d esito %d char %d", jobId, amount, result, gPlayer[playerid][pCharId]);
 		Log_Write("JOB", msg);
 		return 1;
 	}
 	new paid = Economy_PaycheckPaid(amount, Money_BankRoom(playerid));
 	if (paid > 0 && Money_GiveBank(playerid, paid, "job", ""))
 	{
-		SendClientMessage(playerid, 0x66DD66FF, "Compenso: $%d versati in banca. Saldo: $%d.", paid, gPlayer[playerid][pBank]);
+		SendClientMessage(playerid, 0x66DD66FF, "ანაზღაურება: $%d ჩაირიცხა ბანკში. ბალანსი: $%d.", paid, gPlayer[playerid][pBank]);
 		if (paid < amount)
 		{
-			SendClientMessage(playerid, -10270721, "Il conto ha raggiunto il limite: parte del compenso e' andata persa.");
+			SendClientMessage(playerid, -10270721, "ანგარიშმა ლიმიტს მიაღწია: ანაზღაურების ნაწილი დაიკარგა.");
 		}
 	}
 	else
 	{
-		SendClientMessage(playerid, -10270721, "Il conto bancario e' al limite: compenso non versato.");
+		SendClientMessage(playerid, -10270721, "საბანკო ანგარიში ლიმიტზეა: ანაზღაურება არ ჩაირიცხა.");
 	}
 	g_JcSessEarned[playerid] += amount;
 	if (completed)
@@ -507,11 +507,11 @@ Job_StepDone(playerid, now)
 	new Float:dist = floatsqroot((((dx * dx) + (dy * dy)) + (dz * dz))), elapsedMs = now - g_JsLastCpTick[playerid];
 	if (elapsedMs < 400 || ((dist * float(1000)) > (40.0 * float(elapsedMs))))
 	{
-		new name[25], msg[128];
-		GetPlayerName(playerid, name, 25);
-		format(msg, 128, "tratta non valida: %s job %d tappa %d dist %.0f m in %d ms", name, job, g_JsStep[playerid], dist, elapsedMs);
+		new name[75], msg[384];
+		GetPlayerName(playerid, name, 75);
+		format(msg, 384, "tratta non valida: %s job %d tappa %d dist %.0f m in %d ms", name, job, g_JsStep[playerid], dist, elapsedMs);
 		Log_Write("JOB", msg);
-		Job_Cancel(playerid, "tratta percorsa troppo in fretta (controllo anti-abuso).");
+		Job_Cancel(playerid, "მარშრუტი ზედმეტად სწრაფად გაიარე (ანტი-აბიუზ შემოწმება).");
 		return 0;
 	}
 	g_JsLastPos[playerid][0] = tx;
@@ -522,16 +522,16 @@ Job_StepDone(playerid, now)
 	if (g_JsStep[playerid] >= total)
 	{
 		Job_Accrue(playerid, g_JobPayBonus[job]);
-		SendClientMessage(playerid, 0x66DD66FF, "Rientro completato: bonus di fine giro.");
+		SendClientMessage(playerid, 0x66DD66FF, "დაბრუნება დასრულდა: წრის ბონუსი.");
 		Job_Finish(playerid, true);
 		return 0;
 	}
 	new granted = Job_Accrue(playerid, g_JobPayStep[job]);
 	g_JsStep[playerid]++;
-	SendClientMessage(playerid, 0x66DD66FF, "%s %d/%d completata: +$%d (maturato $%d).", g_JobStepWord[job], g_JsStep[playerid], total, granted, g_JsEarned[playerid]);
+	SendClientMessage(playerid, 0x66DD66FF, "%s %d/%d დასრულდა: +$%d (დაგროვდა $%d).", g_JobStepWord[job], g_JsStep[playerid], total, granted, g_JsEarned[playerid]);
 	if (g_JsStep[playerid] >= total)
 	{
-		SendClientMessage(playerid, 0x99CCFFFF, "Ultima tappa fatta: rientra al deposito per il bonus (checkpoint sulla mappa).");
+		SendClientMessage(playerid, 0x99CCFFFF, "ბოლო გაჩერება გავლილია: დაბრუნდი დეპოში ბონუსისთვის (ჩეკპოინტი რუკაზე).");
 	}
 	Job_ShowCheckpoint(playerid);
 	return 0;
@@ -553,20 +553,20 @@ public Job_OnTick()
 		}
 		if (gPlayer[i][pCuffed] || gPlayer[i][pWounded])
 		{
-			Job_Cancel(i, "non sei in condizione di lavorare.");
+			Job_Cancel(i, "მუშაობის მდგომარეობაში არ ხარ.");
 			continue;
 		}
 		new veh = g_JsVeh[i];
 		if (Job_VehicleOwner(veh) != i)
 		{
-			Job_Cancel(i, "il veicolo di lavoro non esiste piu'.");
+			Job_Cancel(i, "სამსახურის მანქანა აღარ არსებობს.");
 			continue;
 		}
 		new Float:hp;
 		GetVehicleHealth(veh, hp);
 		if ((hp < 300.0))
 		{
-			Job_Cancel(i, "veicolo di lavoro distrutto.");
+			Job_Cancel(i, "სამსახურის მანქანა განადგურდა.");
 			continue;
 		}
 		new bool:inVeh = GetPlayerVehicleID(i) == veh && GetPlayerVehicleSeat(i) == 0, offSec = -1;
@@ -585,7 +585,7 @@ public Job_OnTick()
 			GetPlayerPos(i, px, py, pz);
 			if (offMs >= 45000 || (GetVehicleDistanceFromPoint(veh, px, py, pz) > 150.0))
 			{
-				Job_Cancel(i, "veicolo di lavoro abbandonato.");
+				Job_Cancel(i, "სამსახურის მანქანა მიტოვებულია.");
 				continue;
 			}
 			offSec = Job_SecCeil(45000 - offMs);
@@ -637,51 +637,51 @@ Job_Start(playerid)
 	new job = gPlayer[playerid][pJob];
 	if (job < 1 || job > 3)
 	{
-		Util_Send(playerid, -10270721, "Non hai un lavoro. Recati al Job Center e usa /lavoro prendi.");
+		Util_Send(playerid, -10270721, "სამსახური არ გაქვს. მიდი Job Center-ში და გამოიყენე /lavoro prendi.");
 		return 0;
 	}
 	if (g_JsActive[playerid])
 	{
-		Util_Send(playerid, -10270721, "Hai gia' un turno in corso. Usa /fine per terminarlo.");
+		Util_Send(playerid, -10270721, "ცვლა უკვე მიმდინარეობს. დასასრულებლად: /fine.");
 		return 0;
 	}
 	if (gPlayer[playerid][pWounded] || gPlayer[playerid][pCuffed] || gPlayer[playerid][pOnDuty] || g_JpPending[playerid] || g_JcSetPending[playerid])
 	{
-		Util_Send(playerid, -10270721, "Non puoi iniziare un turno adesso (ferito, ammanettato, in servizio o operazione in corso).");
+		Util_Send(playerid, -10270721, "ცვლას ახლა ვერ დაიწყებ (დაჭრილი, ბორკილებით, სამსახურში ან სხვა ოპერაცია მიმდინარეობს).");
 		return 0;
 	}
 	if (gPlayer[playerid][pLevel] < g_JobMinLevel[job])
 	{
-		SendClientMessage(playerid, -10270721, "Per questo lavoro serve il livello %d.", g_JobMinLevel[job]);
+		SendClientMessage(playerid, -10270721, "ამ სამსახურისთვის საჭიროა %d დონე.", g_JobMinLevel[job]);
 		return 0;
 	}
 	new left = Job_CdLeftMs(g_JcRunSet[playerid], g_JcRunLast[playerid], 30000);
 	if (left > 0)
 	{
-		SendClientMessage(playerid, -10270721, "Attendi ancora %d secondi prima di un nuovo turno.", Job_SecCeil(left));
+		SendClientMessage(playerid, -10270721, "ახალ ცვლამდე კიდევ %d წამი მოიცადე.", Job_SecCeil(left));
 		return 0;
 	}
 	if (GetPlayerInterior(playerid) != 0 || GetPlayerVirtualWorld(playerid) != 0)
 	{
-		Util_Send(playerid, -10270721, "Devi trovarti all'aperto per iniziare il turno.");
+		Util_Send(playerid, -10270721, "ცვლის დასაწყებად გარეთ უნდა იყო.");
 		return 0;
 	}
 	new Float:x, Float:y, Float:z, Float:a;
 	Job_SpawnPos(job, x, y, z, a);
 	if (!IsPlayerInRangeOfPoint(playerid, 40.0, x, y, z))
 	{
-		Util_Send(playerid, -10270721, "Devi trovarti al deposito del tuo lavoro per iniziare il turno.");
+		Util_Send(playerid, -10270721, "ცვლის დასაწყებად შენი სამსახურის დეპოში უნდა იყო.");
 		return 0;
 	}
 	if (g_JPool >= 40)
 	{
-		Util_Send(playerid, -10270721, "Nessun veicolo di lavoro disponibile al momento. Riprova tra poco.");
+		Util_Send(playerid, -10270721, "სამსახურის მანქანა ახლა არ არის. სცადე ცოტა ხანში.");
 		return 0;
 	}
 	new veh = CreateVehicle(g_JobModel[job], x, y, z, a, 1, 1, -1, false);
 	if (veh == 65535 || veh <= 0 || veh > 2000)
 	{
-		Util_Send(playerid, -10270721, "Impossibile creare il veicolo di lavoro. Riprova.");
+		Util_Send(playerid, -10270721, "სამსახურის მანქანის შექმნა ვერ მოხერხდა. სცადე ხელახლა.");
 		return 0;
 	}
 	SetVehicleHealth(veh, 1000.0);
@@ -709,12 +709,12 @@ Job_Start(playerid)
 	if (!PutPlayerInVehicle(playerid, veh, 0))
 	{
 		Job_Teardown(playerid, false);
-		Util_Send(playerid, -10270721, "Impossibile salire sul veicolo di lavoro. Riprova.");
+		Util_Send(playerid, -10270721, "სამსახურის მანქანაში ჩაჯდომა ვერ მოხერხდა. სცადე ხელახლა.");
 		return 0;
 	}
 	Job_ShowCheckpoint(playerid);
 	UI_JobHudShow(playerid, job);
-	SendClientMessage(playerid, 0x66DD66FF, "Turno iniziato (%s). Segui i checkpoint sulla mappa: fermati nel cerchio (max %.0f km/h) per %d secondi. /fine per terminare.", g_JobName[job], 12.0, g_JobDwellMs[job] / 1000);
+	SendClientMessage(playerid, 0x66DD66FF, "ცვლა დაიწყო (%s). მიჰყევი ჩეკპოინტებს: გაჩერდი წრეში (მაქს. %.0f კმ/სთ) %d წამით. დასრულება: /fine.", g_JobName[job], 12.0, g_JobDwellMs[job] / 1000);
 	return 0;
 }
 
@@ -727,7 +727,7 @@ Job_CmdFine(playerid)
 {
 	if (!g_JsActive[playerid])
 	{
-		Util_Send(playerid, -10270721, "Non hai nessun turno in corso.");
+		Util_Send(playerid, -10270721, "მიმდინარე ცვლა არ გაქვს.");
 		return 0;
 	}
 	Job_Finish(playerid, false);
@@ -736,8 +736,8 @@ Job_CmdFine(playerid)
 
 Job_CmdLavoro(playerid, const params[])
 {
-	new pos = 0, sub[12];
-	Util_NextToken(params, pos, sub, 12);
+	new pos = 0, sub[36];
+	Util_NextToken(params, pos, sub, 36);
 	if (sub[0] == 0 || !strcmp(sub, "info", true, 0x7FFFFFFF))
 	{
 		UI_JobInfoShow(playerid, gPlayer[playerid][pJob], gPlayer[playerid][pLevel], g_JcSessRuns[playerid], g_JcSessEarned[playerid]);
@@ -746,22 +746,22 @@ Job_CmdLavoro(playerid, const params[])
 	new bool:take = !strcmp(sub, "prendi", true, 0x7FFFFFFF), bool:leave = !strcmp(sub, "lascia", true, 0x7FFFFFFF);
 	if (!take && !leave)
 	{
-		Util_Send(playerid, 0x99CCFFFF, "Uso: /lavoro [info|prendi|lascia]  (prendi e lascia solo al Job Center)");
+		Util_Send(playerid, 0x99CCFFFF, "გამოყენება: /lavoro [info|prendi|lascia]  (prendi და lascia მხოლოდ Job Center-ში)");
 		return 0;
 	}
 	if (!Job_NearCenter(playerid))
 	{
-		Util_Send(playerid, -10270721, "Devi essere al Job Center (piazza City Hall).");
+		Util_Send(playerid, -10270721, "უნდა იყო Job Center-ში (City Hall-ის მოედანი).");
 		return 0;
 	}
 	if (g_JsActive[playerid])
 	{
-		Util_Send(playerid, -10270721, "Termina prima il turno in corso (/fine).");
+		Util_Send(playerid, -10270721, "ჯერ დაასრულე მიმდინარე ცვლა (/fine).");
 		return 0;
 	}
 	if (leave && gPlayer[playerid][pJob] == 0)
 	{
-		Util_Send(playerid, -10270721, "Non hai un lavoro da lasciare.");
+		Util_Send(playerid, -10270721, "დასატოვებელი სამსახური არ გაქვს.");
 		return 0;
 	}
 	new left = Job_CdLeftMs(g_JcChgSet[playerid], g_JcChgLast[playerid], 600000);
@@ -781,28 +781,28 @@ public UI_OnJobSelect(playerid, jobIndex)
 	}
 	if (!Job_NearCenter(playerid))
 	{
-		Util_Send(playerid, -10270721, "Devi essere al Job Center.");
+		Util_Send(playerid, -10270721, "უნდა იყო Job Center-ში.");
 		return 1;
 	}
 	if (g_JsActive[playerid] || g_JpPending[playerid] || g_JcSetPending[playerid] || gPlayer[playerid][pWounded] || gPlayer[playerid][pCuffed])
 	{
-		Util_Send(playerid, -10270721, "Non puoi cambiare lavoro adesso.");
+		Util_Send(playerid, -10270721, "სამსახურს ახლა ვერ შეიცვლი.");
 		return 1;
 	}
 	if (gPlayer[playerid][pLevel] < g_JobMinLevel[jobIndex])
 	{
-		SendClientMessage(playerid, -10270721, "Per questo lavoro serve il livello %d.", g_JobMinLevel[jobIndex]);
+		SendClientMessage(playerid, -10270721, "ამ სამსახურისთვის საჭიროა %d დონე.", g_JobMinLevel[jobIndex]);
 		return 1;
 	}
 	if (gPlayer[playerid][pJob] == jobIndex)
 	{
-		Util_Send(playerid, -10270721, "Fai gia' questo lavoro.");
+		Util_Send(playerid, -10270721, "ამ სამსახურში უკვე მუშაობ.");
 		return 1;
 	}
 	new left = Job_CdLeftMs(g_JcChgSet[playerid], g_JcChgLast[playerid], 600000);
 	if (left > 0)
 	{
-		SendClientMessage(playerid, -10270721, "Potrai cambiare lavoro tra %d secondi.", Job_SecCeil(left));
+		SendClientMessage(playerid, -10270721, "სამსახურის შეცვლა %d წამში შეგეძლება.", Job_SecCeil(left));
 		return 1;
 	}
 	g_JcSetPending[playerid] = true;
@@ -819,12 +819,12 @@ public UI_OnJobQuit(playerid)
 	}
 	if (!Job_NearCenter(playerid))
 	{
-		Util_Send(playerid, -10270721, "Devi essere al Job Center.");
+		Util_Send(playerid, -10270721, "უნდა იყო Job Center-ში.");
 		return 1;
 	}
 	if (gPlayer[playerid][pJob] == 0 || g_JsActive[playerid] || g_JpPending[playerid] || g_JcSetPending[playerid])
 	{
-		Util_Send(playerid, -10270721, "Non puoi lasciare il lavoro adesso.");
+		Util_Send(playerid, -10270721, "სამსახურს ახლა ვერ დატოვებ.");
 		return 1;
 	}
 	g_JcSetPending[playerid] = true;
@@ -851,24 +851,24 @@ public Job_OnDBSet(playerid, jobId, result)
 		g_JcChgLast[playerid] = GetTickCount();
 		if (jobId == 0)
 		{
-			Util_Send(playerid, 0x66DD66FF, "Hai lasciato il lavoro.");
+			Util_Send(playerid, 0x66DD66FF, "სამსახური დატოვე.");
 		}
 		else
 		{
-			SendClientMessage(playerid, 0x66DD66FF, "Ora lavori come %s. Usa /inizia per iniziare un turno.", g_JobName[jobId]);
+			SendClientMessage(playerid, 0x66DD66FF, "ახლა მუშაობ როგორც %s. ცვლის დასაწყებად: /inizia.", g_JobName[jobId]);
 		}
-		new name[25], msg[128];
-		GetPlayerName(playerid, name, 25);
-		format(msg, 128, "%s lavoro -> %d", name, jobId);
+		new name[75], msg[384];
+		GetPlayerName(playerid, name, 75);
+		format(msg, 384, "%s lavoro -> %d", name, jobId);
 		Log_Write("JOB", msg);
 	}
 	else if (result == 0)
 	{
-		Util_Send(playerid, -10270721, "Cambio di lavoro non eseguito.");
+		Util_Send(playerid, -10270721, "სამსახურის შეცვლა ვერ მოხერხდა.");
 	}
 	else
 	{
-		Util_Send(playerid, -10270721, "Servizio temporaneamente non disponibile: riprova piu' tardi.");
+		Util_Send(playerid, -10270721, "სერვისი დროებით მიუწვდომელია: სცადე მოგვიანებით.");
 	}
 	return 1;
 }
@@ -887,7 +887,7 @@ Job_OnInit()
 	g_JPool = 0;
 	g_JTimer = SetTimer("Job_OnTick", 500, true);
 	CreatePickup(1239, 1, 1480.5, -1736.0, 13.5, 0);
-	Lang_Create3DTextLabel("Job Center\nUsa /lavoro", -2994689, 1480.5, -1736.0, (13.5 + 1.0), 15.0, 0, false);
+	Lang_Create3DTextLabel("Job Center\nგამოიყენე /lavoro", -2994689, 1480.5, -1736.0, (13.5 + 1.0), 15.0, 0, false);
 }
 
 Job_OnExit()
@@ -931,7 +931,7 @@ Job_OnPlayerDeath(playerid)
 	{
 		return 0;
 	}
-	Job_Cancel(playerid, "sei morto o ferito.");
+	Job_Cancel(playerid, "მოკვდი ან დაჭრილი ხარ.");
 	return 0;
 }
 
@@ -945,7 +945,7 @@ Job_OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
 	if (ispassenger == 0)
 	{
 		ClearAnimations(playerid, SYNC_NONE);
-		Util_Send(playerid, -10270721, "Questo veicolo di lavoro e' in uso da un altro lavoratore.");
+		Util_Send(playerid, -10270721, "ამ სამსახურის მანქანას სხვა თანამშრომელი იყენებს.");
 	}
 	return 0;
 }
@@ -960,7 +960,7 @@ Job_OnPlayerExitVehicle(playerid, vehicleid)
 	{
 		g_JsOff[playerid] = true;
 		g_JsOffTick[playerid] = GetTickCount();
-		SendClientMessage(playerid, -10270721, "Torna sul veicolo di lavoro entro %d secondi o il turno sara' annullato.", 45);
+		SendClientMessage(playerid, -10270721, "დაბრუნდი სამსახურის მანქანაში %d წამში, თორემ ცვლა გაუქმდება.", 45);
 	}
 	return 0;
 }
@@ -979,7 +979,7 @@ Job_OnPlayerStateChange(playerid, t_PLAYER_STATE:newstate)
 	if (owner != playerid)
 	{
 		RemovePlayerFromVehicle(playerid, false);
-		Util_Send(playerid, -10270721, "Questo veicolo di lavoro e' in uso da un altro lavoratore.");
+		Util_Send(playerid, -10270721, "ამ სამსახურის მანქანას სხვა თანამშრომელი იყენებს.");
 		return 0;
 	}
 	g_JsOff[playerid] = false;
@@ -991,6 +991,6 @@ Job_OnVehicleDeath(vehicleid)
 	new owner = Job_VehicleOwner(vehicleid);
 	if (owner != 65535)
 	{
-		Job_Cancel(owner, "veicolo di lavoro distrutto.");
+		Job_Cancel(owner, "სამსახურის მანქანა განადგურდა.");
 	}
 }

@@ -195,8 +195,8 @@ DB_StoryLoad(playerid, accountId, charId)
 	{
 		return 0;
 	}
-	new query[512], name[25];
-	GetPlayerName(playerid, name, 25);
+	new query[512], name[75];
+	GetPlayerName(playerid, name, 75);
 	mysql_format(g_DB, query, 512, "SELECT a.intro_seen AS intro_seen, COALESCE(s.origin, 0) AS origin, COALESCE(s.motive, 0) AS motive, (s.character_id IS NOT NULL) AS has_story FROM accounts a LEFT JOIN character_story s ON s.character_id = %d WHERE a.id = %d", charId, accountId);
 	mysql_tquery(g_DB, query, "DB_OnStoryLoaded", "dsddd", playerid, name, accountId, charId, g_StoryInfo[playerid][siToken]);
 	return 0;
@@ -246,8 +246,8 @@ DB_StoryRead(playerid, targetid, purpose)
 	{
 		return 0;
 	}
-	new query[512], name[25];
-	GetPlayerName(playerid, name, 25);
+	new query[512], name[75];
+	GetPlayerName(playerid, name, 75);
 	mysql_format(g_DB, query, 512, "SELECT COALESCE(s.origin, 0) AS origin, COALESCE(s.motive, 0) AS motive, (s.character_id IS NOT NULL) AS has_story FROM characters c LEFT JOIN character_story s ON s.character_id = c.id WHERE c.id = %d", g_StoryInfo[playerid][siTargetChar]);
 	mysql_tquery(g_DB, query, "DB_OnStoryRead", "dsd", playerid, name, g_StoryInfo[playerid][siToken]);
 	return 0;
@@ -312,8 +312,8 @@ DB_StorySave(playerid, charId, origin, motive, const opId[], bool:creation)
 		return 0;
 	}
 	DB_PendingSet(playerid, _:2.0);
-	new query[512], name[25];
-	GetPlayerName(playerid, name, 25);
+	new query[512], name[75];
+	GetPlayerName(playerid, name, 75);
 	mysql_format(g_DB, query, 512, "CALL story_save('%e', %d, %d, %d, %d)", opId, charId, origin, motive, creation ? 0 : 1);
 	mysql_tquery(g_DB, query, "DB_OnStoryCalled", "dsdds", playerid, name, charId, g_StoryReq[playerid][sqToken], opId);
 	return 0;

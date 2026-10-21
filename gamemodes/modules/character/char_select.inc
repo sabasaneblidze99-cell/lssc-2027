@@ -199,7 +199,7 @@ CharSel_ShowList(playerid)
 		CefViews_Open(playerid, CEFV_CHARS, "chars");
 		return 1;
 	}
-	new body[1024], line[256];
+	new body[2048], line[768];
 	strcat(body, "სლოტი\tპერსონაჟი\tდონე\n");
 	for (new s = 0; s < CS_SLOTS; s++)
 	{
@@ -284,14 +284,14 @@ CharSel_CountChars(playerid)
 
 CharSel_ShowNameDialog(playerid, const err[])
 {
-	new body[1024], launcher[25];
+	new body[2048], launcher[25];
 	GetPlayerName(playerid, launcher, sizeof launcher);
 	format(body, sizeof body,
 		"%s%s{FFFFFF}შეიყვანე პერსონაჟის სახელი და გვარი ფორმატში {66DD66}Saxeli_Gvari{FFFFFF} (მაგ. Giorgi_Beridze).\n\n{AAAAAA}მხოლოდ ლათინური ასოები, ორივე დიდი ასოთი იწყება.",
 		err, err[0] ? "\n\n" : "");
 	if (CharSel_CountChars(playerid) == 0)
 	{
-		new extra[160];
+		new extra[480];
 		format(extra, sizeof extra, "\n{AAAAAA}ცარიელი ველი = %s", launcher);
 		strcat(body, extra);
 	}
@@ -300,7 +300,7 @@ CharSel_ShowNameDialog(playerid, const err[])
 
 CharSel_ShowBirthDialog(playerid, const err[])
 {
-	new body[768];
+	new body[1536];
 	format(body, sizeof body, "%s%s{FFFFFF}დაბადების თარიღი ფორმატში {66DD66}DD/MM/YYYY{FFFFFF} (მაგ. 14/05/1998).\n\n{AAAAAA}ასაკი: %d-დან %d წლამდე.",
 		err, err[0] ? "\n\n" : "", CS_AGE_MIN, CS_AGE_MAX);
 	Lang_ShowPlayerDialog(playerid, CS_DIALOG_BIRTH, DIALOG_STYLE_INPUT, "ახალი პერსონაჟი - დაბადება", body, "შემდეგი", "უკან");
@@ -397,7 +397,7 @@ CharSel_SubmitName(playerid, const name[])
 	{
 		return 0;
 	}
-	new tmp[25];
+	new tmp[75];
 	strcat(tmp, name, sizeof tmp);
 	if (strlen(name) > 20 || !Util_IsValidRPName(tmp))
 	{
@@ -406,7 +406,7 @@ CharSel_SubmitName(playerid, const name[])
 	}
 	g_CsBusy[playerid] = true;
 	g_CsNewName[playerid][0] = 0;
-	strcat(g_CsNewName[playerid], tmp, 25);
+	strcat(g_CsNewName[playerid], tmp, 75);
 	new query[320];
 	mysql_format(g_DB, query, sizeof query,
 		"SELECT (SELECT COUNT(*) FROM characters WHERE char_name = '%e') + (SELECT COUNT(*) FROM accounts WHERE name = '%e' AND id <> %d) AS taken",
@@ -654,7 +654,7 @@ public Cef_OnCharCreate(playerid, const arguments[])
 		return 1;
 	}
 	g_CsCef[playerid] = true;
-	new pos = 0, first[24], last[24], name[48];
+	new pos = 0, first[24], last[24], name[144];
 	Util_NextToken(arguments, pos, first, 2);       // salta lo slot
 	Util_NextToken(arguments, pos, first, sizeof first);
 	Util_NextToken(arguments, pos, last, sizeof last);

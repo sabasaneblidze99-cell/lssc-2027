@@ -89,8 +89,8 @@ UI_HudCreate(playerid)
 	new Float:left = (632.0 - 150.0);
 	g_UiHud[playerid][0] = UI_HudBox(playerid, left, 330.0, 150.0, 62.0, 153);
 	g_UiHud[playerid][1] = UI_HudText(playerid, (632.0 - 5.0), (330.0 + 3.0), "$0", 0.3, 1.2, 0x66DD66FF, t_TEXT_DRAW_ALIGN:3);
-	g_UiHud[playerid][2] = UI_HudText(playerid, (632.0 - 5.0), (330.0 + 20.0), "Banca: $0", 0.22, 1.0, -1, t_TEXT_DRAW_ALIGN:3);
-	g_UiHud[playerid][3] = UI_HudText(playerid, (5.0 + left), (330.0 + 36.0), "Liv. 1  Exp 0", 0.22, 1.0, -2994689, t_TEXT_DRAW_ALIGN:1);
+	g_UiHud[playerid][2] = UI_HudText(playerid, (632.0 - 5.0), (330.0 + 20.0), "ბანკი: $0", 0.22, 1.0, -1, t_TEXT_DRAW_ALIGN:3);
+	g_UiHud[playerid][3] = UI_HudText(playerid, (5.0 + left), (330.0 + 36.0), "დონე 1  Exp 0", 0.22, 1.0, -2994689, t_TEXT_DRAW_ALIGN:1);
 	g_UiHud[playerid][4] = UI_HudBox(playerid, (5.0 + left), (330.0 + 51.0), 140.0, 6.0, 0x444444FF);
 	g_UiHud[playerid][5] = UI_HudBox(playerid, (5.0 + left), (330.0 + 51.0), 140.0, 6.0, -2994689);
 	for (new i = 0; i < 6; i++)
@@ -150,14 +150,14 @@ UI_HudUpdate(playerid, money, bank, level, exp)
 	{
 		return 0;
 	}
-	new str[48];
-	format(str, 48, "$%d", money);
+	new str[432];
+	format(str, 432, "$%d", money);
 	Lang_PlayerTextDrawSetString(playerid, g_UiHud[playerid][1], str);
-	format(str, 48, "Banca: $%d", bank);
+	format(str, 432, "ბანკი: $%d", bank);
 	Lang_PlayerTextDrawSetString(playerid, g_UiHud[playerid][2], str);
 	if (level >= 50)
 	{
-		format(str, 48, "Liv. %d  (MAX)", 50);
+		format(str, 432, "დონე %d  (MAX)", 50);
 		Lang_PlayerTextDrawSetString(playerid, g_UiHud[playerid][3], str);
 		UI_HudSetBar(playerid, 1.0);
 		return 0;
@@ -177,7 +177,7 @@ UI_HudUpdate(playerid, money, bank, level, exp)
 	{
 		inLevel = step;
 	}
-	format(str, 48, "Liv. %d  Exp %d/%d", level, inLevel, step);
+	format(str, 432, "დონე %d  Exp %d/%d", level, inLevel, step);
 	Lang_PlayerTextDrawSetString(playerid, g_UiHud[playerid][3], str);
 	UI_HudSetBar(playerid, (float(inLevel) / float(step)));
 	return 0;

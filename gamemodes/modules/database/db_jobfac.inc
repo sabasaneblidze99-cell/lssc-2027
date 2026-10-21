@@ -53,8 +53,8 @@ DB_JFCompensate(kind, charId, id, amount)
 
 public DB_OnJFComp(kind, charId, id)
 {
-	new msg[128];
-	format(msg, 128, "%s (char %d, id %d) a sessione scaduta: righe=%d%s", kind == 1 ? "rollback payout lavoro" : "rollback multa", charId, id, cache_affected_rows(), cache_affected_rows() >= 1 ? "" : " ANOMALIA: verificare a mano");
+	new msg[384];
+	format(msg, 384, "%s (char %d, id %d) a sessione scaduta: righe=%d%s", kind == 1 ? "rollback payout lavoro" : "rollback multa", charId, id, cache_affected_rows(), cache_affected_rows() >= 1 ? "" : " ANOMALIA: verificare a mano");
 	Log_Write("DBJOB", msg);
 	return 1;
 }
@@ -168,8 +168,8 @@ DB_JobPayout(playerid, charId, jobId, amount)
 	}
 	else
 	{
-		new name[25], query[512];
-		GetPlayerName(playerid, name, 25);
+		new name[75], query[512];
+		GetPlayerName(playerid, name, 75);
 		g_JFReq[playerid][jqPayoutJobId] = jobId;
 		g_JFReq[playerid][jqPayoutAmount] = amount;
 		mysql_format(g_DB, query, 512, "INSERT INTO job_stats (character_id, job, runs, earned, last_run_at) SELECT id, %d, 1, %d, NOW() FROM characters WHERE id = %d ON DUPLICATE KEY UPDATE runs = runs + 1, earned = earned + %d, last_run_at = NOW()", jobId, amount, charId, amount);
@@ -221,8 +221,8 @@ DB_SetJob(playerid, charId, jobId)
 	}
 	else
 	{
-		new name[25], query[512];
-		GetPlayerName(playerid, name, 25);
+		new name[75], query[512];
+		GetPlayerName(playerid, name, 75);
 		g_JFReq[playerid][jqSetJobId] = jobId;
 		mysql_format(g_DB, query, 512, "UPDATE characters SET job = %d WHERE id = %d AND job <> %d", jobId, charId, jobId);
 		DB_PendingSet(playerid, 524288);
@@ -325,9 +325,9 @@ DB_AddFine(playerid, issuerChar, targetChar, faction, amount, const reason[])
 		}
 		return 0;
 	}
-	new name[25], query[1024], rsn[129];
-	GetPlayerName(playerid, name, 25);
-	strmid(rsn, reason, 0, 128, 129);
+	new name[75], query[1024], rsn[387];
+	GetPlayerName(playerid, name, 75);
+	strmid(rsn, reason, 0, 128, 387);
 	g_FineInfl[idx][fiActive] = 1;
 	g_FineInfl[idx][fiToken] = ++g_FineToken;
 	g_FineInfl[idx][fiIssuerPlayerId] = playerid;
@@ -376,8 +376,8 @@ DB_LoadFines(playerid, charId)
 		}
 		return 0;
 	}
-	new name[25], query[1024];
-	GetPlayerName(playerid, name, 25);
+	new name[75], query[1024];
+	GetPlayerName(playerid, name, 75);
 	mysql_format(g_DB, query, 1024, "SELECT f.id, f.faction, f.amount, UNIX_TIMESTAMP(f.created_at) AS ts, f.reason, a.name AS issuer FROM fines f JOIN characters c ON c.id = f.issuer_char JOIN accounts a ON a.id = c.account_id WHERE f.target_char = %d ORDER BY f.id DESC LIMIT %d", charId, 5);
 	DB_PendingSet(playerid, 2097152);
 	mysql_tquery(g_DB, query, "DB_OnJFFinesLoaded", "dsd", playerid, name, charId);
@@ -448,8 +448,8 @@ DB_JFFacExec(playerid, actorChar, targetChar, cmd, faction, newRank)
 	}
 	else
 	{
-		new name[25], query[1024];
-		GetPlayerName(playerid, name, 25);
+		new name[75], query[1024];
+		GetPlayerName(playerid, name, 75);
 		switch (cmd)
 		{
 			case 1:
@@ -497,7 +497,7 @@ public DB_OnJFFacChanged(playerid, const name[], actorChar, targetChar, cmd, fac
 	new affected = cache_affected_rows();
 	if (affected > 0)
 	{
-		new detail[65];
+		new detail[195];
 		new action[7][] = {"", "join", "promote", "demote", "fire", "leave", "set"};
 		if (cmd == 4 || cmd == 5)
 		{
@@ -505,7 +505,7 @@ public DB_OnJFFacChanged(playerid, const name[], actorChar, targetChar, cmd, fac
 		}
 		else
 		{
-			format(detail, 65, "grado %d", rank);
+			format(detail, 195, "grado %d", rank);
 		}
 		if (cmd >= 1 && cmd <= 6)
 		{
@@ -597,8 +597,8 @@ DB_FactionMembers(playerid, faction)
 		}
 		return 0;
 	}
-	new name[25], query[1024];
-	GetPlayerName(playerid, name, 25);
+	new name[75], query[1024];
+	GetPlayerName(playerid, name, 75);
 	g_JFReq[playerid][jqMembersFaction] = faction;
 	mysql_format(g_DB, query, 1024, "SELECT c.id, a.name, c.faction_rank, c.level, COALESCE(UNIX_TIMESTAMP(a.last_login), 0) AS last_login FROM characters c JOIN accounts a ON a.id = c.account_id WHERE c.faction = %d ORDER BY c.faction_rank DESC, a.name LIMIT %d", faction, 100);
 	DB_PendingSet(playerid, 8388608);
@@ -654,8 +654,8 @@ DB_FactionFindByName(playerid, const name[], tag)
 		}
 		return 0;
 	}
-	new me[25], query[1024];
-	GetPlayerName(playerid, me, 25);
+	new me[75], query[1024];
+	GetPlayerName(playerid, me, 75);
 	g_JFReq[playerid][jqFindTag] = tag;
 	mysql_format(g_DB, query, 1024, "SELECT c.id, a.name, c.faction, c.faction_rank, c.level FROM characters c JOIN accounts a ON a.id = c.account_id WHERE a.name = '%e' AND c.slot = %d LIMIT 1", name, 0);
 	DB_PendingSet(playerid, 0x01000000);
@@ -671,12 +671,12 @@ public DB_OnJFFacFound(playerid, const name[], charId, tag)
 		return 1;
 	}
 	DB_PendingClear(playerid, 0x01000000);
-	new rows = 0, id = 0, faction = 0, rank = 0, level = 0, found[25];
+	new rows = 0, id = 0, faction = 0, rank = 0, level = 0, found[75];
 	cache_get_row_count(rows);
 	if (rows > 0)
 	{
 		cache_get_value_name_int(0, "id", id);
-		cache_get_value_name(0, "name", found, 25);
+		cache_get_value_name(0, "name", found, 75);
 		cache_get_value_name_int(0, "faction", faction);
 		cache_get_value_name_int(0, "faction_rank", rank);
 		cache_get_value_name_int(0, "level", level);

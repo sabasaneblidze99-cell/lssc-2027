@@ -42,14 +42,14 @@ DB_AdminLog(staffAccountId, targetAccountId, const action[], const reason[])
 	{
 		return 0;
 	}
-	new query[1024], target[16];
+	new query[1024], target[48];
 	if (targetAccountId > 0)
 	{
-		format(target, 16, "%d", targetAccountId);
+		format(target, 48, "%d", targetAccountId);
 	}
 	else
 	{
-		strcat(target, "NULL", 16);
+		strcat(target, "NULL", 48);
 	}
 	mysql_format(g_DB, query, 1024, "INSERT INTO admin_log (staff_account_id, target_account_id, action, reason) VALUES (%d, %s, LEFT('%e', %d), LEFT('%e', %d))", max(staffAccountId, 0), target, action, 24, reason, 128);
 	mysql_tquery(g_DB, query, "", "");
@@ -88,8 +88,8 @@ DB_AddWarn(requesterid, targetAccountId, staffAccountId, const reason[])
 		DB_DeliverAdminFailure(DB_ReqSlot(requesterid), 1);
 		return 0;
 	}
-	new query[1024], reqName[25];
-	DB_ReqName(requesterid, reqName, 25);
+	new query[1024], reqName[75];
+	DB_ReqName(requesterid, reqName, 75);
 	mysql_format(g_DB, query, 1024, "INSERT INTO warns (account_id, staff_account_id, reason) VALUES (%d, %d, LEFT('%e', %d))", targetAccountId, max(staffAccountId, 0), reason, 64);
 	DB_ReqBegin(requesterid, 1);
 	mysql_tquery(g_DB, query, "DB_OnWarnInserted", "dsd", requesterid, reqName, targetAccountId);
@@ -124,23 +124,23 @@ DB_AddBan(requesterid, accountId, const name[], const ip[], staffAccountId, cons
 		DB_DeliverAdminFailure(DB_ReqSlot(requesterid), 2);
 		return 0;
 	}
-	new query[1024], reqName[25], accStr[16], expStr[48];
-	DB_ReqName(requesterid, reqName, 25);
+	new query[1024], reqName[75], accStr[48], expStr[144];
+	DB_ReqName(requesterid, reqName, 75);
 	if (accountId > 0)
 	{
-		format(accStr, 16, "%d", accountId);
+		format(accStr, 48, "%d", accountId);
 	}
 	else
 	{
-		strcat(accStr, "NULL", 16);
+		strcat(accStr, "NULL", 48);
 	}
 	if (minutes > 0)
 	{
-		format(expStr, 48, "UNIX_TIMESTAMP() + %d", min(minutes, 5256000) * 60);
+		format(expStr, 144, "UNIX_TIMESTAMP() + %d", min(minutes, 5256000) * 60);
 	}
 	else
 	{
-		strcat(expStr, "NULL", 48);
+		strcat(expStr, "NULL", 144);
 	}
 	mysql_format(g_DB, query, 1024, "INSERT INTO bans (account_id, account_name, ip, staff_account_id, reason, expires_at) VALUES (%s, LEFT('%e', 24), LEFT('%e', 15), %d, LEFT('%e', %d), %s)", accStr, name, ip, max(staffAccountId, 0), reason, 64, expStr);
 	DB_ReqBegin(requesterid, 2);
@@ -171,8 +171,8 @@ DB_Unban(requesterid, const accountName[])
 		DB_DeliverAdminFailure(DB_ReqSlot(requesterid), 4);
 		return 0;
 	}
-	new query[512], reqName[25];
-	DB_ReqName(requesterid, reqName, 25);
+	new query[512], reqName[75];
+	DB_ReqName(requesterid, reqName, 75);
 	mysql_format(g_DB, query, 512, "UPDATE bans SET active = 0 WHERE active = 1 AND account_name = '%e'", accountName);
 	DB_ReqBegin(requesterid, 4);
 	mysql_tquery(g_DB, query, "DB_OnUnbanDone", "dss", requesterid, reqName, accountName);
@@ -201,8 +201,8 @@ DB_CheckBan(playerid, const name[], const ip[])
 		DB_DeliverFailure(playerid, 16);
 		return 0;
 	}
-	new query[512], pname[25];
-	GetPlayerName(playerid, pname, 25);
+	new query[512], pname[75];
+	GetPlayerName(playerid, pname, 75);
 	mysql_format(g_DB, query, 512, "UPDATE bans SET active = 0 WHERE active = 1 AND expires_at IS NOT NULL AND expires_at <= UNIX_TIMESTAMP() AND account_name = '%e'", name);
 	mysql_tquery(g_DB, query, "", "");
 	mysql_format(g_DB, query, 512, "SELECT reason, IFNULL(expires_at, 0) AS expires_at FROM bans WHERE active = 1 AND (expires_at IS NULL OR expires_at > UNIX_TIMESTAMP()) AND account_name = '%e' ORDER BY (expires_at IS NULL) DESC, expires_at DESC LIMIT 1", name);
@@ -218,11 +218,11 @@ public DB_OnBanChecked(playerid, const name[])
 		return 1;
 	}
 	DB_PendingClear(playerid, 16);
-	new rows = 0, reason[65], expiresAt = 0;
+	new rows = 0, reason[195], expiresAt = 0;
 	cache_get_row_count(rows);
 	if (rows > 0)
 	{
-		cache_get_value_name(0, "reason", reason, 65);
+		cache_get_value_name(0, "reason", reason, 195);
 		cache_get_value_name_int(0, "expires_at", expiresAt);
 	}
 	if (funcidx("Admin_OnBanChecked") != -1)
@@ -242,8 +242,8 @@ DB_FindAccountByName(requesterid, const name[], tag)
 		DB_DeliverAdminFailure(slot, 8);
 		return 0;
 	}
-	new query[512], reqName[25];
-	DB_ReqName(requesterid, reqName, 25);
+	new query[512], reqName[75];
+	DB_ReqName(requesterid, reqName, 75);
 	mysql_format(g_DB, query, 512, "SELECT id, name, admin_level, IFNULL(last_ip, '') AS last_ip FROM accounts WHERE name = '%e' LIMIT 1", name);
 	DB_ReqBegin(requesterid, 8);
 	mysql_tquery(g_DB, query, "DB_OnAccountFound", "dsds", requesterid, reqName, tag, name);
@@ -253,18 +253,18 @@ DB_FindAccountByName(requesterid, const name[], tag)
 public DB_OnAccountFound(requesterid, const reqName[], tag, const name[])
 {
 	DB_ReqEnd(requesterid, 8);
-	new rows = 0, accountId = 0, adminLevel = 0, canon[25], lastIp[16];
+	new rows = 0, accountId = 0, adminLevel = 0, canon[75], lastIp[48];
 	cache_get_row_count(rows);
 	if (rows > 0)
 	{
 		cache_get_value_name_int(0, "id", accountId);
-		cache_get_value_name(0, "name", canon, 25);
+		cache_get_value_name(0, "name", canon, 75);
 		cache_get_value_name_int(0, "admin_level", adminLevel);
-		cache_get_value_name(0, "last_ip", lastIp, 16);
+		cache_get_value_name(0, "last_ip", lastIp, 48);
 	}
 	else
 	{
-		strcat(canon, name, 25);
+		strcat(canon, name, 75);
 	}
 	if (funcidx("Admin_OnAccountFound") != -1)
 	{

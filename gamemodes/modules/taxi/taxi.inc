@@ -276,7 +276,7 @@ Taxi_CancelRide(driverid, const driverMsg[], const passengerMsg[])
 
 Taxi_EndDuty(driverid, reason, bool:closeRental)
 {
-	Taxi_CancelRide(driverid, "", "La corsa e' stata annullata: il taxi non e' piu' in servizio.");
+	Taxi_CancelRide(driverid, "", "მგზავრობა გაუქმდა: ტაქსი აღარ არის სამსახურში.");
 	Taxi_ClearOffer(driverid);
 	if (gPlayer[driverid][pTaxiOnDuty] != 0)
 	{
@@ -377,11 +377,11 @@ Taxi_NpcOffer(driverid)
 	g_TxOfferUntil[driverid] = Taxi_TickAfter(30000);
 	g_TxOfferFromPt[driverid] = fromPt;
 	g_TxOfferToPt[driverid] = toPt;
-	UI_LivingTaxiOffer(driverid, g_TxOfferCall[driverid], true, "Cliente", fromD, toD, straight, est, 30);
-	new a[16], b[16];
-	LD_DistrictName(fromD, a, 16);
-	LD_DistrictName(toD, b, 16);
-	SendClientMessage(driverid, -2994689, "[Taxi] Chiamata: cliente a %s diretto a %s (~$%d). /accettacorsa entro %d s.", a, b, est, 30);
+	UI_LivingTaxiOffer(driverid, g_TxOfferCall[driverid], true, "კლიენტი", fromD, toD, straight, est, 30);
+	new a[48], b[48];
+	LD_DistrictName(fromD, a, 48);
+	LD_DistrictName(toD, b, 48);
+	SendClientMessage(driverid, -2994689, "[Taxi] გამოძახება: კლიენტი %s-ში, მიემართება %s-ში (~$%d). /accettacorsa %d წამში.", a, b, est, 30);
 	return 0;
 }
 
@@ -391,7 +391,7 @@ bool:Taxi_CanAccept(driverid, bool:verbose)
 	{
 		if (verbose)
 		{
-			Util_Send(driverid, -10270721, "Non sei in servizio come tassista (/taxi on al deposito di Unity).");
+			Util_Send(driverid, -10270721, "ტაქსისტად სამსახურში არ ხარ (/taxi on Unity-ს დეპოში).");
 		}
 		return false;
 	}
@@ -399,7 +399,7 @@ bool:Taxi_CanAccept(driverid, bool:verbose)
 	{
 		if (verbose)
 		{
-			Util_Send(driverid, -10270721, "Hai gia' una corsa in corso.");
+			Util_Send(driverid, -10270721, "უკვე გაქვს მიმდინარე მგზავრობა.");
 		}
 		return false;
 	}
@@ -407,7 +407,7 @@ bool:Taxi_CanAccept(driverid, bool:verbose)
 	{
 		if (verbose)
 		{
-			Util_Send(driverid, -10270721, "Operazione taxi in corso: attendi.");
+			Util_Send(driverid, -10270721, "ტაქსის ოპერაცია მიმდინარეობს: მოიცადე.");
 		}
 		return false;
 	}
@@ -415,7 +415,7 @@ bool:Taxi_CanAccept(driverid, bool:verbose)
 	{
 		if (verbose)
 		{
-			Util_Send(driverid, -10270721, "Il tuo taxi non e' disponibile.");
+			Util_Send(driverid, -10270721, "შენი ტაქსი მიუწვდომელია.");
 		}
 		return false;
 	}
@@ -423,7 +423,7 @@ bool:Taxi_CanAccept(driverid, bool:verbose)
 	{
 		if (verbose)
 		{
-			Util_Send(driverid, -10270721, "Attendi qualche secondo prima di accettare una nuova corsa.");
+			Util_Send(driverid, -10270721, "ახალი მგზავრობის მიღებამდე რამდენიმე წამი მოიცადე.");
 		}
 		return false;
 	}
@@ -443,7 +443,7 @@ Taxi_AcceptNpc(driverid)
 	}
 	if (g_TxOfferCall[driverid] < 1001 || Taxi_TickReached(g_TxOfferUntil[driverid]))
 	{
-		Util_Send(driverid, -10270721, "Nessuna chiamata da accettare (o e' scaduta).");
+		Util_Send(driverid, -10270721, "მისაღები გამოძახება არ არის (ან ვადა გაუვიდა).");
 		return 0;
 	}
 	new fromPt = g_TxOfferFromPt[driverid], toPt = g_TxOfferToPt[driverid];
@@ -474,17 +474,17 @@ Taxi_AcceptPlayer(driverid, passengerid)
 	}
 	if (!Taxi_Valid(passengerid) || passengerid == driverid || !Util_IsPlaying(passengerid) || g_TxCallUntil[passengerid] == 0 || Taxi_TickReached(g_TxCallUntil[passengerid]))
 	{
-		Util_Send(driverid, -10270721, "Quella chiamata non e' piu' attiva.");
+		Util_Send(driverid, -10270721, "ეს გამოძახება აღარ არის აქტიური.");
 		return 0;
 	}
 	if (gPlayer[passengerid][pTaxiPeer] != 0)
 	{
-		Util_Send(driverid, -10270721, "La chiamata e' gia' stata presa da un altro taxi.");
+		Util_Send(driverid, -10270721, "ეს გამოძახება სხვა ტაქსიმ უკვე აიღო.");
 		return 0;
 	}
 	if (!Util_InRange(driverid, passengerid, 600.0))
 	{
-		Util_Send(driverid, -10270721, "Il cliente e' troppo lontano.");
+		Util_Send(driverid, -10270721, "კლიენტი ძალიან შორსაა.");
 		return 0;
 	}
 	new Float:px, Float:py, Float:pz;
@@ -549,43 +549,43 @@ Taxi_OnStartResult(driverid, result, rideId)
 		{
 			new pt = g_TxPickPt[driverid];
 			SetPlayerCheckpoint(driverid, g_TxNpcX[pt], g_TxNpcY[pt], g_TxNpcZ[pt], 6.0);
-			Util_Send(driverid, 0x66DD66FF, "Corsa accettata: raggiungi il cliente (checkpoint) e fermati qualche secondo per farlo salire.");
+			Util_Send(driverid, 0x66DD66FF, "მგზავრობა მიღებულია: მიდი კლიენტთან (ჩეკპოინტი) და რამდენიმე წამით გაჩერდი, რომ ჩაჯდეს.");
 			return 0;
 		}
-		new name[25], Float:px, Float:py, Float:pz;
-		GetPlayerName(driverid, name, 25);
+		new name[75], Float:px, Float:py, Float:pz;
+		GetPlayerName(driverid, name, 75);
 		GetPlayerPos(p, px, py, pz);
 		SetPlayerCheckpoint(driverid, px, py, pz, 6.0);
 		g_TxBoardUntil[driverid] = Taxi_TickAfter(180000);
-		SendClientMessage(p, 0x66DD66FF, "Il taxi di %s ha accettato la tua chiamata: aspettalo e sali come passeggero.", name);
-		Util_Send(driverid, 0x66DD66FF, "Corsa accettata: raggiungi il cliente (checkpoint). Quando e' a bordo: /tassametro start.");
+		SendClientMessage(p, 0x66DD66FF, "%s-ის ტაქსიმ მიიღო შენი გამოძახება: დაელოდე და ჩაჯექი მგზავრად.", name);
+		Util_Send(driverid, 0x66DD66FF, "მგზავრობა მიღებულია: მიდი კლიენტთან (ჩეკპოინტი). როცა ჩაჯდება: /tassametro start.");
 		return 0;
 	}
 	g_TxAbort[driverid] = false;
 	if (p != INVALID_PLAYER_ID)
 	{
-		Util_Send(p, -10270721, "Il taxi non ha potuto accettare la corsa: puoi chiamarne un altro.");
+		Util_Send(p, -10270721, "ტაქსიმ მგზავრობა ვერ მიიღო: შეგიძლია სხვა გამოიძახო.");
 	}
 	switch (result)
 	{
 		case 6:
 		{
-			Util_Send(driverid, -10270721, "Hai raggiunto il massimo di corse con clienti della citta' per quest'ora.");
+			Util_Send(driverid, -10270721, "ამ საათში ქალაქის კლიენტებთან მგზავრობების მაქსიმუმს მიაღწიე.");
 			Taxi_ResetRide(driverid);
 			gPlayer[driverid][pTaxiNpcOfferAt] = Taxi_TickAfter(300000);
 			return 0;
 		}
 		case 7:
 		{
-			Util_Send(driverid, -10270721, npc ? "Requisiti del servizio taxi non soddisfatti." : "Limite orario di corse con questo cliente raggiunto (o requisiti non soddisfatti).");
+			Util_Send(driverid, -10270721, npc ? "ტაქსის სერვისის მოთხოვნები არ სრულდება." : "ამ კლიენტთან მგზავრობების საათობრივი ლიმიტი ამოიწურა (ან მოთხოვნები არ სრულდება).");
 		}
 		case 4:
 		{
-			Util_Send(driverid, -10270721, "Risulta gia' una corsa aperta: attendi la sua chiusura.");
+			Util_Send(driverid, -10270721, "ღია მგზავრობა უკვე არსებობს: დაელოდე მის დახურვას.");
 		}
 		default:
 		{
-			Util_Send(driverid, -10270721, "Centrale taxi non raggiungibile: corsa non avviata.");
+			Util_Send(driverid, -10270721, "ტაქსის დისპეჩერი მიუწვდომელია: მგზავრობა არ დაიწყო.");
 		}
 	}
 	Taxi_ResetRide(driverid);
@@ -674,7 +674,7 @@ Taxi_PayPrompt(driverid)
 	new p = Taxi_PassengerOf(driverid), veh = Rental_GetVehicle(driverid);
 	if (p == INVALID_PLAYER_ID || veh == 0)
 	{
-		Taxi_CancelRide(driverid, "Corsa annullata: cliente o taxi non piu' disponibili.", "");
+		Taxi_CancelRide(driverid, "მგზავრობა გაუქმდა: კლიენტი ან ტაქსი აღარ არის ხელმისაწვდომი.", "");
 		return 0;
 	}
 	new Float:x, Float:y, Float:z;
@@ -682,11 +682,11 @@ Taxi_PayPrompt(driverid)
 	new meters = gPlayer[driverid][pTaxiMeterM];
 	if (meters < 200 || Taxi_Dist2D(g_TxStartX[driverid], g_TxStartY[driverid], x, y) < 150)
 	{
-		Taxi_CancelRide(driverid, "Corsa troppo breve: annullata senza addebito.", "Corsa troppo breve: annullata senza addebito.");
+		Taxi_CancelRide(driverid, "მგზავრობა ძალიან მოკლეა: გაუქმდა თანხის ჩამოჭრის გარეშე.", "მგზავრობა ძალიან მოკლეა: გაუქმდა თანხის ჩამოჭრის გარეშე.");
 		return 0;
 	}
-	new rep = Taxi_MaxLocalRep(p), name[25];
-	GetPlayerName(driverid, name, 25);
+	new rep = Taxi_MaxLocalRep(p), name[75];
+	GetPlayerName(driverid, name, 75);
 	g_TxPayMeters[driverid] = meters;
 	g_TxPayToD[driverid] = District_At(x, y);
 	g_TxPayFare[driverid] = LD_TaxiFareFor(meters, rep);
@@ -695,7 +695,7 @@ Taxi_PayPrompt(driverid)
 	g_TxPhase[driverid] = 4;
 	Taxi_MeterShow(driverid, false);
 	UI_LivingTaxiPayConfirm(p, gPlayer[driverid][pTaxiRideId], name, meters, g_TxPayFare[driverid], LD_DiscountPct(rep), 60);
-	SendClientMessage(driverid, -1, "Tassametro fermo: $%d per %d m. In attesa della conferma del cliente.", g_TxPayFare[driverid], meters);
+	SendClientMessage(driverid, -1, "ტაქსომეტრი გაჩერდა: $%d %d მ-ზე. ველოდებით კლიენტის დადასტურებას.", g_TxPayFare[driverid], meters);
 	return 0;
 }
 
@@ -730,10 +730,10 @@ Taxi_OnPayResult(driverid, result, rideId, net, points, tax)
 	g_TxRetry[driverid] = 0;
 	g_TxRetryAt[driverid] = 0;
 	new bool:npc = gPlayer[driverid][pTaxiRideKind] == 1;
-	new p = Taxi_PassengerOf(driverid), other[25];
+	new p = Taxi_PassengerOf(driverid), other[225];
 	if (npc || p == INVALID_PLAYER_ID)
 	{
-		format(other, 25, "%s", "Cliente");
+		format(other, 225, "%s", "კლიენტი");
 	}
 	else
 	{
@@ -751,31 +751,31 @@ Taxi_OnPayResult(driverid, result, rideId, net, points, tax)
 			UI_LivingTaxiReceipt(driverid, true, rideId, other, g_TxPayMeters[driverid], npc ? net : net + tax, tax, net);
 			if (result == 6)
 			{
-				Util_Send(driverid, -2994689, "Tetto orario del lavoro dinamico raggiunto: e' stato pagato solo il residuo.");
+				Util_Send(driverid, -2994689, "დინამიური სამსახურის საათობრივი ლიმიტი ამოიწურა: გადაიხადა მხოლოდ ნაშთი.");
 			}
 			LD_Emit(3, g_TxPayToD[driverid], gPlayer[driverid][pCharId], net, gPlayer[driverid][pTaxiOpId]);
 		}
 		case 8:
 		{
 			gPlayer[driverid][pTaxiRideState] = 3;
-			Util_Send(driverid, -10270721, "Il cliente ha contestato la corsa: nessun pagamento, la verifichera' lo staff.");
+			Util_Send(driverid, -10270721, "კლიენტმა მგზავრობა გაასაჩივრა: გადახდა არ მოხდა, შეამოწმებს ადმინისტრაცია.");
 		}
 		case 3:
 		{
-			Taxi_CancelRide(driverid, "Il cliente non ha fondi sufficienti in banca: corsa annullata.", "");
+			Taxi_CancelRide(driverid, "კლიენტს ბანკში საკმარისი თანხა არ აქვს: მგზავრობა გაუქმდა.", "");
 			return 0;
 		}
 		case 2:
 		{
-			Util_Send(driverid, -1, "La corsa risultava gia' chiusa.");
+			Util_Send(driverid, -1, "მგზავრობა უკვე დახურული იყო.");
 		}
 		case -1, 10:
 		{
-			Util_Send(driverid, -10270721, "Pagamento non confermato dalla centrale: la corsa verra' verificata.");
+			Util_Send(driverid, -10270721, "დისპეჩერმა გადახდა არ დაადასტურა: მგზავრობა შემოწმდება.");
 		}
 		default:
 		{
-			Util_Send(driverid, -10270721, "Corsa non piu' valida: chiusa senza pagamento.");
+			Util_Send(driverid, -10270721, "მგზავრობა აღარ არის მოქმედი: დაიხურა გადახდის გარეშე.");
 		}
 	}
 	Taxi_ResetRide(driverid);
@@ -864,16 +864,16 @@ public Living_OnDBTaxi(playerid, action, result, rideId, amount, balance, v1, v2
 			g_TxRetryAt[playerid] = 0;
 			if (result == 1)
 			{
-				Util_Send(playerid, 0x66DD66FF, "Grazie per il tuo voto.");
+				Util_Send(playerid, 0x66DD66FF, "მადლობა შეფასებისთვის.");
 				new d = DB_LdCharOnline(g_TxRateDriverChar[playerid]);
 				if (d != 65535 && v2 > 0)
 				{
-					SendClientMessage(d, -1, "[Taxi] Nuovo voto: %d stelle (media %d.%02d).", v1, v2 / 100, v2 % 100);
+					SendClientMessage(d, -1, "[Taxi] ახალი შეფასება: %d ვარსკვლავი (საშუალო %d.%02d).", v1, v2 / 100, v2 % 100);
 				}
 			}
 			else if (result == 2)
 			{
-				Util_Send(playerid, -1, "Hai gia' votato questa corsa.");
+				Util_Send(playerid, -1, "ეს მგზავრობა უკვე შეაფასე.");
 			}
 			g_TxRateRide[playerid] = 0;
 			g_TxRateStars[playerid] = 0;
@@ -894,11 +894,11 @@ public Living_OnDBTaxiCharged(playerid, rideId, result, charged, balance)
 	{
 		case 1, 6:
 		{
-			new name[25], meters = 0;
+			new name[75], meters = 0;
 			name[0] = 0;
 			if (d != 65535)
 			{
-				GetPlayerName(d, name, 25);
+				GetPlayerName(d, name, 75);
 				meters = g_TxPayMeters[d];
 				g_TxRateDriverChar[playerid] = gPlayer[d][pCharId];
 			}
@@ -912,11 +912,11 @@ public Living_OnDBTaxiCharged(playerid, rideId, result, charged, balance)
 		}
 		case 8:
 		{
-			Util_Send(playerid, -1, "Corsa contestata: nessun addebito, la verifichera' lo staff.");
+			Util_Send(playerid, -1, "მგზავრობა გასაჩივრდა: თანხა არ ჩამოგეჭრა, შეამოწმებს ადმინისტრაცია.");
 		}
 		case 3:
 		{
-			Util_Send(playerid, -10270721, "Fondi insufficienti in banca per pagare la corsa: corsa annullata.");
+			Util_Send(playerid, -10270721, "ბანკში თანხა არ გყოფნის მგზავრობის გადასახდელად: მგზავრობა გაუქმდა.");
 		}
 	}
 	return 1;
@@ -938,7 +938,7 @@ public UI_OnTaxiCallAccept(playerid, callId)
 	}
 	else
 	{
-		Util_Send(playerid, -10270721, "Quella chiamata non e' piu' attiva.");
+		Util_Send(playerid, -10270721, "ეს გამოძახება აღარ არის აქტიური.");
 	}
 	return 1;
 }
@@ -948,7 +948,7 @@ public UI_OnTaxiPayConfirm(playerid, rideId, accept)
 	new d = Taxi_DriverOf(playerid);
 	if (d == 65535 || rideId <= 0 || gPlayer[d][pTaxiRideId] != rideId || g_TxPhase[d] != 4 || gPlayer[d][pTaxiPendOp] != 0)
 	{
-		UI_LivingReject(playerid, "Questa corsa non e' piu' in attesa di pagamento.");
+		UI_LivingReject(playerid, "ეს მგზავრობა აღარ ელოდება გადახდას.");
 		return 1;
 	}
 	g_TxPhase[d] = 5;
@@ -956,7 +956,7 @@ public UI_OnTaxiPayConfirm(playerid, rideId, accept)
 	g_TxRetry[d] = 0;
 	gPlayer[d][pTaxiPendOp] = 7;
 	DB_LivingMakeOpId(gPlayer[d][pTaxiOpId], 41, "tp", rideId, gPlayer[d][pCharId]);
-	Util_Send(playerid, -1, accept != 0 ? "Pagamento in corso..." : "Contestazione registrata: la corsa restera' in sospeso per lo staff.");
+	Util_Send(playerid, -1, accept != 0 ? "გადახდა მიმდინარეობს..." : "საჩივარი დარეგისტრირდა: მგზავრობას ადმინისტრაცია განიხილავს.");
 	DB_LivingTaxiPay(d, rideId, playerid, g_TxPayMeters[d], g_TxPayToD[d], g_TxPayAccept[d], 0, gPlayer[d][pTaxiOpId]);
 	return 1;
 }
@@ -971,11 +971,11 @@ public UI_OnTaxiPayExpired(playerid, rideId)
 	g_TxPayPrompts[d]++;
 	if (g_TxPayPrompts[d] >= 2)
 	{
-		Taxi_CancelRide(d, "Il cliente non ha confermato il pagamento: corsa annullata.", "Non hai confermato il pagamento: corsa annullata.");
+		Taxi_CancelRide(d, "კლიენტმა გადახდა არ დაადასტურა: მგზავრობა გაუქმდა.", "გადახდა არ დაადასტურე: მგზავრობა გაუქმდა.");
 		return 1;
 	}
 	g_TxPhase[d] = 3;
-	Util_Send(d, -2994689, "Il cliente non ha risposto: /tassametro stop per richiedere di nuovo il pagamento, /tassametro annulla per chiudere.");
+	Util_Send(d, -2994689, "კლიენტმა არ უპასუხა: /tassametro stop — გადახდის ხელახლა მოთხოვნა, /tassametro annulla — დახურვა.");
 	return 1;
 }
 
@@ -995,18 +995,18 @@ public UI_OnTaxiRate(playerid, rideId, stars)
 
 Taxi_CmdTaxi(playerid, const params[])
 {
-	new pos = 0, tok[16];
-	Util_NextToken(params, pos, tok, 16);
+	new pos = 0, tok[48];
+	Util_NextToken(params, pos, tok, 48);
 	if (!strcmp(tok, "on", true, 0x7FFFFFFF) && tok[0] != 0)
 	{
 		if (gPlayer[playerid][pTaxiOnDuty] != 0)
 		{
-			Util_Send(playerid, -10270721, "Sei gia' in servizio.");
+			Util_Send(playerid, -10270721, "უკვე სამსახურში ხარ.");
 			return 1;
 		}
 		if (gPlayer[playerid][pRentalPendOp] != 0 || gPlayer[playerid][pTaxiPendOp] != 0)
 		{
-			Util_Send(playerid, -10270721, "Pratica in corso: attendi.");
+			Util_Send(playerid, -10270721, "განაცხადი მუშავდება: მოიცადე.");
 			return 1;
 		}
 		new block = LD_CheckStart(playerid);
@@ -1017,56 +1017,56 @@ Taxi_CmdTaxi(playerid, const params[])
 		}
 		if (gPlayer[playerid][pLevel] < 2)
 		{
-			SendClientMessage(playerid, -10270721, "Serve almeno il livello %d per guidare un taxi.", 2);
+			SendClientMessage(playerid, -10270721, "ტაქსის სამართავად საჭიროა მინიმუმ %d დონე.", 2);
 			return 1;
 		}
 		if (!Taxi_AtDepot(playerid) || GetPlayerState(playerid) != PLAYER_STATE_ONFOOT)
 		{
-			Util_Send(playerid, -10270721, "Presentati a piedi al deposito taxi di Unity Station.");
+			Util_Send(playerid, -10270721, "მიდი ფეხით Unity Station-ის ტაქსის დეპოში.");
 			return 1;
 		}
 		new total = 360;
 		if ((gPlayer[playerid][pBank] > 0 ? gPlayer[playerid][pBank] : 0) + (gPlayer[playerid][pMoney] > 0 ? gPlayer[playerid][pMoney] : 0) < total)
 		{
-			SendClientMessage(playerid, -10270721, "Servono $%d (canone $%d/h + cauzione $%d) tra banca e contanti.", total, 60, 300);
+			SendClientMessage(playerid, -10270721, "საჭიროა $%d (ქირა $%d/სთ + გირაო $%d) ბანკსა და ნაღდში.", total, 60, 300);
 			return 1;
 		}
 		if (!LD_PoolHasRoom() || !Rental_OpenPro(playerid, 4))
 		{
-			Util_Send(playerid, -10270721, "Nessun taxi disponibile al momento: riprova tra poco.");
+			Util_Send(playerid, -10270721, "თავისუფალი ტაქსი ახლა არ არის: სცადე ცოტა ხანში.");
 			return 1;
 		}
-		Util_Send(playerid, -1, "Pratica del taxi in corso...");
+		Util_Send(playerid, -1, "ტაქსის განაცხადი მუშავდება...");
 		return 1;
 	}
 	if (!strcmp(tok, "off", true, 0x7FFFFFFF) && tok[0] != 0)
 	{
 		if (gPlayer[playerid][pTaxiOnDuty] == 0)
 		{
-			Util_Send(playerid, -10270721, "Non sei in servizio.");
+			Util_Send(playerid, -10270721, "სამსახურში არ ხარ.");
 			return 1;
 		}
 		if (g_TxPhase[playerid] != 0 || gPlayer[playerid][pTaxiRideId] != 0 || gPlayer[playerid][pTaxiPendOp] != 0)
 		{
-			Util_Send(playerid, -10270721, "Concludi o annulla prima la corsa in corso (/tassametro annulla).");
+			Util_Send(playerid, -10270721, "ჯერ დაასრულე ან გააუქმე მიმდინარე მგზავრობა (/tassametro annulla).");
 			return 1;
 		}
 		if (Rental_GetVehicle(playerid) != 0 && !Taxi_AtDepot(playerid))
 		{
-			Util_Send(playerid, -10270721, "Riporta il taxi al deposito di Unity Station per chiudere il turno.");
+			Util_Send(playerid, -10270721, "ცვლის დასახურად დააბრუნე ტაქსი Unity Station-ის დეპოში.");
 			return 1;
 		}
 		Taxi_EndDuty(playerid, 1, true);
-		Util_Send(playerid, -1, "Fine turno: riconsegna del taxi in corso...");
+		Util_Send(playerid, -1, "ცვლის დასასრული: ტაქსის დაბრუნება მიმდინარეობს...");
 		return 1;
 	}
 	if (gPlayer[playerid][pTaxiOnDuty] != 0)
 	{
-		SendClientMessage(playerid, -1, "In servizio. Punti taxi: %d. Comandi: /accettacorsa [id] · /tassametro start|stop|annulla · /taxi off (al deposito).", LD_GetProPoints(playerid, 2));
+		SendClientMessage(playerid, -1, "სამსახურში ხარ. ტაქსის ქულები: %d. ბრძანებები: /accettacorsa [id] · /tassametro start|stop|annulla · /taxi off (დეპოში).", LD_GetProPoints(playerid, 2));
 	}
 	else
 	{
-		Util_Send(playerid, 0x99CCFFFF, "Uso: /taxi on|off al deposito di Unity Station (canone orario + cauzione).");
+		Util_Send(playerid, 0x99CCFFFF, "გამოყენება: /taxi on|off Unity Station-ის დეპოში (საათობრივი ქირა + გირაო).");
 	}
 	return 1;
 }
@@ -1081,22 +1081,22 @@ Taxi_CmdChiamataxi(playerid, const params[])
 	}
 	if (gPlayer[playerid][pTaxiOnDuty] != 0)
 	{
-		Util_Send(playerid, -10270721, "Sei in servizio come tassista.");
+		Util_Send(playerid, -10270721, "ტაქსისტად სამსახურში ხარ.");
 		return 1;
 	}
 	if (gPlayer[playerid][pTaxiPeer] != 0)
 	{
-		Util_Send(playerid, -10270721, "Un taxi ha gia' accettato la tua chiamata.");
+		Util_Send(playerid, -10270721, "შენი გამოძახება ტაქსიმ უკვე მიიღო.");
 		return 1;
 	}
 	if (gPlayer[playerid][pTaxiCallTick] != 0 && GetTickCount() - gPlayer[playerid][pTaxiCallTick] < 60000)
 	{
-		SendClientMessage(playerid, -10270721, "Hai gia' chiamato un taxi: attendi %d secondi.", (60000 - (GetTickCount() - gPlayer[playerid][pTaxiCallTick])) / 1000 + 1);
+		SendClientMessage(playerid, -10270721, "ტაქსი უკვე გამოიძახე: მოიცადე %d წამი.", (60000 - (GetTickCount() - gPlayer[playerid][pTaxiCallTick])) / 1000 + 1);
 		return 1;
 	}
 	if (GetPlayerInterior(playerid) != 0 || GetPlayerVirtualWorld(playerid) != 0)
 	{
-		Util_Send(playerid, -10270721, "Devi trovarti all'aperto per chiamare un taxi.");
+		Util_Send(playerid, -10270721, "ტაქსის გამოსაძახებლად გარეთ უნდა იყო.");
 		return 1;
 	}
 	gPlayer[playerid][pTaxiCallTick] = GetTickCount();
@@ -1105,11 +1105,11 @@ Taxi_CmdChiamataxi(playerid, const params[])
 		gPlayer[playerid][pTaxiCallTick] = 1;
 	}
 	g_TxCallUntil[playerid] = Taxi_TickAfter(60000);
-	new name[25], Float:px, Float:py, Float:pz, sent = 0, area[16];
-	GetPlayerName(playerid, name, 25);
+	new name[75], Float:px, Float:py, Float:pz, sent = 0, area[48];
+	GetPlayerName(playerid, name, 75);
 	GetPlayerPos(playerid, px, py, pz);
 	new fromD = District_At(px, py);
-	LD_DistrictName(fromD, area, 16);
+	LD_DistrictName(fromD, area, 48);
 	for (new d = 0; d < 1000; d++)
 	{
 		if (d == playerid || !IsPlayerConnected(d) || gPlayer[d][pTaxiOnDuty] == 0)
@@ -1126,7 +1126,7 @@ Taxi_CmdChiamataxi(playerid, const params[])
 		}
 		new Float:dx, Float:dy, Float:dz;
 		GetPlayerPos(d, dx, dy, dz);
-		SendClientMessage(d, -2994689, "[Taxi] %s (id %d) chiede un taxi a %s. /accettacorsa %d", name, playerid, area, playerid);
+		SendClientMessage(d, -2994689, "[Taxi] %s (id %d) ტაქსს იძახებს: %s. /accettacorsa %d", name, playerid, area, playerid);
 		if (g_TxOfferCall[d] == 0)
 		{
 			g_TxOfferCall[d] = playerid + 1;
@@ -1137,24 +1137,24 @@ Taxi_CmdChiamataxi(playerid, const params[])
 	}
 	if (sent > 0)
 	{
-		SendClientMessage(playerid, 0x66DD66FF, "Chiamata inviata a %d taxi in zona: attendi una risposta.", sent);
+		SendClientMessage(playerid, 0x66DD66FF, "გამოძახება გაეგზავნა ზონაში %d ტაქსს: დაელოდე პასუხს.", sent);
 	}
 	else
 	{
-		Util_Send(playerid, -10270721, "Nessun taxi in servizio nelle vicinanze. Riprova piu' tardi.");
+		Util_Send(playerid, -10270721, "ახლოს სამსახურში მყოფი ტაქსი არ არის. სცადე მოგვიანებით.");
 	}
 	return 1;
 }
 
 Taxi_CmdAccettacorsa(playerid, const params[])
 {
-	new pos = 0, tok[16], id = 0;
-	Util_NextToken(params, pos, tok, 16);
+	new pos = 0, tok[48], id = 0;
+	Util_NextToken(params, pos, tok, 48);
 	if (tok[0] != 0)
 	{
 		if (!Util_ParseInt(tok, id) || id < 0 || id >= 1000)
 		{
-			Util_Send(playerid, -10270721, "Uso: /accettacorsa [id giocatore]");
+			Util_Send(playerid, -10270721, "გამოყენება: /accettacorsa [მოთამაშის id]");
 			return 1;
 		}
 		Taxi_AcceptPlayer(playerid, id);
@@ -1163,7 +1163,7 @@ Taxi_CmdAccettacorsa(playerid, const params[])
 	new call = g_TxOfferCall[playerid];
 	if (call <= 0 || Taxi_TickReached(g_TxOfferUntil[playerid]))
 	{
-		Util_Send(playerid, -10270721, "Nessuna chiamata da accettare. Per un giocatore: /accettacorsa id.");
+		Util_Send(playerid, -10270721, "მისაღები გამოძახება არ არის. მოთამაშისთვის: /accettacorsa id.");
 		return 1;
 	}
 	if (call <= 1000)
@@ -1179,21 +1179,21 @@ Taxi_CmdAccettacorsa(playerid, const params[])
 
 Taxi_CmdTassametro(playerid, const params[])
 {
-	new pos = 0, tok[16];
-	Util_NextToken(params, pos, tok, 16);
+	new pos = 0, tok[48];
+	Util_NextToken(params, pos, tok, 48);
 	if (gPlayer[playerid][pTaxiOnDuty] == 0 || gPlayer[playerid][pTaxiRideId] == 0)
 	{
-		Util_Send(playerid, -10270721, "Non hai una corsa in corso.");
+		Util_Send(playerid, -10270721, "მიმდინარე მგზავრობა არ გაქვს.");
 		return 1;
 	}
 	if (gPlayer[playerid][pTaxiRideKind] != 2)
 	{
-		Util_Send(playerid, -1, "Con i clienti della citta' il tassametro e' automatico (prelievo -> arrivo).");
+		Util_Send(playerid, -1, "ქალაქის კლიენტებთან ტაქსომეტრი ავტომატურია (აყვანა -> ჩასვლა).");
 		return 1;
 	}
 	if (gPlayer[playerid][pTaxiPendOp] != 0)
 	{
-		Util_Send(playerid, -10270721, "Operazione taxi in corso: attendi.");
+		Util_Send(playerid, -10270721, "ტაქსის ოპერაცია მიმდინარეობს: მოიცადე.");
 		return 1;
 	}
 	new veh = Rental_GetVehicle(playerid), p = Taxi_PassengerOf(playerid);
@@ -1201,24 +1201,24 @@ Taxi_CmdTassametro(playerid, const params[])
 	{
 		if (g_TxPhase[playerid] != 2 && g_TxPhase[playerid] != 3)
 		{
-			Util_Send(playerid, -10270721, "In attesa della conferma di pagamento del cliente.");
+			Util_Send(playerid, -10270721, "ველოდებით კლიენტის მიერ გადახდის დადასტურებას.");
 			return 1;
 		}
 		if (gPlayer[playerid][pTaxiMeterOn] != 0)
 		{
-			Util_Send(playerid, -10270721, "Il tassametro e' gia' acceso.");
+			Util_Send(playerid, -10270721, "ტაქსომეტრი უკვე ჩართულია.");
 			return 1;
 		}
 		if (!Taxi_InTaxi(playerid, veh) || p == INVALID_PLAYER_ID || GetPlayerVehicleID(p) != veh || GetPlayerState(p) != PLAYER_STATE_PASSENGER)
 		{
-			Util_Send(playerid, -10270721, "Devi essere al volante del taxi con il cliente a bordo.");
+			Util_Send(playerid, -10270721, "ტაქსის საჭესთან უნდა იჯდე, კლიენტით სალონში.");
 			return 1;
 		}
 		DisablePlayerCheckpoint(playerid);
 		g_TxPhase[playerid] = 3;
 		Taxi_MeterBegin(playerid, veh);
-		Util_Send(playerid, 0x66DD66FF, "Tassametro acceso. A destinazione: /tassametro stop.");
-		Util_Send(p, -1, "Il tassametro e' acceso.");
+		Util_Send(playerid, 0x66DD66FF, "ტაქსომეტრი ჩაირთო. დანიშნულების ადგილზე: /tassametro stop.");
+		Util_Send(p, -1, "ტაქსომეტრი ჩართულია.");
 		return 1;
 	}
 	if (!strcmp(tok, "stop", true, 0x7FFFFFFF) && tok[0] != 0)
@@ -1233,15 +1233,15 @@ Taxi_CmdTassametro(playerid, const params[])
 			Taxi_PayPrompt(playerid);
 			return 1;
 		}
-		Util_Send(playerid, -10270721, "Il tassametro non e' acceso.");
+		Util_Send(playerid, -10270721, "ტაქსომეტრი ჩართული არ არის.");
 		return 1;
 	}
 	if (!strcmp(tok, "annulla", true, 0x7FFFFFFF) && tok[0] != 0)
 	{
-		Taxi_CancelRide(playerid, "Corsa annullata senza addebito.", "Il tassista ha annullato la corsa: nessun addebito.");
+		Taxi_CancelRide(playerid, "მგზავრობა გაუქმდა თანხის ჩამოჭრის გარეშე.", "ტაქსისტმა მგზავრობა გააუქმა: თანხა არ ჩამოგეჭრა.");
 		return 1;
 	}
-	Util_Send(playerid, 0x99CCFFFF, "Uso: /tassametro start|stop|annulla");
+	Util_Send(playerid, 0x99CCFFFF, "გამოყენება: /tassametro start|stop|annulla");
 	return 1;
 }
 
@@ -1257,15 +1257,15 @@ Taxi_OnProRental(playerid, result, vehicleid)
 		{
 			case 3:
 			{
-				SendClientMessage(playerid, -10270721, "Fondi insufficienti: servono $%d (canone + cauzione).", 360);
+				SendClientMessage(playerid, -10270721, "სახსრები არ გყოფნის: საჭიროა $%d (ქირა + გირაო).", 360);
 			}
 			case 7:
 			{
-				Util_Send(playerid, -10270721, "Non puoi prendere servizio: livello insufficiente o un altro noleggio/contratto attivo.");
+				Util_Send(playerid, -10270721, "სამსახურს ვერ დაიწყებ: დონე არ გყოფნის ან სხვა ქირაობა/კონტრაქტი აქტიურია.");
 			}
 			default:
 			{
-				Util_Send(playerid, -10270721, "Nessun taxi assegnato: riprova tra poco (nessun addebito).");
+				Util_Send(playerid, -10270721, "ტაქსი არ მოგენიჭა: სცადე ცოტა ხანში (თანხა არ ჩამოგეჭრა).");
 			}
 		}
 		return 0;
@@ -1275,7 +1275,7 @@ Taxi_OnProRental(playerid, result, vehicleid)
 	gPlayer[playerid][pTaxiRideId] = 0;
 	Taxi_ScheduleNpc(playerid);
 	LD_Emit(107, 0, gPlayer[playerid][pCharId], 1, "-");
-	SendClientMessage(playerid, 0x66DD66FF, "Sei in servizio (canone $%d/h, cauzione $%d). Le chiamate arrivano da sole: /accettacorsa. Fine turno: /taxi off al deposito.", 60, 300);
+	SendClientMessage(playerid, 0x66DD66FF, "სამსახურში ხარ (ქირა $%d/სთ, გირაო $%d). გამოძახებები თავად მოვა: /accettacorsa. ცვლის დასასრული: /taxi off დეპოში.", 60, 300);
 	return 1;
 }
 
@@ -1297,19 +1297,19 @@ Taxi_OnProRentalClosed(playerid, result, refund)
 	{
 		case 1:
 		{
-			SendClientMessage(playerid, -1, "Taxi riconsegnato: cauzione restituita $%d (in base alle condizioni del mezzo).", refund);
+			SendClientMessage(playerid, -1, "ტაქსი დაბრუნებულია: დაგიბრუნდა გირაო $%d (მანქანის მდგომარეობის მიხედვით).", refund);
 		}
 		case 5:
 		{
-			Util_Send(playerid, -10270721, "Taxi riconsegnato oltre la tolleranza: cauzione trattenuta.");
+			Util_Send(playerid, -10270721, "ტაქსი დაშვებული დროის შემდეგ დააბრუნე: გირაო დაკავებულია.");
 		}
 		case 2:
 		{
-			Util_Send(playerid, -1, "Il noleggio del taxi risultava gia' chiuso.");
+			Util_Send(playerid, -1, "ტაქსის ქირაობა უკვე დახურული იყო.");
 		}
 		default:
 		{
-			Util_Send(playerid, -10270721, "Chiusura del taxi non confermata: verra' sistemata al prossimo accesso.");
+			Util_Send(playerid, -10270721, "ტაქსის დახურვა არ დადასტურდა: შემდეგ შესვლისას მოგვარდება.");
 		}
 	}
 	return 1;
@@ -1340,13 +1340,13 @@ Taxi_TickNpc(driverid, vehicleid, bool:inVeh)
 	g_TxDwellTick[driverid] = 0;
 	if (g_TxPhase[driverid] == 2)
 	{
-		new d = g_TxDestPt[driverid], name[16];
+		new d = g_TxDestPt[driverid], name[48];
 		g_TxPhase[driverid] = 3;
 		g_TxStartHealth[driverid] = Taxi_VehHealth(vehicleid);
 		Taxi_MeterBegin(driverid, vehicleid);
 		SetPlayerCheckpoint(driverid, g_TxNpcX[d], g_TxNpcY[d], g_TxNpcZ[d], 6.0);
-		LD_DistrictName(g_TxNpcD[d], name, 16);
-		SendClientMessage(driverid, 0x66DD66FF, "Cliente a bordo: portalo a %s (checkpoint).", name);
+		LD_DistrictName(g_TxNpcD[d], name, 48);
+		SendClientMessage(driverid, 0x66DD66FF, "კლიენტი სალონშია: წაიყვანე %s-ში (ჩეკპოინტი).", name);
 		return 0;
 	}
 	Taxi_NpcPay(driverid, vehicleid);
@@ -1365,12 +1365,12 @@ Taxi_TickDriver(driverid)
 	{
 		if (gPlayer[driverid][pRentalId] == 0 && gPlayer[driverid][pRentalPendOp] == 0)
 		{
-			Util_Send(driverid, -10270721, "Il tuo taxi non e' piu' disponibile: fuori servizio.");
+			Util_Send(driverid, -10270721, "შენი ტაქსი აღარ არის ხელმისაწვდომი: სამსახურს გარეთ ხარ.");
 			Taxi_EndDuty(driverid, 4, false);
 		}
 		else if (g_TxPhase[driverid] >= 2 && g_TxPhase[driverid] <= 4)
 		{
-			Taxi_CancelRide(driverid, "Taxi non disponibile: corsa annullata.", "Il taxi non e' piu' disponibile: corsa annullata.");
+			Taxi_CancelRide(driverid, "ტაქსი მიუწვდომელია: მგზავრობა გაუქმდა.", "ტაქსი აღარ არის ხელმისაწვდომი: მგზავრობა გაუქმდა.");
 		}
 		return 0;
 	}
@@ -1385,11 +1385,11 @@ Taxi_TickDriver(driverid)
 		else if (g_TxOffTick[driverid] == 0)
 		{
 			g_TxOffTick[driverid] = Taxi_TickAfter(45000);
-			SendClientMessage(driverid, -10270721, "Torna sul taxi entro %d secondi o la corsa sara' annullata.", 45);
+			SendClientMessage(driverid, -10270721, "დაბრუნდი ტაქსში %d წამში, თორემ მგზავრობა გაუქმდება.", 45);
 		}
 		else if (Taxi_TickReached(g_TxOffTick[driverid]))
 		{
-			Taxi_CancelRide(driverid, "Hai lasciato il taxi: corsa annullata.", "Il tassista ha lasciato il taxi: corsa annullata.");
+			Taxi_CancelRide(driverid, "ტაქსი დატოვე: მგზავრობა გაუქმდა.", "ტაქსისტმა ტაქსი დატოვა: მგზავრობა გაუქმდა.");
 			return 0;
 		}
 	}
@@ -1421,12 +1421,12 @@ Taxi_TickDriver(driverid)
 	new p = Taxi_PassengerOf(driverid);
 	if (p == INVALID_PLAYER_ID)
 	{
-		Taxi_CancelRide(driverid, "Il cliente non e' piu' disponibile: corsa annullata.", "");
+		Taxi_CancelRide(driverid, "კლიენტი აღარ არის ხელმისაწვდომი: მგზავრობა გაუქმდა.", "");
 		return 0;
 	}
 	if (phase == 2 && !g_TxMeterStarted[driverid] && Taxi_TickReached(g_TxBoardUntil[driverid]))
 	{
-		Taxi_CancelRide(driverid, "Il cliente non e' salito in tempo: corsa annullata.", "Non sei salito sul taxi in tempo: corsa annullata.");
+		Taxi_CancelRide(driverid, "კლიენტი დროულად არ ჩაჯდა: მგზავრობა გაუქმდა.", "ტაქსში დროულად არ ჩაჯექი: მგზავრობა გაუქმდა.");
 		return 0;
 	}
 	if (gPlayer[driverid][pTaxiMeterOn] != 0 && GetPlayerVehicleID(p) != veh)
@@ -1454,7 +1454,7 @@ public Taxi_OnTick()
 			g_TxCallUntil[i] = 0;
 			if (gPlayer[i][pTaxiPeer] == 0)
 			{
-				Util_Send(i, -1, "Nessun taxi ha risposto alla tua chiamata.");
+				Util_Send(i, -1, "შენს გამოძახებას არცერთმა ტაქსმა არ უპასუხა.");
 			}
 		}
 		if (gPlayer[i][pTaxiOnDuty] != 0)
@@ -1478,7 +1478,7 @@ Taxi_OnInit()
 	g_TxTimer = SetTimer("Taxi_OnTick", 1000, true);
 	LD_Listen("Taxi_OnDistrictEvent", 20);
 	CreatePickup(1239, 1, 1771.0, -1895.0, 13.6, 0);
-	Lang_Create3DTextLabel("Deposito taxi\n/taxi on  ·  /taxi off", -2994689, 1771.0, -1895.0, (13.6 + 0.8), 20.0, 0, false);
+	Lang_Create3DTextLabel("ტაქსის დეპო\n/taxi on  ·  /taxi off", -2994689, 1771.0, -1895.0, (13.6 + 0.8), 20.0, 0, false);
 }
 
 Taxi_OnExit()
@@ -1514,7 +1514,7 @@ Taxi_OnPlayerDisconnect(playerid, reason)
 	new d = Taxi_DriverOf(playerid);
 	if (d != 65535)
 	{
-		Taxi_CancelRide(d, "Il cliente si e' disconnesso: corsa annullata.", "");
+		Taxi_CancelRide(d, "კლიენტი გავიდა სერვერიდან: მგზავრობა გაუქმდა.", "");
 	}
 	for (new i = 0; i < MAX_PLAYERS; i++)
 	{
@@ -1535,13 +1535,13 @@ Taxi_OnPlayerDeath(playerid)
 	}
 	if (gPlayer[playerid][pTaxiOnDuty] != 0)
 	{
-		Util_Send(playerid, -10270721, "Turno di taxi interrotto.");
+		Util_Send(playerid, -10270721, "ტაქსის ცვლა შეწყდა.");
 		Taxi_EndDuty(playerid, 3, true);
 	}
 	new d = Taxi_DriverOf(playerid);
 	if (d != 65535)
 	{
-		Taxi_CancelRide(d, "Il cliente non e' in condizione di proseguire: corsa annullata.", "");
+		Taxi_CancelRide(d, "კლიენტი ვეღარ გააგრძელებს: მგზავრობა გაუქმდა.", "");
 	}
 	g_TxCallUntil[playerid] = 0;
 	return 0;
@@ -1571,7 +1571,7 @@ Taxi_OnPlayerStateChange(playerid, t_PLAYER_STATE:newstate, t_PLAYER_STATE:oldst
 	if (newstate == PLAYER_STATE_PASSENGER && g_TxPhase[d] == 2 && GetPlayerVehicleID(playerid) == Rental_GetVehicle(d))
 	{
 		DisablePlayerCheckpoint(d);
-		Util_Send(d, 0x66DD66FF, "Il cliente e' a bordo: /tassametro start.");
+		Util_Send(d, 0x66DD66FF, "კლიენტი სალონშია: /tassametro start.");
 		return 0;
 	}
 	if (oldstate == PLAYER_STATE_PASSENGER && _:gPlayer[d][pTaxiMeterOn] != 0)
@@ -1593,7 +1593,7 @@ Taxi_OnVehicleDeath(vehicleid, killerid)
 	{
 		return 0;
 	}
-	Util_Send(d, -10270721, "Il taxi e' stato distrutto: fine del turno.");
+	Util_Send(d, -10270721, "ტაქსი განადგურდა: ცვლა დასრულდა.");
 	Taxi_EndDuty(d, 4, true);
 	return 0;
 }

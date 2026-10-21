@@ -32,18 +32,18 @@ Economy_Paycheck(playerid)
 {
 	new amount = Economy_PaycheckAmount(gPlayer[playerid][pLevel]);
 	new paid = Economy_PaycheckPaid(amount, Money_BankRoom(playerid));
-	SendClientMessage(playerid, -2994689, "--- Stipendio ---");
+	SendClientMessage(playerid, -2994689, "--- ხელფასი ---");
 	if (paid > 0 && Money_GiveBank(playerid, paid, "paycheck", ""))
 	{
-		SendClientMessage(playerid, 0x66DD66FF, "Stipendio: $%d versato in banca. Saldo: $%d.", paid, gPlayer[playerid][pBank]);
+		SendClientMessage(playerid, 0x66DD66FF, "ხელფასი: $%d ჩაირიცხა ბანკში. ბალანსი: $%d.", paid, gPlayer[playerid][pBank]);
 		if (paid < amount)
 		{
-			SendClientMessage(playerid, -10270721, "Il conto ha raggiunto il limite: parte dello stipendio e' andata persa.");
+			SendClientMessage(playerid, -10270721, "ანგარიში ლიმიტზეა: ხელფასის ნაწილი დაიკარგა.");
 		}
 	}
 	else
 	{
-		SendClientMessage(playerid, -10270721, "Il conto bancario e' al limite: stipendio non versato.");
+		SendClientMessage(playerid, -10270721, "საბანკო ანგარიში ლიმიტზეა: ხელფასი არ ჩაირიცხა.");
 	}
 	Level_AddExp(playerid, 1);
 	Char_Save(playerid);

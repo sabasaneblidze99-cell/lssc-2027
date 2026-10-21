@@ -22,7 +22,7 @@ Level_FromExp(exp)
 
 Level_Announce(playerid)
 {
-	SendClientMessage(playerid, -2994689, "Complimenti! Hai raggiunto il livello %d.", gPlayer[playerid][pLevel]);
+	SendClientMessage(playerid, -2994689, "გილოცავ! მიაღწიე %d დონეს.", gPlayer[playerid][pLevel]);
 }
 
 bool:Level_AddExp(playerid, amount)
