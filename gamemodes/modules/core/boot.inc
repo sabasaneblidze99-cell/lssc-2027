@@ -17,6 +17,7 @@ new bool:g_BootWaitLogin[MAX_PLAYERS];
 new g_BootMaxMs, g_BootMaxStep;
 
 forward Boot_OnTick();
+forward Boot_OnLoginQueue();
 
 Boot_Start()
 {
@@ -53,6 +54,12 @@ Boot_Finish()
 	g_BootTimer = 0;
 	g_BootDone = true;
 	printf("[AVVIO] completato in %d ms (%d tappe, la piu' lunga: tappa %d, %d ms)", GetTickCount() - g_BootStartTick, g_BootStep, g_BootMaxStep, g_BootMaxMs);
+	// chi e' entrato durante l'avvio: un login per tick, non tutti nella stessa callback
+	SetTimer("Boot_OnLoginQueue", BOOT_TICK_MS, false);
+}
+
+public Boot_OnLoginQueue()
+{
 	for (new p = 0; p < MAX_PLAYERS; p++)
 	{
 		if (g_BootWaitLogin[p])
@@ -62,8 +69,11 @@ Boot_Finish()
 			{
 				Account_OnConnect(p);
 			}
+			SetTimer("Boot_OnLoginQueue", BOOT_TICK_MS, false);
+			return 1;
 		}
 	}
+	return 1;
 }
 
 // una tappa per tick, nello stesso ordine del vecchio OnGameModeInit

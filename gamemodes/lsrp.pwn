@@ -106,10 +106,7 @@ main()
 public OnGameModeInit()
 {
 	SetGameModeText("LS Crime's RP");
-	for (new i = 0; i < MAX_PLAYERS; i++)
-	{
-		Player_Reset(i);
-	}
+	// (niente reset dei 300 posti qui: gPlayer parte gia' a zero e ogni giocatore viene azzerato in OnPlayerConnect)
 	if (GetMaxPlayers() > MAX_PLAYERS)
 	{
 		printf("[AVVIO] ERRORE: config.json \"max_players\" = %d, ma il gamemode gestisce al massimo %d giocatori (LSRP_MAX_PLAYERS). Abbassa max_players.", GetMaxPlayers(), MAX_PLAYERS);

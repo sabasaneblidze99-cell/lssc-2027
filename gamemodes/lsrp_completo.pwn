@@ -70806,6 +70806,7 @@ new bool:g_BootWaitLogin[MAX_PLAYERS];
 new g_BootMaxMs, g_BootMaxStep;
 
 forward Boot_OnTick();
+forward Boot_OnLoginQueue();
 
 Boot_Start()
 {
@@ -70842,6 +70843,12 @@ Boot_Finish()
 	g_BootTimer = 0;
 	g_BootDone = true;
 	printf("[AVVIO] completato in %d ms (%d tappe, la piu' lunga: tappa %d, %d ms)", GetTickCount() - g_BootStartTick, g_BootStep, g_BootMaxStep, g_BootMaxMs);
+	// chi e' entrato durante l'avvio: un login per tick, non tutti nella stessa callback
+	SetTimer("Boot_OnLoginQueue", BOOT_TICK_MS, false);
+}
+
+public Boot_OnLoginQueue()
+{
 	for (new p = 0; p < MAX_PLAYERS; p++)
 	{
 		if (g_BootWaitLogin[p])
@@ -70851,8 +70858,11 @@ Boot_Finish()
 			{
 				Account_OnConnect(p);
 			}
+			SetTimer("Boot_OnLoginQueue", BOOT_TICK_MS, false);
+			return 1;
 		}
 	}
+	return 1;
 }
 
 // una tappa per tick, nello stesso ordine del vecchio OnGameModeInit
@@ -72551,10 +72561,7 @@ main()
 public OnGameModeInit()
 {
 	SetGameModeText("LS Crime's RP");
-	for (new i = 0; i < MAX_PLAYERS; i++)
-	{
-		Player_Reset(i);
-	}
+	// (niente reset dei 300 posti qui: gPlayer parte gia' a zero e ogni giocatore viene azzerato in OnPlayerConnect)
 	if (GetMaxPlayers() > MAX_PLAYERS)
 	{
 		printf("[AVVIO] ERRORE: config.json \"max_players\" = %d, ma il gamemode gestisce al massimo %d giocatori (LSRP_MAX_PLAYERS). Abbassa max_players.", GetMaxPlayers(), MAX_PLAYERS);
