@@ -161,7 +161,7 @@
       '<div class="au-slab s1"></div><div class="au-slab s2"></div><div class="au-slab s3"></div><div class="au-slab s4"></div>' +
       '<div class="au-pane" id="au-pane"></div><div class="au-side" id="au-side"></div>' +
     "</div>" +
-    '<div class="au-audio" id="au-audio"><div class="au-eq"><i></i><i></i><i></i></div><span id="au-audio-t">' + T.music + '</span><button id="au-mute" aria-label="Audio"></button></div>' +
+    '<div class="au-audio" id="au-audio"><div class="au-eq"><i></i><i></i><i></i></div><span id="au-audio-t">' + T.music + '</span><button id="au-mute" aria-label="ხმა"></button></div>' +
     '<div class="au-foot">' + T.slogan + " · " + T.enterHint + '</div>';
 
   var pane = U.el("au-pane"), side = U.el("au-side"), stage = U.el("au-stage"), prog = U.el("au-progress");

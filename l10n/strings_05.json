@@ -1325,7 +1325,7 @@
   "line": 2,
   "it": "Monolocale",
   "ctx": "\"Monolocale\",",
-  "ka": ""
+  "ka": "სტუდიო"
  },
  {
   "id": 547,
@@ -1333,7 +1333,7 @@
   "line": 3,
   "it": "Bilocale",
   "ctx": "\"Bilocale\",",
-  "ka": ""
+  "ka": "ოროთახიანი"
  },
  {
   "id": 548,
@@ -1341,7 +1341,7 @@
   "line": 4,
   "it": "Casa media",
   "ctx": "\"Casa media\",",
-  "ka": ""
+  "ka": "საშუალო სახლი"
  },
  {
   "id": 549,
@@ -1349,7 +1349,7 @@
   "line": 5,
   "it": "Villa",
   "ctx": "\"Villa\"",
-  "ka": ""
+  "ka": "ვილა"
  },
  {
   "id": 550,
@@ -1357,7 +1357,7 @@
   "line": 11,
   "it": "Denise",
   "ctx": "\"Denise\",",
-  "ka": ""
+  "ka": "Denise"
  },
  {
   "id": 551,
@@ -1365,7 +1365,7 @@
   "line": 12,
   "it": "Katie",
   "ctx": "\"Katie\",",
-  "ka": ""
+  "ka": "Katie"
  },
  {
   "id": 552,
@@ -1373,7 +1373,7 @@
   "line": 13,
   "it": "Casa di Ryder",
   "ctx": "\"Casa di Ryder\",",
-  "ka": ""
+  "ka": "Ryder-ის სახლი"
  },
  {
   "id": 553,
@@ -1381,7 +1381,7 @@
   "line": 14,
   "it": "Casa di Sweet",
   "ctx": "\"Casa di Sweet\",",
-  "ka": ""
+  "ka": "Sweet-ის სახლი"
  },
  {
   "id": 554,
@@ -1389,7 +1389,7 @@
   "line": 15,
   "it": "Casa media A",
   "ctx": "\"Casa media A\",",
-  "ka": ""
+  "ka": "საშუალო სახლი A"
  },
  {
   "id": 555,
@@ -1397,7 +1397,7 @@
   "line": 16,
   "it": "Casa Johnson",
   "ctx": "\"Casa Johnson\",",
-  "ka": ""
+  "ka": "Johnson-ების სახლი"
  },
  {
   "id": 556,
@@ -1405,7 +1405,7 @@
   "line": 17,
   "it": "Casa media B",
   "ctx": "\"Casa media B\",",
-  "ka": ""
+  "ka": "საშუალო სახლი B"
  },
  {
   "id": 557,
@@ -1413,7 +1413,7 @@
   "line": 18,
   "it": "Villa di Madd Dogg",
   "ctx": "\"Villa di Madd Dogg\"",
-  "ka": ""
+  "ka": "Madd Dogg-ის ვილა"
  },
  {
   "id": 558,
@@ -1421,7 +1421,7 @@
   "line": 83,
   "it": "{FF6666}STACCATA",
   "ctx": "format(out, size, \"{FF6666}STACCATA\");",
-  "ka": ""
+  "ka": "{FF6666}გათიშული"
  },
  {
   "id": 559,
@@ -1429,7 +1429,7 @@
   "line": 87,
   "it": "{FFD24D}OFF",
   "ctx": "format(out, size, \"{FFD24D}OFF\");",
-  "ka": ""
+  "ka": "{FFD24D}გამორთ."
  },
  {
   "id": 560,
@@ -1437,7 +1437,7 @@
   "line": 94,
   "it": "%s - Casa %d",
   "ctx": "format(out, size, \"%s - Casa %d\", prefix, g_UiHsHouse[playerid]);",
-  "ka": ""
+  "ka": "%s - სახლი %d"
  },
  {
   "id": 561,
@@ -1445,7 +1445,7 @@
   "line": 190,
   "it": "Casa %d - %s",
   "ctx": "format(title, 64, \"Casa %d - %s\", g_UiHsHouse[playerid], g_UiHsIntName[g_UiHsInt[playerid]]);",
-  "ka": ""
+  "ka": "სახლი %d - %s"
  },
  {
   "id": 562,
@@ -1453,7 +1453,7 @@
   "line": 191,
   "it": "{AAAAAA}Interno: {FFFFFF}%s (%s)\\n",
   "ctx": "format(line, 160, \"{AAAAAA}Interno: {FFFFFF}%s (%s)\\n\", g_UiHsIntName[g_UiHsInt[playerid]], g_UiHsTierName[t]);",
-  "ka": ""
+  "ka": "{AAAAAA}ინტერიერი: {FFFFFF}%s (%s)\\n"
  },
  {
   "id": 563,
@@ -1461,7 +1461,7 @@
   "line": 193,
   "it": "{AAAAAA}Prezzo: {66DD66}$%s{AAAAAA}  (liv. min %d)\\n",
   "ctx": "format(line, 160, \"{AAAAAA}Prezzo: {66DD66}$%s{AAAAAA}  (liv. min %d)\\n\", price, g_UiHsTierLevel[t]);",
-  "ka": ""
+  "ka": "{AAAAAA}ფასი: {66DD66}$%s{AAAAAA}  (მინ. დონე %d)\\n"
  },
  {
   "id": 564,
@@ -1469,7 +1469,7 @@
   "line": 197,
   "it": "{AAAAAA}Stato: {FFD24D}in vendita\\n",
   "ctx": "UI_HsMenuRow(playerid, n, 0, \"{AAAAAA}Stato: {FFD24D}in vendita\\n\", body, 1024);",
-  "ka": ""
+  "ka": "{AAAAAA}სტატუსი: {FFD24D}იყიდება\\n"
  },
  {
   "id": 565,
@@ -1477,7 +1477,7 @@
   "line": 198,
   "it": "{66DD66}> Compra questa casa\\n",
   "ctx": "UI_HsMenuRow(playerid, n, 100, \"{66DD66}> Compra questa casa\\n\", body, 1024);",
-  "ka": ""
+  "ka": "{66DD66}> იყიდე ეს სახლი\\n"
  },
  {
   "id": 566,
@@ -1485,7 +1485,7 @@
   "line": 202,
   "it": "{AAAAAA}Stato: {FF6666}proprieta' privata\\n",
   "ctx": "UI_HsMenuRow(playerid, n, 0, \"{AAAAAA}Stato: {FF6666}proprieta' privata\\n\", body, 1024);",
-  "ka": ""
+  "ka": "{AAAAAA}სტატუსი: {FF6666}კერძო საკუთრება\\n"
  },
  {
   "id": 567,
@@ -1493,7 +1493,7 @@
   "line": 206,
   "it": "{AAAAAA}Stato: {66DD66}tua proprieta'\\n",
   "ctx": "UI_HsMenuRow(playerid, n, 0, role == 1 ? \"{AAAAAA}Stato: {66DD66}tua proprieta'\\n\" : \"{AAAAAA}Stato: {66AAFF}ospite con chiave\\n\", body, 1024);",
-  "ka": ""
+  "ka": "{AAAAAA}სტატუსი: {66DD66}შენი საკუთრება\\n"
  },
  {
   "id": 568,
@@ -1501,7 +1501,7 @@
   "line": 206,
   "it": "{AAAAAA}Stato: {66AAFF}ospite con chiave\\n",
   "ctx": "UI_HsMenuRow(playerid, n, 0, role == 1 ? \"{AAAAAA}Stato: {66DD66}tua proprieta'\\n\" : \"{AAAAAA}Stato: {66AAFF}ospite con chiave\\n\", body, 1024);",
-  "ka": ""
+  "ka": "{AAAAAA}სტატუსი: {66AAFF}სტუმარი გასაღებით\\n"
  },
  {
   "id": 569,
@@ -1509,7 +1509,7 @@
   "line": 208,
   "it": "{AAAAAA}Luce: %s{AAAAAA}   Gas: ",
   "ctx": "format(line, 160, \"{AAAAAA}Luce: %s{AAAAAA}   Gas: \", st);",
-  "ka": ""
+  "ka": "{AAAAAA}შუქი: %s{AAAAAA}   გაზი: "
  },
  {
   "id": 570,
@@ -1517,7 +1517,7 @@
   "line": 218,
   "it": "{AAAAAA}Bollette: %s%d da pagare ($%s)\\n",
   "ctx": "format(line, 160, \"{AAAAAA}Bollette: %s%d da pagare ($%s)\\n\", bills > 0 ? \"{FF6666}\" : \"{66DD66}\", bills, tmp);",
-  "ka": ""
+  "ka": "{AAAAAA}გადასახადები: %s%d გადასახდელი ($%s)\\n"
  },
  {
   "id": 571,
@@ -1525,7 +1525,7 @@
   "line": 220,
   "it": "{FFFFFF}Serratura: %s{FFFFFF} (tocca per cambiare)\\n",
   "ctx": "format(line, 160, \"{FFFFFF}Serratura: %s{FFFFFF} (tocca per cambiare)\\n\", g_UiHsLocked[playerid] ? \"{FF6666}chiusa\" : \"{66DD66}aperta\");",
-  "ka": ""
+  "ka": "{FFFFFF}საკეტი: %s{FFFFFF} (შესაცვლელად დააჭირე)\\n"
  },
  {
   "id": 572,
@@ -1533,7 +1533,7 @@
   "line": 220,
   "it": "{FF6666}chiusa",
   "ctx": "format(line, 160, \"{FFFFFF}Serratura: %s{FFFFFF} (tocca per cambiare)\\n\", g_UiHsLocked[playerid] ? \"{FF6666}chiusa\" : \"{66DD66}aperta\");",
-  "ka": ""
+  "ka": "{FF6666}ჩაკეტილი"
  },
  {
   "id": 573,
@@ -1541,7 +1541,7 @@
   "line": 220,
   "it": "{66DD66}aperta",
   "ctx": "format(line, 160, \"{FFFFFF}Serratura: %s{FFFFFF} (tocca per cambiare)\\n\", g_UiHsLocked[playerid] ? \"{FF6666}chiusa\" : \"{66DD66}aperta\");",
-  "ka": ""
+  "ka": "{66DD66}ღია"
  },
  {
   "id": 574,
@@ -1549,7 +1549,7 @@
   "line": 223,
   "it": "{FFFFFF}Utenze (luce / gas)\\n",
   "ctx": "UI_HsMenuRow(playerid, n, 2, \"{FFFFFF}Utenze (luce / gas)\\n\", body, 1024);",
-  "ka": ""
+  "ka": "{FFFFFF}კომუნალური (შუქი / გაზი)\\n"
  },
  {
   "id": 575,
@@ -1557,7 +1557,7 @@
   "line": 224,
   "it": "{FFFFFF}Frigo ({FFD24D}%d/%d{FFFFFF} porzioni)\\n",
   "ctx": "format(line, 160, \"{FFFFFF}Frigo ({FFD24D}%d/%d{FFFFFF} porzioni)\\n\", g_UiHsFridge[playerid], UI_HsFridgeCap(playerid));",
-  "ka": ""
+  "ka": "{FFFFFF}მაცივარი ({FFD24D}%d/%d{FFFFFF} პორცია)\\n"
  },
  {
   "id": 576,
@@ -1565,7 +1565,7 @@
   "line": 228,
   "it": "{FFFFFF}Bollette\\n",
   "ctx": "UI_HsMenuRow(playerid, n, 4, \"{FFFFFF}Bollette\\n\", body, 1024);",
-  "ka": ""
+  "ka": "{FFFFFF}გადასახადები\\n"
  },
  {
   "id": 577,
@@ -1573,7 +1573,7 @@
   "line": 229,
   "it": "{FFFFFF}Chiavi ospiti ({FFD24D}%d/%d{FFFFFF})\\n",
   "ctx": "format(line, 160, \"{FFFFFF}Chiavi ospiti ({FFD24D}%d/%d{FFFFFF})\\n\", g_UiHsKeys[playerid], 3);",
-  "ka": ""
+  "ka": "{FFFFFF}სტუმრის გასაღებები ({FFD24D}%d/%d{FFFFFF})\\n"
  },
  {
   "id": 578,
@@ -1581,7 +1581,7 @@
   "line": 231,
   "it": "{FF6666}Vendi la casa\\n",
   "ctx": "UI_HsMenuRow(playerid, n, 6, \"{FF6666}Vendi la casa\\n\", body, 1024);",
-  "ka": ""
+  "ka": "{FF6666}სახლის გაყიდვა\\n"
  },
  {
   "id": 579,
@@ -1589,7 +1589,7 @@
   "line": 234,
   "it": "Scegli",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9200, DIALOG_STYLE_LIST, title, body, \"Scegli\", \"Chiudi\");",
-  "ka": ""
+  "ka": "არჩევა"
  },
  {
   "id": 580,
@@ -1597,7 +1597,7 @@
   "line": 234,
   "it": "Chiudi",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9200, DIALOG_STYLE_LIST, title, body, \"Scegli\", \"Chiudi\");",
-  "ka": ""
+  "ka": "დახურვა"
  },
  {
   "id": 581,
@@ -1605,7 +1605,7 @@
   "line": 246,
   "it": "{FFFFFF}Contanti\\t%s$%s\\n",
   "ctx": "format(body, 320, \"{FFFFFF}Contanti\\t%s$%s\\n\", g_UiHsMoney[playerid] >= p ? \"{66DD66}\" : \"{FF6666}\", cash);",
-  "ka": ""
+  "ka": "{FFFFFF}ნაღდი ფული\\t%s$%s\\n"
  },
  {
   "id": 582,
@@ -1613,7 +1613,7 @@
   "line": 247,
   "it": "{FFFFFF}Banca\\t%s$%s\\n",
   "ctx": "format(tl, 48, \"{FFFFFF}Banca\\t%s$%s\\n\", g_UiHsBank[playerid] >= p ? \"{66DD66}\" : \"{FF6666}\", bank);",
-  "ka": ""
+  "ka": "{FFFFFF}ბანკი\\t%s$%s\\n"
  },
  {
   "id": 583,
@@ -1621,7 +1621,7 @@
   "line": 249,
   "it": "%s $%s - pagamento",
   "ctx": "format(title, 64, \"%s $%s - pagamento\", g_UiHsTierName[t], price);",
-  "ka": ""
+  "ka": "%s $%s - გადახდა"
  },
  {
   "id": 584,
@@ -1629,7 +1629,7 @@
   "line": 250,
   "it": "Acquista",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9201, DIALOG_STYLE_TABLIST, title, body, \"Acquista\", \"Indietro\");",
-  "ka": ""
+  "ka": "ყიდვა"
  },
  {
   "id": 585,
@@ -1637,7 +1637,7 @@
   "line": 250,
   "it": "Indietro",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9201, DIALOG_STYLE_TABLIST, title, body, \"Acquista\", \"Indietro\");",
-  "ka": ""
+  "ka": "უკან"
  },
  {
   "id": 586,
@@ -1645,7 +1645,7 @@
   "line": 257,
   "it": "{FFFFFF}Vendere la casa {FFD24D}%d{FFFFFF} (%s)?\\n\\nRiceverai circa {66DD66}$%s{FFFFFF} (%d%% del prezzo) in banca.\\nUtenze, chiavi e bollette verranno azzerate; l'operazione non e' reversibile.",
   "ctx": "format(body, 320, \"{FFFFFF}Vendere la casa {FFD24D}%d{FFFFFF} (%s)?\\n\\nRiceverai circa {66DD66}$%s{FFFFFF} (%d%% del prezzo) in banca.\\nUtenze, chiavi e bollette verranno azzerate; l'operazione non e'",
-  "ka": ""
+  "ka": "{FFFFFF}გაყიდო სახლი {FFD24D}%d{FFFFFF} (%s)?\\n\\nბანკში მიიღებ დაახლოებით {66DD66}$%s{FFFFFF}-ს (ფასის %d%%).\\nკომუნალური, გასაღებები და გადასახადები განულდება; ოპერაცია შეუქცევადია."
  },
  {
   "id": 587,
@@ -1653,7 +1653,7 @@
   "line": 258,
   "it": "Conferma vendita",
   "ctx": "UI_HsTitle(playerid, \"Conferma vendita\", title, 64);",
-  "ka": ""
+  "ka": "გაყიდვის დადასტურება"
  },
  {
   "id": 588,
@@ -1661,7 +1661,7 @@
   "line": 259,
   "it": "Vendi",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9202, DIALOG_STYLE_MSGBOX, title, body, \"Vendi\", \"Annulla\");",
-  "ka": ""
+  "ka": "გაყიდვა"
  },
  {
   "id": 589,
@@ -1669,7 +1669,7 @@
   "line": 259,
   "it": "Annulla",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9202, DIALOG_STYLE_MSGBOX, title, body, \"Vendi\", \"Annulla\");",
-  "ka": ""
+  "ka": "გაუქმება"
  },
  {
   "id": 590,
@@ -1677,7 +1677,7 @@
   "line": 269,
   "it": "Utenza\\tStato\\tAzione\\n",
   "ctx": "strcat(body, \"Utenza\\tStato\\tAzione\\n\", 512);",
-  "ka": ""
+  "ka": "კომუნალური\\tსტატუსი\\tმოქმედება\\n"
  },
  {
   "id": 591,
@@ -1685,7 +1685,7 @@
   "line": 275,
   "it": "{FFFFFF}Luce\\t%s\\t{FF6666}Paga le bollette\\n",
   "ctx": "format(line, 128, \"{FFFFFF}Luce\\t%s\\t{FF6666}Paga le bollette\\n\", st);",
-  "ka": ""
+  "ka": "{FFFFFF}შუქი\\t%s\\t{FF6666}გადაიხადე გადასახადები\\n"
  },
  {
   "id": 592,
@@ -1693,7 +1693,7 @@
   "line": 279,
   "it": "{FFFFFF}Luce\\t%s\\t{AAAAAA}Spegni\\n",
   "ctx": "format(line, 128, \"{FFFFFF}Luce\\t%s\\t{AAAAAA}Spegni\\n\", st);",
-  "ka": ""
+  "ka": "{FFFFFF}შუქი\\t%s\\t{AAAAAA}გამორთვა\\n"
  },
  {
   "id": 593,
@@ -1701,7 +1701,7 @@
   "line": 283,
   "it": "{FFFFFF}Luce\\t%s\\t{AAAAAA}Accendi\\n",
   "ctx": "format(line, 128, \"{FFFFFF}Luce\\t%s\\t{AAAAAA}Accendi\\n\", st);",
-  "ka": ""
+  "ka": "{FFFFFF}შუქი\\t%s\\t{AAAAAA}ჩართვა\\n"
  },
  {
   "id": 594,
@@ -1709,7 +1709,7 @@
   "line": 290,
   "it": "{777777}Gas\\t%s\\t{777777}Solo proprietario\\n",
   "ctx": "format(line, 128, \"{777777}Gas\\t%s\\t{777777}Solo proprietario\\n\", st);",
-  "ka": ""
+  "ka": "{777777}გაზი\\t%s\\t{777777}მხოლოდ მფლობელი\\n"
  },
  {
   "id": 595,
@@ -1717,7 +1717,7 @@
   "line": 298,
   "it": "{FFFFFF}Gas\\t%s\\t{FF6666}Paga le bollette\\n",
   "ctx": "format(line, 128, \"{FFFFFF}Gas\\t%s\\t{FF6666}Paga le bollette\\n\", st);",
-  "ka": ""
+  "ka": "{FFFFFF}გაზი\\t%s\\t{FF6666}გადაიხადე გადასახადები\\n"
  },
  {
   "id": 596,
@@ -1725,7 +1725,7 @@
   "line": 302,
   "it": "{FFFFFF}Gas\\t%s\\t{AAAAAA}Spegni\\n",
   "ctx": "format(line, 128, \"{FFFFFF}Gas\\t%s\\t{AAAAAA}Spegni\\n\", st);",
-  "ka": ""
+  "ka": "{FFFFFF}გაზი\\t%s\\t{AAAAAA}გამორთვა\\n"
  },
  {
   "id": 597,
@@ -1733,7 +1733,7 @@
   "line": 306,
   "it": "{FFFFFF}Gas\\t%s\\t{AAAAAA}Accendi\\n",
   "ctx": "format(line, 128, \"{FFFFFF}Gas\\t%s\\t{AAAAAA}Accendi\\n\", st);",
-  "ka": ""
+  "ka": "{FFFFFF}გაზი\\t%s\\t{AAAAAA}ჩართვა\\n"
  },
  {
   "id": 598,
@@ -1741,7 +1741,7 @@
   "line": 311,
   "it": "Utenze",
   "ctx": "UI_HsTitle(playerid, \"Utenze\", title, 64);",
-  "ka": ""
+  "ka": "კომუნალური"
  },
  {
   "id": 599,
@@ -1749,7 +1749,7 @@
   "line": 312,
   "it": "Cambia",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9203, DIALOG_STYLE_TABLIST_HEADERS, title, body, \"Cambia\", \"Indietro\");",
-  "ka": ""
+  "ka": "შეცვლა"
  },
  {
   "id": 600,
@@ -1757,7 +1757,7 @@
   "line": 312,
   "it": "Indietro",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9203, DIALOG_STYLE_TABLIST_HEADERS, title, body, \"Cambia\", \"Indietro\");",
-  "ka": ""
+  "ka": "უკან"
  },
  {
   "id": 601,
@@ -1765,7 +1765,7 @@
   "line": 329,
   "it": "{AAAAAA}Scorte: {FFD24D}%d/%d{AAAAAA} porzioni  -  con te: %d/%d\\n",
   "ctx": "format(line, 128, \"{AAAAAA}Scorte: {FFD24D}%d/%d{AAAAAA} porzioni  -  con te: %d/%d\\n\", units, cap, g_UiHsBag[playerid], 12);",
-  "ka": ""
+  "ka": "{AAAAAA}მარაგი: {FFD24D}%d/%d{AAAAAA} პორცია  -  თან: %d/%d\\n"
  },
  {
   "id": 602,
@@ -1773,7 +1773,7 @@
   "line": 333,
   "it": "{FF6666}Luce spenta: il frigo non raffredda, le scorte si deteriorano\\n",
   "ctx": "UI_HsMenuRow(playerid, n, 0, \"{FF6666}Luce spenta: il frigo non raffredda, le scorte si deteriorano\\n\", body, 512);",
-  "ka": ""
+  "ka": "{FF6666}შუქი გამორთულია: მაცივარი არ აციებს, მარაგი ფუჭდება\\n"
  },
  {
   "id": 603,
@@ -1781,7 +1781,7 @@
   "line": 335,
   "it": "%sMangia freddo (+%d sazieta')\\n",
   "ctx": "format(line, 128, \"%sMangia freddo (+%d sazieta')\\n\", units > 0 ? \"{FFFFFF}\" : \"{777777}\", 25);",
-  "ka": ""
+  "ka": "%sცივად ჭამა (+%d სიმაძღრე)\\n"
  },
  {
   "id": 604,
@@ -1789,7 +1789,7 @@
   "line": 337,
   "it": "%sCucina (+%d sazieta', +%d salute%s)\\n",
   "ctx": "format(line, 128, \"%sCucina (+%d sazieta', +%d salute%s)\\n\", units > 0 && g_UiHsGas[playerid] == 1 ? \"{FFFFFF}\" : \"{777777}\", 45, 5, g_UiHsGas[playerid] == 1 ? \"\" : \" - gas non attivo\");",
-  "ka": ""
+  "ka": "%sმომზადება (+%d სიმაძღრე, +%d ჯანმრთელობა%s)\\n"
  },
  {
   "id": 605,
@@ -1797,7 +1797,7 @@
   "line": 337,
   "it": " - gas non attivo",
   "ctx": "format(line, 128, \"%sCucina (+%d sazieta', +%d salute%s)\\n\", units > 0 && g_UiHsGas[playerid] == 1 ? \"{FFFFFF}\" : \"{777777}\", 45, 5, g_UiHsGas[playerid] == 1 ? \"\" : \" - gas non attivo\");",
-  "ka": ""
+  "ka": " - გაზი არ მუშაობს"
  },
  {
   "id": 606,
@@ -1805,7 +1805,7 @@
   "line": 341,
   "it": "%sRiponi spesa nel frigo\\n",
   "ctx": "format(line, 128, \"%sRiponi spesa nel frigo\\n\", g_UiHsBag[playerid] > 0 && units < cap ? \"{FFFFFF}\" : \"{777777}\");",
-  "ka": ""
+  "ka": "%sპროდუქტების ჩალაგება მაცივარში\\n"
  },
  {
   "id": 607,
@@ -1813,7 +1813,7 @@
   "line": 343,
   "it": "%sPrendi porzioni dal frigo\\n",
   "ctx": "format(line, 128, \"%sPrendi porzioni dal frigo\\n\", units > 0 && g_UiHsBag[playerid] < 12 ? \"{FFFFFF}\" : \"{777777}\");",
-  "ka": ""
+  "ka": "%sპორციების აღება მაცივრიდან\\n"
  },
  {
   "id": 608,
@@ -1821,7 +1821,7 @@
   "line": 346,
   "it": "Frigo",
   "ctx": "UI_HsTitle(playerid, \"Frigo\", title, 64);",
-  "ka": ""
+  "ka": "მაცივარი"
  },
  {
   "id": 609,
@@ -1829,7 +1829,7 @@
   "line": 347,
   "it": "Scegli",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9204, DIALOG_STYLE_LIST, title, body, \"Scegli\", \"Indietro\");",
-  "ka": ""
+  "ka": "არჩევა"
  },
  {
   "id": 610,
@@ -1837,7 +1837,7 @@
   "line": 347,
   "it": "Indietro",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9204, DIALOG_STYLE_LIST, title, body, \"Scegli\", \"Indietro\");",
-  "ka": ""
+  "ka": "უკან"
  },
  {
   "id": 611,
@@ -1845,7 +1845,7 @@
   "line": 356,
   "it": "{FFFFFF}%s\\nQuantita' (1-%d):",
   "ctx": "format(body, 192, \"{FFFFFF}%s\\nQuantita' (1-%d):\", action == 3 ? \"Porzioni da riporre nel frigo.\" : \"Porzioni da prendere dal frigo.\", maxAmount);",
-  "ka": ""
+  "ka": "{FFFFFF}%s\\nრაოდენობა (1-%d):"
  },
  {
   "id": 612,
@@ -1853,7 +1853,7 @@
   "line": 356,
   "it": "Porzioni da riporre nel frigo.",
   "ctx": "format(body, 192, \"{FFFFFF}%s\\nQuantita' (1-%d):\", action == 3 ? \"Porzioni da riporre nel frigo.\" : \"Porzioni da prendere dal frigo.\", maxAmount);",
-  "ka": ""
+  "ka": "მაცივარში ჩასალაგებელი პორციები."
  },
  {
   "id": 613,
@@ -1861,7 +1861,7 @@
   "line": 356,
   "it": "Porzioni da prendere dal frigo.",
   "ctx": "format(body, 192, \"{FFFFFF}%s\\nQuantita' (1-%d):\", action == 3 ? \"Porzioni da riporre nel frigo.\" : \"Porzioni da prendere dal frigo.\", maxAmount);",
-  "ka": ""
+  "ka": "მაცივრიდან ასაღები პორციები."
  },
  {
   "id": 614,
@@ -1869,7 +1869,7 @@
   "line": 357,
   "it": "Riponi",
   "ctx": "UI_HsTitle(playerid, action == 3 ? \"Riponi\" : \"Prendi\", title, 64);",
-  "ka": ""
+  "ka": "ჩალაგება"
  },
  {
   "id": 615,
@@ -1877,7 +1877,7 @@
   "line": 357,
   "it": "Prendi",
   "ctx": "UI_HsTitle(playerid, action == 3 ? \"Riponi\" : \"Prendi\", title, 64);",
-  "ka": ""
+  "ka": "აღება"
  },
  {
   "id": 616,
@@ -1885,7 +1885,7 @@
   "line": 358,
   "it": "Conferma",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9205, DIALOG_STYLE_INPUT, title, body, \"Conferma\", \"Indietro\");",
-  "ka": ""
+  "ka": "დადასტურება"
  },
  {
   "id": 617,
@@ -1893,7 +1893,7 @@
   "line": 358,
   "it": "Indietro",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9205, DIALOG_STYLE_INPUT, title, body, \"Conferma\", \"Indietro\");",
-  "ka": ""
+  "ka": "უკან"
  },
  {
   "id": 618,
@@ -1901,7 +1901,7 @@
   "line": 368,
   "it": "Utenza\\tDa pagare\\tImporto\\tNote\\n",
   "ctx": "strcat(body, \"Utenza\\tDa pagare\\tImporto\\tNote\\n\", 512);",
-  "ka": ""
+  "ka": "კომუნალური\\tგადასახდელი\\tთანხა\\tშენიშვნა\\n"
  },
  {
   "id": 619,
@@ -1909,7 +1909,7 @@
   "line": 370,
   "it": "{FFFFFF}Luce\\t%d\\t$%s\\t%s\\n",
   "ctx": "format(line, 160, \"{FFFFFF}Luce\\t%d\\t$%s\\t%s\\n\", g_UiHsLightCnt[playerid], a, g_UiHsLight[playerid] == 2 ? \"{FF6666}staccata\" : \"{AAAAAA}-\");",
-  "ka": ""
+  "ka": "{FFFFFF}შუქი\\t%d\\t$%s\\t%s\\n"
  },
  {
   "id": 620,
@@ -1917,7 +1917,7 @@
   "line": 370,
   "it": "{FF6666}staccata",
   "ctx": "format(line, 160, \"{FFFFFF}Luce\\t%d\\t$%s\\t%s\\n\", g_UiHsLightCnt[playerid], a, g_UiHsLight[playerid] == 2 ? \"{FF6666}staccata\" : \"{AAAAAA}-\");",
-  "ka": ""
+  "ka": "{FF6666}გათიშული"
  },
  {
   "id": 621,
@@ -1925,7 +1925,7 @@
   "line": 373,
   "it": "{FFFFFF}Gas\\t%d\\t$%s\\t%s\\n",
   "ctx": "format(line, 160, \"{FFFFFF}Gas\\t%d\\t$%s\\t%s\\n\", g_UiHsGasCnt[playerid], b, g_UiHsGas[playerid] == 2 ? \"{FF6666}staccata\" : \"{AAAAAA}-\");",
-  "ka": ""
+  "ka": "{FFFFFF}გაზი\\t%d\\t$%s\\t%s\\n"
  },
  {
   "id": 622,
@@ -1933,7 +1933,7 @@
   "line": 373,
   "it": "{FF6666}staccata",
   "ctx": "format(line, 160, \"{FFFFFF}Gas\\t%d\\t$%s\\t%s\\n\", g_UiHsGasCnt[playerid], b, g_UiHsGas[playerid] == 2 ? \"{FF6666}staccata\" : \"{AAAAAA}-\");",
-  "ka": ""
+  "ka": "{FF6666}გათიშული"
  },
  {
   "id": 623,
@@ -1941,7 +1941,7 @@
   "line": 381,
   "it": "{FFD24D}Totale\\t%d\\t$%s\\t{AAAAAA}incl. $%s riattivazione\\n",
   "ctx": "format(line, 160, \"{FFD24D}Totale\\t%d\\t$%s\\t{AAAAAA}incl. $%s riattivazione\\n\", g_UiHsLightCnt[playerid] + g_UiHsGasCnt[playerid], a, b);",
-  "ka": ""
+  "ka": "{FFD24D}სულ\\t%d\\t$%s\\t{AAAAAA}მ.შ. $%s აღდგენა\\n"
  },
  {
   "id": 624,
@@ -1949,7 +1949,7 @@
   "line": 385,
   "it": "{FFD24D}Totale\\t%d\\t$%s\\t{AAAAAA}-\\n",
   "ctx": "format(line, 160, \"{FFD24D}Totale\\t%d\\t$%s\\t{AAAAAA}-\\n\", g_UiHsLightCnt[playerid] + g_UiHsGasCnt[playerid], a);",
-  "ka": ""
+  "ka": "{FFD24D}სულ\\t%d\\t$%s\\t{AAAAAA}-\\n"
  },
  {
   "id": 625,
@@ -1957,7 +1957,7 @@
   "line": 388,
   "it": "Bollette",
   "ctx": "UI_HsTitle(playerid, \"Bollette\", title, 64);",
-  "ka": ""
+  "ka": "გადასახადები"
  },
  {
   "id": 626,
@@ -1965,7 +1965,7 @@
   "line": 389,
   "it": "Paga tutte",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9206, DIALOG_STYLE_TABLIST_HEADERS, title, body, \"Paga tutte\", \"Indietro\");",
-  "ka": ""
+  "ka": "ყველას გადახდა"
  },
  {
   "id": 627,
@@ -1973,7 +1973,7 @@
   "line": 389,
   "it": "Indietro",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9206, DIALOG_STYLE_TABLIST_HEADERS, title, body, \"Paga tutte\", \"Indietro\");",
-  "ka": ""
+  "ka": "უკან"
  },
  {
   "id": 628,
@@ -1981,7 +1981,7 @@
   "line": 400,
   "it": "{FFFFFF}Banca\\t%s$%s\\n",
   "ctx": "format(body, 320, \"{FFFFFF}Banca\\t%s$%s\\n\", g_UiHsBank[playerid] >= p ? \"{66DD66}\" : \"{FF6666}\", bank);",
-  "ka": ""
+  "ka": "{FFFFFF}ბანკი\\t%s$%s\\n"
  },
  {
   "id": 629,
@@ -1989,7 +1989,7 @@
   "line": 401,
   "it": "{FFFFFF}Contanti\\t%s$%s\\n",
   "ctx": "format(tl, 48, \"{FFFFFF}Contanti\\t%s$%s\\n\", g_UiHsMoney[playerid] >= p ? \"{66DD66}\" : \"{FF6666}\", cash);",
-  "ka": ""
+  "ka": "{FFFFFF}ნაღდი ფული\\t%s$%s\\n"
  },
  {
   "id": 630,
@@ -1997,7 +1997,7 @@
   "line": 403,
   "it": "Paga bollette $%s",
   "ctx": "format(title, 64, \"Paga bollette $%s\", total);",
-  "ka": ""
+  "ka": "გადასახადების გადახდა $%s"
  },
  {
   "id": 631,
@@ -2005,7 +2005,7 @@
   "line": 404,
   "it": "Paga",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9207, DIALOG_STYLE_TABLIST, title, body, \"Paga\", \"Indietro\");",
-  "ka": ""
+  "ka": "გადახდა"
  },
  {
   "id": 632,
@@ -2013,7 +2013,7 @@
   "line": 404,
   "it": "Indietro",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9207, DIALOG_STYLE_TABLIST, title, body, \"Paga\", \"Indietro\");",
-  "ka": ""
+  "ka": "უკან"
  },
  {
   "id": 633,
@@ -2021,7 +2021,7 @@
   "line": 451,
   "it": "Il tuo livello e' troppo basso per questa casa.",
   "ctx": "SendClientMessage(playerid, -10066177, \"Il tuo livello e' troppo basso per questa casa.\");",
-  "ka": ""
+  "ka": "ამ სახლისთვის შენი დონე ძალიან დაბალია."
  },
  {
   "id": 634,
@@ -2029,7 +2029,7 @@
   "line": 477,
   "it": "Fondi insufficienti con questo metodo di pagamento.",
   "ctx": "SendClientMessage(playerid, -10066177, \"Fondi insufficienti con questo metodo di pagamento.\");",
-  "ka": ""
+  "ka": "ამ გადახდის მეთოდით სახსრები არ გყოფნის."
  },
  {
   "id": 635,
@@ -2037,7 +2037,7 @@
   "line": 509,
   "it": "Utenza staccata per morosita': paga le bollette per riattivarla.",
   "ctx": "SendClientMessage(playerid, -10066177, \"Utenza staccata per morosita': paga le bollette per riattivarla.\");",
-  "ka": ""
+  "ka": "კომუნალური გათიშულია დავალიანების გამო: გადაიხადე გადასახადები აღსადგენად."
  },
  {
   "id": 636,
@@ -2045,7 +2045,7 @@
   "line": 515,
   "it": "Solo il proprietario puo' gestire il gas.",
   "ctx": "SendClientMessage(playerid, -10066177, \"Solo il proprietario puo' gestire il gas.\");",
-  "ka": ""
+  "ka": "გაზის მართვა მხოლოდ მფლობელს შეუძლია."
  },
  {
   "id": 637,
@@ -2053,7 +2053,7 @@
   "line": 537,
   "it": "Il frigo e' vuoto.",
   "ctx": "SendClientMessage(playerid, -10066177, \"Il frigo e' vuoto.\");",
-  "ka": ""
+  "ka": "მაცივარი ცარიელია."
  },
  {
   "id": 638,
@@ -2061,7 +2061,7 @@
   "line": 547,
   "it": "Il frigo e' vuoto.",
   "ctx": "SendClientMessage(playerid, -10066177, \"Il frigo e' vuoto.\");",
-  "ka": ""
+  "ka": "მაცივარი ცარიელია."
  },
  {
   "id": 639,
@@ -2069,7 +2069,7 @@
   "line": 553,
   "it": "Il gas non e' attivo: non puoi cucinare.",
   "ctx": "SendClientMessage(playerid, -10066177, \"Il gas non e' attivo: non puoi cucinare.\");",
-  "ka": ""
+  "ka": "გაზი არ მუშაობს: მომზადება არ შეგიძლია."
  },
  {
   "id": 640,
@@ -2077,6 +2077,6 @@
   "line": 568,
   "it": "Non hai spesa da riporre o il frigo e' pieno.",
   "ctx": "SendClientMessage(playerid, -10066177, \"Non hai spesa da riporre o il frigo e' pieno.\");",
-  "ka": ""
+  "ka": "ჩასალაგებელი პროდუქტები არ გაქვს ან მაცივარი სავსეა."
  }
 ]

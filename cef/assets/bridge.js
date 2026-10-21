@@ -83,17 +83,17 @@
   // metri -> "420 m" / "1,5 km" (come UI_LvFmtDist)
   U.dist = function (m) {
     m = Math.max(0, U.int(m));
-    if (m < 1000) return m + " m";
-    return Math.floor(m / 1000) + "," + Math.floor((m % 1000) / 100) + " km";
+    if (m < 1000) return m + " მ";
+    return Math.floor(m / 1000) + "," + Math.floor((m % 1000) / 100) + " კმ";
   };
 
   // secondi fa (come UI_LvFmtAgo)
   U.ago = function (s) {
     s = Math.max(0, U.int(s));
-    if (s < 60) return "adesso";
-    if (s < 3600) return Math.floor(s / 60) + " min fa";
-    if (s < 86400) return Math.floor(s / 3600) + " h fa";
-    return Math.floor(s / 86400) + " g fa";
+    if (s < 60) return "ახლა";
+    if (s < 3600) return Math.floor(s / 60) + " წთ წინ";
+    if (s < 86400) return Math.floor(s / 3600) + " სთ წინ";
+    return Math.floor(s / 86400) + " დღის წინ";
   };
 
   U.pct = function (v, max) {
@@ -110,34 +110,34 @@
 
   // Tabelle di sola visualizzazione: stessi testi di modules/ui/living_ui.inc
   LSSC.names = {
-    district: ["Tutti", "Idlewood", "Ganton", "Jefferson"],
-    cargo: ["Merci varie", "Merci generiche", "Alimentari", "Materiali edili"],
-    kind: ["Tutte", "Trasporto merci"],
-    track: ["", "Trasporti", "Taxi"],
-    tier: ["Principiante", "Affidabile", "Esperto", "Elite"],
+    district: ["ყველა", "Idlewood", "Ganton", "Jefferson"],
+    cargo: ["სხვადასხვა ტვირთი", "ზოგადი ტვირთი", "სურსათი", "სამშენებლო მასალები"],
+    kind: ["ყველა", "ტვირთის გადაზიდვა"],
+    track: ["", "ტრანსპორტირება", "ტაქსი"],
+    tier: ["დამწყები", "სანდო", "გამოცდილი", "ელიტა"],
     block: [
       "",
-      "Livello insufficiente",
-      "Serve più reputazione nei trasporti",
-      "Serve più fiducia nel quartiere",
-      "Hai già un contratto in corso",
-      "Sei già impegnato in un altro lavoro",
-      "Prenditi una pausa, torna tra poco",
-      "Hai lavorato tanto quest'ora",
-      "Lasciato da poco: riprovaci più tardi",
-      "Già preso da un altro autista",
-      "Non disponibile al momento"
+      "არასაკმარისი დონე",
+      "ტრანსპორტირებაში მეტი რეპუტაცია გჭირდება",
+      "უბნის მეტი ნდობა გჭირდება",
+      "უკვე გაქვს აქტიური კონტრაქტი",
+      "უკვე სხვა სამსახურით ხარ დაკავებული",
+      "შეისვენე და ცოტა ხანში დაბრუნდი",
+      "ამ საათში უკვე ბევრი იმუშავე",
+      "ახლახან თქვი უარი: მოგვიანებით სცადე",
+      "სხვა მძღოლმა უკვე აიღო",
+      "ამჟამად მიუწვდომელია"
     ],
     prjBlock: [
       "",
-      "Potrai donare dopo un po' di tempo trascorso in città.",
-      "Per oggi hai già dato il massimo: grazie davvero.",
-      "Questo progetto non raccoglie più fondi.",
-      "Le donazioni si fanno alla Casa del Quartiere o a una bacheca."
+      "შეწირვას ქალაქში ცოტა ხნის გატარების შემდეგ შეძლებ.",
+      "დღეს უკვე მაქსიმუმი შეწირე: დიდი მადლობა.",
+      "ეს პროექტი თანხას აღარ აგროვებს.",
+      "შემოწირულობა მიიღება უბნის სახლში ან დაფასთან."
     ],
     event: [
-      "Evento", "Consegna completata", "Consegna non riuscita", "Corsa in taxi", "Noleggio aperto",
-      "Noleggio riconsegnato", "Crimine segnalato", "Pattuglia di passaggio", "Progetto della comunità", "Intervento dello staff"
+      "მოვლენა", "მიწოდება დასრულდა", "მიწოდება ჩაიშალა", "ტაქსით მგზავრობა", "ქირაობა დაიწყო",
+      "ნაქირავები დაბრუნდა", "დანაშაულის შეტყობინება", "პატრულმა ჩაიარა", "საზოგადოებრივი პროექტი", "ადმინისტრაციის ჩარევა"
     ]
   };
   U.name = function (table, idx) {
@@ -204,9 +204,9 @@
       "</div>";
     wrap.querySelector(".confirm-title").textContent = opts.title;
     wrap.querySelector(".confirm-text").innerHTML = opts.html;
-    wrap.querySelector('[data-a="no"]').textContent = opts.no || "Annulla";
+    wrap.querySelector('[data-a="no"]').textContent = opts.no || "გაუქმება";
     var yes = wrap.querySelector('[data-a="yes"]');
-    yes.textContent = opts.yes || "Conferma";
+    yes.textContent = opts.yes || "დადასტურება";
     if (opts.danger) yes.className = "btn btn-danger";
     var api = {
       close: function () { if (wrap.parentNode) wrap.parentNode.removeChild(wrap); api.open = false; },

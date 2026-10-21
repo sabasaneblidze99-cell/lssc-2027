@@ -13,19 +13,19 @@
     '<div class="view-scrim"></div>' +
     '<section class="board glass" role="dialog" aria-modal="true" aria-labelledby="bd-title">' +
       '<header class="board-head">' +
-        '<div><h1 class="board-title" id="bd-title">Bacheca contratti</h1><p class="board-sub" id="bd-sub"></p></div>' +
+        '<div><h1 class="board-title" id="bd-title">კონტრაქტების დაფა</h1><p class="board-sub" id="bd-sub"></p></div>' +
         '<div class="board-head-right"><span class="kbd">Esc</span>' +
-          '<button class="icon-btn" id="bd-close" aria-label="Chiudi la bacheca">' + IC_CLOSE + "</button></div>" +
+          '<button class="icon-btn" id="bd-close" aria-label="დაფის დახურვა">' + IC_CLOSE + "</button></div>" +
       "</header>" +
       '<div class="board-filters">' +
-        '<div class="filter-group" id="bd-f-district"><span>Quartiere</span></div>' +
-        '<div class="filter-group" id="bd-f-kind"><span>Professione</span></div>' +
-        '<div class="filter-group"><button class="chip" id="bd-f-elig" aria-pressed="false">Solo quelli che posso accettare</button></div>' +
+        '<div class="filter-group" id="bd-f-district"><span>უბანი</span></div>' +
+        '<div class="filter-group" id="bd-f-kind"><span>პროფესია</span></div>' +
+        '<div class="filter-group"><button class="chip" id="bd-f-elig" aria-pressed="false">მხოლოდ ხელმისაწვდომი</button></div>' +
         '<div class="spacer"></div>' +
-        '<button class="btn" id="bd-refresh">' + IC_REFRESH.replace("<svg", '<svg width="16" height="16"') + "Aggiorna</button>" +
+        '<button class="btn" id="bd-refresh">' + IC_REFRESH.replace("<svg", '<svg width="16" height="16"') + "განახლება</button>" +
       "</div>" +
       '<div class="board-body">' +
-        '<div class="board-list" id="bd-list" role="listbox" aria-label="Contratti disponibili"></div>' +
+        '<div class="board-list" id="bd-list" role="listbox" aria-label="ხელმისაწვდომი კონტრაქტები"></div>' +
         '<aside class="board-detail" id="bd-detail"></aside>' +
       "</div>" +
     "</section>";
@@ -69,9 +69,9 @@
   }
   function left(r) { return Math.max(0, Math.round((r.expAt - Date.now()) / 1000)); }
   function requirement(r) {
-    if (r.minRep > 0) return "Liv. " + r.minLevel + ", rep. " + r.minRep;
-    if (r.minLRep > 0) return "Liv. " + r.minLevel + ", fiducia " + r.minLRep;
-    return "Liv. " + r.minLevel;
+    if (r.minRep > 0) return "დონე " + r.minLevel + ", რეპუტაცია " + r.minRep;
+    if (r.minLRep > 0) return "დონე " + r.minLevel + ", უბნის ნდობა " + r.minLRep;
+    return "დონე " + r.minLevel;
   }
   function route(r) {
     return U.esc(U.name("district", r.from)) + '<span class="arrow">›</span>' + U.esc(U.name("district", r.to));
@@ -81,15 +81,15 @@
   function renderList() {
     var shown = rows.filter(match);
     if (!shown.length) {
-      el.list.innerHTML = '<div class="board-empty">' + (rows.length ? "Nessun contratto con questi filtri. Prova a toglierne uno." : "La bacheca è vuota adesso. Premi Aggiorna tra qualche minuto.") + "</div>";
+      el.list.innerHTML = '<div class="board-empty">' + (rows.length ? "ამ ფილტრებით კონტრაქტი ვერ მოიძებნა. სცადე რომელიმე ფილტრის მოხსნა." : "დაფა ახლა ცარიელია. რამდენიმე წუთში დააჭირე „განახლებას“.") + "</div>";
     } else {
       el.list.innerHTML = shown.map(function (r) {
         var ok = r.block === 0;
         return '<button class="ct' + (ok ? "" : " blocked") + '" role="option" data-id="' + r.id + '" aria-selected="' + (r.id === selId) + '">' +
-          '<div class="ct-top"><span class="num">#' + r.id + "</span>" + (r.premium ? '<span class="ct-premium">Premium</span>' : "") + "</div>" +
+          '<div class="ct-top"><span class="num">#' + r.id + "</span>" + (r.premium ? '<span class="ct-premium">პრემიუმ</span>' : "") + "</div>" +
           '<div class="ct-route">' + route(r) + "</div>" +
           '<div class="ct-cargo">' + U.esc(U.name("cargo", r.cargo)) + " · " + U.dist(r.dist) + "</div>" +
-          '<div class="ct-foot"><span class="ct-reward num">' + U.money(r.reward) + '</span><span class="ct-time num" data-t="' + r.id + '">scade tra ' + U.time(left(r)) + "</span></div>" +
+          '<div class="ct-foot"><span class="ct-reward num">' + U.money(r.reward) + '</span><span class="ct-time num" data-t="' + r.id + '">დარჩა ' + U.time(left(r)) + "</span></div>" +
           '<div class="ct-req">' + U.esc(ok ? requirement(r) : U.name("block", r.block)) + "</div>" +
         "</button>";
       }).join("");
@@ -109,40 +109,40 @@
   function renderDetail() {
     var r = find(selId);
     if (!r) {
-      el.detail.innerHTML = '<p class="detail-empty">Scegli un contratto per vedere tratta, compenso e requisiti.</p>';
+      el.detail.innerHTML = '<p class="detail-empty">აირჩიე კონტრაქტი, რომ ნახო მარშრუტი, ანაზღაურება და მოთხოვნები.</p>';
       return;
     }
     var can = r.block === 0 && atBoard;
     var status, cls;
     if (r.block !== 0) { status = U.name("block", r.block) + "."; cls = "blocked"; }
-    else if (!atBoard) { status = "Puoi accettarlo a una bacheca: Casa del Quartiere di Idlewood, magazzino di Ganton o di Jefferson."; cls = "away"; }
-    else { status = "Puoi accettarlo adesso."; cls = "ok"; }
+    else if (!atBoard) { status = "კონტრაქტის აღება შეგიძლია დაფასთან: Idlewood-ის უბნის სახლში, Ganton-ის ან Jefferson-ის საწყობში."; cls = "away"; }
+    else { status = "შეგიძლია ახლავე აიღო."; cls = "ok"; }
     el.detail.innerHTML =
-      '<div><div class="detail-id num">Contratto #' + r.id + '</div><div class="detail-route">' + route(r) + "</div>" +
-        '<div class="detail-kind">' + U.esc(U.name("kind", r.kind)) + (r.premium ? " · <b>premium: il quartiere si fida di te</b>" : "") + "</div></div>" +
-      '<div class="detail-reward num">' + U.money(r.reward) + '<div class="detail-note">compenso indicativo</div></div>' +
+      '<div><div class="detail-id num">კონტრაქტი #' + r.id + '</div><div class="detail-route">' + route(r) + "</div>" +
+        '<div class="detail-kind">' + U.esc(U.name("kind", r.kind)) + (r.premium ? " · <b>პრემიუმ: უბანი გენდობა</b>" : "") + "</div></div>" +
+      '<div class="detail-reward num">' + U.money(r.reward) + '<div class="detail-note">სავარაუდო ანაზღაურება</div></div>' +
       '<dl class="facts">' +
-        "<dt>Ritiro</dt><dd>magazzino di " + U.esc(U.name("district", r.from)) + "</dd>" +
-        "<dt>Consegna</dt><dd>negozio di " + U.esc(U.name("district", r.to)) + "</dd>" +
-        "<dt>Merce</dt><dd>" + U.esc(U.name("cargo", r.cargo)) + "</dd>" +
-        '<dt>Distanza</dt><dd class="num">' + U.dist(r.dist) + "</dd>" +
-        '<dt>Disponibile</dt><dd class="num" data-t="' + r.id + '">' + U.time(left(r)) + "</dd>" +
-        "<dt>Requisiti</dt><dd>" + U.esc(requirement(r)) + "</dd>" +
+        "<dt>აღება</dt><dd>" + U.esc(U.name("district", r.from)) + "-ის საწყობი</dd>" +
+        "<dt>მიწოდება</dt><dd>" + U.esc(U.name("district", r.to)) + "-ის მაღაზია</dd>" +
+        "<dt>ტვირთი</dt><dd>" + U.esc(U.name("cargo", r.cargo)) + "</dd>" +
+        '<dt>მანძილი</dt><dd class="num">' + U.dist(r.dist) + "</dd>" +
+        '<dt>დარჩენილი დრო</dt><dd class="num" data-t="' + r.id + '">' + U.time(left(r)) + "</dd>" +
+        "<dt>მოთხოვნები</dt><dd>" + U.esc(requirement(r)) + "</dd>" +
       "</dl>" +
-      '<p class="detail-note">Il mezzo te lo fornisce il magazzino. Il compenso finale dipende da come arriva la merce.</p>' +
+      '<p class="detail-note">მანქანას საწყობი მოგცემს. საბოლოო ანაზღაურება იმაზეა დამოკიდებული, რა მდგომარეობაში მიიტან ტვირთს.</p>' +
       '<div class="detail-status ' + cls + '">' + U.esc(status) + "</div>" +
       '<div class="detail-actions"><button class="btn btn-primary" id="bd-accept"' + (can && !pending ? "" : " disabled") + ">" +
-        (pending === r.id ? "In attesa della bacheca…" : "Accetta contratto") + "</button></div>";
+        (pending === r.id ? "ველოდებით დაფის პასუხს…" : "კონტრაქტის აღება") + "</button></div>";
     var btn = U.el("bd-accept");
     if (can) btn.addEventListener("click", function () { askAccept(r); });
   }
 
   function askAccept(r) {
     confirmBox = LSSC.confirm(root, {
-      title: "Accetti il contratto #" + r.id + "?",
-      html: "Un furgone ti aspetta al magazzino di <b>" + U.esc(U.name("district", r.from)) + "</b>. Porta il carico al negozio di <b>" +
-        U.esc(U.name("district", r.to)) + "</b> con calma e attenzione.<br><br>Puoi seguire un solo contratto alla volta. Il contratto resta valido per " + U.time(left(r)) + ".",
-      yes: "Conferma", no: "Annulla",
+      title: "აიღებ კონტრაქტს #" + r.id + "?",
+      html: "ფურგონი გელოდება <b>" + U.esc(U.name("district", r.from)) + "</b>-ის საწყობთან. ტვირთი მშვიდად და ფრთხილად მიიტანე <b>" +
+        U.esc(U.name("district", r.to)) + "</b>-ის მაღაზიაში.<br><br>ერთდროულად მხოლოდ ერთ კონტრაქტზე შეგიძლია მუშაობა. კონტრაქტი ძალაშია კიდევ " + U.time(left(r)) + ".",
+      yes: "დადასტურება", no: "გაუქმება",
       onYes: function () {
         confirmBox = null;
         pending = r.id;
@@ -158,14 +158,14 @@
       var r = find(U.int(n.getAttribute("data-t")));
       if (!r) return;
       var t = U.time(left(r));
-      n.textContent = n.classList.contains("ct-time") ? "scade tra " + t : t;
+      n.textContent = n.classList.contains("ct-time") ? "დარჩა " + t : t;
     });
   }
 
   function renderHead() {
     el.sub.innerHTML = atBoard
-      ? "Sei alla bacheca" + (place ? " di <b>" + U.esc(place) + "</b>" : "") + ": puoi accettare un contratto."
-      : "Consultazione: per accettare raggiungi una bacheca.";
+      ? "დაფასთან ხარ" + (place ? " (<b>" + U.esc(place) + "</b>)" : "") + ": შეგიძლია კონტრაქტის აღება."
+      : "დათვალიერების რეჟიმი: კონტრაქტის ასაღებად მიდი დაფასთან.";
   }
 
   // ---------------------------------------------------------------- eventi server

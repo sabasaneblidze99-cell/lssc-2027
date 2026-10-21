@@ -18,16 +18,16 @@
     back: SVG('<path d="M15 5l-7 7 7 7"/>')
   };
   var APPS = [
-    ["contracts", "Contratti"], ["messages", "Messaggi"], ["district", "Quartiere"],
-    ["bank", "Banca"], ["job", "Lavoro"], ["profile", "Profilo"]
+    ["contracts", "კონტრაქტები"], ["messages", "შეტყობინებები"], ["district", "უბანი"],
+    ["bank", "ბანკი"], ["job", "სამსახური"], ["profile", "პროფილი"]
   ];
 
   root.innerHTML =
-    '<section class="phone" role="dialog" aria-modal="true" aria-label="Telefono CityOS">' +
+    '<section class="phone" role="dialog" aria-modal="true" aria-label="CityOS ტელეფონი">' +
       '<div class="phone-screen" id="ph-screen">' +
         '<div class="phone-status"><span class="num" id="ph-clock">--:--</span><span class="os">CityOS</span></div>' +
         '<div class="phone-scroll" id="ph-body"></div>' +
-        '<div class="phone-home-bar"><button id="ph-home" aria-label="Schermata principale"></button></div>' +
+        '<div class="phone-home-bar"><button id="ph-home" aria-label="მთავარი ეკრანი"></button></div>' +
       "</div>" +
     "</section>";
 
@@ -129,7 +129,7 @@
     return h < 0 ? "--:--" : (h < 10 ? "0" : "") + h + ":" + (m < 10 ? "0" : "") + m;
   }
   function head(title, backTo) {
-    return '<div class="app-head"><button class="icon-btn" data-go="' + (backTo || "home") + '" aria-label="Indietro">' + IC.back +
+    return '<div class="app-head"><button class="icon-btn" data-go="' + (backTo || "home") + '" aria-label="უკან">' + IC.back +
       '</button><h2 class="app-title">' + U.esc(title) + "</h2></div>";
   }
   function ctLeft() { return D.ct && D.ct.expAt ? Math.max(0, Math.round((D.ct.expAt - Date.now()) / 1000)) : -1; }
@@ -139,37 +139,37 @@
       '<div class="bar"><i style="width:' + U.pct(value, max) + '%"></i></div>' + (note ? '<div class="meter-note">' + note + "</div>" : "") + "</div>";
   }
   function localLabel(tier, disc) {
-    if (tier >= 2) return "Di casa (-" + disc + "% su noleggio e taxi)";
-    if (tier === 1) return "Conosciuto (-" + disc + "% su noleggio e taxi)";
-    if (tier < 0) return "Da riconquistare: si risale più in fretta";
-    return "Sconosciuto";
+    if (tier >= 2) return "შენიანი (-" + disc + "% ქირაობასა და ტაქსიზე)";
+    if (tier === 1) return "ნაცნობი (-" + disc + "% ქირაობასა და ტაქსიზე)";
+    if (tier < 0) return "ნდობა დასაბრუნებელია: აღდგენა უფრო სწრაფად ხდება";
+    return "უცნობი";
   }
 
   function contractWidget(full) {
     if (!D.ct) {
-      return '<div class="widget empty"><div class="widget-head"><span>Contratto</span></div>' +
-        '<div class="widget-title">Nessun contratto in corso</div>' +
-        '<p class="widget-sub">La bacheca della Casa del Quartiere di Idlewood ha sempre qualcosa da fare.</p></div>';
+      return '<div class="widget empty"><div class="widget-head"><span>კონტრაქტი</span></div>' +
+        '<div class="widget-title">აქტიური კონტრაქტი არ გაქვს</div>' +
+        '<p class="widget-sub">Idlewood-ის უბნის სახლის დაფაზე სამუშაო ყოველთვის მოიძებნება.</p></div>';
     }
     var c = D.ct, t = ctLeft();
-    var html = '<div class="widget"><div class="widget-head"><span class="num">Contratto #' + c.id + "</span><b>" + (c.state === 2 ? "In consegna" : "Accettato") + "</b></div>" +
+    var html = '<div class="widget"><div class="widget-head"><span class="num">კონტრაქტი #' + c.id + "</span><b>" + (c.state === 2 ? "მიწოდება" : "მიღებულია") + "</b></div>" +
       '<div class="widget-title">' + U.esc(U.name("district", c.from)) + '<span class="arrow">›</span>' + U.esc(U.name("district", c.to)) + "</div>" +
       '<p class="widget-sub">' + U.esc(c.objective || "-") + "</p>" +
-      '<div class="widget-row"><span class="muted">Verso ' + U.esc(c.dest || "-") + (c.dist >= 0 ? " · " + U.dist(c.dist) : "") + '</span><span class="big num" data-ct-timer>' + U.time(t) + "</span></div>";
-    if (c.integ >= 0) html += '<div class="meter"><div class="meter-label"><span>Integrità merce</span><span class="num">' + c.integ + '%</span></div><div class="bar' + (c.integ < 40 ? " danger" : c.integ < 70 ? " warn" : "") + '"><i style="width:' + Math.min(100, c.integ) + '%"></i></div></div>';
+      '<div class="widget-row"><span class="muted">მიმართულება: ' + U.esc(c.dest || "-") + (c.dist >= 0 ? " · " + U.dist(c.dist) : "") + '</span><span class="big num" data-ct-timer>' + U.time(t) + "</span></div>";
+    if (c.integ >= 0) html += '<div class="meter"><div class="meter-label"><span>ტვირთის მთლიანობა</span><span class="num">' + c.integ + '%</span></div><div class="bar' + (c.integ < 40 ? " danger" : c.integ < 70 ? " warn" : "") + '"><i style="width:' + Math.min(100, c.integ) + '%"></i></div></div>';
     if (full) {
-      html += '<dl class="facts" style="margin-top:0.9rem"><dt>Merce</dt><dd>' + U.esc(U.name("cargo", c.cargo)) + '</dd><dt>Compenso indicativo</dt><dd class="money num">' + U.money(c.reward) + "</dd></dl>";
+      html += '<dl class="facts" style="margin-top:0.9rem"><dt>ტვირთი</dt><dd>' + U.esc(U.name("cargo", c.cargo)) + '</dd><dt>სავარაუდო ანაზღაურება</dt><dd class="money num">' + U.money(c.reward) + "</dd></dl>";
     }
     return html + "</div>";
   }
 
   var R = {};
   R.home = function () {
-    var h = D.hud.hour, greet = h < 0 ? "Ciao" : h < 6 ? "Buonanotte" : h < 13 ? "Buongiorno" : h < 18 ? "Buon pomeriggio" : "Buonasera";
+    var h = D.hud.hour, greet = h < 0 ? "გამარჯობა" : h < 6 ? "ღამე მშვიდობისა" : h < 13 ? "დილა მშვიდობისა" : h < 18 ? "დღე მშვიდობისა" : "საღამო მშვიდობისა";
     var first = D.profile.name.split(/[_ ]/)[0];
     var badge = unread();
     return '<div class="os-greet num">' + clock() + "</div>" +
-      '<p class="os-date">' + greet + (first ? ", " + U.esc(first) : "") + ". Saldo in banca " + '<span class="money num">' + U.money(D.hud.bank) + "</span></p>" +
+      '<p class="os-date">' + greet + (first ? ", " + U.esc(first) : "") + ". ანგარიშზე: " + '<span class="money num">' + U.money(D.hud.bank) + "</span></p>" +
       contractWidget(false) +
       '<div class="apps">' + APPS.map(function (a) {
         return '<button class="app' + (a[0] === "contracts" ? " primary" : "") + '" data-go="' + a[0] + '"><span class="app-icon">' + IC[a[0]] +
@@ -177,16 +177,16 @@
       }).join("") + "</div>";
   };
   R.contracts = function () {
-    var html = head("Contratti") + contractWidget(true) + '<div class="stack" style="margin-top:1rem">';
-    html += '<button class="btn btn-primary" data-act="board">Apri la bacheca</button>';
-    if (D.ct) html += '<button class="btn btn-danger" data-act="abandon"' + (pendingAbandon ? " disabled" : "") + ">" + (pendingAbandon ? "In attesa…" : "Lascia il contratto") + "</button>" +
-      '<p class="small muted">Se lasci il contratto non perdi denaro, ma perdi ' + D.ct.penalty + " punti di reputazione nei trasporti.</p>";
-    else html += '<p class="small muted">Dal telefono consulti la bacheca ovunque; per accettare serve una bacheca: Casa del Quartiere di Idlewood, magazzino di Ganton o di Jefferson.</p>';
+    var html = head("კონტრაქტები") + contractWidget(true) + '<div class="stack" style="margin-top:1rem">';
+    html += '<button class="btn btn-primary" data-act="board">დაფის გახსნა</button>';
+    if (D.ct) html += '<button class="btn btn-danger" data-act="abandon"' + (pendingAbandon ? " disabled" : "") + ">" + (pendingAbandon ? "მოლოდინი…" : "კონტრაქტზე უარის თქმა") + "</button>" +
+      '<p class="small muted">თუ კონტრაქტზე უარს იტყვი, ფულს არ დაკარგავ, მაგრამ ტრანსპორტირების რეპუტაციას ' + D.ct.penalty + " ქულა დააკლდება.</p>";
+    else html += '<p class="small muted">ტელეფონით დაფის ნახვა ყველგან შეგიძლია, მაგრამ კონტრაქტის ასაღებად დაფასთან უნდა მიხვიდე: Idlewood-ის უბნის სახლი, Ganton-ის ან Jefferson-ის საწყობი.</p>';
     return html + "</div>";
   };
   R.messages = function () {
-    var html = head("Messaggi");
-    if (!D.msgs.length) return html + '<p class="muted">Nessun messaggio. Qui arrivano gli avvisi della bacheca e del quartiere.</p>';
+    var html = head("შეტყობინებები");
+    if (!D.msgs.length) return html + '<p class="muted">შეტყობინებები არ გაქვს. აქ მოდის დაფისა და უბნის განცხადებები.</p>';
     html += '<div class="stack">' + D.msgs.map(function (m) {
       return '<div class="msg' + (m.unread ? " unread" : "") + '"><div class="msg-head"><b>' + U.esc(m.from) + "</b><span>" + U.ago((Date.now() - m.at) / 1000) + "</span></div><p>" + U.esc(m.text) + "</p></div>";
     }).join("") + "</div>";
@@ -197,87 +197,87 @@
     var tabs = '<div class="tabs">' + [1, 2, 3].map(function (i) {
       return '<button class="chip" data-district="' + i + '" aria-pressed="' + (D.districtTab === i) + '">' + N.district[i] + "</button>";
     }).join("") + "</div>";
-    var html = head("Quartiere") + tabs;
+    var html = head("უბანი") + tabs;
     var d = D.district;
-    if (D.districtWait || !d || d.id !== D.districtTab) return html + '<p class="muted">Sto chiedendo le notizie del quartiere…</p>';
-    var prosp = d.prosp === 0 ? ["low", "In difficoltà", "Ogni consegna conta per la ricostruzione."]
-      : d.prosp === 2 ? ["high", "Fiorente", "C'è più lavoro per tutti."] : ["", "Stabile", "Il quartiere tiene il passo."];
-    html += '<div class="widget"><div class="widget-head"><span>Prosperità</span></div><div class="district-state ' + prosp[0] + '">' + prosp[1] + "</div>" +
+    if (D.districtWait || !d || d.id !== D.districtTab) return html + '<p class="muted">უბნის ამბები იტვირთება…</p>';
+    var prosp = d.prosp === 0 ? ["low", "გაჭირვებაში", "აღდგენისთვის ყოველი მიწოდება მნიშვნელოვანია."]
+      : d.prosp === 2 ? ["high", "აყვავებული", "სამუშაო ყველასთვის მეტია."] : ["", "სტაბილური", "უბანი დროს ფეხს უწყობს."];
+    html += '<div class="widget"><div class="widget-head"><span>კეთილდღეობა</span></div><div class="district-state ' + prosp[0] + '">' + prosp[1] + "</div>" +
       '<p class="widget-sub">' + prosp[2] + "</p>" +
-      meter("act", "Attività economica", d.act, 1000) +
-      meter("sec", "Sicurezza", d.sec, 100) +
-      meter("pre", "Pressione criminale", d.crime, 100, d.hazard ? "Zona a rischio: i contratti pagano di più." : "") +
-      (d.fest > 0 ? '<p class="festa">Festa di quartiere in corso: ancora ' + d.fest + " ore.</p>" : "") + "</div>";
-    html += '<div class="widget" style="margin-top:0.7rem"><div class="widget-head"><span>La tua reputazione qui</span></div>' +
+      meter("act", "ეკონომიკური აქტივობა", d.act, 1000) +
+      meter("sec", "უსაფრთხოება", d.sec, 100) +
+      meter("pre", "კრიმინალური წნეხი", d.crime, 100, d.hazard ? "სარისკო ზონა: კონტრაქტები მეტს იხდის." : "") +
+      (d.fest > 0 ? '<p class="festa">უბანში დღესასწაულია: კიდევ ' + d.fest + " საათი.</p>" : "") + "</div>";
+    html += '<div class="widget" style="margin-top:0.7rem"><div class="widget-head"><span>შენი რეპუტაცია აქ</span></div>' +
       '<div class="rep-line"><span>' + U.esc(localLabel(d.tier, d.disc)) + '</span><span class="rep-num num">' + d.lrep + "</span></div></div>";
-    if (d.rumor) html += '<p class="rumor">Si dice in giro: “' + U.esc(d.rumor) + "”</p>";
-    html += '<div class="section-label">Ultimi avvenimenti</div>';
-    if (!d.events.length) html += '<p class="muted small">Una giornata tranquilla, per ora.</p>';
+    if (d.rumor) html += '<p class="rumor">ხმები დადის: „' + U.esc(d.rumor) + "“</p>";
+    html += '<div class="section-label">ბოლო მოვლენები</div>';
+    if (!d.events.length) html += '<p class="muted small">ჯერჯერობით მშვიდი დღეა.</p>';
     else html += '<ul class="timeline">' + d.events.map(function (e) {
       var v = e.value > 0 ? '<span class="plus num">+' + e.value + "</span>" : e.value < 0 ? '<span class="minus num">' + e.value + "</span>" : "<span></span>";
       return '<li><span class="ago">' + U.ago(e.ago) + "</span><span>" + U.esc(U.name("event", e.type)) + "</span>" + v + "</li>";
     }).join("") + "</ul>";
-    html += '<div class="stack" style="margin-top:1rem"><button class="btn" data-act="project">Progetto della comunità</button></div>';
+    html += '<div class="stack" style="margin-top:1rem"><button class="btn" data-act="project">საზოგადოებრივი პროექტი</button></div>';
     return html;
   };
   R.project = function () {
-    var html = head("Progetto", "district"), p = D.project;
-    if (D.projectWait || !p) return html + '<p class="muted">Sto aprendo il progetto del quartiere…</p>';
-    if (!p.id) return html + '<p class="muted">In questo quartiere non c\'è un progetto attivo adesso.</p>';
+    var html = head("პროექტი", "district"), p = D.project;
+    if (D.projectWait || !p) return html + '<p class="muted">უბნის პროექტი იხსნება…</p>';
+    if (!p.id) return html + '<p class="muted">ამ უბანში ახლა აქტიური პროექტი არ არის.</p>';
     var cap = Math.min(p.max, p.dayLeft);
-    html += '<div class="widget"><div class="widget-head"><span>' + U.esc(U.name("district", p.district)) + '</span><span class="num">' + p.hours + " h rimaste</span></div>" +
+    html += '<div class="widget"><div class="widget-head"><span>' + U.esc(U.name("district", p.district)) + '</span><span class="num">' + p.hours + " სთ დარჩა</span></div>" +
       '<div class="widget-title">' + U.esc(p.name) + "</div>" +
-      '<div class="meter"><div class="meter-label"><span class="money num">' + U.money(p.fund) + '</span><span class="num">obiettivo ' + U.money(p.goal) + "</span></div>" +
+      '<div class="meter"><div class="meter-label"><span class="money num">' + U.money(p.fund) + '</span><span class="num">მიზანი: ' + U.money(p.goal) + "</span></div>" +
       '<div class="bar"><i style="width:' + U.pct(p.fund, p.goal) + '%"></i></div></div></div>';
-    html += '<p class="small muted" style="margin-top:0.8rem">Il fondo cresce anche con ogni contratto completato nel quartiere, senza toccare il tuo compenso.</p>';
+    html += '<p class="small muted" style="margin-top:0.8rem">ფონდი უბანში შესრულებული ყოველი კონტრაქტითაც იზრდება, შენი ანაზღაურება კი ამით არ მცირდება.</p>';
     if (p.block) return html + '<p class="detail-status away" style="margin-top:0.8rem">' + U.esc(U.name("prjBlock", p.block)) + "</p>";
-    return html + '<div class="section-label">Contribuisci (da ' + U.money(p.min) + " a " + U.money(cap) + ")</div>" +
-      '<div class="amount-input"><input id="ph-amount" inputmode="numeric" maxlength="9" placeholder="' + p.min + '" aria-label="Importo"><button class="btn btn-primary" data-act="contribute">Dona</button></div>' +
+    return html + '<div class="section-label">შემოწირულობა (' + U.money(p.min) + "-დან " + U.money(cap) + "-მდე)</div>" +
+      '<div class="amount-input"><input id="ph-amount" inputmode="numeric" maxlength="9" placeholder="' + p.min + '" aria-label="თანხა"><button class="btn btn-primary" data-act="contribute">შეწირვა</button></div>' +
       '<p class="small muted" id="ph-amount-err" style="margin-top:0.4rem"></p>';
   };
   R.bank = function () {
-    var html = head("Banca") +
-      '<div class="widget"><div class="widget-head"><span>Saldo</span></div><div class="widget-title money num">' + U.money(D.hud.bank) + "</div>" +
-      '<div class="widget-row"><span class="muted">Contanti</span><span class="num">' + U.money(D.hud.money) + "</span></div></div>" +
-      '<div class="section-label">Ultimi movimenti</div>';
-    if (!D.bankReady) html += '<p class="muted small">Sto caricando l\'estratto conto…</p>';
-    else if (!D.bankRows.length) html += '<p class="muted small">Nessun movimento recente.</p>';
+    var html = head("ბანკი") +
+      '<div class="widget"><div class="widget-head"><span>ბალანსი</span></div><div class="widget-title money num">' + U.money(D.hud.bank) + "</div>" +
+      '<div class="widget-row"><span class="muted">ნაღდი ფული</span><span class="num">' + U.money(D.hud.money) + "</span></div></div>" +
+      '<div class="section-label">ბოლო ოპერაციები</div>';
+    if (!D.bankReady) html += '<p class="muted small">ამონაწერი იტვირთება…</p>';
+    else if (!D.bankRows.length) html += '<p class="muted small">ბოლო დროს ოპერაციები არ ყოფილა.</p>';
     else html += D.bankRows.map(function (r) {
       return '<div class="list-row"><span><b>' + U.esc(r.kind) + "</b>" + (r.other ? " · " + U.esc(r.other) : "") + '<br><span class="small muted num">' + U.esc(r.when) + "</span></span>" +
         '<span class="num ' + (r.amount >= 0 ? "money" : "") + '">' + (r.amount >= 0 ? "+" : "") + U.money(r.amount) + "</span></div>";
     }).join("");
-    return html + '<p class="small muted" style="margin-top:0.8rem">Depositi, prelievi e bonifici si fanno agli ATM o allo sportello.</p>';
+    return html + '<p class="small muted" style="margin-top:0.8rem">თანხის შეტანა, გამოტანა და გადარიცხვა ბანკომატში ან ბანკის სალაროში შეგიძლია.</p>';
   };
   R.job = function () {
-    return head("Lavoro") +
-      '<div class="widget"><div class="widget-head"><span>Job Center</span><span>Pershing Square</span></div>' +
-      '<div class="widget-title">Lavori stabili</div><p class="widget-sub">Il Job Center di Pershing Square offre lavori stabili; se ti serve un mezzo, il noleggio è proprio lì accanto.</p></div>' +
-      (D.profile.job ? '<div class="widget-row"><span class="muted">Il tuo lavoro</span><span>' + U.esc(D.profile.job) + "</span></div>" : "") +
-      '<div class="stack" style="margin-top:1rem"><button class="btn btn-primary" data-act="waypoint">Segna il Job Center sulla mappa</button></div>';
+    return head("სამსახური") +
+      '<div class="widget"><div class="widget-head"><span>დასაქმების ცენტრი</span><span>Pershing Square</span></div>' +
+      '<div class="widget-title">მუდმივი სამსახური</div><p class="widget-sub">Pershing Square-ის დასაქმების ცენტრი მუდმივ სამსახურს გთავაზობს; თუ მანქანა გჭირდება, გაქირავების პუნქტი იქვე, გვერდითაა.</p></div>' +
+      (D.profile.job ? '<div class="widget-row"><span class="muted">შენი სამსახური</span><span>' + U.esc(D.profile.job) + "</span></div>" : "") +
+      '<div class="stack" style="margin-top:1rem"><button class="btn btn-primary" data-act="waypoint">დასაქმების ცენტრის მონიშვნა რუკაზე</button></div>';
   };
   R.profile = function () {
-    var html = head("Profilo") +
+    var html = head("პროფილი") +
       '<div class="widget"><div class="widget-title">' + U.esc((D.profile.name || "-").replace(/_/g, " ")) + "</div>" +
-      '<div class="widget-row"><span class="muted">Livello</span><span class="num">' + D.hud.level + "</span></div>" +
-      (D.profile.job ? '<div class="widget-row"><span class="muted">Lavoro</span><span>' + U.esc(D.profile.job) + "</span></div>" : "") + "</div>";
-    if (!D.rep.ready) return html + '<p class="muted small" style="margin-top:1rem">Sto caricando la reputazione…</p>';
-    html += '<div class="section-label">Il tuo mestiere</div>';
+      '<div class="widget-row"><span class="muted">დონე</span><span class="num">' + D.hud.level + "</span></div>" +
+      (D.profile.job ? '<div class="widget-row"><span class="muted">სამსახური</span><span>' + U.esc(D.profile.job) + "</span></div>" : "") + "</div>";
+    if (!D.rep.ready) return html + '<p class="muted small" style="margin-top:1rem">რეპუტაცია იტვირთება…</p>';
+    html += '<div class="section-label">შენი ხელობა</div>';
     [1, 2].forEach(function (t) {
       var r = D.rep.tracks[t];
-      if (!r) { html += '<div class="list-row"><span>' + N.track[t] + '</span><span class="muted small">Non hai ancora iniziato</span></div>'; return; }
-      var nextTxt = r.next > 0 ? (N.tier[r.tier + 1] || "") + " tra " + Math.max(0, r.next - r.pts) + " punti" : "il grado più alto";
-      var avg = r.rcnt > 0 ? ", voto " + (r.rsum / r.rcnt).toFixed(1).replace(".", ",") + "/5" : "";
-      html += '<div class="meter"><div class="meter-label"><span>' + N.track[t] + ": <b>" + U.esc(U.name("tier", r.tier)) + "</b> (+" + r.bonus + '%)</span><span class="num">' + r.pts + " punti</span></div>" +
+      if (!r) { html += '<div class="list-row"><span>' + N.track[t] + '</span><span class="muted small">ჯერ არ დაგიწყია</span></div>'; return; }
+      var nextTxt = r.next > 0 ? (N.tier[r.tier + 1] || "") + ": კიდევ " + Math.max(0, r.next - r.pts) + " ქულა" : "უმაღლესი რანგი";
+      var avg = r.rcnt > 0 ? ", შეფასება " + (r.rsum / r.rcnt).toFixed(1).replace(".", ",") + "/5" : "";
+      html += '<div class="meter"><div class="meter-label"><span>' + N.track[t] + ": <b>" + U.esc(U.name("tier", r.tier)) + "</b> (+" + r.bonus + '%)</span><span class="num">' + r.pts + " ქულა</span></div>" +
         '<div class="bar"><i style="width:' + (r.next > 0 ? U.pct(r.pts, r.next) : 100) + '%;background:var(--accent)"></i></div>' +
-        '<div class="small muted">' + nextTxt + " · completati " + r.done + ", non riusciti " + r.fail + avg + ", oggi +" + r.day + "</div></div>";
+        '<div class="small muted">' + nextTxt + " · შესრულებული: " + r.done + ", ჩავარდნილი: " + r.fail + avg + ", დღეს +" + r.day + "</div></div>";
     });
-    html += '<div class="section-label">Il tuo nome nei quartieri</div>';
+    html += '<div class="section-label">შენი სახელი უბნებში</div>';
     [1, 2, 3].forEach(function (d) {
       var l = D.rep.local[d] || { rep: 0, tier: 0, disc: 0, premium: false };
-      html += '<div class="list-row"><span>' + N.district[d] + '<br><span class="small muted">' + U.esc(localLabel(l.tier, l.disc)) + (l.premium ? " · contratti premium" : "") +
+      html += '<div class="list-row"><span>' + N.district[d] + '<br><span class="small muted">' + U.esc(localLabel(l.tier, l.disc)) + (l.premium ? " · პრემიუმ კონტრაქტები" : "") +
         '</span></span><span class="rep-num num">' + l.rep + "</span></div>";
     });
-    return html + '<p class="small muted" style="margin-top:0.6rem">La reputazione non si compra: cresce con il lavoro, ogni giorno un passo alla volta.</p>';
+    return html + '<p class="small muted" style="margin-top:0.6rem">რეპუტაცია არ იყიდება: ის შრომით იზრდება, ყოველდღე ნაბიჯ-ნაბიჯ.</p>';
   };
 
   function render() {
@@ -327,9 +327,9 @@
   function askAbandon() {
     var c = D.ct;
     confirmBox = LSSC.confirm(screen, {
-      title: "Lasci il contratto #" + c.id + "?",
-      html: "Non perdi denaro, ma perdi <b>" + c.penalty + " punti</b> di reputazione nei trasporti.",
-      yes: "Lascia", no: "Continua", danger: true,
+      title: "ამბობ უარს კონტრაქტზე #" + c.id + "?",
+      html: "ფულს არ დაკარგავ, მაგრამ ტრანსპორტირების რეპუტაციას <b>" + c.penalty + " ქულა</b> დააკლდება.",
+      yes: "უარის თქმა", no: "გაგრძელება", danger: true,
       onYes: function () { confirmBox = null; pendingAbandon = true; LSSC.emit("lssc:abandon", c.id); render(); },
       onNo: function () { confirmBox = null; }
     });
@@ -339,14 +339,14 @@
     var p = D.project, input = U.el("ph-amount"), err = U.el("ph-amount-err");
     var raw = (input.value || "").trim(), cap = Math.min(p.max, p.dayLeft);
     // controllo di comodo, come UI_LvParseAmount: il server rivalida importo, tetti e fondi
-    if (!/^\d{1,9}$/.test(raw)) { err.textContent = "Scrivi un importo in dollari, solo cifre."; return; }
+    if (!/^\d{1,9}$/.test(raw)) { err.textContent = "შეიყვანე თანხა დოლარებში, მხოლოდ ციფრებით."; return; }
     var amount = U.int(raw);
-    if (amount < p.min || amount > cap) { err.textContent = "Puoi donare da " + U.money(p.min) + " a " + U.money(cap) + " oggi."; return; }
+    if (amount < p.min || amount > cap) { err.textContent = "დღეს შეგიძლია შეწირო " + U.money(p.min) + "-დან " + U.money(cap) + "-მდე."; return; }
     err.textContent = "";
     confirmBox = LSSC.confirm(screen, {
-      title: "Doni " + U.money(amount) + "?",
-      html: "Vanno al progetto <b>" + U.esc(p.name) + "</b>. I soldi escono dai tuoi contanti.",
-      yes: "Dona", no: "Annulla",
+      title: "შეწირავ " + U.money(amount) + "-ს?",
+      html: "თანხა მოხმარდება პროექტს <b>" + U.esc(p.name) + "</b>. ის შენი ნაღდი ფულიდან ჩამოგეჭრება.",
+      yes: "შეწირვა", no: "გაუქმება",
       onYes: function () { confirmBox = null; LSSC.emit("lssc:contribute", p.id, amount); },
       onNo: function () { confirmBox = null; }
     });
