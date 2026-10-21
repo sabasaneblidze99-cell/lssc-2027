@@ -35,23 +35,8 @@ new g_UiJbSel[MAX_PLAYERS];
 
 UI_JbMoney(value, out[], size)
 {
-	new raw[48], len = 0, pos = 0;
-	if (value < 0)
-	{
-		value = 0;
-	}
-	format(raw, 48, "%d", value);
-	len = strlen(raw);
-	out[0] = 0;
-	for (new i = 0; i < len && pos < size - 2; i++)
-	{
-		if (i > 0 && (len - i) % 3 == 0)
-		{
-			out[pos++] = 46;
-		}
-		out[pos++] = raw[i];
-	}
-	out[pos] = 0;
+	// importo in tetri -> "1.250,50" (economy/currency.inc)
+	return Money_Format(value, out, size);
 }
 
 UI_JbValid(playerid)
@@ -102,15 +87,15 @@ UI_JobCenterShow(playerid, level, currentJob, cooldownSec)
 		UI_JbMoney(UI_JbHourly(job), pay, 48);
 		if (level < g_UiJbMinLevel[job])
 		{
-			format(line, 576, "{888888}%s\t{FF6666}დონე %d (დაბლოკილი)\t{888888}~$%s\t{888888}%s\n", g_UiJbName[job], g_UiJbMinLevel[job], pay, g_UiJbVehicle[job]);
+			format(line, 576, "{888888}%s\t{FF6666}დონე %d (დაბლოკილი)\t{888888}~₾%s\t{888888}%s\n", g_UiJbName[job], g_UiJbMinLevel[job], pay, g_UiJbVehicle[job]);
 		}
 		else if (job == currentJob)
 		{
-			format(line, 576, "{FFD24D}%s (მიმდინარე)\t{FFFFFF}დონე %d\t{66DD66}~$%s\t{FFFFFF}%s\n", g_UiJbName[job], g_UiJbMinLevel[job], pay, g_UiJbVehicle[job]);
+			format(line, 576, "{FFD24D}%s (მიმდინარე)\t{FFFFFF}დონე %d\t{66DD66}~₾%s\t{FFFFFF}%s\n", g_UiJbName[job], g_UiJbMinLevel[job], pay, g_UiJbVehicle[job]);
 		}
 		else
 		{
-			format(line, 576, "{FFFFFF}%s\t{FFFFFF}დონე %d\t{66DD66}~$%s\t{FFFFFF}%s\n", g_UiJbName[job], g_UiJbMinLevel[job], pay, g_UiJbVehicle[job]);
+			format(line, 576, "{FFFFFF}%s\t{FFFFFF}დონე %d\t{66DD66}~₾%s\t{FFFFFF}%s\n", g_UiJbName[job], g_UiJbMinLevel[job], pay, g_UiJbVehicle[job]);
 		}
 		strcat(body, line, 2048);
 	}
@@ -142,9 +127,9 @@ UI_JbDetailShow(playerid, job)
 	strcat(body, line, 2048);
 	format(line, 576, "მინიმალური დონე: %d\nსაჭირო გაჩერება: %d წმ ყოველ %s-ზე\n\n", g_UiJbMinLevel[job], g_UiJbDwellMs[job] / 1000, g_UiJbStepWord[job]);
 	strcat(body, line, 2048);
-	format(line, 576, "ხელფასი: {66DD66}$%s{FFFFFF} ყოველ %s-ზე + {66DD66}$%s{FFFFFF} ბონუსი წრის ბოლოს = {66DD66}$%s{FFFFFF} წრეზე\n", step, g_UiJbStepWord[job], bonus, runPay);
+	format(line, 576, "ხელფასი: {66DD66}₾%s{FFFFFF} ყოველ %s-ზე + {66DD66}₾%s{FFFFFF} ბონუსი წრის ბოლოს = {66DD66}₾%s{FFFFFF} წრეზე\n", step, g_UiJbStepWord[job], bonus, runPay);
 	strcat(body, line, 2048);
-	format(line, 576, "სავარაუდოდ: დაახლ. {66DD66}$%s{FFFFFF}/სთ (ლიმიტი $%s/სთ). ხელფასი ბანკში ჩაირიცხება ცვლის ბოლოს.\n\n", hourly, cap);
+	format(line, 576, "სავარაუდოდ: დაახლ. {66DD66}₾%s{FFFFFF}/სთ (ლიმიტი ₾%s/სთ). ხელფასი ბანკში ჩაირიცხება ცვლის ბოლოს.\n\n", hourly, cap);
 	strcat(body, line, 2048);
 	strcat(body, "ცვლა იწყება /inizia-თი და მთავრდება /fine-ით. მანქანის განადგურება ან მიტოვება, სიკვდილი ან\nგათიშვა ცვლას აუქმებს და დაგროვილი შემოსავალი იკარგება.", 2048);
 	new bool:ok = true;
@@ -204,7 +189,7 @@ UI_JobInfoShow(playerid, jobId, level, runs, earned)
 		for (new job = 1; job <= 3; job++)
 		{
 			UI_JbMoney(UI_JbHourly(job), hourly, 48);
-			format(line, 576, "{FFFFFF}- %s: დონე %d, ~{66DD66}$%s{FFFFFF}/სთ%s\n", g_UiJbName[job], g_UiJbMinLevel[job], hourly, level < g_UiJbMinLevel[job] ? " {FF6666}(დაბლოკილი){FFFFFF}" : "");
+			format(line, 576, "{FFFFFF}- %s: დონე %d, ~{66DD66}₾%s{FFFFFF}/სთ%s\n", g_UiJbName[job], g_UiJbMinLevel[job], hourly, level < g_UiJbMinLevel[job] ? " {FF6666}(დაბლოკილი){FFFFFF}" : "");
 			strcat(body, line, 2048);
 		}
 	}
@@ -214,10 +199,10 @@ UI_JobInfoShow(playerid, jobId, level, runs, earned)
 		UI_JbMoney(UI_JbHourly(jobId), hourly, 48);
 		format(line, 576, "{FFFFFF}მიმდინარე სამსახური: {FFD24D}%s{FFFFFF}\nმანქანა: %s\nმარშრუტი: %s\n", g_UiJbName[jobId], g_UiJbVehicle[jobId], g_UiJbRoute[jobId]);
 		strcat(body, line, 2048);
-		format(line, 576, "ხელფასი წრეზე: {66DD66}$%s{FFFFFF}  |  სავარაუდოდ ~{66DD66}$%s{FFFFFF}/სთ (ლიმიტი $%d/სთ)\n\n", money, hourly, 2200);
+		format(line, 576, "ხელფასი წრეზე: {66DD66}₾%s{FFFFFF}  |  სავარაუდოდ ~{66DD66}₾%s{FFFFFF}/სთ (ლიმიტი %s/სთ)\n\n", money, hourly, Money_Str(2200));
 		strcat(body, line, 2048);
 		UI_JbMoney(earned, money, 48);
-		format(line, 576, "დასრულებული ცვლები: %d\nსულ გამომუშავებული: {66DD66}$%s{FFFFFF}\n\n", runs, money);
+		format(line, 576, "დასრულებული ცვლები: %d\nსულ გამომუშავებული: {66DD66}₾%s{FFFFFF}\n\n", runs, money);
 		strcat(body, line, 2048);
 		strcat(body, "ბრძანებები: /inizia (ცვლის დაწყება), /fine (დასრულება და დაგროვილის გადახდა), /lavoro lascia (Job Center-ში).", 2048);
 	}
@@ -326,7 +311,7 @@ UI_JhCreate(playerid)
 	g_UiJHud[playerid][0] = UI_JhBox(playerid, left, 384.0, 150.0, 66.0, 153);
 	g_UiJHud[playerid][1] = UI_JhText(playerid, (5.0 + left), (384.0 + 2.0), "სამსახური", 0.22, 1.0, -2994689, t_TEXT_DRAW_ALIGN:1);
 	g_UiJHud[playerid][2] = UI_JhText(playerid, (5.0 + left), (384.0 + 14.0), "გაჩერება 0/0", 0.22, 1.0, -1, t_TEXT_DRAW_ALIGN:1);
-	g_UiJHud[playerid][3] = UI_JhText(playerid, (5.0 + left), (384.0 + 26.0), "დაგროვდა: $0", 0.22, 1.0, 0x66DD66FF, t_TEXT_DRAW_ALIGN:1);
+	g_UiJHud[playerid][3] = UI_JhText(playerid, (5.0 + left), (384.0 + 26.0), "დაგროვდა: ₾0", 0.22, 1.0, 0x66DD66FF, t_TEXT_DRAW_ALIGN:1);
 	g_UiJHud[playerid][4] = UI_JhText(playerid, (5.0 + left), (384.0 + 38.0), "დრო 00:00", 0.22, 1.0, -1, t_TEXT_DRAW_ALIGN:1);
 	g_UiJHud[playerid][5] = UI_JhText(playerid, (5.0 + left), (384.0 + 51.0), "დაბრუნდი მანქანაში: 45s", 0.2, 0.9, -12303105, t_TEXT_DRAW_ALIGN:1);
 	g_UiJHudCreated[playerid] = true;
@@ -376,7 +361,7 @@ UI_JobHudShow(playerid, jobId)
 	Lang_PlayerTextDrawSetString(playerid, g_UiJHud[playerid][1], str);
 	format(str, 432, "%s 0/%d", g_UiJbStepWord[jobId], g_UiJbSteps[jobId]);
 	Lang_PlayerTextDrawSetString(playerid, g_UiJHud[playerid][2], str);
-	Lang_PlayerTextDrawSetString(playerid, g_UiJHud[playerid][3], "დაგროვდა: $0");
+	Lang_PlayerTextDrawSetString(playerid, g_UiJHud[playerid][3], "დაგროვდა: ₾0");
 	Lang_PlayerTextDrawSetString(playerid, g_UiJHud[playerid][4], "დრო 00:00");
 	UI_JhSetVisible(playerid, true);
 	return 0;
@@ -423,7 +408,7 @@ UI_JobHudUpdate(playerid, step, stepTotal, earned, elapsedSec, dwellSec, offVehi
 	}
 	Lang_PlayerTextDrawSetString(playerid, g_UiJHud[playerid][2], str);
 	UI_JbMoney(earned, money, 48);
-	format(str, 576, "დაგროვდა: $%s", money);
+	format(str, 576, "დაგროვდა: ₾%s", money);
 	Lang_PlayerTextDrawSetString(playerid, g_UiJHud[playerid][3], str);
 	if (dwellSec >= 0)
 	{

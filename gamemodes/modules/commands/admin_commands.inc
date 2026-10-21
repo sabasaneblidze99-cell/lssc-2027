@@ -100,7 +100,7 @@ public Cmd_setmoney(playerid, const params[])
 	new pos = 0, tid[36], tam[36], targetid = 0, amount = 0;
 	Util_NextToken(params, pos, tid, 36);
 	Util_NextToken(params, pos, tam, 36);
-	if (tid[0] == 0 || tam[0] == 0 || !Util_ParseInt(tam, amount))
+	if (tid[0] == 0 || tam[0] == 0 || !Money_Parse(tam, amount))
 	{
 		Util_Send(playerid, 0x99CCFFFF, "გამოყენება: /setmoney id თანხა");
 		return 1;
@@ -118,10 +118,10 @@ public Cmd_setmoney(playerid, const params[])
 	new an[75], tn[75], msg[384];
 	GetPlayerName(playerid, an, 75);
 	GetPlayerName(targetid, tn, 75);
-	SendClientMessage(playerid, -5963521, "%s-ის ნაღდი ფული დაყენდა: $%d.", tn, amount);
+	SendClientMessage(playerid, -5963521, "%s-ის ნაღდი ფული დაყენდა: %s.", tn, Money_Str(amount));
 	if (targetid != playerid)
 	{
-		SendClientMessage(targetid, 0x66DD66FF, "ადმინისტრაციამ შენი ნაღდი ფული დააყენა: $%d.", amount);
+		SendClientMessage(targetid, 0x66DD66FF, "ადმინისტრაციამ შენი ნაღდი ფული დააყენა: %s.", Money_Str(amount));
 	}
 	format(msg, 384, "%s /setmoney %s %d", an, tn, amount);
 	Log_Write("ADMIN", msg);
@@ -557,7 +557,7 @@ public Cmd_givemoney(playerid, const params[])
 	new pos = 0, tid[36], tam[36], targetid = 0, amount = 0;
 	Util_NextToken(params, pos, tid, 36);
 	Util_NextToken(params, pos, tam, 36);
-	if (tid[0] == 0 || tam[0] == 0 || !Util_ParseInt(tam, amount))
+	if (tid[0] == 0 || tam[0] == 0 || !Money_Parse(tam, amount))
 	{
 		Util_Send(playerid, 0x99CCFFFF, "გამოყენება: /givemoney id თანხა");
 		return 1;
@@ -587,8 +587,8 @@ public Cmd_givemoney(playerid, const params[])
 	new an[75], tn[75], msg[384];
 	GetPlayerName(playerid, an, 75);
 	GetPlayerName(targetid, tn, 75);
-	SendClientMessage(targetid, 0x66DD66FF, "ადმინისტრაციისგან მიიღე $%d.", amount);
-	format(msg, 384, "$%d", amount);
+	SendClientMessage(targetid, 0x66DD66FF, "ადმინისტრაციისგან მიიღე %s.", Money_Str(amount));
+	format(msg, 384, "%s", Money_Str(amount));
 	Admin_AdmCmd(an, "ნაღდი ფული მისცა:", tn, msg, "");
 	Admin_Log(playerid, gPlayer[targetid][pAccountId], "givemoney", msg);
 	return 1;

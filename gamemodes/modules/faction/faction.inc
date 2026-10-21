@@ -512,7 +512,7 @@ Fac_PayTick(playerid, now)
 	new paid = Economy_PaycheckPaid(amount, Money_BankRoom(playerid));
 	if (paid > 0 && Money_GiveBank(playerid, paid, "faction", ""))
 	{
-		SendClientMessage(playerid, 0x66DD66FF, "%s ხელფასი: $%d ჩაირიცხა ბანკში (paycheck-ის გარდა). ბალანსი: $%d.", g_FacShort[f], paid, gPlayer[playerid][pBank]);
+		SendClientMessage(playerid, 0x66DD66FF, "%s ხელფასი: %s ჩაირიცხა ბანკში (paycheck-ის გარდა). ბალანსი: %s.", g_FacShort[f], Money_Str(paid), Money_Str(gPlayer[playerid][pBank]));
 		Char_Save(playerid);
 	}
 	else
@@ -659,7 +659,7 @@ Faction_CmdMulta(playerid, const params[])
 	new pos = 0, tid[36], tam[36], target = 0, amount = 0, reason[65];
 	Util_NextToken(params, pos, tid, 36);
 	Util_NextToken(params, pos, tam, 36);
-	if (tid[0] == 0 || tam[0] == 0 || !Util_ParseInt(tam, amount) || !Util_SanitizeText(params[pos], reason, 64))
+	if (tid[0] == 0 || tam[0] == 0 || !Money_Parse(tam, amount) || !Util_SanitizeText(params[pos], reason, 64))
 	{
 		Util_Send(playerid, 0x99CCFFFF, "გამოყენება: /multa id თანხა მიზეზი");
 		return 0;
@@ -678,7 +678,7 @@ Faction_CmdMulta(playerid, const params[])
 	}
 	if (amount < 50 || amount > cap)
 	{
-		SendClientMessage(playerid, -10270721, "არასწორი თანხა: შენი წოდებისთვის $%d-დან $%d-მდე.", 50, cap);
+		SendClientMessage(playerid, -10270721, "არასწორი თანხა: შენი წოდებისთვის %s-დან %s-მდე.", Money_Str(50), Money_Str(cap));
 		return 0;
 	}
 	if (!Fac_ParseTarget(playerid, tid, target))
@@ -709,7 +709,7 @@ Faction_CmdMulta(playerid, const params[])
 	}
 	if (g_FcFineSum[playerid] + amount > 10000)
 	{
-		SendClientMessage(playerid, -10270721, "ჯარიმების საათობრივ ლიმიტს მიაღწიე ($%d).", 10000);
+		SendClientMessage(playerid, -10270721, "ჯარიმების საათობრივ ლიმიტს მიაღწიე (%s).", Money_Str(10000));
 		return 0;
 	}
 	if (gPlayer[target][pMoney] + gPlayer[target][pBank] < amount)
@@ -784,7 +784,7 @@ public Fine_OnDBAdded(playerid, targetChar, fineId, amount)
 	}
 	if (target == INVALID_PLAYER_ID)
 	{
-		format(msg, 384, "multa %d ($%d) registrata ma bersaglio char %d non piu' online: nessun addebito", fineId, amount, targetChar);
+		format(msg, 384, "multa %d (%s) registrata ma bersaglio char %d non piu' online: nessun addebito", fineId, Money_Str(amount), targetChar);
 		Log_Write("FINE", msg);
 		if (issuer != INVALID_PLAYER_ID)
 		{
@@ -795,13 +795,13 @@ public Fine_OnDBAdded(playerid, targetChar, fineId, amount)
 	new taken = Fac_Debit(target, amount);
 	if (taken < amount)
 	{
-		format(msg, 384, "multa %d: addebitati $%d su $%d (fondi cambiati durante la registrazione)", fineId, taken, amount);
+		format(msg, 384, "multa %d: addebitati %s su %s (fondi cambiati durante la registrazione)", fineId, Money_Str(taken), Money_Str(amount));
 		Log_Write("FINE", msg);
 	}
 	g_FcFineTgtSet[target] = true;
 	g_FcFineTgtLast[target] = GetTickCount();
 	Char_Save(target);
-	SendClientMessage(target, -10270721, "მიიღე $%d-ის ჯარიმა %s-სგან%s%s.", taken, an, hasReason ? ": " : "", reason);
+	SendClientMessage(target, -10270721, "მიიღე %s-ის ჯარიმა %s-სგან%s%s.", Money_Str(taken), an, hasReason ? ": " : "", reason);
 	if (issuer != INVALID_PLAYER_ID)
 	{
 		new bucket = gPlayer[issuer][pSessionMs] / 3600000;
@@ -813,7 +813,7 @@ public Fine_OnDBAdded(playerid, targetChar, fineId, amount)
 		g_FcFineSum[issuer] += amount;
 		new tn[75];
 		GetPlayerName(target, tn, 75);
-		SendClientMessage(issuer, 0x66DD66FF, "ჯარიმა #%d, $%d, %s-ზე გაფორმდა.", fineId, taken, tn);
+		SendClientMessage(issuer, 0x66DD66FF, "ჯარიმა #%d, %s, %s-ზე გაფორმდა.", fineId, Money_Str(taken), tn);
 		format(msg, 384, "%s-ს ჯარიმას გადასცემს", tn);
 		Fac_Emote(issuer, msg);
 	}
@@ -851,7 +851,7 @@ public Fine_OnDBLoaded(playerid, count)
 	for (new i = 0; i < count && i < 5; i++)
 	{
 		Admin_FormatDuration(now - g_FineRows[i][frTimestamp], ago, 72);
-		SendClientMessage(playerid, -1, "#%d  $%d  %s  (%s)  %s fa", g_FineRows[i][frId], g_FineRows[i][frAmount], g_FineRows[i][frReason], g_FineRows[i][frIssuer], ago);
+		SendClientMessage(playerid, -1, "#%d  %s  %s  (%s)  %s fa", g_FineRows[i][frId], Money_Str(g_FineRows[i][frAmount]), g_FineRows[i][frReason], g_FineRows[i][frIssuer], ago);
 	}
 	return 1;
 }
@@ -1027,7 +1027,7 @@ Fac_ReviveDone(medic, target)
 	if (g_FcReviveCount[medic] < 6 && Money_GiveBank(medic, 100, "faction", ""))
 	{
 		g_FcReviveCount[medic]++;
-		SendClientMessage(medic, 0x66DD66FF, "გაცოცხლების ბონუსი: $%d ჩაირიცხა ბანკში.", 100);
+		SendClientMessage(medic, 0x66DD66FF, "გაცოცხლების ბონუსი: %s ჩაირიცხა ბანკში.", Money_Str(100));
 		Char_Save(medic);
 	}
 }
@@ -1055,7 +1055,7 @@ Faction_Hospitalize(playerid)
 	Char_Save(playerid);
 	new name[75], msg[384];
 	GetPlayerName(playerid, name, 75);
-	format(msg, 384, "ricovero %s: addebitati $%d", name, fee);
+	format(msg, 384, "ricovero %s: addebitati %s", name, Money_Str(fee));
 	Log_Write("INJURY", msg);
 }
 
@@ -1932,7 +1932,7 @@ Faction_OnPlayerSpawn(playerid)
 	g_FcInjLeftMs[playerid] = 180000;
 	g_FcInjSec[playerid] = 180;
 	UI_InjuryHudShow(playerid, 180);
-	SendClientMessage(playerid, -10270721, "დაჭრილი ხარ. დაელოდე დახმარებას (EMS): დახმარების გარეშე %d წამში ჰოსპიტალიზდები ($%d).", 180, 200);
+	SendClientMessage(playerid, -10270721, "დაჭრილი ხარ. დაელოდე დახმარებას (EMS): დახმარების გარეშე %d წამში ჰოსპიტალიზდები (%s).", 180, Money_Str(200));
 	return 0;
 }
 

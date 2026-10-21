@@ -65,27 +65,8 @@ Bank_NearPoint(playerid, bool:counterOnly)
 
 bool:Bank_ParseAmount(const s[], &value)
 {
-	new i = 0, len = strlen(s), digits = 0;
-	value = 0;
-	while (i < len && s[i] == 32)
-	{
-		i++;
-	}
-	while (i < len && s[i] >= 48 && s[i] <= 57)
-	{
-		if (digits >= 9)
-		{
-			return false;
-		}
-		value = value * 10 + (s[i] - 48);
-		digits++;
-		i++;
-	}
-	while (i < len && s[i] == 32)
-	{
-		i++;
-	}
-	return digits > 0 && i == len && value >= 1;
+	// lari digitati ("25", "12,50") -> tetri (economy/currency.inc)
+	return Money_Parse(s, value);
 }
 
 Bank_FindPlayer(const input[])
@@ -465,7 +446,7 @@ Bank_RefreshLimits(playerid)
 Bank_CmdSaldo(playerid)
 {
 	SendClientMessage(playerid, -2994689, "--- ბალანსი ---");
-	SendClientMessage(playerid, -1, "ნაღდი: $%d  ბანკი: $%d  სულ: $%d", gPlayer[playerid][pMoney], gPlayer[playerid][pBank], gPlayer[playerid][pMoney] + gPlayer[playerid][pBank]);
+	SendClientMessage(playerid, -1, "ნაღდი: %s  ბანკი: %s  სულ: %s", Money_Str(gPlayer[playerid][pMoney]), Money_Str(gPlayer[playerid][pBank]), Money_Str(gPlayer[playerid][pMoney] + gPlayer[playerid][pBank]));
 }
 
 Bank_CmdAtm(playerid, bool:counterOnly)
@@ -512,7 +493,7 @@ Bank_Deposit(playerid, amount, bool:ui)
 	if (!Bank_IsCounter(point) && amount > 20000)
 	{
 		new msg[528];
-		format(msg, 528, "ATM-ის ლიმიტი შეტანაზე: $%d ერთ ოპერაციაზე. მეტი თანხისთვის სალარო გამოიყენე.", 20000);
+		format(msg, 528, "ATM-ის ლიმიტი შეტანაზე: %s ერთ ოპერაციაზე. მეტი თანხისთვის სალარო გამოიყენე.", Money_Str(20000));
 		Bank_Reply(playerid, ui, msg);
 		return 0;
 	}
@@ -616,7 +597,7 @@ public Bank_OnDBDeposit(playerid, amount, result, balance)
 		Char_Save(playerid);
 		Char_RefreshHud(playerid);
 		new msg[528];
-		format(msg, 528, "შეიტანე $%d. ნაღდი: $%d  ბანკი: $%d.", amount, gPlayer[playerid][pMoney], gPlayer[playerid][pBank]);
+		format(msg, 528, "შეიტანე %s. ნაღდი: %s  ბანკი: %s.", Money_Str(amount), Money_Str(gPlayer[playerid][pMoney]), Money_Str(gPlayer[playerid][pBank]));
 		Util_Send(playerid, 0x66DD66FF, msg);
 		if (ui)
 		{
@@ -658,7 +639,7 @@ Bank_Withdraw(playerid, amount, bool:ui)
 	if (amount > maxOp)
 	{
 		new msg[528];
-		format(msg, 528, "%s ლიმიტი გატანაზე: $%d ერთ ოპერაციაზე.%s", counter ? "სალაროს" : "ATM-ის", maxOp, counter ? "" : " მეტი თანხისთვის სალარო გამოიყენე.");
+		format(msg, 528, "%s ლიმიტი გატანაზე: %s ერთ ოპერაციაზე.%s", counter ? "სალაროს" : "ATM-ის", Money_Str(maxOp), counter ? "" : " მეტი თანხისთვის სალარო გამოიყენე.");
 		Bank_Reply(playerid, ui, msg);
 		return 0;
 	}
@@ -716,7 +697,7 @@ public Bank_OnDBWithdraw(playerid, amount, result, balance)
 		Char_Save(playerid);
 		Char_RefreshHud(playerid);
 		new msg[528];
-		format(msg, 528, "გაიტანე $%d. ნაღდი: $%d  ბანკი: $%d.", amount, gPlayer[playerid][pMoney], gPlayer[playerid][pBank]);
+		format(msg, 528, "გაიტანე %s. ნაღდი: %s  ბანკი: %s.", Money_Str(amount), Money_Str(gPlayer[playerid][pMoney]), Money_Str(gPlayer[playerid][pBank]));
 		Util_Send(playerid, 0x66DD66FF, msg);
 		if (ui)
 		{
@@ -757,7 +738,7 @@ public Bank_OnDBUndone(playerid, const opId[], result)
 		{
 			Bank_EndOp(i);
 			Char_RefreshHud(i);
-			SendClientMessage(i, -1, "ოპერაცია გაუქმდა, თანხა არ გადაადგილებულა. ნაღდი: $%d  ბანკი: $%d.", gPlayer[i][pMoney], gPlayer[i][pBank]);
+			SendClientMessage(i, -1, "ოპერაცია გაუქმდა, თანხა არ გადაადგილებულა. ნაღდი: %s  ბანკი: %s.", Money_Str(gPlayer[i][pMoney]), Money_Str(gPlayer[i][pBank]));
 		}
 		else if (result == -1 && gPlayer[i][pBankOpAux] < 3)
 		{
@@ -817,7 +798,7 @@ public Bank_OnDBSynced(playerid, result, balance)
 	if (result == 1)
 	{
 		Bank_EndOp(playerid);
-		SendClientMessage(playerid, -1, "საბანკო ბალანსი შემოწმებულია: $%d.", gPlayer[playerid][pBank]);
+		SendClientMessage(playerid, -1, "საბანკო ბალანსი შემოწმებულია: %s.", Money_Str(gPlayer[playerid][pBank]));
 		return 1;
 	}
 	Bank_ScheduleResync(playerid);
@@ -857,14 +838,14 @@ bool:Bank_XferCheck(playerid, target, amount, bool:ui)
 	}
 	if (amount < 10 || amount > 25000)
 	{
-		format(msg, 528, "გადარიცხვის თანხა: $%d-დან $%d-მდე.", 10, 25000);
+		format(msg, 528, "გადარიცხვის თანხა: %s-დან %s-მდე.", Money_Str(10), Money_Str(25000));
 		Bank_Reply(playerid, ui, msg);
 		return false;
 	}
 	new fee = DB_BankXferFee(amount), total = amount + fee;
 	if (gPlayer[playerid][pBank] < total)
 	{
-		format(msg, 528, "არასაკმარისი თანხა: საჭიროა $%d (თანხა $%d + საკომისიო $%d), გაქვს $%d.", total, amount, fee, gPlayer[playerid][pBank]);
+		format(msg, 528, "არასაკმარისი თანხა: საჭიროა %s (თანხა %s + საკომისიო %s), გაქვს %s.", Money_Str(total), Money_Str(amount), Money_Str(fee), Money_Str(gPlayer[playerid][pBank]));
 		Bank_Reply(playerid, ui, msg);
 		return false;
 	}
@@ -967,7 +948,7 @@ public Bank_OnDBLimits(playerid, result, withdrawn, xferOut, xferIn, sinceXfer)
 	if (xferOut >= 50000 || amount > 50000 - xferOut)
 	{
 		new msg[528], room = xferOut >= 50000 ? 0 : 50000 - xferOut;
-		format(msg, 528, "გამავალი გადარიცხვების დღიური ლიმიტი: კიდევ $%d შეგიძლია გაგზავნო მომდევნო %d საათში.", room, 24);
+		format(msg, 528, "გამავალი გადარიცხვების დღიური ლიმიტი: კიდევ %s შეგიძლია გაგზავნო მომდევნო %d საათში.", Money_Str(room), 24);
 		Bank_Reply(playerid, ui, msg);
 		return 1;
 	}
@@ -1051,7 +1032,7 @@ public UI_OnBankTransferConfirm(playerid, targetId, amount)
 	if (amount >= 10000 || sameIp)
 	{
 		new reason[528];
-		format(reason, 528, "%s -> %s $%d (+$%d comm.) op %.8s%s", sName, tName, amount, fee, gPlayer[playerid][pBankOpId], sameIp ? " STESSO IP" : "");
+		format(reason, 528, "%s -> %s %s (+%s comm.) op %.8s%s", sName, tName, Money_Str(amount), Money_Str(fee), gPlayer[playerid][pBankOpId], sameIp ? " STESSO IP" : "");
 		DB_AdminLog(0, gPlayer[playerid][pAccountId], sameIp ? "bank_xfer_ip" : "bank_xfer", reason);
 		if (sameIp)
 		{
@@ -1085,7 +1066,7 @@ public Bank_OnDBTransfer(playerid, targetid, amount, fee, result, balance)
 				gPlayer[playerid][pBankXferOutToday] += amount;
 			}
 			Char_RefreshHud(playerid);
-			SendClientMessage(playerid, 0x66DD66FF, "გადარიცხვა $%d%s%s შესრულდა. საკომისიო: $%d. ბალანსი: $%d.", amount, tName[0] != 0 ? " მიმღები: " : "", tName, fee, gPlayer[playerid][pBank]);
+			SendClientMessage(playerid, 0x66DD66FF, "გადარიცხვა %s%s%s შესრულდა. საკომისიო: %s. ბალანსი: %s.", Money_Str(amount), tName[0] != 0 ? " მიმღები: " : "", tName, Money_Str(fee), Money_Str(gPlayer[playerid][pBank]));
 		}
 		else if (result == -1)
 		{
@@ -1116,7 +1097,7 @@ public Bank_OnDBTransfer(playerid, targetid, amount, fee, result, balance)
 			GetPlayerName(playerid, sName, 75);
 		}
 		Char_RefreshHud(targetid);
-		SendClientMessage(targetid, 0x66DD66FF, "მიიღე გადარიცხვა $%d%s%s. ბალანსი: $%d.", amount, sName[0] != 0 ? ", გამგზავნი: " : "", sName, gPlayer[targetid][pBank]);
+		SendClientMessage(targetid, 0x66DD66FF, "მიიღე გადარიცხვა %s%s%s. ბალანსი: %s.", Money_Str(amount), sName[0] != 0 ? ", გამგზავნი: " : "", sName, Money_Str(gPlayer[targetid][pBank]));
 	}
 	return 1;
 }

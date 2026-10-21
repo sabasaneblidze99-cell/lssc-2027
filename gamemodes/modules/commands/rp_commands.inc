@@ -239,7 +239,7 @@ public Cmd_pay(playerid, const params[])
 	new pos = 0, tid[36], tam[36], targetid = 0, amount = 0;
 	Util_NextToken(params, pos, tid, 36);
 	Util_NextToken(params, pos, tam, 36);
-	if (tid[0] == 0 || tam[0] == 0 || !Util_ParseInt(tam, amount) || !Util_ParsePlayerId(tid, targetid))
+	if (tid[0] == 0 || tam[0] == 0 || !Money_Parse(tam, amount) || !Util_ParsePlayerId(tid, targetid))
 	{
 		Util_Send(playerid, 0x99CCFFFF, "გამოყენება: /pay id თანხა");
 		return 1;
@@ -280,13 +280,13 @@ public Cmd_pay(playerid, const params[])
 	new sn[75], tn[75], msg[768];
 	GetPlayerName(playerid, sn, 75);
 	GetPlayerName(targetid, tn, 75);
-	SendClientMessage(playerid, 0x66DD66FF, "$%d გადაეცი %s-ს.", amount, tn);
-	SendClientMessage(targetid, 0x66DD66FF, "$%d მიიღე %s-სგან.", amount, sn);
+	SendClientMessage(playerid, 0x66DD66FF, "%s გადაეცი %s-ს.", Money_Str(amount), tn);
+	SendClientMessage(targetid, 0x66DD66FF, "%s მიიღე %s-სგან.", Money_Str(amount), sn);
 	format(msg, 768, "* %s ფულს აწვდის %s-ს", sn, tn);
 	Util_SendNear(playerid, 0xC2A2DAFF, 20.0, msg);
 	Char_Save(playerid);
 	Char_Save(targetid);
-	format(msg, 768, "%s -> %s: $%d", sn, tn, amount);
+	format(msg, 768, "%s -> %s: %s", sn, tn, Money_Str(amount));
 	Log_Write("PAY", msg);
 	return 1;
 }
@@ -418,7 +418,7 @@ public Cmd_stats(playerid, const params[])
 	{
 		SendClientMessage(playerid, -1, "დონე: %d  Exp: %d/%d", level, exp - Level_ExpForLevel(level), Level_StepExp(level));
 	}
-	SendClientMessage(playerid, -1, "ნაღდი: $%d  ბანკი: $%d", gPlayer[playerid][pMoney], gPlayer[playerid][pBank]);
+	SendClientMessage(playerid, -1, "ნაღდი: %s  ბანკი: %s", Money_Str(gPlayer[playerid][pMoney]), Money_Str(gPlayer[playerid][pBank]));
 	new played = gPlayer[playerid][pSessionMs];
 	new total = gPlayer[playerid][pPlayedMs];
 	SendClientMessage(playerid, -1, "ნათამაშები: სესია %dს %02dწ, სულ %dს %02dწ", played / 3600000, played % 3600000 / 60000, total / 3600000, total % 3600000 / 60000);
@@ -427,7 +427,7 @@ public Cmd_stats(playerid, const params[])
 	{
 		remainSec = 0;
 	}
-	SendClientMessage(playerid, -1, "შემდეგი ხელფასი: %d წთ %02d წმ (%d $ ბანკში)", remainSec / 60, remainSec % 60, Economy_PaycheckAmount(level));
+	SendClientMessage(playerid, -1, "შემდეგი ხელფასი: %d წთ %02d წმ (%s ბანკში)", remainSec / 60, remainSec % 60, Money_Str(Economy_PaycheckAmount(level)));
 	return 1;
 }
 

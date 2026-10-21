@@ -35,7 +35,7 @@ Economy_Paycheck(playerid)
 	SendClientMessage(playerid, -2994689, "--- ხელფასი ---");
 	if (paid > 0 && Money_GiveBank(playerid, paid, "paycheck", ""))
 	{
-		SendClientMessage(playerid, 0x66DD66FF, "ხელფასი: $%d ჩაირიცხა ბანკში. ბალანსი: $%d.", paid, gPlayer[playerid][pBank]);
+		SendClientMessage(playerid, 0x66DD66FF, "ხელფასი: %s ჩაირიცხა ბანკში. ბალანსი: %s.", Money_Str(paid), Money_Str(gPlayer[playerid][pBank]));
 		if (paid < amount)
 		{
 			SendClientMessage(playerid, -10270721, "ანგარიში ლიმიტზეა: ხელფასის ნაწილი დაიკარგა.");

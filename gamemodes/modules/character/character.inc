@@ -8,7 +8,7 @@ bool:Char_IsSkinAllowed(gender, skin)
 Char_SyncMoney(playerid)
 {
 	ResetPlayerMoney(playerid);
-	GivePlayerMoney(playerid, gPlayer[playerid][pMoney]);
+	GivePlayerMoney(playerid, Money_GtaDisplay(gPlayer[playerid][pMoney]));   // contatore GTA: lari interi, solo vista
 }
 
 Char_RefreshHud(playerid)

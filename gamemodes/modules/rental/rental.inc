@@ -251,7 +251,7 @@ Rental_NotifyClosed(playerid, result, refund, newState)
 			}
 			if (newState == 3)
 			{
-				SendClientMessage(playerid, -1, "ქირაობა შეწყდა: გირაო $%d ანგარიშზე დაგიბრუნდა.", refund);
+				SendClientMessage(playerid, -1, "ქირაობა შეწყდა: გირაო %s ანგარიშზე დაგიბრუნდა.", Money_Str(refund));
 			}
 			else
 			{
@@ -262,7 +262,7 @@ Rental_NotifyClosed(playerid, result, refund, newState)
 		{
 			if (refund > 0)
 			{
-				SendClientMessage(playerid, -1, "ქირაობა დაიხურა დაშვებული დროის შემდეგ: დაგიბრუნდა $%d.", refund);
+				SendClientMessage(playerid, -1, "ქირაობა დაიხურა დაშვებული დროის შემდეგ: დაგიბრუნდა %s.", Money_Str(refund));
 			}
 			else
 			{
@@ -360,11 +360,11 @@ Rental_OnOpenResult(playerid, result, rentalId, amount, dueAt)
 	if (gPlayer[playerid][pRentalKind] == SRENT_VKIND)
 	{
 		Veh_StdModelName(GetVehicleModel(gPlayer[playerid][pRentalVehicle]), name);
-		SendClientMessage(playerid, 0x66DD66FF, "ქირაობა აქტიურია: %s - %d წუთი ($%d). დაბრუნება ნებისმიერ ადგილას: /riconsegna", name, minutes > 0 ? minutes : 0, g_RtFee[playerid]);
+		SendClientMessage(playerid, 0x66DD66FF, "ქირაობა აქტიურია: %s - %d წუთი (%s). დაბრუნება ნებისმიერ ადგილას: /riconsegna", name, minutes > 0 ? minutes : 0, Money_Str(g_RtFee[playerid]));
 		return 1;
 	}
 	Rental_KindName(gPlayer[playerid][pRentalKind], name, 16);
-	SendClientMessage(playerid, 0x66DD66FF, "ქირაობა აქტიურია: %s %d წუთით (ქირა $%d, გირაო $%d). დააბრუნე აქ: /riconsegna.", name, minutes > 0 ? minutes : 0, g_RtFee[playerid], g_RtDeposit[playerid]);
+	SendClientMessage(playerid, 0x66DD66FF, "ქირაობა აქტიურია: %s %d წუთით (ქირა %s, გირაო %s). დააბრუნე აქ: /riconsegna.", name, minutes > 0 ? minutes : 0, Money_Str(g_RtFee[playerid]), Money_Str(g_RtDeposit[playerid]));
 	return 0;
 }
 
@@ -493,7 +493,7 @@ public UI_OnRentalConfirm(playerid, modelIdx, blocks)
 	if (have < total)
 	{
 		new msg[480];
-		format(msg, 480, "სახსრები არ გყოფნის: საჭიროა $%d (ქირა + გირაო) ბანკსა და ნაღდში.", total);
+		format(msg, 480, "სახსრები არ გყოფნის: საჭიროა %s (ქირა + გირაო) ბანკსა და ნაღდში.", Money_Str(total));
 		UI_LivingReject(playerid, msg);
 		return 1;
 	}

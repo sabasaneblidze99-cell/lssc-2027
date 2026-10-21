@@ -11,6 +11,8 @@
 @font-face { font-family: "Barlow Condensed"; font-weight: 700; font-style: normal; font-display: block; src: url("fonts/barlow-condensed-latin-700-normal.woff2") format("woff2"); }
 /* Georgian (Mkhedruli/Mtavruli): Noto Sans Georgian variabile (peso e larghezza), SIL OFL 1.1 - fonts/OFL-NotoSansGeorgian.txt */
 @font-face { font-family: "Noto Sans Georgian"; font-weight: 100 900; font-stretch: 62.5% 100%; font-style: normal; font-display: block; src: url("fonts/noto-sans-georgian-georgian-standard-normal.woff2") format("woff2-variations"), url("fonts/noto-sans-georgian-georgian-standard-normal.woff2") format("woff2"); unicode-range: U+0589, U+10A0-10FF, U+1C90-1CBA, U+1CBD-1CBF, U+205A, U+2D00-2D2F, U+2E31; }
+/* ₾ (U+20BE): il sottoinsieme georgiano non lo contiene; arriva dal sottoinsieme latin-ext dello stesso font (OFL), solo per il simbolo del lari */
+@font-face { font-family: "Noto Sans Georgian"; font-weight: 100 900; font-stretch: 62.5% 100%; font-style: normal; font-display: block; src: url("fonts/noto-sans-georgian-latin-ext-standard-normal.woff2") format("woff2-variations"), url("fonts/noto-sans-georgian-latin-ext-standard-normal.woff2") format("woff2"); unicode-range: U+20BE; }
 
 :root {
   --accent: #f2c14e;          /* giallo CityOS */

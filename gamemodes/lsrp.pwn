@@ -23,6 +23,7 @@
 #include "modules/core/lang.inc"
 #include "modules/core/player_data.inc"
 #include "modules/core/utils.inc"
+#include "modules/economy/currency.inc"
 #include "modules/core/logger.inc"
 #include "modules/ui/cef_ui.inc"
 #include "modules/core/validation.inc"

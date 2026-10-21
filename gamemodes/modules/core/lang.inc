@@ -135,6 +135,20 @@ Lang_Translit(const src[], dest[], size)
 			{
 				dest[o++] = 32;
 			}
+			case 8382:
+			{
+				// ₾ (lari): il font di SA-MP non lo ha -> "GEL" (+ spazio prima della cifra)
+				if (o < size - 3)
+				{
+					dest[o++] = 71;
+					dest[o++] = 69;
+					dest[o++] = 76;
+				}
+				if (src[i] >= 48 && src[i] <= 57 && o < size - 1)
+				{
+					dest[o++] = 32;
+				}
+			}
 			default:
 			{
 				dest[o++] = 63;

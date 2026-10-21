@@ -468,7 +468,7 @@ Hub_StepMessage(playerid, step, paid)
 		{
 			if (paid > 0)
 			{
-				format(msg, 768, "მისასალმებელი მიწოდება შესრულდა: მაღაზია გიხდის მადლობას. უბნის სახლმა ანგარიშზე $%d ჩაგირიცხა.", paid);
+				format(msg, 768, "მისასალმებელი მიწოდება შესრულდა: მაღაზია გიხდის მადლობას. უბნის სახლმა ანგარიშზე %s ჩაგირიცხა.", Money_Str(paid));
 			}
 			else
 			{
@@ -704,7 +704,7 @@ Hub_ShowServices(playerid)
 	Util_Send(playerid, 0x99CCFFFF, "Idlewood-ის უბნის სახლი - რას იპოვი აქ (და Ganton-ისა და Jefferson-ის დაფებთან):");
 	Util_Send(playerid, -1, " /contratti - დაფა: ნახვა ყველგან შეიძლება, მიღება აქ ან უბნის დაფასთან");
 	Util_Send(playerid, -1, " /quartiere [სახელი] - როგორაა უბანი და რას ამბობენ ქუჩაში");
-	format(msg, 768, " /contribuisci [თანხა] [უბანი] - საზოგადოების პროექტი: $%d-დან $%d-მდე, დღეში მაქს. $%d, ანგარიშიდან", 50, 500, 1000);
+	format(msg, 768, " /contribuisci [თანხა] [უბანი] - საზოგადოების პროექტი: %s-დან %s-მდე, დღეში მაქს. %s, ანგარიშიდან", Money_Str(50), Money_Str(500), Money_Str(1000));
 	Util_Send(playerid, -1, msg);
 	Util_Send(playerid, -1, " /documento richiedi - დოკუმენტების სარკმელი");
 	Util_Send(playerid, -1, " /aiuto lavoro - გზა Pershing Square-ის Job Center-მდე  |  /aiuto noleggio - ტრანსპორტის ქირაობა");
@@ -916,11 +916,11 @@ Hub_CmdContribuisci(playerid, const params[])
 	Util_NextToken(params, pos, tok, 72);
 	if (tok[0] != 0)
 	{
-		if (Util_ParseInt(tok, amount))
+		if (Money_Parse(tok, amount))
 		{
 			if (amount <= 0)
 			{
-				Util_Send(playerid, -10270721, "არასწორი თანხა: დაწერე დადებითი მთელი რიცხვი (მაგ. /contribuisci 100).");
+				Util_Send(playerid, -10270721, "არასწორი თანხა: ჩაწერე ლარებში (მაგ. /contribuisci 20 ან 12,50).");
 				return 1;
 			}
 			Util_NextToken(params, pos, tok, 72);
@@ -1006,7 +1006,7 @@ public UI_OnProjectContribute(playerid, projectId, amount)
 	}
 	if (!LD_DonationValid(amount, g_HubDonToday[playerid]))
 	{
-		format(msg, 768, "არასწორი თანხა: $%d-დან $%d-მდე, დღეში მაქსიმუმ $%d.", 50, 500, 1000);
+		format(msg, 768, "არასწორი თანხა: %s-დან %s-მდე, დღეში მაქსიმუმ %s.", Money_Str(50), Money_Str(500), Money_Str(1000));
 		UI_LivingReject(playerid, msg);
 		return 1;
 	}
@@ -1063,7 +1063,7 @@ public Living_OnDBProject(playerid, result, projectId, donated, balance, points,
 				g_HubFundPrj[d] = projectId;
 				g_HubFund[d] = fund;
 			}
-			format(msg, 768, "მადლობა! $%d შესწირე პროექტს \"%s\": შეგროვდა $%d / $%d.", donated, name, fund, DB_LivingDistrictGet(d, E_LD_DISTRICT:7));
+			format(msg, 768, "მადლობა! %s შესწირე პროექტს \"%s\": შეგროვდა %s / %s.", Money_Str(donated), name, Money_Str(fund), Money_Str(DB_LivingDistrictGet(d, E_LD_DISTRICT:7)));
 			UI_LivingNotify(playerid, msg, 1);
 			if (points > 0)
 			{
@@ -1093,12 +1093,12 @@ public Living_OnDBProject(playerid, result, projectId, donated, balance, points,
 		}
 		case 7:
 		{
-			format(msg, 768, "ჯერ არ შეიძლება: საჭიროა ქალაქში მინიმუმ %d წუთი და დღეში მაქსიმუმ $%d შემოწირულობა.", 60, 1000);
+			format(msg, 768, "ჯერ არ შეიძლება: საჭიროა ქალაქში მინიმუმ %d წუთი და დღეში მაქსიმუმ %s შემოწირულობა.", 60, Money_Str(1000));
 			UI_LivingReject(playerid, msg);
 		}
 		case 9:
 		{
-			format(msg, 768, "არასწორი თანხა: $%d-დან $%d-მდე.", 50, 500);
+			format(msg, 768, "არასწორი თანხა: %s-დან %s-მდე.", Money_Str(50), Money_Str(500));
 			UI_LivingReject(playerid, msg);
 		}
 		case 10:

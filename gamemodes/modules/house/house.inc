@@ -361,7 +361,7 @@ House_RefreshWorld(idx)
 	new text[480], tier = House_Tier(idx), bool:free = g_HouseRows[idx][hrOwnerId] <= 0;
 	if (free)
 	{
-		format(text, 480, "სახლი %d - %s\nიყიდება: $%d (დონე %d)\nინფო: /casa", g_HouseRows[idx][hrId], s_HsTierName[tier], g_HouseRows[idx][hrPrice], s_HsTierLevel[tier]);
+		format(text, 480, "სახლი %d - %s\nიყიდება: %s (დონე %d)\nინფო: /casa", g_HouseRows[idx][hrId], s_HsTierName[tier], Money_Str(g_HouseRows[idx][hrPrice]), s_HsTierLevel[tier]);
 	}
 	else
 	{
@@ -801,8 +801,8 @@ public House_OnDBBought(playerid, houseId, affected)
 	House_ResetRowState(idx);
 	House_RefreshWorld(idx);
 	Char_Save(playerid);
-	SendClientMessage(playerid, 0x66DD66FF, "იყიდე სახლი %d $%d-ად (%s). შესასვლელად /entra, სამართავად /casa.", houseId, price, bank == 1 ? "ბანკიდან" : "ნაღდით");
-	format(msg, 256, "ACQUISTO %s: casa %d $%d (%s)", name, houseId, price, bank == 1 ? "banca" : "contanti");
+	SendClientMessage(playerid, 0x66DD66FF, "იყიდე სახლი %d %s-ად (%s). შესასვლელად /entra, სამართავად /casa.", houseId, Money_Str(price), bank == 1 ? "ბანკიდან" : "ნაღდით");
+	format(msg, 256, "ACQUISTO %s: casa %d %s (%s)", name, houseId, Money_Str(price), bank == 1 ? "banca" : "contanti");
 	Log_Write("HOUSE", msg);
 	return 1;
 }
@@ -843,7 +843,7 @@ House_DoSell(playerid, idx, bool:confirmed)
 	}
 	if (!confirmed)
 	{
-		SendClientMessage(playerid, -2994689, "სახლის %d გაყიდვა: ბანკში მიიღებ $%d-ს (%d%%). კომუნალურები, გასაღებები და მაცივარი განულდება.", g_HouseRows[idx][hrId], refund, 70);
+		SendClientMessage(playerid, -2994689, "სახლის %d გაყიდვა: ბანკში მიიღებ %s-ს (%d%%). კომუნალურები, გასაღებები და მაცივარი განულდება.", g_HouseRows[idx][hrId], Money_Str(refund), 70);
 		Util_Send(playerid, 0x99CCFFFF, "დასადასტურებლად: /casa vendi conferma");
 		return 0;
 	}
@@ -918,8 +918,8 @@ public House_OnDBSold(playerid, houseId, affected)
 	Char_Save(playerid);
 	new name[75], msg[256];
 	GetPlayerName(playerid, name, 75);
-	SendClientMessage(playerid, 0x66DD66FF, "გაყიდე სახლი %d: $%d ჩაირიცხა ბანკში.", houseId, refund);
-	format(msg, 256, "VENDITA %s: casa %d rimborso $%d", name, houseId, refund);
+	SendClientMessage(playerid, 0x66DD66FF, "გაყიდე სახლი %d: %s ჩაირიცხა ბანკში.", houseId, Money_Str(refund));
+	format(msg, 256, "VENDITA %s: casa %d rimborso %s", name, houseId, Money_Str(refund));
 	Log_Write("HOUSE", msg);
 	return 1;
 }
@@ -1499,7 +1499,7 @@ public House_OnDBBillAdded(houseId, kind, billId, amount)
 	new owner = House_OwnerPlayer(idx);
 	if (owner != 65535 && Util_IsPlaying(owner))
 	{
-		SendClientMessage(owner, -2994689, "სახლი %d: ახალი გადასახადი %s, $%d (/bollette).", houseId, kind == 1 ? "გაზის" : "შუქის", amount);
+		SendClientMessage(owner, -2994689, "სახლი %d: ახალი გადასახადი %s, %s (/bollette).", houseId, kind == 1 ? "გაზის" : "შუქის", Money_Str(amount));
 	}
 	return 1;
 }
@@ -1530,7 +1530,7 @@ House_CutUtil(idx, kind)
 	new owner = House_OwnerPlayer(idx);
 	if (owner != 65535)
 	{
-		SendClientMessage(owner, -10270721, "სახლი %d: %s გაითიშა%s გადაუხდელი გადასახადების გამო. გადაიხადე /bollette (+$%d აღდგენა).", id, kind == 1 ? "გაზი" : "შუქი", "", 40);
+		SendClientMessage(owner, -10270721, "სახლი %d: %s გაითიშა%s გადაუხდელი გადასახადების გამო. გადაიხადე /bollette (+%s აღდგენა).", id, kind == 1 ? "გაზი" : "შუქი", "", Money_Str(40));
 	}
 	new msg[256];
 	format(msg, 256, "DISTACCO casa %d: %s", id, kind == 1 ? "gas" : "luce");
@@ -1697,7 +1697,7 @@ public House_OnDBBillsPaid(playerid, houseId, kind, paidAmount, restored)
 	g_HPl[playerid][hpBillPaidTotal] += amount;
 	new msg[256], name[75];
 	GetPlayerName(playerid, name, 75);
-	format(msg, 256, "BOLLETTE %s: casa %d %s $%d%s (%s)", name, houseId, kind == 1 ? "gas" : "luce", amount, restored != 0 ? " con riattivazione" : "", bank == 1 ? "banca" : "contanti");
+	format(msg, 256, "BOLLETTE %s: casa %d %s %s%s (%s)", name, houseId, kind == 1 ? "gas" : "luce", Money_Str(amount), restored != 0 ? " con riattivazione" : "", bank == 1 ? "banca" : "contanti");
 	Log_Write("HOUSE", msg);
 	g_HPl[playerid][hpBillKindMask] &= ~(1 << kind);
 	if (g_HPl[playerid][hpBillKindMask] != 0)
@@ -1707,7 +1707,7 @@ public House_OnDBBillsPaid(playerid, houseId, kind, paidAmount, restored)
 	}
 	g_HPl[playerid][hpPendingOp] = 0;
 	g_HPl[playerid][hpBillsHouseId] = 0;
-	SendClientMessage(playerid, 0x66DD66FF, "გადასახადები გადახდილია: ჩამოიჭრა $%d (%s).", g_HPl[playerid][hpBillPaidTotal], bank == 1 ? "ბანკიდან" : "ნაღდით");
+	SendClientMessage(playerid, 0x66DD66FF, "გადასახადები გადახდილია: ჩამოიჭრა %s (%s).", Money_Str(g_HPl[playerid][hpBillPaidTotal]), bank == 1 ? "ბანკიდან" : "ნაღდით");
 	return 1;
 }
 
@@ -1971,7 +1971,7 @@ House_Info(playerid, idx)
 	SendClientMessage(playerid, -2994689, "--- სახლი %d - %s ---", g_HouseRows[idx][hrId], s_HsTierName[tier]);
 	if (role == 0)
 	{
-		SendClientMessage(playerid, -1, "იყიდება: $%d, მინ. დონე %d, მაცივარი %d ულუფა. სახლების ლიმიტი შენი დონისთვის: %d.", g_HouseRows[idx][hrPrice], s_HsTierLevel[tier], s_HsFridgeCap[tier], House_MaxForLevel(gPlayer[playerid][pLevel]));
+		SendClientMessage(playerid, -1, "იყიდება: %s, მინ. დონე %d, მაცივარი %d ულუფა. სახლების ლიმიტი შენი დონისთვის: %d.", Money_Str(g_HouseRows[idx][hrPrice]), s_HsTierLevel[tier], s_HsFridgeCap[tier], House_MaxForLevel(gPlayer[playerid][pLevel]));
 		Util_Send(playerid, 0x99CCFFFF, "შეძენა: /casa compra (მენიუ) ან /casa compra contanti|banca");
 		return 0;
 	}
@@ -2629,7 +2629,7 @@ House_OnPlayerPickUpPickup(playerid, pickupid)
 	new tier = House_Tier(idx);
 	if (g_HouseRows[idx][hrOwnerId] <= 0)
 	{
-		SendClientMessage(playerid, -1, "სახლი %d (%s) იყიდება: $%d, მინ. დონე %d. ინფო და შეძენა: /casa.", g_HouseRows[idx][hrId], s_HsTierName[tier], g_HouseRows[idx][hrPrice], s_HsTierLevel[tier]);
+		SendClientMessage(playerid, -1, "სახლი %d (%s) იყიდება: %s, მინ. დონე %d. ინფო და შეძენა: /casa.", g_HouseRows[idx][hrId], s_HsTierName[tier], Money_Str(g_HouseRows[idx][hrPrice]), s_HsTierLevel[tier]);
 	}
 	else if (House_CanEnterNow(idx, playerid))
 	{

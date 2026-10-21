@@ -1164,7 +1164,7 @@ Inv_ShopList(playerid)
 		{
 			continue;
 		}
-		format(part, 192, "%s $%d  ", s_InvShopKey[i], s_InvPrice[i]);
+		format(part, 192, "%s %s  ", s_InvShopKey[i], Money_Str(s_InvPrice[i]));
 		strcat(line, part, 256);
 	}
 	Util_Send(playerid, 0x99CCFFFF, line);
@@ -1210,7 +1210,7 @@ Inv_Buy(playerid, itemId, qty)
 	new cost = s_InvPrice[itemId] * qty;
 	if (!Money_Can(playerid, cost))
 	{
-		SendClientMessage(playerid, -10270721, "საჭიროა $%d ნაღდი ფული.", cost);
+		SendClientMessage(playerid, -10270721, "საჭიროა %s ნაღდი ფული.", Money_Str(cost));
 		return 0;
 	}
 	Inv_BeginOp(playerid, 5, itemId, qty, cost);
@@ -1227,7 +1227,7 @@ Inv_BuyBag(playerid)
 	}
 	if (!Money_Can(playerid, 350))
 	{
-		SendClientMessage(playerid, -10270721, "საჭიროა $%d ნაღდი ფული.", 350);
+		SendClientMessage(playerid, -10270721, "საჭიროა %s ნაღდი ფული.", Money_Str(350));
 		return 0;
 	}
 	Inv_BeginOp(playerid, 6, 11, 1, 350);
@@ -1261,7 +1261,7 @@ public Inv_OnDBBought(playerid, itemId, qty, result)
 		Inv_EndOp(playerid);
 		Inv_Reload(playerid);
 		UI_InvToast(playerid, itemId, qty);
-		SendClientMessage(playerid, 0x66DD66FF, "იყიდე %s x%d $%d-ად.", s_InvName[itemId], qty, cost);
+		SendClientMessage(playerid, 0x66DD66FF, "იყიდე %s x%d %s-ად.", s_InvName[itemId], qty, Money_Str(cost));
 		return 1;
 	}
 	Inv_EndOp(playerid);
@@ -1299,7 +1299,7 @@ public Inv_OnDBBag(playerid, result)
 		Char_Save(playerid);
 		Inv_EndOp(playerid);
 		Inv_Reload(playerid);
-		SendClientMessage(playerid, 0x66DD66FF, "იყიდე ზურგჩანთა $%d-ად: ტევადობა %d სლოტი.", 350, 20);
+		SendClientMessage(playerid, 0x66DD66FF, "იყიდე ზურგჩანთა %s-ად: ტევადობა %d სლოტი.", Money_Str(350), 20);
 		return 1;
 	}
 	Inv_EndOp(playerid);

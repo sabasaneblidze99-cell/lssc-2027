@@ -51,23 +51,8 @@ UI_FcRankText(faction, rank, out[], size)
 
 UI_FcMoney(value, out[], size)
 {
-	new raw[48], len = 0, pos = 0;
-	if (value < 0)
-	{
-		value = 0;
-	}
-	format(raw, 48, "%d", value);
-	len = strlen(raw);
-	out[0] = 0;
-	for (new i = 0; i < len && pos < size - 2; i++)
-	{
-		if (i > 0 && (len - i) % 3 == 0)
-		{
-			out[pos++] = 46;
-		}
-		out[pos++] = raw[i];
-	}
-	out[pos] = 0;
+	// importo in tetri -> "1.250,50" (economy/currency.inc)
+	return Money_Format(value, out, size);
 }
 
 UI_FcStatusText(status, out[], size)
@@ -167,7 +152,7 @@ UI_FcInfoShow(playerid)
 	strcat(body, line, 3072);
 	format(line, 576, "წოდება: {FFFFFF}%s (%d/%d)\nსამსახური: %s{FFFFFF}\n", rankName, rank, 6, g_UiFcDuty[playerid] ? "{66DD66}სამსახურში" : "{FF6666}სამსახურს გარეთ");
 	strcat(body, line, 3072);
-	format(line, 576, "ხელფასი: {66DD66}$%s{FFFFFF} ყოველ %d წთ რეალურ სამსახურზე (ირიცხება ბანკში)\nწევრები: %d ონლაინ / %d სულ\n\n", pay, 15, g_UiFcOnline[playerid], g_UiFcTotal[playerid]);
+	format(line, 576, "ხელფასი: {66DD66}₾%s{FFFFFF} ყოველ %d წთ რეალურ სამსახურზე (ირიცხება ბანკში)\nწევრები: %d ონლაინ / %d სულ\n\n", pay, 15, g_UiFcOnline[playerid], g_UiFcTotal[playerid]);
 	strcat(body, line, 3072);
 	strcat(body, "ბრძანებები: /duty (შტაბთან ახლოს), /r (რადიო), /dep (დეპარტამენტთაშორისი), /fazione lascia.", 3072);
 	if (rank >= 5)
@@ -366,7 +351,7 @@ UI_FcMemberInfoShow(playerid, idx)
 	UI_FcRankText(faction, rank, rankName, 72);
 	UI_FcStatusText(st, status, 72);
 	UI_FcMoney(g_UiFcRankPay[faction][rank], pay, 48);
-	format(body, 768, "{FFD24D}%s{FFFFFF}\n\nფრაქცია: %s\nწოდება: %s (%d/%d)\nსტატუსი: %s{FFFFFF}\nწოდების ხელფასი: {66DD66}$%s{FFFFFF} ყოველ %d წთ სამსახურზე", name, g_UiFcFull[faction], rankName, rank, 6, status, pay, 15);
+	format(body, 768, "{FFD24D}%s{FFFFFF}\n\nფრაქცია: %s\nწოდება: %s (%d/%d)\nსტატუსი: %s{FFFFFF}\nწოდების ხელფასი: {66DD66}₾%s{FFFFFF} ყოველ %d წთ სამსახურზე", name, g_UiFcFull[faction], rankName, rank, 6, status, pay, 15);
 	Lang_ShowPlayerDialog(playerid, 9323, DIALOG_STYLE_MSGBOX, "წევრის დეტალები", body, "უკან", "");
 }
 
@@ -821,7 +806,7 @@ UI_InjuryEndShow(playerid, reason, fee)
 		if (fee > 0)
 		{
 			UI_FcMoney(fee, money, 48);
-			format(body, 768, "{FFFFFF}დახმარება დროულად არ მოვიდა: All Saints-ის საავადმყოფოში მოგათავსეს და გამოჯანმრთელდი.\n\nმკურნალობის ხარჯი: {FF6666}$%s{FFFFFF}.", money);
+			format(body, 768, "{FFFFFF}დახმარება დროულად არ მოვიდა: All Saints-ის საავადმყოფოში მოგათავსეს და გამოჯანმრთელდი.\n\nმკურნალობის ხარჯი: {FF6666}₾%s{FFFFFF}.", money);
 		}
 		else
 		{

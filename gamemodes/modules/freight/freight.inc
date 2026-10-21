@@ -705,11 +705,11 @@ Freight_OnCompleteResult(playerid, result, paid, balance)
 			}
 			else if (result == 6)
 			{
-				SendClientMessage(playerid, 0x66DD66FF, "მიწოდება #%d დასრულდა: $%d ჩაირიცხა ბანკში (საათობრივი ლიმიტი მიღწეულია). ბალანსი: $%d.", ct, paid, balance);
+				SendClientMessage(playerid, 0x66DD66FF, "მიწოდება #%d დასრულდა: %s ჩაირიცხა ბანკში (საათობრივი ლიმიტი მიღწეულია). ბალანსი: %s.", ct, Money_Str(paid), Money_Str(balance));
 			}
 			else
 			{
-				SendClientMessage(playerid, 0x66DD66FF, "მიწოდება #%d დასრულდა: $%d ჩაირიცხა ბანკში. ბალანსი: $%d.", ct, paid, balance);
+				SendClientMessage(playerid, 0x66DD66FF, "მიწოდება #%d დასრულდა: %s ჩაირიცხა ბანკში. ბალანსი: %s.", ct, Money_Str(paid), Money_Str(balance));
 			}
 		}
 		case 8:

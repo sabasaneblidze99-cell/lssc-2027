@@ -36,54 +36,14 @@ bool:UI_BankValid(playerid)
 
 UI_BankFmt(value, dest[], size)
 {
-	new s[48], len = 0, bool:neg = value < 0;
-	if (neg)
-	{
-		value = -value;
-	}
-	valstr(s, value, false);
-	len = strlen(s);
-	dest[0] = 0;
-	if (neg)
-	{
-		strcat(dest, "-", size);
-	}
-	new ch[2];
-	for (new i = 0; i < len; i++)
-	{
-		if (i > 0 && (len - i) % 3 == 0)
-		{
-			strcat(dest, ".", size);
-		}
-		ch[0] = s[i];
-		ch[1] = 0;
-		strcat(dest, ch, size);
-	}
+	// importo in tetri -> "1.250,50" (economy/currency.inc)
+	return Money_Format(value, dest, size);
 }
 
 bool:UI_BankParseAmount(const s[], &value)
 {
-	new i = 0, len = strlen(s), digits = 0;
-	value = 0;
-	while (i < len && s[i] == 32)
-	{
-		i++;
-	}
-	while (i < len && s[i] >= 48 && s[i] <= 57)
-	{
-		if (digits >= 9)
-		{
-			return false;
-		}
-		value = value * 10 + (s[i] - 48);
-		digits++;
-		i++;
-	}
-	while (i < len && s[i] == 32)
-	{
-		i++;
-	}
-	return digits > 0 && i == len && value >= 1;
+	// lari digitati ("25", "12,50") -> tetri (economy/currency.inc)
+	return Money_Parse(s, value);
 }
 
 UI_BankFindTarget(const input[])
@@ -249,7 +209,7 @@ UI_BankMenuShow(playerid)
 	UI_BankFmt(g_UiBkCash[playerid], b, 48);
 	UI_BankFmt(g_UiBkBank[playerid], c, 48);
 	format(title, 576, "%s - Los Santos Bank", g_UiBkCounter[playerid] ? "სალარო" : "ATM");
-	format(body, 320, "ოპერაცია\tდეტალი\nბალანსი\t{66DD66}$%s\nშეტანა\tნაღდი: $%s\nგამოტანა\tბანკი: $%s\nგადარიცხვა\t{FFD24D}საკომისიოს ჩათვლით\nამონაწერი\tბოლო %d ჩანაწერი", a, b, c, 15);
+	format(body, 320, "ოპერაცია\tდეტალი\nბალანსი\t{66DD66}₾%s\nშეტანა\tნაღდი: ₾%s\nგამოტანა\tბანკი: ₾%s\nგადარიცხვა\t{FFD24D}საკომისიოს ჩათვლით\nამონაწერი\tბოლო %d ჩანაწერი", a, b, c, 15);
 	g_UiBkOp[playerid] = 0;
 	g_UiBkTarget[playerid] = -1;
 	Lang_ShowPlayerDialog(playerid, 9500, DIALOG_STYLE_TABLIST_HEADERS, title, body, "არჩევა", "დახურვა");
@@ -275,7 +235,7 @@ UI_BankBalanceShow(playerid)
 	if (g_UiBkWdLeft[playerid] >= 0)
 	{
 		UI_BankFmt(g_UiBkWdLeft[playerid], tmp, 48);
-		format(wd, 144, "{FFD24D}$%s", tmp);
+		format(wd, 144, "{FFD24D}₾%s", tmp);
 	}
 	else
 	{
@@ -284,13 +244,13 @@ UI_BankBalanceShow(playerid)
 	if (g_UiBkSendLeft[playerid] >= 0)
 	{
 		UI_BankFmt(g_UiBkSendLeft[playerid], tmp, 48);
-		format(snd, 144, "{FFD24D}$%s", tmp);
+		format(snd, 144, "{FFD24D}₾%s", tmp);
 	}
 	else
 	{
 		strcopy(snd, "{AAAAAA}n/d", 144);
 	}
-	format(body, 1024, "{FFFFFF}ნაღდი ფული: {66DD66}$%s\n{FFFFFF}საბანკო ანგარიში: {66DD66}$%s\n{FFFFFF}სულ: {66DD66}$%s\n\n{FFFFFF}დღეს გამოსატანი: %s\n{FFFFFF}დღეს გადასარიცხი: %s", cash, bank, total, wd, snd);
+	format(body, 1024, "{FFFFFF}ნაღდი ფული: {66DD66}₾%s\n{FFFFFF}საბანკო ანგარიში: {66DD66}₾%s\n{FFFFFF}სულ: {66DD66}₾%s\n\n{FFFFFF}დღეს გამოსატანი: %s\n{FFFFFF}დღეს გადასარიცხი: %s", cash, bank, total, wd, snd);
 	Lang_ShowPlayerDialog(playerid, 9505, DIALOG_STYLE_MSGBOX, "ბალანსი", body, "მენიუ", "დახურვა");
 }
 
@@ -382,20 +342,20 @@ UI_BankAmountShow(playerid, op, const err[])
 		case 0:
 		{
 			strcopy(title, "ნაღდი ფულის შეტანა", 64);
-			format(sub, 288, "ხელმისაწვდომი ნაღდი: {66DD66}$%s", sCash);
+			format(sub, 288, "ხელმისაწვდომი ნაღდი: {66DD66}₾%s", sCash);
 		}
 		case 1:
 		{
 			strcopy(title, "ანგარიშიდან გამოტანა", 64);
-			format(sub, 288, "საბანკო ბალანსი: {66DD66}$%s", sBank);
+			format(sub, 288, "საბანკო ბალანსი: {66DD66}₾%s", sBank);
 		}
 		default:
 		{
 			strcopy(title, "გადარიცხვა: თანხა", 64);
-			format(sub, 288, "საბანკო ბალანსი: {66DD66}$%s{FFFFFF} (საკომისიო ემატება)", sBank);
+			format(sub, 288, "საბანკო ბალანსი: {66DD66}₾%s{FFFFFF} (საკომისიო ემატება)", sBank);
 		}
 	}
-	format(body, 1024, "%s{FFFFFF}%s\nდასაშვები თანხა: {FFD24D}$%s{FFFFFF}-დან {FFD24D}$%s{FFFFFF}-მდე.\nშეიყვანე მთელი რიცხვი:", err, sub, sLo, sHi);
+	format(body, 1024, "%s{FFFFFF}%s\nდასაშვები თანხა: {FFD24D}₾%s{FFFFFF}-დან {FFD24D}₾%s{FFFFFF}-მდე.\nშეიყვანე თანხა ლარში (მაგ. 25 ან 12,50):", err, sub, sLo, sHi);
 	Lang_ShowPlayerDialog(playerid, 9501, DIALOG_STYLE_INPUT, title, body, "შემდეგი", "უკან");
 	return 0;
 }
@@ -432,7 +392,7 @@ UI_BankTransferConfirm(playerid, targetId, amount, fee, balanceAfter, ttlSec)
 	UI_BankFmt(fee, sFee, 48);
 	UI_BankFmt(amount + fee, sTotal, 48);
 	UI_BankFmt(balanceAfter, sAfter, 48);
-	format(body, 1024, "{FFFFFF}მიმღები: {FFD24D}%s (ID %d)\n{FFFFFF}თანხა: {66DD66}$%s\n{FFFFFF}საკომისიო: {FF6666}$%s\n{FFFFFF}სულ ჩამოგეჭრება: {FF6666}$%s\n{FFFFFF}ბალანსი ოპერაციის შემდეგ: {66DD66}$%s\n\n{AAAAAA}დადასტურების ვადა %d წამში იწურება.", g_UiBkConfName[playerid], targetId, sAmount, sFee, sTotal, sAfter, ttlSec);
+	format(body, 1024, "{FFFFFF}მიმღები: {FFD24D}%s (ID %d)\n{FFFFFF}თანხა: {66DD66}₾%s\n{FFFFFF}საკომისიო: {FF6666}₾%s\n{FFFFFF}სულ ჩამოგეჭრება: {FF6666}₾%s\n{FFFFFF}ბალანსი ოპერაციის შემდეგ: {66DD66}₾%s\n\n{AAAAAA}დადასტურების ვადა %d წამში იწურება.", g_UiBkConfName[playerid], targetId, sAmount, sFee, sTotal, sAfter, ttlSec);
 	Lang_ShowPlayerDialog(playerid, 9503, DIALOG_STYLE_MSGBOX, "გადარიცხვის დადასტურება", body, "დადასტურება", "გაუქმება");
 	return 0;
 }
@@ -529,7 +489,7 @@ UI_BankStatementShow(playerid)
 		{
 			strcopy(what, g_UiBkStKind[playerid][i], 168);
 		}
-		format(line, 480, "%s\t%s\t%s$%s\t$%s\n", g_UiBkStWhen[playerid][i], what, g_UiBkStAmount[playerid][i] < 0 ? "{FF6666}-" : "{66DD66}+", sAmt, sBal);
+		format(line, 480, "%s\t%s\t%s₾%s\t₾%s\n", g_UiBkStWhen[playerid][i], what, g_UiBkStAmount[playerid][i] < 0 ? "{FF6666}-" : "{66DD66}+", sAmt, sBal);
 		strcat(body, line, 4096);
 	}
 	new idx = n;
@@ -757,7 +717,7 @@ bool:UI_BankOnDialogResponse(playerid, dialogid, response, listitem, const input
 			}
 			if (!UI_BankParseAmount(inputtext, amount))
 			{
-				UI_BankAmountShow(playerid, op, "{FF6666}არასწორი თანხა: მხოლოდ ციფრები, დადებითი მთელი რიცხვი.\n\n");
+				UI_BankAmountShow(playerid, op, "{FF6666}არასწორი თანხა: ჩაწერე ლარებში, მაგ. 25 ან 12,50.\n\n");
 				return true;
 			}
 			if (amount < lo || amount > hi)
@@ -765,7 +725,7 @@ bool:UI_BankOnDialogResponse(playerid, dialogid, response, listitem, const input
 				new err[480], sLo[48], sHi[48];
 				UI_BankFmt(lo, sLo, 48);
 				UI_BankFmt(hi, sHi, 48);
-				format(err, 480, "{FF6666}თანხა ლიმიტს გარეთაა: $%s-დან $%s-მდე.\n\n", sLo, sHi);
+				format(err, 480, "{FF6666}თანხა ლიმიტს გარეთაა: ₾%s-დან ₾%s-მდე.\n\n", sLo, sHi);
 				UI_BankAmountShow(playerid, op, err);
 				return true;
 			}

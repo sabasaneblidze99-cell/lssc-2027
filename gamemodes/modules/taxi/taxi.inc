@@ -381,7 +381,7 @@ Taxi_NpcOffer(driverid)
 	new a[48], b[48];
 	LD_DistrictName(fromD, a, 48);
 	LD_DistrictName(toD, b, 48);
-	SendClientMessage(driverid, -2994689, "[Taxi] გამოძახება: კლიენტი %s-ში, მიემართება %s-ში (~$%d). /accettacorsa %d წამში.", a, b, est, 30);
+	SendClientMessage(driverid, -2994689, "[Taxi] გამოძახება: კლიენტი %s-ში, მიემართება %s-ში (~%s). /accettacorsa %d წამში.", a, b, Money_Str(est), 30);
 	return 0;
 }
 
@@ -695,7 +695,7 @@ Taxi_PayPrompt(driverid)
 	g_TxPhase[driverid] = 4;
 	Taxi_MeterShow(driverid, false);
 	UI_LivingTaxiPayConfirm(p, gPlayer[driverid][pTaxiRideId], name, meters, g_TxPayFare[driverid], LD_DiscountPct(rep), 60);
-	SendClientMessage(driverid, -1, "ტაქსომეტრი გაჩერდა: $%d %d მ-ზე. ველოდებით კლიენტის დადასტურებას.", g_TxPayFare[driverid], meters);
+	SendClientMessage(driverid, -1, "ტაქსომეტრი გაჩერდა: %s %d მ-ზე. ველოდებით კლიენტის დადასტურებას.", Money_Str(g_TxPayFare[driverid]), meters);
 	return 0;
 }
 
@@ -1028,7 +1028,7 @@ Taxi_CmdTaxi(playerid, const params[])
 		new total = 360;
 		if ((gPlayer[playerid][pBank] > 0 ? gPlayer[playerid][pBank] : 0) + (gPlayer[playerid][pMoney] > 0 ? gPlayer[playerid][pMoney] : 0) < total)
 		{
-			SendClientMessage(playerid, -10270721, "საჭიროა $%d (ქირა $%d/სთ + გირაო $%d) ბანკსა და ნაღდში.", total, 60, 300);
+			SendClientMessage(playerid, -10270721, "საჭიროა %s (ქირა %s/სთ + გირაო %s) ბანკსა და ნაღდში.", Money_Str(total), Money_Str(60), Money_Str(300));
 			return 1;
 		}
 		if (!LD_PoolHasRoom() || !Rental_OpenPro(playerid, 4))
@@ -1257,7 +1257,7 @@ Taxi_OnProRental(playerid, result, vehicleid)
 		{
 			case 3:
 			{
-				SendClientMessage(playerid, -10270721, "სახსრები არ გყოფნის: საჭიროა $%d (ქირა + გირაო).", 360);
+				SendClientMessage(playerid, -10270721, "სახსრები არ გყოფნის: საჭიროა %s (ქირა + გირაო).", Money_Str(360));
 			}
 			case 7:
 			{
@@ -1275,7 +1275,7 @@ Taxi_OnProRental(playerid, result, vehicleid)
 	gPlayer[playerid][pTaxiRideId] = 0;
 	Taxi_ScheduleNpc(playerid);
 	LD_Emit(107, 0, gPlayer[playerid][pCharId], 1, "-");
-	SendClientMessage(playerid, 0x66DD66FF, "სამსახურში ხარ (ქირა $%d/სთ, გირაო $%d). გამოძახებები თავად მოვა: /accettacorsa. ცვლის დასასრული: /taxi off დეპოში.", 60, 300);
+	SendClientMessage(playerid, 0x66DD66FF, "სამსახურში ხარ (ქირა %s/სთ, გირაო %s). გამოძახებები თავად მოვა: /accettacorsa. ცვლის დასასრული: /taxi off დეპოში.", Money_Str(60), Money_Str(300));
 	return 1;
 }
 
@@ -1297,7 +1297,7 @@ Taxi_OnProRentalClosed(playerid, result, refund)
 	{
 		case 1:
 		{
-			SendClientMessage(playerid, -1, "ტაქსი დაბრუნებულია: დაგიბრუნდა გირაო $%d (მანქანის მდგომარეობის მიხედვით).", refund);
+			SendClientMessage(playerid, -1, "ტაქსი დაბრუნებულია: დაგიბრუნდა გირაო %s (მანქანის მდგომარეობის მიხედვით).", Money_Str(refund));
 		}
 		case 5:
 		{

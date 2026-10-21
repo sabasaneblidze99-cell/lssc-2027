@@ -232,7 +232,7 @@
     html += '<p class="small muted" style="margin-top:0.8rem">ფონდი უბანში შესრულებული ყოველი კონტრაქტითაც იზრდება, შენი ანაზღაურება კი ამით არ მცირდება.</p>';
     if (p.block) return html + '<p class="detail-status away" style="margin-top:0.8rem">' + U.esc(U.name("prjBlock", p.block)) + "</p>";
     return html + '<div class="section-label">შემოწირულობა (' + U.money(p.min) + "-დან " + U.money(cap) + "-მდე)</div>" +
-      '<div class="amount-input"><input id="ph-amount" inputmode="numeric" maxlength="9" placeholder="' + p.min + '" aria-label="თანხა"><button class="btn btn-primary" data-act="contribute">შეწირვა</button></div>' +
+      '<div class="amount-input"><input id="ph-amount" inputmode="decimal" maxlength="11" placeholder="' + U.money(p.min) + '" aria-label="თანხა"><button class="btn btn-primary" data-act="contribute">შეწირვა</button></div>' +
       '<p class="small muted" id="ph-amount-err" style="margin-top:0.4rem"></p>';
   };
   R.bank = function () {
@@ -339,8 +339,8 @@
     var p = D.project, input = U.el("ph-amount"), err = U.el("ph-amount-err");
     var raw = (input.value || "").trim(), cap = Math.min(p.max, p.dayLeft);
     // controllo di comodo, come UI_LvParseAmount: il server rivalida importo, tetti e fondi
-    if (!/^\d{1,9}$/.test(raw)) { err.textContent = "შეიყვანე თანხა დოლარებში, მხოლოდ ციფრებით."; return; }
-    var amount = U.int(raw);
+    var amount = U.parseMoney(raw);   // tetri
+    if (!isFinite(amount)) { err.textContent = "შეიყვანე თანხა ლარში, მაგ. 25 ან 12,50."; return; }
     if (amount < p.min || amount > cap) { err.textContent = "დღეს შეგიძლია შეწირო " + U.money(p.min) + "-დან " + U.money(cap) + "-მდე."; return; }
     err.textContent = "";
     confirmBox = LSSC.confirm(screen, {

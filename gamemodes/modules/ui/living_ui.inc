@@ -210,28 +210,8 @@ UI_LvClamp(value, lo, hi)
 
 UI_LvFmt(value, dest[], size)
 {
-	new s[48], len = 0, bool:neg = value < 0, ch[2];
-	if (neg)
-	{
-		value = -value;
-	}
-	valstr(s, value, false);
-	len = strlen(s);
-	dest[0] = 0;
-	if (neg)
-	{
-		strcat(dest, "-", size);
-	}
-	for (new i = 0; i < len; i++)
-	{
-		if (i > 0 && (len - i) % 3 == 0)
-		{
-			strcat(dest, ".", size);
-		}
-		ch[0] = s[i];
-		ch[1] = 0;
-		strcat(dest, ch, size);
-	}
+	// importo in tetri -> "1.250,50" (economy/currency.inc)
+	return Money_Format(value, dest, size);
 }
 
 UI_LvFmtTime(seconds, dest[], size)
@@ -301,27 +281,8 @@ UI_LvBar(value, maxValue, const color[], dest[], size)
 
 bool:UI_LvParseAmount(const s[], &value)
 {
-	new i = 0, len = strlen(s), digits = 0;
-	value = 0;
-	while (i < len && s[i] == 32)
-	{
-		i++;
-	}
-	while (i < len && s[i] >= 48 && s[i] <= 57)
-	{
-		if (digits >= 9)
-		{
-			return false;
-		}
-		value = value * 10 + (s[i] - 48);
-		digits++;
-		i++;
-	}
-	while (i < len && s[i] == 32)
-	{
-		i++;
-	}
-	return digits > 0 && i == len && value >= 1;
+	// lari digitati ("25", "12,50") -> tetri (economy/currency.inc)
+	return Money_Parse(s, value);
 }
 
 UI_LvTier(points)
@@ -735,7 +696,7 @@ UI_LvBoardRender(playerid)
 		{
 			strcopy(req, g_UiLvBlockText[g_UiLvBdBlock[playerid][i]], 120);
 		}
-		format(line, 384, "%s#%d %s > %s%s\t%s%s\t%s$%s / %s\t%s%s\n", ok ? "{FFFFFF}" : "{888888}", g_UiLvBdId[playerid][i], g_UiLvDistrictName[g_UiLvBdFrom[playerid][i]], g_UiLvDistrictName[g_UiLvBdTo[playerid][i]], g_UiLvBdPremium[playerid][i] ? " *" : "", ok ? "{FFFFFF}" : "{888888}", g_UiLvCargoName[g_UiLvBdCargo[playerid][i]], ok ? "{66DD66}" : "{888888}", sReward, sTime, ok ? "{AAAAAA}" : "{FF8888}", req);
+		format(line, 384, "%s#%d %s > %s%s\t%s%s\t%s₾%s / %s\t%s%s\n", ok ? "{FFFFFF}" : "{888888}", g_UiLvBdId[playerid][i], g_UiLvDistrictName[g_UiLvBdFrom[playerid][i]], g_UiLvDistrictName[g_UiLvBdTo[playerid][i]], g_UiLvBdPremium[playerid][i] ? " *" : "", ok ? "{FFFFFF}" : "{888888}", g_UiLvCargoName[g_UiLvBdCargo[playerid][i]], ok ? "{66DD66}" : "{888888}", sReward, sTime, ok ? "{AAAAAA}" : "{FF8888}", req);
 		strcat(body, line, 3072);
 		g_UiLvBdRow[playerid][g_UiLvBdRows[playerid]] = i;
 		g_UiLvBdRows[playerid]++;
@@ -794,7 +755,7 @@ UI_LvDetailRender(playerid, i)
 	{
 		strcopy(status, "{66DD66}ახლავე შეგიძლია მიღება.", 160);
 	}
-	format(body, 1024, "{FFFFFF}%s%s\n\n{FFFFFF}აღება: {FFD24D}საწყობი, %s\n{FFFFFF}მიწოდება: {FFD24D}მაღაზია, %s\n{FFFFFF}ტვირთი: {FFD24D}%s\n{FFFFFF}მანძილი: {FFD24D}%s\n{FFFFFF}სავარაუდო ანაზღაურება: {66DD66}$%s\n{FFFFFF}ხელმისაწვდომია კიდევ: {FFD24D}%s\n{FFFFFF}მოთხოვნები: {AAAAAA}%s\n\n{AAAAAA}მანქანას საწყობი მოგცემს. საბოლოო ანაზღაურება ტვირთის მდგომარეობაზეა დამოკიდებული.\n%s", g_UiLvKindName[g_UiLvBdKind[playerid][i]], g_UiLvBdPremium[playerid][i] ? " {FFD24D}(პრემიუმ: უბანი გენდობა)" : "", g_UiLvDistrictName[g_UiLvBdFrom[playerid][i]], g_UiLvDistrictName[g_UiLvBdTo[playerid][i]], g_UiLvCargoName[g_UiLvBdCargo[playerid][i]], sDist, sReward, sTime, req, status);
+	format(body, 1024, "{FFFFFF}%s%s\n\n{FFFFFF}აღება: {FFD24D}საწყობი, %s\n{FFFFFF}მიწოდება: {FFD24D}მაღაზია, %s\n{FFFFFF}ტვირთი: {FFD24D}%s\n{FFFFFF}მანძილი: {FFD24D}%s\n{FFFFFF}სავარაუდო ანაზღაურება: {66DD66}₾%s\n{FFFFFF}ხელმისაწვდომია კიდევ: {FFD24D}%s\n{FFFFFF}მოთხოვნები: {AAAAAA}%s\n\n{AAAAAA}მანქანას საწყობი მოგცემს. საბოლოო ანაზღაურება ტვირთის მდგომარეობაზეა დამოკიდებული.\n%s", g_UiLvKindName[g_UiLvBdKind[playerid][i]], g_UiLvBdPremium[playerid][i] ? " {FFD24D}(პრემიუმ: უბანი გენდობა)" : "", g_UiLvDistrictName[g_UiLvBdFrom[playerid][i]], g_UiLvDistrictName[g_UiLvBdTo[playerid][i]], g_UiLvCargoName[g_UiLvBdCargo[playerid][i]], sDist, sReward, sTime, req, status);
 	format(title, 576, "კონტრაქტი #%d", g_UiLvBdId[playerid][i]);
 	if (g_UiLvDetCan[playerid])
 	{
@@ -876,7 +837,7 @@ UI_CityContractStatus(playerid, contractId, ctState, fromDistrict, toDistrict, c
 	{
 		format(step, 384, "მიდი საწყობში (%s) და ჩატვირთე ტვირთი", g_UiLvDistrictName[from]);
 	}
-	format(body, 1024, "{FFFFFF}სტატუსი: {FFD24D}%s\n{FFFFFF}შემდეგი ნაბიჯი: {FFD24D}%s\n{FFFFFF}მანძილი: {FFD24D}%s\n{FFFFFF}დარჩენილი დრო: {FFD24D}%s\n{FFFFFF}ტვირთი: {FFD24D}%s{FFFFFF}, მთლიანობა {FFD24D}%s\n{FFFFFF}სავარაუდო ანაზღაურება: {66DD66}$%s\n\n{AAAAAA}კონტრაქტის დატოვებისას ფულს არ კარგავ, მაგრამ ტრანსპორტში %d რეპუტაციის ქულას კარგავ.", ctState == 2 ? "მიწოდება მიმდინარეობს" : "მიღებულია", step, sDist, sTime, g_UiLvCargoName[cargo >= 1 && cargo <= 3 ? cargo : 0], sInteg, sReward, repPenalty < 0 ? -repPenalty : repPenalty);
+	format(body, 1024, "{FFFFFF}სტატუსი: {FFD24D}%s\n{FFFFFF}შემდეგი ნაბიჯი: {FFD24D}%s\n{FFFFFF}მანძილი: {FFD24D}%s\n{FFFFFF}დარჩენილი დრო: {FFD24D}%s\n{FFFFFF}ტვირთი: {FFD24D}%s{FFFFFF}, მთლიანობა {FFD24D}%s\n{FFFFFF}სავარაუდო ანაზღაურება: {66DD66}₾%s\n\n{AAAAAA}კონტრაქტის დატოვებისას ფულს არ კარგავ, მაგრამ ტრანსპორტში %d რეპუტაციის ქულას კარგავ.", ctState == 2 ? "მიწოდება მიმდინარეობს" : "მიღებულია", step, sDist, sTime, g_UiLvCargoName[cargo >= 1 && cargo <= 3 ? cargo : 0], sInteg, sReward, repPenalty < 0 ? -repPenalty : repPenalty);
 	format(title, 576, "შენი კონტრაქტი #%d", contractId);
 	Lang_ShowPlayerDialog(playerid, 9704, DIALOG_STYLE_MSGBOX, title, body, "დატოვება", "დახურვა");
 	return 0;
@@ -1269,7 +1230,7 @@ UI_LvRentModelShow(playerid)
 		new bool:ok = g_UiLvRnAvail[playerid][i];
 		UI_LvFmt(g_UiLvRnFee[playerid][i], sFee, 48);
 		UI_LvFmt(g_UiLvRnDep[playerid][i], sDep, 48);
-		format(line, 384, "%s%s\t%s$%s\t%s$%s\t%s%d\n", ok ? "{FFFFFF}" : "{888888}", g_UiLvRnName[playerid][i], ok ? "{66DD66}" : "{888888}", sFee, ok ? "{FFD24D}" : "{888888}", sDep, ok ? "{AAAAAA}" : "{888888}", g_UiLvRnLevel[playerid][i]);
+		format(line, 384, "%s%s\t%s₾%s\t%s₾%s\t%s%d\n", ok ? "{FFFFFF}" : "{888888}", g_UiLvRnName[playerid][i], ok ? "{66DD66}" : "{888888}", sFee, ok ? "{FFD24D}" : "{888888}", sDep, ok ? "{AAAAAA}" : "{888888}", g_UiLvRnLevel[playerid][i]);
 		strcat(body, line, 2048);
 	}
 	if (g_UiLvRnDisc[playerid] > 0)
@@ -1305,7 +1266,7 @@ UI_LvRentBlocksShow(playerid)
 	for (new b = 1; b <= g_UiLvRnMaxBlocks[playerid]; b++)
 	{
 		UI_LvFmt(g_UiLvRnFee[playerid][s] * b, sTot, 48);
-		format(line, 384, "{FFFFFF}%d წთ\t{66DD66}$%s\n", g_UiLvRnBlockMin[playerid] * b, sTot);
+		format(line, 384, "{FFFFFF}%d წთ\t{66DD66}₾%s\n", g_UiLvRnBlockMin[playerid] * b, sTot);
 		strcat(body, line, 512);
 	}
 	format(title, 192, "%s - რა ვადით?", g_UiLvRnName[playerid][s]);
@@ -1327,7 +1288,7 @@ UI_LvRentSummaryShow(playerid)
 	{
 		disc[0] = 0;
 	}
-	format(body, 1024, "{FFFFFF}მანქანა: {FFD24D}%s\n{FFFFFF}ხანგრძლივობა: {FFD24D}%d წუთი\n{FFFFFF}ქირა: {66DD66}$%s%s\n{FFFFFF}გირაო: {FFD24D}$%s {AAAAAA}(დაბრუნებისას მოგიბრუნდება, მანქანის მდგომარეობის მიხედვით)\n{FFFFFF}ახლა ჩამოგეჭრება: {66DD66}$%s\n\n{AAAAAA}თანხა ჯერ საბანკო ანგარიშიდან ჩამოიჭრება, შემდეგ ნაღდი ფულიდან. მანქანა აქ დააბრუნე /riconsegna-თი:\nვადის გასვლის შემდეგ რამდენიმე წუთი გაქვს, მერე გირაო სააგენტოს რჩება.", g_UiLvRnName[playerid][s], g_UiLvRnBlockMin[playerid] * b, sFee, disc, sDep, sTot);
+	format(body, 1024, "{FFFFFF}მანქანა: {FFD24D}%s\n{FFFFFF}ხანგრძლივობა: {FFD24D}%d წუთი\n{FFFFFF}ქირა: {66DD66}₾%s%s\n{FFFFFF}გირაო: {FFD24D}₾%s {AAAAAA}(დაბრუნებისას მოგიბრუნდება, მანქანის მდგომარეობის მიხედვით)\n{FFFFFF}ახლა ჩამოგეჭრება: {66DD66}₾%s\n\n{AAAAAA}თანხა ჯერ საბანკო ანგარიშიდან ჩამოიჭრება, შემდეგ ნაღდი ფულიდან. მანქანა აქ დააბრუნე /riconsegna-თი:\nვადის გასვლის შემდეგ რამდენიმე წუთი გაქვს, მერე გირაო სააგენტოს რჩება.", g_UiLvRnName[playerid][s], g_UiLvRnBlockMin[playerid] * b, sFee, disc, sDep, sTot);
 	Lang_ShowPlayerDialog(playerid, 9711, DIALOG_STYLE_MSGBOX, "ქირაობის შეჯამება", body, "ქირაობა", "უკან");
 }
 
@@ -1341,7 +1302,7 @@ UI_LivingRentalReturnConfirm(playerid, rentalId, const modelName[], healthPct, d
 	g_UiLvRnReturnId[playerid] = rentalId;
 	UI_LvFmt(deposit < 0 ? 0 : deposit, sDep, 48);
 	UI_LvFmt(refund < 0 ? 0 : refund, sRef, 48);
-	format(body, 1024, "{FFFFFF}აბრუნებ {FFD24D}%s{FFFFFF}-ს?\n\nმანქანის მდგომარეობა: {FFD24D}%d%%\n{FFFFFF}გადახდილი გირაო: {FFD24D}$%s\n{FFFFFF}დაგიბრუნდება: {66DD66}$%s\n\n{AAAAAA}ქირა არ ბრუნდება. მადლობა, რომ ჩვენ აგვირჩიე.", modelName, UI_LvClamp(healthPct, 0, 100), sDep, sRef);
+	format(body, 1024, "{FFFFFF}აბრუნებ {FFD24D}%s{FFFFFF}-ს?\n\nმანქანის მდგომარეობა: {FFD24D}%d%%\n{FFFFFF}გადახდილი გირაო: {FFD24D}₾%s\n{FFFFFF}დაგიბრუნდება: {66DD66}₾%s\n\n{AAAAAA}ქირა არ ბრუნდება. მადლობა, რომ ჩვენ აგვირჩიე.", modelName, UI_LvClamp(healthPct, 0, 100), sDep, sRef);
 	Lang_ShowPlayerDialog(playerid, 9712, DIALOG_STYLE_MSGBOX, "დაბრუნება", body, "დაბრუნება", "გაუქმება");
 	return 0;
 }
@@ -1357,7 +1318,7 @@ UI_LivingRentalReceipt(playerid, const modelName[], fee, deposit, refund, minute
 	UI_LvFmt(deposit < 0 ? 0 : deposit, sDep, 48);
 	UI_LvFmt(refund < 0 ? 0 : refund, sRef, 48);
 	UI_LvFmt(deposit - refund < 0 ? 0 : deposit - refund, sKept, 48);
-	format(body, 1024, "{FFFFFF}მანქანა: {FFD24D}%s\n{FFFFFF}გამოყენება: {FFD24D}%d წუთი\n{FFFFFF}გადახდილი ქირა: {FFD24D}$%s\n{FFFFFF}გირაო: {FFD24D}$%s\n{FFFFFF}დაბრუნდა: {66DD66}$%s\n{FFFFFF}დაკავდა დაზიანების ან დაგვიანებისთვის: {FF8866}$%s\n\n{AAAAAA}კარგ გზას გისურვებთ, მალე შევხვდებით.", modelName, minutesUsed < 0 ? 0 : minutesUsed, sFee, sDep, sRef, sKept);
+	format(body, 1024, "{FFFFFF}მანქანა: {FFD24D}%s\n{FFFFFF}გამოყენება: {FFD24D}%d წუთი\n{FFFFFF}გადახდილი ქირა: {FFD24D}₾%s\n{FFFFFF}გირაო: {FFD24D}₾%s\n{FFFFFF}დაბრუნდა: {66DD66}₾%s\n{FFFFFF}დაკავდა დაზიანების ან დაგვიანებისთვის: {FF8866}₾%s\n\n{AAAAAA}კარგ გზას გისურვებთ, მალე შევხვდებით.", modelName, minutesUsed < 0 ? 0 : minutesUsed, sFee, sDep, sRef, sKept);
 	Lang_ShowPlayerDialog(playerid, 9713, DIALOG_STYLE_MSGBOX, "ქირაობის ქვითარი", body, "დახურვა", "");
 	return 0;
 }
@@ -1377,7 +1338,7 @@ UI_LivingTaxiOffer(playerid, callId, bool:npc, const passenger[], fromDistrict, 
 	g_UiLvTxOfferLeft[playerid] = ttlSec;
 	UI_LvFmtDist(distanceM, sDist, 48);
 	UI_LvFmt(fareEstimate < 0 ? 0 : fareEstimate, sFare, 48);
-	format(body, 1024, "{FFFFFF}%s {FFD24D}%s{FFFFFF} ტაქსს ეძებს.\n\nსაიდან: {FFD24D}%s\n{FFFFFF}სადამდე: {FFD24D}%s\n{FFFFFF}სავარაუდო მარშრუტი: {FFD24D}%s\n{FFFFFF}სავარაუდო ტარიფი: {66DD66}$%s\n\n{AAAAAA}პასუხისთვის %d წამი გაქვს (ასევე /accettacorsa-თი).", npc ? "კლიენტი," : "მოთამაშე", passenger[0] != 0 ? passenger : "-", g_UiLvDistrictName[UI_LvClampDistrict(fromDistrict)], g_UiLvDistrictName[UI_LvClampDistrict(toDistrict)], sDist, sFare, ttlSec);
+	format(body, 1024, "{FFFFFF}%s {FFD24D}%s{FFFFFF} ტაქსს ეძებს.\n\nსაიდან: {FFD24D}%s\n{FFFFFF}სადამდე: {FFD24D}%s\n{FFFFFF}სავარაუდო მარშრუტი: {FFD24D}%s\n{FFFFFF}სავარაუდო ტარიფი: {66DD66}₾%s\n\n{AAAAAA}პასუხისთვის %d წამი გაქვს (ასევე /accettacorsa-თი).", npc ? "კლიენტი," : "მოთამაშე", passenger[0] != 0 ? passenger : "-", g_UiLvDistrictName[UI_LvClampDistrict(fromDistrict)], g_UiLvDistrictName[UI_LvClampDistrict(toDistrict)], sDist, sFare, ttlSec);
 	Lang_ShowPlayerDialog(playerid, 9714, DIALOG_STYLE_MSGBOX, "ტაქსის გამოძახება", body, "მიღება", "იგნორი");
 	UI_LvTimerSync(playerid);
 	return 0;
@@ -1413,7 +1374,7 @@ UI_LivingTaxiMeter(playerid, fare, distanceM, bool:running)
 	new line[384], sFare[48], sDist[48];
 	UI_LvFmt(fare < 0 ? 0 : fare, sFare, 48);
 	UI_LvFmtDist(distanceM, sDist, 48);
-	format(line, 384, "$%s  -  %s", sFare, sDist);
+	format(line, 384, "₾%s  -  %s", sFare, sDist);
 	Lang_PlayerTextDrawSetString(playerid, g_UiLvTd[playerid][7], line);
 	Lang_PlayerTextDrawSetString(playerid, g_UiLvTd[playerid][6], running ? "ტაქსომეტრი - მოძრაობაში" : "ტაქსომეტრი - გაჩერებული");
 	PlayerTextDrawColour(playerid, PlayerText:g_UiLvTd[playerid][7], running ? 0x66DD66FF : 0xC8C8C8FF);
@@ -1449,7 +1410,7 @@ UI_LvTaxiPayShow(playerid)
 	{
 		disc[0] = 0;
 	}
-	format(body, 640, "{FFFFFF}მგზავრობა {FFD24D}%s{FFFFFF}-თან დასრულდა.\n\nმარშრუტი: {FFD24D}%s\n{FFFFFF}თანხა: {66DD66}$%s%s\n\n{AAAAAA}გადახდა შენი საბანკო ანგარიშიდან მოხდება. თუ რამე არასწორია, შეგიძლია გაასაჩივრო:\nმგზავრობა შეჩერდება და ადმინისტრაცია გადაამოწმებს. უპასუხე %d წამში.", g_UiLvTxPayDriver[playerid], sDist, sFare, disc, g_UiLvTxPayLeft[playerid]);
+	format(body, 640, "{FFFFFF}მგზავრობა {FFD24D}%s{FFFFFF}-თან დასრულდა.\n\nმარშრუტი: {FFD24D}%s\n{FFFFFF}თანხა: {66DD66}₾%s%s\n\n{AAAAAA}გადახდა შენი საბანკო ანგარიშიდან მოხდება. თუ რამე არასწორია, შეგიძლია გაასაჩივრო:\nმგზავრობა შეჩერდება და ადმინისტრაცია გადაამოწმებს. უპასუხე %d წამში.", g_UiLvTxPayDriver[playerid], sDist, sFare, disc, g_UiLvTxPayLeft[playerid]);
 	Lang_ShowPlayerDialog(playerid, 9715, DIALOG_STYLE_MSGBOX, "მგზავრობის გადახდა", body, "გადახდა", "გასაჩივრება");
 }
 
@@ -1526,11 +1487,11 @@ UI_LivingTaxiReceipt(playerid, bool:asDriver, rideId, const other[], distanceM, 
 	UI_LvFmt(net < 0 ? 0 : net, sNet, 48);
 	if (asDriver)
 	{
-		format(body, 1024, "{FFFFFF}კლიენტი: {FFD24D}%s\n{FFFFFF}მარშრუტი: {FFD24D}%s\n{FFFFFF}ტარიფი: {FFD24D}$%s\n{FFFFFF}მუნიციპალური გადასახადი: {FF8866}$%s\n{FFFFFF}ბანკში ჩაირიცხა: {66DD66}$%s\n\n{AAAAAA}კარგი მუშაობა, ქალაქი შენი დამსახურებითაც მოძრაობს.", other[0] != 0 ? other : "-", sDist, sFare, sTax, sNet);
+		format(body, 1024, "{FFFFFF}კლიენტი: {FFD24D}%s\n{FFFFFF}მარშრუტი: {FFD24D}%s\n{FFFFFF}ტარიფი: {FFD24D}₾%s\n{FFFFFF}მუნიციპალური გადასახადი: {FF8866}₾%s\n{FFFFFF}ბანკში ჩაირიცხა: {66DD66}₾%s\n\n{AAAAAA}კარგი მუშაობა, ქალაქი შენი დამსახურებითაც მოძრაობს.", other[0] != 0 ? other : "-", sDist, sFare, sTax, sNet);
 	}
 	else
 	{
-		format(body, 1024, "{FFFFFF}ტაქსისტი: {FFD24D}%s\n{FFFFFF}მარშრუტი: {FFD24D}%s\n{FFFFFF}გადახდილია: {66DD66}$%s\n\n{AAAAAA}მადლობა, რომ ლოს-სანტოსის ტაქსით იმგზავრე.", other[0] != 0 ? other : "-", sDist, sFare);
+		format(body, 1024, "{FFFFFF}ტაქსისტი: {FFD24D}%s\n{FFFFFF}მარშრუტი: {FFD24D}%s\n{FFFFFF}გადახდილია: {66DD66}₾%s\n\n{AAAAAA}მადლობა, რომ ლოს-სანტოსის ტაქსით იმგზავრე.", other[0] != 0 ? other : "-", sDist, sFare);
 	}
 	format(title, 576, "მგზავრობის ქვითარი #%d", rideId);
 	Lang_ShowPlayerDialog(playerid, 9718, DIALOG_STYLE_MSGBOX, title, body, "დახურვა", "");
@@ -1597,7 +1558,7 @@ UI_LivingProjectShow(playerid)
 	{
 		UI_LvFmt(lo, sLo, 48);
 		UI_LvFmt(hi, sHi, 48);
-		format(foot, 480, "{66DD66}დღეს შეგიძლია შეიტანო $%s-დან $%s-მდე.", sLo, sHi);
+		format(foot, 480, "{66DD66}დღეს შეგიძლია შეიტანო ₾%s-დან ₾%s-მდე.", sLo, sHi);
 	}
 	else if (g_UiLvPjBlock[playerid] != 0)
 	{
@@ -1607,7 +1568,7 @@ UI_LivingProjectShow(playerid)
 	{
 		strcopy(foot, "{FFD24D}დღეს მაქსიმუმი უკვე გაიღე: დიდი მადლობა.", 160);
 	}
-	format(body, 1024, "{FFFFFF}%s\n{AAAAAA}უბანი: %s\n\n%s\n{FFFFFF}შეგროვდა {66DD66}$%s{FFFFFF} / {FFD24D}$%s{FFFFFF} - დარჩა %d დღე და %d საათი\n\n{AAAAAA}ფონდი იზრდება ყოველი კონტრაქტით და მგზავრობით უბანში და უბნიდან, შენი ანაზღაურების\nშემცირების გარეშე, და იქ მცხოვრებთა შემოწირულობებით. ყოველი დახმარება მნიშვნელოვანია.\n\n%s", g_UiLvPjName[playerid], g_UiLvDistrictName[g_UiLvPjDistrict[playerid]], bar, sFund, sGoal, g_UiLvPjHours[playerid] / 24, g_UiLvPjHours[playerid] % 24, foot);
+	format(body, 1024, "{FFFFFF}%s\n{AAAAAA}უბანი: %s\n\n%s\n{FFFFFF}შეგროვდა {66DD66}₾%s{FFFFFF} / {FFD24D}₾%s{FFFFFF} - დარჩა %d დღე და %d საათი\n\n{AAAAAA}ფონდი იზრდება ყოველი კონტრაქტით და მგზავრობით უბანში და უბნიდან, შენი ანაზღაურების\nშემცირების გარეშე, და იქ მცხოვრებთა შემოწირულობებით. ყოველი დახმარება მნიშვნელოვანია.\n\n%s", g_UiLvPjName[playerid], g_UiLvDistrictName[g_UiLvPjDistrict[playerid]], bar, sFund, sGoal, g_UiLvPjHours[playerid] / 24, g_UiLvPjHours[playerid] % 24, foot);
 	strcopy(title, "საზოგადოების პროექტი", 64);
 	if (can)
 	{
@@ -1630,7 +1591,7 @@ UI_LvPrjAmountShow(playerid, const err[])
 	}
 	UI_LvFmt(lo, sLo, 48);
 	UI_LvFmt(hi, sHi, 48);
-	format(body, 1024, "%s{FFFFFF}რამდენის შეწირვა გინდა {FFD24D}%s{FFFFFF}-ისთვის?\nდასაშვები თანხა: {FFD24D}$%s{FFFFFF}-დან {FFD24D}$%s{FFFFFF}-მდე. შეიყვანე მთელი რიცხვი:", err, g_UiLvPjName[playerid], sLo, sHi);
+	format(body, 1024, "%s{FFFFFF}რამდენის შეწირვა გინდა {FFD24D}%s{FFFFFF}-ისთვის?\nდასაშვები თანხა: {FFD24D}₾%s{FFFFFF}-დან {FFD24D}₾%s{FFFFFF}-მდე. შეიყვანე თანხა ლარში (მაგ. 25 ან 12,50):", err, g_UiLvPjName[playerid], sLo, sHi);
 	Lang_ShowPlayerDialog(playerid, 9720, DIALOG_STYLE_INPUT, "შეწირვა", body, "შემდეგი", "უკან");
 	return 0;
 }
@@ -1639,7 +1600,7 @@ UI_LvPrjConfirmShow(playerid)
 {
 	new body[768], sAmt[48];
 	UI_LvFmt(g_UiLvPjAmount[playerid], sAmt, 48);
-	format(body, 768, "{FFFFFF}სწირავ {66DD66}$%s{FFFFFF}-ს {FFD24D}%s{FFFFFF}-ისთვის?\n\n{AAAAAA}თანხა ჯერ საბანკო ანგარიშიდან ჩამოიჭრება, შემდეგ ნაღდი ფულიდან, და არ ბრუნდება.\nუბანი ამას არ დაივიწყებს.", sAmt, g_UiLvPjName[playerid]);
+	format(body, 768, "{FFFFFF}სწირავ {66DD66}₾%s{FFFFFF}-ს {FFD24D}%s{FFFFFF}-ისთვის?\n\n{AAAAAA}თანხა ჯერ საბანკო ანგარიშიდან ჩამოიჭრება, შემდეგ ნაღდი ფულიდან, და არ ბრუნდება.\nუბანი ამას არ დაივიწყებს.", sAmt, g_UiLvPjName[playerid]);
 	Lang_ShowPlayerDialog(playerid, 9721, DIALOG_STYLE_MSGBOX, "შეწირვის დადასტურება", body, "შეწირვა", "უკან");
 }
 
@@ -1655,7 +1616,7 @@ bool:UI_LvPrjCheck(playerid, amount, err[], size)
 	{
 		UI_LvFmt(lo, sLo, 48);
 		UI_LvFmt(hi, sHi, 48);
-		format(err, size, "{FF6666}თანხა ლიმიტს სცდება: $%s-დან $%s-მდე.\n\n", sLo, sHi);
+		format(err, size, "{FF6666}თანხა ლიმიტს სცდება: ₾%s-დან ₾%s-მდე.\n\n", sLo, sHi);
 		return false;
 	}
 	return true;
@@ -2282,7 +2243,7 @@ bool:UI_LivingOnDialogResponse(playerid, dialogid, response, listitem, const inp
 			new amount = 0, err[480];
 			if (!UI_LvParseAmount(inputtext, amount))
 			{
-				UI_LvPrjAmountShow(playerid, "{FF6666}არასწორი თანხა: მხოლოდ ციფრები, დადებითი მთელი რიცხვი.\n\n");
+				UI_LvPrjAmountShow(playerid, "{FF6666}არასწორი თანხა: ჩაწერე ლარებში, მაგ. 25 ან 12,50.\n\n");
 				return true;
 			}
 			if (!UI_LvPrjCheck(playerid, amount, err, 480))

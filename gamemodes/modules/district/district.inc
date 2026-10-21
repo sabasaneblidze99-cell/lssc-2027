@@ -380,7 +380,7 @@ public Living_OnDBPlayer(playerid, result, refund)
 		if (refund > 0)
 		{
 			new msg[480];
-			format(msg, 480, "ღიად დარჩენილი ქირაობა დაიხურა: $%d გირაო შენს ანგარიშზე დაბრუნდა.", refund);
+			format(msg, 480, "ღიად დარჩენილი ქირაობა დაიხურა: %s გირაო შენს ანგარიშზე დაბრუნდა.", Money_Str(refund));
 			Util_Send(playerid, 0x66DD66FF, msg);
 		}
 		LD_Emit(108, 0, gPlayer[playerid][pCharId], refund, "-");

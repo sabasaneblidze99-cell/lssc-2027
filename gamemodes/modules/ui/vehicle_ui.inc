@@ -29,23 +29,8 @@ new g_UiVehState[MAX_PLAYERS][4];
 
 UI_VehMoney(value, out[], size)
 {
-	new raw[48], len = 0, pos = 0;
-	if (value < 0)
-	{
-		value = 0;
-	}
-	format(raw, 48, "%d", value);
-	len = strlen(raw);
-	out[0] = 0;
-	for (new i = 0; i < len && pos < size - 2; i++)
-	{
-		if (i > 0 && (len - i) % 3 == 0)
-		{
-			out[pos++] = 46;
-		}
-		out[pos++] = raw[i];
-	}
-	out[pos] = 0;
+	// importo in tetri -> "1.250,50" (economy/currency.inc)
+	return Money_Format(value, out, size);
 }
 
 UI_VehCatalogIndexOf(model)
@@ -88,11 +73,11 @@ UI_VehicleShopShow(playerid, level, money, bank)
 		UI_VehMoney(g_UiVehPrice[i], price, 48);
 		if (level >= g_UiVehMinLevel[i])
 		{
-			format(line, 288, "{FFFFFF}%s\t{66DD66}$%s\t{AAAAAA}დონე %d\n", g_UiVehName[i], price, g_UiVehMinLevel[i]);
+			format(line, 288, "{FFFFFF}%s\t{66DD66}₾%s\t{AAAAAA}დონე %d\n", g_UiVehName[i], price, g_UiVehMinLevel[i]);
 		}
 		else
 		{
-			format(line, 288, "{777777}%s\t$%s\t{FF6666}დაბლოკილია: დონე %d\n", g_UiVehName[i], price, g_UiVehMinLevel[i]);
+			format(line, 288, "{777777}%s\t₾%s\t{FF6666}დაბლოკილია: დონე %d\n", g_UiVehName[i], price, g_UiVehMinLevel[i]);
 		}
 		strcat(body, line, 1536);
 	}
@@ -107,11 +92,11 @@ UI_VehPayShow(playerid)
 	UI_VehMoney(g_UiVehPrice[idx], price, 48);
 	UI_VehMoney(g_UiVehMoney[playerid], cash, 48);
 	UI_VehMoney(g_UiVehBank[playerid], bank, 48);
-	format(body, 640, "{FFFFFF}ნაღდი ფული\t%s$%s\n", g_UiVehMoney[playerid] >= g_UiVehPrice[idx] ? "{66DD66}" : "{FF6666}", cash);
-	format(t, 144, "{FFFFFF}ბანკი\t%s$%s\n", g_UiVehBank[playerid] >= g_UiVehPrice[idx] ? "{66DD66}" : "{FF6666}", bank);
+	format(body, 640, "{FFFFFF}ნაღდი ფული\t%s₾%s\n", g_UiVehMoney[playerid] >= g_UiVehPrice[idx] ? "{66DD66}" : "{FF6666}", cash);
+	format(t, 144, "{FFFFFF}ბანკი\t%s₾%s\n", g_UiVehBank[playerid] >= g_UiVehPrice[idx] ? "{66DD66}" : "{FF6666}", bank);
 	strcat(body, t, 640);
 	new title[576];
-	format(title, 576, "%s - $%s: გადახდა", g_UiVehName[idx], price);
+	format(title, 576, "%s - ₾%s: გადახდა", g_UiVehName[idx], price);
 	Lang_ShowPlayerDialog(playerid, 9101, DIALOG_STYLE_TABLIST, title, body, "ყიდვა", "უკან");
 }
 
@@ -207,7 +192,7 @@ UI_VehSellConfirmShow(playerid)
 	if (idx >= 0)
 	{
 		UI_VehMoney(g_UiVehPrice[idx] * 60 / 100, amount, 48);
-		format(body, 768, "{FFFFFF}ყიდი {FFD24D}%s{FFFFFF}-ს (ნომერი %s)?\n\nბანკში მიიღებ დაახლ. {66DD66}$%s{FFFFFF}-ს (საბაზო ფასის %d%%).\nოპერაცია შეუქცევადია.", name, g_UiVehLPlate[playerid][i], amount, 60);
+		format(body, 768, "{FFFFFF}ყიდი {FFD24D}%s{FFFFFF}-ს (ნომერი %s)?\n\nბანკში მიიღებ დაახლ. {66DD66}₾%s{FFFFFF}-ს (საბაზო ფასის %d%%).\nოპერაცია შეუქცევადია.", name, g_UiVehLPlate[playerid][i], amount, 60);
 	}
 	else
 	{

@@ -200,8 +200,8 @@ StreetRental_OnStateChange(playerid, PLAYER_STATE:newstate)
 	new name[24], body[2048];
 	Veh_StdModelName(GetVehicleModel(veh), name);
 	format(body, sizeof body,
-		"{FFFFFF}%s\n\n{AAAAAA}ქირა: {66DD66}$%d{AAAAAA} - %d წუთი\nგირაო არ არის. გადახდა: ბანკიდან ან ნაღდით.\n\n{AAAAAA}დაბრუნება ნებისმიერ ადგილას: /riconsegna",
-		name, SRENT_PRICE, SRENT_MINUTES);
+		"{FFFFFF}%s\n\n{AAAAAA}ქირა: {66DD66}%s{AAAAAA} - %d წუთი\nგირაო არ არის. გადახდა: ბანკიდან ან ნაღდით.\n\n{AAAAAA}დაბრუნება ნებისმიერ ადგილას: /riconsegna",
+		name, Money_Str(SRENT_PRICE), SRENT_MINUTES);
 	g_SrOffer[playerid] = veh;
 	Lang_ShowPlayerDialog(playerid, SRENT_DIALOG, DIALOG_STYLE_MSGBOX, "მანქანის ქირაობა", body, "ქირაობა", "გასვლა");
 	return 1;

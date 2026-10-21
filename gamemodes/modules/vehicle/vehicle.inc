@@ -791,8 +791,8 @@ public Veh_OnDBCreated(playerid, vehDbId, const plate[])
 	new mname[36], pname[75], msg[256];
 	Veh_ModelName(g_VehCatModel[idx], mname, 36);
 	GetPlayerName(playerid, pname, 75);
-	SendClientMessage(playerid, 0x66DD66FF, "შენ იყიდე %s (ნომერი %s) $%d-ად (%s). ავტოსალონის გასასვლელთან გელოდება.", mname, plate, price, bank ? "ბანკიდან" : "ნაღდით");
-	format(msg, 256, "ACQUISTO %s: %s targa %s $%d (%s) dbId %d", pname, mname, plate, price, bank ? "banca" : "contanti", vehDbId);
+	SendClientMessage(playerid, 0x66DD66FF, "შენ იყიდე %s (ნომერი %s) %s-ად (%s). ავტოსალონის გასასვლელთან გელოდება.", mname, plate, Money_Str(price), bank ? "ბანკიდან" : "ნაღდით");
+	format(msg, 256, "ACQUISTO %s: %s targa %s %s (%s) dbId %d", pname, mname, plate, Money_Str(price), bank ? "banca" : "contanti", vehDbId);
 	Log_Write("VEH", msg);
 	return 1;
 }
@@ -835,7 +835,7 @@ Veh_DoSell(playerid, slot, bool:confirmed)
 	Veh_ModelName(g_VSlot[playerid][slot][vsModel], mname, 36);
 	if (!confirmed)
 	{
-		SendClientMessage(playerid, -2994689, "გაყიდვა: %s (ნომერი %s): ბანკში მიიღებ $%d-ს.", mname, g_VSlot[playerid][slot][vsPlate], refund);
+		SendClientMessage(playerid, -2994689, "გაყიდვა: %s (ნომერი %s): ბანკში მიიღებ %s-ს.", mname, g_VSlot[playerid][slot][vsPlate], Money_Str(refund));
 		SendClientMessage(playerid, 0x99CCFFFF, "დასადასტურებლად: /v sell %d conferma", slot + 1);
 		return 0;
 	}
@@ -900,13 +900,13 @@ public Veh_OnDBDeleted(playerid, vehDbId, affected)
 		Money_GiveBank(playerid, paid, "refund", "");
 	}
 	Char_Save(playerid);
-	SendClientMessage(playerid, 0x66DD66FF, "შენ გაყიდე %s (ნომერი %s): ბანკში ჩაგერიცხა $%d.", mname, plate, paid);
+	SendClientMessage(playerid, 0x66DD66FF, "შენ გაყიდე %s (ნომერი %s): ბანკში ჩაგერიცხა %s.", mname, plate, Money_Str(paid));
 	if (paid < refund)
 	{
 		Util_Send(playerid, -10270721, "ანგარიშმა ლიმიტს მიაღწია: თანხის ნაწილი არ ჩაირიცხა.");
 	}
 	GetPlayerName(playerid, pname, 75);
-	format(msg, 256, "VENDITA %s: %s targa %s dbId %d accredito $%d", pname, mname, plate, dbId, paid);
+	format(msg, 256, "VENDITA %s: %s targa %s dbId %d accredito %s", pname, mname, plate, dbId, Money_Str(paid));
 	Log_Write("VEH", msg);
 	return 1;
 }
@@ -1211,7 +1211,7 @@ Veh_DoRecover(playerid, slot)
 	new bool:useCash = Money_Can(playerid, cost);
 	if (!useCash && !Money_CanBank(playerid, cost))
 	{
-		SendClientMessage(playerid, -10270721, "დაზღვევა $%d: თანხა არ გყოფნის (ნაღდი ფული ან ბანკი).", cost);
+		SendClientMessage(playerid, -10270721, "დაზღვევა %s: თანხა არ გყოფნის (ნაღდი ფული ან ბანკი).", Money_Str(cost));
 		return 0;
 	}
 	new vid = g_VSlot[playerid][slot][vsVehicleId];
@@ -1241,9 +1241,9 @@ Veh_DoRecover(playerid, slot)
 	DB_RecoverVehicle(g_VSlot[playerid][slot][vsDbId], gPlayer[playerid][pCharId], g_VSlot[playerid][slot][vsHealth], g_VSlot[playerid][slot][vsFuelCl]);
 	new mname[36], pname[75], msg[256];
 	Veh_ModelName(g_VSlot[playerid][slot][vsModel], mname, 36);
-	SendClientMessage(playerid, 0x66DD66FF, "დაზღვევა გადახდილია ($%d, %s): შენი %s პარკინგზე გელოდება.", cost, useCash ? "ნაღდით" : "ბანკიდან", mname);
+	SendClientMessage(playerid, 0x66DD66FF, "დაზღვევა გადახდილია (%s, %s): შენი %s პარკინგზე გელოდება.", Money_Str(cost), useCash ? "ნაღდით" : "ბანკიდან", mname);
 	GetPlayerName(playerid, pname, 75);
-	format(msg, 256, "RECUPERO %s: %s dbId %d costo $%d", pname, mname, g_VSlot[playerid][slot][vsDbId], cost);
+	format(msg, 256, "RECUPERO %s: %s dbId %d costo %s", pname, mname, g_VSlot[playerid][slot][vsDbId], Money_Str(cost));
 	Log_Write("VEH", msg);
 	return 0;
 }
@@ -1448,7 +1448,7 @@ Veh_CmdRefuel(playerid, const params[])
 	Char_Save(playerid);
 	Veh_SaveSlot(playerid, slot);
 	Veh_HudRefresh(playerid);
-	SendClientMessage(playerid, 0x66DD66FF, "ჩასხმულია: +%.1f ლ $%d-ად. ავზი: %.1f/%.0f ლ.", (float(add) / float(100)), cost, (float(g_VSlot[playerid][slot][vsFuelCl]) / float(100)), (float(cap) / float(100)));
+	SendClientMessage(playerid, 0x66DD66FF, "ჩასხმულია: +%.1f ლ %s-ად. ავზი: %.1f/%.0f ლ.", (float(add) / float(100)), Money_Str(cost), (float(g_VSlot[playerid][slot][vsFuelCl]) / float(100)), (float(cap) / float(100)));
 	return 0;
 }
 

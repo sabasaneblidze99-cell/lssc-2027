@@ -40,23 +40,8 @@ new g_UiHsAmtMax[MAX_PLAYERS];
 
 UI_HsMoney(value, out[], size)
 {
-	new raw[48], len = 0, pos = 0;
-	if (value < 0)
-	{
-		value = 0;
-	}
-	format(raw, 48, "%d", value);
-	len = strlen(raw);
-	out[0] = 0;
-	for (new i = 0; i < len && pos < size - 2; i++)
-	{
-		if (i > 0 && (len - i) % 3 == 0)
-		{
-			out[pos++] = 46;
-		}
-		out[pos++] = raw[i];
-	}
-	out[pos] = 0;
+	// importo in tetri -> "1.250,50" (economy/currency.inc)
+	return Money_Format(value, out, size);
 }
 
 UI_HsValid(playerid)
@@ -190,7 +175,7 @@ UI_HouseMenuShow(playerid)
 	format(title, 576, "სახლი %d - %s", g_UiHsHouse[playerid], g_UiHsIntName[g_UiHsInt[playerid]]);
 	format(line, 480, "{AAAAAA}ინტერიერი: {FFFFFF}%s (%s)\n", g_UiHsIntName[g_UiHsInt[playerid]], g_UiHsTierName[t]);
 	UI_HsMenuRow(playerid, n, 0, line, body, 1024);
-	format(line, 480, "{AAAAAA}ფასი: {66DD66}$%s{AAAAAA}  (მინ. დონე %d)\n", price, g_UiHsTierLevel[t]);
+	format(line, 480, "{AAAAAA}ფასი: {66DD66}₾%s{AAAAAA}  (მინ. დონე %d)\n", price, g_UiHsTierLevel[t]);
 	UI_HsMenuRow(playerid, n, 0, line, body, 1024);
 	if (role == 0)
 	{
@@ -215,7 +200,7 @@ UI_HouseMenuShow(playerid)
 		UI_HsMoney(due, tmp, 48);
 		if (role == 1)
 		{
-			format(line, 480, "{AAAAAA}გადასახადები: %s%d გადასახდელი ($%s)\n", bills > 0 ? "{FF6666}" : "{66DD66}", bills, tmp);
+			format(line, 480, "{AAAAAA}გადასახადები: %s%d გადასახდელი (₾%s)\n", bills > 0 ? "{FF6666}" : "{66DD66}", bills, tmp);
 			UI_HsMenuRow(playerid, n, 0, line, body, 1024);
 			format(line, 480, "{FFFFFF}საკეტი: %s{FFFFFF} (შესაცვლელად დააჭირე)\n", g_UiHsLocked[playerid] ? "{FF6666}ჩაკეტილი" : "{66DD66}ღია");
 			UI_HsMenuRow(playerid, n, 1, line, body, 1024);
@@ -243,10 +228,10 @@ UI_HsBuyPayShow(playerid)
 	UI_HsMoney(p, price, 48);
 	UI_HsMoney(g_UiHsMoney[playerid], cash, 48);
 	UI_HsMoney(g_UiHsBank[playerid], bank, 48);
-	format(body, 640, "{FFFFFF}ნაღდი ფული\t%s$%s\n", g_UiHsMoney[playerid] >= p ? "{66DD66}" : "{FF6666}", cash);
-	format(tl, 144, "{FFFFFF}ბანკი\t%s$%s\n", g_UiHsBank[playerid] >= p ? "{66DD66}" : "{FF6666}", bank);
+	format(body, 640, "{FFFFFF}ნაღდი ფული\t%s₾%s\n", g_UiHsMoney[playerid] >= p ? "{66DD66}" : "{FF6666}", cash);
+	format(tl, 144, "{FFFFFF}ბანკი\t%s₾%s\n", g_UiHsBank[playerid] >= p ? "{66DD66}" : "{FF6666}", bank);
 	strcat(body, tl, 640);
-	format(title, 576, "%s $%s - გადახდა", g_UiHsTierName[t], price);
+	format(title, 576, "%s ₾%s - გადახდა", g_UiHsTierName[t], price);
 	Lang_ShowPlayerDialog(playerid, 9201, DIALOG_STYLE_TABLIST, title, body, "ყიდვა", "უკან");
 }
 
@@ -254,7 +239,7 @@ UI_HsSellConfirmShow(playerid)
 {
 	new body[640], amount[48], title[192];
 	UI_HsMoney(g_UiHsTierPrice[g_UiHsTier[playerid]] * 70 / 100, amount, 48);
-	format(body, 640, "{FFFFFF}გაყიდო სახლი {FFD24D}%d{FFFFFF} (%s)?\n\nბანკში მიიღებ დაახლოებით {66DD66}$%s{FFFFFF}-ს (ფასის %d%%).\nკომუნალური, გასაღებები და გადასახადები განულდება; ოპერაცია შეუქცევადია.", g_UiHsHouse[playerid], g_UiHsIntName[g_UiHsInt[playerid]], amount, 70);
+	format(body, 640, "{FFFFFF}გაყიდო სახლი {FFD24D}%d{FFFFFF} (%s)?\n\nბანკში მიიღებ დაახლოებით {66DD66}₾%s{FFFFFF}-ს (ფასის %d%%).\nკომუნალური, გასაღებები და გადასახადები განულდება; ოპერაცია შეუქცევადია.", g_UiHsHouse[playerid], g_UiHsIntName[g_UiHsInt[playerid]], amount, 70);
 	UI_HsTitle(playerid, "გაყიდვის დადასტურება", title, 192);
 	Lang_ShowPlayerDialog(playerid, 9202, DIALOG_STYLE_MSGBOX, title, body, "გაყიდვა", "გაუქმება");
 }
@@ -367,10 +352,10 @@ UI_HouseBillsShow(playerid)
 	new body[1024], line[480], a[48], b[48], title[192];
 	strcat(body, "კომუნალური\tგადასახდელი\tთანხა\tშენიშვნა\n", 1024);
 	UI_HsMoney(g_UiHsLightDue[playerid], a, 48);
-	format(line, 480, "{FFFFFF}შუქი\t%d\t$%s\t%s\n", g_UiHsLightCnt[playerid], a, g_UiHsLight[playerid] == 2 ? "{FF6666}გათიშული" : "{AAAAAA}-");
+	format(line, 480, "{FFFFFF}შუქი\t%d\t₾%s\t%s\n", g_UiHsLightCnt[playerid], a, g_UiHsLight[playerid] == 2 ? "{FF6666}გათიშული" : "{AAAAAA}-");
 	strcat(body, line, 1024);
 	UI_HsMoney(g_UiHsGasDue[playerid], b, 48);
-	format(line, 480, "{FFFFFF}გაზი\t%d\t$%s\t%s\n", g_UiHsGasCnt[playerid], b, g_UiHsGas[playerid] == 2 ? "{FF6666}გათიშული" : "{AAAAAA}-");
+	format(line, 480, "{FFFFFF}გაზი\t%d\t₾%s\t%s\n", g_UiHsGasCnt[playerid], b, g_UiHsGas[playerid] == 2 ? "{FF6666}გათიშული" : "{AAAAAA}-");
 	strcat(body, line, 1024);
 	new total = UI_HsBillsTotal(playerid);
 	UI_HsMoney(total, a, 48);
@@ -378,11 +363,11 @@ UI_HouseBillsShow(playerid)
 	if (fees > 0)
 	{
 		UI_HsMoney(fees, b, 48);
-		format(line, 480, "{FFD24D}სულ\t%d\t$%s\t{AAAAAA}მ.შ. $%s აღდგენა\n", g_UiHsLightCnt[playerid] + g_UiHsGasCnt[playerid], a, b);
+		format(line, 480, "{FFD24D}სულ\t%d\t₾%s\t{AAAAAA}მ.შ. ₾%s აღდგენა\n", g_UiHsLightCnt[playerid] + g_UiHsGasCnt[playerid], a, b);
 	}
 	else
 	{
-		format(line, 480, "{FFD24D}სულ\t%d\t$%s\t{AAAAAA}-\n", g_UiHsLightCnt[playerid] + g_UiHsGasCnt[playerid], a);
+		format(line, 480, "{FFD24D}სულ\t%d\t₾%s\t{AAAAAA}-\n", g_UiHsLightCnt[playerid] + g_UiHsGasCnt[playerid], a);
 	}
 	strcat(body, line, 1024);
 	UI_HsTitle(playerid, "გადასახადები", title, 192);
@@ -397,10 +382,10 @@ UI_HsBillsPayShow(playerid)
 	UI_HsMoney(p, total, 48);
 	UI_HsMoney(g_UiHsMoney[playerid], cash, 48);
 	UI_HsMoney(g_UiHsBank[playerid], bank, 48);
-	format(body, 640, "{FFFFFF}ბანკი\t%s$%s\n", g_UiHsBank[playerid] >= p ? "{66DD66}" : "{FF6666}", bank);
-	format(tl, 144, "{FFFFFF}ნაღდი ფული\t%s$%s\n", g_UiHsMoney[playerid] >= p ? "{66DD66}" : "{FF6666}", cash);
+	format(body, 640, "{FFFFFF}ბანკი\t%s₾%s\n", g_UiHsBank[playerid] >= p ? "{66DD66}" : "{FF6666}", bank);
+	format(tl, 144, "{FFFFFF}ნაღდი ფული\t%s₾%s\n", g_UiHsMoney[playerid] >= p ? "{66DD66}" : "{FF6666}", cash);
 	strcat(body, tl, 640);
-	format(title, 576, "გადასახადების გადახდა $%s", total);
+	format(title, 576, "გადასახადების გადახდა ₾%s", total);
 	Lang_ShowPlayerDialog(playerid, 9207, DIALOG_STYLE_TABLIST, title, body, "გადახდა", "უკან");
 }
 

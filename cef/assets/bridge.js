@@ -70,7 +70,18 @@
     }
     return (neg ? "-" : "") + out;
   };
-  U.money = function (v) { return "$" + U.fmt(v); };
+  // denaro: il server manda sempre TETRI interi (1 ლარი = 100 თეთრი). 125050 -> "₾1.250,50", 8500000 -> "₾85.000".
+  // Solo visualizzazione: il saldo vero e' quello del server.
+  U.money = function (v) {
+    var n = U.int(v), neg = n < 0, a = Math.abs(n), lari = Math.floor(a / 100), c = a % 100;
+    return (neg ? "-" : "") + "\u20BE" + U.fmt(lari) + (c ? "," + (c < 10 ? "0" : "") + c : "");
+  };
+  // lari digitati -> tetri interi ("12", "12,5", "12.50"); NaN se non valido. Il server rivalida comunque.
+  U.parseMoney = function (str) {
+    var m = /^\s*(\d{1,8})(?:[.,](\d{1,2}))?\s*$/.exec(U.str(str));
+    if (!m) return NaN;
+    return Number(m[1]) * 100 + (m[2] ? Number(m[2].length === 1 ? m[2] + "0" : m[2]) : 0);
+  };
 
   // secondi -> "mm:ss"; negativo -> "--:--" (come UI_LvFmtTime)
   U.time = function (sec) {

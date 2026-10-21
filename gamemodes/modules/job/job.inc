@@ -380,7 +380,7 @@ Job_Cancel(playerid, const reason[])
 		SendClientMessage(playerid, -10270721, "ცვლა გაუქმდა: %s", reason);
 		if (lost > 0)
 		{
-			SendClientMessage(playerid, -10270721, "დაგროვებული ანაზღაურება ($%d) დაიკარგა.", lost);
+			SendClientMessage(playerid, -10270721, "დაგროვებული ანაზღაურება (%s) დაიკარგა.", Money_Str(lost));
 		}
 	}
 	return 0;
@@ -398,7 +398,7 @@ Job_Accrue(playerid, amount)
 	if (granted < amount && !g_JsCapWarned[playerid])
 	{
 		g_JsCapWarned[playerid] = true;
-		SendClientMessage(playerid, -10270721, "მიღწეულია საათობრივი ლიმიტი $%d: ცვლა გრძელდება, მაგრამ ანაზღაურება აღარ გროვდება.", 2200);
+		SendClientMessage(playerid, -10270721, "მიღწეულია საათობრივი ლიმიტი %s: ცვლა გრძელდება, მაგრამ ანაზღაურება აღარ გროვდება.", Money_Str(2200));
 	}
 	g_JcHourEarned[playerid][job] += granted;
 	g_JsCapUsed[playerid] += granted;
@@ -431,7 +431,7 @@ Job_Finish(playerid, bool:completed)
 	g_JpAmount[playerid] = amount;
 	g_JpCap[playerid] = cap;
 	g_JpCompleted[playerid] = completed;
-	SendClientMessage(playerid, -1, "ცვლა დასრულდა: ანაზღაურების ($%d) რეგისტრაცია მიმდინარეობს...", amount);
+	SendClientMessage(playerid, -1, "ცვლა დასრულდა: ანაზღაურების (%s) რეგისტრაცია მიმდინარეობს...", Money_Str(amount));
 	DB_JobPayout(playerid, gPlayer[playerid][pCharId], job, amount);
 	return 0;
 }
@@ -468,7 +468,7 @@ public Job_OnDBPayout(playerid, jobId, amount, result)
 	new paid = Economy_PaycheckPaid(amount, Money_BankRoom(playerid));
 	if (paid > 0 && Money_GiveBank(playerid, paid, "job", ""))
 	{
-		SendClientMessage(playerid, 0x66DD66FF, "ანაზღაურება: $%d ჩაირიცხა ბანკში. ბალანსი: $%d.", paid, gPlayer[playerid][pBank]);
+		SendClientMessage(playerid, 0x66DD66FF, "ანაზღაურება: %s ჩაირიცხა ბანკში. ბალანსი: %s.", Money_Str(paid), Money_Str(gPlayer[playerid][pBank]));
 		if (paid < amount)
 		{
 			SendClientMessage(playerid, -10270721, "ანგარიშმა ლიმიტს მიაღწია: ანაზღაურების ნაწილი დაიკარგა.");
@@ -528,7 +528,7 @@ Job_StepDone(playerid, now)
 	}
 	new granted = Job_Accrue(playerid, g_JobPayStep[job]);
 	g_JsStep[playerid]++;
-	SendClientMessage(playerid, 0x66DD66FF, "%s %d/%d დასრულდა: +$%d (დაგროვდა $%d).", g_JobStepWord[job], g_JsStep[playerid], total, granted, g_JsEarned[playerid]);
+	SendClientMessage(playerid, 0x66DD66FF, "%s %d/%d დასრულდა: +%s (დაგროვდა %s).", g_JobStepWord[job], g_JsStep[playerid], total, Money_Str(granted), Money_Str(g_JsEarned[playerid]));
 	if (g_JsStep[playerid] >= total)
 	{
 		SendClientMessage(playerid, 0x99CCFFFF, "ბოლო გაჩერება გავლილია: დაბრუნდი დეპოში ბონუსისთვის (ჩეკპოინტი რუკაზე).");
