@@ -5,7 +5,7 @@
   "line": 1196,
   "it": "Hai un'operazione veicolo in corso: attendi.",
   "ctx": "Util_Send(playerid, -10270721, \"Hai un'operazione veicolo in corso: attendi.\");",
-  "ka": ""
+  "ka": "მანქანასთან დაკავშირებული ოპერაცია მიმდინარეობს: მოიცადე."
  },
  {
   "id": 1741,
@@ -13,7 +13,7 @@
   "line": 1201,
   "it": "Questo veicolo non e' distrutto.",
   "ctx": "Util_Send(playerid, -10270721, \"Questo veicolo non e' distrutto.\");",
-  "ka": ""
+  "ka": "ეს მანქანა განადგურებული არ არის."
  },
  {
   "id": 1742,
@@ -21,7 +21,7 @@
   "line": 1206,
   "it": "Limite veicoli del server raggiunto: riprova piu' tardi.",
   "ctx": "Util_Send(playerid, -10270721, \"Limite veicoli del server raggiunto: riprova piu' tardi.\");",
-  "ka": ""
+  "ka": "სერვერის მანქანების ლიმიტი ამოწურულია: მოგვიანებით სცადე."
  },
  {
   "id": 1743,
@@ -29,7 +29,7 @@
   "line": 1214,
   "it": "Assicurazione $%d: fondi insufficienti (contanti o banca).",
   "ctx": "SendClientMessage(playerid, -10270721, \"Assicurazione $%d: fondi insufficienti (contanti o banca).\", cost);",
-  "ka": ""
+  "ka": "დაზღვევა $%d: თანხა არ გყოფნის (ნაღდი ფული ან ბანკი)."
  },
  {
   "id": 1744,
@@ -37,7 +37,7 @@
   "line": 1230,
   "it": "Recupero non riuscito (limite veicoli del server). Nessun addebito.",
   "ctx": "Util_Send(playerid, -10270721, \"Recupero non riuscito (limite veicoli del server). Nessun addebito.\");",
-  "ka": ""
+  "ka": "აღდგენა ვერ მოხერხდა (სერვერის მანქანების ლიმიტი). თანხა არ ჩამოგეჭრა."
  },
  {
   "id": 1745,
@@ -45,7 +45,7 @@
   "line": 1237,
   "it": "Pagamento non riuscito. Recupero annullato.",
   "ctx": "Util_Send(playerid, -10270721, \"Pagamento non riuscito. Recupero annullato.\");",
-  "ka": ""
+  "ka": "გადახდა ვერ მოხერხდა. აღდგენა გაუქმდა."
  },
  {
   "id": 1746,
@@ -53,7 +53,7 @@
   "line": 1244,
   "it": "Assicurazione pagata ($%d, %s): la tua %s ti aspetta al parcheggio.",
   "ctx": "SendClientMessage(playerid, 0x66DD66FF, \"Assicurazione pagata ($%d, %s): la tua %s ti aspetta al parcheggio.\", cost, useCash ? \"contanti\" : \"banca\", mname);",
-  "ka": ""
+  "ka": "დაზღვევა გადახდილია ($%d, %s): შენი %s პარკინგზე გელოდება."
  },
  {
   "id": 1747,
@@ -61,7 +61,7 @@
   "line": 1246,
   "it": "RECUPERO %s: %s dbId %d costo $%d",
   "ctx": "format(msg, 256, \"RECUPERO %s: %s dbId %d costo $%d\", pname, mname, g_VSlot[playerid][slot][vsDbId], cost);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 1748,
@@ -69,7 +69,7 @@
   "line": 1267,
   "it": "Uso: /v lock | engine | lights | park | find [slot] | list | sell [slot] | recover [slot]",
   "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Uso: /v lock | engine | lights | park | find [slot] | list | sell [slot] | recover [slot]\");",
-  "ka": ""
+  "ka": "გამოყენება: /v lock | engine | lights | park | find [slot] | list | sell [slot] | recover [slot]"
  },
  {
   "id": 1749,
@@ -77,7 +77,7 @@
   "line": 1301,
   "it": "Il carro attrezzi non e' ancora disponibile.",
   "ctx": "Util_Send(playerid, -10270721, \"Il carro attrezzi non e' ancora disponibile.\");",
-  "ka": ""
+  "ka": "ევაკუატორი ჯერ მიუწვდომელია."
  },
  {
   "id": 1750,
@@ -85,7 +85,7 @@
   "line": 1321,
   "it": "Slot non valido (1-%d).",
   "ctx": "SendClientMessage(playerid, -10270721, \"Slot non valido (1-%d).\", 4);",
-  "ka": ""
+  "ka": "არასწორი სლოტი (1-%d)."
  },
  {
   "id": 1751,
@@ -93,7 +93,7 @@
   "line": 1338,
   "it": "Uso: /v recover [slot] (/v list per vedere quali sono distrutti)",
   "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Uso: /v recover [slot] (/v list per vedere quali sono distrutti)\");",
-  "ka": ""
+  "ka": "გამოყენება: /v recover [slot] (/v list - ნახე, რომელია განადგურებული)"
  },
  {
   "id": 1752,
@@ -101,7 +101,7 @@
   "line": 1357,
   "it": "Uso: /v find|sell [slot] (nessun tuo veicolo vicino)",
   "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Uso: /v find|sell [slot] (nessun tuo veicolo vicino)\");",
-  "ka": ""
+  "ka": "გამოყენება: /v find|sell [slot] (ახლოს შენი მანქანა არ არის)"
  },
  {
   "id": 1753,
@@ -109,7 +109,7 @@
   "line": 1375,
   "it": "Uso: /v lock | engine | lights | park | find [slot] | list | sell [slot] | recover [slot]",
   "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Uso: /v lock | engine | lights | park | find [slot] | list | sell [slot] | recover [slot]\");",
-  "ka": ""
+  "ka": "გამოყენება: /v lock | engine | lights | park | find [slot] | list | sell [slot] | recover [slot]"
  },
  {
   "id": 1754,
@@ -117,7 +117,7 @@
   "line": 1392,
   "it": "Devi essere al volante di un tuo veicolo.",
   "ctx": "Util_Send(playerid, -10270721, \"Devi essere al volante di un tuo veicolo.\");",
-  "ka": ""
+  "ka": "შენი მანქანის საჭესთან უნდა იჯდე."
  },
  {
   "id": 1755,
@@ -125,7 +125,7 @@
   "line": 1397,
   "it": "Non sei vicino a un distributore.",
   "ctx": "Util_Send(playerid, -10270721, \"Non sei vicino a un distributore.\");",
-  "ka": ""
+  "ka": "ბენზინგასამართ სადგურთან არ ხარ."
  },
  {
   "id": 1756,
@@ -133,7 +133,7 @@
   "line": 1402,
   "it": "Veicolo non disponibile: operazione in corso.",
   "ctx": "Util_Send(playerid, -10270721, \"Veicolo non disponibile: operazione in corso.\");",
-  "ka": ""
+  "ka": "მანქანა მიუწვდომელია: მიმდინარეობს ოპერაცია."
  },
  {
   "id": 1757,
@@ -141,7 +141,7 @@
   "line": 1407,
   "it": "Spegni il motore prima di fare rifornimento (/v engine).",
   "ctx": "Util_Send(playerid, -10270721, \"Spegni il motore prima di fare rifornimento (/v engine).\");",
-  "ka": ""
+  "ka": "საწვავის ჩასხმამდე ძრავი გამორთე (/v engine)."
  },
  {
   "id": 1758,
@@ -149,7 +149,7 @@
   "line": 1414,
   "it": "Il serbatoio e' gia' pieno.",
   "ctx": "Util_Send(playerid, -10270721, \"Il serbatoio e' gia' pieno.\");",
-  "ka": ""
+  "ka": "ავზი უკვე სავსეა."
  },
  {
   "id": 1759,
@@ -157,7 +157,7 @@
   "line": 1424,
   "it": "Uso: /refuel [litri 1-%d] (senza argomento: pieno)",
   "ctx": "SendClientMessage(playerid, 0x99CCFFFF, \"Uso: /refuel [litri 1-%d] (senza argomento: pieno)\", cap / 100);",
-  "ka": ""
+  "ka": "გამოყენება: /refuel [ლიტრი 1-%d] (არგუმენტის გარეშე: სავსე ავზი)"
  },
  {
   "id": 1760,
@@ -165,7 +165,7 @@
   "line": 1434,
   "it": "Non hai abbastanza contanti per fare rifornimento.",
   "ctx": "Util_Send(playerid, -10270721, \"Non hai abbastanza contanti per fare rifornimento.\");",
-  "ka": ""
+  "ka": "საწვავისთვის საკმარისი ნაღდი ფული არ გაქვს."
  },
  {
   "id": 1761,
@@ -173,7 +173,7 @@
   "line": 1440,
   "it": "Non hai abbastanza contanti per fare rifornimento.",
   "ctx": "Util_Send(playerid, -10270721, \"Non hai abbastanza contanti per fare rifornimento.\");",
-  "ka": ""
+  "ka": "საწვავისთვის საკმარისი ნაღდი ფული არ გაქვს."
  },
  {
   "id": 1762,
@@ -181,7 +181,7 @@
   "line": 1451,
   "it": "Rifornimento: +%.1f L per $%d. Serbatoio: %.1f/%.0f L.",
   "ctx": "SendClientMessage(playerid, 0x66DD66FF, \"Rifornimento: +%.1f L per $%d. Serbatoio: %.1f/%.0f L.\", (float(add) / float(100)), cost, (float(g_VSlot[playerid][slot][vsFuelCl]) / float(100)), (float(cap) ",
-  "ka": ""
+  "ka": "ჩასხმულია: +%.1f ლ $%d-ად. ავზი: %.1f/%.0f ლ."
  },
  {
   "id": 1763,
@@ -189,7 +189,7 @@
   "line": 1470,
   "it": "Concessionario di Los Santos\\nUsa /concessionario",
   "ctx": "Lang_Create3DTextLabel(\"Concessionario di Los Santos\\nUsa /concessionario\", -2994689, 1655.0, -1665.0, (22.5 + 1.0), 15.0, 0, false);",
-  "ka": ""
+  "ka": "ლოს-სანტოსის ავტოსალონი\\nგამოიყენე /concessionario"
  },
  {
   "id": 1764,
@@ -197,7 +197,7 @@
   "line": 1473,
   "it": "Distributore\\nUsa /refuel [litri]",
   "ctx": "Lang_Create3DTextLabel(\"Distributore\\nUsa /refuel [litri]\", -2994689, g_VehStations[i][0], g_VehStations[i][1], (1.0 + g_VehStations[i][2]), 15.0, 0, false);",
-  "ka": ""
+  "ka": "ბენზინგასამართი სადგური\\nგამოიყენე /refuel [ლიტრი]"
  },
  {
   "id": 1765,
@@ -205,7 +205,7 @@
   "line": 1560,
   "it": "Non hai le chiavi di questo veicolo.",
   "ctx": "Util_Send(playerid, -10270721, \"Non hai le chiavi di questo veicolo.\");",
-  "ka": ""
+  "ka": "ამ მანქანის გასაღები არ გაქვს."
  },
  {
   "id": 1766,
@@ -213,7 +213,7 @@
   "line": 1599,
   "it": "Non hai le chiavi di questo veicolo.",
   "ctx": "Util_Send(playerid, -10270721, \"Non hai le chiavi di questo veicolo.\");",
-  "ka": ""
+  "ka": "ამ მანქანის გასაღები არ გაქვს."
  },
  {
   "id": 1767,
@@ -221,7 +221,7 @@
   "line": 1631,
   "it": "La tua %s (slot %d) e' stata distrutta. Recuperala con /v recover %d.",
   "ctx": "SendClientMessage(o, -10270721, \"La tua %s (slot %d) e' stata distrutta. Recuperala con /v recover %d.\", mname, s + 1, s + 1);",
-  "ka": ""
+  "ka": "შენი %s (სლოტი %d) განადგურდა. აღადგინე /v recover %d-ით."
  },
  {
   "id": 1768,
@@ -229,6 +229,6 @@
   "line": 1633,
   "it": "DISTRUTTO %s: %s dbId %d",
   "ctx": "format(msg, 256, \"DISTRUTTO %s: %s dbId %d\", pname, mname, g_VSlot[o][s][vsDbId]);",
-  "ka": ""
+  "ka": null
  }
 ]

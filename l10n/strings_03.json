@@ -757,7 +757,7 @@
   "line": 2636,
   "it": "Casa %d di %s. Usa /entra per entrare.",
   "ctx": "SendClientMessage(playerid, -1, \"Casa %d di %s. Usa /entra per entrare.\", g_HouseRows[idx][hrId], g_HouseRows[idx][hrOwnerName]);",
-  "ka": "%d სახლი, მფლობელი %s. შესასვლელად: /entra."
+  "ka": "სახლი %d, მფლობელი %s. შესასვლელად: /entra."
  },
  {
   "id": 1645,
@@ -765,7 +765,7 @@
   "line": 2640,
   "it": "Casa %d di %s: porta chiusa a chiave. Usa /bussa.",
   "ctx": "SendClientMessage(playerid, -1, \"Casa %d di %s: porta chiusa a chiave. Usa /bussa.\", g_HouseRows[idx][hrId], g_HouseRows[idx][hrOwnerName]);",
-  "ka": "%d სახლი, მფლობელი %s: კარი ჩაკეტილია. გამოიყენე /bussa."
+  "ka": "სახლი %d, მფლობელი %s: კარი ჩაკეტილია. გამოიყენე /bussa."
  },
  {
   "id": 1146,
@@ -1181,7 +1181,7 @@
   "line": 1066,
   "it": "Grazie! Hai donato $%d per \\\"%s\\\": raccolti $%d su $%d.",
   "ctx": "format(msg, 256, \"Grazie! Hai donato $%d per \\\"%s\\\": raccolti $%d su $%d.\", donated, name, fund, DB_LivingDistrictGet(d, E_LD_DISTRICT:7));",
-  "ka": "მადლობა! $%d შესწირე პროექტს „%s“: შეგროვდა $%d / $%d."
+  "ka": "მადლობა! $%d შესწირე პროექტს \\\"%s\\\": შეგროვდა $%d / $%d."
  },
  {
   "id": 1198,
@@ -1269,7 +1269,7 @@
   "line": 1170,
   "it": "%s ce l'ha fatta: \\\"%s\\\" e' completato grazie a chi ci lavora e a chi ha donato. Festa di quartiere per %d ore!",
   "ctx": "format(msg, 256, \"%s ce l'ha fatta: \\\"%s\\\" e' completato grazie a chi ci lavora e a chi ha donato. Festa di quartiere per %d ore!\", dname, g_HubPrjNameSeen[d], 72);",
-  "ka": "%s-მ შეძლო: „%s“ დასრულდა მათი წყალობით, ვინც იმუშავა და შესწირა. უბნის ზეიმი %d საათი!"
+  "ka": "%s-მ შეძლო: \\\"%s\\\" დასრულდა მათი წყალობით, ვინც იმუშავა და შესწირა. უბნის ზეიმი %d საათი!"
  },
  {
   "id": 1209,
@@ -1285,7 +1285,7 @@
   "line": 1179,
   "it": "A %s parte un nuovo progetto della comunita': \\\"%s\\\". Ogni contratto da e per il quartiere lo aiuta.",
   "ctx": "format(msg, 256, \"A %s parte un nuovo progetto della comunita': \\\"%s\\\". Ogni contratto da e per il quartiere lo aiuta.\", dname, name);",
-  "ka": "%s-ში იწყება საზოგადოების ახალი პროექტი: „%s“. უბნიდან და უბანში ყოველი კონტრაქტი მას ეხმარება."
+  "ka": "%s-ში იწყება საზოგადოების ახალი პროექტი: \\\"%s\\\". უბნიდან და უბანში ყოველი კონტრაქტი მას ეხმარება."
  },
  {
   "id": 1211,
