@@ -109,7 +109,7 @@ DB_ConnectHint(errno, const errtxt[])
 		}
 		case 1049:
 		{
-			print("[DB] suggerimento: il database indicato in mysql.ini non esiste. Crealo (CREATE DATABASE ... CHARACTER SET utf8mb4) e importa sql/schema.sql.");
+			print("[DB] suggerimento: il database indicato in mysql.ini non esiste. Importa sql/lsrp_completo.sql (crea il database lsrp) e poi sql/crea_utente.sql.");
 		}
 		case 2002, 2003, 2005:
 		{

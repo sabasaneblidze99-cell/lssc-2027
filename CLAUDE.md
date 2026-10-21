@@ -17,7 +17,10 @@ all'utente deve includere anche il sorgente.
 - `gamemodes/modules/core/enums.inc` — tutti gli enum dati (E_PLAYER_DATA …).
 - `gamemodes/modules/core/forwards.inc` — forward delle public.
 - `cef/assets/` — interfaccia CEF (login, HUD, telefono, bacheca).
-- `sql/` — schema MySQL completo + migrazioni.
+- `sql/` — schema MySQL completo + migrazioni. `sql/lsrp_completo.sql` e' GENERATO da `scripts/build_sql.py` (lo chiama build.sh):
+  non modificarlo a mano. Nessuna password in sql/: l'utente si crea con `sql/crea_utente.sql` (segnaposto).
+- `deploy/server/` — modelli di config.json (server privato) e mysql.ini.
+- `docs/PRELAUNCH_REPORT.md`, `docs/PRELAUNCH_DEPENDENCIES.md` — audit pre-lancio, plugin con link ufficiali.
 - `docs/` — Chapter Zero, localizzazione, piani.
 - `toolchain/include/` — include usati per compilare.
 - `recovery/tools/` — strumenti che hanno ricostruito il sorgente dalla v8.

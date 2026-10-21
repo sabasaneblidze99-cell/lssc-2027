@@ -225,7 +225,9 @@ public Cmd_ame(playerid, const params[])
 	}
 	new name[75], msg[256];
 	GetPlayerName(playerid, name, 75);
-	SetPlayerChatBubble(playerid, "* %s", _:-81.42773, 20.0, 6000, text);
+	new bubble[140];
+	Lang_Translit(text, bubble, sizeof bubble);   // fumetto SA-MP (max 144): georgiano della chat CEF in lettere latine
+	SetPlayerChatBubble(playerid, "* %s", _:-81.42773, 20.0, 6000, bubble);
 	format(msg, 256, "> %s %s", name, text);
 	Util_SendNear(playerid, 0xC2A2DAFF, 20.0, msg);
 	return 1;

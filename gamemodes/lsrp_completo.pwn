@@ -10383,7 +10383,7 @@ DB_ConnectHint(errno, const errtxt[])
 		}
 		case 1049:
 		{
-			print("[DB] suggerimento: il database indicato in mysql.ini non esiste. Crealo (CREATE DATABASE ... CHARACTER SET utf8mb4) e importa sql/schema.sql.");
+			print("[DB] suggerimento: il database indicato in mysql.ini non esiste. Importa sql/lsrp_completo.sql (crea il database lsrp) e poi sql/crea_utente.sql.");
 		}
 		case 2002, 2003, 2005:
 		{
@@ -70837,7 +70837,9 @@ public Cmd_ame(playerid, const params[])
 	}
 	new name[75], msg[256];
 	GetPlayerName(playerid, name, 75);
-	SetPlayerChatBubble(playerid, "* %s", _:-81.42773, 20.0, 6000, text);
+	new bubble[140];
+	Lang_Translit(text, bubble, sizeof bubble);   // fumetto SA-MP (max 144): georgiano della chat CEF in lettere latine
+	SetPlayerChatBubble(playerid, "* %s", _:-81.42773, 20.0, 6000, bubble);
 	format(msg, 256, "> %s %s", name, text);
 	Util_SendNear(playerid, 0xC2A2DAFF, 20.0, msg);
 	return 1;

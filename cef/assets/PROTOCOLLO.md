@@ -15,9 +15,9 @@ bacheca, requisiti, fondi, tetti, cooldown) esattamente come per i dialog di `mo
   quindi le liste si inviano con il pattern *begin / add / end* (come `UI_CityBoardBegin/Add/Show`).
 - **Pagina → server**: `cef.emit(nome, ...)`; sul server `cef_subscribe("nome", "Callback")` riceve `Callback(playerid, const arguments[])`
   con **tutti gli argomenti uniti da spazi in una sola stringa**. Per questo la pagina invia solo interi o parole senza spazi.
-- **Codifica**: il plugin SA-MP imposta Windows-1251 per le stringhe Pawn; il componente open.mp passa i byte cosi' come sono.
-  Le stringhe inviate dal server devono essere **ASCII** (accenti come apostrofo, `citta'`), come gia' nei dialog. I testi
-  fissi della pagina sono UTF-8 (file locale) e possono avere accenti.
+- **Codifica**: componente open.mp, stringhe passate byte per byte. Il gamemode invia testo **UTF-8** (georgiano incluso):
+  `cef/cef_safe.inc` ripulisce ogni argomento stringa prima dell'invio (una sequenza UTF-8 rotta farebbe chiudere il server).
+  La pagina -> server: i testi liberi (chat, password, nomi) viaggiano in **esadecimale** (`bridge.js`) e il server li decodifica.
 - Booleani: interi `0/1`. Assenza di un valore: `-1` dove indicato.
 
 ## Server → pagina
@@ -69,14 +69,16 @@ Esempio Pawn: `cef_subscribe("lssc:accept", "Cef_OnAccept");` e
 
 ## Collegamento nel gamemode (stato attuale)
 
-- Build: `scripts/build.sh --cef` (definisce `LSRP_CEF`). Senza `--cef` le native CEF sono stub e il gamemode gira su server senza componente.
+- Build: `scripts/build.sh` = `lsrp.amx` con CEF (unico gamemode ufficiale); `--test` = senza CEF, solo per il server di prova Linux (stub in `ui/cef_ui.inc`).
 - `modules/ui/cef_ui.inc`: stato del browser per giocatore, apertura/chiusura viste e focus, HUD. La pagina sostituisce dialog e TextDraw
   **solo dopo `lssc:ready`**; chi non ha il plugin (`OnCefInitialize(..., 0)`) continua con dialog e TextDraw.
 - Rami CEF in `ui/hud.inc` (HUD) e `ui/living_ui.inc` (bacheca, contratto, quartiere, reputazione, progetto, toast, rifiuti).
 - `modules/cef/cef_bridge.inc`: eventi pagina -> server, che passano dagli stessi ingressi di comandi e dialog.
 - Il telefono si apre con `/telefono`. Se e' gia' aperto il server non lo riapre (le app chiedono i dati da sole: si eviterebbe un ciclo).
 - `lssc:bank_req` per ora invia solo il saldo: l'estratto conto dettagliato resta allo sportello/ATM (`/estratto`).
-- Non ancora collegati: `lssc:msg` (messaggi), noleggio e taxi (restano dialog).
+- Non ancora collegati (la pagina ha gia' il listener, il server non li invia): `lssc:msg`/`lssc:msg_clear` (messaggi), `lssc:bank_row` (estratto conto),
+  `lssc:chat_open`/`lssc:chat_clear`. Noleggio e taxi restano dialog.
+- Rete: il componente usa UDP porta del server + 2 (7777 -> **7779**, QUIC cifrato): va aperta nel firewall insieme alla 7777.
 
 ## Focus e input
 
