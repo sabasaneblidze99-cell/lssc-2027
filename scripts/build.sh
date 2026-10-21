@@ -10,6 +10,8 @@ DEFS=""; OUT="lsrp.amx"
 # default: lsrp.amx = CEF + voce (il gamemode ufficiale). --test = senza CEF (solo per il server di prova Linux)
 if [ "$1" == "--test" ]; then DEFS="LSRP_NO_CEF=1"; OUT="lsrp_test.amx"; fi
 cd "$ROOT/gamemodes" || exit 1
+# database completo in un file, sempre allineato a schema + migrazioni
+python3 "$ROOT/scripts/build_sql.py" >/dev/null
 # file unico per Qawno, sempre allineato ai moduli
 python3 "$ROOT/scripts/flatten.py" lsrp.pwn lsrp_completo.pwn && sed -i '1i // lsrp_completo.pwn - GENERATO da scripts/flatten.py (lsrp.pwn + modules/) in un solo file per Qawno.\n// Non modificare qui: modificare lsrp.pwn/modules e rigenerare.' lsrp_completo.pwn
 "$PAWNCC" lsrp.pwn -d3 $DEFS \

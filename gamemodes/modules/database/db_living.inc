@@ -732,8 +732,9 @@ DB_LivingLoadPlayer(playerid, bool:cleanup)
 
 public DB_OnLdPlayerCalled(playerid, const name[], token, charId, const opId[])
 {
-	new query[1024];
-	mysql_format(g_DB, query, 1024, "SELECT COALESCE((SELECT amount FROM ld_ops WHERE op_id = '%e'), 0) AS refund, ld_pro_points(c.id, 1) AS p1, ld_pro_points(c.id, 2) AS p2, ld_local_rep(c.id, 1) AS r1, ld_local_rep(c.id, 2) AS r2, ld_local_rep(c.id, 3) AS r3, COALESCE(o.step, 0) AS step, COALESCE(o.hints_off, 0) AS hoff, (o.done_at IS NOT NULL) AS odone, ld_work_earned(c.id) AS earned, (SELECT COUNT(*) FROM ct_payouts WHERE character_id = c.id AND paid_at > NOW() - INTERVAL 1 HOUR) AS ctn, COALESCE(TIMESTAMPDIFF(SECOND, (SELECT MAX(paid_at) FROM ct_payouts WHERE character_id = c.id), NOW()), -1) AS since, COALESCE((SELECT ROUND(AVG(z.rating) * 100) FROM (SELECT rating FROM taxi_rides WHERE driver_char = c.id AND rating IS NOT NULL ORDER BY id DESC LIMIT %d) z), 0) AS rating FROM characters c LEFT JOIN ld_onboarding o ON o.character_id = c.id WHERE c.id = %d", opId, 20, charId);
+	// media delle ultime 20 valutazioni taxi: niente tabella derivata con riferimento esterno (MariaDB non lo supporta)
+	new query[1280];
+	mysql_format(g_DB, query, 1280, "SELECT COALESCE((SELECT amount FROM ld_ops WHERE op_id = '%e'), 0) AS refund, ld_pro_points(c.id, 1) AS p1, ld_pro_points(c.id, 2) AS p2, ld_local_rep(c.id, 1) AS r1, ld_local_rep(c.id, 2) AS r2, ld_local_rep(c.id, 3) AS r3, COALESCE(o.step, 0) AS step, COALESCE(o.hints_off, 0) AS hoff, (o.done_at IS NOT NULL) AS odone, ld_work_earned(c.id) AS earned, (SELECT COUNT(*) FROM ct_payouts WHERE character_id = c.id AND paid_at > NOW() - INTERVAL 1 HOUR) AS ctn, COALESCE(TIMESTAMPDIFF(SECOND, (SELECT MAX(paid_at) FROM ct_payouts WHERE character_id = c.id), NOW()), -1) AS since, COALESCE((SELECT ROUND(AVG(r.rating) * 100) FROM taxi_rides r WHERE r.driver_char = c.id AND r.rating IS NOT NULL AND r.id >= COALESCE((SELECT r2.id FROM taxi_rides r2 WHERE r2.driver_char = c.id AND r2.rating IS NOT NULL ORDER BY r2.id DESC LIMIT 1 OFFSET %d), 0)), 0) AS rating FROM characters c LEFT JOIN ld_onboarding o ON o.character_id = c.id WHERE c.id = %d", opId, 20 - 1, charId);
 	mysql_tquery(g_DB, query, "DB_OnLdPlayer", "dsdd", playerid, name, token, charId);
 	return 1;
 }

@@ -1,15 +1,10 @@
 -- LSSC 2027 - installazione nuova del database (MySQL 8 / MariaDB)
 -- Importare in phpMyAdmin dalla pagina iniziale (NON dentro un database): scheda "Importa", questo file, "Esegui".
--- (Scritto per MySQL 8.0-8.3: il plugin MySQL del server richiede mysql_native_password.)
--- Crea il database lsrp, l'utente lsrp (password LsrpTest2026, la stessa di mysql.ini) e tutte le tabelle.
+-- Crea il database lsrp e tutte le tabelle. L'utente MySQL del server NON viene creato qui (nessuna password nel repository):
+-- crealo con sql/crea_utente.sql scegliendo tu la password, la stessa che metterai in mysql.ini.
 -- ATTENZIONE: se il database lsrp esiste gia', prima rinominalo o cancellalo tu da phpMyAdmin (questo file non cancella nulla).
 
 CREATE DATABASE IF NOT EXISTS lsrp CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-CREATE USER IF NOT EXISTS 'lsrp'@'localhost' IDENTIFIED WITH mysql_native_password BY 'LsrpTest2026';
-CREATE USER IF NOT EXISTS 'lsrp'@'127.0.0.1' IDENTIFIED WITH mysql_native_password BY 'LsrpTest2026';
-GRANT ALL PRIVILEGES ON lsrp.* TO 'lsrp'@'localhost';
-GRANT ALL PRIVILEGES ON lsrp.* TO 'lsrp'@'127.0.0.1';
-FLUSH PRIVILEGES;
 USE lsrp;
 -- NB: sql/schema.sql e' GENERATO (scripts/db.sh build-sql) da sql/src/schema_tables.sql + sql/procedures_inventory.sql.
 -- LSRP schema base. Idempotente (CREATE TABLE IF NOT EXISTS), utf8mb4, InnoDB.
@@ -2870,3 +2865,5 @@ INSERT IGNORE INTO `ld_project_catalog` (`district_id`, `seq`, `name`) VALUES
   (3, 1, 'Biblioteca di strada di Jefferson'), (3, 2, 'Pulizia del canale di Jefferson'), (3, 3, 'Panchine e ombra in piazza');
 -- Un progetto attivo per quartiere (nessun effetto se c'e' gia').
 CALL sp_ld_seed();
+
+INSERT IGNORE INTO schema_migrations (name) VALUES ('schema_full_v8'), ('012_account_character_identity');

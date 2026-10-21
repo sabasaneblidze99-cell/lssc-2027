@@ -4,6 +4,9 @@
 SET @c := (SELECT COUNT(*) FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'houses' AND COLUMN_NAME = 'int_game');
 SET @q := IF(@c = 0, 'ALTER TABLE houses ADD COLUMN int_game TINYINT NULL DEFAULT NULL, ADD COLUMN int_x FLOAT NULL DEFAULT NULL, ADD COLUMN int_y FLOAT NULL DEFAULT NULL, ADD COLUMN int_z FLOAT NULL DEFAULT NULL, ADD COLUMN src VARCHAR(16) NULL DEFAULT NULL, ADD COLUMN src_id INT NULL DEFAULT NULL, ADD COLUMN min_level SMALLINT UNSIGNED NOT NULL DEFAULT 0, ADD UNIQUE KEY uq_houses_src (src, src_id)', 'SELECT 1');
 PREPARE st FROM @q; EXECUTE st; DEALLOCATE PREPARE st;
+-- Su un database nuovo gli id 1-10 restano alle 10 case di base del gamemode (le crea il gamemode al primo avvio):
+-- senza questa riga le case Arizona prenderebbero gli id 1-10 e il gamemode le sovrascriverebbe. Su una tabella gia piena non cambia nulla.
+ALTER TABLE houses AUTO_INCREMENT = 11;
 INSERT IGNORE INTO houses (owner_id, tier, interior_idx, ext_x, ext_y, ext_z, ext_a, price, locked, int_game, int_x, int_y, int_z, src, src_id, min_level) VALUES
 (NULL, 0, 0, 1885.88, -1113.56, 26.2758, 0, 750000, 1, 5, 226.897, 1114.28, 1081.0, 'arizona', 1, 1),
 (NULL, 0, 0, 1906.0, -1113.0, 26.6641, 0, 750000, 1, 5, 226.897, 1114.28, 1081.0, 'arizona', 2, 1),
@@ -343,3 +346,4 @@ INSERT IGNORE INTO houses (owner_id, tier, interior_idx, ext_x, ext_y, ext_z, ex
 (NULL, 3, 0, 1122.71, -2037.92, 69.8942, 0, 750000, 1, 10, 2206.68, -402.872, 1502.01, 'arizona', 847, 1),
 (NULL, 3, 0, 1299.18, -1880.17, 13.5466, 0, 750000, 1, 2, 267.1, 305.0, 999.148, 'arizona', 848, 1);
 INSERT IGNORE INTO house_utilities (house_id) SELECT id FROM houses;
+INSERT IGNORE INTO schema_migrations (name) VALUES ('015_arizona_houses');

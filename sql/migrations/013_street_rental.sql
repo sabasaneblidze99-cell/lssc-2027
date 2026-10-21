@@ -68,3 +68,4 @@ main: BEGIN
   COMMIT;
 END//
 DELIMITER ;
+INSERT IGNORE INTO schema_migrations (name) VALUES ('013_street_rental');

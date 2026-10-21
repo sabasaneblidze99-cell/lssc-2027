@@ -283,7 +283,9 @@ DB_SeedHouses()
 		return 0;
 	}
 	new query[2304], row[480];
-	query = "INSERT INTO houses (id, tier, interior_idx, ext_x, ext_y, ext_z, ext_a, price) VALUES "; /*movs 87*/
+	// INSERT IGNORE: le 10 case di base si creano solo se mancano. Prima c'era ON DUPLICATE KEY UPDATE, che su un database
+	// installato da zero sovrascriveva le case Arizona con id 1-10 (vedi sql/migrations/016_arizona_houses_fix.sql).
+	query = "INSERT IGNORE INTO houses (id, tier, interior_idx, ext_x, ext_y, ext_z, ext_a, price) VALUES ";
 	for (new i = 0; i < 10; i++)
 	{
 		new intIdx = s_HouseIntIdx[i];
@@ -291,7 +293,6 @@ DB_SeedHouses()
 		mysql_format(g_DB, row, 480, "%s(%d, %d, %d, %f, %f, %f, %f, %d)", i == 0 ? "" : ", ", i + 1, tier, intIdx, s_HouseExt[i], s_HouseExt[i][1], s_HouseExt[i][2], s_HouseExt[i][3], s_HouseTierPrice[tier]);
 		strcat(query, row, 2304);
 	}
-	strcat(query, " ON DUPLICATE KEY UPDATE tier = IF(owner_id IS NULL, VALUES(tier), tier), interior_idx = IF(owner_id IS NULL, VALUES(interior_idx), interior_idx), ext_x = IF(owner_id IS NULL, VALUES(ext_x), ext_x), ext_y = IF(owner_id IS NULL, VALUES(ext_y), ext_y), ext_z = IF(owner_id IS NULL, VALUES(ext_z), ext_z), ext_a = IF(owner_id IS NULL, VALUES(ext_a), ext_a), price = IF(owner_id IS NULL, VALUES(price), price)", 2304);
 	mysql_tquery(g_DB, query, "DB_OnHouseSeeded", "");
 	return 0;
 }

@@ -6,3 +6,4 @@ SET @sql := IF(@have = 0,
   'ALTER TABLE characters ADD COLUMN combat_logout TINYINT UNSIGNED NOT NULL DEFAULT 0 AFTER last_save',
   'SELECT ''combat_logout gia presente''');
 PREPARE st FROM @sql; EXECUTE st; DEALLOCATE PREPARE st;
+INSERT IGNORE INTO schema_migrations (name) VALUES ('014_spawn_select');

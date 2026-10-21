@@ -148,6 +148,9 @@ S = ['-- 015_arizona_houses.sql - case del mondo Arizona (solo Los Santos), GENE
      "SET @c := (SELECT COUNT(*) FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'houses' AND COLUMN_NAME = 'int_game');",
      "SET @q := IF(@c = 0, 'ALTER TABLE houses ADD COLUMN int_game TINYINT NULL DEFAULT NULL, ADD COLUMN int_x FLOAT NULL DEFAULT NULL, ADD COLUMN int_y FLOAT NULL DEFAULT NULL, ADD COLUMN int_z FLOAT NULL DEFAULT NULL, ADD COLUMN src VARCHAR(16) NULL DEFAULT NULL, ADD COLUMN src_id INT NULL DEFAULT NULL, ADD COLUMN min_level SMALLINT UNSIGNED NOT NULL DEFAULT 0, ADD UNIQUE KEY uq_houses_src (src, src_id)', 'SELECT 1');",
      'PREPARE st FROM @q; EXECUTE st; DEALLOCATE PREPARE st;',
+     '-- Su un database nuovo gli id 1-10 restano alle 10 case di base del gamemode (le crea il gamemode al primo avvio):',
+     '-- senza questa riga le case Arizona prenderebbero gli id 1-10 e il gamemode le sovrascriverebbe. Su una tabella gia piena non cambia nulla.',
+     'ALTER TABLE houses AUTO_INCREMENT = 11;',
      'INSERT IGNORE INTO houses (owner_id, tier, interior_idx, ext_x, ext_y, ext_z, ext_a, price, locked, int_game, int_x, int_y, int_z, src, src_id, min_level) VALUES']
 vals = []
 for h in houses:
@@ -155,5 +158,18 @@ for h in houses:
         tier(h), fl(h['enter'][0]), fl(h['enter'][1]), fl(h['enter'][2]), h['cost'], h['interior'], fl(h['exit'][0]), fl(h['exit'][1]), fl(h['exit'][2]), h['src_id'], h['level']))
 S.append(',\n'.join(vals) + ';')
 S.append('INSERT IGNORE INTO house_utilities (house_id) SELECT id FROM houses;')
+S.append("INSERT IGNORE INTO schema_migrations (name) VALUES ('015_arizona_houses');")
 open(os.path.join(ROOT, 'sql', 'migrations', '015_arizona_houses.sql'), 'w').write('\n'.join(S) + '\n')
+
+# 016: riparazione dei database installati con la prima versione di lsrp_completo.sql, dove le case Arizona avevano gli id 1-10
+# e il gamemode le sovrascriveva con le sue 10 case di base. Rimette entrata, prezzo e classe del server di origine alle case
+# Arizona SENZA proprietario. Idempotente; su un database corretto non cambia nulla.
+F = ['-- 016_arizona_houses_fix.sql - GENERATO da recovery/tools/arizona/gen.py. Idempotente, non cancella nulla.',
+     '-- Ripara le case Arizona sovrascritte (id 1-10) quando il database era stato creato con la prima versione di lsrp_completo.sql.',
+     '-- Tocca solo case Arizona senza proprietario; rimette entrata, classe e prezzo del server di origine.']
+for h in houses:
+    F.append("UPDATE houses SET tier = %d, interior_idx = 0, ext_x = %s, ext_y = %s, ext_z = %s, ext_a = 0, price = %d WHERE src = 'arizona' AND src_id = %d AND owner_id IS NULL;" % (
+        tier(h), fl(h['enter'][0]), fl(h['enter'][1]), fl(h['enter'][2]), h['cost'], h['src_id']))
+F.append("INSERT IGNORE INTO schema_migrations (name) VALUES ('016_arizona_houses_fix');")
+open(os.path.join(ROOT, 'sql', 'migrations', '016_arizona_houses_fix.sql'), 'w').write('\n'.join(F) + '\n')
 print('mapping', len(mapping), 'parti', len(parts), 'porte', len(tps), 'business', len(biz), 'veicoli', len(allv), 'case', len(houses))
