@@ -110,9 +110,7 @@
         "main_scripts": [
             "lsrp 1"
         ],
-        "side_scripts": [
-            "filterscripts/lsrp_voce"
-        ]
+        "side_scripts": []
     },
     "rcon": {
         "allow_teleport": false,

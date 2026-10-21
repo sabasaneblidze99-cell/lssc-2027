@@ -1,4 +1,4 @@
-#define HOUSE_MAX (400)          // case caricate (10 di LSSC + 337 di Arizona + margine)
+#define HOUSE_MAX (400)          // case caricate (10 di LSSC + 336 di Arizona + margine)
 new g_HouseRows[HOUSE_MAX][E_HOUSE_ROW];
 new bool:g_HsIntCols;              // colonne int_* presenti (migrazione 015)
 new g_HouseCount;

@@ -35,7 +35,7 @@ Questo audit **non** ha avviato il server di gioco né fatto test in gioco. Tutt
 | 4. Database | PASS | Import da zero su MySQL 8.0.46 (log binario attivo) e MariaDB 10.11.14. 156 query preparate, 36 CALL con il numero giusto di argomenti, 218 letture di colonne tutte presenti, 47 INSERT con le colonne obbligatorie. |
 | 5. Integrazione dei sistemi | BLOCKED | Account, personaggi, spawn, inventario, banca, case, veicoli, lavori e fazioni sono collegati e controllati. **GPS assente**. Garage e gestione dei business non implementati. |
 | 6. World data | BLOCKED | Case, porte, business, veicoli e mapping hanno loader e relazioni coerenti (controllo statico). Il **GPS** non ha né dati né loader. |
-| 7. CEF | PASS (statico) | 69 eventi server→pagina, tutti con un listener; 25 eventi pagina→server, tutti sottoscritti. Font georgiano su ogni testo. Il rendering in gioco è NOT VERIFIED. |
+| 7. CEF | PASS (statico) | 45 eventi server→pagina (56 invii nel codice), tutti con un listener; 25 eventi pagina→server, tutti sottoscritti. Font georgiano su ogni testo. Il rendering in gioco è NOT VERIFIED. |
 | 8. Sicurezza | PASS (per un test isolato) | Nessuna SQL injection trovata e transazioni lato server con op_id. Restano senza anti-cheat e con l'RCON dell'utente da cambiare: due punti da chiudere prima dell'apertura pubblica. |
 | 9. Deployment | PASS | Modelli di `config.json` (server privato) e `mysql.ini`. Utente SQL con permessi minimi. Log del server, del plugin MySQL e del client CEF (`cef_client.log`). |
 
@@ -79,7 +79,7 @@ Dettagli completi (cartelle, librerie runtime, porte, verifica) in `docs/PRELAUN
 
 | Collegamento | Stato | Note |
 |---|---|---|
-| Account → Login → Personaggi → Spawn | OK (statico + test NPC del 21/10 su 6aaec52) | bcrypt, blocco dopo password errate, 3 personaggi, scelta dello spawn, regola delle 3 ore. |
+| Account → Login → Personaggi → Spawn | OK (statico; test NPC del 21/10 eseguito su 6aaec52, cioè prima delle correzioni dell'audit) | bcrypt, blocco dopo password errate, 3 personaggi, scelta dello spawn, regola delle 3 ore. |
 | Personaggio → Inventario → Oggetti → DB | OK | Procedure `inv_*` con op_id. |
 | Personaggio → Soldi → Banca → Transazioni | OK | Procedure `bank_*` con limiti giornalieri e op_id; estratto conto in CEF non collegato (`lssc:bank_row`). |
 | Personaggio → Veicolo → Proprietà → Garage | INCOMPLETE | Veicoli personali salvati. **Nessun sistema di garage**: 86 case Arizona hanno dati di garage non usati. |
@@ -89,14 +89,14 @@ Dettagli completi (cartelle, librerie runtime, porte, verifica) in `docs/PRELAUN
 | Fazione → Gradi → Permessi → Veicoli | OK per LSPD ed EMS | Gli altri veicoli di fazione del donatore (esercito, gang, radio, banca…) sono chiusi, tranne che per gli admin, finché le fazioni non esistono. |
 | Business | INCOMPLETE | 46 business visitabili, di cui 8 senza interno (solo l'etichetta). Proprietà e gestione non implementate. |
 | Pawn → CEF bridge → JavaScript → UI | OK (statico) | Un solo browser per giocatore, creato su `OnCefInitialize(success)`, distrutto dal componente alla disconnessione. Se la pagina non risponde entro 3 secondi, si torna ai dialog. |
-| Pulizia alla disconnessione | OK | 25 chiamate di pulizia in `OnPlayerDisconnect`; timer per giocatore chiusi con `KillTimer`. |
+| Pulizia alla disconnessione | OK | 24 chiamate di pulizia in `OnPlayerDisconnect`; timer per giocatore chiusi con `KillTimer`. |
 
 ## F. CEF report
 
 - **Server**: componente open.mp di samp-cef (`components/cef.dll`), 7 native verificate nel sorgente. Porta UDP **7779** (7777 + 2).
 - **Client**: `cef.asi` più l'intera cartella `cef/` dallo **stesso commit** del componente. SA-MP 0.3.7 R1/R3 o 0.3.DL R1; la R2 non è supportata.
 - **Asset**: `<GTA>/cef/assets/index.html` con HUD, login, personaggi, spawn, bacheca e telefono (660 KB). `preview.html` e `preview-server.js` servono solo come anteprima nel browser e non vanno nel client.
-- **Eventi**: 69 server→pagina, tutti con un listener. 25 pagina→server, tutti con `cef_subscribe`. Listener presenti ma mai usati dal server: `lssc:msg`, `lssc:msg_clear`, `lssc:bank_row`, `lssc:chat_open`, `lssc:chat_clear`. Il server non li manda ancora e non è stato inventato un backend finto.
+- **Eventi**: 45 server→pagina (56 chiamate `cef_emit_event`), tutti con un listener. 25 pagina→server, tutti con `cef_subscribe`. Listener presenti ma mai usati dal server: `lssc:msg`, `lssc:msg_clear`, `lssc:bank_row`, `lssc:chat_open`, `lssc:chat_clear`, `lssc:quick_close` (quest'ultimo la pagina lo usa solo verso il server). Il server non li manda ancora e non è stato inventato un backend finto.
 - **Validazione**: ogni evento della pagina passa dagli stessi controlli di comandi e dialog. Chat CEF con pausa minima tra i messaggi, password in esadecimale e cancellate dalla memoria dopo l'uso, testo verso la pagina ripulito da UTF-8 non valido (`cef_safe.inc`).
 - **Da provare in gioco**: focus, ESC, tasti F6/Y/N, scala a 1080p e 1440p, prestazioni in guida, eventuali crash allo spawn.
 
@@ -133,7 +133,7 @@ Dettagli completi (cartelle, librerie runtime, porte, verifica) in `docs/PRELAUN
 1. **Streamer 2.9.6**: scarica `samp-streamer-plugin-2.9.6.zip` da https://github.com/samp-incognito/samp-streamer-plugin/releases/tag/v2.9.6 e metti `plugins/streamer.dll` al posto di quella del donatore. Verifica: il log non deve mostrare avvisi di versione.
 2. **CEF**: client (`cef.asi` + `cef/`) e `components/cef.dll` devono venire dallo stesso commit di https://github.com/ZOTTCE/samp-cef. Apri la porta UDP 7779 nel firewall di Windows.
 3. **Database del PC di prova**: se l'hai creato con il vecchio `lsrp_completo.sql`, fai un backup e poi importa `016_arizona_houses_fix.sql` dentro `lsrp`. La casa Arizona 192 (doppione della 143) resta nel tuo database: dimmi se vuoi una migrazione che la disattivi.
-4. **Password**: la password di test `LsrpTest2026` è nella storia del repository. Cambiala sull'utente MySQL che la usa e in `mysql.ini`. Cancellarla dalla storia di git richiede un force-push e serve la tua autorizzazione.
+4. **Password**: la password di test è nella storia del repository (non più nei file attuali). Cambiala sull'utente MySQL che la usa e in `mysql.ini`. Cancellarla dalla storia di git richiede un force-push e serve la tua autorizzazione.
 5. **RCON**: il tuo `config.json` aveva una password RCON corta. Usane una lunga, oppure `"enable": false` come nel modello.
 6. **Decisioni di gioco**: la casa di base 4 (2065,0 / −1703,5) è a 0,8 m dalla casa Arizona 86; le due porte si sovrappongono. Restano da decidere anche i comandi in italiano e i nomi dei quartieri.
 7. **Visual C++ Redistributable x86**: https://learn.microsoft.com/cpp/windows/latest-supported-vc-redist, se streamer non si carica.
@@ -143,7 +143,7 @@ Dettagli completi (cartelle, librerie runtime, porte, verifica) in `docs/PRELAUN
 Server privato sul tuo PC: `announce` spento, query spenta, password di ingresso (vedi `deploy/server/config.json.esempio`).
 
 1. **Database**: avvia MySQL/MariaDB. Su un database nuovo importa `lsrp_completo.sql`, poi `crea_utente.sql` con la tua password. In phpMyAdmin controlla: `SELECT COUNT(*) FROM lsrp.houses` → 336 prima del primo avvio, 346 dopo; `SELECT * FROM lsrp.schema_migrations` → 6 righe.
-2. **Dipendenze**: in `plugins/` servono `mysql.dll`, `streamer.dll` (2.9.6) e `samp_bcrypt.dll`; accanto all'exe `log-core.dll` e `libmariadb.dll`; in `components/` `cef.dll`; `mysql.ini` nella cartella del server.
+2. **Dipendenze**: in `plugins/` servono `mysql.dll`, `streamer.dll` (2.9.6) e `samp_bcrypt.dll`; accanto all'exe `log-core.dll` e `libmariadb.dll`; in `components/` `cef.dll`; `mysql.ini` nella cartella del server. La voce resta spenta (`side_scripts` vuoto) finché non installi SampVoice -omp: se la attivi senza il componente, il filterscript non si carica.
 3. **Avvio**: `omp-server.exe` con `main_scripts: ["lsrp 1"]`.
 4. **Log**: nessun `Failed` né `Function not registered`. Devi vedere `[DB] connesso (utf8mb4)`, `[MONDO] Arizona Los Santos: 14956 oggetti, 41 porte, 46 business (8 senza interno), 227 veicoli` e il componente CEF caricato.
 5. **Client**: SA-MP 0.3.7 R1 o R3 con `cef.asi` e `cef/assets` di questo pacchetto; connessione a `127.0.0.1:7777`.

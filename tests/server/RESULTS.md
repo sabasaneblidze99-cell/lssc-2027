@@ -103,8 +103,8 @@ Rows written to the DB:
 
 **E1: schema_full_v8.sql does not run as-is on MariaDB** (the rest of the file is fine; with `--force` all tables and procedures get created):
 ```
-ERROR 1064 (42000) at line 8: You have an error in your SQL syntax; ... near 'BY 'LsrpTest2026'' at line 1
-ERROR 1064 (42000) at line 9: ... near 'BY 'LsrpTest2026''
+ERROR 1064 (42000) at line 8: You have an error in your SQL syntax; ... near 'BY '<password di test>'' at line 1
+ERROR 1064 (42000) at line 9: ... near 'BY '<password di test>''
 ERROR 1133 (28000) at line 10: Can't find any matching row in the user table
 ERROR 1133 (28000) at line 11: Can't find any matching row in the user table
 ```
