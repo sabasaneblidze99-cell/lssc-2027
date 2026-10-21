@@ -1,0 +1,2082 @@
+[
+ {
+  "id": 1828,
+  "file": "faction/faction.inc",
+  "line": 539,
+  "it": "Sei stato liberato dalle manette.",
+  "ctx": "Util_Send(targetid, 0x66DD66FF, \"Sei stato liberato dalle manette.\");",
+  "ka": ""
+ },
+ {
+  "id": 1829,
+  "file": "faction/faction.inc",
+  "line": 554,
+  "it": "Uso: /ammanetta id",
+  "ctx": "Util_Send(playerid, 0x99CCFFFF, cuff ? \"Uso: /ammanetta id\" : \"Uso: /smanetta id\");",
+  "ka": ""
+ },
+ {
+  "id": 1830,
+  "file": "faction/faction.inc",
+  "line": 554,
+  "it": "Uso: /smanetta id",
+  "ctx": "Util_Send(playerid, 0x99CCFFFF, cuff ? \"Uso: /ammanetta id\" : \"Uso: /smanetta id\");",
+  "ka": ""
+ },
+ {
+  "id": 1831,
+  "file": "faction/faction.inc",
+  "line": 563,
+  "it": "Bersaglio non valido o troppo lontano.",
+  "ctx": "Util_Send(playerid, -10270721, \"Bersaglio non valido o troppo lontano.\");",
+  "ka": ""
+ },
+ {
+  "id": 1832,
+  "file": "faction/faction.inc",
+  "line": 574,
+  "it": "Attendi ancora %d secondi.",
+  "ctx": "SendClientMessage(playerid, -10270721, \"Attendi ancora %d secondi.\", Fac_SecCeil(left));",
+  "ka": ""
+ },
+ {
+  "id": 1833,
+  "file": "faction/faction.inc",
+  "line": 579,
+  "it": "Il bersaglio non puo' essere ammanettato (gia' ammanettato, ferito o non a piedi).",
+  "ctx": "Util_Send(playerid, -10270721, \"Il bersaglio non puo' essere ammanettato (gia' ammanettato, ferito o non a piedi).\");",
+  "ka": ""
+ },
+ {
+  "id": 1834,
+  "file": "faction/faction.inc",
+  "line": 587,
+  "it": "sei stato ammanettato.",
+  "ctx": "Job_Cancel(target, \"sei stato ammanettato.\");",
+  "ka": ""
+ },
+ {
+  "id": 1835,
+  "file": "faction/faction.inc",
+  "line": 590,
+  "it": "ammanetta %s",
+  "ctx": "format(msg, 128, \"ammanetta %s\", tn);",
+  "ka": ""
+ },
+ {
+  "id": 1836,
+  "file": "faction/faction.inc",
+  "line": 597,
+  "it": "Il bersaglio non e' ammanettato.",
+  "ctx": "Util_Send(playerid, -10270721, \"Il bersaglio non e' ammanettato.\");",
+  "ka": ""
+ },
+ {
+  "id": 1837,
+  "file": "faction/faction.inc",
+  "line": 601,
+  "it": "toglie le manette a %s",
+  "ctx": "format(msg, 128, \"toglie le manette a %s\", tn);",
+  "ka": ""
+ },
+ {
+  "id": 1838,
+  "file": "faction/faction.inc",
+  "line": 620,
+  "it": "Uso: /dep testo",
+  "ctx": "Util_Send(playerid, 0x99CCFFFF, interdept ? \"Uso: /dep testo\" : \"Uso: /r testo\");",
+  "ka": ""
+ },
+ {
+  "id": 1839,
+  "file": "faction/faction.inc",
+  "line": 620,
+  "it": "Uso: /r testo",
+  "ctx": "Util_Send(playerid, 0x99CCFFFF, interdept ? \"Uso: /dep testo\" : \"Uso: /r testo\");",
+  "ka": ""
+ },
+ {
+  "id": 1840,
+  "file": "faction/faction.inc",
+  "line": 626,
+  "it": "Rallenta con la radio.",
+  "ctx": "Util_Send(playerid, -10270721, \"Rallenta con la radio.\");",
+  "ka": ""
+ },
+ {
+  "id": 1841,
+  "file": "faction/faction.inc",
+  "line": 636,
+  "it": "[DIP] %s %s %s: %s",
+  "ctx": "format(msg, 256, \"[DIP] %s %s %s: %s\", g_FacShort[f], rn, name, text);",
+  "ka": ""
+ },
+ {
+  "id": 1842,
+  "file": "faction/faction.inc",
+  "line": 641,
+  "it": "[RADIO] %s %s: %s",
+  "ctx": "format(msg, 256, \"[RADIO] %s %s: %s\", rn, name, text);",
+  "ka": ""
+ },
+ {
+  "id": 1843,
+  "file": "faction/faction.inc",
+  "line": 656,
+  "it": "Il tuo grado non consente di emettere multe (minimo grado 2).",
+  "ctx": "SendClientMessage(playerid, -10270721, \"Il tuo grado non consente di emettere multe (minimo grado 2).\");",
+  "ka": ""
+ },
+ {
+  "id": 1844,
+  "file": "faction/faction.inc",
+  "line": 664,
+  "it": "Uso: /multa id importo motivo",
+  "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Uso: /multa id importo motivo\");",
+  "ka": ""
+ },
+ {
+  "id": 1845,
+  "file": "faction/faction.inc",
+  "line": 669,
+  "it": "Motivo troppo corto (minimo %d caratteri).",
+  "ctx": "SendClientMessage(playerid, -10270721, \"Motivo troppo corto (minimo %d caratteri).\", 3);",
+  "ka": ""
+ },
+ {
+  "id": 1846,
+  "file": "faction/faction.inc",
+  "line": 681,
+  "it": "Importo non valido: da $%d a $%d per il tuo grado.",
+  "ctx": "SendClientMessage(playerid, -10270721, \"Importo non valido: da $%d a $%d per il tuo grado.\", 50, cap);",
+  "ka": ""
+ },
+ {
+  "id": 1847,
+  "file": "faction/faction.inc",
+  "line": 690,
+  "it": "Bersaglio non valido o troppo lontano.",
+  "ctx": "Util_Send(playerid, -10270721, \"Bersaglio non valido o troppo lontano.\");",
+  "ka": ""
+ },
+ {
+  "id": 1848,
+  "file": "faction/faction.inc",
+  "line": 695,
+  "it": "Una multa e' gia' in corso di registrazione: attendi.",
+  "ctx": "Util_Send(playerid, -10270721, \"Una multa e' gia' in corso di registrazione: attendi.\");",
+  "ka": ""
+ },
+ {
+  "id": 1849,
+  "file": "faction/faction.inc",
+  "line": 701,
+  "it": "Questo cittadino e' stato multato da poco: riprova tra %d minuti.",
+  "ctx": "SendClientMessage(playerid, -10270721, \"Questo cittadino e' stato multato da poco: riprova tra %d minuti.\", (Fac_SecCeil(left) + 60 - 1) / 60);",
+  "ka": ""
+ },
+ {
+  "id": 1850,
+  "file": "faction/faction.inc",
+  "line": 712,
+  "it": "Hai raggiunto il limite orario di multe ($%d).",
+  "ctx": "SendClientMessage(playerid, -10270721, \"Hai raggiunto il limite orario di multe ($%d).\", 10000);",
+  "ka": ""
+ },
+ {
+  "id": 1851,
+  "file": "faction/faction.inc",
+  "line": 717,
+  "it": "Il cittadino non ha fondi sufficienti: multa rifiutata.",
+  "ctx": "Util_Send(playerid, -10270721, \"Il cittadino non ha fondi sufficienti: multa rifiutata.\");",
+  "ka": ""
+ },
+ {
+  "id": 1852,
+  "file": "faction/faction.inc",
+  "line": 781,
+  "it": "Errore del servizio: multa non registrata, nessun addebito.",
+  "ctx": "Util_Send(issuer, -10270721, fineId < 0 ? \"Errore del servizio: multa non registrata, nessun addebito.\" : \"Multa rifiutata dal sistema: nessun addebito.\");",
+  "ka": ""
+ },
+ {
+  "id": 1853,
+  "file": "faction/faction.inc",
+  "line": 781,
+  "it": "Multa rifiutata dal sistema: nessun addebito.",
+  "ctx": "Util_Send(issuer, -10270721, fineId < 0 ? \"Errore del servizio: multa non registrata, nessun addebito.\" : \"Multa rifiutata dal sistema: nessun addebito.\");",
+  "ka": ""
+ },
+ {
+  "id": 1854,
+  "file": "faction/faction.inc",
+  "line": 787,
+  "it": "multa %d ($%d) registrata ma bersaglio char %d non piu' online: nessun addebito",
+  "ctx": "format(msg, 128, \"multa %d ($%d) registrata ma bersaglio char %d non piu' online: nessun addebito\", fineId, amount, targetChar);",
+  "ka": ""
+ },
+ {
+  "id": 1855,
+  "file": "faction/faction.inc",
+  "line": 791,
+  "it": "Il cittadino si e' disconnesso: la multa e' registrata ma non e' stato possibile addebitarla.",
+  "ctx": "Util_Send(issuer, -10270721, \"Il cittadino si e' disconnesso: la multa e' registrata ma non e' stato possibile addebitarla.\");",
+  "ka": ""
+ },
+ {
+  "id": 1856,
+  "file": "faction/faction.inc",
+  "line": 798,
+  "it": "multa %d: addebitati $%d su $%d (fondi cambiati durante la registrazione)",
+  "ctx": "format(msg, 128, \"multa %d: addebitati $%d su $%d (fondi cambiati durante la registrazione)\", fineId, taken, amount);",
+  "ka": ""
+ },
+ {
+  "id": 1857,
+  "file": "faction/faction.inc",
+  "line": 804,
+  "it": "Hai ricevuto una multa di $%d da %s%s%s.",
+  "ctx": "SendClientMessage(target, -10270721, \"Hai ricevuto una multa di $%d da %s%s%s.\", taken, an, hasReason ? \": \" : \"\", reason);",
+  "ka": ""
+ },
+ {
+  "id": 1858,
+  "file": "faction/faction.inc",
+  "line": 816,
+  "it": "Multa #%d di $%d a %s registrata.",
+  "ctx": "SendClientMessage(issuer, 0x66DD66FF, \"Multa #%d di $%d a %s registrata.\", fineId, taken, tn);",
+  "ka": ""
+ },
+ {
+  "id": 1859,
+  "file": "faction/faction.inc",
+  "line": 817,
+  "it": "consegna una multa a %s",
+  "ctx": "format(msg, 128, \"consegna una multa a %s\", tn);",
+  "ka": ""
+ },
+ {
+  "id": 1860,
+  "file": "faction/faction.inc",
+  "line": 841,
+  "it": "Servizio temporaneamente non disponibile: riprova piu' tardi.",
+  "ctx": "Util_Send(playerid, -10270721, \"Servizio temporaneamente non disponibile: riprova piu' tardi.\");",
+  "ka": ""
+ },
+ {
+  "id": 1861,
+  "file": "faction/faction.inc",
+  "line": 846,
+  "it": "Non hai multe registrate.",
+  "ctx": "Util_Send(playerid, -1, \"Non hai multe registrate.\");",
+  "ka": ""
+ },
+ {
+  "id": 1862,
+  "file": "faction/faction.inc",
+  "line": 849,
+  "it": "--- Ultime multe ricevute ---",
+  "ctx": "SendClientMessage(playerid, -2994689, \"--- Ultime multe ricevute ---\");",
+  "ka": ""
+ },
+ {
+  "id": 1863,
+  "file": "faction/faction.inc",
+  "line": 878,
+  "it": "Uso: /cura id",
+  "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Uso: /cura id\");",
+  "ka": ""
+ },
+ {
+  "id": 1864,
+  "file": "faction/faction.inc",
+  "line": 887,
+  "it": "Bersaglio non valido o troppo lontano.",
+  "ctx": "Util_Send(playerid, -10270721, \"Bersaglio non valido o troppo lontano.\");",
+  "ka": ""
+ },
+ {
+  "id": 1865,
+  "file": "faction/faction.inc",
+  "line": 892,
+  "it": "Il bersaglio e' ferito: usa /rianima.",
+  "ctx": "Util_Send(playerid, -10270721, \"Il bersaglio e' ferito: usa /rianima.\");",
+  "ka": ""
+ },
+ {
+  "id": 1866,
+  "file": "faction/faction.inc",
+  "line": 897,
+  "it": "Il kit medico e' esaurito (si ricarica a /duty on).",
+  "ctx": "Util_Send(playerid, -10270721, \"Il kit medico e' esaurito (si ricarica a /duty on).\");",
+  "ka": ""
+ },
+ {
+  "id": 1867,
+  "file": "faction/faction.inc",
+  "line": 903,
+  "it": "Attendi ancora %d secondi.",
+  "ctx": "SendClientMessage(playerid, -10270721, \"Attendi ancora %d secondi.\", Fac_SecCeil(left));",
+  "ka": ""
+ },
+ {
+  "id": 1868,
+  "file": "faction/faction.inc",
+  "line": 909,
+  "it": "Il paziente e' stato curato da poco: attendi %d secondi.",
+  "ctx": "SendClientMessage(playerid, -10270721, \"Il paziente e' stato curato da poco: attendi %d secondi.\", Fac_SecCeil(left));",
+  "ka": ""
+ },
+ {
+  "id": 1869,
+  "file": "faction/faction.inc",
+  "line": 916,
+  "it": "Il bersaglio e' in piena salute.",
+  "ctx": "Util_Send(playerid, -10270721, \"Il bersaglio e' in piena salute.\");",
+  "ka": ""
+ },
+ {
+  "id": 1870,
+  "file": "faction/faction.inc",
+  "line": 932,
+  "it": "presta le prime cure a %s",
+  "ctx": "format(msg, 128, \"presta le prime cure a %s\", tn);",
+  "ka": ""
+ },
+ {
+  "id": 1871,
+  "file": "faction/faction.inc",
+  "line": 934,
+  "it": "Sei stato curato (salute %.0f).",
+  "ctx": "SendClientMessage(target, 0x66DD66FF, \"Sei stato curato (salute %.0f).\", hp);",
+  "ka": ""
+ },
+ {
+  "id": 1872,
+  "file": "faction/faction.inc",
+  "line": 963,
+  "it": "Uso: /rianima id",
+  "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Uso: /rianima id\");",
+  "ka": ""
+ },
+ {
+  "id": 1873,
+  "file": "faction/faction.inc",
+  "line": 972,
+  "it": "Bersaglio non valido o troppo lontano.",
+  "ctx": "Util_Send(playerid, -10270721, \"Bersaglio non valido o troppo lontano.\");",
+  "ka": ""
+ },
+ {
+  "id": 1874,
+  "file": "faction/faction.inc",
+  "line": 977,
+  "it": "Il bersaglio non e' ferito.",
+  "ctx": "Util_Send(playerid, -10270721, \"Il bersaglio non e' ferito.\");",
+  "ka": ""
+ },
+ {
+  "id": 1875,
+  "file": "faction/faction.inc",
+  "line": 982,
+  "it": "Il kit medico e' esaurito (si ricarica a /duty on).",
+  "ctx": "Util_Send(playerid, -10270721, \"Il kit medico e' esaurito (si ricarica a /duty on).\");",
+  "ka": ""
+ },
+ {
+  "id": 1876,
+  "file": "faction/faction.inc",
+  "line": 987,
+  "it": "Stai gia' rianimando qualcuno.",
+  "ctx": "Util_Send(playerid, -10270721, \"Stai gia' rianimando qualcuno.\");",
+  "ka": ""
+ },
+ {
+  "id": 1877,
+  "file": "faction/faction.inc",
+  "line": 996,
+  "it": "inizia a rianimare %s",
+  "ctx": "format(msg, 128, \"inizia a rianimare %s\", tn);",
+  "ka": ""
+ },
+ {
+  "id": 1878,
+  "file": "faction/faction.inc",
+  "line": 998,
+  "it": "Rianimazione in corso (%d secondi): non allontanarti.",
+  "ctx": "SendClientMessage(playerid, -1, \"Rianimazione in corso (%d secondi): non allontanarti.\", 8);",
+  "ka": ""
+ },
+ {
+  "id": 1879,
+  "file": "faction/faction.inc",
+  "line": 1017,
+  "it": "%s ti ha rianimato.",
+  "ctx": "SendClientMessage(target, 0x66DD66FF, \"%s ti ha rianimato.\", mn);",
+  "ka": ""
+ },
+ {
+  "id": 1880,
+  "file": "faction/faction.inc",
+  "line": 1018,
+  "it": "rianima %s",
+  "ctx": "format(msg, 128, \"rianima %s\", tn);",
+  "ka": ""
+ },
+ {
+  "id": 1881,
+  "file": "faction/faction.inc",
+  "line": 1030,
+  "it": "Bonus rianimazione: $%d versati in banca.",
+  "ctx": "SendClientMessage(medic, 0x66DD66FF, \"Bonus rianimazione: $%d versati in banca.\", 100);",
+  "ka": ""
+ },
+ {
+  "id": 1882,
+  "file": "faction/faction.inc",
+  "line": 1058,
+  "it": "ricovero %s: addebitati $%d",
+  "ctx": "format(msg, 128, \"ricovero %s: addebitati $%d\", name, fee);",
+  "ka": ""
+ },
+ {
+  "id": 1883,
+  "file": "faction/faction.inc",
+  "line": 1080,
+  "it": "Non sei autorizzato a invitare.",
+  "ctx": "Util_Send(playerid, -10270721, \"Non sei autorizzato a invitare.\");",
+  "ka": ""
+ },
+ {
+  "id": 1884,
+  "file": "faction/faction.inc",
+  "line": 1089,
+  "it": "Giocatore non valido.",
+  "ctx": "Util_Send(playerid, -10270721, \"Giocatore non valido.\");",
+  "ka": ""
+ },
+ {
+  "id": 1885,
+  "file": "faction/faction.inc",
+  "line": 1094,
+  "it": "Il giocatore e' troppo lontano.",
+  "ctx": "Util_Send(playerid, -10270721, \"Il giocatore e' troppo lontano.\");",
+  "ka": ""
+ },
+ {
+  "id": 1886,
+  "file": "faction/faction.inc",
+  "line": 1099,
+  "it": "Il giocatore appartiene gia' a una fazione.",
+  "ctx": "Util_Send(playerid, -10270721, \"Il giocatore appartiene gia' a una fazione.\");",
+  "ka": ""
+ },
+ {
+  "id": 1887,
+  "file": "faction/faction.inc",
+  "line": 1104,
+  "it": "Il giocatore deve essere almeno livello %d.",
+  "ctx": "SendClientMessage(playerid, -10270721, \"Il giocatore deve essere almeno livello %d.\", 3);",
+  "ka": ""
+ },
+ {
+  "id": 1888,
+  "file": "faction/faction.inc",
+  "line": 1109,
+  "it": "Il giocatore ha gia' un invito in sospeso.",
+  "ctx": "Util_Send(playerid, -10270721, \"Il giocatore ha gia' un invito in sospeso.\");",
+  "ka": ""
+ },
+ {
+  "id": 1889,
+  "file": "faction/faction.inc",
+  "line": 1121,
+  "it": "%s ti invita in %s. Accetta dal pannello o con /accetta (valido %d secondi).",
+  "ctx": "SendClientMessage(target, -1, \"%s ti invita in %s. Accetta dal pannello o con /accetta (valido %d secondi).\", an, g_FacShort[f], 60);",
+  "ka": ""
+ },
+ {
+  "id": 1890,
+  "file": "faction/faction.inc",
+  "line": 1122,
+  "it": "Invito inviato a %s.",
+  "ctx": "SendClientMessage(playerid, 0x66DD66FF, \"Invito inviato a %s.\", tn);",
+  "ka": ""
+ },
+ {
+  "id": 1891,
+  "file": "faction/faction.inc",
+  "line": 1136,
+  "it": "Uso: /invita id",
+  "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Uso: /invita id\");",
+  "ka": ""
+ },
+ {
+  "id": 1892,
+  "file": "faction/faction.inc",
+  "line": 1172,
+  "it": "L'invito e' scaduto.",
+  "ctx": "Util_Send(playerid, -10270721, \"L'invito e' scaduto.\");",
+  "ka": ""
+ },
+ {
+  "id": 1893,
+  "file": "faction/faction.inc",
+  "line": 1177,
+  "it": "Hai rifiutato l'invito.",
+  "ctx": "Util_Send(playerid, -1, \"Hai rifiutato l'invito.\");",
+  "ka": ""
+ },
+ {
+  "id": 1894,
+  "file": "faction/faction.inc",
+  "line": 1180,
+  "it": "L'invito e' stato rifiutato.",
+  "ctx": "Util_Send(from, -1, \"L'invito e' stato rifiutato.\");",
+  "ka": ""
+ },
+ {
+  "id": 1895,
+  "file": "faction/faction.inc",
+  "line": 1186,
+  "it": "Chi ti ha invitato non e' piu' disponibile.",
+  "ctx": "Util_Send(playerid, -10270721, \"Chi ti ha invitato non e' piu' disponibile.\");",
+  "ka": ""
+ },
+ {
+  "id": 1896,
+  "file": "faction/faction.inc",
+  "line": 1191,
+  "it": "Non puoi entrare in una fazione adesso.",
+  "ctx": "Util_Send(playerid, -10270721, \"Non puoi entrare in una fazione adesso.\");",
+  "ka": ""
+ },
+ {
+  "id": 1897,
+  "file": "faction/faction.inc",
+  "line": 1210,
+  "it": "Non hai inviti in sospeso.",
+  "ctx": "Util_Send(playerid, -10270721, \"Non hai inviti in sospeso.\");",
+  "ka": ""
+ },
+ {
+  "id": 1898,
+  "file": "faction/faction.inc",
+  "line": 1223,
+  "it": "Non sei autorizzato.",
+  "ctx": "Util_Send(playerid, -10270721, \"Non sei autorizzato.\");",
+  "ka": ""
+ },
+ {
+  "id": 1899,
+  "file": "faction/faction.inc",
+  "line": 1232,
+  "it": "Bersaglio non valido.",
+  "ctx": "Util_Send(playerid, -10270721, \"Bersaglio non valido.\");",
+  "ka": ""
+ },
+ {
+  "id": 1900,
+  "file": "faction/faction.inc",
+  "line": 1237,
+  "it": "Puoi agire solo su membri di grado inferiore al tuo.",
+  "ctx": "Util_Send(playerid, -10270721, \"Puoi agire solo su membri di grado inferiore al tuo.\");",
+  "ka": ""
+ },
+ {
+  "id": 1901,
+  "file": "faction/faction.inc",
+  "line": 1247,
+  "it": "Il nuovo grado deve restare inferiore al tuo.",
+  "ctx": "Util_Send(playerid, -10270721, \"Il nuovo grado deve restare inferiore al tuo.\");",
+  "ka": ""
+ },
+ {
+  "id": 1902,
+  "file": "faction/faction.inc",
+  "line": 1256,
+  "it": "Il membro e' gia' al grado minimo.",
+  "ctx": "Util_Send(playerid, -10270721, \"Il membro e' gia' al grado minimo.\");",
+  "ka": ""
+ },
+ {
+  "id": 1903,
+  "file": "faction/faction.inc",
+  "line": 1279,
+  "it": "Uso: /promuovi id",
+  "ctx": "Util_Send(playerid, 0x99CCFFFF, action == 4 ? \"Uso: /promuovi id\" : (action == 5 ? \"Uso: /degrada id\" : \"Uso: /licenzia id\"));",
+  "ka": ""
+ },
+ {
+  "id": 1904,
+  "file": "faction/faction.inc",
+  "line": 1279,
+  "it": "Uso: /degrada id",
+  "ctx": "Util_Send(playerid, 0x99CCFFFF, action == 4 ? \"Uso: /promuovi id\" : (action == 5 ? \"Uso: /degrada id\" : \"Uso: /licenzia id\"));",
+  "ka": ""
+ },
+ {
+  "id": 1905,
+  "file": "faction/faction.inc",
+  "line": 1279,
+  "it": "Uso: /licenzia id",
+  "ctx": "Util_Send(playerid, 0x99CCFFFF, action == 4 ? \"Uso: /promuovi id\" : (action == 5 ? \"Uso: /degrada id\" : \"Uso: /licenzia id\"));",
+  "ka": ""
+ },
+ {
+  "id": 1906,
+  "file": "faction/faction.inc",
+  "line": 1288,
+  "it": "Il giocatore non appartiene alla tua fazione.",
+  "ctx": "Util_Send(playerid, -10270721, \"Il giocatore non appartiene alla tua fazione.\");",
+  "ka": ""
+ },
+ {
+  "id": 1907,
+  "file": "faction/faction.inc",
+  "line": 1314,
+  "it": "Membro non piu' in lista: riapri il menu.",
+  "ctx": "Util_Send(playerid, -10270721, \"Membro non piu' in lista: riapri il menu.\");",
+  "ka": ""
+ },
+ {
+  "id": 1908,
+  "file": "faction/faction.inc",
+  "line": 1349,
+  "it": "Sei stato messo fuori servizio.",
+  "ctx": "Util_Send(target, -1, \"Sei stato messo fuori servizio.\");",
+  "ka": ""
+ },
+ {
+  "id": 1909,
+  "file": "faction/faction.inc",
+  "line": 1363,
+  "it": "Sei entrato in %s con il grado %s.",
+  "ctx": "SendClientMessage(target, 0x66DD66FF, \"Sei entrato in %s con il grado %s.\", g_FacShort[nf], rn);",
+  "ka": ""
+ },
+ {
+  "id": 1910,
+  "file": "faction/faction.inc",
+  "line": 1367,
+  "it": "Sei stato promosso a %s (%s).",
+  "ctx": "SendClientMessage(target, 0x66DD66FF, \"Sei stato promosso a %s (%s).\", rn, g_FacShort[nf]);",
+  "ka": ""
+ },
+ {
+  "id": 1911,
+  "file": "faction/faction.inc",
+  "line": 1371,
+  "it": "Sei stato degradato a %s (%s).",
+  "ctx": "SendClientMessage(target, -10270721, \"Sei stato degradato a %s (%s).\", rn, g_FacShort[nf]);",
+  "ka": ""
+ },
+ {
+  "id": 1912,
+  "file": "faction/faction.inc",
+  "line": 1375,
+  "it": "Sei stato licenziato da %s.",
+  "ctx": "SendClientMessage(target, -10270721, \"Sei stato licenziato da %s.\", g_FacShort[faction]);",
+  "ka": ""
+ },
+ {
+  "id": 1913,
+  "file": "faction/faction.inc",
+  "line": 1379,
+  "it": "Hai lasciato %s.",
+  "ctx": "SendClientMessage(target, -1, \"Hai lasciato %s.\", g_FacShort[faction]);",
+  "ka": ""
+ },
+ {
+  "id": 1914,
+  "file": "faction/faction.inc",
+  "line": 1385,
+  "it": "Sei stato rimosso dalla fazione da uno staff.",
+  "ctx": "Util_Send(target, -5963521, \"Sei stato rimosso dalla fazione da uno staff.\");",
+  "ka": ""
+ },
+ {
+  "id": 1915,
+  "file": "faction/faction.inc",
+  "line": 1389,
+  "it": "Uno staff ti ha assegnato a %s con il grado %s.",
+  "ctx": "SendClientMessage(target, -5963521, \"Uno staff ti ha assegnato a %s con il grado %s.\", g_FacShort[nf], rn);",
+  "ka": ""
+ },
+ {
+  "id": 1916,
+  "file": "faction/faction.inc",
+  "line": 1441,
+  "it": "rimosso dalla fazione",
+  "ctx": "format(detail, 128, \"rimosso dalla fazione\");",
+  "ka": ""
+ },
+ {
+  "id": 1917,
+  "file": "faction/faction.inc",
+  "line": 1445,
+  "it": "%s grado %d",
+  "ctx": "format(detail, 128, \"%s grado %d\", g_FacShort[faction], rank);",
+  "ka": ""
+ },
+ {
+  "id": 1918,
+  "file": "faction/faction.inc",
+  "line": 1449,
+  "it": "impostato la fazione di",
+  "ctx": "Admin_AdmCmd(g_FcSetStaffName[ctx], \"impostato la fazione di\", tn, detail, \"\");",
+  "ka": ""
+ },
+ {
+  "id": 1919,
+  "file": "faction/faction.inc",
+  "line": 1457,
+  "it": "%s e' entrato in %s.",
+  "ctx": "SendClientMessage(req, 0x66DD66FF, \"%s e' entrato in %s.\", tn, g_FacShort[faction]);",
+  "ka": ""
+ },
+ {
+  "id": 1920,
+  "file": "faction/faction.inc",
+  "line": 1461,
+  "it": "%s promosso a %s.",
+  "ctx": "SendClientMessage(req, 0x66DD66FF, \"%s promosso a %s.\", tn, rn);",
+  "ka": ""
+ },
+ {
+  "id": 1921,
+  "file": "faction/faction.inc",
+  "line": 1465,
+  "it": "%s degradato a %s.",
+  "ctx": "SendClientMessage(req, 0x66DD66FF, \"%s degradato a %s.\", tn, rn);",
+  "ka": ""
+ },
+ {
+  "id": 1922,
+  "file": "faction/faction.inc",
+  "line": 1469,
+  "it": "%s licenziato.",
+  "ctx": "SendClientMessage(req, 0x66DD66FF, \"%s licenziato.\", tn);",
+  "ka": ""
+ },
+ {
+  "id": 1923,
+  "file": "faction/faction.inc",
+  "line": 1474,
+  "it": "cmd %d char %d fazione %d grado %d",
+  "ctx": "format(msg, 128, \"cmd %d char %d fazione %d grado %d\", cmd, targetChar, faction, rank);",
+  "ka": ""
+ },
+ {
+  "id": 1924,
+  "file": "faction/faction.inc",
+  "line": 1484,
+  "it": "Servizio temporaneamente non disponibile: operazione non eseguita.",
+  "ctx": "Util_Send(notify, -10270721, \"Servizio temporaneamente non disponibile: operazione non eseguita.\");",
+  "ka": ""
+ },
+ {
+  "id": 1925,
+  "file": "faction/faction.inc",
+  "line": 1488,
+  "it": "Operazione rifiutata (gradi, fazione o livello non idonei, o un'altra operazione e' in corso).",
+  "ctx": "Util_Send(notify, -10270721, \"Operazione rifiutata (gradi, fazione o livello non idonei, o un'altra operazione e' in corso).\");",
+  "ka": ""
+ },
+ {
+  "id": 1926,
+  "file": "faction/faction.inc",
+  "line": 1493,
+  "it": "Non e' stato possibile completare l'ingresso in fazione.",
+  "ctx": "Util_Send(target, -10270721, \"Non e' stato possibile completare l'ingresso in fazione.\");",
+  "ka": ""
+ },
+ {
+  "id": 1927,
+  "file": "faction/faction.inc",
+  "line": 1508,
+  "it": "Non appartieni a nessuna fazione.",
+  "ctx": "Util_Send(playerid, -10270721, \"Non appartieni a nessuna fazione.\");",
+  "ka": ""
+ },
+ {
+  "id": 1928,
+  "file": "faction/faction.inc",
+  "line": 1513,
+  "it": "Richiesta gia' in corso: attendi.",
+  "ctx": "Util_Send(playerid, -10270721, \"Richiesta gia' in corso: attendi.\");",
+  "ka": ""
+ },
+ {
+  "id": 1929,
+  "file": "faction/faction.inc",
+  "line": 1527,
+  "it": "Non appartieni a nessuna fazione.",
+  "ctx": "Util_Send(playerid, -10270721, \"Non appartieni a nessuna fazione.\");",
+  "ka": ""
+ },
+ {
+  "id": 1930,
+  "file": "faction/faction.inc",
+  "line": 1552,
+  "it": "Uso: /fazione [info|membri|lascia]",
+  "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Uso: /fazione [info|membri|lascia]\");",
+  "ka": ""
+ },
+ {
+  "id": 1931,
+  "file": "faction/faction.inc",
+  "line": 1579,
+  "it": "Servizio temporaneamente non disponibile: riprova piu' tardi.",
+  "ctx": "Util_Send(playerid, -10270721, \"Servizio temporaneamente non disponibile: riprova piu' tardi.\");",
+  "ka": ""
+ },
+ {
+  "id": 1932,
+  "file": "faction/faction.inc",
+  "line": 1651,
+  "it": "Uso: /setfazione id|Nome_Cognome fazione(%d-%d, 0 = rimuovi) grado(1-%d)",
+  "ctx": "SendClientMessage(playerid, 0x99CCFFFF, \"Uso: /setfazione id|Nome_Cognome fazione(%d-%d, 0 = rimuovi) grado(1-%d)\", 0, 2, 6);",
+  "ka": ""
+ },
+ {
+  "id": 1933,
+  "file": "faction/faction.inc",
+  "line": 1660,
+  "it": "Hai gia' un'operazione /setfazione in corso.",
+  "ctx": "Util_Send(playerid, -10270721, \"Hai gia' un'operazione /setfazione in corso.\");",
+  "ka": ""
+ },
+ {
+  "id": 1934,
+  "file": "faction/faction.inc",
+  "line": 1668,
+  "it": "Giocatore non valido.",
+  "ctx": "Util_Send(playerid, -10270721, \"Giocatore non valido.\");",
+  "ka": ""
+ },
+ {
+  "id": 1935,
+  "file": "faction/faction.inc",
+  "line": 1685,
+  "it": "Giocatore non valido (usa id oppure Nome_Cognome).",
+  "ctx": "Util_Send(playerid, -10270721, \"Giocatore non valido (usa id oppure Nome_Cognome).\");",
+  "ka": ""
+ },
+ {
+  "id": 1936,
+  "file": "faction/faction.inc",
+  "line": 1709,
+  "it": "Servizio temporaneamente non disponibile: riprova piu' tardi.",
+  "ctx": "Util_Send(playerid, -10270721, charId < 0 ? \"Servizio temporaneamente non disponibile: riprova piu' tardi.\" : \"Personaggio non trovato.\");",
+  "ka": ""
+ },
+ {
+  "id": 1937,
+  "file": "faction/faction.inc",
+  "line": 1709,
+  "it": "Personaggio non trovato.",
+  "ctx": "Util_Send(playerid, -10270721, charId < 0 ? \"Servizio temporaneamente non disponibile: riprova piu' tardi.\" : \"Personaggio non trovato.\");",
+  "ka": ""
+ },
+ {
+  "id": 1938,
+  "file": "faction/faction.inc",
+  "line": 1730,
+  "it": "L'invito in fazione e' scaduto.",
+  "ctx": "Util_Send(i, -1, \"L'invito in fazione e' scaduto.\");",
+  "ka": ""
+ },
+ {
+  "id": 1939,
+  "file": "faction/faction.inc",
+  "line": 1733,
+  "it": "Il tuo invito e' scaduto.",
+  "ctx": "Util_Send(from, -1, \"Il tuo invito e' scaduto.\");",
+  "ka": ""
+ },
+ {
+  "id": 1940,
+  "file": "faction/faction.inc",
+  "line": 1753,
+  "it": "Sei stato messo fuori servizio.",
+  "ctx": "Util_Send(i, -10270721, \"Sei stato messo fuori servizio.\");",
+  "ka": ""
+ },
+ {
+  "id": 1941,
+  "file": "faction/faction.inc",
+  "line": 1765,
+  "it": "Rianimazione interrotta.",
+  "ctx": "Fac_ReviveCancel(i, \"Rianimazione interrotta.\");",
+  "ka": ""
+ },
+ {
+  "id": 1942,
+  "file": "faction/faction.inc",
+  "line": 1769,
+  "it": "Rianimazione interrotta: il paziente non e' piu' ferito.",
+  "ctx": "Fac_ReviveCancel(i, \"Rianimazione interrotta: il paziente non e' piu' ferito.\");",
+  "ka": ""
+ },
+ {
+  "id": 1943,
+  "file": "faction/faction.inc",
+  "line": 1773,
+  "it": "Rianimazione interrotta: ti sei allontanato.",
+  "ctx": "Fac_ReviveCancel(i, \"Rianimazione interrotta: ti sei allontanato.\");",
+  "ka": ""
+ },
+ {
+  "id": 1944,
+  "file": "faction/faction.inc",
+  "line": 1783,
+  "it": "Kit medico esaurito.",
+  "ctx": "Fac_ReviveCancel(i, \"Kit medico esaurito.\");",
+  "ka": ""
+ },
+ {
+  "id": 1945,
+  "file": "faction/faction.inc",
+  "line": 1853,
+  "it": "Rianimazione interrotta: il paziente si e' scollegato.",
+  "ctx": "Fac_ReviveCancel(i, \"Rianimazione interrotta: il paziente si e' scollegato.\");",
+  "ka": ""
+ },
+ {
+  "id": 1946,
+  "file": "faction/faction.inc",
+  "line": 1895,
+  "it": "Rianimazione interrotta.",
+  "ctx": "Fac_ReviveCancel(i, \"Rianimazione interrotta.\");",
+  "ka": ""
+ },
+ {
+  "id": 1947,
+  "file": "faction/faction.inc",
+  "line": 1935,
+  "it": "Sei ferito. Attendi i soccorsi (EMS): senza aiuto verrai ricoverato tra %d secondi ($%d).",
+  "ctx": "SendClientMessage(playerid, -10270721, \"Sei ferito. Attendi i soccorsi (EMS): senza aiuto verrai ricoverato tra %d secondi ($%d).\", 180, 200);",
+  "ka": ""
+ },
+ {
+  "id": 1948,
+  "file": "faction/faction.inc",
+  "line": 1946,
+  "it": "--- Fazione %s ---",
+  "ctx": "SendClientMessage(playerid, -2994689, \"--- Fazione %s ---\", g_FacShort[f]);",
+  "ka": ""
+ },
+ {
+  "id": 1949,
+  "file": "faction/faction.inc",
+  "line": 1947,
+  "it": "/fazione [info|membri|lascia] · /duty (vicino alla sede) · /r testo · /dep testo",
+  "ctx": "Util_Send(playerid, 0x99CCFFFF, \"/fazione [info|membri|lascia] · /duty (vicino alla sede) · /r testo · /dep testo\");",
+  "ka": ""
+ },
+ {
+  "id": 1950,
+  "file": "faction/faction.inc",
+  "line": 1950,
+  "it": "/ammanetta id · /smanetta id",
+  "ctx": "Util_Send(playerid, 0x99CCFFFF, \"/ammanetta id · /smanetta id\");",
+  "ka": ""
+ },
+ {
+  "id": 1951,
+  "file": "faction/faction.inc",
+  "line": 1953,
+  "it": "/multa id importo motivo",
+  "ctx": "Util_Send(playerid, 0x99CCFFFF, \"/multa id importo motivo\");",
+  "ka": ""
+ },
+ {
+  "id": 1952,
+  "file": "faction/faction.inc",
+  "line": 1958,
+  "it": "/cura id · /rianima id",
+  "ctx": "Util_Send(playerid, 0x99CCFFFF, \"/cura id · /rianima id\");",
+  "ka": ""
+ },
+ {
+  "id": 1953,
+  "file": "faction/faction.inc",
+  "line": 1962,
+  "it": "/invita id · /promuovi id · /degrada id · /licenzia id",
+  "ctx": "Util_Send(playerid, 0x99CCFFFF, \"/invita id · /promuovi id · /degrada id · /licenzia id\");",
+  "ka": ""
+ },
+ {
+  "id": 0,
+  "file": "freight/freight.inc",
+  "line": 139,
+  "it": "merci alimentari",
+  "ctx": "strcopy(dest, \"merci alimentari\", size);",
+  "ka": ""
+ },
+ {
+  "id": 1,
+  "file": "freight/freight.inc",
+  "line": 147,
+  "it": "merci generiche",
+  "ctx": "strcopy(dest, \"merci generiche\", size);",
+  "ka": ""
+ },
+ {
+  "id": 2,
+  "file": "freight/freight.inc",
+  "line": 254,
+  "it": "Negozio",
+  "ctx": "format(dest, 96, \"%s %s\", shop ? \"Negozio\" : \"Magazzino\", name);",
+  "ka": ""
+ },
+ {
+  "id": 3,
+  "file": "freight/freight.inc",
+  "line": 254,
+  "it": "Magazzino",
+  "ctx": "format(dest, 96, \"%s %s\", shop ? \"Negozio\" : \"Magazzino\", name);",
+  "ka": ""
+ },
+ {
+  "id": 4,
+  "file": "freight/freight.inc",
+  "line": 259,
+  "it": "Registrazione del carico...",
+  "ctx": "strcopy(goal, \"Registrazione del carico...\", 96);",
+  "ka": ""
+ },
+ {
+  "id": 5,
+  "file": "freight/freight.inc",
+  "line": 263,
+  "it": "Registrazione della consegna...",
+  "ctx": "strcopy(goal, \"Registrazione della consegna...\", 96);",
+  "ka": ""
+ },
+ {
+  "id": 6,
+  "file": "freight/freight.inc",
+  "line": 269,
+  "it": "Scarico: resta fermo %d s",
+  "ctx": "format(goal, 96, \"Scarico: resta fermo %d s\", dwellSec);",
+  "ka": ""
+ },
+ {
+  "id": 7,
+  "file": "freight/freight.inc",
+  "line": 273,
+  "it": "Torna alla guida del Mule!",
+  "ctx": "strcopy(goal, \"Torna alla guida del Mule!\", 96);",
+  "ka": ""
+ },
+ {
+  "id": 8,
+  "file": "freight/freight.inc",
+  "line": 277,
+  "it": "Consegna la merce al negozio",
+  "ctx": "strcopy(goal, \"Consegna la merce al negozio\", 96);",
+  "ka": ""
+ },
+ {
+  "id": 9,
+  "file": "freight/freight.inc",
+  "line": 284,
+  "it": "Carico: resta fermo %d s",
+  "ctx": "format(goal, 96, \"Carico: resta fermo %d s\", dwellSec);",
+  "ka": ""
+ },
+ {
+  "id": 10,
+  "file": "freight/freight.inc",
+  "line": 288,
+  "it": "Sali sul Mule al magazzino",
+  "ctx": "strcopy(goal, \"Sali sul Mule al magazzino\", 96);",
+  "ka": ""
+ },
+ {
+  "id": 11,
+  "file": "freight/freight.inc",
+  "line": 292,
+  "it": "Torna alla guida del Mule!",
+  "ctx": "strcopy(goal, \"Torna alla guida del Mule!\", 96);",
+  "ka": ""
+ },
+ {
+  "id": 12,
+  "file": "freight/freight.inc",
+  "line": 296,
+  "it": "Entra nel checkpoint del magazzino",
+  "ctx": "strcopy(goal, \"Entra nel checkpoint del magazzino\", 96);",
+  "ka": ""
+ },
+ {
+  "id": 13,
+  "file": "freight/freight.inc",
+  "line": 324,
+  "it": "Contratto di trasporto chiuso: il Mule e' stato ritirato.",
+  "ctx": "Util_Send(playerid, -1, \"Contratto di trasporto chiuso: il Mule e' stato ritirato.\");",
+  "ka": ""
+ },
+ {
+  "id": 14,
+  "file": "freight/freight.inc",
+  "line": 328,
+  "it": "Contratto di trasporto scaduto o non piu' valido: il Mule e' stato ritirato.",
+  "ctx": "Util_Send(playerid, -10270721, \"Contratto di trasporto scaduto o non piu' valido: il Mule e' stato ritirato.\");",
+  "ka": ""
+ },
+ {
+  "id": 15,
+  "file": "freight/freight.inc",
+  "line": 332,
+  "it": "Contratto di trasporto annullato dallo staff.",
+  "ctx": "Util_Send(playerid, -10270721, \"Contratto di trasporto annullato dallo staff.\");",
+  "ka": ""
+ },
+ {
+  "id": 16,
+  "file": "freight/freight.inc",
+  "line": 419,
+  "it": "Merce caricata: portala al negozio di Idlewood.",
+  "ctx": "UI_LivingToast(playerid, \"Merce caricata: portala al negozio di Idlewood.\", 1);",
+  "ka": ""
+ },
+ {
+  "id": 17,
+  "file": "freight/freight.inc",
+  "line": 421,
+  "it": "Merce caricata. Consegnala al negozio di %s: guida con prudenza, i danni al Mule rovinano il carico.",
+  "ctx": "SendClientMessage(playerid, 0x66DD66FF, \"Merce caricata. Consegnala al negozio di %s: guida con prudenza, i danni al Mule rovinano il carico.\", name);",
+  "ka": ""
+ },
+ {
+  "id": 18,
+  "file": "freight/freight.inc",
+  "line": 443,
+  "it": "Carico non registrato al momento: resta nel checkpoint e riprova tra qualche secondo.",
+  "ctx": "Util_Send(playerid, -10270721, \"Carico non registrato al momento: resta nel checkpoint e riprova tra qualche secondo.\");",
+  "ka": ""
+ },
+ {
+  "id": 19,
+  "file": "freight/freight.inc",
+  "line": 457,
+  "it": "consegna troppo rapida: pers. %d contratto %d dopo %d s (minimo %d s)",
+  "ctx": "format(msg, 256, \"consegna troppo rapida: pers. %d contratto %d dopo %d s (minimo %d s)\", gPlayer[playerid][pCharId], g_FrtCt[playerid], seconds, minSec);",
+  "ka": ""
+ },
+ {
+  "id": 20,
+  "file": "freight/freight.inc",
+  "line": 459,
+  "it": "Consegna non valida: troppo rapida (ancora %d s). Resta nel checkpoint.",
+  "ctx": "format(msg, 256, \"Consegna non valida: troppo rapida (ancora %d s). Resta nel checkpoint.\", minSec - seconds);",
+  "ka": ""
+ },
+ {
+  "id": 21,
+  "file": "freight/freight.inc",
+  "line": 466,
+  "it": "Contratto non valido (tratta troppo corta).",
+  "ctx": "Freight_Stop(playerid, 5, \"Contratto non valido (tratta troppo corta).\");",
+  "ka": ""
+ },
+ {
+  "id": 22,
+  "file": "freight/freight.inc",
+  "line": 473,
+  "it": "percorso insufficiente: pers. %d contratto %d percorso %.0f m su %d m",
+  "ctx": "format(msg, 256, \"percorso insufficiente: pers. %d contratto %d percorso %.0f m su %d m\", gPlayer[playerid][pCharId], g_FrtCt[playerid], g_FrtPath[playerid], g_FrtDist[playerid]);",
+  "ka": ""
+ },
+ {
+  "id": 23,
+  "file": "freight/freight.inc",
+  "line": 475,
+  "it": "Consegna non valida: la merce deve essere portata dal magazzino con il Mule.",
+  "ctx": "Freight_Note(playerid, \"Consegna non valida: la merce deve essere portata dal magazzino con il Mule.\");",
+  "ka": ""
+ },
+ {
+  "id": 24,
+  "file": "freight/freight.inc",
+  "line": 488,
+  "it": "Consegna di benvenuto completata: il negozio di Idlewood ti ringrazia!",
+  "ctx": "Util_Send(playerid, 0x66DD66FF, \"Consegna di benvenuto completata: il negozio di Idlewood ti ringrazia!\");",
+  "ka": ""
+ },
+ {
+  "id": 25,
+  "file": "freight/freight.inc",
+  "line": 504,
+  "it": "Consegna non registrata al momento: resta nel checkpoint e riprova tra qualche secondo.",
+  "ctx": "Util_Send(playerid, -10270721, \"Consegna non registrata al momento: resta nel checkpoint e riprova tra qualche secondo.\");",
+  "ka": ""
+ },
+ {
+  "id": 26,
+  "file": "freight/freight.inc",
+  "line": 572,
+  "it": "Nessun veicolo da carico disponibile al momento. Riprova tra poco.",
+  "ctx": "Util_Send(playerid, -10270721, \"Nessun veicolo da carico disponibile al momento. Riprova tra poco.\");",
+  "ka": ""
+ },
+ {
+  "id": 27,
+  "file": "freight/freight.inc",
+  "line": 588,
+  "it": "Impossibile preparare il veicolo da carico. Riprova.",
+  "ctx": "Util_Send(playerid, -10270721, \"Impossibile preparare il veicolo da carico. Riprova.\");",
+  "ka": ""
+ },
+ {
+  "id": 28,
+  "file": "freight/freight.inc",
+  "line": 595,
+  "it": "Nessun veicolo da carico disponibile al momento. Riprova tra poco.",
+  "ctx": "Util_Send(playerid, -10270721, \"Nessun veicolo da carico disponibile al momento. Riprova tra poco.\");",
+  "ka": ""
+ },
+ {
+  "id": 29,
+  "file": "freight/freight.inc",
+  "line": 642,
+  "it": "Consegna di benvenuto: sali sul Mule al magazzino di Idlewood, fermati nel checkpoint %d s per caricare %s, poi portali al negozio di Idlewood.",
+  "ctx": "SendClientMessage(playerid, 0x66DD66FF, \"Consegna di benvenuto: sali sul Mule al magazzino di Idlewood, fermati nel checkpoint %d s per caricare %s, poi portali al negozio di Idlewood.\", 6, cargoName)",
+  "ka": ""
+ },
+ {
+  "id": 30,
+  "file": "freight/freight.inc",
+  "line": 643,
+  "it": "Sali sul Mule al magazzino di Idlewood.",
+  "ctx": "UI_LivingToast(playerid, \"Sali sul Mule al magazzino di Idlewood.\", 0);",
+  "ka": ""
+ },
+ {
+  "id": 31,
+  "file": "freight/freight.inc",
+  "line": 647,
+  "it": "Contratto #%d: ritira il Mule al magazzino di %s, fermati nel checkpoint (max %.0f km/h) %d s per caricare %s, poi consegna al negozio di %s (%d m).",
+  "ctx": "SendClientMessage(playerid, 0x66DD66FF, \"Contratto #%d: ritira il Mule al magazzino di %s, fermati nel checkpoint (max %.0f km/h) %d s per caricare %s, poi consegna al negozio di %s (%d m).\", contract",
+  "ka": ""
+ },
+ {
+  "id": 32,
+  "file": "freight/freight.inc",
+  "line": 680,
+  "it": "Registrazione del carico non riuscita: resta nel checkpoint per ritentare.",
+  "ctx": "Util_Send(playerid, -10270721, \"Registrazione del carico non riuscita: resta nel checkpoint per ritentare.\");",
+  "ka": ""
+ },
+ {
+  "id": 33,
+  "file": "freight/freight.inc",
+  "line": 704,
+  "it": "Consegna del contratto #%d gia' registrata: nessun nuovo pagamento.",
+  "ctx": "SendClientMessage(playerid, -1, \"Consegna del contratto #%d gia' registrata: nessun nuovo pagamento.\", ct);",
+  "ka": ""
+ },
+ {
+  "id": 34,
+  "file": "freight/freight.inc",
+  "line": 708,
+  "it": "Consegna #%d completata: $%d accreditati in banca (tetto orario raggiunto). Saldo: $%d.",
+  "ctx": "SendClientMessage(playerid, 0x66DD66FF, \"Consegna #%d completata: $%d accreditati in banca (tetto orario raggiunto). Saldo: $%d.\", ct, paid, balance);",
+  "ka": ""
+ },
+ {
+  "id": 35,
+  "file": "freight/freight.inc",
+  "line": 712,
+  "it": "Consegna #%d completata: $%d accreditati in banca. Saldo: $%d.",
+  "ctx": "SendClientMessage(playerid, 0x66DD66FF, \"Consegna #%d completata: $%d accreditati in banca. Saldo: $%d.\", ct, paid, balance);",
+  "ka": ""
+ },
+ {
+  "id": 36,
+  "file": "freight/freight.inc",
+  "line": 718,
+  "it": "Contratto FALLITO: la merce e' arrivata troppo danneggiata. Nessun compenso.",
+  "ctx": "Util_Send(playerid, -10270721, \"Contratto FALLITO: la merce e' arrivata troppo danneggiata. Nessun compenso.\");",
+  "ka": ""
+ },
+ {
+  "id": 37,
+  "file": "freight/freight.inc",
+  "line": 730,
+  "it": "Registrazione della consegna non riuscita: resta nel checkpoint per ritentare.",
+  "ctx": "Util_Send(playerid, -10270721, \"Registrazione della consegna non riuscita: resta nel checkpoint per ritentare.\");",
+  "ka": ""
+ },
+ {
+  "id": 38,
+  "file": "freight/freight.inc",
+  "line": 743,
+  "it": "Consegna rifiutata dal registro (troppo rapida o stato non valido): attendi qualche secondo nel checkpoint.",
+  "ctx": "Util_Send(playerid, -10270721, \"Consegna rifiutata dal registro (troppo rapida o stato non valido): attendi qualche secondo nel checkpoint.\");",
+  "ka": ""
+ },
+ {
+  "id": 39,
+  "file": "freight/freight.inc",
+  "line": 756,
+  "it": "esito DB non ricevuto: pers. %d contratto %d fase %d",
+  "ctx": "format(msg, 256, \"esito DB non ricevuto: pers. %d contratto %d fase %d\", gPlayer[playerid][pCharId], g_FrtCt[playerid], g_FrtPhase[playerid]);",
+  "ka": ""
+ },
+ {
+  "id": 40,
+  "file": "freight/freight.inc",
+  "line": 787,
+  "it": "salto del Mule: pers. %d contratto %d %.0f m in %d ms",
+  "ctx": "format(msg, 256, \"salto del Mule: pers. %d contratto %d %.0f m in %d ms\", gPlayer[playerid][pCharId], g_FrtCt[playerid], seg, dt);",
+  "ka": ""
+ },
+ {
+  "id": 41,
+  "file": "freight/freight.inc",
+  "line": 812,
+  "it": "Hai iniziato un turno di lavoro: il contratto di trasporto e' stato chiuso.",
+  "ctx": "Freight_Stop(playerid, 1, \"Hai iniziato un turno di lavoro: il contratto di trasporto e' stato chiuso.\");",
+  "ka": ""
+ },
+ {
+  "id": 42,
+  "file": "freight/freight.inc",
+  "line": 817,
+  "it": "Non sei in condizione di guidare: contratto di trasporto interrotto.",
+  "ctx": "Freight_Stop(playerid, 3, \"Non sei in condizione di guidare: contratto di trasporto interrotto.\");",
+  "ka": ""
+ },
+ {
+  "id": 43,
+  "file": "freight/freight.inc",
+  "line": 822,
+  "it": "Il Mule del contratto non esiste piu': contratto interrotto.",
+  "ctx": "Freight_Stop(playerid, 4, \"Il Mule del contratto non esiste piu': contratto interrotto.\");",
+  "ka": ""
+ },
+ {
+  "id": 44,
+  "file": "freight/freight.inc",
+  "line": 830,
+  "it": "Mule distrutto: il carico e' perso e il contratto e' interrotto.",
+  "ctx": "Freight_Stop(playerid, 4, \"Mule distrutto: il carico e' perso e il contratto e' interrotto.\");",
+  "ka": ""
+ },
+ {
+  "id": 45,
+  "file": "freight/freight.inc",
+  "line": 851,
+  "it": "Mule abbandonato: contratto di trasporto rilasciato.",
+  "ctx": "Freight_Stop(playerid, 4, \"Mule abbandonato: contratto di trasporto rilasciato.\");",
+  "ka": ""
+ },
+ {
+  "id": 46,
+  "file": "freight/freight.inc",
+  "line": 857,
+  "it": "Non hai preso in consegna il Mule in tempo: contratto di trasporto rilasciato.",
+  "ctx": "Freight_Stop(playerid, 4, \"Non hai preso in consegna il Mule in tempo: contratto di trasporto rilasciato.\");",
+  "ka": ""
+ },
+ {
+  "id": 47,
+  "file": "freight/freight.inc",
+  "line": 864,
+  "it": "Spostamento anomalo del Mule: contratto di trasporto annullato.",
+  "ctx": "Freight_Stop(playerid, 4, \"Spostamento anomalo del Mule: contratto di trasporto annullato.\");",
+  "ka": ""
+ },
+ {
+  "id": 48,
+  "file": "freight/freight.inc",
+  "line": 887,
+  "it": "Scarico in corso: resta fermo.",
+  "ctx": "UI_LivingToast(playerid, shop ? \"Scarico in corso: resta fermo.\" : \"Carico in corso: resta fermo.\", 0);",
+  "ka": ""
+ },
+ {
+  "id": 49,
+  "file": "freight/freight.inc",
+  "line": 887,
+  "it": "Carico in corso: resta fermo.",
+  "ctx": "UI_LivingToast(playerid, shop ? \"Scarico in corso: resta fermo.\" : \"Carico in corso: resta fermo.\", 0);",
+  "ka": ""
+ },
+ {
+  "id": 50,
+  "file": "freight/freight.inc",
+  "line": 1007,
+  "it": "Sei stato ferito: il contratto di trasporto e' interrotto e il Mule ritirato.",
+  "ctx": "Freight_Stop(playerid, 3, \"Sei stato ferito: il contratto di trasporto e' interrotto e il Mule ritirato.\");",
+  "ka": ""
+ },
+ {
+  "id": 51,
+  "file": "freight/freight.inc",
+  "line": 1023,
+  "it": "Questo veicolo da carico e' assegnato a un altro trasportatore.",
+  "ctx": "Util_Send(playerid, -10270721, \"Questo veicolo da carico e' assegnato a un altro trasportatore.\");",
+  "ka": ""
+ },
+ {
+  "id": 52,
+  "file": "freight/freight.inc",
+  "line": 1037,
+  "it": "Torna alla guida del Mule entro %d secondi (e resta entro %.0f m) o il contratto sara' rilasciato.",
+  "ctx": "SendClientMessage(playerid, -10270721, \"Torna alla guida del Mule entro %d secondi (e resta entro %.0f m) o il contratto sara' rilasciato.\", 45, 0x43160000);",
+  "ka": ""
+ },
+ {
+  "id": 53,
+  "file": "freight/freight.inc",
+  "line": 1057,
+  "it": "Questo veicolo da carico e' assegnato a un altro trasportatore.",
+  "ctx": "Util_Send(playerid, -10270721, \"Questo veicolo da carico e' assegnato a un altro trasportatore.\");",
+  "ka": ""
+ },
+ {
+  "id": 54,
+  "file": "freight/freight.inc",
+  "line": 1081,
+  "it": "Mule distrutto: il carico e' perso e il contratto e' interrotto.",
+  "ctx": "Freight_Stop(owner, 4, \"Mule distrutto: il carico e' perso e il contratto e' interrotto.\");",
+  "ka": ""
+ },
+ {
+  "id": 1471,
+  "file": "house/house.inc",
+  "line": 11,
+  "it": "Monolocale",
+  "ctx": "\"Monolocale\",",
+  "ka": ""
+ },
+ {
+  "id": 1472,
+  "file": "house/house.inc",
+  "line": 12,
+  "it": "Bilocale",
+  "ctx": "\"Bilocale\",",
+  "ka": ""
+ },
+ {
+  "id": 1473,
+  "file": "house/house.inc",
+  "line": 13,
+  "it": "Casa media",
+  "ctx": "\"Casa media\",",
+  "ka": ""
+ },
+ {
+  "id": 1474,
+  "file": "house/house.inc",
+  "line": 14,
+  "it": "Villa",
+  "ctx": "\"Villa\"",
+  "ka": ""
+ },
+ {
+  "id": 1475,
+  "file": "house/house.inc",
+  "line": 246,
+  "it": "Attendi un attimo prima di usare un altro comando della casa.",
+  "ctx": "Util_Send(playerid, -10270721, \"Attendi un attimo prima di usare un altro comando della casa.\");",
+  "ka": ""
+ },
+ {
+  "id": 1476,
+  "file": "house/house.inc",
+  "line": 261,
+  "it": "Il sistema case non e' disponibile al momento.",
+  "ctx": "Util_Send(playerid, -10270721, \"Il sistema case non e' disponibile al momento.\");",
+  "ka": ""
+ },
+ {
+  "id": 1477,
+  "file": "house/house.inc",
+  "line": 270,
+  "it": "Hai un'operazione della casa in corso: attendi.",
+  "ctx": "Util_Send(playerid, -10270721, \"Hai un'operazione della casa in corso: attendi.\");",
+  "ka": ""
+ },
+ {
+  "id": 1478,
+  "file": "house/house.inc",
+  "line": 364,
+  "it": "Casa %d - %s\\nIn vendita: $%d (liv. %d)\\nUsa /casa per info",
+  "ctx": "format(text, 160, \"Casa %d - %s\\nIn vendita: $%d (liv. %d)\\nUsa /casa per info\", g_HouseRows[idx][hrId], s_HsTierName[tier], g_HouseRows[idx][hrPrice], s_HsTierLevel[tier]);",
+  "ka": ""
+ },
+ {
+  "id": 1479,
+  "file": "house/house.inc",
+  "line": 368,
+  "it": "Casa %d - %s\\nProprieta' di %s\\n%s",
+  "ctx": "format(text, 160, \"Casa %d - %s\\nProprieta' di %s\\n%s\", g_HouseRows[idx][hrId], s_HsTierName[tier], g_HouseRows[idx][hrOwnerName], g_HouseRows[idx][hrLocked] ? \"Chiusa a chiave (/bussa)\" : \"Aperta (/e",
+  "ka": ""
+ },
+ {
+  "id": 1480,
+  "file": "house/house.inc",
+  "line": 368,
+  "it": "Chiusa a chiave (/bussa)",
+  "ctx": "format(text, 160, \"Casa %d - %s\\nProprieta' di %s\\n%s\", g_HouseRows[idx][hrId], s_HsTierName[tier], g_HouseRows[idx][hrOwnerName], g_HouseRows[idx][hrLocked] ? \"Chiusa a chiave (/bussa)\" : \"Aperta (/e",
+  "ka": ""
+ },
+ {
+  "id": 1481,
+  "file": "house/house.inc",
+  "line": 368,
+  "it": "Aperta (/entra)",
+  "ctx": "format(text, 160, \"Casa %d - %s\\nProprieta' di %s\\n%s\", g_HouseRows[idx][hrId], s_HsTierName[tier], g_HouseRows[idx][hrOwnerName], g_HouseRows[idx][hrLocked] ? \"Chiusa a chiave (/bussa)\" : \"Aperta (/e",
+  "ka": ""
+ },
+ {
+  "id": 1482,
+  "file": "house/house.inc",
+  "line": 498,
+  "it": "Sei debole per la fame: mangia qualcosa (/mangia, /usa, /compra).",
+  "ctx": "Util_Send(playerid, -10270721, \"Sei debole per la fame: mangia qualcosa (/mangia, /usa, /compra).\");",
+  "ka": ""
+ },
+ {
+  "id": 1483,
+  "file": "house/house.inc",
+  "line": 502,
+  "it": "Hai fame: pensa a mangiare qualcosa.",
+  "ctx": "Util_Send(playerid, -2994689, \"Hai fame: pensa a mangiare qualcosa.\");",
+  "ka": ""
+ },
+ {
+  "id": 1484,
+  "file": "house/house.inc",
+  "line": 541,
+  "it": "I tuoi dati sul cibo non sono ancora stati caricati: riprova tra poco.",
+  "ctx": "Util_Send(playerid, -10270721, \"I tuoi dati sul cibo non sono ancora stati caricati: riprova tra poco.\");",
+  "ka": ""
+ },
+ {
+  "id": 1485,
+  "file": "house/house.inc",
+  "line": 558,
+  "it": "Casa %d: hai %d bollette non pagate (/bollette).",
+  "ctx": "SendClientMessage(playerid, -10270721, \"Casa %d: hai %d bollette non pagate (/bollette).\", g_HouseRows[i][hrId], g_HouseRows[i][hrBills]);",
+  "ka": ""
+ },
+ {
+  "id": 1486,
+  "file": "house/house.inc",
+  "line": 562,
+  "it": "Casa %d: la luce e' stata staccata per morosita'.",
+  "ctx": "SendClientMessage(playerid, -10270721, \"Casa %d: la luce e' stata staccata per morosita'.\", g_HouseRows[i][hrId]);",
+  "ka": ""
+ },
+ {
+  "id": 1487,
+  "file": "house/house.inc",
+  "line": 566,
+  "it": "Casa %d: il gas e' stato staccato per morosita'.",
+  "ctx": "SendClientMessage(playerid, -10270721, \"Casa %d: il gas e' stato staccato per morosita'.\", g_HouseRows[i][hrId]);",
+  "ka": ""
+ },
+ {
+  "id": 1488,
+  "file": "house/house.inc",
+  "line": 602,
+  "it": "STACCATA",
+  "ctx": "format(out, size, \"STACCATA\");",
+  "ka": ""
+ },
+ {
+  "id": 1489,
+  "file": "house/house.inc",
+  "line": 606,
+  "it": "OFF",
+  "ctx": "format(out, size, \"%s\", on ? \"ON\" : \"OFF\");",
+  "ka": ""
+ },
+ {
+  "id": 1490,
+  "file": "house/house.inc",
+  "line": 679,
+  "it": "Impossibile leggere le bollette (errore database). Riprova piu' tardi.",
+  "ctx": "Util_Send(playerid, -10270721, \"Impossibile leggere le bollette (errore database). Riprova piu' tardi.\");",
+  "ka": ""
+ },
+ {
+  "id": 1491,
+  "file": "house/house.inc",
+  "line": 700,
+  "it": "Operazione in corso: attendi.",
+  "ctx": "Util_Send(playerid, -10270721, \"Operazione in corso: attendi.\");",
+  "ka": ""
+ },
+ {
+  "id": 1492,
+  "file": "house/house.inc",
+  "line": 705,
+  "it": "Devi essere a piedi davanti alla porta della casa.",
+  "ctx": "Util_Send(playerid, -10270721, \"Devi essere a piedi davanti alla porta della casa.\");",
+  "ka": ""
+ },
+ {
+  "id": 1493,
+  "file": "house/house.inc",
+  "line": 710,
+  "it": "Questa casa non e' in vendita.",
+  "ctx": "Util_Send(playerid, -10270721, \"Questa casa non e' in vendita.\");",
+  "ka": ""
+ },
+ {
+  "id": 1494,
+  "file": "house/house.inc",
+  "line": 715,
+  "it": "Metodo di pagamento non valido.",
+  "ctx": "Util_Send(playerid, -10270721, \"Metodo di pagamento non valido.\");",
+  "ka": ""
+ },
+ {
+  "id": 1495,
+  "file": "house/house.inc",
+  "line": 721,
+  "it": "Acquisto non disponibile.",
+  "ctx": "Util_Send(playerid, -10270721, \"Acquisto non disponibile.\");",
+  "ka": ""
+ },
+ {
+  "id": 1496,
+  "file": "house/house.inc",
+  "line": 726,
+  "it": "Questa casa richiede il livello %d.",
+  "ctx": "SendClientMessage(playerid, -10270721, \"Questa casa richiede il livello %d.\", s_HsTierLevel[tier]);",
+  "ka": ""
+ },
+ {
+  "id": 1497,
+  "file": "house/house.inc",
+  "line": 732,
+  "it": "Hai raggiunto il limite di case per il tuo livello (%d).",
+  "ctx": "SendClientMessage(playerid, -10270721, \"Hai raggiunto il limite di case per il tuo livello (%d).\", maxHouses);",
+  "ka": ""
+ },
+ {
+  "id": 1498,
+  "file": "house/house.inc",
+  "line": 737,
+  "it": "Fondi insufficienti con questo metodo di pagamento.",
+  "ctx": "Util_Send(playerid, -10270721, \"Fondi insufficienti con questo metodo di pagamento.\");",
+  "ka": ""
+ },
+ {
+  "id": 1499,
+  "file": "house/house.inc",
+  "line": 745,
+  "it": "Pratica di acquisto in corso...",
+  "ctx": "Util_Send(playerid, -1, \"Pratica di acquisto in corso...\");",
+  "ka": ""
+ },
+ {
+  "id": 1500,
+  "file": "house/house.inc",
+  "line": 774,
+  "it": "Acquisto non riuscito (errore database). Nessun addebito.",
+  "ctx": "Util_Send(playerid, -10270721, \"Acquisto non riuscito (errore database). Nessun addebito.\");",
+  "ka": ""
+ },
+ {
+  "id": 1501,
+  "file": "house/house.inc",
+  "line": 779,
+  "it": "Acquisto non possibile: la casa non e' piu' disponibile o hai raggiunto il limite. Nessun addebito.",
+  "ctx": "Util_Send(playerid, -10270721, \"Acquisto non possibile: la casa non e' piu' disponibile o hai raggiunto il limite. Nessun addebito.\");",
+  "ka": ""
+ },
+ {
+  "id": 1502,
+  "file": "house/house.inc",
+  "line": 793,
+  "it": "Acquisto annullato: requisiti o fondi non piu' validi. Nessun addebito.",
+  "ctx": "Util_Send(playerid, -10270721, \"Acquisto annullato: requisiti o fondi non piu' validi. Nessun addebito.\");",
+  "ka": ""
+ },
+ {
+  "id": 1503,
+  "file": "house/house.inc",
+  "line": 804,
+  "it": "Hai acquistato la casa %d per $%d (%s). Usa /entra per entrare, /casa per gestirla.",
+  "ctx": "SendClientMessage(playerid, 0x66DD66FF, \"Hai acquistato la casa %d per $%d (%s). Usa /entra per entrare, /casa per gestirla.\", houseId, price, bank == 1 ? \"banca\" : \"contanti\");",
+  "ka": ""
+ },
+ {
+  "id": 1504,
+  "file": "house/house.inc",
+  "line": 805,
+  "it": "ACQUISTO %s: casa %d $%d (%s)",
+  "ctx": "format(msg, 256, \"ACQUISTO %s: casa %d $%d (%s)\", name, houseId, price, bank == 1 ? \"banca\" : \"contanti\");",
+  "ka": ""
+ },
+ {
+  "id": 1505,
+  "file": "house/house.inc",
+  "line": 820,
+  "it": "Operazione in corso: attendi.",
+  "ctx": "Util_Send(playerid, -10270721, \"Operazione in corso: attendi.\");",
+  "ka": ""
+ },
+ {
+  "id": 1506,
+  "file": "house/house.inc",
+  "line": 825,
+  "it": "Solo il proprietario puo' vendere la casa.",
+  "ctx": "Util_Send(playerid, -10270721, \"Solo il proprietario puo' vendere la casa.\");",
+  "ka": ""
+ },
+ {
+  "id": 1507,
+  "file": "house/house.inc",
+  "line": 830,
+  "it": "Devi essere dentro la casa o davanti alla sua porta.",
+  "ctx": "Util_Send(playerid, -10270721, \"Devi essere dentro la casa o davanti alla sua porta.\");",
+  "ka": ""
+ },
+ {
+  "id": 1508,
+  "file": "house/house.inc",
+  "line": 835,
+  "it": "Non puoi vendere la casa con bollette non pagate (/bollette).",
+  "ctx": "Util_Send(playerid, -10270721, \"Non puoi vendere la casa con bollette non pagate (/bollette).\");",
+  "ka": ""
+ },
+ {
+  "id": 1509,
+  "file": "house/house.inc",
+  "line": 841,
+  "it": "Il tuo conto bancario non puo' ricevere l'importo: vendita rifiutata.",
+  "ctx": "Util_Send(playerid, -10270721, \"Il tuo conto bancario non puo' ricevere l'importo: vendita rifiutata.\");",
+  "ka": ""
+ },
+ {
+  "id": 1510,
+  "file": "house/house.inc",
+  "line": 846,
+  "it": "Vendita casa %d: ricevi $%d (%d%%) in banca. Utenze, chiavi e frigo vengono azzerati.",
+  "ctx": "SendClientMessage(playerid, -2994689, \"Vendita casa %d: ricevi $%d (%d%%) in banca. Utenze, chiavi e frigo vengono azzerati.\", g_HouseRows[idx][hrId], refund, 70);",
+  "ka": ""
+ },
+ {
+  "id": 1511,
+  "file": "house/house.inc",
+  "line": 847,
+  "it": "Per confermare: /casa vendi conferma",
+  "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Per confermare: /casa vendi conferma\");",
+  "ka": ""
+ },
+ {
+  "id": 1512,
+  "file": "house/house.inc",
+  "line": 854,
+  "it": "Vendita in corso...",
+  "ctx": "Util_Send(playerid, -1, \"Vendita in corso...\");",
+  "ka": ""
+ },
+ {
+  "id": 1513,
+  "file": "house/house.inc",
+  "line": 897,
+  "it": "Vendita non riuscita (errore database). Nessun accredito.",
+  "ctx": "Util_Send(playerid, -10270721, \"Vendita non riuscita (errore database). Nessun accredito.\");",
+  "ka": ""
+ },
+ {
+  "id": 1514,
+  "file": "house/house.inc",
+  "line": 902,
+  "it": "Vendita non eseguita: la casa non risulta piu' di tua proprieta'. Nessun accredito.",
+  "ctx": "Util_Send(playerid, -10270721, \"Vendita non eseguita: la casa non risulta piu' di tua proprieta'. Nessun accredito.\");",
+  "ka": ""
+ },
+ {
+  "id": 1515,
+  "file": "house/house.inc",
+  "line": 908,
+  "it": "Vendita annullata: il conto bancario non puo' ricevere l'importo. Nessun accredito.",
+  "ctx": "Util_Send(playerid, -10270721, \"Vendita annullata: il conto bancario non puo' ricevere l'importo. Nessun accredito.\");",
+  "ka": ""
+ },
+ {
+  "id": 1516,
+  "file": "house/house.inc",
+  "line": 912,
+  "it": "La casa e' stata venduta: sei stato portato fuori.",
+  "ctx": "House_EvictAll(idx, \"La casa e' stata venduta: sei stato portato fuori.\");",
+  "ka": ""
+ },
+ {
+  "id": 1517,
+  "file": "house/house.inc",
+  "line": 921,
+  "it": "Hai venduto la casa %d: $%d accreditati in banca.",
+  "ctx": "SendClientMessage(playerid, 0x66DD66FF, \"Hai venduto la casa %d: $%d accreditati in banca.\", houseId, refund);",
+  "ka": ""
+ },
+ {
+  "id": 1518,
+  "file": "house/house.inc",
+  "line": 922,
+  "it": "VENDITA %s: casa %d rimborso $%d",
+  "ctx": "format(msg, 256, \"VENDITA %s: casa %d rimborso $%d\", name, houseId, refund);",
+  "ka": ""
+ },
+ {
+  "id": 1519,
+  "file": "house/house.inc",
+  "line": 931,
+  "it": "Solo il proprietario puo' usare la serratura.",
+  "ctx": "Util_Send(playerid, -10270721, \"Solo il proprietario puo' usare la serratura.\");",
+  "ka": ""
+ },
+ {
+  "id": 1520,
+  "file": "house/house.inc",
+  "line": 936,
+  "it": "Devi essere dentro la casa o davanti alla sua porta.",
+  "ctx": "Util_Send(playerid, -10270721, \"Devi essere dentro la casa o davanti alla sua porta.\");",
+  "ka": ""
+ },
+ {
+  "id": 1521,
+  "file": "house/house.inc",
+  "line": 942,
+  "it": "Porta della casa %d: %s.",
+  "ctx": "SendClientMessage(playerid, 0x66DD66FF, \"Porta della casa %d: %s.\", g_HouseRows[idx][hrId], g_HouseRows[idx][hrLocked] ? \"chiusa a chiave\" : \"aperta\");",
+  "ka": ""
+ },
+ {
+  "id": 1522,
+  "file": "house/house.inc",
+  "line": 942,
+  "it": "chiusa a chiave",
+  "ctx": "SendClientMessage(playerid, 0x66DD66FF, \"Porta della casa %d: %s.\", g_HouseRows[idx][hrId], g_HouseRows[idx][hrLocked] ? \"chiusa a chiave\" : \"aperta\");",
+  "ka": ""
+ },
+ {
+  "id": 1523,
+  "file": "house/house.inc",
+  "line": 950,
+  "it": "Devi essere dentro la casa.",
+  "ctx": "Util_Send(playerid, -10270721, \"Devi essere dentro la casa.\");",
+  "ka": ""
+ },
+ {
+  "id": 1524,
+  "file": "house/house.inc",
+  "line": 956,
+  "it": "Solo il proprietario puo' gestire il gas.",
+  "ctx": "Util_Send(playerid, -10270721, utility == 1 ? \"Solo il proprietario puo' gestire il gas.\" : \"Non hai accesso alle utenze di questa casa.\");",
+  "ka": ""
+ },
+ {
+  "id": 1525,
+  "file": "house/house.inc",
+  "line": 956,
+  "it": "Non hai accesso alle utenze di questa casa.",
+  "ctx": "Util_Send(playerid, -10270721, utility == 1 ? \"Solo il proprietario puo' gestire il gas.\" : \"Non hai accesso alle utenze di questa casa.\");",
+  "ka": ""
+ },
+ {
+  "id": 1526,
+  "file": "house/house.inc",
+  "line": 962,
+  "it": "Utenza staccata per morosita': paga le bollette (/bollette).",
+  "ctx": "Util_Send(playerid, -10270721, \"Utenza staccata per morosita': paga le bollette (/bollette).\");",
+  "ka": ""
+ },
+ {
+  "id": 1527,
+  "file": "house/house.inc",
+  "line": 975,
+  "it": "Gas",
+  "ctx": "SendClientMessage(playerid, 0x66DD66FF, \"%s %s.\", utility == 1 ? \"Gas\" : \"Luce\", utility == 1 ? (on ? \"acceso\" : \"spento\") : (on ? \"accesa\" : \"spenta\"));",
+  "ka": ""
+ },
+ {
+  "id": 1528,
+  "file": "house/house.inc",
+  "line": 975,
+  "it": "Luce",
+  "ctx": "SendClientMessage(playerid, 0x66DD66FF, \"%s %s.\", utility == 1 ? \"Gas\" : \"Luce\", utility == 1 ? (on ? \"acceso\" : \"spento\") : (on ? \"accesa\" : \"spenta\"));",
+  "ka": ""
+ },
+ {
+  "id": 1529,
+  "file": "house/house.inc",
+  "line": 988,
+  "it": "Devi essere dentro una casa.",
+  "ctx": "Util_Send(playerid, -10270721, \"Devi essere dentro una casa.\");",
+  "ka": ""
+ },
+ {
+  "id": 1530,
+  "file": "house/house.inc",
+  "line": 1019,
+  "it": "Devi essere dentro la tua casa (o di un amico che ti ha dato la chiave).",
+  "ctx": "Util_Send(playerid, -10270721, \"Devi essere dentro la tua casa (o di un amico che ti ha dato la chiave).\");",
+  "ka": ""
+ },
+ {
+  "id": 1531,
+  "file": "house/house.inc",
+  "line": 1024,
+  "it": "Non puoi usare il frigo di questa casa.",
+  "ctx": "Util_Send(playerid, -10270721, \"Non puoi usare il frigo di questa casa.\");",
+  "ka": ""
+ },
+ {
+  "id": 1532,
+  "file": "house/house.inc",
+  "line": 1039,
+  "it": "Qualcuno sta usando il frigo: attendi un attimo.",
+  "ctx": "Util_Send(playerid, -10270721, \"Qualcuno sta usando il frigo: attendi un attimo.\");",
+  "ka": ""
+ },
+ {
+  "id": 1533,
+  "file": "house/house.inc",
+  "line": 1044,
+  "it": "Il frigo e' vuoto.",
+  "ctx": "Util_Send(playerid, -10270721, \"Il frigo e' vuoto.\");",
+  "ka": ""
+ },
+ {
+  "id": 1534,
+  "file": "house/house.inc",
+  "line": 1049,
+  "it": "Non hai fame.",
+  "ctx": "Util_Send(playerid, -10270721, \"Non hai fame.\");",
+  "ka": ""
+ },
+ {
+  "id": 1535,
+  "file": "house/house.inc",
+  "line": 1055,
+  "it": "Mangi qualcosa di freddo dal frigo. Sazieta': %d%%.",
+  "ctx": "SendClientMessage(playerid, 0x66DD66FF, \"Mangi qualcosa di freddo dal frigo. Sazieta': %d%%.\", g_HPl[playerid][hpHunger]);",
+  "ka": ""
+ },
+ {
+  "id": 1536,
+  "file": "house/house.inc",
+  "line": 1068,
+  "it": "Stai gia' cucinando.",
+  "ctx": "Util_Send(playerid, -10270721, \"Stai gia' cucinando.\");",
+  "ka": ""
+ },
+ {
+  "id": 1537,
+  "file": "house/house.inc",
+  "line": 1073,
+  "it": "Hai gia' un piatto caldo pronto: usa /mangia.",
+  "ctx": "Util_Send(playerid, -10270721, \"Hai gia' un piatto caldo pronto: usa /mangia.\");",
+  "ka": ""
+ },
+ {
+  "id": 1538,
+  "file": "house/house.inc",
+  "line": 1078,
+  "it": "Il gas non e' attivo: non puoi cucinare.",
+  "ctx": "Util_Send(playerid, -10270721, \"Il gas non e' attivo: non puoi cucinare.\");",
+  "ka": ""
+ },
+ {
+  "id": 1539,
+  "file": "house/house.inc",
+  "line": 1083,
+  "it": "Il frigo e' vuoto.",
+  "ctx": "Util_Send(playerid, -10270721, \"Il frigo e' vuoto.\");",
+  "ka": ""
+ },
+ {
+  "id": 1540,
+  "file": "house/house.inc",
+  "line": 1089,
+  "it": "Inizi a cucinare...",
+  "ctx": "Util_Send(playerid, -1, \"Inizi a cucinare...\");",
+  "ka": ""
+ },
+ {
+  "id": 1541,
+  "file": "house/house.inc",
+  "line": 1107,
+  "it": "Cottura annullata.",
+  "ctx": "Util_Send(playerid, -10270721, \"Cottura annullata.\");",
+  "ka": ""
+ },
+ {
+  "id": 1542,
+  "file": "house/house.inc",
+  "line": 1117,
+  "it": "Il piatto e' pronto: usa /mangia entro %d minuti.",
+  "ctx": "SendClientMessage(playerid, 0x66DD66FF, \"Il piatto e' pronto: usa /mangia entro %d minuti.\", 5);",
+  "ka": ""
+ },
+ {
+  "id": 1543,
+  "file": "house/house.inc",
+  "line": 1130,
+  "it": "Non hai un piatto caldo pronto. Usa /cucina in casa oppure /mangia freddo.",
+  "ctx": "Util_Send(playerid, -10270721, \"Non hai un piatto caldo pronto. Usa /cucina in casa oppure /mangia freddo.\");",
+  "ka": ""
+ },
+ {
+  "id": 1544,
+  "file": "house/house.inc",
+  "line": 1135,
+  "it": "Non hai fame.",
+  "ctx": "Util_Send(playerid, -10270721, \"Non hai fame.\");",
+  "ka": ""
+ },
+ {
+  "id": 1545,
+  "file": "house/house.inc",
+  "line": 1148,
+  "it": "Mangi il piatto caldo. Sazieta': %d%%.",
+  "ctx": "SendClientMessage(playerid, 0x66DD66FF, \"Mangi il piatto caldo. Sazieta': %d%%.\", g_HPl[playerid][hpHunger]);",
+  "ka": ""
+ },
+ {
+  "id": 1546,
+  "file": "house/house.inc",
+  "line": 1157,
+  "it": "Puoi riporre la spesa solo nel frigo di casa tua.",
+  "ctx": "Util_Send(playerid, -10270721, \"Puoi riporre la spesa solo nel frigo di casa tua.\");",
+  "ka": ""
+ },
+ {
+  "id": 1547,
+  "file": "house/house.inc",
+  "line": 1162,
+  "it": "Qualcuno sta usando il frigo: attendi un attimo.",
+  "ctx": "Util_Send(playerid, -10270721, \"Qualcuno sta usando il frigo: attendi un attimo.\");",
+  "ka": ""
+ },
+ {
+  "id": 1548,
+  "file": "house/house.inc",
+  "line": 1167,
+  "it": "Non hai tutta quella spesa con te.",
+  "ctx": "Util_Send(playerid, -10270721, \"Non hai tutta quella spesa con te.\");",
+  "ka": ""
+ },
+ {
+  "id": 1549,
+  "file": "house/house.inc",
+  "line": 1173,
+  "it": "Nel frigo c'e' posto solo per altre %d porzioni.",
+  "ctx": "SendClientMessage(playerid, -10270721, \"Nel frigo c'e' posto solo per altre %d porzioni.\", cap - g_HouseRows[idx][hrFridgeUnits]);",
+  "ka": ""
+ }
+]

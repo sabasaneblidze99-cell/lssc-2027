@@ -1,0 +1,2082 @@
+[
+ {
+  "id": 1406,
+  "file": "inventory/inventory.inc",
+  "line": 892,
+  "it": "Hai gia' richiesto un documento di recente: attendi.",
+  "ctx": "Inv_Say(playerid, -10270721, \"Hai gia' richiesto un documento di recente: attendi.\");",
+  "ka": ""
+ },
+ {
+  "id": 1407,
+  "file": "inventory/inventory.inc",
+  "line": 938,
+  "it": "Uso: /dai [id giocatore] [oggetto] [quantita']",
+  "ctx": "Inv_Say(playerid, 0x99CCFFFF, \"Uso: /dai [id giocatore] [oggetto] [quantita']\");",
+  "ka": ""
+ },
+ {
+  "id": 1408,
+  "file": "inventory/inventory.inc",
+  "line": 945,
+  "it": "Uso: /dai [id giocatore] [oggetto] [quantita'] (cibo, pasto, acqua, snack, kit, benda, sigarette, accendino)",
+  "ctx": "Inv_Say(playerid, 0x99CCFFFF, \"Uso: /dai [id giocatore] [oggetto] [quantita'] (cibo, pasto, acqua, snack, kit, benda, sigarette, accendino)\");",
+  "ka": ""
+ },
+ {
+  "id": 1409,
+  "file": "inventory/inventory.inc",
+  "line": 951,
+  "it": "Quantita' non valida.",
+  "ctx": "Inv_Say(playerid, -10270721, \"Quantita' non valida.\");",
+  "ka": ""
+ },
+ {
+  "id": 1410,
+  "file": "inventory/inventory.inc",
+  "line": 966,
+  "it": "Questo oggetto non si puo' dare.",
+  "ctx": "Inv_Say(playerid, -10270721, \"Questo oggetto non si puo' dare.\");",
+  "ka": ""
+ },
+ {
+  "id": 1411,
+  "file": "inventory/inventory.inc",
+  "line": 971,
+  "it": "Non puoi dare oggetti a te stesso.",
+  "ctx": "Inv_Say(playerid, -10270721, \"Non puoi dare oggetti a te stesso.\");",
+  "ka": ""
+ },
+ {
+  "id": 1412,
+  "file": "inventory/inventory.inc",
+  "line": 976,
+  "it": "Giocatore non valido o non ancora pronto.",
+  "ctx": "Inv_Say(playerid, -10270721, \"Giocatore non valido o non ancora pronto.\");",
+  "ka": ""
+ },
+ {
+  "id": 1413,
+  "file": "inventory/inventory.inc",
+  "line": 981,
+  "it": "Il giocatore e' troppo lontano.",
+  "ctx": "Inv_Say(playerid, -10270721, \"Il giocatore e' troppo lontano.\");",
+  "ka": ""
+ },
+ {
+  "id": 1414,
+  "file": "inventory/inventory.inc",
+  "line": 986,
+  "it": "Non hai abbastanza: %s.",
+  "ctx": "SendClientMessage(playerid, -10270721, \"Non hai abbastanza: %s.\", s_InvName[itemId]);",
+  "ka": ""
+ },
+ {
+  "id": 1415,
+  "file": "inventory/inventory.inc",
+  "line": 991,
+  "it": "Hai gia' uno scambio in sospeso.",
+  "ctx": "Inv_Say(playerid, -10270721, \"Hai gia' uno scambio in sospeso.\");",
+  "ka": ""
+ },
+ {
+  "id": 1416,
+  "file": "inventory/inventory.inc",
+  "line": 996,
+  "it": "Quel giocatore ha gia' uno scambio in sospeso.",
+  "ctx": "Inv_Say(playerid, -10270721, \"Quel giocatore ha gia' uno scambio in sospeso.\");",
+  "ka": ""
+ },
+ {
+  "id": 1417,
+  "file": "inventory/inventory.inc",
+  "line": 1002,
+  "it": "Attendi qualche secondo prima di un nuovo scambio.",
+  "ctx": "Inv_Say(playerid, -10270721, \"Attendi qualche secondo prima di un nuovo scambio.\");",
+  "ka": ""
+ },
+ {
+  "id": 1418,
+  "file": "inventory/inventory.inc",
+  "line": 1007,
+  "it": "Hai raggiunto il limite di %d scambi all'ora.",
+  "ctx": "SendClientMessage(playerid, -10270721, \"Hai raggiunto il limite di %d scambi all'ora.\", 20);",
+  "ka": ""
+ },
+ {
+  "id": 1419,
+  "file": "inventory/inventory.inc",
+  "line": 1024,
+  "it": "Hai offerto %s x%d a %s: attendi la risposta (%d secondi).",
+  "ctx": "SendClientMessage(playerid, -1, \"Hai offerto %s x%d a %s: attendi la risposta (%d secondi).\", s_InvName[itemId], qty, tname, 15);",
+  "ka": ""
+ },
+ {
+  "id": 1420,
+  "file": "inventory/inventory.inc",
+  "line": 1063,
+  "it": "Lo scambio non e' piu' valido.",
+  "ctx": "Inv_Say(playerid, -10270721, \"Lo scambio non e' piu' valido.\");",
+  "ka": ""
+ },
+ {
+  "id": 1421,
+  "file": "inventory/inventory.inc",
+  "line": 1068,
+  "it": "Scambio scaduto.",
+  "ctx": "Inv_GiveCancel(giver, expired ? \"Scambio scaduto.\" : \"Scambio rifiutato.\");",
+  "ka": ""
+ },
+ {
+  "id": 1422,
+  "file": "inventory/inventory.inc",
+  "line": 1068,
+  "it": "Scambio rifiutato.",
+  "ctx": "Inv_GiveCancel(giver, expired ? \"Scambio scaduto.\" : \"Scambio rifiutato.\");",
+  "ka": ""
+ },
+ {
+  "id": 1423,
+  "file": "inventory/inventory.inc",
+  "line": 1074,
+  "it": "Scambio scaduto.",
+  "ctx": "Inv_GiveCancel(giver, \"Scambio scaduto.\");",
+  "ka": ""
+ },
+ {
+  "id": 1424,
+  "file": "inventory/inventory.inc",
+  "line": 1075,
+  "it": "Scambio non completato.",
+  "ctx": "Inv_Say(playerid, -10270721, \"Scambio non completato.\");",
+  "ka": ""
+ },
+ {
+  "id": 1425,
+  "file": "inventory/inventory.inc",
+  "line": 1080,
+  "it": "Scambio annullato: uno dei due non puo' farlo adesso.",
+  "ctx": "Inv_GiveCancel(giver, \"Scambio annullato: uno dei due non puo' farlo adesso.\");",
+  "ka": ""
+ },
+ {
+  "id": 1426,
+  "file": "inventory/inventory.inc",
+  "line": 1081,
+  "it": "Scambio non completato.",
+  "ctx": "Inv_Say(playerid, -10270721, \"Scambio non completato.\");",
+  "ka": ""
+ },
+ {
+  "id": 1427,
+  "file": "inventory/inventory.inc",
+  "line": 1086,
+  "it": "Scambio annullato: troppo lontani.",
+  "ctx": "Inv_GiveCancel(giver, \"Scambio annullato: troppo lontani.\");",
+  "ka": ""
+ },
+ {
+  "id": 1428,
+  "file": "inventory/inventory.inc",
+  "line": 1087,
+  "it": "Scambio non completato.",
+  "ctx": "Inv_Say(playerid, -10270721, \"Scambio non completato.\");",
+  "ka": ""
+ },
+ {
+  "id": 1429,
+  "file": "inventory/inventory.inc",
+  "line": 1092,
+  "it": "Scambio annullato: l'oggetto non e' piu' disponibile.",
+  "ctx": "Inv_GiveCancel(giver, \"Scambio annullato: l'oggetto non e' piu' disponibile.\");",
+  "ka": ""
+ },
+ {
+  "id": 1430,
+  "file": "inventory/inventory.inc",
+  "line": 1093,
+  "it": "Scambio non completato.",
+  "ctx": "Inv_Say(playerid, -10270721, \"Scambio non completato.\");",
+  "ka": ""
+ },
+ {
+  "id": 1431,
+  "file": "inventory/inventory.inc",
+  "line": 1117,
+  "it": "Hai dato %s x%d.",
+  "ctx": "SendClientMessage(giverid, 0x66DD66FF, \"Hai dato %s x%d.\", s_InvName[itemId], qty);",
+  "ka": ""
+ },
+ {
+  "id": 1432,
+  "file": "inventory/inventory.inc",
+  "line": 1121,
+  "it": "Scambio fallito: il destinatario non ha spazio.",
+  "ctx": "Inv_Say(giverid, -10270721, \"Scambio fallito: il destinatario non ha spazio.\");",
+  "ka": ""
+ },
+ {
+  "id": 1433,
+  "file": "inventory/inventory.inc",
+  "line": 1125,
+  "it": "Scambio fallito: non hai piu' abbastanza oggetti.",
+  "ctx": "Inv_Say(giverid, -10270721, \"Scambio fallito: non hai piu' abbastanza oggetti.\");",
+  "ka": ""
+ },
+ {
+  "id": 1434,
+  "file": "inventory/inventory.inc",
+  "line": 1130,
+  "it": "Questo oggetto non si puo' dare.",
+  "ctx": "Inv_Say(giverid, -10270721, \"Questo oggetto non si puo' dare.\");",
+  "ka": ""
+ },
+ {
+  "id": 1435,
+  "file": "inventory/inventory.inc",
+  "line": 1134,
+  "it": "Errore database durante lo scambio: ricontrolla l'inventario.",
+  "ctx": "Inv_Say(giverid, -10270721, \"Errore database durante lo scambio: ricontrolla l'inventario.\");",
+  "ka": ""
+ },
+ {
+  "id": 1436,
+  "file": "inventory/inventory.inc",
+  "line": 1143,
+  "it": "Scambio non riuscito.",
+  "ctx": "Inv_Say(giverid, -10270721, \"Scambio non riuscito.\");",
+  "ka": ""
+ },
+ {
+  "id": 1437,
+  "file": "inventory/inventory.inc",
+  "line": 1151,
+  "it": "Hai ricevuto %s x%d.",
+  "ctx": "SendClientMessage(receiverid, 0x66DD66FF, \"Hai ricevuto %s x%d.\", s_InvName[itemId], qty);",
+  "ka": ""
+ },
+ {
+  "id": 1438,
+  "file": "inventory/inventory.inc",
+  "line": 1158,
+  "it": "--- Supermercato: /compra [articolo] [quantita'] ---",
+  "ctx": "SendClientMessage(playerid, -2994689, \"--- Supermercato: /compra [articolo] [quantita'] ---\");",
+  "ka": ""
+ },
+ {
+  "id": 1439,
+  "file": "inventory/inventory.inc",
+  "line": 1171,
+  "it": "Il cibo si compra a porzioni (max 12 con te) e si ripone nel frigo; il pasto si consuma con /usa pasto.",
+  "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Il cibo si compra a porzioni (max 12 con te) e si ripone nel frigo; il pasto si consuma con /usa pasto.\");",
+  "ka": ""
+ },
+ {
+  "id": 1440,
+  "file": "inventory/inventory.inc",
+  "line": 1187,
+  "it": "Questo articolo non e' in vendita.",
+  "ctx": "Inv_Say(playerid, -10270721, \"Questo articolo non e' in vendita.\");",
+  "ka": ""
+ },
+ {
+  "id": 1441,
+  "file": "inventory/inventory.inc",
+  "line": 1193,
+  "it": "Quantita' non valida (1-%d).",
+  "ctx": "SendClientMessage(playerid, -10270721, \"Quantita' non valida (1-%d).\", stack);",
+  "ka": ""
+ },
+ {
+  "id": 1442,
+  "file": "inventory/inventory.inc",
+  "line": 1207,
+  "it": "Puoi averne al massimo %d con te.",
+  "ctx": "SendClientMessage(playerid, -10270721, \"Puoi averne al massimo %d con te.\", maxTotal);",
+  "ka": ""
+ },
+ {
+  "id": 1443,
+  "file": "inventory/inventory.inc",
+  "line": 1213,
+  "it": "Servono $%d in contanti.",
+  "ctx": "SendClientMessage(playerid, -10270721, \"Servono $%d in contanti.\", cost);",
+  "ka": ""
+ },
+ {
+  "id": 1444,
+  "file": "inventory/inventory.inc",
+  "line": 1225,
+  "it": "Hai gia' uno zaino.",
+  "ctx": "Inv_Say(playerid, -10270721, \"Hai gia' uno zaino.\");",
+  "ka": ""
+ },
+ {
+  "id": 1445,
+  "file": "inventory/inventory.inc",
+  "line": 1230,
+  "it": "Servono $%d in contanti.",
+  "ctx": "SendClientMessage(playerid, -10270721, \"Servono $%d in contanti.\", 350);",
+  "ka": ""
+ },
+ {
+  "id": 1446,
+  "file": "inventory/inventory.inc",
+  "line": 1242,
+  "it": "Contanti insufficienti: acquisto annullato.",
+  "ctx": "Inv_Say(playerid, -10270721, \"Contanti insufficienti: acquisto annullato.\");",
+  "ka": ""
+ },
+ {
+  "id": 1447,
+  "file": "inventory/inventory.inc",
+  "line": 1264,
+  "it": "Hai comprato %s x%d per $%d.",
+  "ctx": "SendClientMessage(playerid, 0x66DD66FF, \"Hai comprato %s x%d per $%d.\", s_InvName[itemId], qty, cost);",
+  "ka": ""
+ },
+ {
+  "id": 1448,
+  "file": "inventory/inventory.inc",
+  "line": 1272,
+  "it": "Non hai abbastanza spazio nell'inventario (o ne hai gia' il massimo).",
+  "ctx": "Inv_Say(playerid, -10270721, \"Non hai abbastanza spazio nell'inventario (o ne hai gia' il massimo).\");",
+  "ka": ""
+ },
+ {
+  "id": 1449,
+  "file": "inventory/inventory.inc",
+  "line": 1276,
+  "it": "Errore database: nessun addebito, riprova.",
+  "ctx": "Inv_Say(playerid, -10270721, \"Errore database: nessun addebito, riprova.\");",
+  "ka": ""
+ },
+ {
+  "id": 1450,
+  "file": "inventory/inventory.inc",
+  "line": 1280,
+  "it": "Acquisto non riuscito.",
+  "ctx": "Inv_Say(playerid, -10270721, \"Acquisto non riuscito.\");",
+  "ka": ""
+ },
+ {
+  "id": 1451,
+  "file": "inventory/inventory.inc",
+  "line": 1302,
+  "it": "Hai comprato lo zaino per $%d: capienza %d slot.",
+  "ctx": "SendClientMessage(playerid, 0x66DD66FF, \"Hai comprato lo zaino per $%d: capienza %d slot.\", 350, 20);",
+  "ka": ""
+ },
+ {
+  "id": 1452,
+  "file": "inventory/inventory.inc",
+  "line": 1310,
+  "it": "Hai gia' uno zaino.",
+  "ctx": "Inv_Say(playerid, -10270721, \"Hai gia' uno zaino.\");",
+  "ka": ""
+ },
+ {
+  "id": 1453,
+  "file": "inventory/inventory.inc",
+  "line": 1315,
+  "it": "Errore database: nessun addebito, riprova.",
+  "ctx": "Inv_Say(playerid, -10270721, \"Errore database: nessun addebito, riprova.\");",
+  "ka": ""
+ },
+ {
+  "id": 1454,
+  "file": "inventory/inventory.inc",
+  "line": 1319,
+  "it": "Acquisto non riuscito.",
+  "ctx": "Inv_Say(playerid, -10270721, \"Acquisto non riuscito.\");",
+  "ka": ""
+ },
+ {
+  "id": 1455,
+  "file": "inventory/inventory.inc",
+  "line": 1340,
+  "it": "Annullamento acquisto non riuscito: segnala il problema a un admin.",
+  "ctx": "Inv_Say(p, -10270721, \"Annullamento acquisto non riuscito: segnala il problema a un admin.\");",
+  "ka": ""
+ },
+ {
+  "id": 1456,
+  "file": "inventory/inventory.inc",
+  "line": 1355,
+  "it": "Quantita' non valida.",
+  "ctx": "Inv_Say(playerid, -10270721, \"Quantita' non valida.\");",
+  "ka": ""
+ },
+ {
+  "id": 1457,
+  "file": "inventory/inventory.inc",
+  "line": 1360,
+  "it": "Non hai tutta quella spesa con te.",
+  "ctx": "Inv_Say(playerid, -10270721, \"Non hai tutta quella spesa con te.\");",
+  "ka": ""
+ },
+ {
+  "id": 1458,
+  "file": "inventory/inventory.inc",
+  "line": 1365,
+  "it": "Puoi portare al massimo %d porzioni.",
+  "ctx": "SendClientMessage(playerid, -10270721, \"Puoi portare al massimo %d porzioni.\", 12);",
+  "ka": ""
+ },
+ {
+  "id": 1459,
+  "file": "inventory/inventory.inc",
+  "line": 1385,
+  "it": "Errore database: verifico lo stato del frigo...",
+  "ctx": "Inv_Say(playerid, -10270721, \"Errore database: verifico lo stato del frigo...\");",
+  "ka": ""
+ },
+ {
+  "id": 1460,
+  "file": "inventory/inventory.inc",
+  "line": 1420,
+  "it": "Scambio scaduto.",
+  "ctx": "Inv_GiveCancel(p, \"Scambio scaduto.\");",
+  "ka": ""
+ },
+ {
+  "id": 1461,
+  "file": "inventory/inventory.inc",
+  "line": 1470,
+  "it": "Scambio annullato: il giocatore si e' scollegato.",
+  "ctx": "Inv_GiveCancel(playerid, \"Scambio annullato: il giocatore si e' scollegato.\");",
+  "ka": ""
+ },
+ {
+  "id": 1462,
+  "file": "inventory/inventory.inc",
+  "line": 1482,
+  "it": "Scambio annullato: il giocatore si e' scollegato.",
+  "ctx": "Inv_GiveCancel(giver, \"Scambio annullato: il giocatore si e' scollegato.\");",
+  "ka": ""
+ },
+ {
+  "id": 1083,
+  "file": "job/job.inc",
+  "line": 2,
+  "it": "Disoccupato",
+  "ctx": "\"Disoccupato\",",
+  "ka": ""
+ },
+ {
+  "id": 1084,
+  "file": "job/job.inc",
+  "line": 3,
+  "it": "Autista Bus",
+  "ctx": "\"Autista Bus\",",
+  "ka": ""
+ },
+ {
+  "id": 1085,
+  "file": "job/job.inc",
+  "line": 4,
+  "it": "Corriere",
+  "ctx": "\"Corriere\",",
+  "ka": ""
+ },
+ {
+  "id": 1086,
+  "file": "job/job.inc",
+  "line": 5,
+  "it": "Netturbino",
+  "ctx": "\"Netturbino\"",
+  "ka": ""
+ },
+ {
+  "id": 1087,
+  "file": "job/job.inc",
+  "line": 18,
+  "it": "Tappa",
+  "ctx": "\"Tappa\",",
+  "ka": ""
+ },
+ {
+  "id": 1088,
+  "file": "job/job.inc",
+  "line": 19,
+  "it": "Fermata",
+  "ctx": "\"Fermata\",",
+  "ka": ""
+ },
+ {
+  "id": 1089,
+  "file": "job/job.inc",
+  "line": 20,
+  "it": "Consegna",
+  "ctx": "\"Consegna\",",
+  "ka": ""
+ },
+ {
+  "id": 1090,
+  "file": "job/job.inc",
+  "line": 21,
+  "it": "Cassonetto",
+  "ctx": "\"Cassonetto\"",
+  "ka": ""
+ },
+ {
+  "id": 1091,
+  "file": "job/job.inc",
+  "line": 380,
+  "it": "Turno annullato: %s",
+  "ctx": "SendClientMessage(playerid, -10270721, \"Turno annullato: %s\", reason);",
+  "ka": ""
+ },
+ {
+  "id": 1092,
+  "file": "job/job.inc",
+  "line": 383,
+  "it": "Il compenso maturato ($%d) e' andato perso.",
+  "ctx": "SendClientMessage(playerid, -10270721, \"Il compenso maturato ($%d) e' andato perso.\", lost);",
+  "ka": ""
+ },
+ {
+  "id": 1093,
+  "file": "job/job.inc",
+  "line": 401,
+  "it": "Tetto orario di $%d raggiunto: il turno prosegue ma non matura altro compenso.",
+  "ctx": "SendClientMessage(playerid, -10270721, \"Tetto orario di $%d raggiunto: il turno prosegue ma non matura altro compenso.\", 2200);",
+  "ka": ""
+ },
+ {
+  "id": 1094,
+  "file": "job/job.inc",
+  "line": 416,
+  "it": "Turno terminato: nessun compenso maturato.",
+  "ctx": "SendClientMessage(playerid, -1, \"Turno terminato: nessun compenso maturato.\");",
+  "ka": ""
+ },
+ {
+  "id": 1095,
+  "file": "job/job.inc",
+  "line": 426,
+  "it": "Un accredito precedente e' ancora in corso: compenso non registrato.",
+  "ctx": "SendClientMessage(playerid, -10270721, \"Un accredito precedente e' ancora in corso: compenso non registrato.\");",
+  "ka": ""
+ },
+ {
+  "id": 1096,
+  "file": "job/job.inc",
+  "line": 434,
+  "it": "Turno terminato: registrazione del compenso ($%d) in corso...",
+  "ctx": "SendClientMessage(playerid, -1, \"Turno terminato: registrazione del compenso ($%d) in corso...\", amount);",
+  "ka": ""
+ },
+ {
+  "id": 1097,
+  "file": "job/job.inc",
+  "line": 462,
+  "it": "Errore del servizio: compenso non accreditato.",
+  "ctx": "SendClientMessage(playerid, -10270721, result < 0 ? \"Errore del servizio: compenso non accreditato.\" : \"Compenso rifiutato: nulla accreditato.\");",
+  "ka": ""
+ },
+ {
+  "id": 1098,
+  "file": "job/job.inc",
+  "line": 462,
+  "it": "Compenso rifiutato: nulla accreditato.",
+  "ctx": "SendClientMessage(playerid, -10270721, result < 0 ? \"Errore del servizio: compenso non accreditato.\" : \"Compenso rifiutato: nulla accreditato.\");",
+  "ka": ""
+ },
+ {
+  "id": 1099,
+  "file": "job/job.inc",
+  "line": 464,
+  "it": "payout non accreditato job %d importo %d esito %d char %d",
+  "ctx": "format(msg, 128, \"payout non accreditato job %d importo %d esito %d char %d\", jobId, amount, result, gPlayer[playerid][pCharId]);",
+  "ka": ""
+ },
+ {
+  "id": 1100,
+  "file": "job/job.inc",
+  "line": 471,
+  "it": "Compenso: $%d versati in banca. Saldo: $%d.",
+  "ctx": "SendClientMessage(playerid, 0x66DD66FF, \"Compenso: $%d versati in banca. Saldo: $%d.\", paid, gPlayer[playerid][pBank]);",
+  "ka": ""
+ },
+ {
+  "id": 1101,
+  "file": "job/job.inc",
+  "line": 474,
+  "it": "Il conto ha raggiunto il limite: parte del compenso e' andata persa.",
+  "ctx": "SendClientMessage(playerid, -10270721, \"Il conto ha raggiunto il limite: parte del compenso e' andata persa.\");",
+  "ka": ""
+ },
+ {
+  "id": 1102,
+  "file": "job/job.inc",
+  "line": 479,
+  "it": "Il conto bancario e' al limite: compenso non versato.",
+  "ctx": "SendClientMessage(playerid, -10270721, \"Il conto bancario e' al limite: compenso non versato.\");",
+  "ka": ""
+ },
+ {
+  "id": 1103,
+  "file": "job/job.inc",
+  "line": 512,
+  "it": "tratta non valida: %s job %d tappa %d dist %.0f m in %d ms",
+  "ctx": "format(msg, 128, \"tratta non valida: %s job %d tappa %d dist %.0f m in %d ms\", name, job, g_JsStep[playerid], dist, elapsedMs);",
+  "ka": ""
+ },
+ {
+  "id": 1104,
+  "file": "job/job.inc",
+  "line": 514,
+  "it": "tratta percorsa troppo in fretta (controllo anti-abuso).",
+  "ctx": "Job_Cancel(playerid, \"tratta percorsa troppo in fretta (controllo anti-abuso).\");",
+  "ka": ""
+ },
+ {
+  "id": 1105,
+  "file": "job/job.inc",
+  "line": 525,
+  "it": "Rientro completato: bonus di fine giro.",
+  "ctx": "SendClientMessage(playerid, 0x66DD66FF, \"Rientro completato: bonus di fine giro.\");",
+  "ka": ""
+ },
+ {
+  "id": 1106,
+  "file": "job/job.inc",
+  "line": 531,
+  "it": "%s %d/%d completata: +$%d (maturato $%d).",
+  "ctx": "SendClientMessage(playerid, 0x66DD66FF, \"%s %d/%d completata: +$%d (maturato $%d).\", g_JobStepWord[job], g_JsStep[playerid], total, granted, g_JsEarned[playerid]);",
+  "ka": ""
+ },
+ {
+  "id": 1107,
+  "file": "job/job.inc",
+  "line": 534,
+  "it": "Ultima tappa fatta: rientra al deposito per il bonus (checkpoint sulla mappa).",
+  "ctx": "SendClientMessage(playerid, 0x99CCFFFF, \"Ultima tappa fatta: rientra al deposito per il bonus (checkpoint sulla mappa).\");",
+  "ka": ""
+ },
+ {
+  "id": 1108,
+  "file": "job/job.inc",
+  "line": 556,
+  "it": "non sei in condizione di lavorare.",
+  "ctx": "Job_Cancel(i, \"non sei in condizione di lavorare.\");",
+  "ka": ""
+ },
+ {
+  "id": 1109,
+  "file": "job/job.inc",
+  "line": 562,
+  "it": "il veicolo di lavoro non esiste piu'.",
+  "ctx": "Job_Cancel(i, \"il veicolo di lavoro non esiste piu'.\");",
+  "ka": ""
+ },
+ {
+  "id": 1110,
+  "file": "job/job.inc",
+  "line": 569,
+  "it": "veicolo di lavoro distrutto.",
+  "ctx": "Job_Cancel(i, \"veicolo di lavoro distrutto.\");",
+  "ka": ""
+ },
+ {
+  "id": 1111,
+  "file": "job/job.inc",
+  "line": 588,
+  "it": "veicolo di lavoro abbandonato.",
+  "ctx": "Job_Cancel(i, \"veicolo di lavoro abbandonato.\");",
+  "ka": ""
+ },
+ {
+  "id": 1112,
+  "file": "job/job.inc",
+  "line": 640,
+  "it": "Non hai un lavoro. Recati al Job Center e usa /lavoro prendi.",
+  "ctx": "Util_Send(playerid, -10270721, \"Non hai un lavoro. Recati al Job Center e usa /lavoro prendi.\");",
+  "ka": ""
+ },
+ {
+  "id": 1113,
+  "file": "job/job.inc",
+  "line": 645,
+  "it": "Hai gia' un turno in corso. Usa /fine per terminarlo.",
+  "ctx": "Util_Send(playerid, -10270721, \"Hai gia' un turno in corso. Usa /fine per terminarlo.\");",
+  "ka": ""
+ },
+ {
+  "id": 1114,
+  "file": "job/job.inc",
+  "line": 650,
+  "it": "Non puoi iniziare un turno adesso (ferito, ammanettato, in servizio o operazione in corso).",
+  "ctx": "Util_Send(playerid, -10270721, \"Non puoi iniziare un turno adesso (ferito, ammanettato, in servizio o operazione in corso).\");",
+  "ka": ""
+ },
+ {
+  "id": 1115,
+  "file": "job/job.inc",
+  "line": 655,
+  "it": "Per questo lavoro serve il livello %d.",
+  "ctx": "SendClientMessage(playerid, -10270721, \"Per questo lavoro serve il livello %d.\", g_JobMinLevel[job]);",
+  "ka": ""
+ },
+ {
+  "id": 1116,
+  "file": "job/job.inc",
+  "line": 661,
+  "it": "Attendi ancora %d secondi prima di un nuovo turno.",
+  "ctx": "SendClientMessage(playerid, -10270721, \"Attendi ancora %d secondi prima di un nuovo turno.\", Job_SecCeil(left));",
+  "ka": ""
+ },
+ {
+  "id": 1117,
+  "file": "job/job.inc",
+  "line": 666,
+  "it": "Devi trovarti all'aperto per iniziare il turno.",
+  "ctx": "Util_Send(playerid, -10270721, \"Devi trovarti all'aperto per iniziare il turno.\");",
+  "ka": ""
+ },
+ {
+  "id": 1118,
+  "file": "job/job.inc",
+  "line": 673,
+  "it": "Devi trovarti al deposito del tuo lavoro per iniziare il turno.",
+  "ctx": "Util_Send(playerid, -10270721, \"Devi trovarti al deposito del tuo lavoro per iniziare il turno.\");",
+  "ka": ""
+ },
+ {
+  "id": 1119,
+  "file": "job/job.inc",
+  "line": 678,
+  "it": "Nessun veicolo di lavoro disponibile al momento. Riprova tra poco.",
+  "ctx": "Util_Send(playerid, -10270721, \"Nessun veicolo di lavoro disponibile al momento. Riprova tra poco.\");",
+  "ka": ""
+ },
+ {
+  "id": 1120,
+  "file": "job/job.inc",
+  "line": 684,
+  "it": "Impossibile creare il veicolo di lavoro. Riprova.",
+  "ctx": "Util_Send(playerid, -10270721, \"Impossibile creare il veicolo di lavoro. Riprova.\");",
+  "ka": ""
+ },
+ {
+  "id": 1121,
+  "file": "job/job.inc",
+  "line": 712,
+  "it": "Impossibile salire sul veicolo di lavoro. Riprova.",
+  "ctx": "Util_Send(playerid, -10270721, \"Impossibile salire sul veicolo di lavoro. Riprova.\");",
+  "ka": ""
+ },
+ {
+  "id": 1122,
+  "file": "job/job.inc",
+  "line": 717,
+  "it": "Turno iniziato (%s). Segui i checkpoint sulla mappa: fermati nel cerchio (max %.0f km/h) per %d secondi. /fine per terminare.",
+  "ctx": "SendClientMessage(playerid, 0x66DD66FF, \"Turno iniziato (%s). Segui i checkpoint sulla mappa: fermati nel cerchio (max %.0f km/h) per %d secondi. /fine per terminare.\", g_JobName[job], 12.0, g_JobDwel",
+  "ka": ""
+ },
+ {
+  "id": 1123,
+  "file": "job/job.inc",
+  "line": 730,
+  "it": "Non hai nessun turno in corso.",
+  "ctx": "Util_Send(playerid, -10270721, \"Non hai nessun turno in corso.\");",
+  "ka": ""
+ },
+ {
+  "id": 1124,
+  "file": "job/job.inc",
+  "line": 749,
+  "it": "Uso: /lavoro [info|prendi|lascia]  (prendi e lascia solo al Job Center)",
+  "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Uso: /lavoro [info|prendi|lascia]  (prendi e lascia solo al Job Center)\");",
+  "ka": ""
+ },
+ {
+  "id": 1125,
+  "file": "job/job.inc",
+  "line": 754,
+  "it": "Devi essere al Job Center (piazza City Hall).",
+  "ctx": "Util_Send(playerid, -10270721, \"Devi essere al Job Center (piazza City Hall).\");",
+  "ka": ""
+ },
+ {
+  "id": 1126,
+  "file": "job/job.inc",
+  "line": 759,
+  "it": "Termina prima il turno in corso (/fine).",
+  "ctx": "Util_Send(playerid, -10270721, \"Termina prima il turno in corso (/fine).\");",
+  "ka": ""
+ },
+ {
+  "id": 1127,
+  "file": "job/job.inc",
+  "line": 764,
+  "it": "Non hai un lavoro da lasciare.",
+  "ctx": "Util_Send(playerid, -10270721, \"Non hai un lavoro da lasciare.\");",
+  "ka": ""
+ },
+ {
+  "id": 1128,
+  "file": "job/job.inc",
+  "line": 784,
+  "it": "Devi essere al Job Center.",
+  "ctx": "Util_Send(playerid, -10270721, \"Devi essere al Job Center.\");",
+  "ka": ""
+ },
+ {
+  "id": 1129,
+  "file": "job/job.inc",
+  "line": 789,
+  "it": "Non puoi cambiare lavoro adesso.",
+  "ctx": "Util_Send(playerid, -10270721, \"Non puoi cambiare lavoro adesso.\");",
+  "ka": ""
+ },
+ {
+  "id": 1130,
+  "file": "job/job.inc",
+  "line": 794,
+  "it": "Per questo lavoro serve il livello %d.",
+  "ctx": "SendClientMessage(playerid, -10270721, \"Per questo lavoro serve il livello %d.\", g_JobMinLevel[jobIndex]);",
+  "ka": ""
+ },
+ {
+  "id": 1131,
+  "file": "job/job.inc",
+  "line": 799,
+  "it": "Fai gia' questo lavoro.",
+  "ctx": "Util_Send(playerid, -10270721, \"Fai gia' questo lavoro.\");",
+  "ka": ""
+ },
+ {
+  "id": 1132,
+  "file": "job/job.inc",
+  "line": 805,
+  "it": "Potrai cambiare lavoro tra %d secondi.",
+  "ctx": "SendClientMessage(playerid, -10270721, \"Potrai cambiare lavoro tra %d secondi.\", Job_SecCeil(left));",
+  "ka": ""
+ },
+ {
+  "id": 1133,
+  "file": "job/job.inc",
+  "line": 822,
+  "it": "Devi essere al Job Center.",
+  "ctx": "Util_Send(playerid, -10270721, \"Devi essere al Job Center.\");",
+  "ka": ""
+ },
+ {
+  "id": 1134,
+  "file": "job/job.inc",
+  "line": 827,
+  "it": "Non puoi lasciare il lavoro adesso.",
+  "ctx": "Util_Send(playerid, -10270721, \"Non puoi lasciare il lavoro adesso.\");",
+  "ka": ""
+ },
+ {
+  "id": 1135,
+  "file": "job/job.inc",
+  "line": 854,
+  "it": "Hai lasciato il lavoro.",
+  "ctx": "Util_Send(playerid, 0x66DD66FF, \"Hai lasciato il lavoro.\");",
+  "ka": ""
+ },
+ {
+  "id": 1136,
+  "file": "job/job.inc",
+  "line": 858,
+  "it": "Ora lavori come %s. Usa /inizia per iniziare un turno.",
+  "ctx": "SendClientMessage(playerid, 0x66DD66FF, \"Ora lavori come %s. Usa /inizia per iniziare un turno.\", g_JobName[jobId]);",
+  "ka": ""
+ },
+ {
+  "id": 1137,
+  "file": "job/job.inc",
+  "line": 862,
+  "it": "%s lavoro -> %d",
+  "ctx": "format(msg, 128, \"%s lavoro -> %d\", name, jobId);",
+  "ka": ""
+ },
+ {
+  "id": 1138,
+  "file": "job/job.inc",
+  "line": 867,
+  "it": "Cambio di lavoro non eseguito.",
+  "ctx": "Util_Send(playerid, -10270721, \"Cambio di lavoro non eseguito.\");",
+  "ka": ""
+ },
+ {
+  "id": 1139,
+  "file": "job/job.inc",
+  "line": 871,
+  "it": "Servizio temporaneamente non disponibile: riprova piu' tardi.",
+  "ctx": "Util_Send(playerid, -10270721, \"Servizio temporaneamente non disponibile: riprova piu' tardi.\");",
+  "ka": ""
+ },
+ {
+  "id": 1140,
+  "file": "job/job.inc",
+  "line": 890,
+  "it": "Job Center\\nUsa /lavoro",
+  "ctx": "Lang_Create3DTextLabel(\"Job Center\\nUsa /lavoro\", -2994689, 1480.5, -1736.0, (13.5 + 1.0), 15.0, 0, false);",
+  "ka": ""
+ },
+ {
+  "id": 1141,
+  "file": "job/job.inc",
+  "line": 934,
+  "it": "sei morto o ferito.",
+  "ctx": "Job_Cancel(playerid, \"sei morto o ferito.\");",
+  "ka": ""
+ },
+ {
+  "id": 1142,
+  "file": "job/job.inc",
+  "line": 948,
+  "it": "Questo veicolo di lavoro e' in uso da un altro lavoratore.",
+  "ctx": "Util_Send(playerid, -10270721, \"Questo veicolo di lavoro e' in uso da un altro lavoratore.\");",
+  "ka": ""
+ },
+ {
+  "id": 1143,
+  "file": "job/job.inc",
+  "line": 963,
+  "it": "Torna sul veicolo di lavoro entro %d secondi o il turno sara' annullato.",
+  "ctx": "SendClientMessage(playerid, -10270721, \"Torna sul veicolo di lavoro entro %d secondi o il turno sara' annullato.\", 45);",
+  "ka": ""
+ },
+ {
+  "id": 1144,
+  "file": "job/job.inc",
+  "line": 982,
+  "it": "Questo veicolo di lavoro e' in uso da un altro lavoratore.",
+  "ctx": "Util_Send(playerid, -10270721, \"Questo veicolo di lavoro e' in uso da un altro lavoratore.\");",
+  "ka": ""
+ },
+ {
+  "id": 1145,
+  "file": "job/job.inc",
+  "line": 994,
+  "it": "veicolo di lavoro distrutto.",
+  "ctx": "Job_Cancel(owner, \"veicolo di lavoro distrutto.\");",
+  "ka": ""
+ },
+ {
+  "id": 1317,
+  "file": "living/living_api.inc",
+  "line": 75,
+  "it": "evento %d scartato (annidamento): quartiere %d pers. %d valore %d",
+  "ctx": "format(msg, 256, \"evento %d scartato (annidamento): quartiere %d pers. %d valore %d\", type, districtId, charId, value);",
+  "ka": ""
+ },
+ {
+  "id": 1318,
+  "file": "living/living_api.inc",
+  "line": 186,
+  "it": "I servizi della citta' si stanno avviando: riprova tra poco.",
+  "ctx": "Util_Send(playerid, -10270721, \"I servizi della citta' si stanno avviando: riprova tra poco.\");",
+  "ka": ""
+ },
+ {
+  "id": 1319,
+  "file": "living/living_api.inc",
+  "line": 190,
+  "it": "Sei ferito: non puoi farlo ora.",
+  "ctx": "Util_Send(playerid, -10270721, \"Sei ferito: non puoi farlo ora.\");",
+  "ka": ""
+ },
+ {
+  "id": 1320,
+  "file": "living/living_api.inc",
+  "line": 194,
+  "it": "Sei ammanettato: non puoi farlo ora.",
+  "ctx": "Util_Send(playerid, -10270721, \"Sei ammanettato: non puoi farlo ora.\");",
+  "ka": ""
+ },
+ {
+  "id": 1321,
+  "file": "living/living_api.inc",
+  "line": 202,
+  "it": "Sei in turno di lavoro: termina prima il turno (/fine).",
+  "ctx": "Util_Send(playerid, -10270721, \"Sei in turno di lavoro: termina prima il turno (/fine).\");",
+  "ka": ""
+ },
+ {
+  "id": 1322,
+  "file": "living/living_api.inc",
+  "line": 206,
+  "it": "Hai gia' un contratto attivo (/contratto).",
+  "ctx": "Util_Send(playerid, -10270721, \"Hai gia' un contratto attivo (/contratto).\");",
+  "ka": ""
+ },
+ {
+  "id": 1323,
+  "file": "living/living_api.inc",
+  "line": 210,
+  "it": "Sei in servizio taxi: prima /taxi off.",
+  "ctx": "Util_Send(playerid, -10270721, \"Sei in servizio taxi: prima /taxi off.\");",
+  "ka": ""
+ },
+ {
+  "id": 1324,
+  "file": "living/living_api.inc",
+  "line": 214,
+  "it": "Hai un noleggio in corso: prima /riconsegna.",
+  "ctx": "Util_Send(playerid, -10270721, \"Hai un noleggio in corso: prima /riconsegna.\");",
+  "ka": ""
+ },
+ {
+  "id": 1325,
+  "file": "living/living_api.inc",
+  "line": 305,
+  "it": "veicolo %d (modulo %d) non rilasciato dal modulo alla disconnessione di %d: distrutto",
+  "ctx": "format(msg, 256, \"veicolo %d (modulo %d) non rilasciato dal modulo alla disconnessione di %d: distrutto\", v, g_LdVehMod[v], playerid);",
+  "ka": ""
+ },
+ {
+  "id": 1326,
+  "file": "living/living_calc.inc",
+  "line": 365,
+  "it": "Idlewood",
+  "ctx": "return LD_CopyStr(dest, size, \"Idlewood\");",
+  "ka": ""
+ },
+ {
+  "id": 1327,
+  "file": "living/living_calc.inc",
+  "line": 369,
+  "it": "Ganton",
+  "ctx": "return LD_CopyStr(dest, size, \"Ganton\");",
+  "ka": ""
+ },
+ {
+  "id": 1328,
+  "file": "living/living_calc.inc",
+  "line": 373,
+  "it": "Jefferson",
+  "ctx": "return LD_CopyStr(dest, size, \"Jefferson\");",
+  "ka": ""
+ },
+ {
+  "id": 55,
+  "file": "rental/rental.inc",
+  "line": 20,
+  "it": "Faggio",
+  "ctx": "strcat(dest, \"Faggio\", size);",
+  "ka": ""
+ },
+ {
+  "id": 56,
+  "file": "rental/rental.inc",
+  "line": 24,
+  "it": "Previon",
+  "ctx": "strcat(dest, \"Previon\", size);",
+  "ka": ""
+ },
+ {
+  "id": 57,
+  "file": "rental/rental.inc",
+  "line": 28,
+  "it": "Manana",
+  "ctx": "strcat(dest, \"Manana\", size);",
+  "ka": ""
+ },
+ {
+  "id": 58,
+  "file": "rental/rental.inc",
+  "line": 32,
+  "it": "Taxi",
+  "ctx": "strcat(dest, \"Taxi\", size);",
+  "ka": ""
+ },
+ {
+  "id": 59,
+  "file": "rental/rental.inc",
+  "line": 244,
+  "it": "Nessun mezzo disponibile al momento: noleggio annullato e importo restituito sul conto.",
+  "ctx": "Util_Send(playerid, -10270721, \"Nessun mezzo disponibile al momento: noleggio annullato e importo restituito sul conto.\");",
+  "ka": ""
+ },
+ {
+  "id": 60,
+  "file": "rental/rental.inc",
+  "line": 254,
+  "it": "Noleggio interrotto: cauzione di $%d restituita sul conto.",
+  "ctx": "SendClientMessage(playerid, -1, \"Noleggio interrotto: cauzione di $%d restituita sul conto.\", refund);",
+  "ka": ""
+ },
+ {
+  "id": 61,
+  "file": "rental/rental.inc",
+  "line": 265,
+  "it": "Noleggio chiuso oltre la tolleranza: restituiti $%d.",
+  "ctx": "SendClientMessage(playerid, -1, \"Noleggio chiuso oltre la tolleranza: restituiti $%d.\", refund);",
+  "ka": ""
+ },
+ {
+  "id": 62,
+  "file": "rental/rental.inc",
+  "line": 269,
+  "it": "Noleggio scaduto oltre la tolleranza: il mezzo e' tornato all'agenzia e la cauzione e' stata trattenuta.",
+  "ctx": "Util_Send(playerid, -10270721, \"Noleggio scaduto oltre la tolleranza: il mezzo e' tornato all'agenzia e la cauzione e' stata trattenuta.\");",
+  "ka": ""
+ },
+ {
+  "id": 63,
+  "file": "rental/rental.inc",
+  "line": 274,
+  "it": "Il noleggio risultava gia' chiuso.",
+  "ctx": "Util_Send(playerid, -1, \"Il noleggio risultava gia' chiuso.\");",
+  "ka": ""
+ },
+ {
+  "id": 64,
+  "file": "rental/rental.inc",
+  "line": 278,
+  "it": "Chiusura del noleggio non riuscita: verra' sistemata automaticamente al prossimo accesso.",
+  "ctx": "Util_Send(playerid, -10270721, \"Chiusura del noleggio non riuscita: verra' sistemata automaticamente al prossimo accesso.\");",
+  "ka": ""
+ },
+ {
+  "id": 65,
+  "file": "rental/rental.inc",
+  "line": 311,
+  "it": "Fondi insufficienti (banca + contanti) per canone e cauzione.",
+  "ctx": "Util_Send(playerid, -10270721, \"Fondi insufficienti (banca + contanti) per canone e cauzione.\");",
+  "ka": ""
+ },
+ {
+  "id": 66,
+  "file": "rental/rental.inc",
+  "line": 315,
+  "it": "Non puoi noleggiare ora: hai gia' un noleggio o un contratto attivo, oppure livello insufficiente.",
+  "ctx": "Util_Send(playerid, -10270721, \"Non puoi noleggiare ora: hai gia' un noleggio o un contratto attivo, oppure livello insufficiente.\");",
+  "ka": ""
+ },
+ {
+  "id": 67,
+  "file": "rental/rental.inc",
+  "line": 319,
+  "it": "Un'altra operazione di noleggio e' in corso: riprova tra poco.",
+  "ctx": "Util_Send(playerid, -10270721, \"Un'altra operazione di noleggio e' in corso: riprova tra poco.\");",
+  "ka": ""
+ },
+ {
+  "id": 68,
+  "file": "rental/rental.inc",
+  "line": 323,
+  "it": "Richiesta di noleggio non valida.",
+  "ctx": "Util_Send(playerid, -10270721, \"Richiesta di noleggio non valida.\");",
+  "ka": ""
+ },
+ {
+  "id": 69,
+  "file": "rental/rental.inc",
+  "line": 327,
+  "it": "Servizio noleggi momentaneamente non raggiungibile: nessun addebito, riprova tra poco.",
+  "ctx": "Util_Send(playerid, -10270721, \"Servizio noleggi momentaneamente non raggiungibile: nessun addebito, riprova tra poco.\");",
+  "ka": ""
+ },
+ {
+  "id": 70,
+  "file": "rental/rental.inc",
+  "line": 367,
+  "it": "Noleggio attivo: %s per %d minuti (canone $%d, cauzione $%d). Riportalo qui con /riconsegna.",
+  "ctx": "SendClientMessage(playerid, 0x66DD66FF, \"Noleggio attivo: %s per %d minuti (canone $%d, cauzione $%d). Riportalo qui con /riconsegna.\", name, minutes > 0 ? minutes : 0, g_RtFee[playerid], g_RtDeposit[",
+  "ka": ""
+ },
+ {
+  "id": 71,
+  "file": "rental/rental.inc",
+  "line": 425,
+  "it": "Pratica di noleggio gia' in corso: attendi.",
+  "ctx": "Util_Send(playerid, -10270721, \"Pratica di noleggio gia' in corso: attendi.\");",
+  "ka": ""
+ },
+ {
+  "id": 72,
+  "file": "rental/rental.inc",
+  "line": 436,
+  "it": "Devi trovarti all'agenzia di noleggio di Pershing Square.",
+  "ctx": "Util_Send(playerid, -10270721, \"Devi trovarti all'agenzia di noleggio di Pershing Square.\");",
+  "ka": ""
+ },
+ {
+  "id": 73,
+  "file": "rental/rental.inc",
+  "line": 441,
+  "it": "Scendi dal veicolo per noleggiare.",
+  "ctx": "Util_Send(playerid, -10270721, \"Scendi dal veicolo per noleggiare.\");",
+  "ka": ""
+ },
+ {
+  "id": 74,
+  "file": "rental/rental.inc",
+  "line": 446,
+  "it": "Serve almeno il livello %d per noleggiare.",
+  "ctx": "SendClientMessage(playerid, -10270721, \"Serve almeno il livello %d per noleggiare.\", 1);",
+  "ka": ""
+ },
+ {
+  "id": 75,
+  "file": "rental/rental.inc",
+  "line": 470,
+  "it": "Al momento non ci sono mezzi disponibili: riprova tra poco.",
+  "ctx": "Util_Send(playerid, -10270721, \"Al momento non ci sono mezzi disponibili: riprova tra poco.\");",
+  "ka": ""
+ },
+ {
+  "id": 76,
+  "file": "rental/rental.inc",
+  "line": 483,
+  "it": "Scelta di noleggio non valida.",
+  "ctx": "UI_LivingReject(playerid, \"Scelta di noleggio non valida.\");",
+  "ka": ""
+ },
+ {
+  "id": 77,
+  "file": "rental/rental.inc",
+  "line": 488,
+  "it": "Al momento non ci sono mezzi disponibili: riprova tra poco.",
+  "ctx": "UI_LivingReject(playerid, \"Al momento non ci sono mezzi disponibili: riprova tra poco.\");",
+  "ka": ""
+ },
+ {
+  "id": 78,
+  "file": "rental/rental.inc",
+  "line": 496,
+  "it": "Fondi insufficienti: servono $%d (canone + cauzione) tra banca e contanti.",
+  "ctx": "format(msg, 160, \"Fondi insufficienti: servono $%d (canone + cauzione) tra banca e contanti.\", total);",
+  "ka": ""
+ },
+ {
+  "id": 79,
+  "file": "rental/rental.inc",
+  "line": 502,
+  "it": "Pratica di noleggio gia' in corso: attendi.",
+  "ctx": "UI_LivingReject(playerid, \"Pratica di noleggio gia' in corso: attendi.\");",
+  "ka": ""
+ },
+ {
+  "id": 80,
+  "file": "rental/rental.inc",
+  "line": 505,
+  "it": "Pratica di noleggio in corso...",
+  "ctx": "Util_Send(playerid, -1, \"Pratica di noleggio in corso...\");",
+  "ka": ""
+ },
+ {
+  "id": 81,
+  "file": "rental/rental.inc",
+  "line": 519,
+  "it": "Non hai un noleggio attivo.",
+  "ctx": "Util_Send(playerid, -10270721, \"Non hai un noleggio attivo.\");",
+  "ka": ""
+ },
+ {
+  "id": 82,
+  "file": "rental/rental.inc",
+  "line": 527,
+  "it": "Il taxi si restituisce al deposito con /taxi off.",
+  "ctx": "Util_Send(playerid, -10270721, \"Il taxi si restituisce al deposito con /taxi off.\");",
+  "ka": ""
+ },
+ {
+  "id": 83,
+  "file": "rental/rental.inc",
+  "line": 535,
+  "it": "Pratica di noleggio gia' in corso: attendi.",
+  "ctx": "Util_Send(playerid, -10270721, \"Pratica di noleggio gia' in corso: attendi.\");",
+  "ka": ""
+ },
+ {
+  "id": 84,
+  "file": "rental/rental.inc",
+  "line": 544,
+  "it": "Devi essere al volante del mezzo noleggiato.",
+  "ctx": "Util_Send(playerid, -10270721, \"Devi essere al volante del mezzo noleggiato.\");",
+  "ka": ""
+ },
+ {
+  "id": 85,
+  "file": "rental/rental.inc",
+  "line": 552,
+  "it": "Riporta il mezzo all'agenzia di noleggio di Pershing Square.",
+  "ctx": "Util_Send(playerid, -10270721, \"Riporta il mezzo all'agenzia di noleggio di Pershing Square.\");",
+  "ka": ""
+ },
+ {
+  "id": 86,
+  "file": "rental/rental.inc",
+  "line": 582,
+  "it": "Questo noleggio non e' piu' attivo.",
+  "ctx": "UI_LivingReject(playerid, \"Questo noleggio non e' piu' attivo.\");",
+  "ka": ""
+ },
+ {
+  "id": 87,
+  "file": "rental/rental.inc",
+  "line": 590,
+  "it": "Riconsegna in corso...",
+  "ctx": "Util_Send(playerid, -1, \"Riconsegna in corso...\");",
+  "ka": ""
+ },
+ {
+  "id": 88,
+  "file": "rental/rental.inc",
+  "line": 697,
+  "it": "Il tuo noleggio scade tra %d minuti.",
+  "ctx": "SendClientMessage(playerid, -2994689, \"Il tuo noleggio scade tra %d minuti.\", (left + 60 - 1) / 60);",
+  "ka": ""
+ },
+ {
+  "id": 89,
+  "file": "rental/rental.inc",
+  "line": 702,
+  "it": "Il turno di noleggio del taxi scade tra un minuto.",
+  "ctx": "Util_Send(playerid, -2994689, pro ? \"Il turno di noleggio del taxi scade tra un minuto.\" : \"Il tuo noleggio scade tra un minuto: riportalo all'agenzia (/riconsegna).\");",
+  "ka": ""
+ },
+ {
+  "id": 90,
+  "file": "rental/rental.inc",
+  "line": 702,
+  "it": "Il tuo noleggio scade tra un minuto: riportalo all'agenzia (/riconsegna).",
+  "ctx": "Util_Send(playerid, -2994689, pro ? \"Il turno di noleggio del taxi scade tra un minuto.\" : \"Il tuo noleggio scade tra un minuto: riportalo all'agenzia (/riconsegna).\");",
+  "ka": ""
+ },
+ {
+  "id": 91,
+  "file": "rental/rental.inc",
+  "line": 709,
+  "it": "Noleggio scaduto: hai %d minuti di tolleranza per la riconsegna, poi la cauzione resta all'agenzia.",
+  "ctx": "SendClientMessage(playerid, -10270721, \"Noleggio scaduto: hai %d minuti di tolleranza per la riconsegna, poi la cauzione resta all'agenzia.\", 5);",
+  "ka": ""
+ },
+ {
+  "id": 92,
+  "file": "rental/rental.inc",
+  "line": 716,
+  "it": "Il noleggio del taxi e' scaduto: il turno si conclude.",
+  "ctx": "Util_Send(playerid, -1, \"Il noleggio del taxi e' scaduto: il turno si conclude.\");",
+  "ka": ""
+ },
+ {
+  "id": 93,
+  "file": "rental/rental.inc",
+  "line": 723,
+  "it": "Tolleranza scaduta: il mezzo torna all'agenzia.",
+  "ctx": "Util_Send(playerid, -10270721, \"Tolleranza scaduta: il mezzo torna all'agenzia.\");",
+  "ka": ""
+ },
+ {
+  "id": 94,
+  "file": "rental/rental.inc",
+  "line": 759,
+  "it": "Noleggio veicoli\\n/noleggio  ·  /riconsegna",
+  "ctx": "Lang_Create3DTextLabel(\"Noleggio veicoli\\n/noleggio  ·  /riconsegna\", -2994689, 1505.0, -1700.0, (13.5 + 0.8), 20.0, 0, false);",
+  "ka": ""
+ },
+ {
+  "id": 95,
+  "file": "rental/rental.inc",
+  "line": 832,
+  "it": "Noleggio interrotto: il mezzo torna all'agenzia.",
+  "ctx": "Util_Send(playerid, -1, \"Noleggio interrotto: il mezzo torna all'agenzia.\");",
+  "ka": ""
+ },
+ {
+  "id": 96,
+  "file": "rental/rental.inc",
+  "line": 850,
+  "it": "Questo taxi e' in servizio: puoi salire solo come passeggero.",
+  "ctx": "Util_Send(playerid, -10270721, mod == 2 ? \"Questo taxi e' in servizio: puoi salire solo come passeggero.\" : \"Questo mezzo e' a noleggio di un altro cliente.\");",
+  "ka": ""
+ },
+ {
+  "id": 97,
+  "file": "rental/rental.inc",
+  "line": 850,
+  "it": "Questo mezzo e' a noleggio di un altro cliente.",
+  "ctx": "Util_Send(playerid, -10270721, mod == 2 ? \"Questo taxi e' in servizio: puoi salire solo come passeggero.\" : \"Questo mezzo e' a noleggio di un altro cliente.\");",
+  "ka": ""
+ },
+ {
+  "id": 98,
+  "file": "rental/rental.inc",
+  "line": 877,
+  "it": "Solo chi ha noleggiato questo mezzo puo' guidarlo.",
+  "ctx": "Util_Send(playerid, -10270721, \"Solo chi ha noleggiato questo mezzo puo' guidarlo.\");",
+  "ka": ""
+ },
+ {
+  "id": 99,
+  "file": "rental/rental.inc",
+  "line": 903,
+  "it": "Il mezzo a noleggio e' stato distrutto: la cauzione copre i danni.",
+  "ctx": "Util_Send(owner, -10270721, \"Il mezzo a noleggio e' stato distrutto: la cauzione copre i danni.\");",
+  "ka": ""
+ },
+ {
+  "id": 100,
+  "file": "rental/street_rental.inc",
+  "line": 143,
+  "it": "RENT",
+  "ctx": "SetVehicleNumberPlate(veh, \"RENT\");",
+  "ka": ""
+ },
+ {
+  "id": 299,
+  "file": "taxi/taxi.inc",
+  "line": 279,
+  "it": "La corsa e' stata annullata: il taxi non e' piu' in servizio.",
+  "ctx": "Taxi_CancelRide(driverid, \"\", \"La corsa e' stata annullata: il taxi non e' piu' in servizio.\");",
+  "ka": ""
+ },
+ {
+  "id": 300,
+  "file": "taxi/taxi.inc",
+  "line": 380,
+  "it": "Cliente",
+  "ctx": "UI_LivingTaxiOffer(driverid, g_TxOfferCall[driverid], true, \"Cliente\", fromD, toD, straight, est, 30);",
+  "ka": ""
+ },
+ {
+  "id": 301,
+  "file": "taxi/taxi.inc",
+  "line": 384,
+  "it": "[Taxi] Chiamata: cliente a %s diretto a %s (~$%d). /accettacorsa entro %d s.",
+  "ctx": "SendClientMessage(driverid, -2994689, \"[Taxi] Chiamata: cliente a %s diretto a %s (~$%d). /accettacorsa entro %d s.\", a, b, est, 30);",
+  "ka": ""
+ },
+ {
+  "id": 302,
+  "file": "taxi/taxi.inc",
+  "line": 394,
+  "it": "Non sei in servizio come tassista (/taxi on al deposito di Unity).",
+  "ctx": "Util_Send(driverid, -10270721, \"Non sei in servizio come tassista (/taxi on al deposito di Unity).\");",
+  "ka": ""
+ },
+ {
+  "id": 303,
+  "file": "taxi/taxi.inc",
+  "line": 402,
+  "it": "Hai gia' una corsa in corso.",
+  "ctx": "Util_Send(driverid, -10270721, \"Hai gia' una corsa in corso.\");",
+  "ka": ""
+ },
+ {
+  "id": 304,
+  "file": "taxi/taxi.inc",
+  "line": 410,
+  "it": "Operazione taxi in corso: attendi.",
+  "ctx": "Util_Send(driverid, -10270721, \"Operazione taxi in corso: attendi.\");",
+  "ka": ""
+ },
+ {
+  "id": 305,
+  "file": "taxi/taxi.inc",
+  "line": 418,
+  "it": "Il tuo taxi non e' disponibile.",
+  "ctx": "Util_Send(driverid, -10270721, \"Il tuo taxi non e' disponibile.\");",
+  "ka": ""
+ },
+ {
+  "id": 306,
+  "file": "taxi/taxi.inc",
+  "line": 426,
+  "it": "Attendi qualche secondo prima di accettare una nuova corsa.",
+  "ctx": "Util_Send(driverid, -10270721, \"Attendi qualche secondo prima di accettare una nuova corsa.\");",
+  "ka": ""
+ },
+ {
+  "id": 307,
+  "file": "taxi/taxi.inc",
+  "line": 446,
+  "it": "Nessuna chiamata da accettare (o e' scaduta).",
+  "ctx": "Util_Send(driverid, -10270721, \"Nessuna chiamata da accettare (o e' scaduta).\");",
+  "ka": ""
+ },
+ {
+  "id": 308,
+  "file": "taxi/taxi.inc",
+  "line": 477,
+  "it": "Quella chiamata non e' piu' attiva.",
+  "ctx": "Util_Send(driverid, -10270721, \"Quella chiamata non e' piu' attiva.\");",
+  "ka": ""
+ },
+ {
+  "id": 309,
+  "file": "taxi/taxi.inc",
+  "line": 482,
+  "it": "La chiamata e' gia' stata presa da un altro taxi.",
+  "ctx": "Util_Send(driverid, -10270721, \"La chiamata e' gia' stata presa da un altro taxi.\");",
+  "ka": ""
+ },
+ {
+  "id": 310,
+  "file": "taxi/taxi.inc",
+  "line": 487,
+  "it": "Il cliente e' troppo lontano.",
+  "ctx": "Util_Send(driverid, -10270721, \"Il cliente e' troppo lontano.\");",
+  "ka": ""
+ },
+ {
+  "id": 311,
+  "file": "taxi/taxi.inc",
+  "line": 552,
+  "it": "Corsa accettata: raggiungi il cliente (checkpoint) e fermati qualche secondo per farlo salire.",
+  "ctx": "Util_Send(driverid, 0x66DD66FF, \"Corsa accettata: raggiungi il cliente (checkpoint) e fermati qualche secondo per farlo salire.\");",
+  "ka": ""
+ },
+ {
+  "id": 312,
+  "file": "taxi/taxi.inc",
+  "line": 560,
+  "it": "Il taxi di %s ha accettato la tua chiamata: aspettalo e sali come passeggero.",
+  "ctx": "SendClientMessage(p, 0x66DD66FF, \"Il taxi di %s ha accettato la tua chiamata: aspettalo e sali come passeggero.\", name);",
+  "ka": ""
+ },
+ {
+  "id": 313,
+  "file": "taxi/taxi.inc",
+  "line": 561,
+  "it": "Corsa accettata: raggiungi il cliente (checkpoint). Quando e' a bordo: /tassametro start.",
+  "ctx": "Util_Send(driverid, 0x66DD66FF, \"Corsa accettata: raggiungi il cliente (checkpoint). Quando e' a bordo: /tassametro start.\");",
+  "ka": ""
+ },
+ {
+  "id": 314,
+  "file": "taxi/taxi.inc",
+  "line": 567,
+  "it": "Il taxi non ha potuto accettare la corsa: puoi chiamarne un altro.",
+  "ctx": "Util_Send(p, -10270721, \"Il taxi non ha potuto accettare la corsa: puoi chiamarne un altro.\");",
+  "ka": ""
+ },
+ {
+  "id": 315,
+  "file": "taxi/taxi.inc",
+  "line": 573,
+  "it": "Hai raggiunto il massimo di corse con clienti della citta' per quest'ora.",
+  "ctx": "Util_Send(driverid, -10270721, \"Hai raggiunto il massimo di corse con clienti della citta' per quest'ora.\");",
+  "ka": ""
+ },
+ {
+  "id": 316,
+  "file": "taxi/taxi.inc",
+  "line": 580,
+  "it": "Requisiti del servizio taxi non soddisfatti.",
+  "ctx": "Util_Send(driverid, -10270721, npc ? \"Requisiti del servizio taxi non soddisfatti.\" : \"Limite orario di corse con questo cliente raggiunto (o requisiti non soddisfatti).\");",
+  "ka": ""
+ },
+ {
+  "id": 317,
+  "file": "taxi/taxi.inc",
+  "line": 580,
+  "it": "Limite orario di corse con questo cliente raggiunto (o requisiti non soddisfatti).",
+  "ctx": "Util_Send(driverid, -10270721, npc ? \"Requisiti del servizio taxi non soddisfatti.\" : \"Limite orario di corse con questo cliente raggiunto (o requisiti non soddisfatti).\");",
+  "ka": ""
+ },
+ {
+  "id": 318,
+  "file": "taxi/taxi.inc",
+  "line": 584,
+  "it": "Risulta gia' una corsa aperta: attendi la sua chiusura.",
+  "ctx": "Util_Send(driverid, -10270721, \"Risulta gia' una corsa aperta: attendi la sua chiusura.\");",
+  "ka": ""
+ },
+ {
+  "id": 319,
+  "file": "taxi/taxi.inc",
+  "line": 588,
+  "it": "Centrale taxi non raggiungibile: corsa non avviata.",
+  "ctx": "Util_Send(driverid, -10270721, \"Centrale taxi non raggiungibile: corsa non avviata.\");",
+  "ka": ""
+ },
+ {
+  "id": 320,
+  "file": "taxi/taxi.inc",
+  "line": 677,
+  "it": "Corsa annullata: cliente o taxi non piu' disponibili.",
+  "ctx": "Taxi_CancelRide(driverid, \"Corsa annullata: cliente o taxi non piu' disponibili.\", \"\");",
+  "ka": ""
+ },
+ {
+  "id": 321,
+  "file": "taxi/taxi.inc",
+  "line": 685,
+  "it": "Corsa troppo breve: annullata senza addebito.",
+  "ctx": "Taxi_CancelRide(driverid, \"Corsa troppo breve: annullata senza addebito.\", \"Corsa troppo breve: annullata senza addebito.\");",
+  "ka": ""
+ },
+ {
+  "id": 322,
+  "file": "taxi/taxi.inc",
+  "line": 685,
+  "it": "Corsa troppo breve: annullata senza addebito.",
+  "ctx": "Taxi_CancelRide(driverid, \"Corsa troppo breve: annullata senza addebito.\", \"Corsa troppo breve: annullata senza addebito.\");",
+  "ka": ""
+ },
+ {
+  "id": 323,
+  "file": "taxi/taxi.inc",
+  "line": 698,
+  "it": "Tassametro fermo: $%d per %d m. In attesa della conferma del cliente.",
+  "ctx": "SendClientMessage(driverid, -1, \"Tassametro fermo: $%d per %d m. In attesa della conferma del cliente.\", g_TxPayFare[driverid], meters);",
+  "ka": ""
+ },
+ {
+  "id": 324,
+  "file": "taxi/taxi.inc",
+  "line": 736,
+  "it": "Cliente",
+  "ctx": "format(other, 25, \"%s\", \"Cliente\");",
+  "ka": ""
+ },
+ {
+  "id": 325,
+  "file": "taxi/taxi.inc",
+  "line": 754,
+  "it": "Tetto orario del lavoro dinamico raggiunto: e' stato pagato solo il residuo.",
+  "ctx": "Util_Send(driverid, -2994689, \"Tetto orario del lavoro dinamico raggiunto: e' stato pagato solo il residuo.\");",
+  "ka": ""
+ },
+ {
+  "id": 326,
+  "file": "taxi/taxi.inc",
+  "line": 761,
+  "it": "Il cliente ha contestato la corsa: nessun pagamento, la verifichera' lo staff.",
+  "ctx": "Util_Send(driverid, -10270721, \"Il cliente ha contestato la corsa: nessun pagamento, la verifichera' lo staff.\");",
+  "ka": ""
+ },
+ {
+  "id": 327,
+  "file": "taxi/taxi.inc",
+  "line": 765,
+  "it": "Il cliente non ha fondi sufficienti in banca: corsa annullata.",
+  "ctx": "Taxi_CancelRide(driverid, \"Il cliente non ha fondi sufficienti in banca: corsa annullata.\", \"\");",
+  "ka": ""
+ },
+ {
+  "id": 328,
+  "file": "taxi/taxi.inc",
+  "line": 770,
+  "it": "La corsa risultava gia' chiusa.",
+  "ctx": "Util_Send(driverid, -1, \"La corsa risultava gia' chiusa.\");",
+  "ka": ""
+ },
+ {
+  "id": 329,
+  "file": "taxi/taxi.inc",
+  "line": 774,
+  "it": "Pagamento non confermato dalla centrale: la corsa verra' verificata.",
+  "ctx": "Util_Send(driverid, -10270721, \"Pagamento non confermato dalla centrale: la corsa verra' verificata.\");",
+  "ka": ""
+ },
+ {
+  "id": 330,
+  "file": "taxi/taxi.inc",
+  "line": 778,
+  "it": "Corsa non piu' valida: chiusa senza pagamento.",
+  "ctx": "Util_Send(driverid, -10270721, \"Corsa non piu' valida: chiusa senza pagamento.\");",
+  "ka": ""
+ },
+ {
+  "id": 331,
+  "file": "taxi/taxi.inc",
+  "line": 867,
+  "it": "Grazie per il tuo voto.",
+  "ctx": "Util_Send(playerid, 0x66DD66FF, \"Grazie per il tuo voto.\");",
+  "ka": ""
+ },
+ {
+  "id": 332,
+  "file": "taxi/taxi.inc",
+  "line": 871,
+  "it": "[Taxi] Nuovo voto: %d stelle (media %d.%02d).",
+  "ctx": "SendClientMessage(d, -1, \"[Taxi] Nuovo voto: %d stelle (media %d.%02d).\", v1, v2 / 100, v2 % 100);",
+  "ka": ""
+ },
+ {
+  "id": 333,
+  "file": "taxi/taxi.inc",
+  "line": 876,
+  "it": "Hai gia' votato questa corsa.",
+  "ctx": "Util_Send(playerid, -1, \"Hai gia' votato questa corsa.\");",
+  "ka": ""
+ },
+ {
+  "id": 334,
+  "file": "taxi/taxi.inc",
+  "line": 915,
+  "it": "Corsa contestata: nessun addebito, la verifichera' lo staff.",
+  "ctx": "Util_Send(playerid, -1, \"Corsa contestata: nessun addebito, la verifichera' lo staff.\");",
+  "ka": ""
+ },
+ {
+  "id": 335,
+  "file": "taxi/taxi.inc",
+  "line": 919,
+  "it": "Fondi insufficienti in banca per pagare la corsa: corsa annullata.",
+  "ctx": "Util_Send(playerid, -10270721, \"Fondi insufficienti in banca per pagare la corsa: corsa annullata.\");",
+  "ka": ""
+ },
+ {
+  "id": 336,
+  "file": "taxi/taxi.inc",
+  "line": 941,
+  "it": "Quella chiamata non e' piu' attiva.",
+  "ctx": "Util_Send(playerid, -10270721, \"Quella chiamata non e' piu' attiva.\");",
+  "ka": ""
+ },
+ {
+  "id": 337,
+  "file": "taxi/taxi.inc",
+  "line": 951,
+  "it": "Questa corsa non e' piu' in attesa di pagamento.",
+  "ctx": "UI_LivingReject(playerid, \"Questa corsa non e' piu' in attesa di pagamento.\");",
+  "ka": ""
+ },
+ {
+  "id": 338,
+  "file": "taxi/taxi.inc",
+  "line": 959,
+  "it": "Pagamento in corso...",
+  "ctx": "Util_Send(playerid, -1, accept != 0 ? \"Pagamento in corso...\" : \"Contestazione registrata: la corsa restera' in sospeso per lo staff.\");",
+  "ka": ""
+ },
+ {
+  "id": 339,
+  "file": "taxi/taxi.inc",
+  "line": 959,
+  "it": "Contestazione registrata: la corsa restera' in sospeso per lo staff.",
+  "ctx": "Util_Send(playerid, -1, accept != 0 ? \"Pagamento in corso...\" : \"Contestazione registrata: la corsa restera' in sospeso per lo staff.\");",
+  "ka": ""
+ },
+ {
+  "id": 340,
+  "file": "taxi/taxi.inc",
+  "line": 974,
+  "it": "Il cliente non ha confermato il pagamento: corsa annullata.",
+  "ctx": "Taxi_CancelRide(d, \"Il cliente non ha confermato il pagamento: corsa annullata.\", \"Non hai confermato il pagamento: corsa annullata.\");",
+  "ka": ""
+ },
+ {
+  "id": 341,
+  "file": "taxi/taxi.inc",
+  "line": 974,
+  "it": "Non hai confermato il pagamento: corsa annullata.",
+  "ctx": "Taxi_CancelRide(d, \"Il cliente non ha confermato il pagamento: corsa annullata.\", \"Non hai confermato il pagamento: corsa annullata.\");",
+  "ka": ""
+ },
+ {
+  "id": 342,
+  "file": "taxi/taxi.inc",
+  "line": 978,
+  "it": "Il cliente non ha risposto: /tassametro stop per richiedere di nuovo il pagamento, /tassametro annulla per chiudere.",
+  "ctx": "Util_Send(d, -2994689, \"Il cliente non ha risposto: /tassametro stop per richiedere di nuovo il pagamento, /tassametro annulla per chiudere.\");",
+  "ka": ""
+ },
+ {
+  "id": 343,
+  "file": "taxi/taxi.inc",
+  "line": 1004,
+  "it": "Sei gia' in servizio.",
+  "ctx": "Util_Send(playerid, -10270721, \"Sei gia' in servizio.\");",
+  "ka": ""
+ },
+ {
+  "id": 344,
+  "file": "taxi/taxi.inc",
+  "line": 1009,
+  "it": "Pratica in corso: attendi.",
+  "ctx": "Util_Send(playerid, -10270721, \"Pratica in corso: attendi.\");",
+  "ka": ""
+ },
+ {
+  "id": 345,
+  "file": "taxi/taxi.inc",
+  "line": 1020,
+  "it": "Serve almeno il livello %d per guidare un taxi.",
+  "ctx": "SendClientMessage(playerid, -10270721, \"Serve almeno il livello %d per guidare un taxi.\", 2);",
+  "ka": ""
+ },
+ {
+  "id": 346,
+  "file": "taxi/taxi.inc",
+  "line": 1025,
+  "it": "Presentati a piedi al deposito taxi di Unity Station.",
+  "ctx": "Util_Send(playerid, -10270721, \"Presentati a piedi al deposito taxi di Unity Station.\");",
+  "ka": ""
+ },
+ {
+  "id": 347,
+  "file": "taxi/taxi.inc",
+  "line": 1031,
+  "it": "Servono $%d (canone $%d/h + cauzione $%d) tra banca e contanti.",
+  "ctx": "SendClientMessage(playerid, -10270721, \"Servono $%d (canone $%d/h + cauzione $%d) tra banca e contanti.\", total, 60, 300);",
+  "ka": ""
+ },
+ {
+  "id": 348,
+  "file": "taxi/taxi.inc",
+  "line": 1036,
+  "it": "Nessun taxi disponibile al momento: riprova tra poco.",
+  "ctx": "Util_Send(playerid, -10270721, \"Nessun taxi disponibile al momento: riprova tra poco.\");",
+  "ka": ""
+ },
+ {
+  "id": 349,
+  "file": "taxi/taxi.inc",
+  "line": 1039,
+  "it": "Pratica del taxi in corso...",
+  "ctx": "Util_Send(playerid, -1, \"Pratica del taxi in corso...\");",
+  "ka": ""
+ },
+ {
+  "id": 350,
+  "file": "taxi/taxi.inc",
+  "line": 1046,
+  "it": "Non sei in servizio.",
+  "ctx": "Util_Send(playerid, -10270721, \"Non sei in servizio.\");",
+  "ka": ""
+ },
+ {
+  "id": 351,
+  "file": "taxi/taxi.inc",
+  "line": 1051,
+  "it": "Concludi o annulla prima la corsa in corso (/tassametro annulla).",
+  "ctx": "Util_Send(playerid, -10270721, \"Concludi o annulla prima la corsa in corso (/tassametro annulla).\");",
+  "ka": ""
+ },
+ {
+  "id": 352,
+  "file": "taxi/taxi.inc",
+  "line": 1056,
+  "it": "Riporta il taxi al deposito di Unity Station per chiudere il turno.",
+  "ctx": "Util_Send(playerid, -10270721, \"Riporta il taxi al deposito di Unity Station per chiudere il turno.\");",
+  "ka": ""
+ },
+ {
+  "id": 353,
+  "file": "taxi/taxi.inc",
+  "line": 1060,
+  "it": "Fine turno: riconsegna del taxi in corso...",
+  "ctx": "Util_Send(playerid, -1, \"Fine turno: riconsegna del taxi in corso...\");",
+  "ka": ""
+ },
+ {
+  "id": 354,
+  "file": "taxi/taxi.inc",
+  "line": 1065,
+  "it": "In servizio. Punti taxi: %d. Comandi: /accettacorsa [id] · /tassametro start|stop|annulla · /taxi off (al deposito).",
+  "ctx": "SendClientMessage(playerid, -1, \"In servizio. Punti taxi: %d. Comandi: /accettacorsa [id] · /tassametro start|stop|annulla · /taxi off (al deposito).\", LD_GetProPoints(playerid, 2));",
+  "ka": ""
+ },
+ {
+  "id": 355,
+  "file": "taxi/taxi.inc",
+  "line": 1069,
+  "it": "Uso: /taxi on|off al deposito di Unity Station (canone orario + cauzione).",
+  "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Uso: /taxi on|off al deposito di Unity Station (canone orario + cauzione).\");",
+  "ka": ""
+ },
+ {
+  "id": 356,
+  "file": "taxi/taxi.inc",
+  "line": 1084,
+  "it": "Sei in servizio come tassista.",
+  "ctx": "Util_Send(playerid, -10270721, \"Sei in servizio come tassista.\");",
+  "ka": ""
+ },
+ {
+  "id": 357,
+  "file": "taxi/taxi.inc",
+  "line": 1089,
+  "it": "Un taxi ha gia' accettato la tua chiamata.",
+  "ctx": "Util_Send(playerid, -10270721, \"Un taxi ha gia' accettato la tua chiamata.\");",
+  "ka": ""
+ },
+ {
+  "id": 358,
+  "file": "taxi/taxi.inc",
+  "line": 1094,
+  "it": "Hai gia' chiamato un taxi: attendi %d secondi.",
+  "ctx": "SendClientMessage(playerid, -10270721, \"Hai gia' chiamato un taxi: attendi %d secondi.\", (60000 - (GetTickCount() - gPlayer[playerid][pTaxiCallTick])) / 1000 + 1);",
+  "ka": ""
+ },
+ {
+  "id": 359,
+  "file": "taxi/taxi.inc",
+  "line": 1099,
+  "it": "Devi trovarti all'aperto per chiamare un taxi.",
+  "ctx": "Util_Send(playerid, -10270721, \"Devi trovarti all'aperto per chiamare un taxi.\");",
+  "ka": ""
+ },
+ {
+  "id": 360,
+  "file": "taxi/taxi.inc",
+  "line": 1129,
+  "it": "[Taxi] %s (id %d) chiede un taxi a %s. /accettacorsa %d",
+  "ctx": "SendClientMessage(d, -2994689, \"[Taxi] %s (id %d) chiede un taxi a %s. /accettacorsa %d\", name, playerid, area, playerid);",
+  "ka": ""
+ },
+ {
+  "id": 361,
+  "file": "taxi/taxi.inc",
+  "line": 1140,
+  "it": "Chiamata inviata a %d taxi in zona: attendi una risposta.",
+  "ctx": "SendClientMessage(playerid, 0x66DD66FF, \"Chiamata inviata a %d taxi in zona: attendi una risposta.\", sent);",
+  "ka": ""
+ },
+ {
+  "id": 362,
+  "file": "taxi/taxi.inc",
+  "line": 1144,
+  "it": "Nessun taxi in servizio nelle vicinanze. Riprova piu' tardi.",
+  "ctx": "Util_Send(playerid, -10270721, \"Nessun taxi in servizio nelle vicinanze. Riprova piu' tardi.\");",
+  "ka": ""
+ },
+ {
+  "id": 363,
+  "file": "taxi/taxi.inc",
+  "line": 1157,
+  "it": "Uso: /accettacorsa [id giocatore]",
+  "ctx": "Util_Send(playerid, -10270721, \"Uso: /accettacorsa [id giocatore]\");",
+  "ka": ""
+ },
+ {
+  "id": 364,
+  "file": "taxi/taxi.inc",
+  "line": 1166,
+  "it": "Nessuna chiamata da accettare. Per un giocatore: /accettacorsa id.",
+  "ctx": "Util_Send(playerid, -10270721, \"Nessuna chiamata da accettare. Per un giocatore: /accettacorsa id.\");",
+  "ka": ""
+ },
+ {
+  "id": 365,
+  "file": "taxi/taxi.inc",
+  "line": 1186,
+  "it": "Non hai una corsa in corso.",
+  "ctx": "Util_Send(playerid, -10270721, \"Non hai una corsa in corso.\");",
+  "ka": ""
+ },
+ {
+  "id": 366,
+  "file": "taxi/taxi.inc",
+  "line": 1191,
+  "it": "Con i clienti della citta' il tassametro e' automatico (prelievo -> arrivo).",
+  "ctx": "Util_Send(playerid, -1, \"Con i clienti della citta' il tassametro e' automatico (prelievo -> arrivo).\");",
+  "ka": ""
+ },
+ {
+  "id": 367,
+  "file": "taxi/taxi.inc",
+  "line": 1196,
+  "it": "Operazione taxi in corso: attendi.",
+  "ctx": "Util_Send(playerid, -10270721, \"Operazione taxi in corso: attendi.\");",
+  "ka": ""
+ },
+ {
+  "id": 368,
+  "file": "taxi/taxi.inc",
+  "line": 1204,
+  "it": "In attesa della conferma di pagamento del cliente.",
+  "ctx": "Util_Send(playerid, -10270721, \"In attesa della conferma di pagamento del cliente.\");",
+  "ka": ""
+ },
+ {
+  "id": 369,
+  "file": "taxi/taxi.inc",
+  "line": 1209,
+  "it": "Il tassametro e' gia' acceso.",
+  "ctx": "Util_Send(playerid, -10270721, \"Il tassametro e' gia' acceso.\");",
+  "ka": ""
+ },
+ {
+  "id": 370,
+  "file": "taxi/taxi.inc",
+  "line": 1214,
+  "it": "Devi essere al volante del taxi con il cliente a bordo.",
+  "ctx": "Util_Send(playerid, -10270721, \"Devi essere al volante del taxi con il cliente a bordo.\");",
+  "ka": ""
+ },
+ {
+  "id": 371,
+  "file": "taxi/taxi.inc",
+  "line": 1220,
+  "it": "Tassametro acceso. A destinazione: /tassametro stop.",
+  "ctx": "Util_Send(playerid, 0x66DD66FF, \"Tassametro acceso. A destinazione: /tassametro stop.\");",
+  "ka": ""
+ },
+ {
+  "id": 372,
+  "file": "taxi/taxi.inc",
+  "line": 1221,
+  "it": "Il tassametro e' acceso.",
+  "ctx": "Util_Send(p, -1, \"Il tassametro e' acceso.\");",
+  "ka": ""
+ },
+ {
+  "id": 373,
+  "file": "taxi/taxi.inc",
+  "line": 1236,
+  "it": "Il tassametro non e' acceso.",
+  "ctx": "Util_Send(playerid, -10270721, \"Il tassametro non e' acceso.\");",
+  "ka": ""
+ },
+ {
+  "id": 374,
+  "file": "taxi/taxi.inc",
+  "line": 1241,
+  "it": "Corsa annullata senza addebito.",
+  "ctx": "Taxi_CancelRide(playerid, \"Corsa annullata senza addebito.\", \"Il tassista ha annullato la corsa: nessun addebito.\");",
+  "ka": ""
+ },
+ {
+  "id": 375,
+  "file": "taxi/taxi.inc",
+  "line": 1241,
+  "it": "Il tassista ha annullato la corsa: nessun addebito.",
+  "ctx": "Taxi_CancelRide(playerid, \"Corsa annullata senza addebito.\", \"Il tassista ha annullato la corsa: nessun addebito.\");",
+  "ka": ""
+ },
+ {
+  "id": 376,
+  "file": "taxi/taxi.inc",
+  "line": 1244,
+  "it": "Uso: /tassametro start|stop|annulla",
+  "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Uso: /tassametro start|stop|annulla\");",
+  "ka": ""
+ },
+ {
+  "id": 377,
+  "file": "taxi/taxi.inc",
+  "line": 1260,
+  "it": "Fondi insufficienti: servono $%d (canone + cauzione).",
+  "ctx": "SendClientMessage(playerid, -10270721, \"Fondi insufficienti: servono $%d (canone + cauzione).\", 360);",
+  "ka": ""
+ },
+ {
+  "id": 378,
+  "file": "taxi/taxi.inc",
+  "line": 1264,
+  "it": "Non puoi prendere servizio: livello insufficiente o un altro noleggio/contratto attivo.",
+  "ctx": "Util_Send(playerid, -10270721, \"Non puoi prendere servizio: livello insufficiente o un altro noleggio/contratto attivo.\");",
+  "ka": ""
+ },
+ {
+  "id": 379,
+  "file": "taxi/taxi.inc",
+  "line": 1268,
+  "it": "Nessun taxi assegnato: riprova tra poco (nessun addebito).",
+  "ctx": "Util_Send(playerid, -10270721, \"Nessun taxi assegnato: riprova tra poco (nessun addebito).\");",
+  "ka": ""
+ },
+ {
+  "id": 380,
+  "file": "taxi/taxi.inc",
+  "line": 1278,
+  "it": "Sei in servizio (canone $%d/h, cauzione $%d). Le chiamate arrivano da sole: /accettacorsa. Fine turno: /taxi off al deposito.",
+  "ctx": "SendClientMessage(playerid, 0x66DD66FF, \"Sei in servizio (canone $%d/h, cauzione $%d). Le chiamate arrivano da sole: /accettacorsa. Fine turno: /taxi off al deposito.\", 60, 300);",
+  "ka": ""
+ }
+]

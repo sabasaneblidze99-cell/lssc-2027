@@ -1,0 +1,234 @@
+[
+ {
+  "id": 1740,
+  "file": "vehicle/vehicle.inc",
+  "line": 1196,
+  "it": "Hai un'operazione veicolo in corso: attendi.",
+  "ctx": "Util_Send(playerid, -10270721, \"Hai un'operazione veicolo in corso: attendi.\");",
+  "ka": ""
+ },
+ {
+  "id": 1741,
+  "file": "vehicle/vehicle.inc",
+  "line": 1201,
+  "it": "Questo veicolo non e' distrutto.",
+  "ctx": "Util_Send(playerid, -10270721, \"Questo veicolo non e' distrutto.\");",
+  "ka": ""
+ },
+ {
+  "id": 1742,
+  "file": "vehicle/vehicle.inc",
+  "line": 1206,
+  "it": "Limite veicoli del server raggiunto: riprova piu' tardi.",
+  "ctx": "Util_Send(playerid, -10270721, \"Limite veicoli del server raggiunto: riprova piu' tardi.\");",
+  "ka": ""
+ },
+ {
+  "id": 1743,
+  "file": "vehicle/vehicle.inc",
+  "line": 1214,
+  "it": "Assicurazione $%d: fondi insufficienti (contanti o banca).",
+  "ctx": "SendClientMessage(playerid, -10270721, \"Assicurazione $%d: fondi insufficienti (contanti o banca).\", cost);",
+  "ka": ""
+ },
+ {
+  "id": 1744,
+  "file": "vehicle/vehicle.inc",
+  "line": 1230,
+  "it": "Recupero non riuscito (limite veicoli del server). Nessun addebito.",
+  "ctx": "Util_Send(playerid, -10270721, \"Recupero non riuscito (limite veicoli del server). Nessun addebito.\");",
+  "ka": ""
+ },
+ {
+  "id": 1745,
+  "file": "vehicle/vehicle.inc",
+  "line": 1237,
+  "it": "Pagamento non riuscito. Recupero annullato.",
+  "ctx": "Util_Send(playerid, -10270721, \"Pagamento non riuscito. Recupero annullato.\");",
+  "ka": ""
+ },
+ {
+  "id": 1746,
+  "file": "vehicle/vehicle.inc",
+  "line": 1244,
+  "it": "Assicurazione pagata ($%d, %s): la tua %s ti aspetta al parcheggio.",
+  "ctx": "SendClientMessage(playerid, 0x66DD66FF, \"Assicurazione pagata ($%d, %s): la tua %s ti aspetta al parcheggio.\", cost, useCash ? \"contanti\" : \"banca\", mname);",
+  "ka": ""
+ },
+ {
+  "id": 1747,
+  "file": "vehicle/vehicle.inc",
+  "line": 1246,
+  "it": "RECUPERO %s: %s dbId %d costo $%d",
+  "ctx": "format(msg, 256, \"RECUPERO %s: %s dbId %d costo $%d\", pname, mname, g_VSlot[playerid][slot][vsDbId], cost);",
+  "ka": ""
+ },
+ {
+  "id": 1748,
+  "file": "vehicle/vehicle.inc",
+  "line": 1267,
+  "it": "Uso: /v lock | engine | lights | park | find [slot] | list | sell [slot] | recover [slot]",
+  "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Uso: /v lock | engine | lights | park | find [slot] | list | sell [slot] | recover [slot]\");",
+  "ka": ""
+ },
+ {
+  "id": 1749,
+  "file": "vehicle/vehicle.inc",
+  "line": 1301,
+  "it": "Il carro attrezzi non e' ancora disponibile.",
+  "ctx": "Util_Send(playerid, -10270721, \"Il carro attrezzi non e' ancora disponibile.\");",
+  "ka": ""
+ },
+ {
+  "id": 1750,
+  "file": "vehicle/vehicle.inc",
+  "line": 1321,
+  "it": "Slot non valido (1-%d).",
+  "ctx": "SendClientMessage(playerid, -10270721, \"Slot non valido (1-%d).\", 4);",
+  "ka": ""
+ },
+ {
+  "id": 1751,
+  "file": "vehicle/vehicle.inc",
+  "line": 1338,
+  "it": "Uso: /v recover [slot] (/v list per vedere quali sono distrutti)",
+  "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Uso: /v recover [slot] (/v list per vedere quali sono distrutti)\");",
+  "ka": ""
+ },
+ {
+  "id": 1752,
+  "file": "vehicle/vehicle.inc",
+  "line": 1357,
+  "it": "Uso: /v find|sell [slot] (nessun tuo veicolo vicino)",
+  "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Uso: /v find|sell [slot] (nessun tuo veicolo vicino)\");",
+  "ka": ""
+ },
+ {
+  "id": 1753,
+  "file": "vehicle/vehicle.inc",
+  "line": 1375,
+  "it": "Uso: /v lock | engine | lights | park | find [slot] | list | sell [slot] | recover [slot]",
+  "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Uso: /v lock | engine | lights | park | find [slot] | list | sell [slot] | recover [slot]\");",
+  "ka": ""
+ },
+ {
+  "id": 1754,
+  "file": "vehicle/vehicle.inc",
+  "line": 1392,
+  "it": "Devi essere al volante di un tuo veicolo.",
+  "ctx": "Util_Send(playerid, -10270721, \"Devi essere al volante di un tuo veicolo.\");",
+  "ka": ""
+ },
+ {
+  "id": 1755,
+  "file": "vehicle/vehicle.inc",
+  "line": 1397,
+  "it": "Non sei vicino a un distributore.",
+  "ctx": "Util_Send(playerid, -10270721, \"Non sei vicino a un distributore.\");",
+  "ka": ""
+ },
+ {
+  "id": 1756,
+  "file": "vehicle/vehicle.inc",
+  "line": 1402,
+  "it": "Veicolo non disponibile: operazione in corso.",
+  "ctx": "Util_Send(playerid, -10270721, \"Veicolo non disponibile: operazione in corso.\");",
+  "ka": ""
+ },
+ {
+  "id": 1757,
+  "file": "vehicle/vehicle.inc",
+  "line": 1407,
+  "it": "Spegni il motore prima di fare rifornimento (/v engine).",
+  "ctx": "Util_Send(playerid, -10270721, \"Spegni il motore prima di fare rifornimento (/v engine).\");",
+  "ka": ""
+ },
+ {
+  "id": 1758,
+  "file": "vehicle/vehicle.inc",
+  "line": 1414,
+  "it": "Il serbatoio e' gia' pieno.",
+  "ctx": "Util_Send(playerid, -10270721, \"Il serbatoio e' gia' pieno.\");",
+  "ka": ""
+ },
+ {
+  "id": 1759,
+  "file": "vehicle/vehicle.inc",
+  "line": 1424,
+  "it": "Uso: /refuel [litri 1-%d] (senza argomento: pieno)",
+  "ctx": "SendClientMessage(playerid, 0x99CCFFFF, \"Uso: /refuel [litri 1-%d] (senza argomento: pieno)\", cap / 100);",
+  "ka": ""
+ },
+ {
+  "id": 1760,
+  "file": "vehicle/vehicle.inc",
+  "line": 1434,
+  "it": "Non hai abbastanza contanti per fare rifornimento.",
+  "ctx": "Util_Send(playerid, -10270721, \"Non hai abbastanza contanti per fare rifornimento.\");",
+  "ka": ""
+ },
+ {
+  "id": 1761,
+  "file": "vehicle/vehicle.inc",
+  "line": 1440,
+  "it": "Non hai abbastanza contanti per fare rifornimento.",
+  "ctx": "Util_Send(playerid, -10270721, \"Non hai abbastanza contanti per fare rifornimento.\");",
+  "ka": ""
+ },
+ {
+  "id": 1762,
+  "file": "vehicle/vehicle.inc",
+  "line": 1451,
+  "it": "Rifornimento: +%.1f L per $%d. Serbatoio: %.1f/%.0f L.",
+  "ctx": "SendClientMessage(playerid, 0x66DD66FF, \"Rifornimento: +%.1f L per $%d. Serbatoio: %.1f/%.0f L.\", (float(add) / float(100)), cost, (float(g_VSlot[playerid][slot][vsFuelCl]) / float(100)), (float(cap) ",
+  "ka": ""
+ },
+ {
+  "id": 1763,
+  "file": "vehicle/vehicle.inc",
+  "line": 1470,
+  "it": "Concessionario di Los Santos\\nUsa /concessionario",
+  "ctx": "Lang_Create3DTextLabel(\"Concessionario di Los Santos\\nUsa /concessionario\", -2994689, 1655.0, -1665.0, (22.5 + 1.0), 15.0, 0, false);",
+  "ka": ""
+ },
+ {
+  "id": 1764,
+  "file": "vehicle/vehicle.inc",
+  "line": 1473,
+  "it": "Distributore\\nUsa /refuel [litri]",
+  "ctx": "Lang_Create3DTextLabel(\"Distributore\\nUsa /refuel [litri]\", -2994689, g_VehStations[i][0], g_VehStations[i][1], (1.0 + g_VehStations[i][2]), 15.0, 0, false);",
+  "ka": ""
+ },
+ {
+  "id": 1765,
+  "file": "vehicle/vehicle.inc",
+  "line": 1560,
+  "it": "Non hai le chiavi di questo veicolo.",
+  "ctx": "Util_Send(playerid, -10270721, \"Non hai le chiavi di questo veicolo.\");",
+  "ka": ""
+ },
+ {
+  "id": 1766,
+  "file": "vehicle/vehicle.inc",
+  "line": 1599,
+  "it": "Non hai le chiavi di questo veicolo.",
+  "ctx": "Util_Send(playerid, -10270721, \"Non hai le chiavi di questo veicolo.\");",
+  "ka": ""
+ },
+ {
+  "id": 1767,
+  "file": "vehicle/vehicle.inc",
+  "line": 1631,
+  "it": "La tua %s (slot %d) e' stata distrutta. Recuperala con /v recover %d.",
+  "ctx": "SendClientMessage(o, -10270721, \"La tua %s (slot %d) e' stata distrutta. Recuperala con /v recover %d.\", mname, s + 1, s + 1);",
+  "ka": ""
+ },
+ {
+  "id": 1768,
+  "file": "vehicle/vehicle.inc",
+  "line": 1633,
+  "it": "DISTRUTTO %s: %s dbId %d",
+  "ctx": "format(msg, 256, \"DISTRUTTO %s: %s dbId %d\", pname, mname, g_VSlot[o][s][vsDbId]);",
+  "ka": ""
+ }
+]

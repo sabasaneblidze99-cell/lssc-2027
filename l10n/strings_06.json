@@ -1,0 +1,2082 @@
+[
+ {
+  "id": 641,
+  "file": "ui/house_ui.inc",
+  "line": 583,
+  "it": "Frigo vuoto o borsa piena.",
+  "ctx": "SendClientMessage(playerid, -10066177, \"Frigo vuoto o borsa piena.\");",
+  "ka": ""
+ },
+ {
+  "id": 642,
+  "file": "ui/house_ui.inc",
+  "line": 606,
+  "it": "Quantita' non valida.",
+  "ctx": "SendClientMessage(playerid, -10066177, \"Quantita' non valida.\");",
+  "ka": ""
+ },
+ {
+  "id": 643,
+  "file": "ui/house_ui.inc",
+  "line": 622,
+  "it": "Nessuna bolletta da pagare.",
+  "ctx": "SendClientMessage(playerid, 0x66DD66FF, \"Nessuna bolletta da pagare.\");",
+  "ka": ""
+ },
+ {
+  "id": 644,
+  "file": "ui/house_ui.inc",
+  "line": 640,
+  "it": "Fondi insufficienti con questo metodo di pagamento.",
+  "ctx": "SendClientMessage(playerid, -10066177, \"Fondi insufficienti con questo metodo di pagamento.\");",
+  "ka": ""
+ },
+ {
+  "id": 645,
+  "file": "ui/house_ui.inc",
+  "line": 697,
+  "it": "Sazieta' 0%",
+  "ctx": "g_UiHh[playerid][2] = UI_HhText(playerid, (4.0 + left), (458.0 + 1.0), \"Sazieta' 0%\", 0.2, 0.9, -1, t_TEXT_DRAW_ALIGN:1);",
+  "ka": ""
+ },
+ {
+  "id": 646,
+  "file": "ui/house_ui.inc",
+  "line": 701,
+  "it": "Luce ON | Gas ON | Frigo 0/0",
+  "ctx": "g_UiHh[playerid][6] = UI_HhText(playerid, (4.0 + homeLeft), (458.0 + 3.0), \"Luce ON | Gas ON | Frigo 0/0\", 0.2, 0.9, -1, t_TEXT_DRAW_ALIGN:1);",
+  "ka": ""
+ },
+ {
+  "id": 647,
+  "file": "ui/house_ui.inc",
+  "line": 760,
+  "it": "Sazieta' %d%%",
+  "ctx": "format(str, 32, \"Sazieta' %d%%\", hunger);",
+  "ka": ""
+ },
+ {
+  "id": 648,
+  "file": "ui/house_ui.inc",
+  "line": 785,
+  "it": "Luce %s | Gas %s | Frigo %d/%d",
+  "ctx": "format(str, 64, \"Luce %s | Gas %s | Frigo %d/%d\", lightOn ? \"ON\" : \"OFF\", gasOn ? \"ON\" : \"OFF\", fridgeUnits, fridgeCap);",
+  "ka": ""
+ },
+ {
+  "id": 649,
+  "file": "ui/house_ui.inc",
+  "line": 785,
+  "it": "OFF",
+  "ctx": "format(str, 64, \"Luce %s | Gas %s | Frigo %d/%d\", lightOn ? \"ON\" : \"OFF\", gasOn ? \"ON\" : \"OFF\", fridgeUnits, fridgeCap);",
+  "ka": ""
+ },
+ {
+  "id": 650,
+  "file": "ui/house_ui.inc",
+  "line": 785,
+  "it": "OFF",
+  "ctx": "format(str, 64, \"Luce %s | Gas %s | Frigo %d/%d\", lightOn ? \"ON\" : \"OFF\", gasOn ? \"ON\" : \"OFF\", fridgeUnits, fridgeCap);",
+  "ka": ""
+ },
+ {
+  "id": 651,
+  "file": "ui/hud.inc",
+  "line": 92,
+  "it": "Banca: $0",
+  "ctx": "g_UiHud[playerid][2] = UI_HudText(playerid, (632.0 - 5.0), (330.0 + 20.0), \"Banca: $0\", 0.22, 1.0, -1, t_TEXT_DRAW_ALIGN:3);",
+  "ka": ""
+ },
+ {
+  "id": 652,
+  "file": "ui/hud.inc",
+  "line": 93,
+  "it": "Liv. 1  Exp 0",
+  "ctx": "g_UiHud[playerid][3] = UI_HudText(playerid, (5.0 + left), (330.0 + 36.0), \"Liv. 1  Exp 0\", 0.22, 1.0, -2994689, t_TEXT_DRAW_ALIGN:1);",
+  "ka": ""
+ },
+ {
+  "id": 653,
+  "file": "ui/hud.inc",
+  "line": 156,
+  "it": "Banca: $%d",
+  "ctx": "format(str, 48, \"Banca: $%d\", bank);",
+  "ka": ""
+ },
+ {
+  "id": 654,
+  "file": "ui/hud.inc",
+  "line": 160,
+  "it": "Liv. %d  (MAX)",
+  "ctx": "format(str, 48, \"Liv. %d  (MAX)\", 50);",
+  "ka": ""
+ },
+ {
+  "id": 655,
+  "file": "ui/hud.inc",
+  "line": 180,
+  "it": "Liv. %d  Exp %d/%d",
+  "ctx": "format(str, 48, \"Liv. %d  Exp %d/%d\", level, inLevel, step);",
+  "ka": ""
+ },
+ {
+  "id": 656,
+  "file": "ui/intro_ui.inc",
+  "line": 414,
+  "it": "LOS SANTOS",
+  "ctx": "g_UiIntroTd[playerid][4] = UI_IntroText(playerid, 320.0, 170.0, \"LOS SANTOS\", 0.9, 3.6, -1, t_TEXT_DRAW_FONT:3);",
+  "ka": ""
+ },
+ {
+  "id": 657,
+  "file": "ui/inventory_ui.inc",
+  "line": 3,
+  "it": "Porzione di cibo",
+  "ctx": "\"Porzione di cibo\",",
+  "ka": ""
+ },
+ {
+  "id": 658,
+  "file": "ui/inventory_ui.inc",
+  "line": 4,
+  "it": "Pasto pronto",
+  "ctx": "\"Pasto pronto\",",
+  "ka": ""
+ },
+ {
+  "id": 659,
+  "file": "ui/inventory_ui.inc",
+  "line": 5,
+  "it": "Bottiglia d'acqua",
+  "ctx": "\"Bottiglia d'acqua\",",
+  "ka": ""
+ },
+ {
+  "id": 660,
+  "file": "ui/inventory_ui.inc",
+  "line": 6,
+  "it": "Snack",
+  "ctx": "\"Snack\",",
+  "ka": ""
+ },
+ {
+  "id": 661,
+  "file": "ui/inventory_ui.inc",
+  "line": 7,
+  "it": "Kit di pronto soccorso",
+  "ctx": "\"Kit di pronto soccorso\",",
+  "ka": ""
+ },
+ {
+  "id": 662,
+  "file": "ui/inventory_ui.inc",
+  "line": 8,
+  "it": "Benda",
+  "ctx": "\"Benda\",",
+  "ka": ""
+ },
+ {
+  "id": 663,
+  "file": "ui/inventory_ui.inc",
+  "line": 9,
+  "it": "Sigarette",
+  "ctx": "\"Sigarette\",",
+  "ka": ""
+ },
+ {
+  "id": 664,
+  "file": "ui/inventory_ui.inc",
+  "line": 10,
+  "it": "Accendino",
+  "ctx": "\"Accendino\",",
+  "ka": ""
+ },
+ {
+  "id": 665,
+  "file": "ui/inventory_ui.inc",
+  "line": 11,
+  "it": "Telefono",
+  "ctx": "\"Telefono\",",
+  "ka": ""
+ },
+ {
+  "id": 666,
+  "file": "ui/inventory_ui.inc",
+  "line": 12,
+  "it": "Documento d'identita'",
+  "ctx": "\"Documento d'identita'\"",
+  "ka": ""
+ },
+ {
+  "id": 667,
+  "file": "ui/inventory_ui.inc",
+  "line": 16,
+  "it": "Scatolame e ingredienti per cucinare. Si ripone nel frigo.",
+  "ctx": "\"Scatolame e ingredienti per cucinare. Si ripone nel frigo.\",",
+  "ka": ""
+ },
+ {
+  "id": 668,
+  "file": "ui/inventory_ui.inc",
+  "line": 17,
+  "it": "Piatto da asporto. Sazia subito.",
+  "ctx": "\"Piatto da asporto. Sazia subito.\",",
+  "ka": ""
+ },
+ {
+  "id": 669,
+  "file": "ui/inventory_ui.inc",
+  "line": 18,
+  "it": "Acqua naturale da 0,5 l.",
+  "ctx": "\"Acqua naturale da 0,5 l.\",",
+  "ka": ""
+ },
+ {
+  "id": 670,
+  "file": "ui/inventory_ui.inc",
+  "line": 19,
+  "it": "Barretta o patatine.",
+  "ctx": "\"Barretta o patatine.\",",
+  "ka": ""
+ },
+ {
+  "id": 671,
+  "file": "ui/inventory_ui.inc",
+  "line": 20,
+  "it": "Kit civile di pronto soccorso. Cura e viene consumato.",
+  "ctx": "\"Kit civile di pronto soccorso. Cura e viene consumato.\",",
+  "ka": ""
+ },
+ {
+  "id": 672,
+  "file": "ui/inventory_ui.inc",
+  "line": 21,
+  "it": "Garza e cerotti per piccole ferite.",
+  "ctx": "\"Garza e cerotti per piccole ferite.\",",
+  "ka": ""
+ },
+ {
+  "id": 673,
+  "file": "ui/inventory_ui.inc",
+  "line": 22,
+  "it": "Pacchetto da 20. Serve un accendino.",
+  "ctx": "\"Pacchetto da 20. Serve un accendino.\",",
+  "ka": ""
+ },
+ {
+  "id": 674,
+  "file": "ui/inventory_ui.inc",
+  "line": 23,
+  "it": "Necessario per fumare.",
+  "ctx": "\"Necessario per fumare.\",",
+  "ka": ""
+ },
+ {
+  "id": 675,
+  "file": "ui/inventory_ui.inc",
+  "line": 24,
+  "it": "Mostra il tuo numero di telefono.",
+  "ctx": "\"Mostra il tuo numero di telefono.\",",
+  "ka": ""
+ },
+ {
+  "id": 676,
+  "file": "ui/inventory_ui.inc",
+  "line": 25,
+  "it": "Carta d'identita' di San Andreas.",
+  "ctx": "\"Carta d'identita' di San Andreas.\"",
+  "ka": ""
+ },
+ {
+  "id": 677,
+  "file": "ui/inventory_ui.inc",
+  "line": 187,
+  "it": "Inventario - %d/%d slot - zaino %s",
+  "ctx": "format(title, 64, \"Inventario - %d/%d slot - zaino %s\", used, limit, g_UiInvBag[playerid] ? \"si\" : \"no\");",
+  "ka": ""
+ },
+ {
+  "id": 678,
+  "file": "ui/inventory_ui.inc",
+  "line": 191,
+  "it": "{FFFFFF}Il tuo inventario e' vuoto.\\n\\nCapienza: {FFD24D}%d/%d{FFFFFF} slot. Zaino: {FFD24D}%s{FFFFFF}.",
+  "ctx": "format(empty, 160, \"{FFFFFF}Il tuo inventario e' vuoto.\\n\\nCapienza: {FFD24D}%d/%d{FFFFFF} slot. Zaino: {FFD24D}%s{FFFFFF}.\", used, limit, g_UiInvBag[playerid] ? \"si\" : \"no\");",
+  "ka": ""
+ },
+ {
+  "id": 679,
+  "file": "ui/inventory_ui.inc",
+  "line": 195,
+  "it": "Chiudi",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9400, DIALOG_STYLE_MSGBOX, title, empty, \"Chiudi\", \"\");",
+  "ka": ""
+ },
+ {
+  "id": 680,
+  "file": "ui/inventory_ui.inc",
+  "line": 209,
+  "it": "Slot\\tOggetto\\tQuantita'\\n",
+  "ctx": "format(body, 1024, \"Slot\\tOggetto\\tQuantita'\\n\");",
+  "ka": ""
+ },
+ {
+  "id": 681,
+  "file": "ui/inventory_ui.inc",
+  "line": 225,
+  "it": "{FFD24D}>> Pagina successiva\\t\\t\\n",
+  "ctx": "strcat(body, \"{FFD24D}>> Pagina successiva\\t\\t\\n\", 1024);",
+  "ka": ""
+ },
+ {
+  "id": 682,
+  "file": "ui/inventory_ui.inc",
+  "line": 230,
+  "it": "{FFD24D}<< Pagina precedente\\t\\t\\n",
+  "ctx": "strcat(body, \"{FFD24D}<< Pagina precedente\\t\\t\\n\", 1024);",
+  "ka": ""
+ },
+ {
+  "id": 683,
+  "file": "ui/inventory_ui.inc",
+  "line": 235,
+  "it": "Inventario %d/%d - zaino %s - pag. %d/%d",
+  "ctx": "format(title, 64, \"Inventario %d/%d - zaino %s - pag. %d/%d\", used, limit, g_UiInvBag[playerid] ? \"si\" : \"no\", page + 1, pages);",
+  "ka": ""
+ },
+ {
+  "id": 684,
+  "file": "ui/inventory_ui.inc",
+  "line": 237,
+  "it": "Apri",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9400, DIALOG_STYLE_TABLIST_HEADERS, title, body, \"Apri\", \"Chiudi\");",
+  "ka": ""
+ },
+ {
+  "id": 685,
+  "file": "ui/inventory_ui.inc",
+  "line": 237,
+  "it": "Chiudi",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9400, DIALOG_STYLE_TABLIST_HEADERS, title, body, \"Apri\", \"Chiudi\");",
+  "ka": ""
+ },
+ {
+  "id": 686,
+  "file": "ui/inventory_ui.inc",
+  "line": 256,
+  "it": "L'inventario e' cambiato: riapro la lista.",
+  "ctx": "SendClientMessage(playerid, -10066177, \"L'inventario e' cambiato: riapro la lista.\");",
+  "ka": ""
+ },
+ {
+  "id": 687,
+  "file": "ui/inventory_ui.inc",
+  "line": 264,
+  "it": "%s x%d (slot %d)",
+  "ctx": "format(title, 64, \"%s x%d (slot %d)\", name, qty, slot + 1);",
+  "ka": ""
+ },
+ {
+  "id": 688,
+  "file": "ui/inventory_ui.inc",
+  "line": 267,
+  "it": "Usa\\n",
+  "ctx": "strcat(body, \"Usa\\n\", 256);",
+  "ka": ""
+ },
+ {
+  "id": 689,
+  "file": "ui/inventory_ui.inc",
+  "line": 271,
+  "it": "{888888}Usa (non utilizzabile){FFFFFF}\\n",
+  "ctx": "strcat(body, \"{888888}Usa (non utilizzabile){FFFFFF}\\n\", 256);",
+  "ka": ""
+ },
+ {
+  "id": 690,
+  "file": "ui/inventory_ui.inc",
+  "line": 275,
+  "it": "Dai a un giocatore\\nGetta\\n",
+  "ctx": "strcat(body, \"Dai a un giocatore\\nGetta\\n\", 256);",
+  "ka": ""
+ },
+ {
+  "id": 691,
+  "file": "ui/inventory_ui.inc",
+  "line": 279,
+  "it": "{888888}Dai (non trasferibile){FFFFFF}\\n{888888}Getta (non droppabile){FFFFFF}\\n",
+  "ctx": "strcat(body, \"{888888}Dai (non trasferibile){FFFFFF}\\n{888888}Getta (non droppabile){FFFFFF}\\n\", 256);",
+  "ka": ""
+ },
+ {
+  "id": 692,
+  "file": "ui/inventory_ui.inc",
+  "line": 281,
+  "it": "Descrizione",
+  "ctx": "strcat(body, \"Descrizione\", 256);",
+  "ka": ""
+ },
+ {
+  "id": 693,
+  "file": "ui/inventory_ui.inc",
+  "line": 282,
+  "it": "Scegli",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9401, DIALOG_STYLE_LIST, title, body, \"Scegli\", \"Indietro\");",
+  "ka": ""
+ },
+ {
+  "id": 694,
+  "file": "ui/inventory_ui.inc",
+  "line": 282,
+  "it": "Indietro",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9401, DIALOG_STYLE_LIST, title, body, \"Scegli\", \"Indietro\");",
+  "ka": ""
+ },
+ {
+  "id": 695,
+  "file": "ui/inventory_ui.inc",
+  "line": 294,
+  "it": "Slot vuoto o non valido.",
+  "ctx": "SendClientMessage(playerid, -10066177, \"Slot vuoto o non valido.\");",
+  "ka": ""
+ },
+ {
+  "id": 696,
+  "file": "ui/inventory_ui.inc",
+  "line": 312,
+  "it": "{FFFFFF}%s\\n\\nPosseduti: {FFD24D}%d{FFFFFF} (max %d per slot)\\nUso: {FFD24D}%s{FFFFFF}\\nDare/Gettare: {FFD24D}%s",
+  "ctx": "format(body, 384, \"{FFFFFF}%s\\n\\nPosseduti: {FFD24D}%d{FFFFFF} (max %d per slot)\\nUso: {FFD24D}%s{FFFFFF}\\nDare/Gettare: {FFD24D}%s\", desc, g_UiInvQty[playerid][slot], g_UiInvStack[itemId], flags & 1 ",
+  "ka": ""
+ },
+ {
+  "id": 697,
+  "file": "ui/inventory_ui.inc",
+  "line": 313,
+  "it": "Indietro",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9402, DIALOG_STYLE_MSGBOX, title, body, \"Indietro\", \"Chiudi\");",
+  "ka": ""
+ },
+ {
+  "id": 698,
+  "file": "ui/inventory_ui.inc",
+  "line": 313,
+  "it": "Chiudi",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9402, DIALOG_STYLE_MSGBOX, title, body, \"Indietro\", \"Chiudi\");",
+  "ka": ""
+ },
+ {
+  "id": 699,
+  "file": "ui/inventory_ui.inc",
+  "line": 321,
+  "it": "%s: quantita'",
+  "ctx": "format(title, 64, \"%s: quantita'\", name);",
+  "ka": ""
+ },
+ {
+  "id": 700,
+  "file": "ui/inventory_ui.inc",
+  "line": 322,
+  "it": "%s{FFFFFF}Quante unita' di {FFD24D}%s{FFFFFF} vuoi %s?\\nInserisci un numero da {FFD24D}1{FFFFFF} a {FFD24D}%d{FFFFFF}.",
+  "ctx": "format(body, 320, \"%s{FFFFFF}Quante unita' di {FFD24D}%s{FFFFFF} vuoi %s?\\nInserisci un numero da {FFD24D}1{FFFFFF} a {FFD24D}%d{FFFFFF}.\", err, name, g_UiInvPendAct[playerid] == 1 ? \"dare\" : \"gettare",
+  "ka": ""
+ },
+ {
+  "id": 701,
+  "file": "ui/inventory_ui.inc",
+  "line": 323,
+  "it": "Avanti",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9403, DIALOG_STYLE_INPUT, title, body, \"Avanti\", \"Indietro\");",
+  "ka": ""
+ },
+ {
+  "id": 702,
+  "file": "ui/inventory_ui.inc",
+  "line": 323,
+  "it": "Indietro",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9403, DIALOG_STYLE_INPUT, title, body, \"Avanti\", \"Indietro\");",
+  "ka": ""
+ },
+ {
+  "id": 703,
+  "file": "ui/inventory_ui.inc",
+  "line": 330,
+  "it": "Dai %s x%d",
+  "ctx": "format(title, 64, \"Dai %s x%d\", name, g_UiInvSelQty[playerid]);",
+  "ka": ""
+ },
+ {
+  "id": 704,
+  "file": "ui/inventory_ui.inc",
+  "line": 331,
+  "it": "%s{FFFFFF}Inserisci l'{FFD24D}ID{FFFFFF} del giocatore vicino a cui dare l'oggetto.\\nDeve trovarsi entro %.0f metri e accettare lo scambio.",
+  "ctx": "format(body, 320, \"%s{FFFFFF}Inserisci l'{FFD24D}ID{FFFFFF} del giocatore vicino a cui dare l'oggetto.\\nDeve trovarsi entro %.0f metri e accettare lo scambio.\", err, 3.0);",
+  "ka": ""
+ },
+ {
+  "id": 705,
+  "file": "ui/inventory_ui.inc",
+  "line": 332,
+  "it": "Invia",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9404, DIALOG_STYLE_INPUT, title, body, \"Invia\", \"Indietro\");",
+  "ka": ""
+ },
+ {
+  "id": 706,
+  "file": "ui/inventory_ui.inc",
+  "line": 332,
+  "it": "Indietro",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9404, DIALOG_STYLE_INPUT, title, body, \"Invia\", \"Indietro\");",
+  "ka": ""
+ },
+ {
+  "id": 707,
+  "file": "ui/inventory_ui.inc",
+  "line": 339,
+  "it": "{FFFFFF}Gettare {FFD24D}%s x%d{FFFFFF}?\\n\\n{FF6666}L'oggetto finira' a terra e scomparira' dopo %d minuti. Chiunque vicino potra' raccoglierlo.",
+  "ctx": "format(body, 320, \"{FFFFFF}Gettare {FFD24D}%s x%d{FFFFFF}?\\n\\n{FF6666}L'oggetto finira' a terra e scomparira' dopo %d minuti. Chiunque vicino potra' raccoglierlo.\", name, g_UiInvSelQty[playerid], 10);",
+  "ka": ""
+ },
+ {
+  "id": 708,
+  "file": "ui/inventory_ui.inc",
+  "line": 340,
+  "it": "Conferma: getta",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9405, DIALOG_STYLE_MSGBOX, \"Conferma: getta\", body, \"Getta\", \"Annulla\");",
+  "ka": ""
+ },
+ {
+  "id": 709,
+  "file": "ui/inventory_ui.inc",
+  "line": 340,
+  "it": "Getta",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9405, DIALOG_STYLE_MSGBOX, \"Conferma: getta\", body, \"Getta\", \"Annulla\");",
+  "ka": ""
+ },
+ {
+  "id": 710,
+  "file": "ui/inventory_ui.inc",
+  "line": 340,
+  "it": "Annulla",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9405, DIALOG_STYLE_MSGBOX, \"Conferma: getta\", body, \"Getta\", \"Annulla\");",
+  "ka": ""
+ },
+ {
+  "id": 711,
+  "file": "ui/inventory_ui.inc",
+  "line": 402,
+  "it": "Scambio in attesa: %d s",
+  "ctx": "format(str, 48, \"Scambio in attesa: %d s\", left);",
+  "ka": ""
+ },
+ {
+  "id": 712,
+  "file": "ui/inventory_ui.inc",
+  "line": 460,
+  "it": "Scambio in attesa",
+  "ctx": "g_UiInvRecvTd[playerid][1] = UI_InvText(playerid, (210.0 + 6.0), (124.0 + 2.0), \"Scambio in attesa\", 0.24, 1.1, -2994689, t_TEXT_DRAW_ALIGN:1);",
+  "ka": ""
+ },
+ {
+  "id": 713,
+  "file": "ui/inventory_ui.inc",
+  "line": 473,
+  "it": "{FFD24D}%s{FFFFFF} vuole darti {FFD24D}%s x%d{FFFFFF}.\\n\\nLa richiesta scade tra {FF6666}%d{FFFFFF} secondi.\\nSe non c'e' posto nel tuo inventario lo scambio fallira'.",
+  "ctx": "format(body, 320, \"{FFD24D}%s{FFFFFF} vuole darti {FFD24D}%s x%d{FFFFFF}.\\n\\nLa richiesta scade tra {FF6666}%d{FFFFFF} secondi.\\nSe non c'e' posto nel tuo inventario lo scambio fallira'.\", giver, name",
+  "ka": ""
+ },
+ {
+  "id": 714,
+  "file": "ui/inventory_ui.inc",
+  "line": 474,
+  "it": "Oggetto in arrivo",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9406, DIALOG_STYLE_MSGBOX, \"Oggetto in arrivo\", body, \"Accetta\", \"Rifiuta\");",
+  "ka": ""
+ },
+ {
+  "id": 715,
+  "file": "ui/inventory_ui.inc",
+  "line": 474,
+  "it": "Accetta",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9406, DIALOG_STYLE_MSGBOX, \"Oggetto in arrivo\", body, \"Accetta\", \"Rifiuta\");",
+  "ka": ""
+ },
+ {
+  "id": 716,
+  "file": "ui/inventory_ui.inc",
+  "line": 474,
+  "it": "Rifiuta",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9406, DIALOG_STYLE_MSGBOX, \"Oggetto in arrivo\", body, \"Accetta\", \"Rifiuta\");",
+  "ka": ""
+ },
+ {
+  "id": 717,
+  "file": "ui/inventory_ui.inc",
+  "line": 597,
+  "it": "La richiesta di scambio e' scaduta.",
+  "ctx": "SendClientMessage(playerid, -2994689, \"La richiesta di scambio e' scaduta.\");",
+  "ka": ""
+ },
+ {
+  "id": 718,
+  "file": "ui/inventory_ui.inc",
+  "line": 670,
+  "it": "Questo oggetto non si puo' usare.",
+  "ctx": "SendClientMessage(playerid, -10066177, \"Questo oggetto non si puo' usare.\");",
+  "ka": ""
+ },
+ {
+  "id": 719,
+  "file": "ui/inventory_ui.inc",
+  "line": 681,
+  "it": "Questo oggetto non si puo' dare.",
+  "ctx": "SendClientMessage(playerid, -10066177, listitem == 1 ? \"Questo oggetto non si puo' dare.\" : \"Questo oggetto non si puo' gettare.\");",
+  "ka": ""
+ },
+ {
+  "id": 720,
+  "file": "ui/inventory_ui.inc",
+  "line": 681,
+  "it": "Questo oggetto non si puo' gettare.",
+  "ctx": "SendClientMessage(playerid, -10066177, listitem == 1 ? \"Questo oggetto non si puo' dare.\" : \"Questo oggetto non si puo' gettare.\");",
+  "ka": ""
+ },
+ {
+  "id": 721,
+  "file": "ui/inventory_ui.inc",
+  "line": 739,
+  "it": "{FF6666}Quantita' non valida: serve un numero da 1 a %d.\\n\\n",
+  "ctx": "format(err, 144, \"{FF6666}Quantita' non valida: serve un numero da 1 a %d.\\n\\n\", maxQ);",
+  "ka": ""
+ },
+ {
+  "id": 722,
+  "file": "ui/inventory_ui.inc",
+  "line": 776,
+  "it": "{FF6666}Inserisci l'ID numerico del giocatore.\\n\\n",
+  "ctx": "UI_InvTargetShow(playerid, \"{FF6666}Inserisci l'ID numerico del giocatore.\\n\\n\");",
+  "ka": ""
+ },
+ {
+  "id": 723,
+  "file": "ui/inventory_ui.inc",
+  "line": 781,
+  "it": "{FF6666}ID non valido o giocatore non connesso.\\n\\n",
+  "ctx": "UI_InvTargetShow(playerid, \"{FF6666}ID non valido o giocatore non connesso.\\n\\n\");",
+  "ka": ""
+ },
+ {
+  "id": 724,
+  "file": "ui/inventory_ui.inc",
+  "line": 786,
+  "it": "{FF6666}Non puoi dare oggetti a te stesso.\\n\\n",
+  "ctx": "UI_InvTargetShow(playerid, \"{FF6666}Non puoi dare oggetti a te stesso.\\n\\n\");",
+  "ka": ""
+ },
+ {
+  "id": 725,
+  "file": "ui/job_ui.inc",
+  "line": 2,
+  "it": "Disoccupato",
+  "ctx": "\"Disoccupato\",",
+  "ka": ""
+ },
+ {
+  "id": 726,
+  "file": "ui/job_ui.inc",
+  "line": 3,
+  "it": "Autista Bus",
+  "ctx": "\"Autista Bus\",",
+  "ka": ""
+ },
+ {
+  "id": 727,
+  "file": "ui/job_ui.inc",
+  "line": 4,
+  "it": "Corriere",
+  "ctx": "\"Corriere\",",
+  "ka": ""
+ },
+ {
+  "id": 728,
+  "file": "ui/job_ui.inc",
+  "line": 5,
+  "it": "Netturbino",
+  "ctx": "\"Netturbino\"",
+  "ka": ""
+ },
+ {
+  "id": 729,
+  "file": "ui/job_ui.inc",
+  "line": 9,
+  "it": "Bus",
+  "ctx": "\"Bus\",",
+  "ka": ""
+ },
+ {
+  "id": 730,
+  "file": "ui/job_ui.inc",
+  "line": 10,
+  "it": "Boxville",
+  "ctx": "\"Boxville\",",
+  "ka": ""
+ },
+ {
+  "id": 731,
+  "file": "ui/job_ui.inc",
+  "line": 11,
+  "it": "Trashmaster",
+  "ctx": "\"Trashmaster\"",
+  "ka": ""
+ },
+ {
+  "id": 732,
+  "file": "ui/job_ui.inc",
+  "line": 14,
+  "it": "Tappa",
+  "ctx": "\"Tappa\",",
+  "ka": ""
+ },
+ {
+  "id": 733,
+  "file": "ui/job_ui.inc",
+  "line": 15,
+  "it": "Fermata",
+  "ctx": "\"Fermata\",",
+  "ka": ""
+ },
+ {
+  "id": 734,
+  "file": "ui/job_ui.inc",
+  "line": 16,
+  "it": "Consegna",
+  "ctx": "\"Consegna\",",
+  "ka": ""
+ },
+ {
+  "id": 735,
+  "file": "ui/job_ui.inc",
+  "line": 17,
+  "it": "Cassonetto",
+  "ctx": "\"Cassonetto\"",
+  "ka": ""
+ },
+ {
+  "id": 736,
+  "file": "ui/job_ui.inc",
+  "line": 27,
+  "it": "6 fermate fisse in ordine, poi rientro al deposito",
+  "ctx": "\"6 fermate fisse in ordine, poi rientro al deposito\",",
+  "ka": ""
+ },
+ {
+  "id": 737,
+  "file": "ui/job_ui.inc",
+  "line": 28,
+  "it": "5 consegne a caso tra 8 punti, poi rientro al deposito",
+  "ctx": "\"5 consegne a caso tra 8 punti, poi rientro al deposito\",",
+  "ka": ""
+ },
+ {
+  "id": 738,
+  "file": "ui/job_ui.inc",
+  "line": 29,
+  "it": "8 cassonetti in ordine fisso, poi scarico al deposito",
+  "ctx": "\"8 cassonetti in ordine fisso, poi scarico al deposito\"",
+  "ka": ""
+ },
+ {
+  "id": 739,
+  "file": "ui/job_ui.inc",
+  "line": 99,
+  "it": "Lavoro\\tLiv. min\\tPaga/ora stimata\\tVeicolo\\n",
+  "ctx": "strcat(body, \"Lavoro\\tLiv. min\\tPaga/ora stimata\\tVeicolo\\n\", 1024);",
+  "ka": ""
+ },
+ {
+  "id": 740,
+  "file": "ui/job_ui.inc",
+  "line": 105,
+  "it": "{888888}%s\\t{FF6666}Liv. %d (bloccato)\\t{888888}~$%s\\t{888888}%s\\n",
+  "ctx": "format(line, 192, \"{888888}%s\\t{FF6666}Liv. %d (bloccato)\\t{888888}~$%s\\t{888888}%s\\n\", g_UiJbName[job], g_UiJbMinLevel[job], pay, g_UiJbVehicle[job]);",
+  "ka": ""
+ },
+ {
+  "id": 741,
+  "file": "ui/job_ui.inc",
+  "line": 109,
+  "it": "{FFD24D}%s (attuale)\\t{FFFFFF}Liv. %d\\t{66DD66}~$%s\\t{FFFFFF}%s\\n",
+  "ctx": "format(line, 192, \"{FFD24D}%s (attuale)\\t{FFFFFF}Liv. %d\\t{66DD66}~$%s\\t{FFFFFF}%s\\n\", g_UiJbName[job], g_UiJbMinLevel[job], pay, g_UiJbVehicle[job]);",
+  "ka": ""
+ },
+ {
+  "id": 742,
+  "file": "ui/job_ui.inc",
+  "line": 113,
+  "it": "{FFFFFF}%s\\t{FFFFFF}Liv. %d\\t{66DD66}~$%s\\t{FFFFFF}%s\\n",
+  "ctx": "format(line, 192, \"{FFFFFF}%s\\t{FFFFFF}Liv. %d\\t{66DD66}~$%s\\t{FFFFFF}%s\\n\", g_UiJbName[job], g_UiJbMinLevel[job], pay, g_UiJbVehicle[job]);",
+  "ka": ""
+ },
+ {
+  "id": 743,
+  "file": "ui/job_ui.inc",
+  "line": 119,
+  "it": "{FF6666}Lascia il lavoro attuale\\t\\t\\t\\n",
+  "ctx": "strcat(body, \"{FF6666}Lascia il lavoro attuale\\t\\t\\t\\n\", 1024);",
+  "ka": ""
+ },
+ {
+  "id": 744,
+  "file": "ui/job_ui.inc",
+  "line": 121,
+  "it": "Job Center",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9300, DIALOG_STYLE_TABLIST_HEADERS, \"Job Center\", body, \"Dettagli\", \"Chiudi\");",
+  "ka": ""
+ },
+ {
+  "id": 745,
+  "file": "ui/job_ui.inc",
+  "line": 121,
+  "it": "Dettagli",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9300, DIALOG_STYLE_TABLIST_HEADERS, \"Job Center\", body, \"Dettagli\", \"Chiudi\");",
+  "ka": ""
+ },
+ {
+  "id": 746,
+  "file": "ui/job_ui.inc",
+  "line": 121,
+  "it": "Chiudi",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9300, DIALOG_STYLE_TABLIST_HEADERS, \"Job Center\", body, \"Dettagli\", \"Chiudi\");",
+  "ka": ""
+ },
+ {
+  "id": 747,
+  "file": "ui/job_ui.inc",
+  "line": 141,
+  "it": "Veicolo di servizio: {FFFFFF}%s{FFFFFF}\\nPercorso: %s\\n",
+  "ctx": "format(line, 192, \"Veicolo di servizio: {FFFFFF}%s{FFFFFF}\\nPercorso: %s\\n\", g_UiJbVehicle[job], g_UiJbRoute[job]);",
+  "ka": ""
+ },
+ {
+  "id": 748,
+  "file": "ui/job_ui.inc",
+  "line": 143,
+  "it": "Livello minimo: %d\\nSosta richiesta: %d s a ogni %s\\n\\n",
+  "ctx": "format(line, 192, \"Livello minimo: %d\\nSosta richiesta: %d s a ogni %s\\n\\n\", g_UiJbMinLevel[job], g_UiJbDwellMs[job] / 1000, g_UiJbStepWord[job]);",
+  "ka": ""
+ },
+ {
+  "id": 749,
+  "file": "ui/job_ui.inc",
+  "line": 145,
+  "it": "Paga: {66DD66}$%s{FFFFFF} a %s + {66DD66}$%s{FFFFFF} di bonus a fine giro = {66DD66}$%s{FFFFFF} a giro\\n",
+  "ctx": "format(line, 192, \"Paga: {66DD66}$%s{FFFFFF} a %s + {66DD66}$%s{FFFFFF} di bonus a fine giro = {66DD66}$%s{FFFFFF} a giro\\n\", step, g_UiJbStepWord[job], bonus, runPay);",
+  "ka": ""
+ },
+ {
+  "id": 750,
+  "file": "ui/job_ui.inc",
+  "line": 147,
+  "it": "Stima: circa {66DD66}$%s{FFFFFF}/ora (tetto $%s/ora). La paga e' accreditata in banca a fine turno.\\n\\n",
+  "ctx": "format(line, 192, \"Stima: circa {66DD66}$%s{FFFFFF}/ora (tetto $%s/ora). La paga e' accreditata in banca a fine turno.\\n\\n\", hourly, cap);",
+  "ka": ""
+ },
+ {
+  "id": 751,
+  "file": "ui/job_ui.inc",
+  "line": 149,
+  "it": "Il turno inizia con /inizia e termina con /fine. Veicolo distrutto o abbandonato, morte o\\ndisconnessione annullano il turno e il guadagno maturato va perso.",
+  "ctx": "strcat(body, \"Il turno inizia con /inizia e termina con /fine. Veicolo distrutto o abbandonato, morte o\\ndisconnessione annullano il turno e il guadagno maturato va perso.\", 1024);",
+  "ka": ""
+ },
+ {
+  "id": 752,
+  "file": "ui/job_ui.inc",
+  "line": 153,
+  "it": "\\n\\n{FF6666}Richiede il livello %d (tu sei livello %d).",
+  "ctx": "format(line, 192, \"\\n\\n{FF6666}Richiede il livello %d (tu sei livello %d).\", g_UiJbMinLevel[job], g_UiJbLevel[playerid]);",
+  "ka": ""
+ },
+ {
+  "id": 753,
+  "file": "ui/job_ui.inc",
+  "line": 159,
+  "it": "\\n\\n{FFD24D}Questo e' gia' il tuo lavoro attuale.",
+  "ctx": "strcat(body, \"\\n\\n{FFD24D}Questo e' gia' il tuo lavoro attuale.\", 1024);",
+  "ka": ""
+ },
+ {
+  "id": 754,
+  "file": "ui/job_ui.inc",
+  "line": 164,
+  "it": "\\n\\n{FF6666}Potrai cambiare lavoro tra %d min %02d s.",
+  "ctx": "format(line, 192, \"\\n\\n{FF6666}Potrai cambiare lavoro tra %d min %02d s.\", g_UiJbCooldown[playerid] / 60, g_UiJbCooldown[playerid] % 60);",
+  "ka": ""
+ },
+ {
+  "id": 755,
+  "file": "ui/job_ui.inc",
+  "line": 170,
+  "it": "\\n\\n{FFD24D}Dopo la scelta dovrai attendere %d minuti prima di cambiare lavoro.",
+  "ctx": "format(line, 192, \"\\n\\n{FFD24D}Dopo la scelta dovrai attendere %d minuti prima di cambiare lavoro.\", 10);",
+  "ka": ""
+ },
+ {
+  "id": 756,
+  "file": "ui/job_ui.inc",
+  "line": 173,
+  "it": "Job Center - %s",
+  "ctx": "format(title, 64, \"Job Center - %s\", g_UiJbName[job]);",
+  "ka": ""
+ },
+ {
+  "id": 757,
+  "file": "ui/job_ui.inc",
+  "line": 174,
+  "it": "Prendi lavoro",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9301, DIALOG_STYLE_MSGBOX, title, body, ok ? \"Prendi lavoro\" : \"Indietro\", ok ? \"Indietro\" : \"\");",
+  "ka": ""
+ },
+ {
+  "id": 758,
+  "file": "ui/job_ui.inc",
+  "line": 174,
+  "it": "Indietro",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9301, DIALOG_STYLE_MSGBOX, title, body, ok ? \"Prendi lavoro\" : \"Indietro\", ok ? \"Indietro\" : \"\");",
+  "ka": ""
+ },
+ {
+  "id": 759,
+  "file": "ui/job_ui.inc",
+  "line": 174,
+  "it": "Indietro",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9301, DIALOG_STYLE_MSGBOX, title, body, ok ? \"Prendi lavoro\" : \"Indietro\", ok ? \"Indietro\" : \"\");",
+  "ka": ""
+ },
+ {
+  "id": 760,
+  "file": "ui/job_ui.inc",
+  "line": 185,
+  "it": "{FFFFFF}Vuoi davvero lasciare il lavoro di {FFD24D}%s{FFFFFF}?\\n\\nSe poi scegli un altro lavoro dovrai rispettare il cooldown di %d minuti.",
+  "ctx": "format(body, 256, \"{FFFFFF}Vuoi davvero lasciare il lavoro di {FFD24D}%s{FFFFFF}?\\n\\nSe poi scegli un altro lavoro dovrai rispettare il cooldown di %d minuti.\", g_UiJbName[cur], 10);",
+  "ka": ""
+ },
+ {
+  "id": 761,
+  "file": "ui/job_ui.inc",
+  "line": 186,
+  "it": "Lascia il lavoro",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9302, DIALOG_STYLE_MSGBOX, \"Lascia il lavoro\", body, \"Lascia\", \"Annulla\");",
+  "ka": ""
+ },
+ {
+  "id": 762,
+  "file": "ui/job_ui.inc",
+  "line": 186,
+  "it": "Lascia",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9302, DIALOG_STYLE_MSGBOX, \"Lascia il lavoro\", body, \"Lascia\", \"Annulla\");",
+  "ka": ""
+ },
+ {
+  "id": 763,
+  "file": "ui/job_ui.inc",
+  "line": 186,
+  "it": "Annulla",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9302, DIALOG_STYLE_MSGBOX, \"Lascia il lavoro\", body, \"Lascia\", \"Annulla\");",
+  "ka": ""
+ },
+ {
+  "id": 764,
+  "file": "ui/job_ui.inc",
+  "line": 203,
+  "it": "{FFFFFF}Al momento sei {FFD24D}disoccupato{FFFFFF}.\\nRecati al Job Center (piazza City Hall) e usa /lavoro prendi.\\n\\nLavori disponibili:\\n",
+  "ctx": "strcat(body, \"{FFFFFF}Al momento sei {FFD24D}disoccupato{FFFFFF}.\\nRecati al Job Center (piazza City Hall) e usa /lavoro prendi.\\n\\nLavori disponibili:\\n\", 1024);",
+  "ka": ""
+ },
+ {
+  "id": 765,
+  "file": "ui/job_ui.inc",
+  "line": 207,
+  "it": "{FFFFFF}- %s: livello %d, ~{66DD66}$%s{FFFFFF}/ora%s\\n",
+  "ctx": "format(line, 192, \"{FFFFFF}- %s: livello %d, ~{66DD66}$%s{FFFFFF}/ora%s\\n\", g_UiJbName[job], g_UiJbMinLevel[job], hourly, level < g_UiJbMinLevel[job] ? \" {FF6666}(bloccato){FFFFFF}\" : \"\");",
+  "ka": ""
+ },
+ {
+  "id": 766,
+  "file": "ui/job_ui.inc",
+  "line": 207,
+  "it": " {FF6666}(bloccato){FFFFFF}",
+  "ctx": "format(line, 192, \"{FFFFFF}- %s: livello %d, ~{66DD66}$%s{FFFFFF}/ora%s\\n\", g_UiJbName[job], g_UiJbMinLevel[job], hourly, level < g_UiJbMinLevel[job] ? \" {FF6666}(bloccato){FFFFFF}\" : \"\");",
+  "ka": ""
+ },
+ {
+  "id": 767,
+  "file": "ui/job_ui.inc",
+  "line": 215,
+  "it": "{FFFFFF}Lavoro attuale: {FFD24D}%s{FFFFFF}\\nVeicolo: %s\\nPercorso: %s\\n",
+  "ctx": "format(line, 192, \"{FFFFFF}Lavoro attuale: {FFD24D}%s{FFFFFF}\\nVeicolo: %s\\nPercorso: %s\\n\", g_UiJbName[jobId], g_UiJbVehicle[jobId], g_UiJbRoute[jobId]);",
+  "ka": ""
+ },
+ {
+  "id": 768,
+  "file": "ui/job_ui.inc",
+  "line": 217,
+  "it": "Paga a giro: {66DD66}$%s{FFFFFF}  |  stima ~{66DD66}$%s{FFFFFF}/ora (tetto $%d/ora)\\n\\n",
+  "ctx": "format(line, 192, \"Paga a giro: {66DD66}$%s{FFFFFF}  |  stima ~{66DD66}$%s{FFFFFF}/ora (tetto $%d/ora)\\n\\n\", money, hourly, 2200);",
+  "ka": ""
+ },
+ {
+  "id": 769,
+  "file": "ui/job_ui.inc",
+  "line": 220,
+  "it": "Turni completati: %d\\nTotale guadagnato: {66DD66}$%s{FFFFFF}\\n\\n",
+  "ctx": "format(line, 192, \"Turni completati: %d\\nTotale guadagnato: {66DD66}$%s{FFFFFF}\\n\\n\", runs, money);",
+  "ka": ""
+ },
+ {
+  "id": 770,
+  "file": "ui/job_ui.inc",
+  "line": 222,
+  "it": "Comandi: /inizia (avvia il turno), /fine (chiude e paga il maturato), /lavoro lascia (al Job Center).",
+  "ctx": "strcat(body, \"Comandi: /inizia (avvia il turno), /fine (chiude e paga il maturato), /lavoro lascia (al Job Center).\", 1024);",
+  "ka": ""
+ },
+ {
+  "id": 771,
+  "file": "ui/job_ui.inc",
+  "line": 224,
+  "it": "Il tuo lavoro",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9303, DIALOG_STYLE_MSGBOX, \"Il tuo lavoro\", body, \"Chiudi\", \"\");",
+  "ka": ""
+ },
+ {
+  "id": 772,
+  "file": "ui/job_ui.inc",
+  "line": 224,
+  "it": "Chiudi",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9303, DIALOG_STYLE_MSGBOX, \"Il tuo lavoro\", body, \"Chiudi\", \"\");",
+  "ka": ""
+ },
+ {
+  "id": 773,
+  "file": "ui/job_ui.inc",
+  "line": 327,
+  "it": "LAVORO",
+  "ctx": "g_UiJHud[playerid][1] = UI_JhText(playerid, (5.0 + left), (384.0 + 2.0), \"LAVORO\", 0.22, 1.0, -2994689, t_TEXT_DRAW_ALIGN:1);",
+  "ka": ""
+ },
+ {
+  "id": 774,
+  "file": "ui/job_ui.inc",
+  "line": 328,
+  "it": "Tappa 0/0",
+  "ctx": "g_UiJHud[playerid][2] = UI_JhText(playerid, (5.0 + left), (384.0 + 14.0), \"Tappa 0/0\", 0.22, 1.0, -1, t_TEXT_DRAW_ALIGN:1);",
+  "ka": ""
+ },
+ {
+  "id": 775,
+  "file": "ui/job_ui.inc",
+  "line": 329,
+  "it": "Maturato: $0",
+  "ctx": "g_UiJHud[playerid][3] = UI_JhText(playerid, (5.0 + left), (384.0 + 26.0), \"Maturato: $0\", 0.22, 1.0, 0x66DD66FF, t_TEXT_DRAW_ALIGN:1);",
+  "ka": ""
+ },
+ {
+  "id": 776,
+  "file": "ui/job_ui.inc",
+  "line": 330,
+  "it": "Tempo 00:00",
+  "ctx": "g_UiJHud[playerid][4] = UI_JhText(playerid, (5.0 + left), (384.0 + 38.0), \"Tempo 00:00\", 0.22, 1.0, -1, t_TEXT_DRAW_ALIGN:1);",
+  "ka": ""
+ },
+ {
+  "id": 777,
+  "file": "ui/job_ui.inc",
+  "line": 331,
+  "it": "TORNA AL VEICOLO: 45s",
+  "ctx": "g_UiJHud[playerid][5] = UI_JhText(playerid, (5.0 + left), (384.0 + 51.0), \"TORNA AL VEICOLO: 45s\", 0.2, 0.9, -12303105, t_TEXT_DRAW_ALIGN:1);",
+  "ka": ""
+ },
+ {
+  "id": 778,
+  "file": "ui/job_ui.inc",
+  "line": 375,
+  "it": "LAVORO: %s",
+  "ctx": "format(str, 48, \"LAVORO: %s\", g_UiJbName[jobId]);",
+  "ka": ""
+ },
+ {
+  "id": 779,
+  "file": "ui/job_ui.inc",
+  "line": 379,
+  "it": "Maturato: $0",
+  "ctx": "Lang_PlayerTextDrawSetString(playerid, g_UiJHud[playerid][3], \"Maturato: $0\");",
+  "ka": ""
+ },
+ {
+  "id": 780,
+  "file": "ui/job_ui.inc",
+  "line": 380,
+  "it": "Tempo 00:00",
+  "ctx": "Lang_PlayerTextDrawSetString(playerid, g_UiJHud[playerid][4], \"Tempo 00:00\");",
+  "ka": ""
+ },
+ {
+  "id": 781,
+  "file": "ui/job_ui.inc",
+  "line": 418,
+  "it": "Rientro al deposito",
+  "ctx": "format(str, 64, \"Rientro al deposito\");",
+  "ka": ""
+ },
+ {
+  "id": 782,
+  "file": "ui/job_ui.inc",
+  "line": 426,
+  "it": "Maturato: $%s",
+  "ctx": "format(str, 64, \"Maturato: $%s\", money);",
+  "ka": ""
+ },
+ {
+  "id": 783,
+  "file": "ui/job_ui.inc",
+  "line": 430,
+  "it": "Tempo %02d:%02d  Sosta %ds",
+  "ctx": "format(str, 64, \"Tempo %02d:%02d  Sosta %ds\", elapsedSec / 60, elapsedSec % 60, dwellSec);",
+  "ka": ""
+ },
+ {
+  "id": 784,
+  "file": "ui/job_ui.inc",
+  "line": 434,
+  "it": "Tempo %02d:%02d",
+  "ctx": "format(str, 64, \"Tempo %02d:%02d\", elapsedSec / 60, elapsedSec % 60);",
+  "ka": ""
+ },
+ {
+  "id": 785,
+  "file": "ui/job_ui.inc",
+  "line": 439,
+  "it": "TORNA AL VEICOLO: %ds",
+  "ctx": "format(str, 64, \"TORNA AL VEICOLO: %ds\", offVehicleSec);",
+  "ka": ""
+ },
+ {
+  "id": 786,
+  "file": "ui/living_ui.inc",
+  "line": 2,
+  "it": "Tutti",
+  "ctx": "\"Tutti\",",
+  "ka": ""
+ },
+ {
+  "id": 787,
+  "file": "ui/living_ui.inc",
+  "line": 3,
+  "it": "Idlewood",
+  "ctx": "\"Idlewood\",",
+  "ka": ""
+ },
+ {
+  "id": 788,
+  "file": "ui/living_ui.inc",
+  "line": 4,
+  "it": "Ganton",
+  "ctx": "\"Ganton\",",
+  "ka": ""
+ },
+ {
+  "id": 789,
+  "file": "ui/living_ui.inc",
+  "line": 5,
+  "it": "Jefferson",
+  "ctx": "\"Jefferson\"",
+  "ka": ""
+ },
+ {
+  "id": 790,
+  "file": "ui/living_ui.inc",
+  "line": 8,
+  "it": "Merci varie",
+  "ctx": "\"Merci varie\",",
+  "ka": ""
+ },
+ {
+  "id": 791,
+  "file": "ui/living_ui.inc",
+  "line": 9,
+  "it": "Merci generiche",
+  "ctx": "\"Merci generiche\",",
+  "ka": ""
+ },
+ {
+  "id": 792,
+  "file": "ui/living_ui.inc",
+  "line": 10,
+  "it": "Alimentari",
+  "ctx": "\"Alimentari\",",
+  "ka": ""
+ },
+ {
+  "id": 793,
+  "file": "ui/living_ui.inc",
+  "line": 11,
+  "it": "Materiali edili",
+  "ctx": "\"Materiali edili\"",
+  "ka": ""
+ },
+ {
+  "id": 794,
+  "file": "ui/living_ui.inc",
+  "line": 14,
+  "it": "Tutte",
+  "ctx": "\"Tutte\",",
+  "ka": ""
+ },
+ {
+  "id": 795,
+  "file": "ui/living_ui.inc",
+  "line": 15,
+  "it": "Trasporto merci",
+  "ctx": "\"Trasporto merci\"",
+  "ka": ""
+ },
+ {
+  "id": 796,
+  "file": "ui/living_ui.inc",
+  "line": 19,
+  "it": "Trasporti",
+  "ctx": "\"Trasporti\",",
+  "ka": ""
+ },
+ {
+  "id": 797,
+  "file": "ui/living_ui.inc",
+  "line": 20,
+  "it": "Taxi",
+  "ctx": "\"Taxi\"",
+  "ka": ""
+ },
+ {
+  "id": 798,
+  "file": "ui/living_ui.inc",
+  "line": 23,
+  "it": "Principiante",
+  "ctx": "\"Principiante\",",
+  "ka": ""
+ },
+ {
+  "id": 799,
+  "file": "ui/living_ui.inc",
+  "line": 24,
+  "it": "Affidabile",
+  "ctx": "\"Affidabile\",",
+  "ka": ""
+ },
+ {
+  "id": 800,
+  "file": "ui/living_ui.inc",
+  "line": 25,
+  "it": "Esperto",
+  "ctx": "\"Esperto\",",
+  "ka": ""
+ },
+ {
+  "id": 801,
+  "file": "ui/living_ui.inc",
+  "line": 26,
+  "it": "Elite",
+  "ctx": "\"Elite\"",
+  "ka": ""
+ },
+ {
+  "id": 802,
+  "file": "ui/living_ui.inc",
+  "line": 30,
+  "it": "Livello insufficiente",
+  "ctx": "\"Livello insufficiente\",",
+  "ka": ""
+ },
+ {
+  "id": 803,
+  "file": "ui/living_ui.inc",
+  "line": 31,
+  "it": "Serve piu' reputazione nei trasporti",
+  "ctx": "\"Serve piu' reputazione nei trasporti\",",
+  "ka": ""
+ },
+ {
+  "id": 804,
+  "file": "ui/living_ui.inc",
+  "line": 32,
+  "it": "Serve piu' fiducia nel quartiere",
+  "ctx": "\"Serve piu' fiducia nel quartiere\",",
+  "ka": ""
+ },
+ {
+  "id": 805,
+  "file": "ui/living_ui.inc",
+  "line": 33,
+  "it": "Hai gia' un contratto in corso",
+  "ctx": "\"Hai gia' un contratto in corso\",",
+  "ka": ""
+ },
+ {
+  "id": 806,
+  "file": "ui/living_ui.inc",
+  "line": 34,
+  "it": "Sei gia' impegnato in un altro lavoro",
+  "ctx": "\"Sei gia' impegnato in un altro lavoro\",",
+  "ka": ""
+ },
+ {
+  "id": 807,
+  "file": "ui/living_ui.inc",
+  "line": 35,
+  "it": "Prenditi una pausa, torna tra poco",
+  "ctx": "\"Prenditi una pausa, torna tra poco\",",
+  "ka": ""
+ },
+ {
+  "id": 808,
+  "file": "ui/living_ui.inc",
+  "line": 36,
+  "it": "Hai lavorato tanto quest'ora",
+  "ctx": "\"Hai lavorato tanto quest'ora\",",
+  "ka": ""
+ },
+ {
+  "id": 809,
+  "file": "ui/living_ui.inc",
+  "line": 37,
+  "it": "Lasciato da poco: riprovaci piu' tardi",
+  "ctx": "\"Lasciato da poco: riprovaci piu' tardi\",",
+  "ka": ""
+ },
+ {
+  "id": 810,
+  "file": "ui/living_ui.inc",
+  "line": 38,
+  "it": "Gia' preso da un altro autista",
+  "ctx": "\"Gia' preso da un altro autista\",",
+  "ka": ""
+ },
+ {
+  "id": 811,
+  "file": "ui/living_ui.inc",
+  "line": 39,
+  "it": "Non disponibile al momento",
+  "ctx": "\"Non disponibile al momento\"",
+  "ka": ""
+ },
+ {
+  "id": 812,
+  "file": "ui/living_ui.inc",
+  "line": 43,
+  "it": "Potrai donare dopo un po' di tempo trascorso in citta'.",
+  "ctx": "\"Potrai donare dopo un po' di tempo trascorso in citta'.\",",
+  "ka": ""
+ },
+ {
+  "id": 813,
+  "file": "ui/living_ui.inc",
+  "line": 44,
+  "it": "Per oggi hai gia' dato il massimo: grazie davvero.",
+  "ctx": "\"Per oggi hai gia' dato il massimo: grazie davvero.\",",
+  "ka": ""
+ },
+ {
+  "id": 814,
+  "file": "ui/living_ui.inc",
+  "line": 45,
+  "it": "Questo progetto non raccoglie piu' fondi.",
+  "ctx": "\"Questo progetto non raccoglie piu' fondi.\",",
+  "ka": ""
+ },
+ {
+  "id": 815,
+  "file": "ui/living_ui.inc",
+  "line": 46,
+  "it": "Le donazioni si fanno alla Casa del Quartiere o a una bacheca.",
+  "ctx": "\"Le donazioni si fanno alla Casa del Quartiere o a una bacheca.\"",
+  "ka": ""
+ },
+ {
+  "id": 816,
+  "file": "ui/living_ui.inc",
+  "line": 49,
+  "it": "Evento",
+  "ctx": "\"Evento\",",
+  "ka": ""
+ },
+ {
+  "id": 817,
+  "file": "ui/living_ui.inc",
+  "line": 50,
+  "it": "Consegna completata",
+  "ctx": "\"Consegna completata\",",
+  "ka": ""
+ },
+ {
+  "id": 818,
+  "file": "ui/living_ui.inc",
+  "line": 51,
+  "it": "Consegna non riuscita",
+  "ctx": "\"Consegna non riuscita\",",
+  "ka": ""
+ },
+ {
+  "id": 819,
+  "file": "ui/living_ui.inc",
+  "line": 52,
+  "it": "Corsa in taxi",
+  "ctx": "\"Corsa in taxi\",",
+  "ka": ""
+ },
+ {
+  "id": 820,
+  "file": "ui/living_ui.inc",
+  "line": 53,
+  "it": "Noleggio aperto",
+  "ctx": "\"Noleggio aperto\",",
+  "ka": ""
+ },
+ {
+  "id": 821,
+  "file": "ui/living_ui.inc",
+  "line": 54,
+  "it": "Noleggio riconsegnato",
+  "ctx": "\"Noleggio riconsegnato\",",
+  "ka": ""
+ },
+ {
+  "id": 822,
+  "file": "ui/living_ui.inc",
+  "line": 55,
+  "it": "Crimine segnalato",
+  "ctx": "\"Crimine segnalato\",",
+  "ka": ""
+ },
+ {
+  "id": 823,
+  "file": "ui/living_ui.inc",
+  "line": 56,
+  "it": "Pattuglia di passaggio",
+  "ctx": "\"Pattuglia di passaggio\",",
+  "ka": ""
+ },
+ {
+  "id": 824,
+  "file": "ui/living_ui.inc",
+  "line": 57,
+  "it": "Progetto della comunita'",
+  "ctx": "\"Progetto della comunita'\",",
+  "ka": ""
+ },
+ {
+  "id": 825,
+  "file": "ui/living_ui.inc",
+  "line": 58,
+  "it": "Intervento dello staff",
+  "ctx": "\"Intervento dello staff\"",
+  "ka": ""
+ },
+ {
+  "id": 826,
+  "file": "ui/living_ui.inc",
+  "line": 62,
+  "it": "Raggiungi la Casa del Quartiere",
+  "ctx": "\"Raggiungi la Casa del Quartiere\",",
+  "ka": ""
+ },
+ {
+  "id": 827,
+  "file": "ui/living_ui.inc",
+  "line": 63,
+  "it": "Leggi /quartiere",
+  "ctx": "\"Leggi /quartiere\",",
+  "ka": ""
+ },
+ {
+  "id": 828,
+  "file": "ui/living_ui.inc",
+  "line": 64,
+  "it": "Fai la consegna di benvenuto",
+  "ctx": "\"Fai la consegna di benvenuto\",",
+  "ka": ""
+ },
+ {
+  "id": 829,
+  "file": "ui/living_ui.inc",
+  "line": 65,
+  "it": "Apri /reputazione",
+  "ctx": "\"Apri /reputazione\",",
+  "ka": ""
+ },
+ {
+  "id": 830,
+  "file": "ui/living_ui.inc",
+  "line": 66,
+  "it": "Scopri /lavoro o /noleggio",
+  "ctx": "\"Scopri /lavoro o /noleggio\"",
+  "ka": ""
+ },
+ {
+  "id": 831,
+  "file": "ui/living_ui.inc",
+  "line": 70,
+  "it": "A due passi da Unity Station, sotto la tettoia di Idlewood, c'e' la Casa del Quartiere: la bacheca dei contratti e qualcuno che conosce la zona.",
+  "ctx": "\"A due passi da Unity Station, sotto la tettoia di Idlewood, c'e' la Casa del Quartiere: la bacheca dei contratti e qualcuno che conosce la zona.\",",
+  "ka": ""
+ },
+ {
+  "id": 832,
+  "file": "ui/living_ui.inc",
+  "line": 71,
+  "it": "Scopri come sta Idlewood: attivita', sicurezza, le voci della strada. Il quartiere cambia con quello che facciamo tutti.",
+  "ctx": "\"Scopri come sta Idlewood: attivita', sicurezza, le voci della strada. Il quartiere cambia con quello che facciamo tutti.\",",
+  "ka": ""
+ },
+ {
+  "id": 833,
+  "file": "ui/living_ui.inc",
+  "line": 72,
+  "it": "Accetta alla bacheca la consegna di benvenuto: un carico dal magazzino al negozio di Idlewood. Nessuna fretta, la strada e' breve.",
+  "ctx": "\"Accetta alla bacheca la consegna di benvenuto: un carico dal magazzino al negozio di Idlewood. Nessuna fretta, la strada e' breve.\",",
+  "ka": ""
+ },
+ {
+  "id": 834,
+  "file": "ui/living_ui.inc",
+  "line": 73,
+  "it": "Guarda come ti conosce la citta': il tuo mestiere e il tuo nome nei quartieri crescono con il lavoro fatto bene.",
+  "ctx": "\"Guarda come ti conosce la citta': il tuo mestiere e il tuo nome nei quartieri crescono con il lavoro fatto bene.\",",
+  "ka": ""
+ },
+ {
+  "id": 835,
+  "file": "ui/living_ui.inc",
+  "line": 74,
+  "it": "Il Job Center di Pershing Square offre lavori stabili; se ti serve un mezzo, il noleggio e' proprio li' accanto.",
+  "ctx": "\"Il Job Center di Pershing Square offre lavori stabili; se ti serve un mezzo, il noleggio e' proprio li' accanto.\"",
+  "ka": ""
+ },
+ {
+  "id": 836,
+  "file": "ui/living_ui.inc",
+  "line": 78,
+  "it": "Segui il segnale: la Casa del Quartiere e' vicino alla stazione.",
+  "ctx": "\"Segui il segnale: la Casa del Quartiere e' vicino alla stazione.\",",
+  "ka": ""
+ },
+ {
+  "id": 837,
+  "file": "ui/living_ui.inc",
+  "line": 79,
+  "it": "Scrivi /quartiere per conoscere Idlewood.",
+  "ctx": "\"Scrivi /quartiere per conoscere Idlewood.\",",
+  "ka": ""
+ },
+ {
+  "id": 838,
+  "file": "ui/living_ui.inc",
+  "line": 80,
+  "it": "Alla bacheca, /contratti: c'e' una consegna di benvenuto per te.",
+  "ctx": "\"Alla bacheca, /contratti: c'e' una consegna di benvenuto per te.\",",
+  "ka": ""
+ },
+ {
+  "id": 839,
+  "file": "ui/living_ui.inc",
+  "line": 81,
+  "it": "Scrivi /reputazione per vedere come ti conosce la citta'.",
+  "ctx": "\"Scrivi /reputazione per vedere come ti conosce la citta'.\",",
+  "ka": ""
+ },
+ {
+  "id": 840,
+  "file": "ui/living_ui.inc",
+  "line": 82,
+  "it": "Ultimo passo: /lavoro o /noleggio, scegli tu.",
+  "ctx": "\"Ultimo passo: /lavoro o /noleggio, scegli tu.\"",
+  "ka": ""
+ },
+ {
+  "id": 841,
+  "file": "ui/living_ui.inc",
+  "line": 272,
+  "it": "%d min fa",
+  "ctx": "format(dest, size, \"%d min fa\", seconds / 60);",
+  "ka": ""
+ },
+ {
+  "id": 842,
+  "file": "ui/living_ui.inc",
+  "line": 276,
+  "it": "%d h fa",
+  "ctx": "format(dest, size, \"%d h fa\", seconds / 3600);",
+  "ka": ""
+ },
+ {
+  "id": 843,
+  "file": "ui/living_ui.inc",
+  "line": 280,
+  "it": "%d g fa",
+  "ctx": "format(dest, size, \"%d g fa\", seconds / 86400);",
+  "ka": ""
+ },
+ {
+  "id": 844,
+  "file": "ui/living_ui.inc",
+  "line": 388,
+  "it": "{66DD66}Di casa{AAAAAA} (-%d%% su noleggio e taxi)",
+  "ctx": "format(dest, size, \"{66DD66}Di casa{AAAAAA} (-%d%% su noleggio e taxi)\", 10);",
+  "ka": ""
+ },
+ {
+  "id": 845,
+  "file": "ui/living_ui.inc",
+  "line": 392,
+  "it": "{FFD24D}Conosciuto{AAAAAA} (-%d%% su noleggio e taxi)",
+  "ctx": "format(dest, size, \"{FFD24D}Conosciuto{AAAAAA} (-%d%% su noleggio e taxi)\", 5);",
+  "ka": ""
+ },
+ {
+  "id": 846,
+  "file": "ui/living_ui.inc",
+  "line": 396,
+  "it": "{FFAA33}Da riconquistare{AAAAAA} (si risale piu' in fretta)",
+  "ctx": "strcopy(dest, \"{FFAA33}Da riconquistare{AAAAAA} (si risale piu' in fretta)\", size);",
+  "ka": ""
+ },
+ {
+  "id": 847,
+  "file": "ui/living_ui.inc",
+  "line": 400,
+  "it": "{FFFFFF}Sconosciuto",
+  "ctx": "strcopy(dest, \"{FFFFFF}Sconosciuto\", size);",
+  "ka": ""
+ },
+ {
+  "id": 848,
+  "file": "ui/living_ui.inc",
+  "line": 426,
+  "it": "Chiudi",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9725, DIALOG_STYLE_MSGBOX, title, body, \"Chiudi\", \"\");",
+  "ka": ""
+ },
+ {
+  "id": 849,
+  "file": "ui/living_ui.inc",
+  "line": 463,
+  "it": "CONTRATTO",
+  "ctx": "g_UiLvTd[playerid][1] = UI_LvText(playerid, (14.0 + 5.0), (150.0 + 2.0), \"CONTRATTO\", 0.22, 1.0, -2994689, t_TEXT_DRAW_ALIGN:1);",
+  "ka": ""
+ },
+ {
+  "id": 850,
+  "file": "ui/living_ui.inc",
+  "line": 468,
+  "it": "TASSAMETRO",
+  "ctx": "g_UiLvTd[playerid][6] = UI_LvText(playerid, (14.0 + 5.0), (212.0 + 2.0), \"TASSAMETRO\", 0.22, 1.0, -2994689, t_TEXT_DRAW_ALIGN:1);",
+  "ka": ""
+ },
+ {
+  "id": 851,
+  "file": "ui/living_ui.inc",
+  "line": 703,
+  "it": "Liv. %d, rep. %d",
+  "ctx": "format(dest, size, \"Liv. %d, rep. %d\", g_UiLvBdMinLevel[playerid][i], g_UiLvBdMinRep[playerid][i]);",
+  "ka": ""
+ },
+ {
+  "id": 852,
+  "file": "ui/living_ui.inc",
+  "line": 707,
+  "it": "Liv. %d, fiducia %d",
+  "ctx": "format(dest, size, \"Liv. %d, fiducia %d\", g_UiLvBdMinLevel[playerid][i], g_UiLvBdMinLRep[playerid][i]);",
+  "ka": ""
+ },
+ {
+  "id": 853,
+  "file": "ui/living_ui.inc",
+  "line": 711,
+  "it": "Liv. %d",
+  "ctx": "format(dest, size, \"Liv. %d\", g_UiLvBdMinLevel[playerid][i]);",
+  "ka": ""
+ },
+ {
+  "id": 854,
+  "file": "ui/living_ui.inc",
+  "line": 719,
+  "it": "Contratto\\tMerce\\tCompenso / scade\\tRequisito\\n{FFD24D}Filtro: %s\\t{FFD24D}%s\\t{FFD24D}%s\\t{AAAAAA}cambia\\n",
+  "ctx": "format(body, 1536, \"Contratto\\tMerce\\tCompenso / scade\\tRequisito\\n{FFD24D}Filtro: %s\\t{FFD24D}%s\\t{FFD24D}%s\\t{AAAAAA}cambia\\n\", g_UiLvDistrictName[g_UiLvFltDistrict[playerid]], g_UiLvKindName[g_UiLv",
+  "ka": ""
+ },
+ {
+  "id": 855,
+  "file": "ui/living_ui.inc",
+  "line": 745,
+  "it": "{AAAAAA}Nessun contratto con questo filtro\\t\\t\\t\\n",
+  "ctx": "strcat(body, \"{AAAAAA}Nessun contratto con questo filtro\\t\\t\\t\\n\", 1536);",
+  "ka": ""
+ },
+ {
+  "id": 856,
+  "file": "ui/living_ui.inc",
+  "line": 747,
+  "it": "{AAAAAA}Aggiorna la bacheca\\t\\t\\t",
+  "ctx": "strcat(body, \"{AAAAAA}Aggiorna la bacheca\\t\\t\\t\", 1536);",
+  "ka": ""
+ },
+ {
+  "id": 857,
+  "file": "ui/living_ui.inc",
+  "line": 748,
+  "it": "Bacheca contratti%s",
+  "ctx": "format(title, 64, \"Bacheca contratti%s\", g_UiLvBdAt[playerid] ? \"\" : \" (consultazione)\");",
+  "ka": ""
+ },
+ {
+  "id": 858,
+  "file": "ui/living_ui.inc",
+  "line": 748,
+  "it": " (consultazione)",
+  "ctx": "format(title, 64, \"Bacheca contratti%s\", g_UiLvBdAt[playerid] ? \"\" : \" (consultazione)\");",
+  "ka": ""
+ },
+ {
+  "id": 859,
+  "file": "ui/living_ui.inc",
+  "line": 749,
+  "it": "Apri",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9700, DIALOG_STYLE_TABLIST_HEADERS, title, body, \"Apri\", \"Chiudi\");",
+  "ka": ""
+ },
+ {
+  "id": 860,
+  "file": "ui/living_ui.inc",
+  "line": 749,
+  "it": "Chiudi",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9700, DIALOG_STYLE_TABLIST_HEADERS, title, body, \"Apri\", \"Chiudi\");",
+  "ka": ""
+ },
+ {
+  "id": 861,
+  "file": "ui/living_ui.inc",
+  "line": 771,
+  "it": "Quartiere: {FFD24D}%s\\nProfessione: {FFD24D}%s\\nMostra: {FFD24D}%s\\n{66DD66}Torna alla bacheca",
+  "ctx": "format(body, 384, \"Quartiere: {FFD24D}%s\\nProfessione: {FFD24D}%s\\nMostra: {FFD24D}%s\\n{66DD66}Torna alla bacheca\", g_UiLvDistrictName[g_UiLvFltDistrict[playerid]], g_UiLvKindName[g_UiLvFltKind[player",
+  "ka": ""
+ },
+ {
+  "id": 862,
+  "file": "ui/living_ui.inc",
+  "line": 771,
+  "it": "solo quelli che posso accettare",
+  "ctx": "format(body, 384, \"Quartiere: {FFD24D}%s\\nProfessione: {FFD24D}%s\\nMostra: {FFD24D}%s\\n{66DD66}Torna alla bacheca\", g_UiLvDistrictName[g_UiLvFltDistrict[playerid]], g_UiLvKindName[g_UiLvFltKind[player",
+  "ka": ""
+ },
+ {
+  "id": 863,
+  "file": "ui/living_ui.inc",
+  "line": 771,
+  "it": "tutti i contratti",
+  "ctx": "format(body, 384, \"Quartiere: {FFD24D}%s\\nProfessione: {FFD24D}%s\\nMostra: {FFD24D}%s\\n{66DD66}Torna alla bacheca\", g_UiLvDistrictName[g_UiLvFltDistrict[playerid]], g_UiLvKindName[g_UiLvFltKind[player",
+  "ka": ""
+ },
+ {
+  "id": 864,
+  "file": "ui/living_ui.inc",
+  "line": 772,
+  "it": "Filtra la bacheca",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9701, DIALOG_STYLE_LIST, \"Filtra la bacheca\", body, \"Cambia\", \"Indietro\");",
+  "ka": ""
+ },
+ {
+  "id": 865,
+  "file": "ui/living_ui.inc",
+  "line": 772,
+  "it": "Cambia",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9701, DIALOG_STYLE_LIST, \"Filtra la bacheca\", body, \"Cambia\", \"Indietro\");",
+  "ka": ""
+ },
+ {
+  "id": 866,
+  "file": "ui/living_ui.inc",
+  "line": 772,
+  "it": "Indietro",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9701, DIALOG_STYLE_LIST, \"Filtra la bacheca\", body, \"Cambia\", \"Indietro\");",
+  "ka": ""
+ },
+ {
+  "id": 867,
+  "file": "ui/living_ui.inc",
+  "line": 791,
+  "it": "{FFD24D}Puoi accettarlo a una bacheca: Casa del Quartiere di Idlewood, magazzino di Ganton o di Jefferson.",
+  "ctx": "strcopy(status, \"{FFD24D}Puoi accettarlo a una bacheca: Casa del Quartiere di Idlewood, magazzino di Ganton o di Jefferson.\", 160);",
+  "ka": ""
+ },
+ {
+  "id": 868,
+  "file": "ui/living_ui.inc",
+  "line": 795,
+  "it": "{66DD66}Puoi accettarlo adesso.",
+  "ctx": "strcopy(status, \"{66DD66}Puoi accettarlo adesso.\", 160);",
+  "ka": ""
+ },
+ {
+  "id": 869,
+  "file": "ui/living_ui.inc",
+  "line": 797,
+  "it": "{FFFFFF}%s%s\\n\\n{FFFFFF}Ritiro: {FFD24D}magazzino di %s\\n{FFFFFF}Consegna: {FFD24D}negozio di %s\\n{FFFFFF}Merce: {FFD24D}%s\\n{FFFFFF}Distanza: {FFD24D}%s\\n{FFFFFF}Compenso indicativo: {66DD66}$%s\\n{FFFFFF}Disponibile ancora per: {FFD24D}%s\\n{FFFFFF}Requisiti: {AAAAAA}%s\\n\\n{AAAAAA}Il mezzo te lo fornisce il magazzino. Il compenso finale dipende da come arriva la merce.\\n%s",
+  "ctx": "format(body, 1024, \"{FFFFFF}%s%s\\n\\n{FFFFFF}Ritiro: {FFD24D}magazzino di %s\\n{FFFFFF}Consegna: {FFD24D}negozio di %s\\n{FFFFFF}Merce: {FFD24D}%s\\n{FFFFFF}Distanza: {FFD24D}%s\\n{FFFFFF}Compenso indicati",
+  "ka": ""
+ },
+ {
+  "id": 870,
+  "file": "ui/living_ui.inc",
+  "line": 797,
+  "it": " {FFD24D}(premium: il quartiere si fida di te)",
+  "ctx": "format(body, 1024, \"{FFFFFF}%s%s\\n\\n{FFFFFF}Ritiro: {FFD24D}magazzino di %s\\n{FFFFFF}Consegna: {FFD24D}negozio di %s\\n{FFFFFF}Merce: {FFD24D}%s\\n{FFFFFF}Distanza: {FFD24D}%s\\n{FFFFFF}Compenso indicati",
+  "ka": ""
+ },
+ {
+  "id": 871,
+  "file": "ui/living_ui.inc",
+  "line": 798,
+  "it": "Contratto #%d",
+  "ctx": "format(title, 64, \"Contratto #%d\", g_UiLvBdId[playerid][i]);",
+  "ka": ""
+ },
+ {
+  "id": 872,
+  "file": "ui/living_ui.inc",
+  "line": 801,
+  "it": "Accetta",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9702, DIALOG_STYLE_MSGBOX, title, body, \"Accetta\", \"Indietro\");",
+  "ka": ""
+ },
+ {
+  "id": 873,
+  "file": "ui/living_ui.inc",
+  "line": 801,
+  "it": "Indietro",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9702, DIALOG_STYLE_MSGBOX, title, body, \"Accetta\", \"Indietro\");",
+  "ka": ""
+ },
+ {
+  "id": 874,
+  "file": "ui/living_ui.inc",
+  "line": 805,
+  "it": "Indietro",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9702, DIALOG_STYLE_MSGBOX, title, body, \"Indietro\", \"Chiudi\");",
+  "ka": ""
+ },
+ {
+  "id": 875,
+  "file": "ui/living_ui.inc",
+  "line": 805,
+  "it": "Chiudi",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9702, DIALOG_STYLE_MSGBOX, title, body, \"Indietro\", \"Chiudi\");",
+  "ka": ""
+ },
+ {
+  "id": 876,
+  "file": "ui/living_ui.inc",
+  "line": 825,
+  "it": "{FFFFFF}Accetti il contratto {FFD24D}#%d{FFFFFF}?\\n\\nUn furgone ti aspetta al magazzino di {FFD24D}%s{FFFFFF}.\\nPorta il carico al negozio di {FFD24D}%s{FFFFFF} con calma e attenzione.\\n\\n{AAAAAA}Puoi seguire un solo contratto alla volta. Il contratto resta valido per %s.",
+  "ctx": "format(body, 512, \"{FFFFFF}Accetti il contratto {FFD24D}#%d{FFFFFF}?\\n\\nUn furgone ti aspetta al magazzino di {FFD24D}%s{FFFFFF}.\\nPorta il carico al negozio di {FFD24D}%s{FFFFFF} con calma e attenzio",
+  "ka": ""
+ },
+ {
+  "id": 877,
+  "file": "ui/living_ui.inc",
+  "line": 826,
+  "it": "Conferma contratto",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9703, DIALOG_STYLE_MSGBOX, \"Conferma contratto\", body, \"Conferma\", \"Annulla\");",
+  "ka": ""
+ },
+ {
+  "id": 878,
+  "file": "ui/living_ui.inc",
+  "line": 826,
+  "it": "Conferma",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9703, DIALOG_STYLE_MSGBOX, \"Conferma contratto\", body, \"Conferma\", \"Annulla\");",
+  "ka": ""
+ },
+ {
+  "id": 879,
+  "file": "ui/living_ui.inc",
+  "line": 826,
+  "it": "Annulla",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9703, DIALOG_STYLE_MSGBOX, \"Conferma contratto\", body, \"Conferma\", \"Annulla\");",
+  "ka": ""
+ },
+ {
+  "id": 880,
+  "file": "ui/living_ui.inc",
+  "line": 842,
+  "it": "Consegna al negozio di %s",
+  "ctx": "format(step, 128, \"Consegna al negozio di %s\", g_UiLvDistrictName[to]);",
+  "ka": ""
+ },
+ {
+  "id": 881,
+  "file": "ui/living_ui.inc",
+  "line": 846,
+  "it": "Carica la merce al magazzino di %s",
+  "ctx": "format(step, 128, \"Carica la merce al magazzino di %s\", g_UiLvDistrictName[from]);",
+  "ka": ""
+ },
+ {
+  "id": 882,
+  "file": "ui/living_ui.inc",
+  "line": 873,
+  "it": "Carico a bordo: consegnalo al negozio di %s",
+  "ctx": "format(step, 128, \"Carico a bordo: consegnalo al negozio di %s\", g_UiLvDistrictName[to]);",
+  "ka": ""
+ },
+ {
+  "id": 883,
+  "file": "ui/living_ui.inc",
+  "line": 877,
+  "it": "Raggiungi il magazzino di %s e carica la merce",
+  "ctx": "format(step, 128, \"Raggiungi il magazzino di %s e carica la merce\", g_UiLvDistrictName[from]);",
+  "ka": ""
+ },
+ {
+  "id": 884,
+  "file": "ui/living_ui.inc",
+  "line": 879,
+  "it": "{FFFFFF}Stato: {FFD24D}%s\\n{FFFFFF}Prossimo passo: {FFD24D}%s\\n{FFFFFF}Distanza: {FFD24D}%s\\n{FFFFFF}Tempo rimasto: {FFD24D}%s\\n{FFFFFF}Merce: {FFD24D}%s{FFFFFF}, integrita' {FFD24D}%s\\n{FFFFFF}Compenso indicativo: {66DD66}$%s\\n\\n{AAAAAA}Se lasci il contratto non perdi denaro, ma perdi %d punti di reputazione nei trasporti.",
+  "ctx": "format(body, 1024, \"{FFFFFF}Stato: {FFD24D}%s\\n{FFFFFF}Prossimo passo: {FFD24D}%s\\n{FFFFFF}Distanza: {FFD24D}%s\\n{FFFFFF}Tempo rimasto: {FFD24D}%s\\n{FFFFFF}Merce: {FFD24D}%s{FFFFFF}, integrita' {FFD24",
+  "ka": ""
+ },
+ {
+  "id": 885,
+  "file": "ui/living_ui.inc",
+  "line": 880,
+  "it": "Il tuo contratto #%d",
+  "ctx": "format(title, 64, \"Il tuo contratto #%d\", contractId);",
+  "ka": ""
+ },
+ {
+  "id": 886,
+  "file": "ui/living_ui.inc",
+  "line": 881,
+  "it": "Lascia",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9704, DIALOG_STYLE_MSGBOX, title, body, \"Lascia\", \"Chiudi\");",
+  "ka": ""
+ },
+ {
+  "id": 887,
+  "file": "ui/living_ui.inc",
+  "line": 881,
+  "it": "Chiudi",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9704, DIALOG_STYLE_MSGBOX, title, body, \"Lascia\", \"Chiudi\");",
+  "ka": ""
+ },
+ {
+  "id": 888,
+  "file": "ui/living_ui.inc",
+  "line": 898,
+  "it": "Nessun contratto",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9704, DIALOG_STYLE_MSGBOX, \"Nessun contratto\", \"{FFFFFF}Al momento non stai seguendo nessun contratto.\\n\\n{AAAAAA}La bacheca della Casa del Quartiere di Idlewood ha sem",
+  "ka": ""
+ },
+ {
+  "id": 889,
+  "file": "ui/living_ui.inc",
+  "line": 898,
+  "it": "{FFFFFF}Al momento non stai seguendo nessun contratto.\\n\\n{AAAAAA}La bacheca della Casa del Quartiere di Idlewood ha sempre qualcosa da fare.",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9704, DIALOG_STYLE_MSGBOX, \"Nessun contratto\", \"{FFFFFF}Al momento non stai seguendo nessun contratto.\\n\\n{AAAAAA}La bacheca della Casa del Quartiere di Idlewood ha sem",
+  "ka": ""
+ },
+ {
+  "id": 890,
+  "file": "ui/living_ui.inc",
+  "line": 898,
+  "it": "Bacheca",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9704, DIALOG_STYLE_MSGBOX, \"Nessun contratto\", \"{FFFFFF}Al momento non stai seguendo nessun contratto.\\n\\n{AAAAAA}La bacheca della Casa del Quartiere di Idlewood ha sem",
+  "ka": ""
+ },
+ {
+  "id": 891,
+  "file": "ui/living_ui.inc",
+  "line": 898,
+  "it": "Chiudi",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9704, DIALOG_STYLE_MSGBOX, \"Nessun contratto\", \"{FFFFFF}Al momento non stai seguendo nessun contratto.\\n\\n{AAAAAA}La bacheca della Casa del Quartiere di Idlewood ha sem",
+  "ka": ""
+ },
+ {
+  "id": 892,
+  "file": "ui/living_ui.inc",
+  "line": 908,
+  "it": "Verso: %s (%s)",
+  "ctx": "format(line, 128, \"Verso: %s (%s)\", g_UiLvHudDest[playerid], sDist);",
+  "ka": ""
+ },
+ {
+  "id": 893,
+  "file": "ui/living_ui.inc",
+  "line": 912,
+  "it": "Verso: %s",
+  "ctx": "format(line, 128, \"Verso: %s\", g_UiLvHudDest[playerid]);",
+  "ka": ""
+ },
+ {
+  "id": 894,
+  "file": "ui/living_ui.inc",
+  "line": 926,
+  "it": "Scade tra %s  -  Merce %d%%",
+  "ctx": "format(line, 128, \"Scade tra %s  -  Merce %d%%\", sTime, g_UiLvHudInteg[playerid]);",
+  "ka": ""
+ },
+ {
+  "id": 895,
+  "file": "ui/living_ui.inc",
+  "line": 930,
+  "it": "Scade tra %s",
+  "ctx": "format(line, 128, \"Scade tra %s\", sTime);",
+  "ka": ""
+ },
+ {
+  "id": 896,
+  "file": "ui/living_ui.inc",
+  "line": 955,
+  "it": "CONTRATTO #%d  -  %s",
+  "ctx": "format(title, 128, \"CONTRATTO #%d  -  %s\", contractId, ctState == 2 ? \"IN CONSEGNA\" : \"ACCETTATO\");",
+  "ka": ""
+ },
+ {
+  "id": 897,
+  "file": "ui/living_ui.inc",
+  "line": 955,
+  "it": "IN CONSEGNA",
+  "ctx": "format(title, 128, \"CONTRATTO #%d  -  %s\", contractId, ctState == 2 ? \"IN CONSEGNA\" : \"ACCETTATO\");",
+  "ka": ""
+ },
+ {
+  "id": 898,
+  "file": "ui/living_ui.inc",
+  "line": 955,
+  "it": "ACCETTATO",
+  "ctx": "format(title, 128, \"CONTRATTO #%d  -  %s\", contractId, ctState == 2 ? \"IN CONSEGNA\" : \"ACCETTATO\");",
+  "ka": ""
+ },
+ {
+  "id": 899,
+  "file": "ui/living_ui.inc",
+  "line": 1001,
+  "it": "Quale quartiere?",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9706, DIALOG_STYLE_LIST, \"Quale quartiere?\", body, \"Apri\", \"Chiudi\");",
+  "ka": ""
+ },
+ {
+  "id": 900,
+  "file": "ui/living_ui.inc",
+  "line": 1001,
+  "it": "Apri",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9706, DIALOG_STYLE_LIST, \"Quale quartiere?\", body, \"Apri\", \"Chiudi\");",
+  "ka": ""
+ }
+]

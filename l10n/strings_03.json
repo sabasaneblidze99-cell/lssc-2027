@@ -1,0 +1,2082 @@
+[
+ {
+  "id": 1550,
+  "file": "house/house.inc",
+  "line": 1193,
+  "it": "Qualcuno sta usando il frigo: attendi un attimo.",
+  "ctx": "Util_Send(playerid, -10270721, \"Qualcuno sta usando il frigo: attendi un attimo.\");",
+  "ka": ""
+ },
+ {
+  "id": 1551,
+  "file": "house/house.inc",
+  "line": 1198,
+  "it": "Non ci sono tante porzioni nel frigo.",
+  "ctx": "Util_Send(playerid, -10270721, \"Non ci sono tante porzioni nel frigo.\");",
+  "ka": ""
+ },
+ {
+  "id": 1552,
+  "file": "house/house.inc",
+  "line": 1203,
+  "it": "Puoi portare al massimo %d porzioni.",
+  "ctx": "SendClientMessage(playerid, -10270721, \"Puoi portare al massimo %d porzioni.\", 12);",
+  "ka": ""
+ },
+ {
+  "id": 1553,
+  "file": "house/house.inc",
+  "line": 1241,
+  "it": "Hai riposto %d porzioni nel frigo (%d/%d).",
+  "ctx": "SendClientMessage(playerid, 0x66DD66FF, \"Hai riposto %d porzioni nel frigo (%d/%d).\", qty, g_HouseRows[idx][hrFridgeUnits], House_FridgeCap(idx));",
+  "ka": ""
+ },
+ {
+  "id": 1554,
+  "file": "house/house.inc",
+  "line": 1245,
+  "it": "Hai preso %d porzioni dal frigo (max %d con te).",
+  "ctx": "SendClientMessage(playerid, 0x66DD66FF, \"Hai preso %d porzioni dal frigo (max %d con te).\", qty, 12);",
+  "ka": ""
+ },
+ {
+  "id": 1555,
+  "file": "house/house.inc",
+  "line": 1254,
+  "it": "Non hai abbastanza spazio nell'inventario (o hai gia' il massimo di porzioni).",
+  "ctx": "Util_Send(playerid, -10270721, \"Non hai abbastanza spazio nell'inventario (o hai gia' il massimo di porzioni).\");",
+  "ka": ""
+ },
+ {
+  "id": 1556,
+  "file": "house/house.inc",
+  "line": 1258,
+  "it": "Non hai tutta quella spesa con te.",
+  "ctx": "Util_Send(playerid, -10270721, direction == 1 ? \"Non hai tutta quella spesa con te.\" : \"Non ci sono tante porzioni nel frigo.\");",
+  "ka": ""
+ },
+ {
+  "id": 1557,
+  "file": "house/house.inc",
+  "line": 1258,
+  "it": "Non ci sono tante porzioni nel frigo.",
+  "ctx": "Util_Send(playerid, -10270721, direction == 1 ? \"Non hai tutta quella spesa con te.\" : \"Non ci sono tante porzioni nel frigo.\");",
+  "ka": ""
+ },
+ {
+  "id": 1558,
+  "file": "house/house.inc",
+  "line": 1262,
+  "it": "Il frigo non ha abbastanza posto.",
+  "ctx": "Util_Send(playerid, -10270721, \"Il frigo non ha abbastanza posto.\");",
+  "ka": ""
+ },
+ {
+  "id": 1559,
+  "file": "house/house.inc",
+  "line": 1266,
+  "it": "Non puoi usare il frigo di questa casa.",
+  "ctx": "Util_Send(playerid, -10270721, \"Non puoi usare il frigo di questa casa.\");",
+  "ka": ""
+ },
+ {
+  "id": 1560,
+  "file": "house/house.inc",
+  "line": 1270,
+  "it": "Errore database: stato del frigo non verificabile, riprova piu' tardi.",
+  "ctx": "Util_Send(playerid, -10270721, \"Errore database: stato del frigo non verificabile, riprova piu' tardi.\");",
+  "ka": ""
+ },
+ {
+  "id": 1561,
+  "file": "house/house.inc",
+  "line": 1274,
+  "it": "Impossibile spostare le porzioni.",
+  "ctx": "Util_Send(playerid, -10270721, \"Impossibile spostare le porzioni.\");",
+  "ka": ""
+ },
+ {
+  "id": 1562,
+  "file": "house/house.inc",
+  "line": 1348,
+  "it": "Frigo: %d/%d porzioni (con te: %d/%d).",
+  "ctx": "SendClientMessage(playerid, -1, \"Frigo: %d/%d porzioni (con te: %d/%d).\", g_HouseRows[idx][hrFridgeUnits], House_FridgeCap(idx), Inv_Count(playerid, 1), 12);",
+  "ka": ""
+ },
+ {
+  "id": 1563,
+  "file": "house/house.inc",
+  "line": 1351,
+  "it": "Luce spenta: il frigo non raffredda e le scorte si deteriorano.",
+  "ctx": "Util_Send(playerid, -10270721, \"Luce spenta: il frigo non raffredda e le scorte si deteriorano.\");",
+  "ka": ""
+ },
+ {
+  "id": 1564,
+  "file": "house/house.inc",
+  "line": 1353,
+  "it": "Uso: /frigo metti [n] (solo proprietario) · /frigo prendi [n] (proprietario o ospite)",
+  "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Uso: /frigo metti [n] (solo proprietario) · /frigo prendi [n] (proprietario o ospite)\");",
+  "ka": ""
+ },
+ {
+  "id": 1565,
+  "file": "house/house.inc",
+  "line": 1359,
+  "it": "Uso: /frigo metti [n] · /frigo prendi [n]",
+  "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Uso: /frigo metti [n] · /frigo prendi [n]\");",
+  "ka": ""
+ },
+ {
+  "id": 1566,
+  "file": "house/house.inc",
+  "line": 1366,
+  "it": "Quantita' non valida.",
+  "ctx": "Util_Send(playerid, -10270721, \"Quantita' non valida.\");",
+  "ka": ""
+ },
+ {
+  "id": 1567,
+  "file": "house/house.inc",
+  "line": 1398,
+  "it": "Uso: /mangia (piatto caldo dopo /cucina) · /mangia freddo",
+  "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Uso: /mangia (piatto caldo dopo /cucina) · /mangia freddo\");",
+  "ka": ""
+ },
+ {
+  "id": 1568,
+  "file": "house/house.inc",
+  "line": 1420,
+  "it": "Devi essere in un supermercato.",
+  "ctx": "Util_Send(playerid, -10270721, \"Devi essere in un supermercato.\");",
+  "ka": ""
+ },
+ {
+  "id": 1569,
+  "file": "house/house.inc",
+  "line": 1425,
+  "it": "Scendi dal veicolo.",
+  "ctx": "Util_Send(playerid, -10270721, \"Scendi dal veicolo.\");",
+  "ka": ""
+ },
+ {
+  "id": 1570,
+  "file": "house/house.inc",
+  "line": 1448,
+  "it": "Quantita' non valida.",
+  "ctx": "Util_Send(playerid, -10270721, \"Quantita' non valida.\");",
+  "ka": ""
+ },
+ {
+  "id": 1571,
+  "file": "house/house.inc",
+  "line": 1502,
+  "it": "Casa %d: nuova bolletta %s di $%d (/bollette).",
+  "ctx": "SendClientMessage(owner, -2994689, \"Casa %d: nuova bolletta %s di $%d (/bollette).\", houseId, kind == 1 ? \"del gas\" : \"della luce\", amount);",
+  "ka": ""
+ },
+ {
+  "id": 1572,
+  "file": "house/house.inc",
+  "line": 1533,
+  "it": "Casa %d: %s staccat%s per bollette non pagate. Paga con /bollette (+$%d di riattivazione).",
+  "ctx": "SendClientMessage(owner, -10270721, \"Casa %d: %s staccat%s per bollette non pagate. Paga con /bollette (+$%d di riattivazione).\", id, kind == 1 ? \"il gas\" : \"la luce\", kind == 1 ? \"o\" : \"a\", 40);",
+  "ka": ""
+ },
+ {
+  "id": 1573,
+  "file": "house/house.inc",
+  "line": 1536,
+  "it": "DISTACCO casa %d: %s",
+  "ctx": "format(msg, 256, \"DISTACCO casa %d: %s\", id, kind == 1 ? \"gas\" : \"luce\");",
+  "ka": ""
+ },
+ {
+  "id": 1574,
+  "file": "house/house.inc",
+  "line": 1589,
+  "it": "Solo il proprietario puo' pagare le bollette.",
+  "ctx": "Util_Send(playerid, -10270721, \"Solo il proprietario puo' pagare le bollette.\");",
+  "ka": ""
+ },
+ {
+  "id": 1575,
+  "file": "house/house.inc",
+  "line": 1594,
+  "it": "Operazione in corso: attendi.",
+  "ctx": "Util_Send(playerid, -10270721, \"Operazione in corso: attendi.\");",
+  "ka": ""
+ },
+ {
+  "id": 1576,
+  "file": "house/house.inc",
+  "line": 1599,
+  "it": "Riapri /bollette per aggiornare l'elenco.",
+  "ctx": "Util_Send(playerid, -10270721, \"Riapri /bollette per aggiornare l'elenco.\");",
+  "ka": ""
+ },
+ {
+  "id": 1577,
+  "file": "house/house.inc",
+  "line": 1620,
+  "it": "Nessuna bolletta da pagare.",
+  "ctx": "Util_Send(playerid, 0x66DD66FF, \"Nessuna bolletta da pagare.\");",
+  "ka": ""
+ },
+ {
+  "id": 1578,
+  "file": "house/house.inc",
+  "line": 1625,
+  "it": "Fondi insufficienti con questo metodo di pagamento.",
+  "ctx": "Util_Send(playerid, -10270721, \"Fondi insufficienti con questo metodo di pagamento.\");",
+  "ka": ""
+ },
+ {
+  "id": 1579,
+  "file": "house/house.inc",
+  "line": 1632,
+  "it": "Pagamento in corso...",
+  "ctx": "Util_Send(playerid, -1, \"Pagamento in corso...\");",
+  "ka": ""
+ },
+ {
+  "id": 1580,
+  "file": "house/house.inc",
+  "line": 1653,
+  "it": "Pagamento non riuscito (errore database). Verifica lo stato con /bollette.",
+  "ctx": "Util_Send(playerid, -10270721, \"Pagamento non riuscito (errore database). Verifica lo stato con /bollette.\");",
+  "ka": ""
+ },
+ {
+  "id": 1581,
+  "file": "house/house.inc",
+  "line": 1661,
+  "it": "Le bollette sono cambiate o non risultano piu' dovute: riapri /bollette. Nessun addebito per questa utenza.",
+  "ctx": "Util_Send(playerid, -10270721, \"Le bollette sono cambiate o non risultano piu' dovute: riapri /bollette. Nessun addebito per questa utenza.\");",
+  "ka": ""
+ },
+ {
+  "id": 1582,
+  "file": "house/house.inc",
+  "line": 1678,
+  "it": "Fondi insufficienti: pagamento annullato per questa utenza.",
+  "ctx": "Util_Send(playerid, -10270721, \"Fondi insufficienti: pagamento annullato per questa utenza.\");",
+  "ka": ""
+ },
+ {
+  "id": 1583,
+  "file": "house/house.inc",
+  "line": 1700,
+  "it": "BOLLETTE %s: casa %d %s $%d%s (%s)",
+  "ctx": "format(msg, 256, \"BOLLETTE %s: casa %d %s $%d%s (%s)\", name, houseId, kind == 1 ? \"gas\" : \"luce\", amount, restored != 0 ? \" con riattivazione\" : \"\", bank == 1 ? \"banca\" : \"contanti\");",
+  "ka": ""
+ },
+ {
+  "id": 1584,
+  "file": "house/house.inc",
+  "line": 1700,
+  "it": " con riattivazione",
+  "ctx": "format(msg, 256, \"BOLLETTE %s: casa %d %s $%d%s (%s)\", name, houseId, kind == 1 ? \"gas\" : \"luce\", amount, restored != 0 ? \" con riattivazione\" : \"\", bank == 1 ? \"banca\" : \"contanti\");",
+  "ka": ""
+ },
+ {
+  "id": 1585,
+  "file": "house/house.inc",
+  "line": 1710,
+  "it": "Bollette pagate: $%d addebitati (%s).",
+  "ctx": "SendClientMessage(playerid, 0x66DD66FF, \"Bollette pagate: $%d addebitati (%s).\", g_HPl[playerid][hpBillPaidTotal], bank == 1 ? \"banca\" : \"contanti\");",
+  "ka": ""
+ },
+ {
+  "id": 1586,
+  "file": "house/house.inc",
+  "line": 1734,
+  "it": "Non possiedi nessuna casa.",
+  "ctx": "Util_Send(playerid, -10270721, \"Non possiedi nessuna casa.\");",
+  "ka": ""
+ },
+ {
+  "id": 1587,
+  "file": "house/house.inc",
+  "line": 1739,
+  "it": "Possiedi piu' case: entra o avvicinati alla porta di quella interessata.",
+  "ctx": "Util_Send(playerid, -10270721, \"Possiedi piu' case: entra o avvicinati alla porta di quella interessata.\");",
+  "ka": ""
+ },
+ {
+  "id": 1588,
+  "file": "house/house.inc",
+  "line": 1753,
+  "it": "Devi essere il proprietario, dentro la casa o davanti alla sua porta.",
+  "ctx": "Util_Send(playerid, -10270721, \"Devi essere il proprietario, dentro la casa o davanti alla sua porta.\");",
+  "ka": ""
+ },
+ {
+  "id": 1589,
+  "file": "house/house.inc",
+  "line": 1768,
+  "it": "Giocatore non valido.",
+  "ctx": "Util_Send(playerid, -10270721, \"Giocatore non valido.\");",
+  "ka": ""
+ },
+ {
+  "id": 1590,
+  "file": "house/house.inc",
+  "line": 1773,
+  "it": "Il giocatore e' troppo lontano.",
+  "ctx": "Util_Send(playerid, -10270721, \"Il giocatore e' troppo lontano.\");",
+  "ka": ""
+ },
+ {
+  "id": 1591,
+  "file": "house/house.inc",
+  "line": 1778,
+  "it": "Quel giocatore ha gia' una chiave.",
+  "ctx": "Util_Send(playerid, -10270721, \"Quel giocatore ha gia' una chiave.\");",
+  "ka": ""
+ },
+ {
+  "id": 1592,
+  "file": "house/house.inc",
+  "line": 1783,
+  "it": "Hai gia' consegnato il massimo di chiavi (%d).",
+  "ctx": "SendClientMessage(playerid, -10270721, \"Hai gia' consegnato il massimo di chiavi (%d).\", 3);",
+  "ka": ""
+ },
+ {
+  "id": 1593,
+  "file": "house/house.inc",
+  "line": 1808,
+  "it": "Chiave non consegnata (errore database).",
+  "ctx": "Util_Send(playerid, -10270721, \"Chiave non consegnata (errore database).\");",
+  "ka": ""
+ },
+ {
+  "id": 1594,
+  "file": "house/house.inc",
+  "line": 1813,
+  "it": "Chiave non consegnata: limite raggiunto o gia' presente.",
+  "ctx": "Util_Send(playerid, -10270721, \"Chiave non consegnata: limite raggiunto o gia' presente.\");",
+  "ka": ""
+ },
+ {
+  "id": 1595,
+  "file": "house/house.inc",
+  "line": 1825,
+  "it": "Hai ricevuto la chiave della casa %d (%s).",
+  "ctx": "SendClientMessage(target, 0x66DD66FF, \"Hai ricevuto la chiave della casa %d (%s).\", houseId, g_HouseRows[idx][hrOwnerName]);",
+  "ka": ""
+ },
+ {
+  "id": 1596,
+  "file": "house/house.inc",
+  "line": 1827,
+  "it": "Hai consegnato una chiave della casa %d a %s (%d/%d).",
+  "ctx": "SendClientMessage(playerid, 0x66DD66FF, \"Hai consegnato una chiave della casa %d a %s (%d/%d).\", houseId, tname, g_HouseRows[idx][hrKeyCount], 3);",
+  "ka": ""
+ },
+ {
+  "id": 1597,
+  "file": "house/house.inc",
+  "line": 1860,
+  "it": "Impossibile leggere le chiavi (errore database).",
+  "ctx": "Util_Send(playerid, -10270721, \"Impossibile leggere le chiavi (errore database).\");",
+  "ka": ""
+ },
+ {
+  "id": 1598,
+  "file": "house/house.inc",
+  "line": 1865,
+  "it": "--- Chiavi casa %d (%d/%d) ---",
+  "ctx": "SendClientMessage(playerid, -2994689, \"--- Chiavi casa %d (%d/%d) ---\", houseId, count, 3);",
+  "ka": ""
+ },
+ {
+  "id": 1599,
+  "file": "house/house.inc",
+  "line": 1871,
+  "it": "%d) %s (online, id %d)",
+  "ctx": "SendClientMessage(playerid, -1, \"%d) %s (online, id %d)\", i + 1, g_HouseKeyList[playerid][i][hkName], online);",
+  "ka": ""
+ },
+ {
+  "id": 1600,
+  "file": "house/house.inc",
+  "line": 1878,
+  "it": "Uso: /casa chiave [id] · /casa revoca [id | Nome_Cognome | numero]",
+  "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Uso: /casa chiave [id] · /casa revoca [id | Nome_Cognome | numero]\");",
+  "ka": ""
+ },
+ {
+  "id": 1601,
+  "file": "house/house.inc",
+  "line": 1908,
+  "it": "Nessuna chiave corrisponde: usa /casa chiavi per l'elenco.",
+  "ctx": "Util_Send(playerid, -10270721, \"Nessuna chiave corrisponde: usa /casa chiavi per l'elenco.\");",
+  "ka": ""
+ },
+ {
+  "id": 1602,
+  "file": "house/house.inc",
+  "line": 1933,
+  "it": "Chiave non revocata (errore database).",
+  "ctx": "Util_Send(playerid, -10270721, \"Chiave non revocata (errore database).\");",
+  "ka": ""
+ },
+ {
+  "id": 1603,
+  "file": "house/house.inc",
+  "line": 1938,
+  "it": "Chiave non revocata: non risulta piu' presente.",
+  "ctx": "Util_Send(playerid, -10270721, \"Chiave non revocata: non risulta piu' presente.\");",
+  "ka": ""
+ },
+ {
+  "id": 1604,
+  "file": "house/house.inc",
+  "line": 1958,
+  "it": "La tua chiave della casa %d e' stata revocata.",
+  "ctx": "SendClientMessage(target, -10270721, \"La tua chiave della casa %d e' stata revocata.\", houseId);",
+  "ka": ""
+ },
+ {
+  "id": 1605,
+  "file": "house/house.inc",
+  "line": 1964,
+  "it": "Chiave revocata (%d/%d).",
+  "ctx": "SendClientMessage(playerid, 0x66DD66FF, \"Chiave revocata (%d/%d).\", g_HouseRows[idx][hrKeyCount], 3);",
+  "ka": ""
+ },
+ {
+  "id": 1606,
+  "file": "house/house.inc",
+  "line": 1971,
+  "it": "--- Casa %d - %s ---",
+  "ctx": "SendClientMessage(playerid, -2994689, \"--- Casa %d - %s ---\", g_HouseRows[idx][hrId], s_HsTierName[tier]);",
+  "ka": ""
+ },
+ {
+  "id": 1607,
+  "file": "house/house.inc",
+  "line": 1974,
+  "it": "In vendita: $%d, livello minimo %d, frigo %d porzioni. Limite case per il tuo livello: %d.",
+  "ctx": "SendClientMessage(playerid, -1, \"In vendita: $%d, livello minimo %d, frigo %d porzioni. Limite case per il tuo livello: %d.\", g_HouseRows[idx][hrPrice], s_HsTierLevel[tier], s_HsFridgeCap[tier], House",
+  "ka": ""
+ },
+ {
+  "id": 1608,
+  "file": "house/house.inc",
+  "line": 1975,
+  "it": "Acquisto: /casa compra (menu) oppure /casa compra contanti|banca",
+  "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Acquisto: /casa compra (menu) oppure /casa compra contanti|banca\");",
+  "ka": ""
+ },
+ {
+  "id": 1609,
+  "file": "house/house.inc",
+  "line": 1978,
+  "it": "Proprietario: %s - porta %s.",
+  "ctx": "SendClientMessage(playerid, -1, \"Proprietario: %s - porta %s.\", g_HouseRows[idx][hrOwnerName], g_HouseRows[idx][hrLocked] ? \"chiusa a chiave\" : \"aperta\");",
+  "ka": ""
+ },
+ {
+  "id": 1610,
+  "file": "house/house.inc",
+  "line": 1978,
+  "it": "chiusa a chiave",
+  "ctx": "SendClientMessage(playerid, -1, \"Proprietario: %s - porta %s.\", g_HouseRows[idx][hrOwnerName], g_HouseRows[idx][hrLocked] ? \"chiusa a chiave\" : \"aperta\");",
+  "ka": ""
+ },
+ {
+  "id": 1611,
+  "file": "house/house.inc",
+  "line": 1985,
+  "it": "Luce: %s - Gas: %s - Frigo: %d/%d",
+  "ctx": "SendClientMessage(playerid, -1, \"Luce: %s - Gas: %s - Frigo: %d/%d\", st1, st2, g_HouseRows[idx][hrFridgeUnits], s_HsFridgeCap[tier]);",
+  "ka": ""
+ },
+ {
+  "id": 1612,
+  "file": "house/house.inc",
+  "line": 1988,
+  "it": "Bollette non pagate: %d - Chiavi consegnate: %d/%d",
+  "ctx": "SendClientMessage(playerid, -1, \"Bollette non pagate: %d - Chiavi consegnate: %d/%d\", g_HouseRows[idx][hrBills], g_HouseRows[idx][hrKeyCount], 3);",
+  "ka": ""
+ },
+ {
+  "id": 1613,
+  "file": "house/house.inc",
+  "line": 2004,
+  "it": "Devi essere dentro una casa o davanti alla sua porta.",
+  "ctx": "Util_Send(playerid, -10270721, \"Devi essere dentro una casa o davanti alla sua porta.\");",
+  "ka": ""
+ },
+ {
+  "id": 1614,
+  "file": "house/house.inc",
+  "line": 2009,
+  "it": "Hai un'operazione della casa in corso: attendi.",
+  "ctx": "Util_Send(playerid, -10270721, \"Hai un'operazione della casa in corso: attendi.\");",
+  "ka": ""
+ },
+ {
+  "id": 1615,
+  "file": "house/house.inc",
+  "line": 2037,
+  "it": "Uso: /casa chiave [id giocatore]",
+  "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Uso: /casa chiave [id giocatore]\");",
+  "ka": ""
+ },
+ {
+  "id": 1616,
+  "file": "house/house.inc",
+  "line": 2048,
+  "it": "Uso: /casa revoca [id giocatore | Nome_Cognome | numero da /casa chiavi]",
+  "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Uso: /casa revoca [id giocatore | Nome_Cognome | numero da /casa chiavi]\");",
+  "ka": ""
+ },
+ {
+  "id": 1617,
+  "file": "house/house.inc",
+  "line": 2064,
+  "it": "Devi essere davanti alla porta di una casa in vendita.",
+  "ctx": "Util_Send(playerid, -10270721, \"Devi essere davanti alla porta di una casa in vendita.\");",
+  "ka": ""
+ },
+ {
+  "id": 1618,
+  "file": "house/house.inc",
+  "line": 2083,
+  "it": "Uso: /casa compra [contanti|banca]",
+  "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Uso: /casa compra [contanti|banca]\");",
+  "ka": ""
+ },
+ {
+  "id": 1619,
+  "file": "house/house.inc",
+  "line": 2086,
+  "it": "Uso: /casa [info|compra|vendi|serratura|chiave|chiavi|revoca]",
+  "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Uso: /casa [info|compra|vendi|serratura|chiave|chiavi|revoca]\");",
+  "ka": ""
+ },
+ {
+  "id": 1620,
+  "file": "house/house.inc",
+  "line": 2098,
+  "it": "Sei gia' dentro una casa.",
+  "ctx": "Util_Send(playerid, -10270721, \"Sei gia' dentro una casa.\");",
+  "ka": ""
+ },
+ {
+  "id": 1621,
+  "file": "house/house.inc",
+  "line": 2104,
+  "it": "Non sei davanti alla porta di una casa.",
+  "ctx": "Util_Send(playerid, -10270721, \"Non sei davanti alla porta di una casa.\");",
+  "ka": ""
+ },
+ {
+  "id": 1622,
+  "file": "house/house.inc",
+  "line": 2109,
+  "it": "Scendi dal veicolo per entrare.",
+  "ctx": "Util_Send(playerid, -10270721, \"Scendi dal veicolo per entrare.\");",
+  "ka": ""
+ },
+ {
+  "id": 1623,
+  "file": "house/house.inc",
+  "line": 2114,
+  "it": "La casa e' in vendita e non e' visitabile. Usa /casa per le informazioni.",
+  "ctx": "Util_Send(playerid, -10270721, \"La casa e' in vendita e non e' visitabile. Usa /casa per le informazioni.\");",
+  "ka": ""
+ },
+ {
+  "id": 1624,
+  "file": "house/house.inc",
+  "line": 2119,
+  "it": "La porta e' chiusa a chiave. Prova con /bussa.",
+  "ctx": "Util_Send(playerid, -10270721, \"La porta e' chiusa a chiave. Prova con /bussa.\");",
+  "ka": ""
+ },
+ {
+  "id": 1625,
+  "file": "house/house.inc",
+  "line": 2123,
+  "it": "Sei entrato nella casa %d. Usa /esci per uscire.",
+  "ctx": "SendClientMessage(playerid, -1, \"Sei entrato nella casa %d. Usa /esci per uscire.\", g_HouseRows[idx][hrId]);",
+  "ka": ""
+ },
+ {
+  "id": 1626,
+  "file": "house/house.inc",
+  "line": 2136,
+  "it": "Non sei dentro una casa.",
+  "ctx": "Util_Send(playerid, -10270721, \"Non sei dentro una casa.\");",
+  "ka": ""
+ },
+ {
+  "id": 1627,
+  "file": "house/house.inc",
+  "line": 2141,
+  "it": "Avvicinati alla porta per uscire.",
+  "ctx": "Util_Send(playerid, -10270721, \"Avvicinati alla porta per uscire.\");",
+  "ka": ""
+ },
+ {
+  "id": 1628,
+  "file": "house/house.inc",
+  "line": 2157,
+  "it": "Non sei davanti alla porta di una casa abitata.",
+  "ctx": "Util_Send(playerid, -10270721, \"Non sei davanti alla porta di una casa abitata.\");",
+  "ka": ""
+ },
+ {
+  "id": 1629,
+  "file": "house/house.inc",
+  "line": 2162,
+  "it": "La porta e' aperta: usa /entra.",
+  "ctx": "Util_Send(playerid, -1, \"La porta e' aperta: usa /entra.\");",
+  "ka": ""
+ },
+ {
+  "id": 1630,
+  "file": "house/house.inc",
+  "line": 2168,
+  "it": "Hai bussato da poco: attendi.",
+  "ctx": "Util_Send(playerid, -10270721, \"Hai bussato da poco: attendi.\");",
+  "ka": ""
+ },
+ {
+  "id": 1631,
+  "file": "house/house.inc",
+  "line": 2180,
+  "it": "* Qualcuno bussa alla porta (%s).",
+  "ctx": "SendClientMessage(p, 0xC2A2DAFF, \"* Qualcuno bussa alla porta (%s).\", name);",
+  "ka": ""
+ },
+ {
+  "id": 1632,
+  "file": "house/house.inc",
+  "line": 2183,
+  "it": "* Bussi alla porta.",
+  "ctx": "Util_Send(playerid, 0xC2A2DAFF, \"* Bussi alla porta.\");",
+  "ka": ""
+ },
+ {
+  "id": 1633,
+  "file": "house/house.inc",
+  "line": 2186,
+  "it": "Non sembra esserci nessuno in casa.",
+  "ctx": "Util_Send(playerid, -1, \"Non sembra esserci nessuno in casa.\");",
+  "ka": ""
+ },
+ {
+  "id": 1634,
+  "file": "house/house.inc",
+  "line": 2204,
+  "it": "Non sei piu' vicino a quella casa.",
+  "ctx": "Util_Send(playerid, -10270721, \"Non sei piu' vicino a quella casa.\");",
+  "ka": ""
+ },
+ {
+  "id": 1635,
+  "file": "house/house.inc",
+  "line": 2219,
+  "it": "Operazione in corso: attendi.",
+  "ctx": "Util_Send(playerid, -10270721, \"Operazione in corso: attendi.\");",
+  "ka": ""
+ },
+ {
+  "id": 1636,
+  "file": "house/house.inc",
+  "line": 2233,
+  "it": "Non hai accesso alle utenze.",
+  "ctx": "Util_Send(playerid, -10270721, \"Non hai accesso alle utenze.\");",
+  "ka": ""
+ },
+ {
+  "id": 1637,
+  "file": "house/house.inc",
+  "line": 2243,
+  "it": "Devi essere dentro la casa per usare il frigo.",
+  "ctx": "Util_Send(playerid, -10270721, \"Devi essere dentro la casa per usare il frigo.\");",
+  "ka": ""
+ },
+ {
+  "id": 1638,
+  "file": "house/house.inc",
+  "line": 2253,
+  "it": "Solo il proprietario gestisce le bollette.",
+  "ctx": "Util_Send(playerid, -10270721, \"Solo il proprietario gestisce le bollette.\");",
+  "ka": ""
+ },
+ {
+  "id": 1639,
+  "file": "house/house.inc",
+  "line": 2262,
+  "it": "Solo il proprietario gestisce le chiavi.",
+  "ctx": "Util_Send(playerid, -10270721, \"Solo il proprietario gestisce le chiavi.\");",
+  "ka": ""
+ },
+ {
+  "id": 1640,
+  "file": "house/house.inc",
+  "line": 2362,
+  "it": "Casa %d: senza corrente il frigo ha perso %d porzioni.",
+  "ctx": "SendClientMessage(owner, -10270721, \"Casa %d: senza corrente il frigo ha perso %d porzioni.\", g_HouseRows[idx][hrId], lost);",
+  "ka": ""
+ },
+ {
+  "id": 1641,
+  "file": "house/house.inc",
+  "line": 2465,
+  "it": "caricate %d case",
+  "ctx": "format(msg, 128, \"caricate %d case\", count);",
+  "ka": ""
+ },
+ {
+  "id": 1642,
+  "file": "house/house.inc",
+  "line": 2486,
+  "it": "Supermercato\\n/compra - cibo, pasto, acqua, snack, kit, benda, zaino...",
+  "ctx": "Lang_Create3DTextLabel(\"Supermercato\\n/compra - cibo, pasto, acqua, snack, kit, benda, zaino...\", 0x66DD66FF, s_HsShops[s][0], s_HsShops[s][1], (0.9 + s_HsShops[s][2]), 12.0, 0, false);",
+  "ka": ""
+ },
+ {
+  "id": 1643,
+  "file": "house/house.inc",
+  "line": 2632,
+  "it": "Casa %d (%s) in vendita: $%d, livello minimo %d. Usa /casa per le info e l'acquisto.",
+  "ctx": "SendClientMessage(playerid, -1, \"Casa %d (%s) in vendita: $%d, livello minimo %d. Usa /casa per le info e l'acquisto.\", g_HouseRows[idx][hrId], s_HsTierName[tier], g_HouseRows[idx][hrPrice], s_HsTierL",
+  "ka": ""
+ },
+ {
+  "id": 1644,
+  "file": "house/house.inc",
+  "line": 2636,
+  "it": "Casa %d di %s. Usa /entra per entrare.",
+  "ctx": "SendClientMessage(playerid, -1, \"Casa %d di %s. Usa /entra per entrare.\", g_HouseRows[idx][hrId], g_HouseRows[idx][hrOwnerName]);",
+  "ka": ""
+ },
+ {
+  "id": 1645,
+  "file": "house/house.inc",
+  "line": 2640,
+  "it": "Casa %d di %s: porta chiusa a chiave. Usa /bussa.",
+  "ctx": "SendClientMessage(playerid, -1, \"Casa %d di %s: porta chiusa a chiave. Usa /bussa.\", g_HouseRows[idx][hrId], g_HouseRows[idx][hrOwnerName]);",
+  "ka": ""
+ },
+ {
+  "id": 1146,
+  "file": "hub/hub.inc",
+  "line": 238,
+  "it": "Casa del Quartiere di Idlewood\\nBacheca contratti - Progetto del quartiere\\n/contratti  /contribuisci  /aiuto servizi",
+  "ctx": "g_HubLabel[b] = Lang_Create3DTextLabel(\"Casa del Quartiere di Idlewood\\nBacheca contratti - Progetto del quartiere\\n/contratti  /contribuisci  /aiuto servizi\", -2994689, s_HubBoard[b][0], s_HubBoard[b",
+  "ka": ""
+ },
+ {
+  "id": 1147,
+  "file": "hub/hub.inc",
+  "line": 243,
+  "it": "Bacheca di quartiere - %s\\nUn pezzo di Casa del Quartiere anche qui\\n/contratti  /contribuisci",
+  "ctx": "format(text, 256, \"Bacheca di quartiere - %s\\nUn pezzo di Casa del Quartiere anche qui\\n/contratti  /contribuisci\", name);",
+  "ka": ""
+ },
+ {
+  "id": 1148,
+  "file": "hub/hub.inc",
+  "line": 265,
+  "it": "Hub_OnDistrictEvent",
+  "ctx": "if (!LD_Listen(\"Hub_OnDistrictEvent\", 40))",
+  "ka": ""
+ },
+ {
+  "id": 1149,
+  "file": "hub/hub.inc",
+  "line": 360,
+  "it": "Benvenuto a Los Santos. Qui nessuno arriva da solo: a due passi da Unity Station c'e' la Casa del Quartiere di Idlewood.",
+  "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Benvenuto a Los Santos. Qui nessuno arriva da solo: a due passi da Unity Station c'e' la Casa del Quartiere di Idlewood.\");",
+  "ka": ""
+ },
+ {
+  "id": 1150,
+  "file": "hub/hub.inc",
+  "line": 361,
+  "it": "Se ti va, /aiuto ti accompagna nel primo giorno. Preferisci fare da te? /aiuto off, nessun problema.",
+  "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Se ti va, /aiuto ti accompagna nel primo giorno. Preferisci fare da te? /aiuto off, nessun problema.\");",
+  "ka": ""
+ },
+ {
+  "id": 1151,
+  "file": "hub/hub.inc",
+  "line": 366,
+  "it": "Bentornato. Il tuo primo giorno riprende dal passo %d di %d: /aiuto per rivederlo.",
+  "ctx": "format(msg, 256, \"Bentornato. Il tuo primo giorno riprende dal passo %d di %d: /aiuto per rivederlo.\", Hub_CurStep(playerid), 5);",
+  "ka": ""
+ },
+ {
+  "id": 1152,
+  "file": "hub/hub.inc",
+  "line": 461,
+  "it": "Sei alla Casa del Quartiere: qui la citta' ti chiama per nome. Bacheca, notizie, una mano quando serve.",
+  "ctx": "UI_LivingNotify(playerid, \"Sei alla Casa del Quartiere: qui la citta' ti chiama per nome. Bacheca, notizie, una mano quando serve.\", 1);",
+  "ka": ""
+ },
+ {
+  "id": 1153,
+  "file": "hub/hub.inc",
+  "line": 465,
+  "it": "Ora sai come respira Idlewood. Quello che facciamo, lo cambia per tutti.",
+  "ctx": "UI_LivingNotify(playerid, \"Ora sai come respira Idlewood. Quello che facciamo, lo cambia per tutti.\", 1);",
+  "ka": ""
+ },
+ {
+  "id": 1154,
+  "file": "hub/hub.inc",
+  "line": 471,
+  "it": "Consegna di benvenuto fatta: il negozio ringrazia. La Casa del Quartiere ti ha versato $%d sul conto.",
+  "ctx": "format(msg, 256, \"Consegna di benvenuto fatta: il negozio ringrazia. La Casa del Quartiere ti ha versato $%d sul conto.\", paid);",
+  "ka": ""
+ },
+ {
+  "id": 1155,
+  "file": "hub/hub.inc",
+  "line": 475,
+  "it": "Consegna di benvenuto fatta: il negozio ringrazia.",
+  "ctx": "format(msg, 256, \"Consegna di benvenuto fatta: il negozio ringrazia.\");",
+  "ka": ""
+ },
+ {
+  "id": 1156,
+  "file": "hub/hub.inc",
+  "line": 481,
+  "it": "La citta' comincia a conoscerti. Ogni lavoro fatto bene lascia un segno.",
+  "ctx": "UI_LivingNotify(playerid, \"La citta' comincia a conoscerti. Ogni lavoro fatto bene lascia un segno.\", 1);",
+  "ka": ""
+ },
+ {
+  "id": 1157,
+  "file": "hub/hub.inc",
+  "line": 507,
+  "it": "pacco accoglienza non consegnato al personaggio %d (inventario non pronto)",
+  "ctx": "format(msg, 256, \"pacco accoglienza non consegnato al personaggio %d (inventario non pronto)\", gPlayer[playerid][pCharId]);",
+  "ka": ""
+ },
+ {
+  "id": 1158,
+  "file": "hub/hub.inc",
+  "line": 525,
+  "it": "obkit%d-%d",
+  "ctx": "format(opId, 33, \"obkit%d-%d\", gPlayer[playerid][pCharId], i);",
+  "ka": ""
+ },
+ {
+  "id": 1159,
+  "file": "hub/hub.inc",
+  "line": 602,
+  "it": "onboarding: esito %d per il passo %d del personaggio %d",
+  "ctx": "format(msg, 256, \"onboarding: esito %d per il passo %d del personaggio %d\", result, sent, gPlayer[playerid][pCharId]);",
+  "ka": ""
+ },
+ {
+  "id": 1160,
+  "file": "hub/hub.inc",
+  "line": 615,
+  "it": "Sto ancora recuperando il tuo percorso: riprova tra un attimo.",
+  "ctx": "Util_Send(playerid, -10270721, \"Sto ancora recuperando il tuo percorso: riprova tra un attimo.\");",
+  "ka": ""
+ },
+ {
+  "id": 1161,
+  "file": "hub/hub.inc",
+  "line": 625,
+  "it": "Suggerimenti spenti. La Casa del Quartiere di Idlewood resta aperta, se ti serve.",
+  "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Suggerimenti spenti. La Casa del Quartiere di Idlewood resta aperta, se ti serve.\");",
+  "ka": ""
+ },
+ {
+  "id": 1162,
+  "file": "hub/hub.inc",
+  "line": 631,
+  "it": "Un attimo: sto registrando il tuo ultimo passo. Riprova tra poco.",
+  "ctx": "Util_Send(playerid, -10270721, \"Un attimo: sto registrando il tuo ultimo passo. Riprova tra poco.\");",
+  "ka": ""
+ },
+ {
+  "id": 1163,
+  "file": "hub/hub.inc",
+  "line": 650,
+  "it": "La consegna di benvenuto arriva tra poco: prima finisci il passo in corso (/aiuto).",
+  "ctx": "Util_Send(playerid, 0x99CCFFFF, \"La consegna di benvenuto arriva tra poco: prima finisci il passo in corso (/aiuto).\");",
+  "ka": ""
+ },
+ {
+  "id": 1164,
+  "file": "hub/hub.inc",
+  "line": 654,
+  "it": "La consegna di benvenuto e' per il primo giorno. Per altri incarichi c'e' la bacheca: /contratti.",
+  "ctx": "Util_Send(playerid, 0x99CCFFFF, \"La consegna di benvenuto e' per il primo giorno. Per altri incarichi c'e' la bacheca: /contratti.\");",
+  "ka": ""
+ },
+ {
+  "id": 1165,
+  "file": "hub/hub.inc",
+  "line": 660,
+  "it": "La consegna di benvenuto e' gia' in corso: il magazzino di Idlewood ti aspetta.",
+  "ctx": "Util_Send(playerid, 0x99CCFFFF, \"La consegna di benvenuto e' gia' in corso: il magazzino di Idlewood ti aspetta.\");",
+  "ka": ""
+ },
+ {
+  "id": 1166,
+  "file": "hub/hub.inc",
+  "line": 665,
+  "it": "La consegna si prende a una bacheca: ti ho segnato la Casa del Quartiere di Idlewood sulla mappa.",
+  "ctx": "Util_Send(playerid, 0x99CCFFFF, \"La consegna si prende a una bacheca: ti ho segnato la Casa del Quartiere di Idlewood sulla mappa.\");",
+  "ka": ""
+ },
+ {
+  "id": 1167,
+  "file": "hub/hub.inc",
+  "line": 678,
+  "it": "Il furgone della consegna di benvenuto non e' disponibile proprio ora: riprova tra poco.",
+  "ctx": "Util_Send(playerid, -10270721, \"Il furgone della consegna di benvenuto non e' disponibile proprio ora: riprova tra poco.\");",
+  "ka": ""
+ },
+ {
+  "id": 1168,
+  "file": "hub/hub.inc",
+  "line": 681,
+  "it": "Un carico di merci dal magazzino al negozio di Idlewood: strada breve, nessuna fretta. Il quartiere ti ringrazia gia'.",
+  "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Un carico di merci dal magazzino al negozio di Idlewood: strada breve, nessuna fretta. Il quartiere ti ringrazia gia'.\");",
+  "ka": ""
+ },
+ {
+  "id": 1169,
+  "file": "hub/hub.inc",
+  "line": 696,
+  "it": "Pazienza, capita a tutti. La consegna di benvenuto resta li': quando vuoi, /aiuto consegna a una bacheca.",
+  "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Pazienza, capita a tutti. La consegna di benvenuto resta li': quando vuoi, /aiuto consegna a una bacheca.\");",
+  "ka": ""
+ },
+ {
+  "id": 1170,
+  "file": "hub/hub.inc",
+  "line": 704,
+  "it": "Casa del Quartiere di Idlewood - cosa trovi qui (e alle bacheche di Ganton e Jefferson):",
+  "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Casa del Quartiere di Idlewood - cosa trovi qui (e alle bacheche di Ganton e Jefferson):\");",
+  "ka": ""
+ },
+ {
+  "id": 1171,
+  "file": "hub/hub.inc",
+  "line": 705,
+  "it": " /contratti - la bacheca: si consulta ovunque, si accetta qui o a una bacheca di quartiere",
+  "ctx": "Util_Send(playerid, -1, \" /contratti - la bacheca: si consulta ovunque, si accetta qui o a una bacheca di quartiere\");",
+  "ka": ""
+ },
+ {
+  "id": 1172,
+  "file": "hub/hub.inc",
+  "line": 706,
+  "it": " /quartiere [nome] - come sta il quartiere e cosa si dice in strada",
+  "ctx": "Util_Send(playerid, -1, \" /quartiere [nome] - come sta il quartiere e cosa si dice in strada\");",
+  "ka": ""
+ },
+ {
+  "id": 1173,
+  "file": "hub/hub.inc",
+  "line": 707,
+  "it": " /contribuisci [importo] [quartiere] - il progetto della comunita': da $%d a $%d, max $%d al giorno, dal conto",
+  "ctx": "format(msg, 256, \" /contribuisci [importo] [quartiere] - il progetto della comunita': da $%d a $%d, max $%d al giorno, dal conto\", 50, 500, 1000);",
+  "ka": ""
+ },
+ {
+  "id": 1174,
+  "file": "hub/hub.inc",
+  "line": 709,
+  "it": " /documento richiedi - lo sportello documenti",
+  "ctx": "Util_Send(playerid, -1, \" /documento richiedi - lo sportello documenti\");",
+  "ka": ""
+ },
+ {
+  "id": 1175,
+  "file": "hub/hub.inc",
+  "line": 710,
+  "it": " /aiuto lavoro - la strada per il Job Center di Pershing Square  |  /aiuto noleggio - il noleggio mezzi",
+  "ctx": "Util_Send(playerid, -1, \" /aiuto lavoro - la strada per il Job Center di Pershing Square  |  /aiuto noleggio - il noleggio mezzi\");",
+  "ka": ""
+ },
+ {
+  "id": 1176,
+  "file": "hub/hub.inc",
+  "line": 725,
+  "it": "Sto recuperando il tuo percorso: riprova tra un attimo. Intanto: /aiuto servizi.",
+  "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Sto recuperando il tuo percorso: riprova tra un attimo. Intanto: /aiuto servizi.\");",
+  "ka": ""
+ },
+ {
+  "id": 1177,
+  "file": "hub/hub.inc",
+  "line": 755,
+  "it": "Nessun passo da segnare. Per la Casa del Quartiere: /aiuto casa.",
+  "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Nessun passo da segnare. Per la Casa del Quartiere: /aiuto casa.\");",
+  "ka": ""
+ },
+ {
+  "id": 1178,
+  "file": "hub/hub.inc",
+  "line": 762,
+  "it": "Ti ho segnato la Casa del Quartiere di Idlewood sulla mappa.",
+  "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Ti ho segnato la Casa del Quartiere di Idlewood sulla mappa.\");",
+  "ka": ""
+ },
+ {
+  "id": 1179,
+  "file": "hub/hub.inc",
+  "line": 768,
+  "it": "Il Job Center e' a Pershing Square, vicino al municipio: te l'ho segnato sulla mappa. Li', /lavoro prendi.",
+  "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Il Job Center e' a Pershing Square, vicino al municipio: te l'ho segnato sulla mappa. Li', /lavoro prendi.\");",
+  "ka": ""
+ },
+ {
+  "id": 1180,
+  "file": "hub/hub.inc",
+  "line": 774,
+  "it": "Il noleggio mezzi e' a Pershing Square: te l'ho segnato sulla mappa. Li', /noleggio.",
+  "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Il noleggio mezzi e' a Pershing Square: te l'ho segnato sulla mappa. Li', /noleggio.\");",
+  "ka": ""
+ },
+ {
+  "id": 1181,
+  "file": "hub/hub.inc",
+  "line": 777,
+  "it": "Uso: /aiuto [servizi|mappa|consegna|casa|lavoro|noleggio|off]",
+  "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Uso: /aiuto [servizi|mappa|consegna|casa|lavoro|noleggio|off]\");",
+  "ka": ""
+ },
+ {
+  "id": 1182,
+  "file": "hub/hub.inc",
+  "line": 789,
+  "it": "Questo passo non e' quello in corso: /aiuto per vedere a che punto sei.",
+  "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Questo passo non e' quello in corso: /aiuto per vedere a che punto sei.\");",
+  "ka": ""
+ },
+ {
+  "id": 1183,
+  "file": "hub/hub.inc",
+  "line": 797,
+  "it": "Segui il segnale: la Casa del Quartiere e' a due passi da Unity Station.",
+  "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Segui il segnale: la Casa del Quartiere e' a due passi da Unity Station.\");",
+  "ka": ""
+ },
+ {
+  "id": 1184,
+  "file": "hub/hub.inc",
+  "line": 803,
+  "it": "Sei gia' a una bacheca: /aiuto consegna e si parte.",
+  "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Sei gia' a una bacheca: /aiuto consegna e si parte.\");",
+  "ka": ""
+ },
+ {
+  "id": 1185,
+  "file": "hub/hub.inc",
+  "line": 808,
+  "it": "Ti ho segnato la Casa del Quartiere: li', /aiuto consegna.",
+  "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Ti ho segnato la Casa del Quartiere: li', /aiuto consegna.\");",
+  "ka": ""
+ },
+ {
+  "id": 1186,
+  "file": "hub/hub.inc",
+  "line": 814,
+  "it": "Ti ho segnato il Job Center di Pershing Square. Puoi anche solo scrivere /lavoro o /noleggio da qui.",
+  "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Ti ho segnato il Job Center di Pershing Square. Puoi anche solo scrivere /lavoro o /noleggio da qui.\");",
+  "ka": ""
+ },
+ {
+  "id": 1187,
+  "file": "hub/hub.inc",
+  "line": 818,
+  "it": "Non serve andare lontano: il comando funziona ovunque tu sia (/aiuto per i dettagli).",
+  "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Non serve andare lontano: il comando funziona ovunque tu sia (/aiuto per i dettagli).\");",
+  "ka": ""
+ },
+ {
+  "id": 1188,
+  "file": "hub/hub.inc",
+  "line": 923,
+  "it": "Importo non valido: scrivi un numero intero positivo (es. /contribuisci 100).",
+  "ctx": "Util_Send(playerid, -10270721, \"Importo non valido: scrivi un numero intero positivo (es. /contribuisci 100).\");",
+  "ka": ""
+ },
+ {
+  "id": 1189,
+  "file": "hub/hub.inc",
+  "line": 938,
+  "it": "Quartiere sconosciuto: Idlewood, Ganton o Jefferson.",
+  "ctx": "Util_Send(playerid, -10270721, \"Quartiere sconosciuto: Idlewood, Ganton o Jefferson.\");",
+  "ka": ""
+ },
+ {
+  "id": 1190,
+  "file": "hub/hub.inc",
+  "line": 984,
+  "it": "Questo progetto non raccoglie piu' fondi: ne partira' presto un altro.",
+  "ctx": "UI_LivingReject(playerid, \"Questo progetto non raccoglie piu' fondi: ne partira' presto un altro.\");",
+  "ka": ""
+ },
+ {
+  "id": 1191,
+  "file": "hub/hub.inc",
+  "line": 992,
+  "it": "Le donazioni si fanno alla Casa del Quartiere di Idlewood o a una bacheca di quartiere.",
+  "ctx": "UI_LivingReject(playerid, \"Le donazioni si fanno alla Casa del Quartiere di Idlewood o a una bacheca di quartiere.\");",
+  "ka": ""
+ },
+ {
+  "id": 1192,
+  "file": "hub/hub.inc",
+  "line": 997,
+  "it": "Potrai donare dopo almeno %d minuti trascorsi in citta'. Intanto, grazie del pensiero.",
+  "ctx": "format(msg, 256, \"Potrai donare dopo almeno %d minuti trascorsi in citta'. Intanto, grazie del pensiero.\", 60);",
+  "ka": ""
+ },
+ {
+  "id": 1193,
+  "file": "hub/hub.inc",
+  "line": 1003,
+  "it": "Per oggi hai gia' dato il massimo: grazie davvero.",
+  "ctx": "UI_LivingReject(playerid, \"Per oggi hai gia' dato il massimo: grazie davvero.\");",
+  "ka": ""
+ },
+ {
+  "id": 1194,
+  "file": "hub/hub.inc",
+  "line": 1009,
+  "it": "Importo non valido: da $%d a $%d, al massimo $%d al giorno.",
+  "ctx": "format(msg, 256, \"Importo non valido: da $%d a $%d, al massimo $%d al giorno.\", 50, 500, 1000);",
+  "ka": ""
+ },
+ {
+  "id": 1195,
+  "file": "hub/hub.inc",
+  "line": 1015,
+  "it": "Un attimo: la tua donazione precedente e' ancora in registrazione.",
+  "ctx": "UI_LivingReject(playerid, \"Un attimo: la tua donazione precedente e' ancora in registrazione.\");",
+  "ka": ""
+ },
+ {
+  "id": 1196,
+  "file": "hub/hub.inc",
+  "line": 1020,
+  "it": "Le donazioni partono dal conto in banca e li' non c'e' abbastanza. Nessun problema: ogni contratto aiuta il fondo.",
+  "ctx": "UI_LivingReject(playerid, \"Le donazioni partono dal conto in banca e li' non c'e' abbastanza. Nessun problema: ogni contratto aiuta il fondo.\");",
+  "ka": ""
+ },
+ {
+  "id": 1197,
+  "file": "hub/hub.inc",
+  "line": 1066,
+  "it": "Grazie! Hai donato $%d per \\\"%s\\\": raccolti $%d su $%d.",
+  "ctx": "format(msg, 256, \"Grazie! Hai donato $%d per \\\"%s\\\": raccolti $%d su $%d.\", donated, name, fund, DB_LivingDistrictGet(d, E_LD_DISTRICT:7));",
+  "ka": ""
+ },
+ {
+  "id": 1198,
+  "file": "hub/hub.inc",
+  "line": 1070,
+  "it": "%s se ne ricordera': reputazione locale +%d.",
+  "ctx": "format(msg, 256, \"%s se ne ricordera': reputazione locale +%d.\", dname, points);",
+  "ka": ""
+ },
+ {
+  "id": 1199,
+  "file": "hub/hub.inc",
+  "line": 1075,
+  "it": "E' stata la tua donazione a completare il progetto. Il quartiere fa festa!",
+  "ctx": "Util_Send(playerid, 0x66DD66FF, \"E' stata la tua donazione a completare il progetto. Il quartiere fa festa!\");",
+  "ka": ""
+ },
+ {
+  "id": 1200,
+  "file": "hub/hub.inc",
+  "line": 1078,
+  "it": "personaggio %d dona %d al progetto %d (fondo %d, stato %d)",
+  "ctx": "format(msg, 256, \"personaggio %d dona %d al progetto %d (fondo %d, stato %d)\", gPlayer[playerid][pCharId], donated, projectId, fund, projectState);",
+  "ka": ""
+ },
+ {
+  "id": 1201,
+  "file": "hub/hub.inc",
+  "line": 1083,
+  "it": "Questa donazione risulta gia' registrata.",
+  "ctx": "UI_LivingReject(playerid, \"Questa donazione risulta gia' registrata.\");",
+  "ka": ""
+ },
+ {
+  "id": 1202,
+  "file": "hub/hub.inc",
+  "line": 1087,
+  "it": "Le donazioni partono dal conto in banca e li' non c'e' abbastanza.",
+  "ctx": "UI_LivingReject(playerid, \"Le donazioni partono dal conto in banca e li' non c'e' abbastanza.\");",
+  "ka": ""
+ },
+ {
+  "id": 1203,
+  "file": "hub/hub.inc",
+  "line": 1091,
+  "it": "Questo progetto non raccoglie piu' fondi: ne partira' presto un altro.",
+  "ctx": "UI_LivingReject(playerid, \"Questo progetto non raccoglie piu' fondi: ne partira' presto un altro.\");",
+  "ka": ""
+ },
+ {
+  "id": 1204,
+  "file": "hub/hub.inc",
+  "line": 1096,
+  "it": "Per ora non si puo': servono almeno %d minuti in citta' e al massimo $%d donati al giorno.",
+  "ctx": "format(msg, 256, \"Per ora non si puo': servono almeno %d minuti in citta' e al massimo $%d donati al giorno.\", 60, 1000);",
+  "ka": ""
+ },
+ {
+  "id": 1205,
+  "file": "hub/hub.inc",
+  "line": 1101,
+  "it": "Importo non valido: da $%d a $%d.",
+  "ctx": "format(msg, 256, \"Importo non valido: da $%d a $%d.\", 50, 500);",
+  "ka": ""
+ },
+ {
+  "id": 1206,
+  "file": "hub/hub.inc",
+  "line": 1106,
+  "it": "Un attimo: c'e' gia' una donazione in registrazione.",
+  "ctx": "UI_LivingReject(playerid, \"Un attimo: c'e' gia' una donazione in registrazione.\");",
+  "ka": ""
+ },
+ {
+  "id": 1207,
+  "file": "hub/hub.inc",
+  "line": 1110,
+  "it": "Il registro della Casa del Quartiere non ha risposto. Riprova con lo stesso importo: non verra' addebitato due volte.",
+  "ctx": "UI_LivingReject(playerid, \"Il registro della Casa del Quartiere non ha risposto. Riprova con lo stesso importo: non verra' addebitato due volte.\");",
+  "ka": ""
+ },
+ {
+  "id": 1208,
+  "file": "hub/hub.inc",
+  "line": 1170,
+  "it": "%s ce l'ha fatta: \\\"%s\\\" e' completato grazie a chi ci lavora e a chi ha donato. Festa di quartiere per %d ore!",
+  "ctx": "format(msg, 256, \"%s ce l'ha fatta: \\\"%s\\\" e' completato grazie a chi ci lavora e a chi ha donato. Festa di quartiere per %d ore!\", dname, g_HubPrjNameSeen[d], 72);",
+  "ka": ""
+ },
+ {
+  "id": 1209,
+  "file": "hub/hub.inc",
+  "line": 1172,
+  "it": "pj%d-done",
+  "ctx": "format(opId, 37, \"pj%d-done\", g_HubPrjSeen[d]);",
+  "ka": ""
+ },
+ {
+  "id": 1210,
+  "file": "hub/hub.inc",
+  "line": 1179,
+  "it": "A %s parte un nuovo progetto della comunita': \\\"%s\\\". Ogni contratto da e per il quartiere lo aiuta.",
+  "ctx": "format(msg, 256, \"A %s parte un nuovo progetto della comunita': \\\"%s\\\". Ogni contratto da e per il quartiere lo aiuta.\", dname, name);",
+  "ka": ""
+ },
+ {
+  "id": 1211,
+  "file": "hub/hub.inc",
+  "line": 1230,
+  "it": "Casa del Quartiere di Idlewood: bacheca (/contratti), progetto del quartiere (/contribuisci), notizie (/quartiere).",
+  "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Casa del Quartiere di Idlewood: bacheca (/contratti), progetto del quartiere (/contribuisci), notizie (/quartiere).\");",
+  "ka": ""
+ },
+ {
+  "id": 1212,
+  "file": "hub/hub.inc",
+  "line": 1231,
+  "it": "Qui si ricomincia, si da' una mano, ci si conosce. Tutti i servizi: /aiuto servizi.",
+  "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Qui si ricomincia, si da' una mano, ci si conosce. Tutti i servizi: /aiuto servizi.\");",
+  "ka": ""
+ },
+ {
+  "id": 1213,
+  "file": "hub/hub.inc",
+  "line": 1236,
+  "it": "Bacheca di quartiere di %s: qui accetti i contratti (/contratti) e sostieni il progetto della zona (/contribuisci).",
+  "ctx": "format(msg, 256, \"Bacheca di quartiere di %s: qui accetti i contratti (/contratti) e sostieni il progetto della zona (/contribuisci).\", dname);",
+  "ka": ""
+ },
+ {
+  "id": 1214,
+  "file": "hub/hub.inc",
+  "line": 1256,
+  "it": "C'e' una consegna di benvenuto che ti aspetta: /aiuto consegna.",
+  "ctx": "Util_Send(playerid, 0x99CCFFFF, \"C'e' una consegna di benvenuto che ti aspetta: /aiuto consegna.\");",
+  "ka": ""
+ },
+ {
+  "id": 1215,
+  "file": "hub/hub.inc",
+  "line": 1273,
+  "it": "Eccoti al Job Center: /lavoro per vedere cosa offre la citta'.",
+  "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Eccoti al Job Center: /lavoro per vedere cosa offre la citta'.\");",
+  "ka": ""
+ },
+ {
+  "id": 1216,
+  "file": "hub/hub.inc",
+  "line": 1277,
+  "it": "Eccoti al noleggio: /noleggio per scegliere un mezzo.",
+  "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Eccoti al noleggio: /noleggio per scegliere un mezzo.\");",
+  "ka": ""
+ },
+ {
+  "id": 1646,
+  "file": "intro/intro.inc",
+  "line": 176,
+  "it": "PED",
+  "ctx": "ApplyActorAnimation(actor, \"PED\", \"IDLE_stance\", 4.1, true, false, false, false, 0);",
+  "ka": ""
+ },
+ {
+  "id": 1647,
+  "file": "intro/intro.inc",
+  "line": 176,
+  "it": "IDLE_stance",
+  "ctx": "ApplyActorAnimation(actor, \"PED\", \"IDLE_stance\", 4.1, true, false, false, false, 0);",
+  "ka": ""
+ },
+ {
+  "id": 1648,
+  "file": "intro/intro.inc",
+  "line": 287,
+  "it": "intro terminata (%s) per %s",
+  "ctx": "format(msg, 128, \"intro terminata (%s) per %s\", reason == 1 ? \"skip\" : \"watchdog\", name);",
+  "ka": ""
+ },
+ {
+  "id": 1649,
+  "file": "intro/intro.inc",
+  "line": 588,
+  "it": "salvataggio storia non riuscito (esito %d, set %d)",
+  "ctx": "format(msg, 128, \"salvataggio storia non riuscito (esito %d, set %d)\", result, setMode);",
+  "ka": ""
+ },
+ {
+  "id": 1650,
+  "file": "intro/intro.inc",
+  "line": 653,
+  "it": "Uso: /storia · /storia imposta · /storia [id giocatore in gioco] (staff)",
+  "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Uso: /storia · /storia imposta · /storia [id giocatore in gioco] (staff)\");",
+  "ka": ""
+ },
+ {
+  "id": 1651,
+  "file": "intro/intro.inc",
+  "line": 657,
+  "it": "Uso: /storia · /storia imposta (una sola volta, solo se non hai una storia)",
+  "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Uso: /storia · /storia imposta (una sola volta, solo se non hai una storia)\");",
+  "ka": ""
+ },
+ {
+  "id": 1652,
+  "file": "intro/intro.inc",
+  "line": 668,
+  "it": "Uso: /mostrastoria [id] (a un giocatore vicino a te)",
+  "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Uso: /mostrastoria [id] (a un giocatore vicino a te)\");",
+  "ka": ""
+ },
+ {
+  "id": 1653,
+  "file": "intro/intro.inc",
+  "line": 673,
+  "it": "Il giocatore e' troppo lontano.",
+  "ctx": "Util_Send(playerid, -10270721, \"Il giocatore e' troppo lontano.\");",
+  "ka": ""
+ },
+ {
+  "id": 1654,
+  "file": "intro/intro.inc",
+  "line": 679,
+  "it": "Attendi qualche secondo prima di mostrare di nuovo la tua storia.",
+  "ctx": "Util_Send(playerid, -10270721, \"Attendi qualche secondo prima di mostrare di nuovo la tua storia.\");",
+  "ka": ""
+ },
+ {
+  "id": 1655,
+  "file": "intro/intro.inc",
+  "line": 704,
+  "it": "Impossibile leggere la tua storia ora. Riprova tra poco.",
+  "ctx": "Util_Send(playerid, -10270721, \"Impossibile leggere la tua storia ora. Riprova tra poco.\");",
+  "ka": ""
+ },
+ {
+  "id": 1656,
+  "file": "intro/intro.inc",
+  "line": 709,
+  "it": "Non hai una storia da mostrare (/storia imposta).",
+  "ctx": "Util_Send(playerid, -10270721, \"Non hai una storia da mostrare (/storia imposta).\");",
+  "ka": ""
+ },
+ {
+  "id": 1657,
+  "file": "intro/intro.inc",
+  "line": 714,
+  "it": "Il giocatore non e' piu' abbastanza vicino.",
+  "ctx": "Util_Send(playerid, -10270721, \"Il giocatore non e' piu' abbastanza vicino.\");",
+  "ka": ""
+ },
+ {
+  "id": 1658,
+  "file": "intro/intro.inc",
+  "line": 721,
+  "it": "%s ti mostra la propria storia.",
+  "ctx": "SendClientMessage(to, -1, \"%s ti mostra la propria storia.\", name);",
+  "ka": ""
+ },
+ {
+  "id": 1659,
+  "file": "intro/intro.inc",
+  "line": 722,
+  "it": "Hai mostrato la tua storia a %s.",
+  "ctx": "SendClientMessage(playerid, 0x66DD66FF, \"Hai mostrato la tua storia a %s.\", tname);",
+  "ka": ""
+ },
+ {
+  "id": 1660,
+  "file": "intro/intro.inc",
+  "line": 733,
+  "it": "Impossibile leggere la storia del giocatore.",
+  "ctx": "Util_Send(playerid, -10270721, \"Impossibile leggere la storia del giocatore.\");",
+  "ka": ""
+ },
+ {
+  "id": 1661,
+  "file": "intro/intro.inc",
+  "line": 742,
+  "it": "letta la storia di %s (pg %d)",
+  "ctx": "format(reason, 64, \"letta la storia di %s (pg %d)\", tname, gPlayer[targetid][pCharId]);",
+  "ka": ""
+ },
+ {
+  "id": 1329,
+  "file": "inventory/inv_doc.inc",
+  "line": 14,
+  "it": "--- Documento d'identita' di San Andreas ---",
+  "ctx": "SendClientMessage(viewerid, -2994689, \"--- Documento d'identita' di San Andreas ---\");",
+  "ka": ""
+ },
+ {
+  "id": 1330,
+  "file": "inventory/inv_doc.inc",
+  "line": 15,
+  "it": "Nome: %s  Livello: %d  Ore di gioco: %dh %02dm",
+  "ctx": "SendClientMessage(viewerid, -1, \"Nome: %s  Livello: %d  Ore di gioco: %dh %02dm\", name, gPlayer[playerid][pLevel], total / 3600000, total % 3600000 / 60000);",
+  "ka": ""
+ },
+ {
+  "id": 1331,
+  "file": "inventory/inv_doc.inc",
+  "line": 20,
+  "it": "Origine: %s",
+  "ctx": "SendClientMessage(viewerid, -1, \"Origine: %s\", origin);",
+  "ka": ""
+ },
+ {
+  "id": 1332,
+  "file": "inventory/inv_doc.inc",
+  "line": 24,
+  "it": "Lavoro: %s  Fazione: %s (%s)",
+  "ctx": "SendClientMessage(viewerid, -1, \"Lavoro: %s  Fazione: %s (%s)\", job, fac, rank);",
+  "ka": ""
+ },
+ {
+  "id": 1333,
+  "file": "inventory/inv_doc.inc",
+  "line": 28,
+  "it": "Lavoro: %s  Fazione: nessuna",
+  "ctx": "SendClientMessage(viewerid, -1, \"Lavoro: %s  Fazione: nessuna\", job);",
+  "ka": ""
+ },
+ {
+  "id": 1334,
+  "file": "inventory/inv_doc.inc",
+  "line": 44,
+  "it": "Inventario non disponibile: riprova tra poco (/inventario).",
+  "ctx": "Util_Send(playerid, -10270721, \"Inventario non disponibile: riprova tra poco (/inventario).\");",
+  "ka": ""
+ },
+ {
+  "id": 1335,
+  "file": "inventory/inv_doc.inc",
+  "line": 49,
+  "it": "Non hai il documento d'identita': usa /documento richiedi.",
+  "ctx": "Util_Send(playerid, -10270721, \"Non hai il documento d'identita': usa /documento richiedi.\");",
+  "ka": ""
+ },
+ {
+  "id": 1336,
+  "file": "inventory/inv_doc.inc",
+  "line": 59,
+  "it": "Uso: /documento · /documento [id] · /documento richiedi",
+  "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Uso: /documento · /documento [id] · /documento richiedi\");",
+  "ka": ""
+ },
+ {
+  "id": 1337,
+  "file": "inventory/inv_doc.inc",
+  "line": 64,
+  "it": "Il giocatore e' troppo lontano.",
+  "ctx": "Util_Send(playerid, -10270721, \"Il giocatore e' troppo lontano.\");",
+  "ka": ""
+ },
+ {
+  "id": 1338,
+  "file": "inventory/inv_doc.inc",
+  "line": 72,
+  "it": "Hai mostrato il documento a %s.",
+  "ctx": "SendClientMessage(playerid, 0x66DD66FF, \"Hai mostrato il documento a %s.\", tname);",
+  "ka": ""
+ },
+ {
+  "id": 1339,
+  "file": "inventory/inventory.inc",
+  "line": 3,
+  "it": "Porzione di cibo",
+  "ctx": "\"Porzione di cibo\",",
+  "ka": ""
+ },
+ {
+  "id": 1340,
+  "file": "inventory/inventory.inc",
+  "line": 4,
+  "it": "Pasto pronto",
+  "ctx": "\"Pasto pronto\",",
+  "ka": ""
+ },
+ {
+  "id": 1341,
+  "file": "inventory/inventory.inc",
+  "line": 5,
+  "it": "Bottiglia d'acqua",
+  "ctx": "\"Bottiglia d'acqua\",",
+  "ka": ""
+ },
+ {
+  "id": 1342,
+  "file": "inventory/inventory.inc",
+  "line": 6,
+  "it": "Snack",
+  "ctx": "\"Snack\",",
+  "ka": ""
+ },
+ {
+  "id": 1343,
+  "file": "inventory/inventory.inc",
+  "line": 7,
+  "it": "Kit di pronto soccorso",
+  "ctx": "\"Kit di pronto soccorso\",",
+  "ka": ""
+ },
+ {
+  "id": 1344,
+  "file": "inventory/inventory.inc",
+  "line": 8,
+  "it": "Benda",
+  "ctx": "\"Benda\",",
+  "ka": ""
+ },
+ {
+  "id": 1345,
+  "file": "inventory/inventory.inc",
+  "line": 9,
+  "it": "Sigarette",
+  "ctx": "\"Sigarette\",",
+  "ka": ""
+ },
+ {
+  "id": 1346,
+  "file": "inventory/inventory.inc",
+  "line": 10,
+  "it": "Accendino",
+  "ctx": "\"Accendino\",",
+  "ka": ""
+ },
+ {
+  "id": 1347,
+  "file": "inventory/inventory.inc",
+  "line": 11,
+  "it": "Telefono",
+  "ctx": "\"Telefono\",",
+  "ka": ""
+ },
+ {
+  "id": 1348,
+  "file": "inventory/inventory.inc",
+  "line": 12,
+  "it": "Documento",
+  "ctx": "\"Documento\",",
+  "ka": ""
+ },
+ {
+  "id": 1349,
+  "file": "inventory/inventory.inc",
+  "line": 13,
+  "it": "Zaino",
+  "ctx": "\"Zaino\"",
+  "ka": ""
+ },
+ {
+  "id": 1350,
+  "file": "inventory/inventory.inc",
+  "line": 181,
+  "it": "Inventario non disponibile (errore database): riprova con /inventario.",
+  "ctx": "Inv_Say(playerid, -10270721, \"Inventario non disponibile (errore database): riprova con /inventario.\");",
+  "ka": ""
+ },
+ {
+  "id": 1351,
+  "file": "inventory/inventory.inc",
+  "line": 278,
+  "it": "L'inventario si sta caricando: riprova tra un attimo.",
+  "ctx": "Inv_Say(playerid, -10270721, \"L'inventario si sta caricando: riprova tra un attimo.\");",
+  "ka": ""
+ },
+ {
+  "id": 1352,
+  "file": "inventory/inventory.inc",
+  "line": 283,
+  "it": "Inventario non disponibile: provo a ricaricarlo, riprova tra poco.",
+  "ctx": "Inv_Say(playerid, -10270721, \"Inventario non disponibile: provo a ricaricarlo, riprova tra poco.\");",
+  "ka": ""
+ },
+ {
+  "id": 1353,
+  "file": "inventory/inventory.inc",
+  "line": 290,
+  "it": "Hai un'operazione di inventario in corso: attendi.",
+  "ctx": "Inv_Say(playerid, -10270721, \"Hai un'operazione di inventario in corso: attendi.\");",
+  "ka": ""
+ },
+ {
+  "id": 1354,
+  "file": "inventory/inventory.inc",
+  "line": 295,
+  "it": "Non puoi farlo da ferito o ammanettato.",
+  "ctx": "Inv_Say(playerid, -10270721, \"Non puoi farlo da ferito o ammanettato.\");",
+  "ka": ""
+ },
+ {
+  "id": 1355,
+  "file": "inventory/inventory.inc",
+  "line": 301,
+  "it": "Attendi un attimo prima di un'altra azione con l'inventario.",
+  "ctx": "Inv_Say(playerid, -10270721, \"Attendi un attimo prima di un'altra azione con l'inventario.\");",
+  "ka": ""
+ },
+ {
+  "id": 1356,
+  "file": "inventory/inventory.inc",
+  "line": 312,
+  "it": "L'inventario si sta caricando: riprova tra un attimo.",
+  "ctx": "Inv_Say(playerid, -10270721, \"L'inventario si sta caricando: riprova tra un attimo.\");",
+  "ka": ""
+ },
+ {
+  "id": 1357,
+  "file": "inventory/inventory.inc",
+  "line": 317,
+  "it": "Inventario non disponibile: provo a ricaricarlo, riprova tra poco.",
+  "ctx": "Inv_Say(playerid, -10270721, \"Inventario non disponibile: provo a ricaricarlo, riprova tra poco.\");",
+  "ka": ""
+ },
+ {
+  "id": 1358,
+  "file": "inventory/inventory.inc",
+  "line": 349,
+  "it": "Oggetto sconosciuto.",
+  "ctx": "Inv_Say(playerid, -10270721, \"Oggetto sconosciuto.\");",
+  "ka": ""
+ },
+ {
+  "id": 1359,
+  "file": "inventory/inventory.inc",
+  "line": 354,
+  "it": "Non hai: %s.",
+  "ctx": "SendClientMessage(playerid, -10270721, \"Non hai: %s.\", s_InvName[itemId]);",
+  "ka": ""
+ },
+ {
+  "id": 1360,
+  "file": "inventory/inventory.inc",
+  "line": 361,
+  "it": "Le porzioni di cibo non si usano: riponile nel frigo (/frigo metti) e cucina o mangia freddo.",
+  "ctx": "Inv_Say(playerid, -10270721, \"Le porzioni di cibo non si usano: riponile nel frigo (/frigo metti) e cucina o mangia freddo.\");",
+  "ka": ""
+ },
+ {
+  "id": 1361,
+  "file": "inventory/inventory.inc",
+  "line": 366,
+  "it": "L'accendino serve per fumare: usa /usa sigarette.",
+  "ctx": "Inv_Say(playerid, -10270721, \"L'accendino serve per fumare: usa /usa sigarette.\");",
+  "ka": ""
+ },
+ {
+  "id": 1362,
+  "file": "inventory/inventory.inc",
+  "line": 371,
+  "it": "Telefono: il tuo numero e' %d.",
+  "ctx": "SendClientMessage(playerid, -1, \"Telefono: il tuo numero e' %d.\", gPlayer[playerid][pCharId] + 555000);",
+  "ka": ""
+ },
+ {
+  "id": 1363,
+  "file": "inventory/inventory.inc",
+  "line": 383,
+  "it": "Devi attendere ancora %d secondi per usare di nuovo: %s.",
+  "ctx": "SendClientMessage(playerid, -10270721, \"Devi attendere ancora %d secondi per usare di nuovo: %s.\", left, s_InvName[itemId]);",
+  "ka": ""
+ },
+ {
+  "id": 1364,
+  "file": "inventory/inventory.inc",
+  "line": 395,
+  "it": "I tuoi dati sul cibo non sono ancora stati caricati: riprova tra poco.",
+  "ctx": "Inv_Say(playerid, -10270721, \"I tuoi dati sul cibo non sono ancora stati caricati: riprova tra poco.\");",
+  "ka": ""
+ },
+ {
+  "id": 1365,
+  "file": "inventory/inventory.inc",
+  "line": 400,
+  "it": "Non hai fame.",
+  "ctx": "Inv_Say(playerid, -10270721, \"Non hai fame.\");",
+  "ka": ""
+ },
+ {
+  "id": 1366,
+  "file": "inventory/inventory.inc",
+  "line": 408,
+  "it": "Non ti serve un kit di pronto soccorso: sei in buona salute.",
+  "ctx": "Inv_Say(playerid, -10270721, \"Non ti serve un kit di pronto soccorso: sei in buona salute.\");",
+  "ka": ""
+ },
+ {
+  "id": 1367,
+  "file": "inventory/inventory.inc",
+  "line": 416,
+  "it": "Non hai ferite che richiedano una benda.",
+  "ctx": "Inv_Say(playerid, -10270721, \"Non hai ferite che richiedano una benda.\");",
+  "ka": ""
+ },
+ {
+  "id": 1368,
+  "file": "inventory/inventory.inc",
+  "line": 424,
+  "it": "Ti serve un accendino per fumare.",
+  "ctx": "Inv_Say(playerid, -10270721, \"Ti serve un accendino per fumare.\");",
+  "ka": ""
+ },
+ {
+  "id": 1369,
+  "file": "inventory/inventory.inc",
+  "line": 451,
+  "it": "consuma un pasto pronto.",
+  "ctx": "Inv_RpUse(playerid, itemId == 2 ? \"consuma un pasto pronto.\" : (itemId == 3 ? \"beve dell'acqua.\" : \"mangia uno snack.\"));",
+  "ka": ""
+ },
+ {
+  "id": 1370,
+  "file": "inventory/inventory.inc",
+  "line": 451,
+  "it": "beve dell'acqua.",
+  "ctx": "Inv_RpUse(playerid, itemId == 2 ? \"consuma un pasto pronto.\" : (itemId == 3 ? \"beve dell'acqua.\" : \"mangia uno snack.\"));",
+  "ka": ""
+ },
+ {
+  "id": 1371,
+  "file": "inventory/inventory.inc",
+  "line": 451,
+  "it": "mangia uno snack.",
+  "ctx": "Inv_RpUse(playerid, itemId == 2 ? \"consuma un pasto pronto.\" : (itemId == 3 ? \"beve dell'acqua.\" : \"mangia uno snack.\"));",
+  "ka": ""
+ },
+ {
+  "id": 1372,
+  "file": "inventory/inventory.inc",
+  "line": 454,
+  "it": "Sazieta': %d%%.",
+  "ctx": "SendClientMessage(playerid, 0x66DD66FF, \"Sazieta': %d%%.\", value);",
+  "ka": ""
+ },
+ {
+  "id": 1373,
+  "file": "inventory/inventory.inc",
+  "line": 466,
+  "it": "usa un kit di pronto soccorso.",
+  "ctx": "Inv_RpUse(playerid, itemId == 5 ? \"usa un kit di pronto soccorso.\" : \"si medica con una benda.\");",
+  "ka": ""
+ },
+ {
+  "id": 1374,
+  "file": "inventory/inventory.inc",
+  "line": 466,
+  "it": "si medica con una benda.",
+  "ctx": "Inv_RpUse(playerid, itemId == 5 ? \"usa un kit di pronto soccorso.\" : \"si medica con una benda.\");",
+  "ka": ""
+ },
+ {
+  "id": 1375,
+  "file": "inventory/inventory.inc",
+  "line": 467,
+  "it": "Salute: %d.",
+  "ctx": "SendClientMessage(playerid, 0x66DD66FF, \"Salute: %d.\", floatround(hp, floatround_method:0));",
+  "ka": ""
+ },
+ {
+  "id": 1376,
+  "file": "inventory/inventory.inc",
+  "line": 471,
+  "it": "accende una sigaretta.",
+  "ctx": "Inv_RpUse(playerid, \"accende una sigaretta.\");",
+  "ka": ""
+ },
+ {
+  "id": 1377,
+  "file": "inventory/inventory.inc",
+  "line": 501,
+  "it": "Hai perso l'oggetto: non eri in condizione di usarlo.",
+  "ctx": "Inv_Say(playerid, -10270721, \"Hai perso l'oggetto: non eri in condizione di usarlo.\");",
+  "ka": ""
+ },
+ {
+  "id": 1378,
+  "file": "inventory/inventory.inc",
+  "line": 506,
+  "it": "Non hai piu' quell'oggetto.",
+  "ctx": "Inv_Say(playerid, -10270721, \"Non hai piu' quell'oggetto.\");",
+  "ka": ""
+ },
+ {
+  "id": 1379,
+  "file": "inventory/inventory.inc",
+  "line": 511,
+  "it": "Errore database: l'oggetto non e' stato usato. Controlla l'inventario e riprova.",
+  "ctx": "Inv_Say(playerid, -10270721, \"Errore database: l'oggetto non e' stato usato. Controlla l'inventario e riprova.\");",
+  "ka": ""
+ },
+ {
+  "id": 1380,
+  "file": "inventory/inventory.inc",
+  "line": 516,
+  "it": "Impossibile usare l'oggetto.",
+  "ctx": "Inv_Say(playerid, -10270721, \"Impossibile usare l'oggetto.\");",
+  "ka": ""
+ },
+ {
+  "id": 1381,
+  "file": "inventory/inventory.inc",
+  "line": 608,
+  "it": "Uso: /getta [oggetto] [quantita'] (cibo, pasto, acqua, snack, kit, benda, sigarette, accendino)",
+  "ctx": "Inv_Say(playerid, 0x99CCFFFF, \"Uso: /getta [oggetto] [quantita'] (cibo, pasto, acqua, snack, kit, benda, sigarette, accendino)\");",
+  "ka": ""
+ },
+ {
+  "id": 1382,
+  "file": "inventory/inventory.inc",
+  "line": 614,
+  "it": "Quantita' non valida.",
+  "ctx": "Inv_Say(playerid, -10270721, \"Quantita' non valida.\");",
+  "ka": ""
+ },
+ {
+  "id": 1383,
+  "file": "inventory/inventory.inc",
+  "line": 629,
+  "it": "Questo oggetto non si puo' gettare.",
+  "ctx": "Inv_Say(playerid, -10270721, \"Questo oggetto non si puo' gettare.\");",
+  "ka": ""
+ },
+ {
+  "id": 1384,
+  "file": "inventory/inventory.inc",
+  "line": 634,
+  "it": "Non hai abbastanza: %s.",
+  "ctx": "SendClientMessage(playerid, -10270721, \"Non hai abbastanza: %s.\", s_InvName[itemId]);",
+  "ka": ""
+ },
+ {
+  "id": 1385,
+  "file": "inventory/inventory.inc",
+  "line": 639,
+  "it": "Puoi gettare oggetti solo a piedi, all'aperto.",
+  "ctx": "Inv_Say(playerid, -10270721, \"Puoi gettare oggetti solo a piedi, all'aperto.\");",
+  "ka": ""
+ },
+ {
+  "id": 1386,
+  "file": "inventory/inventory.inc",
+  "line": 645,
+  "it": "Ci sono troppi oggetti a terra in giro: riprova piu' tardi.",
+  "ctx": "Inv_Say(playerid, -10270721, \"Ci sono troppi oggetti a terra in giro: riprova piu' tardi.\");",
+  "ka": ""
+ },
+ {
+  "id": 1387,
+  "file": "inventory/inventory.inc",
+  "line": 650,
+  "it": "Hai gia' %d oggetti a terra: raccoglili o attendi che spariscano.",
+  "ctx": "SendClientMessage(playerid, -10270721, \"Hai gia' %d oggetti a terra: raccoglili o attendi che spariscano.\", 3);",
+  "ka": ""
+ },
+ {
+  "id": 1388,
+  "file": "inventory/inventory.inc",
+  "line": 656,
+  "it": "Ci sono troppi oggetti a terra in giro: riprova piu' tardi.",
+  "ctx": "Inv_Say(playerid, -10270721, \"Ci sono troppi oggetti a terra in giro: riprova piu' tardi.\");",
+  "ka": ""
+ },
+ {
+  "id": 1389,
+  "file": "inventory/inventory.inc",
+  "line": 697,
+  "it": "Non hai piu' quell'oggetto.",
+  "ctx": "Inv_Say(playerid, -10270721, \"Non hai piu' quell'oggetto.\");",
+  "ka": ""
+ },
+ {
+  "id": 1390,
+  "file": "inventory/inventory.inc",
+  "line": 702,
+  "it": "Questo oggetto non si puo' gettare.",
+  "ctx": "Inv_Say(playerid, -10270721, \"Questo oggetto non si puo' gettare.\");",
+  "ka": ""
+ },
+ {
+  "id": 1391,
+  "file": "inventory/inventory.inc",
+  "line": 706,
+  "it": "Errore database: l'oggetto non e' stato gettato.",
+  "ctx": "Inv_Say(playerid, -10270721, \"Errore database: l'oggetto non e' stato gettato.\");",
+  "ka": ""
+ },
+ {
+  "id": 1392,
+  "file": "inventory/inventory.inc",
+  "line": 711,
+  "it": "Impossibile gettare l'oggetto.",
+  "ctx": "Inv_Say(playerid, -10270721, \"Impossibile gettare l'oggetto.\");",
+  "ka": ""
+ },
+ {
+  "id": 1393,
+  "file": "inventory/inventory.inc",
+  "line": 720,
+  "it": "Impossibile gettare l'oggetto.",
+  "ctx": "Inv_Say(playerid, -10270721, \"Impossibile gettare l'oggetto.\");",
+  "ka": ""
+ },
+ {
+  "id": 1394,
+  "file": "inventory/inventory.inc",
+  "line": 732,
+  "it": "getta a terra: %s x%d.",
+  "ctx": "format(text, 144, \"getta a terra: %s x%d.\", s_InvName[itemId], qty);",
+  "ka": ""
+ },
+ {
+  "id": 1395,
+  "file": "inventory/inventory.inc",
+  "line": 759,
+  "it": "Puoi raccogliere oggetti solo a piedi, all'aperto.",
+  "ctx": "Inv_Say(playerid, -10270721, \"Puoi raccogliere oggetti solo a piedi, all'aperto.\");",
+  "ka": ""
+ },
+ {
+  "id": 1396,
+  "file": "inventory/inventory.inc",
+  "line": 778,
+  "it": "Non c'e' nessun oggetto a terra vicino a te.",
+  "ctx": "Inv_Say(playerid, -10270721, \"Non c'e' nessun oggetto a terra vicino a te.\");",
+  "ka": ""
+ },
+ {
+  "id": 1397,
+  "file": "inventory/inventory.inc",
+  "line": 802,
+  "it": "Hai raccolto: %s x%d.",
+  "ctx": "SendClientMessage(playerid, 0x66DD66FF, \"Hai raccolto: %s x%d.\", s_InvName[itemId], qty);",
+  "ka": ""
+ },
+ {
+  "id": 1398,
+  "file": "inventory/inventory.inc",
+  "line": 813,
+  "it": "Non hai abbastanza spazio nell'inventario.",
+  "ctx": "Inv_Say(playerid, -10270721, \"Non hai abbastanza spazio nell'inventario.\");",
+  "ka": ""
+ },
+ {
+  "id": 1399,
+  "file": "inventory/inventory.inc",
+  "line": 817,
+  "it": "Errore database: oggetto non raccolto.",
+  "ctx": "Inv_Say(playerid, -10270721, \"Errore database: oggetto non raccolto.\");",
+  "ka": ""
+ },
+ {
+  "id": 1400,
+  "file": "inventory/inventory.inc",
+  "line": 821,
+  "it": "Impossibile raccogliere l'oggetto.",
+  "ctx": "Inv_Say(playerid, -10270721, \"Impossibile raccogliere l'oggetto.\");",
+  "ka": ""
+ },
+ {
+  "id": 1401,
+  "file": "inventory/inventory.inc",
+  "line": 847,
+  "it": "Hai richiesto un nuovo documento d'identita'.",
+  "ctx": "Inv_Say(playerid, 0x66DD66FF, \"Hai richiesto un nuovo documento d'identita'.\");",
+  "ka": ""
+ },
+ {
+  "id": 1402,
+  "file": "inventory/inventory.inc",
+  "line": 852,
+  "it": "Non hai spazio nell'inventario per il documento.",
+  "ctx": "Inv_Say(playerid, -10270721, result == 2 ? \"Non hai spazio nell'inventario per il documento.\" : \"Impossibile rilasciare il documento.\");",
+  "ka": ""
+ },
+ {
+  "id": 1403,
+  "file": "inventory/inventory.inc",
+  "line": 852,
+  "it": "Impossibile rilasciare il documento.",
+  "ctx": "Inv_Say(playerid, -10270721, result == 2 ? \"Non hai spazio nell'inventario per il documento.\" : \"Impossibile rilasciare il documento.\");",
+  "ka": ""
+ },
+ {
+  "id": 1404,
+  "file": "inventory/inventory.inc",
+  "line": 872,
+  "it": "startdoc%d",
+  "ctx": "format(gPlayer[playerid][pInvOpId], 33, \"startdoc%d\", gPlayer[playerid][pCharId]);",
+  "ka": ""
+ },
+ {
+  "id": 1405,
+  "file": "inventory/inventory.inc",
+  "line": 886,
+  "it": "Hai gia' il documento d'identita'.",
+  "ctx": "Inv_Say(playerid, -10270721, \"Hai gia' il documento d'identita'.\");",
+  "ka": ""
+ }
+]

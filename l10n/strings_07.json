@@ -1,0 +1,2082 @@
+[
+ {
+  "id": 901,
+  "file": "ui/living_ui.inc",
+  "line": 1001,
+  "it": "Chiudi",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9706, DIALOG_STYLE_LIST, \"Quale quartiere?\", body, \"Apri\", \"Chiudi\");",
+  "ka": ""
+ },
+ {
+  "id": 902,
+  "file": "ui/living_ui.inc",
+  "line": 1070,
+  "it": "66AAFF",
+  "ctx": "UI_LvBar(g_UiLvDsSec[playerid], 100, \"66AAFF\", bSec, 64);",
+  "ka": ""
+ },
+ {
+  "id": 903,
+  "file": "ui/living_ui.inc",
+  "line": 1074,
+  "it": "{FFAA33}In difficolta'{AAAAAA}: ogni consegna conta per la ricostruzione",
+  "ctx": "strcopy(prosp, \"{FFAA33}In difficolta'{AAAAAA}: ogni consegna conta per la ricostruzione\", 96);",
+  "ka": ""
+ },
+ {
+  "id": 904,
+  "file": "ui/living_ui.inc",
+  "line": 1078,
+  "it": "{66DD66}Fiorente{AAAAAA}: c'e' piu' lavoro per tutti",
+  "ctx": "strcopy(prosp, \"{66DD66}Fiorente{AAAAAA}: c'e' piu' lavoro per tutti\", 96);",
+  "ka": ""
+ },
+ {
+  "id": 905,
+  "file": "ui/living_ui.inc",
+  "line": 1082,
+  "it": "{FFFFFF}Stabile",
+  "ctx": "strcopy(prosp, \"{FFFFFF}Stabile\", 96);",
+  "ka": ""
+ },
+ {
+  "id": 906,
+  "file": "ui/living_ui.inc",
+  "line": 1085,
+  "it": "{FFFFFF}Prosperita': %s\\n\\n{FFFFFF}Attivita' economica  %s {FFFFFF}%d/%d\\n{FFFFFF}Sicurezza                %s {FFFFFF}%d/%d\\n{FFFFFF}Pressione criminale  %s {FFFFFF}%d/%d%s\\n\\n{FFFFFF}La tua reputazione qui: {FFD24D}%d{FFFFFF} - %s\\n",
+  "ctx": "format(body, 1280, \"{FFFFFF}Prosperita': %s\\n\\n{FFFFFF}Attivita' economica  %s {FFFFFF}%d/%d\\n{FFFFFF}Sicurezza                %s {FFFFFF}%d/%d\\n{FFFFFF}Pressione criminale  %s {FFFFFF}%d/%d%s\\n\\n{FFF",
+  "ka": ""
+ },
+ {
+  "id": 907,
+  "file": "ui/living_ui.inc",
+  "line": 1085,
+  "it": "  {FF8866}(zona a rischio: i contratti pagano di piu')",
+  "ctx": "format(body, 1280, \"{FFFFFF}Prosperita': %s\\n\\n{FFFFFF}Attivita' economica  %s {FFFFFF}%d/%d\\n{FFFFFF}Sicurezza                %s {FFFFFF}%d/%d\\n{FFFFFF}Pressione criminale  %s {FFFFFF}%d/%d%s\\n\\n{FFF",
+  "ka": ""
+ },
+ {
+  "id": 908,
+  "file": "ui/living_ui.inc",
+  "line": 1088,
+  "it": "{66DD66}Festa di quartiere in corso: ancora %d ore.\\n",
+  "ctx": "format(line, 128, \"{66DD66}Festa di quartiere in corso: ancora %d ore.\\n\", g_UiLvDsFest[playerid]);",
+  "ka": ""
+ },
+ {
+  "id": 909,
+  "file": "ui/living_ui.inc",
+  "line": 1093,
+  "it": "\\n{AAAAAA}Si dice in giro: {FFFFFF}\\\"%s\\\"\\n",
+  "ctx": "format(line, 128, \"\\n{AAAAAA}Si dice in giro: {FFFFFF}\\\"%s\\\"\\n\", g_UiLvDsRumor[playerid]);",
+  "ka": ""
+ },
+ {
+  "id": 910,
+  "file": "ui/living_ui.inc",
+  "line": 1096,
+  "it": "\\n{FFD24D}Ultimi avvenimenti\\n",
+  "ctx": "strcat(body, \"\\n{FFD24D}Ultimi avvenimenti\\n\", 1280);",
+  "ka": ""
+ },
+ {
+  "id": 911,
+  "file": "ui/living_ui.inc",
+  "line": 1099,
+  "it": "{AAAAAA}Una giornata tranquilla, per ora.\\n",
+  "ctx": "strcat(body, \"{AAAAAA}Una giornata tranquilla, per ora.\\n\", 1280);",
+  "ka": ""
+ },
+ {
+  "id": 912,
+  "file": "ui/living_ui.inc",
+  "line": 1107,
+  "it": "{AAAAAA}%s  {FFFFFF}%s {66DD66}(+%d attivita')\\n",
+  "ctx": "format(line, 128, \"{AAAAAA}%s  {FFFFFF}%s {66DD66}(+%d attivita')\\n\", ago, g_UiLvEventName[g_UiLvDsEvType[playerid][i]], v);",
+  "ka": ""
+ },
+ {
+  "id": 913,
+  "file": "ui/living_ui.inc",
+  "line": 1111,
+  "it": "{AAAAAA}%s  {FFFFFF}%s {FF8866}(%d attivita')\\n",
+  "ctx": "format(line, 128, \"{AAAAAA}%s  {FFFFFF}%s {FF8866}(%d attivita')\\n\", ago, g_UiLvEventName[g_UiLvDsEvType[playerid][i]], v);",
+  "ka": ""
+ },
+ {
+  "id": 914,
+  "file": "ui/living_ui.inc",
+  "line": 1119,
+  "it": "Quartiere: %s",
+  "ctx": "format(title, 64, \"Quartiere: %s\", g_UiLvDistrictName[d]);",
+  "ka": ""
+ },
+ {
+  "id": 915,
+  "file": "ui/living_ui.inc",
+  "line": 1120,
+  "it": "Progetto",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9707, DIALOG_STYLE_MSGBOX, title, body, \"Progetto\", \"Chiudi\");",
+  "ka": ""
+ },
+ {
+  "id": 916,
+  "file": "ui/living_ui.inc",
+  "line": 1120,
+  "it": "Chiudi",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9707, DIALOG_STYLE_MSGBOX, title, body, \"Progetto\", \"Chiudi\");",
+  "ka": ""
+ },
+ {
+  "id": 917,
+  "file": "ui/living_ui.inc",
+  "line": 1181,
+  "it": "{FFD24D}Il tuo mestiere\\n",
+  "ctx": "strcopy(body, \"{FFD24D}Il tuo mestiere\\n\", 1280);",
+  "ka": ""
+ },
+ {
+  "id": 918,
+  "file": "ui/living_ui.inc",
+  "line": 1188,
+  "it": "FFD24D",
+  "ctx": "UI_LvBar(pts, next, \"FFD24D\", bar, 64);",
+  "ka": ""
+ },
+ {
+  "id": 919,
+  "file": "ui/living_ui.inc",
+  "line": 1189,
+  "it": "{FFFFFF}%s: {FFD24D}%s{FFFFFF} (+%d%%) - %d punti\\n  %s {AAAAAA}%s tra %d punti\\n",
+  "ctx": "format(line, 192, \"{FFFFFF}%s: {FFD24D}%s{FFFFFF} (+%d%%) - %d punti\\n  %s {AAAAAA}%s tra %d punti\\n\", g_UiLvTrackName[t], g_UiLvTierName[tier], UI_LvTierBonus(tier), pts, bar, g_UiLvTierName[tier + 1",
+  "ka": ""
+ },
+ {
+  "id": 920,
+  "file": "ui/living_ui.inc",
+  "line": 1193,
+  "it": "{FFFFFF}%s: {66DD66}%s{FFFFFF} (+%d%%) - %d punti, il grado piu' alto\\n",
+  "ctx": "format(line, 192, \"{FFFFFF}%s: {66DD66}%s{FFFFFF} (+%d%%) - %d punti, il grado piu' alto\\n\", g_UiLvTrackName[t], g_UiLvTierName[tier], UI_LvTierBonus(tier), pts);",
+  "ka": ""
+ },
+ {
+  "id": 921,
+  "file": "ui/living_ui.inc",
+  "line": 1201,
+  "it": "  {AAAAAA}Completati %d, non riusciti %d, voto medio %d,%d/5, oggi +%d\\n",
+  "ctx": "format(line, 192, \"  {AAAAAA}Completati %d, non riusciti %d, voto medio %d,%d/5, oggi +%d\\n\", g_UiLvRpDone[playerid][t], g_UiLvRpFail[playerid][t], avg10 / 10, avg10 % 10, g_UiLvRpDay[playerid][t]);",
+  "ka": ""
+ },
+ {
+  "id": 922,
+  "file": "ui/living_ui.inc",
+  "line": 1205,
+  "it": "  {AAAAAA}Completati %d, non riusciti %d, oggi +%d\\n",
+  "ctx": "format(line, 192, \"  {AAAAAA}Completati %d, non riusciti %d, oggi +%d\\n\", g_UiLvRpDone[playerid][t], g_UiLvRpFail[playerid][t], g_UiLvRpDay[playerid][t]);",
+  "ka": ""
+ },
+ {
+  "id": 923,
+  "file": "ui/living_ui.inc",
+  "line": 1210,
+  "it": "  {AAAAAA}Non hai ancora iniziato: c'e' sempre una prima volta.\\n",
+  "ctx": "strcopy(line, \"  {AAAAAA}Non hai ancora iniziato: c'e' sempre una prima volta.\\n\", 192);",
+  "ka": ""
+ },
+ {
+  "id": 924,
+  "file": "ui/living_ui.inc",
+  "line": 1214,
+  "it": "\\n{FFD24D}Il tuo nome nei quartieri\\n",
+  "ctx": "strcat(body, \"\\n{FFD24D}Il tuo nome nei quartieri\\n\", 1280);",
+  "ka": ""
+ },
+ {
+  "id": 925,
+  "file": "ui/living_ui.inc",
+  "line": 1219,
+  "it": " {66DD66}[contratti premium]",
+  "ctx": "format(line, 192, \"{FFFFFF}%s: {FFD24D}%d{FFFFFF} - %s%s\\n\", g_UiLvDistrictName[d], rep, lrep, rep >= 20 ? \" {66DD66}[contratti premium]\" : \"\");",
+  "ka": ""
+ },
+ {
+  "id": 926,
+  "file": "ui/living_ui.inc",
+  "line": 1222,
+  "it": "\\n{AAAAAA}La reputazione non si compra: cresce con il lavoro, ogni giorno un passo alla volta.",
+  "ctx": "strcat(body, \"\\n{AAAAAA}La reputazione non si compra: cresce con il lavoro, ogni giorno un passo alla volta.\", 1280);",
+  "ka": ""
+ },
+ {
+  "id": 927,
+  "file": "ui/living_ui.inc",
+  "line": 1223,
+  "it": "Reputazione",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9708, DIALOG_STYLE_MSGBOX, \"Reputazione\", body, \"Chiudi\", \"\");",
+  "ka": ""
+ },
+ {
+  "id": 928,
+  "file": "ui/living_ui.inc",
+  "line": 1223,
+  "it": "Chiudi",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9708, DIALOG_STYLE_MSGBOX, \"Reputazione\", body, \"Chiudi\", \"\");",
+  "ka": ""
+ },
+ {
+  "id": 929,
+  "file": "ui/living_ui.inc",
+  "line": 1266,
+  "it": "Veicolo\\tCanone / %d min\\tCauzione\\tLivello\\n",
+  "ctx": "format(body, 1024, \"Veicolo\\tCanone / %d min\\tCauzione\\tLivello\\n\", g_UiLvRnBlockMin[playerid]);",
+  "ka": ""
+ },
+ {
+  "id": 930,
+  "file": "ui/living_ui.inc",
+  "line": 1277,
+  "it": "Noleggio - sconto residente %d%%",
+  "ctx": "format(title, 64, \"Noleggio - sconto residente %d%%\", g_UiLvRnDisc[playerid]);",
+  "ka": ""
+ },
+ {
+  "id": 931,
+  "file": "ui/living_ui.inc",
+  "line": 1281,
+  "it": "Noleggio veicoli",
+  "ctx": "strcopy(title, \"Noleggio veicoli\", 64);",
+  "ka": ""
+ },
+ {
+  "id": 932,
+  "file": "ui/living_ui.inc",
+  "line": 1283,
+  "it": "Scegli",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9709, DIALOG_STYLE_TABLIST_HEADERS, title, body, \"Scegli\", \"Chiudi\");",
+  "ka": ""
+ },
+ {
+  "id": 933,
+  "file": "ui/living_ui.inc",
+  "line": 1283,
+  "it": "Chiudi",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9709, DIALOG_STYLE_TABLIST_HEADERS, title, body, \"Scegli\", \"Chiudi\");",
+  "ka": ""
+ },
+ {
+  "id": 934,
+  "file": "ui/living_ui.inc",
+  "line": 1294,
+  "it": "Noleggio veicoli",
+  "ctx": "UI_LvInfo(playerid, \"Noleggio veicoli\", \"{FFFFFF}Oggi non ci sono mezzi disponibili. Ripassa piu' tardi.\");",
+  "ka": ""
+ },
+ {
+  "id": 935,
+  "file": "ui/living_ui.inc",
+  "line": 1294,
+  "it": "{FFFFFF}Oggi non ci sono mezzi disponibili. Ripassa piu' tardi.",
+  "ctx": "UI_LvInfo(playerid, \"Noleggio veicoli\", \"{FFFFFF}Oggi non ci sono mezzi disponibili. Ripassa piu' tardi.\");",
+  "ka": ""
+ },
+ {
+  "id": 936,
+  "file": "ui/living_ui.inc",
+  "line": 1308,
+  "it": "{FFFFFF}%d min\\t{66DD66}$%s\\n",
+  "ctx": "format(line, 128, \"{FFFFFF}%d min\\t{66DD66}$%s\\n\", g_UiLvRnBlockMin[playerid] * b, sTot);",
+  "ka": ""
+ },
+ {
+  "id": 937,
+  "file": "ui/living_ui.inc",
+  "line": 1311,
+  "it": "%s - per quanto tempo?",
+  "ctx": "format(title, 64, \"%s - per quanto tempo?\", g_UiLvRnName[playerid][s]);",
+  "ka": ""
+ },
+ {
+  "id": 938,
+  "file": "ui/living_ui.inc",
+  "line": 1312,
+  "it": "Avanti",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9710, DIALOG_STYLE_TABLIST, title, body, \"Avanti\", \"Indietro\");",
+  "ka": ""
+ },
+ {
+  "id": 939,
+  "file": "ui/living_ui.inc",
+  "line": 1312,
+  "it": "Indietro",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9710, DIALOG_STYLE_TABLIST, title, body, \"Avanti\", \"Indietro\");",
+  "ka": ""
+ },
+ {
+  "id": 940,
+  "file": "ui/living_ui.inc",
+  "line": 1324,
+  "it": " {AAAAAA}(sconto residente %d%% incluso)",
+  "ctx": "format(disc, 64, \" {AAAAAA}(sconto residente %d%% incluso)\", g_UiLvRnDisc[playerid]);",
+  "ka": ""
+ },
+ {
+  "id": 941,
+  "file": "ui/living_ui.inc",
+  "line": 1330,
+  "it": "{FFFFFF}Veicolo: {FFD24D}%s\\n{FFFFFF}Durata: {FFD24D}%d minuti\\n{FFFFFF}Canone: {66DD66}$%s%s\\n{FFFFFF}Cauzione: {FFD24D}$%s {AAAAAA}(ti torna alla riconsegna, in base alle condizioni del mezzo)\\n{FFFFFF}Addebito ora: {66DD66}$%s\\n\\n{AAAAAA}Si paga dal conto in banca, poi dai contanti. Riporta il mezzo qui con /riconsegna:\\ndopo la scadenza c'e' qualche minuto di tolleranza, poi la cauzione resta all'agenzia.",
+  "ctx": "format(body, 1024, \"{FFFFFF}Veicolo: {FFD24D}%s\\n{FFFFFF}Durata: {FFD24D}%d minuti\\n{FFFFFF}Canone: {66DD66}$%s%s\\n{FFFFFF}Cauzione: {FFD24D}$%s {AAAAAA}(ti torna alla riconsegna, in base alle condizi",
+  "ka": ""
+ },
+ {
+  "id": 942,
+  "file": "ui/living_ui.inc",
+  "line": 1331,
+  "it": "Riepilogo noleggio",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9711, DIALOG_STYLE_MSGBOX, \"Riepilogo noleggio\", body, \"Noleggia\", \"Indietro\");",
+  "ka": ""
+ },
+ {
+  "id": 943,
+  "file": "ui/living_ui.inc",
+  "line": 1331,
+  "it": "Noleggia",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9711, DIALOG_STYLE_MSGBOX, \"Riepilogo noleggio\", body, \"Noleggia\", \"Indietro\");",
+  "ka": ""
+ },
+ {
+  "id": 944,
+  "file": "ui/living_ui.inc",
+  "line": 1331,
+  "it": "Indietro",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9711, DIALOG_STYLE_MSGBOX, \"Riepilogo noleggio\", body, \"Noleggia\", \"Indietro\");",
+  "ka": ""
+ },
+ {
+  "id": 945,
+  "file": "ui/living_ui.inc",
+  "line": 1344,
+  "it": "{FFFFFF}Riconsegni la {FFD24D}%s{FFFFFF}?\\n\\nCondizioni del mezzo: {FFD24D}%d%%\\n{FFFFFF}Cauzione versata: {FFD24D}$%s\\n{FFFFFF}Ti restituiamo: {66DD66}$%s\\n\\n{AAAAAA}Il canone non si rimborsa. Grazie per averci scelto.",
+  "ctx": "format(body, 512, \"{FFFFFF}Riconsegni la {FFD24D}%s{FFFFFF}?\\n\\nCondizioni del mezzo: {FFD24D}%d%%\\n{FFFFFF}Cauzione versata: {FFD24D}$%s\\n{FFFFFF}Ti restituiamo: {66DD66}$%s\\n\\n{AAAAAA}Il canone non ",
+  "ka": ""
+ },
+ {
+  "id": 946,
+  "file": "ui/living_ui.inc",
+  "line": 1345,
+  "it": "Riconsegna",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9712, DIALOG_STYLE_MSGBOX, \"Riconsegna\", body, \"Riconsegna\", \"Annulla\");",
+  "ka": ""
+ },
+ {
+  "id": 947,
+  "file": "ui/living_ui.inc",
+  "line": 1345,
+  "it": "Riconsegna",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9712, DIALOG_STYLE_MSGBOX, \"Riconsegna\", body, \"Riconsegna\", \"Annulla\");",
+  "ka": ""
+ },
+ {
+  "id": 948,
+  "file": "ui/living_ui.inc",
+  "line": 1345,
+  "it": "Annulla",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9712, DIALOG_STYLE_MSGBOX, \"Riconsegna\", body, \"Riconsegna\", \"Annulla\");",
+  "ka": ""
+ },
+ {
+  "id": 949,
+  "file": "ui/living_ui.inc",
+  "line": 1360,
+  "it": "{FFFFFF}Veicolo: {FFD24D}%s\\n{FFFFFF}Utilizzo: {FFD24D}%d minuti\\n{FFFFFF}Canone pagato: {FFD24D}$%s\\n{FFFFFF}Cauzione: {FFD24D}$%s\\n{FFFFFF}Rimborsata: {66DD66}$%s\\n{FFFFFF}Trattenuta per danni o ritardo: {FF8866}$%s\\n\\n{AAAAAA}Buona strada, e a presto.",
+  "ctx": "format(body, 512, \"{FFFFFF}Veicolo: {FFD24D}%s\\n{FFFFFF}Utilizzo: {FFD24D}%d minuti\\n{FFFFFF}Canone pagato: {FFD24D}$%s\\n{FFFFFF}Cauzione: {FFD24D}$%s\\n{FFFFFF}Rimborsata: {66DD66}$%s\\n{FFFFFF}Tratten",
+  "ka": ""
+ },
+ {
+  "id": 950,
+  "file": "ui/living_ui.inc",
+  "line": 1361,
+  "it": "Ricevuta noleggio",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9713, DIALOG_STYLE_MSGBOX, \"Ricevuta noleggio\", body, \"Chiudi\", \"\");",
+  "ka": ""
+ },
+ {
+  "id": 951,
+  "file": "ui/living_ui.inc",
+  "line": 1361,
+  "it": "Chiudi",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9713, DIALOG_STYLE_MSGBOX, \"Ricevuta noleggio\", body, \"Chiudi\", \"\");",
+  "ka": ""
+ },
+ {
+  "id": 952,
+  "file": "ui/living_ui.inc",
+  "line": 1380,
+  "it": "{FFFFFF}%s {FFD24D}%s{FFFFFF} cerca un taxi.\\n\\nDa: {FFD24D}%s\\n{FFFFFF}A: {FFD24D}%s\\n{FFFFFF}Percorso stimato: {FFD24D}%s\\n{FFFFFF}Tariffa stimata: {66DD66}$%s\\n\\n{AAAAAA}Hai %d secondi per rispondere (anche con /accettacorsa).",
+  "ctx": "format(body, 512, \"{FFFFFF}%s {FFD24D}%s{FFFFFF} cerca un taxi.\\n\\nDa: {FFD24D}%s\\n{FFFFFF}A: {FFD24D}%s\\n{FFFFFF}Percorso stimato: {FFD24D}%s\\n{FFFFFF}Tariffa stimata: {66DD66}$%s\\n\\n{AAAAAA}Hai %d s",
+  "ka": ""
+ },
+ {
+  "id": 953,
+  "file": "ui/living_ui.inc",
+  "line": 1380,
+  "it": "Un cliente,",
+  "ctx": "format(body, 512, \"{FFFFFF}%s {FFD24D}%s{FFFFFF} cerca un taxi.\\n\\nDa: {FFD24D}%s\\n{FFFFFF}A: {FFD24D}%s\\n{FFFFFF}Percorso stimato: {FFD24D}%s\\n{FFFFFF}Tariffa stimata: {66DD66}$%s\\n\\n{AAAAAA}Hai %d s",
+  "ka": ""
+ },
+ {
+  "id": 954,
+  "file": "ui/living_ui.inc",
+  "line": 1380,
+  "it": "Il giocatore",
+  "ctx": "format(body, 512, \"{FFFFFF}%s {FFD24D}%s{FFFFFF} cerca un taxi.\\n\\nDa: {FFD24D}%s\\n{FFFFFF}A: {FFD24D}%s\\n{FFFFFF}Percorso stimato: {FFD24D}%s\\n{FFFFFF}Tariffa stimata: {66DD66}$%s\\n\\n{AAAAAA}Hai %d s",
+  "ka": ""
+ },
+ {
+  "id": 955,
+  "file": "ui/living_ui.inc",
+  "line": 1381,
+  "it": "Chiamata taxi",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9714, DIALOG_STYLE_MSGBOX, \"Chiamata taxi\", body, \"Accetta corsa\", \"Ignora\");",
+  "ka": ""
+ },
+ {
+  "id": 956,
+  "file": "ui/living_ui.inc",
+  "line": 1381,
+  "it": "Accetta corsa",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9714, DIALOG_STYLE_MSGBOX, \"Chiamata taxi\", body, \"Accetta corsa\", \"Ignora\");",
+  "ka": ""
+ },
+ {
+  "id": 957,
+  "file": "ui/living_ui.inc",
+  "line": 1381,
+  "it": "Ignora",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9714, DIALOG_STYLE_MSGBOX, \"Chiamata taxi\", body, \"Accetta corsa\", \"Ignora\");",
+  "ka": ""
+ },
+ {
+  "id": 958,
+  "file": "ui/living_ui.inc",
+  "line": 1418,
+  "it": "TASSAMETRO - in corsa",
+  "ctx": "Lang_PlayerTextDrawSetString(playerid, g_UiLvTd[playerid][6], running ? \"TASSAMETRO - in corsa\" : \"TASSAMETRO - fermo\");",
+  "ka": ""
+ },
+ {
+  "id": 959,
+  "file": "ui/living_ui.inc",
+  "line": 1418,
+  "it": "TASSAMETRO - fermo",
+  "ctx": "Lang_PlayerTextDrawSetString(playerid, g_UiLvTd[playerid][6], running ? \"TASSAMETRO - in corsa\" : \"TASSAMETRO - fermo\");",
+  "ka": ""
+ },
+ {
+  "id": 960,
+  "file": "ui/living_ui.inc",
+  "line": 1446,
+  "it": " {AAAAAA}(sconto residente %d%% incluso)",
+  "ctx": "format(disc, 64, \" {AAAAAA}(sconto residente %d%% incluso)\", g_UiLvTxPayDisc[playerid]);",
+  "ka": ""
+ },
+ {
+  "id": 961,
+  "file": "ui/living_ui.inc",
+  "line": 1452,
+  "it": "{FFFFFF}Corsa con {FFD24D}%s{FFFFFF} conclusa.\\n\\nPercorso: {FFD24D}%s\\n{FFFFFF}Importo: {66DD66}$%s%s\\n\\n{AAAAAA}Il pagamento parte dal tuo conto in banca. Se qualcosa non va puoi contestare:\\nla corsa restera' in sospeso e lo staff la verifichera'. Rispondi entro %d secondi.",
+  "ctx": "format(body, 640, \"{FFFFFF}Corsa con {FFD24D}%s{FFFFFF} conclusa.\\n\\nPercorso: {FFD24D}%s\\n{FFFFFF}Importo: {66DD66}$%s%s\\n\\n{AAAAAA}Il pagamento parte dal tuo conto in banca. Se qualcosa non va puoi ",
+  "ka": ""
+ },
+ {
+  "id": 962,
+  "file": "ui/living_ui.inc",
+  "line": 1453,
+  "it": "Pagamento corsa",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9715, DIALOG_STYLE_MSGBOX, \"Pagamento corsa\", body, \"Paga\", \"Contesta\");",
+  "ka": ""
+ },
+ {
+  "id": 963,
+  "file": "ui/living_ui.inc",
+  "line": 1453,
+  "it": "Paga",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9715, DIALOG_STYLE_MSGBOX, \"Pagamento corsa\", body, \"Paga\", \"Contesta\");",
+  "ka": ""
+ },
+ {
+  "id": 964,
+  "file": "ui/living_ui.inc",
+  "line": 1453,
+  "it": "Contesta",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9715, DIALOG_STYLE_MSGBOX, \"Pagamento corsa\", body, \"Paga\", \"Contesta\");",
+  "ka": ""
+ },
+ {
+  "id": 965,
+  "file": "ui/living_ui.inc",
+  "line": 1511,
+  "it": "Com'e' andata con %s?",
+  "ctx": "format(title, 64, \"Com'e' andata con %s?\", driver[0] != 0 ? driver : \"il tassista\");",
+  "ka": ""
+ },
+ {
+  "id": 966,
+  "file": "ui/living_ui.inc",
+  "line": 1512,
+  "it": "{66DD66}***** Ottima\\n{66DD66}**** Buona\\n{FFD24D}*** Nella norma\\n{FFAA33}** Da migliorare\\n{FF8866}* Deludente",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9717, DIALOG_STYLE_LIST, title, \"{66DD66}***** Ottima\\n{66DD66}**** Buona\\n{FFD24D}*** Nella norma\\n{FFAA33}** Da migliorare\\n{FF8866}* Deludente\", \"Vota\", \"Salta\");",
+  "ka": ""
+ },
+ {
+  "id": 967,
+  "file": "ui/living_ui.inc",
+  "line": 1512,
+  "it": "Vota",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9717, DIALOG_STYLE_LIST, title, \"{66DD66}***** Ottima\\n{66DD66}**** Buona\\n{FFD24D}*** Nella norma\\n{FFAA33}** Da migliorare\\n{FF8866}* Deludente\", \"Vota\", \"Salta\");",
+  "ka": ""
+ },
+ {
+  "id": 968,
+  "file": "ui/living_ui.inc",
+  "line": 1512,
+  "it": "Salta",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9717, DIALOG_STYLE_LIST, title, \"{66DD66}***** Ottima\\n{66DD66}**** Buona\\n{FFD24D}*** Nella norma\\n{FFAA33}** Da migliorare\\n{FF8866}* Deludente\", \"Vota\", \"Salta\");",
+  "ka": ""
+ },
+ {
+  "id": 969,
+  "file": "ui/living_ui.inc",
+  "line": 1529,
+  "it": "{FFFFFF}Cliente: {FFD24D}%s\\n{FFFFFF}Percorso: {FFD24D}%s\\n{FFFFFF}Tariffa: {FFD24D}$%s\\n{FFFFFF}Tassa comunale: {FF8866}$%s\\n{FFFFFF}Accreditato in banca: {66DD66}$%s\\n\\n{AAAAAA}Buon lavoro, la citta' gira anche grazie a te.",
+  "ctx": "format(body, 512, \"{FFFFFF}Cliente: {FFD24D}%s\\n{FFFFFF}Percorso: {FFD24D}%s\\n{FFFFFF}Tariffa: {FFD24D}$%s\\n{FFFFFF}Tassa comunale: {FF8866}$%s\\n{FFFFFF}Accreditato in banca: {66DD66}$%s\\n\\n{AAAAAA}Bu",
+  "ka": ""
+ },
+ {
+  "id": 970,
+  "file": "ui/living_ui.inc",
+  "line": 1533,
+  "it": "{FFFFFF}Tassista: {FFD24D}%s\\n{FFFFFF}Percorso: {FFD24D}%s\\n{FFFFFF}Pagato: {66DD66}$%s\\n\\n{AAAAAA}Grazie per aver viaggiato con i taxi di Los Santos.",
+  "ctx": "format(body, 512, \"{FFFFFF}Tassista: {FFD24D}%s\\n{FFFFFF}Percorso: {FFD24D}%s\\n{FFFFFF}Pagato: {66DD66}$%s\\n\\n{AAAAAA}Grazie per aver viaggiato con i taxi di Los Santos.\", other[0] != 0 ? other : \"-\",",
+  "ka": ""
+ },
+ {
+  "id": 971,
+  "file": "ui/living_ui.inc",
+  "line": 1535,
+  "it": "Ricevuta corsa #%d",
+  "ctx": "format(title, 64, \"Ricevuta corsa #%d\", rideId);",
+  "ka": ""
+ },
+ {
+  "id": 972,
+  "file": "ui/living_ui.inc",
+  "line": 1536,
+  "it": "Chiudi",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9718, DIALOG_STYLE_MSGBOX, title, body, \"Chiudi\", \"\");",
+  "ka": ""
+ },
+ {
+  "id": 973,
+  "file": "ui/living_ui.inc",
+  "line": 1588,
+  "it": "Progetti della comunita'",
+  "ctx": "UI_LvInfo(playerid, \"Progetti della comunita'\", \"{FFFFFF}In questo quartiere non c'e' un progetto aperto, per ora.\\n\\n{AAAAAA}Il prossimo partira' presto: tieni d'occhio la bacheca.\");",
+  "ka": ""
+ },
+ {
+  "id": 974,
+  "file": "ui/living_ui.inc",
+  "line": 1588,
+  "it": "{FFFFFF}In questo quartiere non c'e' un progetto aperto, per ora.\\n\\n{AAAAAA}Il prossimo partira' presto: tieni d'occhio la bacheca.",
+  "ctx": "UI_LvInfo(playerid, \"Progetti della comunita'\", \"{FFFFFF}In questo quartiere non c'e' un progetto aperto, per ora.\\n\\n{AAAAAA}Il prossimo partira' presto: tieni d'occhio la bacheca.\");",
+  "ka": ""
+ },
+ {
+  "id": 975,
+  "file": "ui/living_ui.inc",
+  "line": 1600,
+  "it": "{66DD66}Puoi contribuire oggi da $%s a $%s.",
+  "ctx": "format(foot, 160, \"{66DD66}Puoi contribuire oggi da $%s a $%s.\", sLo, sHi);",
+  "ka": ""
+ },
+ {
+  "id": 976,
+  "file": "ui/living_ui.inc",
+  "line": 1608,
+  "it": "{FFD24D}Per oggi hai gia' dato il massimo: grazie davvero.",
+  "ctx": "strcopy(foot, \"{FFD24D}Per oggi hai gia' dato il massimo: grazie davvero.\", 160);",
+  "ka": ""
+ },
+ {
+  "id": 977,
+  "file": "ui/living_ui.inc",
+  "line": 1610,
+  "it": "{FFFFFF}%s\\n{AAAAAA}Quartiere di %s\\n\\n%s\\n{FFFFFF}Raccolti {66DD66}$%s{FFFFFF} su {FFD24D}$%s{FFFFFF} - mancano %d giorni e %d ore\\n\\n{AAAAAA}Il fondo cresce con ogni contratto e corsa da e verso il quartiere, senza togliere\\nnulla al tuo compenso, e con le donazioni di chi ci vive. Ogni aiuto conta.\\n\\n%s",
+  "ctx": "format(body, 1024, \"{FFFFFF}%s\\n{AAAAAA}Quartiere di %s\\n\\n%s\\n{FFFFFF}Raccolti {66DD66}$%s{FFFFFF} su {FFD24D}$%s{FFFFFF} - mancano %d giorni e %d ore\\n\\n{AAAAAA}Il fondo cresce con ogni contratto e ",
+  "ka": ""
+ },
+ {
+  "id": 978,
+  "file": "ui/living_ui.inc",
+  "line": 1611,
+  "it": "Progetto della comunita'",
+  "ctx": "strcopy(title, \"Progetto della comunita'\", 64);",
+  "ka": ""
+ },
+ {
+  "id": 979,
+  "file": "ui/living_ui.inc",
+  "line": 1614,
+  "it": "Contribuisci",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9719, DIALOG_STYLE_MSGBOX, title, body, \"Contribuisci\", \"Chiudi\");",
+  "ka": ""
+ },
+ {
+  "id": 980,
+  "file": "ui/living_ui.inc",
+  "line": 1614,
+  "it": "Chiudi",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9719, DIALOG_STYLE_MSGBOX, title, body, \"Contribuisci\", \"Chiudi\");",
+  "ka": ""
+ },
+ {
+  "id": 981,
+  "file": "ui/living_ui.inc",
+  "line": 1618,
+  "it": "Chiudi",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9719, DIALOG_STYLE_MSGBOX, title, body, \"Chiudi\", \"\");",
+  "ka": ""
+ },
+ {
+  "id": 982,
+  "file": "ui/living_ui.inc",
+  "line": 1633,
+  "it": "%s{FFFFFF}Quanto vuoi donare a {FFD24D}%s{FFFFFF}?\\nImporto ammesso: da {FFD24D}$%s{FFFFFF} a {FFD24D}$%s{FFFFFF}. Inserisci un numero intero:",
+  "ctx": "format(body, 512, \"%s{FFFFFF}Quanto vuoi donare a {FFD24D}%s{FFFFFF}?\\nImporto ammesso: da {FFD24D}$%s{FFFFFF} a {FFD24D}$%s{FFFFFF}. Inserisci un numero intero:\", err, g_UiLvPjName[playerid], sLo, sH",
+  "ka": ""
+ },
+ {
+  "id": 983,
+  "file": "ui/living_ui.inc",
+  "line": 1634,
+  "it": "Contribuisci",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9720, DIALOG_STYLE_INPUT, \"Contribuisci\", body, \"Avanti\", \"Indietro\");",
+  "ka": ""
+ },
+ {
+  "id": 984,
+  "file": "ui/living_ui.inc",
+  "line": 1634,
+  "it": "Avanti",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9720, DIALOG_STYLE_INPUT, \"Contribuisci\", body, \"Avanti\", \"Indietro\");",
+  "ka": ""
+ },
+ {
+  "id": 985,
+  "file": "ui/living_ui.inc",
+  "line": 1634,
+  "it": "Indietro",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9720, DIALOG_STYLE_INPUT, \"Contribuisci\", body, \"Avanti\", \"Indietro\");",
+  "ka": ""
+ },
+ {
+  "id": 986,
+  "file": "ui/living_ui.inc",
+  "line": 1642,
+  "it": "{FFFFFF}Doni {66DD66}$%s{FFFFFF} a {FFD24D}%s{FFFFFF}?\\n\\n{AAAAAA}L'importo si paga dal conto in banca, poi dai contanti, e non si restituisce.\\nIl quartiere se ne ricordera'.",
+  "ctx": "format(body, 384, \"{FFFFFF}Doni {66DD66}$%s{FFFFFF} a {FFD24D}%s{FFFFFF}?\\n\\n{AAAAAA}L'importo si paga dal conto in banca, poi dai contanti, e non si restituisce.\\nIl quartiere se ne ricordera'.\", sAm",
+  "ka": ""
+ },
+ {
+  "id": 987,
+  "file": "ui/living_ui.inc",
+  "line": 1643,
+  "it": "Conferma donazione",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9721, DIALOG_STYLE_MSGBOX, \"Conferma donazione\", body, \"Dona\", \"Indietro\");",
+  "ka": ""
+ },
+ {
+  "id": 988,
+  "file": "ui/living_ui.inc",
+  "line": 1643,
+  "it": "Dona",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9721, DIALOG_STYLE_MSGBOX, \"Conferma donazione\", body, \"Dona\", \"Indietro\");",
+  "ka": ""
+ },
+ {
+  "id": 989,
+  "file": "ui/living_ui.inc",
+  "line": 1643,
+  "it": "Indietro",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9721, DIALOG_STYLE_MSGBOX, \"Conferma donazione\", body, \"Dona\", \"Indietro\");",
+  "ka": ""
+ },
+ {
+  "id": 990,
+  "file": "ui/living_ui.inc",
+  "line": 1658,
+  "it": "{FF6666}Importo fuori limite: da $%s a $%s.\\n\\n",
+  "ctx": "format(err, size, \"{FF6666}Importo fuori limite: da $%s a $%s.\\n\\n\", sLo, sHi);",
+  "ka": ""
+ },
+ {
+  "id": 991,
+  "file": "ui/living_ui.inc",
+  "line": 1718,
+  "it": "{66DD66}[fatto] {AAAAAA}%d. %s\\n",
+  "ctx": "format(line, 128, \"{66DD66}[fatto] {AAAAAA}%d. %s\\n\", s, g_UiLvStepTitle[s]);",
+  "ka": ""
+ },
+ {
+  "id": 992,
+  "file": "ui/living_ui.inc",
+  "line": 1722,
+  "it": "{FFD24D}[ora] {FFFFFF}%d. %s\\n",
+  "ctx": "format(line, 128, \"{FFD24D}[ora] {FFFFFF}%d. %s\\n\", s, g_UiLvStepTitle[s]);",
+  "ka": ""
+ },
+ {
+  "id": 993,
+  "file": "ui/living_ui.inc",
+  "line": 1733,
+  "it": "{AAAAAA}Spegni i suggerimenti",
+  "ctx": "strcat(body, \"{AAAAAA}Spegni i suggerimenti\", 1024);",
+  "ka": ""
+ },
+ {
+  "id": 994,
+  "file": "ui/living_ui.inc",
+  "line": 1738,
+  "it": "Primo giorno - completato",
+  "ctx": "strcopy(title, \"Primo giorno - completato\", 64);",
+  "ka": ""
+ },
+ {
+  "id": 995,
+  "file": "ui/living_ui.inc",
+  "line": 1742,
+  "it": "Primo giorno - passo %d di %d",
+  "ctx": "format(title, 64, \"Primo giorno - passo %d di %d\", cur, 5);",
+  "ka": ""
+ },
+ {
+  "id": 996,
+  "file": "ui/living_ui.inc",
+  "line": 1744,
+  "it": "Apri",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9722, DIALOG_STYLE_LIST, title, body, \"Apri\", \"Chiudi\");",
+  "ka": ""
+ },
+ {
+  "id": 997,
+  "file": "ui/living_ui.inc",
+  "line": 1744,
+  "it": "Chiudi",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9722, DIALOG_STYLE_LIST, title, body, \"Apri\", \"Chiudi\");",
+  "ka": ""
+ },
+ {
+  "id": 998,
+  "file": "ui/living_ui.inc",
+  "line": 1752,
+  "it": "{66DD66}Fatto.",
+  "ctx": "format(body, 512, \"{FFFFFF}%s\\n\\n%s\", g_UiLvStepText[step], step < cur ? \"{66DD66}Fatto.\" : (step == cur ? \"{FFD24D}E' il tuo prossimo passo.\" : \"{AAAAAA}Ci arriverai presto.\"));",
+  "ka": ""
+ },
+ {
+  "id": 999,
+  "file": "ui/living_ui.inc",
+  "line": 1752,
+  "it": "{FFD24D}E' il tuo prossimo passo.",
+  "ctx": "format(body, 512, \"{FFFFFF}%s\\n\\n%s\", g_UiLvStepText[step], step < cur ? \"{66DD66}Fatto.\" : (step == cur ? \"{FFD24D}E' il tuo prossimo passo.\" : \"{AAAAAA}Ci arriverai presto.\"));",
+  "ka": ""
+ },
+ {
+  "id": 1000,
+  "file": "ui/living_ui.inc",
+  "line": 1752,
+  "it": "{AAAAAA}Ci arriverai presto.",
+  "ctx": "format(body, 512, \"{FFFFFF}%s\\n\\n%s\", g_UiLvStepText[step], step < cur ? \"{66DD66}Fatto.\" : (step == cur ? \"{FFD24D}E' il tuo prossimo passo.\" : \"{AAAAAA}Ci arriverai presto.\"));",
+  "ka": ""
+ },
+ {
+  "id": 1001,
+  "file": "ui/living_ui.inc",
+  "line": 1756,
+  "it": "Segna sulla mappa",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9723, DIALOG_STYLE_MSGBOX, title, body, \"Segna sulla mappa\", \"Indietro\");",
+  "ka": ""
+ },
+ {
+  "id": 1002,
+  "file": "ui/living_ui.inc",
+  "line": 1756,
+  "it": "Indietro",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9723, DIALOG_STYLE_MSGBOX, title, body, \"Segna sulla mappa\", \"Indietro\");",
+  "ka": ""
+ },
+ {
+  "id": 1003,
+  "file": "ui/living_ui.inc",
+  "line": 1760,
+  "it": "Indietro",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9723, DIALOG_STYLE_MSGBOX, title, body, \"Indietro\", \"Chiudi\");",
+  "ka": ""
+ },
+ {
+  "id": 1004,
+  "file": "ui/living_ui.inc",
+  "line": 1760,
+  "it": "Chiudi",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9723, DIALOG_STYLE_MSGBOX, title, body, \"Indietro\", \"Chiudi\");",
+  "ka": ""
+ },
+ {
+  "id": 1005,
+  "file": "ui/living_ui.inc",
+  "line": 1772,
+  "it": "~y~Primo giorno %d/%d~n~~w~%s",
+  "ctx": "format(text, 160, \"~y~Primo giorno %d/%d~n~~w~%s\", step, 5, g_UiLvStepHint[step]);",
+  "ka": ""
+ },
+ {
+  "id": 1006,
+  "file": "ui/living_ui.inc",
+  "line": 1808,
+  "it": "Benvenuto a Los Santos",
+  "ctx": "UI_LvInfo(playerid, \"Benvenuto a Los Santos\", \"{FFFFFF}Hai fatto il tuo primo giorno in citta'.\\n\\nLa Casa del Quartiere ti ha lasciato un {66DD66}pacco accoglienza{FFFFFF}: acqua, un pasto pronto e q",
+  "ka": ""
+ },
+ {
+  "id": 1007,
+  "file": "ui/living_ui.inc",
+  "line": 1808,
+  "it": "{FFFFFF}Hai fatto il tuo primo giorno in citta'.\\n\\nLa Casa del Quartiere ti ha lasciato un {66DD66}pacco accoglienza{FFFFFF}: acqua, un pasto pronto e qualche benda.\\n\\n{AAAAAA}Da qui in poi la strada la scegli tu. Idlewood ti aspetta, quando vuoi.",
+  "ctx": "UI_LvInfo(playerid, \"Benvenuto a Los Santos\", \"{FFFFFF}Hai fatto il tuo primo giorno in citta'.\\n\\nLa Casa del Quartiere ti ha lasciato un {66DD66}pacco accoglienza{FFFFFF}: acqua, un pasto pronto e q",
+  "ka": ""
+ },
+ {
+  "id": 1008,
+  "file": "ui/living_ui.inc",
+  "line": 1812,
+  "it": "Suggerimenti spenti",
+  "ctx": "UI_LvInfo(playerid, \"Suggerimenti spenti\", \"{FFFFFF}Va bene, niente piu' suggerimenti.\\n\\n{AAAAAA}Se ti serve una mano, la Casa del Quartiere di Idlewood e' sempre aperta.\");",
+  "ka": ""
+ },
+ {
+  "id": 1009,
+  "file": "ui/living_ui.inc",
+  "line": 1812,
+  "it": "{FFFFFF}Va bene, niente piu' suggerimenti.\\n\\n{AAAAAA}Se ti serve una mano, la Casa del Quartiere di Idlewood e' sempre aperta.",
+  "ctx": "UI_LvInfo(playerid, \"Suggerimenti spenti\", \"{FFFFFF}Va bene, niente piu' suggerimenti.\\n\\n{AAAAAA}Se ti serve una mano, la Casa del Quartiere di Idlewood e' sempre aperta.\");",
+  "ka": ""
+ },
+ {
+  "id": 1010,
+  "file": "ui/living_ui.inc",
+  "line": 1956,
+  "it": "La chiamata e' passata a un altro taxi",
+  "ctx": "UI_LivingToast(playerid, \"La chiamata e' passata a un altro taxi\", 2);",
+  "ka": ""
+ },
+ {
+  "id": 1011,
+  "file": "ui/living_ui.inc",
+  "line": 1970,
+  "it": "Tempo scaduto per il pagamento della corsa",
+  "ctx": "UI_LivingToast(playerid, \"Tempo scaduto per il pagamento della corsa\", 2);",
+  "ka": ""
+ },
+ {
+  "id": 1012,
+  "file": "ui/living_ui.inc",
+  "line": 2008,
+  "it": "Aggiorno la bacheca...",
+  "ctx": "UI_LivingToast(playerid, \"Aggiorno la bacheca...\", 0);",
+  "ka": ""
+ },
+ {
+  "id": 1013,
+  "file": "ui/living_ui.inc",
+  "line": 2079,
+  "it": "Contratto richiesto, un attimo...",
+  "ctx": "UI_LivingToast(playerid, \"Contratto richiesto, un attimo...\", 0);",
+  "ka": ""
+ },
+ {
+  "id": 1014,
+  "file": "ui/living_ui.inc",
+  "line": 2095,
+  "it": "{FFFFFF}Vuoi davvero lasciare il contratto {FFD24D}#%d{FFFFFF}?\\n\\n{AAAAAA}Il mezzo tornera' al magazzino e il contratto tornera' in bacheca per qualcun altro.",
+  "ctx": "format(body, 256, \"{FFFFFF}Vuoi davvero lasciare il contratto {FFD24D}#%d{FFFFFF}?\\n\\n{AAAAAA}Il mezzo tornera' al magazzino e il contratto tornera' in bacheca per qualcun altro.\", g_UiLvStId[playerid",
+  "ka": ""
+ },
+ {
+  "id": 1015,
+  "file": "ui/living_ui.inc",
+  "line": 2096,
+  "it": "Lasciare il contratto?",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9705, DIALOG_STYLE_MSGBOX, \"Lasciare il contratto?\", body, \"Lascia\", \"Indietro\");",
+  "ka": ""
+ },
+ {
+  "id": 1016,
+  "file": "ui/living_ui.inc",
+  "line": 2096,
+  "it": "Lascia",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9705, DIALOG_STYLE_MSGBOX, \"Lasciare il contratto?\", body, \"Lascia\", \"Indietro\");",
+  "ka": ""
+ },
+ {
+  "id": 1017,
+  "file": "ui/living_ui.inc",
+  "line": 2096,
+  "it": "Indietro",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9705, DIALOG_STYLE_MSGBOX, \"Lasciare il contratto?\", body, \"Lascia\", \"Indietro\");",
+  "ka": ""
+ },
+ {
+  "id": 1018,
+  "file": "ui/living_ui.inc",
+  "line": 2108,
+  "it": "Il contratto resta tuo",
+  "ctx": "UI_LivingToast(playerid, \"Il contratto resta tuo\", 1);",
+  "ka": ""
+ },
+ {
+  "id": 1019,
+  "file": "ui/living_ui.inc",
+  "line": 2152,
+  "it": "Questo mezzo non e' disponibile per te ora",
+  "ctx": "UI_LivingToast(playerid, \"Questo mezzo non e' disponibile per te ora\", 2);",
+  "ka": ""
+ },
+ {
+  "id": 1020,
+  "file": "ui/living_ui.inc",
+  "line": 2192,
+  "it": "Preparo il mezzo...",
+  "ctx": "UI_LivingToast(playerid, \"Preparo il mezzo...\", 0);",
+  "ka": ""
+ },
+ {
+  "id": 1021,
+  "file": "ui/living_ui.inc",
+  "line": 2234,
+  "it": "Contestare la corsa?",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9716, DIALOG_STYLE_MSGBOX, \"Contestare la corsa?\", \"{FFFFFF}Se contesti, la corsa non viene pagata e resta in sospeso per lo staff.\\n\\n{AAAAAA}Usalo solo se qualcosa e'",
+  "ka": ""
+ },
+ {
+  "id": 1022,
+  "file": "ui/living_ui.inc",
+  "line": 2234,
+  "it": "{FFFFFF}Se contesti, la corsa non viene pagata e resta in sospeso per lo staff.\\n\\n{AAAAAA}Usalo solo se qualcosa e' andato davvero storto.",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9716, DIALOG_STYLE_MSGBOX, \"Contestare la corsa?\", \"{FFFFFF}Se contesti, la corsa non viene pagata e resta in sospeso per lo staff.\\n\\n{AAAAAA}Usalo solo se qualcosa e'",
+  "ka": ""
+ },
+ {
+  "id": 1023,
+  "file": "ui/living_ui.inc",
+  "line": 2234,
+  "it": "Contesta",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9716, DIALOG_STYLE_MSGBOX, \"Contestare la corsa?\", \"{FFFFFF}Se contesti, la corsa non viene pagata e resta in sospeso per lo staff.\\n\\n{AAAAAA}Usalo solo se qualcosa e'",
+  "ka": ""
+ },
+ {
+  "id": 1024,
+  "file": "ui/living_ui.inc",
+  "line": 2234,
+  "it": "Indietro",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9716, DIALOG_STYLE_MSGBOX, \"Contestare la corsa?\", \"{FFFFFF}Se contesti, la corsa non viene pagata e resta in sospeso per lo staff.\\n\\n{AAAAAA}Usalo solo se qualcosa e'",
+  "ka": ""
+ },
+ {
+  "id": 1025,
+  "file": "ui/living_ui.inc",
+  "line": 2262,
+  "it": "Grazie per il tuo voto",
+  "ctx": "UI_LivingToast(playerid, \"Grazie per il tuo voto\", 1);",
+  "ka": ""
+ },
+ {
+  "id": 1026,
+  "file": "ui/living_ui.inc",
+  "line": 2285,
+  "it": "{FF6666}Importo non valido: solo cifre, intero positivo.\\n\\n",
+  "ctx": "UI_LvPrjAmountShow(playerid, \"{FF6666}Importo non valido: solo cifre, intero positivo.\\n\\n\");",
+  "ka": ""
+ },
+ {
+  "id": 1027,
+  "file": "ui/living_ui.inc",
+  "line": 2318,
+  "it": "Grazie: registro la tua donazione...",
+  "ctx": "UI_LivingToast(playerid, \"Grazie: registro la tua donazione...\", 1);",
+  "ka": ""
+ },
+ {
+  "id": 1028,
+  "file": "ui/living_ui.inc",
+  "line": 2335,
+  "it": "Spegnere i suggerimenti?",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9724, DIALOG_STYLE_MSGBOX, \"Spegnere i suggerimenti?\", \"{FFFFFF}Il percorso del primo giorno si chiude qui, senza il pacco accoglienza.\\n\\n{AAAAAA}Potrai sempre chieder",
+  "ka": ""
+ },
+ {
+  "id": 1029,
+  "file": "ui/living_ui.inc",
+  "line": 2335,
+  "it": "{FFFFFF}Il percorso del primo giorno si chiude qui, senza il pacco accoglienza.\\n\\n{AAAAAA}Potrai sempre chiedere a chi incontri: Los Santos e' piu' gentile di quanto sembri.",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9724, DIALOG_STYLE_MSGBOX, \"Spegnere i suggerimenti?\", \"{FFFFFF}Il percorso del primo giorno si chiude qui, senza il pacco accoglienza.\\n\\n{AAAAAA}Potrai sempre chieder",
+  "ka": ""
+ },
+ {
+  "id": 1030,
+  "file": "ui/living_ui.inc",
+  "line": 2335,
+  "it": "Spegni",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9724, DIALOG_STYLE_MSGBOX, \"Spegnere i suggerimenti?\", \"{FFFFFF}Il percorso del primo giorno si chiude qui, senza il pacco accoglienza.\\n\\n{AAAAAA}Potrai sempre chieder",
+  "ka": ""
+ },
+ {
+  "id": 1031,
+  "file": "ui/living_ui.inc",
+  "line": 2335,
+  "it": "Indietro",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9724, DIALOG_STYLE_MSGBOX, \"Spegnere i suggerimenti?\", \"{FFFFFF}Il percorso del primo giorno si chiude qui, senza il pacco accoglienza.\\n\\n{AAAAAA}Potrai sempre chieder",
+  "ka": ""
+ },
+ {
+  "id": 1032,
+  "file": "ui/living_ui.inc",
+  "line": 2349,
+  "it": "Ti segno la strada sulla mappa",
+  "ctx": "UI_LivingToast(playerid, \"Ti segno la strada sulla mappa\", 1);",
+  "ka": ""
+ },
+ {
+  "id": 1033,
+  "file": "ui/vehicle_ui.inc",
+  "line": 5,
+  "it": "Faggio",
+  "ctx": "\"Faggio\",",
+  "ka": ""
+ },
+ {
+  "id": 1034,
+  "file": "ui/vehicle_ui.inc",
+  "line": 6,
+  "it": "Previon",
+  "ctx": "\"Previon\",",
+  "ka": ""
+ },
+ {
+  "id": 1035,
+  "file": "ui/vehicle_ui.inc",
+  "line": 7,
+  "it": "Manana",
+  "ctx": "\"Manana\",",
+  "ka": ""
+ },
+ {
+  "id": 1036,
+  "file": "ui/vehicle_ui.inc",
+  "line": 8,
+  "it": "Virgo",
+  "ctx": "\"Virgo\",",
+  "ka": ""
+ },
+ {
+  "id": 1037,
+  "file": "ui/vehicle_ui.inc",
+  "line": 9,
+  "it": "Glendale",
+  "ctx": "\"Glendale\",",
+  "ka": ""
+ },
+ {
+  "id": 1038,
+  "file": "ui/vehicle_ui.inc",
+  "line": 10,
+  "it": "Primo",
+  "ctx": "\"Primo\",",
+  "ka": ""
+ },
+ {
+  "id": 1039,
+  "file": "ui/vehicle_ui.inc",
+  "line": 11,
+  "it": "Willard",
+  "ctx": "\"Willard\",",
+  "ka": ""
+ },
+ {
+  "id": 1040,
+  "file": "ui/vehicle_ui.inc",
+  "line": 12,
+  "it": "Sadler",
+  "ctx": "\"Sadler\",",
+  "ka": ""
+ },
+ {
+  "id": 1041,
+  "file": "ui/vehicle_ui.inc",
+  "line": 13,
+  "it": "PCJ-600",
+  "ctx": "\"PCJ-600\",",
+  "ka": ""
+ },
+ {
+  "id": 1042,
+  "file": "ui/vehicle_ui.inc",
+  "line": 14,
+  "it": "Bobcat",
+  "ctx": "\"Bobcat\",",
+  "ka": ""
+ },
+ {
+  "id": 1043,
+  "file": "ui/vehicle_ui.inc",
+  "line": 15,
+  "it": "Tampa",
+  "ctx": "\"Tampa\",",
+  "ka": ""
+ },
+ {
+  "id": 1044,
+  "file": "ui/vehicle_ui.inc",
+  "line": 16,
+  "it": "Mesa",
+  "ctx": "\"Mesa\",",
+  "ka": ""
+ },
+ {
+  "id": 1045,
+  "file": "ui/vehicle_ui.inc",
+  "line": 17,
+  "it": "Sentinel",
+  "ctx": "\"Sentinel\"",
+  "ka": ""
+ },
+ {
+  "id": 1046,
+  "file": "ui/vehicle_ui.inc",
+  "line": 72,
+  "it": "Modello %d",
+  "ctx": "format(out, size, \"Modello %d\", model);",
+  "ka": ""
+ },
+ {
+  "id": 1047,
+  "file": "ui/vehicle_ui.inc",
+  "line": 91,
+  "it": "{FFFFFF}%s\\t{66DD66}$%s\\t{AAAAAA}liv. %d\\n",
+  "ctx": "format(line, 96, \"{FFFFFF}%s\\t{66DD66}$%s\\t{AAAAAA}liv. %d\\n\", g_UiVehName[i], price, g_UiVehMinLevel[i]);",
+  "ka": ""
+ },
+ {
+  "id": 1048,
+  "file": "ui/vehicle_ui.inc",
+  "line": 95,
+  "it": "{777777}%s\\t$%s\\t{FF6666}Bloccato: liv. %d\\n",
+  "ctx": "format(line, 96, \"{777777}%s\\t$%s\\t{FF6666}Bloccato: liv. %d\\n\", g_UiVehName[i], price, g_UiVehMinLevel[i]);",
+  "ka": ""
+ },
+ {
+  "id": 1049,
+  "file": "ui/vehicle_ui.inc",
+  "line": 99,
+  "it": "Concessionario di Los Santos",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9100, DIALOG_STYLE_TABLIST, \"Concessionario di Los Santos\", body, \"Scegli\", \"Chiudi\");",
+  "ka": ""
+ },
+ {
+  "id": 1050,
+  "file": "ui/vehicle_ui.inc",
+  "line": 99,
+  "it": "Scegli",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9100, DIALOG_STYLE_TABLIST, \"Concessionario di Los Santos\", body, \"Scegli\", \"Chiudi\");",
+  "ka": ""
+ },
+ {
+  "id": 1051,
+  "file": "ui/vehicle_ui.inc",
+  "line": 99,
+  "it": "Chiudi",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9100, DIALOG_STYLE_TABLIST, \"Concessionario di Los Santos\", body, \"Scegli\", \"Chiudi\");",
+  "ka": ""
+ },
+ {
+  "id": 1052,
+  "file": "ui/vehicle_ui.inc",
+  "line": 110,
+  "it": "{FFFFFF}Contanti\\t%s$%s\\n",
+  "ctx": "format(body, 320, \"{FFFFFF}Contanti\\t%s$%s\\n\", g_UiVehMoney[playerid] >= g_UiVehPrice[idx] ? \"{66DD66}\" : \"{FF6666}\", cash);",
+  "ka": ""
+ },
+ {
+  "id": 1053,
+  "file": "ui/vehicle_ui.inc",
+  "line": 111,
+  "it": "{FFFFFF}Banca\\t%s$%s\\n",
+  "ctx": "format(t, 48, \"{FFFFFF}Banca\\t%s$%s\\n\", g_UiVehBank[playerid] >= g_UiVehPrice[idx] ? \"{66DD66}\" : \"{FF6666}\", bank);",
+  "ka": ""
+ },
+ {
+  "id": 1054,
+  "file": "ui/vehicle_ui.inc",
+  "line": 114,
+  "it": "%s - $%s: pagamento",
+  "ctx": "format(title, 64, \"%s - $%s: pagamento\", g_UiVehName[idx], price);",
+  "ka": ""
+ },
+ {
+  "id": 1055,
+  "file": "ui/vehicle_ui.inc",
+  "line": 115,
+  "it": "Acquista",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9101, DIALOG_STYLE_TABLIST, title, body, \"Acquista\", \"Indietro\");",
+  "ka": ""
+ },
+ {
+  "id": 1056,
+  "file": "ui/vehicle_ui.inc",
+  "line": 115,
+  "it": "Indietro",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9101, DIALOG_STYLE_TABLIST, title, body, \"Acquista\", \"Indietro\");",
+  "ka": ""
+ },
+ {
+  "id": 1057,
+  "file": "ui/vehicle_ui.inc",
+  "line": 164,
+  "it": "I miei veicoli",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9105, DIALOG_STYLE_MSGBOX, \"I miei veicoli\", \"{FFFFFF}Non possiedi veicoli.\\nAcquistane uno al concessionario di Los Santos.\", \"Ok\", \"\");",
+  "ka": ""
+ },
+ {
+  "id": 1058,
+  "file": "ui/vehicle_ui.inc",
+  "line": 164,
+  "it": "{FFFFFF}Non possiedi veicoli.\\nAcquistane uno al concessionario di Los Santos.",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9105, DIALOG_STYLE_MSGBOX, \"I miei veicoli\", \"{FFFFFF}Non possiedi veicoli.\\nAcquistane uno al concessionario di Los Santos.\", \"Ok\", \"\");",
+  "ka": ""
+ },
+ {
+  "id": 1059,
+  "file": "ui/vehicle_ui.inc",
+  "line": 168,
+  "it": "Slot\\tModello\\tTarga\\tCarburante\\tStato\\n",
+  "ctx": "strcat(body, \"Slot\\tModello\\tTarga\\tCarburante\\tStato\\n\", 1536);",
+  "ka": ""
+ },
+ {
+  "id": 1060,
+  "file": "ui/vehicle_ui.inc",
+  "line": 176,
+  "it": "{66AAFF}Parcheggiato",
+  "ctx": "format(stxt, 24, \"{66AAFF}Parcheggiato\");",
+  "ka": ""
+ },
+ {
+  "id": 1061,
+  "file": "ui/vehicle_ui.inc",
+  "line": 180,
+  "it": "{FF6666}Distrutto",
+  "ctx": "format(stxt, 24, \"{FF6666}Distrutto\");",
+  "ka": ""
+ },
+ {
+  "id": 1062,
+  "file": "ui/vehicle_ui.inc",
+  "line": 184,
+  "it": "{66DD66}In giro",
+  "ctx": "format(stxt, 24, \"{66DD66}In giro\");",
+  "ka": ""
+ },
+ {
+  "id": 1063,
+  "file": "ui/vehicle_ui.inc",
+  "line": 190,
+  "it": "I miei veicoli",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9102, DIALOG_STYLE_TABLIST_HEADERS, \"I miei veicoli\", body, \"Seleziona\", \"Chiudi\");",
+  "ka": ""
+ },
+ {
+  "id": 1064,
+  "file": "ui/vehicle_ui.inc",
+  "line": 190,
+  "it": "Seleziona",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9102, DIALOG_STYLE_TABLIST_HEADERS, \"I miei veicoli\", body, \"Seleziona\", \"Chiudi\");",
+  "ka": ""
+ },
+ {
+  "id": 1065,
+  "file": "ui/vehicle_ui.inc",
+  "line": 190,
+  "it": "Chiudi",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9102, DIALOG_STYLE_TABLIST_HEADERS, \"I miei veicoli\", body, \"Seleziona\", \"Chiudi\");",
+  "ka": ""
+ },
+ {
+  "id": 1066,
+  "file": "ui/vehicle_ui.inc",
+  "line": 199,
+  "it": "Trova veicolo\\nVendi veicolo",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9103, DIALOG_STYLE_LIST, title, \"Trova veicolo\\nVendi veicolo\", \"Scegli\", \"Indietro\");",
+  "ka": ""
+ },
+ {
+  "id": 1067,
+  "file": "ui/vehicle_ui.inc",
+  "line": 199,
+  "it": "Scegli",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9103, DIALOG_STYLE_LIST, title, \"Trova veicolo\\nVendi veicolo\", \"Scegli\", \"Indietro\");",
+  "ka": ""
+ },
+ {
+  "id": 1068,
+  "file": "ui/vehicle_ui.inc",
+  "line": 199,
+  "it": "Indietro",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9103, DIALOG_STYLE_LIST, title, \"Trova veicolo\\nVendi veicolo\", \"Scegli\", \"Indietro\");",
+  "ka": ""
+ },
+ {
+  "id": 1069,
+  "file": "ui/vehicle_ui.inc",
+  "line": 210,
+  "it": "{FFFFFF}Vendere {FFD24D}%s{FFFFFF} (targa %s)?\\n\\nRiceverai circa {66DD66}$%s{FFFFFF} (%d%% del listino) in banca.\\nL'operazione non e' reversibile.",
+  "ctx": "format(body, 256, \"{FFFFFF}Vendere {FFD24D}%s{FFFFFF} (targa %s)?\\n\\nRiceverai circa {66DD66}$%s{FFFFFF} (%d%% del listino) in banca.\\nL'operazione non e' reversibile.\", name, g_UiVehLPlate[playerid][",
+  "ka": ""
+ },
+ {
+  "id": 1070,
+  "file": "ui/vehicle_ui.inc",
+  "line": 214,
+  "it": "{FFFFFF}Vendere {FFD24D}%s{FFFFFF} (targa %s)?\\n\\nRiceverai il %d%% del prezzo di listino in banca.\\nL'operazione non e' reversibile.",
+  "ctx": "format(body, 256, \"{FFFFFF}Vendere {FFD24D}%s{FFFFFF} (targa %s)?\\n\\nRiceverai il %d%% del prezzo di listino in banca.\\nL'operazione non e' reversibile.\", name, g_UiVehLPlate[playerid][i], 60);",
+  "ka": ""
+ },
+ {
+  "id": 1071,
+  "file": "ui/vehicle_ui.inc",
+  "line": 216,
+  "it": "Conferma vendita",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9104, DIALOG_STYLE_MSGBOX, \"Conferma vendita\", body, \"Vendi\", \"Annulla\");",
+  "ka": ""
+ },
+ {
+  "id": 1072,
+  "file": "ui/vehicle_ui.inc",
+  "line": 216,
+  "it": "Vendi",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9104, DIALOG_STYLE_MSGBOX, \"Conferma vendita\", body, \"Vendi\", \"Annulla\");",
+  "ka": ""
+ },
+ {
+  "id": 1073,
+  "file": "ui/vehicle_ui.inc",
+  "line": 216,
+  "it": "Annulla",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9104, DIALOG_STYLE_MSGBOX, \"Conferma vendita\", body, \"Vendi\", \"Annulla\");",
+  "ka": ""
+ },
+ {
+  "id": 1074,
+  "file": "ui/vehicle_ui.inc",
+  "line": 240,
+  "it": "Questo modello richiede un livello superiore.",
+  "ctx": "SendClientMessage(playerid, -10066177, \"Questo modello richiede un livello superiore.\");",
+  "ka": ""
+ },
+ {
+  "id": 1075,
+  "file": "ui/vehicle_ui.inc",
+  "line": 263,
+  "it": "Fondi insufficienti con questo metodo di pagamento.",
+  "ctx": "SendClientMessage(playerid, -10066177, \"Fondi insufficienti con questo metodo di pagamento.\");",
+  "ka": ""
+ },
+ {
+  "id": 1076,
+  "file": "ui/vehicle_ui.inc",
+  "line": 372,
+  "it": "0 km/h",
+  "ctx": "g_UiVHud[playerid][1] = UI_VHudText(playerid, (632.0 - 5.0), (398.0 + 2.0), \"0 km/h\", 0.3, 1.2, -1, t_TEXT_DRAW_ALIGN:3);",
+  "ka": ""
+ },
+ {
+  "id": 1077,
+  "file": "ui/vehicle_ui.inc",
+  "line": 373,
+  "it": "Benzina 0.0/0 L",
+  "ctx": "g_UiVHud[playerid][2] = UI_VHudText(playerid, (5.0 + left), (398.0 + 22.0), \"Benzina 0.0/0 L\", 0.22, 1.0, -1, t_TEXT_DRAW_ALIGN:1);",
+  "ka": ""
+ },
+ {
+  "id": 1078,
+  "file": "ui/vehicle_ui.inc",
+  "line": 376,
+  "it": "MOTORE SPENTO",
+  "ctx": "g_UiVHud[playerid][5] = UI_VHudText(playerid, (5.0 + left), (398.0 + 43.0), \"MOTORE SPENTO\", 0.2, 0.9, -10066177, t_TEXT_DRAW_ALIGN:1);",
+  "ka": ""
+ },
+ {
+  "id": 1079,
+  "file": "ui/vehicle_ui.inc",
+  "line": 448,
+  "it": "%d km/h",
+  "ctx": "format(str, 48, \"%d km/h\", speedKmh);",
+  "ka": ""
+ },
+ {
+  "id": 1080,
+  "file": "ui/vehicle_ui.inc",
+  "line": 450,
+  "it": "Benzina %.1f/%.0f L",
+  "ctx": "format(str, 48, \"Benzina %.1f/%.0f L\", fuel, fuelMax);",
+  "ka": ""
+ },
+ {
+  "id": 1081,
+  "file": "ui/vehicle_ui.inc",
+  "line": 458,
+  "it": "MOTORE ACCESO",
+  "ctx": "Lang_PlayerTextDrawSetString(playerid, g_UiVHud[playerid][5], engineOn ? \"MOTORE ACCESO\" : \"MOTORE SPENTO\");",
+  "ka": ""
+ },
+ {
+  "id": 1082,
+  "file": "ui/vehicle_ui.inc",
+  "line": 458,
+  "it": "MOTORE SPENTO",
+  "ctx": "Lang_PlayerTextDrawSetString(playerid, g_UiVHud[playerid][5], engineOn ? \"MOTORE ACCESO\" : \"MOTORE SPENTO\");",
+  "ka": ""
+ },
+ {
+  "id": 1662,
+  "file": "vehicle/vehicle.inc",
+  "line": 10,
+  "it": "Faggio",
+  "ctx": "\"Faggio\",",
+  "ka": ""
+ },
+ {
+  "id": 1663,
+  "file": "vehicle/vehicle.inc",
+  "line": 11,
+  "it": "Previon",
+  "ctx": "\"Previon\",",
+  "ka": ""
+ },
+ {
+  "id": 1664,
+  "file": "vehicle/vehicle.inc",
+  "line": 12,
+  "it": "Manana",
+  "ctx": "\"Manana\",",
+  "ka": ""
+ },
+ {
+  "id": 1665,
+  "file": "vehicle/vehicle.inc",
+  "line": 13,
+  "it": "Virgo",
+  "ctx": "\"Virgo\",",
+  "ka": ""
+ },
+ {
+  "id": 1666,
+  "file": "vehicle/vehicle.inc",
+  "line": 14,
+  "it": "Glendale",
+  "ctx": "\"Glendale\",",
+  "ka": ""
+ },
+ {
+  "id": 1667,
+  "file": "vehicle/vehicle.inc",
+  "line": 15,
+  "it": "Primo",
+  "ctx": "\"Primo\",",
+  "ka": ""
+ },
+ {
+  "id": 1668,
+  "file": "vehicle/vehicle.inc",
+  "line": 16,
+  "it": "Willard",
+  "ctx": "\"Willard\",",
+  "ka": ""
+ },
+ {
+  "id": 1669,
+  "file": "vehicle/vehicle.inc",
+  "line": 17,
+  "it": "Sadler",
+  "ctx": "\"Sadler\",",
+  "ka": ""
+ },
+ {
+  "id": 1670,
+  "file": "vehicle/vehicle.inc",
+  "line": 18,
+  "it": "PCJ-600",
+  "ctx": "\"PCJ-600\",",
+  "ka": ""
+ },
+ {
+  "id": 1671,
+  "file": "vehicle/vehicle.inc",
+  "line": 19,
+  "it": "Bobcat",
+  "ctx": "\"Bobcat\",",
+  "ka": ""
+ },
+ {
+  "id": 1672,
+  "file": "vehicle/vehicle.inc",
+  "line": 20,
+  "it": "Tampa",
+  "ctx": "\"Tampa\",",
+  "ka": ""
+ },
+ {
+  "id": 1673,
+  "file": "vehicle/vehicle.inc",
+  "line": 21,
+  "it": "Mesa",
+  "ctx": "\"Mesa\",",
+  "ka": ""
+ },
+ {
+  "id": 1674,
+  "file": "vehicle/vehicle.inc",
+  "line": 22,
+  "it": "Sentinel",
+  "ctx": "\"Sentinel\"",
+  "ka": ""
+ },
+ {
+  "id": 1675,
+  "file": "vehicle/vehicle.inc",
+  "line": 61,
+  "it": "Veicolo",
+  "ctx": "strmid(out, \"Veicolo\", 0, 7, size);",
+  "ka": ""
+ },
+ {
+  "id": 1676,
+  "file": "vehicle/vehicle.inc",
+  "line": 171,
+  "it": "Attendi un attimo prima di usare un altro comando veicolo.",
+  "ctx": "Util_Send(playerid, -10270721, \"Attendi un attimo prima di usare un altro comando veicolo.\");",
+  "ka": ""
+ },
+ {
+  "id": 1677,
+  "file": "vehicle/vehicle.inc",
+  "line": 480,
+  "it": "Serbatoio vuoto: il motore si e' spento. Cerca un distributore (/refuel).",
+  "ctx": "Util_Send(driver, -10270721, \"Serbatoio vuoto: il motore si e' spento. Cerca un distributore (/refuel).\");",
+  "ka": ""
+ },
+ {
+  "id": 1678,
+  "file": "vehicle/vehicle.inc",
+  "line": 484,
+  "it": "Un tuo veicolo ha finito il carburante e si e' spento.",
+  "ctx": "Util_Send(p, -10270721, \"Un tuo veicolo ha finito il carburante e si e' spento.\");",
+  "ka": ""
+ },
+ {
+  "id": 1679,
+  "file": "vehicle/vehicle.inc",
+  "line": 490,
+  "it": "Carburante in riserva: raggiungi un distributore.",
+  "ctx": "Util_Send(p, -10270721, \"Carburante in riserva: raggiungi un distributore.\");",
+  "ka": ""
+ },
+ {
+  "id": 1680,
+  "file": "vehicle/vehicle.inc",
+  "line": 557,
+  "it": "Impossibile caricare i tuoi veicoli (errore database). Gli acquisti sono sospesi fino al prossimo accesso.",
+  "ctx": "Util_Send(playerid, -10270721, \"Impossibile caricare i tuoi veicoli (errore database). Gli acquisti sono sospesi fino al prossimo accesso.\");",
+  "ka": ""
+ },
+ {
+  "id": 1681,
+  "file": "vehicle/vehicle.inc",
+  "line": 601,
+  "it": "[VEICOLI] Tetto di %d veicoli personali raggiunto: i veicoli di %s [%d] non sono stati creati.",
+  "ctx": "format(msg, 256, \"[VEICOLI] Tetto di %d veicoli personali raggiunto: i veicoli di %s [%d] non sono stati creati.\", 300, name, playerid);",
+  "ka": ""
+ },
+ {
+  "id": 1682,
+  "file": "vehicle/vehicle.inc",
+  "line": 604,
+  "it": "Il server ha raggiunto il limite di veicoli personali: i tuoi veicoli non sono disponibili al momento.",
+  "ctx": "Util_Send(playerid, -10270721, \"Il server ha raggiunto il limite di veicoli personali: i tuoi veicoli non sono disponibili al momento.\");",
+  "ka": ""
+ },
+ {
+  "id": 1683,
+  "file": "vehicle/vehicle.inc",
+  "line": 619,
+  "it": "Hai %d veicolo/i (%d in strada). Usa /v list per i dettagli.",
+  "ctx": "SendClientMessage(playerid, -1, \"Hai %d veicolo/i (%d in strada). Usa /v list per i dettagli.\", count, spawned);",
+  "ka": ""
+ },
+ {
+  "id": 1684,
+  "file": "vehicle/vehicle.inc",
+  "line": 635,
+  "it": "Devi essere al concessionario di Los Santos.",
+  "ctx": "Util_Send(playerid, -10270721, \"Devi essere al concessionario di Los Santos.\");",
+  "ka": ""
+ },
+ {
+  "id": 1685,
+  "file": "vehicle/vehicle.inc",
+  "line": 640,
+  "it": "Scendi dal veicolo per usare il concessionario.",
+  "ctx": "Util_Send(playerid, -10270721, \"Scendi dal veicolo per usare il concessionario.\");",
+  "ka": ""
+ },
+ {
+  "id": 1686,
+  "file": "vehicle/vehicle.inc",
+  "line": 645,
+  "it": "I tuoi veicoli non sono ancora stati caricati: riprova tra poco.",
+  "ctx": "Util_Send(playerid, -10270721, \"I tuoi veicoli non sono ancora stati caricati: riprova tra poco.\");",
+  "ka": ""
+ },
+ {
+  "id": 1687,
+  "file": "vehicle/vehicle.inc",
+  "line": 650,
+  "it": "Hai un'operazione veicolo in corso: attendi.",
+  "ctx": "Util_Send(playerid, -10270721, \"Hai un'operazione veicolo in corso: attendi.\");",
+  "ka": ""
+ },
+ {
+  "id": 1688,
+  "file": "vehicle/vehicle.inc",
+  "line": 665,
+  "it": "Devi essere al concessionario di Los Santos.",
+  "ctx": "Util_Send(playerid, -10270721, \"Devi essere al concessionario di Los Santos.\");",
+  "ka": ""
+ },
+ {
+  "id": 1689,
+  "file": "vehicle/vehicle.inc",
+  "line": 670,
+  "it": "Hai un'operazione veicolo in corso: attendi.",
+  "ctx": "Util_Send(playerid, -10270721, \"Hai un'operazione veicolo in corso: attendi.\");",
+  "ka": ""
+ },
+ {
+  "id": 1690,
+  "file": "vehicle/vehicle.inc",
+  "line": 675,
+  "it": "I tuoi veicoli non sono disponibili (caricamento non riuscito o in corso).",
+  "ctx": "Util_Send(playerid, -10270721, \"I tuoi veicoli non sono disponibili (caricamento non riuscito o in corso).\");",
+  "ka": ""
+ },
+ {
+  "id": 1691,
+  "file": "vehicle/vehicle.inc",
+  "line": 680,
+  "it": "Richiesta di acquisto non valida.",
+  "ctx": "Util_Send(playerid, -10270721, \"Richiesta di acquisto non valida.\");",
+  "ka": ""
+ },
+ {
+  "id": 1692,
+  "file": "vehicle/vehicle.inc",
+  "line": 685,
+  "it": "Questo modello richiede il livello %d.",
+  "ctx": "SendClientMessage(playerid, -10270721, \"Questo modello richiede il livello %d.\", g_VehCatLevel[catalogIndex]);",
+  "ka": ""
+ },
+ {
+  "id": 1693,
+  "file": "vehicle/vehicle.inc",
+  "line": 690,
+  "it": "Hai raggiunto il limite di veicoli per il tuo livello (%d).",
+  "ctx": "SendClientMessage(playerid, -10270721, \"Hai raggiunto il limite di veicoli per il tuo livello (%d).\", Veh_MaxForLevel(gPlayer[playerid][pLevel]));",
+  "ka": ""
+ },
+ {
+  "id": 1694,
+  "file": "vehicle/vehicle.inc",
+  "line": 695,
+  "it": "Il concessionario non puo' consegnare altri veicoli in questo momento.",
+  "ctx": "Util_Send(playerid, -10270721, \"Il concessionario non puo' consegnare altri veicoli in questo momento.\");",
+  "ka": ""
+ },
+ {
+  "id": 1695,
+  "file": "vehicle/vehicle.inc",
+  "line": 701,
+  "it": "Fondi insufficienti con questo metodo di pagamento.",
+  "ctx": "Util_Send(playerid, -10270721, \"Fondi insufficienti con questo metodo di pagamento.\");",
+  "ka": ""
+ },
+ {
+  "id": 1696,
+  "file": "vehicle/vehicle.inc",
+  "line": 708,
+  "it": "Pratica di acquisto in corso...",
+  "ctx": "Util_Send(playerid, -1, \"Pratica di acquisto in corso...\");",
+  "ka": ""
+ },
+ {
+  "id": 1697,
+  "file": "vehicle/vehicle.inc",
+  "line": 740,
+  "it": "Acquisto non riuscito (errore del concessionario). Nessun addebito.",
+  "ctx": "Util_Send(playerid, -10270721, \"Acquisto non riuscito (errore del concessionario). Nessun addebito.\");",
+  "ka": ""
+ },
+ {
+  "id": 1698,
+  "file": "vehicle/vehicle.inc",
+  "line": 749,
+  "it": "Acquisto annullato: requisiti o fondi non piu' validi. Nessun addebito.",
+  "ctx": "Util_Send(playerid, -10270721, \"Acquisto annullato: requisiti o fondi non piu' validi. Nessun addebito.\");",
+  "ka": ""
+ },
+ {
+  "id": 1699,
+  "file": "vehicle/vehicle.inc",
+  "line": 779,
+  "it": "Consegna non riuscita (limite veicoli del server). Nessun addebito.",
+  "ctx": "Util_Send(playerid, -10270721, \"Consegna non riuscita (limite veicoli del server). Nessun addebito.\");",
+  "ka": ""
+ },
+ {
+  "id": 1700,
+  "file": "vehicle/vehicle.inc",
+  "line": 787,
+  "it": "Pagamento non riuscito. Acquisto annullato.",
+  "ctx": "Util_Send(playerid, -10270721, \"Pagamento non riuscito. Acquisto annullato.\");",
+  "ka": ""
+ },
+ {
+  "id": 1701,
+  "file": "vehicle/vehicle.inc",
+  "line": 794,
+  "it": "Hai acquistato una %s (targa %s) per $%d (%s). Ti aspetta all'uscita del concessionario.",
+  "ctx": "SendClientMessage(playerid, 0x66DD66FF, \"Hai acquistato una %s (targa %s) per $%d (%s). Ti aspetta all'uscita del concessionario.\", mname, plate, price, bank ? \"banca\" : \"contanti\");",
+  "ka": ""
+ },
+ {
+  "id": 1702,
+  "file": "vehicle/vehicle.inc",
+  "line": 795,
+  "it": "ACQUISTO %s: %s targa %s $%d (%s) dbId %d",
+  "ctx": "format(msg, 256, \"ACQUISTO %s: %s targa %s $%d (%s) dbId %d\", pname, mname, plate, price, bank ? \"banca\" : \"contanti\", vehDbId);",
+  "ka": ""
+ },
+ {
+  "id": 1703,
+  "file": "vehicle/vehicle.inc",
+  "line": 804,
+  "it": "Slot veicolo non valido.",
+  "ctx": "Util_Send(playerid, -10270721, \"Slot veicolo non valido.\");",
+  "ka": ""
+ },
+ {
+  "id": 1704,
+  "file": "vehicle/vehicle.inc",
+  "line": 809,
+  "it": "Hai un'operazione veicolo in corso: attendi.",
+  "ctx": "Util_Send(playerid, -10270721, \"Hai un'operazione veicolo in corso: attendi.\");",
+  "ka": ""
+ },
+ {
+  "id": 1705,
+  "file": "vehicle/vehicle.inc",
+  "line": 814,
+  "it": "Puoi vendere solo presso il concessionario di Los Santos.",
+  "ctx": "Util_Send(playerid, -10270721, \"Puoi vendere solo presso il concessionario di Los Santos.\");",
+  "ka": ""
+ },
+ {
+  "id": 1706,
+  "file": "vehicle/vehicle.inc",
+  "line": 824,
+  "it": "Il veicolo deve essere al concessionario con te (o devi essere al volante).",
+  "ctx": "Util_Send(playerid, -10270721, \"Il veicolo deve essere al concessionario con te (o devi essere al volante).\");",
+  "ka": ""
+ },
+ {
+  "id": 1707,
+  "file": "vehicle/vehicle.inc",
+  "line": 831,
+  "it": "Il tuo conto bancario non puo' ricevere l'importo: vendita rifiutata.",
+  "ctx": "Util_Send(playerid, -10270721, \"Il tuo conto bancario non puo' ricevere l'importo: vendita rifiutata.\");",
+  "ka": ""
+ },
+ {
+  "id": 1708,
+  "file": "vehicle/vehicle.inc",
+  "line": 838,
+  "it": "Vendita %s (targa %s): ricevi $%d in banca.",
+  "ctx": "SendClientMessage(playerid, -2994689, \"Vendita %s (targa %s): ricevi $%d in banca.\", mname, g_VSlot[playerid][slot][vsPlate], refund);",
+  "ka": ""
+ },
+ {
+  "id": 1709,
+  "file": "vehicle/vehicle.inc",
+  "line": 839,
+  "it": "Per confermare: /v sell %d conferma",
+  "ctx": "SendClientMessage(playerid, 0x99CCFFFF, \"Per confermare: /v sell %d conferma\", slot + 1);",
+  "ka": ""
+ },
+ {
+  "id": 1710,
+  "file": "vehicle/vehicle.inc",
+  "line": 848,
+  "it": "Vendita in corso...",
+  "ctx": "Util_Send(playerid, -1, \"Vendita in corso...\");",
+  "ka": ""
+ },
+ {
+  "id": 1711,
+  "file": "vehicle/vehicle.inc",
+  "line": 884,
+  "it": "Vendita non riuscita (errore database). Nessun accredito.",
+  "ctx": "Util_Send(playerid, -10270721, \"Vendita non riuscita (errore database). Nessun accredito.\");",
+  "ka": ""
+ },
+ {
+  "id": 1712,
+  "file": "vehicle/vehicle.inc",
+  "line": 889,
+  "it": "Vendita non eseguita: il veicolo non risulta piu' di tua proprieta'. Nessun accredito.",
+  "ctx": "Util_Send(playerid, -10270721, \"Vendita non eseguita: il veicolo non risulta piu' di tua proprieta'. Nessun accredito.\");",
+  "ka": ""
+ },
+ {
+  "id": 1713,
+  "file": "vehicle/vehicle.inc",
+  "line": 903,
+  "it": "Hai venduto la %s (targa %s): $%d accreditati in banca.",
+  "ctx": "SendClientMessage(playerid, 0x66DD66FF, \"Hai venduto la %s (targa %s): $%d accreditati in banca.\", mname, plate, paid);",
+  "ka": ""
+ },
+ {
+  "id": 1714,
+  "file": "vehicle/vehicle.inc",
+  "line": 906,
+  "it": "Il conto ha raggiunto il limite: parte dell'importo non e' stata accreditata.",
+  "ctx": "Util_Send(playerid, -10270721, \"Il conto ha raggiunto il limite: parte dell'importo non e' stata accreditata.\");",
+  "ka": ""
+ },
+ {
+  "id": 1715,
+  "file": "vehicle/vehicle.inc",
+  "line": 909,
+  "it": "VENDITA %s: %s targa %s dbId %d accredito $%d",
+  "ctx": "format(msg, 256, \"VENDITA %s: %s targa %s dbId %d accredito $%d\", pname, mname, plate, dbId, paid);",
+  "ka": ""
+ },
+ {
+  "id": 1716,
+  "file": "vehicle/vehicle.inc",
+  "line": 1002,
+  "it": "Nessun tuo veicolo entro %.0f metri.",
+  "ctx": "SendClientMessage(playerid, -10270721, \"Nessun tuo veicolo entro %.0f metri.\", 5.0);",
+  "ka": ""
+ },
+ {
+  "id": 1717,
+  "file": "vehicle/vehicle.inc",
+  "line": 1007,
+  "it": "Veicolo non disponibile: operazione in corso.",
+  "ctx": "Util_Send(playerid, -10270721, \"Veicolo non disponibile: operazione in corso.\");",
+  "ka": ""
+ },
+ {
+  "id": 1718,
+  "file": "vehicle/vehicle.inc",
+  "line": 1013,
+  "it": "blocca le porte del proprio veicolo.",
+  "ctx": "Veh_Emote(playerid, lock ? \"blocca le porte del proprio veicolo.\" : \"sblocca le porte del proprio veicolo.\");",
+  "ka": ""
+ },
+ {
+  "id": 1719,
+  "file": "vehicle/vehicle.inc",
+  "line": 1013,
+  "it": "sblocca le porte del proprio veicolo.",
+  "ctx": "Veh_Emote(playerid, lock ? \"blocca le porte del proprio veicolo.\" : \"sblocca le porte del proprio veicolo.\");",
+  "ka": ""
+ },
+ {
+  "id": 1720,
+  "file": "vehicle/vehicle.inc",
+  "line": 1044,
+  "it": "spegne il motore.",
+  "ctx": "Veh_Emote(playerid, e == 1 ? \"spegne il motore.\" : \"avvia il motore.\");",
+  "ka": ""
+ },
+ {
+  "id": 1721,
+  "file": "vehicle/vehicle.inc",
+  "line": 1044,
+  "it": "avvia il motore.",
+  "ctx": "Veh_Emote(playerid, e == 1 ? \"spegne il motore.\" : \"avvia il motore.\");",
+  "ka": ""
+ },
+ {
+  "id": 1722,
+  "file": "vehicle/vehicle.inc",
+  "line": 1057,
+  "it": "Veicolo non disponibile: operazione in corso.",
+  "ctx": "Util_Send(playerid, -10270721, \"Veicolo non disponibile: operazione in corso.\");",
+  "ka": ""
+ },
+ {
+  "id": 1723,
+  "file": "vehicle/vehicle.inc",
+  "line": 1063,
+  "it": "spegne il motore.",
+  "ctx": "Veh_Emote(playerid, \"spegne il motore.\");",
+  "ka": ""
+ },
+ {
+  "id": 1724,
+  "file": "vehicle/vehicle.inc",
+  "line": 1068,
+  "it": "Il veicolo e' distrutto.",
+  "ctx": "Util_Send(playerid, -10270721, \"Il veicolo e' distrutto.\");",
+  "ka": ""
+ },
+ {
+  "id": 1725,
+  "file": "vehicle/vehicle.inc",
+  "line": 1073,
+  "it": "Il serbatoio e' vuoto.",
+  "ctx": "Util_Send(playerid, -10270721, \"Il serbatoio e' vuoto.\");",
+  "ka": ""
+ },
+ {
+  "id": 1726,
+  "file": "vehicle/vehicle.inc",
+  "line": 1077,
+  "it": "avvia il motore.",
+  "ctx": "Veh_Emote(playerid, \"avvia il motore.\");",
+  "ka": ""
+ },
+ {
+  "id": 1727,
+  "file": "vehicle/vehicle.inc",
+  "line": 1086,
+  "it": "Devi essere al posto guida di un tuo veicolo.",
+  "ctx": "Util_Send(playerid, -10270721, \"Devi essere al posto guida di un tuo veicolo.\");",
+  "ka": ""
+ },
+ {
+  "id": 1728,
+  "file": "vehicle/vehicle.inc",
+  "line": 1092,
+  "it": "Fari spenti.",
+  "ctx": "Util_Send(playerid, -1, l == 1 ? \"Fari spenti.\" : \"Fari accesi.\");",
+  "ka": ""
+ },
+ {
+  "id": 1729,
+  "file": "vehicle/vehicle.inc",
+  "line": 1092,
+  "it": "Fari accesi.",
+  "ctx": "Util_Send(playerid, -1, l == 1 ? \"Fari spenti.\" : \"Fari accesi.\");",
+  "ka": ""
+ },
+ {
+  "id": 1730,
+  "file": "vehicle/vehicle.inc",
+  "line": 1101,
+  "it": "Devi essere al volante di un tuo veicolo.",
+  "ctx": "Util_Send(playerid, -10270721, \"Devi essere al volante di un tuo veicolo.\");",
+  "ka": ""
+ },
+ {
+  "id": 1731,
+  "file": "vehicle/vehicle.inc",
+  "line": 1107,
+  "it": "Veicolo non disponibile.",
+  "ctx": "Util_Send(playerid, -10270721, \"Veicolo non disponibile.\");",
+  "ka": ""
+ },
+ {
+  "id": 1732,
+  "file": "vehicle/vehicle.inc",
+  "line": 1112,
+  "it": "Devi essere fermo per parcheggiare.",
+  "ctx": "Util_Send(playerid, -10270721, \"Devi essere fermo per parcheggiare.\");",
+  "ka": ""
+ },
+ {
+  "id": 1733,
+  "file": "vehicle/vehicle.inc",
+  "line": 1124,
+  "it": "Posizione di parcheggio salvata.",
+  "ctx": "Util_Send(playerid, 0x66DD66FF, \"Posizione di parcheggio salvata.\");",
+  "ka": ""
+ },
+ {
+  "id": 1734,
+  "file": "vehicle/vehicle.inc",
+  "line": 1132,
+  "it": "Slot veicolo non valido.",
+  "ctx": "Util_Send(playerid, -10270721, \"Slot veicolo non valido.\");",
+  "ka": ""
+ },
+ {
+  "id": 1735,
+  "file": "vehicle/vehicle.inc",
+  "line": 1138,
+  "it": "Il veicolo e' distrutto: usa /v recover.",
+  "ctx": "Util_Send(playerid, -10270721, g_VSlot[playerid][slot][vsDestroyed] ? \"Il veicolo e' distrutto: usa /v recover.\" : \"Il veicolo non e' in strada al momento.\");",
+  "ka": ""
+ },
+ {
+  "id": 1736,
+  "file": "vehicle/vehicle.inc",
+  "line": 1138,
+  "it": "Il veicolo non e' in strada al momento.",
+  "ctx": "Util_Send(playerid, -10270721, g_VSlot[playerid][slot][vsDestroyed] ? \"Il veicolo e' distrutto: usa /v recover.\" : \"Il veicolo non e' in strada al momento.\");",
+  "ka": ""
+ },
+ {
+  "id": 1737,
+  "file": "vehicle/vehicle.inc",
+  "line": 1150,
+  "it": "Veicolo %d segnato sulla mappa per %d secondi (distanza: %.0f m).",
+  "ctx": "SendClientMessage(playerid, -1, \"Veicolo %d segnato sulla mappa per %d secondi (distanza: %.0f m).\", slot + 1, 60, GetVehicleDistanceFromPoint(vid, px, py, pz));",
+  "ka": ""
+ },
+ {
+  "id": 1738,
+  "file": "vehicle/vehicle.inc",
+  "line": 1158,
+  "it": "I tuoi veicoli non sono disponibili (caricamento non riuscito o in corso).",
+  "ctx": "Util_Send(playerid, -10270721, \"I tuoi veicoli non sono disponibili (caricamento non riuscito o in corso).\");",
+  "ka": ""
+ },
+ {
+  "id": 1739,
+  "file": "vehicle/vehicle.inc",
+  "line": 1191,
+  "it": "Slot veicolo non valido.",
+  "ctx": "Util_Send(playerid, -10270721, \"Slot veicolo non valido.\");",
+  "ka": ""
+ }
+]

@@ -1,0 +1,2082 @@
+[
+ {
+  "id": 381,
+  "file": "taxi/taxi.inc",
+  "line": 1300,
+  "it": "Taxi riconsegnato: cauzione restituita $%d (in base alle condizioni del mezzo).",
+  "ctx": "SendClientMessage(playerid, -1, \"Taxi riconsegnato: cauzione restituita $%d (in base alle condizioni del mezzo).\", refund);",
+  "ka": ""
+ },
+ {
+  "id": 382,
+  "file": "taxi/taxi.inc",
+  "line": 1304,
+  "it": "Taxi riconsegnato oltre la tolleranza: cauzione trattenuta.",
+  "ctx": "Util_Send(playerid, -10270721, \"Taxi riconsegnato oltre la tolleranza: cauzione trattenuta.\");",
+  "ka": ""
+ },
+ {
+  "id": 383,
+  "file": "taxi/taxi.inc",
+  "line": 1308,
+  "it": "Il noleggio del taxi risultava gia' chiuso.",
+  "ctx": "Util_Send(playerid, -1, \"Il noleggio del taxi risultava gia' chiuso.\");",
+  "ka": ""
+ },
+ {
+  "id": 384,
+  "file": "taxi/taxi.inc",
+  "line": 1312,
+  "it": "Chiusura del taxi non confermata: verra' sistemata al prossimo accesso.",
+  "ctx": "Util_Send(playerid, -10270721, \"Chiusura del taxi non confermata: verra' sistemata al prossimo accesso.\");",
+  "ka": ""
+ },
+ {
+  "id": 385,
+  "file": "taxi/taxi.inc",
+  "line": 1349,
+  "it": "Cliente a bordo: portalo a %s (checkpoint).",
+  "ctx": "SendClientMessage(driverid, 0x66DD66FF, \"Cliente a bordo: portalo a %s (checkpoint).\", name);",
+  "ka": ""
+ },
+ {
+  "id": 386,
+  "file": "taxi/taxi.inc",
+  "line": 1368,
+  "it": "Il tuo taxi non e' piu' disponibile: fuori servizio.",
+  "ctx": "Util_Send(driverid, -10270721, \"Il tuo taxi non e' piu' disponibile: fuori servizio.\");",
+  "ka": ""
+ },
+ {
+  "id": 387,
+  "file": "taxi/taxi.inc",
+  "line": 1373,
+  "it": "Taxi non disponibile: corsa annullata.",
+  "ctx": "Taxi_CancelRide(driverid, \"Taxi non disponibile: corsa annullata.\", \"Il taxi non e' piu' disponibile: corsa annullata.\");",
+  "ka": ""
+ },
+ {
+  "id": 388,
+  "file": "taxi/taxi.inc",
+  "line": 1373,
+  "it": "Il taxi non e' piu' disponibile: corsa annullata.",
+  "ctx": "Taxi_CancelRide(driverid, \"Taxi non disponibile: corsa annullata.\", \"Il taxi non e' piu' disponibile: corsa annullata.\");",
+  "ka": ""
+ },
+ {
+  "id": 389,
+  "file": "taxi/taxi.inc",
+  "line": 1388,
+  "it": "Torna sul taxi entro %d secondi o la corsa sara' annullata.",
+  "ctx": "SendClientMessage(driverid, -10270721, \"Torna sul taxi entro %d secondi o la corsa sara' annullata.\", 45);",
+  "ka": ""
+ },
+ {
+  "id": 390,
+  "file": "taxi/taxi.inc",
+  "line": 1392,
+  "it": "Hai lasciato il taxi: corsa annullata.",
+  "ctx": "Taxi_CancelRide(driverid, \"Hai lasciato il taxi: corsa annullata.\", \"Il tassista ha lasciato il taxi: corsa annullata.\");",
+  "ka": ""
+ },
+ {
+  "id": 391,
+  "file": "taxi/taxi.inc",
+  "line": 1392,
+  "it": "Il tassista ha lasciato il taxi: corsa annullata.",
+  "ctx": "Taxi_CancelRide(driverid, \"Hai lasciato il taxi: corsa annullata.\", \"Il tassista ha lasciato il taxi: corsa annullata.\");",
+  "ka": ""
+ },
+ {
+  "id": 392,
+  "file": "taxi/taxi.inc",
+  "line": 1424,
+  "it": "Il cliente non e' piu' disponibile: corsa annullata.",
+  "ctx": "Taxi_CancelRide(driverid, \"Il cliente non e' piu' disponibile: corsa annullata.\", \"\");",
+  "ka": ""
+ },
+ {
+  "id": 393,
+  "file": "taxi/taxi.inc",
+  "line": 1429,
+  "it": "Il cliente non e' salito in tempo: corsa annullata.",
+  "ctx": "Taxi_CancelRide(driverid, \"Il cliente non e' salito in tempo: corsa annullata.\", \"Non sei salito sul taxi in tempo: corsa annullata.\");",
+  "ka": ""
+ },
+ {
+  "id": 394,
+  "file": "taxi/taxi.inc",
+  "line": 1429,
+  "it": "Non sei salito sul taxi in tempo: corsa annullata.",
+  "ctx": "Taxi_CancelRide(driverid, \"Il cliente non e' salito in tempo: corsa annullata.\", \"Non sei salito sul taxi in tempo: corsa annullata.\");",
+  "ka": ""
+ },
+ {
+  "id": 395,
+  "file": "taxi/taxi.inc",
+  "line": 1457,
+  "it": "Nessun taxi ha risposto alla tua chiamata.",
+  "ctx": "Util_Send(i, -1, \"Nessun taxi ha risposto alla tua chiamata.\");",
+  "ka": ""
+ },
+ {
+  "id": 396,
+  "file": "taxi/taxi.inc",
+  "line": 1479,
+  "it": "Taxi_OnDistrictEvent",
+  "ctx": "LD_Listen(\"Taxi_OnDistrictEvent\", 20);",
+  "ka": ""
+ },
+ {
+  "id": 397,
+  "file": "taxi/taxi.inc",
+  "line": 1481,
+  "it": "Deposito taxi\\n/taxi on  ·  /taxi off",
+  "ctx": "Lang_Create3DTextLabel(\"Deposito taxi\\n/taxi on  ·  /taxi off\", -2994689, 1771.0, -1895.0, (13.6 + 0.8), 20.0, 0, false);",
+  "ka": ""
+ },
+ {
+  "id": 398,
+  "file": "taxi/taxi.inc",
+  "line": 1517,
+  "it": "Il cliente si e' disconnesso: corsa annullata.",
+  "ctx": "Taxi_CancelRide(d, \"Il cliente si e' disconnesso: corsa annullata.\", \"\");",
+  "ka": ""
+ },
+ {
+  "id": 399,
+  "file": "taxi/taxi.inc",
+  "line": 1538,
+  "it": "Turno di taxi interrotto.",
+  "ctx": "Util_Send(playerid, -10270721, \"Turno di taxi interrotto.\");",
+  "ka": ""
+ },
+ {
+  "id": 400,
+  "file": "taxi/taxi.inc",
+  "line": 1544,
+  "it": "Il cliente non e' in condizione di proseguire: corsa annullata.",
+  "ctx": "Taxi_CancelRide(d, \"Il cliente non e' in condizione di proseguire: corsa annullata.\", \"\");",
+  "ka": ""
+ },
+ {
+  "id": 401,
+  "file": "taxi/taxi.inc",
+  "line": 1574,
+  "it": "Il cliente e' a bordo: /tassametro start.",
+  "ctx": "Util_Send(d, 0x66DD66FF, \"Il cliente e' a bordo: /tassametro start.\");",
+  "ka": ""
+ },
+ {
+  "id": 402,
+  "file": "taxi/taxi.inc",
+  "line": 1596,
+  "it": "Il taxi e' stato distrutto: fine del turno.",
+  "ctx": "Util_Send(d, -10270721, \"Il taxi e' stato distrutto: fine del turno.\");",
+  "ka": ""
+ },
+ {
+  "id": 403,
+  "file": "ui/bank_ui.inc",
+  "line": 251,
+  "it": "%s - Los Santos Bank",
+  "ctx": "format(title, 64, \"%s - Los Santos Bank\", g_UiBkCounter[playerid] ? \"Sportello\" : \"ATM\");",
+  "ka": ""
+ },
+ {
+  "id": 404,
+  "file": "ui/bank_ui.inc",
+  "line": 251,
+  "it": "Sportello",
+  "ctx": "format(title, 64, \"%s - Los Santos Bank\", g_UiBkCounter[playerid] ? \"Sportello\" : \"ATM\");",
+  "ka": ""
+ },
+ {
+  "id": 405,
+  "file": "ui/bank_ui.inc",
+  "line": 251,
+  "it": "ATM",
+  "ctx": "format(title, 64, \"%s - Los Santos Bank\", g_UiBkCounter[playerid] ? \"Sportello\" : \"ATM\");",
+  "ka": ""
+ },
+ {
+  "id": 406,
+  "file": "ui/bank_ui.inc",
+  "line": 252,
+  "it": "Operazione\\tDettaglio\\nSaldo\\t{66DD66}$%s\\nDeposita\\tContanti: $%s\\nPrelievo\\tBanca: $%s\\nBonifico\\t{FFD24D}commissione inclusa\\nEstratto conto\\tultime %d righe",
+  "ctx": "format(body, 320, \"Operazione\\tDettaglio\\nSaldo\\t{66DD66}$%s\\nDeposita\\tContanti: $%s\\nPrelievo\\tBanca: $%s\\nBonifico\\t{FFD24D}commissione inclusa\\nEstratto conto\\tultime %d righe\", a, b, c, 15);",
+  "ka": ""
+ },
+ {
+  "id": 407,
+  "file": "ui/bank_ui.inc",
+  "line": 255,
+  "it": "Scegli",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9500, DIALOG_STYLE_TABLIST_HEADERS, title, body, \"Scegli\", \"Chiudi\");",
+  "ka": ""
+ },
+ {
+  "id": 408,
+  "file": "ui/bank_ui.inc",
+  "line": 255,
+  "it": "Chiudi",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9500, DIALOG_STYLE_TABLIST_HEADERS, title, body, \"Scegli\", \"Chiudi\");",
+  "ka": ""
+ },
+ {
+  "id": 409,
+  "file": "ui/bank_ui.inc",
+  "line": 293,
+  "it": "{FFFFFF}Contanti: {66DD66}$%s\\n{FFFFFF}Conto bancario: {66DD66}$%s\\n{FFFFFF}Totale: {66DD66}$%s\\n\\n{FFFFFF}Prelevabile oggi: %s\\n{FFFFFF}Inviabile oggi: %s",
+  "ctx": "format(body, 512, \"{FFFFFF}Contanti: {66DD66}$%s\\n{FFFFFF}Conto bancario: {66DD66}$%s\\n{FFFFFF}Totale: {66DD66}$%s\\n\\n{FFFFFF}Prelevabile oggi: %s\\n{FFFFFF}Inviabile oggi: %s\", cash, bank, total, wd, ",
+  "ka": ""
+ },
+ {
+  "id": 410,
+  "file": "ui/bank_ui.inc",
+  "line": 294,
+  "it": "Saldo",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9505, DIALOG_STYLE_MSGBOX, \"Saldo\", body, \"Menu\", \"Chiudi\");",
+  "ka": ""
+ },
+ {
+  "id": 411,
+  "file": "ui/bank_ui.inc",
+  "line": 294,
+  "it": "Menu",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9505, DIALOG_STYLE_MSGBOX, \"Saldo\", body, \"Menu\", \"Chiudi\");",
+  "ka": ""
+ },
+ {
+  "id": 412,
+  "file": "ui/bank_ui.inc",
+  "line": 294,
+  "it": "Chiudi",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9505, DIALOG_STYLE_MSGBOX, \"Saldo\", body, \"Menu\", \"Chiudi\");",
+  "ka": ""
+ },
+ {
+  "id": 413,
+  "file": "ui/bank_ui.inc",
+  "line": 358,
+  "it": "Non hai contanti da depositare (o limite per operazione raggiunto).",
+  "ctx": "strcopy(msg, \"Non hai contanti da depositare (o limite per operazione raggiunto).\", 160);",
+  "ka": ""
+ },
+ {
+  "id": 414,
+  "file": "ui/bank_ui.inc",
+  "line": 362,
+  "it": "Non puoi prelevare ora: saldo o limite giornaliero esauriti.",
+  "ctx": "strcopy(msg, \"Non puoi prelevare ora: saldo o limite giornaliero esauriti.\", 160);",
+  "ka": ""
+ },
+ {
+  "id": 415,
+  "file": "ui/bank_ui.inc",
+  "line": 366,
+  "it": "Non puoi inviare bonifici ora: saldo insufficiente o limite giornaliero raggiunto.",
+  "ctx": "strcopy(msg, \"Non puoi inviare bonifici ora: saldo insufficiente o limite giornaliero raggiunto.\", 160);",
+  "ka": ""
+ },
+ {
+  "id": 416,
+  "file": "ui/bank_ui.inc",
+  "line": 370,
+  "it": "Operazione non disponibile",
+  "ctx": "UI_BankToast(playerid, \"Operazione non disponibile\", false);",
+  "ka": ""
+ },
+ {
+  "id": 417,
+  "file": "ui/bank_ui.inc",
+  "line": 384,
+  "it": "Deposita contanti",
+  "ctx": "strcopy(title, \"Deposita contanti\", 64);",
+  "ka": ""
+ },
+ {
+  "id": 418,
+  "file": "ui/bank_ui.inc",
+  "line": 385,
+  "it": "Contanti disponibili: {66DD66}$%s",
+  "ctx": "format(sub, 96, \"Contanti disponibili: {66DD66}$%s\", sCash);",
+  "ka": ""
+ },
+ {
+  "id": 419,
+  "file": "ui/bank_ui.inc",
+  "line": 389,
+  "it": "Preleva dal conto",
+  "ctx": "strcopy(title, \"Preleva dal conto\", 64);",
+  "ka": ""
+ },
+ {
+  "id": 420,
+  "file": "ui/bank_ui.inc",
+  "line": 390,
+  "it": "Saldo bancario: {66DD66}$%s",
+  "ctx": "format(sub, 96, \"Saldo bancario: {66DD66}$%s\", sBank);",
+  "ka": ""
+ },
+ {
+  "id": 421,
+  "file": "ui/bank_ui.inc",
+  "line": 394,
+  "it": "Bonifico: importo",
+  "ctx": "strcopy(title, \"Bonifico: importo\", 64);",
+  "ka": ""
+ },
+ {
+  "id": 422,
+  "file": "ui/bank_ui.inc",
+  "line": 395,
+  "it": "Saldo bancario: {66DD66}$%s{FFFFFF} (la commissione si aggiunge)",
+  "ctx": "format(sub, 96, \"Saldo bancario: {66DD66}$%s{FFFFFF} (la commissione si aggiunge)\", sBank);",
+  "ka": ""
+ },
+ {
+  "id": 423,
+  "file": "ui/bank_ui.inc",
+  "line": 398,
+  "it": "%s{FFFFFF}%s\\nImporto ammesso: da {FFD24D}$%s{FFFFFF} a {FFD24D}$%s{FFFFFF}.\\nInserisci un numero intero:",
+  "ctx": "format(body, 512, \"%s{FFFFFF}%s\\nImporto ammesso: da {FFD24D}$%s{FFFFFF} a {FFD24D}$%s{FFFFFF}.\\nInserisci un numero intero:\", err, sub, sLo, sHi);",
+  "ka": ""
+ },
+ {
+  "id": 424,
+  "file": "ui/bank_ui.inc",
+  "line": 399,
+  "it": "Avanti",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9501, DIALOG_STYLE_INPUT, title, body, \"Avanti\", \"Indietro\");",
+  "ka": ""
+ },
+ {
+  "id": 425,
+  "file": "ui/bank_ui.inc",
+  "line": 399,
+  "it": "Indietro",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9501, DIALOG_STYLE_INPUT, title, body, \"Avanti\", \"Indietro\");",
+  "ka": ""
+ },
+ {
+  "id": 426,
+  "file": "ui/bank_ui.inc",
+  "line": 406,
+  "it": "%s{FFFFFF}Inserisci l'{FFD24D}ID{FFFFFF} o parte del {FFD24D}nome{FFFFFF} del giocatore online che riceve il bonifico.\\nIl destinatario non deve confermare: il credito e' immediato.",
+  "ctx": "format(body, 320, \"%s{FFFFFF}Inserisci l'{FFD24D}ID{FFFFFF} o parte del {FFD24D}nome{FFFFFF} del giocatore online che riceve il bonifico.\\nIl destinatario non deve confermare: il credito e' immediato.",
+  "ka": ""
+ },
+ {
+  "id": 427,
+  "file": "ui/bank_ui.inc",
+  "line": 407,
+  "it": "Bonifico: destinatario",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9502, DIALOG_STYLE_INPUT, \"Bonifico: destinatario\", body, \"Avanti\", \"Indietro\");",
+  "ka": ""
+ },
+ {
+  "id": 428,
+  "file": "ui/bank_ui.inc",
+  "line": 407,
+  "it": "Avanti",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9502, DIALOG_STYLE_INPUT, \"Bonifico: destinatario\", body, \"Avanti\", \"Indietro\");",
+  "ka": ""
+ },
+ {
+  "id": 429,
+  "file": "ui/bank_ui.inc",
+  "line": 407,
+  "it": "Indietro",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9502, DIALOG_STYLE_INPUT, \"Bonifico: destinatario\", body, \"Avanti\", \"Indietro\");",
+  "ka": ""
+ },
+ {
+  "id": 430,
+  "file": "ui/bank_ui.inc",
+  "line": 435,
+  "it": "{FFFFFF}Destinatario: {FFD24D}%s (ID %d)\\n{FFFFFF}Importo: {66DD66}$%s\\n{FFFFFF}Commissione: {FF6666}$%s\\n{FFFFFF}Totale addebitato: {FF6666}$%s\\n{FFFFFF}Saldo dopo l'operazione: {66DD66}$%s\\n\\n{AAAAAA}La conferma scade tra %d secondi.",
+  "ctx": "format(body, 512, \"{FFFFFF}Destinatario: {FFD24D}%s (ID %d)\\n{FFFFFF}Importo: {66DD66}$%s\\n{FFFFFF}Commissione: {FF6666}$%s\\n{FFFFFF}Totale addebitato: {FF6666}$%s\\n{FFFFFF}Saldo dopo l'operazione: {6",
+  "ka": ""
+ },
+ {
+  "id": 431,
+  "file": "ui/bank_ui.inc",
+  "line": 436,
+  "it": "Conferma bonifico",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9503, DIALOG_STYLE_MSGBOX, \"Conferma bonifico\", body, \"Conferma\", \"Annulla\");",
+  "ka": ""
+ },
+ {
+  "id": 432,
+  "file": "ui/bank_ui.inc",
+  "line": 436,
+  "it": "Conferma",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9503, DIALOG_STYLE_MSGBOX, \"Conferma bonifico\", body, \"Conferma\", \"Annulla\");",
+  "ka": ""
+ },
+ {
+  "id": 433,
+  "file": "ui/bank_ui.inc",
+  "line": 436,
+  "it": "Annulla",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9503, DIALOG_STYLE_MSGBOX, \"Conferma bonifico\", body, \"Conferma\", \"Annulla\");",
+  "ka": ""
+ },
+ {
+  "id": 434,
+  "file": "ui/bank_ui.inc",
+  "line": 510,
+  "it": "Estratto conto - pag. %d",
+  "ctx": "format(title, 64, \"Estratto conto - pag. %d\", page + 1);",
+  "ka": ""
+ },
+ {
+  "id": 435,
+  "file": "ui/bank_ui.inc",
+  "line": 511,
+  "it": "{FFFFFF}Nessun movimento da mostrare.",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9504, DIALOG_STYLE_MSGBOX, title, \"{FFFFFF}Nessun movimento da mostrare.\", page > 0 ? \"Precedente\" : \"Menu\", \"Chiudi\");",
+  "ka": ""
+ },
+ {
+  "id": 436,
+  "file": "ui/bank_ui.inc",
+  "line": 511,
+  "it": "Precedente",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9504, DIALOG_STYLE_MSGBOX, title, \"{FFFFFF}Nessun movimento da mostrare.\", page > 0 ? \"Precedente\" : \"Menu\", \"Chiudi\");",
+  "ka": ""
+ },
+ {
+  "id": 437,
+  "file": "ui/bank_ui.inc",
+  "line": 511,
+  "it": "Menu",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9504, DIALOG_STYLE_MSGBOX, title, \"{FFFFFF}Nessun movimento da mostrare.\", page > 0 ? \"Precedente\" : \"Menu\", \"Chiudi\");",
+  "ka": ""
+ },
+ {
+  "id": 438,
+  "file": "ui/bank_ui.inc",
+  "line": 511,
+  "it": "Chiudi",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9504, DIALOG_STYLE_MSGBOX, title, \"{FFFFFF}Nessun movimento da mostrare.\", page > 0 ? \"Precedente\" : \"Menu\", \"Chiudi\");",
+  "ka": ""
+ },
+ {
+  "id": 439,
+  "file": "ui/bank_ui.inc",
+  "line": 518,
+  "it": "Data\\tOperazione\\tImporto\\tSaldo\\n",
+  "ctx": "strcopy(body, \"Data\\tOperazione\\tImporto\\tSaldo\\n\", 2048);",
+  "ka": ""
+ },
+ {
+  "id": 440,
+  "file": "ui/bank_ui.inc",
+  "line": 538,
+  "it": "{FFD24D}>> Pagina successiva\\t\\t\\t\\n",
+  "ctx": "strcat(body, \"{FFD24D}>> Pagina successiva\\t\\t\\t\\n\", 2048);",
+  "ka": ""
+ },
+ {
+  "id": 441,
+  "file": "ui/bank_ui.inc",
+  "line": 543,
+  "it": "{FFD24D}<< Pagina precedente\\t\\t\\t\\n",
+  "ctx": "strcat(body, \"{FFD24D}<< Pagina precedente\\t\\t\\t\\n\", 2048);",
+  "ka": ""
+ },
+ {
+  "id": 442,
+  "file": "ui/bank_ui.inc",
+  "line": 546,
+  "it": "Estratto conto - pag. %d/%d",
+  "ctx": "format(title, 64, \"Estratto conto - pag. %d/%d\", page + 1, 5);",
+  "ka": ""
+ },
+ {
+  "id": 443,
+  "file": "ui/bank_ui.inc",
+  "line": 547,
+  "it": "Vai",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9504, DIALOG_STYLE_TABLIST_HEADERS, title, body, \"Vai\", \"Menu\");",
+  "ka": ""
+ },
+ {
+  "id": 444,
+  "file": "ui/bank_ui.inc",
+  "line": 547,
+  "it": "Menu",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9504, DIALOG_STYLE_TABLIST_HEADERS, title, body, \"Vai\", \"Menu\");",
+  "ka": ""
+ },
+ {
+  "id": 445,
+  "file": "ui/bank_ui.inc",
+  "line": 644,
+  "it": "La conferma del bonifico e' scaduta: nessun addebito.",
+  "ctx": "SendClientMessage(playerid, -2994689, \"La conferma del bonifico e' scaduta: nessun addebito.\");",
+  "ka": ""
+ },
+ {
+  "id": 446,
+  "file": "ui/bank_ui.inc",
+  "line": 645,
+  "it": "Bonifico scaduto",
+  "ctx": "UI_BankToast(playerid, \"Bonifico scaduto\", false);",
+  "ka": ""
+ },
+ {
+  "id": 447,
+  "file": "ui/bank_ui.inc",
+  "line": 692,
+  "it": "Caricamento estratto conto...",
+  "ctx": "UI_BankToast(playerid, \"Caricamento estratto conto...\", true);",
+  "ka": ""
+ },
+ {
+  "id": 448,
+  "file": "ui/bank_ui.inc",
+  "line": 720,
+  "it": "{FF6666}Piu' giocatori corrispondono: usa l'ID o un nome piu' preciso.\\n\\n",
+  "ctx": "UI_BankTargetShow(playerid, \"{FF6666}Piu' giocatori corrispondono: usa l'ID o un nome piu' preciso.\\n\\n\");",
+  "ka": ""
+ },
+ {
+  "id": 449,
+  "file": "ui/bank_ui.inc",
+  "line": 725,
+  "it": "{FF6666}Giocatore non trovato tra gli online.\\n\\n",
+  "ctx": "UI_BankTargetShow(playerid, \"{FF6666}Giocatore non trovato tra gli online.\\n\\n\");",
+  "ka": ""
+ },
+ {
+  "id": 450,
+  "file": "ui/bank_ui.inc",
+  "line": 730,
+  "it": "{FF6666}Non puoi inviare un bonifico a te stesso.\\n\\n",
+  "ctx": "UI_BankTargetShow(playerid, \"{FF6666}Non puoi inviare un bonifico a te stesso.\\n\\n\");",
+  "ka": ""
+ },
+ {
+  "id": 451,
+  "file": "ui/bank_ui.inc",
+  "line": 760,
+  "it": "{FF6666}Importo non valido: solo cifre, intero positivo.\\n\\n",
+  "ctx": "UI_BankAmountShow(playerid, op, \"{FF6666}Importo non valido: solo cifre, intero positivo.\\n\\n\");",
+  "ka": ""
+ },
+ {
+  "id": 452,
+  "file": "ui/bank_ui.inc",
+  "line": 768,
+  "it": "{FF6666}Importo fuori limite: da $%s a $%s.\\n\\n",
+  "ctx": "format(err, 160, \"{FF6666}Importo fuori limite: da $%s a $%s.\\n\\n\", sLo, sHi);",
+  "ka": ""
+ },
+ {
+  "id": 453,
+  "file": "ui/bank_ui.inc",
+  "line": 788,
+  "it": "{FF6666}Il destinatario non e' piu' disponibile: sceglilo di nuovo.\\n\\n",
+  "ctx": "UI_BankTargetShow(playerid, \"{FF6666}Il destinatario non e' piu' disponibile: sceglilo di nuovo.\\n\\n\");",
+  "ka": ""
+ },
+ {
+  "id": 454,
+  "file": "ui/bank_ui.inc",
+  "line": 810,
+  "it": "Bonifico annullato",
+  "ctx": "UI_BankToast(playerid, \"Bonifico annullato\", false);",
+  "ka": ""
+ },
+ {
+  "id": 455,
+  "file": "ui/bank_ui.inc",
+  "line": 827,
+  "it": "Il destinatario non e' piu' online: bonifico annullato.",
+  "ctx": "SendClientMessage(playerid, -10066177, \"Il destinatario non e' piu' online: bonifico annullato.\");",
+  "ka": ""
+ },
+ {
+  "id": 456,
+  "file": "ui/bank_ui.inc",
+  "line": 828,
+  "it": "Destinatario non disponibile",
+  "ctx": "UI_BankToast(playerid, \"Destinatario non disponibile\", false);",
+  "ka": ""
+ },
+ {
+  "id": 457,
+  "file": "ui/bank_ui.inc",
+  "line": 856,
+  "it": "Caricamento estratto conto...",
+  "ctx": "UI_BankToast(playerid, \"Caricamento estratto conto...\", true);",
+  "ka": ""
+ },
+ {
+  "id": 458,
+  "file": "ui/bank_ui.inc",
+  "line": 861,
+  "it": "Caricamento estratto conto...",
+  "ctx": "UI_BankToast(playerid, \"Caricamento estratto conto...\", true);",
+  "ka": ""
+ },
+ {
+  "id": 459,
+  "file": "ui/cef_ui.inc",
+  "line": 222,
+  "it": "Caricamento dell'interfaccia...",
+  "ctx": "SendClientMessage(playerid, 0xAAAAAAFF, \"Caricamento dell'interfaccia...\");",
+  "ka": ""
+ },
+ {
+  "id": 460,
+  "file": "ui/faction_ui.inc",
+  "line": 3,
+  "it": "LSPD",
+  "ctx": "\"LSPD\",",
+  "ka": ""
+ },
+ {
+  "id": 461,
+  "file": "ui/faction_ui.inc",
+  "line": 4,
+  "it": "EMS",
+  "ctx": "\"EMS\"",
+  "ka": ""
+ },
+ {
+  "id": 462,
+  "file": "ui/faction_ui.inc",
+  "line": 7,
+  "it": "Nessuna fazione",
+  "ctx": "\"Nessuna fazione\",",
+  "ka": ""
+ },
+ {
+  "id": 463,
+  "file": "ui/faction_ui.inc",
+  "line": 8,
+  "it": "Los Santos Police Department",
+  "ctx": "\"Los Santos Police Department\",",
+  "ka": ""
+ },
+ {
+  "id": 464,
+  "file": "ui/faction_ui.inc",
+  "line": 9,
+  "it": "Los Santos Emergency Medical Services",
+  "ctx": "\"Los Santos Emergency Medical Services\"",
+  "ka": ""
+ },
+ {
+  "id": 465,
+  "file": "ui/faction_ui.inc",
+  "line": 13,
+  "it": "Cadetto",
+  "ctx": "{\"-\", \"Cadetto\", \"Agente\", \"Agente Scelto\", \"Sergente\", \"Tenente\", \"Capo del Dipartimento\"},",
+  "ka": ""
+ },
+ {
+  "id": 466,
+  "file": "ui/faction_ui.inc",
+  "line": 13,
+  "it": "Agente",
+  "ctx": "{\"-\", \"Cadetto\", \"Agente\", \"Agente Scelto\", \"Sergente\", \"Tenente\", \"Capo del Dipartimento\"},",
+  "ka": ""
+ },
+ {
+  "id": 467,
+  "file": "ui/faction_ui.inc",
+  "line": 13,
+  "it": "Agente Scelto",
+  "ctx": "{\"-\", \"Cadetto\", \"Agente\", \"Agente Scelto\", \"Sergente\", \"Tenente\", \"Capo del Dipartimento\"},",
+  "ka": ""
+ },
+ {
+  "id": 468,
+  "file": "ui/faction_ui.inc",
+  "line": 13,
+  "it": "Sergente",
+  "ctx": "{\"-\", \"Cadetto\", \"Agente\", \"Agente Scelto\", \"Sergente\", \"Tenente\", \"Capo del Dipartimento\"},",
+  "ka": ""
+ },
+ {
+  "id": 469,
+  "file": "ui/faction_ui.inc",
+  "line": 13,
+  "it": "Tenente",
+  "ctx": "{\"-\", \"Cadetto\", \"Agente\", \"Agente Scelto\", \"Sergente\", \"Tenente\", \"Capo del Dipartimento\"},",
+  "ka": ""
+ },
+ {
+  "id": 470,
+  "file": "ui/faction_ui.inc",
+  "line": 13,
+  "it": "Capo del Dipartimento",
+  "ctx": "{\"-\", \"Cadetto\", \"Agente\", \"Agente Scelto\", \"Sergente\", \"Tenente\", \"Capo del Dipartimento\"},",
+  "ka": ""
+ },
+ {
+  "id": 471,
+  "file": "ui/faction_ui.inc",
+  "line": 14,
+  "it": "Volontario",
+  "ctx": "{\"-\", \"Volontario\", \"Soccorritore\", \"Paramedico\", \"Caposquadra\", \"Medico\", \"Direttore Sanitario\"}",
+  "ka": ""
+ },
+ {
+  "id": 472,
+  "file": "ui/faction_ui.inc",
+  "line": 14,
+  "it": "Soccorritore",
+  "ctx": "{\"-\", \"Volontario\", \"Soccorritore\", \"Paramedico\", \"Caposquadra\", \"Medico\", \"Direttore Sanitario\"}",
+  "ka": ""
+ },
+ {
+  "id": 473,
+  "file": "ui/faction_ui.inc",
+  "line": 14,
+  "it": "Paramedico",
+  "ctx": "{\"-\", \"Volontario\", \"Soccorritore\", \"Paramedico\", \"Caposquadra\", \"Medico\", \"Direttore Sanitario\"}",
+  "ka": ""
+ },
+ {
+  "id": 474,
+  "file": "ui/faction_ui.inc",
+  "line": 14,
+  "it": "Caposquadra",
+  "ctx": "{\"-\", \"Volontario\", \"Soccorritore\", \"Paramedico\", \"Caposquadra\", \"Medico\", \"Direttore Sanitario\"}",
+  "ka": ""
+ },
+ {
+  "id": 475,
+  "file": "ui/faction_ui.inc",
+  "line": 14,
+  "it": "Medico",
+  "ctx": "{\"-\", \"Volontario\", \"Soccorritore\", \"Paramedico\", \"Caposquadra\", \"Medico\", \"Direttore Sanitario\"}",
+  "ka": ""
+ },
+ {
+  "id": 476,
+  "file": "ui/faction_ui.inc",
+  "line": 14,
+  "it": "Direttore Sanitario",
+  "ctx": "{\"-\", \"Volontario\", \"Soccorritore\", \"Paramedico\", \"Caposquadra\", \"Medico\", \"Direttore Sanitario\"}",
+  "ka": ""
+ },
+ {
+  "id": 477,
+  "file": "ui/faction_ui.inc",
+  "line": 79,
+  "it": "{66DD66}In servizio",
+  "ctx": "format(out, size, \"{66DD66}In servizio\");",
+  "ka": ""
+ },
+ {
+  "id": 478,
+  "file": "ui/faction_ui.inc",
+  "line": 83,
+  "it": "{FFFFFF}Online",
+  "ctx": "format(out, size, \"{FFFFFF}Online\");",
+  "ka": ""
+ },
+ {
+  "id": 479,
+  "file": "ui/faction_ui.inc",
+  "line": 87,
+  "it": "{888888}Offline",
+  "ctx": "format(out, size, \"{888888}Offline\");",
+  "ka": ""
+ },
+ {
+  "id": 480,
+  "file": "ui/faction_ui.inc",
+  "line": 98,
+  "it": "Promuovi",
+  "ctx": "format(out, size, \"Promuovi\");",
+  "ka": ""
+ },
+ {
+  "id": 481,
+  "file": "ui/faction_ui.inc",
+  "line": 102,
+  "it": "Degrada",
+  "ctx": "format(out, size, \"Degrada\");",
+  "ka": ""
+ },
+ {
+  "id": 482,
+  "file": "ui/faction_ui.inc",
+  "line": 106,
+  "it": "Licenzia",
+  "ctx": "format(out, size, \"Licenzia\");",
+  "ka": ""
+ },
+ {
+  "id": 483,
+  "file": "ui/faction_ui.inc",
+  "line": 110,
+  "it": "Membri",
+  "ctx": "format(out, size, \"Membri\");",
+  "ka": ""
+ },
+ {
+  "id": 484,
+  "file": "ui/faction_ui.inc",
+  "line": 123,
+  "it": "Non appartieni a nessuna fazione.",
+  "ctx": "SendClientMessage(playerid, -10066177, \"Non appartieni a nessuna fazione.\");",
+  "ka": ""
+ },
+ {
+  "id": 485,
+  "file": "ui/faction_ui.inc",
+  "line": 137,
+  "it": "Informazioni fazione\\n",
+  "ctx": "strcat(body, \"Informazioni fazione\\n\", 1536);",
+  "ka": ""
+ },
+ {
+  "id": 486,
+  "file": "ui/faction_ui.inc",
+  "line": 139,
+  "it": "Elenco membri (%d online / %d totali)\\n",
+  "ctx": "format(line, 192, \"Elenco membri (%d online / %d totali)\\n\", membersOnline, membersTotal);",
+  "ka": ""
+ },
+ {
+  "id": 487,
+  "file": "ui/faction_ui.inc",
+  "line": 144,
+  "it": "{FFD24D}Invita giocatore\\n{FFD24D}Promuovi membro\\n{FFD24D}Degrada membro\\n{FFD24D}Licenzia membro\\n",
+  "ctx": "strcat(body, \"{FFD24D}Invita giocatore\\n{FFD24D}Promuovi membro\\n{FFD24D}Degrada membro\\n{FFD24D}Licenzia membro\\n\", 1536);",
+  "ka": ""
+ },
+ {
+  "id": 488,
+  "file": "ui/faction_ui.inc",
+  "line": 151,
+  "it": " (in servizio)",
+  "ctx": "format(title, 64, \"%s - %s%s\", g_UiFcShort[faction], rankName, onDuty ? \" (in servizio)\" : \"\");",
+  "ka": ""
+ },
+ {
+  "id": 489,
+  "file": "ui/faction_ui.inc",
+  "line": 152,
+  "it": "Seleziona",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9320, DIALOG_STYLE_LIST, title, body, \"Seleziona\", \"Chiudi\");",
+  "ka": ""
+ },
+ {
+  "id": 490,
+  "file": "ui/faction_ui.inc",
+  "line": 152,
+  "it": "Chiudi",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9320, DIALOG_STYLE_LIST, title, body, \"Seleziona\", \"Chiudi\");",
+  "ka": ""
+ },
+ {
+  "id": 491,
+  "file": "ui/faction_ui.inc",
+  "line": 168,
+  "it": "Grado: {FFFFFF}%s (%d/%d)\\nServizio: %s{FFFFFF}\\n",
+  "ctx": "format(line, 192, \"Grado: {FFFFFF}%s (%d/%d)\\nServizio: %s{FFFFFF}\\n\", rankName, rank, 6, g_UiFcDuty[playerid] ? \"{66DD66}In servizio\" : \"{FF6666}Fuori servizio\");",
+  "ka": ""
+ },
+ {
+  "id": 492,
+  "file": "ui/faction_ui.inc",
+  "line": 168,
+  "it": "{66DD66}In servizio",
+  "ctx": "format(line, 192, \"Grado: {FFFFFF}%s (%d/%d)\\nServizio: %s{FFFFFF}\\n\", rankName, rank, 6, g_UiFcDuty[playerid] ? \"{66DD66}In servizio\" : \"{FF6666}Fuori servizio\");",
+  "ka": ""
+ },
+ {
+  "id": 493,
+  "file": "ui/faction_ui.inc",
+  "line": 168,
+  "it": "{FF6666}Fuori servizio",
+  "ctx": "format(line, 192, \"Grado: {FFFFFF}%s (%d/%d)\\nServizio: %s{FFFFFF}\\n\", rankName, rank, 6, g_UiFcDuty[playerid] ? \"{66DD66}In servizio\" : \"{FF6666}Fuori servizio\");",
+  "ka": ""
+ },
+ {
+  "id": 494,
+  "file": "ui/faction_ui.inc",
+  "line": 170,
+  "it": "Stipendio: {66DD66}$%s{FFFFFF} ogni %d min di servizio effettivo (versato in banca)\\nMembri: %d online / %d totali\\n\\n",
+  "ctx": "format(line, 192, \"Stipendio: {66DD66}$%s{FFFFFF} ogni %d min di servizio effettivo (versato in banca)\\nMembri: %d online / %d totali\\n\\n\", pay, 15, g_UiFcOnline[playerid], g_UiFcTotal[playerid]);",
+  "ka": ""
+ },
+ {
+  "id": 495,
+  "file": "ui/faction_ui.inc",
+  "line": 172,
+  "it": "Comandi: /duty (vicino alla sede), /r (radio), /dep (interdipartimentale), /fazione lascia.",
+  "ctx": "strcat(body, \"Comandi: /duty (vicino alla sede), /r (radio), /dep (interdipartimentale), /fazione lascia.\", 1536);",
+  "ka": ""
+ },
+ {
+  "id": 496,
+  "file": "ui/faction_ui.inc",
+  "line": 175,
+  "it": "\\nComando: /invita, /promuovi, /degrada, /licenzia (solo su gradi inferiori al tuo; il grado %d si assegna solo da staff).",
+  "ctx": "format(line, 192, \"\\nComando: /invita, /promuovi, /degrada, /licenzia (solo su gradi inferiori al tuo; il grado %d si assegna solo da staff).\", 6);",
+  "ka": ""
+ },
+ {
+  "id": 497,
+  "file": "ui/faction_ui.inc",
+  "line": 178,
+  "it": "Informazioni fazione",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9321, DIALOG_STYLE_MSGBOX, \"Informazioni fazione\", body, \"Menu\", \"Chiudi\");",
+  "ka": ""
+ },
+ {
+  "id": 498,
+  "file": "ui/faction_ui.inc",
+  "line": 178,
+  "it": "Menu",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9321, DIALOG_STYLE_MSGBOX, \"Informazioni fazione\", body, \"Menu\", \"Chiudi\");",
+  "ka": ""
+ },
+ {
+  "id": 499,
+  "file": "ui/faction_ui.inc",
+  "line": 178,
+  "it": "Chiudi",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9321, DIALOG_STYLE_MSGBOX, \"Informazioni fazione\", body, \"Menu\", \"Chiudi\");",
+  "ka": ""
+ },
+ {
+  "id": 500,
+  "file": "ui/faction_ui.inc",
+  "line": 185,
+  "it": "{FFFFFF}Inserisci l'ID del giocatore da invitare in {FFD24D}%s{FFFFFF}.\\nDeve essere senza fazione, di livello %d o superiore e a meno di %.0f metri.\\nL'invito resta valido %d secondi.\\n\\n%s",
+  "ctx": "format(body, 384, \"{FFFFFF}Inserisci l'ID del giocatore da invitare in {FFD24D}%s{FFFFFF}.\\nDeve essere senza fazione, di livello %d o superiore e a meno di %.0f metri.\\nL'invito resta valido %d secon",
+  "ka": ""
+ },
+ {
+  "id": 501,
+  "file": "ui/faction_ui.inc",
+  "line": 186,
+  "it": "Invita giocatore",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9325, DIALOG_STYLE_INPUT, \"Invita giocatore\", body, \"Invita\", \"Annulla\");",
+  "ka": ""
+ },
+ {
+  "id": 502,
+  "file": "ui/faction_ui.inc",
+  "line": 186,
+  "it": "Invita",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9325, DIALOG_STYLE_INPUT, \"Invita giocatore\", body, \"Invita\", \"Annulla\");",
+  "ka": ""
+ },
+ {
+  "id": 503,
+  "file": "ui/faction_ui.inc",
+  "line": 186,
+  "it": "Annulla",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9325, DIALOG_STYLE_INPUT, \"Invita giocatore\", body, \"Invita\", \"Annulla\");",
+  "ka": ""
+ },
+ {
+  "id": 504,
+  "file": "ui/faction_ui.inc",
+  "line": 243,
+  "it": "Il bersaglio non ha un grado inferiore al tuo.",
+  "ctx": "format(reason, size, \"Il bersaglio non ha un grado inferiore al tuo.\");",
+  "ka": ""
+ },
+ {
+  "id": 505,
+  "file": "ui/faction_ui.inc",
+  "line": 248,
+  "it": "Il nuovo grado deve restare inferiore al tuo.",
+  "ctx": "format(reason, size, \"Il nuovo grado deve restare inferiore al tuo.\");",
+  "ka": ""
+ },
+ {
+  "id": 506,
+  "file": "ui/faction_ui.inc",
+  "line": 253,
+  "it": "Il membro e' gia' al grado minimo.",
+  "ctx": "format(reason, size, \"Il membro e' gia' al grado minimo.\");",
+  "ka": ""
+ },
+ {
+  "id": 507,
+  "file": "ui/faction_ui.inc",
+  "line": 284,
+  "it": "{FFFFFF}Nessun membro da mostrare.",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9323, DIALOG_STYLE_MSGBOX, title, \"{FFFFFF}Nessun membro da mostrare.\", \"Chiudi\", \"\");",
+  "ka": ""
+ },
+ {
+  "id": 508,
+  "file": "ui/faction_ui.inc",
+  "line": 284,
+  "it": "Chiudi",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9323, DIALOG_STYLE_MSGBOX, title, \"{FFFFFF}Nessun membro da mostrare.\", \"Chiudi\", \"\");",
+  "ka": ""
+ },
+ {
+  "id": 509,
+  "file": "ui/faction_ui.inc",
+  "line": 288,
+  "it": "Nome\\tGrado\\tStato\\n",
+  "ctx": "strcat(body, \"Nome\\tGrado\\tStato\\n\", 1536);",
+  "ka": ""
+ },
+ {
+  "id": 510,
+  "file": "ui/faction_ui.inc",
+  "line": 309,
+  "it": "{888888}%s\\t%s (%d)\\t{888888}Non selezionabile\\n",
+  "ctx": "format(line, 192, \"{888888}%s\\t%s (%d)\\t{888888}Non selezionabile\\n\", name, rankName, rank);",
+  "ka": ""
+ },
+ {
+  "id": 511,
+  "file": "ui/faction_ui.inc",
+  "line": 315,
+  "it": "{FFD24D}<< Pagina precedente\\t\\t\\n",
+  "ctx": "strcat(body, \"{FFD24D}<< Pagina precedente\\t\\t\\n\", 1536);",
+  "ka": ""
+ },
+ {
+  "id": 512,
+  "file": "ui/faction_ui.inc",
+  "line": 319,
+  "it": "{FFD24D}Pagina successiva >>\\t\\t\\n",
+  "ctx": "strcat(body, \"{FFD24D}Pagina successiva >>\\t\\t\\n\", 1536);",
+  "ka": ""
+ },
+ {
+  "id": 513,
+  "file": "ui/faction_ui.inc",
+  "line": 323,
+  "it": "Membri %s (pag. %d/%d)",
+  "ctx": "format(title, 64, \"Membri %s (pag. %d/%d)\", g_UiFcShort[faction], page + 1, pages);",
+  "ka": ""
+ },
+ {
+  "id": 514,
+  "file": "ui/faction_ui.inc",
+  "line": 327,
+  "it": "%s membro - %s (pag. %d/%d)",
+  "ctx": "format(title, 64, \"%s membro - %s (pag. %d/%d)\", verb, g_UiFcShort[faction], page + 1, pages);",
+  "ka": ""
+ },
+ {
+  "id": 515,
+  "file": "ui/faction_ui.inc",
+  "line": 329,
+  "it": "Dettagli",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9322, DIALOG_STYLE_TABLIST_HEADERS, title, body, mode == 2 ? \"Dettagli\" : \"Seleziona\", \"Chiudi\");",
+  "ka": ""
+ },
+ {
+  "id": 516,
+  "file": "ui/faction_ui.inc",
+  "line": 329,
+  "it": "Seleziona",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9322, DIALOG_STYLE_TABLIST_HEADERS, title, body, mode == 2 ? \"Dettagli\" : \"Seleziona\", \"Chiudi\");",
+  "ka": ""
+ },
+ {
+  "id": 517,
+  "file": "ui/faction_ui.inc",
+  "line": 329,
+  "it": "Chiudi",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9322, DIALOG_STYLE_TABLIST_HEADERS, title, body, mode == 2 ? \"Dettagli\" : \"Seleziona\", \"Chiudi\");",
+  "ka": ""
+ },
+ {
+  "id": 518,
+  "file": "ui/faction_ui.inc",
+  "line": 349,
+  "it": "Non hai il grado necessario per questa azione.",
+  "ctx": "SendClientMessage(playerid, -10066177, \"Non hai il grado necessario per questa azione.\");",
+  "ka": ""
+ },
+ {
+  "id": 519,
+  "file": "ui/faction_ui.inc",
+  "line": 369,
+  "it": "{FFD24D}%s{FFFFFF}\\n\\nFazione: %s\\nGrado: %s (%d/%d)\\nStato: %s{FFFFFF}\\nStipendio di grado: {66DD66}$%s{FFFFFF} ogni %d min di servizio",
+  "ctx": "format(body, 384, \"{FFD24D}%s{FFFFFF}\\n\\nFazione: %s\\nGrado: %s (%d/%d)\\nStato: %s{FFFFFF}\\nStipendio di grado: {66DD66}$%s{FFFFFF} ogni %d min di servizio\", name, g_UiFcFull[faction], rankName, rank,",
+  "ka": ""
+ },
+ {
+  "id": 520,
+  "file": "ui/faction_ui.inc",
+  "line": 370,
+  "it": "Dettaglio membro",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9323, DIALOG_STYLE_MSGBOX, \"Dettaglio membro\", body, \"Indietro\", \"\");",
+  "ka": ""
+ },
+ {
+  "id": 521,
+  "file": "ui/faction_ui.inc",
+  "line": 370,
+  "it": "Indietro",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9323, DIALOG_STYLE_MSGBOX, \"Dettaglio membro\", body, \"Indietro\", \"\");",
+  "ka": ""
+ },
+ {
+  "id": 522,
+  "file": "ui/faction_ui.inc",
+  "line": 387,
+  "it": "{FFFFFF}Promuovere {FFD24D}%s{FFFFFF} da {FFD24D}%s{FFFFFF} a {66DD66}%s{FFFFFF}?",
+  "ctx": "format(body, 512, \"{FFFFFF}Promuovere {FFD24D}%s{FFFFFF} da {FFD24D}%s{FFFFFF} a {66DD66}%s{FFFFFF}?\", name, oldName, newName);",
+  "ka": ""
+ },
+ {
+  "id": 523,
+  "file": "ui/faction_ui.inc",
+  "line": 392,
+  "it": "{FFFFFF}Degradare {FFD24D}%s{FFFFFF} da {FFD24D}%s{FFFFFF} a {FF6666}%s{FFFFFF}?",
+  "ctx": "format(body, 512, \"{FFFFFF}Degradare {FFD24D}%s{FFFFFF} da {FFD24D}%s{FFFFFF} a {FF6666}%s{FFFFFF}?\", name, oldName, newName);",
+  "ka": ""
+ },
+ {
+  "id": 524,
+  "file": "ui/faction_ui.inc",
+  "line": 396,
+  "it": "{FFFFFF}Licenziare {FFD24D}%s{FFFFFF} ({FFD24D}%s{FFFFFF}) da {FFD24D}%s{FFFFFF}?\\n\\n{FF6666}Perdera' fazione, grado e servizio. L'operazione non e' reversibile.",
+  "ctx": "format(body, 512, \"{FFFFFF}Licenziare {FFD24D}%s{FFFFFF} ({FFD24D}%s{FFFFFF}) da {FFD24D}%s{FFFFFF}?\\n\\n{FF6666}Perdera' fazione, grado e servizio. L'operazione non e' reversibile.\", name, oldName, g_",
+  "ka": ""
+ },
+ {
+  "id": 525,
+  "file": "ui/faction_ui.inc",
+  "line": 399,
+  "it": "Conferma",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9324, DIALOG_STYLE_MSGBOX, verb, body, \"Conferma\", \"Annulla\");",
+  "ka": ""
+ },
+ {
+  "id": 526,
+  "file": "ui/faction_ui.inc",
+  "line": 399,
+  "it": "Annulla",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9324, DIALOG_STYLE_MSGBOX, verb, body, \"Conferma\", \"Annulla\");",
+  "ka": ""
+ },
+ {
+  "id": 527,
+  "file": "ui/faction_ui.inc",
+  "line": 414,
+  "it": "{FFD24D}%s{FFFFFF} ti invita a entrare in {FFD24D}%s{FFFFFF}.\\n\\nEntrerai con il grado {FFD24D}%s{FFFFFF}.\\nL'invito scade tra {FF6666}%d{FFFFFF} secondi.",
+  "ctx": "format(body, 512, \"{FFD24D}%s{FFFFFF} ti invita a entrare in {FFD24D}%s{FFFFFF}.\\n\\nEntrerai con il grado {FFD24D}%s{FFFFFF}.\\nL'invito scade tra {FF6666}%d{FFFFFF} secondi.\", inviterName, g_UiFcFull[",
+  "ka": ""
+ },
+ {
+  "id": 528,
+  "file": "ui/faction_ui.inc",
+  "line": 415,
+  "it": "Invito in fazione",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9326, DIALOG_STYLE_MSGBOX, \"Invito in fazione\", body, \"Accetta\", \"Rifiuta\");",
+  "ka": ""
+ },
+ {
+  "id": 529,
+  "file": "ui/faction_ui.inc",
+  "line": 415,
+  "it": "Accetta",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9326, DIALOG_STYLE_MSGBOX, \"Invito in fazione\", body, \"Accetta\", \"Rifiuta\");",
+  "ka": ""
+ },
+ {
+  "id": 530,
+  "file": "ui/faction_ui.inc",
+  "line": 415,
+  "it": "Rifiuta",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9326, DIALOG_STYLE_MSGBOX, \"Invito in fazione\", body, \"Accetta\", \"Rifiuta\");",
+  "ka": ""
+ },
+ {
+  "id": 531,
+  "file": "ui/faction_ui.inc",
+  "line": 595,
+  "it": "{FF4444}ID non valido o giocatore non connesso.",
+  "ctx": "UI_FcInviteTargetShow(playerid, \"{FF4444}ID non valido o giocatore non connesso.\");",
+  "ka": ""
+ },
+ {
+  "id": 532,
+  "file": "ui/faction_ui.inc",
+  "line": 600,
+  "it": "{FF4444}Non puoi invitare te stesso.",
+  "ctx": "UI_FcInviteTargetShow(playerid, \"{FF4444}Non puoi invitare te stesso.\");",
+  "ka": ""
+ },
+ {
+  "id": 533,
+  "file": "ui/faction_ui.inc",
+  "line": 658,
+  "it": "IN SERVIZIO",
+  "ctx": "g_UiFHud[playerid][1] = UI_FhText(playerid, (5.0 + left), (356.0 + 2.0), \"IN SERVIZIO\", 0.2, 0.9, -1, t_TEXT_DRAW_ALIGN:1);",
+  "ka": ""
+ },
+ {
+  "id": 534,
+  "file": "ui/faction_ui.inc",
+  "line": 659,
+  "it": "Kit medico: 0",
+  "ctx": "g_UiFHud[playerid][2] = UI_FhText(playerid, (5.0 + left), (356.0 + 12.0), \"Kit medico: 0\", 0.2, 0.9, -1, t_TEXT_DRAW_ALIGN:1);",
+  "ka": ""
+ },
+ {
+  "id": 535,
+  "file": "ui/faction_ui.inc",
+  "line": 668,
+  "it": "IN SERVIZIO - %s",
+  "ctx": "format(str, 64, \"IN SERVIZIO - %s\", rankName);",
+  "ka": ""
+ },
+ {
+  "id": 536,
+  "file": "ui/faction_ui.inc",
+  "line": 674,
+  "it": "Kit medico: %d/%d",
+  "ctx": "format(str, 64, \"Kit medico: %d/%d\", kitCharges, 8);",
+  "ka": ""
+ },
+ {
+  "id": 537,
+  "file": "ui/faction_ui.inc",
+  "line": 745,
+  "it": "SEI FERITO",
+  "ctx": "g_UiIHud[playerid][1] = UI_FhText(playerid, (210.0 + 6.0), (60.0 + 2.0), \"SEI FERITO\", 0.3, 1.3, -12303105, t_TEXT_DRAW_ALIGN:1);",
+  "ka": ""
+ },
+ {
+  "id": 538,
+  "file": "ui/faction_ui.inc",
+  "line": 746,
+  "it": "Ricovero automatico tra 3:00",
+  "ctx": "g_UiIHud[playerid][2] = UI_FhText(playerid, (210.0 + 6.0), (60.0 + 21.0), \"Ricovero automatico tra 3:00\", 0.22, 1.0, -1, t_TEXT_DRAW_ALIGN:1);",
+  "ka": ""
+ },
+ {
+  "id": 539,
+  "file": "ui/faction_ui.inc",
+  "line": 749,
+  "it": "Attendi un medico EMS. Non puoi muoverti.",
+  "ctx": "g_UiIHud[playerid][5] = UI_FhText(playerid, (210.0 + 6.0), (60.0 + 43.0), \"Attendi un medico EMS. Non puoi muoverti.\", 0.18, 0.85, _:-0.005729198, t_TEXT_DRAW_ALIGN:1);",
+  "ka": ""
+ },
+ {
+  "id": 540,
+  "file": "ui/faction_ui.inc",
+  "line": 769,
+  "it": "Ricovero automatico tra %d:%02d",
+  "ctx": "format(str, 48, \"Ricovero automatico tra %d:%02d\", secondsLeft / 60, secondsLeft % 60);",
+  "ka": ""
+ },
+ {
+  "id": 541,
+  "file": "ui/faction_ui.inc",
+  "line": 824,
+  "it": "{FFFFFF}Nessun soccorso e' arrivato in tempo: sei stato ricoverato all'ospedale di All Saints e ti sei ripreso.\\n\\nSpese di ricovero addebitate: {FF6666}$%s{FFFFFF}.",
+  "ctx": "format(body, 384, \"{FFFFFF}Nessun soccorso e' arrivato in tempo: sei stato ricoverato all'ospedale di All Saints e ti sei ripreso.\\n\\nSpese di ricovero addebitate: {FF6666}$%s{FFFFFF}.\", money);",
+  "ka": ""
+ },
+ {
+  "id": 542,
+  "file": "ui/faction_ui.inc",
+  "line": 828,
+  "it": "{FFFFFF}Nessun soccorso e' arrivato in tempo: sei stato ricoverato all'ospedale di All Saints e ti sei ripreso.\\n\\nNessuna spesa addebitata (fondi insufficienti).",
+  "ctx": "format(body, 384, \"{FFFFFF}Nessun soccorso e' arrivato in tempo: sei stato ricoverato all'ospedale di All Saints e ti sei ripreso.\\n\\nNessuna spesa addebitata (fondi insufficienti).\");",
+  "ka": ""
+ },
+ {
+  "id": 543,
+  "file": "ui/faction_ui.inc",
+  "line": 830,
+  "it": "Ricovero in ospedale",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9327, DIALOG_STYLE_MSGBOX, \"Ricovero in ospedale\", body, \"OK\", \"\");",
+  "ka": ""
+ },
+ {
+  "id": 544,
+  "file": "ui/faction_ui.inc",
+  "line": 834,
+  "it": "{FFFFFF}Un medico EMS ti ha soccorso: sei di nuovo in piedi.\\nRiprendi il gioco con prudenza.",
+  "ctx": "format(body, 384, \"{FFFFFF}Un medico EMS ti ha soccorso: sei di nuovo in piedi.\\nRiprendi il gioco con prudenza.\");",
+  "ka": ""
+ },
+ {
+  "id": 545,
+  "file": "ui/faction_ui.inc",
+  "line": 835,
+  "it": "Soccorso",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9327, DIALOG_STYLE_MSGBOX, \"Soccorso\", body, \"OK\", \"\");",
+  "ka": ""
+ },
+ {
+  "id": 546,
+  "file": "ui/house_ui.inc",
+  "line": 2,
+  "it": "Monolocale",
+  "ctx": "\"Monolocale\",",
+  "ka": ""
+ },
+ {
+  "id": 547,
+  "file": "ui/house_ui.inc",
+  "line": 3,
+  "it": "Bilocale",
+  "ctx": "\"Bilocale\",",
+  "ka": ""
+ },
+ {
+  "id": 548,
+  "file": "ui/house_ui.inc",
+  "line": 4,
+  "it": "Casa media",
+  "ctx": "\"Casa media\",",
+  "ka": ""
+ },
+ {
+  "id": 549,
+  "file": "ui/house_ui.inc",
+  "line": 5,
+  "it": "Villa",
+  "ctx": "\"Villa\"",
+  "ka": ""
+ },
+ {
+  "id": 550,
+  "file": "ui/house_ui.inc",
+  "line": 11,
+  "it": "Denise",
+  "ctx": "\"Denise\",",
+  "ka": ""
+ },
+ {
+  "id": 551,
+  "file": "ui/house_ui.inc",
+  "line": 12,
+  "it": "Katie",
+  "ctx": "\"Katie\",",
+  "ka": ""
+ },
+ {
+  "id": 552,
+  "file": "ui/house_ui.inc",
+  "line": 13,
+  "it": "Casa di Ryder",
+  "ctx": "\"Casa di Ryder\",",
+  "ka": ""
+ },
+ {
+  "id": 553,
+  "file": "ui/house_ui.inc",
+  "line": 14,
+  "it": "Casa di Sweet",
+  "ctx": "\"Casa di Sweet\",",
+  "ka": ""
+ },
+ {
+  "id": 554,
+  "file": "ui/house_ui.inc",
+  "line": 15,
+  "it": "Casa media A",
+  "ctx": "\"Casa media A\",",
+  "ka": ""
+ },
+ {
+  "id": 555,
+  "file": "ui/house_ui.inc",
+  "line": 16,
+  "it": "Casa Johnson",
+  "ctx": "\"Casa Johnson\",",
+  "ka": ""
+ },
+ {
+  "id": 556,
+  "file": "ui/house_ui.inc",
+  "line": 17,
+  "it": "Casa media B",
+  "ctx": "\"Casa media B\",",
+  "ka": ""
+ },
+ {
+  "id": 557,
+  "file": "ui/house_ui.inc",
+  "line": 18,
+  "it": "Villa di Madd Dogg",
+  "ctx": "\"Villa di Madd Dogg\"",
+  "ka": ""
+ },
+ {
+  "id": 558,
+  "file": "ui/house_ui.inc",
+  "line": 83,
+  "it": "{FF6666}STACCATA",
+  "ctx": "format(out, size, \"{FF6666}STACCATA\");",
+  "ka": ""
+ },
+ {
+  "id": 559,
+  "file": "ui/house_ui.inc",
+  "line": 87,
+  "it": "{FFD24D}OFF",
+  "ctx": "format(out, size, \"{FFD24D}OFF\");",
+  "ka": ""
+ },
+ {
+  "id": 560,
+  "file": "ui/house_ui.inc",
+  "line": 94,
+  "it": "%s - Casa %d",
+  "ctx": "format(out, size, \"%s - Casa %d\", prefix, g_UiHsHouse[playerid]);",
+  "ka": ""
+ },
+ {
+  "id": 561,
+  "file": "ui/house_ui.inc",
+  "line": 190,
+  "it": "Casa %d - %s",
+  "ctx": "format(title, 64, \"Casa %d - %s\", g_UiHsHouse[playerid], g_UiHsIntName[g_UiHsInt[playerid]]);",
+  "ka": ""
+ },
+ {
+  "id": 562,
+  "file": "ui/house_ui.inc",
+  "line": 191,
+  "it": "{AAAAAA}Interno: {FFFFFF}%s (%s)\\n",
+  "ctx": "format(line, 160, \"{AAAAAA}Interno: {FFFFFF}%s (%s)\\n\", g_UiHsIntName[g_UiHsInt[playerid]], g_UiHsTierName[t]);",
+  "ka": ""
+ },
+ {
+  "id": 563,
+  "file": "ui/house_ui.inc",
+  "line": 193,
+  "it": "{AAAAAA}Prezzo: {66DD66}$%s{AAAAAA}  (liv. min %d)\\n",
+  "ctx": "format(line, 160, \"{AAAAAA}Prezzo: {66DD66}$%s{AAAAAA}  (liv. min %d)\\n\", price, g_UiHsTierLevel[t]);",
+  "ka": ""
+ },
+ {
+  "id": 564,
+  "file": "ui/house_ui.inc",
+  "line": 197,
+  "it": "{AAAAAA}Stato: {FFD24D}in vendita\\n",
+  "ctx": "UI_HsMenuRow(playerid, n, 0, \"{AAAAAA}Stato: {FFD24D}in vendita\\n\", body, 1024);",
+  "ka": ""
+ },
+ {
+  "id": 565,
+  "file": "ui/house_ui.inc",
+  "line": 198,
+  "it": "{66DD66}> Compra questa casa\\n",
+  "ctx": "UI_HsMenuRow(playerid, n, 100, \"{66DD66}> Compra questa casa\\n\", body, 1024);",
+  "ka": ""
+ },
+ {
+  "id": 566,
+  "file": "ui/house_ui.inc",
+  "line": 202,
+  "it": "{AAAAAA}Stato: {FF6666}proprieta' privata\\n",
+  "ctx": "UI_HsMenuRow(playerid, n, 0, \"{AAAAAA}Stato: {FF6666}proprieta' privata\\n\", body, 1024);",
+  "ka": ""
+ },
+ {
+  "id": 567,
+  "file": "ui/house_ui.inc",
+  "line": 206,
+  "it": "{AAAAAA}Stato: {66DD66}tua proprieta'\\n",
+  "ctx": "UI_HsMenuRow(playerid, n, 0, role == 1 ? \"{AAAAAA}Stato: {66DD66}tua proprieta'\\n\" : \"{AAAAAA}Stato: {66AAFF}ospite con chiave\\n\", body, 1024);",
+  "ka": ""
+ },
+ {
+  "id": 568,
+  "file": "ui/house_ui.inc",
+  "line": 206,
+  "it": "{AAAAAA}Stato: {66AAFF}ospite con chiave\\n",
+  "ctx": "UI_HsMenuRow(playerid, n, 0, role == 1 ? \"{AAAAAA}Stato: {66DD66}tua proprieta'\\n\" : \"{AAAAAA}Stato: {66AAFF}ospite con chiave\\n\", body, 1024);",
+  "ka": ""
+ },
+ {
+  "id": 569,
+  "file": "ui/house_ui.inc",
+  "line": 208,
+  "it": "{AAAAAA}Luce: %s{AAAAAA}   Gas: ",
+  "ctx": "format(line, 160, \"{AAAAAA}Luce: %s{AAAAAA}   Gas: \", st);",
+  "ka": ""
+ },
+ {
+  "id": 570,
+  "file": "ui/house_ui.inc",
+  "line": 218,
+  "it": "{AAAAAA}Bollette: %s%d da pagare ($%s)\\n",
+  "ctx": "format(line, 160, \"{AAAAAA}Bollette: %s%d da pagare ($%s)\\n\", bills > 0 ? \"{FF6666}\" : \"{66DD66}\", bills, tmp);",
+  "ka": ""
+ },
+ {
+  "id": 571,
+  "file": "ui/house_ui.inc",
+  "line": 220,
+  "it": "{FFFFFF}Serratura: %s{FFFFFF} (tocca per cambiare)\\n",
+  "ctx": "format(line, 160, \"{FFFFFF}Serratura: %s{FFFFFF} (tocca per cambiare)\\n\", g_UiHsLocked[playerid] ? \"{FF6666}chiusa\" : \"{66DD66}aperta\");",
+  "ka": ""
+ },
+ {
+  "id": 572,
+  "file": "ui/house_ui.inc",
+  "line": 220,
+  "it": "{FF6666}chiusa",
+  "ctx": "format(line, 160, \"{FFFFFF}Serratura: %s{FFFFFF} (tocca per cambiare)\\n\", g_UiHsLocked[playerid] ? \"{FF6666}chiusa\" : \"{66DD66}aperta\");",
+  "ka": ""
+ },
+ {
+  "id": 573,
+  "file": "ui/house_ui.inc",
+  "line": 220,
+  "it": "{66DD66}aperta",
+  "ctx": "format(line, 160, \"{FFFFFF}Serratura: %s{FFFFFF} (tocca per cambiare)\\n\", g_UiHsLocked[playerid] ? \"{FF6666}chiusa\" : \"{66DD66}aperta\");",
+  "ka": ""
+ },
+ {
+  "id": 574,
+  "file": "ui/house_ui.inc",
+  "line": 223,
+  "it": "{FFFFFF}Utenze (luce / gas)\\n",
+  "ctx": "UI_HsMenuRow(playerid, n, 2, \"{FFFFFF}Utenze (luce / gas)\\n\", body, 1024);",
+  "ka": ""
+ },
+ {
+  "id": 575,
+  "file": "ui/house_ui.inc",
+  "line": 224,
+  "it": "{FFFFFF}Frigo ({FFD24D}%d/%d{FFFFFF} porzioni)\\n",
+  "ctx": "format(line, 160, \"{FFFFFF}Frigo ({FFD24D}%d/%d{FFFFFF} porzioni)\\n\", g_UiHsFridge[playerid], UI_HsFridgeCap(playerid));",
+  "ka": ""
+ },
+ {
+  "id": 576,
+  "file": "ui/house_ui.inc",
+  "line": 228,
+  "it": "{FFFFFF}Bollette\\n",
+  "ctx": "UI_HsMenuRow(playerid, n, 4, \"{FFFFFF}Bollette\\n\", body, 1024);",
+  "ka": ""
+ },
+ {
+  "id": 577,
+  "file": "ui/house_ui.inc",
+  "line": 229,
+  "it": "{FFFFFF}Chiavi ospiti ({FFD24D}%d/%d{FFFFFF})\\n",
+  "ctx": "format(line, 160, \"{FFFFFF}Chiavi ospiti ({FFD24D}%d/%d{FFFFFF})\\n\", g_UiHsKeys[playerid], 3);",
+  "ka": ""
+ },
+ {
+  "id": 578,
+  "file": "ui/house_ui.inc",
+  "line": 231,
+  "it": "{FF6666}Vendi la casa\\n",
+  "ctx": "UI_HsMenuRow(playerid, n, 6, \"{FF6666}Vendi la casa\\n\", body, 1024);",
+  "ka": ""
+ },
+ {
+  "id": 579,
+  "file": "ui/house_ui.inc",
+  "line": 234,
+  "it": "Scegli",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9200, DIALOG_STYLE_LIST, title, body, \"Scegli\", \"Chiudi\");",
+  "ka": ""
+ },
+ {
+  "id": 580,
+  "file": "ui/house_ui.inc",
+  "line": 234,
+  "it": "Chiudi",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9200, DIALOG_STYLE_LIST, title, body, \"Scegli\", \"Chiudi\");",
+  "ka": ""
+ },
+ {
+  "id": 581,
+  "file": "ui/house_ui.inc",
+  "line": 246,
+  "it": "{FFFFFF}Contanti\\t%s$%s\\n",
+  "ctx": "format(body, 320, \"{FFFFFF}Contanti\\t%s$%s\\n\", g_UiHsMoney[playerid] >= p ? \"{66DD66}\" : \"{FF6666}\", cash);",
+  "ka": ""
+ },
+ {
+  "id": 582,
+  "file": "ui/house_ui.inc",
+  "line": 247,
+  "it": "{FFFFFF}Banca\\t%s$%s\\n",
+  "ctx": "format(tl, 48, \"{FFFFFF}Banca\\t%s$%s\\n\", g_UiHsBank[playerid] >= p ? \"{66DD66}\" : \"{FF6666}\", bank);",
+  "ka": ""
+ },
+ {
+  "id": 583,
+  "file": "ui/house_ui.inc",
+  "line": 249,
+  "it": "%s $%s - pagamento",
+  "ctx": "format(title, 64, \"%s $%s - pagamento\", g_UiHsTierName[t], price);",
+  "ka": ""
+ },
+ {
+  "id": 584,
+  "file": "ui/house_ui.inc",
+  "line": 250,
+  "it": "Acquista",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9201, DIALOG_STYLE_TABLIST, title, body, \"Acquista\", \"Indietro\");",
+  "ka": ""
+ },
+ {
+  "id": 585,
+  "file": "ui/house_ui.inc",
+  "line": 250,
+  "it": "Indietro",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9201, DIALOG_STYLE_TABLIST, title, body, \"Acquista\", \"Indietro\");",
+  "ka": ""
+ },
+ {
+  "id": 586,
+  "file": "ui/house_ui.inc",
+  "line": 257,
+  "it": "{FFFFFF}Vendere la casa {FFD24D}%d{FFFFFF} (%s)?\\n\\nRiceverai circa {66DD66}$%s{FFFFFF} (%d%% del prezzo) in banca.\\nUtenze, chiavi e bollette verranno azzerate; l'operazione non e' reversibile.",
+  "ctx": "format(body, 320, \"{FFFFFF}Vendere la casa {FFD24D}%d{FFFFFF} (%s)?\\n\\nRiceverai circa {66DD66}$%s{FFFFFF} (%d%% del prezzo) in banca.\\nUtenze, chiavi e bollette verranno azzerate; l'operazione non e'",
+  "ka": ""
+ },
+ {
+  "id": 587,
+  "file": "ui/house_ui.inc",
+  "line": 258,
+  "it": "Conferma vendita",
+  "ctx": "UI_HsTitle(playerid, \"Conferma vendita\", title, 64);",
+  "ka": ""
+ },
+ {
+  "id": 588,
+  "file": "ui/house_ui.inc",
+  "line": 259,
+  "it": "Vendi",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9202, DIALOG_STYLE_MSGBOX, title, body, \"Vendi\", \"Annulla\");",
+  "ka": ""
+ },
+ {
+  "id": 589,
+  "file": "ui/house_ui.inc",
+  "line": 259,
+  "it": "Annulla",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9202, DIALOG_STYLE_MSGBOX, title, body, \"Vendi\", \"Annulla\");",
+  "ka": ""
+ },
+ {
+  "id": 590,
+  "file": "ui/house_ui.inc",
+  "line": 269,
+  "it": "Utenza\\tStato\\tAzione\\n",
+  "ctx": "strcat(body, \"Utenza\\tStato\\tAzione\\n\", 512);",
+  "ka": ""
+ },
+ {
+  "id": 591,
+  "file": "ui/house_ui.inc",
+  "line": 275,
+  "it": "{FFFFFF}Luce\\t%s\\t{FF6666}Paga le bollette\\n",
+  "ctx": "format(line, 128, \"{FFFFFF}Luce\\t%s\\t{FF6666}Paga le bollette\\n\", st);",
+  "ka": ""
+ },
+ {
+  "id": 592,
+  "file": "ui/house_ui.inc",
+  "line": 279,
+  "it": "{FFFFFF}Luce\\t%s\\t{AAAAAA}Spegni\\n",
+  "ctx": "format(line, 128, \"{FFFFFF}Luce\\t%s\\t{AAAAAA}Spegni\\n\", st);",
+  "ka": ""
+ },
+ {
+  "id": 593,
+  "file": "ui/house_ui.inc",
+  "line": 283,
+  "it": "{FFFFFF}Luce\\t%s\\t{AAAAAA}Accendi\\n",
+  "ctx": "format(line, 128, \"{FFFFFF}Luce\\t%s\\t{AAAAAA}Accendi\\n\", st);",
+  "ka": ""
+ },
+ {
+  "id": 594,
+  "file": "ui/house_ui.inc",
+  "line": 290,
+  "it": "{777777}Gas\\t%s\\t{777777}Solo proprietario\\n",
+  "ctx": "format(line, 128, \"{777777}Gas\\t%s\\t{777777}Solo proprietario\\n\", st);",
+  "ka": ""
+ },
+ {
+  "id": 595,
+  "file": "ui/house_ui.inc",
+  "line": 298,
+  "it": "{FFFFFF}Gas\\t%s\\t{FF6666}Paga le bollette\\n",
+  "ctx": "format(line, 128, \"{FFFFFF}Gas\\t%s\\t{FF6666}Paga le bollette\\n\", st);",
+  "ka": ""
+ },
+ {
+  "id": 596,
+  "file": "ui/house_ui.inc",
+  "line": 302,
+  "it": "{FFFFFF}Gas\\t%s\\t{AAAAAA}Spegni\\n",
+  "ctx": "format(line, 128, \"{FFFFFF}Gas\\t%s\\t{AAAAAA}Spegni\\n\", st);",
+  "ka": ""
+ },
+ {
+  "id": 597,
+  "file": "ui/house_ui.inc",
+  "line": 306,
+  "it": "{FFFFFF}Gas\\t%s\\t{AAAAAA}Accendi\\n",
+  "ctx": "format(line, 128, \"{FFFFFF}Gas\\t%s\\t{AAAAAA}Accendi\\n\", st);",
+  "ka": ""
+ },
+ {
+  "id": 598,
+  "file": "ui/house_ui.inc",
+  "line": 311,
+  "it": "Utenze",
+  "ctx": "UI_HsTitle(playerid, \"Utenze\", title, 64);",
+  "ka": ""
+ },
+ {
+  "id": 599,
+  "file": "ui/house_ui.inc",
+  "line": 312,
+  "it": "Cambia",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9203, DIALOG_STYLE_TABLIST_HEADERS, title, body, \"Cambia\", \"Indietro\");",
+  "ka": ""
+ },
+ {
+  "id": 600,
+  "file": "ui/house_ui.inc",
+  "line": 312,
+  "it": "Indietro",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9203, DIALOG_STYLE_TABLIST_HEADERS, title, body, \"Cambia\", \"Indietro\");",
+  "ka": ""
+ },
+ {
+  "id": 601,
+  "file": "ui/house_ui.inc",
+  "line": 329,
+  "it": "{AAAAAA}Scorte: {FFD24D}%d/%d{AAAAAA} porzioni  -  con te: %d/%d\\n",
+  "ctx": "format(line, 128, \"{AAAAAA}Scorte: {FFD24D}%d/%d{AAAAAA} porzioni  -  con te: %d/%d\\n\", units, cap, g_UiHsBag[playerid], 12);",
+  "ka": ""
+ },
+ {
+  "id": 602,
+  "file": "ui/house_ui.inc",
+  "line": 333,
+  "it": "{FF6666}Luce spenta: il frigo non raffredda, le scorte si deteriorano\\n",
+  "ctx": "UI_HsMenuRow(playerid, n, 0, \"{FF6666}Luce spenta: il frigo non raffredda, le scorte si deteriorano\\n\", body, 512);",
+  "ka": ""
+ },
+ {
+  "id": 603,
+  "file": "ui/house_ui.inc",
+  "line": 335,
+  "it": "%sMangia freddo (+%d sazieta')\\n",
+  "ctx": "format(line, 128, \"%sMangia freddo (+%d sazieta')\\n\", units > 0 ? \"{FFFFFF}\" : \"{777777}\", 25);",
+  "ka": ""
+ },
+ {
+  "id": 604,
+  "file": "ui/house_ui.inc",
+  "line": 337,
+  "it": "%sCucina (+%d sazieta', +%d salute%s)\\n",
+  "ctx": "format(line, 128, \"%sCucina (+%d sazieta', +%d salute%s)\\n\", units > 0 && g_UiHsGas[playerid] == 1 ? \"{FFFFFF}\" : \"{777777}\", 45, 5, g_UiHsGas[playerid] == 1 ? \"\" : \" - gas non attivo\");",
+  "ka": ""
+ },
+ {
+  "id": 605,
+  "file": "ui/house_ui.inc",
+  "line": 337,
+  "it": " - gas non attivo",
+  "ctx": "format(line, 128, \"%sCucina (+%d sazieta', +%d salute%s)\\n\", units > 0 && g_UiHsGas[playerid] == 1 ? \"{FFFFFF}\" : \"{777777}\", 45, 5, g_UiHsGas[playerid] == 1 ? \"\" : \" - gas non attivo\");",
+  "ka": ""
+ },
+ {
+  "id": 606,
+  "file": "ui/house_ui.inc",
+  "line": 341,
+  "it": "%sRiponi spesa nel frigo\\n",
+  "ctx": "format(line, 128, \"%sRiponi spesa nel frigo\\n\", g_UiHsBag[playerid] > 0 && units < cap ? \"{FFFFFF}\" : \"{777777}\");",
+  "ka": ""
+ },
+ {
+  "id": 607,
+  "file": "ui/house_ui.inc",
+  "line": 343,
+  "it": "%sPrendi porzioni dal frigo\\n",
+  "ctx": "format(line, 128, \"%sPrendi porzioni dal frigo\\n\", units > 0 && g_UiHsBag[playerid] < 12 ? \"{FFFFFF}\" : \"{777777}\");",
+  "ka": ""
+ },
+ {
+  "id": 608,
+  "file": "ui/house_ui.inc",
+  "line": 346,
+  "it": "Frigo",
+  "ctx": "UI_HsTitle(playerid, \"Frigo\", title, 64);",
+  "ka": ""
+ },
+ {
+  "id": 609,
+  "file": "ui/house_ui.inc",
+  "line": 347,
+  "it": "Scegli",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9204, DIALOG_STYLE_LIST, title, body, \"Scegli\", \"Indietro\");",
+  "ka": ""
+ },
+ {
+  "id": 610,
+  "file": "ui/house_ui.inc",
+  "line": 347,
+  "it": "Indietro",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9204, DIALOG_STYLE_LIST, title, body, \"Scegli\", \"Indietro\");",
+  "ka": ""
+ },
+ {
+  "id": 611,
+  "file": "ui/house_ui.inc",
+  "line": 356,
+  "it": "{FFFFFF}%s\\nQuantita' (1-%d):",
+  "ctx": "format(body, 192, \"{FFFFFF}%s\\nQuantita' (1-%d):\", action == 3 ? \"Porzioni da riporre nel frigo.\" : \"Porzioni da prendere dal frigo.\", maxAmount);",
+  "ka": ""
+ },
+ {
+  "id": 612,
+  "file": "ui/house_ui.inc",
+  "line": 356,
+  "it": "Porzioni da riporre nel frigo.",
+  "ctx": "format(body, 192, \"{FFFFFF}%s\\nQuantita' (1-%d):\", action == 3 ? \"Porzioni da riporre nel frigo.\" : \"Porzioni da prendere dal frigo.\", maxAmount);",
+  "ka": ""
+ },
+ {
+  "id": 613,
+  "file": "ui/house_ui.inc",
+  "line": 356,
+  "it": "Porzioni da prendere dal frigo.",
+  "ctx": "format(body, 192, \"{FFFFFF}%s\\nQuantita' (1-%d):\", action == 3 ? \"Porzioni da riporre nel frigo.\" : \"Porzioni da prendere dal frigo.\", maxAmount);",
+  "ka": ""
+ },
+ {
+  "id": 614,
+  "file": "ui/house_ui.inc",
+  "line": 357,
+  "it": "Riponi",
+  "ctx": "UI_HsTitle(playerid, action == 3 ? \"Riponi\" : \"Prendi\", title, 64);",
+  "ka": ""
+ },
+ {
+  "id": 615,
+  "file": "ui/house_ui.inc",
+  "line": 357,
+  "it": "Prendi",
+  "ctx": "UI_HsTitle(playerid, action == 3 ? \"Riponi\" : \"Prendi\", title, 64);",
+  "ka": ""
+ },
+ {
+  "id": 616,
+  "file": "ui/house_ui.inc",
+  "line": 358,
+  "it": "Conferma",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9205, DIALOG_STYLE_INPUT, title, body, \"Conferma\", \"Indietro\");",
+  "ka": ""
+ },
+ {
+  "id": 617,
+  "file": "ui/house_ui.inc",
+  "line": 358,
+  "it": "Indietro",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9205, DIALOG_STYLE_INPUT, title, body, \"Conferma\", \"Indietro\");",
+  "ka": ""
+ },
+ {
+  "id": 618,
+  "file": "ui/house_ui.inc",
+  "line": 368,
+  "it": "Utenza\\tDa pagare\\tImporto\\tNote\\n",
+  "ctx": "strcat(body, \"Utenza\\tDa pagare\\tImporto\\tNote\\n\", 512);",
+  "ka": ""
+ },
+ {
+  "id": 619,
+  "file": "ui/house_ui.inc",
+  "line": 370,
+  "it": "{FFFFFF}Luce\\t%d\\t$%s\\t%s\\n",
+  "ctx": "format(line, 160, \"{FFFFFF}Luce\\t%d\\t$%s\\t%s\\n\", g_UiHsLightCnt[playerid], a, g_UiHsLight[playerid] == 2 ? \"{FF6666}staccata\" : \"{AAAAAA}-\");",
+  "ka": ""
+ },
+ {
+  "id": 620,
+  "file": "ui/house_ui.inc",
+  "line": 370,
+  "it": "{FF6666}staccata",
+  "ctx": "format(line, 160, \"{FFFFFF}Luce\\t%d\\t$%s\\t%s\\n\", g_UiHsLightCnt[playerid], a, g_UiHsLight[playerid] == 2 ? \"{FF6666}staccata\" : \"{AAAAAA}-\");",
+  "ka": ""
+ },
+ {
+  "id": 621,
+  "file": "ui/house_ui.inc",
+  "line": 373,
+  "it": "{FFFFFF}Gas\\t%d\\t$%s\\t%s\\n",
+  "ctx": "format(line, 160, \"{FFFFFF}Gas\\t%d\\t$%s\\t%s\\n\", g_UiHsGasCnt[playerid], b, g_UiHsGas[playerid] == 2 ? \"{FF6666}staccata\" : \"{AAAAAA}-\");",
+  "ka": ""
+ },
+ {
+  "id": 622,
+  "file": "ui/house_ui.inc",
+  "line": 373,
+  "it": "{FF6666}staccata",
+  "ctx": "format(line, 160, \"{FFFFFF}Gas\\t%d\\t$%s\\t%s\\n\", g_UiHsGasCnt[playerid], b, g_UiHsGas[playerid] == 2 ? \"{FF6666}staccata\" : \"{AAAAAA}-\");",
+  "ka": ""
+ },
+ {
+  "id": 623,
+  "file": "ui/house_ui.inc",
+  "line": 381,
+  "it": "{FFD24D}Totale\\t%d\\t$%s\\t{AAAAAA}incl. $%s riattivazione\\n",
+  "ctx": "format(line, 160, \"{FFD24D}Totale\\t%d\\t$%s\\t{AAAAAA}incl. $%s riattivazione\\n\", g_UiHsLightCnt[playerid] + g_UiHsGasCnt[playerid], a, b);",
+  "ka": ""
+ },
+ {
+  "id": 624,
+  "file": "ui/house_ui.inc",
+  "line": 385,
+  "it": "{FFD24D}Totale\\t%d\\t$%s\\t{AAAAAA}-\\n",
+  "ctx": "format(line, 160, \"{FFD24D}Totale\\t%d\\t$%s\\t{AAAAAA}-\\n\", g_UiHsLightCnt[playerid] + g_UiHsGasCnt[playerid], a);",
+  "ka": ""
+ },
+ {
+  "id": 625,
+  "file": "ui/house_ui.inc",
+  "line": 388,
+  "it": "Bollette",
+  "ctx": "UI_HsTitle(playerid, \"Bollette\", title, 64);",
+  "ka": ""
+ },
+ {
+  "id": 626,
+  "file": "ui/house_ui.inc",
+  "line": 389,
+  "it": "Paga tutte",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9206, DIALOG_STYLE_TABLIST_HEADERS, title, body, \"Paga tutte\", \"Indietro\");",
+  "ka": ""
+ },
+ {
+  "id": 627,
+  "file": "ui/house_ui.inc",
+  "line": 389,
+  "it": "Indietro",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9206, DIALOG_STYLE_TABLIST_HEADERS, title, body, \"Paga tutte\", \"Indietro\");",
+  "ka": ""
+ },
+ {
+  "id": 628,
+  "file": "ui/house_ui.inc",
+  "line": 400,
+  "it": "{FFFFFF}Banca\\t%s$%s\\n",
+  "ctx": "format(body, 320, \"{FFFFFF}Banca\\t%s$%s\\n\", g_UiHsBank[playerid] >= p ? \"{66DD66}\" : \"{FF6666}\", bank);",
+  "ka": ""
+ },
+ {
+  "id": 629,
+  "file": "ui/house_ui.inc",
+  "line": 401,
+  "it": "{FFFFFF}Contanti\\t%s$%s\\n",
+  "ctx": "format(tl, 48, \"{FFFFFF}Contanti\\t%s$%s\\n\", g_UiHsMoney[playerid] >= p ? \"{66DD66}\" : \"{FF6666}\", cash);",
+  "ka": ""
+ },
+ {
+  "id": 630,
+  "file": "ui/house_ui.inc",
+  "line": 403,
+  "it": "Paga bollette $%s",
+  "ctx": "format(title, 64, \"Paga bollette $%s\", total);",
+  "ka": ""
+ },
+ {
+  "id": 631,
+  "file": "ui/house_ui.inc",
+  "line": 404,
+  "it": "Paga",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9207, DIALOG_STYLE_TABLIST, title, body, \"Paga\", \"Indietro\");",
+  "ka": ""
+ },
+ {
+  "id": 632,
+  "file": "ui/house_ui.inc",
+  "line": 404,
+  "it": "Indietro",
+  "ctx": "Lang_ShowPlayerDialog(playerid, 9207, DIALOG_STYLE_TABLIST, title, body, \"Paga\", \"Indietro\");",
+  "ka": ""
+ },
+ {
+  "id": 633,
+  "file": "ui/house_ui.inc",
+  "line": 451,
+  "it": "Il tuo livello e' troppo basso per questa casa.",
+  "ctx": "SendClientMessage(playerid, -10066177, \"Il tuo livello e' troppo basso per questa casa.\");",
+  "ka": ""
+ },
+ {
+  "id": 634,
+  "file": "ui/house_ui.inc",
+  "line": 477,
+  "it": "Fondi insufficienti con questo metodo di pagamento.",
+  "ctx": "SendClientMessage(playerid, -10066177, \"Fondi insufficienti con questo metodo di pagamento.\");",
+  "ka": ""
+ },
+ {
+  "id": 635,
+  "file": "ui/house_ui.inc",
+  "line": 509,
+  "it": "Utenza staccata per morosita': paga le bollette per riattivarla.",
+  "ctx": "SendClientMessage(playerid, -10066177, \"Utenza staccata per morosita': paga le bollette per riattivarla.\");",
+  "ka": ""
+ },
+ {
+  "id": 636,
+  "file": "ui/house_ui.inc",
+  "line": 515,
+  "it": "Solo il proprietario puo' gestire il gas.",
+  "ctx": "SendClientMessage(playerid, -10066177, \"Solo il proprietario puo' gestire il gas.\");",
+  "ka": ""
+ },
+ {
+  "id": 637,
+  "file": "ui/house_ui.inc",
+  "line": 537,
+  "it": "Il frigo e' vuoto.",
+  "ctx": "SendClientMessage(playerid, -10066177, \"Il frigo e' vuoto.\");",
+  "ka": ""
+ },
+ {
+  "id": 638,
+  "file": "ui/house_ui.inc",
+  "line": 547,
+  "it": "Il frigo e' vuoto.",
+  "ctx": "SendClientMessage(playerid, -10066177, \"Il frigo e' vuoto.\");",
+  "ka": ""
+ },
+ {
+  "id": 639,
+  "file": "ui/house_ui.inc",
+  "line": 553,
+  "it": "Il gas non e' attivo: non puoi cucinare.",
+  "ctx": "SendClientMessage(playerid, -10066177, \"Il gas non e' attivo: non puoi cucinare.\");",
+  "ka": ""
+ },
+ {
+  "id": 640,
+  "file": "ui/house_ui.inc",
+  "line": 568,
+  "it": "Non hai spesa da riporre o il frigo e' pieno.",
+  "ctx": "SendClientMessage(playerid, -10066177, \"Non hai spesa da riporre o il frigo e' pieno.\");",
+  "ka": ""
+ }
+]

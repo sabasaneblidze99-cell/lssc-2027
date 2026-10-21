@@ -1,0 +1,2082 @@
+[
+ {
+  "id": 1217,
+  "file": "account/account.inc",
+  "line": 191,
+  "it": "login account %d (%s)",
+  "ctx": "format(msg, 128, \"login account %d (%s)\", accountId, name);",
+  "ka": ""
+ },
+ {
+  "id": 1218,
+  "file": "account/account.inc",
+  "line": 279,
+  "it": "login fallito %s (tentativo %d/%d)",
+  "ctx": "format(msg, 128, \"login fallito %s (tentativo %d/%d)\", name, gPlayer[playerid][pLoginAttempts], 3);",
+  "ka": ""
+ },
+ {
+  "id": 101,
+  "file": "admin/admin.inc",
+  "line": 14,
+  "it": "/freeze id [motivo]",
+  "ctx": "\"/freeze id [motivo]\",",
+  "ka": ""
+ },
+ {
+  "id": 102,
+  "file": "admin/admin.inc",
+  "line": 17,
+  "it": "/kick id motivo",
+  "ctx": "\"/kick id motivo\",",
+  "ka": ""
+ },
+ {
+  "id": 103,
+  "file": "admin/admin.inc",
+  "line": 18,
+  "it": "/mute id [min] motivo",
+  "ctx": "\"/mute id [min] motivo\",",
+  "ka": ""
+ },
+ {
+  "id": 104,
+  "file": "admin/admin.inc",
+  "line": 20,
+  "it": "/warn id motivo",
+  "ctx": "\"/warn id motivo\",",
+  "ka": ""
+ },
+ {
+  "id": 105,
+  "file": "admin/admin.inc",
+  "line": 21,
+  "it": "/setadmin id|nome 0-3",
+  "ctx": "\"/setadmin id|nome 0-3\",",
+  "ka": ""
+ },
+ {
+  "id": 106,
+  "file": "admin/admin.inc",
+  "line": 22,
+  "it": "/setlevel id livello",
+  "ctx": "\"/setlevel id livello\",",
+  "ka": ""
+ },
+ {
+  "id": 107,
+  "file": "admin/admin.inc",
+  "line": 23,
+  "it": "/setmoney id importo",
+  "ctx": "\"/setmoney id importo\",",
+  "ka": ""
+ },
+ {
+  "id": 108,
+  "file": "admin/admin.inc",
+  "line": 24,
+  "it": "/givemoney id importo",
+  "ctx": "\"/givemoney id importo\",",
+  "ka": ""
+ },
+ {
+  "id": 109,
+  "file": "admin/admin.inc",
+  "line": 25,
+  "it": "/ban id min motivo",
+  "ctx": "\"/ban id min motivo\",",
+  "ka": ""
+ },
+ {
+  "id": 110,
+  "file": "admin/admin.inc",
+  "line": 26,
+  "it": "/unban nome_account",
+  "ctx": "\"/unban nome_account\"",
+  "ka": ""
+ },
+ {
+  "id": 111,
+  "file": "admin/admin.inc",
+  "line": 35,
+  "it": "Helper",
+  "ctx": "strmid(name, \"Helper\", 0, strlen(\"Helper\"), size);",
+  "ka": ""
+ },
+ {
+  "id": 112,
+  "file": "admin/admin.inc",
+  "line": 35,
+  "it": "Helper",
+  "ctx": "strmid(name, \"Helper\", 0, strlen(\"Helper\"), size);",
+  "ka": ""
+ },
+ {
+  "id": 113,
+  "file": "admin/admin.inc",
+  "line": 39,
+  "it": "Moderatore",
+  "ctx": "strmid(name, \"Moderatore\", 0, strlen(\"Moderatore\"), size);",
+  "ka": ""
+ },
+ {
+  "id": 114,
+  "file": "admin/admin.inc",
+  "line": 39,
+  "it": "Moderatore",
+  "ctx": "strmid(name, \"Moderatore\", 0, strlen(\"Moderatore\"), size);",
+  "ka": ""
+ },
+ {
+  "id": 115,
+  "file": "admin/admin.inc",
+  "line": 43,
+  "it": "Admin",
+  "ctx": "strmid(name, \"Admin\", 0, strlen(\"Admin\"), size);",
+  "ka": ""
+ },
+ {
+  "id": 116,
+  "file": "admin/admin.inc",
+  "line": 43,
+  "it": "Admin",
+  "ctx": "strmid(name, \"Admin\", 0, strlen(\"Admin\"), size);",
+  "ka": ""
+ },
+ {
+  "id": 117,
+  "file": "admin/admin.inc",
+  "line": 69,
+  "it": "Console",
+  "ctx": "strmid(name, \"Console\", 0, strlen(\"Console\"), size);",
+  "ka": ""
+ },
+ {
+  "id": 118,
+  "file": "admin/admin.inc",
+  "line": 69,
+  "it": "Console",
+  "ctx": "strmid(name, \"Console\", 0, strlen(\"Console\"), size);",
+  "ka": ""
+ },
+ {
+  "id": 119,
+  "file": "admin/admin.inc",
+  "line": 131,
+  "it": "AdmCmd: Staff %s ha %s %s: %s",
+  "ctx": "format(msg, 256, \"AdmCmd: Staff %s ha %s %s: %s\", staffName, action, targetName, reason);",
+  "ka": ""
+ },
+ {
+  "id": 120,
+  "file": "admin/admin.inc",
+  "line": 135,
+  "it": "AdmCmd: Staff %s ha %s %s",
+  "ctx": "format(msg, 256, \"AdmCmd: Staff %s ha %s %s\", staffName, action, targetName);",
+  "ka": ""
+ },
+ {
+  "id": 121,
+  "file": "admin/admin.inc",
+  "line": 142,
+  "it": "AdmCmd: %s e' stato %s da %s: %s",
+  "ctx": "format(msg, 256, \"AdmCmd: %s e' stato %s da %s: %s\", targetName, participle, staffName, reason);",
+  "ka": ""
+ },
+ {
+  "id": 122,
+  "file": "admin/admin.inc",
+  "line": 146,
+  "it": "AdmCmd: %s e' stato %s da %s",
+  "ctx": "format(msg, 256, \"AdmCmd: %s e' stato %s da %s\", targetName, participle, staffName);",
+  "ka": ""
+ },
+ {
+  "id": 123,
+  "file": "admin/admin.inc",
+  "line": 156,
+  "it": "%s (acc %d) %s -> acc %d: %s",
+  "ctx": "format(line, 320, \"%s (acc %d) %s -> acc %d: %s\", staffName, staffAcc, action, targetAcc, reason);",
+  "ka": ""
+ },
+ {
+  "id": 124,
+  "file": "admin/admin.inc",
+  "line": 231,
+  "it": "%d giorni",
+  "ctx": "format(dest, size, \"%d giorni\", (minutes + 1440 - 1) / 1440);",
+  "ka": ""
+ },
+ {
+  "id": 125,
+  "file": "admin/admin.inc",
+  "line": 235,
+  "it": "%d ore",
+  "ctx": "format(dest, size, \"%d ore\", (minutes + 60 - 1) / 60);",
+  "ka": ""
+ },
+ {
+  "id": 126,
+  "file": "admin/admin.inc",
+  "line": 239,
+  "it": "%d minuti",
+  "ctx": "format(dest, size, \"%d minuti\", minutes);",
+  "ka": ""
+ },
+ {
+  "id": 127,
+  "file": "admin/admin.inc",
+  "line": 260,
+  "it": "--- Comandi staff ---",
+  "ctx": "SendClientMessage(playerid, -2994689, \"--- Comandi staff ---\");",
+  "ka": ""
+ },
+ {
+  "id": 128,
+  "file": "admin/admin.inc",
+  "line": 320,
+  "it": "Sei mutato ancora %s.",
+  "ctx": "SendClientMessage(playerid, -10270721, \"Sei mutato ancora %s.\", left);",
+  "ka": ""
+ },
+ {
+  "id": 129,
+  "file": "admin/admin.inc",
+  "line": 410,
+  "it": "scade tra %s",
+  "ctx": "format(when, 40, \"scade tra %s\", dur);",
+  "ka": ""
+ },
+ {
+  "id": 130,
+  "file": "admin/admin.inc",
+  "line": 416,
+  "it": "Sei bannato (%s). Motivo: %s",
+  "ctx": "format(msg, 144, \"Sei bannato (%s). Motivo: %s\", when, reason);",
+  "ka": ""
+ },
+ {
+  "id": 131,
+  "file": "admin/admin.inc",
+  "line": 418,
+  "it": "connessione rifiutata (ban) %s",
+  "ctx": "format(line, 320, \"connessione rifiutata (ban) %s\", name);",
+  "ka": ""
+ },
+ {
+  "id": 132,
+  "file": "admin/admin.inc",
+  "line": 433,
+  "it": "Warn non registrato (errore database).",
+  "ctx": "Admin_Reply(requesterid, -10270721, \"Warn non registrato (errore database).\");",
+  "ka": ""
+ },
+ {
+  "id": 133,
+  "file": "admin/admin.inc",
+  "line": 441,
+  "it": "%s (warn attivi %d/%d)",
+  "ctx": "format(msg, 256, \"%s (warn attivi %d/%d)\", reason, activeCount, 3);",
+  "ka": ""
+ },
+ {
+  "id": 134,
+  "file": "admin/admin.inc",
+  "line": 450,
+  "it": "Hai ricevuto un warn da %s: %s (%d/%d).",
+  "ctx": "SendClientMessage(target, -10270721, \"Hai ricevuto un warn da %s: %s (%d/%d).\", sname, reason, activeCount, 3);",
+  "ka": ""
+ },
+ {
+  "id": 135,
+  "file": "admin/admin.inc",
+  "line": 453,
+  "it": "%d warn attivi: kick automatico",
+  "ctx": "format(msg, 256, \"%d warn attivi: kick automatico\", activeCount);",
+  "ka": ""
+ },
+ {
+  "id": 136,
+  "file": "admin/admin.inc",
+  "line": 456,
+  "it": "Hai raggiunto il numero massimo di warn: sei stato espulso.",
+  "ctx": "Account_Kick(target, \"Hai raggiunto il numero massimo di warn: sei stato espulso.\");",
+  "ka": ""
+ },
+ {
+  "id": 137,
+  "file": "admin/admin.inc",
+  "line": 470,
+  "it": "Ban non registrato (errore database).",
+  "ctx": "Admin_Reply(requesterid, -10270721, \"Ban non registrato (errore database).\");",
+  "ka": ""
+ },
+ {
+  "id": 138,
+  "file": "admin/admin.inc",
+  "line": 480,
+  "it": "%d min",
+  "ctx": "format(dur, 24, \"%d min\", minutes);",
+  "ka": ""
+ },
+ {
+  "id": 139,
+  "file": "admin/admin.inc",
+  "line": 492,
+  "it": "Sei stato bannato da %s (%s). Motivo: %s",
+  "ctx": "format(msg, 256, \"Sei stato bannato da %s (%s). Motivo: %s\", sname, dur, reason);",
+  "ka": ""
+ },
+ {
+  "id": 140,
+  "file": "admin/admin.inc",
+  "line": 507,
+  "it": "Unban non riuscito (errore database).",
+  "ctx": "Admin_Reply(requesterid, -10270721, \"Unban non riuscito (errore database).\");",
+  "ka": ""
+ },
+ {
+  "id": 141,
+  "file": "admin/admin.inc",
+  "line": 512,
+  "it": "Nessun ban attivo per questo account.",
+  "ctx": "Admin_Reply(requesterid, -10270721, \"Nessun ban attivo per questo account.\");",
+  "ka": ""
+ },
+ {
+  "id": 142,
+  "file": "admin/admin.inc",
+  "line": 554,
+  "it": "rcon: livello %d",
+  "ctx": "format(msg, 256, \"rcon: livello %d\", level);",
+  "ka": ""
+ },
+ {
+  "id": 143,
+  "file": "admin/admin.inc",
+  "line": 555,
+  "it": "Console",
+  "ctx": "Admin_LogRaw(0, \"Console\", accountId, \"setadmin\", msg);",
+  "ka": ""
+ },
+ {
+  "id": 144,
+  "file": "admin/admin.inc",
+  "line": 560,
+  "it": "Il tuo livello staff e' stato impostato a %d dalla console.",
+  "ctx": "SendClientMessage(online, -5963521, \"Il tuo livello staff e' stato impostato a %d dalla console.\", level);",
+  "ka": ""
+ },
+ {
+  "id": 145,
+  "file": "admin/admin.inc",
+  "line": 570,
+  "it": "Errore database, riprova.",
+  "ctx": "Admin_Reply(requesterid, -10270721, \"Errore database, riprova.\");",
+  "ka": ""
+ },
+ {
+  "id": 146,
+  "file": "admin/admin.inc",
+  "line": 575,
+  "it": "Account non trovato.",
+  "ctx": "Admin_Reply(requesterid, -10270721, \"Account non trovato.\");",
+  "ka": ""
+ },
+ {
+  "id": 147,
+  "file": "admin/admin.inc",
+  "line": 581,
+  "it": "Non puoi agire su questo giocatore.",
+  "ctx": "Admin_Reply(requesterid, -10270721, \"Non puoi agire su questo giocatore.\");",
+  "ka": ""
+ },
+ {
+  "id": 148,
+  "file": "admin/admin.inc",
+  "line": 594,
+  "it": "Il tuo livello staff e' stato impostato a %d da %s.",
+  "ctx": "SendClientMessage(online, -5963521, \"Il tuo livello staff e' stato impostato a %d da %s.\", level, sname);",
+  "ka": ""
+ },
+ {
+  "id": 149,
+  "file": "admin/admin.inc",
+  "line": 596,
+  "it": "livello %d",
+  "ctx": "format(msg, 256, \"livello %d\", level);",
+  "ka": ""
+ },
+ {
+  "id": 150,
+  "file": "admin/admin.inc",
+  "line": 597,
+  "it": "impostato il livello staff di",
+  "ctx": "Admin_AdmCmd(sname, \"impostato il livello staff di\", tname, msg, \"\");",
+  "ka": ""
+ },
+ {
+  "id": 151,
+  "file": "admin/admin.inc",
+  "line": 624,
+  "it": "--- Ultimi report ---",
+  "ctx": "SendClientMessage(playerid, -2994689, \"--- Ultimi report ---\");",
+  "ka": ""
+ },
+ {
+  "id": 152,
+  "file": "admin/admin.inc",
+  "line": 643,
+  "it": "Nessun report.",
+  "ctx": "Util_Send(playerid, -1, \"Nessun report.\");",
+  "ka": ""
+ },
+ {
+  "id": 153,
+  "file": "admin/admin.inc",
+  "line": 665,
+  "it": "[STAFF] %s: %s",
+  "ctx": "SendClientMessage(target, -5963521, \"[STAFF] %s: %s\", name, text);",
+  "ka": ""
+ },
+ {
+  "id": 1224,
+  "file": "bank/bank.inc",
+  "line": 197,
+  "it": "Deposito",
+  "ctx": "strcopy(dest, \"Deposito\", size);",
+  "ka": ""
+ },
+ {
+  "id": 1225,
+  "file": "bank/bank.inc",
+  "line": 201,
+  "it": "Prelievo",
+  "ctx": "strcopy(dest, \"Prelievo\", size);",
+  "ka": ""
+ },
+ {
+  "id": 1226,
+  "file": "bank/bank.inc",
+  "line": 205,
+  "it": "Bonifico a",
+  "ctx": "strcopy(dest, \"Bonifico a\", size);",
+  "ka": ""
+ },
+ {
+  "id": 1227,
+  "file": "bank/bank.inc",
+  "line": 209,
+  "it": "Bonifico da",
+  "ctx": "strcopy(dest, \"Bonifico da\", size);",
+  "ka": ""
+ },
+ {
+  "id": 1228,
+  "file": "bank/bank.inc",
+  "line": 213,
+  "it": "Commissione",
+  "ctx": "strcopy(dest, \"Commissione\", size);",
+  "ka": ""
+ },
+ {
+  "id": 1229,
+  "file": "bank/bank.inc",
+  "line": 217,
+  "it": "Stipendio",
+  "ctx": "strcopy(dest, \"Stipendio\", size);",
+  "ka": ""
+ },
+ {
+  "id": 1230,
+  "file": "bank/bank.inc",
+  "line": 221,
+  "it": "Compenso lavoro",
+  "ctx": "strcopy(dest, \"Compenso lavoro\", size);",
+  "ka": ""
+ },
+ {
+  "id": 1231,
+  "file": "bank/bank.inc",
+  "line": 225,
+  "it": "Stipendio fazione",
+  "ctx": "strcopy(dest, \"Stipendio fazione\", size);",
+  "ka": ""
+ },
+ {
+  "id": 1232,
+  "file": "bank/bank.inc",
+  "line": 229,
+  "it": "Bolletta",
+  "ctx": "strcopy(dest, \"Bolletta\", size);",
+  "ka": ""
+ },
+ {
+  "id": 1233,
+  "file": "bank/bank.inc",
+  "line": 233,
+  "it": "Casa",
+  "ctx": "strcopy(dest, \"Casa\", size);",
+  "ka": ""
+ },
+ {
+  "id": 1234,
+  "file": "bank/bank.inc",
+  "line": 237,
+  "it": "Veicolo",
+  "ctx": "strcopy(dest, \"Veicolo\", size);",
+  "ka": ""
+ },
+ {
+  "id": 1235,
+  "file": "bank/bank.inc",
+  "line": 241,
+  "it": "Multa",
+  "ctx": "strcopy(dest, \"Multa\", size);",
+  "ka": ""
+ },
+ {
+  "id": 1236,
+  "file": "bank/bank.inc",
+  "line": 245,
+  "it": "Rimborso",
+  "ctx": "strcopy(dest, \"Rimborso\", size);",
+  "ka": ""
+ },
+ {
+  "id": 1237,
+  "file": "bank/bank.inc",
+  "line": 249,
+  "it": "Staff",
+  "ctx": "strcopy(dest, \"Staff\", size);",
+  "ka": ""
+ },
+ {
+  "id": 1238,
+  "file": "bank/bank.inc",
+  "line": 253,
+  "it": "Storno",
+  "ctx": "strcopy(dest, \"Storno\", size);",
+  "ka": ""
+ },
+ {
+  "id": 1239,
+  "file": "bank/bank.inc",
+  "line": 329,
+  "it": "Troppe conferme di bonifico fallite o scadute: bonifici sospesi per %d secondi.",
+  "ctx": "SendClientMessage(playerid, -10270721, \"Troppe conferme di bonifico fallite o scadute: bonifici sospesi per %d secondi.\", 60);",
+  "ka": ""
+ },
+ {
+  "id": 1240,
+  "file": "bank/bank.inc",
+  "line": 363,
+  "it": "Non puoi usare la banca da ferito o ammanettato.",
+  "ctx": "Bank_Deny(playerid, ui, \"Non puoi usare la banca da ferito o ammanettato.\");",
+  "ka": ""
+ },
+ {
+  "id": 1241,
+  "file": "bank/bank.inc",
+  "line": 368,
+  "it": "Scendi dal veicolo per usare la banca.",
+  "ctx": "Bank_Deny(playerid, ui, \"Scendi dal veicolo per usare la banca.\");",
+  "ka": ""
+ },
+ {
+  "id": 1242,
+  "file": "bank/bank.inc",
+  "line": 373,
+  "it": "Non puoi usare la banca durante un turno di lavoro.",
+  "ctx": "Bank_Deny(playerid, ui, \"Non puoi usare la banca durante un turno di lavoro.\");",
+  "ka": ""
+ },
+ {
+  "id": 1243,
+  "file": "bank/bank.inc",
+  "line": 378,
+  "it": "Non puoi usare la banca all'interno di un edificio: serve un ATM o uno sportello all'aperto.",
+  "ctx": "Bank_Deny(playerid, ui, \"Non puoi usare la banca all'interno di un edificio: serve un ATM o uno sportello all'aperto.\");",
+  "ka": ""
+ },
+ {
+  "id": 1244,
+  "file": "bank/bank.inc",
+  "line": 384,
+  "it": "Devi essere vicino a un ATM o a uno sportello bancario.",
+  "ctx": "Bank_Deny(playerid, ui, \"Devi essere vicino a un ATM o a uno sportello bancario.\");",
+  "ka": ""
+ },
+ {
+  "id": 1245,
+  "file": "bank/bank.inc",
+  "line": 389,
+  "it": "Questo e' un ATM: per /banca usa uno sportello.",
+  "ctx": "Bank_Deny(playerid, ui, \"Questo e' un ATM: per /banca usa uno sportello.\");",
+  "ka": ""
+ },
+ {
+  "id": 1246,
+  "file": "bank/bank.inc",
+  "line": 413,
+  "it": "Hai un'operazione bancaria in corso: attendi.",
+  "ctx": "Bank_Reply(playerid, ui, \"Hai un'operazione bancaria in corso: attendi.\");",
+  "ka": ""
+ },
+ {
+  "id": 1247,
+  "file": "bank/bank.inc",
+  "line": 425,
+  "it": "Hai un bonifico in attesa di conferma.",
+  "ctx": "Util_Send(playerid, -10270721, \"Hai un bonifico in attesa di conferma.\");",
+  "ka": ""
+ },
+ {
+  "id": 1248,
+  "file": "bank/bank.inc",
+  "line": 431,
+  "it": "Attendi un attimo prima di un'altra operazione bancaria.",
+  "ctx": "Bank_Reply(playerid, ui, \"Attendi un attimo prima di un'altra operazione bancaria.\");",
+  "ka": ""
+ },
+ {
+  "id": 1249,
+  "file": "bank/bank.inc",
+  "line": 467,
+  "it": "--- Saldo ---",
+  "ctx": "SendClientMessage(playerid, -2994689, \"--- Saldo ---\");",
+  "ka": ""
+ },
+ {
+  "id": 1250,
+  "file": "bank/bank.inc",
+  "line": 468,
+  "it": "Contanti: $%d  Banca: $%d  Totale: $%d",
+  "ctx": "SendClientMessage(playerid, -1, \"Contanti: $%d  Banca: $%d  Totale: $%d\", gPlayer[playerid][pMoney], gPlayer[playerid][pBank], gPlayer[playerid][pMoney] + gPlayer[playerid][pBank]);",
+  "ka": ""
+ },
+ {
+  "id": 1251,
+  "file": "bank/bank.inc",
+  "line": 504,
+  "it": "Importo non valido.",
+  "ctx": "Bank_Reply(playerid, ui, \"Importo non valido.\");",
+  "ka": ""
+ },
+ {
+  "id": 1252,
+  "file": "bank/bank.inc",
+  "line": 509,
+  "it": "Non hai abbastanza contanti.",
+  "ctx": "Bank_Reply(playerid, ui, \"Non hai abbastanza contanti.\");",
+  "ka": ""
+ },
+ {
+  "id": 1253,
+  "file": "bank/bank.inc",
+  "line": 515,
+  "it": "Limite ATM per deposito: $%d per operazione. Usa uno sportello per importi maggiori.",
+  "ctx": "format(msg, 176, \"Limite ATM per deposito: $%d per operazione. Usa uno sportello per importi maggiori.\", 20000);",
+  "ka": ""
+ },
+ {
+  "id": 1254,
+  "file": "bank/bank.inc",
+  "line": 521,
+  "it": "Il tuo conto raggiungerebbe il limite massimo consentito.",
+  "ctx": "Bank_Reply(playerid, ui, \"Il tuo conto raggiungerebbe il limite massimo consentito.\");",
+  "ka": ""
+ },
+ {
+  "id": 1255,
+  "file": "bank/bank.inc",
+  "line": 545,
+  "it": "Operazione rifiutata.",
+  "ctx": "strcopy(dest, \"Operazione rifiutata.\", size);",
+  "ka": ""
+ },
+ {
+  "id": 1256,
+  "file": "bank/bank.inc",
+  "line": 549,
+  "it": "Il conto del destinatario ha raggiunto il limite: bonifico rifiutato.",
+  "ctx": "strcopy(dest, op == 3 ? \"Il conto del destinatario ha raggiunto il limite: bonifico rifiutato.\" : \"Il tuo conto raggiungerebbe il limite massimo consentito.\", size);",
+  "ka": ""
+ },
+ {
+  "id": 1257,
+  "file": "bank/bank.inc",
+  "line": 549,
+  "it": "Il tuo conto raggiungerebbe il limite massimo consentito.",
+  "ctx": "strcopy(dest, op == 3 ? \"Il conto del destinatario ha raggiunto il limite: bonifico rifiutato.\" : \"Il tuo conto raggiungerebbe il limite massimo consentito.\", size);",
+  "ka": ""
+ },
+ {
+  "id": 1258,
+  "file": "bank/bank.inc",
+  "line": 553,
+  "it": "Fondi insufficienti: servono importo piu' commissione.",
+  "ctx": "strcopy(dest, op == 3 ? \"Fondi insufficienti: servono importo piu' commissione.\" : \"Fondi insufficienti sul conto.\", size);",
+  "ka": ""
+ },
+ {
+  "id": 1259,
+  "file": "bank/bank.inc",
+  "line": 553,
+  "it": "Fondi insufficienti sul conto.",
+  "ctx": "strcopy(dest, op == 3 ? \"Fondi insufficienti: servono importo piu' commissione.\" : \"Fondi insufficienti sul conto.\", size);",
+  "ka": ""
+ },
+ {
+  "id": 1260,
+  "file": "bank/bank.inc",
+  "line": 557,
+  "it": "Importo fuori dai limiti del bonifico.",
+  "ctx": "strcopy(dest, op == 3 ? \"Importo fuori dai limiti del bonifico.\" : \"Importo oltre il limite per operazione di questo punto: usa uno sportello.\", size);",
+  "ka": ""
+ },
+ {
+  "id": 1261,
+  "file": "bank/bank.inc",
+  "line": 557,
+  "it": "Importo oltre il limite per operazione di questo punto: usa uno sportello.",
+  "ctx": "strcopy(dest, op == 3 ? \"Importo fuori dai limiti del bonifico.\" : \"Importo oltre il limite per operazione di questo punto: usa uno sportello.\", size);",
+  "ka": ""
+ },
+ {
+  "id": 1262,
+  "file": "bank/bank.inc",
+  "line": 561,
+  "it": "Limite giornaliero di bonifici in uscita raggiunto.",
+  "ctx": "strcopy(dest, op == 3 ? \"Limite giornaliero di bonifici in uscita raggiunto.\" : \"Limite giornaliero di prelievo raggiunto.\", size);",
+  "ka": ""
+ },
+ {
+  "id": 1263,
+  "file": "bank/bank.inc",
+  "line": 561,
+  "it": "Limite giornaliero di prelievo raggiunto.",
+  "ctx": "strcopy(dest, op == 3 ? \"Limite giornaliero di bonifici in uscita raggiunto.\" : \"Limite giornaliero di prelievo raggiunto.\", size);",
+  "ka": ""
+ },
+ {
+  "id": 1264,
+  "file": "bank/bank.inc",
+  "line": 565,
+  "it": "Il destinatario ha raggiunto il limite giornaliero di bonifici in entrata.",
+  "ctx": "strcopy(dest, \"Il destinatario ha raggiunto il limite giornaliero di bonifici in entrata.\", size);",
+  "ka": ""
+ },
+ {
+  "id": 1265,
+  "file": "bank/bank.inc",
+  "line": 569,
+  "it": "Sistema bancario occupato: riprova tra un attimo.",
+  "ctx": "strcopy(dest, \"Sistema bancario occupato: riprova tra un attimo.\", size);",
+  "ka": ""
+ },
+ {
+  "id": 1266,
+  "file": "bank/bank.inc",
+  "line": 573,
+  "it": "Operazione bancaria non riuscita.",
+  "ctx": "strcopy(dest, \"Operazione bancaria non riuscita.\", size);",
+  "ka": ""
+ },
+ {
+  "id": 1267,
+  "file": "bank/bank.inc",
+  "line": 611,
+  "it": "Contanti insufficienti al momento del deposito: operazione annullata.",
+  "ctx": "Bank_StartUndo(playerid, \"Contanti insufficienti al momento del deposito: operazione annullata.\");",
+  "ka": ""
+ },
+ {
+  "id": 1268,
+  "file": "bank/bank.inc",
+  "line": 619,
+  "it": "Hai depositato $%d. Contanti: $%d  Banca: $%d.",
+  "ctx": "format(msg, 176, \"Hai depositato $%d. Contanti: $%d  Banca: $%d.\", amount, gPlayer[playerid][pMoney], gPlayer[playerid][pBank]);",
+  "ka": ""
+ },
+ {
+  "id": 1269,
+  "file": "bank/bank.inc",
+  "line": 623,
+  "it": "Deposito eseguito",
+  "ctx": "UI_BankToast(playerid, \"Deposito eseguito\", true);",
+  "ka": ""
+ },
+ {
+  "id": 1270,
+  "file": "bank/bank.inc",
+  "line": 629,
+  "it": "Errore del sistema bancario: nessun importo e' stato spostato. Verifico il saldo, attendi.",
+  "ctx": "Util_Send(playerid, -10270721, \"Errore del sistema bancario: nessun importo e' stato spostato. Verifico il saldo, attendi.\");",
+  "ka": ""
+ },
+ {
+  "id": 1271,
+  "file": "bank/bank.inc",
+  "line": 649,
+  "it": "Importo non valido.",
+  "ctx": "Bank_Reply(playerid, ui, \"Importo non valido.\");",
+  "ka": ""
+ },
+ {
+  "id": 1272,
+  "file": "bank/bank.inc",
+  "line": 654,
+  "it": "Fondi insufficienti sul conto.",
+  "ctx": "Bank_Reply(playerid, ui, \"Fondi insufficienti sul conto.\");",
+  "ka": ""
+ },
+ {
+  "id": 1273,
+  "file": "bank/bank.inc",
+  "line": 661,
+  "it": "Limite %s per prelievo: $%d per operazione.%s",
+  "ctx": "format(msg, 176, \"Limite %s per prelievo: $%d per operazione.%s\", counter ? \"dello sportello\" : \"ATM\", maxOp, counter ? \"\" : \" Usa uno sportello per importi maggiori.\");",
+  "ka": ""
+ },
+ {
+  "id": 1274,
+  "file": "bank/bank.inc",
+  "line": 661,
+  "it": "dello sportello",
+  "ctx": "format(msg, 176, \"Limite %s per prelievo: $%d per operazione.%s\", counter ? \"dello sportello\" : \"ATM\", maxOp, counter ? \"\" : \" Usa uno sportello per importi maggiori.\");",
+  "ka": ""
+ },
+ {
+  "id": 1275,
+  "file": "bank/bank.inc",
+  "line": 661,
+  "it": "ATM",
+  "ctx": "format(msg, 176, \"Limite %s per prelievo: $%d per operazione.%s\", counter ? \"dello sportello\" : \"ATM\", maxOp, counter ? \"\" : \" Usa uno sportello per importi maggiori.\");",
+  "ka": ""
+ },
+ {
+  "id": 1276,
+  "file": "bank/bank.inc",
+  "line": 661,
+  "it": " Usa uno sportello per importi maggiori.",
+  "ctx": "format(msg, 176, \"Limite %s per prelievo: $%d per operazione.%s\", counter ? \"dello sportello\" : \"ATM\", maxOp, counter ? \"\" : \" Usa uno sportello per importi maggiori.\");",
+  "ka": ""
+ },
+ {
+  "id": 1277,
+  "file": "bank/bank.inc",
+  "line": 667,
+  "it": "Hai troppi contanti: non puoi prelevare questa somma.",
+  "ctx": "Bank_Reply(playerid, ui, \"Hai troppi contanti: non puoi prelevare questa somma.\");",
+  "ka": ""
+ },
+ {
+  "id": 1278,
+  "file": "bank/bank.inc",
+  "line": 707,
+  "it": "Non puoi ricevere i contanti (limite raggiunto): prelievo annullato.",
+  "ctx": "Bank_StartUndo(playerid, \"Non puoi ricevere i contanti (limite raggiunto): prelievo annullato.\");",
+  "ka": ""
+ },
+ {
+  "id": 1279,
+  "file": "bank/bank.inc",
+  "line": 719,
+  "it": "Hai prelevato $%d. Contanti: $%d  Banca: $%d.",
+  "ctx": "format(msg, 176, \"Hai prelevato $%d. Contanti: $%d  Banca: $%d.\", amount, gPlayer[playerid][pMoney], gPlayer[playerid][pBank]);",
+  "ka": ""
+ },
+ {
+  "id": 1280,
+  "file": "bank/bank.inc",
+  "line": 723,
+  "it": "Prelievo eseguito",
+  "ctx": "UI_BankToast(playerid, \"Prelievo eseguito\", true);",
+  "ka": ""
+ },
+ {
+  "id": 1281,
+  "file": "bank/bank.inc",
+  "line": 729,
+  "it": "Errore del sistema bancario: nessun importo e' stato spostato. Verifico il saldo, attendi.",
+  "ctx": "Util_Send(playerid, -10270721, \"Errore del sistema bancario: nessun importo e' stato spostato. Verifico il saldo, attendi.\");",
+  "ka": ""
+ },
+ {
+  "id": 1282,
+  "file": "bank/bank.inc",
+  "line": 760,
+  "it": "Operazione annullata: nessun importo spostato. Contanti: $%d  Banca: $%d.",
+  "ctx": "SendClientMessage(i, -1, \"Operazione annullata: nessun importo spostato. Contanti: $%d  Banca: $%d.\", gPlayer[i][pMoney], gPlayer[i][pBank]);",
+  "ka": ""
+ },
+ {
+  "id": 1283,
+  "file": "bank/bank.inc",
+  "line": 773,
+  "it": "ANOMALIA annullamento banca %s op %s esito %d: verificare a mano (saldo e contanti)",
+  "ctx": "format(msg, 176, \"ANOMALIA annullamento banca %s op %s esito %d: verificare a mano (saldo e contanti)\", name, gPlayer[i][pBankOpId], result);",
+  "ka": ""
+ },
+ {
+  "id": 1284,
+  "file": "bank/bank.inc",
+  "line": 776,
+  "it": "Errore bancario non risolto automaticamente: contatta lo staff (segnala data e ora).",
+  "ctx": "Util_Send(i, -10270721, \"Errore bancario non risolto automaticamente: contatta lo staff (segnala data e ora).\");",
+  "ka": ""
+ },
+ {
+  "id": 1285,
+  "file": "bank/bank.inc",
+  "line": 792,
+  "it": "resync banca fallito per %s dopo %d tentativi: verificare a mano",
+  "ctx": "format(msg, 176, \"resync banca fallito per %s dopo %d tentativi: verificare a mano\", name, 3);",
+  "ka": ""
+ },
+ {
+  "id": 1286,
+  "file": "bank/bank.inc",
+  "line": 795,
+  "it": "Impossibile verificare il saldo bancario ora: controlla con /saldo piu' tardi o contatta lo staff.",
+  "ctx": "Util_Send(playerid, -10270721, \"Impossibile verificare il saldo bancario ora: controlla con /saldo piu' tardi o contatta lo staff.\");",
+  "ka": ""
+ },
+ {
+  "id": 1287,
+  "file": "bank/bank.inc",
+  "line": 820,
+  "it": "Saldo bancario verificato: $%d.",
+  "ctx": "SendClientMessage(playerid, -1, \"Saldo bancario verificato: $%d.\", gPlayer[playerid][pBank]);",
+  "ka": ""
+ },
+ {
+  "id": 1288,
+  "file": "bank/bank.inc",
+  "line": 835,
+  "it": "Bonifici sospesi per altri %d secondi (troppe conferme fallite).",
+  "ctx": "format(msg, 176, \"Bonifici sospesi per altri %d secondi (troppe conferme fallite).\", (left + 1000 - 1) / 1000);",
+  "ka": ""
+ },
+ {
+  "id": 1289,
+  "file": "bank/bank.inc",
+  "line": 843,
+  "it": "Servono almeno il livello %d per fare bonifici.",
+  "ctx": "format(msg, 176, \"Servono almeno il livello %d per fare bonifici.\", 3);",
+  "ka": ""
+ },
+ {
+  "id": 1290,
+  "file": "bank/bank.inc",
+  "line": 849,
+  "it": "Servono almeno %d minuti di gioco con questo personaggio per fare bonifici.",
+  "ctx": "format(msg, 176, \"Servono almeno %d minuti di gioco con questo personaggio per fare bonifici.\", 60);",
+  "ka": ""
+ },
+ {
+  "id": 1291,
+  "file": "bank/bank.inc",
+  "line": 855,
+  "it": "Destinatario non valido: deve essere un altro giocatore online e in gioco.",
+  "ctx": "Bank_Reply(playerid, ui, \"Destinatario non valido: deve essere un altro giocatore online e in gioco.\");",
+  "ka": ""
+ },
+ {
+  "id": 1292,
+  "file": "bank/bank.inc",
+  "line": 860,
+  "it": "Importo del bonifico: da $%d a $%d.",
+  "ctx": "format(msg, 176, \"Importo del bonifico: da $%d a $%d.\", 10, 25000);",
+  "ka": ""
+ },
+ {
+  "id": 1293,
+  "file": "bank/bank.inc",
+  "line": 867,
+  "it": "Fondi insufficienti: servono $%d (importo $%d + commissione $%d), hai $%d.",
+  "ctx": "format(msg, 176, \"Fondi insufficienti: servono $%d (importo $%d + commissione $%d), hai $%d.\", total, amount, fee, gPlayer[playerid][pBank]);",
+  "ka": ""
+ },
+ {
+  "id": 1294,
+  "file": "bank/bank.inc",
+  "line": 873,
+  "it": "Il destinatario non puo' ricevere questa somma (conto al limite).",
+  "ctx": "Bank_Reply(playerid, ui, \"Il destinatario non puo' ricevere questa somma (conto al limite).\");",
+  "ka": ""
+ },
+ {
+  "id": 1295,
+  "file": "bank/bank.inc",
+  "line": 878,
+  "it": "Attendi ancora %d secondi prima di un nuovo bonifico.",
+  "ctx": "format(msg, 176, \"Attendi ancora %d secondi prima di un nuovo bonifico.\", (30000 - (now - gPlayer[playerid][pBankLastXferTick]) + 1000 - 1) / 1000);",
+  "ka": ""
+ },
+ {
+  "id": 1296,
+  "file": "bank/bank.inc",
+  "line": 948,
+  "it": "Sistema bancario occupato: riprova tra un attimo.",
+  "ctx": "Bank_Reply(playerid, ui, result == 7 ? \"Sistema bancario occupato: riprova tra un attimo.\" : \"Servizio bancario non disponibile: riprova piu' tardi.\");",
+  "ka": ""
+ },
+ {
+  "id": 1297,
+  "file": "bank/bank.inc",
+  "line": 948,
+  "it": "Servizio bancario non disponibile: riprova piu' tardi.",
+  "ctx": "Bank_Reply(playerid, ui, result == 7 ? \"Sistema bancario occupato: riprova tra un attimo.\" : \"Servizio bancario non disponibile: riprova piu' tardi.\");",
+  "ka": ""
+ },
+ {
+  "id": 1298,
+  "file": "bank/bank.inc",
+  "line": 963,
+  "it": "Attendi ancora %d secondi prima di un nuovo bonifico.",
+  "ctx": "format(msg, 176, \"Attendi ancora %d secondi prima di un nuovo bonifico.\", left);",
+  "ka": ""
+ },
+ {
+  "id": 1299,
+  "file": "bank/bank.inc",
+  "line": 970,
+  "it": "Limite giornaliero di bonifici in uscita: puoi ancora inviare $%d nelle prossime %d ore.",
+  "ctx": "format(msg, 176, \"Limite giornaliero di bonifici in uscita: puoi ancora inviare $%d nelle prossime %d ore.\", room, 24);",
+  "ka": ""
+ },
+ {
+  "id": 1300,
+  "file": "bank/bank.inc",
+  "line": 1023,
+  "it": "La conferma del bonifico e' scaduta: nessun addebito.",
+  "ctx": "Util_Send(playerid, -10270721, \"La conferma del bonifico e' scaduta: nessun addebito.\");",
+  "ka": ""
+ },
+ {
+  "id": 1301,
+  "file": "bank/bank.inc",
+  "line": 1035,
+  "it": "Il destinatario non e' piu' disponibile: bonifico annullato.",
+  "ctx": "Util_Send(playerid, -10270721, \"Il destinatario non e' piu' disponibile: bonifico annullato.\");",
+  "ka": ""
+ },
+ {
+  "id": 1302,
+  "file": "bank/bank.inc",
+  "line": 1054,
+  "it": "%s -> %s $%d (+$%d comm.) op %.8s%s",
+  "ctx": "format(reason, 176, \"%s -> %s $%d (+$%d comm.) op %.8s%s\", sName, tName, amount, fee, gPlayer[playerid][pBankOpId], sameIp ? \" STESSO IP\" : \"\");",
+  "ka": ""
+ },
+ {
+  "id": 1303,
+  "file": "bank/bank.inc",
+  "line": 1054,
+  "it": " STESSO IP",
+  "ctx": "format(reason, 176, \"%s -> %s $%d (+$%d comm.) op %.8s%s\", sName, tName, amount, fee, gPlayer[playerid][pBankOpId], sameIp ? \" STESSO IP\" : \"\");",
+  "ka": ""
+ },
+ {
+  "id": 1304,
+  "file": "bank/bank.inc",
+  "line": 1088,
+  "it": "Bonifico di $%d%s%s eseguito. Commissione: $%d. Saldo: $%d.",
+  "ctx": "SendClientMessage(playerid, 0x66DD66FF, \"Bonifico di $%d%s%s eseguito. Commissione: $%d. Saldo: $%d.\", amount, tName[0] != 0 ? \" a \" : \"\", tName, fee, gPlayer[playerid][pBank]);",
+  "ka": ""
+ },
+ {
+  "id": 1305,
+  "file": "bank/bank.inc",
+  "line": 1092,
+  "it": "Errore del sistema bancario: esito del bonifico incerto. Verifico il saldo, attendi.",
+  "ctx": "Util_Send(playerid, -10270721, \"Errore del sistema bancario: esito del bonifico incerto. Verifico il saldo, attendi.\");",
+  "ka": ""
+ },
+ {
+  "id": 1306,
+  "file": "bank/bank.inc",
+  "line": 1119,
+  "it": "Hai ricevuto un bonifico di $%d%s%s. Saldo: $%d.",
+  "ctx": "SendClientMessage(targetid, 0x66DD66FF, \"Hai ricevuto un bonifico di $%d%s%s. Saldo: $%d.\", amount, sName[0] != 0 ? \" da \" : \"\", sName, gPlayer[targetid][pBank]);",
+  "ka": ""
+ },
+ {
+  "id": 1307,
+  "file": "bank/bank.inc",
+  "line": 1161,
+  "it": "Sistema bancario occupato: riprova tra un attimo.",
+  "ctx": "Bank_Reply(playerid, ui, result == 7 ? \"Sistema bancario occupato: riprova tra un attimo.\" : \"Estratto conto non disponibile: riprova piu' tardi.\");",
+  "ka": ""
+ },
+ {
+  "id": 1308,
+  "file": "bank/bank.inc",
+  "line": 1161,
+  "it": "Estratto conto non disponibile: riprova piu' tardi.",
+  "ctx": "Bank_Reply(playerid, ui, result == 7 ? \"Sistema bancario occupato: riprova tra un attimo.\" : \"Estratto conto non disponibile: riprova piu' tardi.\");",
+  "ka": ""
+ },
+ {
+  "id": 1309,
+  "file": "bank/bank.inc",
+  "line": 1189,
+  "it": "Uso: /deposita importo (intero positivo, vicino a un ATM o sportello)",
+  "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Uso: /deposita importo (intero positivo, vicino a un ATM o sportello)\");",
+  "ka": ""
+ },
+ {
+  "id": 1310,
+  "file": "bank/bank.inc",
+  "line": 1201,
+  "it": "Uso: /preleva importo (intero positivo, vicino a un ATM o sportello)",
+  "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Uso: /preleva importo (intero positivo, vicino a un ATM o sportello)\");",
+  "ka": ""
+ },
+ {
+  "id": 1311,
+  "file": "bank/bank.inc",
+  "line": 1215,
+  "it": "Uso: /bonifico id|nome importo (commissione 2%, serve un ATM o uno sportello)",
+  "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Uso: /bonifico id|nome importo (commissione 2%, serve un ATM o uno sportello)\");",
+  "ka": ""
+ },
+ {
+  "id": 1312,
+  "file": "bank/bank.inc",
+  "line": 1221,
+  "it": "Piu' giocatori corrispondono: usa l'ID o un nome piu' preciso.",
+  "ctx": "Util_Send(playerid, -10270721, \"Piu' giocatori corrispondono: usa l'ID o un nome piu' preciso.\");",
+  "ka": ""
+ },
+ {
+  "id": 1313,
+  "file": "bank/bank.inc",
+  "line": 1226,
+  "it": "Giocatore non trovato tra quelli in gioco.",
+  "ctx": "Util_Send(playerid, -10270721, \"Giocatore non trovato tra quelli in gioco.\");",
+  "ka": ""
+ },
+ {
+  "id": 1314,
+  "file": "bank/bank.inc",
+  "line": 1244,
+  "it": "Banca - Sportello\\nUsa /atm",
+  "ctx": "g_BankLabel[i] = Lang_Create3DTextLabel(counter ? \"Banca - Sportello\\nUsa /atm\" : \"ATM\\nUsa /atm\", 0x66DD66FF, s_BankPoints[i][0], s_BankPoints[i][1], (1.0 + s_BankPoints[i][2]), 12.0, 0, false);",
+  "ka": ""
+ },
+ {
+  "id": 1315,
+  "file": "bank/bank.inc",
+  "line": 1244,
+  "it": "ATM\\nUsa /atm",
+  "ctx": "g_BankLabel[i] = Lang_Create3DTextLabel(counter ? \"Banca - Sportello\\nUsa /atm\" : \"ATM\\nUsa /atm\", 0x66DD66FF, s_BankPoints[i][0], s_BankPoints[i][1], (1.0 + s_BankPoints[i][2]), 12.0, 0, false);",
+  "ka": ""
+ },
+ {
+  "id": 1316,
+  "file": "bank/bank.inc",
+  "line": 1282,
+  "it": "%s esce con operazione bancaria %d in volo (importo %d, op %s)",
+  "ctx": "format(msg, 176, \"%s esce con operazione bancaria %d in volo (importo %d, op %s)\", name, gPlayer[playerid][pBankOp], gPlayer[playerid][pBankOpAmount], gPlayer[playerid][pBankOpId]);",
+  "ka": ""
+ },
+ {
+  "id": 1964,
+  "file": "cef/cef_bridge.inc",
+  "line": 130,
+  "it": "Il telefono CityOS richiede il client CEF. Comandi: /contratti · /contratto · /quartiere · /reputazione · /saldo",
+  "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Il telefono CityOS richiede il client CEF. Comandi: /contratti · /contratto · /quartiere · /reputazione · /saldo\");",
+  "ka": ""
+ },
+ {
+  "id": 1965,
+  "file": "cef/cef_bridge.inc",
+  "line": 176,
+  "it": "pagina pronta per il giocatore %d",
+  "ctx": "format(msg, 64, \"pagina pronta per il giocatore %d\", playerid);",
+  "ka": ""
+ },
+ {
+  "id": 1966,
+  "file": "cef/cef_bridge.inc",
+  "line": 329,
+  "it": "Job Center segnato sulla mappa",
+  "ctx": "CefUI_Toast(playerid, \"Job Center segnato sulla mappa\", 1);",
+  "ka": ""
+ },
+ {
+  "id": 1967,
+  "file": "character/character.inc",
+  "line": 228,
+  "it": "nuovo personaggio %d (%s)",
+  "ctx": "format(msg, 128, \"nuovo personaggio %d (%s)\", charId, name);",
+  "ka": ""
+ },
+ {
+  "id": 1968,
+  "file": "character/spawn_select.inc",
+  "line": 347,
+  "it": "Unity Station",
+  "ctx": "strcat(sub, \"Unity Station\", ssize);",
+  "ka": ""
+ },
+ {
+  "id": 1769,
+  "file": "cityos/cityos.inc",
+  "line": 3,
+  "it": "La panetteria di Idlewood ha riaperto dopo l'estate: il pane esce caldo alle sei.",
+  "ctx": "{\"La panetteria di Idlewood ha riaperto dopo l'estate: il pane esce caldo alle sei.\", \"Alla Casa del Quartiere cercano volontari per il doposcuola del giovedi'.\", \"Il campetto dietro la stazione ha di",
+  "ka": ""
+ },
+ {
+  "id": 1770,
+  "file": "cityos/cityos.inc",
+  "line": 3,
+  "it": "Alla Casa del Quartiere cercano volontari per il doposcuola del giovedi'.",
+  "ctx": "{\"La panetteria di Idlewood ha riaperto dopo l'estate: il pane esce caldo alle sei.\", \"Alla Casa del Quartiere cercano volontari per il doposcuola del giovedi'.\", \"Il campetto dietro la stazione ha di",
+  "ka": ""
+ },
+ {
+  "id": 1771,
+  "file": "cityos/cityos.inc",
+  "line": 3,
+  "it": "Il campetto dietro la stazione ha di nuovo le reti: qualcuno le ha ricucite a mano.",
+  "ctx": "{\"La panetteria di Idlewood ha riaperto dopo l'estate: il pane esce caldo alle sei.\", \"Alla Casa del Quartiere cercano volontari per il doposcuola del giovedi'.\", \"Il campetto dietro la stazione ha di",
+  "ka": ""
+ },
+ {
+  "id": 1772,
+  "file": "cityos/cityos.inc",
+  "line": 3,
+  "it": "Un vecchio meccanico ripara bici gratis ai ragazzi, basta portargli un caffe'.",
+  "ctx": "{\"La panetteria di Idlewood ha riaperto dopo l'estate: il pane esce caldo alle sei.\", \"Alla Casa del Quartiere cercano volontari per il doposcuola del giovedi'.\", \"Il campetto dietro la stazione ha di",
+  "ka": ""
+ },
+ {
+  "id": 1773,
+  "file": "cityos/cityos.inc",
+  "line": 3,
+  "it": "Le signore del palazzo giallo organizzano una cena di quartiere sabato sera.",
+  "ctx": "{\"La panetteria di Idlewood ha riaperto dopo l'estate: il pane esce caldo alle sei.\", \"Alla Casa del Quartiere cercano volontari per il doposcuola del giovedi'.\", \"Il campetto dietro la stazione ha di",
+  "ka": ""
+ },
+ {
+  "id": 1774,
+  "file": "cityos/cityos.inc",
+  "line": 3,
+  "it": "Il negozio all'angolo ha appeso una lavagna: chi ha bisogno lascia un biglietto.",
+  "ctx": "{\"La panetteria di Idlewood ha riaperto dopo l'estate: il pane esce caldo alle sei.\", \"Alla Casa del Quartiere cercano volontari per il doposcuola del giovedi'.\", \"Il campetto dietro la stazione ha di",
+  "ka": ""
+ },
+ {
+  "id": 1775,
+  "file": "cityos/cityos.inc",
+  "line": 3,
+  "it": "Dicono che il murale vicino alla fermata sara' restaurato dagli stessi artisti.",
+  "ctx": "{\"La panetteria di Idlewood ha riaperto dopo l'estate: il pane esce caldo alle sei.\", \"Alla Casa del Quartiere cercano volontari per il doposcuola del giovedi'.\", \"Il campetto dietro la stazione ha di",
+  "ka": ""
+ },
+ {
+  "id": 1776,
+  "file": "cityos/cityos.inc",
+  "line": 3,
+  "it": "Chi esce dal turno di notte trova sempre una luce accesa alla Casa del Quartiere.",
+  "ctx": "{\"La panetteria di Idlewood ha riaperto dopo l'estate: il pane esce caldo alle sei.\", \"Alla Casa del Quartiere cercano volontari per il doposcuola del giovedi'.\", \"Il campetto dietro la stazione ha di",
+  "ka": ""
+ },
+ {
+  "id": 1777,
+  "file": "cityos/cityos.inc",
+  "line": 4,
+  "it": "A Ganton il barbiere sotto i portici taglia i capelli ai ragazzi prima degli esami.",
+  "ctx": "{\"A Ganton il barbiere sotto i portici taglia i capelli ai ragazzi prima degli esami.\", \"Il negozio di Ganton aspetta un carico di frutta: chi consegna e' il benvenuto.\", \"Sulla Grove hanno ridipinto ",
+  "ka": ""
+ },
+ {
+  "id": 1778,
+  "file": "cityos/cityos.inc",
+  "line": 4,
+  "it": "Il negozio di Ganton aspetta un carico di frutta: chi consegna e' il benvenuto.",
+  "ctx": "{\"A Ganton il barbiere sotto i portici taglia i capelli ai ragazzi prima degli esami.\", \"Il negozio di Ganton aspetta un carico di frutta: chi consegna e' il benvenuto.\", \"Sulla Grove hanno ridipinto ",
+  "ka": ""
+ },
+ {
+  "id": 1779,
+  "file": "cityos/cityos.inc",
+  "line": 4,
+  "it": "Sulla Grove hanno ridipinto le panchine, ognuna con un colore diverso.",
+  "ctx": "{\"A Ganton il barbiere sotto i portici taglia i capelli ai ragazzi prima degli esami.\", \"Il negozio di Ganton aspetta un carico di frutta: chi consegna e' il benvenuto.\", \"Sulla Grove hanno ridipinto ",
+  "ka": ""
+ },
+ {
+  "id": 1780,
+  "file": "cityos/cityos.inc",
+  "line": 4,
+  "it": "Un gruppo di madri accompagna i bambini a scuola a turno, a piedi.",
+  "ctx": "{\"A Ganton il barbiere sotto i portici taglia i capelli ai ragazzi prima degli esami.\", \"Il negozio di Ganton aspetta un carico di frutta: chi consegna e' il benvenuto.\", \"Sulla Grove hanno ridipinto ",
+  "ka": ""
+ },
+ {
+  "id": 1781,
+  "file": "cityos/cityos.inc",
+  "line": 4,
+  "it": "Il torneo di basket del venerdi' quest'anno raccoglie fondi per il campetto.",
+  "ctx": "{\"A Ganton il barbiere sotto i portici taglia i capelli ai ragazzi prima degli esami.\", \"Il negozio di Ganton aspetta un carico di frutta: chi consegna e' il benvenuto.\", \"Sulla Grove hanno ridipinto ",
+  "ka": ""
+ },
+ {
+  "id": 1782,
+  "file": "cityos/cityos.inc",
+  "line": 4,
+  "it": "Un ex corriere ha aperto una piccola officina: assume chi vuole imparare.",
+  "ctx": "{\"A Ganton il barbiere sotto i portici taglia i capelli ai ragazzi prima degli esami.\", \"Il negozio di Ganton aspetta un carico di frutta: chi consegna e' il benvenuto.\", \"Sulla Grove hanno ridipinto ",
+  "ka": ""
+ },
+ {
+  "id": 1783,
+  "file": "cityos/cityos.inc",
+  "line": 4,
+  "it": "Le luci della via principale sono tornate: i commercianti hanno fatto colletta.",
+  "ctx": "{\"A Ganton il barbiere sotto i portici taglia i capelli ai ragazzi prima degli esami.\", \"Il negozio di Ganton aspetta un carico di frutta: chi consegna e' il benvenuto.\", \"Sulla Grove hanno ridipinto ",
+  "ka": ""
+ },
+ {
+  "id": 1784,
+  "file": "cityos/cityos.inc",
+  "line": 4,
+  "it": "Dicono che il vecchio cinema all'aperto potrebbe tornare per una sera d'estate.",
+  "ctx": "{\"A Ganton il barbiere sotto i portici taglia i capelli ai ragazzi prima degli esami.\", \"Il negozio di Ganton aspetta un carico di frutta: chi consegna e' il benvenuto.\", \"Sulla Grove hanno ridipinto ",
+  "ka": ""
+ },
+ {
+  "id": 1785,
+  "file": "cityos/cityos.inc",
+  "line": 5,
+  "it": "Al magazzino di Jefferson servono autisti puntuali: chi lavora bene viene ricordato.",
+  "ctx": "{\"Al magazzino di Jefferson servono autisti puntuali: chi lavora bene viene ricordato.\", \"Il motel sulla collina offre la colazione a chi aiuta a scaricare le merci.\", \"Un coro di quartiere prova ogni",
+  "ka": ""
+ },
+ {
+  "id": 1786,
+  "file": "cityos/cityos.inc",
+  "line": 5,
+  "it": "Il motel sulla collina offre la colazione a chi aiuta a scaricare le merci.",
+  "ctx": "{\"Al magazzino di Jefferson servono autisti puntuali: chi lavora bene viene ricordato.\", \"Il motel sulla collina offre la colazione a chi aiuta a scaricare le merci.\", \"Un coro di quartiere prova ogni",
+  "ka": ""
+ },
+ {
+  "id": 1787,
+  "file": "cityos/cityos.inc",
+  "line": 5,
+  "it": "Un coro di quartiere prova ogni martedi' nella sala della chiesa.",
+  "ctx": "{\"Al magazzino di Jefferson servono autisti puntuali: chi lavora bene viene ricordato.\", \"Il motel sulla collina offre la colazione a chi aiuta a scaricare le merci.\", \"Un coro di quartiere prova ogni",
+  "ka": ""
+ },
+ {
+  "id": 1788,
+  "file": "cityos/cityos.inc",
+  "line": 5,
+  "it": "La lavanderia a gettoni e' diventata il posto dove ci si scambia le notizie.",
+  "ctx": "{\"Al magazzino di Jefferson servono autisti puntuali: chi lavora bene viene ricordato.\", \"Il motel sulla collina offre la colazione a chi aiuta a scaricare le merci.\", \"Un coro di quartiere prova ogni",
+  "ka": ""
+ },
+ {
+  "id": 1789,
+  "file": "cityos/cityos.inc",
+  "line": 5,
+  "it": "I ragazzi del quartiere puliscono il parco ogni prima domenica del mese.",
+  "ctx": "{\"Al magazzino di Jefferson servono autisti puntuali: chi lavora bene viene ricordato.\", \"Il motel sulla collina offre la colazione a chi aiuta a scaricare le merci.\", \"Un coro di quartiere prova ogni",
+  "ka": ""
+ },
+ {
+  "id": 1790,
+  "file": "cityos/cityos.inc",
+  "line": 5,
+  "it": "Un fornaio di Jefferson regala le pagnotte invendute alla mensa la sera.",
+  "ctx": "{\"Al magazzino di Jefferson servono autisti puntuali: chi lavora bene viene ricordato.\", \"Il motel sulla collina offre la colazione a chi aiuta a scaricare le merci.\", \"Un coro di quartiere prova ogni",
+  "ka": ""
+ },
+ {
+  "id": 1791,
+  "file": "cityos/cityos.inc",
+  "line": 5,
+  "it": "La fermata dell'autobus ha una nuova pensilina: costruita da chi la usa.",
+  "ctx": "{\"Al magazzino di Jefferson servono autisti puntuali: chi lavora bene viene ricordato.\", \"Il motel sulla collina offre la colazione a chi aiuta a scaricare le merci.\", \"Un coro di quartiere prova ogni",
+  "ka": ""
+ },
+ {
+  "id": 1792,
+  "file": "cityos/cityos.inc",
+  "line": 5,
+  "it": "Dicono che chi consegna con cura a Jefferson trova sempre una porta aperta.",
+  "ctx": "{\"Al magazzino di Jefferson servono autisti puntuali: chi lavora bene viene ricordato.\", \"Il motel sulla collina offre la colazione a chi aiuta a scaricare le merci.\", \"Un coro di quartiere prova ogni",
+  "ka": ""
+ },
+ {
+  "id": 1793,
+  "file": "cityos/cityos.inc",
+  "line": 122,
+  "it": "CityOS_OnDistrictEvent",
+  "ctx": "LD_Listen(\"CityOS_OnDistrictEvent\", 30);",
+  "ka": ""
+ },
+ {
+  "id": 1794,
+  "file": "cityos/cityos.inc",
+  "line": 181,
+  "it": "Uso: /contratti accetta <numero contratto>",
+  "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Uso: /contratti accetta <numero contratto>\");",
+  "ka": ""
+ },
+ {
+  "id": 1795,
+  "file": "cityos/cityos.inc",
+  "line": 206,
+  "it": "Non hai un contratto da lasciare.",
+  "ctx": "Util_Send(playerid, -10270721, \"Non hai un contratto da lasciare.\");",
+  "ka": ""
+ },
+ {
+  "id": 1796,
+  "file": "cityos/cityos.inc",
+  "line": 216,
+  "it": "La tua richiesta di contratto e' in elaborazione: attendi un istante.",
+  "ctx": "Util_Send(playerid, -1, \"La tua richiesta di contratto e' in elaborazione: attendi un istante.\");",
+  "ka": ""
+ },
+ {
+  "id": 1797,
+  "file": "cityos/cityos.inc",
+  "line": 267,
+  "it": "Uso: /quartiere [idlewood|ganton|jefferson]",
+  "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Uso: /quartiere [idlewood|ganton|jefferson]\");",
+  "ka": ""
+ },
+ {
+  "id": 1798,
+  "file": "cityos/cityos.inc",
+  "line": 289,
+  "it": "Sto ancora caricando i tuoi dati: riprova tra un istante.",
+  "ctx": "Util_Send(playerid, -10270721, \"Sto ancora caricando i tuoi dati: riprova tra un istante.\");",
+  "ka": ""
+ },
+ {
+  "id": 1799,
+  "file": "cityos/cityos.inc",
+  "line": 314,
+  "it": "Questo contratto non e' piu' attivo.",
+  "ctx": "Util_Send(playerid, -10270721, \"Questo contratto non e' piu' attivo.\");",
+  "ka": ""
+ },
+ {
+  "id": 1969,
+  "file": "commands/admin_commands.inc",
+  "line": 6,
+  "it": "Giocatore non valido.",
+  "ctx": "Util_Send(playerid, -10270721, \"Giocatore non valido.\");",
+  "ka": ""
+ },
+ {
+  "id": 1970,
+  "file": "commands/admin_commands.inc",
+  "line": 22,
+  "it": "Uso: /goto id",
+  "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Uso: /goto id\");",
+  "ka": ""
+ },
+ {
+  "id": 1971,
+  "file": "commands/admin_commands.inc",
+  "line": 31,
+  "it": "Giocatore non valido.",
+  "ctx": "Util_Send(playerid, -10270721, \"Giocatore non valido.\");",
+  "ka": ""
+ },
+ {
+  "id": 1972,
+  "file": "commands/admin_commands.inc",
+  "line": 42,
+  "it": "Teletrasportato presso %s.",
+  "ctx": "SendClientMessage(playerid, -5963521, \"Teletrasportato presso %s.\", tn);",
+  "ka": ""
+ },
+ {
+  "id": 1973,
+  "file": "commands/admin_commands.inc",
+  "line": 43,
+  "it": "%s /goto %s",
+  "ctx": "format(msg, 128, \"%s /goto %s\", an, tn);",
+  "ka": ""
+ },
+ {
+  "id": 1974,
+  "file": "commands/admin_commands.inc",
+  "line": 61,
+  "it": "Uso: /setlevel id livello",
+  "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Uso: /setlevel id livello\");",
+  "ka": ""
+ },
+ {
+  "id": 1975,
+  "file": "commands/admin_commands.inc",
+  "line": 70,
+  "it": "Livello non valido (%d-%d).",
+  "ctx": "SendClientMessage(playerid, -10270721, \"Livello non valido (%d-%d).\", 1, 50);",
+  "ka": ""
+ },
+ {
+  "id": 1976,
+  "file": "commands/admin_commands.inc",
+  "line": 81,
+  "it": "Livello di %s impostato a %d.",
+  "ctx": "SendClientMessage(playerid, -5963521, \"Livello di %s impostato a %d.\", tn, level);",
+  "ka": ""
+ },
+ {
+  "id": 1977,
+  "file": "commands/admin_commands.inc",
+  "line": 84,
+  "it": "Il tuo livello e' stato impostato a %d dallo staff.",
+  "ctx": "SendClientMessage(targetid, -2994689, \"Il tuo livello e' stato impostato a %d dallo staff.\", level);",
+  "ka": ""
+ },
+ {
+  "id": 1978,
+  "file": "commands/admin_commands.inc",
+  "line": 86,
+  "it": "%s /setlevel %s %d",
+  "ctx": "format(msg, 128, \"%s /setlevel %s %d\", an, tn, level);",
+  "ka": ""
+ },
+ {
+  "id": 1979,
+  "file": "commands/admin_commands.inc",
+  "line": 88,
+  "it": "livello %d",
+  "ctx": "format(msg, 128, \"livello %d\", level);",
+  "ka": ""
+ },
+ {
+  "id": 1980,
+  "file": "commands/admin_commands.inc",
+  "line": 90,
+  "it": "impostato il livello di",
+  "ctx": "Admin_AdmCmd(an, \"impostato il livello di\", tn, msg, \"\");",
+  "ka": ""
+ },
+ {
+  "id": 1981,
+  "file": "commands/admin_commands.inc",
+  "line": 105,
+  "it": "Uso: /setmoney id importo",
+  "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Uso: /setmoney id importo\");",
+  "ka": ""
+ },
+ {
+  "id": 1982,
+  "file": "commands/admin_commands.inc",
+  "line": 114,
+  "it": "Importo non valido (0-%d).",
+  "ctx": "SendClientMessage(playerid, -10270721, \"Importo non valido (0-%d).\", 0x3B9ACA00);",
+  "ka": ""
+ },
+ {
+  "id": 1983,
+  "file": "commands/admin_commands.inc",
+  "line": 121,
+  "it": "Contanti di %s impostati a $%d.",
+  "ctx": "SendClientMessage(playerid, -5963521, \"Contanti di %s impostati a $%d.\", tn, amount);",
+  "ka": ""
+ },
+ {
+  "id": 1984,
+  "file": "commands/admin_commands.inc",
+  "line": 124,
+  "it": "I tuoi contanti sono stati impostati a $%d dallo staff.",
+  "ctx": "SendClientMessage(targetid, 0x66DD66FF, \"I tuoi contanti sono stati impostati a $%d dallo staff.\", amount);",
+  "ka": ""
+ },
+ {
+  "id": 1985,
+  "file": "commands/admin_commands.inc",
+  "line": 126,
+  "it": "%s /setmoney %s %d",
+  "ctx": "format(msg, 128, \"%s /setmoney %s %d\", an, tn, amount);",
+  "ka": ""
+ },
+ {
+  "id": 1986,
+  "file": "commands/admin_commands.inc",
+  "line": 128,
+  "it": "contanti %d",
+  "ctx": "format(msg, 128, \"contanti %d\", amount);",
+  "ka": ""
+ },
+ {
+  "id": 1987,
+  "file": "commands/admin_commands.inc",
+  "line": 130,
+  "it": "impostato i contanti di",
+  "ctx": "Admin_AdmCmd(an, \"impostato i contanti di\", tn, msg, \"\");",
+  "ka": ""
+ },
+ {
+  "id": 1988,
+  "file": "commands/admin_commands.inc",
+  "line": 142,
+  "it": "Giocatore non valido.",
+  "ctx": "Util_Send(playerid, -10270721, \"Giocatore non valido.\");",
+  "ka": ""
+ },
+ {
+  "id": 1989,
+  "file": "commands/admin_commands.inc",
+  "line": 147,
+  "it": "Non puoi agire su questo giocatore.",
+  "ctx": "Util_Send(playerid, -10270721, \"Non puoi agire su questo giocatore.\");",
+  "ka": ""
+ },
+ {
+  "id": 1990,
+  "file": "commands/admin_commands.inc",
+  "line": 172,
+  "it": "Uso: /a testo",
+  "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Uso: /a testo\");",
+  "ka": ""
+ },
+ {
+  "id": 1991,
+  "file": "commands/admin_commands.inc",
+  "line": 178,
+  "it": "[STAFF] %s (%s): %s",
+  "ctx": "format(msg, 256, \"[STAFF] %s (%s): %s\", name, lvl, text);",
+  "ka": ""
+ },
+ {
+  "id": 1992,
+  "file": "commands/admin_commands.inc",
+  "line": 203,
+  "it": "Uso: /rr id_report testo",
+  "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Uso: /rr id_report testo\");",
+  "ka": ""
+ },
+ {
+  "id": 1993,
+  "file": "commands/admin_commands.inc",
+  "line": 210,
+  "it": "Report non trovato.",
+  "ctx": "Util_Send(playerid, -10270721, \"Report non trovato.\");",
+  "ka": ""
+ },
+ {
+  "id": 1994,
+  "file": "commands/admin_commands.inc",
+  "line": 214,
+  "it": "L'autore del report non e' piu' online.",
+  "ctx": "Util_Send(playerid, -10270721, \"L'autore del report non e' piu' online.\");",
+  "ka": ""
+ },
+ {
+  "id": 1995,
+  "file": "commands/admin_commands.inc",
+  "line": 218,
+  "it": "Risposta inviata.",
+  "ctx": "Util_Send(playerid, 0x66DD66FF, \"Risposta inviata.\");",
+  "ka": ""
+ },
+ {
+  "id": 1996,
+  "file": "commands/admin_commands.inc",
+  "line": 234,
+  "it": "Uso: /gethere id",
+  "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Uso: /gethere id\");",
+  "ka": ""
+ },
+ {
+  "id": 1997,
+  "file": "commands/admin_commands.inc",
+  "line": 248,
+  "it": "Sei stato teletrasportato da %s.",
+  "ctx": "SendClientMessage(targetid, -5963521, \"Sei stato teletrasportato da %s.\", an);",
+  "ka": ""
+ },
+ {
+  "id": 1998,
+  "file": "commands/admin_commands.inc",
+  "line": 264,
+  "it": "Uso: /freeze id [motivo]",
+  "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Uso: /freeze id [motivo]\");",
+  "ka": ""
+ },
+ {
+  "id": 1999,
+  "file": "commands/admin_commands.inc",
+  "line": 281,
+  "it": "Sei stato congelato da %s%s%s.",
+  "ctx": "SendClientMessage(targetid, -10270721, \"Sei stato congelato da %s%s%s.\", an, reason[0] != 0 ? \": \" : \"\", reason);",
+  "ka": ""
+ },
+ {
+  "id": 2000,
+  "file": "commands/admin_commands.inc",
+  "line": 297,
+  "it": "Uso: /unfreeze id",
+  "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Uso: /unfreeze id\");",
+  "ka": ""
+ },
+ {
+  "id": 2001,
+  "file": "commands/admin_commands.inc",
+  "line": 309,
+  "it": "Sei stato scongelato da %s.",
+  "ctx": "SendClientMessage(targetid, 0x66DD66FF, \"Sei stato scongelato da %s.\", an);",
+  "ka": ""
+ },
+ {
+  "id": 2002,
+  "file": "commands/admin_commands.inc",
+  "line": 326,
+  "it": "Uso: /sethp id %d-%d",
+  "ctx": "SendClientMessage(playerid, 0x99CCFFFF, \"Uso: /sethp id %d-%d\", 1, 100);",
+  "ka": ""
+ },
+ {
+  "id": 2003,
+  "file": "commands/admin_commands.inc",
+  "line": 335,
+  "it": "Non puoi agire su questo giocatore.",
+  "ctx": "Util_Send(playerid, -10270721, \"Non puoi agire su questo giocatore.\");",
+  "ka": ""
+ },
+ {
+  "id": 2004,
+  "file": "commands/admin_commands.inc",
+  "line": 340,
+  "it": "Vita non valida (%d-%d).",
+  "ctx": "SendClientMessage(playerid, -10270721, \"Vita non valida (%d-%d).\", 1, 100);",
+  "ka": ""
+ },
+ {
+  "id": 2005,
+  "file": "commands/admin_commands.inc",
+  "line": 347,
+  "it": "vita %d",
+  "ctx": "format(msg, 128, \"vita %d\", hp);",
+  "ka": ""
+ },
+ {
+  "id": 2006,
+  "file": "commands/admin_commands.inc",
+  "line": 348,
+  "it": "impostato la vita di",
+  "ctx": "Admin_AdmCmd(an, \"impostato la vita di\", tn, msg, \"\");",
+  "ka": ""
+ },
+ {
+  "id": 2007,
+  "file": "commands/admin_commands.inc",
+  "line": 363,
+  "it": "Uso: /kick id motivo (motivo di almeno %d caratteri)",
+  "ctx": "SendClientMessage(playerid, 0x99CCFFFF, \"Uso: /kick id motivo (motivo di almeno %d caratteri)\", 3);",
+  "ka": ""
+ },
+ {
+  "id": 2008,
+  "file": "commands/admin_commands.inc",
+  "line": 375,
+  "it": "Sei stato espulso da %s: %s",
+  "ctx": "format(msg, 256, \"Sei stato espulso da %s: %s\", an, reason);",
+  "ka": ""
+ },
+ {
+  "id": 2009,
+  "file": "commands/admin_commands.inc",
+  "line": 401,
+  "it": "Uso: /mute id [minuti 1-%d] motivo",
+  "ctx": "SendClientMessage(playerid, 0x99CCFFFF, \"Uso: /mute id [minuti 1-%d] motivo\", 1440);",
+  "ka": ""
+ },
+ {
+  "id": 2010,
+  "file": "commands/admin_commands.inc",
+  "line": 406,
+  "it": "Durata non valida (1-%d minuti).",
+  "ctx": "SendClientMessage(playerid, -10270721, \"Durata non valida (1-%d minuti).\", 1440);",
+  "ka": ""
+ },
+ {
+  "id": 2011,
+  "file": "commands/admin_commands.inc",
+  "line": 418,
+  "it": "%s (%d min)",
+  "ctx": "format(msg, 256, \"%s (%d min)\", reason, minutes);",
+  "ka": ""
+ },
+ {
+  "id": 2012,
+  "file": "commands/admin_commands.inc",
+  "line": 419,
+  "it": "Sei stato mutato da %s per %d minuti: %s",
+  "ctx": "SendClientMessage(targetid, -10270721, \"Sei stato mutato da %s per %d minuti: %s\", an, minutes, reason);",
+  "ka": ""
+ },
+ {
+  "id": 2013,
+  "file": "commands/admin_commands.inc",
+  "line": 435,
+  "it": "Uso: /unmute id",
+  "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Uso: /unmute id\");",
+  "ka": ""
+ },
+ {
+  "id": 2014,
+  "file": "commands/admin_commands.inc",
+  "line": 444,
+  "it": "Il giocatore non e' mutato.",
+  "ctx": "Util_Send(playerid, -10270721, \"Il giocatore non e' mutato.\");",
+  "ka": ""
+ },
+ {
+  "id": 2015,
+  "file": "commands/admin_commands.inc",
+  "line": 452,
+  "it": "Il tuo mute e' stato rimosso da %s.",
+  "ctx": "SendClientMessage(targetid, 0x66DD66FF, \"Il tuo mute e' stato rimosso da %s.\", an);",
+  "ka": ""
+ },
+ {
+  "id": 2016,
+  "file": "commands/admin_commands.inc",
+  "line": 468,
+  "it": "Uso: /warn id motivo (motivo di almeno %d caratteri)",
+  "ctx": "SendClientMessage(playerid, 0x99CCFFFF, \"Uso: /warn id motivo (motivo di almeno %d caratteri)\", 3);",
+  "ka": ""
+ },
+ {
+  "id": 2017,
+  "file": "commands/admin_commands.inc",
+  "line": 477,
+  "it": "Operazione precedente ancora in corso, attendi.",
+  "ctx": "Util_Send(playerid, -10270721, \"Operazione precedente ancora in corso, attendi.\");",
+  "ka": ""
+ },
+ {
+  "id": 2018,
+  "file": "commands/admin_commands.inc",
+  "line": 498,
+  "it": "Uso: /setadmin id|nome_account %d-%d",
+  "ctx": "SendClientMessage(playerid, 0x99CCFFFF, \"Uso: /setadmin id|nome_account %d-%d\", 0, 3);",
+  "ka": ""
+ },
+ {
+  "id": 2019,
+  "file": "commands/admin_commands.inc",
+  "line": 503,
+  "it": "Livello non valido (%d-%d).",
+  "ctx": "SendClientMessage(playerid, -10270721, \"Livello non valido (%d-%d).\", 0, 3);",
+  "ka": ""
+ },
+ {
+  "id": 2020,
+  "file": "commands/admin_commands.inc",
+  "line": 512,
+  "it": "Giocatore non valido.",
+  "ctx": "Util_Send(playerid, -10270721, \"Giocatore non valido.\");",
+  "ka": ""
+ },
+ {
+  "id": 2021,
+  "file": "commands/admin_commands.inc",
+  "line": 524,
+  "it": "Non puoi agire su questo giocatore.",
+  "ctx": "Util_Send(playerid, -10270721, \"Non puoi agire su questo giocatore.\");",
+  "ka": ""
+ },
+ {
+  "id": 2022,
+  "file": "commands/admin_commands.inc",
+  "line": 530,
+  "it": "Il tuo livello staff e' stato impostato a %d da %s.",
+  "ctx": "SendClientMessage(targetid, -5963521, \"Il tuo livello staff e' stato impostato a %d da %s.\", level, an);",
+  "ka": ""
+ },
+ {
+  "id": 2023,
+  "file": "commands/admin_commands.inc",
+  "line": 531,
+  "it": "livello %d",
+  "ctx": "format(msg, 128, \"livello %d\", level);",
+  "ka": ""
+ },
+ {
+  "id": 2024,
+  "file": "commands/admin_commands.inc",
+  "line": 532,
+  "it": "impostato il livello staff di",
+  "ctx": "Admin_AdmCmd(an, \"impostato il livello staff di\", tn, msg, \"\");",
+  "ka": ""
+ },
+ {
+  "id": 2025,
+  "file": "commands/admin_commands.inc",
+  "line": 538,
+  "it": "Giocatore non valido.",
+  "ctx": "Util_Send(playerid, -10270721, \"Giocatore non valido.\");",
+  "ka": ""
+ },
+ {
+  "id": 2026,
+  "file": "commands/admin_commands.inc",
+  "line": 543,
+  "it": "Operazione precedente ancora in corso, attendi.",
+  "ctx": "Util_Send(playerid, -10270721, \"Operazione precedente ancora in corso, attendi.\");",
+  "ka": ""
+ },
+ {
+  "id": 2027,
+  "file": "commands/admin_commands.inc",
+  "line": 562,
+  "it": "Uso: /givemoney id importo",
+  "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Uso: /givemoney id importo\");",
+  "ka": ""
+ },
+ {
+  "id": 2028,
+  "file": "commands/admin_commands.inc",
+  "line": 571,
+  "it": "Importo non valido (1-%d).",
+  "ctx": "SendClientMessage(playerid, -10270721, \"Importo non valido (1-%d).\", 100000);",
+  "ka": ""
+ },
+ {
+  "id": 2029,
+  "file": "commands/admin_commands.inc",
+  "line": 577,
+  "it": "Attendi ancora %d secondi.",
+  "ctx": "SendClientMessage(playerid, -10270721, \"Attendi ancora %d secondi.\", (10000 - elapsed + 1000 - 1) / 1000);",
+  "ka": ""
+ },
+ {
+  "id": 2030,
+  "file": "commands/admin_commands.inc",
+  "line": 582,
+  "it": "Il destinatario non puo' ricevere questa somma.",
+  "ctx": "Util_Send(playerid, -10270721, \"Il destinatario non puo' ricevere questa somma.\");",
+  "ka": ""
+ },
+ {
+  "id": 2031,
+  "file": "commands/admin_commands.inc",
+  "line": 590,
+  "it": "Hai ricevuto $%d dallo staff.",
+  "ctx": "SendClientMessage(targetid, 0x66DD66FF, \"Hai ricevuto $%d dallo staff.\", amount);",
+  "ka": ""
+ },
+ {
+  "id": 2032,
+  "file": "commands/admin_commands.inc",
+  "line": 592,
+  "it": "dato contanti a",
+  "ctx": "Admin_AdmCmd(an, \"dato contanti a\", tn, msg, \"\");",
+  "ka": ""
+ },
+ {
+  "id": 2033,
+  "file": "commands/admin_commands.inc",
+  "line": 608,
+  "it": "Uso: /ban id minuti(0=permanente, max %d) motivo",
+  "ctx": "SendClientMessage(playerid, 0x99CCFFFF, \"Uso: /ban id minuti(0=permanente, max %d) motivo\", 525600);",
+  "ka": ""
+ },
+ {
+  "id": 2034,
+  "file": "commands/admin_commands.inc",
+  "line": 613,
+  "it": "Durata non valida (0-%d minuti).",
+  "ctx": "SendClientMessage(playerid, -10270721, \"Durata non valida (0-%d minuti).\", 525600);",
+  "ka": ""
+ },
+ {
+  "id": 2035,
+  "file": "commands/admin_commands.inc",
+  "line": 622,
+  "it": "Operazione precedente ancora in corso, attendi.",
+  "ctx": "Util_Send(playerid, -10270721, \"Operazione precedente ancora in corso, attendi.\");",
+  "ka": ""
+ },
+ {
+  "id": 2036,
+  "file": "commands/admin_commands.inc",
+  "line": 643,
+  "it": "Uso: /unban nome_account",
+  "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Uso: /unban nome_account\");",
+  "ka": ""
+ },
+ {
+  "id": 2037,
+  "file": "commands/admin_commands.inc",
+  "line": 648,
+  "it": "Operazione precedente ancora in corso, attendi.",
+  "ctx": "Util_Send(playerid, -10270721, \"Operazione precedente ancora in corso, attendi.\");",
+  "ka": ""
+ },
+ {
+  "id": 2038,
+  "file": "commands/rp_commands.inc",
+  "line": 146,
+  "it": "Devi aver effettuato l'accesso ed essere in gioco per usare i comandi.",
+  "ctx": "Util_Send(playerid, -10270721, \"Devi aver effettuato l'accesso ed essere in gioco per usare i comandi.\");",
+  "ka": ""
+ },
+ {
+  "id": 2039,
+  "file": "commands/rp_commands.inc",
+  "line": 154,
+  "it": "Cmd_%s",
+  "ctx": "format(fn, 24, \"Cmd_%s\", name);",
+  "ka": ""
+ },
+ {
+  "id": 2040,
+  "file": "commands/rp_commands.inc",
+  "line": 163,
+  "it": "Uso: /me azione",
+  "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Uso: /me azione\");",
+  "ka": ""
+ },
+ {
+  "id": 2041,
+  "file": "commands/rp_commands.inc",
+  "line": 178,
+  "it": "Uso: /do descrizione",
+  "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Uso: /do descrizione\");",
+  "ka": ""
+ },
+ {
+  "id": 2042,
+  "file": "commands/rp_commands.inc",
+  "line": 193,
+  "it": "Uso: /try azione",
+  "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Uso: /try azione\");",
+  "ka": ""
+ },
+ {
+  "id": 2043,
+  "file": "commands/rp_commands.inc",
+  "line": 198,
+  "it": "* %s prova a %s e %s",
+  "ctx": "format(msg, 256, \"* %s prova a %s e %s\", name, text, random(100) < 50 ? \"ha successo\" : \"fallisce\");",
+  "ka": ""
+ },
+ {
+  "id": 2044,
+  "file": "commands/rp_commands.inc",
+  "line": 208,
+  "it": "Uso: /b testo",
+  "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Uso: /b testo\");",
+  "ka": ""
+ }
+]
