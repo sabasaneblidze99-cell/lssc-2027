@@ -205,6 +205,7 @@ public OnCefInitialize(player_id, success)
 
 public OnCefBrowserCreated(player_id, browser_id, status_code)
 {
+	printf("[CEF] giocatore %d: browser %d creato, codice %d (200 = pagina trovata)", player_id, browser_id, status_code);
 	if (status_code != 200)
 	{
 		new msg[96];

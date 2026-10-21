@@ -37352,6 +37352,7 @@ public CefBridge_DecideTimeout(playerid, nonce)
 	}
 	if (!CefUI_IsDecided(playerid))
 	{
+		printf("[CEF] giocatore %d: nessuna risposta in 9 s (stato %d: 0 = client CEF non arrivato, 1 = pagina non pronta, manca <GTA>/cef/assets/index.html?): uso i dialog", playerid, CefUI_State(playerid));
 		CefBridge_Decided(playerid);
 	}
 	return 1;
@@ -37369,6 +37370,7 @@ CefBridge_OnInitialize(playerid, success)
 	{
 		return 0;
 	}
+	printf("[CEF] giocatore %d: client CEF %s", playerid, success ? ("collegato, apro index.html") : ("NON collegato (cef.asi mancante o porta UDP 7779 chiusa): uso i dialog"));
 	if (!success)
 	{
 		if (CefUI_State(playerid) != 2)
@@ -37449,6 +37451,7 @@ public Cef_OnReady(playerid, const arguments[])
 		return 1;
 	}
 	CefUI_SetState(playerid, 2);
+	printf("[CEF] giocatore %d: pagina pronta", playerid);
 	CefUI_Decide(playerid);
 	switch (gPlayer[playerid][pAuthState])
 	{
@@ -72720,6 +72723,7 @@ public OnCefInitialize(player_id, success)
 
 public OnCefBrowserCreated(player_id, browser_id, status_code)
 {
+	printf("[CEF] giocatore %d: browser %d creato, codice %d (200 = pagina trovata)", player_id, browser_id, status_code);
 	if (status_code != 200)
 	{
 		new msg[96];
