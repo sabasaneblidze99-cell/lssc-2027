@@ -201,7 +201,8 @@ Hub_SetTarget(playerid, target, bool:withCheckpoint)
 		return 0;
 	}
 	Hub_ClearTarget(playerid);
-	SetPlayerMapIcon(playerid, 97, x, y, z, 0, -2994689, MAPICON_GLOBAL);
+	// niente icona sulla mappa (SetPlayerMapIcon): come per world/mapicons.inc, tolta per il crash del client allo spawn.
+	// Resta il checkpoint.
 	g_HubTarget[playerid] = target;
 	if (withCheckpoint && LD_ActiveFlow(playerid) == 0)
 	{
@@ -308,6 +309,7 @@ Hub_OnPlayerConnect(playerid)
 
 Hub_OnCharReady(playerid)
 {
+	Diag_Step(playerid, "hub: zona e obiettivo");
 	if (!Hub_Valid(playerid))
 	{
 		return 0;

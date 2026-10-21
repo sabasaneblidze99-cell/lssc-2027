@@ -3085,6 +3085,7 @@ UI_HudDestroy(playerid)
 
 UI_HudCreate(playerid)
 {
+	Diag_Step(playerid, "HUD TextDraw");
 	if (playerid < 0 || playerid >= MAX_PLAYERS)
 	{
 		return 0;
@@ -36151,7 +36152,8 @@ Hub_SetTarget(playerid, target, bool:withCheckpoint)
 		return 0;
 	}
 	Hub_ClearTarget(playerid);
-	SetPlayerMapIcon(playerid, 97, x, y, z, 0, -2994689, MAPICON_GLOBAL);
+	// niente icona sulla mappa (SetPlayerMapIcon): come per world/mapicons.inc, tolta per il crash del client allo spawn.
+	// Resta il checkpoint.
 	g_HubTarget[playerid] = target;
 	if (withCheckpoint && LD_ActiveFlow(playerid) == 0)
 	{
@@ -36258,6 +36260,7 @@ Hub_OnPlayerConnect(playerid)
 
 Hub_OnCharReady(playerid)
 {
+	Diag_Step(playerid, "hub: zona e obiettivo");
 	if (!Hub_Valid(playerid))
 	{
 		return 0;
@@ -37868,6 +37871,10 @@ HudCef_OnPlayerDisconnect(playerid)
 // chiamata da CefUI_HudShow: la pagina e' pronta e l'HUD e' visibile (o viene nascosto)
 HudCef_OnVisible(playerid, bool:show)
 {
+	if (show)
+	{
+		Diag_Step(playerid, "HUD CEF");
+	}
 	if (playerid < 0 || playerid >= MAX_PLAYERS)
 	{
 		return 0;
@@ -70037,6 +70044,7 @@ SpawnSel_Texts(playerid, idx, icon[], isize, title[], tsize, sub[], ssize)
 
 SpawnSel_Show(playerid)
 {
+	Diag_Step(playerid, "scelta spawn");
 	SpawnSel_Build(playerid);
 	if (g_SsCount[playerid] <= 1 && !g_SsForced[playerid])
 	{

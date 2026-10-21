@@ -69,6 +69,7 @@ UI_HudDestroy(playerid)
 
 UI_HudCreate(playerid)
 {
+	Diag_Step(playerid, "HUD TextDraw");
 	if (playerid < 0 || playerid >= MAX_PLAYERS)
 	{
 		return 0;

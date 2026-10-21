@@ -351,6 +351,7 @@ SpawnSel_Texts(playerid, idx, icon[], isize, title[], tsize, sub[], ssize)
 
 SpawnSel_Show(playerid)
 {
+	Diag_Step(playerid, "scelta spawn");
 	SpawnSel_Build(playerid);
 	if (g_SsCount[playerid] <= 1 && !g_SsForced[playerid])
 	{

@@ -106,6 +106,10 @@ HudCef_OnPlayerDisconnect(playerid)
 // chiamata da CefUI_HudShow: la pagina e' pronta e l'HUD e' visibile (o viene nascosto)
 HudCef_OnVisible(playerid, bool:show)
 {
+	if (show)
+	{
+		Diag_Step(playerid, "HUD CEF");
+	}
 	if (playerid < 0 || playerid >= MAX_PLAYERS)
 	{
 		return 0;
