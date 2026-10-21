@@ -17,6 +17,7 @@
 
 #include "modules/core/enums.inc"
 #include "modules/core/forwards.inc"
+#include "modules/cef/cef_safe.inc"
 #include "modules/core/chat.inc"
 #include "modules/core/vehicle_names.inc"
 #include "modules/core/lang.inc"
