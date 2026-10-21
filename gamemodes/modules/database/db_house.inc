@@ -20,7 +20,7 @@ new Float:s_HouseExt[10][4] = {
 };
 new s_HouseIntIdx[10] = {3, 5, 2, 0, 1, 3, 4, 6, 7, 7};
 new s_HouseIntTier[8] = {0, 0, 1, 1, 2, 2, 2, 3};
-new s_HouseTierPrice[4] = {14000, 24000, 45000, 130000};
+new s_HouseTierPrice[4] = {ECON_HOUSE_T0, ECON_HOUSE_T1, ECON_HOUSE_T2, ECON_HOUSE_T3};
 
 bool:DB_HouseSessionOk(playerid, const name[], ownerId)
 {

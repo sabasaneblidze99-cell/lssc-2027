@@ -42,7 +42,7 @@ bool:Money_CanReceive(playerid, amount)
 	{
 		return false;
 	}
-	return amount <= 0x3B9ACA00 - gPlayer[playerid][pMoney];
+	return amount <= ECON_MONEY_MAX - gPlayer[playerid][pMoney];
 }
 
 bool:Money_Give(playerid, amount)
@@ -69,7 +69,7 @@ bool:Money_Take(playerid, amount)
 
 bool:Money_Set(playerid, amount)
 {
-	if (!Money_ValidPlayer(playerid) || amount < 0 || amount > 0x3B9ACA00)
+	if (!Money_ValidPlayer(playerid) || amount < 0 || amount > ECON_MONEY_MAX)
 	{
 		return false;
 	}
@@ -84,7 +84,7 @@ Money_BankRoom(playerid)
 	{
 		return 0;
 	}
-	return 0x3B9ACA00 - gPlayer[playerid][pBank];
+	return ECON_MONEY_MAX - gPlayer[playerid][pBank];
 }
 
 bool:Money_GiveBank(playerid, amount, const kind[], const ref[])

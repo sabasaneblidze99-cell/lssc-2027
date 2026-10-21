@@ -1526,9 +1526,9 @@ bool:UI_LvPrjRange(playerid, &lo, &hi)
 	{
 		hi = g_UiLvPjDayLeft[playerid];
 	}
-	if (hi > 0x3B9ACA00)
+	if (hi > ECON_MONEY_MAX)
 	{
-		hi = 0x3B9ACA00;
+		hi = ECON_MONEY_MAX;
 	}
 	return g_UiLvPjId[playerid] > 0 && g_UiLvPjBlock[playerid] == 0 && hi >= lo;
 }

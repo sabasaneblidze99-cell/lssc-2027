@@ -140,7 +140,7 @@ Money_GtaDisplay(tetri)
 }
 
 // percentuale intera di un importo senza overflow (importi fino a ECON_MONEY_MAX, pct 0..1000)
-Money_Pct(tetri, pct)
+stock Money_Pct(tetri, pct)
 {
 	return (tetri / 100) * pct + ((tetri % 100) * pct) / 100;
 }

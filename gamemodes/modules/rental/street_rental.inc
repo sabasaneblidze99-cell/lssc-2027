@@ -2,14 +2,14 @@
 // rental/street_rental.inc - auto a noleggio parcheggiate per la citta' ("noleggio di strada").
 //
 // Berline di classe base (Landstalker, Premier, Admiral, ...) parcheggiate in punti casuali di Los Santos.
-// Il giocatore sale al volante -> offerta $179 per 60 minuti (nessuna cauzione). Il pagamento passa dallo
+// Il giocatore sale al volante -> offerta ₾29 per 60 minuti (nessuna cauzione). Il pagamento passa dallo
 // stesso sistema dei noleggi (sp_rental_open, vkind 5, migrazione sql/migrations/013_street_rental.sql):
 // stesse regole (un solo noleggio alla volta, op_id idempotente, banca + contanti), stessa scadenza e riconsegna.
 // La riconsegna si fa ovunque con /riconsegna (o scade da sola); poi l'auto sparisce e un'altra compare altrove.
 // =============================================================================
 
 #define SRENT_VKIND        (5)
-#define SRENT_PRICE        (179)          // deve coincidere con ld_config RENT_FEE_STREET (il DB decide l'addebito)
+#define SRENT_PRICE        (ECON_STREET_RENT)         // deve coincidere con ld_config RENT_FEE_STREET (il DB decide l'addebito)
 #define SRENT_MINUTES      (60)           // = RENT_STREET_MIN
 #define SRENT_ACTIVE       (10)           // auto disponibili in contemporanea
 #define SRENT_RESPAWN_S    (180)          // dopo un noleggio, un'auto nuova compare entro ~3 minuti

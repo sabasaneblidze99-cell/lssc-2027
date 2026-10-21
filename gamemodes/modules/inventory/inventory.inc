@@ -12,7 +12,7 @@ new s_InvName[12][88] = {
 	"დოკუმენტი",
 	"ზურგჩანთა"
 };
-new s_InvPrice[12] = {0, 9, 14, 3, 4, 60, 12, 8, 5, 250, 0, 350};
+new s_InvPrice[12] = {0, ECON_ITEM_FOOD, ECON_ITEM_MEAL, ECON_ITEM_WATER, ECON_ITEM_SNACK, ECON_ITEM_KIT, ECON_ITEM_BANDAGE, ECON_ITEM_CIGARETTES, ECON_ITEM_LIGHTER, ECON_ITEM_PHONE, 0, ECON_ITEM_BACKPACK};   // tetri, economy/econ_config.inc
 new s_InvCooldown[11] = {0, 0, 10000, 5000, 5000, 45000, 15000, 20000};
 new s_InvShopKey[12][24] = {
 	{0},
@@ -1225,12 +1225,12 @@ Inv_BuyBag(playerid)
 		Inv_Say(playerid, -10270721, "ზურგჩანთა უკვე გაქვს.");
 		return 0;
 	}
-	if (!Money_Can(playerid, 350))
+	if (!Money_Can(playerid, ECON_ITEM_BACKPACK))
 	{
-		SendClientMessage(playerid, -10270721, "საჭიროა %s ნაღდი ფული.", Money_Str(350));
+		SendClientMessage(playerid, -10270721, "საჭიროა %s ნაღდი ფული.", Money_Str(ECON_ITEM_BACKPACK));
 		return 0;
 	}
-	Inv_BeginOp(playerid, 6, 11, 1, 350);
+	Inv_BeginOp(playerid, 6, 11, 1, ECON_ITEM_BACKPACK);
 	DB_InvSetBag(playerid, gPlayer[playerid][pCharId], gPlayer[playerid][pInvOpId]);
 	return 0;
 }
@@ -1291,7 +1291,7 @@ public Inv_OnDBBag(playerid, result)
 	}
 	if (result == 1)
 	{
-		if (!Money_Take(playerid, 350))
+		if (!Money_Take(playerid, ECON_ITEM_BACKPACK))
 		{
 			Inv_UndoPurchase(playerid);
 			return 1;
@@ -1299,7 +1299,7 @@ public Inv_OnDBBag(playerid, result)
 		Char_Save(playerid);
 		Inv_EndOp(playerid);
 		Inv_Reload(playerid);
-		SendClientMessage(playerid, 0x66DD66FF, "იყიდე ზურგჩანთა %s-ად: ტევადობა %d სლოტი.", Money_Str(350), 20);
+		SendClientMessage(playerid, 0x66DD66FF, "იყიდე ზურგჩანთა %s-ად: ტევადობა %d სლოტი.", Money_Str(ECON_ITEM_BACKPACK), 20);
 		return 1;
 	}
 	Inv_EndOp(playerid);

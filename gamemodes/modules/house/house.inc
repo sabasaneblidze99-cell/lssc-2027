@@ -15,8 +15,8 @@ new s_HsTierName[4][40] = {
 };
 new s_HsFridgeCap[4] = {10, 16, 24, 40};
 new s_HsTierLevel[4] = {1, 2, 5, 10};
-new s_HsBillLuce[4] = {45, 70, 110, 220};
-new s_HsBillGas[4] = {30, 45, 70, 140};
+new s_HsBillLuce[4] = {ECON_BILL_LUCE_T0, ECON_BILL_LUCE_T1, ECON_BILL_LUCE_T2, ECON_BILL_LUCE_T3};
+new s_HsBillGas[4] = {ECON_BILL_GAS_T0, ECON_BILL_GAS_T1, ECON_BILL_GAS_T2, ECON_BILL_GAS_T3};
 new s_HsIntId[8] = {1, 2, 2, 1, 5, 3, 8, 5};
 new Float:s_HsIntPos[8][4] = {
 	{244.41, 305.03, 999.15, 180.0},
@@ -627,6 +627,7 @@ House_PushUi(playerid, idx)
 {
 	new id = g_HouseRows[idx][hrId];
 	UI_HouseDataSet(playerid, id, House_Role(idx, playerid), House_Tier(idx), House_IntIdx(idx), bool:g_HouseRows[idx][hrLocked], House_UtilState(bool:g_HouseRows[idx][hrLuceOn], bool:g_HouseRows[idx][hrLuceCut]), House_UtilState(bool:g_HouseRows[idx][hrGasOn], bool:g_HouseRows[idx][hrGasCut]), g_HouseRows[idx][hrFridgeUnits], Inv_Count(playerid, 1), g_HouseRows[idx][hrKeyCount], gPlayer[playerid][pLevel], gPlayer[playerid][pMoney], gPlayer[playerid][pBank]);
+	UI_HousePriceSet(playerid, g_HouseRows[idx][hrPrice], House_SellRefund(idx));
 	new lightDue = 0, lightCnt = 0, gasDue = 0, gasCnt = 0;
 	if (g_HPl[playerid][hpBillsHouseId] == id)
 	{
@@ -810,7 +811,7 @@ public House_OnDBBought(playerid, houseId, affected)
 House_SellRefund(idx)
 {
 	new base = g_HouseRows[idx][hrPricePaid] > 0 ? g_HouseRows[idx][hrPricePaid] : g_HouseRows[idx][hrPrice];
-	return base * 70 / 100;
+	return base / 100 * ECON_HOUSE_RESALE_PCT + base % 100 * ECON_HOUSE_RESALE_PCT / 100;   // senza overflow anche per le ville
 }
 
 House_DoSell(playerid, idx, bool:confirmed)
@@ -843,7 +844,7 @@ House_DoSell(playerid, idx, bool:confirmed)
 	}
 	if (!confirmed)
 	{
-		SendClientMessage(playerid, -2994689, "სახლის %d გაყიდვა: ბანკში მიიღებ %s-ს (%d%%). კომუნალურები, გასაღებები და მაცივარი განულდება.", g_HouseRows[idx][hrId], Money_Str(refund), 70);
+		SendClientMessage(playerid, -2994689, "სახლის %d გაყიდვა: ბანკში მიიღებ %s-ს (%d%%). კომუნალურები, გასაღებები და მაცივარი განულდება.", g_HouseRows[idx][hrId], Money_Str(refund), ECON_HOUSE_RESALE_PCT);
 		Util_Send(playerid, 0x99CCFFFF, "დასადასტურებლად: /casa vendi conferma");
 		return 0;
 	}
@@ -1530,7 +1531,7 @@ House_CutUtil(idx, kind)
 	new owner = House_OwnerPlayer(idx);
 	if (owner != 65535)
 	{
-		SendClientMessage(owner, -10270721, "სახლი %d: %s გაითიშა%s გადაუხდელი გადასახადების გამო. გადაიხადე /bollette (+%s აღდგენა).", id, kind == 1 ? "გაზი" : "შუქი", "", Money_Str(40));
+		SendClientMessage(owner, -10270721, "სახლი %d: %s გაითიშა%s გადაუხდელი გადასახადების გამო. გადაიხადე /bollette (+%s აღდგენა).", id, kind == 1 ? "გაზი" : "შუქი", "", Money_Str(ECON_BILL_RESTORE_FEE));
 	}
 	new msg[256];
 	format(msg, 256, "DISTACCO casa %d: %s", id, kind == 1 ? "gas" : "luce");
@@ -1661,7 +1662,7 @@ public House_OnDBBillsPaid(playerid, houseId, kind, paidAmount, restored)
 		Util_Send(playerid, -10270721, "გადასახადები შეიცვალა ან აღარ არის გადასახდელი: ხელახლა გახსენი /bollette. ამ კომუნალურზე თანხა არ ჩამოიჭრა.");
 		return 1;
 	}
-	new fee = restored != 0 ? 40 : 0, amount = paidAmount + fee, cnt = 0;
+	new fee = restored != 0 ? ECON_BILL_RESTORE_FEE : 0, amount = paidAmount + fee, cnt = 0;
 	House_BillSum(playerid, kind, cnt);
 	if (amount <= 0 || !(bank == 1 ? Money_TakeBank(playerid, amount, "bill", "") : Money_Take(playerid, amount)))
 	{

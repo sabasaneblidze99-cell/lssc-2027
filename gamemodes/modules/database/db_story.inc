@@ -26,23 +26,23 @@ DB_StoryCash(motive)
 	{
 		case 2:
 		{
-			return 2000;
+			return ECON_START_CASH_M2;
 		}
 		case 3:
 		{
-			return 3500;
+			return ECON_START_CASH_M3;
 		}
 		case 4:
 		{
-			return 3000;
+			return ECON_START_CASH_M4;
 		}
 	}
-	return 2500;
+	return ECON_START_CASH;
 }
 
 DB_StoryBankStart(motive)
 {
-	return 7500 - DB_StoryCash(motive);
+	return ECON_START_TOTAL - DB_StoryCash(motive);   // = SQL story_start_total()
 }
 
 bool:DB_StoryOpIdOk(const opId[])

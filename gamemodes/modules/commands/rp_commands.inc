@@ -1,4 +1,4 @@
-new g_CmdNames[98][16] = {
+new g_CmdNames[99][16] = {
 	"me",
 	"do",
 	"try",
@@ -96,7 +96,8 @@ new g_CmdNames[98][16] = {
 	"ldset",
 	"chatsamp",
 	"chatcef",
-	"gps"
+	"gps",
+	"economia"
 };
 
 Cmd_Dispatch(playerid, const cmdtext[])
@@ -249,9 +250,9 @@ public Cmd_pay(playerid, const params[])
 		SendClientMessage(playerid, -10270721, "/pay-ის გამოსაყენებლად მინიმუმ %d დონე გჭირდება.", 2);
 		return 1;
 	}
-	if (amount < 1 || amount > 50000)
+	if (amount < 1 || amount > ECON_PAY_MAX)
 	{
-		SendClientMessage(playerid, -10270721, "არასწორი თანხა (%d-%d).", 1, 50000);
+		SendClientMessage(playerid, -10270721, "არასწორი თანხა (%s-%s).", Money_Str(1), Money_Str(ECON_PAY_MAX));
 		return 1;
 	}
 	if (targetid == playerid || !Util_IsPlaying(targetid))

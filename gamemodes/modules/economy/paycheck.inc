@@ -16,7 +16,8 @@ Economy_OnExit()
 
 Economy_PaycheckAmount(level)
 {
-	return level * 25 + 300;
+	// sostegno cittadino ogni 15 min di gioco attivo (economy/econ_config.inc)
+	return min(ECON_PAYCHECK_BASE + level * ECON_PAYCHECK_PER_LEVEL, ECON_PAYCHECK_MAX);
 }
 
 Economy_PaycheckPaid(amount, room)

@@ -847,6 +847,7 @@ forward Cef_OnStory(playerid, const arguments[]);
 forward Cef_OnQuit(playerid, const arguments[]);
 forward Cmd_goto(playerid, const params[]);
 forward Cmd_gps(playerid, const params[]);
+forward Cmd_economia(playerid, const params[]);
 forward Cmd_setlevel(playerid, const params[]);
 forward Cmd_setmoney(playerid, const params[]);
 forward Cmd_ah(playerid, const params[]);
@@ -2107,10 +2108,172 @@ Money_GtaDisplay(tetri)
 }
 
 // percentuale intera di un importo senza overflow (importi fino a ECON_MONEY_MAX, pct 0..1000)
-Money_Pct(tetri, pct)
+stock Money_Pct(tetri, pct)
 {
 	return (tetri / 100) * pct + ((tetri % 100) * pct) / 100;
 }
+
+// ===== modules/economy/econ_config.inc =====
+// =============================================================================
+// economy/econ_config.inc - TUTTI i valori economici del gamemode, in TETRI (?1 = 100).
+//
+// Modello: "economia di gioco ispirata alla Georgia 2026" (docs/economia/PIANO_ECONOMIA_GEL.md).
+//   Riferimento reale: salario medio lordo Q2 2026 ?2.389/mese (Geostat), benzina ?4,03-4,09/L (Gulf, ott. 2026),
+//   pasto economico ?30, pane ~?1,98/500 g (Numbeo Tbilisi, ott. 2026), auto e case da annunci/Geostat.
+//   Calendario RP: 1 ora di gioco attivo = 1 settimana lavorativa RP. Gli stipendi orari di gioco derivano dagli
+//   stipendi mensili reali (mensile x 12 / 52, netto dell'imposta sul reddito del 20%); i beni hanno prezzi reali
+//   o "di gameplay" dichiarati tali. I numeri qui sotto sono i valori di GIOCO.
+// Cambiare un valore qui cambia tutto il gamemode (interfaccia compresa). I valori della "vita in citta'"
+// (consegne, taxi, noleggi, progetti di quartiere) stanno nel database (ld_config, migrazione 017).
+// =============================================================================
+
+// ---------------------------------------------------------------- inizio del personaggio
+#define ECON_START_TOTAL        (65000)      // ?650 tra contanti e banca (il DB applica la stessa cifra: story_start_total)
+#define ECON_START_CASH         (20000)      // ?200 in contanti (il resto in banca)
+// contanti iniziali secondo il motivo scelto nella storia (= SQL story_motive_cash)
+#define ECON_START_CASH_M2      (15000)      // ?150
+#define ECON_START_CASH_M3      (30000)      // ?300
+#define ECON_START_CASH_M4      (25000)      // ?250
+
+// ---------------------------------------------------------------- reddito di base ogni 15 minuti di gioco attivo
+// (sostegno cittadino; riferimento: pensione minima ?370/mese ~ ?85/settimana)
+#define ECON_PAYCHECK_BASE      (2000)       // ?20
+#define ECON_PAYCHECK_PER_LEVEL (100)        // +?1 per livello
+#define ECON_PAYCHECK_MAX       (3000)       // massimo ?30 ogni 15 min (?120/h)
+
+// ---------------------------------------------------------------- lavori del Job Center (paga per tappa + bonus a fine giro)
+// obiettivo netto: autista bus ~?330/h, corriere ~?360/h, netturbino ~?270/h (stime con i minuti medi per giro)
+#define ECON_JOB_BUS_STEP       (500)        // ?5,00 x 6 fermate
+#define ECON_JOB_BUS_BONUS      (850)        // ?8,50
+#define ECON_JOB_COURIER_STEP   (840)        // ?8,40 x 5 consegne
+#define ECON_JOB_COURIER_BONUS  (1200)       // ?12,00
+#define ECON_JOB_CLEANER_STEP   (375)        // ?3,75 x 8 cassonetti
+#define ECON_JOB_CLEANER_BONUS  (600)        // ?6,00
+#define ECON_JOB_HOURLY_CAP     (45000)      // ?450/h per personaggio (anti-abuso)
+
+// ---------------------------------------------------------------- fazioni (paga ogni 15 min in servizio, per grado 1..6)
+// riferimento: stipendio base pubblico ?1.600/mese (grado 1) fino a ~?4.000 (grado 6)
+#define ECON_FAC_PAY_R1         (7500)       // ?75   (~?300/h)
+#define ECON_FAC_PAY_R2         (9000)
+#define ECON_FAC_PAY_R3         (10500)
+#define ECON_FAC_PAY_R4         (12500)
+#define ECON_FAC_PAY_R5         (15000)
+#define ECON_FAC_PAY_R6         (18500)      // ?185  (~?740/h)
+#define ECON_FAC_REVIVE_BONUS   (2500)       // ?25 al medico per ogni rianimazione (max 6 per ora, come prima)
+#define ECON_HOSPITAL_FEE       (4000)       // ?40 di ricovero
+#define ECON_FINE_MIN           (2000)       // ?20 (multe reali per infrazioni minori ?40-100: gioco piu' morbido)
+#define ECON_FINE_HOURLY_CAP    (300000)     // ?3.000 di multe emesse per agente all'ora
+// tetto di una multa per grado (rif. multe stradali georgiane ?50-500, guida in stato di ebbrezza ?500-2.000)
+#define ECON_FINE_CAP_R2        (15000)      // ?150
+#define ECON_FINE_CAP_R3        (30000)      // ?300
+#define ECON_FINE_CAP_R4        (60000)      // ?600
+#define ECON_FINE_CAP_R5        (100000)     // ?1.000
+#define ECON_FINE_CAP_R6        (150000)     // ?1.500
+
+// ---------------------------------------------------------------- trasferimenti tra giocatori (/pay)
+#define ECON_PAY_MAX            (500000)     // ?5.000 in contanti per volta
+#define ECON_ADMIN_GIVE_MAX     (1000000)    // /givemoney: al massimo ?10.000 per volta (registrato nel log admin)
+
+// ---------------------------------------------------------------- banca (limiti per operazione / giorno, commissioni)
+#define ECON_ATM_DEPOSIT_MAX    (200000)     // ?2.000 per versamento al bancomat
+#define ECON_ATM_WITHDRAW_MAX   (100000)     // ?1.000 per prelievo al bancomat
+#define ECON_ATM_WITHDRAW_DAY   (300000)     // ?3.000 al giorno dal bancomat
+#define ECON_DESK_WITHDRAW_MAX  (1000000)    // ?10.000 per prelievo allo sportello
+#define ECON_DESK_WITHDRAW_DAY  (2500000)    // ?25.000 al giorno allo sportello
+#define ECON_XFER_FEE_PCT       (1)          // 1% di commissione sui bonifici (banche georgiane: 0-1% tra conti)
+#define ECON_XFER_FEE_MIN       (50)         // ?0,50 minimo
+#define ECON_XFER_MIN           (100)        // ?1 minimo per bonifico
+#define ECON_XFER_MAX           (2500000)    // ?25.000 per bonifico
+#define ECON_XFER_OUT_DAY       (5000000)    // ?50.000 in uscita al giorno
+#define ECON_XFER_IN_DAY        (10000000)   // ?100.000 in entrata al giorno
+
+// ---------------------------------------------------------------- veicoli (concessionario: prezzi dell'usato georgiano come riferimento)
+#define ECON_VEH_FAGGIO         (220000)     // ?2.200   scooter usato
+#define ECON_VEH_PREVION        (750000)     // ?7.500   utilitaria vecchia (rif. Opel Astra 2002-06 ?7.800-8.800)
+#define ECON_VEH_MANANA         (690000)     // ?6.900   la piu' economica
+#define ECON_VEH_VIRGO          (890000)     // ?8.900
+#define ECON_VEH_GLENDALE       (950000)     // ?9.500
+#define ECON_VEH_PRIMO          (1450000)    // ?14.500  berlina (rif. Toyota Prius 2013 ?14.500-18.900)
+#define ECON_VEH_WILLARD        (1590000)    // ?15.900
+#define ECON_VEH_SADLER         (1350000)    // ?13.500  pick-up vecchio
+#define ECON_VEH_PCJ600         (1750000)    // ?17.500  moto sportiva usata
+#define ECON_VEH_BOBCAT         (1950000)    // ?19.500  pick-up
+#define ECON_VEH_TAMPA          (1650000)    // ?16.500
+#define ECON_VEH_MESA           (2900000)    // ?29.000  4x4
+#define ECON_VEH_SENTINEL       (3100000)    // ?31.000  berlina premium (rif. Mercedes E400 2013 ?27.785)
+#define ECON_VEH_RESALE_PCT     (60)         // rivendita al concessionario: 60% del prezzo
+#define ECON_VEH_RECOVER_PCT    (5)          // recupero/assicurazione dopo distruzione: 5% del prezzo...
+#define ECON_VEH_RECOVER_MIN    (6000)       // ...minimo ?60
+#define ECON_FUEL_PER_LITER     (405)        // ?4,05/L (benzina regular, Gulf ott. 2026: ?4,03-4,09)
+
+// ---------------------------------------------------------------- case (le 10 case di base; quelle di Arizona hanno il prezzo nel DB)
+#define ECON_HOUSE_T0           (5200000)    // ?52.000
+#define ECON_HOUSE_T1           (8500000)    // ?85.000
+#define ECON_HOUSE_T2           (15000000)   // ?150.000
+#define ECON_HOUSE_T3           (38000000)   // ?380.000
+#define ECON_HOUSE_RESALE_PCT   (70)         // rivendita: 70%
+// bollette per ciclo (fino a 180 min di consumo): rif. utenze 85 m2 ?228/mese (Numbeo Tbilisi)
+#define ECON_BILL_LUCE_T0       (3800)
+#define ECON_BILL_LUCE_T1       (5500)
+#define ECON_BILL_LUCE_T2       (8000)
+#define ECON_BILL_LUCE_T3       (15000)
+#define ECON_BILL_GAS_T0        (2200)
+#define ECON_BILL_GAS_T1        (3200)
+#define ECON_BILL_GAS_T2        (4800)
+#define ECON_BILL_GAS_T3        (9000)
+#define ECON_BILL_RESTORE_FEE   (2500)       // ?25 di riattivazione dopo il distacco
+
+// ---------------------------------------------------------------- negozio (supermercato): prezzi reali di Tbilisi dove esistono
+#define ECON_ITEM_FOOD          (250)        // ?2,50  razione (pane 500 g ~?1,98)
+#define ECON_ITEM_MEAL          (1400)       // ?14,00 piatto pronto (pasto al ristorante economico ?30)
+#define ECON_ITEM_WATER         (120)        // ?1,20
+#define ECON_ITEM_SNACK         (280)        // ?2,80
+#define ECON_ITEM_KIT           (4500)       // ?45,00 kit di pronto soccorso (stima)
+#define ECON_ITEM_BANDAGE       (650)        // ?6,50
+#define ECON_ITEM_CIGARETTES    (900)        // ?9,00 (Marlboro ?9,00)
+#define ECON_ITEM_LIGHTER       (150)        // ?1,50
+#define ECON_ITEM_PHONE         (38000)      // ?380   telefono base (stima)
+#define ECON_ITEM_BACKPACK      (8500)       // ?85    zaino (stima)
+
+// ---------------------------------------------------------------- "vita in citta'": valori della tabella ld_config
+// Ogni ECON_LD_<CHIAVE> e' la riga <CHIAVE> di ld_config: scripts/gen_econ_sql.py la scrive in sql/migrations/017_economia_gel.sql.
+// Il database decide gli addebiti; il Pawn usa le stesse cifre per stime e messaggi.
+#define ECON_LD_MONEY_MAX           (ECON_MONEY_MAX)
+// taxi: rif. Tbilisi partenza ?3 + ~?2/km (Bolt/Yandex, ott. 2026). In gioco ?5 + ?10/km: le distanze di LS sono
+// compresse (~1,5 km a corsa) e il tassista deve guadagnare ~?200-350/h tra clienti NPC e giocatori
+#define ECON_LD_TAXI_BASE           (500)        // ?5,00
+#define ECON_LD_TAXI_PER_M_X100     (100)        // ?0,01 al metro (?10/km)
+#define ECON_LD_TAXI_RENT_HOUR      (1500)       // ?15/h affitto del taxi
+#define ECON_LD_TAXI_DEP            (6000)       // ?60 cauzione
+// consegne (camion): obiettivo ~?500-700/h a pieno ritmo (rif. trasporti ?2.322/mese lordi)
+#define ECON_LD_FRT_BASE            (3500)       // ?35 a consegna
+#define ECON_LD_FRT_PER_M_X100      (350)        // ?0,035 al metro
+#define ECON_LD_LD_WORK_HOURLY_CAP  (70000)      // ?700/h tra consegne e taxi NPC
+// noleggi: per blocco di 20 minuti (rif. noleggio scooter/auto a ore ?10-30/h)
+#define ECON_LD_RENT_FEE_FAGGIO     (400)        // ?4
+#define ECON_LD_RENT_FEE_PREVION    (800)        // ?8
+#define ECON_LD_RENT_FEE_MANANA     (900)        // ?9
+#define ECON_LD_RENT_DEP_FAGGIO     (4000)       // ?40 cauzione
+#define ECON_LD_RENT_DEP_PREVION    (8000)       // ?80
+#define ECON_LD_RENT_DEP_MANANA     (9000)       // ?90
+#define ECON_LD_RENT_FEE_STREET     (2900)       // ?29 per 60 min (car sharing)
+#define ECON_LD_RENT_DEP_STREET     (0)
+// benvenuto e progetti di quartiere
+#define ECON_LD_ONB_REWARD          (3000)       // ?30 alla prima consegna di benvenuto
+#define ECON_LD_PRJ_GOAL            (150000)     // ?1.500 obiettivo di un progetto
+#define ECON_LD_PRJ_DON_MIN         (1000)       // ?10
+#define ECON_LD_PRJ_DON_MAX         (10000)      // ?100
+#define ECON_LD_PRJ_DON_DAY         (25000)      // ?250 al giorno per personaggio
+#define ECON_LD_PRJ_DON_REP_PER     (2500)       // 1 punto reputazione ogni ?25 donati
+#define ECON_LD_PRJ_FUND_RIDE_X10   (375)        // +?0,37 al fondo per corsa
+
+// nomi brevi usati dal Pawn
+#define ECON_STREET_RENT        (ECON_LD_RENT_FEE_STREET)
+#define ECON_TAXI_RENT_HOUR     (ECON_LD_TAXI_RENT_HOUR)
+#define ECON_TAXI_DEPOSIT       (ECON_LD_TAXI_DEP)
+#define ECON_PRJ_DON_MIN        (ECON_LD_PRJ_DON_MIN)
+#define ECON_PRJ_DON_MAX        (ECON_LD_PRJ_DON_MAX)
+#define ECON_PRJ_DON_DAY        (ECON_LD_PRJ_DON_DAY)
 
 // ===== modules/core/logger.inc =====
 
@@ -2478,7 +2641,7 @@ Valid_PayAmount(amount, senderMoney, receiverMoney)
 	{
 		return 4;
 	}
-	if (receiverMoney + amount > 0x3B9ACA00)
+	if (receiverMoney + amount > ECON_MONEY_MAX)
 	{
 		return 3;
 	}
@@ -2929,7 +3092,7 @@ UI_HudUpdate(playerid, money, bank, level, exp)
 
 // ===== modules/ui/vehicle_ui.inc =====
 new g_UiVehModel[13] = {462, 436, 410, 491, 466, 547, 529, 543, 461, 422, 549, 500, 405};
-new g_UiVehPrice[13] = {12000, 12500, 13500, 16000, 17500, 19000, 21000, 22000, 24000, 26000, 28000, 34000, 38000};
+new g_UiVehPrice[13] = {ECON_VEH_FAGGIO, ECON_VEH_PREVION, ECON_VEH_MANANA, ECON_VEH_VIRGO, ECON_VEH_GLENDALE, ECON_VEH_PRIMO, ECON_VEH_WILLARD, ECON_VEH_SADLER, ECON_VEH_PCJ600, ECON_VEH_BOBCAT, ECON_VEH_TAMPA, ECON_VEH_MESA, ECON_VEH_SENTINEL};   // = g_VehCatPrice
 new g_UiVehMinLevel[13] = {1, 1, 1, 2, 2, 3, 3, 3, 3, 4, 4, 5, 5};
 new g_UiVehName[13][12] = {
 	"Faggio",
@@ -3121,12 +3284,12 @@ UI_VehSellConfirmShow(playerid)
 	UI_VehModelName(g_UiVehLModel[playerid][i], name, 48);
 	if (idx >= 0)
 	{
-		UI_VehMoney(g_UiVehPrice[idx] * 60 / 100, amount, 48);
-		format(body, 768, "{FFFFFF}\xE1;\x83;\xA7;\xE1;\x83;\x98;\xE1;\x83;\x93;\xE1;\x83;\x98; {FFD24D}%s{FFFFFF}-\xE1;\x83;\xA1; (\xE1;\x83;\x9C;\xE1;\x83;\x9D;\xE1;\x83;\x9B;\xE1;\x83;\x94;\xE1;\x83;\xA0;\xE1;\x83;\x98; %s)?\n\n\xE1;\x83;\x91;\xE1;\x83;\x90;\xE1;\x83;\x9C;\xE1;\x83;\x99;\xE1;\x83;\xA8;\xE1;\x83;\x98; \xE1;\x83;\x9B;\xE1;\x83;\x98;\xE1;\x83;\x98;\xE1;\x83;\xA6;\xE1;\x83;\x94;\xE1;\x83;\x91; \xE1;\x83;\x93;\xE1;\x83;\x90;\xE1;\x83;\x90;\xE1;\x83;\xAE;\xE1;\x83;\x9A;. {66DD66}\xE2;\x82;\xBE;%s{FFFFFF}-\xE1;\x83;\xA1; (\xE1;\x83;\xA1;\xE1;\x83;\x90;\xE1;\x83;\x91;\xE1;\x83;\x90;\xE1;\x83;\x96;\xE1;\x83;\x9D; \xE1;\x83;\xA4;\xE1;\x83;\x90;\xE1;\x83;\xA1;\xE1;\x83;\x98;\xE1;\x83;\xA1; %d%%).\n\xE1;\x83;\x9D;\xE1;\x83;\x9E;\xE1;\x83;\x94;\xE1;\x83;\xA0;\xE1;\x83;\x90;\xE1;\x83;\xAA;\xE1;\x83;\x98;\xE1;\x83;\x90; \xE1;\x83;\xA8;\xE1;\x83;\x94;\xE1;\x83;\xA3;\xE1;\x83;\xA5;\xE1;\x83;\xAA;\xE1;\x83;\x94;\xE1;\x83;\x95;\xE1;\x83;\x90;\xE1;\x83;\x93;\xE1;\x83;\x98;\xE1;\x83;\x90;.", name, g_UiVehLPlate[playerid][i], amount, 60);
+		UI_VehMoney(g_UiVehPrice[idx] * ECON_VEH_RESALE_PCT / 100, amount, 48);
+		format(body, 768, "{FFFFFF}\xE1;\x83;\xA7;\xE1;\x83;\x98;\xE1;\x83;\x93;\xE1;\x83;\x98; {FFD24D}%s{FFFFFF}-\xE1;\x83;\xA1; (\xE1;\x83;\x9C;\xE1;\x83;\x9D;\xE1;\x83;\x9B;\xE1;\x83;\x94;\xE1;\x83;\xA0;\xE1;\x83;\x98; %s)?\n\n\xE1;\x83;\x91;\xE1;\x83;\x90;\xE1;\x83;\x9C;\xE1;\x83;\x99;\xE1;\x83;\xA8;\xE1;\x83;\x98; \xE1;\x83;\x9B;\xE1;\x83;\x98;\xE1;\x83;\x98;\xE1;\x83;\xA6;\xE1;\x83;\x94;\xE1;\x83;\x91; \xE1;\x83;\x93;\xE1;\x83;\x90;\xE1;\x83;\x90;\xE1;\x83;\xAE;\xE1;\x83;\x9A;. {66DD66}\xE2;\x82;\xBE;%s{FFFFFF}-\xE1;\x83;\xA1; (\xE1;\x83;\xA1;\xE1;\x83;\x90;\xE1;\x83;\x91;\xE1;\x83;\x90;\xE1;\x83;\x96;\xE1;\x83;\x9D; \xE1;\x83;\xA4;\xE1;\x83;\x90;\xE1;\x83;\xA1;\xE1;\x83;\x98;\xE1;\x83;\xA1; %d%%).\n\xE1;\x83;\x9D;\xE1;\x83;\x9E;\xE1;\x83;\x94;\xE1;\x83;\xA0;\xE1;\x83;\x90;\xE1;\x83;\xAA;\xE1;\x83;\x98;\xE1;\x83;\x90; \xE1;\x83;\xA8;\xE1;\x83;\x94;\xE1;\x83;\xA3;\xE1;\x83;\xA5;\xE1;\x83;\xAA;\xE1;\x83;\x94;\xE1;\x83;\x95;\xE1;\x83;\x90;\xE1;\x83;\x93;\xE1;\x83;\x98;\xE1;\x83;\x90;.", name, g_UiVehLPlate[playerid][i], amount, ECON_VEH_RESALE_PCT);
 	}
 	else
 	{
-		format(body, 768, "{FFFFFF}\xE1;\x83;\xA7;\xE1;\x83;\x98;\xE1;\x83;\x93;\xE1;\x83;\x98; {FFD24D}%s{FFFFFF}-\xE1;\x83;\xA1; (\xE1;\x83;\x9C;\xE1;\x83;\x9D;\xE1;\x83;\x9B;\xE1;\x83;\x94;\xE1;\x83;\xA0;\xE1;\x83;\x98; %s)?\n\n\xE1;\x83;\x91;\xE1;\x83;\x90;\xE1;\x83;\x9C;\xE1;\x83;\x99;\xE1;\x83;\xA8;\xE1;\x83;\x98; \xE1;\x83;\x9B;\xE1;\x83;\x98;\xE1;\x83;\x98;\xE1;\x83;\xA6;\xE1;\x83;\x94;\xE1;\x83;\x91; \xE1;\x83;\xA1;\xE1;\x83;\x90;\xE1;\x83;\x91;\xE1;\x83;\x90;\xE1;\x83;\x96;\xE1;\x83;\x9D; \xE1;\x83;\xA4;\xE1;\x83;\x90;\xE1;\x83;\xA1;\xE1;\x83;\x98;\xE1;\x83;\xA1; %d%%-\xE1;\x83;\xA1;.\n\xE1;\x83;\x9D;\xE1;\x83;\x9E;\xE1;\x83;\x94;\xE1;\x83;\xA0;\xE1;\x83;\x90;\xE1;\x83;\xAA;\xE1;\x83;\x98;\xE1;\x83;\x90; \xE1;\x83;\xA8;\xE1;\x83;\x94;\xE1;\x83;\xA3;\xE1;\x83;\xA5;\xE1;\x83;\xAA;\xE1;\x83;\x94;\xE1;\x83;\x95;\xE1;\x83;\x90;\xE1;\x83;\x93;\xE1;\x83;\x98;\xE1;\x83;\x90;.", name, g_UiVehLPlate[playerid][i], 60);
+		format(body, 768, "{FFFFFF}\xE1;\x83;\xA7;\xE1;\x83;\x98;\xE1;\x83;\x93;\xE1;\x83;\x98; {FFD24D}%s{FFFFFF}-\xE1;\x83;\xA1; (\xE1;\x83;\x9C;\xE1;\x83;\x9D;\xE1;\x83;\x9B;\xE1;\x83;\x94;\xE1;\x83;\xA0;\xE1;\x83;\x98; %s)?\n\n\xE1;\x83;\x91;\xE1;\x83;\x90;\xE1;\x83;\x9C;\xE1;\x83;\x99;\xE1;\x83;\xA8;\xE1;\x83;\x98; \xE1;\x83;\x9B;\xE1;\x83;\x98;\xE1;\x83;\x98;\xE1;\x83;\xA6;\xE1;\x83;\x94;\xE1;\x83;\x91; \xE1;\x83;\xA1;\xE1;\x83;\x90;\xE1;\x83;\x91;\xE1;\x83;\x90;\xE1;\x83;\x96;\xE1;\x83;\x9D; \xE1;\x83;\xA4;\xE1;\x83;\x90;\xE1;\x83;\xA1;\xE1;\x83;\x98;\xE1;\x83;\xA1; %d%%-\xE1;\x83;\xA1;.\n\xE1;\x83;\x9D;\xE1;\x83;\x9E;\xE1;\x83;\x94;\xE1;\x83;\xA0;\xE1;\x83;\x90;\xE1;\x83;\xAA;\xE1;\x83;\x98;\xE1;\x83;\x90; \xE1;\x83;\xA8;\xE1;\x83;\x94;\xE1;\x83;\xA3;\xE1;\x83;\xA5;\xE1;\x83;\xAA;\xE1;\x83;\x94;\xE1;\x83;\x95;\xE1;\x83;\x90;\xE1;\x83;\x93;\xE1;\x83;\x98;\xE1;\x83;\x90;.", name, g_UiVehLPlate[playerid][i], ECON_VEH_RESALE_PCT);
 	}
 	Lang_ShowPlayerDialog(playerid, 9104, DIALOG_STYLE_MSGBOX, "\xE1;\x83;\x92;\xE1;\x83;\x90;\xE1;\x83;\xA7;\xE1;\x83;\x98;\xE1;\x83;\x93;\xE1;\x83;\x95;\xE1;\x83;\x98;\xE1;\x83;\xA1; \xE1;\x83;\x93;\xE1;\x83;\x90;\xE1;\x83;\x93;\xE1;\x83;\x90;\xE1;\x83;\xA1;\xE1;\x83;\xA2;\xE1;\x83;\xA3;\xE1;\x83;\xA0;\xE1;\x83;\x94;\xE1;\x83;\x91;\xE1;\x83;\x90;", body, "\xE1;\x83;\x92;\xE1;\x83;\x90;\xE1;\x83;\xA7;\xE1;\x83;\x98;\xE1;\x83;\x93;\xE1;\x83;\x95;\xE1;\x83;\x90;", "\xE1;\x83;\x92;\xE1;\x83;\x90;\xE1;\x83;\xA3;\xE1;\x83;\xA5;\xE1;\x83;\x9B;\xE1;\x83;\x94;\xE1;\x83;\x91;\xE1;\x83;\x90;");
 }
@@ -3404,7 +3567,6 @@ new g_UiHsTierName[4][40] = {
 	"\xE1;\x83;\xA1;\xE1;\x83;\x90;\xE1;\x83;\xA8;\xE1;\x83;\xA3;\xE1;\x83;\x90;\xE1;\x83;\x9A;\xE1;\x83;\x9D; \xE1;\x83;\xA1;\xE1;\x83;\x90;\xE1;\x83;\xAE;\xE1;\x83;\x9A;\xE1;\x83;\x98;",
 	"\xE1;\x83;\x95;\xE1;\x83;\x98;\xE1;\x83;\x9A;\xE1;\x83;\x90;"
 };
-new g_UiHsTierPrice[4] = {14000, 24000, 45000, 130000};
 new g_UiHsTierLevel[4] = {1, 2, 5, 10};
 new g_UiHsTierFridge[4] = {10, 16, 24, 40};
 new g_UiHsIntName[8][40] = {
@@ -3430,6 +3592,8 @@ new g_UiHsKeys[MAX_PLAYERS];
 new g_UiHsLevel[MAX_PLAYERS];
 new g_UiHsMoney[MAX_PLAYERS];
 new g_UiHsBank[MAX_PLAYERS];
+new g_UiHsPrice[MAX_PLAYERS];      // prezzo di vendita della casa (DB), in tetri
+new g_UiHsRefund[MAX_PLAYERS];     // rimborso se il proprietario la rivende
 new g_UiHsLightDue[MAX_PLAYERS];
 new g_UiHsLightCnt[MAX_PLAYERS];
 new g_UiHsGasDue[MAX_PLAYERS];
@@ -3472,6 +3636,18 @@ UI_HsUtilText(ustate, out[], size)
 			format(out, size, "{FFD24D}\xE1;\x83;\x92;\xE1;\x83;\x90;\xE1;\x83;\x9B;\xE1;\x83;\x9D;\xE1;\x83;\xA0;\xE1;\x83;\x97;.");
 		}
 	}
+}
+
+// prezzo vero della casa e rimborso di rivendita (chiamata da house.inc subito dopo UI_HouseDataSet)
+UI_HousePriceSet(playerid, price, refund)
+{
+	if (!UI_HsValid(playerid))
+	{
+		return 0;
+	}
+	g_UiHsPrice[playerid] = price < 0 ? 0 : price;
+	g_UiHsRefund[playerid] = refund < 0 ? 0 : refund;
+	return 1;
 }
 
 UI_HsTitle(playerid, const prefix[], out[], size)
@@ -3571,7 +3747,7 @@ UI_HouseMenuShow(playerid)
 	{
 		g_UiHsItemAct[playerid][i] = 0;
 	}
-	UI_HsMoney(g_UiHsTierPrice[t], price, 48);
+	UI_HsMoney(g_UiHsPrice[playerid], price, 48);
 	format(title, 576, "\xE1;\x83;\xA1;\xE1;\x83;\x90;\xE1;\x83;\xAE;\xE1;\x83;\x9A;\xE1;\x83;\x98; %d - %s", g_UiHsHouse[playerid], g_UiHsIntName[g_UiHsInt[playerid]]);
 	format(line, 480, "{AAAAAA}\xE1;\x83;\x98;\xE1;\x83;\x9C;\xE1;\x83;\xA2;\xE1;\x83;\x94;\xE1;\x83;\xA0;\xE1;\x83;\x98;\xE1;\x83;\x94;\xE1;\x83;\xA0;\xE1;\x83;\x98;: {FFFFFF}%s (%s)\n", g_UiHsIntName[g_UiHsInt[playerid]], g_UiHsTierName[t]);
 	UI_HsMenuRow(playerid, n, 0, line, body, 1024);
@@ -3624,7 +3800,7 @@ UI_HsBuyPayShow(playerid)
 {
 	new t = g_UiHsTier[playerid];
 	new body[640], price[48], cash[48], bank[48], tl[144], title[576];
-	new p = g_UiHsTierPrice[t];
+	new p = g_UiHsPrice[playerid];
 	UI_HsMoney(p, price, 48);
 	UI_HsMoney(g_UiHsMoney[playerid], cash, 48);
 	UI_HsMoney(g_UiHsBank[playerid], bank, 48);
@@ -3638,8 +3814,8 @@ UI_HsBuyPayShow(playerid)
 UI_HsSellConfirmShow(playerid)
 {
 	new body[640], amount[48], title[192];
-	UI_HsMoney(g_UiHsTierPrice[g_UiHsTier[playerid]] * 70 / 100, amount, 48);
-	format(body, 640, "{FFFFFF}\xE1;\x83;\x92;\xE1;\x83;\x90;\xE1;\x83;\xA7;\xE1;\x83;\x98;\xE1;\x83;\x93;\xE1;\x83;\x9D; \xE1;\x83;\xA1;\xE1;\x83;\x90;\xE1;\x83;\xAE;\xE1;\x83;\x9A;\xE1;\x83;\x98; {FFD24D}%d{FFFFFF} (%s)?\n\n\xE1;\x83;\x91;\xE1;\x83;\x90;\xE1;\x83;\x9C;\xE1;\x83;\x99;\xE1;\x83;\xA8;\xE1;\x83;\x98; \xE1;\x83;\x9B;\xE1;\x83;\x98;\xE1;\x83;\x98;\xE1;\x83;\xA6;\xE1;\x83;\x94;\xE1;\x83;\x91; \xE1;\x83;\x93;\xE1;\x83;\x90;\xE1;\x83;\x90;\xE1;\x83;\xAE;\xE1;\x83;\x9A;\xE1;\x83;\x9D;\xE1;\x83;\x94;\xE1;\x83;\x91;\xE1;\x83;\x98;\xE1;\x83;\x97; {66DD66}\xE2;\x82;\xBE;%s{FFFFFF}-\xE1;\x83;\xA1; (\xE1;\x83;\xA4;\xE1;\x83;\x90;\xE1;\x83;\xA1;\xE1;\x83;\x98;\xE1;\x83;\xA1; %d%%).\n\xE1;\x83;\x99;\xE1;\x83;\x9D;\xE1;\x83;\x9B;\xE1;\x83;\xA3;\xE1;\x83;\x9C;\xE1;\x83;\x90;\xE1;\x83;\x9A;\xE1;\x83;\xA3;\xE1;\x83;\xA0;\xE1;\x83;\x98;, \xE1;\x83;\x92;\xE1;\x83;\x90;\xE1;\x83;\xA1;\xE1;\x83;\x90;\xE1;\x83;\xA6;\xE1;\x83;\x94;\xE1;\x83;\x91;\xE1;\x83;\x94;\xE1;\x83;\x91;\xE1;\x83;\x98; \xE1;\x83;\x93;\xE1;\x83;\x90; \xE1;\x83;\x92;\xE1;\x83;\x90;\xE1;\x83;\x93;\xE1;\x83;\x90;\xE1;\x83;\xA1;\xE1;\x83;\x90;\xE1;\x83;\xAE;\xE1;\x83;\x90;\xE1;\x83;\x93;\xE1;\x83;\x94;\xE1;\x83;\x91;\xE1;\x83;\x98; \xE1;\x83;\x92;\xE1;\x83;\x90;\xE1;\x83;\x9C;\xE1;\x83;\xA3;\xE1;\x83;\x9A;\xE1;\x83;\x93;\xE1;\x83;\x94;\xE1;\x83;\x91;\xE1;\x83;\x90;; \xE1;\x83;\x9D;\xE1;\x83;\x9E;\xE1;\x83;\x94;\xE1;\x83;\xA0;\xE1;\x83;\x90;\xE1;\x83;\xAA;\xE1;\x83;\x98;\xE1;\x83;\x90; \xE1;\x83;\xA8;\xE1;\x83;\x94;\xE1;\x83;\xA3;\xE1;\x83;\xA5;\xE1;\x83;\xAA;\xE1;\x83;\x94;\xE1;\x83;\x95;\xE1;\x83;\x90;\xE1;\x83;\x93;\xE1;\x83;\x98;\xE1;\x83;\x90;.", g_UiHsHouse[playerid], g_UiHsIntName[g_UiHsInt[playerid]], amount, 70);
+	UI_HsMoney(g_UiHsRefund[playerid], amount, 48);
+	format(body, 640, "{FFFFFF}\xE1;\x83;\x92;\xE1;\x83;\x90;\xE1;\x83;\xA7;\xE1;\x83;\x98;\xE1;\x83;\x93;\xE1;\x83;\x9D; \xE1;\x83;\xA1;\xE1;\x83;\x90;\xE1;\x83;\xAE;\xE1;\x83;\x9A;\xE1;\x83;\x98; {FFD24D}%d{FFFFFF} (%s)?\n\n\xE1;\x83;\x91;\xE1;\x83;\x90;\xE1;\x83;\x9C;\xE1;\x83;\x99;\xE1;\x83;\xA8;\xE1;\x83;\x98; \xE1;\x83;\x9B;\xE1;\x83;\x98;\xE1;\x83;\x98;\xE1;\x83;\xA6;\xE1;\x83;\x94;\xE1;\x83;\x91; \xE1;\x83;\x93;\xE1;\x83;\x90;\xE1;\x83;\x90;\xE1;\x83;\xAE;\xE1;\x83;\x9A;\xE1;\x83;\x9D;\xE1;\x83;\x94;\xE1;\x83;\x91;\xE1;\x83;\x98;\xE1;\x83;\x97; {66DD66}\xE2;\x82;\xBE;%s{FFFFFF}-\xE1;\x83;\xA1; (\xE1;\x83;\xA4;\xE1;\x83;\x90;\xE1;\x83;\xA1;\xE1;\x83;\x98;\xE1;\x83;\xA1; %d%%).\n\xE1;\x83;\x99;\xE1;\x83;\x9D;\xE1;\x83;\x9B;\xE1;\x83;\xA3;\xE1;\x83;\x9C;\xE1;\x83;\x90;\xE1;\x83;\x9A;\xE1;\x83;\xA3;\xE1;\x83;\xA0;\xE1;\x83;\x98;, \xE1;\x83;\x92;\xE1;\x83;\x90;\xE1;\x83;\xA1;\xE1;\x83;\x90;\xE1;\x83;\xA6;\xE1;\x83;\x94;\xE1;\x83;\x91;\xE1;\x83;\x94;\xE1;\x83;\x91;\xE1;\x83;\x98; \xE1;\x83;\x93;\xE1;\x83;\x90; \xE1;\x83;\x92;\xE1;\x83;\x90;\xE1;\x83;\x93;\xE1;\x83;\x90;\xE1;\x83;\xA1;\xE1;\x83;\x90;\xE1;\x83;\xAE;\xE1;\x83;\x90;\xE1;\x83;\x93;\xE1;\x83;\x94;\xE1;\x83;\x91;\xE1;\x83;\x98; \xE1;\x83;\x92;\xE1;\x83;\x90;\xE1;\x83;\x9C;\xE1;\x83;\xA3;\xE1;\x83;\x9A;\xE1;\x83;\x93;\xE1;\x83;\x94;\xE1;\x83;\x91;\xE1;\x83;\x90;; \xE1;\x83;\x9D;\xE1;\x83;\x9E;\xE1;\x83;\x94;\xE1;\x83;\xA0;\xE1;\x83;\x90;\xE1;\x83;\xAA;\xE1;\x83;\x98;\xE1;\x83;\x90; \xE1;\x83;\xA8;\xE1;\x83;\x94;\xE1;\x83;\xA3;\xE1;\x83;\xA5;\xE1;\x83;\xAA;\xE1;\x83;\x94;\xE1;\x83;\x95;\xE1;\x83;\x90;\xE1;\x83;\x93;\xE1;\x83;\x98;\xE1;\x83;\x90;.", g_UiHsHouse[playerid], g_UiHsIntName[g_UiHsInt[playerid]], amount, ECON_HOUSE_RESALE_PCT);
 	UI_HsTitle(playerid, "\xE1;\x83;\x92;\xE1;\x83;\x90;\xE1;\x83;\xA7;\xE1;\x83;\x98;\xE1;\x83;\x93;\xE1;\x83;\x95;\xE1;\x83;\x98;\xE1;\x83;\xA1; \xE1;\x83;\x93;\xE1;\x83;\x90;\xE1;\x83;\x93;\xE1;\x83;\x90;\xE1;\x83;\xA1;\xE1;\x83;\xA2;\xE1;\x83;\xA3;\xE1;\x83;\xA0;\xE1;\x83;\x94;\xE1;\x83;\x91;\xE1;\x83;\x90;", title, 192);
 	Lang_ShowPlayerDialog(playerid, 9202, DIALOG_STYLE_MSGBOX, title, body, "\xE1;\x83;\x92;\xE1;\x83;\x90;\xE1;\x83;\xA7;\xE1;\x83;\x98;\xE1;\x83;\x93;\xE1;\x83;\x95;\xE1;\x83;\x90;", "\xE1;\x83;\x92;\xE1;\x83;\x90;\xE1;\x83;\xA3;\xE1;\x83;\xA5;\xE1;\x83;\x9B;\xE1;\x83;\x94;\xE1;\x83;\x91;\xE1;\x83;\x90;");
 }
@@ -3855,7 +4031,7 @@ bool:UI_HouseOnDialogResponse(playerid, dialogid, response, listitem, const inpu
 				UI_HouseMenuShow(playerid);
 				return true;
 			}
-			new p = g_UiHsTierPrice[g_UiHsTier[playerid]];
+			new p = g_UiHsPrice[playerid];
 			new funds = listitem == 1 ? g_UiHsBank[playerid] : g_UiHsMoney[playerid];
 			if (funds < p)
 			{
@@ -4242,8 +4418,8 @@ new g_UiJbStepWord[4][32] = {
 };
 new g_UiJbMinLevel[4] = {0, 1, 2, 1};
 new g_UiJbSteps[4] = {0, 6, 5, 8};
-new g_UiJbPayStep[4] = {0, 28, 45, 24};
-new g_UiJbPayBonus[4] = {0, 40, 30, 40};
+new g_UiJbPayStep[4] = {0, ECON_JOB_BUS_STEP, ECON_JOB_COURIER_STEP, ECON_JOB_CLEANER_STEP};   // tetri, economy/econ_config.inc
+new g_UiJbPayBonus[4] = {0, ECON_JOB_BUS_BONUS, ECON_JOB_COURIER_BONUS, ECON_JOB_CLEANER_BONUS};
 new g_UiJbDwellMs[4] = {0, 4000, 5000, 4000};
 new g_UiJbEstMinutes[4] = {1, 7, 9, 8};
 new g_UiJbRoute[4][176] = {
@@ -4284,9 +4460,9 @@ UI_JbHourly(job)
 		return 0;
 	}
 	new hourly = UI_JbRunPay(job) * 60 / g_UiJbEstMinutes[job];
-	if (hourly > 2200)
+	if (hourly > ECON_JOB_HOURLY_CAP)
 	{
-		hourly = 2200;
+		hourly = ECON_JOB_HOURLY_CAP;
 	}
 	return hourly;
 }
@@ -4342,7 +4518,7 @@ UI_JbDetailShow(playerid, job)
 	new runPay[48], hourly[48], cap[48], step[48], bonus[48];
 	UI_JbMoney(UI_JbRunPay(job), runPay, 48);
 	UI_JbMoney(UI_JbHourly(job), hourly, 48);
-	UI_JbMoney(2200, cap, 48);
+	UI_JbMoney(ECON_JOB_HOURLY_CAP, cap, 48);
 	UI_JbMoney(g_UiJbPayStep[job], step, 48);
 	UI_JbMoney(g_UiJbPayBonus[job], bonus, 48);
 	format(line, 576, "{FFD24D}%s{FFFFFF}\n\n", g_UiJbName[job]);
@@ -4423,7 +4599,7 @@ UI_JobInfoShow(playerid, jobId, level, runs, earned)
 		UI_JbMoney(UI_JbHourly(jobId), hourly, 48);
 		format(line, 576, "{FFFFFF}\xE1;\x83;\x9B;\xE1;\x83;\x98;\xE1;\x83;\x9B;\xE1;\x83;\x93;\xE1;\x83;\x98;\xE1;\x83;\x9C;\xE1;\x83;\x90;\xE1;\x83;\xA0;\xE1;\x83;\x94; \xE1;\x83;\xA1;\xE1;\x83;\x90;\xE1;\x83;\x9B;\xE1;\x83;\xA1;\xE1;\x83;\x90;\xE1;\x83;\xAE;\xE1;\x83;\xA3;\xE1;\x83;\xA0;\xE1;\x83;\x98;: {FFD24D}%s{FFFFFF}\n\xE1;\x83;\x9B;\xE1;\x83;\x90;\xE1;\x83;\x9C;\xE1;\x83;\xA5;\xE1;\x83;\x90;\xE1;\x83;\x9C;\xE1;\x83;\x90;: %s\n\xE1;\x83;\x9B;\xE1;\x83;\x90;\xE1;\x83;\xA0;\xE1;\x83;\xA8;\xE1;\x83;\xA0;\xE1;\x83;\xA3;\xE1;\x83;\xA2;\xE1;\x83;\x98;: %s\n", g_UiJbName[jobId], g_UiJbVehicle[jobId], g_UiJbRoute[jobId]);
 		strcat(body, line, 2048);
-		format(line, 576, "\xE1;\x83;\xAE;\xE1;\x83;\x94;\xE1;\x83;\x9A;\xE1;\x83;\xA4;\xE1;\x83;\x90;\xE1;\x83;\xA1;\xE1;\x83;\x98; \xE1;\x83;\xAC;\xE1;\x83;\xA0;\xE1;\x83;\x94;\xE1;\x83;\x96;\xE1;\x83;\x94;: {66DD66}\xE2;\x82;\xBE;%s{FFFFFF}  |  \xE1;\x83;\xA1;\xE1;\x83;\x90;\xE1;\x83;\x95;\xE1;\x83;\x90;\xE1;\x83;\xA0;\xE1;\x83;\x90;\xE1;\x83;\xA3;\xE1;\x83;\x93;\xE1;\x83;\x9D;\xE1;\x83;\x93; ~{66DD66}\xE2;\x82;\xBE;%s{FFFFFF}/\xE1;\x83;\xA1;\xE1;\x83;\x97; (\xE1;\x83;\x9A;\xE1;\x83;\x98;\xE1;\x83;\x9B;\xE1;\x83;\x98;\xE1;\x83;\xA2;\xE1;\x83;\x98; %s/\xE1;\x83;\xA1;\xE1;\x83;\x97;)\n\n", money, hourly, Money_Str(2200));
+		format(line, 576, "\xE1;\x83;\xAE;\xE1;\x83;\x94;\xE1;\x83;\x9A;\xE1;\x83;\xA4;\xE1;\x83;\x90;\xE1;\x83;\xA1;\xE1;\x83;\x98; \xE1;\x83;\xAC;\xE1;\x83;\xA0;\xE1;\x83;\x94;\xE1;\x83;\x96;\xE1;\x83;\x94;: {66DD66}\xE2;\x82;\xBE;%s{FFFFFF}  |  \xE1;\x83;\xA1;\xE1;\x83;\x90;\xE1;\x83;\x95;\xE1;\x83;\x90;\xE1;\x83;\xA0;\xE1;\x83;\x90;\xE1;\x83;\xA3;\xE1;\x83;\x93;\xE1;\x83;\x9D;\xE1;\x83;\x93; ~{66DD66}\xE2;\x82;\xBE;%s{FFFFFF}/\xE1;\x83;\xA1;\xE1;\x83;\x97; (\xE1;\x83;\x9A;\xE1;\x83;\x98;\xE1;\x83;\x9B;\xE1;\x83;\x98;\xE1;\x83;\xA2;\xE1;\x83;\x98; %s/\xE1;\x83;\xA1;\xE1;\x83;\x97;)\n\n", money, hourly, Money_Str(ECON_JOB_HOURLY_CAP));
 		strcat(body, line, 2048);
 		UI_JbMoney(earned, money, 48);
 		format(line, 576, "\xE1;\x83;\x93;\xE1;\x83;\x90;\xE1;\x83;\xA1;\xE1;\x83;\xA0;\xE1;\x83;\xA3;\xE1;\x83;\x9A;\xE1;\x83;\x94;\xE1;\x83;\x91;\xE1;\x83;\xA3;\xE1;\x83;\x9A;\xE1;\x83;\x98; \xE1;\x83;\xAA;\xE1;\x83;\x95;\xE1;\x83;\x9A;\xE1;\x83;\x94;\xE1;\x83;\x91;\xE1;\x83;\x98;: %d\n\xE1;\x83;\xA1;\xE1;\x83;\xA3;\xE1;\x83;\x9A; \xE1;\x83;\x92;\xE1;\x83;\x90;\xE1;\x83;\x9B;\xE1;\x83;\x9D;\xE1;\x83;\x9B;\xE1;\x83;\xA3;\xE1;\x83;\xA8;\xE1;\x83;\x90;\xE1;\x83;\x95;\xE1;\x83;\x94;\xE1;\x83;\x91;\xE1;\x83;\xA3;\xE1;\x83;\x9A;\xE1;\x83;\x98;: {66DD66}\xE2;\x82;\xBE;%s{FFFFFF}\n\n", runs, money);
@@ -4706,8 +4882,8 @@ new g_UiFcRankName[3][7][64] = {
 };
 new g_UiFcRankPay[3][7] = {
 	{0},
-	{0, 150, 200, 250, 320, 400, 500},
-	{0, 150, 200, 250, 320, 400, 500}
+	{0, ECON_FAC_PAY_R1, ECON_FAC_PAY_R2, ECON_FAC_PAY_R3, ECON_FAC_PAY_R4, ECON_FAC_PAY_R5, ECON_FAC_PAY_R6},
+	{0, ECON_FAC_PAY_R1, ECON_FAC_PAY_R2, ECON_FAC_PAY_R3, ECON_FAC_PAY_R4, ECON_FAC_PAY_R5, ECON_FAC_PAY_R6}
 };
 new g_UiFcColor[3] = {-1, 0x6FA8FFFF, -8355585};
 new g_UiFcFaction[MAX_PLAYERS];
@@ -6465,27 +6641,8 @@ UI_BankFmt(value, dest[], size)
 
 bool:UI_BankParseAmount(const s[], &value)
 {
-	new i = 0, len = strlen(s), digits = 0;
-	value = 0;
-	while (i < len && s[i] == 32)
-	{
-		i++;
-	}
-	while (i < len && s[i] >= 48 && s[i] <= 57)
-	{
-		if (digits >= 9)
-		{
-			return false;
-		}
-		value = value * 10 + (s[i] - 48);
-		digits++;
-		i++;
-	}
-	while (i < len && s[i] == 32)
-	{
-		i++;
-	}
-	return digits > 0 && i == len && value >= 1;
+	// lari digitati ("25", "12,50") -> tetri (economy/currency.inc)
+	return Money_Parse(s, value);
 }
 
 UI_BankFindTarget(const input[])
@@ -6740,9 +6897,9 @@ bool:UI_BankRange(playerid, op, &lo, &hi)
 			return false;
 		}
 	}
-	if (hi > 0x3B9ACA00)
+	if (hi > ECON_MONEY_MAX)
 	{
-		hi = 0x3B9ACA00;
+		hi = ECON_MONEY_MAX;
 	}
 	return hi >= lo;
 }
@@ -6797,7 +6954,7 @@ UI_BankAmountShow(playerid, op, const err[])
 			format(sub, 288, "\xE1;\x83;\xA1;\xE1;\x83;\x90;\xE1;\x83;\x91;\xE1;\x83;\x90;\xE1;\x83;\x9C;\xE1;\x83;\x99;\xE1;\x83;\x9D; \xE1;\x83;\x91;\xE1;\x83;\x90;\xE1;\x83;\x9A;\xE1;\x83;\x90;\xE1;\x83;\x9C;\xE1;\x83;\xA1;\xE1;\x83;\x98;: {66DD66}\xE2;\x82;\xBE;%s{FFFFFF} (\xE1;\x83;\xA1;\xE1;\x83;\x90;\xE1;\x83;\x99;\xE1;\x83;\x9D;\xE1;\x83;\x9B;\xE1;\x83;\x98;\xE1;\x83;\xA1;\xE1;\x83;\x98;\xE1;\x83;\x9D; \xE1;\x83;\x94;\xE1;\x83;\x9B;\xE1;\x83;\x90;\xE1;\x83;\xA2;\xE1;\x83;\x94;\xE1;\x83;\x91;\xE1;\x83;\x90;)", sBank);
 		}
 	}
-	format(body, 1024, "%s{FFFFFF}%s\n\xE1;\x83;\x93;\xE1;\x83;\x90;\xE1;\x83;\xA1;\xE1;\x83;\x90;\xE1;\x83;\xA8;\xE1;\x83;\x95;\xE1;\x83;\x94;\xE1;\x83;\x91;\xE1;\x83;\x98; \xE1;\x83;\x97;\xE1;\x83;\x90;\xE1;\x83;\x9C;\xE1;\x83;\xAE;\xE1;\x83;\x90;: {FFD24D}\xE2;\x82;\xBE;%s{FFFFFF}-\xE1;\x83;\x93;\xE1;\x83;\x90;\xE1;\x83;\x9C; {FFD24D}\xE2;\x82;\xBE;%s{FFFFFF}-\xE1;\x83;\x9B;\xE1;\x83;\x93;\xE1;\x83;\x94;.\n\xE1;\x83;\xA8;\xE1;\x83;\x94;\xE1;\x83;\x98;\xE1;\x83;\xA7;\xE1;\x83;\x95;\xE1;\x83;\x90;\xE1;\x83;\x9C;\xE1;\x83;\x94; \xE1;\x83;\x9B;\xE1;\x83;\x97;\xE1;\x83;\x94;\xE1;\x83;\x9A;\xE1;\x83;\x98; \xE1;\x83;\xA0;\xE1;\x83;\x98;\xE1;\x83;\xAA;\xE1;\x83;\xAE;\xE1;\x83;\x95;\xE1;\x83;\x98;:", err, sub, sLo, sHi);
+	format(body, 1024, "%s{FFFFFF}%s\n\xE1;\x83;\x93;\xE1;\x83;\x90;\xE1;\x83;\xA1;\xE1;\x83;\x90;\xE1;\x83;\xA8;\xE1;\x83;\x95;\xE1;\x83;\x94;\xE1;\x83;\x91;\xE1;\x83;\x98; \xE1;\x83;\x97;\xE1;\x83;\x90;\xE1;\x83;\x9C;\xE1;\x83;\xAE;\xE1;\x83;\x90;: {FFD24D}\xE2;\x82;\xBE;%s{FFFFFF}-\xE1;\x83;\x93;\xE1;\x83;\x90;\xE1;\x83;\x9C; {FFD24D}\xE2;\x82;\xBE;%s{FFFFFF}-\xE1;\x83;\x9B;\xE1;\x83;\x93;\xE1;\x83;\x94;.\n\xE1;\x83;\xA8;\xE1;\x83;\x94;\xE1;\x83;\x98;\xE1;\x83;\xA7;\xE1;\x83;\x95;\xE1;\x83;\x90;\xE1;\x83;\x9C;\xE1;\x83;\x94; \xE1;\x83;\x97;\xE1;\x83;\x90;\xE1;\x83;\x9C;\xE1;\x83;\xAE;\xE1;\x83;\x90; \xE1;\x83;\x9A;\xE1;\x83;\x90;\xE1;\x83;\xA0;\xE1;\x83;\xA8;\xE1;\x83;\x98; (\xE1;\x83;\x9B;\xE1;\x83;\x90;\xE1;\x83;\x92;. 25 \xE1;\x83;\x90;\xE1;\x83;\x9C; 12,50):", err, sub, sLo, sHi);
 	Lang_ShowPlayerDialog(playerid, 9501, DIALOG_STYLE_INPUT, title, body, "\xE1;\x83;\xA8;\xE1;\x83;\x94;\xE1;\x83;\x9B;\xE1;\x83;\x93;\xE1;\x83;\x94;\xE1;\x83;\x92;\xE1;\x83;\x98;", "\xE1;\x83;\xA3;\xE1;\x83;\x99;\xE1;\x83;\x90;\xE1;\x83;\x9C;");
 	return 0;
 }
@@ -7159,7 +7316,7 @@ bool:UI_BankOnDialogResponse(playerid, dialogid, response, listitem, const input
 			}
 			if (!UI_BankParseAmount(inputtext, amount))
 			{
-				UI_BankAmountShow(playerid, op, "{FF6666}\xE1;\x83;\x90;\xE1;\x83;\xA0;\xE1;\x83;\x90;\xE1;\x83;\xA1;\xE1;\x83;\xAC;\xE1;\x83;\x9D;\xE1;\x83;\xA0;\xE1;\x83;\x98; \xE1;\x83;\x97;\xE1;\x83;\x90;\xE1;\x83;\x9C;\xE1;\x83;\xAE;\xE1;\x83;\x90;: \xE1;\x83;\x9B;\xE1;\x83;\xAE;\xE1;\x83;\x9D;\xE1;\x83;\x9A;\xE1;\x83;\x9D;\xE1;\x83;\x93; \xE1;\x83;\xAA;\xE1;\x83;\x98;\xE1;\x83;\xA4;\xE1;\x83;\xA0;\xE1;\x83;\x94;\xE1;\x83;\x91;\xE1;\x83;\x98;, \xE1;\x83;\x93;\xE1;\x83;\x90;\xE1;\x83;\x93;\xE1;\x83;\x94;\xE1;\x83;\x91;\xE1;\x83;\x98;\xE1;\x83;\x97;\xE1;\x83;\x98; \xE1;\x83;\x9B;\xE1;\x83;\x97;\xE1;\x83;\x94;\xE1;\x83;\x9A;\xE1;\x83;\x98; \xE1;\x83;\xA0;\xE1;\x83;\x98;\xE1;\x83;\xAA;\xE1;\x83;\xAE;\xE1;\x83;\x95;\xE1;\x83;\x98;.\n\n");
+				UI_BankAmountShow(playerid, op, "{FF6666}\xE1;\x83;\x90;\xE1;\x83;\xA0;\xE1;\x83;\x90;\xE1;\x83;\xA1;\xE1;\x83;\xAC;\xE1;\x83;\x9D;\xE1;\x83;\xA0;\xE1;\x83;\x98; \xE1;\x83;\x97;\xE1;\x83;\x90;\xE1;\x83;\x9C;\xE1;\x83;\xAE;\xE1;\x83;\x90;: \xE1;\x83;\xA9;\xE1;\x83;\x90;\xE1;\x83;\xAC;\xE1;\x83;\x94;\xE1;\x83;\xA0;\xE1;\x83;\x94; \xE1;\x83;\x9A;\xE1;\x83;\x90;\xE1;\x83;\xA0;\xE1;\x83;\x94;\xE1;\x83;\x91;\xE1;\x83;\xA8;\xE1;\x83;\x98;, \xE1;\x83;\x9B;\xE1;\x83;\x90;\xE1;\x83;\x92;. 25 \xE1;\x83;\x90;\xE1;\x83;\x9C; 12,50.\n\n");
 				return true;
 			}
 			if (amount < lo || amount > hi)
@@ -8250,27 +8407,8 @@ UI_LvBar(value, maxValue, const color[], dest[], size)
 
 bool:UI_LvParseAmount(const s[], &value)
 {
-	new i = 0, len = strlen(s), digits = 0;
-	value = 0;
-	while (i < len && s[i] == 32)
-	{
-		i++;
-	}
-	while (i < len && s[i] >= 48 && s[i] <= 57)
-	{
-		if (digits >= 9)
-		{
-			return false;
-		}
-		value = value * 10 + (s[i] - 48);
-		digits++;
-		i++;
-	}
-	while (i < len && s[i] == 32)
-	{
-		i++;
-	}
-	return digits > 0 && i == len && value >= 1;
+	// lari digitati ("25", "12,50") -> tetri (economy/currency.inc)
+	return Money_Parse(s, value);
 }
 
 UI_LvTier(points)
@@ -9519,9 +9657,9 @@ bool:UI_LvPrjRange(playerid, &lo, &hi)
 	{
 		hi = g_UiLvPjDayLeft[playerid];
 	}
-	if (hi > 0x3B9ACA00)
+	if (hi > ECON_MONEY_MAX)
 	{
-		hi = 0x3B9ACA00;
+		hi = ECON_MONEY_MAX;
 	}
 	return g_UiLvPjId[playerid] > 0 && g_UiLvPjBlock[playerid] == 0 && hi >= lo;
 }
@@ -9585,7 +9723,7 @@ UI_LvPrjAmountShow(playerid, const err[])
 	}
 	UI_LvFmt(lo, sLo, 48);
 	UI_LvFmt(hi, sHi, 48);
-	format(body, 1024, "%s{FFFFFF}\xE1;\x83;\xA0;\xE1;\x83;\x90;\xE1;\x83;\x9B;\xE1;\x83;\x93;\xE1;\x83;\x94;\xE1;\x83;\x9C;\xE1;\x83;\x98;\xE1;\x83;\xA1; \xE1;\x83;\xA8;\xE1;\x83;\x94;\xE1;\x83;\xAC;\xE1;\x83;\x98;\xE1;\x83;\xA0;\xE1;\x83;\x95;\xE1;\x83;\x90; \xE1;\x83;\x92;\xE1;\x83;\x98;\xE1;\x83;\x9C;\xE1;\x83;\x93;\xE1;\x83;\x90; {FFD24D}%s{FFFFFF}-\xE1;\x83;\x98;\xE1;\x83;\xA1;\xE1;\x83;\x97;\xE1;\x83;\x95;\xE1;\x83;\x98;\xE1;\x83;\xA1;?\n\xE1;\x83;\x93;\xE1;\x83;\x90;\xE1;\x83;\xA1;\xE1;\x83;\x90;\xE1;\x83;\xA8;\xE1;\x83;\x95;\xE1;\x83;\x94;\xE1;\x83;\x91;\xE1;\x83;\x98; \xE1;\x83;\x97;\xE1;\x83;\x90;\xE1;\x83;\x9C;\xE1;\x83;\xAE;\xE1;\x83;\x90;: {FFD24D}\xE2;\x82;\xBE;%s{FFFFFF}-\xE1;\x83;\x93;\xE1;\x83;\x90;\xE1;\x83;\x9C; {FFD24D}\xE2;\x82;\xBE;%s{FFFFFF}-\xE1;\x83;\x9B;\xE1;\x83;\x93;\xE1;\x83;\x94;. \xE1;\x83;\xA8;\xE1;\x83;\x94;\xE1;\x83;\x98;\xE1;\x83;\xA7;\xE1;\x83;\x95;\xE1;\x83;\x90;\xE1;\x83;\x9C;\xE1;\x83;\x94; \xE1;\x83;\x9B;\xE1;\x83;\x97;\xE1;\x83;\x94;\xE1;\x83;\x9A;\xE1;\x83;\x98; \xE1;\x83;\xA0;\xE1;\x83;\x98;\xE1;\x83;\xAA;\xE1;\x83;\xAE;\xE1;\x83;\x95;\xE1;\x83;\x98;:", err, g_UiLvPjName[playerid], sLo, sHi);
+	format(body, 1024, "%s{FFFFFF}\xE1;\x83;\xA0;\xE1;\x83;\x90;\xE1;\x83;\x9B;\xE1;\x83;\x93;\xE1;\x83;\x94;\xE1;\x83;\x9C;\xE1;\x83;\x98;\xE1;\x83;\xA1; \xE1;\x83;\xA8;\xE1;\x83;\x94;\xE1;\x83;\xAC;\xE1;\x83;\x98;\xE1;\x83;\xA0;\xE1;\x83;\x95;\xE1;\x83;\x90; \xE1;\x83;\x92;\xE1;\x83;\x98;\xE1;\x83;\x9C;\xE1;\x83;\x93;\xE1;\x83;\x90; {FFD24D}%s{FFFFFF}-\xE1;\x83;\x98;\xE1;\x83;\xA1;\xE1;\x83;\x97;\xE1;\x83;\x95;\xE1;\x83;\x98;\xE1;\x83;\xA1;?\n\xE1;\x83;\x93;\xE1;\x83;\x90;\xE1;\x83;\xA1;\xE1;\x83;\x90;\xE1;\x83;\xA8;\xE1;\x83;\x95;\xE1;\x83;\x94;\xE1;\x83;\x91;\xE1;\x83;\x98; \xE1;\x83;\x97;\xE1;\x83;\x90;\xE1;\x83;\x9C;\xE1;\x83;\xAE;\xE1;\x83;\x90;: {FFD24D}\xE2;\x82;\xBE;%s{FFFFFF}-\xE1;\x83;\x93;\xE1;\x83;\x90;\xE1;\x83;\x9C; {FFD24D}\xE2;\x82;\xBE;%s{FFFFFF}-\xE1;\x83;\x9B;\xE1;\x83;\x93;\xE1;\x83;\x94;. \xE1;\x83;\xA8;\xE1;\x83;\x94;\xE1;\x83;\x98;\xE1;\x83;\xA7;\xE1;\x83;\x95;\xE1;\x83;\x90;\xE1;\x83;\x9C;\xE1;\x83;\x94; \xE1;\x83;\x97;\xE1;\x83;\x90;\xE1;\x83;\x9C;\xE1;\x83;\xAE;\xE1;\x83;\x90; \xE1;\x83;\x9A;\xE1;\x83;\x90;\xE1;\x83;\xA0;\xE1;\x83;\xA8;\xE1;\x83;\x98; (\xE1;\x83;\x9B;\xE1;\x83;\x90;\xE1;\x83;\x92;. 25 \xE1;\x83;\x90;\xE1;\x83;\x9C; 12,50):", err, g_UiLvPjName[playerid], sLo, sHi);
 	Lang_ShowPlayerDialog(playerid, 9720, DIALOG_STYLE_INPUT, "\xE1;\x83;\xA8;\xE1;\x83;\x94;\xE1;\x83;\xAC;\xE1;\x83;\x98;\xE1;\x83;\xA0;\xE1;\x83;\x95;\xE1;\x83;\x90;", body, "\xE1;\x83;\xA8;\xE1;\x83;\x94;\xE1;\x83;\x9B;\xE1;\x83;\x93;\xE1;\x83;\x94;\xE1;\x83;\x92;\xE1;\x83;\x98;", "\xE1;\x83;\xA3;\xE1;\x83;\x99;\xE1;\x83;\x90;\xE1;\x83;\x9C;");
 	return 0;
 }
@@ -10238,7 +10376,7 @@ bool:UI_LivingOnDialogResponse(playerid, dialogid, response, listitem, const inp
 			new amount = 0, err[480];
 			if (!UI_LvParseAmount(inputtext, amount))
 			{
-				UI_LvPrjAmountShow(playerid, "{FF6666}\xE1;\x83;\x90;\xE1;\x83;\xA0;\xE1;\x83;\x90;\xE1;\x83;\xA1;\xE1;\x83;\xAC;\xE1;\x83;\x9D;\xE1;\x83;\xA0;\xE1;\x83;\x98; \xE1;\x83;\x97;\xE1;\x83;\x90;\xE1;\x83;\x9C;\xE1;\x83;\xAE;\xE1;\x83;\x90;: \xE1;\x83;\x9B;\xE1;\x83;\xAE;\xE1;\x83;\x9D;\xE1;\x83;\x9A;\xE1;\x83;\x9D;\xE1;\x83;\x93; \xE1;\x83;\xAA;\xE1;\x83;\x98;\xE1;\x83;\xA4;\xE1;\x83;\xA0;\xE1;\x83;\x94;\xE1;\x83;\x91;\xE1;\x83;\x98;, \xE1;\x83;\x93;\xE1;\x83;\x90;\xE1;\x83;\x93;\xE1;\x83;\x94;\xE1;\x83;\x91;\xE1;\x83;\x98;\xE1;\x83;\x97;\xE1;\x83;\x98; \xE1;\x83;\x9B;\xE1;\x83;\x97;\xE1;\x83;\x94;\xE1;\x83;\x9A;\xE1;\x83;\x98; \xE1;\x83;\xA0;\xE1;\x83;\x98;\xE1;\x83;\xAA;\xE1;\x83;\xAE;\xE1;\x83;\x95;\xE1;\x83;\x98;.\n\n");
+				UI_LvPrjAmountShow(playerid, "{FF6666}\xE1;\x83;\x90;\xE1;\x83;\xA0;\xE1;\x83;\x90;\xE1;\x83;\xA1;\xE1;\x83;\xAC;\xE1;\x83;\x9D;\xE1;\x83;\xA0;\xE1;\x83;\x98; \xE1;\x83;\x97;\xE1;\x83;\x90;\xE1;\x83;\x9C;\xE1;\x83;\xAE;\xE1;\x83;\x90;: \xE1;\x83;\xA9;\xE1;\x83;\x90;\xE1;\x83;\xAC;\xE1;\x83;\x94;\xE1;\x83;\xA0;\xE1;\x83;\x94; \xE1;\x83;\x9A;\xE1;\x83;\x90;\xE1;\x83;\xA0;\xE1;\x83;\x94;\xE1;\x83;\x91;\xE1;\x83;\xA8;\xE1;\x83;\x98;, \xE1;\x83;\x9B;\xE1;\x83;\x90;\xE1;\x83;\x92;. 25 \xE1;\x83;\x90;\xE1;\x83;\x9C; 12,50.\n\n");
 				return true;
 			}
 			if (!UI_LvPrjCheck(playerid, amount, err, 480))
@@ -11268,7 +11406,7 @@ DB_SaveCharacter(playerid)
 	GetPlayerName(playerid, name, 75);
 	new bankDelta = DB_BankDeltaTake(playerid);
 	skin = gPlayer[playerid][pCivilSkin];
-	mysql_format(g_DB, query, 768, "UPDATE characters SET money = %d, bank = GREATEST(0, LEAST(%d, CAST(bank AS SIGNED) + (%d))), level = %d, exp = %d, health = %f, armor = %f, pos_x = %f, pos_y = %f, pos_z = %f, angle = %f, interior = %d, world = %d, skin = %d, played_ms = %d, last_save = NOW(), last_played_at = NOW() WHERE id = %d", gPlayer[playerid][pMoney], 0x3B9ACA00, bankDelta, gPlayer[playerid][pLevel], gPlayer[playerid][pExp], gPlayer[playerid][pHealth], gPlayer[playerid][pArmor], gPlayer[playerid][pPosX], gPlayer[playerid][pPosY], gPlayer[playerid][pPosZ], gPlayer[playerid][pAngle], gPlayer[playerid][pInterior], gPlayer[playerid][pWorld], skin, max(gPlayer[playerid][pPlayedMs], 0), gPlayer[playerid][pCharId]);
+	mysql_format(g_DB, query, 768, "UPDATE characters SET money = %d, bank = GREATEST(0, LEAST(%d, CAST(bank AS SIGNED) + (%d))), level = %d, exp = %d, health = %f, armor = %f, pos_x = %f, pos_y = %f, pos_z = %f, angle = %f, interior = %d, world = %d, skin = %d, played_ms = %d, last_save = NOW(), last_played_at = NOW() WHERE id = %d", gPlayer[playerid][pMoney], ECON_MONEY_MAX, bankDelta, gPlayer[playerid][pLevel], gPlayer[playerid][pExp], gPlayer[playerid][pHealth], gPlayer[playerid][pArmor], gPlayer[playerid][pPosX], gPlayer[playerid][pPosY], gPlayer[playerid][pPosZ], gPlayer[playerid][pAngle], gPlayer[playerid][pInterior], gPlayer[playerid][pWorld], skin, max(gPlayer[playerid][pPlayedMs], 0), gPlayer[playerid][pCharId]);
 	mysql_tquery(g_DB, query, "DB_OnBankDeltaSaved", "dsddd", playerid, name, gPlayer[playerid][pCharId], g_BankGen[playerid], bankDelta);
 	return 0;
 }
@@ -11860,7 +11998,7 @@ new Float:s_HouseExt[10][4] = {
 };
 new s_HouseIntIdx[10] = {3, 5, 2, 0, 1, 3, 4, 6, 7, 7};
 new s_HouseIntTier[8] = {0, 0, 1, 1, 2, 2, 2, 3};
-new s_HouseTierPrice[4] = {14000, 24000, 45000, 130000};
+new s_HouseTierPrice[4] = {ECON_HOUSE_T0, ECON_HOUSE_T1, ECON_HOUSE_T2, ECON_HOUSE_T3};
 
 bool:DB_HouseSessionOk(playerid, const name[], ownerId)
 {
@@ -14161,12 +14299,13 @@ DB_BankXferFee(amount)
 	{
 		return 0;
 	}
-	if (amount > 0x3B9ACA00)
+	if (amount > ECON_MONEY_MAX)
 	{
-		amount = 0x3B9ACA00;
+		amount = ECON_MONEY_MAX;
 	}
-	new fee = (amount * 2 + 99) / 100;
-	return fee < 5 ? 5 : fee;
+	// = SQL bank_transfer: GREATEST(CEIL(importo * pct / 100), minimo), senza overflow
+	new fee = amount / 100 * ECON_XFER_FEE_PCT + (amount % 100 * ECON_XFER_FEE_PCT + 99) / 100;
+	return fee < ECON_XFER_FEE_MIN ? ECON_XFER_FEE_MIN : fee;
 }
 
 bool:DB_BankOpIdOk(const opId[])
@@ -14273,7 +14412,7 @@ DB_BankFlush(playerid)
 	}
 	new query[512], name[75];
 	GetPlayerName(playerid, name, 75);
-	mysql_format(g_DB, query, 512, "UPDATE characters SET bank = GREATEST(0, LEAST(%d, CAST(bank AS SIGNED) + (%d))) WHERE id = %d", 0x3B9ACA00, d, gPlayer[playerid][pCharId]);
+	mysql_format(g_DB, query, 512, "UPDATE characters SET bank = GREATEST(0, LEAST(%d, CAST(bank AS SIGNED) + (%d))) WHERE id = %d", ECON_MONEY_MAX, d, gPlayer[playerid][pCharId]);
 	mysql_tquery(g_DB, query, "DB_OnBankDeltaSaved", "dsddd", playerid, name, gPlayer[playerid][pCharId], g_BankGen[playerid], d);
 	return 0;
 }
@@ -14322,7 +14461,7 @@ DB_BankCompensate(const opId[], op)
 		return 0;
 	}
 	new query[512];
-	mysql_format(g_DB, query, 512, "CALL bank_undo('%e', %d)", opId, 0x3B9ACA00);
+	mysql_format(g_DB, query, 512, "CALL bank_undo('%e', %d)", opId, ECON_MONEY_MAX);
 	mysql_tquery(g_DB, query, "DB_OnBankUndoCalled", "sd", opId, 0);
 	return 0;
 }
@@ -14502,7 +14641,7 @@ public DB_OnBankSynced(playerid, const name[], charId, token)
 
 DB_BankDeposit(playerid, charId, amount, channel, const opId[])
 {
-	new bool:ok = amount >= 1 && amount <= 0x3B9ACA00 && (channel == 0 || channel == 1);
+	new bool:ok = amount >= 1 && amount <= ECON_MONEY_MAX && (channel == 0 || channel == 1);
 	if (!DB_BankBegin(playerid, 1, ok, charId, amount, opId))
 	{
 		return 0;
@@ -14510,14 +14649,14 @@ DB_BankDeposit(playerid, charId, amount, channel, const opId[])
 	DB_BankFlush(playerid);
 	new query[512], name[75];
 	GetPlayerName(playerid, name, 75);
-	mysql_format(g_DB, query, 512, "CALL bank_deposit('%e', %d, %d, %d, %d, %d)", opId, charId, amount, channel, channel == 0 ? 20000 : 0, 0x3B9ACA00);
+	mysql_format(g_DB, query, 512, "CALL bank_deposit('%e', %d, %d, %d, %d, %d)", opId, charId, amount, channel, channel == 0 ? ECON_ATM_DEPOSIT_MAX : 0, ECON_MONEY_MAX);
 	mysql_tquery(g_DB, query, "DB_OnBankCalled", "dsddds", playerid, name, charId, g_BankReq[playerid][bqToken], 1, opId);
 	return 0;
 }
 
 DB_BankWithdraw(playerid, charId, amount, channel, const opId[])
 {
-	new bool:ok = amount >= 1 && amount <= 0x3B9ACA00 && (channel == 0 || channel == 1);
+	new bool:ok = amount >= 1 && amount <= ECON_MONEY_MAX && (channel == 0 || channel == 1);
 	if (!DB_BankBegin(playerid, 2, ok, charId, amount, opId))
 	{
 		return 0;
@@ -14525,7 +14664,7 @@ DB_BankWithdraw(playerid, charId, amount, channel, const opId[])
 	DB_BankFlush(playerid);
 	new query[512], name[75], bool:atm = channel == 0;
 	GetPlayerName(playerid, name, 75);
-	mysql_format(g_DB, query, 512, "CALL bank_withdraw('%e', %d, %d, %d, %d, %d, %d)", opId, charId, amount, channel, atm ? 5000 : 50000, atm ? 15000 : 100000, 24);
+	mysql_format(g_DB, query, 512, "CALL bank_withdraw('%e', %d, %d, %d, %d, %d, %d)", opId, charId, amount, channel, atm ? ECON_ATM_WITHDRAW_MAX : ECON_DESK_WITHDRAW_MAX, atm ? ECON_ATM_WITHDRAW_DAY : ECON_DESK_WITHDRAW_DAY, 24);
 	mysql_tquery(g_DB, query, "DB_OnBankCalled", "dsddds", playerid, name, charId, g_BankReq[playerid][bqToken], 2, opId);
 	return 0;
 }
@@ -14580,7 +14719,7 @@ DB_BankTransfer(playerid, toPlayerid, amount, const opId[], flag)
 	{
 		return 0;
 	}
-	new bool:ok = amount >= 1 && amount <= 0x3B9ACA00 && toPlayerid >= 0 && toPlayerid < MAX_PLAYERS && toPlayerid != playerid && IsPlayerConnected(toPlayerid);
+	new bool:ok = amount >= 1 && amount <= ECON_MONEY_MAX && toPlayerid >= 0 && toPlayerid < MAX_PLAYERS && toPlayerid != playerid && IsPlayerConnected(toPlayerid);
 	new fromChar = gPlayer[playerid][pCharId], toChar = 0;
 	if (ok)
 	{
@@ -14595,7 +14734,7 @@ DB_BankTransfer(playerid, toPlayerid, amount, const opId[], flag)
 	new query[512], name[75], rname[75];
 	GetPlayerName(playerid, name, 75);
 	GetPlayerName(toPlayerid, rname, 75);
-	mysql_format(g_DB, query, 512, "CALL bank_transfer('%e', %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d)", opId, fromChar, toChar, amount, 2, 5, 10, 25000, 50000, 100000, 0x3B9ACA00, 24, flag != 0 ? 1 : 0);
+	mysql_format(g_DB, query, 512, "CALL bank_transfer('%e', %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d)", opId, fromChar, toChar, amount, ECON_XFER_FEE_PCT, ECON_XFER_FEE_MIN, ECON_XFER_MIN, ECON_XFER_MAX, ECON_XFER_OUT_DAY, ECON_XFER_IN_DAY, ECON_MONEY_MAX, 24, flag != 0 ? 1 : 0);
 	mysql_tquery(g_DB, query, "DB_OnBankXferCalled", "dsdddsddds", playerid, name, fromChar, g_BankReq[playerid][bqToken], toPlayerid, rname, toChar, g_BankGen[toPlayerid], amount, opId);
 	return 0;
 }
@@ -14663,7 +14802,7 @@ DB_BankUndo(const opId[])
 	}
 	new query[512];
 	g_BankUndoNotify++;
-	mysql_format(g_DB, query, 512, "CALL bank_undo('%e', %d)", opId, 0x3B9ACA00);
+	mysql_format(g_DB, query, 512, "CALL bank_undo('%e', %d)", opId, ECON_MONEY_MAX);
 	mysql_tquery(g_DB, query, "DB_OnBankUndoCalled", "sd", opId, 1);
 	return 0;
 }
@@ -14829,23 +14968,23 @@ DB_StoryCash(motive)
 	{
 		case 2:
 		{
-			return 2000;
+			return ECON_START_CASH_M2;
 		}
 		case 3:
 		{
-			return 3500;
+			return ECON_START_CASH_M3;
 		}
 		case 4:
 		{
-			return 3000;
+			return ECON_START_CASH_M4;
 		}
 	}
-	return 2500;
+	return ECON_START_CASH;
 }
 
 DB_StoryBankStart(motive)
 {
-	return 7500 - DB_StoryCash(motive);
+	return ECON_START_TOTAL - DB_StoryCash(motive);   // = SQL story_start_total()
 }
 
 bool:DB_StoryOpIdOk(const opId[])
@@ -16350,8 +16489,8 @@ DB_LivingPushConfig()
 	}
 	new q[1024];
 	q[0] = 0;
-	DB_LdCfgAdd(q, 1024, "MONEY_MAX", 0x3B9ACA00);
-	DB_LdCfgAdd(q, 1024, "LD_WORK_HOURLY_CAP", 2800);
+	DB_LdCfgAdd(q, 1024, "MONEY_MAX", ECON_MONEY_MAX);
+	DB_LdCfgAdd(q, 1024, "LD_WORK_HOURLY_CAP", ECON_LD_LD_WORK_HOURLY_CAP);
 	DB_LdCfgAdd(q, 1024, "LD_MIN_LEVEL", 2);
 	DB_LdCfgAdd(q, 1024, "LD_TICK_MS", 600000);
 	DB_LdCfgAdd(q, 1024, "LD_TICK_CATCHUP_MAX", 144);
@@ -16407,8 +16546,8 @@ DB_LivingPushConfig()
 	DB_LdCfgAdd(q, 1024, "CT_HOURLY_MAX", 8);
 	DB_LdCfgAdd(q, 1024, "CT_REACCEPT_LOCK_S", 600);
 	DB_LdCfgAdd(q, 1024, "CT_PREMIUM_PROREP", 100);
-	DB_LdCfgAdd(q, 1024, "FRT_BASE", 180);
-	DB_LdCfgAdd(q, 1024, "FRT_PER_M_X100", 14);
+	DB_LdCfgAdd(q, 1024, "FRT_BASE", ECON_LD_FRT_BASE);
+	DB_LdCfgAdd(q, 1024, "FRT_PER_M_X100", ECON_LD_FRT_PER_M_X100);
 	DB_LdCfgAdd(q, 1024, "FRT_MIN_DIST", 300);
 	DB_LdCfgAdd(q, 1024, "FRT_CARGO_TYPES", 3);
 	DB_LdCfgAdd(q, 1024, "FRT_MIN_SECONDS", 25);
@@ -16436,29 +16575,31 @@ DB_LivingPushConfig()
 	DB_LdCfgAdd(q, 1024, "RENT_GRACE_MS", 300000);
 	DB_LdCfgAdd(q, 1024, "RENT_HEALTH_ZERO", 300);
 	DB_LdCfgAdd(q, 1024, "RENT_HEALTH_FULL", 1000);
-	DB_LdCfgAdd(q, 1024, "RENT_FEE_FAGGIO", 30);
-	DB_LdCfgAdd(q, 1024, "RENT_FEE_PREVION", 60);
-	DB_LdCfgAdd(q, 1024, "RENT_FEE_MANANA", 70);
-	DB_LdCfgAdd(q, 1024, "RENT_DEP_FAGGIO", 200);
-	DB_LdCfgAdd(q, 1024, "RENT_DEP_PREVION", 400);
-	DB_LdCfgAdd(q, 1024, "RENT_DEP_MANANA", 450);
+	DB_LdCfgAdd(q, 1024, "RENT_FEE_FAGGIO", ECON_LD_RENT_FEE_FAGGIO);
+	DB_LdCfgAdd(q, 1024, "RENT_FEE_PREVION", ECON_LD_RENT_FEE_PREVION);
+	DB_LdCfgAdd(q, 1024, "RENT_FEE_MANANA", ECON_LD_RENT_FEE_MANANA);
+	DB_LdCfgAdd(q, 1024, "RENT_DEP_FAGGIO", ECON_LD_RENT_DEP_FAGGIO);
+	DB_LdCfgAdd(q, 1024, "RENT_DEP_PREVION", ECON_LD_RENT_DEP_PREVION);
+	DB_LdCfgAdd(q, 1024, "RENT_DEP_MANANA", ECON_LD_RENT_DEP_MANANA);
+	DB_LdCfgAdd(q, 1024, "RENT_FEE_STREET", ECON_LD_RENT_FEE_STREET);
+	DB_LdCfgAdd(q, 1024, "RENT_DEP_STREET", ECON_LD_RENT_DEP_STREET);
 	DB_LdCfgAdd(q, 1024, "TAXI_MIN_LEVEL", 2);
-	DB_LdCfgAdd(q, 1024, "TAXI_DEP", 300);
-	DB_LdCfgAdd(q, 1024, "TAXI_RENT_HOUR", 60);
-	DB_LdCfgAdd(q, 1024, "TAXI_BASE", 15);
-	DB_LdCfgAdd(q, 1024, "TAXI_PER_M_X100", 12);
+	DB_LdCfgAdd(q, 1024, "TAXI_DEP", ECON_LD_TAXI_DEP);
+	DB_LdCfgAdd(q, 1024, "TAXI_RENT_HOUR", ECON_LD_TAXI_RENT_HOUR);
+	DB_LdCfgAdd(q, 1024, "TAXI_BASE", ECON_LD_TAXI_BASE);
+	DB_LdCfgAdd(q, 1024, "TAXI_PER_M_X100", ECON_LD_TAXI_PER_M_X100);
 	DB_LdCfgAdd(q, 1024, "TAXI_TAX_PCT", 10);
 	DB_LdCfgAdd(q, 1024, "TAXI_NPC_HOURLY", 10);
 	DB_LdCfgAdd(q, 1024, "TAXI_PAIR_HOURLY", 3);
 	DB_LdCfgAdd(q, 1024, "TAXI_RATING_WINDOW", 20);
-	DB_LdCfgAdd(q, 1024, "PRJ_GOAL", 6000);
+	DB_LdCfgAdd(q, 1024, "PRJ_GOAL", ECON_LD_PRJ_GOAL);
 	DB_LdCfgAdd(q, 1024, "PRJ_DAYS", 7);
 	DB_LdCfgAdd(q, 1024, "PRJ_FUND_PCT", 8);
-	DB_LdCfgAdd(q, 1024, "PRJ_FUND_RIDE_X10", 15);
-	DB_LdCfgAdd(q, 1024, "PRJ_DON_MIN", 50);
-	DB_LdCfgAdd(q, 1024, "PRJ_DON_MAX", 500);
-	DB_LdCfgAdd(q, 1024, "PRJ_DON_DAY", 1000);
-	DB_LdCfgAdd(q, 1024, "PRJ_DON_REP_PER", 100);
+	DB_LdCfgAdd(q, 1024, "PRJ_FUND_RIDE_X10", ECON_LD_PRJ_FUND_RIDE_X10);
+	DB_LdCfgAdd(q, 1024, "PRJ_DON_MIN", ECON_LD_PRJ_DON_MIN);
+	DB_LdCfgAdd(q, 1024, "PRJ_DON_MAX", ECON_LD_PRJ_DON_MAX);
+	DB_LdCfgAdd(q, 1024, "PRJ_DON_DAY", ECON_LD_PRJ_DON_DAY);
+	DB_LdCfgAdd(q, 1024, "PRJ_DON_REP_PER", ECON_LD_PRJ_DON_REP_PER);
 	DB_LdCfgAdd(q, 1024, "PRJ_DON_MIN_PLAYED_MIN", 60);
 	DB_LdCfgAdd(q, 1024, "PRJ_DAY_CAP", 15);
 	DB_LdCfgAdd(q, 1024, "PRJ_REP_DONE", 5);
@@ -16467,7 +16608,7 @@ DB_LivingPushConfig()
 	DB_LdCfgAdd(q, 1024, "PRJ_FEST_H", 72);
 	DB_LdCfgAdd(q, 1024, "PRJ_FEST_ACT_MIN", 600);
 	DB_LdCfgAdd(q, 1024, "ONB_STEPS", 5);
-	DB_LdCfgAdd(q, 1024, "ONB_REWARD", 120);
+	DB_LdCfgAdd(q, 1024, "ONB_REWARD", ECON_LD_ONB_REWARD);
 	DB_LdCfgAdd(q, 1024, "ONB_EXP", 1);
 	DB_LdCfgFlush(q, 1024);
 	return 0;
@@ -17109,8 +17250,8 @@ public Char_OnAutosave()
 
 Char_SanitizeLoaded(playerid)
 {
-	gPlayer[playerid][pMoney] = clamp(gPlayer[playerid][pMoney], 0, 0x3B9ACA00);
-	gPlayer[playerid][pBank] = clamp(gPlayer[playerid][pBank], 0, 0x3B9ACA00);
+	gPlayer[playerid][pMoney] = clamp(gPlayer[playerid][pMoney], 0, ECON_MONEY_MAX);
+	gPlayer[playerid][pBank] = clamp(gPlayer[playerid][pBank], 0, ECON_MONEY_MAX);
 	gPlayer[playerid][pLevel] = clamp(gPlayer[playerid][pLevel], 1, 50);
 	if (gPlayer[playerid][pExp] < 0)
 	{
@@ -17216,8 +17357,8 @@ public UI_OnSkinChosen(playerid, skin)
 	{
 		skin = gPlayer[playerid][pGender] == 1 ? 12 : 7;
 	}
-	gPlayer[playerid][pMoney] = 2500;
-	gPlayer[playerid][pBank] = 5000;
+	gPlayer[playerid][pMoney] = ECON_START_CASH;
+	gPlayer[playerid][pBank] = ECON_START_TOTAL - ECON_START_CASH;
 	gPlayer[playerid][pLevel] = 1;
 	gPlayer[playerid][pExp] = 0;
 	gPlayer[playerid][pHealth] = 100.0;
@@ -17435,7 +17576,7 @@ bool:Money_CanReceive(playerid, amount)
 	{
 		return false;
 	}
-	return amount <= 0x3B9ACA00 - gPlayer[playerid][pMoney];
+	return amount <= ECON_MONEY_MAX - gPlayer[playerid][pMoney];
 }
 
 bool:Money_Give(playerid, amount)
@@ -17462,7 +17603,7 @@ bool:Money_Take(playerid, amount)
 
 bool:Money_Set(playerid, amount)
 {
-	if (!Money_ValidPlayer(playerid) || amount < 0 || amount > 0x3B9ACA00)
+	if (!Money_ValidPlayer(playerid) || amount < 0 || amount > ECON_MONEY_MAX)
 	{
 		return false;
 	}
@@ -17477,7 +17618,7 @@ Money_BankRoom(playerid)
 	{
 		return 0;
 	}
-	return 0x3B9ACA00 - gPlayer[playerid][pBank];
+	return ECON_MONEY_MAX - gPlayer[playerid][pBank];
 }
 
 bool:Money_GiveBank(playerid, amount, const kind[], const ref[])
@@ -17605,7 +17746,8 @@ Economy_OnExit()
 
 Economy_PaycheckAmount(level)
 {
-	return level * 25 + 300;
+	// sostegno cittadino ogni 15 min di gioco attivo (economy/econ_config.inc)
+	return min(ECON_PAYCHECK_BASE + level * ECON_PAYCHECK_PER_LEVEL, ECON_PAYCHECK_MAX);
 }
 
 Economy_PaycheckPaid(amount, room)
@@ -18377,7 +18519,7 @@ new Float:g_VehStations[3][3] = {
 	{2114.0, -1893.0, 13.6}
 };
 new g_VehCatModel[13] = {462, 436, 410, 491, 466, 547, 529, 543, 461, 422, 549, 500, 405};
-new g_VehCatPrice[13] = {12000, 12500, 13500, 16000, 17500, 19000, 21000, 22000, 24000, 26000, 28000, 34000, 38000};
+new g_VehCatPrice[13] = {ECON_VEH_FAGGIO, ECON_VEH_PREVION, ECON_VEH_MANANA, ECON_VEH_VIRGO, ECON_VEH_GLENDALE, ECON_VEH_PRIMO, ECON_VEH_WILLARD, ECON_VEH_SADLER, ECON_VEH_PCJ600, ECON_VEH_BOBCAT, ECON_VEH_TAMPA, ECON_VEH_MESA, ECON_VEH_SENTINEL};   // economy/econ_config.inc
 new g_VehCatLevel[13] = {1, 1, 1, 2, 2, 3, 3, 3, 3, 4, 4, 5, 5};
 new g_VehCatName[13][12] = {
 	"Faggio",
@@ -19198,7 +19340,7 @@ Veh_DoSell(playerid, slot, bool:confirmed)
 			return 0;
 		}
 	}
-	new refund = Veh_ListPrice(g_VSlot[playerid][slot][vsModel], g_VSlot[playerid][slot][vsPricePaid]) * 60 / 100;
+	new refund = Veh_ListPrice(g_VSlot[playerid][slot][vsModel], g_VSlot[playerid][slot][vsPricePaid]) * ECON_VEH_RESALE_PCT / 100;
 	if (refund <= 0 || refund > Money_BankRoom(playerid))
 	{
 		Util_Send(playerid, -10270721, "\xE1;\x83;\xA8;\xE1;\x83;\x94;\xE1;\x83;\x9C;\xE1;\x83;\xA1; \xE1;\x83;\xA1;\xE1;\x83;\x90;\xE1;\x83;\x91;\xE1;\x83;\x90;\xE1;\x83;\x9C;\xE1;\x83;\x99;\xE1;\x83;\x9D; \xE1;\x83;\x90;\xE1;\x83;\x9C;\xE1;\x83;\x92;\xE1;\x83;\x90;\xE1;\x83;\xA0;\xE1;\x83;\x98;\xE1;\x83;\xA8;\xE1;\x83;\xA1; \xE1;\x83;\x97;\xE1;\x83;\x90;\xE1;\x83;\x9C;\xE1;\x83;\xAE;\xE1;\x83;\x98;\xE1;\x83;\xA1; \xE1;\x83;\x9B;\xE1;\x83;\x98;\xE1;\x83;\xA6;\xE1;\x83;\x94;\xE1;\x83;\x91;\xE1;\x83;\x90; \xE1;\x83;\x90;\xE1;\x83;\xA0; \xE1;\x83;\xA8;\xE1;\x83;\x94;\xE1;\x83;\xA3;\xE1;\x83;\xAB;\xE1;\x83;\x9A;\xE1;\x83;\x98;\xE1;\x83;\x90;: \xE1;\x83;\x92;\xE1;\x83;\x90;\xE1;\x83;\xA7;\xE1;\x83;\x98;\xE1;\x83;\x93;\xE1;\x83;\x95;\xE1;\x83;\x90; \xE1;\x83;\xA3;\xE1;\x83;\x90;\xE1;\x83;\xA0;\xE1;\x83;\xA7;\xE1;\x83;\x9D;\xE1;\x83;\xA4;\xE1;\x83;\x98;\xE1;\x83;\x9A;\xE1;\x83;\x98;\xE1;\x83;\x90;.");
@@ -19580,7 +19722,7 @@ Veh_DoRecover(playerid, slot)
 		return 0;
 	}
 	new listPrice = Veh_ListPrice(g_VSlot[playerid][slot][vsModel], g_VSlot[playerid][slot][vsPricePaid]);
-	new cost = max(listPrice * 5 / 100, 500);
+	new cost = max(listPrice * ECON_VEH_RECOVER_PCT / 100, ECON_VEH_RECOVER_MIN);
 	new bool:useCash = Money_Can(playerid, cost);
 	if (!useCash && !Money_CanBank(playerid, cost))
 	{
@@ -19807,7 +19949,7 @@ Veh_CmdRefuel(playerid, const params[])
 		Util_Send(playerid, -10270721, "\xE1;\x83;\xA1;\xE1;\x83;\x90;\xE1;\x83;\xAC;\xE1;\x83;\x95;\xE1;\x83;\x90;\xE1;\x83;\x95;\xE1;\x83;\x98;\xE1;\x83;\xA1;\xE1;\x83;\x97;\xE1;\x83;\x95;\xE1;\x83;\x98;\xE1;\x83;\xA1; \xE1;\x83;\xA1;\xE1;\x83;\x90;\xE1;\x83;\x99;\xE1;\x83;\x9B;\xE1;\x83;\x90;\xE1;\x83;\xA0;\xE1;\x83;\x98;\xE1;\x83;\xA1;\xE1;\x83;\x98; \xE1;\x83;\x9C;\xE1;\x83;\x90;\xE1;\x83;\xA6;\xE1;\x83;\x93;\xE1;\x83;\x98; \xE1;\x83;\xA4;\xE1;\x83;\xA3;\xE1;\x83;\x9A;\xE1;\x83;\x98; \xE1;\x83;\x90;\xE1;\x83;\xA0; \xE1;\x83;\x92;\xE1;\x83;\x90;\xE1;\x83;\xA5;\xE1;\x83;\x95;\xE1;\x83;\xA1;.");
 		return 0;
 	}
-	new cost = (add * 3 + 100 - 1) / 100;
+	new cost = (add * ECON_FUEL_PER_LITER + 100 - 1) / 100;   // add in centilitri, costo in tetri
 	if (!Money_Take(playerid, cost))
 	{
 		Util_Send(playerid, -10270721, "\xE1;\x83;\xA1;\xE1;\x83;\x90;\xE1;\x83;\xAC;\xE1;\x83;\x95;\xE1;\x83;\x90;\xE1;\x83;\x95;\xE1;\x83;\x98;\xE1;\x83;\xA1;\xE1;\x83;\x97;\xE1;\x83;\x95;\xE1;\x83;\x98;\xE1;\x83;\xA1; \xE1;\x83;\xA1;\xE1;\x83;\x90;\xE1;\x83;\x99;\xE1;\x83;\x9B;\xE1;\x83;\x90;\xE1;\x83;\xA0;\xE1;\x83;\x98;\xE1;\x83;\xA1;\xE1;\x83;\x98; \xE1;\x83;\x9C;\xE1;\x83;\x90;\xE1;\x83;\xA6;\xE1;\x83;\x93;\xE1;\x83;\x98; \xE1;\x83;\xA4;\xE1;\x83;\xA3;\xE1;\x83;\x9A;\xE1;\x83;\x98; \xE1;\x83;\x90;\xE1;\x83;\xA0; \xE1;\x83;\x92;\xE1;\x83;\x90;\xE1;\x83;\xA5;\xE1;\x83;\x95;\xE1;\x83;\xA1;.");
@@ -20023,7 +20165,7 @@ new s_InvName[12][88] = {
 	"\xE1;\x83;\x93;\xE1;\x83;\x9D;\xE1;\x83;\x99;\xE1;\x83;\xA3;\xE1;\x83;\x9B;\xE1;\x83;\x94;\xE1;\x83;\x9C;\xE1;\x83;\xA2;\xE1;\x83;\x98;",
 	"\xE1;\x83;\x96;\xE1;\x83;\xA3;\xE1;\x83;\xA0;\xE1;\x83;\x92;\xE1;\x83;\xA9;\xE1;\x83;\x90;\xE1;\x83;\x9C;\xE1;\x83;\x97;\xE1;\x83;\x90;"
 };
-new s_InvPrice[12] = {0, 9, 14, 3, 4, 60, 12, 8, 5, 250, 0, 350};
+new s_InvPrice[12] = {0, ECON_ITEM_FOOD, ECON_ITEM_MEAL, ECON_ITEM_WATER, ECON_ITEM_SNACK, ECON_ITEM_KIT, ECON_ITEM_BANDAGE, ECON_ITEM_CIGARETTES, ECON_ITEM_LIGHTER, ECON_ITEM_PHONE, 0, ECON_ITEM_BACKPACK};   // tetri, economy/econ_config.inc
 new s_InvCooldown[11] = {0, 0, 10000, 5000, 5000, 45000, 15000, 20000};
 new s_InvShopKey[12][24] = {
 	{0},
@@ -21236,12 +21378,12 @@ Inv_BuyBag(playerid)
 		Inv_Say(playerid, -10270721, "\xE1;\x83;\x96;\xE1;\x83;\xA3;\xE1;\x83;\xA0;\xE1;\x83;\x92;\xE1;\x83;\xA9;\xE1;\x83;\x90;\xE1;\x83;\x9C;\xE1;\x83;\x97;\xE1;\x83;\x90; \xE1;\x83;\xA3;\xE1;\x83;\x99;\xE1;\x83;\x95;\xE1;\x83;\x94; \xE1;\x83;\x92;\xE1;\x83;\x90;\xE1;\x83;\xA5;\xE1;\x83;\x95;\xE1;\x83;\xA1;.");
 		return 0;
 	}
-	if (!Money_Can(playerid, 350))
+	if (!Money_Can(playerid, ECON_ITEM_BACKPACK))
 	{
-		SendClientMessage(playerid, -10270721, "\xE1;\x83;\xA1;\xE1;\x83;\x90;\xE1;\x83;\xAD;\xE1;\x83;\x98;\xE1;\x83;\xA0;\xE1;\x83;\x9D;\xE1;\x83;\x90; %s \xE1;\x83;\x9C;\xE1;\x83;\x90;\xE1;\x83;\xA6;\xE1;\x83;\x93;\xE1;\x83;\x98; \xE1;\x83;\xA4;\xE1;\x83;\xA3;\xE1;\x83;\x9A;\xE1;\x83;\x98;.", Money_Str(350));
+		SendClientMessage(playerid, -10270721, "\xE1;\x83;\xA1;\xE1;\x83;\x90;\xE1;\x83;\xAD;\xE1;\x83;\x98;\xE1;\x83;\xA0;\xE1;\x83;\x9D;\xE1;\x83;\x90; %s \xE1;\x83;\x9C;\xE1;\x83;\x90;\xE1;\x83;\xA6;\xE1;\x83;\x93;\xE1;\x83;\x98; \xE1;\x83;\xA4;\xE1;\x83;\xA3;\xE1;\x83;\x9A;\xE1;\x83;\x98;.", Money_Str(ECON_ITEM_BACKPACK));
 		return 0;
 	}
-	Inv_BeginOp(playerid, 6, 11, 1, 350);
+	Inv_BeginOp(playerid, 6, 11, 1, ECON_ITEM_BACKPACK);
 	DB_InvSetBag(playerid, gPlayer[playerid][pCharId], gPlayer[playerid][pInvOpId]);
 	return 0;
 }
@@ -21302,7 +21444,7 @@ public Inv_OnDBBag(playerid, result)
 	}
 	if (result == 1)
 	{
-		if (!Money_Take(playerid, 350))
+		if (!Money_Take(playerid, ECON_ITEM_BACKPACK))
 		{
 			Inv_UndoPurchase(playerid);
 			return 1;
@@ -21310,7 +21452,7 @@ public Inv_OnDBBag(playerid, result)
 		Char_Save(playerid);
 		Inv_EndOp(playerid);
 		Inv_Reload(playerid);
-		SendClientMessage(playerid, 0x66DD66FF, "\xE1;\x83;\x98;\xE1;\x83;\xA7;\xE1;\x83;\x98;\xE1;\x83;\x93;\xE1;\x83;\x94; \xE1;\x83;\x96;\xE1;\x83;\xA3;\xE1;\x83;\xA0;\xE1;\x83;\x92;\xE1;\x83;\xA9;\xE1;\x83;\x90;\xE1;\x83;\x9C;\xE1;\x83;\x97;\xE1;\x83;\x90; %s-\xE1;\x83;\x90;\xE1;\x83;\x93;: \xE1;\x83;\xA2;\xE1;\x83;\x94;\xE1;\x83;\x95;\xE1;\x83;\x90;\xE1;\x83;\x93;\xE1;\x83;\x9D;\xE1;\x83;\x91;\xE1;\x83;\x90; %d \xE1;\x83;\xA1;\xE1;\x83;\x9A;\xE1;\x83;\x9D;\xE1;\x83;\xA2;\xE1;\x83;\x98;.", Money_Str(350), 20);
+		SendClientMessage(playerid, 0x66DD66FF, "\xE1;\x83;\x98;\xE1;\x83;\xA7;\xE1;\x83;\x98;\xE1;\x83;\x93;\xE1;\x83;\x94; \xE1;\x83;\x96;\xE1;\x83;\xA3;\xE1;\x83;\xA0;\xE1;\x83;\x92;\xE1;\x83;\xA9;\xE1;\x83;\x90;\xE1;\x83;\x9C;\xE1;\x83;\x97;\xE1;\x83;\x90; %s-\xE1;\x83;\x90;\xE1;\x83;\x93;: \xE1;\x83;\xA2;\xE1;\x83;\x94;\xE1;\x83;\x95;\xE1;\x83;\x90;\xE1;\x83;\x93;\xE1;\x83;\x9D;\xE1;\x83;\x91;\xE1;\x83;\x90; %d \xE1;\x83;\xA1;\xE1;\x83;\x9A;\xE1;\x83;\x9D;\xE1;\x83;\xA2;\xE1;\x83;\x98;.", Money_Str(ECON_ITEM_BACKPACK), 20);
 		return 1;
 	}
 	Inv_EndOp(playerid);
@@ -21573,27 +21715,8 @@ Bank_NearPoint(playerid, bool:counterOnly)
 
 bool:Bank_ParseAmount(const s[], &value)
 {
-	new i = 0, len = strlen(s), digits = 0;
-	value = 0;
-	while (i < len && s[i] == 32)
-	{
-		i++;
-	}
-	while (i < len && s[i] >= 48 && s[i] <= 57)
-	{
-		if (digits >= 9)
-		{
-			return false;
-		}
-		value = value * 10 + (s[i] - 48);
-		digits++;
-		i++;
-	}
-	while (i < len && s[i] == 32)
-	{
-		i++;
-	}
-	return digits > 0 && i == len && value >= 1;
+	// lari digitati ("25", "12,50") -> tetri (economy/currency.inc)
+	return Money_Parse(s, value);
 }
 
 Bank_FindPlayer(const input[])
@@ -21946,16 +22069,16 @@ Bank_Guard(playerid, bool:ui, bool:counterOnly)
 Bank_PushUi(playerid)
 {
 	new bool:counter = gPlayer[playerid][pBankAtCounter] != 0;
-	new wdMax = counter ? 50000 : 5000;
-	new wdDay = counter ? 100000 : 15000;
+	new wdMax = counter ? ECON_DESK_WITHDRAW_MAX : ECON_ATM_WITHDRAW_MAX;
+	new wdDay = counter ? ECON_DESK_WITHDRAW_DAY : ECON_ATM_WITHDRAW_DAY;
 	new wdLeft = -1, sendLeft = -1;
 	if (gPlayer[playerid][pBankLimitsLoaded])
 	{
 		wdLeft = gPlayer[playerid][pBankWithdrawnToday] >= wdDay ? 0 : wdDay - gPlayer[playerid][pBankWithdrawnToday];
-		sendLeft = gPlayer[playerid][pBankXferOutToday] >= 50000 ? 0 : 50000 - gPlayer[playerid][pBankXferOutToday];
+		sendLeft = gPlayer[playerid][pBankXferOutToday] >= ECON_XFER_OUT_DAY ? 0 : ECON_XFER_OUT_DAY - gPlayer[playerid][pBankXferOutToday];
 	}
 	UI_BankSetBalance(playerid, gPlayer[playerid][pMoney], gPlayer[playerid][pBank]);
-	UI_BankSetLimits(playerid, counter ? 0 : 20000, wdMax, wdLeft, 10, 25000, sendLeft);
+	UI_BankSetLimits(playerid, counter ? 0 : ECON_ATM_DEPOSIT_MAX, wdMax, wdLeft, ECON_XFER_MIN, ECON_XFER_MAX, sendLeft);
 }
 
 Bank_RefreshLimits(playerid)
@@ -22017,10 +22140,10 @@ Bank_Deposit(playerid, amount, bool:ui)
 		Bank_Reply(playerid, ui, "\xE1;\x83;\xA1;\xE1;\x83;\x90;\xE1;\x83;\x99;\xE1;\x83;\x9B;\xE1;\x83;\x90;\xE1;\x83;\xA0;\xE1;\x83;\x98;\xE1;\x83;\xA1;\xE1;\x83;\x98; \xE1;\x83;\x9C;\xE1;\x83;\x90;\xE1;\x83;\xA6;\xE1;\x83;\x93;\xE1;\x83;\x98; \xE1;\x83;\xA4;\xE1;\x83;\xA3;\xE1;\x83;\x9A;\xE1;\x83;\x98; \xE1;\x83;\x90;\xE1;\x83;\xA0; \xE1;\x83;\x92;\xE1;\x83;\x90;\xE1;\x83;\xA5;\xE1;\x83;\x95;\xE1;\x83;\xA1;.");
 		return 0;
 	}
-	if (!Bank_IsCounter(point) && amount > 20000)
+	if (!Bank_IsCounter(point) && amount > ECON_ATM_DEPOSIT_MAX)
 	{
 		new msg[528];
-		format(msg, 528, "ATM-\xE1;\x83;\x98;\xE1;\x83;\xA1; \xE1;\x83;\x9A;\xE1;\x83;\x98;\xE1;\x83;\x9B;\xE1;\x83;\x98;\xE1;\x83;\xA2;\xE1;\x83;\x98; \xE1;\x83;\xA8;\xE1;\x83;\x94;\xE1;\x83;\xA2;\xE1;\x83;\x90;\xE1;\x83;\x9C;\xE1;\x83;\x90;\xE1;\x83;\x96;\xE1;\x83;\x94;: %s \xE1;\x83;\x94;\xE1;\x83;\xA0;\xE1;\x83;\x97; \xE1;\x83;\x9D;\xE1;\x83;\x9E;\xE1;\x83;\x94;\xE1;\x83;\xA0;\xE1;\x83;\x90;\xE1;\x83;\xAA;\xE1;\x83;\x98;\xE1;\x83;\x90;\xE1;\x83;\x96;\xE1;\x83;\x94;. \xE1;\x83;\x9B;\xE1;\x83;\x94;\xE1;\x83;\xA2;\xE1;\x83;\x98; \xE1;\x83;\x97;\xE1;\x83;\x90;\xE1;\x83;\x9C;\xE1;\x83;\xAE;\xE1;\x83;\x98;\xE1;\x83;\xA1;\xE1;\x83;\x97;\xE1;\x83;\x95;\xE1;\x83;\x98;\xE1;\x83;\xA1; \xE1;\x83;\xA1;\xE1;\x83;\x90;\xE1;\x83;\x9A;\xE1;\x83;\x90;\xE1;\x83;\xA0;\xE1;\x83;\x9D; \xE1;\x83;\x92;\xE1;\x83;\x90;\xE1;\x83;\x9B;\xE1;\x83;\x9D;\xE1;\x83;\x98;\xE1;\x83;\xA7;\xE1;\x83;\x94;\xE1;\x83;\x9C;\xE1;\x83;\x94;.", Money_Str(20000));
+		format(msg, 528, "ATM-\xE1;\x83;\x98;\xE1;\x83;\xA1; \xE1;\x83;\x9A;\xE1;\x83;\x98;\xE1;\x83;\x9B;\xE1;\x83;\x98;\xE1;\x83;\xA2;\xE1;\x83;\x98; \xE1;\x83;\xA8;\xE1;\x83;\x94;\xE1;\x83;\xA2;\xE1;\x83;\x90;\xE1;\x83;\x9C;\xE1;\x83;\x90;\xE1;\x83;\x96;\xE1;\x83;\x94;: %s \xE1;\x83;\x94;\xE1;\x83;\xA0;\xE1;\x83;\x97; \xE1;\x83;\x9D;\xE1;\x83;\x9E;\xE1;\x83;\x94;\xE1;\x83;\xA0;\xE1;\x83;\x90;\xE1;\x83;\xAA;\xE1;\x83;\x98;\xE1;\x83;\x90;\xE1;\x83;\x96;\xE1;\x83;\x94;. \xE1;\x83;\x9B;\xE1;\x83;\x94;\xE1;\x83;\xA2;\xE1;\x83;\x98; \xE1;\x83;\x97;\xE1;\x83;\x90;\xE1;\x83;\x9C;\xE1;\x83;\xAE;\xE1;\x83;\x98;\xE1;\x83;\xA1;\xE1;\x83;\x97;\xE1;\x83;\x95;\xE1;\x83;\x98;\xE1;\x83;\xA1; \xE1;\x83;\xA1;\xE1;\x83;\x90;\xE1;\x83;\x9A;\xE1;\x83;\x90;\xE1;\x83;\xA0;\xE1;\x83;\x9D; \xE1;\x83;\x92;\xE1;\x83;\x90;\xE1;\x83;\x9B;\xE1;\x83;\x9D;\xE1;\x83;\x98;\xE1;\x83;\xA7;\xE1;\x83;\x94;\xE1;\x83;\x9C;\xE1;\x83;\x94;.", Money_Str(ECON_ATM_DEPOSIT_MAX));
 		Bank_Reply(playerid, ui, msg);
 		return 0;
 	}
@@ -22162,7 +22285,7 @@ Bank_Withdraw(playerid, amount, bool:ui)
 		Bank_Reply(playerid, ui, "\xE1;\x83;\x90;\xE1;\x83;\x9C;\xE1;\x83;\x92;\xE1;\x83;\x90;\xE1;\x83;\xA0;\xE1;\x83;\x98;\xE1;\x83;\xA8;\xE1;\x83;\x96;\xE1;\x83;\x94; \xE1;\x83;\x90;\xE1;\x83;\xA0;\xE1;\x83;\x90;\xE1;\x83;\xA1;\xE1;\x83;\x90;\xE1;\x83;\x99;\xE1;\x83;\x9B;\xE1;\x83;\x90;\xE1;\x83;\xA0;\xE1;\x83;\x98;\xE1;\x83;\xA1;\xE1;\x83;\x98; \xE1;\x83;\x97;\xE1;\x83;\x90;\xE1;\x83;\x9C;\xE1;\x83;\xAE;\xE1;\x83;\x90;\xE1;\x83;\x90;.");
 		return 0;
 	}
-	new bool:counter = Bank_IsCounter(point), maxOp = counter ? 50000 : 5000;
+	new bool:counter = Bank_IsCounter(point), maxOp = counter ? ECON_DESK_WITHDRAW_MAX : ECON_ATM_WITHDRAW_MAX;
 	if (amount > maxOp)
 	{
 		new msg[528];
@@ -22170,7 +22293,7 @@ Bank_Withdraw(playerid, amount, bool:ui)
 		Bank_Reply(playerid, ui, msg);
 		return 0;
 	}
-	if (amount > 0x3B9ACA00 - gPlayer[playerid][pMoney])
+	if (amount > ECON_MONEY_MAX - gPlayer[playerid][pMoney])
 	{
 		Bank_Reply(playerid, ui, "\xE1;\x83;\xAB;\xE1;\x83;\x90;\xE1;\x83;\x9A;\xE1;\x83;\x98;\xE1;\x83;\x90;\xE1;\x83;\x9C; \xE1;\x83;\x91;\xE1;\x83;\x94;\xE1;\x83;\x95;\xE1;\x83;\xA0;\xE1;\x83;\x98; \xE1;\x83;\x9C;\xE1;\x83;\x90;\xE1;\x83;\xA6;\xE1;\x83;\x93;\xE1;\x83;\x98; \xE1;\x83;\x92;\xE1;\x83;\x90;\xE1;\x83;\xA5;\xE1;\x83;\x95;\xE1;\x83;\xA1;: \xE1;\x83;\x90;\xE1;\x83;\x9B; \xE1;\x83;\x97;\xE1;\x83;\x90;\xE1;\x83;\x9C;\xE1;\x83;\xAE;\xE1;\x83;\x90;\xE1;\x83;\xA1; \xE1;\x83;\x95;\xE1;\x83;\x94;\xE1;\x83;\xA0; \xE1;\x83;\x92;\xE1;\x83;\x90;\xE1;\x83;\x98;\xE1;\x83;\xA2;\xE1;\x83;\x90;\xE1;\x83;\x9C;.");
 		return 0;
@@ -22363,9 +22486,9 @@ bool:Bank_XferCheck(playerid, target, amount, bool:ui)
 		Bank_Reply(playerid, ui, "\xE1;\x83;\x90;\xE1;\x83;\xA0;\xE1;\x83;\x90;\xE1;\x83;\xA1;\xE1;\x83;\xAC;\xE1;\x83;\x9D;\xE1;\x83;\xA0;\xE1;\x83;\x98; \xE1;\x83;\x9B;\xE1;\x83;\x98;\xE1;\x83;\x9B;\xE1;\x83;\xA6;\xE1;\x83;\x94;\xE1;\x83;\x91;\xE1;\x83;\x98;: \xE1;\x83;\xA3;\xE1;\x83;\x9C;\xE1;\x83;\x93;\xE1;\x83;\x90; \xE1;\x83;\x98;\xE1;\x83;\xA7;\xE1;\x83;\x9D;\xE1;\x83;\xA1; \xE1;\x83;\xA1;\xE1;\x83;\xAE;\xE1;\x83;\x95;\xE1;\x83;\x90; \xE1;\x83;\x9B;\xE1;\x83;\x9D;\xE1;\x83;\x97;\xE1;\x83;\x90;\xE1;\x83;\x9B;\xE1;\x83;\x90;\xE1;\x83;\xA8;\xE1;\x83;\x94;, \xE1;\x83;\x9D;\xE1;\x83;\x9C;\xE1;\x83;\x9A;\xE1;\x83;\x90;\xE1;\x83;\x98;\xE1;\x83;\x9C; \xE1;\x83;\x93;\xE1;\x83;\x90; \xE1;\x83;\x97;\xE1;\x83;\x90;\xE1;\x83;\x9B;\xE1;\x83;\x90;\xE1;\x83;\xA8;\xE1;\x83;\xA8;\xE1;\x83;\x98;.");
 		return false;
 	}
-	if (amount < 10 || amount > 25000)
+	if (amount < ECON_XFER_MIN || amount > ECON_XFER_MAX)
 	{
-		format(msg, 528, "\xE1;\x83;\x92;\xE1;\x83;\x90;\xE1;\x83;\x93;\xE1;\x83;\x90;\xE1;\x83;\xA0;\xE1;\x83;\x98;\xE1;\x83;\xAA;\xE1;\x83;\xAE;\xE1;\x83;\x95;\xE1;\x83;\x98;\xE1;\x83;\xA1; \xE1;\x83;\x97;\xE1;\x83;\x90;\xE1;\x83;\x9C;\xE1;\x83;\xAE;\xE1;\x83;\x90;: %s-\xE1;\x83;\x93;\xE1;\x83;\x90;\xE1;\x83;\x9C; %s-\xE1;\x83;\x9B;\xE1;\x83;\x93;\xE1;\x83;\x94;.", Money_Str(10), Money_Str(25000));
+		format(msg, 528, "\xE1;\x83;\x92;\xE1;\x83;\x90;\xE1;\x83;\x93;\xE1;\x83;\x90;\xE1;\x83;\xA0;\xE1;\x83;\x98;\xE1;\x83;\xAA;\xE1;\x83;\xAE;\xE1;\x83;\x95;\xE1;\x83;\x98;\xE1;\x83;\xA1; \xE1;\x83;\x97;\xE1;\x83;\x90;\xE1;\x83;\x9C;\xE1;\x83;\xAE;\xE1;\x83;\x90;: %s-\xE1;\x83;\x93;\xE1;\x83;\x90;\xE1;\x83;\x9C; %s-\xE1;\x83;\x9B;\xE1;\x83;\x93;\xE1;\x83;\x94;.", Money_Str(ECON_XFER_MIN), Money_Str(ECON_XFER_MAX));
 		Bank_Reply(playerid, ui, msg);
 		return false;
 	}
@@ -22376,7 +22499,7 @@ bool:Bank_XferCheck(playerid, target, amount, bool:ui)
 		Bank_Reply(playerid, ui, msg);
 		return false;
 	}
-	if (amount > 0x3B9ACA00 - gPlayer[target][pBank])
+	if (amount > ECON_MONEY_MAX - gPlayer[target][pBank])
 	{
 		Bank_Reply(playerid, ui, "\xE1;\x83;\x9B;\xE1;\x83;\x98;\xE1;\x83;\x9B;\xE1;\x83;\xA6;\xE1;\x83;\x94;\xE1;\x83;\x91;\xE1;\x83;\x98; \xE1;\x83;\x90;\xE1;\x83;\x9B; \xE1;\x83;\x97;\xE1;\x83;\x90;\xE1;\x83;\x9C;\xE1;\x83;\xAE;\xE1;\x83;\x90;\xE1;\x83;\xA1; \xE1;\x83;\x95;\xE1;\x83;\x94;\xE1;\x83;\xA0; \xE1;\x83;\x9B;\xE1;\x83;\x98;\xE1;\x83;\x98;\xE1;\x83;\xA6;\xE1;\x83;\x94;\xE1;\x83;\x91;\xE1;\x83;\xA1; (\xE1;\x83;\x90;\xE1;\x83;\x9C;\xE1;\x83;\x92;\xE1;\x83;\x90;\xE1;\x83;\xA0;\xE1;\x83;\x98;\xE1;\x83;\xA8;\xE1;\x83;\x98; \xE1;\x83;\x9A;\xE1;\x83;\x98;\xE1;\x83;\x9B;\xE1;\x83;\x98;\xE1;\x83;\xA2;\xE1;\x83;\x96;\xE1;\x83;\x94;\xE1;\x83;\x90;).");
 		return false;
@@ -22472,7 +22595,7 @@ public Bank_OnDBLimits(playerid, result, withdrawn, xferOut, xferIn, sinceXfer)
 		Bank_Reply(playerid, ui, msg);
 		return 1;
 	}
-	if (xferOut >= 50000 || amount > 50000 - xferOut)
+	if (xferOut >= ECON_XFER_OUT_DAY || amount > ECON_XFER_OUT_DAY - xferOut)
 	{
 		new msg[528], room = xferOut >= 50000 ? 0 : 50000 - xferOut;
 		format(msg, 528, "\xE1;\x83;\x92;\xE1;\x83;\x90;\xE1;\x83;\x9B;\xE1;\x83;\x90;\xE1;\x83;\x95;\xE1;\x83;\x90;\xE1;\x83;\x9A;\xE1;\x83;\x98; \xE1;\x83;\x92;\xE1;\x83;\x90;\xE1;\x83;\x93;\xE1;\x83;\x90;\xE1;\x83;\xA0;\xE1;\x83;\x98;\xE1;\x83;\xAA;\xE1;\x83;\xAE;\xE1;\x83;\x95;\xE1;\x83;\x94;\xE1;\x83;\x91;\xE1;\x83;\x98;\xE1;\x83;\xA1; \xE1;\x83;\x93;\xE1;\x83;\xA6;\xE1;\x83;\x98;\xE1;\x83;\xA3;\xE1;\x83;\xA0;\xE1;\x83;\x98; \xE1;\x83;\x9A;\xE1;\x83;\x98;\xE1;\x83;\x9B;\xE1;\x83;\x98;\xE1;\x83;\xA2;\xE1;\x83;\x98;: \xE1;\x83;\x99;\xE1;\x83;\x98;\xE1;\x83;\x93;\xE1;\x83;\x94;\xE1;\x83;\x95; %s \xE1;\x83;\xA8;\xE1;\x83;\x94;\xE1;\x83;\x92;\xE1;\x83;\x98;\xE1;\x83;\xAB;\xE1;\x83;\x9A;\xE1;\x83;\x98;\xE1;\x83;\x90; \xE1;\x83;\x92;\xE1;\x83;\x90;\xE1;\x83;\x92;\xE1;\x83;\x96;\xE1;\x83;\x90;\xE1;\x83;\x95;\xE1;\x83;\x9C;\xE1;\x83;\x9D; \xE1;\x83;\x9B;\xE1;\x83;\x9D;\xE1;\x83;\x9B;\xE1;\x83;\x93;\xE1;\x83;\x94;\xE1;\x83;\x95;\xE1;\x83;\x9C;\xE1;\x83;\x9D; %d \xE1;\x83;\xA1;\xE1;\x83;\x90;\xE1;\x83;\x90;\xE1;\x83;\x97;\xE1;\x83;\xA8;\xE1;\x83;\x98;.", Money_Str(room), 24);
@@ -22720,7 +22843,7 @@ Bank_CmdBonifico(playerid, const params[])
 	Util_NextToken(params, pos, tAmount, 36);
 	if (tTarget[0] == 0 || !Bank_ParseAmount(tAmount, amount))
 	{
-		Util_Send(playerid, 0x99CCFFFF, "\xE1;\x83;\x92;\xE1;\x83;\x90;\xE1;\x83;\x9B;\xE1;\x83;\x9D;\xE1;\x83;\xA7;\xE1;\x83;\x94;\xE1;\x83;\x9C;\xE1;\x83;\x94;\xE1;\x83;\x91;\xE1;\x83;\x90;: /bonifico id|\xE1;\x83;\xA1;\xE1;\x83;\x90;\xE1;\x83;\xAE;\xE1;\x83;\x94;\xE1;\x83;\x9A;\xE1;\x83;\x98; \xE1;\x83;\x97;\xE1;\x83;\x90;\xE1;\x83;\x9C;\xE1;\x83;\xAE;\xE1;\x83;\x90; (\xE1;\x83;\xA1;\xE1;\x83;\x90;\xE1;\x83;\x99;\xE1;\x83;\x9D;\xE1;\x83;\x9B;\xE1;\x83;\x98;\xE1;\x83;\xA1;\xE1;\x83;\x98;\xE1;\x83;\x9D; 2%, \xE1;\x83;\xA1;\xE1;\x83;\x90;\xE1;\x83;\xAD;\xE1;\x83;\x98;\xE1;\x83;\xA0;\xE1;\x83;\x9D;\xE1;\x83;\x90; ATM \xE1;\x83;\x90;\xE1;\x83;\x9C; \xE1;\x83;\xA1;\xE1;\x83;\x90;\xE1;\x83;\x9A;\xE1;\x83;\x90;\xE1;\x83;\xA0;\xE1;\x83;\x9D;)");
+		SendClientMessage(playerid, 0x99CCFFFF, "\xE1;\x83;\x92;\xE1;\x83;\x90;\xE1;\x83;\x9B;\xE1;\x83;\x9D;\xE1;\x83;\xA7;\xE1;\x83;\x94;\xE1;\x83;\x9C;\xE1;\x83;\x94;\xE1;\x83;\x91;\xE1;\x83;\x90;: /bonifico id|\xE1;\x83;\xA1;\xE1;\x83;\x90;\xE1;\x83;\xAE;\xE1;\x83;\x94;\xE1;\x83;\x9A;\xE1;\x83;\x98; \xE1;\x83;\x97;\xE1;\x83;\x90;\xE1;\x83;\x9C;\xE1;\x83;\xAE;\xE1;\x83;\x90; (\xE1;\x83;\xA1;\xE1;\x83;\x90;\xE1;\x83;\x99;\xE1;\x83;\x9D;\xE1;\x83;\x9B;\xE1;\x83;\x98;\xE1;\x83;\xA1;\xE1;\x83;\x98;\xE1;\x83;\x9D; %d%%, \xE1;\x83;\xA1;\xE1;\x83;\x90;\xE1;\x83;\xAD;\xE1;\x83;\x98;\xE1;\x83;\xA0;\xE1;\x83;\x9D;\xE1;\x83;\x90; ATM \xE1;\x83;\x90;\xE1;\x83;\x9C; \xE1;\x83;\xA1;\xE1;\x83;\x90;\xE1;\x83;\x9A;\xE1;\x83;\x90;\xE1;\x83;\xA0;\xE1;\x83;\x9D;)", ECON_XFER_FEE_PCT);
 		return 0;
 	}
 	new target = Bank_FindPlayer(tTarget);
@@ -23278,8 +23401,8 @@ Intro_ApplyStartMoney(playerid, motive)
 	}
 	else
 	{
-		gPlayer[playerid][pMoney] = 2500;
-		gPlayer[playerid][pBank] = 5000;
+		gPlayer[playerid][pMoney] = ECON_START_CASH;
+		gPlayer[playerid][pBank] = ECON_START_TOTAL - ECON_START_CASH;
 	}
 }
 
@@ -23561,8 +23684,8 @@ new s_HsTierName[4][40] = {
 };
 new s_HsFridgeCap[4] = {10, 16, 24, 40};
 new s_HsTierLevel[4] = {1, 2, 5, 10};
-new s_HsBillLuce[4] = {45, 70, 110, 220};
-new s_HsBillGas[4] = {30, 45, 70, 140};
+new s_HsBillLuce[4] = {ECON_BILL_LUCE_T0, ECON_BILL_LUCE_T1, ECON_BILL_LUCE_T2, ECON_BILL_LUCE_T3};
+new s_HsBillGas[4] = {ECON_BILL_GAS_T0, ECON_BILL_GAS_T1, ECON_BILL_GAS_T2, ECON_BILL_GAS_T3};
 new s_HsIntId[8] = {1, 2, 2, 1, 5, 3, 8, 5};
 new Float:s_HsIntPos[8][4] = {
 	{244.41, 305.03, 999.15, 180.0},
@@ -24173,6 +24296,7 @@ House_PushUi(playerid, idx)
 {
 	new id = g_HouseRows[idx][hrId];
 	UI_HouseDataSet(playerid, id, House_Role(idx, playerid), House_Tier(idx), House_IntIdx(idx), bool:g_HouseRows[idx][hrLocked], House_UtilState(bool:g_HouseRows[idx][hrLuceOn], bool:g_HouseRows[idx][hrLuceCut]), House_UtilState(bool:g_HouseRows[idx][hrGasOn], bool:g_HouseRows[idx][hrGasCut]), g_HouseRows[idx][hrFridgeUnits], Inv_Count(playerid, 1), g_HouseRows[idx][hrKeyCount], gPlayer[playerid][pLevel], gPlayer[playerid][pMoney], gPlayer[playerid][pBank]);
+	UI_HousePriceSet(playerid, g_HouseRows[idx][hrPrice], House_SellRefund(idx));
 	new lightDue = 0, lightCnt = 0, gasDue = 0, gasCnt = 0;
 	if (g_HPl[playerid][hpBillsHouseId] == id)
 	{
@@ -24356,7 +24480,7 @@ public House_OnDBBought(playerid, houseId, affected)
 House_SellRefund(idx)
 {
 	new base = g_HouseRows[idx][hrPricePaid] > 0 ? g_HouseRows[idx][hrPricePaid] : g_HouseRows[idx][hrPrice];
-	return base * 70 / 100;
+	return base / 100 * ECON_HOUSE_RESALE_PCT + base % 100 * ECON_HOUSE_RESALE_PCT / 100;   // senza overflow anche per le ville
 }
 
 House_DoSell(playerid, idx, bool:confirmed)
@@ -24389,7 +24513,7 @@ House_DoSell(playerid, idx, bool:confirmed)
 	}
 	if (!confirmed)
 	{
-		SendClientMessage(playerid, -2994689, "\xE1;\x83;\xA1;\xE1;\x83;\x90;\xE1;\x83;\xAE;\xE1;\x83;\x9A;\xE1;\x83;\x98;\xE1;\x83;\xA1; %d \xE1;\x83;\x92;\xE1;\x83;\x90;\xE1;\x83;\xA7;\xE1;\x83;\x98;\xE1;\x83;\x93;\xE1;\x83;\x95;\xE1;\x83;\x90;: \xE1;\x83;\x91;\xE1;\x83;\x90;\xE1;\x83;\x9C;\xE1;\x83;\x99;\xE1;\x83;\xA8;\xE1;\x83;\x98; \xE1;\x83;\x9B;\xE1;\x83;\x98;\xE1;\x83;\x98;\xE1;\x83;\xA6;\xE1;\x83;\x94;\xE1;\x83;\x91; %s-\xE1;\x83;\xA1; (%d%%). \xE1;\x83;\x99;\xE1;\x83;\x9D;\xE1;\x83;\x9B;\xE1;\x83;\xA3;\xE1;\x83;\x9C;\xE1;\x83;\x90;\xE1;\x83;\x9A;\xE1;\x83;\xA3;\xE1;\x83;\xA0;\xE1;\x83;\x94;\xE1;\x83;\x91;\xE1;\x83;\x98;, \xE1;\x83;\x92;\xE1;\x83;\x90;\xE1;\x83;\xA1;\xE1;\x83;\x90;\xE1;\x83;\xA6;\xE1;\x83;\x94;\xE1;\x83;\x91;\xE1;\x83;\x94;\xE1;\x83;\x91;\xE1;\x83;\x98; \xE1;\x83;\x93;\xE1;\x83;\x90; \xE1;\x83;\x9B;\xE1;\x83;\x90;\xE1;\x83;\xAA;\xE1;\x83;\x98;\xE1;\x83;\x95;\xE1;\x83;\x90;\xE1;\x83;\xA0;\xE1;\x83;\x98; \xE1;\x83;\x92;\xE1;\x83;\x90;\xE1;\x83;\x9C;\xE1;\x83;\xA3;\xE1;\x83;\x9A;\xE1;\x83;\x93;\xE1;\x83;\x94;\xE1;\x83;\x91;\xE1;\x83;\x90;.", g_HouseRows[idx][hrId], Money_Str(refund), 70);
+		SendClientMessage(playerid, -2994689, "\xE1;\x83;\xA1;\xE1;\x83;\x90;\xE1;\x83;\xAE;\xE1;\x83;\x9A;\xE1;\x83;\x98;\xE1;\x83;\xA1; %d \xE1;\x83;\x92;\xE1;\x83;\x90;\xE1;\x83;\xA7;\xE1;\x83;\x98;\xE1;\x83;\x93;\xE1;\x83;\x95;\xE1;\x83;\x90;: \xE1;\x83;\x91;\xE1;\x83;\x90;\xE1;\x83;\x9C;\xE1;\x83;\x99;\xE1;\x83;\xA8;\xE1;\x83;\x98; \xE1;\x83;\x9B;\xE1;\x83;\x98;\xE1;\x83;\x98;\xE1;\x83;\xA6;\xE1;\x83;\x94;\xE1;\x83;\x91; %s-\xE1;\x83;\xA1; (%d%%). \xE1;\x83;\x99;\xE1;\x83;\x9D;\xE1;\x83;\x9B;\xE1;\x83;\xA3;\xE1;\x83;\x9C;\xE1;\x83;\x90;\xE1;\x83;\x9A;\xE1;\x83;\xA3;\xE1;\x83;\xA0;\xE1;\x83;\x94;\xE1;\x83;\x91;\xE1;\x83;\x98;, \xE1;\x83;\x92;\xE1;\x83;\x90;\xE1;\x83;\xA1;\xE1;\x83;\x90;\xE1;\x83;\xA6;\xE1;\x83;\x94;\xE1;\x83;\x91;\xE1;\x83;\x94;\xE1;\x83;\x91;\xE1;\x83;\x98; \xE1;\x83;\x93;\xE1;\x83;\x90; \xE1;\x83;\x9B;\xE1;\x83;\x90;\xE1;\x83;\xAA;\xE1;\x83;\x98;\xE1;\x83;\x95;\xE1;\x83;\x90;\xE1;\x83;\xA0;\xE1;\x83;\x98; \xE1;\x83;\x92;\xE1;\x83;\x90;\xE1;\x83;\x9C;\xE1;\x83;\xA3;\xE1;\x83;\x9A;\xE1;\x83;\x93;\xE1;\x83;\x94;\xE1;\x83;\x91;\xE1;\x83;\x90;.", g_HouseRows[idx][hrId], Money_Str(refund), ECON_HOUSE_RESALE_PCT);
 		Util_Send(playerid, 0x99CCFFFF, "\xE1;\x83;\x93;\xE1;\x83;\x90;\xE1;\x83;\xA1;\xE1;\x83;\x90;\xE1;\x83;\x93;\xE1;\x83;\x90;\xE1;\x83;\xA1;\xE1;\x83;\xA2;\xE1;\x83;\xA3;\xE1;\x83;\xA0;\xE1;\x83;\x94;\xE1;\x83;\x91;\xE1;\x83;\x9A;\xE1;\x83;\x90;\xE1;\x83;\x93;: /casa vendi conferma");
 		return 0;
 	}
@@ -25076,7 +25200,7 @@ House_CutUtil(idx, kind)
 	new owner = House_OwnerPlayer(idx);
 	if (owner != 65535)
 	{
-		SendClientMessage(owner, -10270721, "\xE1;\x83;\xA1;\xE1;\x83;\x90;\xE1;\x83;\xAE;\xE1;\x83;\x9A;\xE1;\x83;\x98; %d: %s \xE1;\x83;\x92;\xE1;\x83;\x90;\xE1;\x83;\x98;\xE1;\x83;\x97;\xE1;\x83;\x98;\xE1;\x83;\xA8;\xE1;\x83;\x90;%s \xE1;\x83;\x92;\xE1;\x83;\x90;\xE1;\x83;\x93;\xE1;\x83;\x90;\xE1;\x83;\xA3;\xE1;\x83;\xAE;\xE1;\x83;\x93;\xE1;\x83;\x94;\xE1;\x83;\x9A;\xE1;\x83;\x98; \xE1;\x83;\x92;\xE1;\x83;\x90;\xE1;\x83;\x93;\xE1;\x83;\x90;\xE1;\x83;\xA1;\xE1;\x83;\x90;\xE1;\x83;\xAE;\xE1;\x83;\x90;\xE1;\x83;\x93;\xE1;\x83;\x94;\xE1;\x83;\x91;\xE1;\x83;\x98;\xE1;\x83;\xA1; \xE1;\x83;\x92;\xE1;\x83;\x90;\xE1;\x83;\x9B;\xE1;\x83;\x9D;. \xE1;\x83;\x92;\xE1;\x83;\x90;\xE1;\x83;\x93;\xE1;\x83;\x90;\xE1;\x83;\x98;\xE1;\x83;\xAE;\xE1;\x83;\x90;\xE1;\x83;\x93;\xE1;\x83;\x94; /bollette (+%s \xE1;\x83;\x90;\xE1;\x83;\xA6;\xE1;\x83;\x93;\xE1;\x83;\x92;\xE1;\x83;\x94;\xE1;\x83;\x9C;\xE1;\x83;\x90;).", id, kind == 1 ? "\xE1;\x83;\x92;\xE1;\x83;\x90;\xE1;\x83;\x96;\xE1;\x83;\x98;" : "\xE1;\x83;\xA8;\xE1;\x83;\xA3;\xE1;\x83;\xA5;\xE1;\x83;\x98;", "", Money_Str(40));
+		SendClientMessage(owner, -10270721, "\xE1;\x83;\xA1;\xE1;\x83;\x90;\xE1;\x83;\xAE;\xE1;\x83;\x9A;\xE1;\x83;\x98; %d: %s \xE1;\x83;\x92;\xE1;\x83;\x90;\xE1;\x83;\x98;\xE1;\x83;\x97;\xE1;\x83;\x98;\xE1;\x83;\xA8;\xE1;\x83;\x90;%s \xE1;\x83;\x92;\xE1;\x83;\x90;\xE1;\x83;\x93;\xE1;\x83;\x90;\xE1;\x83;\xA3;\xE1;\x83;\xAE;\xE1;\x83;\x93;\xE1;\x83;\x94;\xE1;\x83;\x9A;\xE1;\x83;\x98; \xE1;\x83;\x92;\xE1;\x83;\x90;\xE1;\x83;\x93;\xE1;\x83;\x90;\xE1;\x83;\xA1;\xE1;\x83;\x90;\xE1;\x83;\xAE;\xE1;\x83;\x90;\xE1;\x83;\x93;\xE1;\x83;\x94;\xE1;\x83;\x91;\xE1;\x83;\x98;\xE1;\x83;\xA1; \xE1;\x83;\x92;\xE1;\x83;\x90;\xE1;\x83;\x9B;\xE1;\x83;\x9D;. \xE1;\x83;\x92;\xE1;\x83;\x90;\xE1;\x83;\x93;\xE1;\x83;\x90;\xE1;\x83;\x98;\xE1;\x83;\xAE;\xE1;\x83;\x90;\xE1;\x83;\x93;\xE1;\x83;\x94; /bollette (+%s \xE1;\x83;\x90;\xE1;\x83;\xA6;\xE1;\x83;\x93;\xE1;\x83;\x92;\xE1;\x83;\x94;\xE1;\x83;\x9C;\xE1;\x83;\x90;).", id, kind == 1 ? "\xE1;\x83;\x92;\xE1;\x83;\x90;\xE1;\x83;\x96;\xE1;\x83;\x98;" : "\xE1;\x83;\xA8;\xE1;\x83;\xA3;\xE1;\x83;\xA5;\xE1;\x83;\x98;", "", Money_Str(ECON_BILL_RESTORE_FEE));
 	}
 	new msg[256];
 	format(msg, 256, "DISTACCO casa %d: %s", id, kind == 1 ? "gas" : "luce");
@@ -25207,7 +25331,7 @@ public House_OnDBBillsPaid(playerid, houseId, kind, paidAmount, restored)
 		Util_Send(playerid, -10270721, "\xE1;\x83;\x92;\xE1;\x83;\x90;\xE1;\x83;\x93;\xE1;\x83;\x90;\xE1;\x83;\xA1;\xE1;\x83;\x90;\xE1;\x83;\xAE;\xE1;\x83;\x90;\xE1;\x83;\x93;\xE1;\x83;\x94;\xE1;\x83;\x91;\xE1;\x83;\x98; \xE1;\x83;\xA8;\xE1;\x83;\x94;\xE1;\x83;\x98;\xE1;\x83;\xAA;\xE1;\x83;\x95;\xE1;\x83;\x90;\xE1;\x83;\x9A;\xE1;\x83;\x90; \xE1;\x83;\x90;\xE1;\x83;\x9C; \xE1;\x83;\x90;\xE1;\x83;\xA6;\xE1;\x83;\x90;\xE1;\x83;\xA0; \xE1;\x83;\x90;\xE1;\x83;\xA0;\xE1;\x83;\x98;\xE1;\x83;\xA1; \xE1;\x83;\x92;\xE1;\x83;\x90;\xE1;\x83;\x93;\xE1;\x83;\x90;\xE1;\x83;\xA1;\xE1;\x83;\x90;\xE1;\x83;\xAE;\xE1;\x83;\x93;\xE1;\x83;\x94;\xE1;\x83;\x9A;\xE1;\x83;\x98;: \xE1;\x83;\xAE;\xE1;\x83;\x94;\xE1;\x83;\x9A;\xE1;\x83;\x90;\xE1;\x83;\xAE;\xE1;\x83;\x9A;\xE1;\x83;\x90; \xE1;\x83;\x92;\xE1;\x83;\x90;\xE1;\x83;\xAE;\xE1;\x83;\xA1;\xE1;\x83;\x94;\xE1;\x83;\x9C;\xE1;\x83;\x98; /bollette. \xE1;\x83;\x90;\xE1;\x83;\x9B; \xE1;\x83;\x99;\xE1;\x83;\x9D;\xE1;\x83;\x9B;\xE1;\x83;\xA3;\xE1;\x83;\x9C;\xE1;\x83;\x90;\xE1;\x83;\x9A;\xE1;\x83;\xA3;\xE1;\x83;\xA0;\xE1;\x83;\x96;\xE1;\x83;\x94; \xE1;\x83;\x97;\xE1;\x83;\x90;\xE1;\x83;\x9C;\xE1;\x83;\xAE;\xE1;\x83;\x90; \xE1;\x83;\x90;\xE1;\x83;\xA0; \xE1;\x83;\xA9;\xE1;\x83;\x90;\xE1;\x83;\x9B;\xE1;\x83;\x9D;\xE1;\x83;\x98;\xE1;\x83;\xAD;\xE1;\x83;\xA0;\xE1;\x83;\x90;.");
 		return 1;
 	}
-	new fee = restored != 0 ? 40 : 0, amount = paidAmount + fee, cnt = 0;
+	new fee = restored != 0 ? ECON_BILL_RESTORE_FEE : 0, amount = paidAmount + fee, cnt = 0;
 	House_BillSum(playerid, kind, cnt);
 	if (amount <= 0 || !(bank == 1 ? Money_TakeBank(playerid, amount, "bill", "") : Money_Take(playerid, amount)))
 	{
@@ -26214,8 +26338,8 @@ new g_JobStepWord[4][32] = {
 new g_JobMinLevel[4] = {0, 1, 2, 1};
 new g_JobModel[4] = {0, 431, 498, 408};
 new g_JobSteps[4] = {0, 6, 5, 8};
-new g_JobPayStep[4] = {0, 28, 45, 24};
-new g_JobPayBonus[4] = {0, 40, 30, 40};
+new g_JobPayStep[4] = {0, ECON_JOB_BUS_STEP, ECON_JOB_COURIER_STEP, ECON_JOB_CLEANER_STEP};   // tetri, economy/econ_config.inc
+new g_JobPayBonus[4] = {0, ECON_JOB_BUS_BONUS, ECON_JOB_COURIER_BONUS, ECON_JOB_CLEANER_BONUS};
 new g_JobDwellMs[4] = {0, 4000, 5000, 4000};
 new Float:g_JobBusStops[6][3] = {
 	{1135.0, -1455.0, 15.5},
@@ -26580,7 +26704,7 @@ Job_Cancel(playerid, const reason[])
 Job_Accrue(playerid, amount)
 {
 	Job_RollHour(playerid);
-	new job = g_JsJob[playerid], room = 2200 - g_JcHourEarned[playerid][job];
+	new job = g_JsJob[playerid], room = ECON_JOB_HOURLY_CAP - g_JcHourEarned[playerid][job];
 	if (room < 0)
 	{
 		room = 0;
@@ -26589,7 +26713,7 @@ Job_Accrue(playerid, amount)
 	if (granted < amount && !g_JsCapWarned[playerid])
 	{
 		g_JsCapWarned[playerid] = true;
-		SendClientMessage(playerid, -10270721, "\xE1;\x83;\x9B;\xE1;\x83;\x98;\xE1;\x83;\xA6;\xE1;\x83;\xAC;\xE1;\x83;\x94;\xE1;\x83;\xA3;\xE1;\x83;\x9A;\xE1;\x83;\x98;\xE1;\x83;\x90; \xE1;\x83;\xA1;\xE1;\x83;\x90;\xE1;\x83;\x90;\xE1;\x83;\x97;\xE1;\x83;\x9D;\xE1;\x83;\x91;\xE1;\x83;\xA0;\xE1;\x83;\x98;\xE1;\x83;\x95;\xE1;\x83;\x98; \xE1;\x83;\x9A;\xE1;\x83;\x98;\xE1;\x83;\x9B;\xE1;\x83;\x98;\xE1;\x83;\xA2;\xE1;\x83;\x98; %s: \xE1;\x83;\xAA;\xE1;\x83;\x95;\xE1;\x83;\x9A;\xE1;\x83;\x90; \xE1;\x83;\x92;\xE1;\x83;\xA0;\xE1;\x83;\xAB;\xE1;\x83;\x94;\xE1;\x83;\x9A;\xE1;\x83;\x93;\xE1;\x83;\x94;\xE1;\x83;\x91;\xE1;\x83;\x90;, \xE1;\x83;\x9B;\xE1;\x83;\x90;\xE1;\x83;\x92;\xE1;\x83;\xA0;\xE1;\x83;\x90;\xE1;\x83;\x9B; \xE1;\x83;\x90;\xE1;\x83;\x9C;\xE1;\x83;\x90;\xE1;\x83;\x96;\xE1;\x83;\xA6;\xE1;\x83;\x90;\xE1;\x83;\xA3;\xE1;\x83;\xA0;\xE1;\x83;\x94;\xE1;\x83;\x91;\xE1;\x83;\x90; \xE1;\x83;\x90;\xE1;\x83;\xA6;\xE1;\x83;\x90;\xE1;\x83;\xA0; \xE1;\x83;\x92;\xE1;\x83;\xA0;\xE1;\x83;\x9D;\xE1;\x83;\x95;\xE1;\x83;\x93;\xE1;\x83;\x94;\xE1;\x83;\x91;\xE1;\x83;\x90;.", Money_Str(2200));
+		SendClientMessage(playerid, -10270721, "\xE1;\x83;\x9B;\xE1;\x83;\x98;\xE1;\x83;\xA6;\xE1;\x83;\xAC;\xE1;\x83;\x94;\xE1;\x83;\xA3;\xE1;\x83;\x9A;\xE1;\x83;\x98;\xE1;\x83;\x90; \xE1;\x83;\xA1;\xE1;\x83;\x90;\xE1;\x83;\x90;\xE1;\x83;\x97;\xE1;\x83;\x9D;\xE1;\x83;\x91;\xE1;\x83;\xA0;\xE1;\x83;\x98;\xE1;\x83;\x95;\xE1;\x83;\x98; \xE1;\x83;\x9A;\xE1;\x83;\x98;\xE1;\x83;\x9B;\xE1;\x83;\x98;\xE1;\x83;\xA2;\xE1;\x83;\x98; %s: \xE1;\x83;\xAA;\xE1;\x83;\x95;\xE1;\x83;\x9A;\xE1;\x83;\x90; \xE1;\x83;\x92;\xE1;\x83;\xA0;\xE1;\x83;\xAB;\xE1;\x83;\x94;\xE1;\x83;\x9A;\xE1;\x83;\x93;\xE1;\x83;\x94;\xE1;\x83;\x91;\xE1;\x83;\x90;, \xE1;\x83;\x9B;\xE1;\x83;\x90;\xE1;\x83;\x92;\xE1;\x83;\xA0;\xE1;\x83;\x90;\xE1;\x83;\x9B; \xE1;\x83;\x90;\xE1;\x83;\x9C;\xE1;\x83;\x90;\xE1;\x83;\x96;\xE1;\x83;\xA6;\xE1;\x83;\x90;\xE1;\x83;\xA3;\xE1;\x83;\xA0;\xE1;\x83;\x94;\xE1;\x83;\x91;\xE1;\x83;\x90; \xE1;\x83;\x90;\xE1;\x83;\xA6;\xE1;\x83;\x90;\xE1;\x83;\xA0; \xE1;\x83;\x92;\xE1;\x83;\xA0;\xE1;\x83;\x9D;\xE1;\x83;\x95;\xE1;\x83;\x93;\xE1;\x83;\x94;\xE1;\x83;\x91;\xE1;\x83;\x90;.", Money_Str(ECON_JOB_HOURLY_CAP));
 	}
 	g_JcHourEarned[playerid][job] += granted;
 	g_JsCapUsed[playerid] += granted;
@@ -27199,8 +27323,8 @@ new g_FacRankName[3][7][64] = {
 };
 new g_FacRankPay[3][7] = {
 	{0},
-	{0, 150, 200, 250, 320, 400, 500},
-	{0, 150, 200, 250, 320, 400, 500}
+	{0, ECON_FAC_PAY_R1, ECON_FAC_PAY_R2, ECON_FAC_PAY_R3, ECON_FAC_PAY_R4, ECON_FAC_PAY_R5, ECON_FAC_PAY_R6},
+	{0, ECON_FAC_PAY_R1, ECON_FAC_PAY_R2, ECON_FAC_PAY_R3, ECON_FAC_PAY_R4, ECON_FAC_PAY_R5, ECON_FAC_PAY_R6}
 };
 new g_FacRankSkin[3][7] = {
 	{0},
@@ -27485,23 +27609,23 @@ Fac_FineCap(rank)
 	{
 		case 2:
 		{
-			return 500;
+			return ECON_FINE_CAP_R2;
 		}
 		case 3:
 		{
-			return 1000;
+			return ECON_FINE_CAP_R3;
 		}
 		case 4:
 		{
-			return 2500;
+			return ECON_FINE_CAP_R4;
 		}
 		case 5:
 		{
-			return 5000;
+			return ECON_FINE_CAP_R5;
 		}
 		case 6:
 		{
-			return 5000;
+			return ECON_FINE_CAP_R6;
 		}
 	}
 	return 0;
@@ -27848,7 +27972,7 @@ Faction_CmdMulta(playerid, const params[])
 	new pos = 0, tid[36], tam[36], target = 0, amount = 0, reason[65];
 	Util_NextToken(params, pos, tid, 36);
 	Util_NextToken(params, pos, tam, 36);
-	if (tid[0] == 0 || tam[0] == 0 || !Util_ParseInt(tam, amount) || !Util_SanitizeText(params[pos], reason, 64))
+	if (tid[0] == 0 || tam[0] == 0 || !Money_Parse(tam, amount) || !Util_SanitizeText(params[pos], reason, 64))
 	{
 		Util_Send(playerid, 0x99CCFFFF, "\xE1;\x83;\x92;\xE1;\x83;\x90;\xE1;\x83;\x9B;\xE1;\x83;\x9D;\xE1;\x83;\xA7;\xE1;\x83;\x94;\xE1;\x83;\x9C;\xE1;\x83;\x94;\xE1;\x83;\x91;\xE1;\x83;\x90;: /multa id \xE1;\x83;\x97;\xE1;\x83;\x90;\xE1;\x83;\x9C;\xE1;\x83;\xAE;\xE1;\x83;\x90; \xE1;\x83;\x9B;\xE1;\x83;\x98;\xE1;\x83;\x96;\xE1;\x83;\x94;\xE1;\x83;\x96;\xE1;\x83;\x98;");
 		return 0;
@@ -27865,9 +27989,9 @@ Faction_CmdMulta(playerid, const params[])
 			reason[i] = 35;
 		}
 	}
-	if (amount < 50 || amount > cap)
+	if (amount < ECON_FINE_MIN || amount > cap)
 	{
-		SendClientMessage(playerid, -10270721, "\xE1;\x83;\x90;\xE1;\x83;\xA0;\xE1;\x83;\x90;\xE1;\x83;\xA1;\xE1;\x83;\xAC;\xE1;\x83;\x9D;\xE1;\x83;\xA0;\xE1;\x83;\x98; \xE1;\x83;\x97;\xE1;\x83;\x90;\xE1;\x83;\x9C;\xE1;\x83;\xAE;\xE1;\x83;\x90;: \xE1;\x83;\xA8;\xE1;\x83;\x94;\xE1;\x83;\x9C;\xE1;\x83;\x98; \xE1;\x83;\xAC;\xE1;\x83;\x9D;\xE1;\x83;\x93;\xE1;\x83;\x94;\xE1;\x83;\x91;\xE1;\x83;\x98;\xE1;\x83;\xA1;\xE1;\x83;\x97;\xE1;\x83;\x95;\xE1;\x83;\x98;\xE1;\x83;\xA1; %s-\xE1;\x83;\x93;\xE1;\x83;\x90;\xE1;\x83;\x9C; %s-\xE1;\x83;\x9B;\xE1;\x83;\x93;\xE1;\x83;\x94;.", Money_Str(50), Money_Str(cap));
+		SendClientMessage(playerid, -10270721, "\xE1;\x83;\x90;\xE1;\x83;\xA0;\xE1;\x83;\x90;\xE1;\x83;\xA1;\xE1;\x83;\xAC;\xE1;\x83;\x9D;\xE1;\x83;\xA0;\xE1;\x83;\x98; \xE1;\x83;\x97;\xE1;\x83;\x90;\xE1;\x83;\x9C;\xE1;\x83;\xAE;\xE1;\x83;\x90;: \xE1;\x83;\xA8;\xE1;\x83;\x94;\xE1;\x83;\x9C;\xE1;\x83;\x98; \xE1;\x83;\xAC;\xE1;\x83;\x9D;\xE1;\x83;\x93;\xE1;\x83;\x94;\xE1;\x83;\x91;\xE1;\x83;\x98;\xE1;\x83;\xA1;\xE1;\x83;\x97;\xE1;\x83;\x95;\xE1;\x83;\x98;\xE1;\x83;\xA1; %s-\xE1;\x83;\x93;\xE1;\x83;\x90;\xE1;\x83;\x9C; %s-\xE1;\x83;\x9B;\xE1;\x83;\x93;\xE1;\x83;\x94;.", Money_Str(ECON_FINE_MIN), Money_Str(cap));
 		return 0;
 	}
 	if (!Fac_ParseTarget(playerid, tid, target))
@@ -27896,9 +28020,9 @@ Faction_CmdMulta(playerid, const params[])
 		g_FcFineBucket[playerid] = bucket;
 		g_FcFineSum[playerid] = 0;
 	}
-	if (g_FcFineSum[playerid] + amount > 10000)
+	if (g_FcFineSum[playerid] + amount > ECON_FINE_HOURLY_CAP)
 	{
-		SendClientMessage(playerid, -10270721, "\xE1;\x83;\xAF;\xE1;\x83;\x90;\xE1;\x83;\xA0;\xE1;\x83;\x98;\xE1;\x83;\x9B;\xE1;\x83;\x94;\xE1;\x83;\x91;\xE1;\x83;\x98;\xE1;\x83;\xA1; \xE1;\x83;\xA1;\xE1;\x83;\x90;\xE1;\x83;\x90;\xE1;\x83;\x97;\xE1;\x83;\x9D;\xE1;\x83;\x91;\xE1;\x83;\xA0;\xE1;\x83;\x98;\xE1;\x83;\x95; \xE1;\x83;\x9A;\xE1;\x83;\x98;\xE1;\x83;\x9B;\xE1;\x83;\x98;\xE1;\x83;\xA2;\xE1;\x83;\xA1; \xE1;\x83;\x9B;\xE1;\x83;\x98;\xE1;\x83;\x90;\xE1;\x83;\xA6;\xE1;\x83;\xAC;\xE1;\x83;\x98;\xE1;\x83;\x94; (%s).", Money_Str(10000));
+		SendClientMessage(playerid, -10270721, "\xE1;\x83;\xAF;\xE1;\x83;\x90;\xE1;\x83;\xA0;\xE1;\x83;\x98;\xE1;\x83;\x9B;\xE1;\x83;\x94;\xE1;\x83;\x91;\xE1;\x83;\x98;\xE1;\x83;\xA1; \xE1;\x83;\xA1;\xE1;\x83;\x90;\xE1;\x83;\x90;\xE1;\x83;\x97;\xE1;\x83;\x9D;\xE1;\x83;\x91;\xE1;\x83;\xA0;\xE1;\x83;\x98;\xE1;\x83;\x95; \xE1;\x83;\x9A;\xE1;\x83;\x98;\xE1;\x83;\x9B;\xE1;\x83;\x98;\xE1;\x83;\xA2;\xE1;\x83;\xA1; \xE1;\x83;\x9B;\xE1;\x83;\x98;\xE1;\x83;\x90;\xE1;\x83;\xA6;\xE1;\x83;\xAC;\xE1;\x83;\x98;\xE1;\x83;\x94; (%s).", Money_Str(ECON_FINE_HOURLY_CAP));
 		return 0;
 	}
 	if (gPlayer[target][pMoney] + gPlayer[target][pBank] < amount)
@@ -28213,10 +28337,10 @@ Fac_ReviveDone(medic, target)
 		g_FcReviveBucket[medic] = bucket;
 		g_FcReviveCount[medic] = 0;
 	}
-	if (g_FcReviveCount[medic] < 6 && Money_GiveBank(medic, 100, "faction", ""))
+	if (g_FcReviveCount[medic] < 6 && Money_GiveBank(medic, ECON_FAC_REVIVE_BONUS, "faction", ""))
 	{
 		g_FcReviveCount[medic]++;
-		SendClientMessage(medic, 0x66DD66FF, "\xE1;\x83;\x92;\xE1;\x83;\x90;\xE1;\x83;\xAA;\xE1;\x83;\x9D;\xE1;\x83;\xAA;\xE1;\x83;\xAE;\xE1;\x83;\x9A;\xE1;\x83;\x94;\xE1;\x83;\x91;\xE1;\x83;\x98;\xE1;\x83;\xA1; \xE1;\x83;\x91;\xE1;\x83;\x9D;\xE1;\x83;\x9C;\xE1;\x83;\xA3;\xE1;\x83;\xA1;\xE1;\x83;\x98;: %s \xE1;\x83;\xA9;\xE1;\x83;\x90;\xE1;\x83;\x98;\xE1;\x83;\xA0;\xE1;\x83;\x98;\xE1;\x83;\xAA;\xE1;\x83;\xAE;\xE1;\x83;\x90; \xE1;\x83;\x91;\xE1;\x83;\x90;\xE1;\x83;\x9C;\xE1;\x83;\x99;\xE1;\x83;\xA8;\xE1;\x83;\x98;.", Money_Str(100));
+		SendClientMessage(medic, 0x66DD66FF, "\xE1;\x83;\x92;\xE1;\x83;\x90;\xE1;\x83;\xAA;\xE1;\x83;\x9D;\xE1;\x83;\xAA;\xE1;\x83;\xAE;\xE1;\x83;\x9A;\xE1;\x83;\x94;\xE1;\x83;\x91;\xE1;\x83;\x98;\xE1;\x83;\xA1; \xE1;\x83;\x91;\xE1;\x83;\x9D;\xE1;\x83;\x9C;\xE1;\x83;\xA3;\xE1;\x83;\xA1;\xE1;\x83;\x98;: %s \xE1;\x83;\xA9;\xE1;\x83;\x90;\xE1;\x83;\x98;\xE1;\x83;\xA0;\xE1;\x83;\x98;\xE1;\x83;\xAA;\xE1;\x83;\xAE;\xE1;\x83;\x90; \xE1;\x83;\x91;\xE1;\x83;\x90;\xE1;\x83;\x9C;\xE1;\x83;\x99;\xE1;\x83;\xA8;\xE1;\x83;\x98;.", Money_Str(ECON_FAC_REVIVE_BONUS));
 		Char_Save(medic);
 	}
 }
@@ -28228,7 +28352,7 @@ Fac_ApplyInjuredPose(playerid)
 
 Faction_Hospitalize(playerid)
 {
-	new fee = Fac_Debit(playerid, 200);
+	new fee = Fac_Debit(playerid, ECON_HOSPITAL_FEE);
 	gPlayer[playerid][pWounded] = 0;
 	g_FcInjLeftMs[playerid] = 0;
 	g_FcHospPending[playerid] = false;
@@ -29121,7 +29245,7 @@ Faction_OnPlayerSpawn(playerid)
 	g_FcInjLeftMs[playerid] = 180000;
 	g_FcInjSec[playerid] = 180;
 	UI_InjuryHudShow(playerid, 180);
-	SendClientMessage(playerid, -10270721, "\xE1;\x83;\x93;\xE1;\x83;\x90;\xE1;\x83;\xAD;\xE1;\x83;\xA0;\xE1;\x83;\x98;\xE1;\x83;\x9A;\xE1;\x83;\x98; \xE1;\x83;\xAE;\xE1;\x83;\x90;\xE1;\x83;\xA0;. \xE1;\x83;\x93;\xE1;\x83;\x90;\xE1;\x83;\x94;\xE1;\x83;\x9A;\xE1;\x83;\x9D;\xE1;\x83;\x93;\xE1;\x83;\x94; \xE1;\x83;\x93;\xE1;\x83;\x90;\xE1;\x83;\xAE;\xE1;\x83;\x9B;\xE1;\x83;\x90;\xE1;\x83;\xA0;\xE1;\x83;\x94;\xE1;\x83;\x91;\xE1;\x83;\x90;\xE1;\x83;\xA1; (EMS): \xE1;\x83;\x93;\xE1;\x83;\x90;\xE1;\x83;\xAE;\xE1;\x83;\x9B;\xE1;\x83;\x90;\xE1;\x83;\xA0;\xE1;\x83;\x94;\xE1;\x83;\x91;\xE1;\x83;\x98;\xE1;\x83;\xA1; \xE1;\x83;\x92;\xE1;\x83;\x90;\xE1;\x83;\xA0;\xE1;\x83;\x94;\xE1;\x83;\xA8;\xE1;\x83;\x94; %d \xE1;\x83;\xAC;\xE1;\x83;\x90;\xE1;\x83;\x9B;\xE1;\x83;\xA8;\xE1;\x83;\x98; \xE1;\x83;\xB0;\xE1;\x83;\x9D;\xE1;\x83;\xA1;\xE1;\x83;\x9E;\xE1;\x83;\x98;\xE1;\x83;\xA2;\xE1;\x83;\x90;\xE1;\x83;\x9A;\xE1;\x83;\x98;\xE1;\x83;\x96;\xE1;\x83;\x93;\xE1;\x83;\x94;\xE1;\x83;\x91;\xE1;\x83;\x98; (%s).", 180, Money_Str(200));
+	SendClientMessage(playerid, -10270721, "\xE1;\x83;\x93;\xE1;\x83;\x90;\xE1;\x83;\xAD;\xE1;\x83;\xA0;\xE1;\x83;\x98;\xE1;\x83;\x9A;\xE1;\x83;\x98; \xE1;\x83;\xAE;\xE1;\x83;\x90;\xE1;\x83;\xA0;. \xE1;\x83;\x93;\xE1;\x83;\x90;\xE1;\x83;\x94;\xE1;\x83;\x9A;\xE1;\x83;\x9D;\xE1;\x83;\x93;\xE1;\x83;\x94; \xE1;\x83;\x93;\xE1;\x83;\x90;\xE1;\x83;\xAE;\xE1;\x83;\x9B;\xE1;\x83;\x90;\xE1;\x83;\xA0;\xE1;\x83;\x94;\xE1;\x83;\x91;\xE1;\x83;\x90;\xE1;\x83;\xA1; (EMS): \xE1;\x83;\x93;\xE1;\x83;\x90;\xE1;\x83;\xAE;\xE1;\x83;\x9B;\xE1;\x83;\x90;\xE1;\x83;\xA0;\xE1;\x83;\x94;\xE1;\x83;\x91;\xE1;\x83;\x98;\xE1;\x83;\xA1; \xE1;\x83;\x92;\xE1;\x83;\x90;\xE1;\x83;\xA0;\xE1;\x83;\x94;\xE1;\x83;\xA8;\xE1;\x83;\x94; %d \xE1;\x83;\xAC;\xE1;\x83;\x90;\xE1;\x83;\x9B;\xE1;\x83;\xA8;\xE1;\x83;\x98; \xE1;\x83;\xB0;\xE1;\x83;\x9D;\xE1;\x83;\xA1;\xE1;\x83;\x9E;\xE1;\x83;\x98;\xE1;\x83;\xA2;\xE1;\x83;\x90;\xE1;\x83;\x9A;\xE1;\x83;\x98;\xE1;\x83;\x96;\xE1;\x83;\x93;\xE1;\x83;\x94;\xE1;\x83;\x91;\xE1;\x83;\x98; (%s).", 180, Money_Str(ECON_HOSPITAL_FEE));
 	return 0;
 }
 
@@ -29362,7 +29486,7 @@ LD_ApplyDiscount(amount, rep)
 	{
 		return 0;
 	}
-	new a = LD_Clamp(amount, 0, 10000000);
+	new a = LD_Clamp(amount, 0, ECON_MONEY_MAX);
 	return a - a * LD_DiscountPct(rep) / 100;
 }
 
@@ -29382,7 +29506,7 @@ LD_FreightTimeLimit(distM)
 LD_TaxiFare(meters)
 {
 	new m = LD_Clamp(meters, 0, 100000);
-	return m * 12 / 100 + 15;
+	return m * ECON_LD_TAXI_PER_M_X100 / 100 + ECON_LD_TAXI_BASE;   // = SQL (ld_config)
 }
 
 LD_TaxiFareFor(meters, rep)
@@ -29396,7 +29520,7 @@ LD_TaxiNpcPay(fare, proPoints)
 	{
 		return 0;
 	}
-	return LD_Clamp(fare, 0, 10000000) * (LD_ProBonusPct(proPoints) + 100) / 100;
+	return LD_Clamp(fare, 0, 10000000) * (LD_ProBonusPct(proPoints) + 100) / 100;   // stesso arrotondamento del DB; 1e7 x 115 resta sotto int32
 }
 
 LD_RentalModel(vkind)
@@ -29429,19 +29553,19 @@ LD_RentalDeposit(vkind)
 	{
 		case 1:
 		{
-			return 200;
+			return ECON_LD_RENT_DEP_FAGGIO;
 		}
 		case 2:
 		{
-			return 400;
+			return ECON_LD_RENT_DEP_PREVION;
 		}
 		case 3:
 		{
-			return 450;
+			return ECON_LD_RENT_DEP_MANANA;
 		}
 		case 4:
 		{
-			return 300;
+			return ECON_LD_TAXI_DEP;
 		}
 	}
 	return 0;
@@ -29457,15 +29581,15 @@ LD_RentalFee(vkind, blocks)
 	{
 		case 1:
 		{
-			return blocks * 30;
+			return blocks * ECON_LD_RENT_FEE_FAGGIO;
 		}
 		case 2:
 		{
-			return blocks * 60;
+			return blocks * ECON_LD_RENT_FEE_PREVION;
 		}
 		case 3:
 		{
-			return blocks * 70;
+			return blocks * ECON_LD_RENT_FEE_MANANA;
 		}
 	}
 	return 0;
@@ -29482,7 +29606,7 @@ LD_RentalRefund(deposit, health)
 	{
 		return 0;
 	}
-	new dep = LD_Clamp(deposit, 0, 10000);
+	new dep = LD_Clamp(deposit, 0, ECON_MONEY_MAX);
 	if (health >= 1000)
 	{
 		return dep;
@@ -29498,7 +29622,7 @@ LD_RentalRefund(deposit, health)
 
 bool:LD_DonationValid(amount, donatedToday)
 {
-	if (amount < 50 || amount > 500)
+	if (amount < ECON_LD_PRJ_DON_MIN || amount > ECON_LD_PRJ_DON_MAX)
 	{
 		return false;
 	}
@@ -29506,7 +29630,7 @@ bool:LD_DonationValid(amount, donatedToday)
 	{
 		return false;
 	}
-	return donatedToday + amount <= 1000;
+	return donatedToday + amount <= ECON_LD_PRJ_DON_DAY;
 }
 
 LD_FloatKey(Float:f)
@@ -31440,14 +31564,14 @@ public Living_OnDBContract(playerid, action, result, contractId, amount, balance
 // rental/street_rental.inc - auto a noleggio parcheggiate per la citta' ("noleggio di strada").
 //
 // Berline di classe base (Landstalker, Premier, Admiral, ...) parcheggiate in punti casuali di Los Santos.
-// Il giocatore sale al volante -> offerta $179 per 60 minuti (nessuna cauzione). Il pagamento passa dallo
+// Il giocatore sale al volante -> offerta ?29 per 60 minuti (nessuna cauzione). Il pagamento passa dallo
 // stesso sistema dei noleggi (sp_rental_open, vkind 5, migrazione sql/migrations/013_street_rental.sql):
 // stesse regole (un solo noleggio alla volta, op_id idempotente, banca + contanti), stessa scadenza e riconsegna.
 // La riconsegna si fa ovunque con /riconsegna (o scade da sola); poi l'auto sparisce e un'altra compare altrove.
 // =============================================================================
 
 #define SRENT_VKIND        (5)
-#define SRENT_PRICE        (179)          // deve coincidere con ld_config RENT_FEE_STREET (il DB decide l'addebito)
+#define SRENT_PRICE        (ECON_STREET_RENT)         // deve coincidere con ld_config RENT_FEE_STREET (il DB decide l'addebito)
 #define SRENT_MINUTES      (60)           // = RENT_STREET_MIN
 #define SRENT_ACTIVE       (10)           // auto disponibili in contemporanea
 #define SRENT_RESPAWN_S    (180)          // dopo un noleggio, un'auto nuova compare entro ~3 minuti
@@ -33660,10 +33784,10 @@ Taxi_CmdTaxi(playerid, const params[])
 			Util_Send(playerid, -10270721, "\xE1;\x83;\x9B;\xE1;\x83;\x98;\xE1;\x83;\x93;\xE1;\x83;\x98; \xE1;\x83;\xA4;\xE1;\x83;\x94;\xE1;\x83;\xAE;\xE1;\x83;\x98;\xE1;\x83;\x97; Unity Station-\xE1;\x83;\x98;\xE1;\x83;\xA1; \xE1;\x83;\xA2;\xE1;\x83;\x90;\xE1;\x83;\xA5;\xE1;\x83;\xA1;\xE1;\x83;\x98;\xE1;\x83;\xA1; \xE1;\x83;\x93;\xE1;\x83;\x94;\xE1;\x83;\x9E;\xE1;\x83;\x9D;\xE1;\x83;\xA8;\xE1;\x83;\x98;.");
 			return 1;
 		}
-		new total = 360;
+		new total = ECON_TAXI_RENT_HOUR + ECON_TAXI_DEPOSIT;
 		if ((gPlayer[playerid][pBank] > 0 ? gPlayer[playerid][pBank] : 0) + (gPlayer[playerid][pMoney] > 0 ? gPlayer[playerid][pMoney] : 0) < total)
 		{
-			SendClientMessage(playerid, -10270721, "\xE1;\x83;\xA1;\xE1;\x83;\x90;\xE1;\x83;\xAD;\xE1;\x83;\x98;\xE1;\x83;\xA0;\xE1;\x83;\x9D;\xE1;\x83;\x90; %s (\xE1;\x83;\xA5;\xE1;\x83;\x98;\xE1;\x83;\xA0;\xE1;\x83;\x90; %s/\xE1;\x83;\xA1;\xE1;\x83;\x97; + \xE1;\x83;\x92;\xE1;\x83;\x98;\xE1;\x83;\xA0;\xE1;\x83;\x90;\xE1;\x83;\x9D; %s) \xE1;\x83;\x91;\xE1;\x83;\x90;\xE1;\x83;\x9C;\xE1;\x83;\x99;\xE1;\x83;\xA1;\xE1;\x83;\x90; \xE1;\x83;\x93;\xE1;\x83;\x90; \xE1;\x83;\x9C;\xE1;\x83;\x90;\xE1;\x83;\xA6;\xE1;\x83;\x93;\xE1;\x83;\xA8;\xE1;\x83;\x98;.", Money_Str(total), Money_Str(60), Money_Str(300));
+			SendClientMessage(playerid, -10270721, "\xE1;\x83;\xA1;\xE1;\x83;\x90;\xE1;\x83;\xAD;\xE1;\x83;\x98;\xE1;\x83;\xA0;\xE1;\x83;\x9D;\xE1;\x83;\x90; %s (\xE1;\x83;\xA5;\xE1;\x83;\x98;\xE1;\x83;\xA0;\xE1;\x83;\x90; %s/\xE1;\x83;\xA1;\xE1;\x83;\x97; + \xE1;\x83;\x92;\xE1;\x83;\x98;\xE1;\x83;\xA0;\xE1;\x83;\x90;\xE1;\x83;\x9D; %s) \xE1;\x83;\x91;\xE1;\x83;\x90;\xE1;\x83;\x9C;\xE1;\x83;\x99;\xE1;\x83;\xA1;\xE1;\x83;\x90; \xE1;\x83;\x93;\xE1;\x83;\x90; \xE1;\x83;\x9C;\xE1;\x83;\x90;\xE1;\x83;\xA6;\xE1;\x83;\x93;\xE1;\x83;\xA8;\xE1;\x83;\x98;.", Money_Str(total), Money_Str(ECON_TAXI_RENT_HOUR), Money_Str(ECON_TAXI_DEPOSIT));
 			return 1;
 		}
 		if (!LD_PoolHasRoom() || !Rental_OpenPro(playerid, 4))
@@ -33892,7 +34016,7 @@ Taxi_OnProRental(playerid, result, vehicleid)
 		{
 			case 3:
 			{
-				SendClientMessage(playerid, -10270721, "\xE1;\x83;\xA1;\xE1;\x83;\x90;\xE1;\x83;\xAE;\xE1;\x83;\xA1;\xE1;\x83;\xA0;\xE1;\x83;\x94;\xE1;\x83;\x91;\xE1;\x83;\x98; \xE1;\x83;\x90;\xE1;\x83;\xA0; \xE1;\x83;\x92;\xE1;\x83;\xA7;\xE1;\x83;\x9D;\xE1;\x83;\xA4;\xE1;\x83;\x9C;\xE1;\x83;\x98;\xE1;\x83;\xA1;: \xE1;\x83;\xA1;\xE1;\x83;\x90;\xE1;\x83;\xAD;\xE1;\x83;\x98;\xE1;\x83;\xA0;\xE1;\x83;\x9D;\xE1;\x83;\x90; %s (\xE1;\x83;\xA5;\xE1;\x83;\x98;\xE1;\x83;\xA0;\xE1;\x83;\x90; + \xE1;\x83;\x92;\xE1;\x83;\x98;\xE1;\x83;\xA0;\xE1;\x83;\x90;\xE1;\x83;\x9D;).", Money_Str(360));
+				SendClientMessage(playerid, -10270721, "\xE1;\x83;\xA1;\xE1;\x83;\x90;\xE1;\x83;\xAE;\xE1;\x83;\xA1;\xE1;\x83;\xA0;\xE1;\x83;\x94;\xE1;\x83;\x91;\xE1;\x83;\x98; \xE1;\x83;\x90;\xE1;\x83;\xA0; \xE1;\x83;\x92;\xE1;\x83;\xA7;\xE1;\x83;\x9D;\xE1;\x83;\xA4;\xE1;\x83;\x9C;\xE1;\x83;\x98;\xE1;\x83;\xA1;: \xE1;\x83;\xA1;\xE1;\x83;\x90;\xE1;\x83;\xAD;\xE1;\x83;\x98;\xE1;\x83;\xA0;\xE1;\x83;\x9D;\xE1;\x83;\x90; %s (\xE1;\x83;\xA5;\xE1;\x83;\x98;\xE1;\x83;\xA0;\xE1;\x83;\x90; + \xE1;\x83;\x92;\xE1;\x83;\x98;\xE1;\x83;\xA0;\xE1;\x83;\x90;\xE1;\x83;\x9D;).", Money_Str(ECON_TAXI_RENT_HOUR + ECON_TAXI_DEPOSIT));
 			}
 			case 7:
 			{
@@ -33910,7 +34034,7 @@ Taxi_OnProRental(playerid, result, vehicleid)
 	gPlayer[playerid][pTaxiRideId] = 0;
 	Taxi_ScheduleNpc(playerid);
 	LD_Emit(107, 0, gPlayer[playerid][pCharId], 1, "-");
-	SendClientMessage(playerid, 0x66DD66FF, "\xE1;\x83;\xA1;\xE1;\x83;\x90;\xE1;\x83;\x9B;\xE1;\x83;\xA1;\xE1;\x83;\x90;\xE1;\x83;\xAE;\xE1;\x83;\xA3;\xE1;\x83;\xA0;\xE1;\x83;\xA8;\xE1;\x83;\x98; \xE1;\x83;\xAE;\xE1;\x83;\x90;\xE1;\x83;\xA0; (\xE1;\x83;\xA5;\xE1;\x83;\x98;\xE1;\x83;\xA0;\xE1;\x83;\x90; %s/\xE1;\x83;\xA1;\xE1;\x83;\x97;, \xE1;\x83;\x92;\xE1;\x83;\x98;\xE1;\x83;\xA0;\xE1;\x83;\x90;\xE1;\x83;\x9D; %s). \xE1;\x83;\x92;\xE1;\x83;\x90;\xE1;\x83;\x9B;\xE1;\x83;\x9D;\xE1;\x83;\xAB;\xE1;\x83;\x90;\xE1;\x83;\xAE;\xE1;\x83;\x94;\xE1;\x83;\x91;\xE1;\x83;\x94;\xE1;\x83;\x91;\xE1;\x83;\x98; \xE1;\x83;\x97;\xE1;\x83;\x90;\xE1;\x83;\x95;\xE1;\x83;\x90;\xE1;\x83;\x93; \xE1;\x83;\x9B;\xE1;\x83;\x9D;\xE1;\x83;\x95;\xE1;\x83;\x90;: /accettacorsa. \xE1;\x83;\xAA;\xE1;\x83;\x95;\xE1;\x83;\x9A;\xE1;\x83;\x98;\xE1;\x83;\xA1; \xE1;\x83;\x93;\xE1;\x83;\x90;\xE1;\x83;\xA1;\xE1;\x83;\x90;\xE1;\x83;\xA1;\xE1;\x83;\xA0;\xE1;\x83;\xA3;\xE1;\x83;\x9A;\xE1;\x83;\x98;: /taxi off \xE1;\x83;\x93;\xE1;\x83;\x94;\xE1;\x83;\x9E;\xE1;\x83;\x9D;\xE1;\x83;\xA8;\xE1;\x83;\x98;.", Money_Str(60), Money_Str(300));
+	SendClientMessage(playerid, 0x66DD66FF, "\xE1;\x83;\xA1;\xE1;\x83;\x90;\xE1;\x83;\x9B;\xE1;\x83;\xA1;\xE1;\x83;\x90;\xE1;\x83;\xAE;\xE1;\x83;\xA3;\xE1;\x83;\xA0;\xE1;\x83;\xA8;\xE1;\x83;\x98; \xE1;\x83;\xAE;\xE1;\x83;\x90;\xE1;\x83;\xA0; (\xE1;\x83;\xA5;\xE1;\x83;\x98;\xE1;\x83;\xA0;\xE1;\x83;\x90; %s/\xE1;\x83;\xA1;\xE1;\x83;\x97;, \xE1;\x83;\x92;\xE1;\x83;\x98;\xE1;\x83;\xA0;\xE1;\x83;\x90;\xE1;\x83;\x9D; %s). \xE1;\x83;\x92;\xE1;\x83;\x90;\xE1;\x83;\x9B;\xE1;\x83;\x9D;\xE1;\x83;\xAB;\xE1;\x83;\x90;\xE1;\x83;\xAE;\xE1;\x83;\x94;\xE1;\x83;\x91;\xE1;\x83;\x94;\xE1;\x83;\x91;\xE1;\x83;\x98; \xE1;\x83;\x97;\xE1;\x83;\x90;\xE1;\x83;\x95;\xE1;\x83;\x90;\xE1;\x83;\x93; \xE1;\x83;\x9B;\xE1;\x83;\x9D;\xE1;\x83;\x95;\xE1;\x83;\x90;: /accettacorsa. \xE1;\x83;\xAA;\xE1;\x83;\x95;\xE1;\x83;\x9A;\xE1;\x83;\x98;\xE1;\x83;\xA1; \xE1;\x83;\x93;\xE1;\x83;\x90;\xE1;\x83;\xA1;\xE1;\x83;\x90;\xE1;\x83;\xA1;\xE1;\x83;\xA0;\xE1;\x83;\xA3;\xE1;\x83;\x9A;\xE1;\x83;\x98;: /taxi off \xE1;\x83;\x93;\xE1;\x83;\x94;\xE1;\x83;\x9E;\xE1;\x83;\x9D;\xE1;\x83;\xA8;\xE1;\x83;\x98;.", Money_Str(ECON_TAXI_RENT_HOUR), Money_Str(ECON_TAXI_DEPOSIT));
 	return 1;
 }
 
@@ -36383,7 +36507,7 @@ Hub_ShowServices(playerid)
 	Util_Send(playerid, 0x99CCFFFF, "Idlewood-\xE1;\x83;\x98;\xE1;\x83;\xA1; \xE1;\x83;\xA3;\xE1;\x83;\x91;\xE1;\x83;\x9C;\xE1;\x83;\x98;\xE1;\x83;\xA1; \xE1;\x83;\xA1;\xE1;\x83;\x90;\xE1;\x83;\xAE;\xE1;\x83;\x9A;\xE1;\x83;\x98; - \xE1;\x83;\xA0;\xE1;\x83;\x90;\xE1;\x83;\xA1; \xE1;\x83;\x98;\xE1;\x83;\x9E;\xE1;\x83;\x9D;\xE1;\x83;\x95;\xE1;\x83;\x98; \xE1;\x83;\x90;\xE1;\x83;\xA5; (\xE1;\x83;\x93;\xE1;\x83;\x90; Ganton-\xE1;\x83;\x98;\xE1;\x83;\xA1;\xE1;\x83;\x90; \xE1;\x83;\x93;\xE1;\x83;\x90; Jefferson-\xE1;\x83;\x98;\xE1;\x83;\xA1; \xE1;\x83;\x93;\xE1;\x83;\x90;\xE1;\x83;\xA4;\xE1;\x83;\x94;\xE1;\x83;\x91;\xE1;\x83;\x97;\xE1;\x83;\x90;\xE1;\x83;\x9C;):");
 	Util_Send(playerid, -1, " /contratti - \xE1;\x83;\x93;\xE1;\x83;\x90;\xE1;\x83;\xA4;\xE1;\x83;\x90;: \xE1;\x83;\x9C;\xE1;\x83;\x90;\xE1;\x83;\xAE;\xE1;\x83;\x95;\xE1;\x83;\x90; \xE1;\x83;\xA7;\xE1;\x83;\x95;\xE1;\x83;\x94;\xE1;\x83;\x9A;\xE1;\x83;\x92;\xE1;\x83;\x90;\xE1;\x83;\x9C; \xE1;\x83;\xA8;\xE1;\x83;\x94;\xE1;\x83;\x98;\xE1;\x83;\xAB;\xE1;\x83;\x9A;\xE1;\x83;\x94;\xE1;\x83;\x91;\xE1;\x83;\x90;, \xE1;\x83;\x9B;\xE1;\x83;\x98;\xE1;\x83;\xA6;\xE1;\x83;\x94;\xE1;\x83;\x91;\xE1;\x83;\x90; \xE1;\x83;\x90;\xE1;\x83;\xA5; \xE1;\x83;\x90;\xE1;\x83;\x9C; \xE1;\x83;\xA3;\xE1;\x83;\x91;\xE1;\x83;\x9C;\xE1;\x83;\x98;\xE1;\x83;\xA1; \xE1;\x83;\x93;\xE1;\x83;\x90;\xE1;\x83;\xA4;\xE1;\x83;\x90;\xE1;\x83;\xA1;\xE1;\x83;\x97;\xE1;\x83;\x90;\xE1;\x83;\x9C;");
 	Util_Send(playerid, -1, " /quartiere [\xE1;\x83;\xA1;\xE1;\x83;\x90;\xE1;\x83;\xAE;\xE1;\x83;\x94;\xE1;\x83;\x9A;\xE1;\x83;\x98;] - \xE1;\x83;\xA0;\xE1;\x83;\x9D;\xE1;\x83;\x92;\xE1;\x83;\x9D;\xE1;\x83;\xA0;\xE1;\x83;\x90;\xE1;\x83;\x90; \xE1;\x83;\xA3;\xE1;\x83;\x91;\xE1;\x83;\x90;\xE1;\x83;\x9C;\xE1;\x83;\x98; \xE1;\x83;\x93;\xE1;\x83;\x90; \xE1;\x83;\xA0;\xE1;\x83;\x90;\xE1;\x83;\xA1; \xE1;\x83;\x90;\xE1;\x83;\x9B;\xE1;\x83;\x91;\xE1;\x83;\x9D;\xE1;\x83;\x91;\xE1;\x83;\x94;\xE1;\x83;\x9C; \xE1;\x83;\xA5;\xE1;\x83;\xA3;\xE1;\x83;\xA9;\xE1;\x83;\x90;\xE1;\x83;\xA8;\xE1;\x83;\x98;");
-	format(msg, 768, " /contribuisci [\xE1;\x83;\x97;\xE1;\x83;\x90;\xE1;\x83;\x9C;\xE1;\x83;\xAE;\xE1;\x83;\x90;] [\xE1;\x83;\xA3;\xE1;\x83;\x91;\xE1;\x83;\x90;\xE1;\x83;\x9C;\xE1;\x83;\x98;] - \xE1;\x83;\xA1;\xE1;\x83;\x90;\xE1;\x83;\x96;\xE1;\x83;\x9D;\xE1;\x83;\x92;\xE1;\x83;\x90;\xE1;\x83;\x93;\xE1;\x83;\x9D;\xE1;\x83;\x94;\xE1;\x83;\x91;\xE1;\x83;\x98;\xE1;\x83;\xA1; \xE1;\x83;\x9E;\xE1;\x83;\xA0;\xE1;\x83;\x9D;\xE1;\x83;\x94;\xE1;\x83;\xA5;\xE1;\x83;\xA2;\xE1;\x83;\x98;: %s-\xE1;\x83;\x93;\xE1;\x83;\x90;\xE1;\x83;\x9C; %s-\xE1;\x83;\x9B;\xE1;\x83;\x93;\xE1;\x83;\x94;, \xE1;\x83;\x93;\xE1;\x83;\xA6;\xE1;\x83;\x94;\xE1;\x83;\xA8;\xE1;\x83;\x98; \xE1;\x83;\x9B;\xE1;\x83;\x90;\xE1;\x83;\xA5;\xE1;\x83;\xA1;. %s, \xE1;\x83;\x90;\xE1;\x83;\x9C;\xE1;\x83;\x92;\xE1;\x83;\x90;\xE1;\x83;\xA0;\xE1;\x83;\x98;\xE1;\x83;\xA8;\xE1;\x83;\x98;\xE1;\x83;\x93;\xE1;\x83;\x90;\xE1;\x83;\x9C;", Money_Str(50), Money_Str(500), Money_Str(1000));
+	format(msg, 768, " /contribuisci [\xE1;\x83;\x97;\xE1;\x83;\x90;\xE1;\x83;\x9C;\xE1;\x83;\xAE;\xE1;\x83;\x90;] [\xE1;\x83;\xA3;\xE1;\x83;\x91;\xE1;\x83;\x90;\xE1;\x83;\x9C;\xE1;\x83;\x98;] - \xE1;\x83;\xA1;\xE1;\x83;\x90;\xE1;\x83;\x96;\xE1;\x83;\x9D;\xE1;\x83;\x92;\xE1;\x83;\x90;\xE1;\x83;\x93;\xE1;\x83;\x9D;\xE1;\x83;\x94;\xE1;\x83;\x91;\xE1;\x83;\x98;\xE1;\x83;\xA1; \xE1;\x83;\x9E;\xE1;\x83;\xA0;\xE1;\x83;\x9D;\xE1;\x83;\x94;\xE1;\x83;\xA5;\xE1;\x83;\xA2;\xE1;\x83;\x98;: %s-\xE1;\x83;\x93;\xE1;\x83;\x90;\xE1;\x83;\x9C; %s-\xE1;\x83;\x9B;\xE1;\x83;\x93;\xE1;\x83;\x94;, \xE1;\x83;\x93;\xE1;\x83;\xA6;\xE1;\x83;\x94;\xE1;\x83;\xA8;\xE1;\x83;\x98; \xE1;\x83;\x9B;\xE1;\x83;\x90;\xE1;\x83;\xA5;\xE1;\x83;\xA1;. %s, \xE1;\x83;\x90;\xE1;\x83;\x9C;\xE1;\x83;\x92;\xE1;\x83;\x90;\xE1;\x83;\xA0;\xE1;\x83;\x98;\xE1;\x83;\xA8;\xE1;\x83;\x98;\xE1;\x83;\x93;\xE1;\x83;\x90;\xE1;\x83;\x9C;", Money_Str(ECON_PRJ_DON_MIN), Money_Str(ECON_PRJ_DON_MAX), Money_Str(ECON_PRJ_DON_DAY));
 	Util_Send(playerid, -1, msg);
 	Util_Send(playerid, -1, " /documento richiedi - \xE1;\x83;\x93;\xE1;\x83;\x9D;\xE1;\x83;\x99;\xE1;\x83;\xA3;\xE1;\x83;\x9B;\xE1;\x83;\x94;\xE1;\x83;\x9C;\xE1;\x83;\xA2;\xE1;\x83;\x94;\xE1;\x83;\x91;\xE1;\x83;\x98;\xE1;\x83;\xA1; \xE1;\x83;\xA1;\xE1;\x83;\x90;\xE1;\x83;\xA0;\xE1;\x83;\x99;\xE1;\x83;\x9B;\xE1;\x83;\x94;\xE1;\x83;\x9A;\xE1;\x83;\x98;");
 	Util_Send(playerid, -1, " /aiuto lavoro - \xE1;\x83;\x92;\xE1;\x83;\x96;\xE1;\x83;\x90; Pershing Square-\xE1;\x83;\x98;\xE1;\x83;\xA1; Job Center-\xE1;\x83;\x9B;\xE1;\x83;\x93;\xE1;\x83;\x94;  |  /aiuto noleggio - \xE1;\x83;\xA2;\xE1;\x83;\xA0;\xE1;\x83;\x90;\xE1;\x83;\x9C;\xE1;\x83;\xA1;\xE1;\x83;\x9E;\xE1;\x83;\x9D;\xE1;\x83;\xA0;\xE1;\x83;\xA2;\xE1;\x83;\x98;\xE1;\x83;\xA1; \xE1;\x83;\xA5;\xE1;\x83;\x98;\xE1;\x83;\xA0;\xE1;\x83;\x90;\xE1;\x83;\x9D;\xE1;\x83;\x91;\xE1;\x83;\x90;");
@@ -36517,7 +36641,7 @@ Hub_DayLeft(playerid)
 		g_HubDonDay[playerid] = day;
 		g_HubDonToday[playerid] = 0;
 	}
-	new left = 1000 - g_HubDonToday[playerid];
+	new left = ECON_PRJ_DON_DAY - g_HubDonToday[playerid];
 	return left > 0 ? left : 0;
 }
 
@@ -36550,7 +36674,7 @@ Hub_ProjectBlock(playerid, districtId)
 	{
 		return 1;
 	}
-	if (Hub_DayLeft(playerid) < 50)
+	if (Hub_DayLeft(playerid) < ECON_PRJ_DON_MIN)
 	{
 		return 2;
 	}
@@ -36595,11 +36719,11 @@ Hub_CmdContribuisci(playerid, const params[])
 	Util_NextToken(params, pos, tok, 72);
 	if (tok[0] != 0)
 	{
-		if (Util_ParseInt(tok, amount))
+		if (Money_Parse(tok, amount))
 		{
 			if (amount <= 0)
 			{
-				Util_Send(playerid, -10270721, "\xE1;\x83;\x90;\xE1;\x83;\xA0;\xE1;\x83;\x90;\xE1;\x83;\xA1;\xE1;\x83;\xAC;\xE1;\x83;\x9D;\xE1;\x83;\xA0;\xE1;\x83;\x98; \xE1;\x83;\x97;\xE1;\x83;\x90;\xE1;\x83;\x9C;\xE1;\x83;\xAE;\xE1;\x83;\x90;: \xE1;\x83;\x93;\xE1;\x83;\x90;\xE1;\x83;\xAC;\xE1;\x83;\x94;\xE1;\x83;\xA0;\xE1;\x83;\x94; \xE1;\x83;\x93;\xE1;\x83;\x90;\xE1;\x83;\x93;\xE1;\x83;\x94;\xE1;\x83;\x91;\xE1;\x83;\x98;\xE1;\x83;\x97;\xE1;\x83;\x98; \xE1;\x83;\x9B;\xE1;\x83;\x97;\xE1;\x83;\x94;\xE1;\x83;\x9A;\xE1;\x83;\x98; \xE1;\x83;\xA0;\xE1;\x83;\x98;\xE1;\x83;\xAA;\xE1;\x83;\xAE;\xE1;\x83;\x95;\xE1;\x83;\x98; (\xE1;\x83;\x9B;\xE1;\x83;\x90;\xE1;\x83;\x92;. /contribuisci 100).");
+				Util_Send(playerid, -10270721, "\xE1;\x83;\x90;\xE1;\x83;\xA0;\xE1;\x83;\x90;\xE1;\x83;\xA1;\xE1;\x83;\xAC;\xE1;\x83;\x9D;\xE1;\x83;\xA0;\xE1;\x83;\x98; \xE1;\x83;\x97;\xE1;\x83;\x90;\xE1;\x83;\x9C;\xE1;\x83;\xAE;\xE1;\x83;\x90;: \xE1;\x83;\xA9;\xE1;\x83;\x90;\xE1;\x83;\xAC;\xE1;\x83;\x94;\xE1;\x83;\xA0;\xE1;\x83;\x94; \xE1;\x83;\x9A;\xE1;\x83;\x90;\xE1;\x83;\xA0;\xE1;\x83;\x94;\xE1;\x83;\x91;\xE1;\x83;\xA8;\xE1;\x83;\x98; (\xE1;\x83;\x9B;\xE1;\x83;\x90;\xE1;\x83;\x92;. /contribuisci 20 \xE1;\x83;\x90;\xE1;\x83;\x9C; 12,50).");
 				return 1;
 			}
 			Util_NextToken(params, pos, tok, 72);
@@ -36685,7 +36809,7 @@ public UI_OnProjectContribute(playerid, projectId, amount)
 	}
 	if (!LD_DonationValid(amount, g_HubDonToday[playerid]))
 	{
-		format(msg, 768, "\xE1;\x83;\x90;\xE1;\x83;\xA0;\xE1;\x83;\x90;\xE1;\x83;\xA1;\xE1;\x83;\xAC;\xE1;\x83;\x9D;\xE1;\x83;\xA0;\xE1;\x83;\x98; \xE1;\x83;\x97;\xE1;\x83;\x90;\xE1;\x83;\x9C;\xE1;\x83;\xAE;\xE1;\x83;\x90;: %s-\xE1;\x83;\x93;\xE1;\x83;\x90;\xE1;\x83;\x9C; %s-\xE1;\x83;\x9B;\xE1;\x83;\x93;\xE1;\x83;\x94;, \xE1;\x83;\x93;\xE1;\x83;\xA6;\xE1;\x83;\x94;\xE1;\x83;\xA8;\xE1;\x83;\x98; \xE1;\x83;\x9B;\xE1;\x83;\x90;\xE1;\x83;\xA5;\xE1;\x83;\xA1;\xE1;\x83;\x98;\xE1;\x83;\x9B;\xE1;\x83;\xA3;\xE1;\x83;\x9B; %s.", Money_Str(50), Money_Str(500), Money_Str(1000));
+		format(msg, 768, "\xE1;\x83;\x90;\xE1;\x83;\xA0;\xE1;\x83;\x90;\xE1;\x83;\xA1;\xE1;\x83;\xAC;\xE1;\x83;\x9D;\xE1;\x83;\xA0;\xE1;\x83;\x98; \xE1;\x83;\x97;\xE1;\x83;\x90;\xE1;\x83;\x9C;\xE1;\x83;\xAE;\xE1;\x83;\x90;: %s-\xE1;\x83;\x93;\xE1;\x83;\x90;\xE1;\x83;\x9C; %s-\xE1;\x83;\x9B;\xE1;\x83;\x93;\xE1;\x83;\x94;, \xE1;\x83;\x93;\xE1;\x83;\xA6;\xE1;\x83;\x94;\xE1;\x83;\xA8;\xE1;\x83;\x98; \xE1;\x83;\x9B;\xE1;\x83;\x90;\xE1;\x83;\xA5;\xE1;\x83;\xA1;\xE1;\x83;\x98;\xE1;\x83;\x9B;\xE1;\x83;\xA3;\xE1;\x83;\x9B; %s.", Money_Str(ECON_PRJ_DON_MIN), Money_Str(ECON_PRJ_DON_MAX), Money_Str(ECON_PRJ_DON_DAY));
 		UI_LivingReject(playerid, msg);
 		return 1;
 	}
@@ -36772,12 +36896,12 @@ public Living_OnDBProject(playerid, result, projectId, donated, balance, points,
 		}
 		case 7:
 		{
-			format(msg, 768, "\xE1;\x83;\xAF;\xE1;\x83;\x94;\xE1;\x83;\xA0; \xE1;\x83;\x90;\xE1;\x83;\xA0; \xE1;\x83;\xA8;\xE1;\x83;\x94;\xE1;\x83;\x98;\xE1;\x83;\xAB;\xE1;\x83;\x9A;\xE1;\x83;\x94;\xE1;\x83;\x91;\xE1;\x83;\x90;: \xE1;\x83;\xA1;\xE1;\x83;\x90;\xE1;\x83;\xAD;\xE1;\x83;\x98;\xE1;\x83;\xA0;\xE1;\x83;\x9D;\xE1;\x83;\x90; \xE1;\x83;\xA5;\xE1;\x83;\x90;\xE1;\x83;\x9A;\xE1;\x83;\x90;\xE1;\x83;\xA5;\xE1;\x83;\xA8;\xE1;\x83;\x98; \xE1;\x83;\x9B;\xE1;\x83;\x98;\xE1;\x83;\x9C;\xE1;\x83;\x98;\xE1;\x83;\x9B;\xE1;\x83;\xA3;\xE1;\x83;\x9B; %d \xE1;\x83;\xAC;\xE1;\x83;\xA3;\xE1;\x83;\x97;\xE1;\x83;\x98; \xE1;\x83;\x93;\xE1;\x83;\x90; \xE1;\x83;\x93;\xE1;\x83;\xA6;\xE1;\x83;\x94;\xE1;\x83;\xA8;\xE1;\x83;\x98; \xE1;\x83;\x9B;\xE1;\x83;\x90;\xE1;\x83;\xA5;\xE1;\x83;\xA1;\xE1;\x83;\x98;\xE1;\x83;\x9B;\xE1;\x83;\xA3;\xE1;\x83;\x9B; %s \xE1;\x83;\xA8;\xE1;\x83;\x94;\xE1;\x83;\x9B;\xE1;\x83;\x9D;\xE1;\x83;\xAC;\xE1;\x83;\x98;\xE1;\x83;\xA0;\xE1;\x83;\xA3;\xE1;\x83;\x9A;\xE1;\x83;\x9D;\xE1;\x83;\x91;\xE1;\x83;\x90;.", 60, Money_Str(1000));
+			format(msg, 768, "\xE1;\x83;\xAF;\xE1;\x83;\x94;\xE1;\x83;\xA0; \xE1;\x83;\x90;\xE1;\x83;\xA0; \xE1;\x83;\xA8;\xE1;\x83;\x94;\xE1;\x83;\x98;\xE1;\x83;\xAB;\xE1;\x83;\x9A;\xE1;\x83;\x94;\xE1;\x83;\x91;\xE1;\x83;\x90;: \xE1;\x83;\xA1;\xE1;\x83;\x90;\xE1;\x83;\xAD;\xE1;\x83;\x98;\xE1;\x83;\xA0;\xE1;\x83;\x9D;\xE1;\x83;\x90; \xE1;\x83;\xA5;\xE1;\x83;\x90;\xE1;\x83;\x9A;\xE1;\x83;\x90;\xE1;\x83;\xA5;\xE1;\x83;\xA8;\xE1;\x83;\x98; \xE1;\x83;\x9B;\xE1;\x83;\x98;\xE1;\x83;\x9C;\xE1;\x83;\x98;\xE1;\x83;\x9B;\xE1;\x83;\xA3;\xE1;\x83;\x9B; %d \xE1;\x83;\xAC;\xE1;\x83;\xA3;\xE1;\x83;\x97;\xE1;\x83;\x98; \xE1;\x83;\x93;\xE1;\x83;\x90; \xE1;\x83;\x93;\xE1;\x83;\xA6;\xE1;\x83;\x94;\xE1;\x83;\xA8;\xE1;\x83;\x98; \xE1;\x83;\x9B;\xE1;\x83;\x90;\xE1;\x83;\xA5;\xE1;\x83;\xA1;\xE1;\x83;\x98;\xE1;\x83;\x9B;\xE1;\x83;\xA3;\xE1;\x83;\x9B; %s \xE1;\x83;\xA8;\xE1;\x83;\x94;\xE1;\x83;\x9B;\xE1;\x83;\x9D;\xE1;\x83;\xAC;\xE1;\x83;\x98;\xE1;\x83;\xA0;\xE1;\x83;\xA3;\xE1;\x83;\x9A;\xE1;\x83;\x9D;\xE1;\x83;\x91;\xE1;\x83;\x90;.", 60, Money_Str(ECON_PRJ_DON_DAY));
 			UI_LivingReject(playerid, msg);
 		}
 		case 9:
 		{
-			format(msg, 768, "\xE1;\x83;\x90;\xE1;\x83;\xA0;\xE1;\x83;\x90;\xE1;\x83;\xA1;\xE1;\x83;\xAC;\xE1;\x83;\x9D;\xE1;\x83;\xA0;\xE1;\x83;\x98; \xE1;\x83;\x97;\xE1;\x83;\x90;\xE1;\x83;\x9C;\xE1;\x83;\xAE;\xE1;\x83;\x90;: %s-\xE1;\x83;\x93;\xE1;\x83;\x90;\xE1;\x83;\x9C; %s-\xE1;\x83;\x9B;\xE1;\x83;\x93;\xE1;\x83;\x94;.", Money_Str(50), Money_Str(500));
+			format(msg, 768, "\xE1;\x83;\x90;\xE1;\x83;\xA0;\xE1;\x83;\x90;\xE1;\x83;\xA1;\xE1;\x83;\xAC;\xE1;\x83;\x9D;\xE1;\x83;\xA0;\xE1;\x83;\x98; \xE1;\x83;\x97;\xE1;\x83;\x90;\xE1;\x83;\x9C;\xE1;\x83;\xAE;\xE1;\x83;\x90;: %s-\xE1;\x83;\x93;\xE1;\x83;\x90;\xE1;\x83;\x9C; %s-\xE1;\x83;\x9B;\xE1;\x83;\x93;\xE1;\x83;\x94;.", Money_Str(ECON_PRJ_DON_MIN), Money_Str(ECON_PRJ_DON_MAX));
 			UI_LivingReject(playerid, msg);
 		}
 		case 10:
@@ -68049,7 +68173,8 @@ new const s_AzBizName[AZ_BIZ][96] = {
 };
 stock const s_AzBizType[AZ_BIZ] = {5, 3, 3, 3, 1, 1, 1, 1, 1, 6, 6, 9, 7, 7, 7, 2, 2, 2, 2, 2, 4, 4, 4, 1, 1, 1, 1, 2, 2, 3, 4, 8, 8, 5, 5, 1, 4, 3, 5, 6, 3, 2, 2, 10, 4, 9};
 new const s_AzBizInt[AZ_BIZ] = {1, 3, 17, 11, 16, 10, 16, 10, 16, 3, 3, 0, 3, 3, 3, 9, 9, 9, 9, 9, 0, 0, 0, 10, 10, 10, 10, 9, 9, 11, 0, 3, 3, 1, 1, 16, 0, 3, 1, 3, 3, 9, 9, 0, 0, 3};
-stock const s_AzBizPrice[AZ_BIZ] = {4250000, 3750000, 3750000, 3750000, 2000000, 2000000, 2000000, 2000000, 2000000, 1750000, 1750000, 5500000, 3000000, 3000000, 3000000, 3750000, 3750000, 3750000, 3750000, 3750000, 5250000, 5250000, 5250000, 2000000, 2000000, 2500000, 2000000, 3750000, 3750000, 3750000, 5250000, 18000000, 18000000, 4250000, 12000000, 9000000, 9000000, 6000000, 4250000, 1750000, 6000000, 3750000, 3750000, 19000000, 5250000, 7250229};
+// prezzo di gioco in tetri per tipo (per una futura proprieta' dei business; quello di origine resta in world/arizona/businesses.json)
+stock const s_AzBizPrice[AZ_BIZ] = {35000000, 22000000, 22000000, 22000000, 18000000, 18000000, 18000000, 18000000, 18000000, 20000000, 20000000, 40000000, 45000000, 45000000, 45000000, 15000000, 15000000, 15000000, 15000000, 15000000, 12000000, 12000000, 12000000, 18000000, 18000000, 18000000, 18000000, 15000000, 15000000, 22000000, 12000000, 16000000, 16000000, 35000000, 35000000, 18000000, 12000000, 22000000, 35000000, 20000000, 22000000, 15000000, 15000000, 90000000, 12000000, 40000000};
 new const Float:s_AzBizPos[AZ_BIZ][6] = {
 	{1368.77, -1279.82, 13.5466, 285.4, -41.228, 1001.52},
 	{2421.52, -1219.25, 25.5615, -2636.52, 1402.46, 906.461},
@@ -70374,6 +70499,88 @@ public Cef_OnCharBack(playerid, const arguments[])
 	return 1;
 }
 
+// ===== modules/economy/econ_admin.inc =====
+// =============================================================================
+// economy/econ_admin.inc - /economia (admin livello 2+): massa monetaria e flussi delle ultime 24 ore.
+// Sola lettura: legge characters (contanti + banca) e bank_ledger (entrate/uscite per tipo). I movimenti solo in
+// contanti (negozi, /pay, carburante) non passano dal registro bancario: il pannello lo dice.
+// I valori economici si cambiano in economy/econ_config.inc (e /ldset per la vita in citta').
+// =============================================================================
+
+#define ECON_DLG_STATS (9910)
+
+forward Econ_OnSupply(playerid, const name[]);
+forward Econ_OnFlows(playerid, const name[], const supply[]);
+
+public Cmd_economia(playerid, const params[])
+{
+	#pragma unused params
+	if (Util_GetAdmin(playerid) < 2)
+	{
+		return 0;
+	}
+	if (!DB_IsReady())
+	{
+		Util_Send(playerid, -10270721, "\xE1;\x83;\x91;\xE1;\x83;\x90;\xE1;\x83;\x96;\xE1;\x83;\x90; \xE1;\x83;\x9B;\xE1;\x83;\x98;\xE1;\x83;\xA3;\xE1;\x83;\xAC;\xE1;\x83;\x95;\xE1;\x83;\x93;\xE1;\x83;\x9D;\xE1;\x83;\x9B;\xE1;\x83;\x94;\xE1;\x83;\x9A;\xE1;\x83;\x98;\xE1;\x83;\x90;.");
+		return 1;
+	}
+	new name[75];
+	GetPlayerName(playerid, name, 75);
+	// importi in tetri -> lari formattati dal database (BIGINT: nessun overflow di Pawn)
+	mysql_tquery(g_DB, "SELECT COUNT(*) AS n, FORMAT(COALESCE(SUM(money), 0) / 100, 2, 'de_DE') AS cash, FORMAT(COALESCE(SUM(bank), 0) / 100, 2, 'de_DE') AS bank, FORMAT(COALESCE(SUM(money + bank), 0) / 100, 2, 'de_DE') AS total, FORMAT(COALESCE(AVG(money + bank), 0) / 100, 2, 'de_DE') AS avg FROM characters", "Econ_OnSupply", "s", name);
+	return 1;
+}
+
+public Econ_OnSupply(playerid, const name[])
+{
+	if (!DB_PlayerMatches(playerid, name))
+	{
+		return 1;
+	}
+	new n = 0, cash[32], bank[32], total[32], avg[32], supply[512];
+	if (cache_num_rows() > 0)
+	{
+		cache_get_value_name_int(0, "n", n);
+		cache_get_value_name(0, "cash", cash, 32);
+		cache_get_value_name(0, "bank", bank, 32);
+		cache_get_value_name(0, "total", total, 32);
+		cache_get_value_name(0, "avg", avg, 32);
+	}
+	format(supply, sizeof supply, "{FFD24D}\xE1;\x83;\xA4;\xE1;\x83;\xA3;\xE1;\x83;\x9A;\xE1;\x83;\x98;\xE1;\x83;\xA1; \xE1;\x83;\x9B;\xE1;\x83;\x90;\xE1;\x83;\xA1;\xE1;\x83;\x90;{FFFFFF}\n\xE1;\x83;\x9E;\xE1;\x83;\x94;\xE1;\x83;\xA0;\xE1;\x83;\xA1;\xE1;\x83;\x9D;\xE1;\x83;\x9C;\xE1;\x83;\x90;\xE1;\x83;\x9F;\xE1;\x83;\x94;\xE1;\x83;\x91;\xE1;\x83;\x98;: %d\n\xE1;\x83;\x9C;\xE1;\x83;\x90;\xE1;\x83;\xA6;\xE1;\x83;\x93;\xE1;\x83;\x98;: \xE2;\x82;\xBE;%s\n\xE1;\x83;\x91;\xE1;\x83;\x90;\xE1;\x83;\x9C;\xE1;\x83;\x99;\xE1;\x83;\x98;: \xE2;\x82;\xBE;%s\n\xE1;\x83;\xA1;\xE1;\x83;\xA3;\xE1;\x83;\x9A;: \xE2;\x82;\xBE;%s\n\xE1;\x83;\xA1;\xE1;\x83;\x90;\xE1;\x83;\xA8;\xE1;\x83;\xA3;\xE1;\x83;\x90;\xE1;\x83;\x9A;\xE1;\x83;\x9D;\xE1;\x83;\x93;: \xE2;\x82;\xBE;%s\n\n", n, cash, bank, total, avg);
+	new q[512];
+	mysql_format(g_DB, q, sizeof q, "SELECT kind, FORMAT(SUM(GREATEST(delta, 0)) / 100, 2, 'de_DE') AS inn, FORMAT(SUM(GREATEST(-delta, 0)) / 100, 2, 'de_DE') AS outt, COUNT(*) AS c FROM bank_ledger WHERE ts > NOW() - INTERVAL 24 HOUR GROUP BY kind ORDER BY SUM(ABS(delta)) DESC LIMIT 12");
+	mysql_tquery(g_DB, q, "Econ_OnFlows", "ss", name, supply);
+	return 1;
+}
+
+public Econ_OnFlows(playerid, const name[], const supply[])
+{
+	if (!DB_PlayerMatches(playerid, name))
+	{
+		return 1;
+	}
+	new body[2048], line[160], kind[16], inn[32], outt[32], c = 0;
+	strcat(body, supply, sizeof body);
+	strcat(body, "{FFD24D}\xE1;\x83;\x91;\xE1;\x83;\x90;\xE1;\x83;\x9C;\xE1;\x83;\x99;\xE1;\x83;\x98;, \xE1;\x83;\x91;\xE1;\x83;\x9D;\xE1;\x83;\x9A;\xE1;\x83;\x9D; 24 \xE1;\x83;\xA1;\xE1;\x83;\x90;\xE1;\x83;\x90;\xE1;\x83;\x97;\xE1;\x83;\x98; (\xE1;\x83;\xA2;\xE1;\x83;\x98;\xE1;\x83;\x9E;\xE1;\x83;\x98;: \xE1;\x83;\xA8;\xE1;\x83;\x94;\xE1;\x83;\x9B;\xE1;\x83;\x9D;\xE1;\x83;\xA1;\xE1;\x83;\x90;\xE1;\x83;\x95;\xE1;\x83;\x90;\xE1;\x83;\x9A;\xE1;\x83;\x98; / \xE1;\x83;\x92;\xE1;\x83;\x90;\xE1;\x83;\xA1;\xE1;\x83;\x90;\xE1;\x83;\x95;\xE1;\x83;\x90;\xE1;\x83;\x9A;\xE1;\x83;\x98;){FFFFFF}\n", sizeof body);
+	new rows = cache_num_rows();
+	for (new i = 0; i < rows; i++)
+	{
+		cache_get_value_name(i, "kind", kind, sizeof kind);
+		cache_get_value_name(i, "inn", inn, sizeof inn);
+		cache_get_value_name(i, "outt", outt, sizeof outt);
+		cache_get_value_name_int(i, "c", c);
+		format(line, sizeof line, "%s: {66DD66}+\xE2;\x82;\xBE;%s{FFFFFF} / {FF6666}-\xE2;\x82;\xBE;%s{FFFFFF} (%d)\n", kind, inn, outt, c);
+		strcat(body, line, sizeof body);
+	}
+	if (rows == 0)
+	{
+		strcat(body, "{AAAAAA}\xE1;\x83;\x9D;\xE1;\x83;\x9E;\xE1;\x83;\x94;\xE1;\x83;\xA0;\xE1;\x83;\x90;\xE1;\x83;\xAA;\xE1;\x83;\x98;\xE1;\x83;\x94;\xE1;\x83;\x91;\xE1;\x83;\x98; \xE1;\x83;\x90;\xE1;\x83;\xA0; \xE1;\x83;\x90;\xE1;\x83;\xA0;\xE1;\x83;\x98;\xE1;\x83;\xA1;.\n", sizeof body);
+	}
+	strcat(body, "\n{AAAAAA}\xE1;\x83;\x9B;\xE1;\x83;\xAE;\xE1;\x83;\x9D;\xE1;\x83;\x9A;\xE1;\x83;\x9D;\xE1;\x83;\x93; \xE1;\x83;\x9C;\xE1;\x83;\x90;\xE1;\x83;\xA6;\xE1;\x83;\x93;\xE1;\x83;\x98; \xE1;\x83;\xA4;\xE1;\x83;\xA3;\xE1;\x83;\x9A;\xE1;\x83;\x98;\xE1;\x83;\x97; (\xE1;\x83;\x9B;\xE1;\x83;\x90;\xE1;\x83;\xA6;\xE1;\x83;\x90;\xE1;\x83;\x96;\xE1;\x83;\x98;\xE1;\x83;\x90;, /pay, \xE1;\x83;\xA1;\xE1;\x83;\x90;\xE1;\x83;\xAC;\xE1;\x83;\x95;\xE1;\x83;\x90;\xE1;\x83;\x95;\xE1;\x83;\x98;) \xE1;\x83;\x90;\xE1;\x83;\xA5; \xE1;\x83;\x90;\xE1;\x83;\xA0; \xE1;\x83;\xA9;\xE1;\x83;\x90;\xE1;\x83;\x9C;\xE1;\x83;\xA1;. \xE1;\x83;\xA4;\xE1;\x83;\x90;\xE1;\x83;\xA1;\xE1;\x83;\x94;\xE1;\x83;\x91;\xE1;\x83;\x98;: economy/econ_config.inc", sizeof body);
+	Lang_ShowPlayerDialog(playerid, ECON_DLG_STATS, DIALOG_STYLE_MSGBOX, "\xE1;\x83;\x94;\xE1;\x83;\x99;\xE1;\x83;\x9D;\xE1;\x83;\x9C;\xE1;\x83;\x9D;\xE1;\x83;\x9B;\xE1;\x83;\x98;\xE1;\x83;\x99;\xE1;\x83;\x90; (GEL)", body, "\xE1;\x83;\x93;\xE1;\x83;\x90;\xE1;\x83;\xAE;\xE1;\x83;\xA3;\xE1;\x83;\xA0;\xE1;\x83;\x95;\xE1;\x83;\x90;", "");
+	return 1;
+}
+
 // ===== modules/commands/admin_commands.inc =====
 
 bool:Admin_ParseTarget(playerid, const token[], &targetid)
@@ -70477,7 +70684,7 @@ public Cmd_setmoney(playerid, const params[])
 	new pos = 0, tid[36], tam[36], targetid = 0, amount = 0;
 	Util_NextToken(params, pos, tid, 36);
 	Util_NextToken(params, pos, tam, 36);
-	if (tid[0] == 0 || tam[0] == 0 || !Util_ParseInt(tam, amount))
+	if (tid[0] == 0 || tam[0] == 0 || !Money_Parse(tam, amount))
 	{
 		Util_Send(playerid, 0x99CCFFFF, "\xE1;\x83;\x92;\xE1;\x83;\x90;\xE1;\x83;\x9B;\xE1;\x83;\x9D;\xE1;\x83;\xA7;\xE1;\x83;\x94;\xE1;\x83;\x9C;\xE1;\x83;\x94;\xE1;\x83;\x91;\xE1;\x83;\x90;: /setmoney id \xE1;\x83;\x97;\xE1;\x83;\x90;\xE1;\x83;\x9C;\xE1;\x83;\xAE;\xE1;\x83;\x90;");
 		return 1;
@@ -70488,7 +70695,7 @@ public Cmd_setmoney(playerid, const params[])
 	}
 	if (!Money_Set(targetid, amount))
 	{
-		SendClientMessage(playerid, -10270721, "\xE1;\x83;\x90;\xE1;\x83;\xA0;\xE1;\x83;\x90;\xE1;\x83;\xA1;\xE1;\x83;\xAC;\xE1;\x83;\x9D;\xE1;\x83;\xA0;\xE1;\x83;\x98; \xE1;\x83;\x97;\xE1;\x83;\x90;\xE1;\x83;\x9C;\xE1;\x83;\xAE;\xE1;\x83;\x90; (0-%d).", 0x3B9ACA00);
+		SendClientMessage(playerid, -10270721, "\xE1;\x83;\x90;\xE1;\x83;\xA0;\xE1;\x83;\x90;\xE1;\x83;\xA1;\xE1;\x83;\xAC;\xE1;\x83;\x9D;\xE1;\x83;\xA0;\xE1;\x83;\x98; \xE1;\x83;\x97;\xE1;\x83;\x90;\xE1;\x83;\x9C;\xE1;\x83;\xAE;\xE1;\x83;\x90; (\xE2;\x82;\xBE;0-%s).", Money_Str(ECON_MONEY_MAX));
 		return 1;
 	}
 	Char_Save(targetid);
@@ -70934,7 +71141,7 @@ public Cmd_givemoney(playerid, const params[])
 	new pos = 0, tid[36], tam[36], targetid = 0, amount = 0;
 	Util_NextToken(params, pos, tid, 36);
 	Util_NextToken(params, pos, tam, 36);
-	if (tid[0] == 0 || tam[0] == 0 || !Util_ParseInt(tam, amount))
+	if (tid[0] == 0 || tam[0] == 0 || !Money_Parse(tam, amount))
 	{
 		Util_Send(playerid, 0x99CCFFFF, "\xE1;\x83;\x92;\xE1;\x83;\x90;\xE1;\x83;\x9B;\xE1;\x83;\x9D;\xE1;\x83;\xA7;\xE1;\x83;\x94;\xE1;\x83;\x9C;\xE1;\x83;\x94;\xE1;\x83;\x91;\xE1;\x83;\x90;: /givemoney id \xE1;\x83;\x97;\xE1;\x83;\x90;\xE1;\x83;\x9C;\xE1;\x83;\xAE;\xE1;\x83;\x90;");
 		return 1;
@@ -70943,9 +71150,9 @@ public Cmd_givemoney(playerid, const params[])
 	{
 		return 1;
 	}
-	if (amount < 1 || amount > 100000)
+	if (amount < 1 || amount > ECON_ADMIN_GIVE_MAX)
 	{
-		SendClientMessage(playerid, -10270721, "\xE1;\x83;\x90;\xE1;\x83;\xA0;\xE1;\x83;\x90;\xE1;\x83;\xA1;\xE1;\x83;\xAC;\xE1;\x83;\x9D;\xE1;\x83;\xA0;\xE1;\x83;\x98; \xE1;\x83;\x97;\xE1;\x83;\x90;\xE1;\x83;\x9C;\xE1;\x83;\xAE;\xE1;\x83;\x90; (1-%d).", 100000);
+		SendClientMessage(playerid, -10270721, "\xE1;\x83;\x90;\xE1;\x83;\xA0;\xE1;\x83;\x90;\xE1;\x83;\xA1;\xE1;\x83;\xAC;\xE1;\x83;\x9D;\xE1;\x83;\xA0;\xE1;\x83;\x98; \xE1;\x83;\x97;\xE1;\x83;\x90;\xE1;\x83;\x9C;\xE1;\x83;\xAE;\xE1;\x83;\x90; (%s-%s).", Money_Str(1), Money_Str(ECON_ADMIN_GIVE_MAX));
 		return 1;
 	}
 	new now = GetTickCount(), elapsed = now - gPlayer[playerid][pLastGiveMoneyTick];
@@ -71031,7 +71238,7 @@ public Cmd_unban(playerid, const params[])
 }
 
 // ===== modules/commands/rp_commands.inc =====
-new g_CmdNames[98][16] = {
+new g_CmdNames[99][16] = {
 	"me",
 	"do",
 	"try",
@@ -71129,7 +71336,8 @@ new g_CmdNames[98][16] = {
 	"ldset",
 	"chatsamp",
 	"chatcef",
-	"gps"
+	"gps",
+	"economia"
 };
 
 Cmd_Dispatch(playerid, const cmdtext[])
@@ -71272,7 +71480,7 @@ public Cmd_pay(playerid, const params[])
 	new pos = 0, tid[36], tam[36], targetid = 0, amount = 0;
 	Util_NextToken(params, pos, tid, 36);
 	Util_NextToken(params, pos, tam, 36);
-	if (tid[0] == 0 || tam[0] == 0 || !Util_ParseInt(tam, amount) || !Util_ParsePlayerId(tid, targetid))
+	if (tid[0] == 0 || tam[0] == 0 || !Money_Parse(tam, amount) || !Util_ParsePlayerId(tid, targetid))
 	{
 		Util_Send(playerid, 0x99CCFFFF, "\xE1;\x83;\x92;\xE1;\x83;\x90;\xE1;\x83;\x9B;\xE1;\x83;\x9D;\xE1;\x83;\xA7;\xE1;\x83;\x94;\xE1;\x83;\x9C;\xE1;\x83;\x94;\xE1;\x83;\x91;\xE1;\x83;\x90;: /pay id \xE1;\x83;\x97;\xE1;\x83;\x90;\xE1;\x83;\x9C;\xE1;\x83;\xAE;\xE1;\x83;\x90;");
 		return 1;
@@ -71282,9 +71490,9 @@ public Cmd_pay(playerid, const params[])
 		SendClientMessage(playerid, -10270721, "/pay-\xE1;\x83;\x98;\xE1;\x83;\xA1; \xE1;\x83;\x92;\xE1;\x83;\x90;\xE1;\x83;\x9B;\xE1;\x83;\x9D;\xE1;\x83;\xA1;\xE1;\x83;\x90;\xE1;\x83;\xA7;\xE1;\x83;\x94;\xE1;\x83;\x9C;\xE1;\x83;\x94;\xE1;\x83;\x91;\xE1;\x83;\x9A;\xE1;\x83;\x90;\xE1;\x83;\x93; \xE1;\x83;\x9B;\xE1;\x83;\x98;\xE1;\x83;\x9C;\xE1;\x83;\x98;\xE1;\x83;\x9B;\xE1;\x83;\xA3;\xE1;\x83;\x9B; %d \xE1;\x83;\x93;\xE1;\x83;\x9D;\xE1;\x83;\x9C;\xE1;\x83;\x94; \xE1;\x83;\x92;\xE1;\x83;\xAD;\xE1;\x83;\x98;\xE1;\x83;\xA0;\xE1;\x83;\x93;\xE1;\x83;\x94;\xE1;\x83;\x91;\xE1;\x83;\x90;.", 2);
 		return 1;
 	}
-	if (amount < 1 || amount > 50000)
+	if (amount < 1 || amount > ECON_PAY_MAX)
 	{
-		SendClientMessage(playerid, -10270721, "\xE1;\x83;\x90;\xE1;\x83;\xA0;\xE1;\x83;\x90;\xE1;\x83;\xA1;\xE1;\x83;\xAC;\xE1;\x83;\x9D;\xE1;\x83;\xA0;\xE1;\x83;\x98; \xE1;\x83;\x97;\xE1;\x83;\x90;\xE1;\x83;\x9C;\xE1;\x83;\xAE;\xE1;\x83;\x90; (%d-%d).", 1, 50000);
+		SendClientMessage(playerid, -10270721, "\xE1;\x83;\x90;\xE1;\x83;\xA0;\xE1;\x83;\x90;\xE1;\x83;\xA1;\xE1;\x83;\xAC;\xE1;\x83;\x9D;\xE1;\x83;\xA0;\xE1;\x83;\x98; \xE1;\x83;\x97;\xE1;\x83;\x90;\xE1;\x83;\x9C;\xE1;\x83;\xAE;\xE1;\x83;\x90; (%s-%s).", Money_Str(1), Money_Str(ECON_PAY_MAX));
 		return 1;
 	}
 	if (targetid == playerid || !Util_IsPlaying(targetid))

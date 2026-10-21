@@ -419,16 +419,16 @@ Bank_Guard(playerid, bool:ui, bool:counterOnly)
 Bank_PushUi(playerid)
 {
 	new bool:counter = gPlayer[playerid][pBankAtCounter] != 0;
-	new wdMax = counter ? 50000 : 5000;
-	new wdDay = counter ? 100000 : 15000;
+	new wdMax = counter ? ECON_DESK_WITHDRAW_MAX : ECON_ATM_WITHDRAW_MAX;
+	new wdDay = counter ? ECON_DESK_WITHDRAW_DAY : ECON_ATM_WITHDRAW_DAY;
 	new wdLeft = -1, sendLeft = -1;
 	if (gPlayer[playerid][pBankLimitsLoaded])
 	{
 		wdLeft = gPlayer[playerid][pBankWithdrawnToday] >= wdDay ? 0 : wdDay - gPlayer[playerid][pBankWithdrawnToday];
-		sendLeft = gPlayer[playerid][pBankXferOutToday] >= 50000 ? 0 : 50000 - gPlayer[playerid][pBankXferOutToday];
+		sendLeft = gPlayer[playerid][pBankXferOutToday] >= ECON_XFER_OUT_DAY ? 0 : ECON_XFER_OUT_DAY - gPlayer[playerid][pBankXferOutToday];
 	}
 	UI_BankSetBalance(playerid, gPlayer[playerid][pMoney], gPlayer[playerid][pBank]);
-	UI_BankSetLimits(playerid, counter ? 0 : 20000, wdMax, wdLeft, 10, 25000, sendLeft);
+	UI_BankSetLimits(playerid, counter ? 0 : ECON_ATM_DEPOSIT_MAX, wdMax, wdLeft, ECON_XFER_MIN, ECON_XFER_MAX, sendLeft);
 }
 
 Bank_RefreshLimits(playerid)
@@ -490,10 +490,10 @@ Bank_Deposit(playerid, amount, bool:ui)
 		Bank_Reply(playerid, ui, "საკმარისი ნაღდი ფული არ გაქვს.");
 		return 0;
 	}
-	if (!Bank_IsCounter(point) && amount > 20000)
+	if (!Bank_IsCounter(point) && amount > ECON_ATM_DEPOSIT_MAX)
 	{
 		new msg[528];
-		format(msg, 528, "ATM-ის ლიმიტი შეტანაზე: %s ერთ ოპერაციაზე. მეტი თანხისთვის სალარო გამოიყენე.", Money_Str(20000));
+		format(msg, 528, "ATM-ის ლიმიტი შეტანაზე: %s ერთ ოპერაციაზე. მეტი თანხისთვის სალარო გამოიყენე.", Money_Str(ECON_ATM_DEPOSIT_MAX));
 		Bank_Reply(playerid, ui, msg);
 		return 0;
 	}
@@ -635,7 +635,7 @@ Bank_Withdraw(playerid, amount, bool:ui)
 		Bank_Reply(playerid, ui, "ანგარიშზე არასაკმარისი თანხაა.");
 		return 0;
 	}
-	new bool:counter = Bank_IsCounter(point), maxOp = counter ? 50000 : 5000;
+	new bool:counter = Bank_IsCounter(point), maxOp = counter ? ECON_DESK_WITHDRAW_MAX : ECON_ATM_WITHDRAW_MAX;
 	if (amount > maxOp)
 	{
 		new msg[528];
@@ -643,7 +643,7 @@ Bank_Withdraw(playerid, amount, bool:ui)
 		Bank_Reply(playerid, ui, msg);
 		return 0;
 	}
-	if (amount > 0x3B9ACA00 - gPlayer[playerid][pMoney])
+	if (amount > ECON_MONEY_MAX - gPlayer[playerid][pMoney])
 	{
 		Bank_Reply(playerid, ui, "ძალიან ბევრი ნაღდი გაქვს: ამ თანხას ვერ გაიტან.");
 		return 0;
@@ -836,9 +836,9 @@ bool:Bank_XferCheck(playerid, target, amount, bool:ui)
 		Bank_Reply(playerid, ui, "არასწორი მიმღები: უნდა იყოს სხვა მოთამაშე, ონლაინ და თამაშში.");
 		return false;
 	}
-	if (amount < 10 || amount > 25000)
+	if (amount < ECON_XFER_MIN || amount > ECON_XFER_MAX)
 	{
-		format(msg, 528, "გადარიცხვის თანხა: %s-დან %s-მდე.", Money_Str(10), Money_Str(25000));
+		format(msg, 528, "გადარიცხვის თანხა: %s-დან %s-მდე.", Money_Str(ECON_XFER_MIN), Money_Str(ECON_XFER_MAX));
 		Bank_Reply(playerid, ui, msg);
 		return false;
 	}
@@ -849,7 +849,7 @@ bool:Bank_XferCheck(playerid, target, amount, bool:ui)
 		Bank_Reply(playerid, ui, msg);
 		return false;
 	}
-	if (amount > 0x3B9ACA00 - gPlayer[target][pBank])
+	if (amount > ECON_MONEY_MAX - gPlayer[target][pBank])
 	{
 		Bank_Reply(playerid, ui, "მიმღები ამ თანხას ვერ მიიღებს (ანგარიში ლიმიტზეა).");
 		return false;
@@ -945,7 +945,7 @@ public Bank_OnDBLimits(playerid, result, withdrawn, xferOut, xferIn, sinceXfer)
 		Bank_Reply(playerid, ui, msg);
 		return 1;
 	}
-	if (xferOut >= 50000 || amount > 50000 - xferOut)
+	if (xferOut >= ECON_XFER_OUT_DAY || amount > ECON_XFER_OUT_DAY - xferOut)
 	{
 		new msg[528], room = xferOut >= 50000 ? 0 : 50000 - xferOut;
 		format(msg, 528, "გამავალი გადარიცხვების დღიური ლიმიტი: კიდევ %s შეგიძლია გაგზავნო მომდევნო %d საათში.", Money_Str(room), 24);
@@ -1193,7 +1193,7 @@ Bank_CmdBonifico(playerid, const params[])
 	Util_NextToken(params, pos, tAmount, 36);
 	if (tTarget[0] == 0 || !Bank_ParseAmount(tAmount, amount))
 	{
-		Util_Send(playerid, 0x99CCFFFF, "გამოყენება: /bonifico id|სახელი თანხა (საკომისიო 2%, საჭიროა ATM ან სალარო)");
+		SendClientMessage(playerid, 0x99CCFFFF, "გამოყენება: /bonifico id|სახელი თანხა (საკომისიო %d%%, საჭიროა ATM ან სალარო)", ECON_XFER_FEE_PCT);
 		return 0;
 	}
 	new target = Bank_FindPlayer(tTarget);

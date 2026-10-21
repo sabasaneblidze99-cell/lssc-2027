@@ -481,8 +481,8 @@ Intro_ApplyStartMoney(playerid, motive)
 	}
 	else
 	{
-		gPlayer[playerid][pMoney] = 2500;
-		gPlayer[playerid][pBank] = 5000;
+		gPlayer[playerid][pMoney] = ECON_START_CASH;
+		gPlayer[playerid][pBank] = ECON_START_TOTAL - ECON_START_CASH;
 	}
 }
 

@@ -24,6 +24,7 @@
 #include "modules/core/player_data.inc"
 #include "modules/core/utils.inc"
 #include "modules/economy/currency.inc"
+#include "modules/economy/econ_config.inc"
 #include "modules/core/logger.inc"
 #include "modules/ui/cef_ui.inc"
 #include "modules/core/validation.inc"
@@ -83,6 +84,7 @@
 #include "modules/ui/cef_views.inc"
 #include "modules/character/spawn_select.inc"
 #include "modules/character/char_select.inc"
+#include "modules/economy/econ_admin.inc"
 #include "modules/commands/admin_commands.inc"
 #include "modules/commands/rp_commands.inc"
 

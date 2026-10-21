@@ -4,7 +4,7 @@ new Float:g_VehStations[3][3] = {
 	{2114.0, -1893.0, 13.6}
 };
 new g_VehCatModel[13] = {462, 436, 410, 491, 466, 547, 529, 543, 461, 422, 549, 500, 405};
-new g_VehCatPrice[13] = {12000, 12500, 13500, 16000, 17500, 19000, 21000, 22000, 24000, 26000, 28000, 34000, 38000};
+new g_VehCatPrice[13] = {ECON_VEH_FAGGIO, ECON_VEH_PREVION, ECON_VEH_MANANA, ECON_VEH_VIRGO, ECON_VEH_GLENDALE, ECON_VEH_PRIMO, ECON_VEH_WILLARD, ECON_VEH_SADLER, ECON_VEH_PCJ600, ECON_VEH_BOBCAT, ECON_VEH_TAMPA, ECON_VEH_MESA, ECON_VEH_SENTINEL};   // economy/econ_config.inc
 new g_VehCatLevel[13] = {1, 1, 1, 2, 2, 3, 3, 3, 3, 4, 4, 5, 5};
 new g_VehCatName[13][12] = {
 	"Faggio",
@@ -825,7 +825,7 @@ Veh_DoSell(playerid, slot, bool:confirmed)
 			return 0;
 		}
 	}
-	new refund = Veh_ListPrice(g_VSlot[playerid][slot][vsModel], g_VSlot[playerid][slot][vsPricePaid]) * 60 / 100;
+	new refund = Veh_ListPrice(g_VSlot[playerid][slot][vsModel], g_VSlot[playerid][slot][vsPricePaid]) * ECON_VEH_RESALE_PCT / 100;
 	if (refund <= 0 || refund > Money_BankRoom(playerid))
 	{
 		Util_Send(playerid, -10270721, "შენს საბანკო ანგარიშს თანხის მიღება არ შეუძლია: გაყიდვა უარყოფილია.");
@@ -1207,7 +1207,7 @@ Veh_DoRecover(playerid, slot)
 		return 0;
 	}
 	new listPrice = Veh_ListPrice(g_VSlot[playerid][slot][vsModel], g_VSlot[playerid][slot][vsPricePaid]);
-	new cost = max(listPrice * 5 / 100, 500);
+	new cost = max(listPrice * ECON_VEH_RECOVER_PCT / 100, ECON_VEH_RECOVER_MIN);
 	new bool:useCash = Money_Can(playerid, cost);
 	if (!useCash && !Money_CanBank(playerid, cost))
 	{
@@ -1434,7 +1434,7 @@ Veh_CmdRefuel(playerid, const params[])
 		Util_Send(playerid, -10270721, "საწვავისთვის საკმარისი ნაღდი ფული არ გაქვს.");
 		return 0;
 	}
-	new cost = (add * 3 + 100 - 1) / 100;
+	new cost = (add * ECON_FUEL_PER_LITER + 100 - 1) / 100;   // add in centilitri, costo in tetri
 	if (!Money_Take(playerid, cost))
 	{
 		Util_Send(playerid, -10270721, "საწვავისთვის საკმარისი ნაღდი ფული არ გაქვს.");

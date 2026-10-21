@@ -704,7 +704,7 @@ Hub_ShowServices(playerid)
 	Util_Send(playerid, 0x99CCFFFF, "Idlewood-ის უბნის სახლი - რას იპოვი აქ (და Ganton-ისა და Jefferson-ის დაფებთან):");
 	Util_Send(playerid, -1, " /contratti - დაფა: ნახვა ყველგან შეიძლება, მიღება აქ ან უბნის დაფასთან");
 	Util_Send(playerid, -1, " /quartiere [სახელი] - როგორაა უბანი და რას ამბობენ ქუჩაში");
-	format(msg, 768, " /contribuisci [თანხა] [უბანი] - საზოგადოების პროექტი: %s-დან %s-მდე, დღეში მაქს. %s, ანგარიშიდან", Money_Str(50), Money_Str(500), Money_Str(1000));
+	format(msg, 768, " /contribuisci [თანხა] [უბანი] - საზოგადოების პროექტი: %s-დან %s-მდე, დღეში მაქს. %s, ანგარიშიდან", Money_Str(ECON_PRJ_DON_MIN), Money_Str(ECON_PRJ_DON_MAX), Money_Str(ECON_PRJ_DON_DAY));
 	Util_Send(playerid, -1, msg);
 	Util_Send(playerid, -1, " /documento richiedi - დოკუმენტების სარკმელი");
 	Util_Send(playerid, -1, " /aiuto lavoro - გზა Pershing Square-ის Job Center-მდე  |  /aiuto noleggio - ტრანსპორტის ქირაობა");
@@ -838,7 +838,7 @@ Hub_DayLeft(playerid)
 		g_HubDonDay[playerid] = day;
 		g_HubDonToday[playerid] = 0;
 	}
-	new left = 1000 - g_HubDonToday[playerid];
+	new left = ECON_PRJ_DON_DAY - g_HubDonToday[playerid];
 	return left > 0 ? left : 0;
 }
 
@@ -871,7 +871,7 @@ Hub_ProjectBlock(playerid, districtId)
 	{
 		return 1;
 	}
-	if (Hub_DayLeft(playerid) < 50)
+	if (Hub_DayLeft(playerid) < ECON_PRJ_DON_MIN)
 	{
 		return 2;
 	}
@@ -1006,7 +1006,7 @@ public UI_OnProjectContribute(playerid, projectId, amount)
 	}
 	if (!LD_DonationValid(amount, g_HubDonToday[playerid]))
 	{
-		format(msg, 768, "არასწორი თანხა: %s-დან %s-მდე, დღეში მაქსიმუმ %s.", Money_Str(50), Money_Str(500), Money_Str(1000));
+		format(msg, 768, "არასწორი თანხა: %s-დან %s-მდე, დღეში მაქსიმუმ %s.", Money_Str(ECON_PRJ_DON_MIN), Money_Str(ECON_PRJ_DON_MAX), Money_Str(ECON_PRJ_DON_DAY));
 		UI_LivingReject(playerid, msg);
 		return 1;
 	}
@@ -1093,12 +1093,12 @@ public Living_OnDBProject(playerid, result, projectId, donated, balance, points,
 		}
 		case 7:
 		{
-			format(msg, 768, "ჯერ არ შეიძლება: საჭიროა ქალაქში მინიმუმ %d წუთი და დღეში მაქსიმუმ %s შემოწირულობა.", 60, Money_Str(1000));
+			format(msg, 768, "ჯერ არ შეიძლება: საჭიროა ქალაქში მინიმუმ %d წუთი და დღეში მაქსიმუმ %s შემოწირულობა.", 60, Money_Str(ECON_PRJ_DON_DAY));
 			UI_LivingReject(playerid, msg);
 		}
 		case 9:
 		{
-			format(msg, 768, "არასწორი თანხა: %s-დან %s-მდე.", Money_Str(50), Money_Str(500));
+			format(msg, 768, "არასწორი თანხა: %s-დან %s-მდე.", Money_Str(ECON_PRJ_DON_MIN), Money_Str(ECON_PRJ_DON_MAX));
 			UI_LivingReject(playerid, msg);
 		}
 		case 10:

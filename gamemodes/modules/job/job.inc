@@ -23,8 +23,8 @@ new g_JobStepWord[4][32] = {
 new g_JobMinLevel[4] = {0, 1, 2, 1};
 new g_JobModel[4] = {0, 431, 498, 408};
 new g_JobSteps[4] = {0, 6, 5, 8};
-new g_JobPayStep[4] = {0, 28, 45, 24};
-new g_JobPayBonus[4] = {0, 40, 30, 40};
+new g_JobPayStep[4] = {0, ECON_JOB_BUS_STEP, ECON_JOB_COURIER_STEP, ECON_JOB_CLEANER_STEP};   // tetri, economy/econ_config.inc
+new g_JobPayBonus[4] = {0, ECON_JOB_BUS_BONUS, ECON_JOB_COURIER_BONUS, ECON_JOB_CLEANER_BONUS};
 new g_JobDwellMs[4] = {0, 4000, 5000, 4000};
 new Float:g_JobBusStops[6][3] = {
 	{1135.0, -1455.0, 15.5},
@@ -389,7 +389,7 @@ Job_Cancel(playerid, const reason[])
 Job_Accrue(playerid, amount)
 {
 	Job_RollHour(playerid);
-	new job = g_JsJob[playerid], room = 2200 - g_JcHourEarned[playerid][job];
+	new job = g_JsJob[playerid], room = ECON_JOB_HOURLY_CAP - g_JcHourEarned[playerid][job];
 	if (room < 0)
 	{
 		room = 0;
@@ -398,7 +398,7 @@ Job_Accrue(playerid, amount)
 	if (granted < amount && !g_JsCapWarned[playerid])
 	{
 		g_JsCapWarned[playerid] = true;
-		SendClientMessage(playerid, -10270721, "მიღწეულია საათობრივი ლიმიტი %s: ცვლა გრძელდება, მაგრამ ანაზღაურება აღარ გროვდება.", Money_Str(2200));
+		SendClientMessage(playerid, -10270721, "მიღწეულია საათობრივი ლიმიტი %s: ცვლა გრძელდება, მაგრამ ანაზღაურება აღარ გროვდება.", Money_Str(ECON_JOB_HOURLY_CAP));
 	}
 	g_JcHourEarned[playerid][job] += granted;
 	g_JsCapUsed[playerid] += granted;

@@ -298,9 +298,9 @@ bool:UI_BankRange(playerid, op, &lo, &hi)
 			return false;
 		}
 	}
-	if (hi > 0x3B9ACA00)
+	if (hi > ECON_MONEY_MAX)
 	{
-		hi = 0x3B9ACA00;
+		hi = ECON_MONEY_MAX;
 	}
 	return hi >= lo;
 }

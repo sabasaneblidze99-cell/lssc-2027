@@ -18,8 +18,8 @@ new g_UiJbStepWord[4][32] = {
 };
 new g_UiJbMinLevel[4] = {0, 1, 2, 1};
 new g_UiJbSteps[4] = {0, 6, 5, 8};
-new g_UiJbPayStep[4] = {0, 28, 45, 24};
-new g_UiJbPayBonus[4] = {0, 40, 30, 40};
+new g_UiJbPayStep[4] = {0, ECON_JOB_BUS_STEP, ECON_JOB_COURIER_STEP, ECON_JOB_CLEANER_STEP};   // tetri, economy/econ_config.inc
+new g_UiJbPayBonus[4] = {0, ECON_JOB_BUS_BONUS, ECON_JOB_COURIER_BONUS, ECON_JOB_CLEANER_BONUS};
 new g_UiJbDwellMs[4] = {0, 4000, 5000, 4000};
 new g_UiJbEstMinutes[4] = {1, 7, 9, 8};
 new g_UiJbRoute[4][176] = {
@@ -60,9 +60,9 @@ UI_JbHourly(job)
 		return 0;
 	}
 	new hourly = UI_JbRunPay(job) * 60 / g_UiJbEstMinutes[job];
-	if (hourly > 2200)
+	if (hourly > ECON_JOB_HOURLY_CAP)
 	{
-		hourly = 2200;
+		hourly = ECON_JOB_HOURLY_CAP;
 	}
 	return hourly;
 }
@@ -118,7 +118,7 @@ UI_JbDetailShow(playerid, job)
 	new runPay[48], hourly[48], cap[48], step[48], bonus[48];
 	UI_JbMoney(UI_JbRunPay(job), runPay, 48);
 	UI_JbMoney(UI_JbHourly(job), hourly, 48);
-	UI_JbMoney(2200, cap, 48);
+	UI_JbMoney(ECON_JOB_HOURLY_CAP, cap, 48);
 	UI_JbMoney(g_UiJbPayStep[job], step, 48);
 	UI_JbMoney(g_UiJbPayBonus[job], bonus, 48);
 	format(line, 576, "{FFD24D}%s{FFFFFF}\n\n", g_UiJbName[job]);
@@ -199,7 +199,7 @@ UI_JobInfoShow(playerid, jobId, level, runs, earned)
 		UI_JbMoney(UI_JbHourly(jobId), hourly, 48);
 		format(line, 576, "{FFFFFF}მიმდინარე სამსახური: {FFD24D}%s{FFFFFF}\nმანქანა: %s\nმარშრუტი: %s\n", g_UiJbName[jobId], g_UiJbVehicle[jobId], g_UiJbRoute[jobId]);
 		strcat(body, line, 2048);
-		format(line, 576, "ხელფასი წრეზე: {66DD66}₾%s{FFFFFF}  |  სავარაუდოდ ~{66DD66}₾%s{FFFFFF}/სთ (ლიმიტი %s/სთ)\n\n", money, hourly, Money_Str(2200));
+		format(line, 576, "ხელფასი წრეზე: {66DD66}₾%s{FFFFFF}  |  სავარაუდოდ ~{66DD66}₾%s{FFFFFF}/სთ (ლიმიტი %s/სთ)\n\n", money, hourly, Money_Str(ECON_JOB_HOURLY_CAP));
 		strcat(body, line, 2048);
 		UI_JbMoney(earned, money, 48);
 		format(line, 576, "დასრულებული ცვლები: %d\nსულ გამომუშავებული: {66DD66}₾%s{FFFFFF}\n\n", runs, money);

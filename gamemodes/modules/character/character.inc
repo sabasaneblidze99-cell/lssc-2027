@@ -78,8 +78,8 @@ public Char_OnAutosave()
 
 Char_SanitizeLoaded(playerid)
 {
-	gPlayer[playerid][pMoney] = clamp(gPlayer[playerid][pMoney], 0, 0x3B9ACA00);
-	gPlayer[playerid][pBank] = clamp(gPlayer[playerid][pBank], 0, 0x3B9ACA00);
+	gPlayer[playerid][pMoney] = clamp(gPlayer[playerid][pMoney], 0, ECON_MONEY_MAX);
+	gPlayer[playerid][pBank] = clamp(gPlayer[playerid][pBank], 0, ECON_MONEY_MAX);
 	gPlayer[playerid][pLevel] = clamp(gPlayer[playerid][pLevel], 1, 50);
 	if (gPlayer[playerid][pExp] < 0)
 	{
@@ -185,8 +185,8 @@ public UI_OnSkinChosen(playerid, skin)
 	{
 		skin = gPlayer[playerid][pGender] == 1 ? 12 : 7;
 	}
-	gPlayer[playerid][pMoney] = 2500;
-	gPlayer[playerid][pBank] = 5000;
+	gPlayer[playerid][pMoney] = ECON_START_CASH;
+	gPlayer[playerid][pBank] = ECON_START_TOTAL - ECON_START_CASH;
 	gPlayer[playerid][pLevel] = 1;
 	gPlayer[playerid][pExp] = 0;
 	gPlayer[playerid][pHealth] = 100.0;

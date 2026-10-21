@@ -4,7 +4,6 @@ new g_UiHsTierName[4][40] = {
 	"საშუალო სახლი",
 	"ვილა"
 };
-new g_UiHsTierPrice[4] = {14000, 24000, 45000, 130000};
 new g_UiHsTierLevel[4] = {1, 2, 5, 10};
 new g_UiHsTierFridge[4] = {10, 16, 24, 40};
 new g_UiHsIntName[8][40] = {
@@ -30,6 +29,8 @@ new g_UiHsKeys[MAX_PLAYERS];
 new g_UiHsLevel[MAX_PLAYERS];
 new g_UiHsMoney[MAX_PLAYERS];
 new g_UiHsBank[MAX_PLAYERS];
+new g_UiHsPrice[MAX_PLAYERS];      // prezzo di vendita della casa (DB), in tetri
+new g_UiHsRefund[MAX_PLAYERS];     // rimborso se il proprietario la rivende
 new g_UiHsLightDue[MAX_PLAYERS];
 new g_UiHsLightCnt[MAX_PLAYERS];
 new g_UiHsGasDue[MAX_PLAYERS];
@@ -72,6 +73,18 @@ UI_HsUtilText(ustate, out[], size)
 			format(out, size, "{FFD24D}გამორთ.");
 		}
 	}
+}
+
+// prezzo vero della casa e rimborso di rivendita (chiamata da house.inc subito dopo UI_HouseDataSet)
+UI_HousePriceSet(playerid, price, refund)
+{
+	if (!UI_HsValid(playerid))
+	{
+		return 0;
+	}
+	g_UiHsPrice[playerid] = price < 0 ? 0 : price;
+	g_UiHsRefund[playerid] = refund < 0 ? 0 : refund;
+	return 1;
 }
 
 UI_HsTitle(playerid, const prefix[], out[], size)
@@ -171,7 +184,7 @@ UI_HouseMenuShow(playerid)
 	{
 		g_UiHsItemAct[playerid][i] = 0;
 	}
-	UI_HsMoney(g_UiHsTierPrice[t], price, 48);
+	UI_HsMoney(g_UiHsPrice[playerid], price, 48);
 	format(title, 576, "სახლი %d - %s", g_UiHsHouse[playerid], g_UiHsIntName[g_UiHsInt[playerid]]);
 	format(line, 480, "{AAAAAA}ინტერიერი: {FFFFFF}%s (%s)\n", g_UiHsIntName[g_UiHsInt[playerid]], g_UiHsTierName[t]);
 	UI_HsMenuRow(playerid, n, 0, line, body, 1024);
@@ -224,7 +237,7 @@ UI_HsBuyPayShow(playerid)
 {
 	new t = g_UiHsTier[playerid];
 	new body[640], price[48], cash[48], bank[48], tl[144], title[576];
-	new p = g_UiHsTierPrice[t];
+	new p = g_UiHsPrice[playerid];
 	UI_HsMoney(p, price, 48);
 	UI_HsMoney(g_UiHsMoney[playerid], cash, 48);
 	UI_HsMoney(g_UiHsBank[playerid], bank, 48);
@@ -238,8 +251,8 @@ UI_HsBuyPayShow(playerid)
 UI_HsSellConfirmShow(playerid)
 {
 	new body[640], amount[48], title[192];
-	UI_HsMoney(g_UiHsTierPrice[g_UiHsTier[playerid]] * 70 / 100, amount, 48);
-	format(body, 640, "{FFFFFF}გაყიდო სახლი {FFD24D}%d{FFFFFF} (%s)?\n\nბანკში მიიღებ დაახლოებით {66DD66}₾%s{FFFFFF}-ს (ფასის %d%%).\nკომუნალური, გასაღებები და გადასახადები განულდება; ოპერაცია შეუქცევადია.", g_UiHsHouse[playerid], g_UiHsIntName[g_UiHsInt[playerid]], amount, 70);
+	UI_HsMoney(g_UiHsRefund[playerid], amount, 48);
+	format(body, 640, "{FFFFFF}გაყიდო სახლი {FFD24D}%d{FFFFFF} (%s)?\n\nბანკში მიიღებ დაახლოებით {66DD66}₾%s{FFFFFF}-ს (ფასის %d%%).\nკომუნალური, გასაღებები და გადასახადები განულდება; ოპერაცია შეუქცევადია.", g_UiHsHouse[playerid], g_UiHsIntName[g_UiHsInt[playerid]], amount, ECON_HOUSE_RESALE_PCT);
 	UI_HsTitle(playerid, "გაყიდვის დადასტურება", title, 192);
 	Lang_ShowPlayerDialog(playerid, 9202, DIALOG_STYLE_MSGBOX, title, body, "გაყიდვა", "გაუქმება");
 }
@@ -455,7 +468,7 @@ bool:UI_HouseOnDialogResponse(playerid, dialogid, response, listitem, const inpu
 				UI_HouseMenuShow(playerid);
 				return true;
 			}
-			new p = g_UiHsTierPrice[g_UiHsTier[playerid]];
+			new p = g_UiHsPrice[playerid];
 			new funds = listitem == 1 ? g_UiHsBank[playerid] : g_UiHsMoney[playerid];
 			if (funds < p)
 			{

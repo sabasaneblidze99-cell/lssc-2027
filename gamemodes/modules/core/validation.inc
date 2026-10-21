@@ -44,7 +44,7 @@ Valid_PayAmount(amount, senderMoney, receiverMoney)
 	{
 		return 4;
 	}
-	if (receiverMoney + amount > 0x3B9ACA00)
+	if (receiverMoney + amount > ECON_MONEY_MAX)
 	{
 		return 3;
 	}

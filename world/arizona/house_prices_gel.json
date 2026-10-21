@@ -1,0 +1,2690 @@
+[
+{
+"src_id": 1,
+"class": 1,
+"zone": "bassa",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 5800000
+},
+{
+"src_id": 2,
+"class": 1,
+"zone": "bassa",
+"garage": true,
+"price_src": 750000,
+"price_tetri": 6700000
+},
+{
+"src_id": 3,
+"class": 1,
+"zone": "bassa",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 5800000
+},
+{
+"src_id": 4,
+"class": 1,
+"zone": "bassa",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 5800000
+},
+{
+"src_id": 5,
+"class": 1,
+"zone": "bassa",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 5800000
+},
+{
+"src_id": 6,
+"class": 1,
+"zone": "bassa",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 5800000
+},
+{
+"src_id": 7,
+"class": 1,
+"zone": "bassa",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 5800000
+},
+{
+"src_id": 8,
+"class": 1,
+"zone": "bassa",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 5800000
+},
+{
+"src_id": 9,
+"class": 1,
+"zone": "bassa",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 5800000
+},
+{
+"src_id": 10,
+"class": 2,
+"zone": "bassa",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 9800000
+},
+{
+"src_id": 11,
+"class": 1,
+"zone": "bassa",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 5800000
+},
+{
+"src_id": 12,
+"class": 1,
+"zone": "bassa",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 5800000
+},
+{
+"src_id": 13,
+"class": 1,
+"zone": "bassa",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 5800000
+},
+{
+"src_id": 14,
+"class": 1,
+"zone": "bassa",
+"garage": true,
+"price_src": 750000,
+"price_tetri": 6700000
+},
+{
+"src_id": 15,
+"class": 1,
+"zone": "bassa",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 5800000
+},
+{
+"src_id": 16,
+"class": 2,
+"zone": "bassa",
+"garage": true,
+"price_src": 1000000,
+"price_tetri": 10700000
+},
+{
+"src_id": 17,
+"class": 1,
+"zone": "bassa",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 5800000
+},
+{
+"src_id": 18,
+"class": 2,
+"zone": "bassa",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 9800000
+},
+{
+"src_id": 19,
+"class": 1,
+"zone": "bassa",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 5800000
+},
+{
+"src_id": 20,
+"class": 2,
+"zone": "bassa",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 9800000
+},
+{
+"src_id": 21,
+"class": 2,
+"zone": "bassa",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 9800000
+},
+{
+"src_id": 22,
+"class": 1,
+"zone": "bassa",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 5800000
+},
+{
+"src_id": 23,
+"class": 2,
+"zone": "bassa",
+"garage": true,
+"price_src": 1000000,
+"price_tetri": 10700000
+},
+{
+"src_id": 24,
+"class": 1,
+"zone": "bassa",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 5800000
+},
+{
+"src_id": 25,
+"class": 2,
+"zone": "bassa",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 9800000
+},
+{
+"src_id": 26,
+"class": 2,
+"zone": "bassa",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 9800000
+},
+{
+"src_id": 27,
+"class": 2,
+"zone": "bassa",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 9800000
+},
+{
+"src_id": 28,
+"class": 1,
+"zone": "bassa",
+"garage": true,
+"price_src": 750000,
+"price_tetri": 6700000
+},
+{
+"src_id": 29,
+"class": 1,
+"zone": "bassa",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 5800000
+},
+{
+"src_id": 30,
+"class": 2,
+"zone": "bassa",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 9800000
+},
+{
+"src_id": 31,
+"class": 1,
+"zone": "bassa",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 5800000
+},
+{
+"src_id": 33,
+"class": 1,
+"zone": "bassa",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 5800000
+},
+{
+"src_id": 34,
+"class": 1,
+"zone": "bassa",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 5800000
+},
+{
+"src_id": 35,
+"class": 2,
+"zone": "bassa",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 9800000
+},
+{
+"src_id": 36,
+"class": 2,
+"zone": "bassa",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 9800000
+},
+{
+"src_id": 37,
+"class": 1,
+"zone": "bassa",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 5800000
+},
+{
+"src_id": 38,
+"class": 1,
+"zone": "bassa",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 5800000
+},
+{
+"src_id": 39,
+"class": 1,
+"zone": "bassa",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 5800000
+},
+{
+"src_id": 40,
+"class": 2,
+"zone": "bassa",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 9800000
+},
+{
+"src_id": 41,
+"class": 1,
+"zone": "bassa",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 5800000
+},
+{
+"src_id": 42,
+"class": 1,
+"zone": "bassa",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 5800000
+},
+{
+"src_id": 43,
+"class": 2,
+"zone": "bassa",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 9800000
+},
+{
+"src_id": 44,
+"class": 2,
+"zone": "bassa",
+"garage": true,
+"price_src": 1000000,
+"price_tetri": 10700000
+},
+{
+"src_id": 45,
+"class": 1,
+"zone": "bassa",
+"garage": true,
+"price_src": 750000,
+"price_tetri": 6700000
+},
+{
+"src_id": 46,
+"class": 2,
+"zone": "bassa",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 9800000
+},
+{
+"src_id": 47,
+"class": 2,
+"zone": "bassa",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 9800000
+},
+{
+"src_id": 48,
+"class": 1,
+"zone": "bassa",
+"garage": true,
+"price_src": 750000,
+"price_tetri": 6700000
+},
+{
+"src_id": 49,
+"class": 1,
+"zone": "bassa",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 5800000
+},
+{
+"src_id": 50,
+"class": 1,
+"zone": "bassa",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 5800000
+},
+{
+"src_id": 51,
+"class": 1,
+"zone": "bassa",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 5800000
+},
+{
+"src_id": 52,
+"class": 1,
+"zone": "bassa",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 5800000
+},
+{
+"src_id": 53,
+"class": 1,
+"zone": "bassa",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 5800000
+},
+{
+"src_id": 54,
+"class": 1,
+"zone": "bassa",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 5800000
+},
+{
+"src_id": 55,
+"class": 1,
+"zone": "bassa",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 5800000
+},
+{
+"src_id": 56,
+"class": 2,
+"zone": "bassa",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 9800000
+},
+{
+"src_id": 57,
+"class": 1,
+"zone": "bassa",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 5800000
+},
+{
+"src_id": 58,
+"class": 2,
+"zone": "bassa",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 9800000
+},
+{
+"src_id": 59,
+"class": 1,
+"zone": "bassa",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 5800000
+},
+{
+"src_id": 60,
+"class": 2,
+"zone": "bassa",
+"garage": true,
+"price_src": 1000000,
+"price_tetri": 10700000
+},
+{
+"src_id": 61,
+"class": 1,
+"zone": "bassa",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 5800000
+},
+{
+"src_id": 62,
+"class": 2,
+"zone": "bassa",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 9800000
+},
+{
+"src_id": 63,
+"class": 1,
+"zone": "bassa",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 5800000
+},
+{
+"src_id": 64,
+"class": 1,
+"zone": "bassa",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 5800000
+},
+{
+"src_id": 65,
+"class": 1,
+"zone": "bassa",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 5800000
+},
+{
+"src_id": 66,
+"class": 2,
+"zone": "bassa",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 9800000
+},
+{
+"src_id": 67,
+"class": 2,
+"zone": "bassa",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 9800000
+},
+{
+"src_id": 68,
+"class": 1,
+"zone": "bassa",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 5800000
+},
+{
+"src_id": 69,
+"class": 1,
+"zone": "bassa",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 5800000
+},
+{
+"src_id": 70,
+"class": 2,
+"zone": "bassa",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 9800000
+},
+{
+"src_id": 71,
+"class": 2,
+"zone": "bassa",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 9800000
+},
+{
+"src_id": 72,
+"class": 1,
+"zone": "bassa",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 5800000
+},
+{
+"src_id": 73,
+"class": 2,
+"zone": "bassa",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 9800000
+},
+{
+"src_id": 74,
+"class": 2,
+"zone": "bassa",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 9800000
+},
+{
+"src_id": 75,
+"class": 1,
+"zone": "bassa",
+"garage": true,
+"price_src": 750000,
+"price_tetri": 6700000
+},
+{
+"src_id": 76,
+"class": 2,
+"zone": "bassa",
+"garage": true,
+"price_src": 1000000,
+"price_tetri": 10700000
+},
+{
+"src_id": 77,
+"class": 2,
+"zone": "bassa",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 9800000
+},
+{
+"src_id": 78,
+"class": 2,
+"zone": "bassa",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 9800000
+},
+{
+"src_id": 79,
+"class": 1,
+"zone": "bassa",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 5800000
+},
+{
+"src_id": 80,
+"class": 2,
+"zone": "bassa",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 9800000
+},
+{
+"src_id": 81,
+"class": 2,
+"zone": "bassa",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 9800000
+},
+{
+"src_id": 82,
+"class": 2,
+"zone": "bassa",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 9800000
+},
+{
+"src_id": 83,
+"class": 1,
+"zone": "bassa",
+"garage": true,
+"price_src": 750000,
+"price_tetri": 6700000
+},
+{
+"src_id": 84,
+"class": 2,
+"zone": "bassa",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 9800000
+},
+{
+"src_id": 85,
+"class": 1,
+"zone": "bassa",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 5800000
+},
+{
+"src_id": 86,
+"class": 2,
+"zone": "bassa",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 9800000
+},
+{
+"src_id": 87,
+"class": 2,
+"zone": "bassa",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 9800000
+},
+{
+"src_id": 88,
+"class": 1,
+"zone": "bassa",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 5800000
+},
+{
+"src_id": 89,
+"class": 1,
+"zone": "bassa",
+"garage": true,
+"price_src": 750000,
+"price_tetri": 6700000
+},
+{
+"src_id": 90,
+"class": 2,
+"zone": "bassa",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 9800000
+},
+{
+"src_id": 91,
+"class": 1,
+"zone": "bassa",
+"garage": true,
+"price_src": 750000,
+"price_tetri": 6700000
+},
+{
+"src_id": 92,
+"class": 2,
+"zone": "bassa",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 9800000
+},
+{
+"src_id": 93,
+"class": 1,
+"zone": "bassa",
+"garage": true,
+"price_src": 750000,
+"price_tetri": 6700000
+},
+{
+"src_id": 94,
+"class": 1,
+"zone": "bassa",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 5800000
+},
+{
+"src_id": 95,
+"class": 2,
+"zone": "bassa",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 9800000
+},
+{
+"src_id": 96,
+"class": 2,
+"zone": "bassa",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 9800000
+},
+{
+"src_id": 97,
+"class": 2,
+"zone": "bassa",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 9800000
+},
+{
+"src_id": 98,
+"class": 1,
+"zone": "bassa",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 5800000
+},
+{
+"src_id": 99,
+"class": 1,
+"zone": "bassa",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 5800000
+},
+{
+"src_id": 100,
+"class": 1,
+"zone": "bassa",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 5800000
+},
+{
+"src_id": 101,
+"class": 2,
+"zone": "bassa",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 9800000
+},
+{
+"src_id": 102,
+"class": 1,
+"zone": "bassa",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 5800000
+},
+{
+"src_id": 103,
+"class": 1,
+"zone": "bassa",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 5800000
+},
+{
+"src_id": 104,
+"class": 1,
+"zone": "bassa",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 5800000
+},
+{
+"src_id": 105,
+"class": 2,
+"zone": "bassa",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 9800000
+},
+{
+"src_id": 106,
+"class": 1,
+"zone": "bassa",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 5800000
+},
+{
+"src_id": 107,
+"class": 2,
+"zone": "bassa",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 9800000
+},
+{
+"src_id": 108,
+"class": 2,
+"zone": "bassa",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 9800000
+},
+{
+"src_id": 109,
+"class": 2,
+"zone": "bassa",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 9800000
+},
+{
+"src_id": 110,
+"class": 1,
+"zone": "bassa",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 5800000
+},
+{
+"src_id": 111,
+"class": 2,
+"zone": "bassa",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 9800000
+},
+{
+"src_id": 112,
+"class": 2,
+"zone": "bassa",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 9800000
+},
+{
+"src_id": 113,
+"class": 2,
+"zone": "bassa",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 9800000
+},
+{
+"src_id": 114,
+"class": 1,
+"zone": "bassa",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 5800000
+},
+{
+"src_id": 115,
+"class": 1,
+"zone": "bassa",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 5800000
+},
+{
+"src_id": 116,
+"class": 2,
+"zone": "bassa",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 9800000
+},
+{
+"src_id": 117,
+"class": 1,
+"zone": "bassa",
+"garage": true,
+"price_src": 750000,
+"price_tetri": 6700000
+},
+{
+"src_id": 119,
+"class": 1,
+"zone": "bassa",
+"garage": true,
+"price_src": 750000,
+"price_tetri": 6700000
+},
+{
+"src_id": 120,
+"class": 1,
+"zone": "bassa",
+"garage": true,
+"price_src": 750000,
+"price_tetri": 6700000
+},
+{
+"src_id": 121,
+"class": 2,
+"zone": "bassa",
+"garage": true,
+"price_src": 1000000,
+"price_tetri": 10700000
+},
+{
+"src_id": 122,
+"class": 2,
+"zone": "bassa",
+"garage": true,
+"price_src": 1000000,
+"price_tetri": 10700000
+},
+{
+"src_id": 123,
+"class": 2,
+"zone": "bassa",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 9800000
+},
+{
+"src_id": 124,
+"class": 2,
+"zone": "bassa",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 9800000
+},
+{
+"src_id": 125,
+"class": 1,
+"zone": "bassa",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 5800000
+},
+{
+"src_id": 126,
+"class": 2,
+"zone": "bassa",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 9800000
+},
+{
+"src_id": 127,
+"class": 1,
+"zone": "bassa",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 5800000
+},
+{
+"src_id": 128,
+"class": 1,
+"zone": "bassa",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 5800000
+},
+{
+"src_id": 129,
+"class": 1,
+"zone": "bassa",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 5800000
+},
+{
+"src_id": 130,
+"class": 2,
+"zone": "bassa",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 9800000
+},
+{
+"src_id": 131,
+"class": 1,
+"zone": "media",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 6800000
+},
+{
+"src_id": 132,
+"class": 2,
+"zone": "media",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 11500000
+},
+{
+"src_id": 133,
+"class": 2,
+"zone": "media",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 11500000
+},
+{
+"src_id": 134,
+"class": 1,
+"zone": "media",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 6800000
+},
+{
+"src_id": 135,
+"class": 2,
+"zone": "media",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 11500000
+},
+{
+"src_id": 136,
+"class": 2,
+"zone": "media",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 11500000
+},
+{
+"src_id": 137,
+"class": 1,
+"zone": "media",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 6800000
+},
+{
+"src_id": 138,
+"class": 2,
+"zone": "media",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 11500000
+},
+{
+"src_id": 139,
+"class": 2,
+"zone": "media",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 11500000
+},
+{
+"src_id": 140,
+"class": 1,
+"zone": "media",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 6800000
+},
+{
+"src_id": 141,
+"class": 2,
+"zone": "media",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 11500000
+},
+{
+"src_id": 142,
+"class": 2,
+"zone": "media",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 11500000
+},
+{
+"src_id": 143,
+"class": 1,
+"zone": "alta",
+"garage": true,
+"price_src": 750000,
+"price_tetri": 10750000
+},
+{
+"src_id": 144,
+"class": 1,
+"zone": "alta",
+"garage": true,
+"price_src": 750000,
+"price_tetri": 10750000
+},
+{
+"src_id": 145,
+"class": 1,
+"zone": "alta",
+"garage": true,
+"price_src": 750000,
+"price_tetri": 10750000
+},
+{
+"src_id": 146,
+"class": 2,
+"zone": "alta",
+"garage": true,
+"price_src": 1000000,
+"price_tetri": 17600000
+},
+{
+"src_id": 147,
+"class": 1,
+"zone": "alta",
+"garage": true,
+"price_src": 750000,
+"price_tetri": 10750000
+},
+{
+"src_id": 148,
+"class": 2,
+"zone": "alta",
+"garage": true,
+"price_src": 1000000,
+"price_tetri": 17600000
+},
+{
+"src_id": 149,
+"class": 2,
+"zone": "alta",
+"garage": true,
+"price_src": 1000000,
+"price_tetri": 17600000
+},
+{
+"src_id": 150,
+"class": 1,
+"zone": "alta",
+"garage": true,
+"price_src": 750000,
+"price_tetri": 10750000
+},
+{
+"src_id": 151,
+"class": 1,
+"zone": "alta",
+"garage": true,
+"price_src": 750000,
+"price_tetri": 10750000
+},
+{
+"src_id": 152,
+"class": 1,
+"zone": "alta",
+"garage": true,
+"price_src": 750000,
+"price_tetri": 10750000
+},
+{
+"src_id": 153,
+"class": 2,
+"zone": "alta",
+"garage": true,
+"price_src": 1000000,
+"price_tetri": 17600000
+},
+{
+"src_id": 154,
+"class": 1,
+"zone": "alta",
+"garage": true,
+"price_src": 750000,
+"price_tetri": 10750000
+},
+{
+"src_id": 155,
+"class": 2,
+"zone": "alta",
+"garage": true,
+"price_src": 1000000,
+"price_tetri": 17600000
+},
+{
+"src_id": 156,
+"class": 2,
+"zone": "alta",
+"garage": true,
+"price_src": 1000000,
+"price_tetri": 17600000
+},
+{
+"src_id": 157,
+"class": 1,
+"zone": "alta",
+"garage": true,
+"price_src": 750000,
+"price_tetri": 10750000
+},
+{
+"src_id": 158,
+"class": 1,
+"zone": "alta",
+"garage": true,
+"price_src": 750000,
+"price_tetri": 10750000
+},
+{
+"src_id": 159,
+"class": 1,
+"zone": "alta",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 9850000
+},
+{
+"src_id": 160,
+"class": 2,
+"zone": "alta",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 16700000
+},
+{
+"src_id": 161,
+"class": 1,
+"zone": "alta",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 9850000
+},
+{
+"src_id": 162,
+"class": 2,
+"zone": "alta",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 16700000
+},
+{
+"src_id": 163,
+"class": 2,
+"zone": "media",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 11500000
+},
+{
+"src_id": 164,
+"class": 1,
+"zone": "media",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 6800000
+},
+{
+"src_id": 165,
+"class": 1,
+"zone": "media",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 6800000
+},
+{
+"src_id": 166,
+"class": 1,
+"zone": "media",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 6800000
+},
+{
+"src_id": 167,
+"class": 1,
+"zone": "media",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 6800000
+},
+{
+"src_id": 168,
+"class": 1,
+"zone": "media",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 6800000
+},
+{
+"src_id": 169,
+"class": 1,
+"zone": "media",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 6800000
+},
+{
+"src_id": 170,
+"class": 2,
+"zone": "media",
+"garage": true,
+"price_src": 1000000,
+"price_tetri": 12400000
+},
+{
+"src_id": 171,
+"class": 2,
+"zone": "media",
+"garage": true,
+"price_src": 1000000,
+"price_tetri": 12400000
+},
+{
+"src_id": 172,
+"class": 1,
+"zone": "media",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 6800000
+},
+{
+"src_id": 173,
+"class": 1,
+"zone": "media",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 6800000
+},
+{
+"src_id": 174,
+"class": 2,
+"zone": "media",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 11500000
+},
+{
+"src_id": 175,
+"class": 1,
+"zone": "media",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 6800000
+},
+{
+"src_id": 176,
+"class": 2,
+"zone": "media",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 11500000
+},
+{
+"src_id": 177,
+"class": 1,
+"zone": "media",
+"garage": true,
+"price_src": 750000,
+"price_tetri": 7700000
+},
+{
+"src_id": 178,
+"class": 1,
+"zone": "media",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 6800000
+},
+{
+"src_id": 179,
+"class": 2,
+"zone": "media",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 11500000
+},
+{
+"src_id": 180,
+"class": 1,
+"zone": "media",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 6800000
+},
+{
+"src_id": 181,
+"class": 1,
+"zone": "media",
+"garage": true,
+"price_src": 750000,
+"price_tetri": 7700000
+},
+{
+"src_id": 182,
+"class": 1,
+"zone": "media",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 6800000
+},
+{
+"src_id": 183,
+"class": 2,
+"zone": "media",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 11500000
+},
+{
+"src_id": 184,
+"class": 1,
+"zone": "media",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 6800000
+},
+{
+"src_id": 185,
+"class": 2,
+"zone": "media",
+"garage": true,
+"price_src": 1000000,
+"price_tetri": 12400000
+},
+{
+"src_id": 186,
+"class": 1,
+"zone": "media",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 6800000
+},
+{
+"src_id": 187,
+"class": 1,
+"zone": "media",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 6800000
+},
+{
+"src_id": 188,
+"class": 1,
+"zone": "media",
+"garage": true,
+"price_src": 750000,
+"price_tetri": 7700000
+},
+{
+"src_id": 189,
+"class": 1,
+"zone": "media",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 6800000
+},
+{
+"src_id": 190,
+"class": 2,
+"zone": "media",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 11500000
+},
+{
+"src_id": 191,
+"class": 1,
+"zone": "media",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 6800000
+},
+{
+"src_id": 193,
+"class": 1,
+"zone": "media",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 6800000
+},
+{
+"src_id": 194,
+"class": 1,
+"zone": "media",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 6800000
+},
+{
+"src_id": 195,
+"class": 2,
+"zone": "media",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 11500000
+},
+{
+"src_id": 196,
+"class": 1,
+"zone": "media",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 6800000
+},
+{
+"src_id": 197,
+"class": 1,
+"zone": "media",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 6800000
+},
+{
+"src_id": 198,
+"class": 1,
+"zone": "alta",
+"garage": true,
+"price_src": 750000,
+"price_tetri": 10750000
+},
+{
+"src_id": 199,
+"class": 1,
+"zone": "alta",
+"garage": true,
+"price_src": 750000,
+"price_tetri": 10750000
+},
+{
+"src_id": 200,
+"class": 6,
+"zone": "alta",
+"garage": true,
+"price_src": 750000,
+"price_tetri": 61800000
+},
+{
+"src_id": 201,
+"class": 1,
+"zone": "media",
+"garage": true,
+"price_src": 750000,
+"price_tetri": 7700000
+},
+{
+"src_id": 202,
+"class": 1,
+"zone": "media",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 6800000
+},
+{
+"src_id": 203,
+"class": 2,
+"zone": "media",
+"garage": true,
+"price_src": 1000000,
+"price_tetri": 12400000
+},
+{
+"src_id": 204,
+"class": 1,
+"zone": "media",
+"garage": true,
+"price_src": 750000,
+"price_tetri": 7700000
+},
+{
+"src_id": 205,
+"class": 1,
+"zone": "media",
+"garage": true,
+"price_src": 750000,
+"price_tetri": 7700000
+},
+{
+"src_id": 209,
+"class": 5,
+"zone": "alta",
+"garage": true,
+"price_src": 750000,
+"price_tetri": 38600000
+},
+{
+"src_id": 210,
+"class": 1,
+"zone": "alta",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 9850000
+},
+{
+"src_id": 212,
+"class": 1,
+"zone": "alta",
+"garage": true,
+"price_src": 750000,
+"price_tetri": 10750000
+},
+{
+"src_id": 214,
+"class": 1,
+"zone": "alta",
+"garage": true,
+"price_src": 750000,
+"price_tetri": 10750000
+},
+{
+"src_id": 215,
+"class": 1,
+"zone": "alta",
+"garage": true,
+"price_src": 750000,
+"price_tetri": 10750000
+},
+{
+"src_id": 216,
+"class": 1,
+"zone": "alta",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 9850000
+},
+{
+"src_id": 217,
+"class": 1,
+"zone": "alta",
+"garage": true,
+"price_src": 750000,
+"price_tetri": 10750000
+},
+{
+"src_id": 218,
+"class": 2,
+"zone": "alta",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 16700000
+},
+{
+"src_id": 219,
+"class": 1,
+"zone": "alta",
+"garage": true,
+"price_src": 750000,
+"price_tetri": 10750000
+},
+{
+"src_id": 220,
+"class": 2,
+"zone": "alta",
+"garage": true,
+"price_src": 1000000,
+"price_tetri": 17600000
+},
+{
+"src_id": 223,
+"class": 2,
+"zone": "alta",
+"garage": true,
+"price_src": 1000000,
+"price_tetri": 17600000
+},
+{
+"src_id": 229,
+"class": 1,
+"zone": "alta",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 9850000
+},
+{
+"src_id": 230,
+"class": 2,
+"zone": "alta",
+"garage": true,
+"price_src": 1000000,
+"price_tetri": 17600000
+},
+{
+"src_id": 231,
+"class": 1,
+"zone": "alta",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 9850000
+},
+{
+"src_id": 232,
+"class": 1,
+"zone": "alta",
+"garage": true,
+"price_src": 750000,
+"price_tetri": 10750000
+},
+{
+"src_id": 233,
+"class": 1,
+"zone": "alta",
+"garage": true,
+"price_src": 750000,
+"price_tetri": 10750000
+},
+{
+"src_id": 234,
+"class": 1,
+"zone": "alta",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 9850000
+},
+{
+"src_id": 235,
+"class": 1,
+"zone": "alta",
+"garage": true,
+"price_src": 750000,
+"price_tetri": 10750000
+},
+{
+"src_id": 236,
+"class": 1,
+"zone": "alta",
+"garage": true,
+"price_src": 750000,
+"price_tetri": 10750000
+},
+{
+"src_id": 237,
+"class": 1,
+"zone": "alta",
+"garage": true,
+"price_src": 750000,
+"price_tetri": 10750000
+},
+{
+"src_id": 238,
+"class": 1,
+"zone": "alta",
+"garage": true,
+"price_src": 750000,
+"price_tetri": 10750000
+},
+{
+"src_id": 240,
+"class": 1,
+"zone": "alta",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 9850000
+},
+{
+"src_id": 241,
+"class": 1,
+"zone": "alta",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 9850000
+},
+{
+"src_id": 242,
+"class": 1,
+"zone": "media",
+"garage": true,
+"price_src": 750000,
+"price_tetri": 7700000
+},
+{
+"src_id": 243,
+"class": 1,
+"zone": "media",
+"garage": true,
+"price_src": 750000,
+"price_tetri": 7700000
+},
+{
+"src_id": 244,
+"class": 1,
+"zone": "media",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 6800000
+},
+{
+"src_id": 245,
+"class": 1,
+"zone": "alta",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 9850000
+},
+{
+"src_id": 246,
+"class": 1,
+"zone": "alta",
+"garage": true,
+"price_src": 750000,
+"price_tetri": 10750000
+},
+{
+"src_id": 247,
+"class": 1,
+"zone": "alta",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 9850000
+},
+{
+"src_id": 256,
+"class": 1,
+"zone": "media",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 6800000
+},
+{
+"src_id": 257,
+"class": 2,
+"zone": "media",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 11500000
+},
+{
+"src_id": 258,
+"class": 1,
+"zone": "media",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 6800000
+},
+{
+"src_id": 259,
+"class": 2,
+"zone": "media",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 11500000
+},
+{
+"src_id": 260,
+"class": 2,
+"zone": "media",
+"garage": true,
+"price_src": 1000000,
+"price_tetri": 12400000
+},
+{
+"src_id": 265,
+"class": 2,
+"zone": "bassa",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 9800000
+},
+{
+"src_id": 267,
+"class": 1,
+"zone": "alta",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 9850000
+},
+{
+"src_id": 268,
+"class": 1,
+"zone": "alta",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 9850000
+},
+{
+"src_id": 269,
+"class": 1,
+"zone": "alta",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 9850000
+},
+{
+"src_id": 270,
+"class": 2,
+"zone": "alta",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 16700000
+},
+{
+"src_id": 271,
+"class": 2,
+"zone": "bassa",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 9800000
+},
+{
+"src_id": 272,
+"class": 2,
+"zone": "bassa",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 9800000
+},
+{
+"src_id": 273,
+"class": 2,
+"zone": "bassa",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 9800000
+},
+{
+"src_id": 274,
+"class": 1,
+"zone": "bassa",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 5800000
+},
+{
+"src_id": 275,
+"class": 2,
+"zone": "bassa",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 9800000
+},
+{
+"src_id": 276,
+"class": 2,
+"zone": "media",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 11500000
+},
+{
+"src_id": 277,
+"class": 2,
+"zone": "media",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 11500000
+},
+{
+"src_id": 278,
+"class": 2,
+"zone": "media",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 11500000
+},
+{
+"src_id": 279,
+"class": 2,
+"zone": "media",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 11500000
+},
+{
+"src_id": 280,
+"class": 2,
+"zone": "media",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 11500000
+},
+{
+"src_id": 284,
+"class": 2,
+"zone": "media",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 11500000
+},
+{
+"src_id": 285,
+"class": 1,
+"zone": "media",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 6800000
+},
+{
+"src_id": 286,
+"class": 2,
+"zone": "media",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 11500000
+},
+{
+"src_id": 287,
+"class": 2,
+"zone": "media",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 11500000
+},
+{
+"src_id": 288,
+"class": 2,
+"zone": "media",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 11500000
+},
+{
+"src_id": 289,
+"class": 2,
+"zone": "media",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 11500000
+},
+{
+"src_id": 290,
+"class": 2,
+"zone": "bassa",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 9800000
+},
+{
+"src_id": 291,
+"class": 2,
+"zone": "bassa",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 9800000
+},
+{
+"src_id": 292,
+"class": 2,
+"zone": "bassa",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 9800000
+},
+{
+"src_id": 293,
+"class": 2,
+"zone": "bassa",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 9800000
+},
+{
+"src_id": 294,
+"class": 1,
+"zone": "bassa",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 5800000
+},
+{
+"src_id": 295,
+"class": 2,
+"zone": "bassa",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 9800000
+},
+{
+"src_id": 296,
+"class": 2,
+"zone": "bassa",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 9800000
+},
+{
+"src_id": 297,
+"class": 1,
+"zone": "media",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 6800000
+},
+{
+"src_id": 298,
+"class": 1,
+"zone": "bassa",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 5800000
+},
+{
+"src_id": 299,
+"class": 2,
+"zone": "bassa",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 9800000
+},
+{
+"src_id": 300,
+"class": 2,
+"zone": "bassa",
+"garage": true,
+"price_src": 1000000,
+"price_tetri": 10700000
+},
+{
+"src_id": 301,
+"class": 1,
+"zone": "bassa",
+"garage": true,
+"price_src": 750000,
+"price_tetri": 6700000
+},
+{
+"src_id": 302,
+"class": 1,
+"zone": "bassa",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 5800000
+},
+{
+"src_id": 303,
+"class": 2,
+"zone": "bassa",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 9800000
+},
+{
+"src_id": 304,
+"class": 1,
+"zone": "bassa",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 5800000
+},
+{
+"src_id": 305,
+"class": 1,
+"zone": "bassa",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 5800000
+},
+{
+"src_id": 306,
+"class": 2,
+"zone": "bassa",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 9800000
+},
+{
+"src_id": 307,
+"class": 2,
+"zone": "bassa",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 9800000
+},
+{
+"src_id": 308,
+"class": 2,
+"zone": "bassa",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 9800000
+},
+{
+"src_id": 309,
+"class": 2,
+"zone": "bassa",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 9800000
+},
+{
+"src_id": 311,
+"class": 2,
+"zone": "bassa",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 9800000
+},
+{
+"src_id": 313,
+"class": 2,
+"zone": "bassa",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 9800000
+},
+{
+"src_id": 314,
+"class": 1,
+"zone": "bassa",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 5800000
+},
+{
+"src_id": 315,
+"class": 1,
+"zone": "bassa",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 5800000
+},
+{
+"src_id": 316,
+"class": 1,
+"zone": "bassa",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 5800000
+},
+{
+"src_id": 317,
+"class": 2,
+"zone": "alta",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 16700000
+},
+{
+"src_id": 318,
+"class": 2,
+"zone": "alta",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 16700000
+},
+{
+"src_id": 346,
+"class": 1,
+"zone": "alta",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 9850000
+},
+{
+"src_id": 347,
+"class": 2,
+"zone": "alta",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 16700000
+},
+{
+"src_id": 348,
+"class": 2,
+"zone": "alta",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 16700000
+},
+{
+"src_id": 349,
+"class": 2,
+"zone": "alta",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 16700000
+},
+{
+"src_id": 350,
+"class": 1,
+"zone": "alta",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 9850000
+},
+{
+"src_id": 351,
+"class": 1,
+"zone": "alta",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 9850000
+},
+{
+"src_id": 352,
+"class": 2,
+"zone": "alta",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 16700000
+},
+{
+"src_id": 353,
+"class": 1,
+"zone": "alta",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 9850000
+},
+{
+"src_id": 354,
+"class": 1,
+"zone": "alta",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 9850000
+},
+{
+"src_id": 355,
+"class": 2,
+"zone": "alta",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 16700000
+},
+{
+"src_id": 356,
+"class": 1,
+"zone": "alta",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 9850000
+},
+{
+"src_id": 357,
+"class": 2,
+"zone": "alta",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 16700000
+},
+{
+"src_id": 358,
+"class": 1,
+"zone": "alta",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 9850000
+},
+{
+"src_id": 359,
+"class": 1,
+"zone": "alta",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 9850000
+},
+{
+"src_id": 360,
+"class": 1,
+"zone": "media",
+"garage": true,
+"price_src": 750000,
+"price_tetri": 7700000
+},
+{
+"src_id": 361,
+"class": 2,
+"zone": "media",
+"garage": true,
+"price_src": 1000000,
+"price_tetri": 12400000
+},
+{
+"src_id": 362,
+"class": 1,
+"zone": "media",
+"garage": true,
+"price_src": 750000,
+"price_tetri": 7700000
+},
+{
+"src_id": 363,
+"class": 2,
+"zone": "media",
+"garage": true,
+"price_src": 1000000,
+"price_tetri": 12400000
+},
+{
+"src_id": 364,
+"class": 1,
+"zone": "media",
+"garage": true,
+"price_src": 750000,
+"price_tetri": 7700000
+},
+{
+"src_id": 365,
+"class": 1,
+"zone": "alta",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 9850000
+},
+{
+"src_id": 367,
+"class": 1,
+"zone": "alta",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 9850000
+},
+{
+"src_id": 369,
+"class": 1,
+"zone": "alta",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 9850000
+},
+{
+"src_id": 370,
+"class": 2,
+"zone": "alta",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 16700000
+},
+{
+"src_id": 371,
+"class": 1,
+"zone": "alta",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 9850000
+},
+{
+"src_id": 372,
+"class": 2,
+"zone": "alta",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 16700000
+},
+{
+"src_id": 373,
+"class": 2,
+"zone": "alta",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 16700000
+},
+{
+"src_id": 374,
+"class": 2,
+"zone": "alta",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 16700000
+},
+{
+"src_id": 433,
+"class": 2,
+"zone": "bassa",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 9800000
+},
+{
+"src_id": 434,
+"class": 1,
+"zone": "media",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 6800000
+},
+{
+"src_id": 435,
+"class": 2,
+"zone": "bassa",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 9800000
+},
+{
+"src_id": 437,
+"class": 2,
+"zone": "bassa",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 9800000
+},
+{
+"src_id": 438,
+"class": 2,
+"zone": "bassa",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 9800000
+},
+{
+"src_id": 443,
+"class": 2,
+"zone": "media",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 11500000
+},
+{
+"src_id": 444,
+"class": 2,
+"zone": "media",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 11500000
+},
+{
+"src_id": 445,
+"class": 1,
+"zone": "media",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 6800000
+},
+{
+"src_id": 446,
+"class": 2,
+"zone": "media",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 11500000
+},
+{
+"src_id": 447,
+"class": 2,
+"zone": "bassa",
+"garage": false,
+"price_src": 1000000,
+"price_tetri": 9800000
+},
+{
+"src_id": 448,
+"class": 1,
+"zone": "bassa",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 5800000
+},
+{
+"src_id": 450,
+"class": 1,
+"zone": "bassa",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 5800000
+},
+{
+"src_id": 728,
+"class": 1,
+"zone": "alta",
+"garage": true,
+"price_src": 750000,
+"price_tetri": 10750000
+},
+{
+"src_id": 811,
+"class": 6,
+"zone": "media",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 42000000
+},
+{
+"src_id": 812,
+"class": 6,
+"zone": "alta",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 60900000
+},
+{
+"src_id": 836,
+"class": 5,
+"zone": "media",
+"garage": true,
+"price_src": 40000000,
+"price_tetri": 185000000
+},
+{
+"src_id": 839,
+"class": 5,
+"zone": "alta",
+"garage": true,
+"price_src": 750000,
+"price_tetri": 38600000
+},
+{
+"src_id": 840,
+"class": 5,
+"zone": "alta",
+"garage": true,
+"price_src": 750000,
+"price_tetri": 38600000
+},
+{
+"src_id": 841,
+"class": 5,
+"zone": "bassa",
+"garage": true,
+"price_src": 750000,
+"price_tetri": 23000000
+},
+{
+"src_id": 842,
+"class": 5,
+"zone": "bassa",
+"garage": true,
+"price_src": 750000,
+"price_tetri": 23000000
+},
+{
+"src_id": 843,
+"class": 5,
+"zone": "bassa",
+"garage": true,
+"price_src": 750000,
+"price_tetri": 23000000
+},
+{
+"src_id": 844,
+"class": 5,
+"zone": "alta",
+"garage": true,
+"price_src": 750000,
+"price_tetri": 38600000
+},
+{
+"src_id": 846,
+"class": 5,
+"zone": "bassa",
+"garage": true,
+"price_src": 750000,
+"price_tetri": 23000000
+},
+{
+"src_id": 847,
+"class": 6,
+"zone": "media",
+"garage": false,
+"price_src": 750000,
+"price_tetri": 42000000
+},
+{
+"src_id": 848,
+"class": 6,
+"zone": "media",
+"garage": true,
+"price_src": 750000,
+"price_tetri": 42900000
+}
+]

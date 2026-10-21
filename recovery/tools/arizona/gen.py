@@ -5,6 +5,26 @@
   sql/migrations/015_arizona_houses.sql case nel DB (idempotente)"""
 import json, os, re
 
+# ------------------------------------------------------------------ prezzi in lari (tetri) - economia GEL (docs/economia)
+# Prezzo di GIOCO, non conversione del prezzo russo: classe della casa (dimensione/qualita' dell'interno), zona di LS, garage.
+# Riferimento reale (Geostat Q2 2026): case private a Tbilisi ₾2.778-4.656/m2, nuove costruzioni ₾3.680-6.730/m2;
+# le case di gioco costano circa la meta' di un immobile reale equivalente (progressione).
+GEL_CLASS = {1: 6800000, 2: 11500000, 5: 26000000, 6: 42000000}
+def ls_zone(x, y):
+    if x < 1450 and y > -1300: return 'alta'    # Richman, Mulholland, Vinewood, Rodeo, Temple
+    if x > 1800 and y < -1050: return 'bassa'   # Ganton, Idlewood, Jefferson, East LS, Willowfield, Playa del Seville
+    return 'media'                              # Downtown, Commerce, Verona, Santa Maria, Marina, Las Colinas, Glen Park
+GEL_ZONE = {'alta': 145, 'media': 100, 'bassa': 85}
+def gel_price(h):
+    if h['cost'] >= 10000000:
+        return 185000000                        # villa unica del server di origine: ₾1.850.000
+    base = GEL_CLASS.get(h['class'], 6800000) * GEL_ZONE[ls_zone(h['enter'][0], h['enter'][1])] // 100
+    if h.get('garage'):
+        base += 900000                          # garage: +₾9.000
+    return (base + 25000) // 50000 * 50000      # arrotondato a ₾500
+GEL_BIZ_TYPE = {1: 18000000, 2: 15000000, 3: 22000000, 4: 12000000, 5: 35000000, 6: 20000000, 7: 45000000, 8: 16000000, 9: 40000000, 10: 90000000}
+
+
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..'))
 W = os.path.join(ROOT, 'world', 'arizona')
 def load(n): return json.load(open(os.path.join(W, n + '.json')))
@@ -121,7 +141,8 @@ D.append(',\n'.join('\t"%s"' % KA_BIZ.get(b['name_ru'], (b['name_ru'], 0))[0] fo
 D.append('};')
 D.append('stock const s_AzBizType[AZ_BIZ] = {' + ', '.join(str(KA_BIZ.get(b['name_ru'], ('', 0))[1]) for b in biz) + '};')
 D.append('new const s_AzBizInt[AZ_BIZ] = {' + ', '.join(str(b['interior']) for b in biz) + '};')
-D.append('stock const s_AzBizPrice[AZ_BIZ] = {' + ', '.join(str(b['cost']) for b in biz) + '};')
+D.append('// prezzo di gioco in tetri per tipo (per una futura proprieta\' dei business; quello di origine resta in world/arizona/businesses.json)')
+D.append('stock const s_AzBizPrice[AZ_BIZ] = {' + ', '.join(str(GEL_BIZ_TYPE.get(KA_BIZ.get(b['name_ru'], ('', 0))[1], 15000000)) for b in biz) + '};')
 D.append('new const Float:s_AzBizPos[AZ_BIZ][6] = {')
 D.append(',\n'.join('\t{%s, %s, %s, %s, %s, %s}' % tuple(fl(v) for v in b['enter'] + b['exit']) for b in biz))
 D.append('};')
@@ -178,7 +199,7 @@ def tier(h):
     return 0 if c <= 1 and h['cost'] < 1000000 else (1 if c <= 1 else (2 if c == 2 else 3))
 S = ['-- 015_arizona_houses.sql - case del mondo Arizona (solo Los Santos), GENERATO da recovery/tools/arizona/gen.py.',
      '-- Idempotente: si puo\' rilanciare. Aggiunge alla tabella houses il punto interno personalizzato e l\'origine.',
-     '-- Tutte le case sono SENZA proprietario (in vendita). Prezzi e livelli come nel server di origine.',
+     '-- Tutte le case sono SENZA proprietario (in vendita). Prezzi in tetri (lari x 100) dell\'economia GEL; livelli come nel server di origine.',
      "SET @c := (SELECT COUNT(*) FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'houses' AND COLUMN_NAME = 'int_game');",
      "SET @q := IF(@c = 0, 'ALTER TABLE houses ADD COLUMN int_game TINYINT NULL DEFAULT NULL, ADD COLUMN int_x FLOAT NULL DEFAULT NULL, ADD COLUMN int_y FLOAT NULL DEFAULT NULL, ADD COLUMN int_z FLOAT NULL DEFAULT NULL, ADD COLUMN src VARCHAR(16) NULL DEFAULT NULL, ADD COLUMN src_id INT NULL DEFAULT NULL, ADD COLUMN min_level SMALLINT UNSIGNED NOT NULL DEFAULT 0, ADD UNIQUE KEY uq_houses_src (src, src_id)', 'SELECT 1');",
      'PREPARE st FROM @q; EXECUTE st; DEALLOCATE PREPARE st;',
@@ -189,11 +210,13 @@ S = ['-- 015_arizona_houses.sql - case del mondo Arizona (solo Los Santos), GENE
 vals = []
 for h in houses:
     vals.append("(NULL, %d, 0, %s, %s, %s, 0, %d, 1, %d, %s, %s, %s, 'arizona', %d, %d)" % (
-        tier(h), fl(h['enter'][0]), fl(h['enter'][1]), fl(h['enter'][2]), h['cost'], h['interior'], fl(h['exit'][0]), fl(h['exit'][1]), fl(h['exit'][2]), h['src_id'], h['level']))
+        tier(h), fl(h['enter'][0]), fl(h['enter'][1]), fl(h['enter'][2]), gel_price(h), h['interior'], fl(h['exit'][0]), fl(h['exit'][1]), fl(h['exit'][2]), h['src_id'], h['level']))
 S.append(',\n'.join(vals) + ';')
 S.append('INSERT IGNORE INTO house_utilities (house_id) SELECT id FROM houses;')
 S.append("INSERT IGNORE INTO schema_migrations (name) VALUES ('015_arizona_houses');")
 open(os.path.join(ROOT, 'sql', 'migrations', '015_arizona_houses.sql'), 'w').write('\n'.join(S) + '\n')
+json.dump([{'src_id': h['src_id'], 'class': h['class'], 'zone': ls_zone(h['enter'][0], h['enter'][1]), 'garage': bool(h.get('garage')), 'price_src': h['cost'], 'price_tetri': gel_price(h)} for h in houses],
+          open(os.path.join(ROOT, 'world', 'arizona', 'house_prices_gel.json'), 'w'), indent=0)
 
 # 016: riparazione dei database installati con la prima versione di lsrp_completo.sql, dove le case Arizona avevano gli id 1-10
 # e il gamemode le sovrascriveva con le sue 10 case di base. Rimette entrata, prezzo e classe del server di origine alle case
@@ -203,7 +226,7 @@ F = ['-- 016_arizona_houses_fix.sql - GENERATO da recovery/tools/arizona/gen.py.
      '-- Tocca solo case Arizona senza proprietario; rimette entrata, classe e prezzo del server di origine.']
 for h in houses:
     F.append("UPDATE houses SET tier = %d, interior_idx = 0, ext_x = %s, ext_y = %s, ext_z = %s, ext_a = 0, price = %d WHERE src = 'arizona' AND src_id = %d AND owner_id IS NULL;" % (
-        tier(h), fl(h['enter'][0]), fl(h['enter'][1]), fl(h['enter'][2]), h['cost'], h['src_id']))
+        tier(h), fl(h['enter'][0]), fl(h['enter'][1]), fl(h['enter'][2]), gel_price(h), h['src_id']))
 F.append("INSERT IGNORE INTO schema_migrations (name) VALUES ('016_arizona_houses_fix');")
 open(os.path.join(ROOT, 'sql', 'migrations', '016_arizona_houses_fix.sql'), 'w').write('\n'.join(F) + '\n')
 print('mapping', len(mapping), 'parti', len(parts), 'porte', len(tps), 'business', len(biz), 'veicoli', len(allv), 'case', len(houses))

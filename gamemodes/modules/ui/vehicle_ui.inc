@@ -1,5 +1,5 @@
 new g_UiVehModel[13] = {462, 436, 410, 491, 466, 547, 529, 543, 461, 422, 549, 500, 405};
-new g_UiVehPrice[13] = {12000, 12500, 13500, 16000, 17500, 19000, 21000, 22000, 24000, 26000, 28000, 34000, 38000};
+new g_UiVehPrice[13] = {ECON_VEH_FAGGIO, ECON_VEH_PREVION, ECON_VEH_MANANA, ECON_VEH_VIRGO, ECON_VEH_GLENDALE, ECON_VEH_PRIMO, ECON_VEH_WILLARD, ECON_VEH_SADLER, ECON_VEH_PCJ600, ECON_VEH_BOBCAT, ECON_VEH_TAMPA, ECON_VEH_MESA, ECON_VEH_SENTINEL};   // = g_VehCatPrice
 new g_UiVehMinLevel[13] = {1, 1, 1, 2, 2, 3, 3, 3, 3, 4, 4, 5, 5};
 new g_UiVehName[13][12] = {
 	"Faggio",
@@ -191,12 +191,12 @@ UI_VehSellConfirmShow(playerid)
 	UI_VehModelName(g_UiVehLModel[playerid][i], name, 48);
 	if (idx >= 0)
 	{
-		UI_VehMoney(g_UiVehPrice[idx] * 60 / 100, amount, 48);
-		format(body, 768, "{FFFFFF}ყიდი {FFD24D}%s{FFFFFF}-ს (ნომერი %s)?\n\nბანკში მიიღებ დაახლ. {66DD66}₾%s{FFFFFF}-ს (საბაზო ფასის %d%%).\nოპერაცია შეუქცევადია.", name, g_UiVehLPlate[playerid][i], amount, 60);
+		UI_VehMoney(g_UiVehPrice[idx] * ECON_VEH_RESALE_PCT / 100, amount, 48);
+		format(body, 768, "{FFFFFF}ყიდი {FFD24D}%s{FFFFFF}-ს (ნომერი %s)?\n\nბანკში მიიღებ დაახლ. {66DD66}₾%s{FFFFFF}-ს (საბაზო ფასის %d%%).\nოპერაცია შეუქცევადია.", name, g_UiVehLPlate[playerid][i], amount, ECON_VEH_RESALE_PCT);
 	}
 	else
 	{
-		format(body, 768, "{FFFFFF}ყიდი {FFD24D}%s{FFFFFF}-ს (ნომერი %s)?\n\nბანკში მიიღებ საბაზო ფასის %d%%-ს.\nოპერაცია შეუქცევადია.", name, g_UiVehLPlate[playerid][i], 60);
+		format(body, 768, "{FFFFFF}ყიდი {FFD24D}%s{FFFFFF}-ს (ნომერი %s)?\n\nბანკში მიიღებ საბაზო ფასის %d%%-ს.\nოპერაცია შეუქცევადია.", name, g_UiVehLPlate[playerid][i], ECON_VEH_RESALE_PCT);
 	}
 	Lang_ShowPlayerDialog(playerid, 9104, DIALOG_STYLE_MSGBOX, "გაყიდვის დადასტურება", body, "გაყიდვა", "გაუქმება");
 }

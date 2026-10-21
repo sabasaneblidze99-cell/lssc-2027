@@ -18,6 +18,7 @@ bacheca, requisiti, fondi, tetti, cooldown) esattamente come per i dialog di `mo
 - **Codifica**: componente open.mp, stringhe passate byte per byte. Il gamemode invia testo **UTF-8** (georgiano incluso):
   `cef/cef_safe.inc` ripulisce ogni argomento stringa prima dell'invio (una sequenza UTF-8 rotta farebbe chiudere il server).
   La pagina -> server: i testi liberi (chat, password, nomi) viaggiano in **esadecimale** (`bridge.js`) e il server li decodifica.
+- **Denaro**: ogni importo (money, bank, reward, fee, amount, fare...) e' un intero in **tetri** (₾1 = 100). La pagina lo formatta con `U.money` ("₾1.250,50") e non calcola saldi; la pagina invia importi digitati come tetri (`U.parseMoney`), il server li rivalida.
 - Booleani: interi `0/1`. Assenza di un valore: `-1` dove indicato.
 
 ## Server → pagina

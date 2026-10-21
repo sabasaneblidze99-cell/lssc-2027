@@ -10,8 +10,8 @@ new g_FacRankName[3][7][64] = {
 };
 new g_FacRankPay[3][7] = {
 	{0},
-	{0, 150, 200, 250, 320, 400, 500},
-	{0, 150, 200, 250, 320, 400, 500}
+	{0, ECON_FAC_PAY_R1, ECON_FAC_PAY_R2, ECON_FAC_PAY_R3, ECON_FAC_PAY_R4, ECON_FAC_PAY_R5, ECON_FAC_PAY_R6},
+	{0, ECON_FAC_PAY_R1, ECON_FAC_PAY_R2, ECON_FAC_PAY_R3, ECON_FAC_PAY_R4, ECON_FAC_PAY_R5, ECON_FAC_PAY_R6}
 };
 new g_FacRankSkin[3][7] = {
 	{0},
@@ -296,23 +296,23 @@ Fac_FineCap(rank)
 	{
 		case 2:
 		{
-			return 500;
+			return ECON_FINE_CAP_R2;
 		}
 		case 3:
 		{
-			return 1000;
+			return ECON_FINE_CAP_R3;
 		}
 		case 4:
 		{
-			return 2500;
+			return ECON_FINE_CAP_R4;
 		}
 		case 5:
 		{
-			return 5000;
+			return ECON_FINE_CAP_R5;
 		}
 		case 6:
 		{
-			return 5000;
+			return ECON_FINE_CAP_R6;
 		}
 	}
 	return 0;
@@ -676,9 +676,9 @@ Faction_CmdMulta(playerid, const params[])
 			reason[i] = 35;
 		}
 	}
-	if (amount < 50 || amount > cap)
+	if (amount < ECON_FINE_MIN || amount > cap)
 	{
-		SendClientMessage(playerid, -10270721, "არასწორი თანხა: შენი წოდებისთვის %s-დან %s-მდე.", Money_Str(50), Money_Str(cap));
+		SendClientMessage(playerid, -10270721, "არასწორი თანხა: შენი წოდებისთვის %s-დან %s-მდე.", Money_Str(ECON_FINE_MIN), Money_Str(cap));
 		return 0;
 	}
 	if (!Fac_ParseTarget(playerid, tid, target))
@@ -707,9 +707,9 @@ Faction_CmdMulta(playerid, const params[])
 		g_FcFineBucket[playerid] = bucket;
 		g_FcFineSum[playerid] = 0;
 	}
-	if (g_FcFineSum[playerid] + amount > 10000)
+	if (g_FcFineSum[playerid] + amount > ECON_FINE_HOURLY_CAP)
 	{
-		SendClientMessage(playerid, -10270721, "ჯარიმების საათობრივ ლიმიტს მიაღწიე (%s).", Money_Str(10000));
+		SendClientMessage(playerid, -10270721, "ჯარიმების საათობრივ ლიმიტს მიაღწიე (%s).", Money_Str(ECON_FINE_HOURLY_CAP));
 		return 0;
 	}
 	if (gPlayer[target][pMoney] + gPlayer[target][pBank] < amount)
@@ -1024,10 +1024,10 @@ Fac_ReviveDone(medic, target)
 		g_FcReviveBucket[medic] = bucket;
 		g_FcReviveCount[medic] = 0;
 	}
-	if (g_FcReviveCount[medic] < 6 && Money_GiveBank(medic, 100, "faction", ""))
+	if (g_FcReviveCount[medic] < 6 && Money_GiveBank(medic, ECON_FAC_REVIVE_BONUS, "faction", ""))
 	{
 		g_FcReviveCount[medic]++;
-		SendClientMessage(medic, 0x66DD66FF, "გაცოცხლების ბონუსი: %s ჩაირიცხა ბანკში.", Money_Str(100));
+		SendClientMessage(medic, 0x66DD66FF, "გაცოცხლების ბონუსი: %s ჩაირიცხა ბანკში.", Money_Str(ECON_FAC_REVIVE_BONUS));
 		Char_Save(medic);
 	}
 }
@@ -1039,7 +1039,7 @@ Fac_ApplyInjuredPose(playerid)
 
 Faction_Hospitalize(playerid)
 {
-	new fee = Fac_Debit(playerid, 200);
+	new fee = Fac_Debit(playerid, ECON_HOSPITAL_FEE);
 	gPlayer[playerid][pWounded] = 0;
 	g_FcInjLeftMs[playerid] = 0;
 	g_FcHospPending[playerid] = false;
@@ -1932,7 +1932,7 @@ Faction_OnPlayerSpawn(playerid)
 	g_FcInjLeftMs[playerid] = 180000;
 	g_FcInjSec[playerid] = 180;
 	UI_InjuryHudShow(playerid, 180);
-	SendClientMessage(playerid, -10270721, "დაჭრილი ხარ. დაელოდე დახმარებას (EMS): დახმარების გარეშე %d წამში ჰოსპიტალიზდები (%s).", 180, Money_Str(200));
+	SendClientMessage(playerid, -10270721, "დაჭრილი ხარ. დაელოდე დახმარებას (EMS): დახმარების გარეშე %d წამში ჰოსპიტალიზდები (%s).", 180, Money_Str(ECON_HOSPITAL_FEE));
 	return 0;
 }
 

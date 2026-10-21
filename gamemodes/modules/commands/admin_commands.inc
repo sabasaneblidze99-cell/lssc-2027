@@ -111,7 +111,7 @@ public Cmd_setmoney(playerid, const params[])
 	}
 	if (!Money_Set(targetid, amount))
 	{
-		SendClientMessage(playerid, -10270721, "არასწორი თანხა (0-%d).", 0x3B9ACA00);
+		SendClientMessage(playerid, -10270721, "არასწორი თანხა (₾0-%s).", Money_Str(ECON_MONEY_MAX));
 		return 1;
 	}
 	Char_Save(targetid);
@@ -566,9 +566,9 @@ public Cmd_givemoney(playerid, const params[])
 	{
 		return 1;
 	}
-	if (amount < 1 || amount > 100000)
+	if (amount < 1 || amount > ECON_ADMIN_GIVE_MAX)
 	{
-		SendClientMessage(playerid, -10270721, "არასწორი თანხა (1-%d).", 100000);
+		SendClientMessage(playerid, -10270721, "არასწორი თანხა (%s-%s).", Money_Str(1), Money_Str(ECON_ADMIN_GIVE_MAX));
 		return 1;
 	}
 	new now = GetTickCount(), elapsed = now - gPlayer[playerid][pLastGiveMoneyTick];

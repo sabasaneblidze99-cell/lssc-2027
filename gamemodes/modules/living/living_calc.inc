@@ -129,7 +129,7 @@ LD_ApplyDiscount(amount, rep)
 	{
 		return 0;
 	}
-	new a = LD_Clamp(amount, 0, 10000000);
+	new a = LD_Clamp(amount, 0, ECON_MONEY_MAX);
 	return a - a * LD_DiscountPct(rep) / 100;
 }
 
@@ -149,7 +149,7 @@ LD_FreightTimeLimit(distM)
 LD_TaxiFare(meters)
 {
 	new m = LD_Clamp(meters, 0, 100000);
-	return m * 12 / 100 + 15;
+	return m * ECON_LD_TAXI_PER_M_X100 / 100 + ECON_LD_TAXI_BASE;   // = SQL (ld_config)
 }
 
 LD_TaxiFareFor(meters, rep)
@@ -163,7 +163,7 @@ LD_TaxiNpcPay(fare, proPoints)
 	{
 		return 0;
 	}
-	return LD_Clamp(fare, 0, 10000000) * (LD_ProBonusPct(proPoints) + 100) / 100;
+	return LD_Clamp(fare, 0, 10000000) * (LD_ProBonusPct(proPoints) + 100) / 100;   // stesso arrotondamento del DB; 1e7 x 115 resta sotto int32
 }
 
 LD_RentalModel(vkind)
@@ -196,19 +196,19 @@ LD_RentalDeposit(vkind)
 	{
 		case 1:
 		{
-			return 200;
+			return ECON_LD_RENT_DEP_FAGGIO;
 		}
 		case 2:
 		{
-			return 400;
+			return ECON_LD_RENT_DEP_PREVION;
 		}
 		case 3:
 		{
-			return 450;
+			return ECON_LD_RENT_DEP_MANANA;
 		}
 		case 4:
 		{
-			return 300;
+			return ECON_LD_TAXI_DEP;
 		}
 	}
 	return 0;
@@ -224,15 +224,15 @@ LD_RentalFee(vkind, blocks)
 	{
 		case 1:
 		{
-			return blocks * 30;
+			return blocks * ECON_LD_RENT_FEE_FAGGIO;
 		}
 		case 2:
 		{
-			return blocks * 60;
+			return blocks * ECON_LD_RENT_FEE_PREVION;
 		}
 		case 3:
 		{
-			return blocks * 70;
+			return blocks * ECON_LD_RENT_FEE_MANANA;
 		}
 	}
 	return 0;
@@ -249,7 +249,7 @@ LD_RentalRefund(deposit, health)
 	{
 		return 0;
 	}
-	new dep = LD_Clamp(deposit, 0, 10000);
+	new dep = LD_Clamp(deposit, 0, ECON_MONEY_MAX);
 	if (health >= 1000)
 	{
 		return dep;
@@ -265,7 +265,7 @@ LD_RentalRefund(deposit, health)
 
 bool:LD_DonationValid(amount, donatedToday)
 {
-	if (amount < 50 || amount > 500)
+	if (amount < ECON_LD_PRJ_DON_MIN || amount > ECON_LD_PRJ_DON_MAX)
 	{
 		return false;
 	}
@@ -273,7 +273,7 @@ bool:LD_DonationValid(amount, donatedToday)
 	{
 		return false;
 	}
-	return donatedToday + amount <= 1000;
+	return donatedToday + amount <= ECON_LD_PRJ_DON_DAY;
 }
 
 LD_FloatKey(Float:f)

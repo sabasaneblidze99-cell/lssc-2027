@@ -1025,10 +1025,10 @@ Taxi_CmdTaxi(playerid, const params[])
 			Util_Send(playerid, -10270721, "მიდი ფეხით Unity Station-ის ტაქსის დეპოში.");
 			return 1;
 		}
-		new total = 360;
+		new total = ECON_TAXI_RENT_HOUR + ECON_TAXI_DEPOSIT;
 		if ((gPlayer[playerid][pBank] > 0 ? gPlayer[playerid][pBank] : 0) + (gPlayer[playerid][pMoney] > 0 ? gPlayer[playerid][pMoney] : 0) < total)
 		{
-			SendClientMessage(playerid, -10270721, "საჭიროა %s (ქირა %s/სთ + გირაო %s) ბანკსა და ნაღდში.", Money_Str(total), Money_Str(60), Money_Str(300));
+			SendClientMessage(playerid, -10270721, "საჭიროა %s (ქირა %s/სთ + გირაო %s) ბანკსა და ნაღდში.", Money_Str(total), Money_Str(ECON_TAXI_RENT_HOUR), Money_Str(ECON_TAXI_DEPOSIT));
 			return 1;
 		}
 		if (!LD_PoolHasRoom() || !Rental_OpenPro(playerid, 4))
@@ -1257,7 +1257,7 @@ Taxi_OnProRental(playerid, result, vehicleid)
 		{
 			case 3:
 			{
-				SendClientMessage(playerid, -10270721, "სახსრები არ გყოფნის: საჭიროა %s (ქირა + გირაო).", Money_Str(360));
+				SendClientMessage(playerid, -10270721, "სახსრები არ გყოფნის: საჭიროა %s (ქირა + გირაო).", Money_Str(ECON_TAXI_RENT_HOUR + ECON_TAXI_DEPOSIT));
 			}
 			case 7:
 			{
@@ -1275,7 +1275,7 @@ Taxi_OnProRental(playerid, result, vehicleid)
 	gPlayer[playerid][pTaxiRideId] = 0;
 	Taxi_ScheduleNpc(playerid);
 	LD_Emit(107, 0, gPlayer[playerid][pCharId], 1, "-");
-	SendClientMessage(playerid, 0x66DD66FF, "სამსახურში ხარ (ქირა %s/სთ, გირაო %s). გამოძახებები თავად მოვა: /accettacorsa. ცვლის დასასრული: /taxi off დეპოში.", Money_Str(60), Money_Str(300));
+	SendClientMessage(playerid, 0x66DD66FF, "სამსახურში ხარ (ქირა %s/სთ, გირაო %s). გამოძახებები თავად მოვა: /accettacorsa. ცვლის დასასრული: /taxi off დეპოში.", Money_Str(ECON_TAXI_RENT_HOUR), Money_Str(ECON_TAXI_DEPOSIT));
 	return 1;
 }
 
