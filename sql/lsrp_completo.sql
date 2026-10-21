@@ -3160,7 +3160,6 @@ INSERT IGNORE INTO houses (owner_id, tier, interior_idx, ext_x, ext_y, ext_z, ex
 (NULL, 0, 0, 769.115, -1696.62, 5.1553, 0, 750000, 1, 2, 267.1, 305.0, 999.148, 'arizona', 189, 1),
 (NULL, 2, 0, 769.056, -1726.33, 13.4321, 0, 1000000, 1, 10, 23.968, 1340.52, 1084.38, 'arizona', 190, 1),
 (NULL, 0, 0, 768.973, -1745.95, 13.0773, 0, 750000, 1, 7, 225.672, 1022.03, 1084.02, 'arizona', 191, 1),
-(NULL, 0, 0, 1326.27, -1090.67, 27.9766, 0, 750000, 1, 7, 225.672, 1022.03, 1084.02, 'arizona', 192, 1),
 (NULL, 0, 0, 295.349, -1765.47, 4.5465, 0, 750000, 1, 7, 225.672, 1022.03, 1084.02, 'arizona', 193, 1),
 (NULL, 0, 0, 280.892, -1767.8, 4.5387, 0, 750000, 1, 7, 225.672, 1022.03, 1084.02, 'arizona', 194, 1),
 (NULL, 2, 0, 206.955, -1769.83, 4.3536, 0, 1000000, 1, 10, 23.968, 1340.52, 1084.38, 'arizona', 195, 1),
@@ -3505,7 +3504,6 @@ UPDATE houses SET tier = 0, interior_idx = 0, ext_x = 768.076, ext_y = -1655.69,
 UPDATE houses SET tier = 0, interior_idx = 0, ext_x = 769.115, ext_y = -1696.62, ext_z = 5.1553, ext_a = 0, price = 750000 WHERE src = 'arizona' AND src_id = 189 AND owner_id IS NULL;
 UPDATE houses SET tier = 2, interior_idx = 0, ext_x = 769.056, ext_y = -1726.33, ext_z = 13.4321, ext_a = 0, price = 1000000 WHERE src = 'arizona' AND src_id = 190 AND owner_id IS NULL;
 UPDATE houses SET tier = 0, interior_idx = 0, ext_x = 768.973, ext_y = -1745.95, ext_z = 13.0773, ext_a = 0, price = 750000 WHERE src = 'arizona' AND src_id = 191 AND owner_id IS NULL;
-UPDATE houses SET tier = 0, interior_idx = 0, ext_x = 1326.27, ext_y = -1090.67, ext_z = 27.9766, ext_a = 0, price = 750000 WHERE src = 'arizona' AND src_id = 192 AND owner_id IS NULL;
 UPDATE houses SET tier = 0, interior_idx = 0, ext_x = 295.349, ext_y = -1765.47, ext_z = 4.5465, ext_a = 0, price = 750000 WHERE src = 'arizona' AND src_id = 193 AND owner_id IS NULL;
 UPDATE houses SET tier = 0, interior_idx = 0, ext_x = 280.892, ext_y = -1767.8, ext_z = 4.5387, ext_a = 0, price = 750000 WHERE src = 'arizona' AND src_id = 194 AND owner_id IS NULL;
 UPDATE houses SET tier = 2, interior_idx = 0, ext_x = 206.955, ext_y = -1769.83, ext_z = 4.3536, ext_a = 0, price = 1000000 WHERE src = 'arizona' AND src_id = 195 AND owner_id IS NULL;

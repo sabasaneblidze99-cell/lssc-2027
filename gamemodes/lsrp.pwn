@@ -92,7 +92,7 @@ main()
 
 public OnGameModeInit()
 {
-	SetGameModeText("LSRP 0.1.0-proto");
+	SetGameModeText("LS Crime's RP");
 	for (new i = 0; i < MAX_PLAYERS; i++)
 	{
 		Player_Reset(i);

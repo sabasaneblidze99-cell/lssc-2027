@@ -387,11 +387,11 @@ public Cef_OnLogin(playerid, const arguments[])
 		pw[0] = 0;
 	}
 	UI_CefLoginSubmit(playerid, pw);
-	for (new i = 0; i < 34; i++)
+	for (new i = 0; i < sizeof pw; i++)
 	{
 		pw[i] = 0;
 	}
-	for (new i = 0; i < 68; i++)
+	for (new i = 0; i < sizeof hex; i++)
 	{
 		hex[i] = 0;
 	}
@@ -414,11 +414,11 @@ public Cef_OnRegister(playerid, const arguments[])
 	Util_NextToken(arguments, pos, email, 255);
 	Account_SetPendingEmail(playerid, email[0] == 45 && email[1] == 0 ? "" : email);
 	UI_CefRegisterSubmit(playerid, pw);
-	for (new i = 0; i < 34; i++)
+	for (new i = 0; i < sizeof pw; i++)
 	{
 		pw[i] = 0;
 	}
-	for (new i = 0; i < 68; i++)
+	for (new i = 0; i < sizeof hex; i++)
 	{
 		hex[i] = 0;
 	}

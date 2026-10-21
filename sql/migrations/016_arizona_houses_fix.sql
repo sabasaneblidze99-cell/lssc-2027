@@ -190,7 +190,6 @@ UPDATE houses SET tier = 0, interior_idx = 0, ext_x = 768.076, ext_y = -1655.69,
 UPDATE houses SET tier = 0, interior_idx = 0, ext_x = 769.115, ext_y = -1696.62, ext_z = 5.1553, ext_a = 0, price = 750000 WHERE src = 'arizona' AND src_id = 189 AND owner_id IS NULL;
 UPDATE houses SET tier = 2, interior_idx = 0, ext_x = 769.056, ext_y = -1726.33, ext_z = 13.4321, ext_a = 0, price = 1000000 WHERE src = 'arizona' AND src_id = 190 AND owner_id IS NULL;
 UPDATE houses SET tier = 0, interior_idx = 0, ext_x = 768.973, ext_y = -1745.95, ext_z = 13.0773, ext_a = 0, price = 750000 WHERE src = 'arizona' AND src_id = 191 AND owner_id IS NULL;
-UPDATE houses SET tier = 0, interior_idx = 0, ext_x = 1326.27, ext_y = -1090.67, ext_z = 27.9766, ext_a = 0, price = 750000 WHERE src = 'arizona' AND src_id = 192 AND owner_id IS NULL;
 UPDATE houses SET tier = 0, interior_idx = 0, ext_x = 295.349, ext_y = -1765.47, ext_z = 4.5465, ext_a = 0, price = 750000 WHERE src = 'arizona' AND src_id = 193 AND owner_id IS NULL;
 UPDATE houses SET tier = 0, interior_idx = 0, ext_x = 280.892, ext_y = -1767.8, ext_z = 4.5387, ext_a = 0, price = 750000 WHERE src = 'arizona' AND src_id = 194 AND owner_id IS NULL;
 UPDATE houses SET tier = 2, interior_idx = 0, ext_x = 206.955, ext_y = -1769.83, ext_z = 4.3536, ext_a = 0, price = 1000000 WHERE src = 'arizona' AND src_id = 195 AND owner_id IS NULL;

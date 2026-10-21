@@ -1,0 +1,5 @@
+hostname = 127.0.0.1
+username = lsrp
+password = LA_PASSWORD_SCELTA_IN_crea_utente.sql
+database = lsrp
+server_port = 3306

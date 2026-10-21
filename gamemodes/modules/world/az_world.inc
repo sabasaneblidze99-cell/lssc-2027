@@ -34,10 +34,20 @@ AzWorld_OnInit()
 		format(label, sizeof label, "{FFFFFF}%s", s_AzDoorName[i]);
 		Lang_Create3DTextLabel(label, 0xFFFFFFFF, s_AzDoorPos[i][0], s_AzDoorPos[i][1], s_AzDoorPos[i][2] + 0.6, 12.0, s_AzDoorWI[i][0], false);
 	}
+	new bizClosed = 0;
 	for (new i = 0; i < AZ_BIZ; i++)
 	{
-		g_AzBizPickIn[i] = CreatePickup(1239, 1, s_AzBizPos[i][0], s_AzBizPos[i][1], s_AzBizPos[i][2], 0);
-		g_AzBizPickOut[i] = CreatePickup(1318, 1, s_AzBizPos[i][3], s_AzBizPos[i][4], s_AzBizPos[i][5], AZ_BIZ_WORLD_BASE + i);
+		g_AzBizPickIn[i] = -1;
+		g_AzBizPickOut[i] = -1;
+		if (AzWorld_BizHasInterior(i))
+		{
+			g_AzBizPickIn[i] = CreatePickup(1239, 1, s_AzBizPos[i][0], s_AzBizPos[i][1], s_AzBizPos[i][2], 0);
+			g_AzBizPickOut[i] = CreatePickup(1318, 1, s_AzBizPos[i][3], s_AzBizPos[i][4], s_AzBizPos[i][5], AZ_BIZ_WORLD_BASE + i);
+		}
+		else
+		{
+			bizClosed++;    // nel server di origine non ha un interno (uscita 0,0,0): solo il nome, niente teletrasporto
+		}
 		format(label, sizeof label, "{FFB547}%s", s_AzBizName[i]);
 		Lang_Create3DTextLabel(label, 0xFFFFFFFF, s_AzBizPos[i][0], s_AzBizPos[i][1], s_AzBizPos[i][2] + 0.7, 15.0, 0, false);
 	}
@@ -53,7 +63,13 @@ AzWorld_OnInit()
 			SetVehicleParamsEx(veh, false, false, false, s_AzVehInfo[i][3] == 4, false, false, false);
 		}
 	}
-	printf("[MONDO] Arizona Los Santos: %d porte, %d business, %d veicoli", AZ_DOORS, AZ_BIZ, AZ_VEH);
+	printf("[MONDO] Arizona Los Santos: %d oggetti, %d porte, %d business (%d senza interno), %d veicoli", AZMAP_OBJECTS, AZ_DOORS, AZ_BIZ, bizClosed, AZ_VEH);
+}
+
+// l'interno del business esiste nei dati di origine (uscita diversa da 0,0,0)
+AzWorld_BizHasInterior(i)
+{
+	return (floatabs(s_AzBizPos[i][3]) > 1.0 || floatabs(s_AzBizPos[i][4]) > 1.0 || floatabs(s_AzBizPos[i][5]) > 1.0);
 }
 
 AzWorld_OnExit()

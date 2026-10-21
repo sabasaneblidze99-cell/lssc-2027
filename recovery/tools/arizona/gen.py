@@ -31,11 +31,19 @@ def pstr(s):
     return '"' + s.replace('\\', '\\\\').replace('"', '\\"') + '"'
 
 # ------------------------------------------------------------------ mapping
-mapping = load('mapping')
+mapping_src = load('mapping')
+# copie identiche (stesso modello, posizione, rotazione, mondo, interno, distanza e materiali) presenti nel server di origine:
+# si tiene solo la prima. Non cambia nulla a vista, libera slot dello streamer.
+_seen = set(); mapping = []
+for _o in mapping_src:
+    _k = json.dumps(_o, sort_keys=True)
+    if _k not in _seen:
+        _seen.add(_k); mapping.append(_o)
+MAP_DUP = len(mapping_src) - len(mapping)
 removed = load('removed_buildings')
 L = ['// GENERATO da recovery/tools/arizona/gen.py - non modificare a mano.',
      '// Mapping del mondo Arizona Prime (v2), solo Los Santos e interni degli edifici di Los Santos.',
-     '// %d oggetti, %d edifici GTA rimossi. Richiede il plugin streamer.' % (len(mapping), len(removed)), '',
+     '// %d oggetti (%d copie identiche del server di origine tolte), %d edifici GTA rimossi. Richiede il plugin streamer.' % (len(mapping), MAP_DUP, len(removed)), '',
      '#define AZMAP_OBJECTS (%d)' % len(mapping), '']
 CH = 2000   # funzioni da max 2000 oggetti (compilazione piu' leggera)
 parts = [mapping[i:i + CH] for i in range(0, len(mapping), CH)]
@@ -138,7 +146,13 @@ D.append('};')
 open(os.path.join(ROOT, 'gamemodes', 'modules', 'world', 'az_data.inc'), 'w').write('\n'.join(D) + '\n')
 
 # ------------------------------------------------------------------ case -> SQL
-houses = load('houses')
+houses_src = load('houses')
+# case con la stessa identica entrata di una precedente (doppioni del server di origine): si tiene la prima
+houses = []; _doors = set()
+for _h in houses_src:
+    _k = tuple(round(c, 2) for c in _h['enter'])
+    if _k not in _doors:
+        _doors.add(_k); houses.append(_h)
 def tier(h):
     c = h['class']
     return 0 if c <= 1 and h['cost'] < 1000000 else (1 if c <= 1 else (2 if c == 2 else 3))
