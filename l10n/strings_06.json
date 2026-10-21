@@ -5,7 +5,7 @@
   "line": 583,
   "it": "Frigo vuoto o borsa piena.",
   "ctx": "SendClientMessage(playerid, -10066177, \"Frigo vuoto o borsa piena.\");",
-  "ka": ""
+  "ka": "მაცივარი ცარიელია ან ჩანთა სავსეა."
  },
  {
   "id": 642,
@@ -13,7 +13,7 @@
   "line": 606,
   "it": "Quantita' non valida.",
   "ctx": "SendClientMessage(playerid, -10066177, \"Quantita' non valida.\");",
-  "ka": ""
+  "ka": "არასწორი რაოდენობა."
  },
  {
   "id": 643,
@@ -21,7 +21,7 @@
   "line": 622,
   "it": "Nessuna bolletta da pagare.",
   "ctx": "SendClientMessage(playerid, 0x66DD66FF, \"Nessuna bolletta da pagare.\");",
-  "ka": ""
+  "ka": "გადასახდელი კომუნალური გადასახადები არ გაქვს."
  },
  {
   "id": 644,
@@ -29,7 +29,7 @@
   "line": 640,
   "it": "Fondi insufficienti con questo metodo di pagamento.",
   "ctx": "SendClientMessage(playerid, -10066177, \"Fondi insufficienti con questo metodo di pagamento.\");",
-  "ka": ""
+  "ka": "ამ გადახდის მეთოდით საკმარისი თანხა არ გაქვს."
  },
  {
   "id": 645,
@@ -37,7 +37,7 @@
   "line": 697,
   "it": "Sazieta' 0%",
   "ctx": "g_UiHh[playerid][2] = UI_HhText(playerid, (4.0 + left), (458.0 + 1.0), \"Sazieta' 0%\", 0.2, 0.9, -1, t_TEXT_DRAW_ALIGN:1);",
-  "ka": ""
+  "ka": "სიმაძღრე 0%"
  },
  {
   "id": 646,
@@ -45,7 +45,7 @@
   "line": 701,
   "it": "Luce ON | Gas ON | Frigo 0/0",
   "ctx": "g_UiHh[playerid][6] = UI_HhText(playerid, (4.0 + homeLeft), (458.0 + 3.0), \"Luce ON | Gas ON | Frigo 0/0\", 0.2, 0.9, -1, t_TEXT_DRAW_ALIGN:1);",
-  "ka": ""
+  "ka": "შუქი ON | გაზი ON | მაცივარი 0/0"
  },
  {
   "id": 647,
@@ -53,7 +53,7 @@
   "line": 760,
   "it": "Sazieta' %d%%",
   "ctx": "format(str, 32, \"Sazieta' %d%%\", hunger);",
-  "ka": ""
+  "ka": "სიმაძღრე %d%%"
  },
  {
   "id": 648,
@@ -61,7 +61,7 @@
   "line": 785,
   "it": "Luce %s | Gas %s | Frigo %d/%d",
   "ctx": "format(str, 64, \"Luce %s | Gas %s | Frigo %d/%d\", lightOn ? \"ON\" : \"OFF\", gasOn ? \"ON\" : \"OFF\", fridgeUnits, fridgeCap);",
-  "ka": ""
+  "ka": "შუქი %s | გაზი %s | მაცივარი %d/%d"
  },
  {
   "id": 649,
@@ -69,7 +69,7 @@
   "line": 785,
   "it": "OFF",
   "ctx": "format(str, 64, \"Luce %s | Gas %s | Frigo %d/%d\", lightOn ? \"ON\" : \"OFF\", gasOn ? \"ON\" : \"OFF\", fridgeUnits, fridgeCap);",
-  "ka": ""
+  "ka": "OFF"
  },
  {
   "id": 650,
@@ -77,7 +77,7 @@
   "line": 785,
   "it": "OFF",
   "ctx": "format(str, 64, \"Luce %s | Gas %s | Frigo %d/%d\", lightOn ? \"ON\" : \"OFF\", gasOn ? \"ON\" : \"OFF\", fridgeUnits, fridgeCap);",
-  "ka": ""
+  "ka": "OFF"
  },
  {
   "id": 651,
@@ -85,7 +85,7 @@
   "line": 92,
   "it": "Banca: $0",
   "ctx": "g_UiHud[playerid][2] = UI_HudText(playerid, (632.0 - 5.0), (330.0 + 20.0), \"Banca: $0\", 0.22, 1.0, -1, t_TEXT_DRAW_ALIGN:3);",
-  "ka": ""
+  "ka": "ბანკი: $0"
  },
  {
   "id": 652,
@@ -93,7 +93,7 @@
   "line": 93,
   "it": "Liv. 1  Exp 0",
   "ctx": "g_UiHud[playerid][3] = UI_HudText(playerid, (5.0 + left), (330.0 + 36.0), \"Liv. 1  Exp 0\", 0.22, 1.0, -2994689, t_TEXT_DRAW_ALIGN:1);",
-  "ka": ""
+  "ka": "დონე 1  Exp 0"
  },
  {
   "id": 653,
@@ -101,7 +101,7 @@
   "line": 156,
   "it": "Banca: $%d",
   "ctx": "format(str, 48, \"Banca: $%d\", bank);",
-  "ka": ""
+  "ka": "ბანკი: $%d"
  },
  {
   "id": 654,
@@ -109,7 +109,7 @@
   "line": 160,
   "it": "Liv. %d  (MAX)",
   "ctx": "format(str, 48, \"Liv. %d  (MAX)\", 50);",
-  "ka": ""
+  "ka": "დონე %d  (MAX)"
  },
  {
   "id": 655,
@@ -117,7 +117,7 @@
   "line": 180,
   "it": "Liv. %d  Exp %d/%d",
   "ctx": "format(str, 48, \"Liv. %d  Exp %d/%d\", level, inLevel, step);",
-  "ka": ""
+  "ka": "დონე %d  Exp %d/%d"
  },
  {
   "id": 656,
@@ -125,7 +125,7 @@
   "line": 414,
   "it": "LOS SANTOS",
   "ctx": "g_UiIntroTd[playerid][4] = UI_IntroText(playerid, 320.0, 170.0, \"LOS SANTOS\", 0.9, 3.6, -1, t_TEXT_DRAW_FONT:3);",
-  "ka": ""
+  "ka": "ლოს-სანტოსი"
  },
  {
   "id": 657,
@@ -133,7 +133,7 @@
   "line": 3,
   "it": "Porzione di cibo",
   "ctx": "\"Porzione di cibo\",",
-  "ka": ""
+  "ka": "საკვების ულუფა"
  },
  {
   "id": 658,
@@ -141,7 +141,7 @@
   "line": 4,
   "it": "Pasto pronto",
   "ctx": "\"Pasto pronto\",",
-  "ka": ""
+  "ka": "მზა კერძი"
  },
  {
   "id": 659,
@@ -149,7 +149,7 @@
   "line": 5,
   "it": "Bottiglia d'acqua",
   "ctx": "\"Bottiglia d'acqua\",",
-  "ka": ""
+  "ka": "წყლის ბოთლი"
  },
  {
   "id": 660,
@@ -157,7 +157,7 @@
   "line": 6,
   "it": "Snack",
   "ctx": "\"Snack\",",
-  "ka": ""
+  "ka": "სნექი"
  },
  {
   "id": 661,
@@ -165,7 +165,7 @@
   "line": 7,
   "it": "Kit di pronto soccorso",
   "ctx": "\"Kit di pronto soccorso\",",
-  "ka": ""
+  "ka": "პირველადი დახმარების ნაკრები"
  },
  {
   "id": 662,
@@ -173,7 +173,7 @@
   "line": 8,
   "it": "Benda",
   "ctx": "\"Benda\",",
-  "ka": ""
+  "ka": "ბინტი"
  },
  {
   "id": 663,
@@ -181,7 +181,7 @@
   "line": 9,
   "it": "Sigarette",
   "ctx": "\"Sigarette\",",
-  "ka": ""
+  "ka": "სიგარეტი"
  },
  {
   "id": 664,
@@ -189,7 +189,7 @@
   "line": 10,
   "it": "Accendino",
   "ctx": "\"Accendino\",",
-  "ka": ""
+  "ka": "სანთებელა"
  },
  {
   "id": 665,
@@ -197,7 +197,7 @@
   "line": 11,
   "it": "Telefono",
   "ctx": "\"Telefono\",",
-  "ka": ""
+  "ka": "ტელეფონი"
  },
  {
   "id": 666,
@@ -205,7 +205,7 @@
   "line": 12,
   "it": "Documento d'identita'",
   "ctx": "\"Documento d'identita'\"",
-  "ka": ""
+  "ka": "პირადობის მოწმობა"
  },
  {
   "id": 667,
@@ -213,7 +213,7 @@
   "line": 16,
   "it": "Scatolame e ingredienti per cucinare. Si ripone nel frigo.",
   "ctx": "\"Scatolame e ingredienti per cucinare. Si ripone nel frigo.\",",
-  "ka": ""
+  "ka": "კონსერვები და ინგრედიენტები საჭმლის მოსამზადებლად. ინახება მაცივარში."
  },
  {
   "id": 668,
@@ -221,7 +221,7 @@
   "line": 17,
   "it": "Piatto da asporto. Sazia subito.",
   "ctx": "\"Piatto da asporto. Sazia subito.\",",
-  "ka": ""
+  "ka": "წასაღები კერძი. მაშინვე გაძღება."
  },
  {
   "id": 669,
@@ -229,7 +229,7 @@
   "line": 18,
   "it": "Acqua naturale da 0,5 l.",
   "ctx": "\"Acqua naturale da 0,5 l.\",",
-  "ka": ""
+  "ka": "0,5 ლ ბუნებრივი წყალი."
  },
  {
   "id": 670,
@@ -237,7 +237,7 @@
   "line": 19,
   "it": "Barretta o patatine.",
   "ctx": "\"Barretta o patatine.\",",
-  "ka": ""
+  "ka": "ბატონჩიკი ან ჩიფსი."
  },
  {
   "id": 671,
@@ -245,7 +245,7 @@
   "line": 20,
   "it": "Kit civile di pronto soccorso. Cura e viene consumato.",
   "ctx": "\"Kit civile di pronto soccorso. Cura e viene consumato.\",",
-  "ka": ""
+  "ka": "სამოქალაქო პირველადი დახმარების ნაკრები. გმკურნალობს და იხარჯება."
  },
  {
   "id": 672,
@@ -253,7 +253,7 @@
   "line": 21,
   "it": "Garza e cerotti per piccole ferite.",
   "ctx": "\"Garza e cerotti per piccole ferite.\",",
-  "ka": ""
+  "ka": "ბინტი და სალბუნი მცირე ჭრილობებისთვის."
  },
  {
   "id": 673,
@@ -261,7 +261,7 @@
   "line": 22,
   "it": "Pacchetto da 20. Serve un accendino.",
   "ctx": "\"Pacchetto da 20. Serve un accendino.\",",
-  "ka": ""
+  "ka": "20-ღერიანი კოლოფი. საჭიროა სანთებელა."
  },
  {
   "id": 674,
@@ -269,7 +269,7 @@
   "line": 23,
   "it": "Necessario per fumare.",
   "ctx": "\"Necessario per fumare.\",",
-  "ka": ""
+  "ka": "საჭიროა მოსაწევად."
  },
  {
   "id": 675,
@@ -277,7 +277,7 @@
   "line": 24,
   "it": "Mostra il tuo numero di telefono.",
   "ctx": "\"Mostra il tuo numero di telefono.\",",
-  "ka": ""
+  "ka": "აჩვენე შენი ტელეფონის ნომერი."
  },
  {
   "id": 676,
@@ -285,7 +285,7 @@
   "line": 25,
   "it": "Carta d'identita' di San Andreas.",
   "ctx": "\"Carta d'identita' di San Andreas.\"",
-  "ka": ""
+  "ka": "სან-ანდრეასის პირადობის მოწმობა."
  },
  {
   "id": 677,
@@ -293,7 +293,7 @@
   "line": 187,
   "it": "Inventario - %d/%d slot - zaino %s",
   "ctx": "format(title, 64, \"Inventario - %d/%d slot - zaino %s\", used, limit, g_UiInvBag[playerid] ? \"si\" : \"no\");",
-  "ka": ""
+  "ka": "ინვენტარი - %d/%d სლოტი - ზურგჩანთა %s"
  },
  {
   "id": 678,
@@ -301,7 +301,7 @@
   "line": 191,
   "it": "{FFFFFF}Il tuo inventario e' vuoto.\\n\\nCapienza: {FFD24D}%d/%d{FFFFFF} slot. Zaino: {FFD24D}%s{FFFFFF}.",
   "ctx": "format(empty, 160, \"{FFFFFF}Il tuo inventario e' vuoto.\\n\\nCapienza: {FFD24D}%d/%d{FFFFFF} slot. Zaino: {FFD24D}%s{FFFFFF}.\", used, limit, g_UiInvBag[playerid] ? \"si\" : \"no\");",
-  "ka": ""
+  "ka": "{FFFFFF}შენი ინვენტარი ცარიელია.\\n\\nტევადობა: {FFD24D}%d/%d{FFFFFF} სლოტი. ზურგჩანთა: {FFD24D}%s{FFFFFF}."
  },
  {
   "id": 679,
@@ -309,7 +309,7 @@
   "line": 195,
   "it": "Chiudi",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9400, DIALOG_STYLE_MSGBOX, title, empty, \"Chiudi\", \"\");",
-  "ka": ""
+  "ka": "დახურვა"
  },
  {
   "id": 680,
@@ -317,7 +317,7 @@
   "line": 209,
   "it": "Slot\\tOggetto\\tQuantita'\\n",
   "ctx": "format(body, 1024, \"Slot\\tOggetto\\tQuantita'\\n\");",
-  "ka": ""
+  "ka": "სლოტი\\tნივთი\\tრაოდენობა\\n"
  },
  {
   "id": 681,
@@ -325,7 +325,7 @@
   "line": 225,
   "it": "{FFD24D}>> Pagina successiva\\t\\t\\n",
   "ctx": "strcat(body, \"{FFD24D}>> Pagina successiva\\t\\t\\n\", 1024);",
-  "ka": ""
+  "ka": "{FFD24D}>> შემდეგი გვერდი\\t\\t\\n"
  },
  {
   "id": 682,
@@ -333,7 +333,7 @@
   "line": 230,
   "it": "{FFD24D}<< Pagina precedente\\t\\t\\n",
   "ctx": "strcat(body, \"{FFD24D}<< Pagina precedente\\t\\t\\n\", 1024);",
-  "ka": ""
+  "ka": "{FFD24D}<< წინა გვერდი\\t\\t\\n"
  },
  {
   "id": 683,
@@ -341,7 +341,7 @@
   "line": 235,
   "it": "Inventario %d/%d - zaino %s - pag. %d/%d",
   "ctx": "format(title, 64, \"Inventario %d/%d - zaino %s - pag. %d/%d\", used, limit, g_UiInvBag[playerid] ? \"si\" : \"no\", page + 1, pages);",
-  "ka": ""
+  "ka": "ინვენტარი %d/%d - ზურგჩანთა %s - გვ. %d/%d"
  },
  {
   "id": 684,
@@ -349,7 +349,7 @@
   "line": 237,
   "it": "Apri",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9400, DIALOG_STYLE_TABLIST_HEADERS, title, body, \"Apri\", \"Chiudi\");",
-  "ka": ""
+  "ka": "გახსნა"
  },
  {
   "id": 685,
@@ -357,7 +357,7 @@
   "line": 237,
   "it": "Chiudi",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9400, DIALOG_STYLE_TABLIST_HEADERS, title, body, \"Apri\", \"Chiudi\");",
-  "ka": ""
+  "ka": "დახურვა"
  },
  {
   "id": 686,
@@ -365,7 +365,7 @@
   "line": 256,
   "it": "L'inventario e' cambiato: riapro la lista.",
   "ctx": "SendClientMessage(playerid, -10066177, \"L'inventario e' cambiato: riapro la lista.\");",
-  "ka": ""
+  "ka": "ინვენტარი შეიცვალა: სია თავიდან იხსნება."
  },
  {
   "id": 687,
@@ -373,7 +373,7 @@
   "line": 264,
   "it": "%s x%d (slot %d)",
   "ctx": "format(title, 64, \"%s x%d (slot %d)\", name, qty, slot + 1);",
-  "ka": ""
+  "ka": "%s x%d (სლოტი %d)"
  },
  {
   "id": 688,
@@ -381,7 +381,7 @@
   "line": 267,
   "it": "Usa\\n",
   "ctx": "strcat(body, \"Usa\\n\", 256);",
-  "ka": ""
+  "ka": "გამოყენება\\n"
  },
  {
   "id": 689,
@@ -389,7 +389,7 @@
   "line": 271,
   "it": "{888888}Usa (non utilizzabile){FFFFFF}\\n",
   "ctx": "strcat(body, \"{888888}Usa (non utilizzabile){FFFFFF}\\n\", 256);",
-  "ka": ""
+  "ka": "{888888}გამოყენება (არ გამოიყენება){FFFFFF}\\n"
  },
  {
   "id": 690,
@@ -397,7 +397,7 @@
   "line": 275,
   "it": "Dai a un giocatore\\nGetta\\n",
   "ctx": "strcat(body, \"Dai a un giocatore\\nGetta\\n\", 256);",
-  "ka": ""
+  "ka": "მოთამაშისთვის მიცემა\\nგადაგდება\\n"
  },
  {
   "id": 691,
@@ -405,7 +405,7 @@
   "line": 279,
   "it": "{888888}Dai (non trasferibile){FFFFFF}\\n{888888}Getta (non droppabile){FFFFFF}\\n",
   "ctx": "strcat(body, \"{888888}Dai (non trasferibile){FFFFFF}\\n{888888}Getta (non droppabile){FFFFFF}\\n\", 256);",
-  "ka": ""
+  "ka": "{888888}მიცემა (არ გადაეცემა){FFFFFF}\\n{888888}გადაგდება (არ იყრება){FFFFFF}\\n"
  },
  {
   "id": 692,
@@ -413,7 +413,7 @@
   "line": 281,
   "it": "Descrizione",
   "ctx": "strcat(body, \"Descrizione\", 256);",
-  "ka": ""
+  "ka": "აღწერა"
  },
  {
   "id": 693,
@@ -421,7 +421,7 @@
   "line": 282,
   "it": "Scegli",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9401, DIALOG_STYLE_LIST, title, body, \"Scegli\", \"Indietro\");",
-  "ka": ""
+  "ka": "არჩევა"
  },
  {
   "id": 694,
@@ -429,7 +429,7 @@
   "line": 282,
   "it": "Indietro",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9401, DIALOG_STYLE_LIST, title, body, \"Scegli\", \"Indietro\");",
-  "ka": ""
+  "ka": "უკან"
  },
  {
   "id": 695,
@@ -437,7 +437,7 @@
   "line": 294,
   "it": "Slot vuoto o non valido.",
   "ctx": "SendClientMessage(playerid, -10066177, \"Slot vuoto o non valido.\");",
-  "ka": ""
+  "ka": "სლოტი ცარიელია ან არასწორია."
  },
  {
   "id": 696,
@@ -445,7 +445,7 @@
   "line": 312,
   "it": "{FFFFFF}%s\\n\\nPosseduti: {FFD24D}%d{FFFFFF} (max %d per slot)\\nUso: {FFD24D}%s{FFFFFF}\\nDare/Gettare: {FFD24D}%s",
   "ctx": "format(body, 384, \"{FFFFFF}%s\\n\\nPosseduti: {FFD24D}%d{FFFFFF} (max %d per slot)\\nUso: {FFD24D}%s{FFFFFF}\\nDare/Gettare: {FFD24D}%s\", desc, g_UiInvQty[playerid][slot], g_UiInvStack[itemId], flags & 1 ",
-  "ka": ""
+  "ka": "{FFFFFF}%s\\n\\nგაქვს: {FFD24D}%d{FFFFFF} (მაქს. %d სლოტში)\\nგამოყენება: {FFD24D}%s{FFFFFF}\\nმიცემა/გადაგდება: {FFD24D}%s"
  },
  {
   "id": 697,
@@ -453,7 +453,7 @@
   "line": 313,
   "it": "Indietro",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9402, DIALOG_STYLE_MSGBOX, title, body, \"Indietro\", \"Chiudi\");",
-  "ka": ""
+  "ka": "უკან"
  },
  {
   "id": 698,
@@ -461,7 +461,7 @@
   "line": 313,
   "it": "Chiudi",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9402, DIALOG_STYLE_MSGBOX, title, body, \"Indietro\", \"Chiudi\");",
-  "ka": ""
+  "ka": "დახურვა"
  },
  {
   "id": 699,
@@ -469,7 +469,7 @@
   "line": 321,
   "it": "%s: quantita'",
   "ctx": "format(title, 64, \"%s: quantita'\", name);",
-  "ka": ""
+  "ka": "%s: რაოდენობა"
  },
  {
   "id": 700,
@@ -477,7 +477,7 @@
   "line": 322,
   "it": "%s{FFFFFF}Quante unita' di {FFD24D}%s{FFFFFF} vuoi %s?\\nInserisci un numero da {FFD24D}1{FFFFFF} a {FFD24D}%d{FFFFFF}.",
   "ctx": "format(body, 320, \"%s{FFFFFF}Quante unita' di {FFD24D}%s{FFFFFF} vuoi %s?\\nInserisci un numero da {FFD24D}1{FFFFFF} a {FFD24D}%d{FFFFFF}.\", err, name, g_UiInvPendAct[playerid] == 1 ? \"dare\" : \"gettare",
-  "ka": ""
+  "ka": "%s{FFFFFF}რამდენი ერთეული {FFD24D}%s{FFFFFF} გინდა %s?\\nშეიყვანე რიცხვი {FFD24D}1{FFFFFF}-დან {FFD24D}%d{FFFFFF}-მდე."
  },
  {
   "id": 701,
@@ -485,7 +485,7 @@
   "line": 323,
   "it": "Avanti",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9403, DIALOG_STYLE_INPUT, title, body, \"Avanti\", \"Indietro\");",
-  "ka": ""
+  "ka": "შემდეგი"
  },
  {
   "id": 702,
@@ -493,7 +493,7 @@
   "line": 323,
   "it": "Indietro",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9403, DIALOG_STYLE_INPUT, title, body, \"Avanti\", \"Indietro\");",
-  "ka": ""
+  "ka": "უკან"
  },
  {
   "id": 703,
@@ -501,7 +501,7 @@
   "line": 330,
   "it": "Dai %s x%d",
   "ctx": "format(title, 64, \"Dai %s x%d\", name, g_UiInvSelQty[playerid]);",
-  "ka": ""
+  "ka": "მიცემა: %s x%d"
  },
  {
   "id": 704,
@@ -509,7 +509,7 @@
   "line": 331,
   "it": "%s{FFFFFF}Inserisci l'{FFD24D}ID{FFFFFF} del giocatore vicino a cui dare l'oggetto.\\nDeve trovarsi entro %.0f metri e accettare lo scambio.",
   "ctx": "format(body, 320, \"%s{FFFFFF}Inserisci l'{FFD24D}ID{FFFFFF} del giocatore vicino a cui dare l'oggetto.\\nDeve trovarsi entro %.0f metri e accettare lo scambio.\", err, 3.0);",
-  "ka": ""
+  "ka": "%s{FFFFFF}შეიყვანე იმ ახლომდებარე მოთამაშის {FFD24D}ID{FFFFFF}, ვისაც ნივთს აძლევ.\\nის %.0f მეტრის რადიუსში უნდა იყოს და გაცვლა უნდა დაადასტუროს."
  },
  {
   "id": 705,
@@ -517,7 +517,7 @@
   "line": 332,
   "it": "Invia",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9404, DIALOG_STYLE_INPUT, title, body, \"Invia\", \"Indietro\");",
-  "ka": ""
+  "ka": "გაგზავნა"
  },
  {
   "id": 706,
@@ -525,7 +525,7 @@
   "line": 332,
   "it": "Indietro",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9404, DIALOG_STYLE_INPUT, title, body, \"Invia\", \"Indietro\");",
-  "ka": ""
+  "ka": "უკან"
  },
  {
   "id": 707,
@@ -533,7 +533,7 @@
   "line": 339,
   "it": "{FFFFFF}Gettare {FFD24D}%s x%d{FFFFFF}?\\n\\n{FF6666}L'oggetto finira' a terra e scomparira' dopo %d minuti. Chiunque vicino potra' raccoglierlo.",
   "ctx": "format(body, 320, \"{FFFFFF}Gettare {FFD24D}%s x%d{FFFFFF}?\\n\\n{FF6666}L'oggetto finira' a terra e scomparira' dopo %d minuti. Chiunque vicino potra' raccoglierlo.\", name, g_UiInvSelQty[playerid], 10);",
-  "ka": ""
+  "ka": "{FFFFFF}გადააგდებ {FFD24D}%s x%d{FFFFFF}?\\n\\n{FF6666}ნივთი მიწაზე დავარდება და %d წუთში გაქრება. ახლოს მყოფ ნებისმიერს შეეძლება მისი აღება."
  },
  {
   "id": 708,
@@ -541,7 +541,7 @@
   "line": 340,
   "it": "Conferma: getta",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9405, DIALOG_STYLE_MSGBOX, \"Conferma: getta\", body, \"Getta\", \"Annulla\");",
-  "ka": ""
+  "ka": "დადასტურება: გადაგდება"
  },
  {
   "id": 709,
@@ -549,7 +549,7 @@
   "line": 340,
   "it": "Getta",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9405, DIALOG_STYLE_MSGBOX, \"Conferma: getta\", body, \"Getta\", \"Annulla\");",
-  "ka": ""
+  "ka": "გადაგდება"
  },
  {
   "id": 710,
@@ -557,7 +557,7 @@
   "line": 340,
   "it": "Annulla",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9405, DIALOG_STYLE_MSGBOX, \"Conferma: getta\", body, \"Getta\", \"Annulla\");",
-  "ka": ""
+  "ka": "გაუქმება"
  },
  {
   "id": 711,
@@ -565,7 +565,7 @@
   "line": 402,
   "it": "Scambio in attesa: %d s",
   "ctx": "format(str, 48, \"Scambio in attesa: %d s\", left);",
-  "ka": ""
+  "ka": "გაცვლის მოლოდინი: %d წმ"
  },
  {
   "id": 712,
@@ -573,7 +573,7 @@
   "line": 460,
   "it": "Scambio in attesa",
   "ctx": "g_UiInvRecvTd[playerid][1] = UI_InvText(playerid, (210.0 + 6.0), (124.0 + 2.0), \"Scambio in attesa\", 0.24, 1.1, -2994689, t_TEXT_DRAW_ALIGN:1);",
-  "ka": ""
+  "ka": "გაცვლის მოლოდინი"
  },
  {
   "id": 713,
@@ -581,7 +581,7 @@
   "line": 473,
   "it": "{FFD24D}%s{FFFFFF} vuole darti {FFD24D}%s x%d{FFFFFF}.\\n\\nLa richiesta scade tra {FF6666}%d{FFFFFF} secondi.\\nSe non c'e' posto nel tuo inventario lo scambio fallira'.",
   "ctx": "format(body, 320, \"{FFD24D}%s{FFFFFF} vuole darti {FFD24D}%s x%d{FFFFFF}.\\n\\nLa richiesta scade tra {FF6666}%d{FFFFFF} secondi.\\nSe non c'e' posto nel tuo inventario lo scambio fallira'.\", giver, name",
-  "ka": ""
+  "ka": "{FFD24D}%s{FFFFFF}-ს სურს მოგცეს {FFD24D}%s x%d{FFFFFF}.\\n\\nმოთხოვნა ვადა გაუვა {FF6666}%d{FFFFFF} წამში.\\nთუ ინვენტარში ადგილი არ გაქვს, გაცვლა ჩაიშლება."
  },
  {
   "id": 714,
@@ -589,7 +589,7 @@
   "line": 474,
   "it": "Oggetto in arrivo",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9406, DIALOG_STYLE_MSGBOX, \"Oggetto in arrivo\", body, \"Accetta\", \"Rifiuta\");",
-  "ka": ""
+  "ka": "შემომავალი ნივთი"
  },
  {
   "id": 715,
@@ -597,7 +597,7 @@
   "line": 474,
   "it": "Accetta",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9406, DIALOG_STYLE_MSGBOX, \"Oggetto in arrivo\", body, \"Accetta\", \"Rifiuta\");",
-  "ka": ""
+  "ka": "მიღება"
  },
  {
   "id": 716,
@@ -605,7 +605,7 @@
   "line": 474,
   "it": "Rifiuta",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9406, DIALOG_STYLE_MSGBOX, \"Oggetto in arrivo\", body, \"Accetta\", \"Rifiuta\");",
-  "ka": ""
+  "ka": "უარყოფა"
  },
  {
   "id": 717,
@@ -613,7 +613,7 @@
   "line": 597,
   "it": "La richiesta di scambio e' scaduta.",
   "ctx": "SendClientMessage(playerid, -2994689, \"La richiesta di scambio e' scaduta.\");",
-  "ka": ""
+  "ka": "გაცვლის მოთხოვნას ვადა გაუვიდა."
  },
  {
   "id": 718,
@@ -621,7 +621,7 @@
   "line": 670,
   "it": "Questo oggetto non si puo' usare.",
   "ctx": "SendClientMessage(playerid, -10066177, \"Questo oggetto non si puo' usare.\");",
-  "ka": ""
+  "ka": "ამ ნივთის გამოყენება შეუძლებელია."
  },
  {
   "id": 719,
@@ -629,7 +629,7 @@
   "line": 681,
   "it": "Questo oggetto non si puo' dare.",
   "ctx": "SendClientMessage(playerid, -10066177, listitem == 1 ? \"Questo oggetto non si puo' dare.\" : \"Questo oggetto non si puo' gettare.\");",
-  "ka": ""
+  "ka": "ამ ნივთის მიცემა შეუძლებელია."
  },
  {
   "id": 720,
@@ -637,7 +637,7 @@
   "line": 681,
   "it": "Questo oggetto non si puo' gettare.",
   "ctx": "SendClientMessage(playerid, -10066177, listitem == 1 ? \"Questo oggetto non si puo' dare.\" : \"Questo oggetto non si puo' gettare.\");",
-  "ka": ""
+  "ka": "ამ ნივთის გადაგდება შეუძლებელია."
  },
  {
   "id": 721,
@@ -645,7 +645,7 @@
   "line": 739,
   "it": "{FF6666}Quantita' non valida: serve un numero da 1 a %d.\\n\\n",
   "ctx": "format(err, 144, \"{FF6666}Quantita' non valida: serve un numero da 1 a %d.\\n\\n\", maxQ);",
-  "ka": ""
+  "ka": "{FF6666}არასწორი რაოდენობა: საჭიროა რიცხვი 1-დან %d-მდე.\\n\\n"
  },
  {
   "id": 722,
@@ -653,7 +653,7 @@
   "line": 776,
   "it": "{FF6666}Inserisci l'ID numerico del giocatore.\\n\\n",
   "ctx": "UI_InvTargetShow(playerid, \"{FF6666}Inserisci l'ID numerico del giocatore.\\n\\n\");",
-  "ka": ""
+  "ka": "{FF6666}შეიყვანე მოთამაშის რიცხვითი ID.\\n\\n"
  },
  {
   "id": 723,
@@ -661,7 +661,7 @@
   "line": 781,
   "it": "{FF6666}ID non valido o giocatore non connesso.\\n\\n",
   "ctx": "UI_InvTargetShow(playerid, \"{FF6666}ID non valido o giocatore non connesso.\\n\\n\");",
-  "ka": ""
+  "ka": "{FF6666}ID არასწორია ან მოთამაშე არ არის სერვერზე.\\n\\n"
  },
  {
   "id": 724,
@@ -669,7 +669,7 @@
   "line": 786,
   "it": "{FF6666}Non puoi dare oggetti a te stesso.\\n\\n",
   "ctx": "UI_InvTargetShow(playerid, \"{FF6666}Non puoi dare oggetti a te stesso.\\n\\n\");",
-  "ka": ""
+  "ka": "{FF6666}საკუთარ თავს ნივთს ვერ მისცემ.\\n\\n"
  },
  {
   "id": 725,
@@ -677,7 +677,7 @@
   "line": 2,
   "it": "Disoccupato",
   "ctx": "\"Disoccupato\",",
-  "ka": ""
+  "ka": "უმუშევარი"
  },
  {
   "id": 726,
@@ -685,7 +685,7 @@
   "line": 3,
   "it": "Autista Bus",
   "ctx": "\"Autista Bus\",",
-  "ka": ""
+  "ka": "ავტობუსის მძღოლი"
  },
  {
   "id": 727,
@@ -693,7 +693,7 @@
   "line": 4,
   "it": "Corriere",
   "ctx": "\"Corriere\",",
-  "ka": ""
+  "ka": "კურიერი"
  },
  {
   "id": 728,
@@ -701,7 +701,7 @@
   "line": 5,
   "it": "Netturbino",
   "ctx": "\"Netturbino\"",
-  "ka": ""
+  "ka": "დამლაგებელი"
  },
  {
   "id": 729,
@@ -709,7 +709,7 @@
   "line": 9,
   "it": "Bus",
   "ctx": "\"Bus\",",
-  "ka": ""
+  "ka": "Bus"
  },
  {
   "id": 730,
@@ -717,7 +717,7 @@
   "line": 10,
   "it": "Boxville",
   "ctx": "\"Boxville\",",
-  "ka": ""
+  "ka": "Boxville"
  },
  {
   "id": 731,
@@ -725,7 +725,7 @@
   "line": 11,
   "it": "Trashmaster",
   "ctx": "\"Trashmaster\"",
-  "ka": ""
+  "ka": "Trashmaster"
  },
  {
   "id": 732,
@@ -733,7 +733,7 @@
   "line": 14,
   "it": "Tappa",
   "ctx": "\"Tappa\",",
-  "ka": ""
+  "ka": "გაჩერება"
  },
  {
   "id": 733,
@@ -741,7 +741,7 @@
   "line": 15,
   "it": "Fermata",
   "ctx": "\"Fermata\",",
-  "ka": ""
+  "ka": "გაჩერება"
  },
  {
   "id": 734,
@@ -749,7 +749,7 @@
   "line": 16,
   "it": "Consegna",
   "ctx": "\"Consegna\",",
-  "ka": ""
+  "ka": "მიწოდება"
  },
  {
   "id": 735,
@@ -757,7 +757,7 @@
   "line": 17,
   "it": "Cassonetto",
   "ctx": "\"Cassonetto\"",
-  "ka": ""
+  "ka": "ნაგვის ურნა"
  },
  {
   "id": 736,
@@ -765,7 +765,7 @@
   "line": 27,
   "it": "6 fermate fisse in ordine, poi rientro al deposito",
   "ctx": "\"6 fermate fisse in ordine, poi rientro al deposito\",",
-  "ka": ""
+  "ka": "6 ფიქსირებული გაჩერება თანმიმდევრობით, შემდეგ დეპოში დაბრუნება"
  },
  {
   "id": 737,
@@ -773,7 +773,7 @@
   "line": 28,
   "it": "5 consegne a caso tra 8 punti, poi rientro al deposito",
   "ctx": "\"5 consegne a caso tra 8 punti, poi rientro al deposito\",",
-  "ka": ""
+  "ka": "5 მიწოდება 8 შემთხვევითი წერტილიდან, შემდეგ დეპოში დაბრუნება"
  },
  {
   "id": 738,
@@ -781,7 +781,7 @@
   "line": 29,
   "it": "8 cassonetti in ordine fisso, poi scarico al deposito",
   "ctx": "\"8 cassonetti in ordine fisso, poi scarico al deposito\"",
-  "ka": ""
+  "ka": "8 ურნა ფიქსირებული თანმიმდევრობით, შემდეგ დეპოში დაცლა"
  },
  {
   "id": 739,
@@ -789,7 +789,7 @@
   "line": 99,
   "it": "Lavoro\\tLiv. min\\tPaga/ora stimata\\tVeicolo\\n",
   "ctx": "strcat(body, \"Lavoro\\tLiv. min\\tPaga/ora stimata\\tVeicolo\\n\", 1024);",
-  "ka": ""
+  "ka": "სამსახური\\tმინ. დონე\\tსავარ. ხელფასი/სთ\\tმანქანა\\n"
  },
  {
   "id": 740,
@@ -797,7 +797,7 @@
   "line": 105,
   "it": "{888888}%s\\t{FF6666}Liv. %d (bloccato)\\t{888888}~$%s\\t{888888}%s\\n",
   "ctx": "format(line, 192, \"{888888}%s\\t{FF6666}Liv. %d (bloccato)\\t{888888}~$%s\\t{888888}%s\\n\", g_UiJbName[job], g_UiJbMinLevel[job], pay, g_UiJbVehicle[job]);",
-  "ka": ""
+  "ka": "{888888}%s\\t{FF6666}დონე %d (დაბლოკილი)\\t{888888}~$%s\\t{888888}%s\\n"
  },
  {
   "id": 741,
@@ -805,7 +805,7 @@
   "line": 109,
   "it": "{FFD24D}%s (attuale)\\t{FFFFFF}Liv. %d\\t{66DD66}~$%s\\t{FFFFFF}%s\\n",
   "ctx": "format(line, 192, \"{FFD24D}%s (attuale)\\t{FFFFFF}Liv. %d\\t{66DD66}~$%s\\t{FFFFFF}%s\\n\", g_UiJbName[job], g_UiJbMinLevel[job], pay, g_UiJbVehicle[job]);",
-  "ka": ""
+  "ka": "{FFD24D}%s (მიმდინარე)\\t{FFFFFF}დონე %d\\t{66DD66}~$%s\\t{FFFFFF}%s\\n"
  },
  {
   "id": 742,
@@ -813,7 +813,7 @@
   "line": 113,
   "it": "{FFFFFF}%s\\t{FFFFFF}Liv. %d\\t{66DD66}~$%s\\t{FFFFFF}%s\\n",
   "ctx": "format(line, 192, \"{FFFFFF}%s\\t{FFFFFF}Liv. %d\\t{66DD66}~$%s\\t{FFFFFF}%s\\n\", g_UiJbName[job], g_UiJbMinLevel[job], pay, g_UiJbVehicle[job]);",
-  "ka": ""
+  "ka": "{FFFFFF}%s\\t{FFFFFF}დონე %d\\t{66DD66}~$%s\\t{FFFFFF}%s\\n"
  },
  {
   "id": 743,
@@ -821,7 +821,7 @@
   "line": 119,
   "it": "{FF6666}Lascia il lavoro attuale\\t\\t\\t\\n",
   "ctx": "strcat(body, \"{FF6666}Lascia il lavoro attuale\\t\\t\\t\\n\", 1024);",
-  "ka": ""
+  "ka": "{FF6666}მიმდინარე სამსახურის დატოვება\\t\\t\\t\\n"
  },
  {
   "id": 744,
@@ -829,7 +829,7 @@
   "line": 121,
   "it": "Job Center",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9300, DIALOG_STYLE_TABLIST_HEADERS, \"Job Center\", body, \"Dettagli\", \"Chiudi\");",
-  "ka": ""
+  "ka": "Job Center"
  },
  {
   "id": 745,
@@ -837,7 +837,7 @@
   "line": 121,
   "it": "Dettagli",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9300, DIALOG_STYLE_TABLIST_HEADERS, \"Job Center\", body, \"Dettagli\", \"Chiudi\");",
-  "ka": ""
+  "ka": "დეტალები"
  },
  {
   "id": 746,
@@ -845,7 +845,7 @@
   "line": 121,
   "it": "Chiudi",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9300, DIALOG_STYLE_TABLIST_HEADERS, \"Job Center\", body, \"Dettagli\", \"Chiudi\");",
-  "ka": ""
+  "ka": "დახურვა"
  },
  {
   "id": 747,
@@ -853,7 +853,7 @@
   "line": 141,
   "it": "Veicolo di servizio: {FFFFFF}%s{FFFFFF}\\nPercorso: %s\\n",
   "ctx": "format(line, 192, \"Veicolo di servizio: {FFFFFF}%s{FFFFFF}\\nPercorso: %s\\n\", g_UiJbVehicle[job], g_UiJbRoute[job]);",
-  "ka": ""
+  "ka": "სამსახურებრივი მანქანა: {FFFFFF}%s{FFFFFF}\\nმარშრუტი: %s\\n"
  },
  {
   "id": 748,
@@ -861,7 +861,7 @@
   "line": 143,
   "it": "Livello minimo: %d\\nSosta richiesta: %d s a ogni %s\\n\\n",
   "ctx": "format(line, 192, \"Livello minimo: %d\\nSosta richiesta: %d s a ogni %s\\n\\n\", g_UiJbMinLevel[job], g_UiJbDwellMs[job] / 1000, g_UiJbStepWord[job]);",
-  "ka": ""
+  "ka": "მინიმალური დონე: %d\\nსაჭირო გაჩერება: %d წმ ყოველ %s-ზე\\n\\n"
  },
  {
   "id": 749,
@@ -869,7 +869,7 @@
   "line": 145,
   "it": "Paga: {66DD66}$%s{FFFFFF} a %s + {66DD66}$%s{FFFFFF} di bonus a fine giro = {66DD66}$%s{FFFFFF} a giro\\n",
   "ctx": "format(line, 192, \"Paga: {66DD66}$%s{FFFFFF} a %s + {66DD66}$%s{FFFFFF} di bonus a fine giro = {66DD66}$%s{FFFFFF} a giro\\n\", step, g_UiJbStepWord[job], bonus, runPay);",
-  "ka": ""
+  "ka": "ხელფასი: {66DD66}$%s{FFFFFF} ყოველ %s-ზე + {66DD66}$%s{FFFFFF} ბონუსი წრის ბოლოს = {66DD66}$%s{FFFFFF} წრეზე\\n"
  },
  {
   "id": 750,
@@ -877,7 +877,7 @@
   "line": 147,
   "it": "Stima: circa {66DD66}$%s{FFFFFF}/ora (tetto $%s/ora). La paga e' accreditata in banca a fine turno.\\n\\n",
   "ctx": "format(line, 192, \"Stima: circa {66DD66}$%s{FFFFFF}/ora (tetto $%s/ora). La paga e' accreditata in banca a fine turno.\\n\\n\", hourly, cap);",
-  "ka": ""
+  "ka": "სავარაუდოდ: დაახლ. {66DD66}$%s{FFFFFF}/სთ (ლიმიტი $%s/სთ). ხელფასი ბანკში ჩაირიცხება ცვლის ბოლოს.\\n\\n"
  },
  {
   "id": 751,
@@ -885,7 +885,7 @@
   "line": 149,
   "it": "Il turno inizia con /inizia e termina con /fine. Veicolo distrutto o abbandonato, morte o\\ndisconnessione annullano il turno e il guadagno maturato va perso.",
   "ctx": "strcat(body, \"Il turno inizia con /inizia e termina con /fine. Veicolo distrutto o abbandonato, morte o\\ndisconnessione annullano il turno e il guadagno maturato va perso.\", 1024);",
-  "ka": ""
+  "ka": "ცვლა იწყება /inizia-თი და მთავრდება /fine-ით. მანქანის განადგურება ან მიტოვება, სიკვდილი ან\\nგათიშვა ცვლას აუქმებს და დაგროვილი შემოსავალი იკარგება."
  },
  {
   "id": 752,
@@ -893,7 +893,7 @@
   "line": 153,
   "it": "\\n\\n{FF6666}Richiede il livello %d (tu sei livello %d).",
   "ctx": "format(line, 192, \"\\n\\n{FF6666}Richiede il livello %d (tu sei livello %d).\", g_UiJbMinLevel[job], g_UiJbLevel[playerid]);",
-  "ka": ""
+  "ka": "\\n\\n{FF6666}საჭიროა დონე %d (შენ ხარ დონე %d)."
  },
  {
   "id": 753,
@@ -901,7 +901,7 @@
   "line": 159,
   "it": "\\n\\n{FFD24D}Questo e' gia' il tuo lavoro attuale.",
   "ctx": "strcat(body, \"\\n\\n{FFD24D}Questo e' gia' il tuo lavoro attuale.\", 1024);",
-  "ka": ""
+  "ka": "\\n\\n{FFD24D}ეს უკვე შენი მიმდინარე სამსახურია."
  },
  {
   "id": 754,
@@ -909,7 +909,7 @@
   "line": 164,
   "it": "\\n\\n{FF6666}Potrai cambiare lavoro tra %d min %02d s.",
   "ctx": "format(line, 192, \"\\n\\n{FF6666}Potrai cambiare lavoro tra %d min %02d s.\", g_UiJbCooldown[playerid] / 60, g_UiJbCooldown[playerid] % 60);",
-  "ka": ""
+  "ka": "\\n\\n{FF6666}სამსახურს შეცვლი %d წთ %02d წმ-ში."
  },
  {
   "id": 755,
@@ -917,7 +917,7 @@
   "line": 170,
   "it": "\\n\\n{FFD24D}Dopo la scelta dovrai attendere %d minuti prima di cambiare lavoro.",
   "ctx": "format(line, 192, \"\\n\\n{FFD24D}Dopo la scelta dovrai attendere %d minuti prima di cambiare lavoro.\", 10);",
-  "ka": ""
+  "ka": "\\n\\n{FFD24D}არჩევის შემდეგ სამსახურის შესაცვლელად %d წუთი მოგიწევს ლოდინი."
  },
  {
   "id": 756,
@@ -925,7 +925,7 @@
   "line": 173,
   "it": "Job Center - %s",
   "ctx": "format(title, 64, \"Job Center - %s\", g_UiJbName[job]);",
-  "ka": ""
+  "ka": "Job Center - %s"
  },
  {
   "id": 757,
@@ -933,7 +933,7 @@
   "line": 174,
   "it": "Prendi lavoro",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9301, DIALOG_STYLE_MSGBOX, title, body, ok ? \"Prendi lavoro\" : \"Indietro\", ok ? \"Indietro\" : \"\");",
-  "ka": ""
+  "ka": "აყვანა"
  },
  {
   "id": 758,
@@ -941,7 +941,7 @@
   "line": 174,
   "it": "Indietro",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9301, DIALOG_STYLE_MSGBOX, title, body, ok ? \"Prendi lavoro\" : \"Indietro\", ok ? \"Indietro\" : \"\");",
-  "ka": ""
+  "ka": "უკან"
  },
  {
   "id": 759,
@@ -949,7 +949,7 @@
   "line": 174,
   "it": "Indietro",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9301, DIALOG_STYLE_MSGBOX, title, body, ok ? \"Prendi lavoro\" : \"Indietro\", ok ? \"Indietro\" : \"\");",
-  "ka": ""
+  "ka": "უკან"
  },
  {
   "id": 760,
@@ -957,7 +957,7 @@
   "line": 185,
   "it": "{FFFFFF}Vuoi davvero lasciare il lavoro di {FFD24D}%s{FFFFFF}?\\n\\nSe poi scegli un altro lavoro dovrai rispettare il cooldown di %d minuti.",
   "ctx": "format(body, 256, \"{FFFFFF}Vuoi davvero lasciare il lavoro di {FFD24D}%s{FFFFFF}?\\n\\nSe poi scegli un altro lavoro dovrai rispettare il cooldown di %d minuti.\", g_UiJbName[cur], 10);",
-  "ka": ""
+  "ka": "{FFFFFF}ნამდვილად გინდა {FFD24D}%s{FFFFFF}-ის სამსახურის დატოვება?\\n\\nსხვა სამსახურის არჩევისას %d წუთი მოგიწევს ლოდინი."
  },
  {
   "id": 761,
@@ -965,7 +965,7 @@
   "line": 186,
   "it": "Lascia il lavoro",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9302, DIALOG_STYLE_MSGBOX, \"Lascia il lavoro\", body, \"Lascia\", \"Annulla\");",
-  "ka": ""
+  "ka": "სამსახურის დატოვება"
  },
  {
   "id": 762,
@@ -973,7 +973,7 @@
   "line": 186,
   "it": "Lascia",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9302, DIALOG_STYLE_MSGBOX, \"Lascia il lavoro\", body, \"Lascia\", \"Annulla\");",
-  "ka": ""
+  "ka": "დატოვება"
  },
  {
   "id": 763,
@@ -981,7 +981,7 @@
   "line": 186,
   "it": "Annulla",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9302, DIALOG_STYLE_MSGBOX, \"Lascia il lavoro\", body, \"Lascia\", \"Annulla\");",
-  "ka": ""
+  "ka": "გაუქმება"
  },
  {
   "id": 764,
@@ -989,7 +989,7 @@
   "line": 203,
   "it": "{FFFFFF}Al momento sei {FFD24D}disoccupato{FFFFFF}.\\nRecati al Job Center (piazza City Hall) e usa /lavoro prendi.\\n\\nLavori disponibili:\\n",
   "ctx": "strcat(body, \"{FFFFFF}Al momento sei {FFD24D}disoccupato{FFFFFF}.\\nRecati al Job Center (piazza City Hall) e usa /lavoro prendi.\\n\\nLavori disponibili:\\n\", 1024);",
-  "ka": ""
+  "ka": "{FFFFFF}ამჟამად {FFD24D}უმუშევარი{FFFFFF} ხარ.\\nმიდი Job Center-ში (City Hall-ის მოედანი) და გამოიყენე /lavoro prendi.\\n\\nხელმისაწვდომი სამსახურები:\\n"
  },
  {
   "id": 765,
@@ -997,7 +997,7 @@
   "line": 207,
   "it": "{FFFFFF}- %s: livello %d, ~{66DD66}$%s{FFFFFF}/ora%s\\n",
   "ctx": "format(line, 192, \"{FFFFFF}- %s: livello %d, ~{66DD66}$%s{FFFFFF}/ora%s\\n\", g_UiJbName[job], g_UiJbMinLevel[job], hourly, level < g_UiJbMinLevel[job] ? \" {FF6666}(bloccato){FFFFFF}\" : \"\");",
-  "ka": ""
+  "ka": "{FFFFFF}- %s: დონე %d, ~{66DD66}$%s{FFFFFF}/სთ%s\\n"
  },
  {
   "id": 766,
@@ -1005,7 +1005,7 @@
   "line": 207,
   "it": " {FF6666}(bloccato){FFFFFF}",
   "ctx": "format(line, 192, \"{FFFFFF}- %s: livello %d, ~{66DD66}$%s{FFFFFF}/ora%s\\n\", g_UiJbName[job], g_UiJbMinLevel[job], hourly, level < g_UiJbMinLevel[job] ? \" {FF6666}(bloccato){FFFFFF}\" : \"\");",
-  "ka": ""
+  "ka": " {FF6666}(დაბლოკილი){FFFFFF}"
  },
  {
   "id": 767,
@@ -1013,7 +1013,7 @@
   "line": 215,
   "it": "{FFFFFF}Lavoro attuale: {FFD24D}%s{FFFFFF}\\nVeicolo: %s\\nPercorso: %s\\n",
   "ctx": "format(line, 192, \"{FFFFFF}Lavoro attuale: {FFD24D}%s{FFFFFF}\\nVeicolo: %s\\nPercorso: %s\\n\", g_UiJbName[jobId], g_UiJbVehicle[jobId], g_UiJbRoute[jobId]);",
-  "ka": ""
+  "ka": "{FFFFFF}მიმდინარე სამსახური: {FFD24D}%s{FFFFFF}\\nმანქანა: %s\\nმარშრუტი: %s\\n"
  },
  {
   "id": 768,
@@ -1021,7 +1021,7 @@
   "line": 217,
   "it": "Paga a giro: {66DD66}$%s{FFFFFF}  |  stima ~{66DD66}$%s{FFFFFF}/ora (tetto $%d/ora)\\n\\n",
   "ctx": "format(line, 192, \"Paga a giro: {66DD66}$%s{FFFFFF}  |  stima ~{66DD66}$%s{FFFFFF}/ora (tetto $%d/ora)\\n\\n\", money, hourly, 2200);",
-  "ka": ""
+  "ka": "ხელფასი წრეზე: {66DD66}$%s{FFFFFF}  |  სავარაუდოდ ~{66DD66}$%s{FFFFFF}/სთ (ლიმიტი $%d/სთ)\\n\\n"
  },
  {
   "id": 769,
@@ -1029,7 +1029,7 @@
   "line": 220,
   "it": "Turni completati: %d\\nTotale guadagnato: {66DD66}$%s{FFFFFF}\\n\\n",
   "ctx": "format(line, 192, \"Turni completati: %d\\nTotale guadagnato: {66DD66}$%s{FFFFFF}\\n\\n\", runs, money);",
-  "ka": ""
+  "ka": "დასრულებული ცვლები: %d\\nსულ გამომუშავებული: {66DD66}$%s{FFFFFF}\\n\\n"
  },
  {
   "id": 770,
@@ -1037,7 +1037,7 @@
   "line": 222,
   "it": "Comandi: /inizia (avvia il turno), /fine (chiude e paga il maturato), /lavoro lascia (al Job Center).",
   "ctx": "strcat(body, \"Comandi: /inizia (avvia il turno), /fine (chiude e paga il maturato), /lavoro lascia (al Job Center).\", 1024);",
-  "ka": ""
+  "ka": "ბრძანებები: /inizia (ცვლის დაწყება), /fine (დასრულება და დაგროვილის გადახდა), /lavoro lascia (Job Center-ში)."
  },
  {
   "id": 771,
@@ -1045,7 +1045,7 @@
   "line": 224,
   "it": "Il tuo lavoro",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9303, DIALOG_STYLE_MSGBOX, \"Il tuo lavoro\", body, \"Chiudi\", \"\");",
-  "ka": ""
+  "ka": "შენი სამსახური"
  },
  {
   "id": 772,
@@ -1053,7 +1053,7 @@
   "line": 224,
   "it": "Chiudi",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9303, DIALOG_STYLE_MSGBOX, \"Il tuo lavoro\", body, \"Chiudi\", \"\");",
-  "ka": ""
+  "ka": "დახურვა"
  },
  {
   "id": 773,
@@ -1061,7 +1061,7 @@
   "line": 327,
   "it": "LAVORO",
   "ctx": "g_UiJHud[playerid][1] = UI_JhText(playerid, (5.0 + left), (384.0 + 2.0), \"LAVORO\", 0.22, 1.0, -2994689, t_TEXT_DRAW_ALIGN:1);",
-  "ka": ""
+  "ka": "სამსახური"
  },
  {
   "id": 774,
@@ -1069,7 +1069,7 @@
   "line": 328,
   "it": "Tappa 0/0",
   "ctx": "g_UiJHud[playerid][2] = UI_JhText(playerid, (5.0 + left), (384.0 + 14.0), \"Tappa 0/0\", 0.22, 1.0, -1, t_TEXT_DRAW_ALIGN:1);",
-  "ka": ""
+  "ka": "გაჩერება 0/0"
  },
  {
   "id": 775,
@@ -1077,7 +1077,7 @@
   "line": 329,
   "it": "Maturato: $0",
   "ctx": "g_UiJHud[playerid][3] = UI_JhText(playerid, (5.0 + left), (384.0 + 26.0), \"Maturato: $0\", 0.22, 1.0, 0x66DD66FF, t_TEXT_DRAW_ALIGN:1);",
-  "ka": ""
+  "ka": "დაგროვდა: $0"
  },
  {
   "id": 776,
@@ -1085,7 +1085,7 @@
   "line": 330,
   "it": "Tempo 00:00",
   "ctx": "g_UiJHud[playerid][4] = UI_JhText(playerid, (5.0 + left), (384.0 + 38.0), \"Tempo 00:00\", 0.22, 1.0, -1, t_TEXT_DRAW_ALIGN:1);",
-  "ka": ""
+  "ka": "დრო 00:00"
  },
  {
   "id": 777,
@@ -1093,7 +1093,7 @@
   "line": 331,
   "it": "TORNA AL VEICOLO: 45s",
   "ctx": "g_UiJHud[playerid][5] = UI_JhText(playerid, (5.0 + left), (384.0 + 51.0), \"TORNA AL VEICOLO: 45s\", 0.2, 0.9, -12303105, t_TEXT_DRAW_ALIGN:1);",
-  "ka": ""
+  "ka": "დაბრუნდი მანქანაში: 45s"
  },
  {
   "id": 778,
@@ -1101,7 +1101,7 @@
   "line": 375,
   "it": "LAVORO: %s",
   "ctx": "format(str, 48, \"LAVORO: %s\", g_UiJbName[jobId]);",
-  "ka": ""
+  "ka": "სამსახური: %s"
  },
  {
   "id": 779,
@@ -1109,7 +1109,7 @@
   "line": 379,
   "it": "Maturato: $0",
   "ctx": "Lang_PlayerTextDrawSetString(playerid, g_UiJHud[playerid][3], \"Maturato: $0\");",
-  "ka": ""
+  "ka": "დაგროვდა: $0"
  },
  {
   "id": 780,
@@ -1117,7 +1117,7 @@
   "line": 380,
   "it": "Tempo 00:00",
   "ctx": "Lang_PlayerTextDrawSetString(playerid, g_UiJHud[playerid][4], \"Tempo 00:00\");",
-  "ka": ""
+  "ka": "დრო 00:00"
  },
  {
   "id": 781,
@@ -1125,7 +1125,7 @@
   "line": 418,
   "it": "Rientro al deposito",
   "ctx": "format(str, 64, \"Rientro al deposito\");",
-  "ka": ""
+  "ka": "დეპოში დაბრუნება"
  },
  {
   "id": 782,
@@ -1133,7 +1133,7 @@
   "line": 426,
   "it": "Maturato: $%s",
   "ctx": "format(str, 64, \"Maturato: $%s\", money);",
-  "ka": ""
+  "ka": "დაგროვდა: $%s"
  },
  {
   "id": 783,
@@ -1141,7 +1141,7 @@
   "line": 430,
   "it": "Tempo %02d:%02d  Sosta %ds",
   "ctx": "format(str, 64, \"Tempo %02d:%02d  Sosta %ds\", elapsedSec / 60, elapsedSec % 60, dwellSec);",
-  "ka": ""
+  "ka": "დრო %02d:%02d  გაჩერება %ds"
  },
  {
   "id": 784,
@@ -1149,7 +1149,7 @@
   "line": 434,
   "it": "Tempo %02d:%02d",
   "ctx": "format(str, 64, \"Tempo %02d:%02d\", elapsedSec / 60, elapsedSec % 60);",
-  "ka": ""
+  "ka": "დრო %02d:%02d"
  },
  {
   "id": 785,
@@ -1157,7 +1157,7 @@
   "line": 439,
   "it": "TORNA AL VEICOLO: %ds",
   "ctx": "format(str, 64, \"TORNA AL VEICOLO: %ds\", offVehicleSec);",
-  "ka": ""
+  "ka": "დაბრუნდი მანქანაში: %ds"
  },
  {
   "id": 786,
@@ -1165,7 +1165,7 @@
   "line": 2,
   "it": "Tutti",
   "ctx": "\"Tutti\",",
-  "ka": ""
+  "ka": "ყველა"
  },
  {
   "id": 787,
@@ -1173,7 +1173,7 @@
   "line": 3,
   "it": "Idlewood",
   "ctx": "\"Idlewood\",",
-  "ka": ""
+  "ka": "Idlewood"
  },
  {
   "id": 788,
@@ -1181,7 +1181,7 @@
   "line": 4,
   "it": "Ganton",
   "ctx": "\"Ganton\",",
-  "ka": ""
+  "ka": "Ganton"
  },
  {
   "id": 789,
@@ -1189,7 +1189,7 @@
   "line": 5,
   "it": "Jefferson",
   "ctx": "\"Jefferson\"",
-  "ka": ""
+  "ka": "Jefferson"
  },
  {
   "id": 790,
@@ -1197,7 +1197,7 @@
   "line": 8,
   "it": "Merci varie",
   "ctx": "\"Merci varie\",",
-  "ka": ""
+  "ka": "სხვადასხვა ტვირთი"
  },
  {
   "id": 791,
@@ -1205,7 +1205,7 @@
   "line": 9,
   "it": "Merci generiche",
   "ctx": "\"Merci generiche\",",
-  "ka": ""
+  "ka": "ზოგადი ტვირთი"
  },
  {
   "id": 792,
@@ -1213,7 +1213,7 @@
   "line": 10,
   "it": "Alimentari",
   "ctx": "\"Alimentari\",",
-  "ka": ""
+  "ka": "სურსათი"
  },
  {
   "id": 793,
@@ -1221,7 +1221,7 @@
   "line": 11,
   "it": "Materiali edili",
   "ctx": "\"Materiali edili\"",
-  "ka": ""
+  "ka": "სამშენებლო მასალები"
  },
  {
   "id": 794,
@@ -1229,7 +1229,7 @@
   "line": 14,
   "it": "Tutte",
   "ctx": "\"Tutte\",",
-  "ka": ""
+  "ka": "ყველა"
  },
  {
   "id": 795,
@@ -1237,7 +1237,7 @@
   "line": 15,
   "it": "Trasporto merci",
   "ctx": "\"Trasporto merci\"",
-  "ka": ""
+  "ka": "ტვირთის გადაზიდვა"
  },
  {
   "id": 796,
@@ -1245,7 +1245,7 @@
   "line": 19,
   "it": "Trasporti",
   "ctx": "\"Trasporti\",",
-  "ka": ""
+  "ka": "ტრანსპორტი"
  },
  {
   "id": 797,
@@ -1253,7 +1253,7 @@
   "line": 20,
   "it": "Taxi",
   "ctx": "\"Taxi\"",
-  "ka": ""
+  "ka": "ტაქსი"
  },
  {
   "id": 798,
@@ -1261,7 +1261,7 @@
   "line": 23,
   "it": "Principiante",
   "ctx": "\"Principiante\",",
-  "ka": ""
+  "ka": "დამწყები"
  },
  {
   "id": 799,
@@ -1269,7 +1269,7 @@
   "line": 24,
   "it": "Affidabile",
   "ctx": "\"Affidabile\",",
-  "ka": ""
+  "ka": "სანდო"
  },
  {
   "id": 800,
@@ -1277,7 +1277,7 @@
   "line": 25,
   "it": "Esperto",
   "ctx": "\"Esperto\",",
-  "ka": ""
+  "ka": "გამოცდილი"
  },
  {
   "id": 801,
@@ -1285,7 +1285,7 @@
   "line": 26,
   "it": "Elite",
   "ctx": "\"Elite\"",
-  "ka": ""
+  "ka": "ელიტა"
  },
  {
   "id": 802,
@@ -1293,7 +1293,7 @@
   "line": 30,
   "it": "Livello insufficiente",
   "ctx": "\"Livello insufficiente\",",
-  "ka": ""
+  "ka": "დონე არ გყოფნის"
  },
  {
   "id": 803,
@@ -1301,7 +1301,7 @@
   "line": 31,
   "it": "Serve piu' reputazione nei trasporti",
   "ctx": "\"Serve piu' reputazione nei trasporti\",",
-  "ka": ""
+  "ka": "ტრანსპორტში მეტი რეპუტაცია გჭირდება"
  },
  {
   "id": 804,
@@ -1309,7 +1309,7 @@
   "line": 32,
   "it": "Serve piu' fiducia nel quartiere",
   "ctx": "\"Serve piu' fiducia nel quartiere\",",
-  "ka": ""
+  "ka": "უბანში მეტი ნდობა გჭირდება"
  },
  {
   "id": 805,
@@ -1317,7 +1317,7 @@
   "line": 33,
   "it": "Hai gia' un contratto in corso",
   "ctx": "\"Hai gia' un contratto in corso\",",
-  "ka": ""
+  "ka": "უკვე გაქვს მიმდინარე კონტრაქტი"
  },
  {
   "id": 806,
@@ -1325,7 +1325,7 @@
   "line": 34,
   "it": "Sei gia' impegnato in un altro lavoro",
   "ctx": "\"Sei gia' impegnato in un altro lavoro\",",
-  "ka": ""
+  "ka": "უკვე სხვა სამსახურით ხარ დაკავებული"
  },
  {
   "id": 807,
@@ -1333,7 +1333,7 @@
   "line": 35,
   "it": "Prenditi una pausa, torna tra poco",
   "ctx": "\"Prenditi una pausa, torna tra poco\",",
-  "ka": ""
+  "ka": "დაისვენე, ცოტა ხანში დაბრუნდი"
  },
  {
   "id": 808,
@@ -1341,7 +1341,7 @@
   "line": 36,
   "it": "Hai lavorato tanto quest'ora",
   "ctx": "\"Hai lavorato tanto quest'ora\",",
-  "ka": ""
+  "ka": "ამ საათში ბევრი იმუშავე"
  },
  {
   "id": 809,
@@ -1349,7 +1349,7 @@
   "line": 37,
   "it": "Lasciato da poco: riprovaci piu' tardi",
   "ctx": "\"Lasciato da poco: riprovaci piu' tardi\",",
-  "ka": ""
+  "ka": "ახლახან დატოვე: მოგვიანებით სცადე"
  },
  {
   "id": 810,
@@ -1357,7 +1357,7 @@
   "line": 38,
   "it": "Gia' preso da un altro autista",
   "ctx": "\"Gia' preso da un altro autista\",",
-  "ka": ""
+  "ka": "უკვე აიღო სხვა მძღოლმა"
  },
  {
   "id": 811,
@@ -1365,7 +1365,7 @@
   "line": 39,
   "it": "Non disponibile al momento",
   "ctx": "\"Non disponibile al momento\"",
-  "ka": ""
+  "ka": "ამჟამად მიუწვდომელია"
  },
  {
   "id": 812,
@@ -1373,7 +1373,7 @@
   "line": 43,
   "it": "Potrai donare dopo un po' di tempo trascorso in citta'.",
   "ctx": "\"Potrai donare dopo un po' di tempo trascorso in citta'.\",",
-  "ka": ""
+  "ka": "შემოწირულობას ქალაქში გარკვეული დროის გატარების შემდეგ შეძლებ."
  },
  {
   "id": 813,
@@ -1381,7 +1381,7 @@
   "line": 44,
   "it": "Per oggi hai gia' dato il massimo: grazie davvero.",
   "ctx": "\"Per oggi hai gia' dato il massimo: grazie davvero.\",",
-  "ka": ""
+  "ka": "დღეს მაქსიმუმი უკვე გაიღე: დიდი მადლობა."
  },
  {
   "id": 814,
@@ -1389,7 +1389,7 @@
   "line": 45,
   "it": "Questo progetto non raccoglie piu' fondi.",
   "ctx": "\"Questo progetto non raccoglie piu' fondi.\",",
-  "ka": ""
+  "ka": "ეს პროექტი თანხას აღარ აგროვებს."
  },
  {
   "id": 815,
@@ -1397,7 +1397,7 @@
   "line": 46,
   "it": "Le donazioni si fanno alla Casa del Quartiere o a una bacheca.",
   "ctx": "\"Le donazioni si fanno alla Casa del Quartiere o a una bacheca.\"",
-  "ka": ""
+  "ka": "შემოწირულობა კეთდება უბნის სახლში ან დაფაზე."
  },
  {
   "id": 816,
@@ -1405,7 +1405,7 @@
   "line": 49,
   "it": "Evento",
   "ctx": "\"Evento\",",
-  "ka": ""
+  "ka": "ღონისძიება"
  },
  {
   "id": 817,
@@ -1413,7 +1413,7 @@
   "line": 50,
   "it": "Consegna completata",
   "ctx": "\"Consegna completata\",",
-  "ka": ""
+  "ka": "მიწოდება დასრულდა"
  },
  {
   "id": 818,
@@ -1421,7 +1421,7 @@
   "line": 51,
   "it": "Consegna non riuscita",
   "ctx": "\"Consegna non riuscita\",",
-  "ka": ""
+  "ka": "მიწოდება ჩაიშალა"
  },
  {
   "id": 819,
@@ -1429,7 +1429,7 @@
   "line": 52,
   "it": "Corsa in taxi",
   "ctx": "\"Corsa in taxi\",",
-  "ka": ""
+  "ka": "ტაქსით მგზავრობა"
  },
  {
   "id": 820,
@@ -1437,7 +1437,7 @@
   "line": 53,
   "it": "Noleggio aperto",
   "ctx": "\"Noleggio aperto\",",
-  "ka": ""
+  "ka": "ქირაობა დაიწყო"
  },
  {
   "id": 821,
@@ -1445,7 +1445,7 @@
   "line": 54,
   "it": "Noleggio riconsegnato",
   "ctx": "\"Noleggio riconsegnato\",",
-  "ka": ""
+  "ka": "ნაქირავები დაბრუნდა"
  },
  {
   "id": 822,
@@ -1453,7 +1453,7 @@
   "line": 55,
   "it": "Crimine segnalato",
   "ctx": "\"Crimine segnalato\",",
-  "ka": ""
+  "ka": "დანაშაულის შეტყობინება"
  },
  {
   "id": 823,
@@ -1461,7 +1461,7 @@
   "line": 56,
   "it": "Pattuglia di passaggio",
   "ctx": "\"Pattuglia di passaggio\",",
-  "ka": ""
+  "ka": "გამვლელი პატრული"
  },
  {
   "id": 824,
@@ -1469,7 +1469,7 @@
   "line": 57,
   "it": "Progetto della comunita'",
   "ctx": "\"Progetto della comunita'\",",
-  "ka": ""
+  "ka": "საზოგადოების პროექტი"
  },
  {
   "id": 825,
@@ -1477,7 +1477,7 @@
   "line": 58,
   "it": "Intervento dello staff",
   "ctx": "\"Intervento dello staff\"",
-  "ka": ""
+  "ka": "ადმინისტრაციის ჩარევა"
  },
  {
   "id": 826,
@@ -1485,7 +1485,7 @@
   "line": 62,
   "it": "Raggiungi la Casa del Quartiere",
   "ctx": "\"Raggiungi la Casa del Quartiere\",",
-  "ka": ""
+  "ka": "მიდი უბნის სახლში"
  },
  {
   "id": 827,
@@ -1493,7 +1493,7 @@
   "line": 63,
   "it": "Leggi /quartiere",
   "ctx": "\"Leggi /quartiere\",",
-  "ka": ""
+  "ka": "წაიკითხე /quartiere"
  },
  {
   "id": 828,
@@ -1501,7 +1501,7 @@
   "line": 64,
   "it": "Fai la consegna di benvenuto",
   "ctx": "\"Fai la consegna di benvenuto\",",
-  "ka": ""
+  "ka": "შეასრულე მისასალმებელი მიწოდება"
  },
  {
   "id": 829,
@@ -1509,7 +1509,7 @@
   "line": 65,
   "it": "Apri /reputazione",
   "ctx": "\"Apri /reputazione\",",
-  "ka": ""
+  "ka": "გახსენი /reputazione"
  },
  {
   "id": 830,
@@ -1517,7 +1517,7 @@
   "line": 66,
   "it": "Scopri /lavoro o /noleggio",
   "ctx": "\"Scopri /lavoro o /noleggio\"",
-  "ka": ""
+  "ka": "გაეცანი /lavoro-ს ან /noleggio-ს"
  },
  {
   "id": 831,
@@ -1525,7 +1525,7 @@
   "line": 70,
   "it": "A due passi da Unity Station, sotto la tettoia di Idlewood, c'e' la Casa del Quartiere: la bacheca dei contratti e qualcuno che conosce la zona.",
   "ctx": "\"A due passi da Unity Station, sotto la tettoia di Idlewood, c'e' la Casa del Quartiere: la bacheca dei contratti e qualcuno che conosce la zona.\",",
-  "ka": ""
+  "ka": "Unity Station-იდან ორ ნაბიჯში, Idlewood-ის ფარდულის ქვეშ, უბნის სახლია: კონტრაქტების დაფა და ვიღაც, ვინც უბანს კარგად იცნობს."
  },
  {
   "id": 832,
@@ -1533,7 +1533,7 @@
   "line": 71,
   "it": "Scopri come sta Idlewood: attivita', sicurezza, le voci della strada. Il quartiere cambia con quello che facciamo tutti.",
   "ctx": "\"Scopri come sta Idlewood: attivita', sicurezza, le voci della strada. Il quartiere cambia con quello che facciamo tutti.\",",
-  "ka": ""
+  "ka": "გაიგე, როგორაა Idlewood: საქმიანობა, უსაფრთხოება, ქუჩის ხმები. უბანი იცვლება იმით, რასაც ყველანი ვაკეთებთ."
  },
  {
   "id": 833,
@@ -1541,7 +1541,7 @@
   "line": 72,
   "it": "Accetta alla bacheca la consegna di benvenuto: un carico dal magazzino al negozio di Idlewood. Nessuna fretta, la strada e' breve.",
   "ctx": "\"Accetta alla bacheca la consegna di benvenuto: un carico dal magazzino al negozio di Idlewood. Nessuna fretta, la strada e' breve.\",",
-  "ka": ""
+  "ka": "დაფაზე მიიღე მისასალმებელი მიწოდება: ტვირთი საწყობიდან Idlewood-ის მაღაზიამდე. არ იჩქარო, გზა მოკლეა."
  },
  {
   "id": 834,
@@ -1549,7 +1549,7 @@
   "line": 73,
   "it": "Guarda come ti conosce la citta': il tuo mestiere e il tuo nome nei quartieri crescono con il lavoro fatto bene.",
   "ctx": "\"Guarda come ti conosce la citta': il tuo mestiere e il tuo nome nei quartieri crescono con il lavoro fatto bene.\",",
-  "ka": ""
+  "ka": "ნახე, როგორ გიცნობს ქალაქი: შენი ხელობა და სახელი უბნებში კარგად შესრულებული საქმით იზრდება."
  },
  {
   "id": 835,
@@ -1557,7 +1557,7 @@
   "line": 74,
   "it": "Il Job Center di Pershing Square offre lavori stabili; se ti serve un mezzo, il noleggio e' proprio li' accanto.",
   "ctx": "\"Il Job Center di Pershing Square offre lavori stabili; se ti serve un mezzo, il noleggio e' proprio li' accanto.\"",
-  "ka": ""
+  "ka": "Pershing Square-ის Job Center სტაბილურ სამსახურს გთავაზობს; თუ მანქანა გჭირდება, ქირაობა იქვე, გვერდითაა."
  },
  {
   "id": 836,
@@ -1565,7 +1565,7 @@
   "line": 78,
   "it": "Segui il segnale: la Casa del Quartiere e' vicino alla stazione.",
   "ctx": "\"Segui il segnale: la Casa del Quartiere e' vicino alla stazione.\",",
-  "ka": ""
+  "ka": "მიჰყევი ნიშნულს: უბნის სახლი სადგურთან ახლოსაა."
  },
  {
   "id": 837,
@@ -1573,7 +1573,7 @@
   "line": 79,
   "it": "Scrivi /quartiere per conoscere Idlewood.",
   "ctx": "\"Scrivi /quartiere per conoscere Idlewood.\",",
-  "ka": ""
+  "ka": "დაწერე /quartiere, რომ Idlewood გაიცნო."
  },
  {
   "id": 838,
@@ -1581,7 +1581,7 @@
   "line": 80,
   "it": "Alla bacheca, /contratti: c'e' una consegna di benvenuto per te.",
   "ctx": "\"Alla bacheca, /contratti: c'e' una consegna di benvenuto per te.\",",
-  "ka": ""
+  "ka": "დაფასთან, /contratti: შენთვის მისასალმებელი მიწოდებაა."
  },
  {
   "id": 839,
@@ -1589,7 +1589,7 @@
   "line": 81,
   "it": "Scrivi /reputazione per vedere come ti conosce la citta'.",
   "ctx": "\"Scrivi /reputazione per vedere come ti conosce la citta'.\",",
-  "ka": ""
+  "ka": "დაწერე /reputazione, რომ ნახო, როგორ გიცნობს ქალაქი."
  },
  {
   "id": 840,
@@ -1597,7 +1597,7 @@
   "line": 82,
   "it": "Ultimo passo: /lavoro o /noleggio, scegli tu.",
   "ctx": "\"Ultimo passo: /lavoro o /noleggio, scegli tu.\"",
-  "ka": ""
+  "ka": "ბოლო ნაბიჯი: /lavoro ან /noleggio, შენ აირჩიე."
  },
  {
   "id": 841,
@@ -1605,7 +1605,7 @@
   "line": 272,
   "it": "%d min fa",
   "ctx": "format(dest, size, \"%d min fa\", seconds / 60);",
-  "ka": ""
+  "ka": "%d წთ-ის წინ"
  },
  {
   "id": 842,
@@ -1613,7 +1613,7 @@
   "line": 276,
   "it": "%d h fa",
   "ctx": "format(dest, size, \"%d h fa\", seconds / 3600);",
-  "ka": ""
+  "ka": "%d სთ-ის წინ"
  },
  {
   "id": 843,
@@ -1621,7 +1621,7 @@
   "line": 280,
   "it": "%d g fa",
   "ctx": "format(dest, size, \"%d g fa\", seconds / 86400);",
-  "ka": ""
+  "ka": "%d დღის წინ"
  },
  {
   "id": 844,
@@ -1629,7 +1629,7 @@
   "line": 388,
   "it": "{66DD66}Di casa{AAAAAA} (-%d%% su noleggio e taxi)",
   "ctx": "format(dest, size, \"{66DD66}Di casa{AAAAAA} (-%d%% su noleggio e taxi)\", 10);",
-  "ka": ""
+  "ka": "{66DD66}შინაური{AAAAAA} (-%d%% ქირაზე და ტაქსზე)"
  },
  {
   "id": 845,
@@ -1637,7 +1637,7 @@
   "line": 392,
   "it": "{FFD24D}Conosciuto{AAAAAA} (-%d%% su noleggio e taxi)",
   "ctx": "format(dest, size, \"{FFD24D}Conosciuto{AAAAAA} (-%d%% su noleggio e taxi)\", 5);",
-  "ka": ""
+  "ka": "{FFD24D}ნაცნობი{AAAAAA} (-%d%% ქირაზე და ტაქსზე)"
  },
  {
   "id": 846,
@@ -1645,7 +1645,7 @@
   "line": 396,
   "it": "{FFAA33}Da riconquistare{AAAAAA} (si risale piu' in fretta)",
   "ctx": "strcopy(dest, \"{FFAA33}Da riconquistare{AAAAAA} (si risale piu' in fretta)\", size);",
-  "ka": ""
+  "ka": "{FFAA33}დასაბრუნებელი{AAAAAA} (უფრო სწრაფად აღდგება)"
  },
  {
   "id": 847,
@@ -1653,7 +1653,7 @@
   "line": 400,
   "it": "{FFFFFF}Sconosciuto",
   "ctx": "strcopy(dest, \"{FFFFFF}Sconosciuto\", size);",
-  "ka": ""
+  "ka": "{FFFFFF}უცნობი"
  },
  {
   "id": 848,
@@ -1661,7 +1661,7 @@
   "line": 426,
   "it": "Chiudi",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9725, DIALOG_STYLE_MSGBOX, title, body, \"Chiudi\", \"\");",
-  "ka": ""
+  "ka": "დახურვა"
  },
  {
   "id": 849,
@@ -1669,7 +1669,7 @@
   "line": 463,
   "it": "CONTRATTO",
   "ctx": "g_UiLvTd[playerid][1] = UI_LvText(playerid, (14.0 + 5.0), (150.0 + 2.0), \"CONTRATTO\", 0.22, 1.0, -2994689, t_TEXT_DRAW_ALIGN:1);",
-  "ka": ""
+  "ka": "კონტრაქტი"
  },
  {
   "id": 850,
@@ -1677,7 +1677,7 @@
   "line": 468,
   "it": "TASSAMETRO",
   "ctx": "g_UiLvTd[playerid][6] = UI_LvText(playerid, (14.0 + 5.0), (212.0 + 2.0), \"TASSAMETRO\", 0.22, 1.0, -2994689, t_TEXT_DRAW_ALIGN:1);",
-  "ka": ""
+  "ka": "ტაქსომეტრი"
  },
  {
   "id": 851,
@@ -1685,7 +1685,7 @@
   "line": 703,
   "it": "Liv. %d, rep. %d",
   "ctx": "format(dest, size, \"Liv. %d, rep. %d\", g_UiLvBdMinLevel[playerid][i], g_UiLvBdMinRep[playerid][i]);",
-  "ka": ""
+  "ka": "დონე %d, რეპ. %d"
  },
  {
   "id": 852,
@@ -1693,7 +1693,7 @@
   "line": 707,
   "it": "Liv. %d, fiducia %d",
   "ctx": "format(dest, size, \"Liv. %d, fiducia %d\", g_UiLvBdMinLevel[playerid][i], g_UiLvBdMinLRep[playerid][i]);",
-  "ka": ""
+  "ka": "დონე %d, ნდობა %d"
  },
  {
   "id": 853,
@@ -1701,7 +1701,7 @@
   "line": 711,
   "it": "Liv. %d",
   "ctx": "format(dest, size, \"Liv. %d\", g_UiLvBdMinLevel[playerid][i]);",
-  "ka": ""
+  "ka": "დონე %d"
  },
  {
   "id": 854,
@@ -1709,7 +1709,7 @@
   "line": 719,
   "it": "Contratto\\tMerce\\tCompenso / scade\\tRequisito\\n{FFD24D}Filtro: %s\\t{FFD24D}%s\\t{FFD24D}%s\\t{AAAAAA}cambia\\n",
   "ctx": "format(body, 1536, \"Contratto\\tMerce\\tCompenso / scade\\tRequisito\\n{FFD24D}Filtro: %s\\t{FFD24D}%s\\t{FFD24D}%s\\t{AAAAAA}cambia\\n\", g_UiLvDistrictName[g_UiLvFltDistrict[playerid]], g_UiLvKindName[g_UiLv",
-  "ka": ""
+  "ka": "კონტრაქტი\\tტვირთი\\tანაზღაურება / ვადა\\tმოთხოვნა\\n{FFD24D}ფილტრი: %s\\t{FFD24D}%s\\t{FFD24D}%s\\t{AAAAAA}შეცვლა\\n"
  },
  {
   "id": 855,
@@ -1717,7 +1717,7 @@
   "line": 745,
   "it": "{AAAAAA}Nessun contratto con questo filtro\\t\\t\\t\\n",
   "ctx": "strcat(body, \"{AAAAAA}Nessun contratto con questo filtro\\t\\t\\t\\n\", 1536);",
-  "ka": ""
+  "ka": "{AAAAAA}ამ ფილტრით კონტრაქტი არ არის\\t\\t\\t\\n"
  },
  {
   "id": 856,
@@ -1725,7 +1725,7 @@
   "line": 747,
   "it": "{AAAAAA}Aggiorna la bacheca\\t\\t\\t",
   "ctx": "strcat(body, \"{AAAAAA}Aggiorna la bacheca\\t\\t\\t\", 1536);",
-  "ka": ""
+  "ka": "{AAAAAA}დაფის განახლება\\t\\t\\t"
  },
  {
   "id": 857,
@@ -1733,7 +1733,7 @@
   "line": 748,
   "it": "Bacheca contratti%s",
   "ctx": "format(title, 64, \"Bacheca contratti%s\", g_UiLvBdAt[playerid] ? \"\" : \" (consultazione)\");",
-  "ka": ""
+  "ka": "კონტრაქტების დაფა%s"
  },
  {
   "id": 858,
@@ -1741,7 +1741,7 @@
   "line": 748,
   "it": " (consultazione)",
   "ctx": "format(title, 64, \"Bacheca contratti%s\", g_UiLvBdAt[playerid] ? \"\" : \" (consultazione)\");",
-  "ka": ""
+  "ka": " (დათვალიერება)"
  },
  {
   "id": 859,
@@ -1749,7 +1749,7 @@
   "line": 749,
   "it": "Apri",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9700, DIALOG_STYLE_TABLIST_HEADERS, title, body, \"Apri\", \"Chiudi\");",
-  "ka": ""
+  "ka": "გახსნა"
  },
  {
   "id": 860,
@@ -1757,7 +1757,7 @@
   "line": 749,
   "it": "Chiudi",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9700, DIALOG_STYLE_TABLIST_HEADERS, title, body, \"Apri\", \"Chiudi\");",
-  "ka": ""
+  "ka": "დახურვა"
  },
  {
   "id": 861,
@@ -1765,7 +1765,7 @@
   "line": 771,
   "it": "Quartiere: {FFD24D}%s\\nProfessione: {FFD24D}%s\\nMostra: {FFD24D}%s\\n{66DD66}Torna alla bacheca",
   "ctx": "format(body, 384, \"Quartiere: {FFD24D}%s\\nProfessione: {FFD24D}%s\\nMostra: {FFD24D}%s\\n{66DD66}Torna alla bacheca\", g_UiLvDistrictName[g_UiLvFltDistrict[playerid]], g_UiLvKindName[g_UiLvFltKind[player",
-  "ka": ""
+  "ka": "უბანი: {FFD24D}%s\\nპროფესია: {FFD24D}%s\\nჩვენება: {FFD24D}%s\\n{66DD66}დაფაზე დაბრუნება"
  },
  {
   "id": 862,
@@ -1773,7 +1773,7 @@
   "line": 771,
   "it": "solo quelli che posso accettare",
   "ctx": "format(body, 384, \"Quartiere: {FFD24D}%s\\nProfessione: {FFD24D}%s\\nMostra: {FFD24D}%s\\n{66DD66}Torna alla bacheca\", g_UiLvDistrictName[g_UiLvFltDistrict[playerid]], g_UiLvKindName[g_UiLvFltKind[player",
-  "ka": ""
+  "ka": "მხოლოდ ის, რისი მიღებაც შემიძლია"
  },
  {
   "id": 863,
@@ -1781,7 +1781,7 @@
   "line": 771,
   "it": "tutti i contratti",
   "ctx": "format(body, 384, \"Quartiere: {FFD24D}%s\\nProfessione: {FFD24D}%s\\nMostra: {FFD24D}%s\\n{66DD66}Torna alla bacheca\", g_UiLvDistrictName[g_UiLvFltDistrict[playerid]], g_UiLvKindName[g_UiLvFltKind[player",
-  "ka": ""
+  "ka": "ყველა კონტრაქტი"
  },
  {
   "id": 864,
@@ -1789,7 +1789,7 @@
   "line": 772,
   "it": "Filtra la bacheca",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9701, DIALOG_STYLE_LIST, \"Filtra la bacheca\", body, \"Cambia\", \"Indietro\");",
-  "ka": ""
+  "ka": "დაფის ფილტრი"
  },
  {
   "id": 865,
@@ -1797,7 +1797,7 @@
   "line": 772,
   "it": "Cambia",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9701, DIALOG_STYLE_LIST, \"Filtra la bacheca\", body, \"Cambia\", \"Indietro\");",
-  "ka": ""
+  "ka": "შეცვლა"
  },
  {
   "id": 866,
@@ -1805,7 +1805,7 @@
   "line": 772,
   "it": "Indietro",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9701, DIALOG_STYLE_LIST, \"Filtra la bacheca\", body, \"Cambia\", \"Indietro\");",
-  "ka": ""
+  "ka": "უკან"
  },
  {
   "id": 867,
@@ -1813,7 +1813,7 @@
   "line": 791,
   "it": "{FFD24D}Puoi accettarlo a una bacheca: Casa del Quartiere di Idlewood, magazzino di Ganton o di Jefferson.",
   "ctx": "strcopy(status, \"{FFD24D}Puoi accettarlo a una bacheca: Casa del Quartiere di Idlewood, magazzino di Ganton o di Jefferson.\", 160);",
-  "ka": ""
+  "ka": "{FFD24D}მისი მიღება დაფასთან შეგიძლია: Idlewood-ის უბნის სახლი, Ganton-ის ან Jefferson-ის საწყობი."
  },
  {
   "id": 868,
@@ -1821,7 +1821,7 @@
   "line": 795,
   "it": "{66DD66}Puoi accettarlo adesso.",
   "ctx": "strcopy(status, \"{66DD66}Puoi accettarlo adesso.\", 160);",
-  "ka": ""
+  "ka": "{66DD66}ახლავე შეგიძლია მიღება."
  },
  {
   "id": 869,
@@ -1829,7 +1829,7 @@
   "line": 797,
   "it": "{FFFFFF}%s%s\\n\\n{FFFFFF}Ritiro: {FFD24D}magazzino di %s\\n{FFFFFF}Consegna: {FFD24D}negozio di %s\\n{FFFFFF}Merce: {FFD24D}%s\\n{FFFFFF}Distanza: {FFD24D}%s\\n{FFFFFF}Compenso indicativo: {66DD66}$%s\\n{FFFFFF}Disponibile ancora per: {FFD24D}%s\\n{FFFFFF}Requisiti: {AAAAAA}%s\\n\\n{AAAAAA}Il mezzo te lo fornisce il magazzino. Il compenso finale dipende da come arriva la merce.\\n%s",
   "ctx": "format(body, 1024, \"{FFFFFF}%s%s\\n\\n{FFFFFF}Ritiro: {FFD24D}magazzino di %s\\n{FFFFFF}Consegna: {FFD24D}negozio di %s\\n{FFFFFF}Merce: {FFD24D}%s\\n{FFFFFF}Distanza: {FFD24D}%s\\n{FFFFFF}Compenso indicati",
-  "ka": ""
+  "ka": "{FFFFFF}%s%s\\n\\n{FFFFFF}აღება: {FFD24D}საწყობი, %s\\n{FFFFFF}მიწოდება: {FFD24D}მაღაზია, %s\\n{FFFFFF}ტვირთი: {FFD24D}%s\\n{FFFFFF}მანძილი: {FFD24D}%s\\n{FFFFFF}სავარაუდო ანაზღაურება: {66DD66}$%s\\n{FFFFFF}ხელმისაწვდომია კიდევ: {FFD24D}%s\\n{FFFFFF}მოთხოვნები: {AAAAAA}%s\\n\\n{AAAAAA}მანქანას საწყობი მოგცემს. საბოლოო ანაზღაურება ტვირთის მდგომარეობაზეა დამოკიდებული.\\n%s"
  },
  {
   "id": 870,
@@ -1837,7 +1837,7 @@
   "line": 797,
   "it": " {FFD24D}(premium: il quartiere si fida di te)",
   "ctx": "format(body, 1024, \"{FFFFFF}%s%s\\n\\n{FFFFFF}Ritiro: {FFD24D}magazzino di %s\\n{FFFFFF}Consegna: {FFD24D}negozio di %s\\n{FFFFFF}Merce: {FFD24D}%s\\n{FFFFFF}Distanza: {FFD24D}%s\\n{FFFFFF}Compenso indicati",
-  "ka": ""
+  "ka": " {FFD24D}(პრემიუმ: უბანი გენდობა)"
  },
  {
   "id": 871,
@@ -1845,7 +1845,7 @@
   "line": 798,
   "it": "Contratto #%d",
   "ctx": "format(title, 64, \"Contratto #%d\", g_UiLvBdId[playerid][i]);",
-  "ka": ""
+  "ka": "კონტრაქტი #%d"
  },
  {
   "id": 872,
@@ -1853,7 +1853,7 @@
   "line": 801,
   "it": "Accetta",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9702, DIALOG_STYLE_MSGBOX, title, body, \"Accetta\", \"Indietro\");",
-  "ka": ""
+  "ka": "მიღება"
  },
  {
   "id": 873,
@@ -1861,7 +1861,7 @@
   "line": 801,
   "it": "Indietro",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9702, DIALOG_STYLE_MSGBOX, title, body, \"Accetta\", \"Indietro\");",
-  "ka": ""
+  "ka": "უკან"
  },
  {
   "id": 874,
@@ -1869,7 +1869,7 @@
   "line": 805,
   "it": "Indietro",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9702, DIALOG_STYLE_MSGBOX, title, body, \"Indietro\", \"Chiudi\");",
-  "ka": ""
+  "ka": "უკან"
  },
  {
   "id": 875,
@@ -1877,7 +1877,7 @@
   "line": 805,
   "it": "Chiudi",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9702, DIALOG_STYLE_MSGBOX, title, body, \"Indietro\", \"Chiudi\");",
-  "ka": ""
+  "ka": "დახურვა"
  },
  {
   "id": 876,
@@ -1885,7 +1885,7 @@
   "line": 825,
   "it": "{FFFFFF}Accetti il contratto {FFD24D}#%d{FFFFFF}?\\n\\nUn furgone ti aspetta al magazzino di {FFD24D}%s{FFFFFF}.\\nPorta il carico al negozio di {FFD24D}%s{FFFFFF} con calma e attenzione.\\n\\n{AAAAAA}Puoi seguire un solo contratto alla volta. Il contratto resta valido per %s.",
   "ctx": "format(body, 512, \"{FFFFFF}Accetti il contratto {FFD24D}#%d{FFFFFF}?\\n\\nUn furgone ti aspetta al magazzino di {FFD24D}%s{FFFFFF}.\\nPorta il carico al negozio di {FFD24D}%s{FFFFFF} con calma e attenzio",
-  "ka": ""
+  "ka": "{FFFFFF}იღებ კონტრაქტს {FFD24D}#%d{FFFFFF}?\\n\\nფურგონი გელოდება საწყობში: {FFD24D}%s{FFFFFF}.\\nტვირთი მიიტანე მაღაზიაში: {FFD24D}%s{FFFFFF}, მშვიდად და ფრთხილად.\\n\\n{AAAAAA}ერთდროულად მხოლოდ ერთი კონტრაქტის შესრულება შეგიძლია. კონტრაქტი მოქმედებს %s."
  },
  {
   "id": 877,
@@ -1893,7 +1893,7 @@
   "line": 826,
   "it": "Conferma contratto",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9703, DIALOG_STYLE_MSGBOX, \"Conferma contratto\", body, \"Conferma\", \"Annulla\");",
-  "ka": ""
+  "ka": "კონტრაქტის დადასტურება"
  },
  {
   "id": 878,
@@ -1901,7 +1901,7 @@
   "line": 826,
   "it": "Conferma",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9703, DIALOG_STYLE_MSGBOX, \"Conferma contratto\", body, \"Conferma\", \"Annulla\");",
-  "ka": ""
+  "ka": "დადასტურება"
  },
  {
   "id": 879,
@@ -1909,7 +1909,7 @@
   "line": 826,
   "it": "Annulla",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9703, DIALOG_STYLE_MSGBOX, \"Conferma contratto\", body, \"Conferma\", \"Annulla\");",
-  "ka": ""
+  "ka": "გაუქმება"
  },
  {
   "id": 880,
@@ -1917,7 +1917,7 @@
   "line": 842,
   "it": "Consegna al negozio di %s",
   "ctx": "format(step, 128, \"Consegna al negozio di %s\", g_UiLvDistrictName[to]);",
-  "ka": ""
+  "ka": "მიწოდება მაღაზიაში: %s"
  },
  {
   "id": 881,
@@ -1925,7 +1925,7 @@
   "line": 846,
   "it": "Carica la merce al magazzino di %s",
   "ctx": "format(step, 128, \"Carica la merce al magazzino di %s\", g_UiLvDistrictName[from]);",
-  "ka": ""
+  "ka": "ჩატვირთე ტვირთი საწყობში: %s"
  },
  {
   "id": 882,
@@ -1933,7 +1933,7 @@
   "line": 873,
   "it": "Carico a bordo: consegnalo al negozio di %s",
   "ctx": "format(step, 128, \"Carico a bordo: consegnalo al negozio di %s\", g_UiLvDistrictName[to]);",
-  "ka": ""
+  "ka": "ტვირთი ჩატვირთულია: მიიტანე მაღაზიაში: %s"
  },
  {
   "id": 883,
@@ -1941,7 +1941,7 @@
   "line": 877,
   "it": "Raggiungi il magazzino di %s e carica la merce",
   "ctx": "format(step, 128, \"Raggiungi il magazzino di %s e carica la merce\", g_UiLvDistrictName[from]);",
-  "ka": ""
+  "ka": "მიდი საწყობში (%s) და ჩატვირთე ტვირთი"
  },
  {
   "id": 884,
@@ -1949,7 +1949,7 @@
   "line": 879,
   "it": "{FFFFFF}Stato: {FFD24D}%s\\n{FFFFFF}Prossimo passo: {FFD24D}%s\\n{FFFFFF}Distanza: {FFD24D}%s\\n{FFFFFF}Tempo rimasto: {FFD24D}%s\\n{FFFFFF}Merce: {FFD24D}%s{FFFFFF}, integrita' {FFD24D}%s\\n{FFFFFF}Compenso indicativo: {66DD66}$%s\\n\\n{AAAAAA}Se lasci il contratto non perdi denaro, ma perdi %d punti di reputazione nei trasporti.",
   "ctx": "format(body, 1024, \"{FFFFFF}Stato: {FFD24D}%s\\n{FFFFFF}Prossimo passo: {FFD24D}%s\\n{FFFFFF}Distanza: {FFD24D}%s\\n{FFFFFF}Tempo rimasto: {FFD24D}%s\\n{FFFFFF}Merce: {FFD24D}%s{FFFFFF}, integrita' {FFD24",
-  "ka": ""
+  "ka": "{FFFFFF}სტატუსი: {FFD24D}%s\\n{FFFFFF}შემდეგი ნაბიჯი: {FFD24D}%s\\n{FFFFFF}მანძილი: {FFD24D}%s\\n{FFFFFF}დარჩენილი დრო: {FFD24D}%s\\n{FFFFFF}ტვირთი: {FFD24D}%s{FFFFFF}, მთლიანობა {FFD24D}%s\\n{FFFFFF}სავარაუდო ანაზღაურება: {66DD66}$%s\\n\\n{AAAAAA}კონტრაქტის დატოვებისას ფულს არ კარგავ, მაგრამ ტრანსპორტში %d რეპუტაციის ქულას კარგავ."
  },
  {
   "id": 885,
@@ -1957,7 +1957,7 @@
   "line": 880,
   "it": "Il tuo contratto #%d",
   "ctx": "format(title, 64, \"Il tuo contratto #%d\", contractId);",
-  "ka": ""
+  "ka": "შენი კონტრაქტი #%d"
  },
  {
   "id": 886,
@@ -1965,7 +1965,7 @@
   "line": 881,
   "it": "Lascia",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9704, DIALOG_STYLE_MSGBOX, title, body, \"Lascia\", \"Chiudi\");",
-  "ka": ""
+  "ka": "დატოვება"
  },
  {
   "id": 887,
@@ -1973,7 +1973,7 @@
   "line": 881,
   "it": "Chiudi",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9704, DIALOG_STYLE_MSGBOX, title, body, \"Lascia\", \"Chiudi\");",
-  "ka": ""
+  "ka": "დახურვა"
  },
  {
   "id": 888,
@@ -1981,7 +1981,7 @@
   "line": 898,
   "it": "Nessun contratto",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9704, DIALOG_STYLE_MSGBOX, \"Nessun contratto\", \"{FFFFFF}Al momento non stai seguendo nessun contratto.\\n\\n{AAAAAA}La bacheca della Casa del Quartiere di Idlewood ha sem",
-  "ka": ""
+  "ka": "კონტრაქტი არ არის"
  },
  {
   "id": 889,
@@ -1989,7 +1989,7 @@
   "line": 898,
   "it": "{FFFFFF}Al momento non stai seguendo nessun contratto.\\n\\n{AAAAAA}La bacheca della Casa del Quartiere di Idlewood ha sempre qualcosa da fare.",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9704, DIALOG_STYLE_MSGBOX, \"Nessun contratto\", \"{FFFFFF}Al momento non stai seguendo nessun contratto.\\n\\n{AAAAAA}La bacheca della Casa del Quartiere di Idlewood ha sem",
-  "ka": ""
+  "ka": "{FFFFFF}ამჟამად არცერთ კონტრაქტს არ ასრულებ.\\n\\n{AAAAAA}Idlewood-ის უბნის სახლის დაფაზე ყოველთვის არის საქმე."
  },
  {
   "id": 890,
@@ -1997,7 +1997,7 @@
   "line": 898,
   "it": "Bacheca",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9704, DIALOG_STYLE_MSGBOX, \"Nessun contratto\", \"{FFFFFF}Al momento non stai seguendo nessun contratto.\\n\\n{AAAAAA}La bacheca della Casa del Quartiere di Idlewood ha sem",
-  "ka": ""
+  "ka": "დაფა"
  },
  {
   "id": 891,
@@ -2005,7 +2005,7 @@
   "line": 898,
   "it": "Chiudi",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9704, DIALOG_STYLE_MSGBOX, \"Nessun contratto\", \"{FFFFFF}Al momento non stai seguendo nessun contratto.\\n\\n{AAAAAA}La bacheca della Casa del Quartiere di Idlewood ha sem",
-  "ka": ""
+  "ka": "დახურვა"
  },
  {
   "id": 892,
@@ -2013,7 +2013,7 @@
   "line": 908,
   "it": "Verso: %s (%s)",
   "ctx": "format(line, 128, \"Verso: %s (%s)\", g_UiLvHudDest[playerid], sDist);",
-  "ka": ""
+  "ka": "მიმართულება: %s (%s)"
  },
  {
   "id": 893,
@@ -2021,7 +2021,7 @@
   "line": 912,
   "it": "Verso: %s",
   "ctx": "format(line, 128, \"Verso: %s\", g_UiLvHudDest[playerid]);",
-  "ka": ""
+  "ka": "მიმართულება: %s"
  },
  {
   "id": 894,
@@ -2029,7 +2029,7 @@
   "line": 926,
   "it": "Scade tra %s  -  Merce %d%%",
   "ctx": "format(line, 128, \"Scade tra %s  -  Merce %d%%\", sTime, g_UiLvHudInteg[playerid]);",
-  "ka": ""
+  "ka": "ვადა: %s  -  ტვირთი %d%%"
  },
  {
   "id": 895,
@@ -2037,7 +2037,7 @@
   "line": 930,
   "it": "Scade tra %s",
   "ctx": "format(line, 128, \"Scade tra %s\", sTime);",
-  "ka": ""
+  "ka": "ვადა: %s"
  },
  {
   "id": 896,
@@ -2045,7 +2045,7 @@
   "line": 955,
   "it": "CONTRATTO #%d  -  %s",
   "ctx": "format(title, 128, \"CONTRATTO #%d  -  %s\", contractId, ctState == 2 ? \"IN CONSEGNA\" : \"ACCETTATO\");",
-  "ka": ""
+  "ka": "კონტრაქტი #%d  -  %s"
  },
  {
   "id": 897,
@@ -2053,7 +2053,7 @@
   "line": 955,
   "it": "IN CONSEGNA",
   "ctx": "format(title, 128, \"CONTRATTO #%d  -  %s\", contractId, ctState == 2 ? \"IN CONSEGNA\" : \"ACCETTATO\");",
-  "ka": ""
+  "ka": "მიწოდებაშია"
  },
  {
   "id": 898,
@@ -2061,7 +2061,7 @@
   "line": 955,
   "it": "ACCETTATO",
   "ctx": "format(title, 128, \"CONTRATTO #%d  -  %s\", contractId, ctState == 2 ? \"IN CONSEGNA\" : \"ACCETTATO\");",
-  "ka": ""
+  "ka": "მიღებულია"
  },
  {
   "id": 899,
@@ -2069,7 +2069,7 @@
   "line": 1001,
   "it": "Quale quartiere?",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9706, DIALOG_STYLE_LIST, \"Quale quartiere?\", body, \"Apri\", \"Chiudi\");",
-  "ka": ""
+  "ka": "რომელი უბანი?"
  },
  {
   "id": 900,
@@ -2077,6 +2077,6 @@
   "line": 1001,
   "it": "Apri",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9706, DIALOG_STYLE_LIST, \"Quale quartiere?\", body, \"Apri\", \"Chiudi\");",
-  "ka": ""
+  "ka": "გახსნა"
  }
 ]

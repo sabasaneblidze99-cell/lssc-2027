@@ -5,7 +5,7 @@
   "line": 191,
   "it": "login account %d (%s)",
   "ctx": "format(msg, 128, \"login account %d (%s)\", accountId, name);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 1218,
@@ -13,7 +13,7 @@
   "line": 279,
   "it": "login fallito %s (tentativo %d/%d)",
   "ctx": "format(msg, 128, \"login fallito %s (tentativo %d/%d)\", name, gPlayer[playerid][pLoginAttempts], 3);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 101,
@@ -21,7 +21,7 @@
   "line": 14,
   "it": "/freeze id [motivo]",
   "ctx": "\"/freeze id [motivo]\",",
-  "ka": ""
+  "ka": "/freeze id [მიზეზი]"
  },
  {
   "id": 102,
@@ -29,7 +29,7 @@
   "line": 17,
   "it": "/kick id motivo",
   "ctx": "\"/kick id motivo\",",
-  "ka": ""
+  "ka": "/kick id მიზეზი"
  },
  {
   "id": 103,
@@ -37,7 +37,7 @@
   "line": 18,
   "it": "/mute id [min] motivo",
   "ctx": "\"/mute id [min] motivo\",",
-  "ka": ""
+  "ka": "/mute id [წთ] მიზეზი"
  },
  {
   "id": 104,
@@ -45,7 +45,7 @@
   "line": 20,
   "it": "/warn id motivo",
   "ctx": "\"/warn id motivo\",",
-  "ka": ""
+  "ka": "/warn id მიზეზი"
  },
  {
   "id": 105,
@@ -53,7 +53,7 @@
   "line": 21,
   "it": "/setadmin id|nome 0-3",
   "ctx": "\"/setadmin id|nome 0-3\",",
-  "ka": ""
+  "ka": "/setadmin id|სახელი 0-3"
  },
  {
   "id": 106,
@@ -61,7 +61,7 @@
   "line": 22,
   "it": "/setlevel id livello",
   "ctx": "\"/setlevel id livello\",",
-  "ka": ""
+  "ka": "/setlevel id დონე"
  },
  {
   "id": 107,
@@ -69,7 +69,7 @@
   "line": 23,
   "it": "/setmoney id importo",
   "ctx": "\"/setmoney id importo\",",
-  "ka": ""
+  "ka": "/setmoney id თანხა"
  },
  {
   "id": 108,
@@ -77,7 +77,7 @@
   "line": 24,
   "it": "/givemoney id importo",
   "ctx": "\"/givemoney id importo\",",
-  "ka": ""
+  "ka": "/givemoney id თანხა"
  },
  {
   "id": 109,
@@ -85,7 +85,7 @@
   "line": 25,
   "it": "/ban id min motivo",
   "ctx": "\"/ban id min motivo\",",
-  "ka": ""
+  "ka": "/ban id წთ მიზეზი"
  },
  {
   "id": 110,
@@ -93,7 +93,7 @@
   "line": 26,
   "it": "/unban nome_account",
   "ctx": "\"/unban nome_account\"",
-  "ka": ""
+  "ka": "/unban ანგარიშის_სახელი"
  },
  {
   "id": 111,
@@ -101,7 +101,7 @@
   "line": 35,
   "it": "Helper",
   "ctx": "strmid(name, \"Helper\", 0, strlen(\"Helper\"), size);",
-  "ka": ""
+  "ka": "ჰელპერი"
  },
  {
   "id": 112,
@@ -109,7 +109,7 @@
   "line": 35,
   "it": "Helper",
   "ctx": "strmid(name, \"Helper\", 0, strlen(\"Helper\"), size);",
-  "ka": ""
+  "ka": "ჰელპერი"
  },
  {
   "id": 113,
@@ -117,7 +117,7 @@
   "line": 39,
   "it": "Moderatore",
   "ctx": "strmid(name, \"Moderatore\", 0, strlen(\"Moderatore\"), size);",
-  "ka": ""
+  "ka": "მოდერატორი"
  },
  {
   "id": 114,
@@ -125,7 +125,7 @@
   "line": 39,
   "it": "Moderatore",
   "ctx": "strmid(name, \"Moderatore\", 0, strlen(\"Moderatore\"), size);",
-  "ka": ""
+  "ka": "მოდერატორი"
  },
  {
   "id": 115,
@@ -133,7 +133,7 @@
   "line": 43,
   "it": "Admin",
   "ctx": "strmid(name, \"Admin\", 0, strlen(\"Admin\"), size);",
-  "ka": ""
+  "ka": "ადმინი"
  },
  {
   "id": 116,
@@ -141,7 +141,7 @@
   "line": 43,
   "it": "Admin",
   "ctx": "strmid(name, \"Admin\", 0, strlen(\"Admin\"), size);",
-  "ka": ""
+  "ka": "ადმინი"
  },
  {
   "id": 117,
@@ -149,7 +149,7 @@
   "line": 69,
   "it": "Console",
   "ctx": "strmid(name, \"Console\", 0, strlen(\"Console\"), size);",
-  "ka": ""
+  "ka": "კონსოლი"
  },
  {
   "id": 118,
@@ -157,7 +157,7 @@
   "line": 69,
   "it": "Console",
   "ctx": "strmid(name, \"Console\", 0, strlen(\"Console\"), size);",
-  "ka": ""
+  "ka": "კონსოლი"
  },
  {
   "id": 119,
@@ -165,7 +165,7 @@
   "line": 131,
   "it": "AdmCmd: Staff %s ha %s %s: %s",
   "ctx": "format(msg, 256, \"AdmCmd: Staff %s ha %s %s: %s\", staffName, action, targetName, reason);",
-  "ka": ""
+  "ka": "AdmCmd: ადმინისტრატორი %s: %s %s: %s"
  },
  {
   "id": 120,
@@ -173,7 +173,7 @@
   "line": 135,
   "it": "AdmCmd: Staff %s ha %s %s",
   "ctx": "format(msg, 256, \"AdmCmd: Staff %s ha %s %s\", staffName, action, targetName);",
-  "ka": ""
+  "ka": "AdmCmd: ადმინისტრატორი %s: %s %s"
  },
  {
   "id": 121,
@@ -181,7 +181,7 @@
   "line": 142,
   "it": "AdmCmd: %s e' stato %s da %s: %s",
   "ctx": "format(msg, 256, \"AdmCmd: %s e' stato %s da %s: %s\", targetName, participle, staffName, reason);",
-  "ka": ""
+  "ka": "AdmCmd: %s — %s (ადმინისტრატორი %s): %s"
  },
  {
   "id": 122,
@@ -189,7 +189,7 @@
   "line": 146,
   "it": "AdmCmd: %s e' stato %s da %s",
   "ctx": "format(msg, 256, \"AdmCmd: %s e' stato %s da %s\", targetName, participle, staffName);",
-  "ka": ""
+  "ka": "AdmCmd: %s — %s (ადმინისტრატორი %s)"
  },
  {
   "id": 123,
@@ -197,7 +197,7 @@
   "line": 156,
   "it": "%s (acc %d) %s -> acc %d: %s",
   "ctx": "format(line, 320, \"%s (acc %d) %s -> acc %d: %s\", staffName, staffAcc, action, targetAcc, reason);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 124,
@@ -205,7 +205,7 @@
   "line": 231,
   "it": "%d giorni",
   "ctx": "format(dest, size, \"%d giorni\", (minutes + 1440 - 1) / 1440);",
-  "ka": ""
+  "ka": "%d დღე"
  },
  {
   "id": 125,
@@ -213,7 +213,7 @@
   "line": 235,
   "it": "%d ore",
   "ctx": "format(dest, size, \"%d ore\", (minutes + 60 - 1) / 60);",
-  "ka": ""
+  "ka": "%d საათი"
  },
  {
   "id": 126,
@@ -221,7 +221,7 @@
   "line": 239,
   "it": "%d minuti",
   "ctx": "format(dest, size, \"%d minuti\", minutes);",
-  "ka": ""
+  "ka": "%d წუთი"
  },
  {
   "id": 127,
@@ -229,7 +229,7 @@
   "line": 260,
   "it": "--- Comandi staff ---",
   "ctx": "SendClientMessage(playerid, -2994689, \"--- Comandi staff ---\");",
-  "ka": ""
+  "ka": "--- ადმინისტრაციის ბრძანებები ---"
  },
  {
   "id": 128,
@@ -237,7 +237,7 @@
   "line": 320,
   "it": "Sei mutato ancora %s.",
   "ctx": "SendClientMessage(playerid, -10270721, \"Sei mutato ancora %s.\", left);",
-  "ka": ""
+  "ka": "მიუტი კიდევ %s გაქვს."
  },
  {
   "id": 129,
@@ -245,7 +245,7 @@
   "line": 410,
   "it": "scade tra %s",
   "ctx": "format(when, 40, \"scade tra %s\", dur);",
-  "ka": ""
+  "ka": "ვადა: %s"
  },
  {
   "id": 130,
@@ -253,7 +253,7 @@
   "line": 416,
   "it": "Sei bannato (%s). Motivo: %s",
   "ctx": "format(msg, 144, \"Sei bannato (%s). Motivo: %s\", when, reason);",
-  "ka": ""
+  "ka": "დაბლოკილი ხარ (%s). მიზეზი: %s"
  },
  {
   "id": 131,
@@ -261,7 +261,7 @@
   "line": 418,
   "it": "connessione rifiutata (ban) %s",
   "ctx": "format(line, 320, \"connessione rifiutata (ban) %s\", name);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 132,
@@ -269,7 +269,7 @@
   "line": 433,
   "it": "Warn non registrato (errore database).",
   "ctx": "Admin_Reply(requesterid, -10270721, \"Warn non registrato (errore database).\");",
-  "ka": ""
+  "ka": "გაფრთხილება არ დარეგისტრირდა (ბაზის შეცდომა)."
  },
  {
   "id": 133,
@@ -277,7 +277,7 @@
   "line": 441,
   "it": "%s (warn attivi %d/%d)",
   "ctx": "format(msg, 256, \"%s (warn attivi %d/%d)\", reason, activeCount, 3);",
-  "ka": ""
+  "ka": "%s (აქტიური გაფრთხილება %d/%d)"
  },
  {
   "id": 134,
@@ -285,7 +285,7 @@
   "line": 450,
   "it": "Hai ricevuto un warn da %s: %s (%d/%d).",
   "ctx": "SendClientMessage(target, -10270721, \"Hai ricevuto un warn da %s: %s (%d/%d).\", sname, reason, activeCount, 3);",
-  "ka": ""
+  "ka": "გაფრთხილება მიიღე %s-სგან: %s (%d/%d)."
  },
  {
   "id": 135,
@@ -293,7 +293,7 @@
   "line": 453,
   "it": "%d warn attivi: kick automatico",
   "ctx": "format(msg, 256, \"%d warn attivi: kick automatico\", activeCount);",
-  "ka": ""
+  "ka": "%d აქტიური გაფრთხილება: ავტომატური კიკი"
  },
  {
   "id": 136,
@@ -301,7 +301,7 @@
   "line": 456,
   "it": "Hai raggiunto il numero massimo di warn: sei stato espulso.",
   "ctx": "Account_Kick(target, \"Hai raggiunto il numero massimo di warn: sei stato espulso.\");",
-  "ka": ""
+  "ka": "გაფრთხილებების ლიმიტს მიაღწიე: სერვერიდან გაგდებული ხარ."
  },
  {
   "id": 137,
@@ -309,7 +309,7 @@
   "line": 470,
   "it": "Ban non registrato (errore database).",
   "ctx": "Admin_Reply(requesterid, -10270721, \"Ban non registrato (errore database).\");",
-  "ka": ""
+  "ka": "ბანი არ დარეგისტრირდა (ბაზის შეცდომა)."
  },
  {
   "id": 138,
@@ -317,7 +317,7 @@
   "line": 480,
   "it": "%d min",
   "ctx": "format(dur, 24, \"%d min\", minutes);",
-  "ka": ""
+  "ka": "%d წთ"
  },
  {
   "id": 139,
@@ -325,7 +325,7 @@
   "line": 492,
   "it": "Sei stato bannato da %s (%s). Motivo: %s",
   "ctx": "format(msg, 256, \"Sei stato bannato da %s (%s). Motivo: %s\", sname, dur, reason);",
-  "ka": ""
+  "ka": "%s-მ დაგბლოკა (%s). მიზეზი: %s"
  },
  {
   "id": 140,
@@ -333,7 +333,7 @@
   "line": 507,
   "it": "Unban non riuscito (errore database).",
   "ctx": "Admin_Reply(requesterid, -10270721, \"Unban non riuscito (errore database).\");",
-  "ka": ""
+  "ka": "განბლოკვა ვერ მოხერხდა (ბაზის შეცდომა)."
  },
  {
   "id": 141,
@@ -341,7 +341,7 @@
   "line": 512,
   "it": "Nessun ban attivo per questo account.",
   "ctx": "Admin_Reply(requesterid, -10270721, \"Nessun ban attivo per questo account.\");",
-  "ka": ""
+  "ka": "ამ ანგარიშზე აქტიური ბანი არ არის."
  },
  {
   "id": 142,
@@ -349,7 +349,7 @@
   "line": 554,
   "it": "rcon: livello %d",
   "ctx": "format(msg, 256, \"rcon: livello %d\", level);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 143,
@@ -357,7 +357,7 @@
   "line": 555,
   "it": "Console",
   "ctx": "Admin_LogRaw(0, \"Console\", accountId, \"setadmin\", msg);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 144,
@@ -365,7 +365,7 @@
   "line": 560,
   "it": "Il tuo livello staff e' stato impostato a %d dalla console.",
   "ctx": "SendClientMessage(online, -5963521, \"Il tuo livello staff e' stato impostato a %d dalla console.\", level);",
-  "ka": ""
+  "ka": "შენი ადმინ-დონე კონსოლმა დააყენა: %d."
  },
  {
   "id": 145,
@@ -373,7 +373,7 @@
   "line": 570,
   "it": "Errore database, riprova.",
   "ctx": "Admin_Reply(requesterid, -10270721, \"Errore database, riprova.\");",
-  "ka": ""
+  "ka": "ბაზის შეცდომა, სცადე თავიდან."
  },
  {
   "id": 146,
@@ -381,7 +381,7 @@
   "line": 575,
   "it": "Account non trovato.",
   "ctx": "Admin_Reply(requesterid, -10270721, \"Account non trovato.\");",
-  "ka": ""
+  "ka": "ანგარიში ვერ მოიძებნა."
  },
  {
   "id": 147,
@@ -389,7 +389,7 @@
   "line": 581,
   "it": "Non puoi agire su questo giocatore.",
   "ctx": "Admin_Reply(requesterid, -10270721, \"Non puoi agire su questo giocatore.\");",
-  "ka": ""
+  "ka": "ამ მოთამაშეზე მოქმედება არ შეგიძლია."
  },
  {
   "id": 148,
@@ -397,7 +397,7 @@
   "line": 594,
   "it": "Il tuo livello staff e' stato impostato a %d da %s.",
   "ctx": "SendClientMessage(online, -5963521, \"Il tuo livello staff e' stato impostato a %d da %s.\", level, sname);",
-  "ka": ""
+  "ka": "შენი ადმინ-დონე დაყენდა: %d (%s)."
  },
  {
   "id": 149,
@@ -405,7 +405,7 @@
   "line": 596,
   "it": "livello %d",
   "ctx": "format(msg, 256, \"livello %d\", level);",
-  "ka": ""
+  "ka": "დონე %d"
  },
  {
   "id": 150,
@@ -413,7 +413,7 @@
   "line": 597,
   "it": "impostato il livello staff di",
   "ctx": "Admin_AdmCmd(sname, \"impostato il livello staff di\", tname, msg, \"\");",
-  "ka": ""
+  "ka": "შეცვალა ადმინ-დონე:"
  },
  {
   "id": 151,
@@ -421,7 +421,7 @@
   "line": 624,
   "it": "--- Ultimi report ---",
   "ctx": "SendClientMessage(playerid, -2994689, \"--- Ultimi report ---\");",
-  "ka": ""
+  "ka": "--- ბოლო რეპორტები ---"
  },
  {
   "id": 152,
@@ -429,7 +429,7 @@
   "line": 643,
   "it": "Nessun report.",
   "ctx": "Util_Send(playerid, -1, \"Nessun report.\");",
-  "ka": ""
+  "ka": "რეპორტები არ არის."
  },
  {
   "id": 153,
@@ -437,7 +437,7 @@
   "line": 665,
   "it": "[STAFF] %s: %s",
   "ctx": "SendClientMessage(target, -5963521, \"[STAFF] %s: %s\", name, text);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 1224,
@@ -445,7 +445,7 @@
   "line": 197,
   "it": "Deposito",
   "ctx": "strcopy(dest, \"Deposito\", size);",
-  "ka": ""
+  "ka": "შეტანა"
  },
  {
   "id": 1225,
@@ -453,7 +453,7 @@
   "line": 201,
   "it": "Prelievo",
   "ctx": "strcopy(dest, \"Prelievo\", size);",
-  "ka": ""
+  "ka": "გატანა"
  },
  {
   "id": 1226,
@@ -461,7 +461,7 @@
   "line": 205,
   "it": "Bonifico a",
   "ctx": "strcopy(dest, \"Bonifico a\", size);",
-  "ka": ""
+  "ka": "გადარიცხვა:"
  },
  {
   "id": 1227,
@@ -469,7 +469,7 @@
   "line": 209,
   "it": "Bonifico da",
   "ctx": "strcopy(dest, \"Bonifico da\", size);",
-  "ka": ""
+  "ka": "გადმორიცხვა:"
  },
  {
   "id": 1228,
@@ -477,7 +477,7 @@
   "line": 213,
   "it": "Commissione",
   "ctx": "strcopy(dest, \"Commissione\", size);",
-  "ka": ""
+  "ka": "საკომისიო"
  },
  {
   "id": 1229,
@@ -485,7 +485,7 @@
   "line": 217,
   "it": "Stipendio",
   "ctx": "strcopy(dest, \"Stipendio\", size);",
-  "ka": ""
+  "ka": "ხელფასი"
  },
  {
   "id": 1230,
@@ -493,7 +493,7 @@
   "line": 221,
   "it": "Compenso lavoro",
   "ctx": "strcopy(dest, \"Compenso lavoro\", size);",
-  "ka": ""
+  "ka": "სამსახურის ანაზღაურება"
  },
  {
   "id": 1231,
@@ -501,7 +501,7 @@
   "line": 225,
   "it": "Stipendio fazione",
   "ctx": "strcopy(dest, \"Stipendio fazione\", size);",
-  "ka": ""
+  "ka": "ფრაქციის ხელფასი"
  },
  {
   "id": 1232,
@@ -509,7 +509,7 @@
   "line": 229,
   "it": "Bolletta",
   "ctx": "strcopy(dest, \"Bolletta\", size);",
-  "ka": ""
+  "ka": "კომუნალური"
  },
  {
   "id": 1233,
@@ -517,7 +517,7 @@
   "line": 233,
   "it": "Casa",
   "ctx": "strcopy(dest, \"Casa\", size);",
-  "ka": ""
+  "ka": "სახლი"
  },
  {
   "id": 1234,
@@ -525,7 +525,7 @@
   "line": 237,
   "it": "Veicolo",
   "ctx": "strcopy(dest, \"Veicolo\", size);",
-  "ka": ""
+  "ka": "მანქანა"
  },
  {
   "id": 1235,
@@ -533,7 +533,7 @@
   "line": 241,
   "it": "Multa",
   "ctx": "strcopy(dest, \"Multa\", size);",
-  "ka": ""
+  "ka": "ჯარიმა"
  },
  {
   "id": 1236,
@@ -541,7 +541,7 @@
   "line": 245,
   "it": "Rimborso",
   "ctx": "strcopy(dest, \"Rimborso\", size);",
-  "ka": ""
+  "ka": "დაბრუნება"
  },
  {
   "id": 1237,
@@ -549,7 +549,7 @@
   "line": 249,
   "it": "Staff",
   "ctx": "strcopy(dest, \"Staff\", size);",
-  "ka": ""
+  "ka": "ადმინისტრაცია"
  },
  {
   "id": 1238,
@@ -557,7 +557,7 @@
   "line": 253,
   "it": "Storno",
   "ctx": "strcopy(dest, \"Storno\", size);",
-  "ka": ""
+  "ka": "სტორნო"
  },
  {
   "id": 1239,
@@ -565,7 +565,7 @@
   "line": 329,
   "it": "Troppe conferme di bonifico fallite o scadute: bonifici sospesi per %d secondi.",
   "ctx": "SendClientMessage(playerid, -10270721, \"Troppe conferme di bonifico fallite o scadute: bonifici sospesi per %d secondi.\", 60);",
-  "ka": ""
+  "ka": "ბევრი ჩავარდნილი ან ვადაგასული დადასტურება: გადარიცხვები შეჩერებულია %d წამით."
  },
  {
   "id": 1240,
@@ -573,7 +573,7 @@
   "line": 363,
   "it": "Non puoi usare la banca da ferito o ammanettato.",
   "ctx": "Bank_Deny(playerid, ui, \"Non puoi usare la banca da ferito o ammanettato.\");",
-  "ka": ""
+  "ka": "დაჭრილს ან ბორკილდადებულს ბანკით სარგებლობა არ შეგიძლია."
  },
  {
   "id": 1241,
@@ -581,7 +581,7 @@
   "line": 368,
   "it": "Scendi dal veicolo per usare la banca.",
   "ctx": "Bank_Deny(playerid, ui, \"Scendi dal veicolo per usare la banca.\");",
-  "ka": ""
+  "ka": "ბანკით სარგებლობისთვის მანქანიდან გადმოდი."
  },
  {
   "id": 1242,
@@ -589,7 +589,7 @@
   "line": 373,
   "it": "Non puoi usare la banca durante un turno di lavoro.",
   "ctx": "Bank_Deny(playerid, ui, \"Non puoi usare la banca durante un turno di lavoro.\");",
-  "ka": ""
+  "ka": "სამსახურის ცვლის დროს ბანკით სარგებლობა არ შეგიძლია."
  },
  {
   "id": 1243,
@@ -597,7 +597,7 @@
   "line": 378,
   "it": "Non puoi usare la banca all'interno di un edificio: serve un ATM o uno sportello all'aperto.",
   "ctx": "Bank_Deny(playerid, ui, \"Non puoi usare la banca all'interno di un edificio: serve un ATM o uno sportello all'aperto.\");",
-  "ka": ""
+  "ka": "შენობაში ბანკით სარგებლობა არ შეგიძლია: გჭირდება ATM ან გარე სალარო."
  },
  {
   "id": 1244,
@@ -605,7 +605,7 @@
   "line": 384,
   "it": "Devi essere vicino a un ATM o a uno sportello bancario.",
   "ctx": "Bank_Deny(playerid, ui, \"Devi essere vicino a un ATM o a uno sportello bancario.\");",
-  "ka": ""
+  "ka": "ATM-თან ან ბანკის სალაროსთან უნდა იყო."
  },
  {
   "id": 1245,
@@ -613,7 +613,7 @@
   "line": 389,
   "it": "Questo e' un ATM: per /banca usa uno sportello.",
   "ctx": "Bank_Deny(playerid, ui, \"Questo e' un ATM: per /banca usa uno sportello.\");",
-  "ka": ""
+  "ka": "ეს ATM-ია: /banca-სთვის სალარო გამოიყენე."
  },
  {
   "id": 1246,
@@ -621,7 +621,7 @@
   "line": 413,
   "it": "Hai un'operazione bancaria in corso: attendi.",
   "ctx": "Bank_Reply(playerid, ui, \"Hai un'operazione bancaria in corso: attendi.\");",
-  "ka": ""
+  "ka": "საბანკო ოპერაცია უკვე მიმდინარეობს: მოიცადე."
  },
  {
   "id": 1247,
@@ -629,7 +629,7 @@
   "line": 425,
   "it": "Hai un bonifico in attesa di conferma.",
   "ctx": "Util_Send(playerid, -10270721, \"Hai un bonifico in attesa di conferma.\");",
-  "ka": ""
+  "ka": "გადარიცხვა დადასტურებას ელოდება."
  },
  {
   "id": 1248,
@@ -637,7 +637,7 @@
   "line": 431,
   "it": "Attendi un attimo prima di un'altra operazione bancaria.",
   "ctx": "Bank_Reply(playerid, ui, \"Attendi un attimo prima di un'altra operazione bancaria.\");",
-  "ka": ""
+  "ka": "მოიცადე, სანამ ახალ საბანკო ოპერაციას გააკეთებ."
  },
  {
   "id": 1249,
@@ -645,7 +645,7 @@
   "line": 467,
   "it": "--- Saldo ---",
   "ctx": "SendClientMessage(playerid, -2994689, \"--- Saldo ---\");",
-  "ka": ""
+  "ka": "--- ბალანსი ---"
  },
  {
   "id": 1250,
@@ -653,7 +653,7 @@
   "line": 468,
   "it": "Contanti: $%d  Banca: $%d  Totale: $%d",
   "ctx": "SendClientMessage(playerid, -1, \"Contanti: $%d  Banca: $%d  Totale: $%d\", gPlayer[playerid][pMoney], gPlayer[playerid][pBank], gPlayer[playerid][pMoney] + gPlayer[playerid][pBank]);",
-  "ka": ""
+  "ka": "ნაღდი: $%d  ბანკი: $%d  სულ: $%d"
  },
  {
   "id": 1251,
@@ -661,7 +661,7 @@
   "line": 504,
   "it": "Importo non valido.",
   "ctx": "Bank_Reply(playerid, ui, \"Importo non valido.\");",
-  "ka": ""
+  "ka": "არასწორი თანხა."
  },
  {
   "id": 1252,
@@ -669,7 +669,7 @@
   "line": 509,
   "it": "Non hai abbastanza contanti.",
   "ctx": "Bank_Reply(playerid, ui, \"Non hai abbastanza contanti.\");",
-  "ka": ""
+  "ka": "საკმარისი ნაღდი ფული არ გაქვს."
  },
  {
   "id": 1253,
@@ -677,7 +677,7 @@
   "line": 515,
   "it": "Limite ATM per deposito: $%d per operazione. Usa uno sportello per importi maggiori.",
   "ctx": "format(msg, 176, \"Limite ATM per deposito: $%d per operazione. Usa uno sportello per importi maggiori.\", 20000);",
-  "ka": ""
+  "ka": "ATM-ის ლიმიტი შეტანაზე: $%d ერთ ოპერაციაზე. მეტი თანხისთვის სალარო გამოიყენე."
  },
  {
   "id": 1254,
@@ -685,7 +685,7 @@
   "line": 521,
   "it": "Il tuo conto raggiungerebbe il limite massimo consentito.",
   "ctx": "Bank_Reply(playerid, ui, \"Il tuo conto raggiungerebbe il limite massimo consentito.\");",
-  "ka": ""
+  "ka": "შენი ანგარიში დასაშვებ ლიმიტს გადააჭარბებდა."
  },
  {
   "id": 1255,
@@ -693,7 +693,7 @@
   "line": 545,
   "it": "Operazione rifiutata.",
   "ctx": "strcopy(dest, \"Operazione rifiutata.\", size);",
-  "ka": ""
+  "ka": "ოპერაცია უარყოფილია."
  },
  {
   "id": 1256,
@@ -701,7 +701,7 @@
   "line": 549,
   "it": "Il conto del destinatario ha raggiunto il limite: bonifico rifiutato.",
   "ctx": "strcopy(dest, op == 3 ? \"Il conto del destinatario ha raggiunto il limite: bonifico rifiutato.\" : \"Il tuo conto raggiungerebbe il limite massimo consentito.\", size);",
-  "ka": ""
+  "ka": "მიმღების ანგარიში ლიმიტზეა: გადარიცხვა უარყოფილია."
  },
  {
   "id": 1257,
@@ -709,7 +709,7 @@
   "line": 549,
   "it": "Il tuo conto raggiungerebbe il limite massimo consentito.",
   "ctx": "strcopy(dest, op == 3 ? \"Il conto del destinatario ha raggiunto il limite: bonifico rifiutato.\" : \"Il tuo conto raggiungerebbe il limite massimo consentito.\", size);",
-  "ka": ""
+  "ka": "შენი ანგარიში დასაშვებ ლიმიტს გადააჭარბებდა."
  },
  {
   "id": 1258,
@@ -717,7 +717,7 @@
   "line": 553,
   "it": "Fondi insufficienti: servono importo piu' commissione.",
   "ctx": "strcopy(dest, op == 3 ? \"Fondi insufficienti: servono importo piu' commissione.\" : \"Fondi insufficienti sul conto.\", size);",
-  "ka": ""
+  "ka": "არასაკმარისი თანხა: საჭიროა თანხა საკომისიოსთან ერთად."
  },
  {
   "id": 1259,
@@ -725,7 +725,7 @@
   "line": 553,
   "it": "Fondi insufficienti sul conto.",
   "ctx": "strcopy(dest, op == 3 ? \"Fondi insufficienti: servono importo piu' commissione.\" : \"Fondi insufficienti sul conto.\", size);",
-  "ka": ""
+  "ka": "ანგარიშზე არასაკმარისი თანხაა."
  },
  {
   "id": 1260,
@@ -733,7 +733,7 @@
   "line": 557,
   "it": "Importo fuori dai limiti del bonifico.",
   "ctx": "strcopy(dest, op == 3 ? \"Importo fuori dai limiti del bonifico.\" : \"Importo oltre il limite per operazione di questo punto: usa uno sportello.\", size);",
-  "ka": ""
+  "ka": "თანხა გადარიცხვის ლიმიტებს სცდება."
  },
  {
   "id": 1261,
@@ -741,7 +741,7 @@
   "line": 557,
   "it": "Importo oltre il limite per operazione di questo punto: usa uno sportello.",
   "ctx": "strcopy(dest, op == 3 ? \"Importo fuori dai limiti del bonifico.\" : \"Importo oltre il limite per operazione di questo punto: usa uno sportello.\", size);",
-  "ka": ""
+  "ka": "თანხა ამ წერტილის ოპერაციის ლიმიტს აჭარბებს: სალარო გამოიყენე."
  },
  {
   "id": 1262,
@@ -749,7 +749,7 @@
   "line": 561,
   "it": "Limite giornaliero di bonifici in uscita raggiunto.",
   "ctx": "strcopy(dest, op == 3 ? \"Limite giornaliero di bonifici in uscita raggiunto.\" : \"Limite giornaliero di prelievo raggiunto.\", size);",
-  "ka": ""
+  "ka": "გამავალი გადარიცხვების დღიური ლიმიტი ამოწურულია."
  },
  {
   "id": 1263,
@@ -757,7 +757,7 @@
   "line": 561,
   "it": "Limite giornaliero di prelievo raggiunto.",
   "ctx": "strcopy(dest, op == 3 ? \"Limite giornaliero di bonifici in uscita raggiunto.\" : \"Limite giornaliero di prelievo raggiunto.\", size);",
-  "ka": ""
+  "ka": "გატანის დღიური ლიმიტი ამოწურულია."
  },
  {
   "id": 1264,
@@ -765,7 +765,7 @@
   "line": 565,
   "it": "Il destinatario ha raggiunto il limite giornaliero di bonifici in entrata.",
   "ctx": "strcopy(dest, \"Il destinatario ha raggiunto il limite giornaliero di bonifici in entrata.\", size);",
-  "ka": ""
+  "ka": "მიმღებმა შემომავალი გადარიცხვების დღიურ ლიმიტს მიაღწია."
  },
  {
   "id": 1265,
@@ -773,7 +773,7 @@
   "line": 569,
   "it": "Sistema bancario occupato: riprova tra un attimo.",
   "ctx": "strcopy(dest, \"Sistema bancario occupato: riprova tra un attimo.\", size);",
-  "ka": ""
+  "ka": "საბანკო სისტემა დატვირთულია: ცოტა ხანში სცადე."
  },
  {
   "id": 1266,
@@ -781,7 +781,7 @@
   "line": 573,
   "it": "Operazione bancaria non riuscita.",
   "ctx": "strcopy(dest, \"Operazione bancaria non riuscita.\", size);",
-  "ka": ""
+  "ka": "საბანკო ოპერაცია ვერ შესრულდა."
  },
  {
   "id": 1267,
@@ -789,7 +789,7 @@
   "line": 611,
   "it": "Contanti insufficienti al momento del deposito: operazione annullata.",
   "ctx": "Bank_StartUndo(playerid, \"Contanti insufficienti al momento del deposito: operazione annullata.\");",
-  "ka": ""
+  "ka": "შეტანისას ნაღდი ფული არ იყო საკმარისი: ოპერაცია გაუქმდა."
  },
  {
   "id": 1268,
@@ -797,7 +797,7 @@
   "line": 619,
   "it": "Hai depositato $%d. Contanti: $%d  Banca: $%d.",
   "ctx": "format(msg, 176, \"Hai depositato $%d. Contanti: $%d  Banca: $%d.\", amount, gPlayer[playerid][pMoney], gPlayer[playerid][pBank]);",
-  "ka": ""
+  "ka": "შეიტანე $%d. ნაღდი: $%d  ბანკი: $%d."
  },
  {
   "id": 1269,
@@ -805,7 +805,7 @@
   "line": 623,
   "it": "Deposito eseguito",
   "ctx": "UI_BankToast(playerid, \"Deposito eseguito\", true);",
-  "ka": ""
+  "ka": "თანხა შეტანილია"
  },
  {
   "id": 1270,
@@ -813,7 +813,7 @@
   "line": 629,
   "it": "Errore del sistema bancario: nessun importo e' stato spostato. Verifico il saldo, attendi.",
   "ctx": "Util_Send(playerid, -10270721, \"Errore del sistema bancario: nessun importo e' stato spostato. Verifico il saldo, attendi.\");",
-  "ka": ""
+  "ka": "საბანკო სისტემის შეცდომა: თანხა არ გადაადგილებულა. ბალანსს ვამოწმებ, მოიცადე."
  },
  {
   "id": 1271,
@@ -821,7 +821,7 @@
   "line": 649,
   "it": "Importo non valido.",
   "ctx": "Bank_Reply(playerid, ui, \"Importo non valido.\");",
-  "ka": ""
+  "ka": "არასწორი თანხა."
  },
  {
   "id": 1272,
@@ -829,7 +829,7 @@
   "line": 654,
   "it": "Fondi insufficienti sul conto.",
   "ctx": "Bank_Reply(playerid, ui, \"Fondi insufficienti sul conto.\");",
-  "ka": ""
+  "ka": "ანგარიშზე არასაკმარისი თანხაა."
  },
  {
   "id": 1273,
@@ -837,7 +837,7 @@
   "line": 661,
   "it": "Limite %s per prelievo: $%d per operazione.%s",
   "ctx": "format(msg, 176, \"Limite %s per prelievo: $%d per operazione.%s\", counter ? \"dello sportello\" : \"ATM\", maxOp, counter ? \"\" : \" Usa uno sportello per importi maggiori.\");",
-  "ka": ""
+  "ka": "%s ლიმიტი გატანაზე: $%d ერთ ოპერაციაზე.%s"
  },
  {
   "id": 1274,
@@ -845,7 +845,7 @@
   "line": 661,
   "it": "dello sportello",
   "ctx": "format(msg, 176, \"Limite %s per prelievo: $%d per operazione.%s\", counter ? \"dello sportello\" : \"ATM\", maxOp, counter ? \"\" : \" Usa uno sportello per importi maggiori.\");",
-  "ka": ""
+  "ka": "სალაროს"
  },
  {
   "id": 1275,
@@ -853,7 +853,7 @@
   "line": 661,
   "it": "ATM",
   "ctx": "format(msg, 176, \"Limite %s per prelievo: $%d per operazione.%s\", counter ? \"dello sportello\" : \"ATM\", maxOp, counter ? \"\" : \" Usa uno sportello per importi maggiori.\");",
-  "ka": ""
+  "ka": "ATM-ის"
  },
  {
   "id": 1276,
@@ -861,7 +861,7 @@
   "line": 661,
   "it": " Usa uno sportello per importi maggiori.",
   "ctx": "format(msg, 176, \"Limite %s per prelievo: $%d per operazione.%s\", counter ? \"dello sportello\" : \"ATM\", maxOp, counter ? \"\" : \" Usa uno sportello per importi maggiori.\");",
-  "ka": ""
+  "ka": " მეტი თანხისთვის სალარო გამოიყენე."
  },
  {
   "id": 1277,
@@ -869,7 +869,7 @@
   "line": 667,
   "it": "Hai troppi contanti: non puoi prelevare questa somma.",
   "ctx": "Bank_Reply(playerid, ui, \"Hai troppi contanti: non puoi prelevare questa somma.\");",
-  "ka": ""
+  "ka": "ძალიან ბევრი ნაღდი გაქვს: ამ თანხას ვერ გაიტან."
  },
  {
   "id": 1278,
@@ -877,7 +877,7 @@
   "line": 707,
   "it": "Non puoi ricevere i contanti (limite raggiunto): prelievo annullato.",
   "ctx": "Bank_StartUndo(playerid, \"Non puoi ricevere i contanti (limite raggiunto): prelievo annullato.\");",
-  "ka": ""
+  "ka": "ნაღდ ფულს ვეღარ მიიღებ (ლიმიტი): გატანა გაუქმდა."
  },
  {
   "id": 1279,
@@ -885,7 +885,7 @@
   "line": 719,
   "it": "Hai prelevato $%d. Contanti: $%d  Banca: $%d.",
   "ctx": "format(msg, 176, \"Hai prelevato $%d. Contanti: $%d  Banca: $%d.\", amount, gPlayer[playerid][pMoney], gPlayer[playerid][pBank]);",
-  "ka": ""
+  "ka": "გაიტანე $%d. ნაღდი: $%d  ბანკი: $%d."
  },
  {
   "id": 1280,
@@ -893,7 +893,7 @@
   "line": 723,
   "it": "Prelievo eseguito",
   "ctx": "UI_BankToast(playerid, \"Prelievo eseguito\", true);",
-  "ka": ""
+  "ka": "თანხა გატანილია"
  },
  {
   "id": 1281,
@@ -901,7 +901,7 @@
   "line": 729,
   "it": "Errore del sistema bancario: nessun importo e' stato spostato. Verifico il saldo, attendi.",
   "ctx": "Util_Send(playerid, -10270721, \"Errore del sistema bancario: nessun importo e' stato spostato. Verifico il saldo, attendi.\");",
-  "ka": ""
+  "ka": "საბანკო სისტემის შეცდომა: თანხა არ გადაადგილებულა. ბალანსს ვამოწმებ, მოიცადე."
  },
  {
   "id": 1282,
@@ -909,7 +909,7 @@
   "line": 760,
   "it": "Operazione annullata: nessun importo spostato. Contanti: $%d  Banca: $%d.",
   "ctx": "SendClientMessage(i, -1, \"Operazione annullata: nessun importo spostato. Contanti: $%d  Banca: $%d.\", gPlayer[i][pMoney], gPlayer[i][pBank]);",
-  "ka": ""
+  "ka": "ოპერაცია გაუქმდა, თანხა არ გადაადგილებულა. ნაღდი: $%d  ბანკი: $%d."
  },
  {
   "id": 1283,
@@ -917,7 +917,7 @@
   "line": 773,
   "it": "ANOMALIA annullamento banca %s op %s esito %d: verificare a mano (saldo e contanti)",
   "ctx": "format(msg, 176, \"ANOMALIA annullamento banca %s op %s esito %d: verificare a mano (saldo e contanti)\", name, gPlayer[i][pBankOpId], result);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 1284,
@@ -925,7 +925,7 @@
   "line": 776,
   "it": "Errore bancario non risolto automaticamente: contatta lo staff (segnala data e ora).",
   "ctx": "Util_Send(i, -10270721, \"Errore bancario non risolto automaticamente: contatta lo staff (segnala data e ora).\");",
-  "ka": ""
+  "ka": "საბანკო შეცდომა ავტომატურად ვერ გამოსწორდა: მიმართე ადმინისტრაციას (მიუთითე თარიღი და დრო)."
  },
  {
   "id": 1285,
@@ -933,7 +933,7 @@
   "line": 792,
   "it": "resync banca fallito per %s dopo %d tentativi: verificare a mano",
   "ctx": "format(msg, 176, \"resync banca fallito per %s dopo %d tentativi: verificare a mano\", name, 3);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 1286,
@@ -941,7 +941,7 @@
   "line": 795,
   "it": "Impossibile verificare il saldo bancario ora: controlla con /saldo piu' tardi o contatta lo staff.",
   "ctx": "Util_Send(playerid, -10270721, \"Impossibile verificare il saldo bancario ora: controlla con /saldo piu' tardi o contatta lo staff.\");",
-  "ka": ""
+  "ka": "ბალანსის შემოწმება ახლა ვერ ხერხდება: მოგვიანებით გამოიყენე /saldo ან მიმართე ადმინისტრაციას."
  },
  {
   "id": 1287,
@@ -949,7 +949,7 @@
   "line": 820,
   "it": "Saldo bancario verificato: $%d.",
   "ctx": "SendClientMessage(playerid, -1, \"Saldo bancario verificato: $%d.\", gPlayer[playerid][pBank]);",
-  "ka": ""
+  "ka": "საბანკო ბალანსი შემოწმებულია: $%d."
  },
  {
   "id": 1288,
@@ -957,7 +957,7 @@
   "line": 835,
   "it": "Bonifici sospesi per altri %d secondi (troppe conferme fallite).",
   "ctx": "format(msg, 176, \"Bonifici sospesi per altri %d secondi (troppe conferme fallite).\", (left + 1000 - 1) / 1000);",
-  "ka": ""
+  "ka": "გადარიცხვები შეჩერებულია კიდევ %d წამით (ბევრი ჩავარდნილი დადასტურება)."
  },
  {
   "id": 1289,
@@ -965,7 +965,7 @@
   "line": 843,
   "it": "Servono almeno il livello %d per fare bonifici.",
   "ctx": "format(msg, 176, \"Servono almeno il livello %d per fare bonifici.\", 3);",
-  "ka": ""
+  "ka": "გადარიცხვისთვის მინიმუმ %d დონე გჭირდება."
  },
  {
   "id": 1290,
@@ -973,7 +973,7 @@
   "line": 849,
   "it": "Servono almeno %d minuti di gioco con questo personaggio per fare bonifici.",
   "ctx": "format(msg, 176, \"Servono almeno %d minuti di gioco con questo personaggio per fare bonifici.\", 60);",
-  "ka": ""
+  "ka": "გადარიცხვისთვის ამ პერსონაჟით მინიმუმ %d წუთი უნდა გქონდეს ნათამაშები."
  },
  {
   "id": 1291,
@@ -981,7 +981,7 @@
   "line": 855,
   "it": "Destinatario non valido: deve essere un altro giocatore online e in gioco.",
   "ctx": "Bank_Reply(playerid, ui, \"Destinatario non valido: deve essere un altro giocatore online e in gioco.\");",
-  "ka": ""
+  "ka": "არასწორი მიმღები: უნდა იყოს სხვა მოთამაშე, ონლაინ და თამაშში."
  },
  {
   "id": 1292,
@@ -989,7 +989,7 @@
   "line": 860,
   "it": "Importo del bonifico: da $%d a $%d.",
   "ctx": "format(msg, 176, \"Importo del bonifico: da $%d a $%d.\", 10, 25000);",
-  "ka": ""
+  "ka": "გადარიცხვის თანხა: $%d-დან $%d-მდე."
  },
  {
   "id": 1293,
@@ -997,7 +997,7 @@
   "line": 867,
   "it": "Fondi insufficienti: servono $%d (importo $%d + commissione $%d), hai $%d.",
   "ctx": "format(msg, 176, \"Fondi insufficienti: servono $%d (importo $%d + commissione $%d), hai $%d.\", total, amount, fee, gPlayer[playerid][pBank]);",
-  "ka": ""
+  "ka": "არასაკმარისი თანხა: საჭიროა $%d (თანხა $%d + საკომისიო $%d), გაქვს $%d."
  },
  {
   "id": 1294,
@@ -1005,7 +1005,7 @@
   "line": 873,
   "it": "Il destinatario non puo' ricevere questa somma (conto al limite).",
   "ctx": "Bank_Reply(playerid, ui, \"Il destinatario non puo' ricevere questa somma (conto al limite).\");",
-  "ka": ""
+  "ka": "მიმღები ამ თანხას ვერ მიიღებს (ანგარიში ლიმიტზეა)."
  },
  {
   "id": 1295,
@@ -1013,7 +1013,7 @@
   "line": 878,
   "it": "Attendi ancora %d secondi prima di un nuovo bonifico.",
   "ctx": "format(msg, 176, \"Attendi ancora %d secondi prima di un nuovo bonifico.\", (30000 - (now - gPlayer[playerid][pBankLastXferTick]) + 1000 - 1) / 1000);",
-  "ka": ""
+  "ka": "ახალ გადარიცხვამდე მოიცადე კიდევ %d წამი."
  },
  {
   "id": 1296,
@@ -1021,7 +1021,7 @@
   "line": 948,
   "it": "Sistema bancario occupato: riprova tra un attimo.",
   "ctx": "Bank_Reply(playerid, ui, result == 7 ? \"Sistema bancario occupato: riprova tra un attimo.\" : \"Servizio bancario non disponibile: riprova piu' tardi.\");",
-  "ka": ""
+  "ka": "საბანკო სისტემა დატვირთულია: ცოტა ხანში სცადე."
  },
  {
   "id": 1297,
@@ -1029,7 +1029,7 @@
   "line": 948,
   "it": "Servizio bancario non disponibile: riprova piu' tardi.",
   "ctx": "Bank_Reply(playerid, ui, result == 7 ? \"Sistema bancario occupato: riprova tra un attimo.\" : \"Servizio bancario non disponibile: riprova piu' tardi.\");",
-  "ka": ""
+  "ka": "საბანკო სერვისი მიუწვდომელია: მოგვიანებით სცადე."
  },
  {
   "id": 1298,
@@ -1037,7 +1037,7 @@
   "line": 963,
   "it": "Attendi ancora %d secondi prima di un nuovo bonifico.",
   "ctx": "format(msg, 176, \"Attendi ancora %d secondi prima di un nuovo bonifico.\", left);",
-  "ka": ""
+  "ka": "ახალ გადარიცხვამდე მოიცადე კიდევ %d წამი."
  },
  {
   "id": 1299,
@@ -1045,7 +1045,7 @@
   "line": 970,
   "it": "Limite giornaliero di bonifici in uscita: puoi ancora inviare $%d nelle prossime %d ore.",
   "ctx": "format(msg, 176, \"Limite giornaliero di bonifici in uscita: puoi ancora inviare $%d nelle prossime %d ore.\", room, 24);",
-  "ka": ""
+  "ka": "გამავალი გადარიცხვების დღიური ლიმიტი: კიდევ $%d შეგიძლია გაგზავნო მომდევნო %d საათში."
  },
  {
   "id": 1300,
@@ -1053,7 +1053,7 @@
   "line": 1023,
   "it": "La conferma del bonifico e' scaduta: nessun addebito.",
   "ctx": "Util_Send(playerid, -10270721, \"La conferma del bonifico e' scaduta: nessun addebito.\");",
-  "ka": ""
+  "ka": "გადარიცხვის დადასტურების ვადა ამოიწურა: თანხა არ ჩამოგეჭრა."
  },
  {
   "id": 1301,
@@ -1061,7 +1061,7 @@
   "line": 1035,
   "it": "Il destinatario non e' piu' disponibile: bonifico annullato.",
   "ctx": "Util_Send(playerid, -10270721, \"Il destinatario non e' piu' disponibile: bonifico annullato.\");",
-  "ka": ""
+  "ka": "მიმღები აღარ არის ხელმისაწვდომი: გადარიცხვა გაუქმდა."
  },
  {
   "id": 1302,
@@ -1069,7 +1069,7 @@
   "line": 1054,
   "it": "%s -> %s $%d (+$%d comm.) op %.8s%s",
   "ctx": "format(reason, 176, \"%s -> %s $%d (+$%d comm.) op %.8s%s\", sName, tName, amount, fee, gPlayer[playerid][pBankOpId], sameIp ? \" STESSO IP\" : \"\");",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 1303,
@@ -1077,7 +1077,7 @@
   "line": 1054,
   "it": " STESSO IP",
   "ctx": "format(reason, 176, \"%s -> %s $%d (+$%d comm.) op %.8s%s\", sName, tName, amount, fee, gPlayer[playerid][pBankOpId], sameIp ? \" STESSO IP\" : \"\");",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 1304,
@@ -1085,7 +1085,7 @@
   "line": 1088,
   "it": "Bonifico di $%d%s%s eseguito. Commissione: $%d. Saldo: $%d.",
   "ctx": "SendClientMessage(playerid, 0x66DD66FF, \"Bonifico di $%d%s%s eseguito. Commissione: $%d. Saldo: $%d.\", amount, tName[0] != 0 ? \" a \" : \"\", tName, fee, gPlayer[playerid][pBank]);",
-  "ka": ""
+  "ka": "გადარიცხვა $%d%s%s შესრულდა. საკომისიო: $%d. ბალანსი: $%d."
  },
  {
   "id": 1305,
@@ -1093,7 +1093,7 @@
   "line": 1092,
   "it": "Errore del sistema bancario: esito del bonifico incerto. Verifico il saldo, attendi.",
   "ctx": "Util_Send(playerid, -10270721, \"Errore del sistema bancario: esito del bonifico incerto. Verifico il saldo, attendi.\");",
-  "ka": ""
+  "ka": "საბანკო სისტემის შეცდომა: გადარიცხვის შედეგი უცნობია. ბალანსს ვამოწმებ, მოიცადე."
  },
  {
   "id": 1306,
@@ -1101,7 +1101,7 @@
   "line": 1119,
   "it": "Hai ricevuto un bonifico di $%d%s%s. Saldo: $%d.",
   "ctx": "SendClientMessage(targetid, 0x66DD66FF, \"Hai ricevuto un bonifico di $%d%s%s. Saldo: $%d.\", amount, sName[0] != 0 ? \" da \" : \"\", sName, gPlayer[targetid][pBank]);",
-  "ka": ""
+  "ka": "მიიღე გადარიცხვა $%d%s%s. ბალანსი: $%d."
  },
  {
   "id": 1307,
@@ -1109,7 +1109,7 @@
   "line": 1161,
   "it": "Sistema bancario occupato: riprova tra un attimo.",
   "ctx": "Bank_Reply(playerid, ui, result == 7 ? \"Sistema bancario occupato: riprova tra un attimo.\" : \"Estratto conto non disponibile: riprova piu' tardi.\");",
-  "ka": ""
+  "ka": "საბანკო სისტემა დატვირთულია: ცოტა ხანში სცადე."
  },
  {
   "id": 1308,
@@ -1117,7 +1117,7 @@
   "line": 1161,
   "it": "Estratto conto non disponibile: riprova piu' tardi.",
   "ctx": "Bank_Reply(playerid, ui, result == 7 ? \"Sistema bancario occupato: riprova tra un attimo.\" : \"Estratto conto non disponibile: riprova piu' tardi.\");",
-  "ka": ""
+  "ka": "ამონაწერი მიუწვდომელია: მოგვიანებით სცადე."
  },
  {
   "id": 1309,
@@ -1125,7 +1125,7 @@
   "line": 1189,
   "it": "Uso: /deposita importo (intero positivo, vicino a un ATM o sportello)",
   "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Uso: /deposita importo (intero positivo, vicino a un ATM o sportello)\");",
-  "ka": ""
+  "ka": "გამოყენება: /deposita თანხა (მთელი დადებითი რიცხვი, ATM-თან ან სალაროსთან)"
  },
  {
   "id": 1310,
@@ -1133,7 +1133,7 @@
   "line": 1201,
   "it": "Uso: /preleva importo (intero positivo, vicino a un ATM o sportello)",
   "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Uso: /preleva importo (intero positivo, vicino a un ATM o sportello)\");",
-  "ka": ""
+  "ka": "გამოყენება: /preleva თანხა (მთელი დადებითი რიცხვი, ATM-თან ან სალაროსთან)"
  },
  {
   "id": 1311,
@@ -1141,7 +1141,7 @@
   "line": 1215,
   "it": "Uso: /bonifico id|nome importo (commissione 2%, serve un ATM o uno sportello)",
   "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Uso: /bonifico id|nome importo (commissione 2%, serve un ATM o uno sportello)\");",
-  "ka": ""
+  "ka": "გამოყენება: /bonifico id|სახელი თანხა (საკომისიო 2%, საჭიროა ATM ან სალარო)"
  },
  {
   "id": 1312,
@@ -1149,7 +1149,7 @@
   "line": 1221,
   "it": "Piu' giocatori corrispondono: usa l'ID o un nome piu' preciso.",
   "ctx": "Util_Send(playerid, -10270721, \"Piu' giocatori corrispondono: usa l'ID o un nome piu' preciso.\");",
-  "ka": ""
+  "ka": "რამდენიმე მოთამაშე ემთხვევა: გამოიყენე ID ან უფრო ზუსტი სახელი."
  },
  {
   "id": 1313,
@@ -1157,7 +1157,7 @@
   "line": 1226,
   "it": "Giocatore non trovato tra quelli in gioco.",
   "ctx": "Util_Send(playerid, -10270721, \"Giocatore non trovato tra quelli in gioco.\");",
-  "ka": ""
+  "ka": "მოთამაშე თამაშში ვერ მოიძებნა."
  },
  {
   "id": 1314,
@@ -1165,7 +1165,7 @@
   "line": 1244,
   "it": "Banca - Sportello\\nUsa /atm",
   "ctx": "g_BankLabel[i] = Lang_Create3DTextLabel(counter ? \"Banca - Sportello\\nUsa /atm\" : \"ATM\\nUsa /atm\", 0x66DD66FF, s_BankPoints[i][0], s_BankPoints[i][1], (1.0 + s_BankPoints[i][2]), 12.0, 0, false);",
-  "ka": ""
+  "ka": "ბანკი - სალარო\\nგამოიყენე /atm"
  },
  {
   "id": 1315,
@@ -1173,7 +1173,7 @@
   "line": 1244,
   "it": "ATM\\nUsa /atm",
   "ctx": "g_BankLabel[i] = Lang_Create3DTextLabel(counter ? \"Banca - Sportello\\nUsa /atm\" : \"ATM\\nUsa /atm\", 0x66DD66FF, s_BankPoints[i][0], s_BankPoints[i][1], (1.0 + s_BankPoints[i][2]), 12.0, 0, false);",
-  "ka": ""
+  "ka": "ATM\\nგამოიყენე /atm"
  },
  {
   "id": 1316,
@@ -1181,7 +1181,7 @@
   "line": 1282,
   "it": "%s esce con operazione bancaria %d in volo (importo %d, op %s)",
   "ctx": "format(msg, 176, \"%s esce con operazione bancaria %d in volo (importo %d, op %s)\", name, gPlayer[playerid][pBankOp], gPlayer[playerid][pBankOpAmount], gPlayer[playerid][pBankOpId]);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 1964,
@@ -1189,7 +1189,7 @@
   "line": 130,
   "it": "Il telefono CityOS richiede il client CEF. Comandi: /contratti · /contratto · /quartiere · /reputazione · /saldo",
   "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Il telefono CityOS richiede il client CEF. Comandi: /contratti · /contratto · /quartiere · /reputazione · /saldo\");",
-  "ka": ""
+  "ka": "CityOS ტელეფონს CEF კლიენტი სჭირდება. ბრძანებები: /contratti · /contratto · /quartiere · /reputazione · /saldo"
  },
  {
   "id": 1965,
@@ -1197,7 +1197,7 @@
   "line": 176,
   "it": "pagina pronta per il giocatore %d",
   "ctx": "format(msg, 64, \"pagina pronta per il giocatore %d\", playerid);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 1966,
@@ -1205,7 +1205,7 @@
   "line": 329,
   "it": "Job Center segnato sulla mappa",
   "ctx": "CefUI_Toast(playerid, \"Job Center segnato sulla mappa\", 1);",
-  "ka": ""
+  "ka": "Job Center რუკაზე მოინიშნა"
  },
  {
   "id": 1967,
@@ -1213,7 +1213,7 @@
   "line": 228,
   "it": "nuovo personaggio %d (%s)",
   "ctx": "format(msg, 128, \"nuovo personaggio %d (%s)\", charId, name);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 1968,
@@ -1221,7 +1221,7 @@
   "line": 347,
   "it": "Unity Station",
   "ctx": "strcat(sub, \"Unity Station\", ssize);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 1769,
@@ -1229,7 +1229,7 @@
   "line": 3,
   "it": "La panetteria di Idlewood ha riaperto dopo l'estate: il pane esce caldo alle sei.",
   "ctx": "{\"La panetteria di Idlewood ha riaperto dopo l'estate: il pane esce caldo alle sei.\", \"Alla Casa del Quartiere cercano volontari per il doposcuola del giovedi'.\", \"Il campetto dietro la stazione ha di",
-  "ka": ""
+  "ka": "Idlewood-ის საცხობი ზაფხულის შემდეგ ისევ გაიხსნა: ცხელი პური ექვს საათზე გამოდის."
  },
  {
   "id": 1770,
@@ -1237,7 +1237,7 @@
   "line": 3,
   "it": "Alla Casa del Quartiere cercano volontari per il doposcuola del giovedi'.",
   "ctx": "{\"La panetteria di Idlewood ha riaperto dopo l'estate: il pane esce caldo alle sei.\", \"Alla Casa del Quartiere cercano volontari per il doposcuola del giovedi'.\", \"Il campetto dietro la stazione ha di",
-  "ka": ""
+  "ka": "უბნის სახლში ხუთშაბათის სკოლისშემდგომი მეცადინეობისთვის მოხალისეებს ეძებენ."
  },
  {
   "id": 1771,
@@ -1245,7 +1245,7 @@
   "line": 3,
   "it": "Il campetto dietro la stazione ha di nuovo le reti: qualcuno le ha ricucite a mano.",
   "ctx": "{\"La panetteria di Idlewood ha riaperto dopo l'estate: il pane esce caldo alle sei.\", \"Alla Casa del Quartiere cercano volontari per il doposcuola del giovedi'.\", \"Il campetto dietro la stazione ha di",
-  "ka": ""
+  "ka": "სადგურის უკან მოედანს ისევ აქვს ბადეები: ვიღაცამ ხელით შეკერა."
  },
  {
   "id": 1772,
@@ -1253,7 +1253,7 @@
   "line": 3,
   "it": "Un vecchio meccanico ripara bici gratis ai ragazzi, basta portargli un caffe'.",
   "ctx": "{\"La panetteria di Idlewood ha riaperto dopo l'estate: il pane esce caldo alle sei.\", \"Alla Casa del Quartiere cercano volontari per il doposcuola del giovedi'.\", \"Il campetto dietro la stazione ha di",
-  "ka": ""
+  "ka": "ერთი ძველი ხელოსანი ბავშვებს ველოსიპედებს უფასოდ უკეთებს — საკმარისია ყავა მიუტანო."
  },
  {
   "id": 1773,
@@ -1261,7 +1261,7 @@
   "line": 3,
   "it": "Le signore del palazzo giallo organizzano una cena di quartiere sabato sera.",
   "ctx": "{\"La panetteria di Idlewood ha riaperto dopo l'estate: il pane esce caldo alle sei.\", \"Alla Casa del Quartiere cercano volontari per il doposcuola del giovedi'.\", \"Il campetto dietro la stazione ha di",
-  "ka": ""
+  "ka": "ყვითელი კორპუსის ქალბატონები შაბათ საღამოს უბნის ვახშამს აწყობენ."
  },
  {
   "id": 1774,
@@ -1269,7 +1269,7 @@
   "line": 3,
   "it": "Il negozio all'angolo ha appeso una lavagna: chi ha bisogno lascia un biglietto.",
   "ctx": "{\"La panetteria di Idlewood ha riaperto dopo l'estate: il pane esce caldo alle sei.\", \"Alla Casa del Quartiere cercano volontari per il doposcuola del giovedi'.\", \"Il campetto dietro la stazione ha di",
-  "ka": ""
+  "ka": "კუთხის მაღაზიამ დაფა ჩამოკიდა: ვისაც დახმარება სჭირდება, ბარათს ტოვებს."
  },
  {
   "id": 1775,
@@ -1277,7 +1277,7 @@
   "line": 3,
   "it": "Dicono che il murale vicino alla fermata sara' restaurato dagli stessi artisti.",
   "ctx": "{\"La panetteria di Idlewood ha riaperto dopo l'estate: il pane esce caldo alle sei.\", \"Alla Casa del Quartiere cercano volontari per il doposcuola del giovedi'.\", \"Il campetto dietro la stazione ha di",
-  "ka": ""
+  "ka": "ამბობენ, გაჩერებასთან მურალს იგივე მხატვრები აღადგენენ."
  },
  {
   "id": 1776,
@@ -1285,7 +1285,7 @@
   "line": 3,
   "it": "Chi esce dal turno di notte trova sempre una luce accesa alla Casa del Quartiere.",
   "ctx": "{\"La panetteria di Idlewood ha riaperto dopo l'estate: il pane esce caldo alle sei.\", \"Alla Casa del Quartiere cercano volontari per il doposcuola del giovedi'.\", \"Il campetto dietro la stazione ha di",
-  "ka": ""
+  "ka": "ღამის ცვლიდან დაბრუნებულს უბნის სახლში შუქი ყოველთვის ანთია."
  },
  {
   "id": 1777,
@@ -1293,7 +1293,7 @@
   "line": 4,
   "it": "A Ganton il barbiere sotto i portici taglia i capelli ai ragazzi prima degli esami.",
   "ctx": "{\"A Ganton il barbiere sotto i portici taglia i capelli ai ragazzi prima degli esami.\", \"Il negozio di Ganton aspetta un carico di frutta: chi consegna e' il benvenuto.\", \"Sulla Grove hanno ridipinto ",
-  "ka": ""
+  "ka": "Ganton-ში თაღების ქვეშ დალაქი ბიჭებს გამოცდების წინ თმას კრეჭს."
  },
  {
   "id": 1778,
@@ -1301,7 +1301,7 @@
   "line": 4,
   "it": "Il negozio di Ganton aspetta un carico di frutta: chi consegna e' il benvenuto.",
   "ctx": "{\"A Ganton il barbiere sotto i portici taglia i capelli ai ragazzi prima degli esami.\", \"Il negozio di Ganton aspetta un carico di frutta: chi consegna e' il benvenuto.\", \"Sulla Grove hanno ridipinto ",
-  "ka": ""
+  "ka": "Ganton-ის მაღაზია ხილის ტვირთს ელოდება: ვინც მიიტანს, სასურველი სტუმარია."
  },
  {
   "id": 1779,
@@ -1309,7 +1309,7 @@
   "line": 4,
   "it": "Sulla Grove hanno ridipinto le panchine, ognuna con un colore diverso.",
   "ctx": "{\"A Ganton il barbiere sotto i portici taglia i capelli ai ragazzi prima degli esami.\", \"Il negozio di Ganton aspetta un carico di frutta: chi consegna e' il benvenuto.\", \"Sulla Grove hanno ridipinto ",
-  "ka": ""
+  "ka": "Grove-ზე სკამები თავიდან შეღებეს, თითოეული სხვადასხვა ფერად."
  },
  {
   "id": 1780,
@@ -1317,7 +1317,7 @@
   "line": 4,
   "it": "Un gruppo di madri accompagna i bambini a scuola a turno, a piedi.",
   "ctx": "{\"A Ganton il barbiere sotto i portici taglia i capelli ai ragazzi prima degli esami.\", \"Il negozio di Ganton aspetta un carico di frutta: chi consegna e' il benvenuto.\", \"Sulla Grove hanno ridipinto ",
-  "ka": ""
+  "ka": "დედების ჯგუფი ბავშვებს რიგრიგობით, ფეხით აცილებს სკოლაში."
  },
  {
   "id": 1781,
@@ -1325,7 +1325,7 @@
   "line": 4,
   "it": "Il torneo di basket del venerdi' quest'anno raccoglie fondi per il campetto.",
   "ctx": "{\"A Ganton il barbiere sotto i portici taglia i capelli ai ragazzi prima degli esami.\", \"Il negozio di Ganton aspetta un carico di frutta: chi consegna e' il benvenuto.\", \"Sulla Grove hanno ridipinto ",
-  "ka": ""
+  "ka": "პარასკევის კალათბურთის ტურნირი წელს მოედნისთვის თანხას აგროვებს."
  },
  {
   "id": 1782,
@@ -1333,7 +1333,7 @@
   "line": 4,
   "it": "Un ex corriere ha aperto una piccola officina: assume chi vuole imparare.",
   "ctx": "{\"A Ganton il barbiere sotto i portici taglia i capelli ai ragazzi prima degli esami.\", \"Il negozio di Ganton aspetta un carico di frutta: chi consegna e' il benvenuto.\", \"Sulla Grove hanno ridipinto ",
-  "ka": ""
+  "ka": "ყოფილმა კურიერმა პატარა სახელოსნო გახსნა: ვისაც სწავლა სურს, სამსახურში იღებს."
  },
  {
   "id": 1783,
@@ -1341,7 +1341,7 @@
   "line": 4,
   "it": "Le luci della via principale sono tornate: i commercianti hanno fatto colletta.",
   "ctx": "{\"A Ganton il barbiere sotto i portici taglia i capelli ai ragazzi prima degli esami.\", \"Il negozio di Ganton aspetta un carico di frutta: chi consegna e' il benvenuto.\", \"Sulla Grove hanno ridipinto ",
-  "ka": ""
+  "ka": "მთავარ ქუჩაზე შუქი დაბრუნდა: ვაჭრებმა ფული შეაგროვეს."
  },
  {
   "id": 1784,
@@ -1349,7 +1349,7 @@
   "line": 4,
   "it": "Dicono che il vecchio cinema all'aperto potrebbe tornare per una sera d'estate.",
   "ctx": "{\"A Ganton il barbiere sotto i portici taglia i capelli ai ragazzi prima degli esami.\", \"Il negozio di Ganton aspetta un carico di frutta: chi consegna e' il benvenuto.\", \"Sulla Grove hanno ridipinto ",
-  "ka": ""
+  "ka": "ამბობენ, ძველი ღია კინოთეატრი ზაფხულის ერთი საღამოთი შეიძლება დაბრუნდეს."
  },
  {
   "id": 1785,
@@ -1357,7 +1357,7 @@
   "line": 5,
   "it": "Al magazzino di Jefferson servono autisti puntuali: chi lavora bene viene ricordato.",
   "ctx": "{\"Al magazzino di Jefferson servono autisti puntuali: chi lavora bene viene ricordato.\", \"Il motel sulla collina offre la colazione a chi aiuta a scaricare le merci.\", \"Un coro di quartiere prova ogni",
-  "ka": ""
+  "ka": "Jefferson-ის საწყობს პუნქტუალური მძღოლები სჭირდება: კარგ მუშაკს არ ივიწყებენ."
  },
  {
   "id": 1786,
@@ -1365,7 +1365,7 @@
   "line": 5,
   "it": "Il motel sulla collina offre la colazione a chi aiuta a scaricare le merci.",
   "ctx": "{\"Al magazzino di Jefferson servono autisti puntuali: chi lavora bene viene ricordato.\", \"Il motel sulla collina offre la colazione a chi aiuta a scaricare le merci.\", \"Un coro di quartiere prova ogni",
-  "ka": ""
+  "ka": "გორაზე მდებარე მოტელი საუზმეს სთავაზობს მათ, ვინც ტვირთის გადმოტვირთვაში ეხმარება."
  },
  {
   "id": 1787,
@@ -1373,7 +1373,7 @@
   "line": 5,
   "it": "Un coro di quartiere prova ogni martedi' nella sala della chiesa.",
   "ctx": "{\"Al magazzino di Jefferson servono autisti puntuali: chi lavora bene viene ricordato.\", \"Il motel sulla collina offre la colazione a chi aiuta a scaricare le merci.\", \"Un coro di quartiere prova ogni",
-  "ka": ""
+  "ka": "უბნის გუნდი ყოველ სამშაბათს ეკლესიის დარბაზში რეპეტიციას ატარებს."
  },
  {
   "id": 1788,
@@ -1381,7 +1381,7 @@
   "line": 5,
   "it": "La lavanderia a gettoni e' diventata il posto dove ci si scambia le notizie.",
   "ctx": "{\"Al magazzino di Jefferson servono autisti puntuali: chi lavora bene viene ricordato.\", \"Il motel sulla collina offre la colazione a chi aiuta a scaricare le merci.\", \"Un coro di quartiere prova ogni",
-  "ka": ""
+  "ka": "ავტომატური სამრეცხაო ამბების გაცვლის ადგილად იქცა."
  },
  {
   "id": 1789,
@@ -1389,7 +1389,7 @@
   "line": 5,
   "it": "I ragazzi del quartiere puliscono il parco ogni prima domenica del mese.",
   "ctx": "{\"Al magazzino di Jefferson servono autisti puntuali: chi lavora bene viene ricordato.\", \"Il motel sulla collina offre la colazione a chi aiuta a scaricare le merci.\", \"Un coro di quartiere prova ogni",
-  "ka": ""
+  "ka": "უბნის ახალგაზრდები პარკს ყოველი თვის პირველ კვირას ასუფთავებენ."
  },
  {
   "id": 1790,
@@ -1397,7 +1397,7 @@
   "line": 5,
   "it": "Un fornaio di Jefferson regala le pagnotte invendute alla mensa la sera.",
   "ctx": "{\"Al magazzino di Jefferson servono autisti puntuali: chi lavora bene viene ricordato.\", \"Il motel sulla collina offre la colazione a chi aiuta a scaricare le merci.\", \"Un coro di quartiere prova ogni",
-  "ka": ""
+  "ka": "Jefferson-ელი მცხობელი გაუყიდავ პურს საღამოობით სასადილოს ჩუქნის."
  },
  {
   "id": 1791,
@@ -1405,7 +1405,7 @@
   "line": 5,
   "it": "La fermata dell'autobus ha una nuova pensilina: costruita da chi la usa.",
   "ctx": "{\"Al magazzino di Jefferson servono autisti puntuali: chi lavora bene viene ricordato.\", \"Il motel sulla collina offre la colazione a chi aiuta a scaricare le merci.\", \"Un coro di quartiere prova ogni",
-  "ka": ""
+  "ka": "ავტობუსის გაჩერებას ახალი ფარდული აქვს: ის მისმა მგზავრებმა ააშენეს."
  },
  {
   "id": 1792,
@@ -1413,7 +1413,7 @@
   "line": 5,
   "it": "Dicono che chi consegna con cura a Jefferson trova sempre una porta aperta.",
   "ctx": "{\"Al magazzino di Jefferson servono autisti puntuali: chi lavora bene viene ricordato.\", \"Il motel sulla collina offre la colazione a chi aiuta a scaricare le merci.\", \"Un coro di quartiere prova ogni",
-  "ka": ""
+  "ka": "ამბობენ, ვინც Jefferson-ში ფრთხილად აწვდის ტვირთს, ყველგან ღია კარს ხვდება."
  },
  {
   "id": 1793,
@@ -1421,7 +1421,7 @@
   "line": 122,
   "it": "CityOS_OnDistrictEvent",
   "ctx": "LD_Listen(\"CityOS_OnDistrictEvent\", 30);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 1794,
@@ -1429,7 +1429,7 @@
   "line": 181,
   "it": "Uso: /contratti accetta <numero contratto>",
   "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Uso: /contratti accetta <numero contratto>\");",
-  "ka": ""
+  "ka": "გამოყენება: /contratti accetta <კონტრაქტის ნომერი>"
  },
  {
   "id": 1795,
@@ -1437,7 +1437,7 @@
   "line": 206,
   "it": "Non hai un contratto da lasciare.",
   "ctx": "Util_Send(playerid, -10270721, \"Non hai un contratto da lasciare.\");",
-  "ka": ""
+  "ka": "დასატოვებელი კონტრაქტი არ გაქვს."
  },
  {
   "id": 1796,
@@ -1445,7 +1445,7 @@
   "line": 216,
   "it": "La tua richiesta di contratto e' in elaborazione: attendi un istante.",
   "ctx": "Util_Send(playerid, -1, \"La tua richiesta di contratto e' in elaborazione: attendi un istante.\");",
-  "ka": ""
+  "ka": "შენი კონტრაქტის მოთხოვნა მუშავდება: წამით მოიცადე."
  },
  {
   "id": 1797,
@@ -1453,7 +1453,7 @@
   "line": 267,
   "it": "Uso: /quartiere [idlewood|ganton|jefferson]",
   "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Uso: /quartiere [idlewood|ganton|jefferson]\");",
-  "ka": ""
+  "ka": "გამოყენება: /quartiere [idlewood|ganton|jefferson]"
  },
  {
   "id": 1798,
@@ -1461,7 +1461,7 @@
   "line": 289,
   "it": "Sto ancora caricando i tuoi dati: riprova tra un istante.",
   "ctx": "Util_Send(playerid, -10270721, \"Sto ancora caricando i tuoi dati: riprova tra un istante.\");",
-  "ka": ""
+  "ka": "შენს მონაცემებს ჯერ კიდევ ვტვირთავ: წამში სცადე."
  },
  {
   "id": 1799,
@@ -1469,7 +1469,7 @@
   "line": 314,
   "it": "Questo contratto non e' piu' attivo.",
   "ctx": "Util_Send(playerid, -10270721, \"Questo contratto non e' piu' attivo.\");",
-  "ka": ""
+  "ka": "ეს კონტრაქტი აღარ არის აქტიური."
  },
  {
   "id": 1969,
@@ -1477,7 +1477,7 @@
   "line": 6,
   "it": "Giocatore non valido.",
   "ctx": "Util_Send(playerid, -10270721, \"Giocatore non valido.\");",
-  "ka": ""
+  "ka": "არასწორი მოთამაშე."
  },
  {
   "id": 1970,
@@ -1485,7 +1485,7 @@
   "line": 22,
   "it": "Uso: /goto id",
   "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Uso: /goto id\");",
-  "ka": ""
+  "ka": "გამოყენება: /goto id"
  },
  {
   "id": 1971,
@@ -1493,7 +1493,7 @@
   "line": 31,
   "it": "Giocatore non valido.",
   "ctx": "Util_Send(playerid, -10270721, \"Giocatore non valido.\");",
-  "ka": ""
+  "ka": "არასწორი მოთამაშე."
  },
  {
   "id": 1972,
@@ -1501,7 +1501,7 @@
   "line": 42,
   "it": "Teletrasportato presso %s.",
   "ctx": "SendClientMessage(playerid, -5963521, \"Teletrasportato presso %s.\", tn);",
-  "ka": ""
+  "ka": "გადაადგილდი %s-თან."
  },
  {
   "id": 1973,
@@ -1509,7 +1509,7 @@
   "line": 43,
   "it": "%s /goto %s",
   "ctx": "format(msg, 128, \"%s /goto %s\", an, tn);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 1974,
@@ -1517,7 +1517,7 @@
   "line": 61,
   "it": "Uso: /setlevel id livello",
   "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Uso: /setlevel id livello\");",
-  "ka": ""
+  "ka": "გამოყენება: /setlevel id დონე"
  },
  {
   "id": 1975,
@@ -1525,7 +1525,7 @@
   "line": 70,
   "it": "Livello non valido (%d-%d).",
   "ctx": "SendClientMessage(playerid, -10270721, \"Livello non valido (%d-%d).\", 1, 50);",
-  "ka": ""
+  "ka": "არასწორი დონე (%d-%d)."
  },
  {
   "id": 1976,
@@ -1533,7 +1533,7 @@
   "line": 81,
   "it": "Livello di %s impostato a %d.",
   "ctx": "SendClientMessage(playerid, -5963521, \"Livello di %s impostato a %d.\", tn, level);",
-  "ka": ""
+  "ka": "%s-ის დონე დაყენდა: %d."
  },
  {
   "id": 1977,
@@ -1541,7 +1541,7 @@
   "line": 84,
   "it": "Il tuo livello e' stato impostato a %d dallo staff.",
   "ctx": "SendClientMessage(targetid, -2994689, \"Il tuo livello e' stato impostato a %d dallo staff.\", level);",
-  "ka": ""
+  "ka": "ადმინისტრაციამ შენი დონე დააყენა: %d."
  },
  {
   "id": 1978,
@@ -1549,7 +1549,7 @@
   "line": 86,
   "it": "%s /setlevel %s %d",
   "ctx": "format(msg, 128, \"%s /setlevel %s %d\", an, tn, level);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 1979,
@@ -1557,7 +1557,7 @@
   "line": 88,
   "it": "livello %d",
   "ctx": "format(msg, 128, \"livello %d\", level);",
-  "ka": ""
+  "ka": "დონე %d"
  },
  {
   "id": 1980,
@@ -1565,7 +1565,7 @@
   "line": 90,
   "it": "impostato il livello di",
   "ctx": "Admin_AdmCmd(an, \"impostato il livello di\", tn, msg, \"\");",
-  "ka": ""
+  "ka": "შეცვალა დონე:"
  },
  {
   "id": 1981,
@@ -1573,7 +1573,7 @@
   "line": 105,
   "it": "Uso: /setmoney id importo",
   "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Uso: /setmoney id importo\");",
-  "ka": ""
+  "ka": "გამოყენება: /setmoney id თანხა"
  },
  {
   "id": 1982,
@@ -1581,7 +1581,7 @@
   "line": 114,
   "it": "Importo non valido (0-%d).",
   "ctx": "SendClientMessage(playerid, -10270721, \"Importo non valido (0-%d).\", 0x3B9ACA00);",
-  "ka": ""
+  "ka": "არასწორი თანხა (0-%d)."
  },
  {
   "id": 1983,
@@ -1589,7 +1589,7 @@
   "line": 121,
   "it": "Contanti di %s impostati a $%d.",
   "ctx": "SendClientMessage(playerid, -5963521, \"Contanti di %s impostati a $%d.\", tn, amount);",
-  "ka": ""
+  "ka": "%s-ის ნაღდი ფული დაყენდა: $%d."
  },
  {
   "id": 1984,
@@ -1597,7 +1597,7 @@
   "line": 124,
   "it": "I tuoi contanti sono stati impostati a $%d dallo staff.",
   "ctx": "SendClientMessage(targetid, 0x66DD66FF, \"I tuoi contanti sono stati impostati a $%d dallo staff.\", amount);",
-  "ka": ""
+  "ka": "ადმინისტრაციამ შენი ნაღდი ფული დააყენა: $%d."
  },
  {
   "id": 1985,
@@ -1605,7 +1605,7 @@
   "line": 126,
   "it": "%s /setmoney %s %d",
   "ctx": "format(msg, 128, \"%s /setmoney %s %d\", an, tn, amount);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 1986,
@@ -1613,7 +1613,7 @@
   "line": 128,
   "it": "contanti %d",
   "ctx": "format(msg, 128, \"contanti %d\", amount);",
-  "ka": ""
+  "ka": "ნაღდი %d"
  },
  {
   "id": 1987,
@@ -1621,7 +1621,7 @@
   "line": 130,
   "it": "impostato i contanti di",
   "ctx": "Admin_AdmCmd(an, \"impostato i contanti di\", tn, msg, \"\");",
-  "ka": ""
+  "ka": "შეცვალა ნაღდი ფული:"
  },
  {
   "id": 1988,
@@ -1629,7 +1629,7 @@
   "line": 142,
   "it": "Giocatore non valido.",
   "ctx": "Util_Send(playerid, -10270721, \"Giocatore non valido.\");",
-  "ka": ""
+  "ka": "არასწორი მოთამაშე."
  },
  {
   "id": 1989,
@@ -1637,7 +1637,7 @@
   "line": 147,
   "it": "Non puoi agire su questo giocatore.",
   "ctx": "Util_Send(playerid, -10270721, \"Non puoi agire su questo giocatore.\");",
-  "ka": ""
+  "ka": "ამ მოთამაშეზე მოქმედება არ შეგიძლია."
  },
  {
   "id": 1990,
@@ -1645,7 +1645,7 @@
   "line": 172,
   "it": "Uso: /a testo",
   "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Uso: /a testo\");",
-  "ka": ""
+  "ka": "გამოყენება: /a ტექსტი"
  },
  {
   "id": 1991,
@@ -1653,7 +1653,7 @@
   "line": 178,
   "it": "[STAFF] %s (%s): %s",
   "ctx": "format(msg, 256, \"[STAFF] %s (%s): %s\", name, lvl, text);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 1992,
@@ -1661,7 +1661,7 @@
   "line": 203,
   "it": "Uso: /rr id_report testo",
   "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Uso: /rr id_report testo\");",
-  "ka": ""
+  "ka": "გამოყენება: /rr რეპორტის_id ტექსტი"
  },
  {
   "id": 1993,
@@ -1669,7 +1669,7 @@
   "line": 210,
   "it": "Report non trovato.",
   "ctx": "Util_Send(playerid, -10270721, \"Report non trovato.\");",
-  "ka": ""
+  "ka": "რეპორტი ვერ მოიძებნა."
  },
  {
   "id": 1994,
@@ -1677,7 +1677,7 @@
   "line": 214,
   "it": "L'autore del report non e' piu' online.",
   "ctx": "Util_Send(playerid, -10270721, \"L'autore del report non e' piu' online.\");",
-  "ka": ""
+  "ka": "რეპორტის ავტორი აღარ არის ონლაინ."
  },
  {
   "id": 1995,
@@ -1685,7 +1685,7 @@
   "line": 218,
   "it": "Risposta inviata.",
   "ctx": "Util_Send(playerid, 0x66DD66FF, \"Risposta inviata.\");",
-  "ka": ""
+  "ka": "პასუხი გაიგზავნა."
  },
  {
   "id": 1996,
@@ -1693,7 +1693,7 @@
   "line": 234,
   "it": "Uso: /gethere id",
   "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Uso: /gethere id\");",
-  "ka": ""
+  "ka": "გამოყენება: /gethere id"
  },
  {
   "id": 1997,
@@ -1701,7 +1701,7 @@
   "line": 248,
   "it": "Sei stato teletrasportato da %s.",
   "ctx": "SendClientMessage(targetid, -5963521, \"Sei stato teletrasportato da %s.\", an);",
-  "ka": ""
+  "ka": "%s-მ გადაგაადგილა."
  },
  {
   "id": 1998,
@@ -1709,7 +1709,7 @@
   "line": 264,
   "it": "Uso: /freeze id [motivo]",
   "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Uso: /freeze id [motivo]\");",
-  "ka": ""
+  "ka": "გამოყენება: /freeze id [მიზეზი]"
  },
  {
   "id": 1999,
@@ -1717,7 +1717,7 @@
   "line": 281,
   "it": "Sei stato congelato da %s%s%s.",
   "ctx": "SendClientMessage(targetid, -10270721, \"Sei stato congelato da %s%s%s.\", an, reason[0] != 0 ? \": \" : \"\", reason);",
-  "ka": ""
+  "ka": "%s-მ გაგყინა%s%s."
  },
  {
   "id": 2000,
@@ -1725,7 +1725,7 @@
   "line": 297,
   "it": "Uso: /unfreeze id",
   "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Uso: /unfreeze id\");",
-  "ka": ""
+  "ka": "გამოყენება: /unfreeze id"
  },
  {
   "id": 2001,
@@ -1733,7 +1733,7 @@
   "line": 309,
   "it": "Sei stato scongelato da %s.",
   "ctx": "SendClientMessage(targetid, 0x66DD66FF, \"Sei stato scongelato da %s.\", an);",
-  "ka": ""
+  "ka": "%s-მ გაგყინვა მოგიხსნა."
  },
  {
   "id": 2002,
@@ -1741,7 +1741,7 @@
   "line": 326,
   "it": "Uso: /sethp id %d-%d",
   "ctx": "SendClientMessage(playerid, 0x99CCFFFF, \"Uso: /sethp id %d-%d\", 1, 100);",
-  "ka": ""
+  "ka": "გამოყენება: /sethp id %d-%d"
  },
  {
   "id": 2003,
@@ -1749,7 +1749,7 @@
   "line": 335,
   "it": "Non puoi agire su questo giocatore.",
   "ctx": "Util_Send(playerid, -10270721, \"Non puoi agire su questo giocatore.\");",
-  "ka": ""
+  "ka": "ამ მოთამაშეზე მოქმედება არ შეგიძლია."
  },
  {
   "id": 2004,
@@ -1757,7 +1757,7 @@
   "line": 340,
   "it": "Vita non valida (%d-%d).",
   "ctx": "SendClientMessage(playerid, -10270721, \"Vita non valida (%d-%d).\", 1, 100);",
-  "ka": ""
+  "ka": "არასწორი სიცოცხლე (%d-%d)."
  },
  {
   "id": 2005,
@@ -1765,7 +1765,7 @@
   "line": 347,
   "it": "vita %d",
   "ctx": "format(msg, 128, \"vita %d\", hp);",
-  "ka": ""
+  "ka": "სიცოცხლე %d"
  },
  {
   "id": 2006,
@@ -1773,7 +1773,7 @@
   "line": 348,
   "it": "impostato la vita di",
   "ctx": "Admin_AdmCmd(an, \"impostato la vita di\", tn, msg, \"\");",
-  "ka": ""
+  "ka": "შეცვალა სიცოცხლე:"
  },
  {
   "id": 2007,
@@ -1781,7 +1781,7 @@
   "line": 363,
   "it": "Uso: /kick id motivo (motivo di almeno %d caratteri)",
   "ctx": "SendClientMessage(playerid, 0x99CCFFFF, \"Uso: /kick id motivo (motivo di almeno %d caratteri)\", 3);",
-  "ka": ""
+  "ka": "გამოყენება: /kick id მიზეზი (მიზეზი მინიმუმ %d სიმბოლო)"
  },
  {
   "id": 2008,
@@ -1789,7 +1789,7 @@
   "line": 375,
   "it": "Sei stato espulso da %s: %s",
   "ctx": "format(msg, 256, \"Sei stato espulso da %s: %s\", an, reason);",
-  "ka": ""
+  "ka": "%s-მ სერვერიდან გაგაგდო: %s"
  },
  {
   "id": 2009,
@@ -1797,7 +1797,7 @@
   "line": 401,
   "it": "Uso: /mute id [minuti 1-%d] motivo",
   "ctx": "SendClientMessage(playerid, 0x99CCFFFF, \"Uso: /mute id [minuti 1-%d] motivo\", 1440);",
-  "ka": ""
+  "ka": "გამოყენება: /mute id [წუთი 1-%d] მიზეზი"
  },
  {
   "id": 2010,
@@ -1805,7 +1805,7 @@
   "line": 406,
   "it": "Durata non valida (1-%d minuti).",
   "ctx": "SendClientMessage(playerid, -10270721, \"Durata non valida (1-%d minuti).\", 1440);",
-  "ka": ""
+  "ka": "არასწორი ხანგრძლივობა (1-%d წუთი)."
  },
  {
   "id": 2011,
@@ -1813,7 +1813,7 @@
   "line": 418,
   "it": "%s (%d min)",
   "ctx": "format(msg, 256, \"%s (%d min)\", reason, minutes);",
-  "ka": ""
+  "ka": "%s (%d წთ)"
  },
  {
   "id": 2012,
@@ -1821,7 +1821,7 @@
   "line": 419,
   "it": "Sei stato mutato da %s per %d minuti: %s",
   "ctx": "SendClientMessage(targetid, -10270721, \"Sei stato mutato da %s per %d minuti: %s\", an, minutes, reason);",
-  "ka": ""
+  "ka": "%s-მ მიუტი დაგადო %d წუთით: %s"
  },
  {
   "id": 2013,
@@ -1829,7 +1829,7 @@
   "line": 435,
   "it": "Uso: /unmute id",
   "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Uso: /unmute id\");",
-  "ka": ""
+  "ka": "გამოყენება: /unmute id"
  },
  {
   "id": 2014,
@@ -1837,7 +1837,7 @@
   "line": 444,
   "it": "Il giocatore non e' mutato.",
   "ctx": "Util_Send(playerid, -10270721, \"Il giocatore non e' mutato.\");",
-  "ka": ""
+  "ka": "მოთამაშეს მიუტი არ აქვს."
  },
  {
   "id": 2015,
@@ -1845,7 +1845,7 @@
   "line": 452,
   "it": "Il tuo mute e' stato rimosso da %s.",
   "ctx": "SendClientMessage(targetid, 0x66DD66FF, \"Il tuo mute e' stato rimosso da %s.\", an);",
-  "ka": ""
+  "ka": "%s-მ მიუტი მოგიხსნა."
  },
  {
   "id": 2016,
@@ -1853,7 +1853,7 @@
   "line": 468,
   "it": "Uso: /warn id motivo (motivo di almeno %d caratteri)",
   "ctx": "SendClientMessage(playerid, 0x99CCFFFF, \"Uso: /warn id motivo (motivo di almeno %d caratteri)\", 3);",
-  "ka": ""
+  "ka": "გამოყენება: /warn id მიზეზი (მიზეზი მინიმუმ %d სიმბოლო)"
  },
  {
   "id": 2017,
@@ -1861,7 +1861,7 @@
   "line": 477,
   "it": "Operazione precedente ancora in corso, attendi.",
   "ctx": "Util_Send(playerid, -10270721, \"Operazione precedente ancora in corso, attendi.\");",
-  "ka": ""
+  "ka": "წინა ოპერაცია ჯერ კიდევ მიმდინარეობს, მოიცადე."
  },
  {
   "id": 2018,
@@ -1869,7 +1869,7 @@
   "line": 498,
   "it": "Uso: /setadmin id|nome_account %d-%d",
   "ctx": "SendClientMessage(playerid, 0x99CCFFFF, \"Uso: /setadmin id|nome_account %d-%d\", 0, 3);",
-  "ka": ""
+  "ka": "გამოყენება: /setadmin id|ანგარიშის_სახელი %d-%d"
  },
  {
   "id": 2019,
@@ -1877,7 +1877,7 @@
   "line": 503,
   "it": "Livello non valido (%d-%d).",
   "ctx": "SendClientMessage(playerid, -10270721, \"Livello non valido (%d-%d).\", 0, 3);",
-  "ka": ""
+  "ka": "არასწორი დონე (%d-%d)."
  },
  {
   "id": 2020,
@@ -1885,7 +1885,7 @@
   "line": 512,
   "it": "Giocatore non valido.",
   "ctx": "Util_Send(playerid, -10270721, \"Giocatore non valido.\");",
-  "ka": ""
+  "ka": "არასწორი მოთამაშე."
  },
  {
   "id": 2021,
@@ -1893,7 +1893,7 @@
   "line": 524,
   "it": "Non puoi agire su questo giocatore.",
   "ctx": "Util_Send(playerid, -10270721, \"Non puoi agire su questo giocatore.\");",
-  "ka": ""
+  "ka": "ამ მოთამაშეზე მოქმედება არ შეგიძლია."
  },
  {
   "id": 2022,
@@ -1901,7 +1901,7 @@
   "line": 530,
   "it": "Il tuo livello staff e' stato impostato a %d da %s.",
   "ctx": "SendClientMessage(targetid, -5963521, \"Il tuo livello staff e' stato impostato a %d da %s.\", level, an);",
-  "ka": ""
+  "ka": "შენი ადმინ-დონე დაყენდა: %d (%s)."
  },
  {
   "id": 2023,
@@ -1909,7 +1909,7 @@
   "line": 531,
   "it": "livello %d",
   "ctx": "format(msg, 128, \"livello %d\", level);",
-  "ka": ""
+  "ka": "დონე %d"
  },
  {
   "id": 2024,
@@ -1917,7 +1917,7 @@
   "line": 532,
   "it": "impostato il livello staff di",
   "ctx": "Admin_AdmCmd(an, \"impostato il livello staff di\", tn, msg, \"\");",
-  "ka": ""
+  "ka": "შეცვალა ადმინ-დონე:"
  },
  {
   "id": 2025,
@@ -1925,7 +1925,7 @@
   "line": 538,
   "it": "Giocatore non valido.",
   "ctx": "Util_Send(playerid, -10270721, \"Giocatore non valido.\");",
-  "ka": ""
+  "ka": "არასწორი მოთამაშე."
  },
  {
   "id": 2026,
@@ -1933,7 +1933,7 @@
   "line": 543,
   "it": "Operazione precedente ancora in corso, attendi.",
   "ctx": "Util_Send(playerid, -10270721, \"Operazione precedente ancora in corso, attendi.\");",
-  "ka": ""
+  "ka": "წინა ოპერაცია ჯერ კიდევ მიმდინარეობს, მოიცადე."
  },
  {
   "id": 2027,
@@ -1941,7 +1941,7 @@
   "line": 562,
   "it": "Uso: /givemoney id importo",
   "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Uso: /givemoney id importo\");",
-  "ka": ""
+  "ka": "გამოყენება: /givemoney id თანხა"
  },
  {
   "id": 2028,
@@ -1949,7 +1949,7 @@
   "line": 571,
   "it": "Importo non valido (1-%d).",
   "ctx": "SendClientMessage(playerid, -10270721, \"Importo non valido (1-%d).\", 100000);",
-  "ka": ""
+  "ka": "არასწორი თანხა (1-%d)."
  },
  {
   "id": 2029,
@@ -1957,7 +1957,7 @@
   "line": 577,
   "it": "Attendi ancora %d secondi.",
   "ctx": "SendClientMessage(playerid, -10270721, \"Attendi ancora %d secondi.\", (10000 - elapsed + 1000 - 1) / 1000);",
-  "ka": ""
+  "ka": "მოიცადე კიდევ %d წამი."
  },
  {
   "id": 2030,
@@ -1965,7 +1965,7 @@
   "line": 582,
   "it": "Il destinatario non puo' ricevere questa somma.",
   "ctx": "Util_Send(playerid, -10270721, \"Il destinatario non puo' ricevere questa somma.\");",
-  "ka": ""
+  "ka": "მიმღები ამ თანხას ვერ მიიღებს."
  },
  {
   "id": 2031,
@@ -1973,7 +1973,7 @@
   "line": 590,
   "it": "Hai ricevuto $%d dallo staff.",
   "ctx": "SendClientMessage(targetid, 0x66DD66FF, \"Hai ricevuto $%d dallo staff.\", amount);",
-  "ka": ""
+  "ka": "ადმინისტრაციისგან მიიღე $%d."
  },
  {
   "id": 2032,
@@ -1981,7 +1981,7 @@
   "line": 592,
   "it": "dato contanti a",
   "ctx": "Admin_AdmCmd(an, \"dato contanti a\", tn, msg, \"\");",
-  "ka": ""
+  "ka": "ნაღდი ფული მისცა:"
  },
  {
   "id": 2033,
@@ -1989,7 +1989,7 @@
   "line": 608,
   "it": "Uso: /ban id minuti(0=permanente, max %d) motivo",
   "ctx": "SendClientMessage(playerid, 0x99CCFFFF, \"Uso: /ban id minuti(0=permanente, max %d) motivo\", 525600);",
-  "ka": ""
+  "ka": "გამოყენება: /ban id წუთი(0=სამუდამოდ, მაქს. %d) მიზეზი"
  },
  {
   "id": 2034,
@@ -1997,7 +1997,7 @@
   "line": 613,
   "it": "Durata non valida (0-%d minuti).",
   "ctx": "SendClientMessage(playerid, -10270721, \"Durata non valida (0-%d minuti).\", 525600);",
-  "ka": ""
+  "ka": "არასწორი ხანგრძლივობა (0-%d წუთი)."
  },
  {
   "id": 2035,
@@ -2005,7 +2005,7 @@
   "line": 622,
   "it": "Operazione precedente ancora in corso, attendi.",
   "ctx": "Util_Send(playerid, -10270721, \"Operazione precedente ancora in corso, attendi.\");",
-  "ka": ""
+  "ka": "წინა ოპერაცია ჯერ კიდევ მიმდინარეობს, მოიცადე."
  },
  {
   "id": 2036,
@@ -2013,7 +2013,7 @@
   "line": 643,
   "it": "Uso: /unban nome_account",
   "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Uso: /unban nome_account\");",
-  "ka": ""
+  "ka": "გამოყენება: /unban ანგარიშის_სახელი"
  },
  {
   "id": 2037,
@@ -2021,7 +2021,7 @@
   "line": 648,
   "it": "Operazione precedente ancora in corso, attendi.",
   "ctx": "Util_Send(playerid, -10270721, \"Operazione precedente ancora in corso, attendi.\");",
-  "ka": ""
+  "ka": "წინა ოპერაცია ჯერ კიდევ მიმდინარეობს, მოიცადე."
  },
  {
   "id": 2038,
@@ -2029,7 +2029,7 @@
   "line": 146,
   "it": "Devi aver effettuato l'accesso ed essere in gioco per usare i comandi.",
   "ctx": "Util_Send(playerid, -10270721, \"Devi aver effettuato l'accesso ed essere in gioco per usare i comandi.\");",
-  "ka": ""
+  "ka": "ბრძანებების გამოსაყენებლად ავტორიზებული და თამაშში უნდა იყო."
  },
  {
   "id": 2039,
@@ -2037,7 +2037,7 @@
   "line": 154,
   "it": "Cmd_%s",
   "ctx": "format(fn, 24, \"Cmd_%s\", name);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 2040,
@@ -2045,7 +2045,7 @@
   "line": 163,
   "it": "Uso: /me azione",
   "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Uso: /me azione\");",
-  "ka": ""
+  "ka": "გამოყენება: /me მოქმედება"
  },
  {
   "id": 2041,
@@ -2053,7 +2053,7 @@
   "line": 178,
   "it": "Uso: /do descrizione",
   "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Uso: /do descrizione\");",
-  "ka": ""
+  "ka": "გამოყენება: /do აღწერა"
  },
  {
   "id": 2042,
@@ -2061,7 +2061,7 @@
   "line": 193,
   "it": "Uso: /try azione",
   "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Uso: /try azione\");",
-  "ka": ""
+  "ka": "გამოყენება: /try მოქმედება"
  },
  {
   "id": 2043,
@@ -2069,7 +2069,7 @@
   "line": 198,
   "it": "* %s prova a %s e %s",
   "ctx": "format(msg, 256, \"* %s prova a %s e %s\", name, text, random(100) < 50 ? \"ha successo\" : \"fallisce\");",
-  "ka": ""
+  "ka": "* %s ცდილობს %s და %s"
  },
  {
   "id": 2044,
@@ -2077,6 +2077,6 @@
   "line": 208,
   "it": "Uso: /b testo",
   "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Uso: /b testo\");",
-  "ka": ""
+  "ka": "გამოყენება: /b ტექსტი"
  }
 ]

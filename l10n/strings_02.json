@@ -5,7 +5,7 @@
   "line": 539,
   "it": "Sei stato liberato dalle manette.",
   "ctx": "Util_Send(targetid, 0x66DD66FF, \"Sei stato liberato dalle manette.\");",
-  "ka": ""
+  "ka": "ბორკილები მოგხსნეს."
  },
  {
   "id": 1829,
@@ -13,7 +13,7 @@
   "line": 554,
   "it": "Uso: /ammanetta id",
   "ctx": "Util_Send(playerid, 0x99CCFFFF, cuff ? \"Uso: /ammanetta id\" : \"Uso: /smanetta id\");",
-  "ka": ""
+  "ka": "გამოყენება: /ammanetta id"
  },
  {
   "id": 1830,
@@ -21,7 +21,7 @@
   "line": 554,
   "it": "Uso: /smanetta id",
   "ctx": "Util_Send(playerid, 0x99CCFFFF, cuff ? \"Uso: /ammanetta id\" : \"Uso: /smanetta id\");",
-  "ka": ""
+  "ka": "გამოყენება: /smanetta id"
  },
  {
   "id": 1831,
@@ -29,7 +29,7 @@
   "line": 563,
   "it": "Bersaglio non valido o troppo lontano.",
   "ctx": "Util_Send(playerid, -10270721, \"Bersaglio non valido o troppo lontano.\");",
-  "ka": ""
+  "ka": "სამიზნე არასწორია ან ძალიან შორსაა."
  },
  {
   "id": 1832,
@@ -37,7 +37,7 @@
   "line": 574,
   "it": "Attendi ancora %d secondi.",
   "ctx": "SendClientMessage(playerid, -10270721, \"Attendi ancora %d secondi.\", Fac_SecCeil(left));",
-  "ka": ""
+  "ka": "დაელოდე კიდევ %d წამი."
  },
  {
   "id": 1833,
@@ -45,7 +45,7 @@
   "line": 579,
   "it": "Il bersaglio non puo' essere ammanettato (gia' ammanettato, ferito o non a piedi).",
   "ctx": "Util_Send(playerid, -10270721, \"Il bersaglio non puo' essere ammanettato (gia' ammanettato, ferito o non a piedi).\");",
-  "ka": ""
+  "ka": "სამიზნეს ბორკილს ვერ დაადებ (უკვე ბორკილდადებულია, დაჭრილია ან ფეხით არ არის)."
  },
  {
   "id": 1834,
@@ -53,7 +53,7 @@
   "line": 587,
   "it": "sei stato ammanettato.",
   "ctx": "Job_Cancel(target, \"sei stato ammanettato.\");",
-  "ka": ""
+  "ka": "ბორკილი დაგადეს."
  },
  {
   "id": 1835,
@@ -61,7 +61,7 @@
   "line": 590,
   "it": "ammanetta %s",
   "ctx": "format(msg, 128, \"ammanetta %s\", tn);",
-  "ka": ""
+  "ka": "%s-ს ბორკილს ადებს"
  },
  {
   "id": 1836,
@@ -69,7 +69,7 @@
   "line": 597,
   "it": "Il bersaglio non e' ammanettato.",
   "ctx": "Util_Send(playerid, -10270721, \"Il bersaglio non e' ammanettato.\");",
-  "ka": ""
+  "ka": "სამიზნე ბორკილდადებული არ არის."
  },
  {
   "id": 1837,
@@ -77,7 +77,7 @@
   "line": 601,
   "it": "toglie le manette a %s",
   "ctx": "format(msg, 128, \"toglie le manette a %s\", tn);",
-  "ka": ""
+  "ka": "%s-ს ბორკილს ხსნის"
  },
  {
   "id": 1838,
@@ -85,7 +85,7 @@
   "line": 620,
   "it": "Uso: /dep testo",
   "ctx": "Util_Send(playerid, 0x99CCFFFF, interdept ? \"Uso: /dep testo\" : \"Uso: /r testo\");",
-  "ka": ""
+  "ka": "გამოყენება: /dep ტექსტი"
  },
  {
   "id": 1839,
@@ -93,7 +93,7 @@
   "line": 620,
   "it": "Uso: /r testo",
   "ctx": "Util_Send(playerid, 0x99CCFFFF, interdept ? \"Uso: /dep testo\" : \"Uso: /r testo\");",
-  "ka": ""
+  "ka": "გამოყენება: /r ტექსტი"
  },
  {
   "id": 1840,
@@ -101,7 +101,7 @@
   "line": 626,
   "it": "Rallenta con la radio.",
   "ctx": "Util_Send(playerid, -10270721, \"Rallenta con la radio.\");",
-  "ka": ""
+  "ka": "რაციით ცოტა ნელა."
  },
  {
   "id": 1841,
@@ -109,7 +109,7 @@
   "line": 636,
   "it": "[DIP] %s %s %s: %s",
   "ctx": "format(msg, 256, \"[DIP] %s %s %s: %s\", g_FacShort[f], rn, name, text);",
-  "ka": ""
+  "ka": "[DIP] %s %s %s: %s"
  },
  {
   "id": 1842,
@@ -117,7 +117,7 @@
   "line": 641,
   "it": "[RADIO] %s %s: %s",
   "ctx": "format(msg, 256, \"[RADIO] %s %s: %s\", rn, name, text);",
-  "ka": ""
+  "ka": "[რაცია] %s %s: %s"
  },
  {
   "id": 1843,
@@ -125,7 +125,7 @@
   "line": 656,
   "it": "Il tuo grado non consente di emettere multe (minimo grado 2).",
   "ctx": "SendClientMessage(playerid, -10270721, \"Il tuo grado non consente di emettere multe (minimo grado 2).\");",
-  "ka": ""
+  "ka": "შენი წოდებით ჯარიმის დაწერა არ შეგიძლია (მინიმუმ მე-2 წოდება)."
  },
  {
   "id": 1844,
@@ -133,7 +133,7 @@
   "line": 664,
   "it": "Uso: /multa id importo motivo",
   "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Uso: /multa id importo motivo\");",
-  "ka": ""
+  "ka": "გამოყენება: /multa id თანხა მიზეზი"
  },
  {
   "id": 1845,
@@ -141,7 +141,7 @@
   "line": 669,
   "it": "Motivo troppo corto (minimo %d caratteri).",
   "ctx": "SendClientMessage(playerid, -10270721, \"Motivo troppo corto (minimo %d caratteri).\", 3);",
-  "ka": ""
+  "ka": "მიზეზი ძალიან მოკლეა (მინიმუმ %d სიმბოლო)."
  },
  {
   "id": 1846,
@@ -149,7 +149,7 @@
   "line": 681,
   "it": "Importo non valido: da $%d a $%d per il tuo grado.",
   "ctx": "SendClientMessage(playerid, -10270721, \"Importo non valido: da $%d a $%d per il tuo grado.\", 50, cap);",
-  "ka": ""
+  "ka": "არასწორი თანხა: შენი წოდებისთვის $%d-დან $%d-მდე."
  },
  {
   "id": 1847,
@@ -157,7 +157,7 @@
   "line": 690,
   "it": "Bersaglio non valido o troppo lontano.",
   "ctx": "Util_Send(playerid, -10270721, \"Bersaglio non valido o troppo lontano.\");",
-  "ka": ""
+  "ka": "სამიზნე არასწორია ან ძალიან შორსაა."
  },
  {
   "id": 1848,
@@ -165,7 +165,7 @@
   "line": 695,
   "it": "Una multa e' gia' in corso di registrazione: attendi.",
   "ctx": "Util_Send(playerid, -10270721, \"Una multa e' gia' in corso di registrazione: attendi.\");",
-  "ka": ""
+  "ka": "ჯარიმა უკვე ფორმდება: დაელოდე."
  },
  {
   "id": 1849,
@@ -173,7 +173,7 @@
   "line": 701,
   "it": "Questo cittadino e' stato multato da poco: riprova tra %d minuti.",
   "ctx": "SendClientMessage(playerid, -10270721, \"Questo cittadino e' stato multato da poco: riprova tra %d minuti.\", (Fac_SecCeil(left) + 60 - 1) / 60);",
-  "ka": ""
+  "ka": "ეს მოქალაქე ახლახან დაჯარიმდა: სცადე %d წუთში."
  },
  {
   "id": 1850,
@@ -181,7 +181,7 @@
   "line": 712,
   "it": "Hai raggiunto il limite orario di multe ($%d).",
   "ctx": "SendClientMessage(playerid, -10270721, \"Hai raggiunto il limite orario di multe ($%d).\", 10000);",
-  "ka": ""
+  "ka": "ჯარიმების საათობრივ ლიმიტს მიაღწიე ($%d)."
  },
  {
   "id": 1851,
@@ -189,7 +189,7 @@
   "line": 717,
   "it": "Il cittadino non ha fondi sufficienti: multa rifiutata.",
   "ctx": "Util_Send(playerid, -10270721, \"Il cittadino non ha fondi sufficienti: multa rifiutata.\");",
-  "ka": ""
+  "ka": "მოქალაქეს საკმარისი თანხა არ აქვს: ჯარიმა უარყოფილია."
  },
  {
   "id": 1852,
@@ -197,7 +197,7 @@
   "line": 781,
   "it": "Errore del servizio: multa non registrata, nessun addebito.",
   "ctx": "Util_Send(issuer, -10270721, fineId < 0 ? \"Errore del servizio: multa non registrata, nessun addebito.\" : \"Multa rifiutata dal sistema: nessun addebito.\");",
-  "ka": ""
+  "ka": "სერვისის შეცდომა: ჯარიმა არ გაფორმდა, თანხა არ ჩამოიჭრა."
  },
  {
   "id": 1853,
@@ -205,7 +205,7 @@
   "line": 781,
   "it": "Multa rifiutata dal sistema: nessun addebito.",
   "ctx": "Util_Send(issuer, -10270721, fineId < 0 ? \"Errore del servizio: multa non registrata, nessun addebito.\" : \"Multa rifiutata dal sistema: nessun addebito.\");",
-  "ka": ""
+  "ka": "სისტემამ ჯარიმა უარყო: თანხა არ ჩამოიჭრა."
  },
  {
   "id": 1854,
@@ -213,7 +213,7 @@
   "line": 787,
   "it": "multa %d ($%d) registrata ma bersaglio char %d non piu' online: nessun addebito",
   "ctx": "format(msg, 128, \"multa %d ($%d) registrata ma bersaglio char %d non piu' online: nessun addebito\", fineId, amount, targetChar);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 1855,
@@ -221,7 +221,7 @@
   "line": 791,
   "it": "Il cittadino si e' disconnesso: la multa e' registrata ma non e' stato possibile addebitarla.",
   "ctx": "Util_Send(issuer, -10270721, \"Il cittadino si e' disconnesso: la multa e' registrata ma non e' stato possibile addebitarla.\");",
-  "ka": ""
+  "ka": "მოქალაქე გავიდა: ჯარიმა გაფორმდა, მაგრამ თანხის ჩამოჭრა ვერ მოხერხდა."
  },
  {
   "id": 1856,
@@ -229,7 +229,7 @@
   "line": 798,
   "it": "multa %d: addebitati $%d su $%d (fondi cambiati durante la registrazione)",
   "ctx": "format(msg, 128, \"multa %d: addebitati $%d su $%d (fondi cambiati durante la registrazione)\", fineId, taken, amount);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 1857,
@@ -237,7 +237,7 @@
   "line": 804,
   "it": "Hai ricevuto una multa di $%d da %s%s%s.",
   "ctx": "SendClientMessage(target, -10270721, \"Hai ricevuto una multa di $%d da %s%s%s.\", taken, an, hasReason ? \": \" : \"\", reason);",
-  "ka": ""
+  "ka": "მიიღე $%d-ის ჯარიმა %s-სგან%s%s."
  },
  {
   "id": 1858,
@@ -245,7 +245,7 @@
   "line": 816,
   "it": "Multa #%d di $%d a %s registrata.",
   "ctx": "SendClientMessage(issuer, 0x66DD66FF, \"Multa #%d di $%d a %s registrata.\", fineId, taken, tn);",
-  "ka": ""
+  "ka": "ჯარიმა #%d, $%d, %s-ზე გაფორმდა."
  },
  {
   "id": 1859,
@@ -253,7 +253,7 @@
   "line": 817,
   "it": "consegna una multa a %s",
   "ctx": "format(msg, 128, \"consegna una multa a %s\", tn);",
-  "ka": ""
+  "ka": "%s-ს ჯარიმას გადასცემს"
  },
  {
   "id": 1860,
@@ -261,7 +261,7 @@
   "line": 841,
   "it": "Servizio temporaneamente non disponibile: riprova piu' tardi.",
   "ctx": "Util_Send(playerid, -10270721, \"Servizio temporaneamente non disponibile: riprova piu' tardi.\");",
-  "ka": ""
+  "ka": "სერვისი დროებით მიუწვდომელია: სცადე მოგვიანებით."
  },
  {
   "id": 1861,
@@ -269,7 +269,7 @@
   "line": 846,
   "it": "Non hai multe registrate.",
   "ctx": "Util_Send(playerid, -1, \"Non hai multe registrate.\");",
-  "ka": ""
+  "ka": "გაფორმებული ჯარიმები არ გაქვს."
  },
  {
   "id": 1862,
@@ -277,7 +277,7 @@
   "line": 849,
   "it": "--- Ultime multe ricevute ---",
   "ctx": "SendClientMessage(playerid, -2994689, \"--- Ultime multe ricevute ---\");",
-  "ka": ""
+  "ka": "--- ბოლო მიღებული ჯარიმები ---"
  },
  {
   "id": 1863,
@@ -285,7 +285,7 @@
   "line": 878,
   "it": "Uso: /cura id",
   "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Uso: /cura id\");",
-  "ka": ""
+  "ka": "გამოყენება: /cura id"
  },
  {
   "id": 1864,
@@ -293,7 +293,7 @@
   "line": 887,
   "it": "Bersaglio non valido o troppo lontano.",
   "ctx": "Util_Send(playerid, -10270721, \"Bersaglio non valido o troppo lontano.\");",
-  "ka": ""
+  "ka": "სამიზნე არასწორია ან ძალიან შორსაა."
  },
  {
   "id": 1865,
@@ -301,7 +301,7 @@
   "line": 892,
   "it": "Il bersaglio e' ferito: usa /rianima.",
   "ctx": "Util_Send(playerid, -10270721, \"Il bersaglio e' ferito: usa /rianima.\");",
-  "ka": ""
+  "ka": "სამიზნე დაჭრილია: გამოიყენე /rianima."
  },
  {
   "id": 1866,
@@ -309,7 +309,7 @@
   "line": 897,
   "it": "Il kit medico e' esaurito (si ricarica a /duty on).",
   "ctx": "Util_Send(playerid, -10270721, \"Il kit medico e' esaurito (si ricarica a /duty on).\");",
-  "ka": ""
+  "ka": "სამედიცინო ნაკრები ამოიწურა (ივსება /duty on-ით)."
  },
  {
   "id": 1867,
@@ -317,7 +317,7 @@
   "line": 903,
   "it": "Attendi ancora %d secondi.",
   "ctx": "SendClientMessage(playerid, -10270721, \"Attendi ancora %d secondi.\", Fac_SecCeil(left));",
-  "ka": ""
+  "ka": "დაელოდე კიდევ %d წამი."
  },
  {
   "id": 1868,
@@ -325,7 +325,7 @@
   "line": 909,
   "it": "Il paziente e' stato curato da poco: attendi %d secondi.",
   "ctx": "SendClientMessage(playerid, -10270721, \"Il paziente e' stato curato da poco: attendi %d secondi.\", Fac_SecCeil(left));",
-  "ka": ""
+  "ka": "პაციენტს ახლახან უმკურნალეს: დაელოდე %d წამი."
  },
  {
   "id": 1869,
@@ -333,7 +333,7 @@
   "line": 916,
   "it": "Il bersaglio e' in piena salute.",
   "ctx": "Util_Send(playerid, -10270721, \"Il bersaglio e' in piena salute.\");",
-  "ka": ""
+  "ka": "სამიზნე სრულად ჯანმრთელია."
  },
  {
   "id": 1870,
@@ -341,7 +341,7 @@
   "line": 932,
   "it": "presta le prime cure a %s",
   "ctx": "format(msg, 128, \"presta le prime cure a %s\", tn);",
-  "ka": ""
+  "ka": "%s-ს პირველ დახმარებას უწევს"
  },
  {
   "id": 1871,
@@ -349,7 +349,7 @@
   "line": 934,
   "it": "Sei stato curato (salute %.0f).",
   "ctx": "SendClientMessage(target, 0x66DD66FF, \"Sei stato curato (salute %.0f).\", hp);",
-  "ka": ""
+  "ka": "გიმკურნალეს (ჯანმრთელობა %.0f)."
  },
  {
   "id": 1872,
@@ -357,7 +357,7 @@
   "line": 963,
   "it": "Uso: /rianima id",
   "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Uso: /rianima id\");",
-  "ka": ""
+  "ka": "გამოყენება: /rianima id"
  },
  {
   "id": 1873,
@@ -365,7 +365,7 @@
   "line": 972,
   "it": "Bersaglio non valido o troppo lontano.",
   "ctx": "Util_Send(playerid, -10270721, \"Bersaglio non valido o troppo lontano.\");",
-  "ka": ""
+  "ka": "სამიზნე არასწორია ან ძალიან შორსაა."
  },
  {
   "id": 1874,
@@ -373,7 +373,7 @@
   "line": 977,
   "it": "Il bersaglio non e' ferito.",
   "ctx": "Util_Send(playerid, -10270721, \"Il bersaglio non e' ferito.\");",
-  "ka": ""
+  "ka": "სამიზნე დაჭრილი არ არის."
  },
  {
   "id": 1875,
@@ -381,7 +381,7 @@
   "line": 982,
   "it": "Il kit medico e' esaurito (si ricarica a /duty on).",
   "ctx": "Util_Send(playerid, -10270721, \"Il kit medico e' esaurito (si ricarica a /duty on).\");",
-  "ka": ""
+  "ka": "სამედიცინო ნაკრები ამოიწურა (ივსება /duty on-ით)."
  },
  {
   "id": 1876,
@@ -389,7 +389,7 @@
   "line": 987,
   "it": "Stai gia' rianimando qualcuno.",
   "ctx": "Util_Send(playerid, -10270721, \"Stai gia' rianimando qualcuno.\");",
-  "ka": ""
+  "ka": "უკვე ვიღაცას აცოცხლებ."
  },
  {
   "id": 1877,
@@ -397,7 +397,7 @@
   "line": 996,
   "it": "inizia a rianimare %s",
   "ctx": "format(msg, 128, \"inizia a rianimare %s\", tn);",
-  "ka": ""
+  "ka": "%s-ს გაცოცხლებას იწყებს"
  },
  {
   "id": 1878,
@@ -405,7 +405,7 @@
   "line": 998,
   "it": "Rianimazione in corso (%d secondi): non allontanarti.",
   "ctx": "SendClientMessage(playerid, -1, \"Rianimazione in corso (%d secondi): non allontanarti.\", 8);",
-  "ka": ""
+  "ka": "მიმდინარეობს გაცოცხლება (%d წამი): არ გაშორდე."
  },
  {
   "id": 1879,
@@ -413,7 +413,7 @@
   "line": 1017,
   "it": "%s ti ha rianimato.",
   "ctx": "SendClientMessage(target, 0x66DD66FF, \"%s ti ha rianimato.\", mn);",
-  "ka": ""
+  "ka": "%s-მ გაგაცოცხლა."
  },
  {
   "id": 1880,
@@ -421,7 +421,7 @@
   "line": 1018,
   "it": "rianima %s",
   "ctx": "format(msg, 128, \"rianima %s\", tn);",
-  "ka": ""
+  "ka": "%s-ს აცოცხლებს"
  },
  {
   "id": 1881,
@@ -429,7 +429,7 @@
   "line": 1030,
   "it": "Bonus rianimazione: $%d versati in banca.",
   "ctx": "SendClientMessage(medic, 0x66DD66FF, \"Bonus rianimazione: $%d versati in banca.\", 100);",
-  "ka": ""
+  "ka": "გაცოცხლების ბონუსი: $%d ჩაირიცხა ბანკში."
  },
  {
   "id": 1882,
@@ -437,7 +437,7 @@
   "line": 1058,
   "it": "ricovero %s: addebitati $%d",
   "ctx": "format(msg, 128, \"ricovero %s: addebitati $%d\", name, fee);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 1883,
@@ -445,7 +445,7 @@
   "line": 1080,
   "it": "Non sei autorizzato a invitare.",
   "ctx": "Util_Send(playerid, -10270721, \"Non sei autorizzato a invitare.\");",
-  "ka": ""
+  "ka": "მოწვევის უფლება არ გაქვს."
  },
  {
   "id": 1884,
@@ -453,7 +453,7 @@
   "line": 1089,
   "it": "Giocatore non valido.",
   "ctx": "Util_Send(playerid, -10270721, \"Giocatore non valido.\");",
-  "ka": ""
+  "ka": "არასწორი მოთამაშე."
  },
  {
   "id": 1885,
@@ -461,7 +461,7 @@
   "line": 1094,
   "it": "Il giocatore e' troppo lontano.",
   "ctx": "Util_Send(playerid, -10270721, \"Il giocatore e' troppo lontano.\");",
-  "ka": ""
+  "ka": "მოთამაშე ძალიან შორსაა."
  },
  {
   "id": 1886,
@@ -469,7 +469,7 @@
   "line": 1099,
   "it": "Il giocatore appartiene gia' a una fazione.",
   "ctx": "Util_Send(playerid, -10270721, \"Il giocatore appartiene gia' a una fazione.\");",
-  "ka": ""
+  "ka": "მოთამაშე უკვე ფრაქციის წევრია."
  },
  {
   "id": 1887,
@@ -477,7 +477,7 @@
   "line": 1104,
   "it": "Il giocatore deve essere almeno livello %d.",
   "ctx": "SendClientMessage(playerid, -10270721, \"Il giocatore deve essere almeno livello %d.\", 3);",
-  "ka": ""
+  "ka": "მოთამაშე მინიმუმ %d დონის უნდა იყოს."
  },
  {
   "id": 1888,
@@ -485,7 +485,7 @@
   "line": 1109,
   "it": "Il giocatore ha gia' un invito in sospeso.",
   "ctx": "Util_Send(playerid, -10270721, \"Il giocatore ha gia' un invito in sospeso.\");",
-  "ka": ""
+  "ka": "მოთამაშეს უკვე აქვს მოლოდინში მყოფი მოწვევა."
  },
  {
   "id": 1889,
@@ -493,7 +493,7 @@
   "line": 1121,
   "it": "%s ti invita in %s. Accetta dal pannello o con /accetta (valido %d secondi).",
   "ctx": "SendClientMessage(target, -1, \"%s ti invita in %s. Accetta dal pannello o con /accetta (valido %d secondi).\", an, g_FacShort[f], 60);",
-  "ka": ""
+  "ka": "%s გიწვევს %s-ში. დაეთანხმე პანელიდან ან /accetta-თი (მოქმედებს %d წამი)."
  },
  {
   "id": 1890,
@@ -501,7 +501,7 @@
   "line": 1122,
   "it": "Invito inviato a %s.",
   "ctx": "SendClientMessage(playerid, 0x66DD66FF, \"Invito inviato a %s.\", tn);",
-  "ka": ""
+  "ka": "მოწვევა გაეგზავნა: %s."
  },
  {
   "id": 1891,
@@ -509,7 +509,7 @@
   "line": 1136,
   "it": "Uso: /invita id",
   "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Uso: /invita id\");",
-  "ka": ""
+  "ka": "გამოყენება: /invita id"
  },
  {
   "id": 1892,
@@ -517,7 +517,7 @@
   "line": 1172,
   "it": "L'invito e' scaduto.",
   "ctx": "Util_Send(playerid, -10270721, \"L'invito e' scaduto.\");",
-  "ka": ""
+  "ka": "მოწვევის ვადა ამოიწურა."
  },
  {
   "id": 1893,
@@ -525,7 +525,7 @@
   "line": 1177,
   "it": "Hai rifiutato l'invito.",
   "ctx": "Util_Send(playerid, -1, \"Hai rifiutato l'invito.\");",
-  "ka": ""
+  "ka": "მოწვევაზე უარი თქვი."
  },
  {
   "id": 1894,
@@ -533,7 +533,7 @@
   "line": 1180,
   "it": "L'invito e' stato rifiutato.",
   "ctx": "Util_Send(from, -1, \"L'invito e' stato rifiutato.\");",
-  "ka": ""
+  "ka": "მოწვევაზე უარი თქვეს."
  },
  {
   "id": 1895,
@@ -541,7 +541,7 @@
   "line": 1186,
   "it": "Chi ti ha invitato non e' piu' disponibile.",
   "ctx": "Util_Send(playerid, -10270721, \"Chi ti ha invitato non e' piu' disponibile.\");",
-  "ka": ""
+  "ka": "ვინც მოგიწვია, აღარ არის ხელმისაწვდომი."
  },
  {
   "id": 1896,
@@ -549,7 +549,7 @@
   "line": 1191,
   "it": "Non puoi entrare in una fazione adesso.",
   "ctx": "Util_Send(playerid, -10270721, \"Non puoi entrare in una fazione adesso.\");",
-  "ka": ""
+  "ka": "ახლა ფრაქციაში ვერ გაწევრიანდები."
  },
  {
   "id": 1897,
@@ -557,7 +557,7 @@
   "line": 1210,
   "it": "Non hai inviti in sospeso.",
   "ctx": "Util_Send(playerid, -10270721, \"Non hai inviti in sospeso.\");",
-  "ka": ""
+  "ka": "მოლოდინში მყოფი მოწვევა არ გაქვს."
  },
  {
   "id": 1898,
@@ -565,7 +565,7 @@
   "line": 1223,
   "it": "Non sei autorizzato.",
   "ctx": "Util_Send(playerid, -10270721, \"Non sei autorizzato.\");",
-  "ka": ""
+  "ka": "ამის უფლება არ გაქვს."
  },
  {
   "id": 1899,
@@ -573,7 +573,7 @@
   "line": 1232,
   "it": "Bersaglio non valido.",
   "ctx": "Util_Send(playerid, -10270721, \"Bersaglio non valido.\");",
-  "ka": ""
+  "ka": "არასწორი სამიზნე."
  },
  {
   "id": 1900,
@@ -581,7 +581,7 @@
   "line": 1237,
   "it": "Puoi agire solo su membri di grado inferiore al tuo.",
   "ctx": "Util_Send(playerid, -10270721, \"Puoi agire solo su membri di grado inferiore al tuo.\");",
-  "ka": ""
+  "ka": "მხოლოდ შენზე დაბალი წოდების წევრებზე შეგიძლია მოქმედება."
  },
  {
   "id": 1901,
@@ -589,7 +589,7 @@
   "line": 1247,
   "it": "Il nuovo grado deve restare inferiore al tuo.",
   "ctx": "Util_Send(playerid, -10270721, \"Il nuovo grado deve restare inferiore al tuo.\");",
-  "ka": ""
+  "ka": "ახალი წოდება შენსაზე დაბალი უნდა იყოს."
  },
  {
   "id": 1902,
@@ -597,7 +597,7 @@
   "line": 1256,
   "it": "Il membro e' gia' al grado minimo.",
   "ctx": "Util_Send(playerid, -10270721, \"Il membro e' gia' al grado minimo.\");",
-  "ka": ""
+  "ka": "წევრი უკვე მინიმალურ წოდებაზეა."
  },
  {
   "id": 1903,
@@ -605,7 +605,7 @@
   "line": 1279,
   "it": "Uso: /promuovi id",
   "ctx": "Util_Send(playerid, 0x99CCFFFF, action == 4 ? \"Uso: /promuovi id\" : (action == 5 ? \"Uso: /degrada id\" : \"Uso: /licenzia id\"));",
-  "ka": ""
+  "ka": "გამოყენება: /promuovi id"
  },
  {
   "id": 1904,
@@ -613,7 +613,7 @@
   "line": 1279,
   "it": "Uso: /degrada id",
   "ctx": "Util_Send(playerid, 0x99CCFFFF, action == 4 ? \"Uso: /promuovi id\" : (action == 5 ? \"Uso: /degrada id\" : \"Uso: /licenzia id\"));",
-  "ka": ""
+  "ka": "გამოყენება: /degrada id"
  },
  {
   "id": 1905,
@@ -621,7 +621,7 @@
   "line": 1279,
   "it": "Uso: /licenzia id",
   "ctx": "Util_Send(playerid, 0x99CCFFFF, action == 4 ? \"Uso: /promuovi id\" : (action == 5 ? \"Uso: /degrada id\" : \"Uso: /licenzia id\"));",
-  "ka": ""
+  "ka": "გამოყენება: /licenzia id"
  },
  {
   "id": 1906,
@@ -629,7 +629,7 @@
   "line": 1288,
   "it": "Il giocatore non appartiene alla tua fazione.",
   "ctx": "Util_Send(playerid, -10270721, \"Il giocatore non appartiene alla tua fazione.\");",
-  "ka": ""
+  "ka": "მოთამაშე შენი ფრაქციის წევრი არ არის."
  },
  {
   "id": 1907,
@@ -637,7 +637,7 @@
   "line": 1314,
   "it": "Membro non piu' in lista: riapri il menu.",
   "ctx": "Util_Send(playerid, -10270721, \"Membro non piu' in lista: riapri il menu.\");",
-  "ka": ""
+  "ka": "წევრი სიაში აღარ არის: თავიდან გახსენი მენიუ."
  },
  {
   "id": 1908,
@@ -645,7 +645,7 @@
   "line": 1349,
   "it": "Sei stato messo fuori servizio.",
   "ctx": "Util_Send(target, -1, \"Sei stato messo fuori servizio.\");",
-  "ka": ""
+  "ka": "სამსახურიდან გაგიყვანეს."
  },
  {
   "id": 1909,
@@ -653,7 +653,7 @@
   "line": 1363,
   "it": "Sei entrato in %s con il grado %s.",
   "ctx": "SendClientMessage(target, 0x66DD66FF, \"Sei entrato in %s con il grado %s.\", g_FacShort[nf], rn);",
-  "ka": ""
+  "ka": "შეხვედი %s-ში, წოდება: %s."
  },
  {
   "id": 1910,
@@ -661,7 +661,7 @@
   "line": 1367,
   "it": "Sei stato promosso a %s (%s).",
   "ctx": "SendClientMessage(target, 0x66DD66FF, \"Sei stato promosso a %s (%s).\", rn, g_FacShort[nf]);",
-  "ka": ""
+  "ka": "დაგაწინაურეს: %s (%s)."
  },
  {
   "id": 1911,
@@ -669,7 +669,7 @@
   "line": 1371,
   "it": "Sei stato degradato a %s (%s).",
   "ctx": "SendClientMessage(target, -10270721, \"Sei stato degradato a %s (%s).\", rn, g_FacShort[nf]);",
-  "ka": ""
+  "ka": "ჩამოგაქვეითეს: %s (%s)."
  },
  {
   "id": 1912,
@@ -677,7 +677,7 @@
   "line": 1375,
   "it": "Sei stato licenziato da %s.",
   "ctx": "SendClientMessage(target, -10270721, \"Sei stato licenziato da %s.\", g_FacShort[faction]);",
-  "ka": ""
+  "ka": "გაგათავისუფლეს: %s."
  },
  {
   "id": 1913,
@@ -685,7 +685,7 @@
   "line": 1379,
   "it": "Hai lasciato %s.",
   "ctx": "SendClientMessage(target, -1, \"Hai lasciato %s.\", g_FacShort[faction]);",
-  "ka": ""
+  "ka": "დატოვე %s."
  },
  {
   "id": 1914,
@@ -693,7 +693,7 @@
   "line": 1385,
   "it": "Sei stato rimosso dalla fazione da uno staff.",
   "ctx": "Util_Send(target, -5963521, \"Sei stato rimosso dalla fazione da uno staff.\");",
-  "ka": ""
+  "ka": "ადმინისტრატორმა ფრაქციიდან ამოგშალა."
  },
  {
   "id": 1915,
@@ -701,7 +701,7 @@
   "line": 1389,
   "it": "Uno staff ti ha assegnato a %s con il grado %s.",
   "ctx": "SendClientMessage(target, -5963521, \"Uno staff ti ha assegnato a %s con il grado %s.\", g_FacShort[nf], rn);",
-  "ka": ""
+  "ka": "ადმინისტრატორმა მიგაკუთვნა %s-ს, წოდება: %s."
  },
  {
   "id": 1916,
@@ -709,7 +709,7 @@
   "line": 1441,
   "it": "rimosso dalla fazione",
   "ctx": "format(detail, 128, \"rimosso dalla fazione\");",
-  "ka": ""
+  "ka": "ფრაქციიდან ამოშლილია"
  },
  {
   "id": 1917,
@@ -717,7 +717,7 @@
   "line": 1445,
   "it": "%s grado %d",
   "ctx": "format(detail, 128, \"%s grado %d\", g_FacShort[faction], rank);",
-  "ka": ""
+  "ka": "%s, წოდება %d"
  },
  {
   "id": 1918,
@@ -725,7 +725,7 @@
   "line": 1449,
   "it": "impostato la fazione di",
   "ctx": "Admin_AdmCmd(g_FcSetStaffName[ctx], \"impostato la fazione di\", tn, detail, \"\");",
-  "ka": ""
+  "ka": "დაუყენა ფრაქცია"
  },
  {
   "id": 1919,
@@ -733,7 +733,7 @@
   "line": 1457,
   "it": "%s e' entrato in %s.",
   "ctx": "SendClientMessage(req, 0x66DD66FF, \"%s e' entrato in %s.\", tn, g_FacShort[faction]);",
-  "ka": ""
+  "ka": "%s შემოუერთდა %s-ს."
  },
  {
   "id": 1920,
@@ -741,7 +741,7 @@
   "line": 1461,
   "it": "%s promosso a %s.",
   "ctx": "SendClientMessage(req, 0x66DD66FF, \"%s promosso a %s.\", tn, rn);",
-  "ka": ""
+  "ka": "%s დაწინაურდა: %s."
  },
  {
   "id": 1921,
@@ -749,7 +749,7 @@
   "line": 1465,
   "it": "%s degradato a %s.",
   "ctx": "SendClientMessage(req, 0x66DD66FF, \"%s degradato a %s.\", tn, rn);",
-  "ka": ""
+  "ka": "%s ჩამოქვეითდა: %s."
  },
  {
   "id": 1922,
@@ -757,7 +757,7 @@
   "line": 1469,
   "it": "%s licenziato.",
   "ctx": "SendClientMessage(req, 0x66DD66FF, \"%s licenziato.\", tn);",
-  "ka": ""
+  "ka": "%s გათავისუფლდა."
  },
  {
   "id": 1923,
@@ -765,7 +765,7 @@
   "line": 1474,
   "it": "cmd %d char %d fazione %d grado %d",
   "ctx": "format(msg, 128, \"cmd %d char %d fazione %d grado %d\", cmd, targetChar, faction, rank);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 1924,
@@ -773,7 +773,7 @@
   "line": 1484,
   "it": "Servizio temporaneamente non disponibile: operazione non eseguita.",
   "ctx": "Util_Send(notify, -10270721, \"Servizio temporaneamente non disponibile: operazione non eseguita.\");",
-  "ka": ""
+  "ka": "სერვისი დროებით მიუწვდომელია: ოპერაცია არ შესრულდა."
  },
  {
   "id": 1925,
@@ -781,7 +781,7 @@
   "line": 1488,
   "it": "Operazione rifiutata (gradi, fazione o livello non idonei, o un'altra operazione e' in corso).",
   "ctx": "Util_Send(notify, -10270721, \"Operazione rifiutata (gradi, fazione o livello non idonei, o un'altra operazione e' in corso).\");",
-  "ka": ""
+  "ka": "ოპერაცია უარყოფილია (წოდება, ფრაქცია ან დონე არ შეესაბამება, ან სხვა ოპერაცია მიმდინარეობს)."
  },
  {
   "id": 1926,
@@ -789,7 +789,7 @@
   "line": 1493,
   "it": "Non e' stato possibile completare l'ingresso in fazione.",
   "ctx": "Util_Send(target, -10270721, \"Non e' stato possibile completare l'ingresso in fazione.\");",
-  "ka": ""
+  "ka": "ფრაქციაში გაწევრიანება ვერ დასრულდა."
  },
  {
   "id": 1927,
@@ -797,7 +797,7 @@
   "line": 1508,
   "it": "Non appartieni a nessuna fazione.",
   "ctx": "Util_Send(playerid, -10270721, \"Non appartieni a nessuna fazione.\");",
-  "ka": ""
+  "ka": "არცერთი ფრაქციის წევრი არ ხარ."
  },
  {
   "id": 1928,
@@ -805,7 +805,7 @@
   "line": 1513,
   "it": "Richiesta gia' in corso: attendi.",
   "ctx": "Util_Send(playerid, -10270721, \"Richiesta gia' in corso: attendi.\");",
-  "ka": ""
+  "ka": "მოთხოვნა უკვე მუშავდება: დაელოდე."
  },
  {
   "id": 1929,
@@ -813,7 +813,7 @@
   "line": 1527,
   "it": "Non appartieni a nessuna fazione.",
   "ctx": "Util_Send(playerid, -10270721, \"Non appartieni a nessuna fazione.\");",
-  "ka": ""
+  "ka": "არცერთი ფრაქციის წევრი არ ხარ."
  },
  {
   "id": 1930,
@@ -821,7 +821,7 @@
   "line": 1552,
   "it": "Uso: /fazione [info|membri|lascia]",
   "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Uso: /fazione [info|membri|lascia]\");",
-  "ka": ""
+  "ka": "გამოყენება: /fazione [info|membri|lascia]"
  },
  {
   "id": 1931,
@@ -829,7 +829,7 @@
   "line": 1579,
   "it": "Servizio temporaneamente non disponibile: riprova piu' tardi.",
   "ctx": "Util_Send(playerid, -10270721, \"Servizio temporaneamente non disponibile: riprova piu' tardi.\");",
-  "ka": ""
+  "ka": "სერვისი დროებით მიუწვდომელია: სცადე მოგვიანებით."
  },
  {
   "id": 1932,
@@ -837,7 +837,7 @@
   "line": 1651,
   "it": "Uso: /setfazione id|Nome_Cognome fazione(%d-%d, 0 = rimuovi) grado(1-%d)",
   "ctx": "SendClientMessage(playerid, 0x99CCFFFF, \"Uso: /setfazione id|Nome_Cognome fazione(%d-%d, 0 = rimuovi) grado(1-%d)\", 0, 2, 6);",
-  "ka": ""
+  "ka": "გამოყენება: /setfazione id|სახელი_გვარი ფრაქცია(%d-%d, 0 = ამოშლა) წოდება(1-%d)"
  },
  {
   "id": 1933,
@@ -845,7 +845,7 @@
   "line": 1660,
   "it": "Hai gia' un'operazione /setfazione in corso.",
   "ctx": "Util_Send(playerid, -10270721, \"Hai gia' un'operazione /setfazione in corso.\");",
-  "ka": ""
+  "ka": "უკვე გაქვს მიმდინარე /setfazione ოპერაცია."
  },
  {
   "id": 1934,
@@ -853,7 +853,7 @@
   "line": 1668,
   "it": "Giocatore non valido.",
   "ctx": "Util_Send(playerid, -10270721, \"Giocatore non valido.\");",
-  "ka": ""
+  "ka": "არასწორი მოთამაშე."
  },
  {
   "id": 1935,
@@ -861,7 +861,7 @@
   "line": 1685,
   "it": "Giocatore non valido (usa id oppure Nome_Cognome).",
   "ctx": "Util_Send(playerid, -10270721, \"Giocatore non valido (usa id oppure Nome_Cognome).\");",
-  "ka": ""
+  "ka": "არასწორი მოთამაშე (მიუთითე id ან სახელი_გვარი)."
  },
  {
   "id": 1936,
@@ -869,7 +869,7 @@
   "line": 1709,
   "it": "Servizio temporaneamente non disponibile: riprova piu' tardi.",
   "ctx": "Util_Send(playerid, -10270721, charId < 0 ? \"Servizio temporaneamente non disponibile: riprova piu' tardi.\" : \"Personaggio non trovato.\");",
-  "ka": ""
+  "ka": "სერვისი დროებით მიუწვდომელია: სცადე მოგვიანებით."
  },
  {
   "id": 1937,
@@ -877,7 +877,7 @@
   "line": 1709,
   "it": "Personaggio non trovato.",
   "ctx": "Util_Send(playerid, -10270721, charId < 0 ? \"Servizio temporaneamente non disponibile: riprova piu' tardi.\" : \"Personaggio non trovato.\");",
-  "ka": ""
+  "ka": "პერსონაჟი ვერ მოიძებნა."
  },
  {
   "id": 1938,
@@ -885,7 +885,7 @@
   "line": 1730,
   "it": "L'invito in fazione e' scaduto.",
   "ctx": "Util_Send(i, -1, \"L'invito in fazione e' scaduto.\");",
-  "ka": ""
+  "ka": "ფრაქციის მოწვევის ვადა ამოიწურა."
  },
  {
   "id": 1939,
@@ -893,7 +893,7 @@
   "line": 1733,
   "it": "Il tuo invito e' scaduto.",
   "ctx": "Util_Send(from, -1, \"Il tuo invito e' scaduto.\");",
-  "ka": ""
+  "ka": "შენი მოწვევის ვადა ამოიწურა."
  },
  {
   "id": 1940,
@@ -901,7 +901,7 @@
   "line": 1753,
   "it": "Sei stato messo fuori servizio.",
   "ctx": "Util_Send(i, -10270721, \"Sei stato messo fuori servizio.\");",
-  "ka": ""
+  "ka": "სამსახურიდან გაგიყვანეს."
  },
  {
   "id": 1941,
@@ -909,7 +909,7 @@
   "line": 1765,
   "it": "Rianimazione interrotta.",
   "ctx": "Fac_ReviveCancel(i, \"Rianimazione interrotta.\");",
-  "ka": ""
+  "ka": "გაცოცხლება შეწყდა."
  },
  {
   "id": 1942,
@@ -917,7 +917,7 @@
   "line": 1769,
   "it": "Rianimazione interrotta: il paziente non e' piu' ferito.",
   "ctx": "Fac_ReviveCancel(i, \"Rianimazione interrotta: il paziente non e' piu' ferito.\");",
-  "ka": ""
+  "ka": "გაცოცხლება შეწყდა: პაციენტი აღარ არის დაჭრილი."
  },
  {
   "id": 1943,
@@ -925,7 +925,7 @@
   "line": 1773,
   "it": "Rianimazione interrotta: ti sei allontanato.",
   "ctx": "Fac_ReviveCancel(i, \"Rianimazione interrotta: ti sei allontanato.\");",
-  "ka": ""
+  "ka": "გაცოცხლება შეწყდა: დაშორდი."
  },
  {
   "id": 1944,
@@ -933,7 +933,7 @@
   "line": 1783,
   "it": "Kit medico esaurito.",
   "ctx": "Fac_ReviveCancel(i, \"Kit medico esaurito.\");",
-  "ka": ""
+  "ka": "სამედიცინო ნაკრები ამოიწურა."
  },
  {
   "id": 1945,
@@ -941,7 +941,7 @@
   "line": 1853,
   "it": "Rianimazione interrotta: il paziente si e' scollegato.",
   "ctx": "Fac_ReviveCancel(i, \"Rianimazione interrotta: il paziente si e' scollegato.\");",
-  "ka": ""
+  "ka": "გაცოცხლება შეწყდა: პაციენტი გავიდა."
  },
  {
   "id": 1946,
@@ -949,7 +949,7 @@
   "line": 1895,
   "it": "Rianimazione interrotta.",
   "ctx": "Fac_ReviveCancel(i, \"Rianimazione interrotta.\");",
-  "ka": ""
+  "ka": "გაცოცხლება შეწყდა."
  },
  {
   "id": 1947,
@@ -957,7 +957,7 @@
   "line": 1935,
   "it": "Sei ferito. Attendi i soccorsi (EMS): senza aiuto verrai ricoverato tra %d secondi ($%d).",
   "ctx": "SendClientMessage(playerid, -10270721, \"Sei ferito. Attendi i soccorsi (EMS): senza aiuto verrai ricoverato tra %d secondi ($%d).\", 180, 200);",
-  "ka": ""
+  "ka": "დაჭრილი ხარ. დაელოდე დახმარებას (EMS): დახმარების გარეშე %d წამში ჰოსპიტალიზდები ($%d)."
  },
  {
   "id": 1948,
@@ -965,7 +965,7 @@
   "line": 1946,
   "it": "--- Fazione %s ---",
   "ctx": "SendClientMessage(playerid, -2994689, \"--- Fazione %s ---\", g_FacShort[f]);",
-  "ka": ""
+  "ka": "--- ფრაქცია %s ---"
  },
  {
   "id": 1949,
@@ -973,7 +973,7 @@
   "line": 1947,
   "it": "/fazione [info|membri|lascia] · /duty (vicino alla sede) · /r testo · /dep testo",
   "ctx": "Util_Send(playerid, 0x99CCFFFF, \"/fazione [info|membri|lascia] · /duty (vicino alla sede) · /r testo · /dep testo\");",
-  "ka": ""
+  "ka": "/fazione [info|membri|lascia] · /duty (შტაბთან) · /r ტექსტი · /dep ტექსტი"
  },
  {
   "id": 1950,
@@ -981,7 +981,7 @@
   "line": 1950,
   "it": "/ammanetta id · /smanetta id",
   "ctx": "Util_Send(playerid, 0x99CCFFFF, \"/ammanetta id · /smanetta id\");",
-  "ka": ""
+  "ka": "/ammanetta id · /smanetta id"
  },
  {
   "id": 1951,
@@ -989,7 +989,7 @@
   "line": 1953,
   "it": "/multa id importo motivo",
   "ctx": "Util_Send(playerid, 0x99CCFFFF, \"/multa id importo motivo\");",
-  "ka": ""
+  "ka": "/multa id თანხა მიზეზი"
  },
  {
   "id": 1952,
@@ -997,7 +997,7 @@
   "line": 1958,
   "it": "/cura id · /rianima id",
   "ctx": "Util_Send(playerid, 0x99CCFFFF, \"/cura id · /rianima id\");",
-  "ka": ""
+  "ka": "/cura id · /rianima id"
  },
  {
   "id": 1953,
@@ -1005,7 +1005,7 @@
   "line": 1962,
   "it": "/invita id · /promuovi id · /degrada id · /licenzia id",
   "ctx": "Util_Send(playerid, 0x99CCFFFF, \"/invita id · /promuovi id · /degrada id · /licenzia id\");",
-  "ka": ""
+  "ka": "/invita id · /promuovi id · /degrada id · /licenzia id"
  },
  {
   "id": 0,
@@ -1013,7 +1013,7 @@
   "line": 139,
   "it": "merci alimentari",
   "ctx": "strcopy(dest, \"merci alimentari\", size);",
-  "ka": ""
+  "ka": "სურსათი"
  },
  {
   "id": 1,
@@ -1021,7 +1021,7 @@
   "line": 147,
   "it": "merci generiche",
   "ctx": "strcopy(dest, \"merci generiche\", size);",
-  "ka": ""
+  "ka": "სხვადასხვა ტვირთი"
  },
  {
   "id": 2,
@@ -1029,7 +1029,7 @@
   "line": 254,
   "it": "Negozio",
   "ctx": "format(dest, 96, \"%s %s\", shop ? \"Negozio\" : \"Magazzino\", name);",
-  "ka": ""
+  "ka": "მაღაზია"
  },
  {
   "id": 3,
@@ -1037,7 +1037,7 @@
   "line": 254,
   "it": "Magazzino",
   "ctx": "format(dest, 96, \"%s %s\", shop ? \"Negozio\" : \"Magazzino\", name);",
-  "ka": ""
+  "ka": "საწყობი"
  },
  {
   "id": 4,
@@ -1045,7 +1045,7 @@
   "line": 259,
   "it": "Registrazione del carico...",
   "ctx": "strcopy(goal, \"Registrazione del carico...\", 96);",
-  "ka": ""
+  "ka": "ტვირთის რეგისტრაცია..."
  },
  {
   "id": 5,
@@ -1053,7 +1053,7 @@
   "line": 263,
   "it": "Registrazione della consegna...",
   "ctx": "strcopy(goal, \"Registrazione della consegna...\", 96);",
-  "ka": ""
+  "ka": "მიწოდების რეგისტრაცია..."
  },
  {
   "id": 6,
@@ -1061,7 +1061,7 @@
   "line": 269,
   "it": "Scarico: resta fermo %d s",
   "ctx": "format(goal, 96, \"Scarico: resta fermo %d s\", dwellSec);",
-  "ka": ""
+  "ka": "გადმოტვირთვა: იდექი %d წმ"
  },
  {
   "id": 7,
@@ -1069,7 +1069,7 @@
   "line": 273,
   "it": "Torna alla guida del Mule!",
   "ctx": "strcopy(goal, \"Torna alla guida del Mule!\", 96);",
-  "ka": ""
+  "ka": "დაბრუნდი Mule-ის საჭესთან!"
  },
  {
   "id": 8,
@@ -1077,7 +1077,7 @@
   "line": 277,
   "it": "Consegna la merce al negozio",
   "ctx": "strcopy(goal, \"Consegna la merce al negozio\", 96);",
-  "ka": ""
+  "ka": "მიიტანე ტვირთი მაღაზიაში"
  },
  {
   "id": 9,
@@ -1085,7 +1085,7 @@
   "line": 284,
   "it": "Carico: resta fermo %d s",
   "ctx": "format(goal, 96, \"Carico: resta fermo %d s\", dwellSec);",
-  "ka": ""
+  "ka": "დატვირთვა: იდექი %d წმ"
  },
  {
   "id": 10,
@@ -1093,7 +1093,7 @@
   "line": 288,
   "it": "Sali sul Mule al magazzino",
   "ctx": "strcopy(goal, \"Sali sul Mule al magazzino\", 96);",
-  "ka": ""
+  "ka": "ჩაჯექი Mule-ში საწყობთან"
  },
  {
   "id": 11,
@@ -1101,7 +1101,7 @@
   "line": 292,
   "it": "Torna alla guida del Mule!",
   "ctx": "strcopy(goal, \"Torna alla guida del Mule!\", 96);",
-  "ka": ""
+  "ka": "დაბრუნდი Mule-ის საჭესთან!"
  },
  {
   "id": 12,
@@ -1109,7 +1109,7 @@
   "line": 296,
   "it": "Entra nel checkpoint del magazzino",
   "ctx": "strcopy(goal, \"Entra nel checkpoint del magazzino\", 96);",
-  "ka": ""
+  "ka": "შედი საწყობის ჩექპოინტში"
  },
  {
   "id": 13,
@@ -1117,7 +1117,7 @@
   "line": 324,
   "it": "Contratto di trasporto chiuso: il Mule e' stato ritirato.",
   "ctx": "Util_Send(playerid, -1, \"Contratto di trasporto chiuso: il Mule e' stato ritirato.\");",
-  "ka": ""
+  "ka": "გადაზიდვის კონტრაქტი დაიხურა: Mule ჩამოგერთვა."
  },
  {
   "id": 14,
@@ -1125,7 +1125,7 @@
   "line": 328,
   "it": "Contratto di trasporto scaduto o non piu' valido: il Mule e' stato ritirato.",
   "ctx": "Util_Send(playerid, -10270721, \"Contratto di trasporto scaduto o non piu' valido: il Mule e' stato ritirato.\");",
-  "ka": ""
+  "ka": "გადაზიდვის კონტრაქტს ვადა გაუვიდა ან აღარ მოქმედებს: Mule ჩამოგერთვა."
  },
  {
   "id": 15,
@@ -1133,7 +1133,7 @@
   "line": 332,
   "it": "Contratto di trasporto annullato dallo staff.",
   "ctx": "Util_Send(playerid, -10270721, \"Contratto di trasporto annullato dallo staff.\");",
-  "ka": ""
+  "ka": "ადმინისტრაციამ გადაზიდვის კონტრაქტი გააუქმა."
  },
  {
   "id": 16,
@@ -1141,7 +1141,7 @@
   "line": 419,
   "it": "Merce caricata: portala al negozio di Idlewood.",
   "ctx": "UI_LivingToast(playerid, \"Merce caricata: portala al negozio di Idlewood.\", 1);",
-  "ka": ""
+  "ka": "ტვირთი დატვირთულია: მიიტანე Idlewood-ის მაღაზიაში."
  },
  {
   "id": 17,
@@ -1149,7 +1149,7 @@
   "line": 421,
   "it": "Merce caricata. Consegnala al negozio di %s: guida con prudenza, i danni al Mule rovinano il carico.",
   "ctx": "SendClientMessage(playerid, 0x66DD66FF, \"Merce caricata. Consegnala al negozio di %s: guida con prudenza, i danni al Mule rovinano il carico.\", name);",
-  "ka": ""
+  "ka": "ტვირთი დატვირთულია. მიიტანე %s-ის მაღაზიაში: ფრთხილად იარე, Mule-ის დაზიანება ტვირთს აფუჭებს."
  },
  {
   "id": 18,
@@ -1157,7 +1157,7 @@
   "line": 443,
   "it": "Carico non registrato al momento: resta nel checkpoint e riprova tra qualche secondo.",
   "ctx": "Util_Send(playerid, -10270721, \"Carico non registrato al momento: resta nel checkpoint e riprova tra qualche secondo.\");",
-  "ka": ""
+  "ka": "ტვირთი ჯერ ვერ დარეგისტრირდა: დარჩი ჩექპოინტში და რამდენიმე წამში სცადე."
  },
  {
   "id": 19,
@@ -1165,7 +1165,7 @@
   "line": 457,
   "it": "consegna troppo rapida: pers. %d contratto %d dopo %d s (minimo %d s)",
   "ctx": "format(msg, 256, \"consegna troppo rapida: pers. %d contratto %d dopo %d s (minimo %d s)\", gPlayer[playerid][pCharId], g_FrtCt[playerid], seconds, minSec);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 20,
@@ -1173,7 +1173,7 @@
   "line": 459,
   "it": "Consegna non valida: troppo rapida (ancora %d s). Resta nel checkpoint.",
   "ctx": "format(msg, 256, \"Consegna non valida: troppo rapida (ancora %d s). Resta nel checkpoint.\", minSec - seconds);",
-  "ka": ""
+  "ka": "მიწოდება არასწორია: ძალიან სწრაფია (კიდევ %d წმ). დარჩი ჩექპოინტში."
  },
  {
   "id": 21,
@@ -1181,7 +1181,7 @@
   "line": 466,
   "it": "Contratto non valido (tratta troppo corta).",
   "ctx": "Freight_Stop(playerid, 5, \"Contratto non valido (tratta troppo corta).\");",
-  "ka": ""
+  "ka": "კონტრაქტი არასწორია (მარშრუტი ძალიან მოკლეა)."
  },
  {
   "id": 22,
@@ -1189,7 +1189,7 @@
   "line": 473,
   "it": "percorso insufficiente: pers. %d contratto %d percorso %.0f m su %d m",
   "ctx": "format(msg, 256, \"percorso insufficiente: pers. %d contratto %d percorso %.0f m su %d m\", gPlayer[playerid][pCharId], g_FrtCt[playerid], g_FrtPath[playerid], g_FrtDist[playerid]);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 23,
@@ -1197,7 +1197,7 @@
   "line": 475,
   "it": "Consegna non valida: la merce deve essere portata dal magazzino con il Mule.",
   "ctx": "Freight_Note(playerid, \"Consegna non valida: la merce deve essere portata dal magazzino con il Mule.\");",
-  "ka": ""
+  "ka": "მიწოდება არასწორია: ტვირთი საწყობიდან Mule-ით უნდა ჩამოიტანო."
  },
  {
   "id": 24,
@@ -1205,7 +1205,7 @@
   "line": 488,
   "it": "Consegna di benvenuto completata: il negozio di Idlewood ti ringrazia!",
   "ctx": "Util_Send(playerid, 0x66DD66FF, \"Consegna di benvenuto completata: il negozio di Idlewood ti ringrazia!\");",
-  "ka": ""
+  "ka": "მისასალმებელი მიწოდება დასრულდა: Idlewood-ის მაღაზია გიხდის მადლობას!"
  },
  {
   "id": 25,
@@ -1213,7 +1213,7 @@
   "line": 504,
   "it": "Consegna non registrata al momento: resta nel checkpoint e riprova tra qualche secondo.",
   "ctx": "Util_Send(playerid, -10270721, \"Consegna non registrata al momento: resta nel checkpoint e riprova tra qualche secondo.\");",
-  "ka": ""
+  "ka": "მიწოდება ჯერ ვერ დარეგისტრირდა: დარჩი ჩექპოინტში და რამდენიმე წამში სცადე."
  },
  {
   "id": 26,
@@ -1221,7 +1221,7 @@
   "line": 572,
   "it": "Nessun veicolo da carico disponibile al momento. Riprova tra poco.",
   "ctx": "Util_Send(playerid, -10270721, \"Nessun veicolo da carico disponibile al momento. Riprova tra poco.\");",
-  "ka": ""
+  "ka": "სატვირთო მანქანა ახლა არ არის თავისუფალი. სცადე ცოტა ხანში."
  },
  {
   "id": 27,
@@ -1229,7 +1229,7 @@
   "line": 588,
   "it": "Impossibile preparare il veicolo da carico. Riprova.",
   "ctx": "Util_Send(playerid, -10270721, \"Impossibile preparare il veicolo da carico. Riprova.\");",
-  "ka": ""
+  "ka": "სატვირთო მანქანის მომზადება ვერ მოხერხდა. სცადე თავიდან."
  },
  {
   "id": 28,
@@ -1237,7 +1237,7 @@
   "line": 595,
   "it": "Nessun veicolo da carico disponibile al momento. Riprova tra poco.",
   "ctx": "Util_Send(playerid, -10270721, \"Nessun veicolo da carico disponibile al momento. Riprova tra poco.\");",
-  "ka": ""
+  "ka": "სატვირთო მანქანა ახლა არ არის თავისუფალი. სცადე ცოტა ხანში."
  },
  {
   "id": 29,
@@ -1245,7 +1245,7 @@
   "line": 642,
   "it": "Consegna di benvenuto: sali sul Mule al magazzino di Idlewood, fermati nel checkpoint %d s per caricare %s, poi portali al negozio di Idlewood.",
   "ctx": "SendClientMessage(playerid, 0x66DD66FF, \"Consegna di benvenuto: sali sul Mule al magazzino di Idlewood, fermati nel checkpoint %d s per caricare %s, poi portali al negozio di Idlewood.\", 6, cargoName)",
-  "ka": ""
+  "ka": "მისასალმებელი მიწოდება: ჩაჯექი Mule-ში Idlewood-ის საწყობთან, ჩექპოინტში %d წმ იდექი, რომ დატვირთო %s, შემდეგ მიიტანე Idlewood-ის მაღაზიაში."
  },
  {
   "id": 30,
@@ -1253,7 +1253,7 @@
   "line": 643,
   "it": "Sali sul Mule al magazzino di Idlewood.",
   "ctx": "UI_LivingToast(playerid, \"Sali sul Mule al magazzino di Idlewood.\", 0);",
-  "ka": ""
+  "ka": "ჩაჯექი Mule-ში Idlewood-ის საწყობთან."
  },
  {
   "id": 31,
@@ -1261,7 +1261,7 @@
   "line": 647,
   "it": "Contratto #%d: ritira il Mule al magazzino di %s, fermati nel checkpoint (max %.0f km/h) %d s per caricare %s, poi consegna al negozio di %s (%d m).",
   "ctx": "SendClientMessage(playerid, 0x66DD66FF, \"Contratto #%d: ritira il Mule al magazzino di %s, fermati nel checkpoint (max %.0f km/h) %d s per caricare %s, poi consegna al negozio di %s (%d m).\", contract",
-  "ka": ""
+  "ka": "კონტრაქტი #%d: აიყვანე Mule %s-ის საწყობიდან, ჩექპოინტში (მაქს. %.0f კმ/სთ) %d წმ იდექი, რომ დატვირთო %s, შემდეგ მიიტანე %s-ის მაღაზიაში (%d მ)."
  },
  {
   "id": 32,
@@ -1269,7 +1269,7 @@
   "line": 680,
   "it": "Registrazione del carico non riuscita: resta nel checkpoint per ritentare.",
   "ctx": "Util_Send(playerid, -10270721, \"Registrazione del carico non riuscita: resta nel checkpoint per ritentare.\");",
-  "ka": ""
+  "ka": "ტვირთის რეგისტრაცია ვერ მოხერხდა: ხელახლა საცდელად დარჩი ჩექპოინტში."
  },
  {
   "id": 33,
@@ -1277,7 +1277,7 @@
   "line": 704,
   "it": "Consegna del contratto #%d gia' registrata: nessun nuovo pagamento.",
   "ctx": "SendClientMessage(playerid, -1, \"Consegna del contratto #%d gia' registrata: nessun nuovo pagamento.\", ct);",
-  "ka": ""
+  "ka": "კონტრაქტის #%d მიწოდება უკვე დარეგისტრირებულია: ახალი გადახდა არ იქნება."
  },
  {
   "id": 34,
@@ -1285,7 +1285,7 @@
   "line": 708,
   "it": "Consegna #%d completata: $%d accreditati in banca (tetto orario raggiunto). Saldo: $%d.",
   "ctx": "SendClientMessage(playerid, 0x66DD66FF, \"Consegna #%d completata: $%d accreditati in banca (tetto orario raggiunto). Saldo: $%d.\", ct, paid, balance);",
-  "ka": ""
+  "ka": "მიწოდება #%d დასრულდა: $%d ჩაირიცხა ბანკში (საათობრივი ლიმიტი მიღწეულია). ბალანსი: $%d."
  },
  {
   "id": 35,
@@ -1293,7 +1293,7 @@
   "line": 712,
   "it": "Consegna #%d completata: $%d accreditati in banca. Saldo: $%d.",
   "ctx": "SendClientMessage(playerid, 0x66DD66FF, \"Consegna #%d completata: $%d accreditati in banca. Saldo: $%d.\", ct, paid, balance);",
-  "ka": ""
+  "ka": "მიწოდება #%d დასრულდა: $%d ჩაირიცხა ბანკში. ბალანსი: $%d."
  },
  {
   "id": 36,
@@ -1301,7 +1301,7 @@
   "line": 718,
   "it": "Contratto FALLITO: la merce e' arrivata troppo danneggiata. Nessun compenso.",
   "ctx": "Util_Send(playerid, -10270721, \"Contratto FALLITO: la merce e' arrivata troppo danneggiata. Nessun compenso.\");",
-  "ka": ""
+  "ka": "კონტრაქტი ჩაიშალა: ტვირთი ძალიან დაზიანებული ჩავიდა. ანაზღაურება არ არის."
  },
  {
   "id": 37,
@@ -1309,7 +1309,7 @@
   "line": 730,
   "it": "Registrazione della consegna non riuscita: resta nel checkpoint per ritentare.",
   "ctx": "Util_Send(playerid, -10270721, \"Registrazione della consegna non riuscita: resta nel checkpoint per ritentare.\");",
-  "ka": ""
+  "ka": "მიწოდების რეგისტრაცია ვერ მოხერხდა: ხელახლა საცდელად დარჩი ჩექპოინტში."
  },
  {
   "id": 38,
@@ -1317,7 +1317,7 @@
   "line": 743,
   "it": "Consegna rifiutata dal registro (troppo rapida o stato non valido): attendi qualche secondo nel checkpoint.",
   "ctx": "Util_Send(playerid, -10270721, \"Consegna rifiutata dal registro (troppo rapida o stato non valido): attendi qualche secondo nel checkpoint.\");",
-  "ka": ""
+  "ka": "რეესტრმა მიწოდება უარყო (ძალიან სწრაფია ან სტატუსი არასწორია): ჩექპოინტში რამდენიმე წამი დაელოდე."
  },
  {
   "id": 39,
@@ -1325,7 +1325,7 @@
   "line": 756,
   "it": "esito DB non ricevuto: pers. %d contratto %d fase %d",
   "ctx": "format(msg, 256, \"esito DB non ricevuto: pers. %d contratto %d fase %d\", gPlayer[playerid][pCharId], g_FrtCt[playerid], g_FrtPhase[playerid]);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 40,
@@ -1333,7 +1333,7 @@
   "line": 787,
   "it": "salto del Mule: pers. %d contratto %d %.0f m in %d ms",
   "ctx": "format(msg, 256, \"salto del Mule: pers. %d contratto %d %.0f m in %d ms\", gPlayer[playerid][pCharId], g_FrtCt[playerid], seg, dt);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 41,
@@ -1341,7 +1341,7 @@
   "line": 812,
   "it": "Hai iniziato un turno di lavoro: il contratto di trasporto e' stato chiuso.",
   "ctx": "Freight_Stop(playerid, 1, \"Hai iniziato un turno di lavoro: il contratto di trasporto e' stato chiuso.\");",
-  "ka": ""
+  "ka": "სამსახურის ცვლა დაიწყე: გადაზიდვის კონტრაქტი დაიხურა."
  },
  {
   "id": 42,
@@ -1349,7 +1349,7 @@
   "line": 817,
   "it": "Non sei in condizione di guidare: contratto di trasporto interrotto.",
   "ctx": "Freight_Stop(playerid, 3, \"Non sei in condizione di guidare: contratto di trasporto interrotto.\");",
-  "ka": ""
+  "ka": "მართვის მდგომარეობაში არ ხარ: გადაზიდვის კონტრაქტი შეწყდა."
  },
  {
   "id": 43,
@@ -1357,7 +1357,7 @@
   "line": 822,
   "it": "Il Mule del contratto non esiste piu': contratto interrotto.",
   "ctx": "Freight_Stop(playerid, 4, \"Il Mule del contratto non esiste piu': contratto interrotto.\");",
-  "ka": ""
+  "ka": "კონტრაქტის Mule აღარ არსებობს: კონტრაქტი შეწყდა."
  },
  {
   "id": 44,
@@ -1365,7 +1365,7 @@
   "line": 830,
   "it": "Mule distrutto: il carico e' perso e il contratto e' interrotto.",
   "ctx": "Freight_Stop(playerid, 4, \"Mule distrutto: il carico e' perso e il contratto e' interrotto.\");",
-  "ka": ""
+  "ka": "Mule განადგურდა: ტვირთი დაიკარგა, კონტრაქტი შეწყდა."
  },
  {
   "id": 45,
@@ -1373,7 +1373,7 @@
   "line": 851,
   "it": "Mule abbandonato: contratto di trasporto rilasciato.",
   "ctx": "Freight_Stop(playerid, 4, \"Mule abbandonato: contratto di trasporto rilasciato.\");",
-  "ka": ""
+  "ka": "Mule მიტოვებულია: გადაზიდვის კონტრაქტი გაუქმდა."
  },
  {
   "id": 46,
@@ -1381,7 +1381,7 @@
   "line": 857,
   "it": "Non hai preso in consegna il Mule in tempo: contratto di trasporto rilasciato.",
   "ctx": "Freight_Stop(playerid, 4, \"Non hai preso in consegna il Mule in tempo: contratto di trasporto rilasciato.\");",
-  "ka": ""
+  "ka": "Mule დროულად არ აიყვანე: გადაზიდვის კონტრაქტი გაუქმდა."
  },
  {
   "id": 47,
@@ -1389,7 +1389,7 @@
   "line": 864,
   "it": "Spostamento anomalo del Mule: contratto di trasporto annullato.",
   "ctx": "Freight_Stop(playerid, 4, \"Spostamento anomalo del Mule: contratto di trasporto annullato.\");",
-  "ka": ""
+  "ka": "Mule-ის საეჭვო გადაადგილება: გადაზიდვის კონტრაქტი გაუქმდა."
  },
  {
   "id": 48,
@@ -1397,7 +1397,7 @@
   "line": 887,
   "it": "Scarico in corso: resta fermo.",
   "ctx": "UI_LivingToast(playerid, shop ? \"Scarico in corso: resta fermo.\" : \"Carico in corso: resta fermo.\", 0);",
-  "ka": ""
+  "ka": "მიმდინარეობს გადმოტვირთვა: იდექი."
  },
  {
   "id": 49,
@@ -1405,7 +1405,7 @@
   "line": 887,
   "it": "Carico in corso: resta fermo.",
   "ctx": "UI_LivingToast(playerid, shop ? \"Scarico in corso: resta fermo.\" : \"Carico in corso: resta fermo.\", 0);",
-  "ka": ""
+  "ka": "მიმდინარეობს დატვირთვა: იდექი."
  },
  {
   "id": 50,
@@ -1413,7 +1413,7 @@
   "line": 1007,
   "it": "Sei stato ferito: il contratto di trasporto e' interrotto e il Mule ritirato.",
   "ctx": "Freight_Stop(playerid, 3, \"Sei stato ferito: il contratto di trasporto e' interrotto e il Mule ritirato.\");",
-  "ka": ""
+  "ka": "დაჭრილი ხარ: გადაზიდვის კონტრაქტი შეწყდა, Mule ჩამოგერთვა."
  },
  {
   "id": 51,
@@ -1421,7 +1421,7 @@
   "line": 1023,
   "it": "Questo veicolo da carico e' assegnato a un altro trasportatore.",
   "ctx": "Util_Send(playerid, -10270721, \"Questo veicolo da carico e' assegnato a un altro trasportatore.\");",
-  "ka": ""
+  "ka": "ეს სატვირთო მანქანა სხვა გადამზიდს ეკუთვნის."
  },
  {
   "id": 52,
@@ -1429,7 +1429,7 @@
   "line": 1037,
   "it": "Torna alla guida del Mule entro %d secondi (e resta entro %.0f m) o il contratto sara' rilasciato.",
   "ctx": "SendClientMessage(playerid, -10270721, \"Torna alla guida del Mule entro %d secondi (e resta entro %.0f m) o il contratto sara' rilasciato.\", 45, 0x43160000);",
-  "ka": ""
+  "ka": "დაბრუნდი Mule-ის საჭესთან %d წამში (და %.0f მ-ზე შორს არ წახვიდე), თორემ კონტრაქტი გაუქმდება."
  },
  {
   "id": 53,
@@ -1437,7 +1437,7 @@
   "line": 1057,
   "it": "Questo veicolo da carico e' assegnato a un altro trasportatore.",
   "ctx": "Util_Send(playerid, -10270721, \"Questo veicolo da carico e' assegnato a un altro trasportatore.\");",
-  "ka": ""
+  "ka": "ეს სატვირთო მანქანა სხვა გადამზიდს ეკუთვნის."
  },
  {
   "id": 54,
@@ -1445,7 +1445,7 @@
   "line": 1081,
   "it": "Mule distrutto: il carico e' perso e il contratto e' interrotto.",
   "ctx": "Freight_Stop(owner, 4, \"Mule distrutto: il carico e' perso e il contratto e' interrotto.\");",
-  "ka": ""
+  "ka": "Mule განადგურდა: ტვირთი დაიკარგა, კონტრაქტი შეწყდა."
  },
  {
   "id": 1471,
@@ -1453,7 +1453,7 @@
   "line": 11,
   "it": "Monolocale",
   "ctx": "\"Monolocale\",",
-  "ka": ""
+  "ka": "ერთოთახიანი"
  },
  {
   "id": 1472,
@@ -1461,7 +1461,7 @@
   "line": 12,
   "it": "Bilocale",
   "ctx": "\"Bilocale\",",
-  "ka": ""
+  "ka": "ოროთახიანი"
  },
  {
   "id": 1473,
@@ -1469,7 +1469,7 @@
   "line": 13,
   "it": "Casa media",
   "ctx": "\"Casa media\",",
-  "ka": ""
+  "ka": "საშუალო სახლი"
  },
  {
   "id": 1474,
@@ -1477,7 +1477,7 @@
   "line": 14,
   "it": "Villa",
   "ctx": "\"Villa\"",
-  "ka": ""
+  "ka": "ვილა"
  },
  {
   "id": 1475,
@@ -1485,7 +1485,7 @@
   "line": 246,
   "it": "Attendi un attimo prima di usare un altro comando della casa.",
   "ctx": "Util_Send(playerid, -10270721, \"Attendi un attimo prima di usare un altro comando della casa.\");",
-  "ka": ""
+  "ka": "დაელოდე ცოტა, სანამ სახლის სხვა ბრძანებას გამოიყენებ."
  },
  {
   "id": 1476,
@@ -1493,7 +1493,7 @@
   "line": 261,
   "it": "Il sistema case non e' disponibile al momento.",
   "ctx": "Util_Send(playerid, -10270721, \"Il sistema case non e' disponibile al momento.\");",
-  "ka": ""
+  "ka": "სახლების სისტემა ახლა მიუწვდომელია."
  },
  {
   "id": 1477,
@@ -1501,7 +1501,7 @@
   "line": 270,
   "it": "Hai un'operazione della casa in corso: attendi.",
   "ctx": "Util_Send(playerid, -10270721, \"Hai un'operazione della casa in corso: attendi.\");",
-  "ka": ""
+  "ka": "სახლის ოპერაცია მიმდინარეობს: დაელოდე."
  },
  {
   "id": 1478,
@@ -1509,7 +1509,7 @@
   "line": 364,
   "it": "Casa %d - %s\\nIn vendita: $%d (liv. %d)\\nUsa /casa per info",
   "ctx": "format(text, 160, \"Casa %d - %s\\nIn vendita: $%d (liv. %d)\\nUsa /casa per info\", g_HouseRows[idx][hrId], s_HsTierName[tier], g_HouseRows[idx][hrPrice], s_HsTierLevel[tier]);",
-  "ka": ""
+  "ka": "სახლი %d - %s\\nიყიდება: $%d (დონე %d)\\nინფო: /casa"
  },
  {
   "id": 1479,
@@ -1517,7 +1517,7 @@
   "line": 368,
   "it": "Casa %d - %s\\nProprieta' di %s\\n%s",
   "ctx": "format(text, 160, \"Casa %d - %s\\nProprieta' di %s\\n%s\", g_HouseRows[idx][hrId], s_HsTierName[tier], g_HouseRows[idx][hrOwnerName], g_HouseRows[idx][hrLocked] ? \"Chiusa a chiave (/bussa)\" : \"Aperta (/e",
-  "ka": ""
+  "ka": "სახლი %d - %s\\nმფლობელი: %s\\n%s"
  },
  {
   "id": 1480,
@@ -1525,7 +1525,7 @@
   "line": 368,
   "it": "Chiusa a chiave (/bussa)",
   "ctx": "format(text, 160, \"Casa %d - %s\\nProprieta' di %s\\n%s\", g_HouseRows[idx][hrId], s_HsTierName[tier], g_HouseRows[idx][hrOwnerName], g_HouseRows[idx][hrLocked] ? \"Chiusa a chiave (/bussa)\" : \"Aperta (/e",
-  "ka": ""
+  "ka": "ჩაკეტილია (/bussa)"
  },
  {
   "id": 1481,
@@ -1533,7 +1533,7 @@
   "line": 368,
   "it": "Aperta (/entra)",
   "ctx": "format(text, 160, \"Casa %d - %s\\nProprieta' di %s\\n%s\", g_HouseRows[idx][hrId], s_HsTierName[tier], g_HouseRows[idx][hrOwnerName], g_HouseRows[idx][hrLocked] ? \"Chiusa a chiave (/bussa)\" : \"Aperta (/e",
-  "ka": ""
+  "ka": "ღიაა (/entra)"
  },
  {
   "id": 1482,
@@ -1541,7 +1541,7 @@
   "line": 498,
   "it": "Sei debole per la fame: mangia qualcosa (/mangia, /usa, /compra).",
   "ctx": "Util_Send(playerid, -10270721, \"Sei debole per la fame: mangia qualcosa (/mangia, /usa, /compra).\");",
-  "ka": ""
+  "ka": "შიმშილისგან დასუსტდი: რამე ჭამე (/mangia, /usa, /compra)."
  },
  {
   "id": 1483,
@@ -1549,7 +1549,7 @@
   "line": 502,
   "it": "Hai fame: pensa a mangiare qualcosa.",
   "ctx": "Util_Send(playerid, -2994689, \"Hai fame: pensa a mangiare qualcosa.\");",
-  "ka": ""
+  "ka": "გშია: რამე ჭამე."
  },
  {
   "id": 1484,
@@ -1557,7 +1557,7 @@
   "line": 541,
   "it": "I tuoi dati sul cibo non sono ancora stati caricati: riprova tra poco.",
   "ctx": "Util_Send(playerid, -10270721, \"I tuoi dati sul cibo non sono ancora stati caricati: riprova tra poco.\");",
-  "ka": ""
+  "ka": "საკვების მონაცემები ჯერ არ ჩატვირთულა: სცადე ცოტა ხანში."
  },
  {
   "id": 1485,
@@ -1565,7 +1565,7 @@
   "line": 558,
   "it": "Casa %d: hai %d bollette non pagate (/bollette).",
   "ctx": "SendClientMessage(playerid, -10270721, \"Casa %d: hai %d bollette non pagate (/bollette).\", g_HouseRows[i][hrId], g_HouseRows[i][hrBills]);",
-  "ka": ""
+  "ka": "სახლი %d: %d გადაუხდელი კომუნალური გადასახადი გაქვს (/bollette)."
  },
  {
   "id": 1486,
@@ -1573,7 +1573,7 @@
   "line": 562,
   "it": "Casa %d: la luce e' stata staccata per morosita'.",
   "ctx": "SendClientMessage(playerid, -10270721, \"Casa %d: la luce e' stata staccata per morosita'.\", g_HouseRows[i][hrId]);",
-  "ka": ""
+  "ka": "სახლი %d: ელექტროენერგია გადაუხდელობის გამო გაითიშა."
  },
  {
   "id": 1487,
@@ -1581,7 +1581,7 @@
   "line": 566,
   "it": "Casa %d: il gas e' stato staccato per morosita'.",
   "ctx": "SendClientMessage(playerid, -10270721, \"Casa %d: il gas e' stato staccato per morosita'.\", g_HouseRows[i][hrId]);",
-  "ka": ""
+  "ka": "სახლი %d: გაზი გადაუხდელობის გამო გაითიშა."
  },
  {
   "id": 1488,
@@ -1589,7 +1589,7 @@
   "line": 602,
   "it": "STACCATA",
   "ctx": "format(out, size, \"STACCATA\");",
-  "ka": ""
+  "ka": "გათიშულია"
  },
  {
   "id": 1489,
@@ -1597,7 +1597,7 @@
   "line": 606,
   "it": "OFF",
   "ctx": "format(out, size, \"%s\", on ? \"ON\" : \"OFF\");",
-  "ka": ""
+  "ka": "გამორთ."
  },
  {
   "id": 1490,
@@ -1605,7 +1605,7 @@
   "line": 679,
   "it": "Impossibile leggere le bollette (errore database). Riprova piu' tardi.",
   "ctx": "Util_Send(playerid, -10270721, \"Impossibile leggere le bollette (errore database). Riprova piu' tardi.\");",
-  "ka": ""
+  "ka": "კომუნალურების წაკითხვა ვერ მოხერხდა (ბაზის შეცდომა). სცადე მოგვიანებით."
  },
  {
   "id": 1491,
@@ -1613,7 +1613,7 @@
   "line": 700,
   "it": "Operazione in corso: attendi.",
   "ctx": "Util_Send(playerid, -10270721, \"Operazione in corso: attendi.\");",
-  "ka": ""
+  "ka": "ოპერაცია მიმდინარეობს: დაელოდე."
  },
  {
   "id": 1492,
@@ -1621,7 +1621,7 @@
   "line": 705,
   "it": "Devi essere a piedi davanti alla porta della casa.",
   "ctx": "Util_Send(playerid, -10270721, \"Devi essere a piedi davanti alla porta della casa.\");",
-  "ka": ""
+  "ka": "ფეხით უნდა იდგე სახლის კართან."
  },
  {
   "id": 1493,
@@ -1629,7 +1629,7 @@
   "line": 710,
   "it": "Questa casa non e' in vendita.",
   "ctx": "Util_Send(playerid, -10270721, \"Questa casa non e' in vendita.\");",
-  "ka": ""
+  "ka": "ეს სახლი არ იყიდება."
  },
  {
   "id": 1494,
@@ -1637,7 +1637,7 @@
   "line": 715,
   "it": "Metodo di pagamento non valido.",
   "ctx": "Util_Send(playerid, -10270721, \"Metodo di pagamento non valido.\");",
-  "ka": ""
+  "ka": "გადახდის არასწორი მეთოდი."
  },
  {
   "id": 1495,
@@ -1645,7 +1645,7 @@
   "line": 721,
   "it": "Acquisto non disponibile.",
   "ctx": "Util_Send(playerid, -10270721, \"Acquisto non disponibile.\");",
-  "ka": ""
+  "ka": "შეძენა მიუწვდომელია."
  },
  {
   "id": 1496,
@@ -1653,7 +1653,7 @@
   "line": 726,
   "it": "Questa casa richiede il livello %d.",
   "ctx": "SendClientMessage(playerid, -10270721, \"Questa casa richiede il livello %d.\", s_HsTierLevel[tier]);",
-  "ka": ""
+  "ka": "ამ სახლისთვის საჭიროა %d დონე."
  },
  {
   "id": 1497,
@@ -1661,7 +1661,7 @@
   "line": 732,
   "it": "Hai raggiunto il limite di case per il tuo livello (%d).",
   "ctx": "SendClientMessage(playerid, -10270721, \"Hai raggiunto il limite di case per il tuo livello (%d).\", maxHouses);",
-  "ka": ""
+  "ka": "შენი დონისთვის სახლების ლიმიტს მიაღწიე (%d)."
  },
  {
   "id": 1498,
@@ -1669,7 +1669,7 @@
   "line": 737,
   "it": "Fondi insufficienti con questo metodo di pagamento.",
   "ctx": "Util_Send(playerid, -10270721, \"Fondi insufficienti con questo metodo di pagamento.\");",
-  "ka": ""
+  "ka": "ამ მეთოდით საკმარისი თანხა არ გაქვს."
  },
  {
   "id": 1499,
@@ -1677,7 +1677,7 @@
   "line": 745,
   "it": "Pratica di acquisto in corso...",
   "ctx": "Util_Send(playerid, -1, \"Pratica di acquisto in corso...\");",
-  "ka": ""
+  "ka": "შეძენა ფორმდება..."
  },
  {
   "id": 1500,
@@ -1685,7 +1685,7 @@
   "line": 774,
   "it": "Acquisto non riuscito (errore database). Nessun addebito.",
   "ctx": "Util_Send(playerid, -10270721, \"Acquisto non riuscito (errore database). Nessun addebito.\");",
-  "ka": ""
+  "ka": "შეძენა ვერ მოხერხდა (ბაზის შეცდომა). თანხა არ ჩამოიჭრა."
  },
  {
   "id": 1501,
@@ -1693,7 +1693,7 @@
   "line": 779,
   "it": "Acquisto non possibile: la casa non e' piu' disponibile o hai raggiunto il limite. Nessun addebito.",
   "ctx": "Util_Send(playerid, -10270721, \"Acquisto non possibile: la casa non e' piu' disponibile o hai raggiunto il limite. Nessun addebito.\");",
-  "ka": ""
+  "ka": "შეძენა შეუძლებელია: სახლი აღარ არის ხელმისაწვდომი ან ლიმიტს მიაღწიე. თანხა არ ჩამოიჭრა."
  },
  {
   "id": 1502,
@@ -1701,7 +1701,7 @@
   "line": 793,
   "it": "Acquisto annullato: requisiti o fondi non piu' validi. Nessun addebito.",
   "ctx": "Util_Send(playerid, -10270721, \"Acquisto annullato: requisiti o fondi non piu' validi. Nessun addebito.\");",
-  "ka": ""
+  "ka": "შეძენა გაუქმდა: მოთხოვნები ან თანხა აღარ შეესაბამება. თანხა არ ჩამოიჭრა."
  },
  {
   "id": 1503,
@@ -1709,7 +1709,7 @@
   "line": 804,
   "it": "Hai acquistato la casa %d per $%d (%s). Usa /entra per entrare, /casa per gestirla.",
   "ctx": "SendClientMessage(playerid, 0x66DD66FF, \"Hai acquistato la casa %d per $%d (%s). Usa /entra per entrare, /casa per gestirla.\", houseId, price, bank == 1 ? \"banca\" : \"contanti\");",
-  "ka": ""
+  "ka": "იყიდე სახლი %d $%d-ად (%s). შესასვლელად /entra, სამართავად /casa."
  },
  {
   "id": 1504,
@@ -1717,7 +1717,7 @@
   "line": 805,
   "it": "ACQUISTO %s: casa %d $%d (%s)",
   "ctx": "format(msg, 256, \"ACQUISTO %s: casa %d $%d (%s)\", name, houseId, price, bank == 1 ? \"banca\" : \"contanti\");",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 1505,
@@ -1725,7 +1725,7 @@
   "line": 820,
   "it": "Operazione in corso: attendi.",
   "ctx": "Util_Send(playerid, -10270721, \"Operazione in corso: attendi.\");",
-  "ka": ""
+  "ka": "ოპერაცია მიმდინარეობს: დაელოდე."
  },
  {
   "id": 1506,
@@ -1733,7 +1733,7 @@
   "line": 825,
   "it": "Solo il proprietario puo' vendere la casa.",
   "ctx": "Util_Send(playerid, -10270721, \"Solo il proprietario puo' vendere la casa.\");",
-  "ka": ""
+  "ka": "სახლის გაყიდვა მხოლოდ მფლობელს შეუძლია."
  },
  {
   "id": 1507,
@@ -1741,7 +1741,7 @@
   "line": 830,
   "it": "Devi essere dentro la casa o davanti alla sua porta.",
   "ctx": "Util_Send(playerid, -10270721, \"Devi essere dentro la casa o davanti alla sua porta.\");",
-  "ka": ""
+  "ka": "სახლში ან მის კართან უნდა იყო."
  },
  {
   "id": 1508,
@@ -1749,7 +1749,7 @@
   "line": 835,
   "it": "Non puoi vendere la casa con bollette non pagate (/bollette).",
   "ctx": "Util_Send(playerid, -10270721, \"Non puoi vendere la casa con bollette non pagate (/bollette).\");",
-  "ka": ""
+  "ka": "გადაუხდელი კომუნალურებით სახლს ვერ გაყიდი (/bollette)."
  },
  {
   "id": 1509,
@@ -1757,7 +1757,7 @@
   "line": 841,
   "it": "Il tuo conto bancario non puo' ricevere l'importo: vendita rifiutata.",
   "ctx": "Util_Send(playerid, -10270721, \"Il tuo conto bancario non puo' ricevere l'importo: vendita rifiutata.\");",
-  "ka": ""
+  "ka": "შენი საბანკო ანგარიში თანხას ვერ მიიღებს: გაყიდვა უარყოფილია."
  },
  {
   "id": 1510,
@@ -1765,7 +1765,7 @@
   "line": 846,
   "it": "Vendita casa %d: ricevi $%d (%d%%) in banca. Utenze, chiavi e frigo vengono azzerati.",
   "ctx": "SendClientMessage(playerid, -2994689, \"Vendita casa %d: ricevi $%d (%d%%) in banca. Utenze, chiavi e frigo vengono azzerati.\", g_HouseRows[idx][hrId], refund, 70);",
-  "ka": ""
+  "ka": "სახლის %d გაყიდვა: ბანკში მიიღებ $%d-ს (%d%%). კომუნალურები, გასაღებები და მაცივარი განულდება."
  },
  {
   "id": 1511,
@@ -1773,7 +1773,7 @@
   "line": 847,
   "it": "Per confermare: /casa vendi conferma",
   "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Per confermare: /casa vendi conferma\");",
-  "ka": ""
+  "ka": "დასადასტურებლად: /casa vendi conferma"
  },
  {
   "id": 1512,
@@ -1781,7 +1781,7 @@
   "line": 854,
   "it": "Vendita in corso...",
   "ctx": "Util_Send(playerid, -1, \"Vendita in corso...\");",
-  "ka": ""
+  "ka": "მიმდინარეობს გაყიდვა..."
  },
  {
   "id": 1513,
@@ -1789,7 +1789,7 @@
   "line": 897,
   "it": "Vendita non riuscita (errore database). Nessun accredito.",
   "ctx": "Util_Send(playerid, -10270721, \"Vendita non riuscita (errore database). Nessun accredito.\");",
-  "ka": ""
+  "ka": "გაყიდვა ვერ მოხერხდა (ბაზის შეცდომა). თანხა არ ჩაირიცხა."
  },
  {
   "id": 1514,
@@ -1797,7 +1797,7 @@
   "line": 902,
   "it": "Vendita non eseguita: la casa non risulta piu' di tua proprieta'. Nessun accredito.",
   "ctx": "Util_Send(playerid, -10270721, \"Vendita non eseguita: la casa non risulta piu' di tua proprieta'. Nessun accredito.\");",
-  "ka": ""
+  "ka": "გაყიდვა არ შესრულდა: სახლი აღარ არის შენი. თანხა არ ჩაირიცხა."
  },
  {
   "id": 1515,
@@ -1805,7 +1805,7 @@
   "line": 908,
   "it": "Vendita annullata: il conto bancario non puo' ricevere l'importo. Nessun accredito.",
   "ctx": "Util_Send(playerid, -10270721, \"Vendita annullata: il conto bancario non puo' ricevere l'importo. Nessun accredito.\");",
-  "ka": ""
+  "ka": "გაყიდვა გაუქმდა: საბანკო ანგარიში თანხას ვერ მიიღებს. თანხა არ ჩაირიცხა."
  },
  {
   "id": 1516,
@@ -1813,7 +1813,7 @@
   "line": 912,
   "it": "La casa e' stata venduta: sei stato portato fuori.",
   "ctx": "House_EvictAll(idx, \"La casa e' stata venduta: sei stato portato fuori.\");",
-  "ka": ""
+  "ka": "სახლი გაიყიდა: გარეთ გაგიყვანეს."
  },
  {
   "id": 1517,
@@ -1821,7 +1821,7 @@
   "line": 921,
   "it": "Hai venduto la casa %d: $%d accreditati in banca.",
   "ctx": "SendClientMessage(playerid, 0x66DD66FF, \"Hai venduto la casa %d: $%d accreditati in banca.\", houseId, refund);",
-  "ka": ""
+  "ka": "გაყიდე სახლი %d: $%d ჩაირიცხა ბანკში."
  },
  {
   "id": 1518,
@@ -1829,7 +1829,7 @@
   "line": 922,
   "it": "VENDITA %s: casa %d rimborso $%d",
   "ctx": "format(msg, 256, \"VENDITA %s: casa %d rimborso $%d\", name, houseId, refund);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 1519,
@@ -1837,7 +1837,7 @@
   "line": 931,
   "it": "Solo il proprietario puo' usare la serratura.",
   "ctx": "Util_Send(playerid, -10270721, \"Solo il proprietario puo' usare la serratura.\");",
-  "ka": ""
+  "ka": "საკეტის გამოყენება მხოლოდ მფლობელს შეუძლია."
  },
  {
   "id": 1520,
@@ -1845,7 +1845,7 @@
   "line": 936,
   "it": "Devi essere dentro la casa o davanti alla sua porta.",
   "ctx": "Util_Send(playerid, -10270721, \"Devi essere dentro la casa o davanti alla sua porta.\");",
-  "ka": ""
+  "ka": "სახლში ან მის კართან უნდა იყო."
  },
  {
   "id": 1521,
@@ -1853,7 +1853,7 @@
   "line": 942,
   "it": "Porta della casa %d: %s.",
   "ctx": "SendClientMessage(playerid, 0x66DD66FF, \"Porta della casa %d: %s.\", g_HouseRows[idx][hrId], g_HouseRows[idx][hrLocked] ? \"chiusa a chiave\" : \"aperta\");",
-  "ka": ""
+  "ka": "სახლის %d კარი: %s."
  },
  {
   "id": 1522,
@@ -1861,7 +1861,7 @@
   "line": 942,
   "it": "chiusa a chiave",
   "ctx": "SendClientMessage(playerid, 0x66DD66FF, \"Porta della casa %d: %s.\", g_HouseRows[idx][hrId], g_HouseRows[idx][hrLocked] ? \"chiusa a chiave\" : \"aperta\");",
-  "ka": ""
+  "ka": "ჩაკეტილია"
  },
  {
   "id": 1523,
@@ -1869,7 +1869,7 @@
   "line": 950,
   "it": "Devi essere dentro la casa.",
   "ctx": "Util_Send(playerid, -10270721, \"Devi essere dentro la casa.\");",
-  "ka": ""
+  "ka": "სახლში უნდა იყო."
  },
  {
   "id": 1524,
@@ -1877,7 +1877,7 @@
   "line": 956,
   "it": "Solo il proprietario puo' gestire il gas.",
   "ctx": "Util_Send(playerid, -10270721, utility == 1 ? \"Solo il proprietario puo' gestire il gas.\" : \"Non hai accesso alle utenze di questa casa.\");",
-  "ka": ""
+  "ka": "გაზს მხოლოდ მფლობელი მართავს."
  },
  {
   "id": 1525,
@@ -1885,7 +1885,7 @@
   "line": 956,
   "it": "Non hai accesso alle utenze di questa casa.",
   "ctx": "Util_Send(playerid, -10270721, utility == 1 ? \"Solo il proprietario puo' gestire il gas.\" : \"Non hai accesso alle utenze di questa casa.\");",
-  "ka": ""
+  "ka": "ამ სახლის კომუნალურებზე წვდომა არ გაქვს."
  },
  {
   "id": 1526,
@@ -1893,7 +1893,7 @@
   "line": 962,
   "it": "Utenza staccata per morosita': paga le bollette (/bollette).",
   "ctx": "Util_Send(playerid, -10270721, \"Utenza staccata per morosita': paga le bollette (/bollette).\");",
-  "ka": ""
+  "ka": "გადაუხდელობის გამო გათიშულია: გადაიხადე კომუნალური (/bollette)."
  },
  {
   "id": 1527,
@@ -1901,7 +1901,7 @@
   "line": 975,
   "it": "Gas",
   "ctx": "SendClientMessage(playerid, 0x66DD66FF, \"%s %s.\", utility == 1 ? \"Gas\" : \"Luce\", utility == 1 ? (on ? \"acceso\" : \"spento\") : (on ? \"accesa\" : \"spenta\"));",
-  "ka": ""
+  "ka": "გაზი"
  },
  {
   "id": 1528,
@@ -1909,7 +1909,7 @@
   "line": 975,
   "it": "Luce",
   "ctx": "SendClientMessage(playerid, 0x66DD66FF, \"%s %s.\", utility == 1 ? \"Gas\" : \"Luce\", utility == 1 ? (on ? \"acceso\" : \"spento\") : (on ? \"accesa\" : \"spenta\"));",
-  "ka": ""
+  "ka": "შუქი"
  },
  {
   "id": 1529,
@@ -1917,7 +1917,7 @@
   "line": 988,
   "it": "Devi essere dentro una casa.",
   "ctx": "Util_Send(playerid, -10270721, \"Devi essere dentro una casa.\");",
-  "ka": ""
+  "ka": "სახლში უნდა იყო."
  },
  {
   "id": 1530,
@@ -1925,7 +1925,7 @@
   "line": 1019,
   "it": "Devi essere dentro la tua casa (o di un amico che ti ha dato la chiave).",
   "ctx": "Util_Send(playerid, -10270721, \"Devi essere dentro la tua casa (o di un amico che ti ha dato la chiave).\");",
-  "ka": ""
+  "ka": "შენს სახლში უნდა იყო (ან მეგობრისაში, რომელმაც გასაღები მოგცა)."
  },
  {
   "id": 1531,
@@ -1933,7 +1933,7 @@
   "line": 1024,
   "it": "Non puoi usare il frigo di questa casa.",
   "ctx": "Util_Send(playerid, -10270721, \"Non puoi usare il frigo di questa casa.\");",
-  "ka": ""
+  "ka": "ამ სახლის მაცივარს ვერ გამოიყენებ."
  },
  {
   "id": 1532,
@@ -1941,7 +1941,7 @@
   "line": 1039,
   "it": "Qualcuno sta usando il frigo: attendi un attimo.",
   "ctx": "Util_Send(playerid, -10270721, \"Qualcuno sta usando il frigo: attendi un attimo.\");",
-  "ka": ""
+  "ka": "მაცივარს ვიღაც იყენებს: ცოტა დაელოდე."
  },
  {
   "id": 1533,
@@ -1949,7 +1949,7 @@
   "line": 1044,
   "it": "Il frigo e' vuoto.",
   "ctx": "Util_Send(playerid, -10270721, \"Il frigo e' vuoto.\");",
-  "ka": ""
+  "ka": "მაცივარი ცარიელია."
  },
  {
   "id": 1534,
@@ -1957,7 +1957,7 @@
   "line": 1049,
   "it": "Non hai fame.",
   "ctx": "Util_Send(playerid, -10270721, \"Non hai fame.\");",
-  "ka": ""
+  "ka": "არ გშია."
  },
  {
   "id": 1535,
@@ -1965,7 +1965,7 @@
   "line": 1055,
   "it": "Mangi qualcosa di freddo dal frigo. Sazieta': %d%%.",
   "ctx": "SendClientMessage(playerid, 0x66DD66FF, \"Mangi qualcosa di freddo dal frigo. Sazieta': %d%%.\", g_HPl[playerid][hpHunger]);",
-  "ka": ""
+  "ka": "მაცივრიდან რაღაც ცივს ჭამ. სიმაძღრე: %d%%."
  },
  {
   "id": 1536,
@@ -1973,7 +1973,7 @@
   "line": 1068,
   "it": "Stai gia' cucinando.",
   "ctx": "Util_Send(playerid, -10270721, \"Stai gia' cucinando.\");",
-  "ka": ""
+  "ka": "უკვე ამზადებ საჭმელს."
  },
  {
   "id": 1537,
@@ -1981,7 +1981,7 @@
   "line": 1073,
   "it": "Hai gia' un piatto caldo pronto: usa /mangia.",
   "ctx": "Util_Send(playerid, -10270721, \"Hai gia' un piatto caldo pronto: usa /mangia.\");",
-  "ka": ""
+  "ka": "ცხელი კერძი უკვე მზადაა: გამოიყენე /mangia."
  },
  {
   "id": 1538,
@@ -1989,7 +1989,7 @@
   "line": 1078,
   "it": "Il gas non e' attivo: non puoi cucinare.",
   "ctx": "Util_Send(playerid, -10270721, \"Il gas non e' attivo: non puoi cucinare.\");",
-  "ka": ""
+  "ka": "გაზი არ მუშაობს: საჭმელს ვერ მოამზადებ."
  },
  {
   "id": 1539,
@@ -1997,7 +1997,7 @@
   "line": 1083,
   "it": "Il frigo e' vuoto.",
   "ctx": "Util_Send(playerid, -10270721, \"Il frigo e' vuoto.\");",
-  "ka": ""
+  "ka": "მაცივარი ცარიელია."
  },
  {
   "id": 1540,
@@ -2005,7 +2005,7 @@
   "line": 1089,
   "it": "Inizi a cucinare...",
   "ctx": "Util_Send(playerid, -1, \"Inizi a cucinare...\");",
-  "ka": ""
+  "ka": "საჭმლის მომზადებას იწყებ..."
  },
  {
   "id": 1541,
@@ -2013,7 +2013,7 @@
   "line": 1107,
   "it": "Cottura annullata.",
   "ctx": "Util_Send(playerid, -10270721, \"Cottura annullata.\");",
-  "ka": ""
+  "ka": "მომზადება გაუქმდა."
  },
  {
   "id": 1542,
@@ -2021,7 +2021,7 @@
   "line": 1117,
   "it": "Il piatto e' pronto: usa /mangia entro %d minuti.",
   "ctx": "SendClientMessage(playerid, 0x66DD66FF, \"Il piatto e' pronto: usa /mangia entro %d minuti.\", 5);",
-  "ka": ""
+  "ka": "კერძი მზადაა: გამოიყენე /mangia %d წუთში."
  },
  {
   "id": 1543,
@@ -2029,7 +2029,7 @@
   "line": 1130,
   "it": "Non hai un piatto caldo pronto. Usa /cucina in casa oppure /mangia freddo.",
   "ctx": "Util_Send(playerid, -10270721, \"Non hai un piatto caldo pronto. Usa /cucina in casa oppure /mangia freddo.\");",
-  "ka": ""
+  "ka": "ცხელი კერძი არ გაქვს. გამოიყენე /cucina სახლში ან /mangia freddo."
  },
  {
   "id": 1544,
@@ -2037,7 +2037,7 @@
   "line": 1135,
   "it": "Non hai fame.",
   "ctx": "Util_Send(playerid, -10270721, \"Non hai fame.\");",
-  "ka": ""
+  "ka": "არ გშია."
  },
  {
   "id": 1545,
@@ -2045,7 +2045,7 @@
   "line": 1148,
   "it": "Mangi il piatto caldo. Sazieta': %d%%.",
   "ctx": "SendClientMessage(playerid, 0x66DD66FF, \"Mangi il piatto caldo. Sazieta': %d%%.\", g_HPl[playerid][hpHunger]);",
-  "ka": ""
+  "ka": "ცხელ კერძს ჭამ. სიმაძღრე: %d%%."
  },
  {
   "id": 1546,
@@ -2053,7 +2053,7 @@
   "line": 1157,
   "it": "Puoi riporre la spesa solo nel frigo di casa tua.",
   "ctx": "Util_Send(playerid, -10270721, \"Puoi riporre la spesa solo nel frigo di casa tua.\");",
-  "ka": ""
+  "ka": "პროდუქტების შენახვა მხოლოდ შენი სახლის მაცივარში შეგიძლია."
  },
  {
   "id": 1547,
@@ -2061,7 +2061,7 @@
   "line": 1162,
   "it": "Qualcuno sta usando il frigo: attendi un attimo.",
   "ctx": "Util_Send(playerid, -10270721, \"Qualcuno sta usando il frigo: attendi un attimo.\");",
-  "ka": ""
+  "ka": "მაცივარს ვიღაც იყენებს: ცოტა დაელოდე."
  },
  {
   "id": 1548,
@@ -2069,7 +2069,7 @@
   "line": 1167,
   "it": "Non hai tutta quella spesa con te.",
   "ctx": "Util_Send(playerid, -10270721, \"Non hai tutta quella spesa con te.\");",
-  "ka": ""
+  "ka": "ამდენი პროდუქტი თან არ გაქვს."
  },
  {
   "id": 1549,
@@ -2077,6 +2077,6 @@
   "line": 1173,
   "it": "Nel frigo c'e' posto solo per altre %d porzioni.",
   "ctx": "SendClientMessage(playerid, -10270721, \"Nel frigo c'e' posto solo per altre %d porzioni.\", cap - g_HouseRows[idx][hrFridgeUnits]);",
-  "ka": ""
+  "ka": "მაცივარში კიდევ მხოლოდ %d ულუფის ადგილია."
  }
 ]

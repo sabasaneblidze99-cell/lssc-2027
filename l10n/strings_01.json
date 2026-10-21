@@ -5,7 +5,7 @@
   "line": 223,
   "it": "Uso: /ame azione",
   "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Uso: /ame azione\");",
-  "ka": ""
+  "ka": "გამოყენება: /ame მოქმედება"
  },
  {
   "id": 2046,
@@ -13,7 +13,7 @@
   "line": 241,
   "it": "Uso: /pay id importo",
   "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Uso: /pay id importo\");",
-  "ka": ""
+  "ka": "გამოყენება: /pay id თანხა"
  },
  {
   "id": 2047,
@@ -21,7 +21,7 @@
   "line": 246,
   "it": "Devi essere almeno al livello %d per usare /pay.",
   "ctx": "SendClientMessage(playerid, -10270721, \"Devi essere almeno al livello %d per usare /pay.\", 2);",
-  "ka": ""
+  "ka": "/pay-ის გამოსაყენებლად მინიმუმ %d დონე გჭირდება."
  },
  {
   "id": 2048,
@@ -29,7 +29,7 @@
   "line": 251,
   "it": "Importo non valido (%d-%d).",
   "ctx": "SendClientMessage(playerid, -10270721, \"Importo non valido (%d-%d).\", 1, 50000);",
-  "ka": ""
+  "ka": "არასწორი თანხა (%d-%d)."
  },
  {
   "id": 2049,
@@ -37,7 +37,7 @@
   "line": 256,
   "it": "Giocatore non valido.",
   "ctx": "Util_Send(playerid, -10270721, \"Giocatore non valido.\");",
-  "ka": ""
+  "ka": "არასწორი მოთამაშე."
  },
  {
   "id": 2050,
@@ -45,7 +45,7 @@
   "line": 261,
   "it": "Sei troppo lontano.",
   "ctx": "Util_Send(playerid, -10270721, \"Sei troppo lontano.\");",
-  "ka": ""
+  "ka": "ძალიან შორს ხარ."
  },
  {
   "id": 2051,
@@ -53,7 +53,7 @@
   "line": 267,
   "it": "Non hai abbastanza contanti.",
   "ctx": "Util_Send(playerid, -10270721, \"Non hai abbastanza contanti.\");",
-  "ka": ""
+  "ka": "საკმარისი ნაღდი ფული არ გაქვს."
  },
  {
   "id": 2052,
@@ -61,7 +61,7 @@
   "line": 272,
   "it": "Il destinatario non puo' ricevere questa somma.",
   "ctx": "Util_Send(playerid, -10270721, \"Il destinatario non puo' ricevere questa somma.\");",
-  "ka": ""
+  "ka": "მიმღები ამ თანხას ვერ მიიღებს."
  },
  {
   "id": 2053,
@@ -69,7 +69,7 @@
   "line": 280,
   "it": "Hai consegnato $%d a %s.",
   "ctx": "SendClientMessage(playerid, 0x66DD66FF, \"Hai consegnato $%d a %s.\", amount, tn);",
-  "ka": ""
+  "ka": "$%d გადაეცი %s-ს."
  },
  {
   "id": 2054,
@@ -77,7 +77,7 @@
   "line": 281,
   "it": "Hai ricevuto $%d da %s.",
   "ctx": "SendClientMessage(targetid, 0x66DD66FF, \"Hai ricevuto $%d da %s.\", amount, sn);",
-  "ka": ""
+  "ka": "$%d მიიღე %s-სგან."
  },
  {
   "id": 2055,
@@ -85,7 +85,7 @@
   "line": 282,
   "it": "* %s consegna del denaro a %s",
   "ctx": "format(msg, 256, \"* %s consegna del denaro a %s\", sn, tn);",
-  "ka": ""
+  "ka": "* %s ფულს აწვდის %s-ს"
  },
  {
   "id": 2056,
@@ -93,7 +93,7 @@
   "line": 409,
   "it": "--- Statistiche di %s ---",
   "ctx": "SendClientMessage(playerid, -2994689, \"--- Statistiche di %s ---\", name);",
-  "ka": ""
+  "ka": "--- %s-ის სტატისტიკა ---"
  },
  {
   "id": 2057,
@@ -101,7 +101,7 @@
   "line": 412,
   "it": "Livello: %d (massimo)  Exp totale: %d",
   "ctx": "SendClientMessage(playerid, -1, \"Livello: %d (massimo)  Exp totale: %d\", level, exp);",
-  "ka": ""
+  "ka": "დონე: %d (მაქსიმალური)  სულ Exp: %d"
  },
  {
   "id": 2058,
@@ -109,7 +109,7 @@
   "line": 416,
   "it": "Livello: %d  Exp: %d/%d",
   "ctx": "SendClientMessage(playerid, -1, \"Livello: %d  Exp: %d/%d\", level, exp - Level_ExpForLevel(level), Level_StepExp(level));",
-  "ka": ""
+  "ka": "დონე: %d  Exp: %d/%d"
  },
  {
   "id": 2059,
@@ -117,7 +117,7 @@
   "line": 418,
   "it": "Contanti: $%d  Banca: $%d",
   "ctx": "SendClientMessage(playerid, -1, \"Contanti: $%d  Banca: $%d\", gPlayer[playerid][pMoney], gPlayer[playerid][pBank]);",
-  "ka": ""
+  "ka": "ნაღდი: $%d  ბანკი: $%d"
  },
  {
   "id": 2060,
@@ -125,7 +125,7 @@
   "line": 421,
   "it": "Ore di gioco: sessione %dh %02dm, totali %dh %02dm",
   "ctx": "SendClientMessage(playerid, -1, \"Ore di gioco: sessione %dh %02dm, totali %dh %02dm\", played / 3600000, played % 3600000 / 60000, total / 3600000, total % 3600000 / 60000);",
-  "ka": ""
+  "ka": "ნათამაშები: სესია %dს %02dწ, სულ %dს %02dწ"
  },
  {
   "id": 2061,
@@ -133,7 +133,7 @@
   "line": 427,
   "it": "Prossimo stipendio tra: %d min %02d s (%d $ in banca)",
   "ctx": "SendClientMessage(playerid, -1, \"Prossimo stipendio tra: %d min %02d s (%d $ in banca)\", remainSec / 60, remainSec % 60, Economy_PaycheckAmount(level));",
-  "ka": ""
+  "ka": "შემდეგი ხელფასი: %d წთ %02d წმ (%d $ ბანკში)"
  },
  {
   "id": 2062,
@@ -141,7 +141,7 @@
   "line": 441,
   "it": "--- Giocatori online (%d) ---",
   "ctx": "SendClientMessage(playerid, -2994689, \"--- Giocatori online (%d) ---\", total);",
-  "ka": ""
+  "ka": "--- ონლაინ მოთამაშეები (%d) ---"
  },
  {
   "id": 2063,
@@ -149,7 +149,7 @@
   "line": 455,
   "it": "... e altri %d giocatori.",
   "ctx": "SendClientMessage(playerid, -1, \"... e altri %d giocatori.\", total - shown);",
-  "ka": ""
+  "ka": "... და კიდევ %d მოთამაშე."
  },
  {
   "id": 2064,
@@ -157,7 +157,7 @@
   "line": 462,
   "it": "--- Comandi ---",
   "ctx": "SendClientMessage(playerid, -2994689, \"--- Comandi ---\");",
-  "ka": ""
+  "ka": "--- ბრძანებები ---"
  },
  {
   "id": 2065,
@@ -165,7 +165,7 @@
   "line": 463,
   "it": "/me azione · /do descrizione · /try azione · /ame azione",
   "ctx": "Util_Send(playerid, 0x99CCFFFF, \"/me azione · /do descrizione · /try azione · /ame azione\");",
-  "ka": ""
+  "ka": "/me მოქმედება · /do აღწერა · /try მოქმედება · /ame მოქმედება"
  },
  {
   "id": 2066,
@@ -173,7 +173,7 @@
   "line": 464,
   "it": "/b testo (chat OOC locale)",
   "ctx": "Util_Send(playerid, 0x99CCFFFF, \"/b testo (chat OOC locale)\");",
-  "ka": ""
+  "ka": "/b ტექსტი (ლოკალური OOC ჩატი)"
  },
  {
   "id": 2067,
@@ -181,7 +181,7 @@
   "line": 465,
   "it": "/pay id importo · /stats · /who · /report testo",
   "ctx": "Util_Send(playerid, 0x99CCFFFF, \"/pay id importo · /stats · /who · /report testo\");",
-  "ka": ""
+  "ka": "/pay id თანხა · /stats · /who · /report ტექსტი"
  },
  {
   "id": 2068,
@@ -189,7 +189,7 @@
   "line": 466,
   "it": "/v lock|engine|lights|park|find|list|sell|recover · /refuel [litri] · /concessionario",
   "ctx": "Util_Send(playerid, 0x99CCFFFF, \"/v lock|engine|lights|park|find|list|sell|recover · /refuel [litri] · /concessionario\");",
-  "ka": ""
+  "ka": "/v lock|engine|lights|park|find|list|sell|recover · /refuel [ლიტრი] · /concessionario"
  },
  {
   "id": 2069,
@@ -197,7 +197,7 @@
   "line": 467,
   "it": "/casa [info|compra|vendi|serratura|chiave|chiavi|revoca] · /entra · /esci · /bussa · /luce · /gas",
   "ctx": "Util_Send(playerid, 0x99CCFFFF, \"/casa [info|compra|vendi|serratura|chiave|chiavi|revoca] · /entra · /esci · /bussa · /luce · /gas\");",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 2070,
@@ -205,7 +205,7 @@
   "line": 468,
   "it": "/frigo [metti|prendi n] · /cucina · /mangia [freddo] · /bollette",
   "ctx": "Util_Send(playerid, 0x99CCFFFF, \"/frigo [metti|prendi n] · /cucina · /mangia [freddo] · /bollette\");",
-  "ka": ""
+  "ka": "/frigo [metti|prendi n] · /cucina · /mangia [freddo] · /bollette"
  },
  {
   "id": 2071,
@@ -213,7 +213,7 @@
   "line": 469,
   "it": "Inventario: /inventario (/inv) · /usa oggetto · /dai id oggetto [q] · /getta oggetto [q] · /prendi · /documento [id|richiedi]",
   "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Inventario: /inventario (/inv) · /usa oggetto · /dai id oggetto [q] · /getta oggetto [q] · /prendi · /documento [id|richiedi]\");",
-  "ka": ""
+  "ka": "ინვენტარი: /inventario (/inv) · /usa ნივთი · /dai id ნივთი [რ] · /getta ნივთი [რ] · /prendi · /documento [id|richiedi]"
  },
  {
   "id": 2072,
@@ -221,7 +221,7 @@
   "line": 470,
   "it": "Banca (vicino a un ATM o sportello): /atm (menu) · /banca (solo sportello) · /saldo (ovunque) · /deposita importo · /preleva importo · /bonifico id|nome importo · /estratto",
   "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Banca (vicino a un ATM o sportello): /atm (menu) · /banca (solo sportello) · /saldo (ovunque) · /deposita importo · /preleva importo · /bonifico id|nome importo · /est",
-  "ka": ""
+  "ka": "ბანკი (ATM-თან ან სალაროსთან): /atm (მენიუ) · /banca (მხოლოდ სალარო) · /saldo (ყველგან) · /deposita თანხა · /preleva თანხა · /bonifico id|სახელი თანხა · /estratto"
  },
  {
   "id": 2073,
@@ -229,7 +229,7 @@
   "line": 471,
   "it": "Storia: /storia (la tua) · /storia imposta (una volta, se non l'hai scelta) · /mostrastoria id (a chi ti sta vicino)",
   "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Storia: /storia (la tua) · /storia imposta (una volta, se non l'hai scelta) · /mostrastoria id (a chi ti sta vicino)\");",
-  "ka": ""
+  "ka": "ისტორია: /storia (შენი) · /storia imposta (ერთხელ, თუ ჯერ არ აგირჩევია) · /mostrastoria id (ახლოს მყოფს)"
  },
  {
   "id": 2074,
@@ -237,7 +237,7 @@
   "line": 474,
   "it": "Staff: /storia id (legge la storia di un giocatore, registrato in admin_log)",
   "ctx": "Util_Send(playerid, -5963521, \"Staff: /storia id (legge la storia di un giocatore, registrato in admin_log)\");",
-  "ka": ""
+  "ka": "ადმინისტრაცია: /storia id (მოთამაშის ისტორიის ნახვა, იწერება admin_log-ში)"
  },
  {
   "id": 2075,
@@ -245,7 +245,7 @@
   "line": 476,
   "it": "Supermercato: /compra [cibo|pasto|acqua|snack|kit|benda|sigarette|accendino|telefono|zaino] [n]",
   "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Supermercato: /compra [cibo|pasto|acqua|snack|kit|benda|sigarette|accendino|telefono|zaino] [n]\");",
-  "ka": ""
+  "ka": "სუპერმარკეტი: /compra [cibo|pasto|acqua|snack|kit|benda|sigarette|accendino|telefono|zaino] [n]"
  },
  {
   "id": 2076,
@@ -253,7 +253,7 @@
   "line": 477,
   "it": "Lavori: /lavoro [info|prendi|lascia] (Job Center, piazza City Hall) · /inizia · /fine · /multe",
   "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Lavori: /lavoro [info|prendi|lascia] (Job Center, piazza City Hall) · /inizia · /fine · /multe\");",
-  "ka": ""
+  "ka": "სამსახური: /lavoro [info|prendi|lascia] (Job Center, City Hall-ის მოედანი) · /inizia · /fine · /multe"
  },
  {
   "id": 2077,
@@ -261,7 +261,7 @@
   "line": 478,
   "it": "Citta': /contratti (bacheca) · /contratto [abbandona] · /reputazione · /quartiere [nome] · /contribuisci importo · /aiuto [off] · /telefono",
   "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Citta': /contratti (bacheca) · /contratto [abbandona] · /reputazione · /quartiere [nome] · /contribuisci importo · /aiuto [off] · /telefono\");",
-  "ka": ""
+  "ka": "ქალაქი: /contratti (დაფა) · /contratto [abbandona] · /reputazione · /quartiere [სახელი] · /contribuisci თანხა · /aiuto [off] · /telefono"
  },
  {
   "id": 2078,
@@ -269,7 +269,7 @@
   "line": 479,
   "it": "Noleggio (Pershing Sq.): /noleggio · /riconsegna  ·  Taxi (deposito Unity): /taxi on|off · /accettacorsa [id] · /tassametro start|stop · /chiamataxi",
   "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Noleggio (Pershing Sq.): /noleggio · /riconsegna  ·  Taxi (deposito Unity): /taxi on|off · /accettacorsa [id] · /tassametro start|stop · /chiamataxi\");",
-  "ka": ""
+  "ka": "ქირაობა (Pershing Sq.): /noleggio · /riconsegna  ·  ტაქსი (Unity-ის დეპო): /taxi on|off · /accettacorsa [id] · /tassametro start|stop · /chiamataxi"
  },
  {
   "id": 2079,
@@ -277,7 +277,7 @@
   "line": 482,
   "it": "Staff: /ldset (valori dei quartieri per test, registrato in admin_log)",
   "ctx": "Util_Send(playerid, -5963521, \"Staff: /ldset (valori dei quartieri per test, registrato in admin_log)\");",
-  "ka": ""
+  "ka": "ადმინისტრაცია: /ldset (უბნების მნიშვნელობები ტესტისთვის, იწერება admin_log-ში)"
  },
  {
   "id": 2080,
@@ -285,7 +285,7 @@
   "line": 487,
   "it": "Staff: /setfazione id|Nome_Cognome fazione(0-2) grado(1-6)",
   "ctx": "Util_Send(playerid, -5963521, \"Staff: /setfazione id|Nome_Cognome fazione(0-2) grado(1-6)\");",
-  "ka": ""
+  "ka": "ადმინისტრაცია: /setfazione id|სახელი_გვარი ფრაქცია(0-2) წოდება(1-6)"
  },
  {
   "id": 2081,
@@ -293,7 +293,7 @@
   "line": 498,
   "it": "Uso: /report testo",
   "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Uso: /report testo\");",
-  "ka": ""
+  "ka": "გამოყენება: /report ტექსტი"
  },
  {
   "id": 2082,
@@ -301,7 +301,7 @@
   "line": 504,
   "it": "Attendi ancora %d secondi prima di un nuovo report.",
   "ctx": "SendClientMessage(playerid, -10270721, \"Attendi ancora %d secondi prima di un nuovo report.\", (30000 - elapsed + 1000 - 1) / 1000);",
-  "ka": ""
+  "ka": "ახალ რეპორტამდე მოიცადე კიდევ %d წამი."
  },
  {
   "id": 2083,
@@ -309,7 +309,7 @@
   "line": 509,
   "it": "[REPORT] %s [%d]: %s",
   "ctx": "format(msg, 256, \"[REPORT] %s [%d]: %s\", name, playerid, text);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 2084,
@@ -317,7 +317,7 @@
   "line": 521,
   "it": "Nessun membro dello staff e' online: il report non e' stato inviato.",
   "ctx": "Util_Send(playerid, -10270721, \"Nessun membro dello staff e' online: il report non e' stato inviato.\");",
-  "ka": ""
+  "ka": "ადმინისტრაციიდან ონლაინ არავინაა: რეპორტი არ გაიგზავნა."
  },
  {
   "id": 2085,
@@ -325,7 +325,7 @@
   "line": 526,
   "it": "Report inviato allo staff.",
   "ctx": "Util_Send(playerid, 0x66DD66FF, \"Report inviato allo staff.\");",
-  "ka": ""
+  "ka": "რეპორტი ადმინისტრაციას გაეგზავნა."
  },
  {
   "id": 2086,
@@ -333,7 +333,7 @@
   "line": 633,
   "it": "Uso: /usa [oggetto] (pasto, acqua, snack, kit, benda, sigarette, telefono, documento)",
   "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Uso: /usa [oggetto] (pasto, acqua, snack, kit, benda, sigarette, telefono, documento)\");",
-  "ka": ""
+  "ka": "გამოყენება: /usa [ნივთი] (pasto, acqua, snack, kit, benda, sigarette, telefono, documento)"
  },
  {
   "id": 1954,
@@ -341,7 +341,7 @@
   "line": 73,
   "it": "[STAFF]",
   "ctx": "if (Chat_Prefix(text, s, \"[STAFF]\") || Chat_Prefix(text, s, \"[ADMIN\") || Chat_Prefix(text, s, \"AdmCmd\") || Chat_Prefix(text, s, \"[REPORT\"))",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 1955,
@@ -349,7 +349,7 @@
   "line": 73,
   "it": "[ADMIN",
   "ctx": "if (Chat_Prefix(text, s, \"[STAFF]\") || Chat_Prefix(text, s, \"[ADMIN\") || Chat_Prefix(text, s, \"AdmCmd\") || Chat_Prefix(text, s, \"[REPORT\"))",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 1956,
@@ -357,7 +357,7 @@
   "line": 73,
   "it": "AdmCmd",
   "ctx": "if (Chat_Prefix(text, s, \"[STAFF]\") || Chat_Prefix(text, s, \"[ADMIN\") || Chat_Prefix(text, s, \"AdmCmd\") || Chat_Prefix(text, s, \"[REPORT\"))",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 1957,
@@ -365,7 +365,7 @@
   "line": 73,
   "it": "[REPORT",
   "ctx": "if (Chat_Prefix(text, s, \"[STAFF]\") || Chat_Prefix(text, s, \"[ADMIN\") || Chat_Prefix(text, s, \"AdmCmd\") || Chat_Prefix(text, s, \"[REPORT\"))",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 1958,
@@ -373,7 +373,7 @@
   "line": 77,
   "it": "[RADIO]",
   "ctx": "if (Chat_Prefix(text, s, \"[RADIO]\") || Chat_Prefix(text, s, \"[DIP]\") || Chat_Prefix(text, s, \"[FAZIONE\"))",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 1959,
@@ -381,7 +381,7 @@
   "line": 77,
   "it": "[DIP]",
   "ctx": "if (Chat_Prefix(text, s, \"[RADIO]\") || Chat_Prefix(text, s, \"[DIP]\") || Chat_Prefix(text, s, \"[FAZIONE\"))",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 1960,
@@ -389,7 +389,7 @@
   "line": 77,
   "it": "[FAZIONE",
   "ctx": "if (Chat_Prefix(text, s, \"[RADIO]\") || Chat_Prefix(text, s, \"[DIP]\") || Chat_Prefix(text, s, \"[FAZIONE\"))",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 1961,
@@ -397,7 +397,7 @@
   "line": 89,
   "it": "[LAVORO]",
   "ctx": "if (Chat_Prefix(text, s, \"[LAVORO]\") || Chat_Prefix(text, s, \"[TAXI]\") || Chat_Prefix(text, s, \"[CONTRATTO\"))",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 1962,
@@ -405,7 +405,7 @@
   "line": 89,
   "it": "[TAXI]",
   "ctx": "if (Chat_Prefix(text, s, \"[LAVORO]\") || Chat_Prefix(text, s, \"[TAXI]\") || Chat_Prefix(text, s, \"[CONTRATTO\"))",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 1963,
@@ -413,7 +413,7 @@
   "line": 89,
   "it": "[CONTRATTO",
   "ctx": "if (Chat_Prefix(text, s, \"[LAVORO]\") || Chat_Prefix(text, s, \"[TAXI]\") || Chat_Prefix(text, s, \"[CONTRATTO\"))",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 154,
@@ -421,7 +421,7 @@
   "line": 52,
   "it": "NULL",
   "ctx": "strcat(target, \"NULL\", 16);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 155,
@@ -429,7 +429,7 @@
   "line": 135,
   "it": "NULL",
   "ctx": "strcat(accStr, \"NULL\", 16);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 156,
@@ -437,7 +437,7 @@
   "line": 139,
   "it": "UNIX_TIMESTAMP() + %d",
   "ctx": "format(expStr, 48, \"UNIX_TIMESTAMP() + %d\", min(minutes, 5256000) * 60);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 157,
@@ -445,7 +445,7 @@
   "line": 143,
   "it": "NULL",
   "ctx": "strcat(expStr, \"NULL\", 48);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 158,
@@ -453,7 +453,7 @@
   "line": 587,
   "it": "undo banca op %s%s: esito %d%s",
   "ctx": "format(msg, 126, \"undo banca op %s%s: esito %d%s\", opId, notify ? \"\" : \" (compensazione a sessione scaduta)\", result, result == 1 ? \"\" : \" ANOMALIA: verificare a mano\");",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 159,
@@ -461,7 +461,7 @@
   "line": 587,
   "it": " (compensazione a sessione scaduta)",
   "ctx": "format(msg, 126, \"undo banca op %s%s: esito %d%s\", opId, notify ? \"\" : \" (compensazione a sessione scaduta)\", result, result == 1 ? \"\" : \" ANOMALIA: verificare a mano\");",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 160,
@@ -469,7 +469,7 @@
   "line": 587,
   "it": " ANOMALIA: verificare a mano",
   "ctx": "format(msg, 126, \"undo banca op %s%s: esito %d%s\", opId, notify ? \"\" : \" (compensazione a sessione scaduta)\", result, result == 1 ? \"\" : \" ANOMALIA: verificare a mano\");",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 161,
@@ -477,7 +477,7 @@
   "line": 244,
   "it": "%s casa %d (owner %d) a sessione scaduta: righe=%d%s",
   "ctx": "format(msg, 128, \"%s casa %d (owner %d) a sessione scaduta: righe=%d%s\", what == 1 ? \"rollback acquisto\" : (what == 2 ? \"ripristino vendita\" : \"annullo pagamento bollette\"), houseId, ownerId, cache_af",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 162,
@@ -485,7 +485,7 @@
   "line": 244,
   "it": "rollback acquisto",
   "ctx": "format(msg, 128, \"%s casa %d (owner %d) a sessione scaduta: righe=%d%s\", what == 1 ? \"rollback acquisto\" : (what == 2 ? \"ripristino vendita\" : \"annullo pagamento bollette\"), houseId, ownerId, cache_af",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 163,
@@ -493,7 +493,7 @@
   "line": 244,
   "it": "ripristino vendita",
   "ctx": "format(msg, 128, \"%s casa %d (owner %d) a sessione scaduta: righe=%d%s\", what == 1 ? \"rollback acquisto\" : (what == 2 ? \"ripristino vendita\" : \"annullo pagamento bollette\"), houseId, ownerId, cache_af",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 164,
@@ -501,7 +501,7 @@
   "line": 244,
   "it": "annullo pagamento bollette",
   "ctx": "format(msg, 128, \"%s casa %d (owner %d) a sessione scaduta: righe=%d%s\", what == 1 ? \"rollback acquisto\" : (what == 2 ? \"ripristino vendita\" : \"annullo pagamento bollette\"), houseId, ownerId, cache_af",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 165,
@@ -509,7 +509,7 @@
   "line": 244,
   "it": " ANOMALIA: verificare a mano",
   "ctx": "format(msg, 128, \"%s casa %d (owner %d) a sessione scaduta: righe=%d%s\", what == 1 ? \"rollback acquisto\" : (what == 2 ? \"ripristino vendita\" : \"annullo pagamento bollette\"), houseId, ownerId, cache_af",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 166,
@@ -517,7 +517,7 @@
   "line": 357,
   "it": "IFNULL(h.int_game, -1) AS int_game, IFNULL(h.int_x, 0) AS int_x, IFNULL(h.int_y, 0) AS int_y, IFNULL(h.int_z, 0) AS int_z",
   "ctx": "mysql_format(g_DB, query, sizeof query, \"SELECT h.id, %s, IFNULL(h.owner_id, 0) AS owner_id, IFNULL(a.name, '') AS owner_name, h.tier, h.interior_idx, h.ext_x, h.ext_y, h.ext_z, h.ext_a, h.price, IFNU",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 167,
@@ -525,7 +525,7 @@
   "line": 357,
   "it": "-1 AS int_game, 0 AS int_x, 0 AS int_y, 0 AS int_z",
   "ctx": "mysql_format(g_DB, query, sizeof query, \"SELECT h.id, %s, IFNULL(h.owner_id, 0) AS owner_id, IFNULL(a.name, '') AS owner_name, h.tier, h.interior_idx, h.ext_x, h.ext_y, h.ext_z, h.ext_a, h.price, IFNU",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 168,
@@ -533,7 +533,7 @@
   "line": 505,
   "it": "undo inventario op %s%s: esito %d%s",
   "ctx": "format(msg, 112, \"undo inventario op %s%s: esito %d%s\", opId, notify ? \"\" : \" (compensazione a sessione scaduta)\", result, result == 1 ? \"\" : \" ANOMALIA: verificare a mano\");",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 169,
@@ -541,7 +541,7 @@
   "line": 505,
   "it": " (compensazione a sessione scaduta)",
   "ctx": "format(msg, 112, \"undo inventario op %s%s: esito %d%s\", opId, notify ? \"\" : \" (compensazione a sessione scaduta)\", result, result == 1 ? \"\" : \" ANOMALIA: verificare a mano\");",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 170,
@@ -549,7 +549,7 @@
   "line": 505,
   "it": " ANOMALIA: verificare a mano",
   "ctx": "format(msg, 112, \"undo inventario op %s%s: esito %d%s\", opId, notify ? \"\" : \" (compensazione a sessione scaduta)\", result, result == 1 ? \"\" : \" ANOMALIA: verificare a mano\");",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 171,
@@ -557,7 +557,7 @@
   "line": 57,
   "it": "%s (char %d, id %d) a sessione scaduta: righe=%d%s",
   "ctx": "format(msg, 128, \"%s (char %d, id %d) a sessione scaduta: righe=%d%s\", kind == 1 ? \"rollback payout lavoro\" : \"rollback multa\", charId, id, cache_affected_rows(), cache_affected_rows() >= 1 ? \"\" : \" A",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 172,
@@ -565,7 +565,7 @@
   "line": 57,
   "it": "rollback payout lavoro",
   "ctx": "format(msg, 128, \"%s (char %d, id %d) a sessione scaduta: righe=%d%s\", kind == 1 ? \"rollback payout lavoro\" : \"rollback multa\", charId, id, cache_affected_rows(), cache_affected_rows() >= 1 ? \"\" : \" A",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 173,
@@ -573,7 +573,7 @@
   "line": 57,
   "it": "rollback multa",
   "ctx": "format(msg, 128, \"%s (char %d, id %d) a sessione scaduta: righe=%d%s\", kind == 1 ? \"rollback payout lavoro\" : \"rollback multa\", charId, id, cache_affected_rows(), cache_affected_rows() >= 1 ? \"\" : \" A",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 174,
@@ -581,7 +581,7 @@
   "line": 57,
   "it": " ANOMALIA: verificare a mano",
   "ctx": "format(msg, 128, \"%s (char %d, id %d) a sessione scaduta: righe=%d%s\", kind == 1 ? \"rollback payout lavoro\" : \"rollback multa\", charId, id, cache_affected_rows(), cache_affected_rows() >= 1 ? \"\" : \" A",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 175,
@@ -589,7 +589,7 @@
   "line": 508,
   "it": "grado %d",
   "ctx": "format(detail, 65, \"grado %d\", rank);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 176,
@@ -597,7 +597,7 @@
   "line": 1105,
   "it": "MONEY_MAX",
   "ctx": "DB_LdCfgAdd(q, 1024, \"MONEY_MAX\", 0x3B9ACA00);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 177,
@@ -605,7 +605,7 @@
   "line": 1106,
   "it": "LD_WORK_HOURLY_CAP",
   "ctx": "DB_LdCfgAdd(q, 1024, \"LD_WORK_HOURLY_CAP\", 2800);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 178,
@@ -613,7 +613,7 @@
   "line": 1107,
   "it": "LD_MIN_LEVEL",
   "ctx": "DB_LdCfgAdd(q, 1024, \"LD_MIN_LEVEL\", 2);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 179,
@@ -621,7 +621,7 @@
   "line": 1108,
   "it": "LD_TICK_MS",
   "ctx": "DB_LdCfgAdd(q, 1024, \"LD_TICK_MS\", 600000);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 180,
@@ -629,7 +629,7 @@
   "line": 1109,
   "it": "LD_TICK_CATCHUP_MAX",
   "ctx": "DB_LdCfgAdd(q, 1024, \"LD_TICK_CATCHUP_MAX\", 144);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 181,
@@ -637,7 +637,7 @@
   "line": 1110,
   "it": "LD_TICK_DIV",
   "ctx": "DB_LdCfgAdd(q, 1024, \"LD_TICK_DIV\", 20);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 182,
@@ -645,7 +645,7 @@
   "line": 1111,
   "it": "LD_TICK_MIN_STEP",
   "ctx": "DB_LdCfgAdd(q, 1024, \"LD_TICK_MIN_STEP\", 1);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 183,
@@ -653,7 +653,7 @@
   "line": 1112,
   "it": "LD_ACT_MAX",
   "ctx": "DB_LdCfgAdd(q, 1024, \"LD_ACT_MAX\", 1000);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 184,
@@ -661,7 +661,7 @@
   "line": 1113,
   "it": "LD_SEC_MAX",
   "ctx": "DB_LdCfgAdd(q, 1024, \"LD_SEC_MAX\", 100);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 185,
@@ -669,7 +669,7 @@
   "line": 1114,
   "it": "LD_CRIME_MAX",
   "ctx": "DB_LdCfgAdd(q, 1024, \"LD_CRIME_MAX\", 100);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 186,
@@ -677,7 +677,7 @@
   "line": 1115,
   "it": "LD_D1_ACT_BASE",
   "ctx": "DB_LdCfgAdd(q, 1024, \"LD_D1_ACT_BASE\", 500);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 187,
@@ -685,7 +685,7 @@
   "line": 1116,
   "it": "LD_D1_SEC_BASE",
   "ctx": "DB_LdCfgAdd(q, 1024, \"LD_D1_SEC_BASE\", 45);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 188,
@@ -693,7 +693,7 @@
   "line": 1117,
   "it": "LD_D1_CRIME_BASE",
   "ctx": "DB_LdCfgAdd(q, 1024, \"LD_D1_CRIME_BASE\", 50);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 189,
@@ -701,7 +701,7 @@
   "line": 1118,
   "it": "LD_D2_ACT_BASE",
   "ctx": "DB_LdCfgAdd(q, 1024, \"LD_D2_ACT_BASE\", 450);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 190,
@@ -709,7 +709,7 @@
   "line": 1119,
   "it": "LD_D2_SEC_BASE",
   "ctx": "DB_LdCfgAdd(q, 1024, \"LD_D2_SEC_BASE\", 35);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 191,
@@ -717,7 +717,7 @@
   "line": 1120,
   "it": "LD_D2_CRIME_BASE",
   "ctx": "DB_LdCfgAdd(q, 1024, \"LD_D2_CRIME_BASE\", 60);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 192,
@@ -725,7 +725,7 @@
   "line": 1121,
   "it": "LD_D3_ACT_BASE",
   "ctx": "DB_LdCfgAdd(q, 1024, \"LD_D3_ACT_BASE\", 500);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 193,
@@ -733,7 +733,7 @@
   "line": 1122,
   "it": "LD_D3_SEC_BASE",
   "ctx": "DB_LdCfgAdd(q, 1024, \"LD_D3_SEC_BASE\", 40);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 194,
@@ -741,7 +741,7 @@
   "line": 1123,
   "it": "LD_D3_CRIME_BASE",
   "ctx": "DB_LdCfgAdd(q, 1024, \"LD_D3_CRIME_BASE\", 55);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 195,
@@ -749,7 +749,7 @@
   "line": 1124,
   "it": "LD_ACT_DELIVERY_DEST",
   "ctx": "DB_LdCfgAdd(q, 1024, \"LD_ACT_DELIVERY_DEST\", 6);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 196,
@@ -757,7 +757,7 @@
   "line": 1125,
   "it": "LD_ACT_DELIVERY_ORIG",
   "ctx": "DB_LdCfgAdd(q, 1024, \"LD_ACT_DELIVERY_ORIG\", 3);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 197,
@@ -765,7 +765,7 @@
   "line": 1126,
   "it": "LD_ACT_RIDE",
   "ctx": "DB_LdCfgAdd(q, 1024, \"LD_ACT_RIDE\", 2);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 198,
@@ -773,7 +773,7 @@
   "line": 1127,
   "it": "LD_ACT_FAIL",
   "ctx": "DB_LdCfgAdd(q, 1024, \"LD_ACT_FAIL\", -3);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 199,
@@ -781,7 +781,7 @@
   "line": 1128,
   "it": "LD_ACT_HOURLY_GAIN_CAP",
   "ctx": "DB_LdCfgAdd(q, 1024, \"LD_ACT_HOURLY_GAIN_CAP\", 60);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 200,
@@ -789,7 +789,7 @@
   "line": 1129,
   "it": "LD_CRIME_EVENT",
   "ctx": "DB_LdCfgAdd(q, 1024, \"LD_CRIME_EVENT\", 5);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 201,
@@ -797,7 +797,7 @@
   "line": 1130,
   "it": "LD_SEC_CRIME_EVENT",
   "ctx": "DB_LdCfgAdd(q, 1024, \"LD_SEC_CRIME_EVENT\", -2);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 202,
@@ -805,7 +805,7 @@
   "line": 1131,
   "it": "LD_SEC_TICK_CRIME_AT",
   "ctx": "DB_LdCfgAdd(q, 1024, \"LD_SEC_TICK_CRIME_AT\", 40);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 203,
@@ -813,7 +813,7 @@
   "line": 1132,
   "it": "LD_ACT_MULT_MIN_PCT",
   "ctx": "DB_LdCfgAdd(q, 1024, \"LD_ACT_MULT_MIN_PCT\", 90);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 204,
@@ -821,7 +821,7 @@
   "line": 1133,
   "it": "LD_ACT_MULT_MAX_PCT",
   "ctx": "DB_LdCfgAdd(q, 1024, \"LD_ACT_MULT_MAX_PCT\", 110);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 205,
@@ -829,7 +829,7 @@
   "line": 1134,
   "it": "LD_CRIME_HAZARD_AT",
   "ctx": "DB_LdCfgAdd(q, 1024, \"LD_CRIME_HAZARD_AT\", 70);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 206,
@@ -837,7 +837,7 @@
   "line": 1135,
   "it": "LD_CRIME_HAZARD_PCT",
   "ctx": "DB_LdCfgAdd(q, 1024, \"LD_CRIME_HAZARD_PCT\", 10);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 207,
@@ -845,7 +845,7 @@
   "line": 1136,
   "it": "LD_DELIV_HOURLY_PER_CHAR",
   "ctx": "DB_LdCfgAdd(q, 1024, \"LD_DELIV_HOURLY_PER_CHAR\", 3);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 208,
@@ -853,7 +853,7 @@
   "line": 1137,
   "it": "LD_PAIR_LOCK_S",
   "ctx": "DB_LdCfgAdd(q, 1024, \"LD_PAIR_LOCK_S\", 1800);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 209,
@@ -861,7 +861,7 @@
   "line": 1138,
   "it": "LD_LOCALREP_MIN",
   "ctx": "DB_LdCfgAdd(q, 1024, \"LD_LOCALREP_MIN\", -50);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 210,
@@ -869,7 +869,7 @@
   "line": 1139,
   "it": "LD_LOCALREP_MAX",
   "ctx": "DB_LdCfgAdd(q, 1024, \"LD_LOCALREP_MAX\", 100);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 211,
@@ -877,7 +877,7 @@
   "line": 1140,
   "it": "LD_LOCALREP_PER_EVENT",
   "ctx": "DB_LdCfgAdd(q, 1024, \"LD_LOCALREP_PER_EVENT\", 2);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 212,
@@ -885,7 +885,7 @@
   "line": 1141,
   "it": "LD_REP_RECOVER_PER_EVENT",
   "ctx": "DB_LdCfgAdd(q, 1024, \"LD_REP_RECOVER_PER_EVENT\", 4);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 213,
@@ -893,7 +893,7 @@
   "line": 1142,
   "it": "LD_LOCALREP_DAY_CAP",
   "ctx": "DB_LdCfgAdd(q, 1024, \"LD_LOCALREP_DAY_CAP\", 10);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 214,
@@ -901,7 +901,7 @@
   "line": 1143,
   "it": "LD_PREMIUM_LOCALREP",
   "ctx": "DB_LdCfgAdd(q, 1024, \"LD_PREMIUM_LOCALREP\", 20);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 215,
@@ -909,7 +909,7 @@
   "line": 1144,
   "it": "LD_PREMIUM_PCT",
   "ctx": "DB_LdCfgAdd(q, 1024, \"LD_PREMIUM_PCT\", 20);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 216,
@@ -917,7 +917,7 @@
   "line": 1145,
   "it": "LD_REP_KNOWN",
   "ctx": "DB_LdCfgAdd(q, 1024, \"LD_REP_KNOWN\", 10);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 217,
@@ -925,7 +925,7 @@
   "line": 1146,
   "it": "LD_REP_HOME",
   "ctx": "DB_LdCfgAdd(q, 1024, \"LD_REP_HOME\", 40);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 218,
@@ -933,7 +933,7 @@
   "line": 1147,
   "it": "LD_DISC_KNOWN_PCT",
   "ctx": "DB_LdCfgAdd(q, 1024, \"LD_DISC_KNOWN_PCT\", 5);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 219,
@@ -941,7 +941,7 @@
   "line": 1148,
   "it": "LD_DISC_HOME_PCT",
   "ctx": "DB_LdCfgAdd(q, 1024, \"LD_DISC_HOME_PCT\", 10);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 220,
@@ -949,7 +949,7 @@
   "line": 1149,
   "it": "LD_PROSP_LOW",
   "ctx": "DB_LdCfgAdd(q, 1024, \"LD_PROSP_LOW\", 350);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 221,
@@ -957,7 +957,7 @@
   "line": 1150,
   "it": "LD_PROSP_HIGH",
   "ctx": "DB_LdCfgAdd(q, 1024, \"LD_PROSP_HIGH\", 650);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 222,
@@ -965,7 +965,7 @@
   "line": 1151,
   "it": "LD_PROSP_BOARD_DELTA",
   "ctx": "DB_LdCfgAdd(q, 1024, \"LD_PROSP_BOARD_DELTA\", 1);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 223,
@@ -973,7 +973,7 @@
   "line": 1152,
   "it": "LD_PROSP_BOARD_MIN",
   "ctx": "DB_LdCfgAdd(q, 1024, \"LD_PROSP_BOARD_MIN\", 3);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 224,
@@ -981,7 +981,7 @@
   "line": 1153,
   "it": "LD_PROSP_LOW_BONUS_PCT",
   "ctx": "DB_LdCfgAdd(q, 1024, \"LD_PROSP_LOW_BONUS_PCT\", 10);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 225,
@@ -989,7 +989,7 @@
   "line": 1154,
   "it": "CT_BUCKET_S",
   "ctx": "DB_LdCfgAdd(q, 1024, \"CT_BUCKET_S\", 1800);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 226,
@@ -997,7 +997,7 @@
   "line": 1155,
   "it": "CT_PER_BUCKET",
   "ctx": "DB_LdCfgAdd(q, 1024, \"CT_PER_BUCKET\", 4);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 227,
@@ -1005,7 +1005,7 @@
   "line": 1156,
   "it": "CT_EXPIRE_EXTRA_S",
   "ctx": "DB_LdCfgAdd(q, 1024, \"CT_EXPIRE_EXTRA_S\", 3600);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 228,
@@ -1013,7 +1013,7 @@
   "line": 1157,
   "it": "CT_ACCEPT_CD_MS",
   "ctx": "DB_LdCfgAdd(q, 1024, \"CT_ACCEPT_CD_MS\", 20000);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 229,
@@ -1021,7 +1021,7 @@
   "line": 1158,
   "it": "CT_DONE_CD_MS",
   "ctx": "DB_LdCfgAdd(q, 1024, \"CT_DONE_CD_MS\", 90000);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 230,
@@ -1029,7 +1029,7 @@
   "line": 1159,
   "it": "CT_HOURLY_MAX",
   "ctx": "DB_LdCfgAdd(q, 1024, \"CT_HOURLY_MAX\", 8);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 231,
@@ -1037,7 +1037,7 @@
   "line": 1160,
   "it": "CT_REACCEPT_LOCK_S",
   "ctx": "DB_LdCfgAdd(q, 1024, \"CT_REACCEPT_LOCK_S\", 600);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 232,
@@ -1045,7 +1045,7 @@
   "line": 1161,
   "it": "CT_PREMIUM_PROREP",
   "ctx": "DB_LdCfgAdd(q, 1024, \"CT_PREMIUM_PROREP\", 100);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 233,
@@ -1053,7 +1053,7 @@
   "line": 1162,
   "it": "FRT_BASE",
   "ctx": "DB_LdCfgAdd(q, 1024, \"FRT_BASE\", 180);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 234,
@@ -1061,7 +1061,7 @@
   "line": 1163,
   "it": "FRT_PER_M_X100",
   "ctx": "DB_LdCfgAdd(q, 1024, \"FRT_PER_M_X100\", 14);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 235,
@@ -1069,7 +1069,7 @@
   "line": 1164,
   "it": "FRT_MIN_DIST",
   "ctx": "DB_LdCfgAdd(q, 1024, \"FRT_MIN_DIST\", 300);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 236,
@@ -1077,7 +1077,7 @@
   "line": 1165,
   "it": "FRT_CARGO_TYPES",
   "ctx": "DB_LdCfgAdd(q, 1024, \"FRT_CARGO_TYPES\", 3);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 237,
@@ -1085,7 +1085,7 @@
   "line": 1166,
   "it": "FRT_MIN_SECONDS",
   "ctx": "DB_LdCfgAdd(q, 1024, \"FRT_MIN_SECONDS\", 25);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 238,
@@ -1093,7 +1093,7 @@
   "line": 1167,
   "it": "FRT_MIN_MPS",
   "ctx": "DB_LdCfgAdd(q, 1024, \"FRT_MIN_MPS\", 40);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 239,
@@ -1101,7 +1101,7 @@
   "line": 1168,
   "it": "FRT_TIME_BASE_S",
   "ctx": "DB_LdCfgAdd(q, 1024, \"FRT_TIME_BASE_S\", 120);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 240,
@@ -1109,7 +1109,7 @@
   "line": 1169,
   "it": "FRT_TIME_MPS_X10",
   "ctx": "DB_LdCfgAdd(q, 1024, \"FRT_TIME_MPS_X10\", 60);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 241,
@@ -1117,7 +1117,7 @@
   "line": 1170,
   "it": "FRT_INTEG_OK",
   "ctx": "DB_LdCfgAdd(q, 1024, \"FRT_INTEG_OK\", 70);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 242,
@@ -1125,7 +1125,7 @@
   "line": 1171,
   "it": "FRT_INTEG_PENALTY_PCT",
   "ctx": "DB_LdCfgAdd(q, 1024, \"FRT_INTEG_PENALTY_PCT\", 25);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 243,
@@ -1133,7 +1133,7 @@
   "line": 1172,
   "it": "FRT_INTEG_FAIL",
   "ctx": "DB_LdCfgAdd(q, 1024, \"FRT_INTEG_FAIL\", 30);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 244,
@@ -1141,7 +1141,7 @@
   "line": 1173,
   "it": "FRT_ABANDON_REP",
   "ctx": "DB_LdCfgAdd(q, 1024, \"FRT_ABANDON_REP\", -5);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 245,
@@ -1149,7 +1149,7 @@
   "line": 1174,
   "it": "PRO_REP_DELIVERY",
   "ctx": "DB_LdCfgAdd(q, 1024, \"PRO_REP_DELIVERY\", 12);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 246,
@@ -1157,7 +1157,7 @@
   "line": 1175,
   "it": "PRO_REP_ONTIME",
   "ctx": "DB_LdCfgAdd(q, 1024, \"PRO_REP_ONTIME\", 4);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 247,
@@ -1165,7 +1165,7 @@
   "line": 1176,
   "it": "PRO_REP_FAIL",
   "ctx": "DB_LdCfgAdd(q, 1024, \"PRO_REP_FAIL\", -15);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 248,
@@ -1173,7 +1173,7 @@
   "line": 1177,
   "it": "PRO_REP_RIDE",
   "ctx": "DB_LdCfgAdd(q, 1024, \"PRO_REP_RIDE\", 8);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 249,
@@ -1181,7 +1181,7 @@
   "line": 1178,
   "it": "PRO_REP_DAY_CAP",
   "ctx": "DB_LdCfgAdd(q, 1024, \"PRO_REP_DAY_CAP\", 60);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 250,
@@ -1189,7 +1189,7 @@
   "line": 1179,
   "it": "PRO_TIER1",
   "ctx": "DB_LdCfgAdd(q, 1024, \"PRO_TIER1\", 100);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 251,
@@ -1197,7 +1197,7 @@
   "line": 1180,
   "it": "PRO_TIER2",
   "ctx": "DB_LdCfgAdd(q, 1024, \"PRO_TIER2\", 300);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 252,
@@ -1205,7 +1205,7 @@
   "line": 1181,
   "it": "PRO_TIER3",
   "ctx": "DB_LdCfgAdd(q, 1024, \"PRO_TIER3\", 600);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 253,
@@ -1213,7 +1213,7 @@
   "line": 1182,
   "it": "PRO_BONUS1_PCT",
   "ctx": "DB_LdCfgAdd(q, 1024, \"PRO_BONUS1_PCT\", 5);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 254,
@@ -1221,7 +1221,7 @@
   "line": 1183,
   "it": "PRO_BONUS2_PCT",
   "ctx": "DB_LdCfgAdd(q, 1024, \"PRO_BONUS2_PCT\", 10);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 255,
@@ -1229,7 +1229,7 @@
   "line": 1184,
   "it": "PRO_BONUS3_PCT",
   "ctx": "DB_LdCfgAdd(q, 1024, \"PRO_BONUS3_PCT\", 15);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 256,
@@ -1237,7 +1237,7 @@
   "line": 1185,
   "it": "RENT_MIN_LEVEL",
   "ctx": "DB_LdCfgAdd(q, 1024, \"RENT_MIN_LEVEL\", 1);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 257,
@@ -1245,7 +1245,7 @@
   "line": 1186,
   "it": "RENT_BLOCK_MIN",
   "ctx": "DB_LdCfgAdd(q, 1024, \"RENT_BLOCK_MIN\", 20);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 258,
@@ -1253,7 +1253,7 @@
   "line": 1187,
   "it": "RENT_BLOCKS_MAX",
   "ctx": "DB_LdCfgAdd(q, 1024, \"RENT_BLOCKS_MAX\", 3);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 259,
@@ -1261,7 +1261,7 @@
   "line": 1188,
   "it": "RENT_GRACE_MS",
   "ctx": "DB_LdCfgAdd(q, 1024, \"RENT_GRACE_MS\", 300000);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 260,
@@ -1269,7 +1269,7 @@
   "line": 1189,
   "it": "RENT_HEALTH_ZERO",
   "ctx": "DB_LdCfgAdd(q, 1024, \"RENT_HEALTH_ZERO\", 300);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 261,
@@ -1277,7 +1277,7 @@
   "line": 1190,
   "it": "RENT_HEALTH_FULL",
   "ctx": "DB_LdCfgAdd(q, 1024, \"RENT_HEALTH_FULL\", 1000);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 262,
@@ -1285,7 +1285,7 @@
   "line": 1191,
   "it": "RENT_FEE_FAGGIO",
   "ctx": "DB_LdCfgAdd(q, 1024, \"RENT_FEE_FAGGIO\", 30);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 263,
@@ -1293,7 +1293,7 @@
   "line": 1192,
   "it": "RENT_FEE_PREVION",
   "ctx": "DB_LdCfgAdd(q, 1024, \"RENT_FEE_PREVION\", 60);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 264,
@@ -1301,7 +1301,7 @@
   "line": 1193,
   "it": "RENT_FEE_MANANA",
   "ctx": "DB_LdCfgAdd(q, 1024, \"RENT_FEE_MANANA\", 70);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 265,
@@ -1309,7 +1309,7 @@
   "line": 1194,
   "it": "RENT_DEP_FAGGIO",
   "ctx": "DB_LdCfgAdd(q, 1024, \"RENT_DEP_FAGGIO\", 200);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 266,
@@ -1317,7 +1317,7 @@
   "line": 1195,
   "it": "RENT_DEP_PREVION",
   "ctx": "DB_LdCfgAdd(q, 1024, \"RENT_DEP_PREVION\", 400);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 267,
@@ -1325,7 +1325,7 @@
   "line": 1196,
   "it": "RENT_DEP_MANANA",
   "ctx": "DB_LdCfgAdd(q, 1024, \"RENT_DEP_MANANA\", 450);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 268,
@@ -1333,7 +1333,7 @@
   "line": 1197,
   "it": "TAXI_MIN_LEVEL",
   "ctx": "DB_LdCfgAdd(q, 1024, \"TAXI_MIN_LEVEL\", 2);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 269,
@@ -1341,7 +1341,7 @@
   "line": 1198,
   "it": "TAXI_DEP",
   "ctx": "DB_LdCfgAdd(q, 1024, \"TAXI_DEP\", 300);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 270,
@@ -1349,7 +1349,7 @@
   "line": 1199,
   "it": "TAXI_RENT_HOUR",
   "ctx": "DB_LdCfgAdd(q, 1024, \"TAXI_RENT_HOUR\", 60);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 271,
@@ -1357,7 +1357,7 @@
   "line": 1200,
   "it": "TAXI_BASE",
   "ctx": "DB_LdCfgAdd(q, 1024, \"TAXI_BASE\", 15);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 272,
@@ -1365,7 +1365,7 @@
   "line": 1201,
   "it": "TAXI_PER_M_X100",
   "ctx": "DB_LdCfgAdd(q, 1024, \"TAXI_PER_M_X100\", 12);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 273,
@@ -1373,7 +1373,7 @@
   "line": 1202,
   "it": "TAXI_TAX_PCT",
   "ctx": "DB_LdCfgAdd(q, 1024, \"TAXI_TAX_PCT\", 10);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 274,
@@ -1381,7 +1381,7 @@
   "line": 1203,
   "it": "TAXI_NPC_HOURLY",
   "ctx": "DB_LdCfgAdd(q, 1024, \"TAXI_NPC_HOURLY\", 10);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 275,
@@ -1389,7 +1389,7 @@
   "line": 1204,
   "it": "TAXI_PAIR_HOURLY",
   "ctx": "DB_LdCfgAdd(q, 1024, \"TAXI_PAIR_HOURLY\", 3);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 276,
@@ -1397,7 +1397,7 @@
   "line": 1205,
   "it": "TAXI_RATING_WINDOW",
   "ctx": "DB_LdCfgAdd(q, 1024, \"TAXI_RATING_WINDOW\", 20);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 277,
@@ -1405,7 +1405,7 @@
   "line": 1206,
   "it": "PRJ_GOAL",
   "ctx": "DB_LdCfgAdd(q, 1024, \"PRJ_GOAL\", 6000);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 278,
@@ -1413,7 +1413,7 @@
   "line": 1207,
   "it": "PRJ_DAYS",
   "ctx": "DB_LdCfgAdd(q, 1024, \"PRJ_DAYS\", 7);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 279,
@@ -1421,7 +1421,7 @@
   "line": 1208,
   "it": "PRJ_FUND_PCT",
   "ctx": "DB_LdCfgAdd(q, 1024, \"PRJ_FUND_PCT\", 8);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 280,
@@ -1429,7 +1429,7 @@
   "line": 1209,
   "it": "PRJ_FUND_RIDE_X10",
   "ctx": "DB_LdCfgAdd(q, 1024, \"PRJ_FUND_RIDE_X10\", 15);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 281,
@@ -1437,7 +1437,7 @@
   "line": 1210,
   "it": "PRJ_DON_MIN",
   "ctx": "DB_LdCfgAdd(q, 1024, \"PRJ_DON_MIN\", 50);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 282,
@@ -1445,7 +1445,7 @@
   "line": 1211,
   "it": "PRJ_DON_MAX",
   "ctx": "DB_LdCfgAdd(q, 1024, \"PRJ_DON_MAX\", 500);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 283,
@@ -1453,7 +1453,7 @@
   "line": 1212,
   "it": "PRJ_DON_DAY",
   "ctx": "DB_LdCfgAdd(q, 1024, \"PRJ_DON_DAY\", 1000);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 284,
@@ -1461,7 +1461,7 @@
   "line": 1213,
   "it": "PRJ_DON_REP_PER",
   "ctx": "DB_LdCfgAdd(q, 1024, \"PRJ_DON_REP_PER\", 100);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 285,
@@ -1469,7 +1469,7 @@
   "line": 1214,
   "it": "PRJ_DON_MIN_PLAYED_MIN",
   "ctx": "DB_LdCfgAdd(q, 1024, \"PRJ_DON_MIN_PLAYED_MIN\", 60);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 286,
@@ -1477,7 +1477,7 @@
   "line": 1215,
   "it": "PRJ_DAY_CAP",
   "ctx": "DB_LdCfgAdd(q, 1024, \"PRJ_DAY_CAP\", 15);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 287,
@@ -1485,7 +1485,7 @@
   "line": 1216,
   "it": "PRJ_REP_DONE",
   "ctx": "DB_LdCfgAdd(q, 1024, \"PRJ_REP_DONE\", 5);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 288,
@@ -1493,7 +1493,7 @@
   "line": 1217,
   "it": "PRJ_REP_MIN_POINTS",
   "ctx": "DB_LdCfgAdd(q, 1024, \"PRJ_REP_MIN_POINTS\", 3);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 289,
@@ -1501,7 +1501,7 @@
   "line": 1218,
   "it": "PRJ_ACT_BONUS",
   "ctx": "DB_LdCfgAdd(q, 1024, \"PRJ_ACT_BONUS\", 100);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 290,
@@ -1509,7 +1509,7 @@
   "line": 1219,
   "it": "PRJ_FEST_H",
   "ctx": "DB_LdCfgAdd(q, 1024, \"PRJ_FEST_H\", 72);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 291,
@@ -1517,7 +1517,7 @@
   "line": 1220,
   "it": "PRJ_FEST_ACT_MIN",
   "ctx": "DB_LdCfgAdd(q, 1024, \"PRJ_FEST_ACT_MIN\", 600);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 292,
@@ -1525,7 +1525,7 @@
   "line": 1221,
   "it": "ONB_STEPS",
   "ctx": "DB_LdCfgAdd(q, 1024, \"ONB_STEPS\", 5);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 293,
@@ -1533,7 +1533,7 @@
   "line": 1222,
   "it": "ONB_REWARD",
   "ctx": "DB_LdCfgAdd(q, 1024, \"ONB_REWARD\", 120);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 294,
@@ -1541,7 +1541,7 @@
   "line": 1223,
   "it": "ONB_EXP",
   "ctx": "DB_LdCfgAdd(q, 1024, \"ONB_EXP\", 1);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 295,
@@ -1549,7 +1549,7 @@
   "line": 40,
   "it": "%s veicolo %d (owner %d) a sessione scaduta: righe=%d%s",
   "ctx": "format(msg, 128, \"%s veicolo %d (owner %d) a sessione scaduta: righe=%d%s\", kind == 1 ? \"rollback creazione\" : \"ripristino vendita\", vehDbId, ownerId, cache_affected_rows(), cache_affected_rows() == 1",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 296,
@@ -1557,7 +1557,7 @@
   "line": 40,
   "it": "rollback creazione",
   "ctx": "format(msg, 128, \"%s veicolo %d (owner %d) a sessione scaduta: righe=%d%s\", kind == 1 ? \"rollback creazione\" : \"ripristino vendita\", vehDbId, ownerId, cache_affected_rows(), cache_affected_rows() == 1",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 297,
@@ -1565,7 +1565,7 @@
   "line": 40,
   "it": "ripristino vendita",
   "ctx": "format(msg, 128, \"%s veicolo %d (owner %d) a sessione scaduta: righe=%d%s\", kind == 1 ? \"rollback creazione\" : \"ripristino vendita\", vehDbId, ownerId, cache_affected_rows(), cache_affected_rows() == 1",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 298,
@@ -1573,7 +1573,7 @@
   "line": 40,
   "it": " ANOMALIA: verificare a mano",
   "ctx": "format(msg, 128, \"%s veicolo %d (owner %d) a sessione scaduta: righe=%d%s\", kind == 1 ? \"rollback creazione\" : \"ripristino vendita\", vehDbId, ownerId, cache_affected_rows(), cache_affected_rows() == 1",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 2087,
@@ -1581,7 +1581,7 @@
   "line": 293,
   "it": "Director_OnDistrictEvent",
   "ctx": "LD_Listen(\"Director_OnDistrictEvent\", 10);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 2088,
@@ -1589,7 +1589,7 @@
   "line": 492,
   "it": "Serve un livello piu' alto per questo contratto.",
   "ctx": "Util_Send(playerid, -10270721, \"Serve un livello piu' alto per questo contratto.\");",
-  "ka": ""
+  "ka": "ამ კონტრაქტისთვის უფრო მაღალი დონე გჭირდება."
  },
  {
   "id": 2089,
@@ -1597,7 +1597,7 @@
   "line": 496,
   "it": "La tua reputazione nei trasporti non basta ancora per questo contratto.",
   "ctx": "Util_Send(playerid, -10270721, \"La tua reputazione nei trasporti non basta ancora per questo contratto.\");",
-  "ka": ""
+  "ka": "ტრანსპორტში შენი რეპუტაცია ამ კონტრაქტისთვის ჯერ არ კმარა."
  },
  {
   "id": 2090,
@@ -1605,7 +1605,7 @@
   "line": 500,
   "it": "Il quartiere non ti conosce abbastanza per questo contratto.",
   "ctx": "Util_Send(playerid, -10270721, \"Il quartiere non ti conosce abbastanza per questo contratto.\");",
-  "ka": ""
+  "ka": "უბანი ამ კონტრაქტისთვის საკმარისად არ გიცნობს."
  },
  {
   "id": 2091,
@@ -1613,7 +1613,7 @@
   "line": 504,
   "it": "Hai gia' un contratto attivo (/contratto).",
   "ctx": "Util_Send(playerid, -10270721, \"Hai gia' un contratto attivo (/contratto).\");",
-  "ka": ""
+  "ka": "უკვე გაქვს აქტიური კონტრაქტი (/contratto)."
  },
  {
   "id": 2092,
@@ -1621,7 +1621,7 @@
   "line": 512,
   "it": "Prenditi un attimo: potrai accettare un nuovo contratto tra poco.",
   "ctx": "Util_Send(playerid, -10270721, \"Prenditi un attimo: potrai accettare un nuovo contratto tra poco.\");",
-  "ka": ""
+  "ka": "ცოტა დაისვენე: ახალ კონტრაქტს მალე აიღებ."
  },
  {
   "id": 2093,
@@ -1629,7 +1629,7 @@
   "line": 516,
   "it": "Per quest'ora hai lavorato abbastanza: riprova piu' tardi.",
   "ctx": "Util_Send(playerid, -10270721, \"Per quest'ora hai lavorato abbastanza: riprova piu' tardi.\");",
-  "ka": ""
+  "ka": "ამ საათში საკმარისად იმუშავე: მოგვიანებით სცადე."
  },
  {
   "id": 2094,
@@ -1637,7 +1637,7 @@
   "line": 520,
   "it": "Hai lasciato questo contratto da poco: scegline un altro.",
   "ctx": "Util_Send(playerid, -10270721, \"Hai lasciato questo contratto da poco: scegline un altro.\");",
-  "ka": ""
+  "ka": "ეს კონტრაქტი ახლახან დატოვე: სხვა აირჩიე."
  },
  {
   "id": 2095,
@@ -1645,7 +1645,7 @@
   "line": 524,
   "it": "Questo contratto non e' piu' disponibile.",
   "ctx": "Util_Send(playerid, -10270721, \"Questo contratto non e' piu' disponibile.\");",
-  "ka": ""
+  "ka": "ეს კონტრაქტი აღარ არის ხელმისაწვდომი."
  },
  {
   "id": 2096,
@@ -1653,7 +1653,7 @@
   "line": 542,
   "it": "Un'operazione sul contratto e' gia' in corso: attendi.",
   "ctx": "Util_Send(playerid, -10270721, \"Un'operazione sul contratto e' gia' in corso: attendi.\");",
-  "ka": ""
+  "ka": "კონტრაქტზე ოპერაცია უკვე მიმდინარეობს: მოიცადე."
  },
  {
   "id": 2097,
@@ -1661,7 +1661,7 @@
   "line": 547,
   "it": "I contratti si accettano a una bacheca: Casa del Quartiere di Idlewood, magazzino di Ganton o di Jefferson.",
   "ctx": "Util_Send(playerid, -10270721, \"I contratti si accettano a una bacheca: Casa del Quartiere di Idlewood, magazzino di Ganton o di Jefferson.\");",
-  "ka": ""
+  "ka": "კონტრაქტებს დაფაზე იღებ: Idlewood-ის უბნის სახლში, Ganton-ის ან Jefferson-ის საწყობში."
  },
  {
   "id": 2098,
@@ -1669,7 +1669,7 @@
   "line": 669,
   "it": "Il magazzino non ha un mezzo disponibile adesso: contratto rimesso in bacheca senza penalita'.",
   "ctx": "Util_Send(playerid, -10270721, \"Il magazzino non ha un mezzo disponibile adesso: contratto rimesso in bacheca senza penalita'.\");",
-  "ka": ""
+  "ka": "საწყობს ახლა თავისუფალი მანქანა არ აქვს: კონტრაქტი დაფას დაუბრუნდა, ჯარიმის გარეშე."
  },
  {
   "id": 2099,
@@ -1677,7 +1677,7 @@
   "line": 688,
   "it": "Il servizio contratti non risponde: riprova tra poco.",
   "ctx": "Util_Send(playerid, -10270721, \"Il servizio contratti non risponde: riprova tra poco.\");",
-  "ka": ""
+  "ka": "კონტრაქტების სერვისი არ პასუხობს: ცოტა ხანში სცადე."
  },
  {
   "id": 2100,
@@ -1685,7 +1685,7 @@
   "line": 696,
   "it": "Hai gia' chiuso questo contratto.",
   "ctx": "Util_Send(playerid, -10270721, \"Hai gia' chiuso questo contratto.\");",
-  "ka": ""
+  "ka": "ეს კონტრაქტი უკვე დახურე."
  },
  {
   "id": 2101,
@@ -1693,7 +1693,7 @@
   "line": 700,
   "it": "Qualcun altro ha appena preso questo contratto.",
   "ctx": "Util_Send(playerid, -10270721, \"Qualcun altro ha appena preso questo contratto.\");",
-  "ka": ""
+  "ka": "ეს კონტრაქტი ვიღაცამ ახლახან აიღო."
  },
  {
   "id": 2102,
@@ -1701,7 +1701,7 @@
   "line": 704,
   "it": "Questo contratto e' scaduto.",
   "ctx": "Util_Send(playerid, -10270721, \"Questo contratto e' scaduto.\");",
-  "ka": ""
+  "ka": "ამ კონტრაქტს ვადა გაუვიდა."
  },
  {
   "id": 2103,
@@ -1709,7 +1709,7 @@
   "line": 712,
   "it": "Non soddisfi ancora i requisiti di questo contratto (livello, reputazione o attesa tra contratti).",
   "ctx": "Util_Send(playerid, -10270721, \"Non soddisfi ancora i requisiti di questo contratto (livello, reputazione o attesa tra contratti).\");",
-  "ka": ""
+  "ka": "ამ კონტრაქტის მოთხოვნებს ჯერ არ აკმაყოფილებ (დონე, რეპუტაცია ან ლოდინი კონტრაქტებს შორის)."
  },
  {
   "id": 2104,
@@ -1717,7 +1717,7 @@
   "line": 716,
   "it": "Un'operazione e' gia' in corso: attendi.",
   "ctx": "Util_Send(playerid, -10270721, \"Un'operazione e' gia' in corso: attendi.\");",
-  "ka": ""
+  "ka": "ოპერაცია უკვე მიმდინარეობს: მოიცადე."
  },
  {
   "id": 2105,
@@ -1725,7 +1725,7 @@
   "line": 720,
   "it": "Contratto non accettato (esito %d).",
   "ctx": "format(msg, 160, \"Contratto non accettato (esito %d).\", result);",
-  "ka": ""
+  "ka": "კონტრაქტი არ მიიღეს (შედეგი %d)."
  },
  {
   "id": 2106,
@@ -1733,7 +1733,7 @@
   "line": 843,
   "it": "Hai lasciato il contratto: nessuna perdita di denaro, ma la tua reputazione nei trasporti ne risente.",
   "ctx": "Util_Send(playerid, -10270721, \"Hai lasciato il contratto: nessuna perdita di denaro, ma la tua reputazione nei trasporti ne risente.\");",
-  "ka": ""
+  "ka": "კონტრაქტი დატოვე: ფულს არ კარგავ, მაგრამ ტრანსპორტში შენი რეპუტაცია ზარალდება."
  },
  {
   "id": 2107,
@@ -1741,7 +1741,7 @@
   "line": 847,
   "it": "Contratto interrotto senza penalita': e' tornato in bacheca.",
   "ctx": "Util_Send(playerid, -1, \"Contratto interrotto senza penalita': e' tornato in bacheca.\");",
-  "ka": ""
+  "ka": "კონტრაქტი ჯარიმის გარეშე შეწყდა: ის დაფას დაუბრუნდა."
  },
  {
   "id": 2108,
@@ -1749,7 +1749,7 @@
   "line": 865,
   "it": "esito contratto fuori sequenza: azione %d contratto %d esito %d",
   "ctx": "format(msg, 160, \"esito contratto fuori sequenza: azione %d contratto %d esito %d\", action, contractId, result);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 1463,
@@ -1757,7 +1757,7 @@
   "line": 241,
   "it": "boot living completato: %d quartieri, %d contratti per bucket",
   "ctx": "format(msg, 160, \"boot living completato: %d quartieri, %d contratti per bucket\", count, DB_LivingBucketSlots());",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 1464,
@@ -1765,7 +1765,7 @@
   "line": 364,
   "it": "evento %d quartiere %d non registrato (esito %d, op %s)",
   "ctx": "format(msg, 160, \"evento %d quartiere %d non registrato (esito %d, op %s)\", g_DistQType[slot], g_DistQDist[slot], result, g_DistQOp[slot]);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 1465,
@@ -1773,7 +1773,7 @@
   "line": 383,
   "it": "Un noleggio rimasto aperto e' stato chiuso: $%d di cauzione sono tornati sul tuo conto.",
   "ctx": "format(msg, 160, \"Un noleggio rimasto aperto e' stato chiuso: $%d di cauzione sono tornati sul tuo conto.\", refund);",
-  "ka": ""
+  "ka": "ღიად დარჩენილი ქირაობა დაიხურა: $%d გირაო შენს ანგარიშზე დაბრუნდა."
  },
  {
   "id": 1466,
@@ -1781,7 +1781,7 @@
   "line": 399,
   "it": "Non e' stato possibile caricare la tua reputazione: riprova a rientrare piu' tardi.",
   "ctx": "Util_Send(playerid, -10270721, \"Non e' stato possibile caricare la tua reputazione: riprova a rientrare piu' tardi.\");",
-  "ka": ""
+  "ka": "შენი რეპუტაციის ჩატვირთვა ვერ მოხერხდა: მოგვიანებით შემოდი თავიდან."
  },
  {
   "id": 1467,
@@ -1789,7 +1789,7 @@
   "line": 452,
   "it": "Uso: /ldset <idlewood|ganton|jefferson> <attivita' 0-1000> [sicurezza 0-100] [pressione 0-100]  (- = invariato)",
   "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Uso: /ldset <idlewood|ganton|jefferson> <attivita' 0-1000> [sicurezza 0-100] [pressione 0-100]  (- = invariato)\");",
-  "ka": ""
+  "ka": "გამოყენება: /ldset <idlewood|ganton|jefferson> <აქტივობა 0-1000> [უსაფრთხოება 0-100] [წნეხი 0-100]  (- = უცვლელი)"
  },
  {
   "id": 1468,
@@ -1797,7 +1797,7 @@
   "line": 457,
   "it": "Valori fuori range: attivita' 0-1000, sicurezza e pressione 0-100.",
   "ctx": "Util_Send(playerid, -10270721, \"Valori fuori range: attivita' 0-1000, sicurezza e pressione 0-100.\");",
-  "ka": ""
+  "ka": "მნიშვნელობები დიაპაზონს გარეთაა: აქტივობა 0-1000, უსაფრთხოება და წნეხი 0-100."
  },
  {
   "id": 1469,
@@ -1805,7 +1805,7 @@
   "line": 474,
   "it": "/ldset non applicato (esito %d).",
   "ctx": "format(msg, 160, \"/ldset non applicato (esito %d).\", result);",
-  "ka": ""
+  "ka": "/ldset არ შესრულდა (შედეგი %d)."
  },
  {
   "id": 1470,
@@ -1813,7 +1813,7 @@
   "line": 480,
   "it": "%s: attivita' %d, sicurezza %d, pressione %d",
   "ctx": "format(msg, 160, \"%s: attivita' %d, sicurezza %d, pressione %d\", name, activity, security, crime);",
-  "ka": ""
+  "ka": "%s: აქტივობა %d, უსაფრთხოება %d, წნეხი %d"
  },
  {
   "id": 1219,
@@ -1821,7 +1821,7 @@
   "line": 25,
   "it": "Complimenti! Hai raggiunto il livello %d.",
   "ctx": "SendClientMessage(playerid, -2994689, \"Complimenti! Hai raggiunto il livello %d.\", gPlayer[playerid][pLevel]);",
-  "ka": ""
+  "ka": "გილოცავ! მიაღწიე %d დონეს."
  },
  {
   "id": 1220,
@@ -1829,7 +1829,7 @@
   "line": 35,
   "it": "--- Stipendio ---",
   "ctx": "SendClientMessage(playerid, -2994689, \"--- Stipendio ---\");",
-  "ka": ""
+  "ka": "--- ხელფასი ---"
  },
  {
   "id": 1221,
@@ -1837,7 +1837,7 @@
   "line": 38,
   "it": "Stipendio: $%d versato in banca. Saldo: $%d.",
   "ctx": "SendClientMessage(playerid, 0x66DD66FF, \"Stipendio: $%d versato in banca. Saldo: $%d.\", paid, gPlayer[playerid][pBank]);",
-  "ka": ""
+  "ka": "ხელფასი: $%d ჩაირიცხა ბანკში. ბალანსი: $%d."
  },
  {
   "id": 1222,
@@ -1845,7 +1845,7 @@
   "line": 41,
   "it": "Il conto ha raggiunto il limite: parte dello stipendio e' andata persa.",
   "ctx": "SendClientMessage(playerid, -10270721, \"Il conto ha raggiunto il limite: parte dello stipendio e' andata persa.\");",
-  "ka": ""
+  "ka": "ანგარიში ლიმიტზეა: ხელფასის ნაწილი დაიკარგა."
  },
  {
   "id": 1223,
@@ -1853,7 +1853,7 @@
   "line": 46,
   "it": "Il conto bancario e' al limite: stipendio non versato.",
   "ctx": "SendClientMessage(playerid, -10270721, \"Il conto bancario e' al limite: stipendio non versato.\");",
-  "ka": ""
+  "ka": "საბანკო ანგარიში ლიმიტზეა: ხელფასი არ ჩაირიცხა."
  },
  {
   "id": 1800,
@@ -1861,7 +1861,7 @@
   "line": 3,
   "it": "LSPD",
   "ctx": "\"LSPD\",",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 1801,
@@ -1869,7 +1869,7 @@
   "line": 4,
   "it": "EMS",
   "ctx": "\"EMS\"",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 1802,
@@ -1877,7 +1877,7 @@
   "line": 8,
   "it": "Cadetto",
   "ctx": "{\"-\", \"Cadetto\", \"Agente\", \"Agente Scelto\", \"Sergente\", \"Tenente\", \"Capo del Dipartimento\"},",
-  "ka": ""
+  "ka": "კადეტი"
  },
  {
   "id": 1803,
@@ -1885,7 +1885,7 @@
   "line": 8,
   "it": "Agente",
   "ctx": "{\"-\", \"Cadetto\", \"Agente\", \"Agente Scelto\", \"Sergente\", \"Tenente\", \"Capo del Dipartimento\"},",
-  "ka": ""
+  "ka": "ოფიცერი"
  },
  {
   "id": 1804,
@@ -1893,7 +1893,7 @@
   "line": 8,
   "it": "Agente Scelto",
   "ctx": "{\"-\", \"Cadetto\", \"Agente\", \"Agente Scelto\", \"Sergente\", \"Tenente\", \"Capo del Dipartimento\"},",
-  "ka": ""
+  "ka": "უფროსი ოფიცერი"
  },
  {
   "id": 1805,
@@ -1901,7 +1901,7 @@
   "line": 8,
   "it": "Sergente",
   "ctx": "{\"-\", \"Cadetto\", \"Agente\", \"Agente Scelto\", \"Sergente\", \"Tenente\", \"Capo del Dipartimento\"},",
-  "ka": ""
+  "ka": "სერჟანტი"
  },
  {
   "id": 1806,
@@ -1909,7 +1909,7 @@
   "line": 8,
   "it": "Tenente",
   "ctx": "{\"-\", \"Cadetto\", \"Agente\", \"Agente Scelto\", \"Sergente\", \"Tenente\", \"Capo del Dipartimento\"},",
-  "ka": ""
+  "ka": "ლეიტენანტი"
  },
  {
   "id": 1807,
@@ -1917,7 +1917,7 @@
   "line": 8,
   "it": "Capo del Dipartimento",
   "ctx": "{\"-\", \"Cadetto\", \"Agente\", \"Agente Scelto\", \"Sergente\", \"Tenente\", \"Capo del Dipartimento\"},",
-  "ka": ""
+  "ka": "დეპარტამენტის უფროსი"
  },
  {
   "id": 1808,
@@ -1925,7 +1925,7 @@
   "line": 9,
   "it": "Volontario",
   "ctx": "{\"-\", \"Volontario\", \"Soccorritore\", \"Paramedico\", \"Caposquadra\", \"Medico\", \"Direttore Sanitario\"}",
-  "ka": ""
+  "ka": "მოხალისე"
  },
  {
   "id": 1809,
@@ -1933,7 +1933,7 @@
   "line": 9,
   "it": "Soccorritore",
   "ctx": "{\"-\", \"Volontario\", \"Soccorritore\", \"Paramedico\", \"Caposquadra\", \"Medico\", \"Direttore Sanitario\"}",
-  "ka": ""
+  "ka": "მაშველი"
  },
  {
   "id": 1810,
@@ -1941,7 +1941,7 @@
   "line": 9,
   "it": "Paramedico",
   "ctx": "{\"-\", \"Volontario\", \"Soccorritore\", \"Paramedico\", \"Caposquadra\", \"Medico\", \"Direttore Sanitario\"}",
-  "ka": ""
+  "ka": "პარამედიკი"
  },
  {
   "id": 1811,
@@ -1949,7 +1949,7 @@
   "line": 9,
   "it": "Caposquadra",
   "ctx": "{\"-\", \"Volontario\", \"Soccorritore\", \"Paramedico\", \"Caposquadra\", \"Medico\", \"Direttore Sanitario\"}",
-  "ka": ""
+  "ka": "ბრიგადირი"
  },
  {
   "id": 1812,
@@ -1957,7 +1957,7 @@
   "line": 9,
   "it": "Medico",
   "ctx": "{\"-\", \"Volontario\", \"Soccorritore\", \"Paramedico\", \"Caposquadra\", \"Medico\", \"Direttore Sanitario\"}",
-  "ka": ""
+  "ka": "ექიმი"
  },
  {
   "id": 1813,
@@ -1965,7 +1965,7 @@
   "line": 9,
   "it": "Direttore Sanitario",
   "ctx": "{\"-\", \"Volontario\", \"Soccorritore\", \"Paramedico\", \"Caposquadra\", \"Medico\", \"Direttore Sanitario\"}",
-  "ka": ""
+  "ka": "მთავარი ექიმი"
  },
  {
   "id": 1814,
@@ -1973,7 +1973,7 @@
   "line": 236,
   "it": "Attendi %d secondi prima di un altro comando di fazione.",
   "ctx": "SendClientMessage(playerid, -10270721, \"Attendi %d secondi prima di un altro comando di fazione.\", Fac_SecCeil(left));",
-  "ka": ""
+  "ka": "ფრაქციის შემდეგ ბრძანებამდე მოიცადე %d წამი."
  },
  {
   "id": 1815,
@@ -1981,7 +1981,7 @@
   "line": 249,
   "it": "Non sei autorizzato a usare questo comando.",
   "ctx": "Util_Send(playerid, -10270721, \"Non sei autorizzato a usare questo comando.\");",
-  "ka": ""
+  "ka": "ამ ბრძანების გამოყენების უფლება არ გაქვს."
  },
  {
   "id": 1816,
@@ -1989,7 +1989,7 @@
   "line": 259,
   "it": "Non puoi farlo nelle tue condizioni.",
   "ctx": "Util_Send(playerid, -10270721, \"Non puoi farlo nelle tue condizioni.\");",
-  "ka": ""
+  "ka": "ამ მდგომარეობაში ამას ვერ გააკეთებ."
  },
  {
   "id": 1817,
@@ -1997,7 +1997,7 @@
   "line": 269,
   "it": "Devi essere in servizio (/duty vicino alla sede).",
   "ctx": "Util_Send(playerid, -10270721, \"Devi essere in servizio (/duty vicino alla sede).\");",
-  "ka": ""
+  "ka": "სამსახურში უნდა იყო (/duty შტაბთან)."
  },
  {
   "id": 1818,
@@ -2005,7 +2005,7 @@
   "line": 279,
   "it": "Giocatore non valido.",
   "ctx": "Util_Send(playerid, -10270721, \"Giocatore non valido.\");",
-  "ka": ""
+  "ka": "არასწორი მოთამაშე."
  },
  {
   "id": 1819,
@@ -2013,7 +2013,7 @@
   "line": 435,
   "it": "Sei in servizio (%s - %s).",
   "ctx": "SendClientMessage(playerid, 0x66DD66FF, \"Sei in servizio (%s - %s).\", g_FacShort[f], rn);",
-  "ka": ""
+  "ka": "სამსახურში ხარ (%s - %s)."
  },
  {
   "id": 1820,
@@ -2021,7 +2021,7 @@
   "line": 436,
   "it": "indossa la divisa ed entra in servizio",
   "ctx": "Fac_Emote(playerid, \"indossa la divisa ed entra in servizio\");",
-  "ka": ""
+  "ka": "იცვამს ფორმას და სამსახურს იწყებს"
  },
  {
   "id": 1821,
@@ -2029,7 +2029,7 @@
   "line": 447,
   "it": "Non puoi cambiare servizio adesso (ferito, ammanettato o turno di lavoro in corso).",
   "ctx": "Util_Send(playerid, -10270721, \"Non puoi cambiare servizio adesso (ferito, ammanettato o turno di lavoro in corso).\");",
-  "ka": ""
+  "ka": "სამსახურის შეცვლა ახლა არ შეგიძლია (დაჭრილი, ბორკილდადებული ან ცვლაზე ხარ)."
  },
  {
   "id": 1822,
@@ -2037,7 +2037,7 @@
   "line": 453,
   "it": "Devi essere vicino alla sede della tua fazione.",
   "ctx": "Util_Send(playerid, -10270721, \"Devi essere vicino alla sede della tua fazione.\");",
-  "ka": ""
+  "ka": "შენი ფრაქციის შტაბთან უნდა იყო."
  },
  {
   "id": 1823,
@@ -2045,7 +2045,7 @@
   "line": 459,
   "it": "Attendi ancora %d secondi prima di cambiare servizio.",
   "ctx": "SendClientMessage(playerid, -10270721, \"Attendi ancora %d secondi prima di cambiare servizio.\", Fac_SecCeil(left));",
-  "ka": ""
+  "ka": "სამსახურის შეცვლამდე მოიცადე კიდევ %d წამი."
  },
  {
   "id": 1824,
@@ -2053,7 +2053,7 @@
   "line": 471,
   "it": "Sei fuori servizio.",
   "ctx": "Util_Send(playerid, 0x66DD66FF, \"Sei fuori servizio.\");",
-  "ka": ""
+  "ka": "სამსახურიდან გამოხვედი."
  },
  {
   "id": 1825,
@@ -2061,7 +2061,7 @@
   "line": 472,
   "it": "si toglie la divisa ed esce dal servizio",
   "ctx": "Fac_Emote(playerid, \"si toglie la divisa ed esce dal servizio\");",
-  "ka": ""
+  "ka": "იხდის ფორმას და სამსახურს ასრულებს"
  },
  {
   "id": 1826,
@@ -2069,7 +2069,7 @@
   "line": 515,
   "it": "Stipendio %s: $%d versati in banca (in aggiunta al paycheck). Saldo: $%d.",
   "ctx": "SendClientMessage(playerid, 0x66DD66FF, \"Stipendio %s: $%d versati in banca (in aggiunta al paycheck). Saldo: $%d.\", g_FacShort[f], paid, gPlayer[playerid][pBank]);",
-  "ka": ""
+  "ka": "%s ხელფასი: $%d ჩაირიცხა ბანკში (paycheck-ის გარდა). ბალანსი: $%d."
  },
  {
   "id": 1827,
@@ -2077,6 +2077,6 @@
   "line": 520,
   "it": "Il conto bancario e' al limite: stipendio di fazione non versato.",
   "ctx": "Util_Send(playerid, -10270721, \"Il conto bancario e' al limite: stipendio di fazione non versato.\");",
-  "ka": ""
+  "ka": "საბანკო ანგარიში ლიმიტზეა: ფრაქციის ხელფასი არ ჩაირიცხა."
  }
 ]

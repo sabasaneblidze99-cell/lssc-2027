@@ -5,7 +5,7 @@
   "line": 892,
   "it": "Hai gia' richiesto un documento di recente: attendi.",
   "ctx": "Inv_Say(playerid, -10270721, \"Hai gia' richiesto un documento di recente: attendi.\");",
-  "ka": ""
+  "ka": "დოკუმენტი უკვე მოითხოვე ახლახან: მოიცადე."
  },
  {
   "id": 1407,
@@ -13,7 +13,7 @@
   "line": 938,
   "it": "Uso: /dai [id giocatore] [oggetto] [quantita']",
   "ctx": "Inv_Say(playerid, 0x99CCFFFF, \"Uso: /dai [id giocatore] [oggetto] [quantita']\");",
-  "ka": ""
+  "ka": "გამოყენება: /dai [მოთამაშის id] [ნივთი] [რაოდენობა]"
  },
  {
   "id": 1408,
@@ -21,7 +21,7 @@
   "line": 945,
   "it": "Uso: /dai [id giocatore] [oggetto] [quantita'] (cibo, pasto, acqua, snack, kit, benda, sigarette, accendino)",
   "ctx": "Inv_Say(playerid, 0x99CCFFFF, \"Uso: /dai [id giocatore] [oggetto] [quantita'] (cibo, pasto, acqua, snack, kit, benda, sigarette, accendino)\");",
-  "ka": ""
+  "ka": "გამოყენება: /dai [მოთამაშის id] [ნივთი] [რაოდენობა] (cibo, pasto, acqua, snack, kit, benda, sigarette, accendino)"
  },
  {
   "id": 1409,
@@ -29,7 +29,7 @@
   "line": 951,
   "it": "Quantita' non valida.",
   "ctx": "Inv_Say(playerid, -10270721, \"Quantita' non valida.\");",
-  "ka": ""
+  "ka": "არასწორი რაოდენობა."
  },
  {
   "id": 1410,
@@ -37,7 +37,7 @@
   "line": 966,
   "it": "Questo oggetto non si puo' dare.",
   "ctx": "Inv_Say(playerid, -10270721, \"Questo oggetto non si puo' dare.\");",
-  "ka": ""
+  "ka": "ამ ნივთის გადაცემა შეუძლებელია."
  },
  {
   "id": 1411,
@@ -45,7 +45,7 @@
   "line": 971,
   "it": "Non puoi dare oggetti a te stesso.",
   "ctx": "Inv_Say(playerid, -10270721, \"Non puoi dare oggetti a te stesso.\");",
-  "ka": ""
+  "ka": "საკუთარ თავს ნივთს ვერ გადასცემ."
  },
  {
   "id": 1412,
@@ -53,7 +53,7 @@
   "line": 976,
   "it": "Giocatore non valido o non ancora pronto.",
   "ctx": "Inv_Say(playerid, -10270721, \"Giocatore non valido o non ancora pronto.\");",
-  "ka": ""
+  "ka": "მოთამაშე არასწორია ან ჯერ მზად არ არის."
  },
  {
   "id": 1413,
@@ -61,7 +61,7 @@
   "line": 981,
   "it": "Il giocatore e' troppo lontano.",
   "ctx": "Inv_Say(playerid, -10270721, \"Il giocatore e' troppo lontano.\");",
-  "ka": ""
+  "ka": "მოთამაშე ძალიან შორსაა."
  },
  {
   "id": 1414,
@@ -69,7 +69,7 @@
   "line": 986,
   "it": "Non hai abbastanza: %s.",
   "ctx": "SendClientMessage(playerid, -10270721, \"Non hai abbastanza: %s.\", s_InvName[itemId]);",
-  "ka": ""
+  "ka": "საკმარისი არ გაქვს: %s."
  },
  {
   "id": 1415,
@@ -77,7 +77,7 @@
   "line": 991,
   "it": "Hai gia' uno scambio in sospeso.",
   "ctx": "Inv_Say(playerid, -10270721, \"Hai gia' uno scambio in sospeso.\");",
-  "ka": ""
+  "ka": "უკვე გაქვს მოლოდინში მყოფი გაცვლა."
  },
  {
   "id": 1416,
@@ -85,7 +85,7 @@
   "line": 996,
   "it": "Quel giocatore ha gia' uno scambio in sospeso.",
   "ctx": "Inv_Say(playerid, -10270721, \"Quel giocatore ha gia' uno scambio in sospeso.\");",
-  "ka": ""
+  "ka": "ამ მოთამაშეს უკვე აქვს მოლოდინში მყოფი გაცვლა."
  },
  {
   "id": 1417,
@@ -93,7 +93,7 @@
   "line": 1002,
   "it": "Attendi qualche secondo prima di un nuovo scambio.",
   "ctx": "Inv_Say(playerid, -10270721, \"Attendi qualche secondo prima di un nuovo scambio.\");",
-  "ka": ""
+  "ka": "ახალ გაცვლამდე რამდენიმე წამი მოიცადე."
  },
  {
   "id": 1418,
@@ -101,7 +101,7 @@
   "line": 1007,
   "it": "Hai raggiunto il limite di %d scambi all'ora.",
   "ctx": "SendClientMessage(playerid, -10270721, \"Hai raggiunto il limite di %d scambi all'ora.\", 20);",
-  "ka": ""
+  "ka": "მიაღწიე საათში %d გაცვლის ლიმიტს."
  },
  {
   "id": 1419,
@@ -109,7 +109,7 @@
   "line": 1024,
   "it": "Hai offerto %s x%d a %s: attendi la risposta (%d secondi).",
   "ctx": "SendClientMessage(playerid, -1, \"Hai offerto %s x%d a %s: attendi la risposta (%d secondi).\", s_InvName[itemId], qty, tname, 15);",
-  "ka": ""
+  "ka": "შესთავაზე %s x%d მოთამაშეს %s: დაელოდე პასუხს (%d წამი)."
  },
  {
   "id": 1420,
@@ -117,7 +117,7 @@
   "line": 1063,
   "it": "Lo scambio non e' piu' valido.",
   "ctx": "Inv_Say(playerid, -10270721, \"Lo scambio non e' piu' valido.\");",
-  "ka": ""
+  "ka": "გაცვლა აღარ არის მოქმედი."
  },
  {
   "id": 1421,
@@ -125,7 +125,7 @@
   "line": 1068,
   "it": "Scambio scaduto.",
   "ctx": "Inv_GiveCancel(giver, expired ? \"Scambio scaduto.\" : \"Scambio rifiutato.\");",
-  "ka": ""
+  "ka": "გაცვლის დრო ამოიწურა."
  },
  {
   "id": 1422,
@@ -133,7 +133,7 @@
   "line": 1068,
   "it": "Scambio rifiutato.",
   "ctx": "Inv_GiveCancel(giver, expired ? \"Scambio scaduto.\" : \"Scambio rifiutato.\");",
-  "ka": ""
+  "ka": "გაცვლა უარყოფილია."
  },
  {
   "id": 1423,
@@ -141,7 +141,7 @@
   "line": 1074,
   "it": "Scambio scaduto.",
   "ctx": "Inv_GiveCancel(giver, \"Scambio scaduto.\");",
-  "ka": ""
+  "ka": "გაცვლის დრო ამოიწურა."
  },
  {
   "id": 1424,
@@ -149,7 +149,7 @@
   "line": 1075,
   "it": "Scambio non completato.",
   "ctx": "Inv_Say(playerid, -10270721, \"Scambio non completato.\");",
-  "ka": ""
+  "ka": "გაცვლა არ დასრულდა."
  },
  {
   "id": 1425,
@@ -157,7 +157,7 @@
   "line": 1080,
   "it": "Scambio annullato: uno dei due non puo' farlo adesso.",
   "ctx": "Inv_GiveCancel(giver, \"Scambio annullato: uno dei due non puo' farlo adesso.\");",
-  "ka": ""
+  "ka": "გაცვლა გაუქმდა: ერთ-ერთს ახლა ეს არ შეუძლია."
  },
  {
   "id": 1426,
@@ -165,7 +165,7 @@
   "line": 1081,
   "it": "Scambio non completato.",
   "ctx": "Inv_Say(playerid, -10270721, \"Scambio non completato.\");",
-  "ka": ""
+  "ka": "გაცვლა არ დასრულდა."
  },
  {
   "id": 1427,
@@ -173,7 +173,7 @@
   "line": 1086,
   "it": "Scambio annullato: troppo lontani.",
   "ctx": "Inv_GiveCancel(giver, \"Scambio annullato: troppo lontani.\");",
-  "ka": ""
+  "ka": "გაცვლა გაუქმდა: ძალიან შორს ხართ."
  },
  {
   "id": 1428,
@@ -181,7 +181,7 @@
   "line": 1087,
   "it": "Scambio non completato.",
   "ctx": "Inv_Say(playerid, -10270721, \"Scambio non completato.\");",
-  "ka": ""
+  "ka": "გაცვლა არ დასრულდა."
  },
  {
   "id": 1429,
@@ -189,7 +189,7 @@
   "line": 1092,
   "it": "Scambio annullato: l'oggetto non e' piu' disponibile.",
   "ctx": "Inv_GiveCancel(giver, \"Scambio annullato: l'oggetto non e' piu' disponibile.\");",
-  "ka": ""
+  "ka": "გაცვლა გაუქმდა: ნივთი აღარ არის ხელმისაწვდომი."
  },
  {
   "id": 1430,
@@ -197,7 +197,7 @@
   "line": 1093,
   "it": "Scambio non completato.",
   "ctx": "Inv_Say(playerid, -10270721, \"Scambio non completato.\");",
-  "ka": ""
+  "ka": "გაცვლა არ დასრულდა."
  },
  {
   "id": 1431,
@@ -205,7 +205,7 @@
   "line": 1117,
   "it": "Hai dato %s x%d.",
   "ctx": "SendClientMessage(giverid, 0x66DD66FF, \"Hai dato %s x%d.\", s_InvName[itemId], qty);",
-  "ka": ""
+  "ka": "გადაეცი %s x%d."
  },
  {
   "id": 1432,
@@ -213,7 +213,7 @@
   "line": 1121,
   "it": "Scambio fallito: il destinatario non ha spazio.",
   "ctx": "Inv_Say(giverid, -10270721, \"Scambio fallito: il destinatario non ha spazio.\");",
-  "ka": ""
+  "ka": "გაცვლა ვერ მოხერხდა: მიმღებს ადგილი არ აქვს."
  },
  {
   "id": 1433,
@@ -221,7 +221,7 @@
   "line": 1125,
   "it": "Scambio fallito: non hai piu' abbastanza oggetti.",
   "ctx": "Inv_Say(giverid, -10270721, \"Scambio fallito: non hai piu' abbastanza oggetti.\");",
-  "ka": ""
+  "ka": "გაცვლა ვერ მოხერხდა: საკმარისი ნივთი აღარ გაქვს."
  },
  {
   "id": 1434,
@@ -229,7 +229,7 @@
   "line": 1130,
   "it": "Questo oggetto non si puo' dare.",
   "ctx": "Inv_Say(giverid, -10270721, \"Questo oggetto non si puo' dare.\");",
-  "ka": ""
+  "ka": "ამ ნივთის გადაცემა შეუძლებელია."
  },
  {
   "id": 1435,
@@ -237,7 +237,7 @@
   "line": 1134,
   "it": "Errore database durante lo scambio: ricontrolla l'inventario.",
   "ctx": "Inv_Say(giverid, -10270721, \"Errore database durante lo scambio: ricontrolla l'inventario.\");",
-  "ka": ""
+  "ka": "ბაზის შეცდომა გაცვლისას: გადაამოწმე ინვენტარი."
  },
  {
   "id": 1436,
@@ -245,7 +245,7 @@
   "line": 1143,
   "it": "Scambio non riuscito.",
   "ctx": "Inv_Say(giverid, -10270721, \"Scambio non riuscito.\");",
-  "ka": ""
+  "ka": "გაცვლა ვერ მოხერხდა."
  },
  {
   "id": 1437,
@@ -253,7 +253,7 @@
   "line": 1151,
   "it": "Hai ricevuto %s x%d.",
   "ctx": "SendClientMessage(receiverid, 0x66DD66FF, \"Hai ricevuto %s x%d.\", s_InvName[itemId], qty);",
-  "ka": ""
+  "ka": "მიიღე %s x%d."
  },
  {
   "id": 1438,
@@ -261,7 +261,7 @@
   "line": 1158,
   "it": "--- Supermercato: /compra [articolo] [quantita'] ---",
   "ctx": "SendClientMessage(playerid, -2994689, \"--- Supermercato: /compra [articolo] [quantita'] ---\");",
-  "ka": ""
+  "ka": "--- სუპერმარკეტი: /compra [პროდუქტი] [რაოდენობა] ---"
  },
  {
   "id": 1439,
@@ -269,7 +269,7 @@
   "line": 1171,
   "it": "Il cibo si compra a porzioni (max 12 con te) e si ripone nel frigo; il pasto si consuma con /usa pasto.",
   "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Il cibo si compra a porzioni (max 12 con te) e si ripone nel frigo; il pasto si consuma con /usa pasto.\");",
-  "ka": ""
+  "ka": "საკვები იყიდება პორციებად (მაქს. 12 თან) და ინახება მაცივარში; კერძი მიირთვი /usa pasto-თი."
  },
  {
   "id": 1440,
@@ -277,7 +277,7 @@
   "line": 1187,
   "it": "Questo articolo non e' in vendita.",
   "ctx": "Inv_Say(playerid, -10270721, \"Questo articolo non e' in vendita.\");",
-  "ka": ""
+  "ka": "ეს პროდუქტი არ იყიდება."
  },
  {
   "id": 1441,
@@ -285,7 +285,7 @@
   "line": 1193,
   "it": "Quantita' non valida (1-%d).",
   "ctx": "SendClientMessage(playerid, -10270721, \"Quantita' non valida (1-%d).\", stack);",
-  "ka": ""
+  "ka": "არასწორი რაოდენობა (1-%d)."
  },
  {
   "id": 1442,
@@ -293,7 +293,7 @@
   "line": 1207,
   "it": "Puoi averne al massimo %d con te.",
   "ctx": "SendClientMessage(playerid, -10270721, \"Puoi averne al massimo %d con te.\", maxTotal);",
-  "ka": ""
+  "ka": "თან მაქსიმუმ %d შეიძლება გქონდეს."
  },
  {
   "id": 1443,
@@ -301,7 +301,7 @@
   "line": 1213,
   "it": "Servono $%d in contanti.",
   "ctx": "SendClientMessage(playerid, -10270721, \"Servono $%d in contanti.\", cost);",
-  "ka": ""
+  "ka": "საჭიროა $%d ნაღდი ფული."
  },
  {
   "id": 1444,
@@ -309,7 +309,7 @@
   "line": 1225,
   "it": "Hai gia' uno zaino.",
   "ctx": "Inv_Say(playerid, -10270721, \"Hai gia' uno zaino.\");",
-  "ka": ""
+  "ka": "ზურგჩანთა უკვე გაქვს."
  },
  {
   "id": 1445,
@@ -317,7 +317,7 @@
   "line": 1230,
   "it": "Servono $%d in contanti.",
   "ctx": "SendClientMessage(playerid, -10270721, \"Servono $%d in contanti.\", 350);",
-  "ka": ""
+  "ka": "საჭიროა $%d ნაღდი ფული."
  },
  {
   "id": 1446,
@@ -325,7 +325,7 @@
   "line": 1242,
   "it": "Contanti insufficienti: acquisto annullato.",
   "ctx": "Inv_Say(playerid, -10270721, \"Contanti insufficienti: acquisto annullato.\");",
-  "ka": ""
+  "ka": "ნაღდი ფული არ გყოფნის: ყიდვა გაუქმდა."
  },
  {
   "id": 1447,
@@ -333,7 +333,7 @@
   "line": 1264,
   "it": "Hai comprato %s x%d per $%d.",
   "ctx": "SendClientMessage(playerid, 0x66DD66FF, \"Hai comprato %s x%d per $%d.\", s_InvName[itemId], qty, cost);",
-  "ka": ""
+  "ka": "იყიდე %s x%d $%d-ად."
  },
  {
   "id": 1448,
@@ -341,7 +341,7 @@
   "line": 1272,
   "it": "Non hai abbastanza spazio nell'inventario (o ne hai gia' il massimo).",
   "ctx": "Inv_Say(playerid, -10270721, \"Non hai abbastanza spazio nell'inventario (o ne hai gia' il massimo).\");",
-  "ka": ""
+  "ka": "ინვენტარში ადგილი არ გაქვს (ან უკვე მაქსიმუმი გაქვს)."
  },
  {
   "id": 1449,
@@ -349,7 +349,7 @@
   "line": 1276,
   "it": "Errore database: nessun addebito, riprova.",
   "ctx": "Inv_Say(playerid, -10270721, \"Errore database: nessun addebito, riprova.\");",
-  "ka": ""
+  "ka": "ბაზის შეცდომა: თანხა არ ჩამოგეჭრა, სცადე ხელახლა."
  },
  {
   "id": 1450,
@@ -357,7 +357,7 @@
   "line": 1280,
   "it": "Acquisto non riuscito.",
   "ctx": "Inv_Say(playerid, -10270721, \"Acquisto non riuscito.\");",
-  "ka": ""
+  "ka": "ყიდვა ვერ მოხერხდა."
  },
  {
   "id": 1451,
@@ -365,7 +365,7 @@
   "line": 1302,
   "it": "Hai comprato lo zaino per $%d: capienza %d slot.",
   "ctx": "SendClientMessage(playerid, 0x66DD66FF, \"Hai comprato lo zaino per $%d: capienza %d slot.\", 350, 20);",
-  "ka": ""
+  "ka": "იყიდე ზურგჩანთა $%d-ად: ტევადობა %d სლოტი."
  },
  {
   "id": 1452,
@@ -373,7 +373,7 @@
   "line": 1310,
   "it": "Hai gia' uno zaino.",
   "ctx": "Inv_Say(playerid, -10270721, \"Hai gia' uno zaino.\");",
-  "ka": ""
+  "ka": "ზურგჩანთა უკვე გაქვს."
  },
  {
   "id": 1453,
@@ -381,7 +381,7 @@
   "line": 1315,
   "it": "Errore database: nessun addebito, riprova.",
   "ctx": "Inv_Say(playerid, -10270721, \"Errore database: nessun addebito, riprova.\");",
-  "ka": ""
+  "ka": "ბაზის შეცდომა: თანხა არ ჩამოგეჭრა, სცადე ხელახლა."
  },
  {
   "id": 1454,
@@ -389,7 +389,7 @@
   "line": 1319,
   "it": "Acquisto non riuscito.",
   "ctx": "Inv_Say(playerid, -10270721, \"Acquisto non riuscito.\");",
-  "ka": ""
+  "ka": "ყიდვა ვერ მოხერხდა."
  },
  {
   "id": 1455,
@@ -397,7 +397,7 @@
   "line": 1340,
   "it": "Annullamento acquisto non riuscito: segnala il problema a un admin.",
   "ctx": "Inv_Say(p, -10270721, \"Annullamento acquisto non riuscito: segnala il problema a un admin.\");",
-  "ka": ""
+  "ka": "ყიდვის გაუქმება ვერ მოხერხდა: აცნობე ადმინისტრატორს."
  },
  {
   "id": 1456,
@@ -405,7 +405,7 @@
   "line": 1355,
   "it": "Quantita' non valida.",
   "ctx": "Inv_Say(playerid, -10270721, \"Quantita' non valida.\");",
-  "ka": ""
+  "ka": "არასწორი რაოდენობა."
  },
  {
   "id": 1457,
@@ -413,7 +413,7 @@
   "line": 1360,
   "it": "Non hai tutta quella spesa con te.",
   "ctx": "Inv_Say(playerid, -10270721, \"Non hai tutta quella spesa con te.\");",
-  "ka": ""
+  "ka": "ამდენი პროდუქტი თან არ გაქვს."
  },
  {
   "id": 1458,
@@ -421,7 +421,7 @@
   "line": 1365,
   "it": "Puoi portare al massimo %d porzioni.",
   "ctx": "SendClientMessage(playerid, -10270721, \"Puoi portare al massimo %d porzioni.\", 12);",
-  "ka": ""
+  "ka": "მაქსიმუმ %d პორციის ტარება შეგიძლია."
  },
  {
   "id": 1459,
@@ -429,7 +429,7 @@
   "line": 1385,
   "it": "Errore database: verifico lo stato del frigo...",
   "ctx": "Inv_Say(playerid, -10270721, \"Errore database: verifico lo stato del frigo...\");",
-  "ka": ""
+  "ka": "ბაზის შეცდომა: ვამოწმებ მაცივრის მდგომარეობას..."
  },
  {
   "id": 1460,
@@ -437,7 +437,7 @@
   "line": 1420,
   "it": "Scambio scaduto.",
   "ctx": "Inv_GiveCancel(p, \"Scambio scaduto.\");",
-  "ka": ""
+  "ka": "გაცვლის დრო ამოიწურა."
  },
  {
   "id": 1461,
@@ -445,7 +445,7 @@
   "line": 1470,
   "it": "Scambio annullato: il giocatore si e' scollegato.",
   "ctx": "Inv_GiveCancel(playerid, \"Scambio annullato: il giocatore si e' scollegato.\");",
-  "ka": ""
+  "ka": "გაცვლა გაუქმდა: მოთამაშე გავიდა სერვერიდან."
  },
  {
   "id": 1462,
@@ -453,7 +453,7 @@
   "line": 1482,
   "it": "Scambio annullato: il giocatore si e' scollegato.",
   "ctx": "Inv_GiveCancel(giver, \"Scambio annullato: il giocatore si e' scollegato.\");",
-  "ka": ""
+  "ka": "გაცვლა გაუქმდა: მოთამაშე გავიდა სერვერიდან."
  },
  {
   "id": 1083,
@@ -461,7 +461,7 @@
   "line": 2,
   "it": "Disoccupato",
   "ctx": "\"Disoccupato\",",
-  "ka": ""
+  "ka": "უმუშევარი"
  },
  {
   "id": 1084,
@@ -469,7 +469,7 @@
   "line": 3,
   "it": "Autista Bus",
   "ctx": "\"Autista Bus\",",
-  "ka": ""
+  "ka": "ავტობუსის მძღოლი"
  },
  {
   "id": 1085,
@@ -477,7 +477,7 @@
   "line": 4,
   "it": "Corriere",
   "ctx": "\"Corriere\",",
-  "ka": ""
+  "ka": "კურიერი"
  },
  {
   "id": 1086,
@@ -485,7 +485,7 @@
   "line": 5,
   "it": "Netturbino",
   "ctx": "\"Netturbino\"",
-  "ka": ""
+  "ka": "დამლაგებელი"
  },
  {
   "id": 1087,
@@ -493,7 +493,7 @@
   "line": 18,
   "it": "Tappa",
   "ctx": "\"Tappa\",",
-  "ka": ""
+  "ka": "გაჩერება"
  },
  {
   "id": 1088,
@@ -501,7 +501,7 @@
   "line": 19,
   "it": "Fermata",
   "ctx": "\"Fermata\",",
-  "ka": ""
+  "ka": "გაჩერება"
  },
  {
   "id": 1089,
@@ -509,7 +509,7 @@
   "line": 20,
   "it": "Consegna",
   "ctx": "\"Consegna\",",
-  "ka": ""
+  "ka": "მიწოდება"
  },
  {
   "id": 1090,
@@ -517,7 +517,7 @@
   "line": 21,
   "it": "Cassonetto",
   "ctx": "\"Cassonetto\"",
-  "ka": ""
+  "ka": "ნაგვის ურნა"
  },
  {
   "id": 1091,
@@ -525,7 +525,7 @@
   "line": 380,
   "it": "Turno annullato: %s",
   "ctx": "SendClientMessage(playerid, -10270721, \"Turno annullato: %s\", reason);",
-  "ka": ""
+  "ka": "ცვლა გაუქმდა: %s"
  },
  {
   "id": 1092,
@@ -533,7 +533,7 @@
   "line": 383,
   "it": "Il compenso maturato ($%d) e' andato perso.",
   "ctx": "SendClientMessage(playerid, -10270721, \"Il compenso maturato ($%d) e' andato perso.\", lost);",
-  "ka": ""
+  "ka": "დაგროვებული ანაზღაურება ($%d) დაიკარგა."
  },
  {
   "id": 1093,
@@ -541,7 +541,7 @@
   "line": 401,
   "it": "Tetto orario di $%d raggiunto: il turno prosegue ma non matura altro compenso.",
   "ctx": "SendClientMessage(playerid, -10270721, \"Tetto orario di $%d raggiunto: il turno prosegue ma non matura altro compenso.\", 2200);",
-  "ka": ""
+  "ka": "მიღწეულია საათობრივი ლიმიტი $%d: ცვლა გრძელდება, მაგრამ ანაზღაურება აღარ გროვდება."
  },
  {
   "id": 1094,
@@ -549,7 +549,7 @@
   "line": 416,
   "it": "Turno terminato: nessun compenso maturato.",
   "ctx": "SendClientMessage(playerid, -1, \"Turno terminato: nessun compenso maturato.\");",
-  "ka": ""
+  "ka": "ცვლა დასრულდა: ანაზღაურება არ დაგროვდა."
  },
  {
   "id": 1095,
@@ -557,7 +557,7 @@
   "line": 426,
   "it": "Un accredito precedente e' ancora in corso: compenso non registrato.",
   "ctx": "SendClientMessage(playerid, -10270721, \"Un accredito precedente e' ancora in corso: compenso non registrato.\");",
-  "ka": ""
+  "ka": "წინა ჩარიცხვა ჯერ კიდევ მიმდინარეობს: ანაზღაურება არ დარეგისტრირდა."
  },
  {
   "id": 1096,
@@ -565,7 +565,7 @@
   "line": 434,
   "it": "Turno terminato: registrazione del compenso ($%d) in corso...",
   "ctx": "SendClientMessage(playerid, -1, \"Turno terminato: registrazione del compenso ($%d) in corso...\", amount);",
-  "ka": ""
+  "ka": "ცვლა დასრულდა: ანაზღაურების ($%d) რეგისტრაცია მიმდინარეობს..."
  },
  {
   "id": 1097,
@@ -573,7 +573,7 @@
   "line": 462,
   "it": "Errore del servizio: compenso non accreditato.",
   "ctx": "SendClientMessage(playerid, -10270721, result < 0 ? \"Errore del servizio: compenso non accreditato.\" : \"Compenso rifiutato: nulla accreditato.\");",
-  "ka": ""
+  "ka": "სერვისის შეცდომა: ანაზღაურება არ ჩაირიცხა."
  },
  {
   "id": 1098,
@@ -581,7 +581,7 @@
   "line": 462,
   "it": "Compenso rifiutato: nulla accreditato.",
   "ctx": "SendClientMessage(playerid, -10270721, result < 0 ? \"Errore del servizio: compenso non accreditato.\" : \"Compenso rifiutato: nulla accreditato.\");",
-  "ka": ""
+  "ka": "ანაზღაურება უარყოფილია: არაფერი ჩაირიცხა."
  },
  {
   "id": 1099,
@@ -589,7 +589,7 @@
   "line": 464,
   "it": "payout non accreditato job %d importo %d esito %d char %d",
   "ctx": "format(msg, 128, \"payout non accreditato job %d importo %d esito %d char %d\", jobId, amount, result, gPlayer[playerid][pCharId]);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 1100,
@@ -597,7 +597,7 @@
   "line": 471,
   "it": "Compenso: $%d versati in banca. Saldo: $%d.",
   "ctx": "SendClientMessage(playerid, 0x66DD66FF, \"Compenso: $%d versati in banca. Saldo: $%d.\", paid, gPlayer[playerid][pBank]);",
-  "ka": ""
+  "ka": "ანაზღაურება: $%d ჩაირიცხა ბანკში. ბალანსი: $%d."
  },
  {
   "id": 1101,
@@ -605,7 +605,7 @@
   "line": 474,
   "it": "Il conto ha raggiunto il limite: parte del compenso e' andata persa.",
   "ctx": "SendClientMessage(playerid, -10270721, \"Il conto ha raggiunto il limite: parte del compenso e' andata persa.\");",
-  "ka": ""
+  "ka": "ანგარიშმა ლიმიტს მიაღწია: ანაზღაურების ნაწილი დაიკარგა."
  },
  {
   "id": 1102,
@@ -613,7 +613,7 @@
   "line": 479,
   "it": "Il conto bancario e' al limite: compenso non versato.",
   "ctx": "SendClientMessage(playerid, -10270721, \"Il conto bancario e' al limite: compenso non versato.\");",
-  "ka": ""
+  "ka": "საბანკო ანგარიში ლიმიტზეა: ანაზღაურება არ ჩაირიცხა."
  },
  {
   "id": 1103,
@@ -621,7 +621,7 @@
   "line": 512,
   "it": "tratta non valida: %s job %d tappa %d dist %.0f m in %d ms",
   "ctx": "format(msg, 128, \"tratta non valida: %s job %d tappa %d dist %.0f m in %d ms\", name, job, g_JsStep[playerid], dist, elapsedMs);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 1104,
@@ -629,7 +629,7 @@
   "line": 514,
   "it": "tratta percorsa troppo in fretta (controllo anti-abuso).",
   "ctx": "Job_Cancel(playerid, \"tratta percorsa troppo in fretta (controllo anti-abuso).\");",
-  "ka": ""
+  "ka": "მარშრუტი ზედმეტად სწრაფად გაიარე (ანტი-აბიუზ შემოწმება)."
  },
  {
   "id": 1105,
@@ -637,7 +637,7 @@
   "line": 525,
   "it": "Rientro completato: bonus di fine giro.",
   "ctx": "SendClientMessage(playerid, 0x66DD66FF, \"Rientro completato: bonus di fine giro.\");",
-  "ka": ""
+  "ka": "დაბრუნება დასრულდა: წრის ბონუსი."
  },
  {
   "id": 1106,
@@ -645,7 +645,7 @@
   "line": 531,
   "it": "%s %d/%d completata: +$%d (maturato $%d).",
   "ctx": "SendClientMessage(playerid, 0x66DD66FF, \"%s %d/%d completata: +$%d (maturato $%d).\", g_JobStepWord[job], g_JsStep[playerid], total, granted, g_JsEarned[playerid]);",
-  "ka": ""
+  "ka": "%s %d/%d დასრულდა: +$%d (დაგროვდა $%d)."
  },
  {
   "id": 1107,
@@ -653,7 +653,7 @@
   "line": 534,
   "it": "Ultima tappa fatta: rientra al deposito per il bonus (checkpoint sulla mappa).",
   "ctx": "SendClientMessage(playerid, 0x99CCFFFF, \"Ultima tappa fatta: rientra al deposito per il bonus (checkpoint sulla mappa).\");",
-  "ka": ""
+  "ka": "ბოლო გაჩერება გავლილია: დაბრუნდი დეპოში ბონუსისთვის (ჩეკპოინტი რუკაზე)."
  },
  {
   "id": 1108,
@@ -661,7 +661,7 @@
   "line": 556,
   "it": "non sei in condizione di lavorare.",
   "ctx": "Job_Cancel(i, \"non sei in condizione di lavorare.\");",
-  "ka": ""
+  "ka": "მუშაობის მდგომარეობაში არ ხარ."
  },
  {
   "id": 1109,
@@ -669,7 +669,7 @@
   "line": 562,
   "it": "il veicolo di lavoro non esiste piu'.",
   "ctx": "Job_Cancel(i, \"il veicolo di lavoro non esiste piu'.\");",
-  "ka": ""
+  "ka": "სამსახურის მანქანა აღარ არსებობს."
  },
  {
   "id": 1110,
@@ -677,7 +677,7 @@
   "line": 569,
   "it": "veicolo di lavoro distrutto.",
   "ctx": "Job_Cancel(i, \"veicolo di lavoro distrutto.\");",
-  "ka": ""
+  "ka": "სამსახურის მანქანა განადგურდა."
  },
  {
   "id": 1111,
@@ -685,7 +685,7 @@
   "line": 588,
   "it": "veicolo di lavoro abbandonato.",
   "ctx": "Job_Cancel(i, \"veicolo di lavoro abbandonato.\");",
-  "ka": ""
+  "ka": "სამსახურის მანქანა მიტოვებულია."
  },
  {
   "id": 1112,
@@ -693,7 +693,7 @@
   "line": 640,
   "it": "Non hai un lavoro. Recati al Job Center e usa /lavoro prendi.",
   "ctx": "Util_Send(playerid, -10270721, \"Non hai un lavoro. Recati al Job Center e usa /lavoro prendi.\");",
-  "ka": ""
+  "ka": "სამსახური არ გაქვს. მიდი Job Center-ში და გამოიყენე /lavoro prendi."
  },
  {
   "id": 1113,
@@ -701,7 +701,7 @@
   "line": 645,
   "it": "Hai gia' un turno in corso. Usa /fine per terminarlo.",
   "ctx": "Util_Send(playerid, -10270721, \"Hai gia' un turno in corso. Usa /fine per terminarlo.\");",
-  "ka": ""
+  "ka": "ცვლა უკვე მიმდინარეობს. დასასრულებლად: /fine."
  },
  {
   "id": 1114,
@@ -709,7 +709,7 @@
   "line": 650,
   "it": "Non puoi iniziare un turno adesso (ferito, ammanettato, in servizio o operazione in corso).",
   "ctx": "Util_Send(playerid, -10270721, \"Non puoi iniziare un turno adesso (ferito, ammanettato, in servizio o operazione in corso).\");",
-  "ka": ""
+  "ka": "ცვლას ახლა ვერ დაიწყებ (დაჭრილი, ბორკილებით, სამსახურში ან სხვა ოპერაცია მიმდინარეობს)."
  },
  {
   "id": 1115,
@@ -717,7 +717,7 @@
   "line": 655,
   "it": "Per questo lavoro serve il livello %d.",
   "ctx": "SendClientMessage(playerid, -10270721, \"Per questo lavoro serve il livello %d.\", g_JobMinLevel[job]);",
-  "ka": ""
+  "ka": "ამ სამსახურისთვის საჭიროა %d დონე."
  },
  {
   "id": 1116,
@@ -725,7 +725,7 @@
   "line": 661,
   "it": "Attendi ancora %d secondi prima di un nuovo turno.",
   "ctx": "SendClientMessage(playerid, -10270721, \"Attendi ancora %d secondi prima di un nuovo turno.\", Job_SecCeil(left));",
-  "ka": ""
+  "ka": "ახალ ცვლამდე კიდევ %d წამი მოიცადე."
  },
  {
   "id": 1117,
@@ -733,7 +733,7 @@
   "line": 666,
   "it": "Devi trovarti all'aperto per iniziare il turno.",
   "ctx": "Util_Send(playerid, -10270721, \"Devi trovarti all'aperto per iniziare il turno.\");",
-  "ka": ""
+  "ka": "ცვლის დასაწყებად გარეთ უნდა იყო."
  },
  {
   "id": 1118,
@@ -741,7 +741,7 @@
   "line": 673,
   "it": "Devi trovarti al deposito del tuo lavoro per iniziare il turno.",
   "ctx": "Util_Send(playerid, -10270721, \"Devi trovarti al deposito del tuo lavoro per iniziare il turno.\");",
-  "ka": ""
+  "ka": "ცვლის დასაწყებად შენი სამსახურის დეპოში უნდა იყო."
  },
  {
   "id": 1119,
@@ -749,7 +749,7 @@
   "line": 678,
   "it": "Nessun veicolo di lavoro disponibile al momento. Riprova tra poco.",
   "ctx": "Util_Send(playerid, -10270721, \"Nessun veicolo di lavoro disponibile al momento. Riprova tra poco.\");",
-  "ka": ""
+  "ka": "სამსახურის მანქანა ახლა არ არის. სცადე ცოტა ხანში."
  },
  {
   "id": 1120,
@@ -757,7 +757,7 @@
   "line": 684,
   "it": "Impossibile creare il veicolo di lavoro. Riprova.",
   "ctx": "Util_Send(playerid, -10270721, \"Impossibile creare il veicolo di lavoro. Riprova.\");",
-  "ka": ""
+  "ka": "სამსახურის მანქანის შექმნა ვერ მოხერხდა. სცადე ხელახლა."
  },
  {
   "id": 1121,
@@ -765,7 +765,7 @@
   "line": 712,
   "it": "Impossibile salire sul veicolo di lavoro. Riprova.",
   "ctx": "Util_Send(playerid, -10270721, \"Impossibile salire sul veicolo di lavoro. Riprova.\");",
-  "ka": ""
+  "ka": "სამსახურის მანქანაში ჩაჯდომა ვერ მოხერხდა. სცადე ხელახლა."
  },
  {
   "id": 1122,
@@ -773,7 +773,7 @@
   "line": 717,
   "it": "Turno iniziato (%s). Segui i checkpoint sulla mappa: fermati nel cerchio (max %.0f km/h) per %d secondi. /fine per terminare.",
   "ctx": "SendClientMessage(playerid, 0x66DD66FF, \"Turno iniziato (%s). Segui i checkpoint sulla mappa: fermati nel cerchio (max %.0f km/h) per %d secondi. /fine per terminare.\", g_JobName[job], 12.0, g_JobDwel",
-  "ka": ""
+  "ka": "ცვლა დაიწყო (%s). მიჰყევი ჩეკპოინტებს: გაჩერდი წრეში (მაქს. %.0f კმ/სთ) %d წამით. დასრულება: /fine."
  },
  {
   "id": 1123,
@@ -781,7 +781,7 @@
   "line": 730,
   "it": "Non hai nessun turno in corso.",
   "ctx": "Util_Send(playerid, -10270721, \"Non hai nessun turno in corso.\");",
-  "ka": ""
+  "ka": "მიმდინარე ცვლა არ გაქვს."
  },
  {
   "id": 1124,
@@ -789,7 +789,7 @@
   "line": 749,
   "it": "Uso: /lavoro [info|prendi|lascia]  (prendi e lascia solo al Job Center)",
   "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Uso: /lavoro [info|prendi|lascia]  (prendi e lascia solo al Job Center)\");",
-  "ka": ""
+  "ka": "გამოყენება: /lavoro [info|prendi|lascia]  (prendi და lascia მხოლოდ Job Center-ში)"
  },
  {
   "id": 1125,
@@ -797,7 +797,7 @@
   "line": 754,
   "it": "Devi essere al Job Center (piazza City Hall).",
   "ctx": "Util_Send(playerid, -10270721, \"Devi essere al Job Center (piazza City Hall).\");",
-  "ka": ""
+  "ka": "უნდა იყო Job Center-ში (City Hall-ის მოედანი)."
  },
  {
   "id": 1126,
@@ -805,7 +805,7 @@
   "line": 759,
   "it": "Termina prima il turno in corso (/fine).",
   "ctx": "Util_Send(playerid, -10270721, \"Termina prima il turno in corso (/fine).\");",
-  "ka": ""
+  "ka": "ჯერ დაასრულე მიმდინარე ცვლა (/fine)."
  },
  {
   "id": 1127,
@@ -813,7 +813,7 @@
   "line": 764,
   "it": "Non hai un lavoro da lasciare.",
   "ctx": "Util_Send(playerid, -10270721, \"Non hai un lavoro da lasciare.\");",
-  "ka": ""
+  "ka": "დასატოვებელი სამსახური არ გაქვს."
  },
  {
   "id": 1128,
@@ -821,7 +821,7 @@
   "line": 784,
   "it": "Devi essere al Job Center.",
   "ctx": "Util_Send(playerid, -10270721, \"Devi essere al Job Center.\");",
-  "ka": ""
+  "ka": "უნდა იყო Job Center-ში."
  },
  {
   "id": 1129,
@@ -829,7 +829,7 @@
   "line": 789,
   "it": "Non puoi cambiare lavoro adesso.",
   "ctx": "Util_Send(playerid, -10270721, \"Non puoi cambiare lavoro adesso.\");",
-  "ka": ""
+  "ka": "სამსახურს ახლა ვერ შეიცვლი."
  },
  {
   "id": 1130,
@@ -837,7 +837,7 @@
   "line": 794,
   "it": "Per questo lavoro serve il livello %d.",
   "ctx": "SendClientMessage(playerid, -10270721, \"Per questo lavoro serve il livello %d.\", g_JobMinLevel[jobIndex]);",
-  "ka": ""
+  "ka": "ამ სამსახურისთვის საჭიროა %d დონე."
  },
  {
   "id": 1131,
@@ -845,7 +845,7 @@
   "line": 799,
   "it": "Fai gia' questo lavoro.",
   "ctx": "Util_Send(playerid, -10270721, \"Fai gia' questo lavoro.\");",
-  "ka": ""
+  "ka": "ამ სამსახურში უკვე მუშაობ."
  },
  {
   "id": 1132,
@@ -853,7 +853,7 @@
   "line": 805,
   "it": "Potrai cambiare lavoro tra %d secondi.",
   "ctx": "SendClientMessage(playerid, -10270721, \"Potrai cambiare lavoro tra %d secondi.\", Job_SecCeil(left));",
-  "ka": ""
+  "ka": "სამსახურის შეცვლა %d წამში შეგეძლება."
  },
  {
   "id": 1133,
@@ -861,7 +861,7 @@
   "line": 822,
   "it": "Devi essere al Job Center.",
   "ctx": "Util_Send(playerid, -10270721, \"Devi essere al Job Center.\");",
-  "ka": ""
+  "ka": "უნდა იყო Job Center-ში."
  },
  {
   "id": 1134,
@@ -869,7 +869,7 @@
   "line": 827,
   "it": "Non puoi lasciare il lavoro adesso.",
   "ctx": "Util_Send(playerid, -10270721, \"Non puoi lasciare il lavoro adesso.\");",
-  "ka": ""
+  "ka": "სამსახურს ახლა ვერ დატოვებ."
  },
  {
   "id": 1135,
@@ -877,7 +877,7 @@
   "line": 854,
   "it": "Hai lasciato il lavoro.",
   "ctx": "Util_Send(playerid, 0x66DD66FF, \"Hai lasciato il lavoro.\");",
-  "ka": ""
+  "ka": "სამსახური დატოვე."
  },
  {
   "id": 1136,
@@ -885,7 +885,7 @@
   "line": 858,
   "it": "Ora lavori come %s. Usa /inizia per iniziare un turno.",
   "ctx": "SendClientMessage(playerid, 0x66DD66FF, \"Ora lavori come %s. Usa /inizia per iniziare un turno.\", g_JobName[jobId]);",
-  "ka": ""
+  "ka": "ახლა მუშაობ როგორც %s. ცვლის დასაწყებად: /inizia."
  },
  {
   "id": 1137,
@@ -893,7 +893,7 @@
   "line": 862,
   "it": "%s lavoro -> %d",
   "ctx": "format(msg, 128, \"%s lavoro -> %d\", name, jobId);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 1138,
@@ -901,7 +901,7 @@
   "line": 867,
   "it": "Cambio di lavoro non eseguito.",
   "ctx": "Util_Send(playerid, -10270721, \"Cambio di lavoro non eseguito.\");",
-  "ka": ""
+  "ka": "სამსახურის შეცვლა ვერ მოხერხდა."
  },
  {
   "id": 1139,
@@ -909,7 +909,7 @@
   "line": 871,
   "it": "Servizio temporaneamente non disponibile: riprova piu' tardi.",
   "ctx": "Util_Send(playerid, -10270721, \"Servizio temporaneamente non disponibile: riprova piu' tardi.\");",
-  "ka": ""
+  "ka": "სერვისი დროებით მიუწვდომელია: სცადე მოგვიანებით."
  },
  {
   "id": 1140,
@@ -917,7 +917,7 @@
   "line": 890,
   "it": "Job Center\\nUsa /lavoro",
   "ctx": "Lang_Create3DTextLabel(\"Job Center\\nUsa /lavoro\", -2994689, 1480.5, -1736.0, (13.5 + 1.0), 15.0, 0, false);",
-  "ka": ""
+  "ka": "Job Center\\nგამოიყენე /lavoro"
  },
  {
   "id": 1141,
@@ -925,7 +925,7 @@
   "line": 934,
   "it": "sei morto o ferito.",
   "ctx": "Job_Cancel(playerid, \"sei morto o ferito.\");",
-  "ka": ""
+  "ka": "მოკვდი ან დაჭრილი ხარ."
  },
  {
   "id": 1142,
@@ -933,7 +933,7 @@
   "line": 948,
   "it": "Questo veicolo di lavoro e' in uso da un altro lavoratore.",
   "ctx": "Util_Send(playerid, -10270721, \"Questo veicolo di lavoro e' in uso da un altro lavoratore.\");",
-  "ka": ""
+  "ka": "ამ სამსახურის მანქანას სხვა თანამშრომელი იყენებს."
  },
  {
   "id": 1143,
@@ -941,7 +941,7 @@
   "line": 963,
   "it": "Torna sul veicolo di lavoro entro %d secondi o il turno sara' annullato.",
   "ctx": "SendClientMessage(playerid, -10270721, \"Torna sul veicolo di lavoro entro %d secondi o il turno sara' annullato.\", 45);",
-  "ka": ""
+  "ka": "დაბრუნდი სამსახურის მანქანაში %d წამში, თორემ ცვლა გაუქმდება."
  },
  {
   "id": 1144,
@@ -949,7 +949,7 @@
   "line": 982,
   "it": "Questo veicolo di lavoro e' in uso da un altro lavoratore.",
   "ctx": "Util_Send(playerid, -10270721, \"Questo veicolo di lavoro e' in uso da un altro lavoratore.\");",
-  "ka": ""
+  "ka": "ამ სამსახურის მანქანას სხვა თანამშრომელი იყენებს."
  },
  {
   "id": 1145,
@@ -957,7 +957,7 @@
   "line": 994,
   "it": "veicolo di lavoro distrutto.",
   "ctx": "Job_Cancel(owner, \"veicolo di lavoro distrutto.\");",
-  "ka": ""
+  "ka": "სამსახურის მანქანა განადგურდა."
  },
  {
   "id": 1317,
@@ -965,7 +965,7 @@
   "line": 75,
   "it": "evento %d scartato (annidamento): quartiere %d pers. %d valore %d",
   "ctx": "format(msg, 256, \"evento %d scartato (annidamento): quartiere %d pers. %d valore %d\", type, districtId, charId, value);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 1318,
@@ -973,7 +973,7 @@
   "line": 186,
   "it": "I servizi della citta' si stanno avviando: riprova tra poco.",
   "ctx": "Util_Send(playerid, -10270721, \"I servizi della citta' si stanno avviando: riprova tra poco.\");",
-  "ka": ""
+  "ka": "ქალაქის სერვისები ირთვება: სცადე ცოტა ხანში."
  },
  {
   "id": 1319,
@@ -981,7 +981,7 @@
   "line": 190,
   "it": "Sei ferito: non puoi farlo ora.",
   "ctx": "Util_Send(playerid, -10270721, \"Sei ferito: non puoi farlo ora.\");",
-  "ka": ""
+  "ka": "დაჭრილი ხარ: ახლა ამას ვერ გააკეთებ."
  },
  {
   "id": 1320,
@@ -989,7 +989,7 @@
   "line": 194,
   "it": "Sei ammanettato: non puoi farlo ora.",
   "ctx": "Util_Send(playerid, -10270721, \"Sei ammanettato: non puoi farlo ora.\");",
-  "ka": ""
+  "ka": "ბორკილები გადევს: ახლა ამას ვერ გააკეთებ."
  },
  {
   "id": 1321,
@@ -997,7 +997,7 @@
   "line": 202,
   "it": "Sei in turno di lavoro: termina prima il turno (/fine).",
   "ctx": "Util_Send(playerid, -10270721, \"Sei in turno di lavoro: termina prima il turno (/fine).\");",
-  "ka": ""
+  "ka": "სამუშაო ცვლაში ხარ: ჯერ დაასრულე ცვლა (/fine)."
  },
  {
   "id": 1322,
@@ -1005,7 +1005,7 @@
   "line": 206,
   "it": "Hai gia' un contratto attivo (/contratto).",
   "ctx": "Util_Send(playerid, -10270721, \"Hai gia' un contratto attivo (/contratto).\");",
-  "ka": ""
+  "ka": "უკვე გაქვს აქტიური კონტრაქტი (/contratto)."
  },
  {
   "id": 1323,
@@ -1013,7 +1013,7 @@
   "line": 210,
   "it": "Sei in servizio taxi: prima /taxi off.",
   "ctx": "Util_Send(playerid, -10270721, \"Sei in servizio taxi: prima /taxi off.\");",
-  "ka": ""
+  "ka": "ტაქსის სამსახურში ხარ: ჯერ /taxi off."
  },
  {
   "id": 1324,
@@ -1021,7 +1021,7 @@
   "line": 214,
   "it": "Hai un noleggio in corso: prima /riconsegna.",
   "ctx": "Util_Send(playerid, -10270721, \"Hai un noleggio in corso: prima /riconsegna.\");",
-  "ka": ""
+  "ka": "ქირაობა მიმდინარეობს: ჯერ /riconsegna."
  },
  {
   "id": 1325,
@@ -1029,7 +1029,7 @@
   "line": 305,
   "it": "veicolo %d (modulo %d) non rilasciato dal modulo alla disconnessione di %d: distrutto",
   "ctx": "format(msg, 256, \"veicolo %d (modulo %d) non rilasciato dal modulo alla disconnessione di %d: distrutto\", v, g_LdVehMod[v], playerid);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 1326,
@@ -1037,7 +1037,7 @@
   "line": 365,
   "it": "Idlewood",
   "ctx": "return LD_CopyStr(dest, size, \"Idlewood\");",
-  "ka": ""
+  "ka": "Idlewood"
  },
  {
   "id": 1327,
@@ -1045,7 +1045,7 @@
   "line": 369,
   "it": "Ganton",
   "ctx": "return LD_CopyStr(dest, size, \"Ganton\");",
-  "ka": ""
+  "ka": "Ganton"
  },
  {
   "id": 1328,
@@ -1053,7 +1053,7 @@
   "line": 373,
   "it": "Jefferson",
   "ctx": "return LD_CopyStr(dest, size, \"Jefferson\");",
-  "ka": ""
+  "ka": "Jefferson"
  },
  {
   "id": 55,
@@ -1061,7 +1061,7 @@
   "line": 20,
   "it": "Faggio",
   "ctx": "strcat(dest, \"Faggio\", size);",
-  "ka": ""
+  "ka": "Faggio"
  },
  {
   "id": 56,
@@ -1069,7 +1069,7 @@
   "line": 24,
   "it": "Previon",
   "ctx": "strcat(dest, \"Previon\", size);",
-  "ka": ""
+  "ka": "Previon"
  },
  {
   "id": 57,
@@ -1077,7 +1077,7 @@
   "line": 28,
   "it": "Manana",
   "ctx": "strcat(dest, \"Manana\", size);",
-  "ka": ""
+  "ka": "Manana"
  },
  {
   "id": 58,
@@ -1085,7 +1085,7 @@
   "line": 32,
   "it": "Taxi",
   "ctx": "strcat(dest, \"Taxi\", size);",
-  "ka": ""
+  "ka": "ტაქსი"
  },
  {
   "id": 59,
@@ -1093,7 +1093,7 @@
   "line": 244,
   "it": "Nessun mezzo disponibile al momento: noleggio annullato e importo restituito sul conto.",
   "ctx": "Util_Send(playerid, -10270721, \"Nessun mezzo disponibile al momento: noleggio annullato e importo restituito sul conto.\");",
-  "ka": ""
+  "ka": "თავისუფალი მანქანა ახლა არ არის: ქირაობა გაუქმდა, თანხა ანგარიშზე დაგიბრუნდა."
  },
  {
   "id": 60,
@@ -1101,7 +1101,7 @@
   "line": 254,
   "it": "Noleggio interrotto: cauzione di $%d restituita sul conto.",
   "ctx": "SendClientMessage(playerid, -1, \"Noleggio interrotto: cauzione di $%d restituita sul conto.\", refund);",
-  "ka": ""
+  "ka": "ქირაობა შეწყდა: გირაო $%d ანგარიშზე დაგიბრუნდა."
  },
  {
   "id": 61,
@@ -1109,7 +1109,7 @@
   "line": 265,
   "it": "Noleggio chiuso oltre la tolleranza: restituiti $%d.",
   "ctx": "SendClientMessage(playerid, -1, \"Noleggio chiuso oltre la tolleranza: restituiti $%d.\", refund);",
-  "ka": ""
+  "ka": "ქირაობა დაიხურა დაშვებული დროის შემდეგ: დაგიბრუნდა $%d."
  },
  {
   "id": 62,
@@ -1117,7 +1117,7 @@
   "line": 269,
   "it": "Noleggio scaduto oltre la tolleranza: il mezzo e' tornato all'agenzia e la cauzione e' stata trattenuta.",
   "ctx": "Util_Send(playerid, -10270721, \"Noleggio scaduto oltre la tolleranza: il mezzo e' tornato all'agenzia e la cauzione e' stata trattenuta.\");",
-  "ka": ""
+  "ka": "ქირის ვადა და დაშვებული დრო ამოიწურა: მანქანა სააგენტოში დაბრუნდა, გირაო დაკავებულია."
  },
  {
   "id": 63,
@@ -1125,7 +1125,7 @@
   "line": 274,
   "it": "Il noleggio risultava gia' chiuso.",
   "ctx": "Util_Send(playerid, -1, \"Il noleggio risultava gia' chiuso.\");",
-  "ka": ""
+  "ka": "ქირაობა უკვე დახურული იყო."
  },
  {
   "id": 64,
@@ -1133,7 +1133,7 @@
   "line": 278,
   "it": "Chiusura del noleggio non riuscita: verra' sistemata automaticamente al prossimo accesso.",
   "ctx": "Util_Send(playerid, -10270721, \"Chiusura del noleggio non riuscita: verra' sistemata automaticamente al prossimo accesso.\");",
-  "ka": ""
+  "ka": "ქირაობის დახურვა ვერ მოხერხდა: შემდეგ შესვლისას ავტომატურად მოგვარდება."
  },
  {
   "id": 65,
@@ -1141,7 +1141,7 @@
   "line": 311,
   "it": "Fondi insufficienti (banca + contanti) per canone e cauzione.",
   "ctx": "Util_Send(playerid, -10270721, \"Fondi insufficienti (banca + contanti) per canone e cauzione.\");",
-  "ka": ""
+  "ka": "სახსრები არ გყოფნის (ბანკი + ნაღდი) ქირისა და გირაოსთვის."
  },
  {
   "id": 66,
@@ -1149,7 +1149,7 @@
   "line": 315,
   "it": "Non puoi noleggiare ora: hai gia' un noleggio o un contratto attivo, oppure livello insufficiente.",
   "ctx": "Util_Send(playerid, -10270721, \"Non puoi noleggiare ora: hai gia' un noleggio o un contratto attivo, oppure livello insufficiente.\");",
-  "ka": ""
+  "ka": "ახლა ვერ იქირავებ: უკვე გაქვს ქირაობა ან აქტიური კონტრაქტი, ან დონე არ გყოფნის."
  },
  {
   "id": 67,
@@ -1157,7 +1157,7 @@
   "line": 319,
   "it": "Un'altra operazione di noleggio e' in corso: riprova tra poco.",
   "ctx": "Util_Send(playerid, -10270721, \"Un'altra operazione di noleggio e' in corso: riprova tra poco.\");",
-  "ka": ""
+  "ka": "ქირაობის სხვა ოპერაცია მიმდინარეობს: სცადე ცოტა ხანში."
  },
  {
   "id": 68,
@@ -1165,7 +1165,7 @@
   "line": 323,
   "it": "Richiesta di noleggio non valida.",
   "ctx": "Util_Send(playerid, -10270721, \"Richiesta di noleggio non valida.\");",
-  "ka": ""
+  "ka": "ქირაობის არასწორი მოთხოვნა."
  },
  {
   "id": 69,
@@ -1173,7 +1173,7 @@
   "line": 327,
   "it": "Servizio noleggi momentaneamente non raggiungibile: nessun addebito, riprova tra poco.",
   "ctx": "Util_Send(playerid, -10270721, \"Servizio noleggi momentaneamente non raggiungibile: nessun addebito, riprova tra poco.\");",
-  "ka": ""
+  "ka": "ქირაობის სერვისი დროებით მიუწვდომელია: თანხა არ ჩამოგეჭრა, სცადე ცოტა ხანში."
  },
  {
   "id": 70,
@@ -1181,7 +1181,7 @@
   "line": 367,
   "it": "Noleggio attivo: %s per %d minuti (canone $%d, cauzione $%d). Riportalo qui con /riconsegna.",
   "ctx": "SendClientMessage(playerid, 0x66DD66FF, \"Noleggio attivo: %s per %d minuti (canone $%d, cauzione $%d). Riportalo qui con /riconsegna.\", name, minutes > 0 ? minutes : 0, g_RtFee[playerid], g_RtDeposit[",
-  "ka": ""
+  "ka": "ქირაობა აქტიურია: %s %d წუთით (ქირა $%d, გირაო $%d). დააბრუნე აქ: /riconsegna."
  },
  {
   "id": 71,
@@ -1189,7 +1189,7 @@
   "line": 425,
   "it": "Pratica di noleggio gia' in corso: attendi.",
   "ctx": "Util_Send(playerid, -10270721, \"Pratica di noleggio gia' in corso: attendi.\");",
-  "ka": ""
+  "ka": "ქირაობის განაცხადი უკვე მუშავდება: მოიცადე."
  },
  {
   "id": 72,
@@ -1197,7 +1197,7 @@
   "line": 436,
   "it": "Devi trovarti all'agenzia di noleggio di Pershing Square.",
   "ctx": "Util_Send(playerid, -10270721, \"Devi trovarti all'agenzia di noleggio di Pershing Square.\");",
-  "ka": ""
+  "ka": "უნდა იყო Pershing Square-ის ქირაობის სააგენტოში."
  },
  {
   "id": 73,
@@ -1205,7 +1205,7 @@
   "line": 441,
   "it": "Scendi dal veicolo per noleggiare.",
   "ctx": "Util_Send(playerid, -10270721, \"Scendi dal veicolo per noleggiare.\");",
-  "ka": ""
+  "ka": "ქირაობისთვის გადმოდი მანქანიდან."
  },
  {
   "id": 74,
@@ -1213,7 +1213,7 @@
   "line": 446,
   "it": "Serve almeno il livello %d per noleggiare.",
   "ctx": "SendClientMessage(playerid, -10270721, \"Serve almeno il livello %d per noleggiare.\", 1);",
-  "ka": ""
+  "ka": "ქირაობისთვის საჭიროა მინიმუმ %d დონე."
  },
  {
   "id": 75,
@@ -1221,7 +1221,7 @@
   "line": 470,
   "it": "Al momento non ci sono mezzi disponibili: riprova tra poco.",
   "ctx": "Util_Send(playerid, -10270721, \"Al momento non ci sono mezzi disponibili: riprova tra poco.\");",
-  "ka": ""
+  "ka": "თავისუფალი მანქანა ახლა არ არის: სცადე ცოტა ხანში."
  },
  {
   "id": 76,
@@ -1229,7 +1229,7 @@
   "line": 483,
   "it": "Scelta di noleggio non valida.",
   "ctx": "UI_LivingReject(playerid, \"Scelta di noleggio non valida.\");",
-  "ka": ""
+  "ka": "ქირაობის არასწორი არჩევანი."
  },
  {
   "id": 77,
@@ -1237,7 +1237,7 @@
   "line": 488,
   "it": "Al momento non ci sono mezzi disponibili: riprova tra poco.",
   "ctx": "UI_LivingReject(playerid, \"Al momento non ci sono mezzi disponibili: riprova tra poco.\");",
-  "ka": ""
+  "ka": "თავისუფალი მანქანა ახლა არ არის: სცადე ცოტა ხანში."
  },
  {
   "id": 78,
@@ -1245,7 +1245,7 @@
   "line": 496,
   "it": "Fondi insufficienti: servono $%d (canone + cauzione) tra banca e contanti.",
   "ctx": "format(msg, 160, \"Fondi insufficienti: servono $%d (canone + cauzione) tra banca e contanti.\", total);",
-  "ka": ""
+  "ka": "სახსრები არ გყოფნის: საჭიროა $%d (ქირა + გირაო) ბანკსა და ნაღდში."
  },
  {
   "id": 79,
@@ -1253,7 +1253,7 @@
   "line": 502,
   "it": "Pratica di noleggio gia' in corso: attendi.",
   "ctx": "UI_LivingReject(playerid, \"Pratica di noleggio gia' in corso: attendi.\");",
-  "ka": ""
+  "ka": "ქირაობის განაცხადი უკვე მუშავდება: მოიცადე."
  },
  {
   "id": 80,
@@ -1261,7 +1261,7 @@
   "line": 505,
   "it": "Pratica di noleggio in corso...",
   "ctx": "Util_Send(playerid, -1, \"Pratica di noleggio in corso...\");",
-  "ka": ""
+  "ka": "ქირაობის განაცხადი მუშავდება..."
  },
  {
   "id": 81,
@@ -1269,7 +1269,7 @@
   "line": 519,
   "it": "Non hai un noleggio attivo.",
   "ctx": "Util_Send(playerid, -10270721, \"Non hai un noleggio attivo.\");",
-  "ka": ""
+  "ka": "აქტიური ქირაობა არ გაქვს."
  },
  {
   "id": 82,
@@ -1277,7 +1277,7 @@
   "line": 527,
   "it": "Il taxi si restituisce al deposito con /taxi off.",
   "ctx": "Util_Send(playerid, -10270721, \"Il taxi si restituisce al deposito con /taxi off.\");",
-  "ka": ""
+  "ka": "ტაქსი დეპოში ბრუნდება /taxi off-ით."
  },
  {
   "id": 83,
@@ -1285,7 +1285,7 @@
   "line": 535,
   "it": "Pratica di noleggio gia' in corso: attendi.",
   "ctx": "Util_Send(playerid, -10270721, \"Pratica di noleggio gia' in corso: attendi.\");",
-  "ka": ""
+  "ka": "ქირაობის განაცხადი უკვე მუშავდება: მოიცადე."
  },
  {
   "id": 84,
@@ -1293,7 +1293,7 @@
   "line": 544,
   "it": "Devi essere al volante del mezzo noleggiato.",
   "ctx": "Util_Send(playerid, -10270721, \"Devi essere al volante del mezzo noleggiato.\");",
-  "ka": ""
+  "ka": "ნაქირავები მანქანის საჭესთან უნდა იჯდე."
  },
  {
   "id": 85,
@@ -1301,7 +1301,7 @@
   "line": 552,
   "it": "Riporta il mezzo all'agenzia di noleggio di Pershing Square.",
   "ctx": "Util_Send(playerid, -10270721, \"Riporta il mezzo all'agenzia di noleggio di Pershing Square.\");",
-  "ka": ""
+  "ka": "დააბრუნე მანქანა Pershing Square-ის ქირაობის სააგენტოში."
  },
  {
   "id": 86,
@@ -1309,7 +1309,7 @@
   "line": 582,
   "it": "Questo noleggio non e' piu' attivo.",
   "ctx": "UI_LivingReject(playerid, \"Questo noleggio non e' piu' attivo.\");",
-  "ka": ""
+  "ka": "ეს ქირაობა აღარ არის აქტიური."
  },
  {
   "id": 87,
@@ -1317,7 +1317,7 @@
   "line": 590,
   "it": "Riconsegna in corso...",
   "ctx": "Util_Send(playerid, -1, \"Riconsegna in corso...\");",
-  "ka": ""
+  "ka": "მანქანის დაბრუნება მიმდინარეობს..."
  },
  {
   "id": 88,
@@ -1325,7 +1325,7 @@
   "line": 697,
   "it": "Il tuo noleggio scade tra %d minuti.",
   "ctx": "SendClientMessage(playerid, -2994689, \"Il tuo noleggio scade tra %d minuti.\", (left + 60 - 1) / 60);",
-  "ka": ""
+  "ka": "შენი ქირის ვადა %d წუთში იწურება."
  },
  {
   "id": 89,
@@ -1333,7 +1333,7 @@
   "line": 702,
   "it": "Il turno di noleggio del taxi scade tra un minuto.",
   "ctx": "Util_Send(playerid, -2994689, pro ? \"Il turno di noleggio del taxi scade tra un minuto.\" : \"Il tuo noleggio scade tra un minuto: riportalo all'agenzia (/riconsegna).\");",
-  "ka": ""
+  "ka": "ტაქსის ქირის ცვლა ერთ წუთში იწურება."
  },
  {
   "id": 90,
@@ -1341,7 +1341,7 @@
   "line": 702,
   "it": "Il tuo noleggio scade tra un minuto: riportalo all'agenzia (/riconsegna).",
   "ctx": "Util_Send(playerid, -2994689, pro ? \"Il turno di noleggio del taxi scade tra un minuto.\" : \"Il tuo noleggio scade tra un minuto: riportalo all'agenzia (/riconsegna).\");",
-  "ka": ""
+  "ka": "შენი ქირის ვადა ერთ წუთში იწურება: დააბრუნე სააგენტოში (/riconsegna)."
  },
  {
   "id": 91,
@@ -1349,7 +1349,7 @@
   "line": 709,
   "it": "Noleggio scaduto: hai %d minuti di tolleranza per la riconsegna, poi la cauzione resta all'agenzia.",
   "ctx": "SendClientMessage(playerid, -10270721, \"Noleggio scaduto: hai %d minuti di tolleranza per la riconsegna, poi la cauzione resta all'agenzia.\", 5);",
-  "ka": ""
+  "ka": "ქირის ვადა ამოიწურა: დასაბრუნებლად გაქვს %d წუთი, შემდეგ გირაო სააგენტოს რჩება."
  },
  {
   "id": 92,
@@ -1357,7 +1357,7 @@
   "line": 716,
   "it": "Il noleggio del taxi e' scaduto: il turno si conclude.",
   "ctx": "Util_Send(playerid, -1, \"Il noleggio del taxi e' scaduto: il turno si conclude.\");",
-  "ka": ""
+  "ka": "ტაქსის ქირის ვადა ამოიწურა: ცვლა სრულდება."
  },
  {
   "id": 93,
@@ -1365,7 +1365,7 @@
   "line": 723,
   "it": "Tolleranza scaduta: il mezzo torna all'agenzia.",
   "ctx": "Util_Send(playerid, -10270721, \"Tolleranza scaduta: il mezzo torna all'agenzia.\");",
-  "ka": ""
+  "ka": "დაშვებული დრო ამოიწურა: მანქანა სააგენტოში ბრუნდება."
  },
  {
   "id": 94,
@@ -1373,7 +1373,7 @@
   "line": 759,
   "it": "Noleggio veicoli\\n/noleggio  ·  /riconsegna",
   "ctx": "Lang_Create3DTextLabel(\"Noleggio veicoli\\n/noleggio  ·  /riconsegna\", -2994689, 1505.0, -1700.0, (13.5 + 0.8), 20.0, 0, false);",
-  "ka": ""
+  "ka": "მანქანების ქირაობა\\n/noleggio  ·  /riconsegna"
  },
  {
   "id": 95,
@@ -1381,7 +1381,7 @@
   "line": 832,
   "it": "Noleggio interrotto: il mezzo torna all'agenzia.",
   "ctx": "Util_Send(playerid, -1, \"Noleggio interrotto: il mezzo torna all'agenzia.\");",
-  "ka": ""
+  "ka": "ქირაობა შეწყდა: მანქანა სააგენტოში ბრუნდება."
  },
  {
   "id": 96,
@@ -1389,7 +1389,7 @@
   "line": 850,
   "it": "Questo taxi e' in servizio: puoi salire solo come passeggero.",
   "ctx": "Util_Send(playerid, -10270721, mod == 2 ? \"Questo taxi e' in servizio: puoi salire solo come passeggero.\" : \"Questo mezzo e' a noleggio di un altro cliente.\");",
-  "ka": ""
+  "ka": "ეს ტაქსი სამსახურშია: მხოლოდ მგზავრად შეგიძლია ჩაჯდე."
  },
  {
   "id": 97,
@@ -1397,7 +1397,7 @@
   "line": 850,
   "it": "Questo mezzo e' a noleggio di un altro cliente.",
   "ctx": "Util_Send(playerid, -10270721, mod == 2 ? \"Questo taxi e' in servizio: puoi salire solo come passeggero.\" : \"Questo mezzo e' a noleggio di un altro cliente.\");",
-  "ka": ""
+  "ka": "ეს მანქანა სხვა კლიენტს აქვს ნაქირავები."
  },
  {
   "id": 98,
@@ -1405,7 +1405,7 @@
   "line": 877,
   "it": "Solo chi ha noleggiato questo mezzo puo' guidarlo.",
   "ctx": "Util_Send(playerid, -10270721, \"Solo chi ha noleggiato questo mezzo puo' guidarlo.\");",
-  "ka": ""
+  "ka": "ამ მანქანის მართვა მხოლოდ დამქირავებელს შეუძლია."
  },
  {
   "id": 99,
@@ -1413,7 +1413,7 @@
   "line": 903,
   "it": "Il mezzo a noleggio e' stato distrutto: la cauzione copre i danni.",
   "ctx": "Util_Send(owner, -10270721, \"Il mezzo a noleggio e' stato distrutto: la cauzione copre i danni.\");",
-  "ka": ""
+  "ka": "ნაქირავები მანქანა განადგურდა: ზარალს გირაო ფარავს."
  },
  {
   "id": 100,
@@ -1421,7 +1421,7 @@
   "line": 143,
   "it": "RENT",
   "ctx": "SetVehicleNumberPlate(veh, \"RENT\");",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 299,
@@ -1429,7 +1429,7 @@
   "line": 279,
   "it": "La corsa e' stata annullata: il taxi non e' piu' in servizio.",
   "ctx": "Taxi_CancelRide(driverid, \"\", \"La corsa e' stata annullata: il taxi non e' piu' in servizio.\");",
-  "ka": ""
+  "ka": "მგზავრობა გაუქმდა: ტაქსი აღარ არის სამსახურში."
  },
  {
   "id": 300,
@@ -1437,7 +1437,7 @@
   "line": 380,
   "it": "Cliente",
   "ctx": "UI_LivingTaxiOffer(driverid, g_TxOfferCall[driverid], true, \"Cliente\", fromD, toD, straight, est, 30);",
-  "ka": ""
+  "ka": "კლიენტი"
  },
  {
   "id": 301,
@@ -1445,7 +1445,7 @@
   "line": 384,
   "it": "[Taxi] Chiamata: cliente a %s diretto a %s (~$%d). /accettacorsa entro %d s.",
   "ctx": "SendClientMessage(driverid, -2994689, \"[Taxi] Chiamata: cliente a %s diretto a %s (~$%d). /accettacorsa entro %d s.\", a, b, est, 30);",
-  "ka": ""
+  "ka": "[Taxi] გამოძახება: კლიენტი %s-ში, მიემართება %s-ში (~$%d). /accettacorsa %d წამში."
  },
  {
   "id": 302,
@@ -1453,7 +1453,7 @@
   "line": 394,
   "it": "Non sei in servizio come tassista (/taxi on al deposito di Unity).",
   "ctx": "Util_Send(driverid, -10270721, \"Non sei in servizio come tassista (/taxi on al deposito di Unity).\");",
-  "ka": ""
+  "ka": "ტაქსისტად სამსახურში არ ხარ (/taxi on Unity-ს დეპოში)."
  },
  {
   "id": 303,
@@ -1461,7 +1461,7 @@
   "line": 402,
   "it": "Hai gia' una corsa in corso.",
   "ctx": "Util_Send(driverid, -10270721, \"Hai gia' una corsa in corso.\");",
-  "ka": ""
+  "ka": "უკვე გაქვს მიმდინარე მგზავრობა."
  },
  {
   "id": 304,
@@ -1469,7 +1469,7 @@
   "line": 410,
   "it": "Operazione taxi in corso: attendi.",
   "ctx": "Util_Send(driverid, -10270721, \"Operazione taxi in corso: attendi.\");",
-  "ka": ""
+  "ka": "ტაქსის ოპერაცია მიმდინარეობს: მოიცადე."
  },
  {
   "id": 305,
@@ -1477,7 +1477,7 @@
   "line": 418,
   "it": "Il tuo taxi non e' disponibile.",
   "ctx": "Util_Send(driverid, -10270721, \"Il tuo taxi non e' disponibile.\");",
-  "ka": ""
+  "ka": "შენი ტაქსი მიუწვდომელია."
  },
  {
   "id": 306,
@@ -1485,7 +1485,7 @@
   "line": 426,
   "it": "Attendi qualche secondo prima di accettare una nuova corsa.",
   "ctx": "Util_Send(driverid, -10270721, \"Attendi qualche secondo prima di accettare una nuova corsa.\");",
-  "ka": ""
+  "ka": "ახალი მგზავრობის მიღებამდე რამდენიმე წამი მოიცადე."
  },
  {
   "id": 307,
@@ -1493,7 +1493,7 @@
   "line": 446,
   "it": "Nessuna chiamata da accettare (o e' scaduta).",
   "ctx": "Util_Send(driverid, -10270721, \"Nessuna chiamata da accettare (o e' scaduta).\");",
-  "ka": ""
+  "ka": "მისაღები გამოძახება არ არის (ან ვადა გაუვიდა)."
  },
  {
   "id": 308,
@@ -1501,7 +1501,7 @@
   "line": 477,
   "it": "Quella chiamata non e' piu' attiva.",
   "ctx": "Util_Send(driverid, -10270721, \"Quella chiamata non e' piu' attiva.\");",
-  "ka": ""
+  "ka": "ეს გამოძახება აღარ არის აქტიური."
  },
  {
   "id": 309,
@@ -1509,7 +1509,7 @@
   "line": 482,
   "it": "La chiamata e' gia' stata presa da un altro taxi.",
   "ctx": "Util_Send(driverid, -10270721, \"La chiamata e' gia' stata presa da un altro taxi.\");",
-  "ka": ""
+  "ka": "ეს გამოძახება სხვა ტაქსიმ უკვე აიღო."
  },
  {
   "id": 310,
@@ -1517,7 +1517,7 @@
   "line": 487,
   "it": "Il cliente e' troppo lontano.",
   "ctx": "Util_Send(driverid, -10270721, \"Il cliente e' troppo lontano.\");",
-  "ka": ""
+  "ka": "კლიენტი ძალიან შორსაა."
  },
  {
   "id": 311,
@@ -1525,7 +1525,7 @@
   "line": 552,
   "it": "Corsa accettata: raggiungi il cliente (checkpoint) e fermati qualche secondo per farlo salire.",
   "ctx": "Util_Send(driverid, 0x66DD66FF, \"Corsa accettata: raggiungi il cliente (checkpoint) e fermati qualche secondo per farlo salire.\");",
-  "ka": ""
+  "ka": "მგზავრობა მიღებულია: მიდი კლიენტთან (ჩეკპოინტი) და რამდენიმე წამით გაჩერდი, რომ ჩაჯდეს."
  },
  {
   "id": 312,
@@ -1533,7 +1533,7 @@
   "line": 560,
   "it": "Il taxi di %s ha accettato la tua chiamata: aspettalo e sali come passeggero.",
   "ctx": "SendClientMessage(p, 0x66DD66FF, \"Il taxi di %s ha accettato la tua chiamata: aspettalo e sali come passeggero.\", name);",
-  "ka": ""
+  "ka": "%s-ის ტაქსიმ მიიღო შენი გამოძახება: დაელოდე და ჩაჯექი მგზავრად."
  },
  {
   "id": 313,
@@ -1541,7 +1541,7 @@
   "line": 561,
   "it": "Corsa accettata: raggiungi il cliente (checkpoint). Quando e' a bordo: /tassametro start.",
   "ctx": "Util_Send(driverid, 0x66DD66FF, \"Corsa accettata: raggiungi il cliente (checkpoint). Quando e' a bordo: /tassametro start.\");",
-  "ka": ""
+  "ka": "მგზავრობა მიღებულია: მიდი კლიენტთან (ჩეკპოინტი). როცა ჩაჯდება: /tassametro start."
  },
  {
   "id": 314,
@@ -1549,7 +1549,7 @@
   "line": 567,
   "it": "Il taxi non ha potuto accettare la corsa: puoi chiamarne un altro.",
   "ctx": "Util_Send(p, -10270721, \"Il taxi non ha potuto accettare la corsa: puoi chiamarne un altro.\");",
-  "ka": ""
+  "ka": "ტაქსიმ მგზავრობა ვერ მიიღო: შეგიძლია სხვა გამოიძახო."
  },
  {
   "id": 315,
@@ -1557,7 +1557,7 @@
   "line": 573,
   "it": "Hai raggiunto il massimo di corse con clienti della citta' per quest'ora.",
   "ctx": "Util_Send(driverid, -10270721, \"Hai raggiunto il massimo di corse con clienti della citta' per quest'ora.\");",
-  "ka": ""
+  "ka": "ამ საათში ქალაქის კლიენტებთან მგზავრობების მაქსიმუმს მიაღწიე."
  },
  {
   "id": 316,
@@ -1565,7 +1565,7 @@
   "line": 580,
   "it": "Requisiti del servizio taxi non soddisfatti.",
   "ctx": "Util_Send(driverid, -10270721, npc ? \"Requisiti del servizio taxi non soddisfatti.\" : \"Limite orario di corse con questo cliente raggiunto (o requisiti non soddisfatti).\");",
-  "ka": ""
+  "ka": "ტაქსის სერვისის მოთხოვნები არ სრულდება."
  },
  {
   "id": 317,
@@ -1573,7 +1573,7 @@
   "line": 580,
   "it": "Limite orario di corse con questo cliente raggiunto (o requisiti non soddisfatti).",
   "ctx": "Util_Send(driverid, -10270721, npc ? \"Requisiti del servizio taxi non soddisfatti.\" : \"Limite orario di corse con questo cliente raggiunto (o requisiti non soddisfatti).\");",
-  "ka": ""
+  "ka": "ამ კლიენტთან მგზავრობების საათობრივი ლიმიტი ამოიწურა (ან მოთხოვნები არ სრულდება)."
  },
  {
   "id": 318,
@@ -1581,7 +1581,7 @@
   "line": 584,
   "it": "Risulta gia' una corsa aperta: attendi la sua chiusura.",
   "ctx": "Util_Send(driverid, -10270721, \"Risulta gia' una corsa aperta: attendi la sua chiusura.\");",
-  "ka": ""
+  "ka": "ღია მგზავრობა უკვე არსებობს: დაელოდე მის დახურვას."
  },
  {
   "id": 319,
@@ -1589,7 +1589,7 @@
   "line": 588,
   "it": "Centrale taxi non raggiungibile: corsa non avviata.",
   "ctx": "Util_Send(driverid, -10270721, \"Centrale taxi non raggiungibile: corsa non avviata.\");",
-  "ka": ""
+  "ka": "ტაქსის დისპეჩერი მიუწვდომელია: მგზავრობა არ დაიწყო."
  },
  {
   "id": 320,
@@ -1597,7 +1597,7 @@
   "line": 677,
   "it": "Corsa annullata: cliente o taxi non piu' disponibili.",
   "ctx": "Taxi_CancelRide(driverid, \"Corsa annullata: cliente o taxi non piu' disponibili.\", \"\");",
-  "ka": ""
+  "ka": "მგზავრობა გაუქმდა: კლიენტი ან ტაქსი აღარ არის ხელმისაწვდომი."
  },
  {
   "id": 321,
@@ -1605,7 +1605,7 @@
   "line": 685,
   "it": "Corsa troppo breve: annullata senza addebito.",
   "ctx": "Taxi_CancelRide(driverid, \"Corsa troppo breve: annullata senza addebito.\", \"Corsa troppo breve: annullata senza addebito.\");",
-  "ka": ""
+  "ka": "მგზავრობა ძალიან მოკლეა: გაუქმდა თანხის ჩამოჭრის გარეშე."
  },
  {
   "id": 322,
@@ -1613,7 +1613,7 @@
   "line": 685,
   "it": "Corsa troppo breve: annullata senza addebito.",
   "ctx": "Taxi_CancelRide(driverid, \"Corsa troppo breve: annullata senza addebito.\", \"Corsa troppo breve: annullata senza addebito.\");",
-  "ka": ""
+  "ka": "მგზავრობა ძალიან მოკლეა: გაუქმდა თანხის ჩამოჭრის გარეშე."
  },
  {
   "id": 323,
@@ -1621,7 +1621,7 @@
   "line": 698,
   "it": "Tassametro fermo: $%d per %d m. In attesa della conferma del cliente.",
   "ctx": "SendClientMessage(driverid, -1, \"Tassametro fermo: $%d per %d m. In attesa della conferma del cliente.\", g_TxPayFare[driverid], meters);",
-  "ka": ""
+  "ka": "ტაქსომეტრი გაჩერდა: $%d %d მ-ზე. ველოდებით კლიენტის დადასტურებას."
  },
  {
   "id": 324,
@@ -1629,7 +1629,7 @@
   "line": 736,
   "it": "Cliente",
   "ctx": "format(other, 25, \"%s\", \"Cliente\");",
-  "ka": ""
+  "ka": "კლიენტი"
  },
  {
   "id": 325,
@@ -1637,7 +1637,7 @@
   "line": 754,
   "it": "Tetto orario del lavoro dinamico raggiunto: e' stato pagato solo il residuo.",
   "ctx": "Util_Send(driverid, -2994689, \"Tetto orario del lavoro dinamico raggiunto: e' stato pagato solo il residuo.\");",
-  "ka": ""
+  "ka": "დინამიური სამსახურის საათობრივი ლიმიტი ამოიწურა: გადაიხადა მხოლოდ ნაშთი."
  },
  {
   "id": 326,
@@ -1645,7 +1645,7 @@
   "line": 761,
   "it": "Il cliente ha contestato la corsa: nessun pagamento, la verifichera' lo staff.",
   "ctx": "Util_Send(driverid, -10270721, \"Il cliente ha contestato la corsa: nessun pagamento, la verifichera' lo staff.\");",
-  "ka": ""
+  "ka": "კლიენტმა მგზავრობა გაასაჩივრა: გადახდა არ მოხდა, შეამოწმებს ადმინისტრაცია."
  },
  {
   "id": 327,
@@ -1653,7 +1653,7 @@
   "line": 765,
   "it": "Il cliente non ha fondi sufficienti in banca: corsa annullata.",
   "ctx": "Taxi_CancelRide(driverid, \"Il cliente non ha fondi sufficienti in banca: corsa annullata.\", \"\");",
-  "ka": ""
+  "ka": "კლიენტს ბანკში საკმარისი თანხა არ აქვს: მგზავრობა გაუქმდა."
  },
  {
   "id": 328,
@@ -1661,7 +1661,7 @@
   "line": 770,
   "it": "La corsa risultava gia' chiusa.",
   "ctx": "Util_Send(driverid, -1, \"La corsa risultava gia' chiusa.\");",
-  "ka": ""
+  "ka": "მგზავრობა უკვე დახურული იყო."
  },
  {
   "id": 329,
@@ -1669,7 +1669,7 @@
   "line": 774,
   "it": "Pagamento non confermato dalla centrale: la corsa verra' verificata.",
   "ctx": "Util_Send(driverid, -10270721, \"Pagamento non confermato dalla centrale: la corsa verra' verificata.\");",
-  "ka": ""
+  "ka": "დისპეჩერმა გადახდა არ დაადასტურა: მგზავრობა შემოწმდება."
  },
  {
   "id": 330,
@@ -1677,7 +1677,7 @@
   "line": 778,
   "it": "Corsa non piu' valida: chiusa senza pagamento.",
   "ctx": "Util_Send(driverid, -10270721, \"Corsa non piu' valida: chiusa senza pagamento.\");",
-  "ka": ""
+  "ka": "მგზავრობა აღარ არის მოქმედი: დაიხურა გადახდის გარეშე."
  },
  {
   "id": 331,
@@ -1685,7 +1685,7 @@
   "line": 867,
   "it": "Grazie per il tuo voto.",
   "ctx": "Util_Send(playerid, 0x66DD66FF, \"Grazie per il tuo voto.\");",
-  "ka": ""
+  "ka": "მადლობა შეფასებისთვის."
  },
  {
   "id": 332,
@@ -1693,7 +1693,7 @@
   "line": 871,
   "it": "[Taxi] Nuovo voto: %d stelle (media %d.%02d).",
   "ctx": "SendClientMessage(d, -1, \"[Taxi] Nuovo voto: %d stelle (media %d.%02d).\", v1, v2 / 100, v2 % 100);",
-  "ka": ""
+  "ka": "[Taxi] ახალი შეფასება: %d ვარსკვლავი (საშუალო %d.%02d)."
  },
  {
   "id": 333,
@@ -1701,7 +1701,7 @@
   "line": 876,
   "it": "Hai gia' votato questa corsa.",
   "ctx": "Util_Send(playerid, -1, \"Hai gia' votato questa corsa.\");",
-  "ka": ""
+  "ka": "ეს მგზავრობა უკვე შეაფასე."
  },
  {
   "id": 334,
@@ -1709,7 +1709,7 @@
   "line": 915,
   "it": "Corsa contestata: nessun addebito, la verifichera' lo staff.",
   "ctx": "Util_Send(playerid, -1, \"Corsa contestata: nessun addebito, la verifichera' lo staff.\");",
-  "ka": ""
+  "ka": "მგზავრობა გასაჩივრდა: თანხა არ ჩამოგეჭრა, შეამოწმებს ადმინისტრაცია."
  },
  {
   "id": 335,
@@ -1717,7 +1717,7 @@
   "line": 919,
   "it": "Fondi insufficienti in banca per pagare la corsa: corsa annullata.",
   "ctx": "Util_Send(playerid, -10270721, \"Fondi insufficienti in banca per pagare la corsa: corsa annullata.\");",
-  "ka": ""
+  "ka": "ბანკში თანხა არ გყოფნის მგზავრობის გადასახდელად: მგზავრობა გაუქმდა."
  },
  {
   "id": 336,
@@ -1725,7 +1725,7 @@
   "line": 941,
   "it": "Quella chiamata non e' piu' attiva.",
   "ctx": "Util_Send(playerid, -10270721, \"Quella chiamata non e' piu' attiva.\");",
-  "ka": ""
+  "ka": "ეს გამოძახება აღარ არის აქტიური."
  },
  {
   "id": 337,
@@ -1733,7 +1733,7 @@
   "line": 951,
   "it": "Questa corsa non e' piu' in attesa di pagamento.",
   "ctx": "UI_LivingReject(playerid, \"Questa corsa non e' piu' in attesa di pagamento.\");",
-  "ka": ""
+  "ka": "ეს მგზავრობა აღარ ელოდება გადახდას."
  },
  {
   "id": 338,
@@ -1741,7 +1741,7 @@
   "line": 959,
   "it": "Pagamento in corso...",
   "ctx": "Util_Send(playerid, -1, accept != 0 ? \"Pagamento in corso...\" : \"Contestazione registrata: la corsa restera' in sospeso per lo staff.\");",
-  "ka": ""
+  "ka": "გადახდა მიმდინარეობს..."
  },
  {
   "id": 339,
@@ -1749,7 +1749,7 @@
   "line": 959,
   "it": "Contestazione registrata: la corsa restera' in sospeso per lo staff.",
   "ctx": "Util_Send(playerid, -1, accept != 0 ? \"Pagamento in corso...\" : \"Contestazione registrata: la corsa restera' in sospeso per lo staff.\");",
-  "ka": ""
+  "ka": "საჩივარი დარეგისტრირდა: მგზავრობას ადმინისტრაცია განიხილავს."
  },
  {
   "id": 340,
@@ -1757,7 +1757,7 @@
   "line": 974,
   "it": "Il cliente non ha confermato il pagamento: corsa annullata.",
   "ctx": "Taxi_CancelRide(d, \"Il cliente non ha confermato il pagamento: corsa annullata.\", \"Non hai confermato il pagamento: corsa annullata.\");",
-  "ka": ""
+  "ka": "კლიენტმა გადახდა არ დაადასტურა: მგზავრობა გაუქმდა."
  },
  {
   "id": 341,
@@ -1765,7 +1765,7 @@
   "line": 974,
   "it": "Non hai confermato il pagamento: corsa annullata.",
   "ctx": "Taxi_CancelRide(d, \"Il cliente non ha confermato il pagamento: corsa annullata.\", \"Non hai confermato il pagamento: corsa annullata.\");",
-  "ka": ""
+  "ka": "გადახდა არ დაადასტურე: მგზავრობა გაუქმდა."
  },
  {
   "id": 342,
@@ -1773,7 +1773,7 @@
   "line": 978,
   "it": "Il cliente non ha risposto: /tassametro stop per richiedere di nuovo il pagamento, /tassametro annulla per chiudere.",
   "ctx": "Util_Send(d, -2994689, \"Il cliente non ha risposto: /tassametro stop per richiedere di nuovo il pagamento, /tassametro annulla per chiudere.\");",
-  "ka": ""
+  "ka": "კლიენტმა არ უპასუხა: /tassametro stop — გადახდის ხელახლა მოთხოვნა, /tassametro annulla — დახურვა."
  },
  {
   "id": 343,
@@ -1781,7 +1781,7 @@
   "line": 1004,
   "it": "Sei gia' in servizio.",
   "ctx": "Util_Send(playerid, -10270721, \"Sei gia' in servizio.\");",
-  "ka": ""
+  "ka": "უკვე სამსახურში ხარ."
  },
  {
   "id": 344,
@@ -1789,7 +1789,7 @@
   "line": 1009,
   "it": "Pratica in corso: attendi.",
   "ctx": "Util_Send(playerid, -10270721, \"Pratica in corso: attendi.\");",
-  "ka": ""
+  "ka": "განაცხადი მუშავდება: მოიცადე."
  },
  {
   "id": 345,
@@ -1797,7 +1797,7 @@
   "line": 1020,
   "it": "Serve almeno il livello %d per guidare un taxi.",
   "ctx": "SendClientMessage(playerid, -10270721, \"Serve almeno il livello %d per guidare un taxi.\", 2);",
-  "ka": ""
+  "ka": "ტაქსის სამართავად საჭიროა მინიმუმ %d დონე."
  },
  {
   "id": 346,
@@ -1805,7 +1805,7 @@
   "line": 1025,
   "it": "Presentati a piedi al deposito taxi di Unity Station.",
   "ctx": "Util_Send(playerid, -10270721, \"Presentati a piedi al deposito taxi di Unity Station.\");",
-  "ka": ""
+  "ka": "მიდი ფეხით Unity Station-ის ტაქსის დეპოში."
  },
  {
   "id": 347,
@@ -1813,7 +1813,7 @@
   "line": 1031,
   "it": "Servono $%d (canone $%d/h + cauzione $%d) tra banca e contanti.",
   "ctx": "SendClientMessage(playerid, -10270721, \"Servono $%d (canone $%d/h + cauzione $%d) tra banca e contanti.\", total, 60, 300);",
-  "ka": ""
+  "ka": "საჭიროა $%d (ქირა $%d/სთ + გირაო $%d) ბანკსა და ნაღდში."
  },
  {
   "id": 348,
@@ -1821,7 +1821,7 @@
   "line": 1036,
   "it": "Nessun taxi disponibile al momento: riprova tra poco.",
   "ctx": "Util_Send(playerid, -10270721, \"Nessun taxi disponibile al momento: riprova tra poco.\");",
-  "ka": ""
+  "ka": "თავისუფალი ტაქსი ახლა არ არის: სცადე ცოტა ხანში."
  },
  {
   "id": 349,
@@ -1829,7 +1829,7 @@
   "line": 1039,
   "it": "Pratica del taxi in corso...",
   "ctx": "Util_Send(playerid, -1, \"Pratica del taxi in corso...\");",
-  "ka": ""
+  "ka": "ტაქსის განაცხადი მუშავდება..."
  },
  {
   "id": 350,
@@ -1837,7 +1837,7 @@
   "line": 1046,
   "it": "Non sei in servizio.",
   "ctx": "Util_Send(playerid, -10270721, \"Non sei in servizio.\");",
-  "ka": ""
+  "ka": "სამსახურში არ ხარ."
  },
  {
   "id": 351,
@@ -1845,7 +1845,7 @@
   "line": 1051,
   "it": "Concludi o annulla prima la corsa in corso (/tassametro annulla).",
   "ctx": "Util_Send(playerid, -10270721, \"Concludi o annulla prima la corsa in corso (/tassametro annulla).\");",
-  "ka": ""
+  "ka": "ჯერ დაასრულე ან გააუქმე მიმდინარე მგზავრობა (/tassametro annulla)."
  },
  {
   "id": 352,
@@ -1853,7 +1853,7 @@
   "line": 1056,
   "it": "Riporta il taxi al deposito di Unity Station per chiudere il turno.",
   "ctx": "Util_Send(playerid, -10270721, \"Riporta il taxi al deposito di Unity Station per chiudere il turno.\");",
-  "ka": ""
+  "ka": "ცვლის დასახურად დააბრუნე ტაქსი Unity Station-ის დეპოში."
  },
  {
   "id": 353,
@@ -1861,7 +1861,7 @@
   "line": 1060,
   "it": "Fine turno: riconsegna del taxi in corso...",
   "ctx": "Util_Send(playerid, -1, \"Fine turno: riconsegna del taxi in corso...\");",
-  "ka": ""
+  "ka": "ცვლის დასასრული: ტაქსის დაბრუნება მიმდინარეობს..."
  },
  {
   "id": 354,
@@ -1869,7 +1869,7 @@
   "line": 1065,
   "it": "In servizio. Punti taxi: %d. Comandi: /accettacorsa [id] · /tassametro start|stop|annulla · /taxi off (al deposito).",
   "ctx": "SendClientMessage(playerid, -1, \"In servizio. Punti taxi: %d. Comandi: /accettacorsa [id] · /tassametro start|stop|annulla · /taxi off (al deposito).\", LD_GetProPoints(playerid, 2));",
-  "ka": ""
+  "ka": "სამსახურში ხარ. ტაქსის ქულები: %d. ბრძანებები: /accettacorsa [id] · /tassametro start|stop|annulla · /taxi off (დეპოში)."
  },
  {
   "id": 355,
@@ -1877,7 +1877,7 @@
   "line": 1069,
   "it": "Uso: /taxi on|off al deposito di Unity Station (canone orario + cauzione).",
   "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Uso: /taxi on|off al deposito di Unity Station (canone orario + cauzione).\");",
-  "ka": ""
+  "ka": "გამოყენება: /taxi on|off Unity Station-ის დეპოში (საათობრივი ქირა + გირაო)."
  },
  {
   "id": 356,
@@ -1885,7 +1885,7 @@
   "line": 1084,
   "it": "Sei in servizio come tassista.",
   "ctx": "Util_Send(playerid, -10270721, \"Sei in servizio come tassista.\");",
-  "ka": ""
+  "ka": "ტაქსისტად სამსახურში ხარ."
  },
  {
   "id": 357,
@@ -1893,7 +1893,7 @@
   "line": 1089,
   "it": "Un taxi ha gia' accettato la tua chiamata.",
   "ctx": "Util_Send(playerid, -10270721, \"Un taxi ha gia' accettato la tua chiamata.\");",
-  "ka": ""
+  "ka": "შენი გამოძახება ტაქსიმ უკვე მიიღო."
  },
  {
   "id": 358,
@@ -1901,7 +1901,7 @@
   "line": 1094,
   "it": "Hai gia' chiamato un taxi: attendi %d secondi.",
   "ctx": "SendClientMessage(playerid, -10270721, \"Hai gia' chiamato un taxi: attendi %d secondi.\", (60000 - (GetTickCount() - gPlayer[playerid][pTaxiCallTick])) / 1000 + 1);",
-  "ka": ""
+  "ka": "ტაქსი უკვე გამოიძახე: მოიცადე %d წამი."
  },
  {
   "id": 359,
@@ -1909,7 +1909,7 @@
   "line": 1099,
   "it": "Devi trovarti all'aperto per chiamare un taxi.",
   "ctx": "Util_Send(playerid, -10270721, \"Devi trovarti all'aperto per chiamare un taxi.\");",
-  "ka": ""
+  "ka": "ტაქსის გამოსაძახებლად გარეთ უნდა იყო."
  },
  {
   "id": 360,
@@ -1917,7 +1917,7 @@
   "line": 1129,
   "it": "[Taxi] %s (id %d) chiede un taxi a %s. /accettacorsa %d",
   "ctx": "SendClientMessage(d, -2994689, \"[Taxi] %s (id %d) chiede un taxi a %s. /accettacorsa %d\", name, playerid, area, playerid);",
-  "ka": ""
+  "ka": "[Taxi] %s (id %d) ტაქსს იძახებს: %s. /accettacorsa %d"
  },
  {
   "id": 361,
@@ -1925,7 +1925,7 @@
   "line": 1140,
   "it": "Chiamata inviata a %d taxi in zona: attendi una risposta.",
   "ctx": "SendClientMessage(playerid, 0x66DD66FF, \"Chiamata inviata a %d taxi in zona: attendi una risposta.\", sent);",
-  "ka": ""
+  "ka": "გამოძახება გაეგზავნა ზონაში %d ტაქსს: დაელოდე პასუხს."
  },
  {
   "id": 362,
@@ -1933,7 +1933,7 @@
   "line": 1144,
   "it": "Nessun taxi in servizio nelle vicinanze. Riprova piu' tardi.",
   "ctx": "Util_Send(playerid, -10270721, \"Nessun taxi in servizio nelle vicinanze. Riprova piu' tardi.\");",
-  "ka": ""
+  "ka": "ახლოს სამსახურში მყოფი ტაქსი არ არის. სცადე მოგვიანებით."
  },
  {
   "id": 363,
@@ -1941,7 +1941,7 @@
   "line": 1157,
   "it": "Uso: /accettacorsa [id giocatore]",
   "ctx": "Util_Send(playerid, -10270721, \"Uso: /accettacorsa [id giocatore]\");",
-  "ka": ""
+  "ka": "გამოყენება: /accettacorsa [მოთამაშის id]"
  },
  {
   "id": 364,
@@ -1949,7 +1949,7 @@
   "line": 1166,
   "it": "Nessuna chiamata da accettare. Per un giocatore: /accettacorsa id.",
   "ctx": "Util_Send(playerid, -10270721, \"Nessuna chiamata da accettare. Per un giocatore: /accettacorsa id.\");",
-  "ka": ""
+  "ka": "მისაღები გამოძახება არ არის. მოთამაშისთვის: /accettacorsa id."
  },
  {
   "id": 365,
@@ -1957,7 +1957,7 @@
   "line": 1186,
   "it": "Non hai una corsa in corso.",
   "ctx": "Util_Send(playerid, -10270721, \"Non hai una corsa in corso.\");",
-  "ka": ""
+  "ka": "მიმდინარე მგზავრობა არ გაქვს."
  },
  {
   "id": 366,
@@ -1965,7 +1965,7 @@
   "line": 1191,
   "it": "Con i clienti della citta' il tassametro e' automatico (prelievo -> arrivo).",
   "ctx": "Util_Send(playerid, -1, \"Con i clienti della citta' il tassametro e' automatico (prelievo -> arrivo).\");",
-  "ka": ""
+  "ka": "ქალაქის კლიენტებთან ტაქსომეტრი ავტომატურია (აყვანა -> ჩასვლა)."
  },
  {
   "id": 367,
@@ -1973,7 +1973,7 @@
   "line": 1196,
   "it": "Operazione taxi in corso: attendi.",
   "ctx": "Util_Send(playerid, -10270721, \"Operazione taxi in corso: attendi.\");",
-  "ka": ""
+  "ka": "ტაქსის ოპერაცია მიმდინარეობს: მოიცადე."
  },
  {
   "id": 368,
@@ -1981,7 +1981,7 @@
   "line": 1204,
   "it": "In attesa della conferma di pagamento del cliente.",
   "ctx": "Util_Send(playerid, -10270721, \"In attesa della conferma di pagamento del cliente.\");",
-  "ka": ""
+  "ka": "ველოდებით კლიენტის მიერ გადახდის დადასტურებას."
  },
  {
   "id": 369,
@@ -1989,7 +1989,7 @@
   "line": 1209,
   "it": "Il tassametro e' gia' acceso.",
   "ctx": "Util_Send(playerid, -10270721, \"Il tassametro e' gia' acceso.\");",
-  "ka": ""
+  "ka": "ტაქსომეტრი უკვე ჩართულია."
  },
  {
   "id": 370,
@@ -1997,7 +1997,7 @@
   "line": 1214,
   "it": "Devi essere al volante del taxi con il cliente a bordo.",
   "ctx": "Util_Send(playerid, -10270721, \"Devi essere al volante del taxi con il cliente a bordo.\");",
-  "ka": ""
+  "ka": "ტაქსის საჭესთან უნდა იჯდე, კლიენტით სალონში."
  },
  {
   "id": 371,
@@ -2005,7 +2005,7 @@
   "line": 1220,
   "it": "Tassametro acceso. A destinazione: /tassametro stop.",
   "ctx": "Util_Send(playerid, 0x66DD66FF, \"Tassametro acceso. A destinazione: /tassametro stop.\");",
-  "ka": ""
+  "ka": "ტაქსომეტრი ჩაირთო. დანიშნულების ადგილზე: /tassametro stop."
  },
  {
   "id": 372,
@@ -2013,7 +2013,7 @@
   "line": 1221,
   "it": "Il tassametro e' acceso.",
   "ctx": "Util_Send(p, -1, \"Il tassametro e' acceso.\");",
-  "ka": ""
+  "ka": "ტაქსომეტრი ჩართულია."
  },
  {
   "id": 373,
@@ -2021,7 +2021,7 @@
   "line": 1236,
   "it": "Il tassametro non e' acceso.",
   "ctx": "Util_Send(playerid, -10270721, \"Il tassametro non e' acceso.\");",
-  "ka": ""
+  "ka": "ტაქსომეტრი ჩართული არ არის."
  },
  {
   "id": 374,
@@ -2029,7 +2029,7 @@
   "line": 1241,
   "it": "Corsa annullata senza addebito.",
   "ctx": "Taxi_CancelRide(playerid, \"Corsa annullata senza addebito.\", \"Il tassista ha annullato la corsa: nessun addebito.\");",
-  "ka": ""
+  "ka": "მგზავრობა გაუქმდა თანხის ჩამოჭრის გარეშე."
  },
  {
   "id": 375,
@@ -2037,7 +2037,7 @@
   "line": 1241,
   "it": "Il tassista ha annullato la corsa: nessun addebito.",
   "ctx": "Taxi_CancelRide(playerid, \"Corsa annullata senza addebito.\", \"Il tassista ha annullato la corsa: nessun addebito.\");",
-  "ka": ""
+  "ka": "ტაქსისტმა მგზავრობა გააუქმა: თანხა არ ჩამოგეჭრა."
  },
  {
   "id": 376,
@@ -2045,7 +2045,7 @@
   "line": 1244,
   "it": "Uso: /tassametro start|stop|annulla",
   "ctx": "Util_Send(playerid, 0x99CCFFFF, \"Uso: /tassametro start|stop|annulla\");",
-  "ka": ""
+  "ka": "გამოყენება: /tassametro start|stop|annulla"
  },
  {
   "id": 377,
@@ -2053,7 +2053,7 @@
   "line": 1260,
   "it": "Fondi insufficienti: servono $%d (canone + cauzione).",
   "ctx": "SendClientMessage(playerid, -10270721, \"Fondi insufficienti: servono $%d (canone + cauzione).\", 360);",
-  "ka": ""
+  "ka": "სახსრები არ გყოფნის: საჭიროა $%d (ქირა + გირაო)."
  },
  {
   "id": 378,
@@ -2061,7 +2061,7 @@
   "line": 1264,
   "it": "Non puoi prendere servizio: livello insufficiente o un altro noleggio/contratto attivo.",
   "ctx": "Util_Send(playerid, -10270721, \"Non puoi prendere servizio: livello insufficiente o un altro noleggio/contratto attivo.\");",
-  "ka": ""
+  "ka": "სამსახურს ვერ დაიწყებ: დონე არ გყოფნის ან სხვა ქირაობა/კონტრაქტი აქტიურია."
  },
  {
   "id": 379,
@@ -2069,7 +2069,7 @@
   "line": 1268,
   "it": "Nessun taxi assegnato: riprova tra poco (nessun addebito).",
   "ctx": "Util_Send(playerid, -10270721, \"Nessun taxi assegnato: riprova tra poco (nessun addebito).\");",
-  "ka": ""
+  "ka": "ტაქსი არ მოგენიჭა: სცადე ცოტა ხანში (თანხა არ ჩამოგეჭრა)."
  },
  {
   "id": 380,
@@ -2077,6 +2077,6 @@
   "line": 1278,
   "it": "Sei in servizio (canone $%d/h, cauzione $%d). Le chiamate arrivano da sole: /accettacorsa. Fine turno: /taxi off al deposito.",
   "ctx": "SendClientMessage(playerid, 0x66DD66FF, \"Sei in servizio (canone $%d/h, cauzione $%d). Le chiamate arrivano da sole: /accettacorsa. Fine turno: /taxi off al deposito.\", 60, 300);",
-  "ka": ""
+  "ka": "სამსახურში ხარ (ქირა $%d/სთ, გირაო $%d). გამოძახებები თავად მოვა: /accettacorsa. ცვლის დასასრული: /taxi off დეპოში."
  }
 ]
