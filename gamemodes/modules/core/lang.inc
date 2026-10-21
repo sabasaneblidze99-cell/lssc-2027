@@ -79,9 +79,30 @@ Lang_Utf8Next(const src[], &i)
 
 Lang_Translit(const src[], dest[], size)
 {
-	new i = 0, o = 0;
-	while (src[i] != 0 && o < size - 1)
+	new i = 0, o = 0, c;
+	while ((c = src[i]) != 0 && o < size - 1)
 	{
+		// via veloce per l'ASCII (la maggior parte dei caratteri): niente chiamata di funzione
+		if (c > 0 && c < 128)
+		{
+			dest[o++] = c;
+			i++;
+			continue;
+		}
+		// via veloce per le lettere georgiane mkhedruli (U+10D0..U+10F0 = E1 83 90..B0)
+		if ((c & 255) == 0xE1 && (src[i + 1] & 255) == 0x83)
+		{
+			new t = (src[i + 2] & 255) - 0x90;
+			if (t >= 0 && t <= 32)
+			{
+				for (new k = 0; g_LangKa[t][k] != 0 && o < size - 1; k++)
+				{
+					dest[o++] = g_LangKa[t][k];
+				}
+				i += 3;
+				continue;
+			}
+		}
 		new cp = Lang_Utf8Next(src, i);
 		if (cp < 0)
 		{
