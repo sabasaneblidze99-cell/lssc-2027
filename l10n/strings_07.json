@@ -5,7 +5,7 @@
   "line": 1001,
   "it": "Chiudi",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9706, DIALOG_STYLE_LIST, \"Quale quartiere?\", body, \"Apri\", \"Chiudi\");",
-  "ka": ""
+  "ka": "დახურვა"
  },
  {
   "id": 902,
@@ -13,7 +13,7 @@
   "line": 1070,
   "it": "66AAFF",
   "ctx": "UI_LvBar(g_UiLvDsSec[playerid], 100, \"66AAFF\", bSec, 64);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 903,
@@ -21,7 +21,7 @@
   "line": 1074,
   "it": "{FFAA33}In difficolta'{AAAAAA}: ogni consegna conta per la ricostruzione",
   "ctx": "strcopy(prosp, \"{FFAA33}In difficolta'{AAAAAA}: ogni consegna conta per la ricostruzione\", 96);",
-  "ka": ""
+  "ka": "{FFAA33}გაჭირვებაშია{AAAAAA}: ყოველი მიწოდება აღდგენას უწყობს ხელს"
  },
  {
   "id": 904,
@@ -29,7 +29,7 @@
   "line": 1078,
   "it": "{66DD66}Fiorente{AAAAAA}: c'e' piu' lavoro per tutti",
   "ctx": "strcopy(prosp, \"{66DD66}Fiorente{AAAAAA}: c'e' piu' lavoro per tutti\", 96);",
-  "ka": ""
+  "ka": "{66DD66}აყვავებული{AAAAAA}: ყველასთვის მეტი სამუშაოა"
  },
  {
   "id": 905,
@@ -37,7 +37,7 @@
   "line": 1082,
   "it": "{FFFFFF}Stabile",
   "ctx": "strcopy(prosp, \"{FFFFFF}Stabile\", 96);",
-  "ka": ""
+  "ka": "{FFFFFF}სტაბილური"
  },
  {
   "id": 906,
@@ -45,7 +45,7 @@
   "line": 1085,
   "it": "{FFFFFF}Prosperita': %s\\n\\n{FFFFFF}Attivita' economica  %s {FFFFFF}%d/%d\\n{FFFFFF}Sicurezza                %s {FFFFFF}%d/%d\\n{FFFFFF}Pressione criminale  %s {FFFFFF}%d/%d%s\\n\\n{FFFFFF}La tua reputazione qui: {FFD24D}%d{FFFFFF} - %s\\n",
   "ctx": "format(body, 1280, \"{FFFFFF}Prosperita': %s\\n\\n{FFFFFF}Attivita' economica  %s {FFFFFF}%d/%d\\n{FFFFFF}Sicurezza                %s {FFFFFF}%d/%d\\n{FFFFFF}Pressione criminale  %s {FFFFFF}%d/%d%s\\n\\n{FFF",
-  "ka": ""
+  "ka": "{FFFFFF}კეთილდღეობა: %s\\n\\n{FFFFFF}ეკონომიკური აქტივობა  %s {FFFFFF}%d/%d\\n{FFFFFF}უსაფრთხოება                %s {FFFFFF}%d/%d\\n{FFFFFF}კრიმინალური წნეხი  %s {FFFFFF}%d/%d%s\\n\\n{FFFFFF}შენი რეპუტაცია აქ: {FFD24D}%d{FFFFFF} - %s\\n"
  },
  {
   "id": 907,
@@ -53,7 +53,7 @@
   "line": 1085,
   "it": "  {FF8866}(zona a rischio: i contratti pagano di piu')",
   "ctx": "format(body, 1280, \"{FFFFFF}Prosperita': %s\\n\\n{FFFFFF}Attivita' economica  %s {FFFFFF}%d/%d\\n{FFFFFF}Sicurezza                %s {FFFFFF}%d/%d\\n{FFFFFF}Pressione criminale  %s {FFFFFF}%d/%d%s\\n\\n{FFF",
-  "ka": ""
+  "ka": "  {FF8866}(რისკის ზონა: კონტრაქტები მეტს იხდის)"
  },
  {
   "id": 908,
@@ -61,7 +61,7 @@
   "line": 1088,
   "it": "{66DD66}Festa di quartiere in corso: ancora %d ore.\\n",
   "ctx": "format(line, 128, \"{66DD66}Festa di quartiere in corso: ancora %d ore.\\n\", g_UiLvDsFest[playerid]);",
-  "ka": ""
+  "ka": "{66DD66}მიმდინარეობს უბნის დღესასწაული: დარჩა %d საათი.\\n"
  },
  {
   "id": 909,
@@ -69,7 +69,7 @@
   "line": 1093,
   "it": "\\n{AAAAAA}Si dice in giro: {FFFFFF}\\\"%s\\\"\\n",
   "ctx": "format(line, 128, \"\\n{AAAAAA}Si dice in giro: {FFFFFF}\\\"%s\\\"\\n\", g_UiLvDsRumor[playerid]);",
-  "ka": ""
+  "ka": "\\n{AAAAAA}ხმები დადის: {FFFFFF}\\\"%s\\\"\\n"
  },
  {
   "id": 910,
@@ -77,7 +77,7 @@
   "line": 1096,
   "it": "\\n{FFD24D}Ultimi avvenimenti\\n",
   "ctx": "strcat(body, \"\\n{FFD24D}Ultimi avvenimenti\\n\", 1280);",
-  "ka": ""
+  "ka": "\\n{FFD24D}ბოლო მოვლენები\\n"
  },
  {
   "id": 911,
@@ -85,7 +85,7 @@
   "line": 1099,
   "it": "{AAAAAA}Una giornata tranquilla, per ora.\\n",
   "ctx": "strcat(body, \"{AAAAAA}Una giornata tranquilla, per ora.\\n\", 1280);",
-  "ka": ""
+  "ka": "{AAAAAA}ჯერჯერობით მშვიდი დღეა.\\n"
  },
  {
   "id": 912,
@@ -93,7 +93,7 @@
   "line": 1107,
   "it": "{AAAAAA}%s  {FFFFFF}%s {66DD66}(+%d attivita')\\n",
   "ctx": "format(line, 128, \"{AAAAAA}%s  {FFFFFF}%s {66DD66}(+%d attivita')\\n\", ago, g_UiLvEventName[g_UiLvDsEvType[playerid][i]], v);",
-  "ka": ""
+  "ka": "{AAAAAA}%s  {FFFFFF}%s {66DD66}(+%d აქტივობა)\\n"
  },
  {
   "id": 913,
@@ -101,7 +101,7 @@
   "line": 1111,
   "it": "{AAAAAA}%s  {FFFFFF}%s {FF8866}(%d attivita')\\n",
   "ctx": "format(line, 128, \"{AAAAAA}%s  {FFFFFF}%s {FF8866}(%d attivita')\\n\", ago, g_UiLvEventName[g_UiLvDsEvType[playerid][i]], v);",
-  "ka": ""
+  "ka": "{AAAAAA}%s  {FFFFFF}%s {FF8866}(%d აქტივობა)\\n"
  },
  {
   "id": 914,
@@ -109,7 +109,7 @@
   "line": 1119,
   "it": "Quartiere: %s",
   "ctx": "format(title, 64, \"Quartiere: %s\", g_UiLvDistrictName[d]);",
-  "ka": ""
+  "ka": "უბანი: %s"
  },
  {
   "id": 915,
@@ -117,7 +117,7 @@
   "line": 1120,
   "it": "Progetto",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9707, DIALOG_STYLE_MSGBOX, title, body, \"Progetto\", \"Chiudi\");",
-  "ka": ""
+  "ka": "პროექტი"
  },
  {
   "id": 916,
@@ -125,7 +125,7 @@
   "line": 1120,
   "it": "Chiudi",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9707, DIALOG_STYLE_MSGBOX, title, body, \"Progetto\", \"Chiudi\");",
-  "ka": ""
+  "ka": "დახურვა"
  },
  {
   "id": 917,
@@ -133,7 +133,7 @@
   "line": 1181,
   "it": "{FFD24D}Il tuo mestiere\\n",
   "ctx": "strcopy(body, \"{FFD24D}Il tuo mestiere\\n\", 1280);",
-  "ka": ""
+  "ka": "{FFD24D}შენი ხელობა\\n"
  },
  {
   "id": 918,
@@ -141,7 +141,7 @@
   "line": 1188,
   "it": "FFD24D",
   "ctx": "UI_LvBar(pts, next, \"FFD24D\", bar, 64);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 919,
@@ -149,7 +149,7 @@
   "line": 1189,
   "it": "{FFFFFF}%s: {FFD24D}%s{FFFFFF} (+%d%%) - %d punti\\n  %s {AAAAAA}%s tra %d punti\\n",
   "ctx": "format(line, 192, \"{FFFFFF}%s: {FFD24D}%s{FFFFFF} (+%d%%) - %d punti\\n  %s {AAAAAA}%s tra %d punti\\n\", g_UiLvTrackName[t], g_UiLvTierName[tier], UI_LvTierBonus(tier), pts, bar, g_UiLvTierName[tier + 1",
-  "ka": ""
+  "ka": "{FFFFFF}%s: {FFD24D}%s{FFFFFF} (+%d%%) - %d ქულა\\n  %s {AAAAAA}%s - %d ქულის შემდეგ\\n"
  },
  {
   "id": 920,
@@ -157,7 +157,7 @@
   "line": 1193,
   "it": "{FFFFFF}%s: {66DD66}%s{FFFFFF} (+%d%%) - %d punti, il grado piu' alto\\n",
   "ctx": "format(line, 192, \"{FFFFFF}%s: {66DD66}%s{FFFFFF} (+%d%%) - %d punti, il grado piu' alto\\n\", g_UiLvTrackName[t], g_UiLvTierName[tier], UI_LvTierBonus(tier), pts);",
-  "ka": ""
+  "ka": "{FFFFFF}%s: {66DD66}%s{FFFFFF} (+%d%%) - %d ქულა, უმაღლესი წოდება\\n"
  },
  {
   "id": 921,
@@ -165,7 +165,7 @@
   "line": 1201,
   "it": "  {AAAAAA}Completati %d, non riusciti %d, voto medio %d,%d/5, oggi +%d\\n",
   "ctx": "format(line, 192, \"  {AAAAAA}Completati %d, non riusciti %d, voto medio %d,%d/5, oggi +%d\\n\", g_UiLvRpDone[playerid][t], g_UiLvRpFail[playerid][t], avg10 / 10, avg10 % 10, g_UiLvRpDay[playerid][t]);",
-  "ka": ""
+  "ka": "  {AAAAAA}შესრულდა %d, ჩაიშალა %d, საშუალო შეფასება %d,%d/5, დღეს +%d\\n"
  },
  {
   "id": 922,
@@ -173,7 +173,7 @@
   "line": 1205,
   "it": "  {AAAAAA}Completati %d, non riusciti %d, oggi +%d\\n",
   "ctx": "format(line, 192, \"  {AAAAAA}Completati %d, non riusciti %d, oggi +%d\\n\", g_UiLvRpDone[playerid][t], g_UiLvRpFail[playerid][t], g_UiLvRpDay[playerid][t]);",
-  "ka": ""
+  "ka": "  {AAAAAA}შესრულდა %d, ჩაიშალა %d, დღეს +%d\\n"
  },
  {
   "id": 923,
@@ -181,7 +181,7 @@
   "line": 1210,
   "it": "  {AAAAAA}Non hai ancora iniziato: c'e' sempre una prima volta.\\n",
   "ctx": "strcopy(line, \"  {AAAAAA}Non hai ancora iniziato: c'e' sempre una prima volta.\\n\", 192);",
-  "ka": ""
+  "ka": "  {AAAAAA}ჯერ არ დაგიწყია: ყველაფერს პირველი ჯერი აქვს.\\n"
  },
  {
   "id": 924,
@@ -189,7 +189,7 @@
   "line": 1214,
   "it": "\\n{FFD24D}Il tuo nome nei quartieri\\n",
   "ctx": "strcat(body, \"\\n{FFD24D}Il tuo nome nei quartieri\\n\", 1280);",
-  "ka": ""
+  "ka": "\\n{FFD24D}შენი სახელი უბნებში\\n"
  },
  {
   "id": 925,
@@ -197,7 +197,7 @@
   "line": 1219,
   "it": " {66DD66}[contratti premium]",
   "ctx": "format(line, 192, \"{FFFFFF}%s: {FFD24D}%d{FFFFFF} - %s%s\\n\", g_UiLvDistrictName[d], rep, lrep, rep >= 20 ? \" {66DD66}[contratti premium]\" : \"\");",
-  "ka": ""
+  "ka": " {66DD66}[პრემიუმ კონტრაქტები]"
  },
  {
   "id": 926,
@@ -205,7 +205,7 @@
   "line": 1222,
   "it": "\\n{AAAAAA}La reputazione non si compra: cresce con il lavoro, ogni giorno un passo alla volta.",
   "ctx": "strcat(body, \"\\n{AAAAAA}La reputazione non si compra: cresce con il lavoro, ogni giorno un passo alla volta.\", 1280);",
-  "ka": ""
+  "ka": "\\n{AAAAAA}რეპუტაცია არ იყიდება: ის შრომით იზრდება, ყოველდღე ნაბიჯ-ნაბიჯ."
  },
  {
   "id": 927,
@@ -213,7 +213,7 @@
   "line": 1223,
   "it": "Reputazione",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9708, DIALOG_STYLE_MSGBOX, \"Reputazione\", body, \"Chiudi\", \"\");",
-  "ka": ""
+  "ka": "რეპუტაცია"
  },
  {
   "id": 928,
@@ -221,7 +221,7 @@
   "line": 1223,
   "it": "Chiudi",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9708, DIALOG_STYLE_MSGBOX, \"Reputazione\", body, \"Chiudi\", \"\");",
-  "ka": ""
+  "ka": "დახურვა"
  },
  {
   "id": 929,
@@ -229,7 +229,7 @@
   "line": 1266,
   "it": "Veicolo\\tCanone / %d min\\tCauzione\\tLivello\\n",
   "ctx": "format(body, 1024, \"Veicolo\\tCanone / %d min\\tCauzione\\tLivello\\n\", g_UiLvRnBlockMin[playerid]);",
-  "ka": ""
+  "ka": "მანქანა\\tქირა / %d წთ\\tგირაო\\tდონე\\n"
  },
  {
   "id": 930,
@@ -237,7 +237,7 @@
   "line": 1277,
   "it": "Noleggio - sconto residente %d%%",
   "ctx": "format(title, 64, \"Noleggio - sconto residente %d%%\", g_UiLvRnDisc[playerid]);",
-  "ka": ""
+  "ka": "ქირაობა - მცხოვრების ფასდაკლება %d%%"
  },
  {
   "id": 931,
@@ -245,7 +245,7 @@
   "line": 1281,
   "it": "Noleggio veicoli",
   "ctx": "strcopy(title, \"Noleggio veicoli\", 64);",
-  "ka": ""
+  "ka": "მანქანების ქირაობა"
  },
  {
   "id": 932,
@@ -253,7 +253,7 @@
   "line": 1283,
   "it": "Scegli",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9709, DIALOG_STYLE_TABLIST_HEADERS, title, body, \"Scegli\", \"Chiudi\");",
-  "ka": ""
+  "ka": "არჩევა"
  },
  {
   "id": 933,
@@ -261,7 +261,7 @@
   "line": 1283,
   "it": "Chiudi",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9709, DIALOG_STYLE_TABLIST_HEADERS, title, body, \"Scegli\", \"Chiudi\");",
-  "ka": ""
+  "ka": "დახურვა"
  },
  {
   "id": 934,
@@ -269,7 +269,7 @@
   "line": 1294,
   "it": "Noleggio veicoli",
   "ctx": "UI_LvInfo(playerid, \"Noleggio veicoli\", \"{FFFFFF}Oggi non ci sono mezzi disponibili. Ripassa piu' tardi.\");",
-  "ka": ""
+  "ka": "მანქანების ქირაობა"
  },
  {
   "id": 935,
@@ -277,7 +277,7 @@
   "line": 1294,
   "it": "{FFFFFF}Oggi non ci sono mezzi disponibili. Ripassa piu' tardi.",
   "ctx": "UI_LvInfo(playerid, \"Noleggio veicoli\", \"{FFFFFF}Oggi non ci sono mezzi disponibili. Ripassa piu' tardi.\");",
-  "ka": ""
+  "ka": "{FFFFFF}დღეს თავისუფალი მანქანა არ არის. მოგვიანებით შემოიარე."
  },
  {
   "id": 936,
@@ -285,7 +285,7 @@
   "line": 1308,
   "it": "{FFFFFF}%d min\\t{66DD66}$%s\\n",
   "ctx": "format(line, 128, \"{FFFFFF}%d min\\t{66DD66}$%s\\n\", g_UiLvRnBlockMin[playerid] * b, sTot);",
-  "ka": ""
+  "ka": "{FFFFFF}%d წთ\\t{66DD66}$%s\\n"
  },
  {
   "id": 937,
@@ -293,7 +293,7 @@
   "line": 1311,
   "it": "%s - per quanto tempo?",
   "ctx": "format(title, 64, \"%s - per quanto tempo?\", g_UiLvRnName[playerid][s]);",
-  "ka": ""
+  "ka": "%s - რა ვადით?"
  },
  {
   "id": 938,
@@ -301,7 +301,7 @@
   "line": 1312,
   "it": "Avanti",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9710, DIALOG_STYLE_TABLIST, title, body, \"Avanti\", \"Indietro\");",
-  "ka": ""
+  "ka": "შემდეგი"
  },
  {
   "id": 939,
@@ -309,7 +309,7 @@
   "line": 1312,
   "it": "Indietro",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9710, DIALOG_STYLE_TABLIST, title, body, \"Avanti\", \"Indietro\");",
-  "ka": ""
+  "ka": "უკან"
  },
  {
   "id": 940,
@@ -317,7 +317,7 @@
   "line": 1324,
   "it": " {AAAAAA}(sconto residente %d%% incluso)",
   "ctx": "format(disc, 64, \" {AAAAAA}(sconto residente %d%% incluso)\", g_UiLvRnDisc[playerid]);",
-  "ka": ""
+  "ka": " {AAAAAA}(მცხოვრების %d%% ფასდაკლების ჩათვლით)"
  },
  {
   "id": 941,
@@ -325,7 +325,7 @@
   "line": 1330,
   "it": "{FFFFFF}Veicolo: {FFD24D}%s\\n{FFFFFF}Durata: {FFD24D}%d minuti\\n{FFFFFF}Canone: {66DD66}$%s%s\\n{FFFFFF}Cauzione: {FFD24D}$%s {AAAAAA}(ti torna alla riconsegna, in base alle condizioni del mezzo)\\n{FFFFFF}Addebito ora: {66DD66}$%s\\n\\n{AAAAAA}Si paga dal conto in banca, poi dai contanti. Riporta il mezzo qui con /riconsegna:\\ndopo la scadenza c'e' qualche minuto di tolleranza, poi la cauzione resta all'agenzia.",
   "ctx": "format(body, 1024, \"{FFFFFF}Veicolo: {FFD24D}%s\\n{FFFFFF}Durata: {FFD24D}%d minuti\\n{FFFFFF}Canone: {66DD66}$%s%s\\n{FFFFFF}Cauzione: {FFD24D}$%s {AAAAAA}(ti torna alla riconsegna, in base alle condizi",
-  "ka": ""
+  "ka": "{FFFFFF}მანქანა: {FFD24D}%s\\n{FFFFFF}ხანგრძლივობა: {FFD24D}%d წუთი\\n{FFFFFF}ქირა: {66DD66}$%s%s\\n{FFFFFF}გირაო: {FFD24D}$%s {AAAAAA}(დაბრუნებისას მოგიბრუნდება, მანქანის მდგომარეობის მიხედვით)\\n{FFFFFF}ახლა ჩამოგეჭრება: {66DD66}$%s\\n\\n{AAAAAA}თანხა ჯერ საბანკო ანგარიშიდან ჩამოიჭრება, შემდეგ ნაღდი ფულიდან. მანქანა აქ დააბრუნე /riconsegna-თი:\\nვადის გასვლის შემდეგ რამდენიმე წუთი გაქვს, მერე გირაო სააგენტოს რჩება."
  },
  {
   "id": 942,
@@ -333,7 +333,7 @@
   "line": 1331,
   "it": "Riepilogo noleggio",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9711, DIALOG_STYLE_MSGBOX, \"Riepilogo noleggio\", body, \"Noleggia\", \"Indietro\");",
-  "ka": ""
+  "ka": "ქირაობის შეჯამება"
  },
  {
   "id": 943,
@@ -341,7 +341,7 @@
   "line": 1331,
   "it": "Noleggia",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9711, DIALOG_STYLE_MSGBOX, \"Riepilogo noleggio\", body, \"Noleggia\", \"Indietro\");",
-  "ka": ""
+  "ka": "ქირაობა"
  },
  {
   "id": 944,
@@ -349,7 +349,7 @@
   "line": 1331,
   "it": "Indietro",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9711, DIALOG_STYLE_MSGBOX, \"Riepilogo noleggio\", body, \"Noleggia\", \"Indietro\");",
-  "ka": ""
+  "ka": "უკან"
  },
  {
   "id": 945,
@@ -357,7 +357,7 @@
   "line": 1344,
   "it": "{FFFFFF}Riconsegni la {FFD24D}%s{FFFFFF}?\\n\\nCondizioni del mezzo: {FFD24D}%d%%\\n{FFFFFF}Cauzione versata: {FFD24D}$%s\\n{FFFFFF}Ti restituiamo: {66DD66}$%s\\n\\n{AAAAAA}Il canone non si rimborsa. Grazie per averci scelto.",
   "ctx": "format(body, 512, \"{FFFFFF}Riconsegni la {FFD24D}%s{FFFFFF}?\\n\\nCondizioni del mezzo: {FFD24D}%d%%\\n{FFFFFF}Cauzione versata: {FFD24D}$%s\\n{FFFFFF}Ti restituiamo: {66DD66}$%s\\n\\n{AAAAAA}Il canone non ",
-  "ka": ""
+  "ka": "{FFFFFF}აბრუნებ {FFD24D}%s{FFFFFF}-ს?\\n\\nმანქანის მდგომარეობა: {FFD24D}%d%%\\n{FFFFFF}გადახდილი გირაო: {FFD24D}$%s\\n{FFFFFF}დაგიბრუნდება: {66DD66}$%s\\n\\n{AAAAAA}ქირა არ ბრუნდება. მადლობა, რომ ჩვენ აგვირჩიე."
  },
  {
   "id": 946,
@@ -365,7 +365,7 @@
   "line": 1345,
   "it": "Riconsegna",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9712, DIALOG_STYLE_MSGBOX, \"Riconsegna\", body, \"Riconsegna\", \"Annulla\");",
-  "ka": ""
+  "ka": "დაბრუნება"
  },
  {
   "id": 947,
@@ -373,7 +373,7 @@
   "line": 1345,
   "it": "Riconsegna",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9712, DIALOG_STYLE_MSGBOX, \"Riconsegna\", body, \"Riconsegna\", \"Annulla\");",
-  "ka": ""
+  "ka": "დაბრუნება"
  },
  {
   "id": 948,
@@ -381,7 +381,7 @@
   "line": 1345,
   "it": "Annulla",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9712, DIALOG_STYLE_MSGBOX, \"Riconsegna\", body, \"Riconsegna\", \"Annulla\");",
-  "ka": ""
+  "ka": "გაუქმება"
  },
  {
   "id": 949,
@@ -389,7 +389,7 @@
   "line": 1360,
   "it": "{FFFFFF}Veicolo: {FFD24D}%s\\n{FFFFFF}Utilizzo: {FFD24D}%d minuti\\n{FFFFFF}Canone pagato: {FFD24D}$%s\\n{FFFFFF}Cauzione: {FFD24D}$%s\\n{FFFFFF}Rimborsata: {66DD66}$%s\\n{FFFFFF}Trattenuta per danni o ritardo: {FF8866}$%s\\n\\n{AAAAAA}Buona strada, e a presto.",
   "ctx": "format(body, 512, \"{FFFFFF}Veicolo: {FFD24D}%s\\n{FFFFFF}Utilizzo: {FFD24D}%d minuti\\n{FFFFFF}Canone pagato: {FFD24D}$%s\\n{FFFFFF}Cauzione: {FFD24D}$%s\\n{FFFFFF}Rimborsata: {66DD66}$%s\\n{FFFFFF}Tratten",
-  "ka": ""
+  "ka": "{FFFFFF}მანქანა: {FFD24D}%s\\n{FFFFFF}გამოყენება: {FFD24D}%d წუთი\\n{FFFFFF}გადახდილი ქირა: {FFD24D}$%s\\n{FFFFFF}გირაო: {FFD24D}$%s\\n{FFFFFF}დაბრუნდა: {66DD66}$%s\\n{FFFFFF}დაკავდა დაზიანების ან დაგვიანებისთვის: {FF8866}$%s\\n\\n{AAAAAA}კარგ გზას გისურვებთ, მალე შევხვდებით."
  },
  {
   "id": 950,
@@ -397,7 +397,7 @@
   "line": 1361,
   "it": "Ricevuta noleggio",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9713, DIALOG_STYLE_MSGBOX, \"Ricevuta noleggio\", body, \"Chiudi\", \"\");",
-  "ka": ""
+  "ka": "ქირაობის ქვითარი"
  },
  {
   "id": 951,
@@ -405,7 +405,7 @@
   "line": 1361,
   "it": "Chiudi",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9713, DIALOG_STYLE_MSGBOX, \"Ricevuta noleggio\", body, \"Chiudi\", \"\");",
-  "ka": ""
+  "ka": "დახურვა"
  },
  {
   "id": 952,
@@ -413,7 +413,7 @@
   "line": 1380,
   "it": "{FFFFFF}%s {FFD24D}%s{FFFFFF} cerca un taxi.\\n\\nDa: {FFD24D}%s\\n{FFFFFF}A: {FFD24D}%s\\n{FFFFFF}Percorso stimato: {FFD24D}%s\\n{FFFFFF}Tariffa stimata: {66DD66}$%s\\n\\n{AAAAAA}Hai %d secondi per rispondere (anche con /accettacorsa).",
   "ctx": "format(body, 512, \"{FFFFFF}%s {FFD24D}%s{FFFFFF} cerca un taxi.\\n\\nDa: {FFD24D}%s\\n{FFFFFF}A: {FFD24D}%s\\n{FFFFFF}Percorso stimato: {FFD24D}%s\\n{FFFFFF}Tariffa stimata: {66DD66}$%s\\n\\n{AAAAAA}Hai %d s",
-  "ka": ""
+  "ka": "{FFFFFF}%s {FFD24D}%s{FFFFFF} ტაქსს ეძებს.\\n\\nსაიდან: {FFD24D}%s\\n{FFFFFF}სადამდე: {FFD24D}%s\\n{FFFFFF}სავარაუდო მარშრუტი: {FFD24D}%s\\n{FFFFFF}სავარაუდო ტარიფი: {66DD66}$%s\\n\\n{AAAAAA}პასუხისთვის %d წამი გაქვს (ასევე /accettacorsa-თი)."
  },
  {
   "id": 953,
@@ -421,7 +421,7 @@
   "line": 1380,
   "it": "Un cliente,",
   "ctx": "format(body, 512, \"{FFFFFF}%s {FFD24D}%s{FFFFFF} cerca un taxi.\\n\\nDa: {FFD24D}%s\\n{FFFFFF}A: {FFD24D}%s\\n{FFFFFF}Percorso stimato: {FFD24D}%s\\n{FFFFFF}Tariffa stimata: {66DD66}$%s\\n\\n{AAAAAA}Hai %d s",
-  "ka": ""
+  "ka": "კლიენტი,"
  },
  {
   "id": 954,
@@ -429,7 +429,7 @@
   "line": 1380,
   "it": "Il giocatore",
   "ctx": "format(body, 512, \"{FFFFFF}%s {FFD24D}%s{FFFFFF} cerca un taxi.\\n\\nDa: {FFD24D}%s\\n{FFFFFF}A: {FFD24D}%s\\n{FFFFFF}Percorso stimato: {FFD24D}%s\\n{FFFFFF}Tariffa stimata: {66DD66}$%s\\n\\n{AAAAAA}Hai %d s",
-  "ka": ""
+  "ka": "მოთამაშე"
  },
  {
   "id": 955,
@@ -437,7 +437,7 @@
   "line": 1381,
   "it": "Chiamata taxi",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9714, DIALOG_STYLE_MSGBOX, \"Chiamata taxi\", body, \"Accetta corsa\", \"Ignora\");",
-  "ka": ""
+  "ka": "ტაქსის გამოძახება"
  },
  {
   "id": 956,
@@ -445,7 +445,7 @@
   "line": 1381,
   "it": "Accetta corsa",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9714, DIALOG_STYLE_MSGBOX, \"Chiamata taxi\", body, \"Accetta corsa\", \"Ignora\");",
-  "ka": ""
+  "ka": "მიღება"
  },
  {
   "id": 957,
@@ -453,7 +453,7 @@
   "line": 1381,
   "it": "Ignora",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9714, DIALOG_STYLE_MSGBOX, \"Chiamata taxi\", body, \"Accetta corsa\", \"Ignora\");",
-  "ka": ""
+  "ka": "იგნორი"
  },
  {
   "id": 958,
@@ -461,7 +461,7 @@
   "line": 1418,
   "it": "TASSAMETRO - in corsa",
   "ctx": "Lang_PlayerTextDrawSetString(playerid, g_UiLvTd[playerid][6], running ? \"TASSAMETRO - in corsa\" : \"TASSAMETRO - fermo\");",
-  "ka": ""
+  "ka": "ტაქსომეტრი - მოძრაობაში"
  },
  {
   "id": 959,
@@ -469,7 +469,7 @@
   "line": 1418,
   "it": "TASSAMETRO - fermo",
   "ctx": "Lang_PlayerTextDrawSetString(playerid, g_UiLvTd[playerid][6], running ? \"TASSAMETRO - in corsa\" : \"TASSAMETRO - fermo\");",
-  "ka": ""
+  "ka": "ტაქსომეტრი - გაჩერებული"
  },
  {
   "id": 960,
@@ -477,7 +477,7 @@
   "line": 1446,
   "it": " {AAAAAA}(sconto residente %d%% incluso)",
   "ctx": "format(disc, 64, \" {AAAAAA}(sconto residente %d%% incluso)\", g_UiLvTxPayDisc[playerid]);",
-  "ka": ""
+  "ka": " {AAAAAA}(მცხოვრების %d%% ფასდაკლების ჩათვლით)"
  },
  {
   "id": 961,
@@ -485,7 +485,7 @@
   "line": 1452,
   "it": "{FFFFFF}Corsa con {FFD24D}%s{FFFFFF} conclusa.\\n\\nPercorso: {FFD24D}%s\\n{FFFFFF}Importo: {66DD66}$%s%s\\n\\n{AAAAAA}Il pagamento parte dal tuo conto in banca. Se qualcosa non va puoi contestare:\\nla corsa restera' in sospeso e lo staff la verifichera'. Rispondi entro %d secondi.",
   "ctx": "format(body, 640, \"{FFFFFF}Corsa con {FFD24D}%s{FFFFFF} conclusa.\\n\\nPercorso: {FFD24D}%s\\n{FFFFFF}Importo: {66DD66}$%s%s\\n\\n{AAAAAA}Il pagamento parte dal tuo conto in banca. Se qualcosa non va puoi ",
-  "ka": ""
+  "ka": "{FFFFFF}მგზავრობა {FFD24D}%s{FFFFFF}-თან დასრულდა.\\n\\nმარშრუტი: {FFD24D}%s\\n{FFFFFF}თანხა: {66DD66}$%s%s\\n\\n{AAAAAA}გადახდა შენი საბანკო ანგარიშიდან მოხდება. თუ რამე არასწორია, შეგიძლია გაასაჩივრო:\\nმგზავრობა შეჩერდება და ადმინისტრაცია გადაამოწმებს. უპასუხე %d წამში."
  },
  {
   "id": 962,
@@ -493,7 +493,7 @@
   "line": 1453,
   "it": "Pagamento corsa",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9715, DIALOG_STYLE_MSGBOX, \"Pagamento corsa\", body, \"Paga\", \"Contesta\");",
-  "ka": ""
+  "ka": "მგზავრობის გადახდა"
  },
  {
   "id": 963,
@@ -501,7 +501,7 @@
   "line": 1453,
   "it": "Paga",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9715, DIALOG_STYLE_MSGBOX, \"Pagamento corsa\", body, \"Paga\", \"Contesta\");",
-  "ka": ""
+  "ka": "გადახდა"
  },
  {
   "id": 964,
@@ -509,7 +509,7 @@
   "line": 1453,
   "it": "Contesta",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9715, DIALOG_STYLE_MSGBOX, \"Pagamento corsa\", body, \"Paga\", \"Contesta\");",
-  "ka": ""
+  "ka": "გასაჩივრება"
  },
  {
   "id": 965,
@@ -517,7 +517,7 @@
   "line": 1511,
   "it": "Com'e' andata con %s?",
   "ctx": "format(title, 64, \"Com'e' andata con %s?\", driver[0] != 0 ? driver : \"il tassista\");",
-  "ka": ""
+  "ka": "როგორ იყო %s-თან?"
  },
  {
   "id": 966,
@@ -525,7 +525,7 @@
   "line": 1512,
   "it": "{66DD66}***** Ottima\\n{66DD66}**** Buona\\n{FFD24D}*** Nella norma\\n{FFAA33}** Da migliorare\\n{FF8866}* Deludente",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9717, DIALOG_STYLE_LIST, title, \"{66DD66}***** Ottima\\n{66DD66}**** Buona\\n{FFD24D}*** Nella norma\\n{FFAA33}** Da migliorare\\n{FF8866}* Deludente\", \"Vota\", \"Salta\");",
-  "ka": ""
+  "ka": "{66DD66}***** შესანიშნავი\\n{66DD66}**** კარგი\\n{FFD24D}*** ნორმალური\\n{FFAA33}** გასაუმჯობესებელი\\n{FF8866}* იმედგაცრუებული"
  },
  {
   "id": 967,
@@ -533,7 +533,7 @@
   "line": 1512,
   "it": "Vota",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9717, DIALOG_STYLE_LIST, title, \"{66DD66}***** Ottima\\n{66DD66}**** Buona\\n{FFD24D}*** Nella norma\\n{FFAA33}** Da migliorare\\n{FF8866}* Deludente\", \"Vota\", \"Salta\");",
-  "ka": ""
+  "ka": "შეფასება"
  },
  {
   "id": 968,
@@ -541,7 +541,7 @@
   "line": 1512,
   "it": "Salta",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9717, DIALOG_STYLE_LIST, title, \"{66DD66}***** Ottima\\n{66DD66}**** Buona\\n{FFD24D}*** Nella norma\\n{FFAA33}** Da migliorare\\n{FF8866}* Deludente\", \"Vota\", \"Salta\");",
-  "ka": ""
+  "ka": "გამოტოვება"
  },
  {
   "id": 969,
@@ -549,7 +549,7 @@
   "line": 1529,
   "it": "{FFFFFF}Cliente: {FFD24D}%s\\n{FFFFFF}Percorso: {FFD24D}%s\\n{FFFFFF}Tariffa: {FFD24D}$%s\\n{FFFFFF}Tassa comunale: {FF8866}$%s\\n{FFFFFF}Accreditato in banca: {66DD66}$%s\\n\\n{AAAAAA}Buon lavoro, la citta' gira anche grazie a te.",
   "ctx": "format(body, 512, \"{FFFFFF}Cliente: {FFD24D}%s\\n{FFFFFF}Percorso: {FFD24D}%s\\n{FFFFFF}Tariffa: {FFD24D}$%s\\n{FFFFFF}Tassa comunale: {FF8866}$%s\\n{FFFFFF}Accreditato in banca: {66DD66}$%s\\n\\n{AAAAAA}Bu",
-  "ka": ""
+  "ka": "{FFFFFF}კლიენტი: {FFD24D}%s\\n{FFFFFF}მარშრუტი: {FFD24D}%s\\n{FFFFFF}ტარიფი: {FFD24D}$%s\\n{FFFFFF}მუნიციპალური გადასახადი: {FF8866}$%s\\n{FFFFFF}ბანკში ჩაირიცხა: {66DD66}$%s\\n\\n{AAAAAA}კარგი მუშაობა, ქალაქი შენი დამსახურებითაც მოძრაობს."
  },
  {
   "id": 970,
@@ -557,7 +557,7 @@
   "line": 1533,
   "it": "{FFFFFF}Tassista: {FFD24D}%s\\n{FFFFFF}Percorso: {FFD24D}%s\\n{FFFFFF}Pagato: {66DD66}$%s\\n\\n{AAAAAA}Grazie per aver viaggiato con i taxi di Los Santos.",
   "ctx": "format(body, 512, \"{FFFFFF}Tassista: {FFD24D}%s\\n{FFFFFF}Percorso: {FFD24D}%s\\n{FFFFFF}Pagato: {66DD66}$%s\\n\\n{AAAAAA}Grazie per aver viaggiato con i taxi di Los Santos.\", other[0] != 0 ? other : \"-\",",
-  "ka": ""
+  "ka": "{FFFFFF}ტაქსისტი: {FFD24D}%s\\n{FFFFFF}მარშრუტი: {FFD24D}%s\\n{FFFFFF}გადახდილია: {66DD66}$%s\\n\\n{AAAAAA}მადლობა, რომ ლოს-სანტოსის ტაქსით იმგზავრე."
  },
  {
   "id": 971,
@@ -565,7 +565,7 @@
   "line": 1535,
   "it": "Ricevuta corsa #%d",
   "ctx": "format(title, 64, \"Ricevuta corsa #%d\", rideId);",
-  "ka": ""
+  "ka": "მგზავრობის ქვითარი #%d"
  },
  {
   "id": 972,
@@ -573,7 +573,7 @@
   "line": 1536,
   "it": "Chiudi",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9718, DIALOG_STYLE_MSGBOX, title, body, \"Chiudi\", \"\");",
-  "ka": ""
+  "ka": "დახურვა"
  },
  {
   "id": 973,
@@ -581,7 +581,7 @@
   "line": 1588,
   "it": "Progetti della comunita'",
   "ctx": "UI_LvInfo(playerid, \"Progetti della comunita'\", \"{FFFFFF}In questo quartiere non c'e' un progetto aperto, per ora.\\n\\n{AAAAAA}Il prossimo partira' presto: tieni d'occhio la bacheca.\");",
-  "ka": ""
+  "ka": "საზოგადოების პროექტები"
  },
  {
   "id": 974,
@@ -589,7 +589,7 @@
   "line": 1588,
   "it": "{FFFFFF}In questo quartiere non c'e' un progetto aperto, per ora.\\n\\n{AAAAAA}Il prossimo partira' presto: tieni d'occhio la bacheca.",
   "ctx": "UI_LvInfo(playerid, \"Progetti della comunita'\", \"{FFFFFF}In questo quartiere non c'e' un progetto aperto, per ora.\\n\\n{AAAAAA}Il prossimo partira' presto: tieni d'occhio la bacheca.\");",
-  "ka": ""
+  "ka": "{FFFFFF}ამ უბანში ჯერჯერობით ღია პროექტი არ არის.\\n\\n{AAAAAA}შემდეგი მალე დაიწყება: თვალი ადევნე დაფას."
  },
  {
   "id": 975,
@@ -597,7 +597,7 @@
   "line": 1600,
   "it": "{66DD66}Puoi contribuire oggi da $%s a $%s.",
   "ctx": "format(foot, 160, \"{66DD66}Puoi contribuire oggi da $%s a $%s.\", sLo, sHi);",
-  "ka": ""
+  "ka": "{66DD66}დღეს შეგიძლია შეიტანო $%s-დან $%s-მდე."
  },
  {
   "id": 976,
@@ -605,7 +605,7 @@
   "line": 1608,
   "it": "{FFD24D}Per oggi hai gia' dato il massimo: grazie davvero.",
   "ctx": "strcopy(foot, \"{FFD24D}Per oggi hai gia' dato il massimo: grazie davvero.\", 160);",
-  "ka": ""
+  "ka": "{FFD24D}დღეს მაქსიმუმი უკვე გაიღე: დიდი მადლობა."
  },
  {
   "id": 977,
@@ -613,7 +613,7 @@
   "line": 1610,
   "it": "{FFFFFF}%s\\n{AAAAAA}Quartiere di %s\\n\\n%s\\n{FFFFFF}Raccolti {66DD66}$%s{FFFFFF} su {FFD24D}$%s{FFFFFF} - mancano %d giorni e %d ore\\n\\n{AAAAAA}Il fondo cresce con ogni contratto e corsa da e verso il quartiere, senza togliere\\nnulla al tuo compenso, e con le donazioni di chi ci vive. Ogni aiuto conta.\\n\\n%s",
   "ctx": "format(body, 1024, \"{FFFFFF}%s\\n{AAAAAA}Quartiere di %s\\n\\n%s\\n{FFFFFF}Raccolti {66DD66}$%s{FFFFFF} su {FFD24D}$%s{FFFFFF} - mancano %d giorni e %d ore\\n\\n{AAAAAA}Il fondo cresce con ogni contratto e ",
-  "ka": ""
+  "ka": "{FFFFFF}%s\\n{AAAAAA}უბანი: %s\\n\\n%s\\n{FFFFFF}შეგროვდა {66DD66}$%s{FFFFFF} / {FFD24D}$%s{FFFFFF} - დარჩა %d დღე და %d საათი\\n\\n{AAAAAA}ფონდი იზრდება ყოველი კონტრაქტით და მგზავრობით უბანში და უბნიდან, შენი ანაზღაურების\\nშემცირების გარეშე, და იქ მცხოვრებთა შემოწირულობებით. ყოველი დახმარება მნიშვნელოვანია.\\n\\n%s"
  },
  {
   "id": 978,
@@ -621,7 +621,7 @@
   "line": 1611,
   "it": "Progetto della comunita'",
   "ctx": "strcopy(title, \"Progetto della comunita'\", 64);",
-  "ka": ""
+  "ka": "საზოგადოების პროექტი"
  },
  {
   "id": 979,
@@ -629,7 +629,7 @@
   "line": 1614,
   "it": "Contribuisci",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9719, DIALOG_STYLE_MSGBOX, title, body, \"Contribuisci\", \"Chiudi\");",
-  "ka": ""
+  "ka": "შეწირვა"
  },
  {
   "id": 980,
@@ -637,7 +637,7 @@
   "line": 1614,
   "it": "Chiudi",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9719, DIALOG_STYLE_MSGBOX, title, body, \"Contribuisci\", \"Chiudi\");",
-  "ka": ""
+  "ka": "დახურვა"
  },
  {
   "id": 981,
@@ -645,7 +645,7 @@
   "line": 1618,
   "it": "Chiudi",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9719, DIALOG_STYLE_MSGBOX, title, body, \"Chiudi\", \"\");",
-  "ka": ""
+  "ka": "დახურვა"
  },
  {
   "id": 982,
@@ -653,7 +653,7 @@
   "line": 1633,
   "it": "%s{FFFFFF}Quanto vuoi donare a {FFD24D}%s{FFFFFF}?\\nImporto ammesso: da {FFD24D}$%s{FFFFFF} a {FFD24D}$%s{FFFFFF}. Inserisci un numero intero:",
   "ctx": "format(body, 512, \"%s{FFFFFF}Quanto vuoi donare a {FFD24D}%s{FFFFFF}?\\nImporto ammesso: da {FFD24D}$%s{FFFFFF} a {FFD24D}$%s{FFFFFF}. Inserisci un numero intero:\", err, g_UiLvPjName[playerid], sLo, sH",
-  "ka": ""
+  "ka": "%s{FFFFFF}რამდენის შეწირვა გინდა {FFD24D}%s{FFFFFF}-ისთვის?\\nდასაშვები თანხა: {FFD24D}$%s{FFFFFF}-დან {FFD24D}$%s{FFFFFF}-მდე. შეიყვანე მთელი რიცხვი:"
  },
  {
   "id": 983,
@@ -661,7 +661,7 @@
   "line": 1634,
   "it": "Contribuisci",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9720, DIALOG_STYLE_INPUT, \"Contribuisci\", body, \"Avanti\", \"Indietro\");",
-  "ka": ""
+  "ka": "შეწირვა"
  },
  {
   "id": 984,
@@ -669,7 +669,7 @@
   "line": 1634,
   "it": "Avanti",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9720, DIALOG_STYLE_INPUT, \"Contribuisci\", body, \"Avanti\", \"Indietro\");",
-  "ka": ""
+  "ka": "შემდეგი"
  },
  {
   "id": 985,
@@ -677,7 +677,7 @@
   "line": 1634,
   "it": "Indietro",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9720, DIALOG_STYLE_INPUT, \"Contribuisci\", body, \"Avanti\", \"Indietro\");",
-  "ka": ""
+  "ka": "უკან"
  },
  {
   "id": 986,
@@ -685,7 +685,7 @@
   "line": 1642,
   "it": "{FFFFFF}Doni {66DD66}$%s{FFFFFF} a {FFD24D}%s{FFFFFF}?\\n\\n{AAAAAA}L'importo si paga dal conto in banca, poi dai contanti, e non si restituisce.\\nIl quartiere se ne ricordera'.",
   "ctx": "format(body, 384, \"{FFFFFF}Doni {66DD66}$%s{FFFFFF} a {FFD24D}%s{FFFFFF}?\\n\\n{AAAAAA}L'importo si paga dal conto in banca, poi dai contanti, e non si restituisce.\\nIl quartiere se ne ricordera'.\", sAm",
-  "ka": ""
+  "ka": "{FFFFFF}სწირავ {66DD66}$%s{FFFFFF}-ს {FFD24D}%s{FFFFFF}-ისთვის?\\n\\n{AAAAAA}თანხა ჯერ საბანკო ანგარიშიდან ჩამოიჭრება, შემდეგ ნაღდი ფულიდან, და არ ბრუნდება.\\nუბანი ამას არ დაივიწყებს."
  },
  {
   "id": 987,
@@ -693,7 +693,7 @@
   "line": 1643,
   "it": "Conferma donazione",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9721, DIALOG_STYLE_MSGBOX, \"Conferma donazione\", body, \"Dona\", \"Indietro\");",
-  "ka": ""
+  "ka": "შეწირვის დადასტურება"
  },
  {
   "id": 988,
@@ -701,7 +701,7 @@
   "line": 1643,
   "it": "Dona",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9721, DIALOG_STYLE_MSGBOX, \"Conferma donazione\", body, \"Dona\", \"Indietro\");",
-  "ka": ""
+  "ka": "შეწირვა"
  },
  {
   "id": 989,
@@ -709,7 +709,7 @@
   "line": 1643,
   "it": "Indietro",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9721, DIALOG_STYLE_MSGBOX, \"Conferma donazione\", body, \"Dona\", \"Indietro\");",
-  "ka": ""
+  "ka": "უკან"
  },
  {
   "id": 990,
@@ -717,7 +717,7 @@
   "line": 1658,
   "it": "{FF6666}Importo fuori limite: da $%s a $%s.\\n\\n",
   "ctx": "format(err, size, \"{FF6666}Importo fuori limite: da $%s a $%s.\\n\\n\", sLo, sHi);",
-  "ka": ""
+  "ka": "{FF6666}თანხა ლიმიტს სცდება: $%s-დან $%s-მდე.\\n\\n"
  },
  {
   "id": 991,
@@ -725,7 +725,7 @@
   "line": 1718,
   "it": "{66DD66}[fatto] {AAAAAA}%d. %s\\n",
   "ctx": "format(line, 128, \"{66DD66}[fatto] {AAAAAA}%d. %s\\n\", s, g_UiLvStepTitle[s]);",
-  "ka": ""
+  "ka": "{66DD66}[შესრულდა] {AAAAAA}%d. %s\\n"
  },
  {
   "id": 992,
@@ -733,7 +733,7 @@
   "line": 1722,
   "it": "{FFD24D}[ora] {FFFFFF}%d. %s\\n",
   "ctx": "format(line, 128, \"{FFD24D}[ora] {FFFFFF}%d. %s\\n\", s, g_UiLvStepTitle[s]);",
-  "ka": ""
+  "ka": "{FFD24D}[ახლა] {FFFFFF}%d. %s\\n"
  },
  {
   "id": 993,
@@ -741,7 +741,7 @@
   "line": 1733,
   "it": "{AAAAAA}Spegni i suggerimenti",
   "ctx": "strcat(body, \"{AAAAAA}Spegni i suggerimenti\", 1024);",
-  "ka": ""
+  "ka": "{AAAAAA}მინიშნებების გამორთვა"
  },
  {
   "id": 994,
@@ -749,7 +749,7 @@
   "line": 1738,
   "it": "Primo giorno - completato",
   "ctx": "strcopy(title, \"Primo giorno - completato\", 64);",
-  "ka": ""
+  "ka": "პირველი დღე - დასრულდა"
  },
  {
   "id": 995,
@@ -757,7 +757,7 @@
   "line": 1742,
   "it": "Primo giorno - passo %d di %d",
   "ctx": "format(title, 64, \"Primo giorno - passo %d di %d\", cur, 5);",
-  "ka": ""
+  "ka": "პირველი დღე - ნაბიჯი %d / %d"
  },
  {
   "id": 996,
@@ -765,7 +765,7 @@
   "line": 1744,
   "it": "Apri",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9722, DIALOG_STYLE_LIST, title, body, \"Apri\", \"Chiudi\");",
-  "ka": ""
+  "ka": "გახსნა"
  },
  {
   "id": 997,
@@ -773,7 +773,7 @@
   "line": 1744,
   "it": "Chiudi",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9722, DIALOG_STYLE_LIST, title, body, \"Apri\", \"Chiudi\");",
-  "ka": ""
+  "ka": "დახურვა"
  },
  {
   "id": 998,
@@ -781,7 +781,7 @@
   "line": 1752,
   "it": "{66DD66}Fatto.",
   "ctx": "format(body, 512, \"{FFFFFF}%s\\n\\n%s\", g_UiLvStepText[step], step < cur ? \"{66DD66}Fatto.\" : (step == cur ? \"{FFD24D}E' il tuo prossimo passo.\" : \"{AAAAAA}Ci arriverai presto.\"));",
-  "ka": ""
+  "ka": "{66DD66}შესრულდა."
  },
  {
   "id": 999,
@@ -789,7 +789,7 @@
   "line": 1752,
   "it": "{FFD24D}E' il tuo prossimo passo.",
   "ctx": "format(body, 512, \"{FFFFFF}%s\\n\\n%s\", g_UiLvStepText[step], step < cur ? \"{66DD66}Fatto.\" : (step == cur ? \"{FFD24D}E' il tuo prossimo passo.\" : \"{AAAAAA}Ci arriverai presto.\"));",
-  "ka": ""
+  "ka": "{FFD24D}ეს შენი შემდეგი ნაბიჯია."
  },
  {
   "id": 1000,
@@ -797,7 +797,7 @@
   "line": 1752,
   "it": "{AAAAAA}Ci arriverai presto.",
   "ctx": "format(body, 512, \"{FFFFFF}%s\\n\\n%s\", g_UiLvStepText[step], step < cur ? \"{66DD66}Fatto.\" : (step == cur ? \"{FFD24D}E' il tuo prossimo passo.\" : \"{AAAAAA}Ci arriverai presto.\"));",
-  "ka": ""
+  "ka": "{AAAAAA}მალე მიხვალ ამ ეტაპამდე."
  },
  {
   "id": 1001,
@@ -805,7 +805,7 @@
   "line": 1756,
   "it": "Segna sulla mappa",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9723, DIALOG_STYLE_MSGBOX, title, body, \"Segna sulla mappa\", \"Indietro\");",
-  "ka": ""
+  "ka": "რუკაზე მონიშვნა"
  },
  {
   "id": 1002,
@@ -813,7 +813,7 @@
   "line": 1756,
   "it": "Indietro",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9723, DIALOG_STYLE_MSGBOX, title, body, \"Segna sulla mappa\", \"Indietro\");",
-  "ka": ""
+  "ka": "უკან"
  },
  {
   "id": 1003,
@@ -821,7 +821,7 @@
   "line": 1760,
   "it": "Indietro",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9723, DIALOG_STYLE_MSGBOX, title, body, \"Indietro\", \"Chiudi\");",
-  "ka": ""
+  "ka": "უკან"
  },
  {
   "id": 1004,
@@ -829,7 +829,7 @@
   "line": 1760,
   "it": "Chiudi",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9723, DIALOG_STYLE_MSGBOX, title, body, \"Indietro\", \"Chiudi\");",
-  "ka": ""
+  "ka": "დახურვა"
  },
  {
   "id": 1005,
@@ -837,7 +837,7 @@
   "line": 1772,
   "it": "~y~Primo giorno %d/%d~n~~w~%s",
   "ctx": "format(text, 160, \"~y~Primo giorno %d/%d~n~~w~%s\", step, 5, g_UiLvStepHint[step]);",
-  "ka": ""
+  "ka": "~y~პირველი დღე %d/%d~n~~w~%s"
  },
  {
   "id": 1006,
@@ -845,7 +845,7 @@
   "line": 1808,
   "it": "Benvenuto a Los Santos",
   "ctx": "UI_LvInfo(playerid, \"Benvenuto a Los Santos\", \"{FFFFFF}Hai fatto il tuo primo giorno in citta'.\\n\\nLa Casa del Quartiere ti ha lasciato un {66DD66}pacco accoglienza{FFFFFF}: acqua, un pasto pronto e q",
-  "ka": ""
+  "ka": "კეთილი იყოს შენი მობრძანება ლოს-სანტოსში"
  },
  {
   "id": 1007,
@@ -853,7 +853,7 @@
   "line": 1808,
   "it": "{FFFFFF}Hai fatto il tuo primo giorno in citta'.\\n\\nLa Casa del Quartiere ti ha lasciato un {66DD66}pacco accoglienza{FFFFFF}: acqua, un pasto pronto e qualche benda.\\n\\n{AAAAAA}Da qui in poi la strada la scegli tu. Idlewood ti aspetta, quando vuoi.",
   "ctx": "UI_LvInfo(playerid, \"Benvenuto a Los Santos\", \"{FFFFFF}Hai fatto il tuo primo giorno in citta'.\\n\\nLa Casa del Quartiere ti ha lasciato un {66DD66}pacco accoglienza{FFFFFF}: acqua, un pasto pronto e q",
-  "ka": ""
+  "ka": "{FFFFFF}ქალაქში პირველი დღე გაატარე.\\n\\nუბნის სახლმა {66DD66}მისასალმებელი ამანათი{FFFFFF} დაგიტოვა: წყალი, მზა კერძი და რამდენიმე ბინტი.\\n\\n{AAAAAA}აქედან გზას შენ თვითონ ირჩევ. Idlewood გელოდება, როცა მოისურვებ."
  },
  {
   "id": 1008,
@@ -861,7 +861,7 @@
   "line": 1812,
   "it": "Suggerimenti spenti",
   "ctx": "UI_LvInfo(playerid, \"Suggerimenti spenti\", \"{FFFFFF}Va bene, niente piu' suggerimenti.\\n\\n{AAAAAA}Se ti serve una mano, la Casa del Quartiere di Idlewood e' sempre aperta.\");",
-  "ka": ""
+  "ka": "მინიშნებები გამორთულია"
  },
  {
   "id": 1009,
@@ -869,7 +869,7 @@
   "line": 1812,
   "it": "{FFFFFF}Va bene, niente piu' suggerimenti.\\n\\n{AAAAAA}Se ti serve una mano, la Casa del Quartiere di Idlewood e' sempre aperta.",
   "ctx": "UI_LvInfo(playerid, \"Suggerimenti spenti\", \"{FFFFFF}Va bene, niente piu' suggerimenti.\\n\\n{AAAAAA}Se ti serve una mano, la Casa del Quartiere di Idlewood e' sempre aperta.\");",
-  "ka": ""
+  "ka": "{FFFFFF}კარგი, მინიშნებები აღარ იქნება.\\n\\n{AAAAAA}თუ დახმარება დაგჭირდება, Idlewood-ის უბნის სახლი ყოველთვის ღიაა."
  },
  {
   "id": 1010,
@@ -877,7 +877,7 @@
   "line": 1956,
   "it": "La chiamata e' passata a un altro taxi",
   "ctx": "UI_LivingToast(playerid, \"La chiamata e' passata a un altro taxi\", 2);",
-  "ka": ""
+  "ka": "გამოძახება სხვა ტაქსს გადაეცა"
  },
  {
   "id": 1011,
@@ -885,7 +885,7 @@
   "line": 1970,
   "it": "Tempo scaduto per il pagamento della corsa",
   "ctx": "UI_LivingToast(playerid, \"Tempo scaduto per il pagamento della corsa\", 2);",
-  "ka": ""
+  "ka": "მგზავრობის გადახდის დრო ამოიწურა"
  },
  {
   "id": 1012,
@@ -893,7 +893,7 @@
   "line": 2008,
   "it": "Aggiorno la bacheca...",
   "ctx": "UI_LivingToast(playerid, \"Aggiorno la bacheca...\", 0);",
-  "ka": ""
+  "ka": "დაფა ახლდება..."
  },
  {
   "id": 1013,
@@ -901,7 +901,7 @@
   "line": 2079,
   "it": "Contratto richiesto, un attimo...",
   "ctx": "UI_LivingToast(playerid, \"Contratto richiesto, un attimo...\", 0);",
-  "ka": ""
+  "ka": "კონტრაქტი მოთხოვნილია, ერთი წამით..."
  },
  {
   "id": 1014,
@@ -909,7 +909,7 @@
   "line": 2095,
   "it": "{FFFFFF}Vuoi davvero lasciare il contratto {FFD24D}#%d{FFFFFF}?\\n\\n{AAAAAA}Il mezzo tornera' al magazzino e il contratto tornera' in bacheca per qualcun altro.",
   "ctx": "format(body, 256, \"{FFFFFF}Vuoi davvero lasciare il contratto {FFD24D}#%d{FFFFFF}?\\n\\n{AAAAAA}Il mezzo tornera' al magazzino e il contratto tornera' in bacheca per qualcun altro.\", g_UiLvStId[playerid",
-  "ka": ""
+  "ka": "{FFFFFF}ნამდვილად გინდა კონტრაქტის {FFD24D}#%d{FFFFFF} დატოვება?\\n\\n{AAAAAA}მანქანა საწყობში დაბრუნდება, კონტრაქტი კი დაფაზე სხვისთვის გამოჩნდება."
  },
  {
   "id": 1015,
@@ -917,7 +917,7 @@
   "line": 2096,
   "it": "Lasciare il contratto?",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9705, DIALOG_STYLE_MSGBOX, \"Lasciare il contratto?\", body, \"Lascia\", \"Indietro\");",
-  "ka": ""
+  "ka": "დატოვებ კონტრაქტს?"
  },
  {
   "id": 1016,
@@ -925,7 +925,7 @@
   "line": 2096,
   "it": "Lascia",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9705, DIALOG_STYLE_MSGBOX, \"Lasciare il contratto?\", body, \"Lascia\", \"Indietro\");",
-  "ka": ""
+  "ka": "დატოვება"
  },
  {
   "id": 1017,
@@ -933,7 +933,7 @@
   "line": 2096,
   "it": "Indietro",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9705, DIALOG_STYLE_MSGBOX, \"Lasciare il contratto?\", body, \"Lascia\", \"Indietro\");",
-  "ka": ""
+  "ka": "უკან"
  },
  {
   "id": 1018,
@@ -941,7 +941,7 @@
   "line": 2108,
   "it": "Il contratto resta tuo",
   "ctx": "UI_LivingToast(playerid, \"Il contratto resta tuo\", 1);",
-  "ka": ""
+  "ka": "კონტრაქტი შენთან რჩება"
  },
  {
   "id": 1019,
@@ -949,7 +949,7 @@
   "line": 2152,
   "it": "Questo mezzo non e' disponibile per te ora",
   "ctx": "UI_LivingToast(playerid, \"Questo mezzo non e' disponibile per te ora\", 2);",
-  "ka": ""
+  "ka": "ეს მანქანა ახლა შენთვის მიუწვდომელია"
  },
  {
   "id": 1020,
@@ -957,7 +957,7 @@
   "line": 2192,
   "it": "Preparo il mezzo...",
   "ctx": "UI_LivingToast(playerid, \"Preparo il mezzo...\", 0);",
-  "ka": ""
+  "ka": "მანქანას ვამზადებთ..."
  },
  {
   "id": 1021,
@@ -965,7 +965,7 @@
   "line": 2234,
   "it": "Contestare la corsa?",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9716, DIALOG_STYLE_MSGBOX, \"Contestare la corsa?\", \"{FFFFFF}Se contesti, la corsa non viene pagata e resta in sospeso per lo staff.\\n\\n{AAAAAA}Usalo solo se qualcosa e'",
-  "ka": ""
+  "ka": "გაასაჩივრებ მგზავრობას?"
  },
  {
   "id": 1022,
@@ -973,7 +973,7 @@
   "line": 2234,
   "it": "{FFFFFF}Se contesti, la corsa non viene pagata e resta in sospeso per lo staff.\\n\\n{AAAAAA}Usalo solo se qualcosa e' andato davvero storto.",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9716, DIALOG_STYLE_MSGBOX, \"Contestare la corsa?\", \"{FFFFFF}Se contesti, la corsa non viene pagata e resta in sospeso per lo staff.\\n\\n{AAAAAA}Usalo solo se qualcosa e'",
-  "ka": ""
+  "ka": "{FFFFFF}თუ გაასაჩივრებ, მგზავრობა არ გადაიხდება და ადმინისტრაციის განხილვამდე შეჩერდება.\\n\\n{AAAAAA}გამოიყენე მხოლოდ მაშინ, თუ რამე მართლა არასწორად წავიდა."
  },
  {
   "id": 1023,
@@ -981,7 +981,7 @@
   "line": 2234,
   "it": "Contesta",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9716, DIALOG_STYLE_MSGBOX, \"Contestare la corsa?\", \"{FFFFFF}Se contesti, la corsa non viene pagata e resta in sospeso per lo staff.\\n\\n{AAAAAA}Usalo solo se qualcosa e'",
-  "ka": ""
+  "ka": "გასაჩივრება"
  },
  {
   "id": 1024,
@@ -989,7 +989,7 @@
   "line": 2234,
   "it": "Indietro",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9716, DIALOG_STYLE_MSGBOX, \"Contestare la corsa?\", \"{FFFFFF}Se contesti, la corsa non viene pagata e resta in sospeso per lo staff.\\n\\n{AAAAAA}Usalo solo se qualcosa e'",
-  "ka": ""
+  "ka": "უკან"
  },
  {
   "id": 1025,
@@ -997,7 +997,7 @@
   "line": 2262,
   "it": "Grazie per il tuo voto",
   "ctx": "UI_LivingToast(playerid, \"Grazie per il tuo voto\", 1);",
-  "ka": ""
+  "ka": "მადლობა შეფასებისთვის"
  },
  {
   "id": 1026,
@@ -1005,7 +1005,7 @@
   "line": 2285,
   "it": "{FF6666}Importo non valido: solo cifre, intero positivo.\\n\\n",
   "ctx": "UI_LvPrjAmountShow(playerid, \"{FF6666}Importo non valido: solo cifre, intero positivo.\\n\\n\");",
-  "ka": ""
+  "ka": "{FF6666}არასწორი თანხა: მხოლოდ ციფრები, დადებითი მთელი რიცხვი.\\n\\n"
  },
  {
   "id": 1027,
@@ -1013,7 +1013,7 @@
   "line": 2318,
   "it": "Grazie: registro la tua donazione...",
   "ctx": "UI_LivingToast(playerid, \"Grazie: registro la tua donazione...\", 1);",
-  "ka": ""
+  "ka": "მადლობა: შენი შემოწირულობა ფიქსირდება..."
  },
  {
   "id": 1028,
@@ -1021,7 +1021,7 @@
   "line": 2335,
   "it": "Spegnere i suggerimenti?",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9724, DIALOG_STYLE_MSGBOX, \"Spegnere i suggerimenti?\", \"{FFFFFF}Il percorso del primo giorno si chiude qui, senza il pacco accoglienza.\\n\\n{AAAAAA}Potrai sempre chieder",
-  "ka": ""
+  "ka": "გამოვრთოთ მინიშნებები?"
  },
  {
   "id": 1029,
@@ -1029,7 +1029,7 @@
   "line": 2335,
   "it": "{FFFFFF}Il percorso del primo giorno si chiude qui, senza il pacco accoglienza.\\n\\n{AAAAAA}Potrai sempre chiedere a chi incontri: Los Santos e' piu' gentile di quanto sembri.",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9724, DIALOG_STYLE_MSGBOX, \"Spegnere i suggerimenti?\", \"{FFFFFF}Il percorso del primo giorno si chiude qui, senza il pacco accoglienza.\\n\\n{AAAAAA}Potrai sempre chieder",
-  "ka": ""
+  "ka": "{FFFFFF}პირველი დღის გზა აქ სრულდება, მისასალმებელი ამანათის გარეშე.\\n\\n{AAAAAA}ყოველთვის შეგიძლია ჰკითხო, ვისაც შეხვდები: ლოს-სანტოსი იმაზე კეთილია, ვიდრე ჩანს."
  },
  {
   "id": 1030,
@@ -1037,7 +1037,7 @@
   "line": 2335,
   "it": "Spegni",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9724, DIALOG_STYLE_MSGBOX, \"Spegnere i suggerimenti?\", \"{FFFFFF}Il percorso del primo giorno si chiude qui, senza il pacco accoglienza.\\n\\n{AAAAAA}Potrai sempre chieder",
-  "ka": ""
+  "ka": "გამორთვა"
  },
  {
   "id": 1031,
@@ -1045,7 +1045,7 @@
   "line": 2335,
   "it": "Indietro",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9724, DIALOG_STYLE_MSGBOX, \"Spegnere i suggerimenti?\", \"{FFFFFF}Il percorso del primo giorno si chiude qui, senza il pacco accoglienza.\\n\\n{AAAAAA}Potrai sempre chieder",
-  "ka": ""
+  "ka": "უკან"
  },
  {
   "id": 1032,
@@ -1053,7 +1053,7 @@
   "line": 2349,
   "it": "Ti segno la strada sulla mappa",
   "ctx": "UI_LivingToast(playerid, \"Ti segno la strada sulla mappa\", 1);",
-  "ka": ""
+  "ka": "გზას რუკაზე გინიშნავ"
  },
  {
   "id": 1033,
@@ -1061,7 +1061,7 @@
   "line": 5,
   "it": "Faggio",
   "ctx": "\"Faggio\",",
-  "ka": ""
+  "ka": "Faggio"
  },
  {
   "id": 1034,
@@ -1069,7 +1069,7 @@
   "line": 6,
   "it": "Previon",
   "ctx": "\"Previon\",",
-  "ka": ""
+  "ka": "Previon"
  },
  {
   "id": 1035,
@@ -1077,7 +1077,7 @@
   "line": 7,
   "it": "Manana",
   "ctx": "\"Manana\",",
-  "ka": ""
+  "ka": "Manana"
  },
  {
   "id": 1036,
@@ -1085,7 +1085,7 @@
   "line": 8,
   "it": "Virgo",
   "ctx": "\"Virgo\",",
-  "ka": ""
+  "ka": "Virgo"
  },
  {
   "id": 1037,
@@ -1093,7 +1093,7 @@
   "line": 9,
   "it": "Glendale",
   "ctx": "\"Glendale\",",
-  "ka": ""
+  "ka": "Glendale"
  },
  {
   "id": 1038,
@@ -1101,7 +1101,7 @@
   "line": 10,
   "it": "Primo",
   "ctx": "\"Primo\",",
-  "ka": ""
+  "ka": "Primo"
  },
  {
   "id": 1039,
@@ -1109,7 +1109,7 @@
   "line": 11,
   "it": "Willard",
   "ctx": "\"Willard\",",
-  "ka": ""
+  "ka": "Willard"
  },
  {
   "id": 1040,
@@ -1117,7 +1117,7 @@
   "line": 12,
   "it": "Sadler",
   "ctx": "\"Sadler\",",
-  "ka": ""
+  "ka": "Sadler"
  },
  {
   "id": 1041,
@@ -1125,7 +1125,7 @@
   "line": 13,
   "it": "PCJ-600",
   "ctx": "\"PCJ-600\",",
-  "ka": ""
+  "ka": "PCJ-600"
  },
  {
   "id": 1042,
@@ -1133,7 +1133,7 @@
   "line": 14,
   "it": "Bobcat",
   "ctx": "\"Bobcat\",",
-  "ka": ""
+  "ka": "Bobcat"
  },
  {
   "id": 1043,
@@ -1141,7 +1141,7 @@
   "line": 15,
   "it": "Tampa",
   "ctx": "\"Tampa\",",
-  "ka": ""
+  "ka": "Tampa"
  },
  {
   "id": 1044,
@@ -1149,7 +1149,7 @@
   "line": 16,
   "it": "Mesa",
   "ctx": "\"Mesa\",",
-  "ka": ""
+  "ka": "Mesa"
  },
  {
   "id": 1045,
@@ -1157,7 +1157,7 @@
   "line": 17,
   "it": "Sentinel",
   "ctx": "\"Sentinel\"",
-  "ka": ""
+  "ka": "Sentinel"
  },
  {
   "id": 1046,
@@ -1165,7 +1165,7 @@
   "line": 72,
   "it": "Modello %d",
   "ctx": "format(out, size, \"Modello %d\", model);",
-  "ka": ""
+  "ka": "მოდელი %d"
  },
  {
   "id": 1047,
@@ -1173,7 +1173,7 @@
   "line": 91,
   "it": "{FFFFFF}%s\\t{66DD66}$%s\\t{AAAAAA}liv. %d\\n",
   "ctx": "format(line, 96, \"{FFFFFF}%s\\t{66DD66}$%s\\t{AAAAAA}liv. %d\\n\", g_UiVehName[i], price, g_UiVehMinLevel[i]);",
-  "ka": ""
+  "ka": "{FFFFFF}%s\\t{66DD66}$%s\\t{AAAAAA}დონე %d\\n"
  },
  {
   "id": 1048,
@@ -1181,7 +1181,7 @@
   "line": 95,
   "it": "{777777}%s\\t$%s\\t{FF6666}Bloccato: liv. %d\\n",
   "ctx": "format(line, 96, \"{777777}%s\\t$%s\\t{FF6666}Bloccato: liv. %d\\n\", g_UiVehName[i], price, g_UiVehMinLevel[i]);",
-  "ka": ""
+  "ka": "{777777}%s\\t$%s\\t{FF6666}დაბლოკილია: დონე %d\\n"
  },
  {
   "id": 1049,
@@ -1189,7 +1189,7 @@
   "line": 99,
   "it": "Concessionario di Los Santos",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9100, DIALOG_STYLE_TABLIST, \"Concessionario di Los Santos\", body, \"Scegli\", \"Chiudi\");",
-  "ka": ""
+  "ka": "ლოს-სანტოსის ავტოსალონი"
  },
  {
   "id": 1050,
@@ -1197,7 +1197,7 @@
   "line": 99,
   "it": "Scegli",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9100, DIALOG_STYLE_TABLIST, \"Concessionario di Los Santos\", body, \"Scegli\", \"Chiudi\");",
-  "ka": ""
+  "ka": "არჩევა"
  },
  {
   "id": 1051,
@@ -1205,7 +1205,7 @@
   "line": 99,
   "it": "Chiudi",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9100, DIALOG_STYLE_TABLIST, \"Concessionario di Los Santos\", body, \"Scegli\", \"Chiudi\");",
-  "ka": ""
+  "ka": "დახურვა"
  },
  {
   "id": 1052,
@@ -1213,7 +1213,7 @@
   "line": 110,
   "it": "{FFFFFF}Contanti\\t%s$%s\\n",
   "ctx": "format(body, 320, \"{FFFFFF}Contanti\\t%s$%s\\n\", g_UiVehMoney[playerid] >= g_UiVehPrice[idx] ? \"{66DD66}\" : \"{FF6666}\", cash);",
-  "ka": ""
+  "ka": "{FFFFFF}ნაღდი ფული\\t%s$%s\\n"
  },
  {
   "id": 1053,
@@ -1221,7 +1221,7 @@
   "line": 111,
   "it": "{FFFFFF}Banca\\t%s$%s\\n",
   "ctx": "format(t, 48, \"{FFFFFF}Banca\\t%s$%s\\n\", g_UiVehBank[playerid] >= g_UiVehPrice[idx] ? \"{66DD66}\" : \"{FF6666}\", bank);",
-  "ka": ""
+  "ka": "{FFFFFF}ბანკი\\t%s$%s\\n"
  },
  {
   "id": 1054,
@@ -1229,7 +1229,7 @@
   "line": 114,
   "it": "%s - $%s: pagamento",
   "ctx": "format(title, 64, \"%s - $%s: pagamento\", g_UiVehName[idx], price);",
-  "ka": ""
+  "ka": "%s - $%s: გადახდა"
  },
  {
   "id": 1055,
@@ -1237,7 +1237,7 @@
   "line": 115,
   "it": "Acquista",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9101, DIALOG_STYLE_TABLIST, title, body, \"Acquista\", \"Indietro\");",
-  "ka": ""
+  "ka": "ყიდვა"
  },
  {
   "id": 1056,
@@ -1245,7 +1245,7 @@
   "line": 115,
   "it": "Indietro",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9101, DIALOG_STYLE_TABLIST, title, body, \"Acquista\", \"Indietro\");",
-  "ka": ""
+  "ka": "უკან"
  },
  {
   "id": 1057,
@@ -1253,7 +1253,7 @@
   "line": 164,
   "it": "I miei veicoli",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9105, DIALOG_STYLE_MSGBOX, \"I miei veicoli\", \"{FFFFFF}Non possiedi veicoli.\\nAcquistane uno al concessionario di Los Santos.\", \"Ok\", \"\");",
-  "ka": ""
+  "ka": "ჩემი მანქანები"
  },
  {
   "id": 1058,
@@ -1261,7 +1261,7 @@
   "line": 164,
   "it": "{FFFFFF}Non possiedi veicoli.\\nAcquistane uno al concessionario di Los Santos.",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9105, DIALOG_STYLE_MSGBOX, \"I miei veicoli\", \"{FFFFFF}Non possiedi veicoli.\\nAcquistane uno al concessionario di Los Santos.\", \"Ok\", \"\");",
-  "ka": ""
+  "ka": "{FFFFFF}მანქანა არ გაქვს.\\nიყიდე ლოს-სანტოსის ავტოსალონში."
  },
  {
   "id": 1059,
@@ -1269,7 +1269,7 @@
   "line": 168,
   "it": "Slot\\tModello\\tTarga\\tCarburante\\tStato\\n",
   "ctx": "strcat(body, \"Slot\\tModello\\tTarga\\tCarburante\\tStato\\n\", 1536);",
-  "ka": ""
+  "ka": "სლოტი\\tმოდელი\\tნომერი\\tსაწვავი\\tსტატუსი\\n"
  },
  {
   "id": 1060,
@@ -1277,7 +1277,7 @@
   "line": 176,
   "it": "{66AAFF}Parcheggiato",
   "ctx": "format(stxt, 24, \"{66AAFF}Parcheggiato\");",
-  "ka": ""
+  "ka": "{66AAFF}გაჩერებულია"
  },
  {
   "id": 1061,
@@ -1285,7 +1285,7 @@
   "line": 180,
   "it": "{FF6666}Distrutto",
   "ctx": "format(stxt, 24, \"{FF6666}Distrutto\");",
-  "ka": ""
+  "ka": "{FF6666}განადგურებულია"
  },
  {
   "id": 1062,
@@ -1293,7 +1293,7 @@
   "line": 184,
   "it": "{66DD66}In giro",
   "ctx": "format(stxt, 24, \"{66DD66}In giro\");",
-  "ka": ""
+  "ka": "{66DD66}გზაშია"
  },
  {
   "id": 1063,
@@ -1301,7 +1301,7 @@
   "line": 190,
   "it": "I miei veicoli",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9102, DIALOG_STYLE_TABLIST_HEADERS, \"I miei veicoli\", body, \"Seleziona\", \"Chiudi\");",
-  "ka": ""
+  "ka": "ჩემი მანქანები"
  },
  {
   "id": 1064,
@@ -1309,7 +1309,7 @@
   "line": 190,
   "it": "Seleziona",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9102, DIALOG_STYLE_TABLIST_HEADERS, \"I miei veicoli\", body, \"Seleziona\", \"Chiudi\");",
-  "ka": ""
+  "ka": "არჩევა"
  },
  {
   "id": 1065,
@@ -1317,7 +1317,7 @@
   "line": 190,
   "it": "Chiudi",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9102, DIALOG_STYLE_TABLIST_HEADERS, \"I miei veicoli\", body, \"Seleziona\", \"Chiudi\");",
-  "ka": ""
+  "ka": "დახურვა"
  },
  {
   "id": 1066,
@@ -1325,7 +1325,7 @@
   "line": 199,
   "it": "Trova veicolo\\nVendi veicolo",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9103, DIALOG_STYLE_LIST, title, \"Trova veicolo\\nVendi veicolo\", \"Scegli\", \"Indietro\");",
-  "ka": ""
+  "ka": "მანქანის პოვნა\\nმანქანის გაყიდვა"
  },
  {
   "id": 1067,
@@ -1333,7 +1333,7 @@
   "line": 199,
   "it": "Scegli",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9103, DIALOG_STYLE_LIST, title, \"Trova veicolo\\nVendi veicolo\", \"Scegli\", \"Indietro\");",
-  "ka": ""
+  "ka": "არჩევა"
  },
  {
   "id": 1068,
@@ -1341,7 +1341,7 @@
   "line": 199,
   "it": "Indietro",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9103, DIALOG_STYLE_LIST, title, \"Trova veicolo\\nVendi veicolo\", \"Scegli\", \"Indietro\");",
-  "ka": ""
+  "ka": "უკან"
  },
  {
   "id": 1069,
@@ -1349,7 +1349,7 @@
   "line": 210,
   "it": "{FFFFFF}Vendere {FFD24D}%s{FFFFFF} (targa %s)?\\n\\nRiceverai circa {66DD66}$%s{FFFFFF} (%d%% del listino) in banca.\\nL'operazione non e' reversibile.",
   "ctx": "format(body, 256, \"{FFFFFF}Vendere {FFD24D}%s{FFFFFF} (targa %s)?\\n\\nRiceverai circa {66DD66}$%s{FFFFFF} (%d%% del listino) in banca.\\nL'operazione non e' reversibile.\", name, g_UiVehLPlate[playerid][",
-  "ka": ""
+  "ka": "{FFFFFF}ყიდი {FFD24D}%s{FFFFFF}-ს (ნომერი %s)?\\n\\nბანკში მიიღებ დაახლ. {66DD66}$%s{FFFFFF}-ს (საბაზო ფასის %d%%).\\nოპერაცია შეუქცევადია."
  },
  {
   "id": 1070,
@@ -1357,7 +1357,7 @@
   "line": 214,
   "it": "{FFFFFF}Vendere {FFD24D}%s{FFFFFF} (targa %s)?\\n\\nRiceverai il %d%% del prezzo di listino in banca.\\nL'operazione non e' reversibile.",
   "ctx": "format(body, 256, \"{FFFFFF}Vendere {FFD24D}%s{FFFFFF} (targa %s)?\\n\\nRiceverai il %d%% del prezzo di listino in banca.\\nL'operazione non e' reversibile.\", name, g_UiVehLPlate[playerid][i], 60);",
-  "ka": ""
+  "ka": "{FFFFFF}ყიდი {FFD24D}%s{FFFFFF}-ს (ნომერი %s)?\\n\\nბანკში მიიღებ საბაზო ფასის %d%%-ს.\\nოპერაცია შეუქცევადია."
  },
  {
   "id": 1071,
@@ -1365,7 +1365,7 @@
   "line": 216,
   "it": "Conferma vendita",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9104, DIALOG_STYLE_MSGBOX, \"Conferma vendita\", body, \"Vendi\", \"Annulla\");",
-  "ka": ""
+  "ka": "გაყიდვის დადასტურება"
  },
  {
   "id": 1072,
@@ -1373,7 +1373,7 @@
   "line": 216,
   "it": "Vendi",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9104, DIALOG_STYLE_MSGBOX, \"Conferma vendita\", body, \"Vendi\", \"Annulla\");",
-  "ka": ""
+  "ka": "გაყიდვა"
  },
  {
   "id": 1073,
@@ -1381,7 +1381,7 @@
   "line": 216,
   "it": "Annulla",
   "ctx": "Lang_ShowPlayerDialog(playerid, 9104, DIALOG_STYLE_MSGBOX, \"Conferma vendita\", body, \"Vendi\", \"Annulla\");",
-  "ka": ""
+  "ka": "გაუქმება"
  },
  {
   "id": 1074,
@@ -1389,7 +1389,7 @@
   "line": 240,
   "it": "Questo modello richiede un livello superiore.",
   "ctx": "SendClientMessage(playerid, -10066177, \"Questo modello richiede un livello superiore.\");",
-  "ka": ""
+  "ka": "ეს მოდელი უფრო მაღალ დონეს მოითხოვს."
  },
  {
   "id": 1075,
@@ -1397,7 +1397,7 @@
   "line": 263,
   "it": "Fondi insufficienti con questo metodo di pagamento.",
   "ctx": "SendClientMessage(playerid, -10066177, \"Fondi insufficienti con questo metodo di pagamento.\");",
-  "ka": ""
+  "ka": "ამ გადახდის მეთოდით საკმარისი თანხა არ გაქვს."
  },
  {
   "id": 1076,
@@ -1405,7 +1405,7 @@
   "line": 372,
   "it": "0 km/h",
   "ctx": "g_UiVHud[playerid][1] = UI_VHudText(playerid, (632.0 - 5.0), (398.0 + 2.0), \"0 km/h\", 0.3, 1.2, -1, t_TEXT_DRAW_ALIGN:3);",
-  "ka": ""
+  "ka": "0 კმ/სთ"
  },
  {
   "id": 1077,
@@ -1413,7 +1413,7 @@
   "line": 373,
   "it": "Benzina 0.0/0 L",
   "ctx": "g_UiVHud[playerid][2] = UI_VHudText(playerid, (5.0 + left), (398.0 + 22.0), \"Benzina 0.0/0 L\", 0.22, 1.0, -1, t_TEXT_DRAW_ALIGN:1);",
-  "ka": ""
+  "ka": "საწვავი 0.0/0 ლ"
  },
  {
   "id": 1078,
@@ -1421,7 +1421,7 @@
   "line": 376,
   "it": "MOTORE SPENTO",
   "ctx": "g_UiVHud[playerid][5] = UI_VHudText(playerid, (5.0 + left), (398.0 + 43.0), \"MOTORE SPENTO\", 0.2, 0.9, -10066177, t_TEXT_DRAW_ALIGN:1);",
-  "ka": ""
+  "ka": "ძრავი გამორთულია"
  },
  {
   "id": 1079,
@@ -1429,7 +1429,7 @@
   "line": 448,
   "it": "%d km/h",
   "ctx": "format(str, 48, \"%d km/h\", speedKmh);",
-  "ka": ""
+  "ka": "%d კმ/სთ"
  },
  {
   "id": 1080,
@@ -1437,7 +1437,7 @@
   "line": 450,
   "it": "Benzina %.1f/%.0f L",
   "ctx": "format(str, 48, \"Benzina %.1f/%.0f L\", fuel, fuelMax);",
-  "ka": ""
+  "ka": "საწვავი %.1f/%.0f ლ"
  },
  {
   "id": 1081,
@@ -1445,7 +1445,7 @@
   "line": 458,
   "it": "MOTORE ACCESO",
   "ctx": "Lang_PlayerTextDrawSetString(playerid, g_UiVHud[playerid][5], engineOn ? \"MOTORE ACCESO\" : \"MOTORE SPENTO\");",
-  "ka": ""
+  "ka": "ძრავი ჩართულია"
  },
  {
   "id": 1082,
@@ -1453,7 +1453,7 @@
   "line": 458,
   "it": "MOTORE SPENTO",
   "ctx": "Lang_PlayerTextDrawSetString(playerid, g_UiVHud[playerid][5], engineOn ? \"MOTORE ACCESO\" : \"MOTORE SPENTO\");",
-  "ka": ""
+  "ka": "ძრავი გამორთულია"
  },
  {
   "id": 1662,
@@ -1461,7 +1461,7 @@
   "line": 10,
   "it": "Faggio",
   "ctx": "\"Faggio\",",
-  "ka": ""
+  "ka": "Faggio"
  },
  {
   "id": 1663,
@@ -1469,7 +1469,7 @@
   "line": 11,
   "it": "Previon",
   "ctx": "\"Previon\",",
-  "ka": ""
+  "ka": "Previon"
  },
  {
   "id": 1664,
@@ -1477,7 +1477,7 @@
   "line": 12,
   "it": "Manana",
   "ctx": "\"Manana\",",
-  "ka": ""
+  "ka": "Manana"
  },
  {
   "id": 1665,
@@ -1485,7 +1485,7 @@
   "line": 13,
   "it": "Virgo",
   "ctx": "\"Virgo\",",
-  "ka": ""
+  "ka": "Virgo"
  },
  {
   "id": 1666,
@@ -1493,7 +1493,7 @@
   "line": 14,
   "it": "Glendale",
   "ctx": "\"Glendale\",",
-  "ka": ""
+  "ka": "Glendale"
  },
  {
   "id": 1667,
@@ -1501,7 +1501,7 @@
   "line": 15,
   "it": "Primo",
   "ctx": "\"Primo\",",
-  "ka": ""
+  "ka": "Primo"
  },
  {
   "id": 1668,
@@ -1509,7 +1509,7 @@
   "line": 16,
   "it": "Willard",
   "ctx": "\"Willard\",",
-  "ka": ""
+  "ka": "Willard"
  },
  {
   "id": 1669,
@@ -1517,7 +1517,7 @@
   "line": 17,
   "it": "Sadler",
   "ctx": "\"Sadler\",",
-  "ka": ""
+  "ka": "Sadler"
  },
  {
   "id": 1670,
@@ -1525,7 +1525,7 @@
   "line": 18,
   "it": "PCJ-600",
   "ctx": "\"PCJ-600\",",
-  "ka": ""
+  "ka": "PCJ-600"
  },
  {
   "id": 1671,
@@ -1533,7 +1533,7 @@
   "line": 19,
   "it": "Bobcat",
   "ctx": "\"Bobcat\",",
-  "ka": ""
+  "ka": "Bobcat"
  },
  {
   "id": 1672,
@@ -1541,7 +1541,7 @@
   "line": 20,
   "it": "Tampa",
   "ctx": "\"Tampa\",",
-  "ka": ""
+  "ka": "Tampa"
  },
  {
   "id": 1673,
@@ -1549,7 +1549,7 @@
   "line": 21,
   "it": "Mesa",
   "ctx": "\"Mesa\",",
-  "ka": ""
+  "ka": "Mesa"
  },
  {
   "id": 1674,
@@ -1557,7 +1557,7 @@
   "line": 22,
   "it": "Sentinel",
   "ctx": "\"Sentinel\"",
-  "ka": ""
+  "ka": "Sentinel"
  },
  {
   "id": 1675,
@@ -1565,7 +1565,7 @@
   "line": 61,
   "it": "Veicolo",
   "ctx": "strmid(out, \"Veicolo\", 0, 7, size);",
-  "ka": ""
+  "ka": "მანქანა"
  },
  {
   "id": 1676,
@@ -1573,7 +1573,7 @@
   "line": 171,
   "it": "Attendi un attimo prima di usare un altro comando veicolo.",
   "ctx": "Util_Send(playerid, -10270721, \"Attendi un attimo prima di usare un altro comando veicolo.\");",
-  "ka": ""
+  "ka": "მოიცადე, სანამ მანქანის სხვა ბრძანებას გამოიყენებ."
  },
  {
   "id": 1677,
@@ -1581,7 +1581,7 @@
   "line": 480,
   "it": "Serbatoio vuoto: il motore si e' spento. Cerca un distributore (/refuel).",
   "ctx": "Util_Send(driver, -10270721, \"Serbatoio vuoto: il motore si e' spento. Cerca un distributore (/refuel).\");",
-  "ka": ""
+  "ka": "ავზი ცარიელია: ძრავი გაითიშა. მოძებნე ბენზინგასამართი სადგური (/refuel)."
  },
  {
   "id": 1678,
@@ -1589,7 +1589,7 @@
   "line": 484,
   "it": "Un tuo veicolo ha finito il carburante e si e' spento.",
   "ctx": "Util_Send(p, -10270721, \"Un tuo veicolo ha finito il carburante e si e' spento.\");",
-  "ka": ""
+  "ka": "შენს ერთ-ერთ მანქანას საწვავი გაუთავდა და გაითიშა."
  },
  {
   "id": 1679,
@@ -1597,7 +1597,7 @@
   "line": 490,
   "it": "Carburante in riserva: raggiungi un distributore.",
   "ctx": "Util_Send(p, -10270721, \"Carburante in riserva: raggiungi un distributore.\");",
-  "ka": ""
+  "ka": "საწვავი ცოტაა: მიდი ბენზინგასამართ სადგურზე."
  },
  {
   "id": 1680,
@@ -1605,7 +1605,7 @@
   "line": 557,
   "it": "Impossibile caricare i tuoi veicoli (errore database). Gli acquisti sono sospesi fino al prossimo accesso.",
   "ctx": "Util_Send(playerid, -10270721, \"Impossibile caricare i tuoi veicoli (errore database). Gli acquisti sono sospesi fino al prossimo accesso.\");",
-  "ka": ""
+  "ka": "შენი მანქანების ჩატვირთვა ვერ მოხერხდა (მონაცემთა ბაზის შეცდომა). ყიდვა შეჩერებულია შემდეგ შესვლამდე."
  },
  {
   "id": 1681,
@@ -1613,7 +1613,7 @@
   "line": 601,
   "it": "[VEICOLI] Tetto di %d veicoli personali raggiunto: i veicoli di %s [%d] non sono stati creati.",
   "ctx": "format(msg, 256, \"[VEICOLI] Tetto di %d veicoli personali raggiunto: i veicoli di %s [%d] non sono stati creati.\", 300, name, playerid);",
-  "ka": ""
+  "ka": "[მანქანები] მიღწეულია %d პირადი მანქანის ლიმიტი: %s-ის [%d] მანქანები არ შეიქმნა."
  },
  {
   "id": 1682,
@@ -1621,7 +1621,7 @@
   "line": 604,
   "it": "Il server ha raggiunto il limite di veicoli personali: i tuoi veicoli non sono disponibili al momento.",
   "ctx": "Util_Send(playerid, -10270721, \"Il server ha raggiunto il limite di veicoli personali: i tuoi veicoli non sono disponibili al momento.\");",
-  "ka": ""
+  "ka": "სერვერმა პირადი მანქანების ლიმიტს მიაღწია: შენი მანქანები ამჟამად მიუწვდომელია."
  },
  {
   "id": 1683,
@@ -1629,7 +1629,7 @@
   "line": 619,
   "it": "Hai %d veicolo/i (%d in strada). Usa /v list per i dettagli.",
   "ctx": "SendClientMessage(playerid, -1, \"Hai %d veicolo/i (%d in strada). Usa /v list per i dettagli.\", count, spawned);",
-  "ka": ""
+  "ka": "გაქვს %d მანქანა (%d გზაზე). დეტალებისთვის გამოიყენე /v list."
  },
  {
   "id": 1684,
@@ -1637,7 +1637,7 @@
   "line": 635,
   "it": "Devi essere al concessionario di Los Santos.",
   "ctx": "Util_Send(playerid, -10270721, \"Devi essere al concessionario di Los Santos.\");",
-  "ka": ""
+  "ka": "ლოს-სანტოსის ავტოსალონში უნდა იყო."
  },
  {
   "id": 1685,
@@ -1645,7 +1645,7 @@
   "line": 640,
   "it": "Scendi dal veicolo per usare il concessionario.",
   "ctx": "Util_Send(playerid, -10270721, \"Scendi dal veicolo per usare il concessionario.\");",
-  "ka": ""
+  "ka": "ავტოსალონით სარგებლობისთვის მანქანიდან გადმოდი."
  },
  {
   "id": 1686,
@@ -1653,7 +1653,7 @@
   "line": 645,
   "it": "I tuoi veicoli non sono ancora stati caricati: riprova tra poco.",
   "ctx": "Util_Send(playerid, -10270721, \"I tuoi veicoli non sono ancora stati caricati: riprova tra poco.\");",
-  "ka": ""
+  "ka": "შენი მანქანები ჯერ არ ჩატვირთულა: ცოტა ხანში სცადე."
  },
  {
   "id": 1687,
@@ -1661,7 +1661,7 @@
   "line": 650,
   "it": "Hai un'operazione veicolo in corso: attendi.",
   "ctx": "Util_Send(playerid, -10270721, \"Hai un'operazione veicolo in corso: attendi.\");",
-  "ka": ""
+  "ka": "მანქანასთან დაკავშირებული ოპერაცია მიმდინარეობს: მოიცადე."
  },
  {
   "id": 1688,
@@ -1669,7 +1669,7 @@
   "line": 665,
   "it": "Devi essere al concessionario di Los Santos.",
   "ctx": "Util_Send(playerid, -10270721, \"Devi essere al concessionario di Los Santos.\");",
-  "ka": ""
+  "ka": "ლოს-სანტოსის ავტოსალონში უნდა იყო."
  },
  {
   "id": 1689,
@@ -1677,7 +1677,7 @@
   "line": 670,
   "it": "Hai un'operazione veicolo in corso: attendi.",
   "ctx": "Util_Send(playerid, -10270721, \"Hai un'operazione veicolo in corso: attendi.\");",
-  "ka": ""
+  "ka": "მანქანასთან დაკავშირებული ოპერაცია მიმდინარეობს: მოიცადე."
  },
  {
   "id": 1690,
@@ -1685,7 +1685,7 @@
   "line": 675,
   "it": "I tuoi veicoli non sono disponibili (caricamento non riuscito o in corso).",
   "ctx": "Util_Send(playerid, -10270721, \"I tuoi veicoli non sono disponibili (caricamento non riuscito o in corso).\");",
-  "ka": ""
+  "ka": "შენი მანქანები მიუწვდომელია (ჩატვირთვა ვერ მოხერხდა ან მიმდინარეობს)."
  },
  {
   "id": 1691,
@@ -1693,7 +1693,7 @@
   "line": 680,
   "it": "Richiesta di acquisto non valida.",
   "ctx": "Util_Send(playerid, -10270721, \"Richiesta di acquisto non valida.\");",
-  "ka": ""
+  "ka": "ყიდვის არასწორი მოთხოვნა."
  },
  {
   "id": 1692,
@@ -1701,7 +1701,7 @@
   "line": 685,
   "it": "Questo modello richiede il livello %d.",
   "ctx": "SendClientMessage(playerid, -10270721, \"Questo modello richiede il livello %d.\", g_VehCatLevel[catalogIndex]);",
-  "ka": ""
+  "ka": "ეს მოდელი მოითხოვს დონე %d-ს."
  },
  {
   "id": 1693,
@@ -1709,7 +1709,7 @@
   "line": 690,
   "it": "Hai raggiunto il limite di veicoli per il tuo livello (%d).",
   "ctx": "SendClientMessage(playerid, -10270721, \"Hai raggiunto il limite di veicoli per il tuo livello (%d).\", Veh_MaxForLevel(gPlayer[playerid][pLevel]));",
-  "ka": ""
+  "ka": "შენი დონისთვის მანქანების ლიმიტს მიაღწიე (%d)."
  },
  {
   "id": 1694,
@@ -1717,7 +1717,7 @@
   "line": 695,
   "it": "Il concessionario non puo' consegnare altri veicoli in questo momento.",
   "ctx": "Util_Send(playerid, -10270721, \"Il concessionario non puo' consegnare altri veicoli in questo momento.\");",
-  "ka": ""
+  "ka": "ავტოსალონს ამჟამად მეტი მანქანის მიწოდება არ შეუძლია."
  },
  {
   "id": 1695,
@@ -1725,7 +1725,7 @@
   "line": 701,
   "it": "Fondi insufficienti con questo metodo di pagamento.",
   "ctx": "Util_Send(playerid, -10270721, \"Fondi insufficienti con questo metodo di pagamento.\");",
-  "ka": ""
+  "ka": "ამ გადახდის მეთოდით საკმარისი თანხა არ გაქვს."
  },
  {
   "id": 1696,
@@ -1733,7 +1733,7 @@
   "line": 708,
   "it": "Pratica di acquisto in corso...",
   "ctx": "Util_Send(playerid, -1, \"Pratica di acquisto in corso...\");",
-  "ka": ""
+  "ka": "ყიდვა ფორმდება..."
  },
  {
   "id": 1697,
@@ -1741,7 +1741,7 @@
   "line": 740,
   "it": "Acquisto non riuscito (errore del concessionario). Nessun addebito.",
   "ctx": "Util_Send(playerid, -10270721, \"Acquisto non riuscito (errore del concessionario). Nessun addebito.\");",
-  "ka": ""
+  "ka": "ყიდვა ვერ მოხერხდა (ავტოსალონის შეცდომა). თანხა არ ჩამოგეჭრა."
  },
  {
   "id": 1698,
@@ -1749,7 +1749,7 @@
   "line": 749,
   "it": "Acquisto annullato: requisiti o fondi non piu' validi. Nessun addebito.",
   "ctx": "Util_Send(playerid, -10270721, \"Acquisto annullato: requisiti o fondi non piu' validi. Nessun addebito.\");",
-  "ka": ""
+  "ka": "ყიდვა გაუქმდა: მოთხოვნები ან თანხა აღარ არის საკმარისი. თანხა არ ჩამოგეჭრა."
  },
  {
   "id": 1699,
@@ -1757,7 +1757,7 @@
   "line": 779,
   "it": "Consegna non riuscita (limite veicoli del server). Nessun addebito.",
   "ctx": "Util_Send(playerid, -10270721, \"Consegna non riuscita (limite veicoli del server). Nessun addebito.\");",
-  "ka": ""
+  "ka": "მიწოდება ვერ მოხერხდა (სერვერის მანქანების ლიმიტი). თანხა არ ჩამოგეჭრა."
  },
  {
   "id": 1700,
@@ -1765,7 +1765,7 @@
   "line": 787,
   "it": "Pagamento non riuscito. Acquisto annullato.",
   "ctx": "Util_Send(playerid, -10270721, \"Pagamento non riuscito. Acquisto annullato.\");",
-  "ka": ""
+  "ka": "გადახდა ვერ მოხერხდა. ყიდვა გაუქმდა."
  },
  {
   "id": 1701,
@@ -1773,7 +1773,7 @@
   "line": 794,
   "it": "Hai acquistato una %s (targa %s) per $%d (%s). Ti aspetta all'uscita del concessionario.",
   "ctx": "SendClientMessage(playerid, 0x66DD66FF, \"Hai acquistato una %s (targa %s) per $%d (%s). Ti aspetta all'uscita del concessionario.\", mname, plate, price, bank ? \"banca\" : \"contanti\");",
-  "ka": ""
+  "ka": "შენ იყიდე %s (ნომერი %s) $%d-ად (%s). ავტოსალონის გასასვლელთან გელოდება."
  },
  {
   "id": 1702,
@@ -1781,7 +1781,7 @@
   "line": 795,
   "it": "ACQUISTO %s: %s targa %s $%d (%s) dbId %d",
   "ctx": "format(msg, 256, \"ACQUISTO %s: %s targa %s $%d (%s) dbId %d\", pname, mname, plate, price, bank ? \"banca\" : \"contanti\", vehDbId);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 1703,
@@ -1789,7 +1789,7 @@
   "line": 804,
   "it": "Slot veicolo non valido.",
   "ctx": "Util_Send(playerid, -10270721, \"Slot veicolo non valido.\");",
-  "ka": ""
+  "ka": "მანქანის არასწორი სლოტი."
  },
  {
   "id": 1704,
@@ -1797,7 +1797,7 @@
   "line": 809,
   "it": "Hai un'operazione veicolo in corso: attendi.",
   "ctx": "Util_Send(playerid, -10270721, \"Hai un'operazione veicolo in corso: attendi.\");",
-  "ka": ""
+  "ka": "მანქანასთან დაკავშირებული ოპერაცია მიმდინარეობს: მოიცადე."
  },
  {
   "id": 1705,
@@ -1805,7 +1805,7 @@
   "line": 814,
   "it": "Puoi vendere solo presso il concessionario di Los Santos.",
   "ctx": "Util_Send(playerid, -10270721, \"Puoi vendere solo presso il concessionario di Los Santos.\");",
-  "ka": ""
+  "ka": "გაყიდვა მხოლოდ ლოს-სანტოსის ავტოსალონში შეგიძლია."
  },
  {
   "id": 1706,
@@ -1813,7 +1813,7 @@
   "line": 824,
   "it": "Il veicolo deve essere al concessionario con te (o devi essere al volante).",
   "ctx": "Util_Send(playerid, -10270721, \"Il veicolo deve essere al concessionario con te (o devi essere al volante).\");",
-  "ka": ""
+  "ka": "მანქანა შენთან ერთად ავტოსალონში უნდა იყოს (ან საჭესთან უნდა იჯდე)."
  },
  {
   "id": 1707,
@@ -1821,7 +1821,7 @@
   "line": 831,
   "it": "Il tuo conto bancario non puo' ricevere l'importo: vendita rifiutata.",
   "ctx": "Util_Send(playerid, -10270721, \"Il tuo conto bancario non puo' ricevere l'importo: vendita rifiutata.\");",
-  "ka": ""
+  "ka": "შენს საბანკო ანგარიშს თანხის მიღება არ შეუძლია: გაყიდვა უარყოფილია."
  },
  {
   "id": 1708,
@@ -1829,7 +1829,7 @@
   "line": 838,
   "it": "Vendita %s (targa %s): ricevi $%d in banca.",
   "ctx": "SendClientMessage(playerid, -2994689, \"Vendita %s (targa %s): ricevi $%d in banca.\", mname, g_VSlot[playerid][slot][vsPlate], refund);",
-  "ka": ""
+  "ka": "გაყიდვა: %s (ნომერი %s): ბანკში მიიღებ $%d-ს."
  },
  {
   "id": 1709,
@@ -1837,7 +1837,7 @@
   "line": 839,
   "it": "Per confermare: /v sell %d conferma",
   "ctx": "SendClientMessage(playerid, 0x99CCFFFF, \"Per confermare: /v sell %d conferma\", slot + 1);",
-  "ka": ""
+  "ka": "დასადასტურებლად: /v sell %d conferma"
  },
  {
   "id": 1710,
@@ -1845,7 +1845,7 @@
   "line": 848,
   "it": "Vendita in corso...",
   "ctx": "Util_Send(playerid, -1, \"Vendita in corso...\");",
-  "ka": ""
+  "ka": "მიმდინარეობს გაყიდვა..."
  },
  {
   "id": 1711,
@@ -1853,7 +1853,7 @@
   "line": 884,
   "it": "Vendita non riuscita (errore database). Nessun accredito.",
   "ctx": "Util_Send(playerid, -10270721, \"Vendita non riuscita (errore database). Nessun accredito.\");",
-  "ka": ""
+  "ka": "გაყიდვა ვერ მოხერხდა (მონაცემთა ბაზის შეცდომა). თანხა არ ჩაირიცხა."
  },
  {
   "id": 1712,
@@ -1861,7 +1861,7 @@
   "line": 889,
   "it": "Vendita non eseguita: il veicolo non risulta piu' di tua proprieta'. Nessun accredito.",
   "ctx": "Util_Send(playerid, -10270721, \"Vendita non eseguita: il veicolo non risulta piu' di tua proprieta'. Nessun accredito.\");",
-  "ka": ""
+  "ka": "გაყიდვა არ შესრულდა: მანქანა აღარ არის შენს საკუთრებაში. თანხა არ ჩაირიცხა."
  },
  {
   "id": 1713,
@@ -1869,7 +1869,7 @@
   "line": 903,
   "it": "Hai venduto la %s (targa %s): $%d accreditati in banca.",
   "ctx": "SendClientMessage(playerid, 0x66DD66FF, \"Hai venduto la %s (targa %s): $%d accreditati in banca.\", mname, plate, paid);",
-  "ka": ""
+  "ka": "შენ გაყიდე %s (ნომერი %s): ბანკში ჩაგერიცხა $%d."
  },
  {
   "id": 1714,
@@ -1877,7 +1877,7 @@
   "line": 906,
   "it": "Il conto ha raggiunto il limite: parte dell'importo non e' stata accreditata.",
   "ctx": "Util_Send(playerid, -10270721, \"Il conto ha raggiunto il limite: parte dell'importo non e' stata accreditata.\");",
-  "ka": ""
+  "ka": "ანგარიშმა ლიმიტს მიაღწია: თანხის ნაწილი არ ჩაირიცხა."
  },
  {
   "id": 1715,
@@ -1885,7 +1885,7 @@
   "line": 909,
   "it": "VENDITA %s: %s targa %s dbId %d accredito $%d",
   "ctx": "format(msg, 256, \"VENDITA %s: %s targa %s dbId %d accredito $%d\", pname, mname, plate, dbId, paid);",
-  "ka": ""
+  "ka": null
  },
  {
   "id": 1716,
@@ -1893,7 +1893,7 @@
   "line": 1002,
   "it": "Nessun tuo veicolo entro %.0f metri.",
   "ctx": "SendClientMessage(playerid, -10270721, \"Nessun tuo veicolo entro %.0f metri.\", 5.0);",
-  "ka": ""
+  "ka": "%.0f მეტრის რადიუსში შენი მანქანა არ არის."
  },
  {
   "id": 1717,
@@ -1901,7 +1901,7 @@
   "line": 1007,
   "it": "Veicolo non disponibile: operazione in corso.",
   "ctx": "Util_Send(playerid, -10270721, \"Veicolo non disponibile: operazione in corso.\");",
-  "ka": ""
+  "ka": "მანქანა მიუწვდომელია: მიმდინარეობს ოპერაცია."
  },
  {
   "id": 1718,
@@ -1909,7 +1909,7 @@
   "line": 1013,
   "it": "blocca le porte del proprio veicolo.",
   "ctx": "Veh_Emote(playerid, lock ? \"blocca le porte del proprio veicolo.\" : \"sblocca le porte del proprio veicolo.\");",
-  "ka": ""
+  "ka": "კეტავს თავისი მანქანის კარებს."
  },
  {
   "id": 1719,
@@ -1917,7 +1917,7 @@
   "line": 1013,
   "it": "sblocca le porte del proprio veicolo.",
   "ctx": "Veh_Emote(playerid, lock ? \"blocca le porte del proprio veicolo.\" : \"sblocca le porte del proprio veicolo.\");",
-  "ka": ""
+  "ka": "აღებს თავისი მანქანის კარებს."
  },
  {
   "id": 1720,
@@ -1925,7 +1925,7 @@
   "line": 1044,
   "it": "spegne il motore.",
   "ctx": "Veh_Emote(playerid, e == 1 ? \"spegne il motore.\" : \"avvia il motore.\");",
-  "ka": ""
+  "ka": "თიშავს ძრავს."
  },
  {
   "id": 1721,
@@ -1933,7 +1933,7 @@
   "line": 1044,
   "it": "avvia il motore.",
   "ctx": "Veh_Emote(playerid, e == 1 ? \"spegne il motore.\" : \"avvia il motore.\");",
-  "ka": ""
+  "ka": "ქოქავს ძრავს."
  },
  {
   "id": 1722,
@@ -1941,7 +1941,7 @@
   "line": 1057,
   "it": "Veicolo non disponibile: operazione in corso.",
   "ctx": "Util_Send(playerid, -10270721, \"Veicolo non disponibile: operazione in corso.\");",
-  "ka": ""
+  "ka": "მანქანა მიუწვდომელია: მიმდინარეობს ოპერაცია."
  },
  {
   "id": 1723,
@@ -1949,7 +1949,7 @@
   "line": 1063,
   "it": "spegne il motore.",
   "ctx": "Veh_Emote(playerid, \"spegne il motore.\");",
-  "ka": ""
+  "ka": "თიშავს ძრავს."
  },
  {
   "id": 1724,
@@ -1957,7 +1957,7 @@
   "line": 1068,
   "it": "Il veicolo e' distrutto.",
   "ctx": "Util_Send(playerid, -10270721, \"Il veicolo e' distrutto.\");",
-  "ka": ""
+  "ka": "მანქანა განადგურებულია."
  },
  {
   "id": 1725,
@@ -1965,7 +1965,7 @@
   "line": 1073,
   "it": "Il serbatoio e' vuoto.",
   "ctx": "Util_Send(playerid, -10270721, \"Il serbatoio e' vuoto.\");",
-  "ka": ""
+  "ka": "ავზი ცარიელია."
  },
  {
   "id": 1726,
@@ -1973,7 +1973,7 @@
   "line": 1077,
   "it": "avvia il motore.",
   "ctx": "Veh_Emote(playerid, \"avvia il motore.\");",
-  "ka": ""
+  "ka": "ქოქავს ძრავს."
  },
  {
   "id": 1727,
@@ -1981,7 +1981,7 @@
   "line": 1086,
   "it": "Devi essere al posto guida di un tuo veicolo.",
   "ctx": "Util_Send(playerid, -10270721, \"Devi essere al posto guida di un tuo veicolo.\");",
-  "ka": ""
+  "ka": "შენი მანქანის მძღოლის ადგილზე უნდა იჯდე."
  },
  {
   "id": 1728,
@@ -1989,7 +1989,7 @@
   "line": 1092,
   "it": "Fari spenti.",
   "ctx": "Util_Send(playerid, -1, l == 1 ? \"Fari spenti.\" : \"Fari accesi.\");",
-  "ka": ""
+  "ka": "ფარები ჩაქრა."
  },
  {
   "id": 1729,
@@ -1997,7 +1997,7 @@
   "line": 1092,
   "it": "Fari accesi.",
   "ctx": "Util_Send(playerid, -1, l == 1 ? \"Fari spenti.\" : \"Fari accesi.\");",
-  "ka": ""
+  "ka": "ფარები აინთო."
  },
  {
   "id": 1730,
@@ -2005,7 +2005,7 @@
   "line": 1101,
   "it": "Devi essere al volante di un tuo veicolo.",
   "ctx": "Util_Send(playerid, -10270721, \"Devi essere al volante di un tuo veicolo.\");",
-  "ka": ""
+  "ka": "შენი მანქანის საჭესთან უნდა იჯდე."
  },
  {
   "id": 1731,
@@ -2013,7 +2013,7 @@
   "line": 1107,
   "it": "Veicolo non disponibile.",
   "ctx": "Util_Send(playerid, -10270721, \"Veicolo non disponibile.\");",
-  "ka": ""
+  "ka": "მანქანა მიუწვდომელია."
  },
  {
   "id": 1732,
@@ -2021,7 +2021,7 @@
   "line": 1112,
   "it": "Devi essere fermo per parcheggiare.",
   "ctx": "Util_Send(playerid, -10270721, \"Devi essere fermo per parcheggiare.\");",
-  "ka": ""
+  "ka": "დასაპარკინგებლად უნდა გაჩერდე."
  },
  {
   "id": 1733,
@@ -2029,7 +2029,7 @@
   "line": 1124,
   "it": "Posizione di parcheggio salvata.",
   "ctx": "Util_Send(playerid, 0x66DD66FF, \"Posizione di parcheggio salvata.\");",
-  "ka": ""
+  "ka": "პარკინგის ადგილი შენახულია."
  },
  {
   "id": 1734,
@@ -2037,7 +2037,7 @@
   "line": 1132,
   "it": "Slot veicolo non valido.",
   "ctx": "Util_Send(playerid, -10270721, \"Slot veicolo non valido.\");",
-  "ka": ""
+  "ka": "მანქანის არასწორი სლოტი."
  },
  {
   "id": 1735,
@@ -2045,7 +2045,7 @@
   "line": 1138,
   "it": "Il veicolo e' distrutto: usa /v recover.",
   "ctx": "Util_Send(playerid, -10270721, g_VSlot[playerid][slot][vsDestroyed] ? \"Il veicolo e' distrutto: usa /v recover.\" : \"Il veicolo non e' in strada al momento.\");",
-  "ka": ""
+  "ka": "მანქანა განადგურებულია: გამოიყენე /v recover."
  },
  {
   "id": 1736,
@@ -2053,7 +2053,7 @@
   "line": 1138,
   "it": "Il veicolo non e' in strada al momento.",
   "ctx": "Util_Send(playerid, -10270721, g_VSlot[playerid][slot][vsDestroyed] ? \"Il veicolo e' distrutto: usa /v recover.\" : \"Il veicolo non e' in strada al momento.\");",
-  "ka": ""
+  "ka": "მანქანა ამჟამად გზაზე არ არის."
  },
  {
   "id": 1737,
@@ -2061,7 +2061,7 @@
   "line": 1150,
   "it": "Veicolo %d segnato sulla mappa per %d secondi (distanza: %.0f m).",
   "ctx": "SendClientMessage(playerid, -1, \"Veicolo %d segnato sulla mappa per %d secondi (distanza: %.0f m).\", slot + 1, 60, GetVehicleDistanceFromPoint(vid, px, py, pz));",
-  "ka": ""
+  "ka": "მანქანა %d რუკაზე მონიშნულია %d წამით (მანძილი: %.0f მ)."
  },
  {
   "id": 1738,
@@ -2069,7 +2069,7 @@
   "line": 1158,
   "it": "I tuoi veicoli non sono disponibili (caricamento non riuscito o in corso).",
   "ctx": "Util_Send(playerid, -10270721, \"I tuoi veicoli non sono disponibili (caricamento non riuscito o in corso).\");",
-  "ka": ""
+  "ka": "შენი მანქანები მიუწვდომელია (ჩატვირთვა ვერ მოხერხდა ან მიმდინარეობს)."
  },
  {
   "id": 1739,
@@ -2077,6 +2077,6 @@
   "line": 1191,
   "it": "Slot veicolo non valido.",
   "ctx": "Util_Send(playerid, -10270721, \"Slot veicolo non valido.\");",
-  "ka": ""
+  "ka": "მანქანის არასწორი სლოტი."
  }
 ]
