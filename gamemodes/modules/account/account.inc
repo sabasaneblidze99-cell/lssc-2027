@@ -177,6 +177,7 @@ public Account_OnDBLoaded(playerid, accountId, const hash[], const salt[], admin
 
 Account_CompleteLogin(playerid, accountId, adminLevel)
 {
+	Diag_Step(playerid, "login completato");
 	new name[75], ip[48], msg[384];
 	GetPlayerName(playerid, name, 75);
 	GetPlayerIp(playerid, ip, 48);

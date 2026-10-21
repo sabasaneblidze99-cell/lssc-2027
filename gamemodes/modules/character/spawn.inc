@@ -55,6 +55,7 @@ Char_ApplySpawnInfo(playerid)
 
 Char_Spawn(playerid)
 {
+	Diag_Step(playerid, "SpawnPlayer");
 	gPlayer[playerid][pAuthState] = 8;
 	Char_ApplySpawnInfo(playerid);
 	SpawnPlayer(playerid);

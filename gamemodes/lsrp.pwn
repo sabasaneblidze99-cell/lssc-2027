@@ -34,6 +34,7 @@
 #include "modules/economy/currency.inc"
 #include "modules/economy/econ_config.inc"
 #include "modules/core/logger.inc"
+#include "modules/core/diag.inc"
 #include "modules/ui/cef_ui.inc"
 #include "modules/core/validation.inc"
 #include "modules/ui/dialogs.inc"
@@ -141,6 +142,7 @@ public OnGameModeExit()
 public OnPlayerConnect(playerid)
 {
 	Player_Reset(playerid);
+	Diag_OnPlayerConnect(playerid);
 	CefBridge_OnPlayerConnect(playerid);
 	Bank_OnPlayerConnect(playerid);
 	Intro_OnPlayerConnect(playerid);
@@ -164,6 +166,7 @@ public OnPlayerConnect(playerid)
 
 public OnPlayerDisconnect(playerid, reason)
 {
+	Diag_OnPlayerDisconnect(playerid, reason);
 	SpawnSel_OnPlayerDisconnect(playerid);   // prima di Faction (manette)
 	CharSel_OnPlayerDisconnect(playerid);
 	Bank_OnPlayerDisconnect(playerid);
@@ -225,6 +228,7 @@ public OnPlayerRequestSpawn(playerid)
 
 public OnPlayerSpawn(playerid)
 {
+	Diag_Step(playerid, "spawn: inizio");
 	Char_OnSpawn(playerid);
 	Veh_OnPlayerSpawn(playerid);
 	House_OnPlayerSpawn(playerid);
@@ -232,6 +236,7 @@ public OnPlayerSpawn(playerid)
 	Voice_OnPlayerSpawn(playerid);
 	Inv_OnPlayerSpawn(playerid);
 	Living_OnPlayerSpawn(playerid);
+	Diag_Step(playerid, "spawn: fatto");
 	return 1;
 }
 

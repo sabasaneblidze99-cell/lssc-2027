@@ -73,7 +73,7 @@ for pi, part in enumerate(parts):
     if any(o['mat'] or o['mattext'] for o in part):
         L.append('\tnew STREAMER_TAG_OBJECT:o;')
     for o in part:
-        dist = fl(min(max(o.get('dist', 300.0), 50.0), 600.0))
+        dist = fl(min(max(o.get('dist', 300.0), 50.0), 200.0))   # max 200 m: meno oggetti caricati insieme dal client 0.3.7
         call = 'CreateDynamicObject(%d, %s, %s, %s, %s, %s, %s, %d, %d, -1, %s, %s)' % (
             o['model'], fl(o['pos'][0]), fl(o['pos'][1]), fl(o['pos'][2]), fl(o['rot'][0]), fl(o['rot'][1]), fl(o['rot'][2]),
             o['world'], o['interior'], dist, dist)
@@ -104,7 +104,11 @@ for pi in range(len(parts)):
 L.append('\t}')
 L.append('\tif (p == 0)')
 L.append('\t{')
-L.append('\t\tStreamer_SetVisibleItems(STREAMER_TYPE_OBJECT, 600);   // 0.3.7 + CEF nello stesso processo: memoria del client limitata')
+L.append('\t\tStreamer_SetVisibleItems(STREAMER_TYPE_OBJECT, 500);   // 0.3.7 + CEF nello stesso processo: memoria del client limitata')
+L.append('\t\t// invio a blocchi: allo spawn il client riceve 25 oggetti per ciclo dello streamer invece di centinaia insieme')
+L.append('\t\tStreamer_ToggleChunkStream(1);')
+L.append('\t\tStreamer_SetChunkSize(STREAMER_TYPE_OBJECT, 25);')
+L.append('\t\tStreamer_SetChunkTickRate(STREAMER_TYPE_OBJECT, 1);')
 L.append('\t}')
 L.append('\tif (p == AZMAP_PARTS - 1)')
 L.append('\t{')

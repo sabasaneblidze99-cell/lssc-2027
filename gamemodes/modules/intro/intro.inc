@@ -158,6 +158,7 @@ Intro_DestroyObjects(playerid)
 
 bool:Intro_CreateObjects(playerid)
 {
+	Diag_Step(playerid, "intro: bus e attore");
 	new world = playerid + 20000;
 	new veh = CreateVehicle(437, 1758.0, -1888.0, 13.8, 0.0, 1, 1, -1, false);
 	if (veh == 65535)
@@ -199,6 +200,9 @@ Intro_AudioStop(playerid)
 
 Intro_BeginScene(playerid, scene)
 {
+	new dstep[32];
+	format(dstep, sizeof dstep, "intro: scena %d", scene);
+	Diag_Step(playerid, dstep);
 	new flags = gPlayer[playerid][pIntroFlags];
 	gPlayer[playerid][pIntroScene] = scene;
 	Intro_Camera(playerid, scene, flags);
