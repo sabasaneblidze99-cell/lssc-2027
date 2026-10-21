@@ -279,6 +279,7 @@ forward Cef_OnSkin(playerid, const arguments[]);
 forward Cef_OnStory(playerid, const arguments[]);
 forward Cef_OnQuit(playerid, const arguments[]);
 forward Cmd_goto(playerid, const params[]);
+forward Cmd_gps(playerid, const params[]);
 forward Cmd_setlevel(playerid, const params[]);
 forward Cmd_setmoney(playerid, const params[]);
 forward Cmd_ah(playerid, const params[]);

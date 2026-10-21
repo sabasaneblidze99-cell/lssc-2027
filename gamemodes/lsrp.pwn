@@ -78,6 +78,7 @@
 #include "modules/world/az_map.inc"
 #include "modules/world/az_data.inc"
 #include "modules/world/az_world.inc"
+#include "modules/world/gps.inc"
 #include "modules/ui/cef_views.inc"
 #include "modules/character/spawn_select.inc"
 #include "modules/character/char_select.inc"
@@ -167,6 +168,7 @@ public OnPlayerDisconnect(playerid, reason)
 	Voice_OnPlayerDisconnect(playerid);
 	HudCef_OnPlayerDisconnect(playerid);
 	StreetRental_OnPlayerDisconnect(playerid);
+	Gps_OnPlayerDisconnect(playerid);
 	Veh_OnPlayerDisconnect(playerid);
 	UI_VehicleUiDestroy(playerid);
 	House_OnPlayerDisconnect(playerid);
@@ -282,6 +284,10 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	{
 		return 1;
 	}
+	if (Gps_OnDialogResponse(playerid, dialogid, response, listitem))
+	{
+		return 1;
+	}
 	if (UI_OnDialogResponse(playerid, dialogid, response, listitem, inputtext))
 	{
 		return 1;
@@ -364,6 +370,12 @@ public OnPlayerKeyStateChange(playerid, KEY:newkeys, KEY:oldkeys)
 	{
 		Veh_DoEngine(playerid);   // N al volante: motore acceso/spento
 	}
+	return 1;
+}
+
+public OnPlayerEnterRaceCheckpoint(playerid)
+{
+	Gps_OnEnterRaceCheckpoint(playerid);
 	return 1;
 }
 

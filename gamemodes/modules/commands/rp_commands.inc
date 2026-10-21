@@ -1,4 +1,4 @@
-new g_CmdNames[97][16] = {
+new g_CmdNames[98][16] = {
 	"me",
 	"do",
 	"try",
@@ -95,7 +95,8 @@ new g_CmdNames[97][16] = {
 	"setfazione",
 	"ldset",
 	"chatsamp",
-	"chatcef"
+	"chatcef",
+	"gps"
 };
 
 Cmd_Dispatch(playerid, const cmdtext[])

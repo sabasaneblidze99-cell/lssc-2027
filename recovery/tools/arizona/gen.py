@@ -143,6 +143,26 @@ D.append('};')
 D.append('new const Float:s_AzVehPos[AZ_VEH][4] = {')
 D.append(',\n'.join('\t{%s, %s, %s, %s}' % tuple(fl(x) for x in v['pos']) for k, v in allv))
 D.append('};')
+# ------------------------------------------------------------------ GPS
+# destinazioni del GPS di Arizona (world/arizona/gps.json, estratto da extract_gps.py) e porte pubbliche, scelte a mano:
+# solo luoghi fisici di Los Santos; esclusi i punti dei sistemi di Arizona che da noi non esistono (mercato nero, lotteria, lavori assenti).
+GPS_AZ = [('[LS] Вокзал', 'რკინიგზის სადგური Unity'), ('[LS] Центральный банк', 'ცენტრალური ბანკი'),
+          ('[LS] Пирс', 'სანტა-მარიას პირსი'), ('[LS] Колесо обозрения', 'ეშმაკის ბორბალი'),
+          ('[LS] Центральный рынок', 'ცენტრალური ბაზარი'), ('[LS] Концертный ЗАЛ', 'საკონცერტო დარბაზი'),
+          ('[LS] Свалка', 'ნაგავსაყრელი'), ('[LS] Лодочная', 'ნავსადგური'),
+          ('[LS] Салон TransFender', 'ტიუნინგ სალონი TransFender'), ('[LS] Loco Low Co.', 'ტიუნინგ სალონი Loco Low Co.')]
+GPS_DOOR = [(1, 'მერია'), (0, 'საავადმყოფო All Saints'), (5, 'პოლიციის განყოფილება'), (9, 'სპორტული კლუბი'), (13, 'რადიო სტუდია')]
+gps_src = {g['name_ru']: g for g in load('gps')}
+gps = [(ka, tps[i]['enter']) for i, ka in GPS_DOOR] + [(ka, gps_src[ru]['pos']) for ru, ka in GPS_AZ]
+D.append('// GPS: luoghi importanti di Los Santos (porte pubbliche + destinazioni del GPS di origine)')
+D.append('#define AZ_GPS (%d)' % len(gps))
+D.append('new const s_AzGpsName[AZ_GPS][96] = {')
+D.append(',\n'.join('\t"%s"' % ka for ka, _ in gps))
+D.append('};')
+D.append('new const Float:s_AzGpsPos[AZ_GPS][3] = {')
+D.append(',\n'.join('\t{%s, %s, %s}' % tuple(fl(v) for v in p) for _, p in gps))
+D.append('};')
+D.append('')
 open(os.path.join(ROOT, 'gamemodes', 'modules', 'world', 'az_data.inc'), 'w').write('\n'.join(D) + '\n')
 
 # ------------------------------------------------------------------ case -> SQL
